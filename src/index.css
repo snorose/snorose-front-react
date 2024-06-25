@@ -75,6 +75,10 @@ button {
 
 /* style */
 
+html {
+  background-color: #dfdfdf;
+}
+
 body {
   margin: 0;
   font-family:
