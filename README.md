@@ -41,6 +41,7 @@ Sookmyung women's university - 커뮤니티
 ### 🔹Commit Convention
 
 - ✨ `[FEAT]` : 새로운 기능 구현
+- 🔧 `[MODIFY]` : 코드 수정 (기능의 변화가 있을 때)
 - 📝 `[DOCS]` : README나 WIKI 등의 문서 수정
 - ➕ `[ADD]` : Feat 이외의 부수적인 코드 추가, 라이브러리 추가, 새로운 파일 생성
 - 🔥 `[REMOVE]` : 폴더 또는 파일 삭제, 쓸모없는 코드 삭제
@@ -62,14 +63,14 @@ Sookmyung women's university - 커뮤니티
 
 ### 🔹Branch Convention
 
-- [main] : 최종 배포
-- [develop] : 주요 개발, main merge 이전에 거치는 branch
-- [feature] : 각자 개발, 기능 추가
-- [fix] : 에러 수정, 버그 수정
-- [docs] : README, 문서
-- [refactor] : 코드 리펙토링 (기능 변경 없이 코드만 수정할 때)
-- [modify] : 코드 수정 (기능의 변화가 있을 때)
-- [chore] : gradle 세팅, 위의 것 이외에 거의 모든 것
+- [MAIN] : 최종 배포
+- [DEVELOP] : 주요 개발, main merge 이전에 거치는 branch
+- [FEATURE] : 각자 개발, 기능 추가
+- [FIX] : 에러 수정, 버그 수정
+- [DOCS] : README, 문서
+- [REFACTOR] : 코드 리펙토링 (기능 변경 없이 코드만 수정할 때)
+- [MODIFY] : 코드 수정 (기능의 변화가 있을 때)
+- [CHORE] : gradle 세팅, 위의 것 이외에 거의 모든 것
 
 ### 브랜치 명 예시
 
@@ -103,11 +104,11 @@ Sookmyung women's university - 커뮤니티
 
 ### 🔹Issue Convention
 
-- [feat] : 기능 추가
-- [fix] : 에러 수정, 버그 수정
-- [docs] : README, 문서
-- [refactor] : 코드 리펙토링 (기능 변경 없이 코드만 수정할 때)
-- [modify] : 코드 수정 (기능의 변화가 있을 때)
-- [chore] : gradle 세팅, 위의 것 이외에 거의 모든 것
+- [FEAT] : 기능 추가
+- [FIX] : 에러 수정, 버그 수정
+- [DOCS] : README, 문서
+- [REFACTOR] : 코드 리펙토링 (기능 변경 없이 코드만 수정할 때)
+- [MODIFY] : 코드 수정 (기능의 변화가 있을 때)
+- [CHORE] : gradle 세팅, 위의 것 이외에 거의 모든 것
 
 `ex) [feat] user api 구현`
