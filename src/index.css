@@ -25,6 +25,8 @@ h6,
 div,
 p,
 span,
+ul,
+ol,
 fieldset,
 legend,
 label,
@@ -64,6 +66,7 @@ ol {
 }
 
 a {
+  color: inherit;
   text-decoration: none;
 }
 
