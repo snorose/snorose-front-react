@@ -1,4 +1,4 @@
-export const MENUS = Object.freeze([
+export const NAVBAR_MENUS = Object.freeze([
   {
     id: 'home',
     label: '메인홈',

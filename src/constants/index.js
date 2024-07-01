@@ -1,3 +1,3 @@
-import { MENUS } from './menus';
+import { NAVBAR_MENUS } from './menus';
 
-export { MENUS };
+export { NAVBAR_MENUS };
