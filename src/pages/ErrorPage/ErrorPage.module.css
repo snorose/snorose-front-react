@@ -1,0 +1,29 @@
+.errorPage {
+  width: 100vw;
+  height: 100vh;
+  max-width: 450px;
+  max-height: 935px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.title {
+  margin-bottom: 0.625rem;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.errorStatus {
+  margin-top: 1rem;
+  color: #00368e;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.errorMessage {
+  font-weight: bold;
+}
