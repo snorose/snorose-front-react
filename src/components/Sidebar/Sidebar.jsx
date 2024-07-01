@@ -30,7 +30,7 @@ export default function Sidebar({ closeSidebar }) {
   return (
     <aside ref={sidebarRef} className={styles.sidebar}>
       <Link to={FIRST_MENU.to}>
-        <h1 className={styles.title}>{FIRST_MENU.title}</h1>
+        <h1 className={`${styles.title} ${styles.logo}`}>{FIRST_MENU.title}</h1>
       </Link>
       <List items={FIRST_MENU.items} />
       {MENUS &&
