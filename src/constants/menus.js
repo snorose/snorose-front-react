@@ -35,3 +35,18 @@ export const NAVBAR_MENUS = Object.freeze([
     height: 16,
   },
 ]);
+
+export const SIDEBAR_MENUS = Object.freeze([
+  { title: 'SNOROSE', items: ['About 스노로즈', '공지사항'] },
+  { title: '인증' },
+  {
+    title: '커뮤니티',
+    items: ['첫눈온방', '함박눈방', '만년설방', '베숙트'],
+  },
+  { title: '시험후기' },
+  { title: '문의/신고' },
+  {
+    title: '숙명여대',
+    items: ['숙명여대 홈페이지', '숙명포탈', '스노위'],
+  },
+]);
