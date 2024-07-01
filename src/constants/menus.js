@@ -21,7 +21,7 @@ export const NAVBAR_MENUS = Object.freeze([
     height: 17,
   },
   {
-    id: 'notification',
+    id: 'alert',
     label: '알림',
     fill: '#BFD7EC',
     width: 19,
