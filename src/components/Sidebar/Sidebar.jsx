@@ -26,14 +26,14 @@ export default function Sidebar({ closeSidebar }) {
   return (
     <aside ref={sidebarRef} className={styles.sidebar}>
       <Link to={FIRST_MENU.to}>
-        <h1>{FIRST_MENU.title}</h1>
+        <h1 className={styles.title}>{FIRST_MENU.title}</h1>
       </Link>
       <List items={FIRST_MENU.items} />
       {MENUS &&
         MENUS.map(({ to, title, items }) => (
           <div key={title}>
             <Link to={to}>
-              <h3>{title}</h3>
+              <h3 className={styles.title}>{title}</h3>
             </Link>
             <List items={items} />
           </div>
