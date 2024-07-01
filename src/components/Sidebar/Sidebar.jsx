@@ -1,12 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { SIDEBAR_MENUS } from '../../constants';
+import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '../../constants';
 import List from './List/List';
 import styles from './Sidebar.module.css';
 
+const isLogin = true;
+
 export default function Sidebar({ closeSidebar }) {
-  const [FIRST_MENU, ...MENUS] = SIDEBAR_MENUS;
   const sidebarRef = useRef();
+  const [FIRST_MENU, ...MENUS] = isLogin
+    ? SIDEBAR_MENUS
+    : SIDEBAR_MENUS.filter((menu) => NOT_LOGIN_MENUS.includes(menu.title));
 
   useEffect(() => {
     const handleEventPropagation = (event) => {

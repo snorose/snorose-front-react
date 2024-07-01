@@ -80,3 +80,9 @@ export const SIDEBAR_MENUS = Object.freeze([
     ],
   },
 ]);
+
+export const NOT_LOGIN_MENUS = Object.freeze([
+  'SNOROSE',
+  '문의/신고',
+  '숙명여대',
+]);
