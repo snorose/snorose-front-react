@@ -6,7 +6,7 @@ import './index.css';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
-import BoardDetailPage from './pages/BoardDetailPage/BoardDetailPage';
+import BoardListPage from './pages/BoardListPage/BoardListPage';
 import BoardPage from './pages/BoardPage/BoardPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         children: ['first-snow', 'large-snow', 'permanent-snow', 'besookt'].map(
           (path) => ({
             path,
-            element: <BoardDetailPage />,
+            element: <BoardListPage />,
           })
         ),
       },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-export default function BoardDetailPage() {
+export default function BoardListPage() {
   const { pathname } = useLocation();
   const currentPath = pathname.split('/')[2];
   let currentBoard = '';
