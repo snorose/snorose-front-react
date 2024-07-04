@@ -25,6 +25,7 @@ export default function BoardListPage() {
       <div className={styles.sponser}>
         <img src={sponser} alt='sponser' />
       </div>
+      <div></div>
     </div>
   );
 }
