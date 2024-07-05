@@ -10,6 +10,7 @@ import MainPage from './pages/MainPage/MainPage';
 import MyPage from './pages/MyPage/MyPage';
 import NotificationPage from './pages/NotificationPage/NotificationPage';
 import reportWebVitals from './reportWebVitals';
+import ChangePassword from './pages/MyPage/ChangePassword';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: '/exam-review', element: <ExamReviewPage /> },
       { path: '/notification', element: <NotificationPage /> },
       { path: '/my-page', element: <MyPage /> },
+      { path: '/my-page/password', element: <ChangePassword /> },
     ],
   },
 ]);
