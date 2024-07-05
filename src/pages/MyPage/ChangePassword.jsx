@@ -2,19 +2,12 @@ import React from 'react';
 import styles from './ChangePassword.module.css';
 import arrowBackIcon from '../../assets/icon-arrow-back.svg';
 import eyeIcon from '../../assets/icon-eye.svg';
-import { useNavigate } from 'react-router-dom';
 
 export default function ChangePassword() {
-  const navigate = useNavigate();
-
-  const handleGoBack = () => {
-    navigate('/my-page');
-  };
-
   return (
     <main className={styles.changePasswordPage}>
       <div className={styles.topContainer}>
-        <div className={styles.goBackBtn} onClick={handleGoBack}>
+        <Link to='/my-page' className={styles.goBackBtn}>
           <img src={arrowBackIcon} alt='뒤로가기' />
         </div>
         <p className={styles.completeBtn}>완료</p>
