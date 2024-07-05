@@ -13,7 +13,7 @@ export default function EditInfoPage() {
   };
 
   return (
-    <main className={styles.EditInfoPage}>
+    <main className={styles.editInfoPage}>
       <div className={styles.topContainer}>
         <div className={styles.goBackBtn} onClick={handleGoBack}>
           <img src={arrowBackIcon} alt='뒤로가기' />
