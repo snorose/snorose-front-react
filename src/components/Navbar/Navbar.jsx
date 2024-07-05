@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { MENUS } from '../../constants';
+import { NAVBAR_MENUS } from '../../constants';
 import Icon from '../Icon/Icon';
 import styles from './Navbar.module.css';
 
@@ -15,8 +15,8 @@ export default function Navbar() {
   return (
     <nav className={styles.nav}>
       <ul className={styles.menus}>
-        {MENUS &&
-          MENUS.map(({ id, label, fill, ...props }) => (
+        {NAVBAR_MENUS &&
+          NAVBAR_MENUS.map(({ id, label, fill, ...props }) => (
             <Link key={id} to={`/${id}`}>
               <li className={styles.menu}>
                 <Icon
