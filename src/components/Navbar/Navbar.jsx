@@ -8,7 +8,9 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const currentMenu = pathname.split('/')[1];
   const getCurrentMenuColor = (id, pointColor, defaultColor) =>
-    id === currentMenu ? pointColor : defaultColor;
+    id === currentMenu || (currentMenu === '' && id === 'home')
+      ? pointColor
+      : defaultColor;
 
   return (
     <nav className={styles.nav}>
