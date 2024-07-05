@@ -1,10 +1,15 @@
+import { Outlet } from 'react-router-dom';
 import styles from './App.module.css';
-import Login from './features/Login';
+
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
-  return <div className={styles.app}>
-    <Login></Login>
-  </div>;
+  return (
+    <div className={styles.app}>
+      <Outlet />
+      <Navbar />
+    </div>
+  );
 }
 
 export default App;
