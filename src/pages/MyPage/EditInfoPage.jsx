@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './EditInfoPage.module.css';
 import arrowBackIcon from '../../assets/icon-arrow-back.svg';
 import profileIcon from '../../assets/icon-profile.svg';
+import calendarIcon from '../../assets/icon-calendar.svg';
 import { useNavigate } from 'react-router-dom';
 
 export default function EditInfoPage() {
@@ -36,7 +37,10 @@ export default function EditInfoPage() {
         </div>
         <div className={styles.Info}>
           <p className={styles.title}>생일</p>
-          <div className={styles.inputBox}>
+          <div className={`${styles.inputBox} ${styles.calendarInput}`}>
+            <div className={styles.calendarContainer}>
+              <img src={calendarIcon} alt='달력 아이콘' />
+            </div>
             <p className={styles.inputText}>1996.01.01</p>
           </div>
         </div>
