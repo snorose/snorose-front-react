@@ -1,23 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './EditInfoPage.module.css';
 import arrowBackIcon from '../../assets/icon-arrow-back.svg';
 import profileIcon from '../../assets/icon-profile.svg';
 import calendarIcon from '../../assets/icon-calendar.svg';
-import { useNavigate } from 'react-router-dom';
 
 export default function EditInfoPage() {
-  const navigate = useNavigate();
-
-  const handleGoBack = () => {
-    navigate('/my-page');
-  };
-
   return (
     <main className={styles.editInfoPage}>
       <div className={styles.topContainer}>
-        <div className={styles.goBackBtn} onClick={handleGoBack}>
+        <Link to='/my-page' className={styles.goBackBtn}>
           <img src={arrowBackIcon} alt='뒤로가기' />
-        </div>
+        </Link>
         <p className={styles.completionBtn}>완료</p>
       </div>
 
