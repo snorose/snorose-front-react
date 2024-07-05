@@ -1,5 +1,6 @@
 .post {
   padding: 10px 0;
+  width: 100%;
 }
 
 .post_top {
@@ -21,7 +22,10 @@
 }
 
 .time {
-  color: gray;
+  font-size: 9px;
+}
+
+.edited {
   font-size: 9px;
 }
 

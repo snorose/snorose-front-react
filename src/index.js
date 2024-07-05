@@ -4,7 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import BoardPage from './pages/BoardPage/BoardPage';
-import BoardListPage from './pages/BoardListPage/BoardListPage'; // 테스트용
+import BoardListPage from './pages/PostListPage/PostListPage'; // 테스트용
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import MainPage from './pages/MainPage/MainPage';
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       { index: true, element: <MainPage /> },
       { path: '/home', element: <MainPage /> },
       { path: '/board', element: <BoardPage /> },
-      { path: '/board/list', element: <BoardListPage /> }, // 테스트용
+      { path: '/board/:id', element: <BoardListPage /> },
       { path: '/exam-review', element: <ExamReviewPage /> },
       { path: '/notification', element: <NotificationPage /> },
       { path: '/my-page', element: <MyPage /> },

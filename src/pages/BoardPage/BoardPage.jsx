@@ -1,17 +1,18 @@
 import styles from './BoardPage.module.css';
 import Icon from '../../components/Icon/Icon.jsx';
 import sponser from '../../assets/sponser.svg';
-import { BOARDMENUS } from '../../constants/menus.js';
+import { BOARDMENUS } from '../../constants/boardmenus.js';
+import { Link } from 'react-router-dom';
 
 const BoardBar = ({ data }) => {
   return (
-    <div className={styles.board_list_bar}>
+    <Link to={`/board/${data.id}`} className={styles.board_list_bar}>
       <div className={styles.board_bar_icon}>
         <Icon id={data.id} />
       </div>
       <div className={styles.board_bar_title}>{data.title}</div>
       <div className={styles.board_bar_description}>{data.desc}</div>
-    </div>
+    </Link>
   );
 };
 

@@ -1,20 +1,45 @@
-import styles from './BoardListPage.module.css';
+import styles from './PostListPage.module.css';
 import Icon from '../../components/Icon/Icon.jsx';
 import PostBar from '../../components/PostBar/PostBar.jsx';
 import Sponser from '../../components/Sponser/Sponser.jsx';
+import POSTLIST from '../../constants/postlist_dummy.js';
+import { useLocation } from 'react-router-dom';
 
 export default function BoardListPage() {
+  const { pathname } = useLocation();
+  const currentBoardId = pathname.split('/')[2];
+
+  function getTitle(currentBoardId) {
+    let title;
+    switch (currentBoardId) {
+      case 'first-snow':
+        title = '첫눈온방';
+        break;
+      case 'big-eyes':
+        title = '함박눈방';
+        break;
+      case 'icecap':
+        title = '만년설방';
+        break;
+      case 'best':
+        title = '베숙트';
+        break;
+      default:
+        title = null;
+    }
+    return title;
+  }
+
+  const boardTitle = getTitle(currentBoardId);
+
   return (
     <div className={styles.container}>
-      <div className={styles.refresh_icon}>
-        <Icon id='refresh' />
-      </div>
       <div className={styles.top}>
         <div className={styles.header}>
           <div className={styles.side_menu_btn}>
             <Icon id='hamburger' />
           </div>
-          <h1>게시판 타이틀</h1>
+          <h1>{boardTitle}</h1>
         </div>
         <div className={styles.notification_bar}>
           <div className={styles.notification_icon}>
@@ -29,18 +54,15 @@ export default function BoardListPage() {
         </div>
       </div>
       <div className={styles.content}>
-        <PostBar />
-        <PostBar />
-        <PostBar />
-        <PostBar />
-        <PostBar />
-        <PostBar />
-        <PostBar />
-        <PostBar />
-        <PostBar />
-        <PostBar />
-        <PostBar />
-        <PostBar />
+        <div className={styles.pencil_icon}>
+          <Icon id='pencil' />
+        </div>
+        {POSTLIST.map((post, index) => (
+          <PostBar key={index} data={post} />
+        ))}
+      </div>
+      <div className={styles.refresh_icon}>
+        <Icon id='refresh' />
       </div>
       <div className={styles.sponser}>
         <Sponser />
