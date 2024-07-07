@@ -43,7 +43,7 @@ export default function BoardListPage() {
         </div>
         <div className={styles.notification_bar}>
           <div className={styles.notification_icon}>
-            <Icon id='notification' />
+            <Icon id='notification-red' />
           </div>
           <p>필독 공지사항</p>
         </div>

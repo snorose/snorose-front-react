@@ -1,6 +1,6 @@
 import styles from './BoardPage.module.css';
 import Icon from '../../components/Icon/Icon.jsx';
-import sponser from '../../assets/sponser.svg';
+import sponser from '../../assets/img/sponser.svg';
 import { BOARDMENUS } from '../../constants/boardmenus.js';
 import { Link } from 'react-router-dom';
 

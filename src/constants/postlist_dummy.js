@@ -43,7 +43,65 @@ const POSTLIST = [
     viewCount: 10,
     createdAt: '2024-07-05T07:29:29.197Z',
     notice: true,
+  }
+  ,
+  {
+    postId: 4,
+    title: '제목4',
+    userDisplay: '송이4',
+    likeCount: 0,
+    viewCount: 10,
+    createdAt: '2024-07-05T07:29:29.197Z',
+    notice: false,
   },
+  {
+    postId: 3,
+    title: '제목3',
+    userDisplay: '송이3',
+    likeCount: 0,
+    viewCount: 10,
+    createdAt: '2024-07-05T07:29:29.197Z',
+    notice: true,
+  }
+  ,
+  {
+    postId: 4,
+    title: '제목4',
+    userDisplay: '송이4',
+    likeCount: 0,
+    viewCount: 10,
+    createdAt: '2024-07-05T07:29:29.197Z',
+    notice: false,
+  },
+  {
+    postId: 3,
+    title: '제목3',
+    userDisplay: '송이3',
+    likeCount: 0,
+    viewCount: 10,
+    createdAt: '2024-07-05T07:29:29.197Z',
+    notice: true,
+  }
+  ,
+  {
+    postId: 4,
+    title: '제목4',
+    userDisplay: '송이4',
+    likeCount: 0,
+    viewCount: 10,
+    createdAt: '2024-07-05T07:29:29.197Z',
+    notice: false,
+  },
+  {
+    postId: 3,
+    title: '제목3',
+    userDisplay: '송이3',
+    likeCount: 0,
+    viewCount: 10,
+    createdAt: '2024-07-05T07:29:29.197Z',
+    notice: true,
+  }
+  
 ];
 
 export default POSTLIST;
