@@ -15,13 +15,13 @@ export default function BoardListPage() {
       case 'first-snow':
         title = '첫눈온방';
         break;
-      case 'big-eyes':
+      case 'large-snow':
         title = '함박눈방';
         break;
-      case 'icecap':
+      case 'permanent-snow':
         title = '만년설방';
         break;
-      case 'best':
+      case 'besookt':
         title = '베숙트';
         break;
       default:

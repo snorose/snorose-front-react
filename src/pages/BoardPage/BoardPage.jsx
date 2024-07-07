@@ -1,6 +1,6 @@
 import styles from './BoardPage.module.css';
 import Icon from '../../components/Icon/Icon.jsx';
-import sponser from '../../assets/img/sponser.svg';
+import Sponser from '../../components/Sponser/Sponser.jsx';
 import { BOARDMENUS } from '../../constants/boardmenus.js';
 import { Link } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ export default function BoardPage() {
         </div>
       </div>
       <div className={styles.sponser}>
-        <img src={sponser} alt='sponser' />
+      <Sponser />
       </div>
       <div className={styles.searchbar_box}>
         <div className={styles.searchbar}>

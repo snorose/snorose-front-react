@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: baseline;
   font-size: 8px;
 }
 
