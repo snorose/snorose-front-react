@@ -1,8 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import styles from './Login.module.css';
-import prevBtn from '../shared/icons/arrow_back_ios.svg';
-import visibiltyBtn from '../shared/icons/visibility.svg';
+import Icon from '../../components/Icon/Icon';
 
 export default function Login() {
     const [id, setId] = useState("");
@@ -42,7 +41,7 @@ export default function Login() {
         <div className={styles.loginframe}>
             <form onSubmit={handleSubmit}>
                 <div className={styles.prev}>
-                    <img src={prevBtn} alt="뒤로가기"/>
+                    <Icon id="arrow-back" width="9" height="14"></Icon>
                 </div>
                 <div className={styles.loginbody}>
                     <p className={styles.title}>SNOROSE</p>
@@ -71,7 +70,8 @@ export default function Login() {
                                 event.preventDefault();
                               }}>
                             {pwInputFocus?
-                                <img src={visibiltyBtn} className={styles.visibility}></img>:""}
+                                <Icon id="visibility" className={styles.visiblity} width="14" height="10"></Icon>
+                                :""}
                         </div>
                         
                     </div>
