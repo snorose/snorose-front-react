@@ -1,27 +1,21 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import styles from './BoardListPage.module.css';
+import styles from './PostListPage.module.css';
 import Icon from '../../components/Icon/Icon.jsx';
 import PostBar from '../../components/PostBar/PostBar.jsx';
 import Sponser from '../../components/Sponser/Sponser.jsx';
 import POSTLIST from '../../constants/postlist_dummy.js';
+import { useLocation } from 'react-router-dom';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
-  const currentPath = pathname.split('/')[2];
-  let currentBoard = '';
+  const currentBoardId = pathname.split('/')[2];
 
-  if (currentPath === 'first-snow') {
-    currentBoard = '첫눈온방';
-  } else if (currentPath === 'large-snow') {
-    currentBoard = '함박눈방';
-  } else if (currentPath === 'permanent-snow') {
-    currentBoard = '만년설방';
-  } else if (currentPath === 'besookt') {
-    currentBoard = '베숙트';
-  }
-
-  console.log(currentBoard);
+  const boardName = {
+    'first-snow': '첫눈온방',
+    'large-snow': '함박눈방',
+    'permanent-snow': '만년설방',
+    besookt: '베숙트',
+  };
+  const currentBoardName = boardName[currentBoardId];
 
   return (
     <div className={styles.container}>
@@ -30,7 +24,7 @@ export default function BoardListPage() {
           <div className={styles.side_menu_btn}>
             <Icon id='hamburger' />
           </div>
-          <h1>{currentBoard}</h1>
+          <h1>{currentBoardName}</h1>
         </div>
         <div className={styles.notification_bar}>
           <div className={styles.notification_icon}>

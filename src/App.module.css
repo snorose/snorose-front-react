@@ -6,8 +6,7 @@
   margin: 0 auto;
   position: relative;
   background-color: white;
-  display:flex;
+  display: flex;
   justify-content: center;
-  align-items: center;
   overflow-y: auto;
 }

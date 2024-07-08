@@ -27,16 +27,11 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <MainPage /> },
       { path: 'home', element: <MainPage /> },
-      {
-        path: '/board',
-        element: <BoardPage />,
-        children: ['first-snow', 'large-snow', 'permanent-snow', 'besookt'].map(
-          (path) => ({
-            path,
-            element: <BoardListPage />,
-          })
-        ),
-      },
+      { path: '/board', element: <BoardPage /> },
+      { path: '/board/first-snow', element: <BoardListPage /> },
+      { path: '/board/large-snow', element: <BoardListPage /> },
+      { path: '/board/permanent-snow', element: <BoardListPage /> },
+      { path: '/board/besookt', element: <BoardListPage /> },
       { path: 'exam-review', element: <ExamReviewPage /> },
       { path: 'alert', element: <AlertPage /> },
       { path: 'my-page', element: <MyPage /> },
