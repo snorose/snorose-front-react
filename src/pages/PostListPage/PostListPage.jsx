@@ -9,28 +9,13 @@ export default function BoardListPage() {
   const { pathname } = useLocation();
   const currentBoardId = pathname.split('/')[2];
 
-  function getTitle(currentBoardId) {
-    let title;
-    switch (currentBoardId) {
-      case 'first-snow':
-        title = '첫눈온방';
-        break;
-      case 'large-snow':
-        title = '함박눈방';
-        break;
-      case 'permanent-snow':
-        title = '만년설방';
-        break;
-      case 'besookt':
-        title = '베숙트';
-        break;
-      default:
-        title = null;
-    }
-    return title;
-  }
-
-  const boardTitle = getTitle(currentBoardId);
+  const boardName = {
+    'first-snow': '첫눈온방',
+    'large-snow': '함박눈방',
+    'permanent-snow': '만년설방',
+    besookt: '베숙트',
+  };
+  const currentBoardName = boardName[currentBoardId];
 
   return (
     <div className={styles.container}>
@@ -39,7 +24,7 @@ export default function BoardListPage() {
           <div className={styles.side_menu_btn}>
             <Icon id='hamburger' />
           </div>
-          <h1>{boardTitle}</h1>
+          <h1>{currentBoardName}</h1>
         </div>
         <div className={styles.notification_bar}>
           <div className={styles.notification_icon}>
