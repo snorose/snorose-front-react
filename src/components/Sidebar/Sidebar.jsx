@@ -6,6 +6,8 @@ import styles from './Sidebar.module.css';
 
 const isLogin = true;
 
+console.log('test');
+
 export default function Sidebar({ closeSidebar }) {
   const sidebarRef = useRef();
   const [FIRST_MENU, ...MENUS] = isLogin
