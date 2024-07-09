@@ -1,19 +1,31 @@
-# SNOROSE
+# SNOROSE | 스노로즈
 
-Sookmyung women's university - 커뮤니티
+숙명여자대학교 신입생, 재학생, 졸업생이 사용하는 커뮤니티
 
-## 🫧 역할 분담
+![snorose](https://github.com/snorose/snorose-front-react/assets/34948133/47378498-15ef-4736-ad5f-85c48656c398)
+
+<br />
+
+## 📍 리액트 리뉴얼
+
+기존 스노로즈는 Angular로 개발되었지만, 스노로즈가 지속적으로 유지보수되기 위해선 계속해서 숙명여대 재학생 중 관리자가 유입되어야 하기 때문에 소프트웨어학부에서 가장 많이 사용되는 기술 스택인 React로 프로젝트를 전면 리뉴얼하기로 결정했습니다.
+
+<br />
+
+## 📋 역할 분담
 
 | 담당자 | 담당 내용 |
 | :----- | :-------- |
-| 김준희 |           |
-| 류미성 |           |
-| 송희원 |           |
-| 정민주 |           |
+| 김준희 | 게시판 |
+| 류미성 | 마이페이지 |
+| 송희원 | 메인페이지|
+| 정민주 | 로그인 |
 
-## 💻 Development Environment
+<br />
 
-- React
+## 💻 Development Techs
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/React Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white"> <img src="https://img.shields.io/badge/PostCSS-DD3A0A?style=for-the-badge&logo=postcss&logoColor=white"> <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black">
+
 
 <br>
 
@@ -21,18 +33,6 @@ Sookmyung women's university - 커뮤니티
 
 | 라이브러리 | 사용 목적 | Management Tool |
 | :--------: | :-------: | :-------------: |
-|    Moya    | 서버 통신 |       SPM       |
-|     @@     |    @@     |       @@        |
-|     @@     |    @@     |       @@        |
-|     @@     |    @@     |       @@        |
-
-<br>
-
-## 📂 Folder Architecture
-
-```jsx
-📁 src
-```
 
 <br>
 
