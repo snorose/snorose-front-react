@@ -1,0 +1,11 @@
+.header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login {
+  background-color: white;
+  color: #00368e;
+  font-weight: bold;
+}
