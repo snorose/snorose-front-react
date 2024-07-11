@@ -1,0 +1,25 @@
+.carousel {
+  width: 100%;
+  margin: 0 14px;
+  display: flex;
+  gap: 14px;
+  transition: 1s transform ease;
+}
+
+.indicator {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  border: 1px solid #00368e;
+}
+
+.dot.current {
+  background-color: #00368e;
+}

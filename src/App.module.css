@@ -6,5 +6,6 @@
   margin: 0 auto;
   position: relative;
   background-color: white;
+  overflow-x: hidden;
   overflow-y: auto;
 }
