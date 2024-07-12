@@ -1,4 +1,4 @@
 .slide {
-  width: calc(100vw - 28px);
+  width: calc(100% - 28px);
   flex-shrink: 0;
 }
