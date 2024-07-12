@@ -1,0 +1,7 @@
+.viewPointListPage {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  width: 100%;
+  gap: 18px;
+}
