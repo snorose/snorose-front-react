@@ -56,19 +56,21 @@
 
 .pointIconWrapper {
   display: flex;
-  width: 1.0625rem;
-  height: 1.0625rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .icon {
   width: 100%;
   height: auto;
+  padding: 4px 0;
 }
 
 .pointContent {
   display: flex;
   flex-direction: column;
   padding: 0 0.625rem;
+  gap: 0.2rem;
 }
 
 .pointTitle {
