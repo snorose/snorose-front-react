@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './BoardListPage.module.css';
-import Icon from '../../components/Icon/Icon.jsx';
-import PostBar from '../../components/PostBar/PostBar.jsx';
-import Sponser from '../../components/Sponser/Sponser.jsx';
-import POSTLIST from '../../constants/postlist_dummy.js';
-import PTR from '../../components/PTR/PTR.jsx';
-import { POST_CATEGORIES } from '../../constants/post_categories.js';
+import Icon from '../../../components/Icon/Icon.jsx';
+import PostBar from '../../../components/PostBar/PostBar.jsx';
+import Sponser from '../../../components/Sponser/Sponser.jsx';
+import POST_LIST from '../../../constants/postListDummy.js';
+import PTR from '../../../components/PTR/PTR.jsx';
+import { POST_CATEGORIES } from '../../../constants/postCategories.js';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
@@ -74,7 +74,7 @@ export default function BoardListPage() {
           <Icon id='pencil' />
         </div>
         <PTR>
-          {POSTLIST.map((post, index) => (
+          {POST_LIST.map((post, index) => (
             <PostBar key={index} data={post} />
           ))}
         </PTR>

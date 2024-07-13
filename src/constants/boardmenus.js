@@ -1,4 +1,4 @@
-export const BOARDMENUS = [
+export const BOARD_MENUS = [
   {
     id: 'first-snow',
     title: '첫눈온방',
