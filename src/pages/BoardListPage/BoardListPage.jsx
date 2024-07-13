@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './BoardListPage.module.css';
 import Icon from '../../components/Icon/Icon.jsx';
 import PostBar from '../../components/PostBar/PostBar.jsx';
 import Sponser from '../../components/Sponser/Sponser.jsx';
 import POSTLIST from '../../constants/postlist_dummy.js';
+import PTR from '../../components/PTR/PTR.jsx';
+import { POST_CATEGORIES } from '../../constants/post_categories.js';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
@@ -21,7 +23,14 @@ export default function BoardListPage() {
     currentBoard = '베숙트';
   }
 
-  console.log(currentBoard);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(currentPath);
+
+  const getCurrentCategoryColor = (id, pointColor, defaultColor) =>
+    id === selectedCategoryId ? pointColor : defaultColor;
+
+  const handleCategoryClick = (id) => {
+    setSelectedCategoryId(id);
+  };
 
   return (
     <div className={styles.container}>
@@ -39,18 +48,36 @@ export default function BoardListPage() {
           <p>필독 공지사항</p>
         </div>
         <div className={styles.keyword_box}>
-          <div className={styles.keyword}>꿀팁</div>
-          <div className={styles.keyword}>일상</div>
-          <div className={styles.keyword}>우리과 찾기</div>
+          {POST_CATEGORIES &&
+            POST_CATEGORIES.map(({ id, label }) => (
+              <div
+                key={id}
+                className={styles.keyword}
+                style={{
+                  backgroundColor: getCurrentCategoryColor(
+                    id,
+                    '#00368E',
+                    '#BFD7EC'
+                  ),
+                  color: getCurrentCategoryColor(id, '#FFFFFF', '#5F86BF'),
+                  border: getCurrentCategoryColor(id, '#00368E', '#5F86BF'),
+                }}
+                onClick={() => handleCategoryClick(id)} // 클릭 이벤트 핸들러 추가
+              >
+                {label}
+              </div>
+            ))}
         </div>
       </div>
       <div className={styles.content}>
         <div className={styles.pencil_icon}>
           <Icon id='pencil' />
         </div>
-        {POSTLIST.map((post, index) => (
-          <PostBar key={index} data={post} />
-        ))}
+        <PTR>
+          {POSTLIST.map((post, index) => (
+            <PostBar key={index} data={post} />
+          ))}
+        </PTR>
       </div>
       <div className={styles.refresh_icon}>
         <Icon id='refresh' />
