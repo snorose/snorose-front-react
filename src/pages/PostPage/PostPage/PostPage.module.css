@@ -1,0 +1,170 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 8px;
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 8px;
+  /* 양옆 여백 */
+  padding: 0 17px;
+}
+
+.header {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.side_menu_btn {
+  width: 20px;
+  height: 15px;
+  display: flex;
+}
+
+.profile {
+  display: flex;
+  width: 100%;
+  justify-content: baseline;
+
+  align-items: center;
+}
+
+.profile_icon {
+  display: flex;
+  width: 30px;
+  height: 30px;
+}
+
+.name {
+  font-size: 11px;
+  padding-left: 5px;
+}
+
+.more_option {
+  margin-left: auto;
+  width: 15px;
+  height: 15px;
+  display: flex;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 8px;
+  /* 양옆 여백 */
+  padding: 0 17px 11px 17px;
+  border-bottom: 1px solid #c7c7c7;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 11px 0;
+}
+
+.text {
+  font-size: 12px;
+}
+
+.edited {
+  font-size: 10px;
+  color: #6a6a6a;
+  padding: 11px 0 9px 0;
+}
+
+.post_bottom {
+  display: flex;
+  gap: 5px;
+  font-size: 10px;
+  color: #5f86bf;
+}
+
+.comment_icon {
+  display: flex;
+  width: 15px;
+  height: 15px;
+}
+
+.like_icon {
+  display: flex;
+  width: 15px;
+  height: 15px;
+}
+
+.view_cnt {
+  margin-left: auto;
+}
+
+.comment {
+  width: 100%;
+
+  padding: 12px 17px;
+  border-bottom: 1px solid #c7c7c7;
+}
+
+.comment_top {
+  display: flex;
+  justify-content: space-between;
+
+  .comment_left {
+    display: flex;
+  }
+
+  .comment_right {
+    display: flex;
+  }
+
+  .profile_icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .name {
+    font-size: 10px;
+  }
+
+  .more_option {
+    margin-left: 10px;
+  }
+
+  .cnt_num {
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .comment_icon {
+    margin-right: 3px;
+    margin-left: 8px;
+  }
+
+  .like_icon {
+    margin-right: 3px;
+    margin-left: 8px;
+  }
+}
+
+.comment_text {
+  font-size: 10px;
+  padding: 6px 0;
+}
+
+.comment_time {
+  color: #6a6a6a;
+}
+
+.nested_comment {
+  padding-left: 34px;
+  width: 100%;
+  background-color: #f0f0f0;
+}
