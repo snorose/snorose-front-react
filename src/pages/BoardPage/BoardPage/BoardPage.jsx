@@ -1,7 +1,7 @@
 import styles from './BoardPage.module.css';
-import Icon from '../../components/Icon/Icon.jsx';
-import Sponser from '../../components/Sponser/Sponser.jsx';
-import { BOARDMENUS } from '../../constants/boardmenus.js';
+import Icon from '../../../components/Icon/Icon.jsx';
+import Sponser from '../../../components/Sponser/Sponser.jsx';
+import { BOARD_MENUS } from '../../../constants/boardMenus.js';
 import { Link } from 'react-router-dom';
 
 const BoardBar = ({ data }) => {
@@ -25,7 +25,7 @@ export default function BoardPage() {
         </div>
       </div>
       <div className={styles.sponser}>
-      <Sponser />
+        <Sponser />
       </div>
       <div className={styles.searchbar_box}>
         <div className={styles.searchbar}>
@@ -38,7 +38,7 @@ export default function BoardPage() {
       <div className={styles.board_box}>
         <div className={styles.board_title}>커뮤니티</div>
         <div className={styles.board_list_box}>
-          {BOARDMENUS.map((board, index) => (
+          {BOARD_MENUS.map((board, index) => (
             <BoardBar key={index} data={board} />
           ))}
         </div>
