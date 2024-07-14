@@ -1,10 +1,29 @@
 import styles from './PostPage.module.css';
 import Icon from '../../../components/Icon/Icon.jsx';
 import Comment from '../../../components/Commnet/Comment.jsx';
-import NestedComment from '../../../components/Commnet/NestedComment.jsx';
 import InputBar from '../../../components/InputBar/InputBar.jsx';
-import { POST_CONTENT } from '../../../constants/postContent_dummy.js';
-import timeAgo from '../../../utils/timeAge.js';
+import { POST_CONTENT } from '../../../constants/postContentDummy.js';
+import { COMMENT_LIST } from '../../../constants/commentDummy.js';
+import timeAgo from '../../../utils/timeAgo.js';
+
+// const data = {
+//   id: 2,
+//   postId: 1,
+//   userProfile: 'string',
+//   userDisplay: '송이1',
+//   isWriter: true,
+//   content: 'comment test',
+//   likeCount: 1,
+//   reportCount: 0,
+//   createdAt: '2024-07-14T04:13:06.215Z',
+//   updatedAt: '2024-07-14T04:13:06.215Z',
+//   deletedAt: '2024-07-14T04:13:06.215Z',
+//   isVisible: true,
+//   isUpdated: true,
+//   isDeleted: false,
+//   parentId: 1,
+//   children: ['string'],
+// };
 
 export default function PostPage() {
   return (
@@ -45,8 +64,10 @@ export default function PostPage() {
           <p className={styles.view_cnt}>{POST_CONTENT.viewCount} 조회</p>
         </div>
       </div>
-      <Comment />
-      <NestedComment />
+      {COMMENT_LIST &&
+        COMMENT_LIST.map((comment) => (
+          <Comment key={comment.id} data={comment} /> // `data` prop에 `comment` 객체를 전달
+        ))}
       <InputBar />
     </div>
   );

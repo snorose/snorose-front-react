@@ -1,6 +1,6 @@
 import styles from './PostBar.module.css';
 import Icon from '../../components/Icon/Icon.jsx';
-import timeAgo from '../../utils/timeAge.js';
+import timeAgo from '../../utils/timeAgo.js';
 
 
 export default function PostBar({ data }) {
