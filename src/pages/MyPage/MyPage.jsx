@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './MyPage.module.css';
+import { Link } from 'react-router-dom';
 import profileIcon from '../../assets/icon-profile.svg';
 import { Link } from 'react-router-dom';
 
@@ -72,7 +73,9 @@ export default function MyPage() {
           <p className={styles.detailContent}>서비스 이용 약관</p>
         </div>
         <div className={styles.accountActions}>
-          <p className={styles.detailContent}>회원 탈퇴</p>
+          <Link to='/my-page/delete-account' className={styles.detailContent}>
+            회원 탈퇴
+          </Link>
           <p className={styles.detailContent}>로그아웃</p>
         </div>
       </div>

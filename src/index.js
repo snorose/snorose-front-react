@@ -7,14 +7,15 @@ import './index.css';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
-import BoardListPage from './pages/BoardListPage/BoardListPage';
-import BoardPage from './pages/BoardPage/BoardPage';
+import { BoardPage, BoardListPage } from './pages/BoardPage';
+import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import MainPage from './pages/MainPage/MainPage';
 import MyPage from './pages/MyPage/MyPage';
 import ViewPointListPage from './pages/MyPage/ViewPointListPage';
+import DeleteAccountPage from './pages/MyPage/DeleteAccountPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import reportWebVitals from './reportWebVitals';
 import EditInfoPage from './pages/MyPage/EditInfoPage';
@@ -33,12 +34,16 @@ const router = createBrowserRouter([
       { path: '/board/large-snow', element: <BoardListPage /> },
       { path: '/board/permanent-snow', element: <BoardListPage /> },
       { path: '/board/besookt', element: <BoardListPage /> },
+      { path: '/post', element: <PostPage /> },
+      { path: '/post-search', element: <PostSearchPage /> },
+      { path: '/post-write', element: <PostWritePage /> },
       { path: 'exam-review', element: <ExamReviewPage /> },
       { path: 'alert', element: <AlertPage /> },
       { path: 'my-page', element: <MyPage /> },
       { path: 'my-page/password', element: <ChangePassword /> },
       { path: 'my-page/edit-info', element: <EditInfoPage /> },
       { path: 'my-page/view-point-list', element: <ViewPointListPage /> },
+      { path: 'my-page/delete-account', element: <DeleteAccountPage /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'notice', element: <NoticePage /> },
       { path: 'authentication', element: <AuthPage /> },
