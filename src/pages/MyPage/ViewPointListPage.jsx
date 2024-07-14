@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './ViewPointListPage.module.css';
 import { Link } from 'react-router-dom';
 import Icon from '../../components/Icon/Icon';
 
 export default function ViewPointListPage() {
+  useEffect(() => {
+    const chargePoints = document.querySelectorAll(`.${styles.chargePoint}`);
+    chargePoints.forEach((point) => {
+      const value = point.textContent.replace(/\s/g, '');
+      if (parseInt(value) < 0) {
+        point.classList.add(styles.negative);
+      }
+    });
+  }, []);
+
   return (
     <main className={styles.viewPointListPage}>
       <div className={styles.arrowBackIconWrapper}>
