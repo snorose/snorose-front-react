@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './MyPage.module.css';
 import profileIcon from '../../assets/icon-profile.svg';
+import { Link } from 'react-router-dom';
 
 export default function MyPage() {
   return (
@@ -27,7 +28,9 @@ export default function MyPage() {
             <p className={styles.point}>39</p>
           </div>
           <div className={styles.detailContent}>
-            <p className={styles.detailContentTitle}>포인트 내역 보기</p>
+            <Link to='view-point-list'>
+              <p className={styles.detailContentTitle}>포인트 내역 보기</p>
+            </Link>
           </div>
         </div>
         <div className={styles.detailContainer}>
