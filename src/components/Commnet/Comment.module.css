@@ -27,13 +27,15 @@
 
 .comment_right {
   display: flex;
+  align-items: center;
 }
 
 .cnt_num {
   font-size: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  color: #5F86BF;
 }
 
 .comment_icon {
@@ -42,6 +44,7 @@
   height: 15px;
   margin-right: 3px;
   margin-left: 8px;
+
 }
 
 .like_icon {
@@ -50,14 +53,18 @@
   height: 15px;
   margin-right: 3px;
   margin-left: 8px;
+
 }
 
 .more_option {
   display: flex;
-  width: 15px;
-  height: 15px;
+  flex-direction: column;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
   margin-left: auto;
   margin-left: 10px;
+
 }
 
 .comment_text {

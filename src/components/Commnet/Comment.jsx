@@ -21,7 +21,7 @@ export default function Comment() {
           </div>
           <p className={styles.cnt_num}>5</p>
           <div className={styles.more_option}>
-            <Icon id='more-option' />
+            <Icon id='more-option' fill='#5F86BF' />
           </div>
         </div>
       </div>

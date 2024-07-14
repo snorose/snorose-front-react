@@ -13,18 +13,17 @@ export default function NestedComment() {
             <p className={styles.name}>이름</p>
           </div>
           <div className={styles.comment_right}>
-            <p className={styles.cnt_num}>3</p>
             <div className={styles.like_icon}>
               <Icon id='blank-heart' />
             </div>
             <p className={styles.cnt_num}>5</p>
             <div className={styles.more_option}>
-              <Icon id='more-option' />
+              <Icon id='more-option' fill='#5F86BF' />
             </div>
           </div>
         </div>
         <p className={styles.comment_text}>맛있겠다...</p>
-        <p className={styles.comment_time}>1시간 전 ...</p>
+        <p className={styles.comment_time}>1시간 전</p>
       </div>
     </div>
   );
