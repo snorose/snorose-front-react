@@ -4,6 +4,7 @@
   background-image: url('../../assets/mypage-background-gradation.svg');
   background-size: cover;
   background-position: center;
+  width: 100%;
 }
 
 /* 마이페이지 상단 정보 */

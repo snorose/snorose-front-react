@@ -14,6 +14,7 @@ import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import MainPage from './pages/MainPage/MainPage';
 import MyPage from './pages/MyPage/MyPage';
+import DeleteAccountPage from './pages/MyPage/DeleteAccountPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import reportWebVitals from './reportWebVitals';
 import EditInfoPage from './pages/MyPage/EditInfoPage';
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
       { path: 'my-page', element: <MyPage /> },
       { path: 'my-page/password', element: <ChangePassword /> },
       { path: 'my-page/edit-info', element: <EditInfoPage /> },
+      { path: 'my-page/delete-account', element: <DeleteAccountPage /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'notice', element: <NoticePage /> },
       { path: 'authentication', element: <AuthPage /> },
