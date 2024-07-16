@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import styles from './Login.module.css';
 import Icon from '../../components/Icon/Icon';
@@ -12,6 +13,7 @@ export default function Login() {
     const [pwInputFocus, setPwInputFocus] = useState(false);
     const pwInputRef = useRef();
     const [user, setUser] = useState();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,8 +31,10 @@ export default function Login() {
             )
             setUser(response.data);
             setErrmsg(false);
-            localStorage.setItem('user', response.data);
+            localStorage.setItem('accessToken', response.data.result.tokenResponse.accessToken);
+            localStorage.setItem('refreshToken', response.data.result.tokenResponse.refreshToken);
             console.log(response.data);
+            navigate('/home');
         }catch (e){
             setErrmsg(true);
             console.log(e);
@@ -76,8 +80,8 @@ export default function Login() {
                         
                     </div>
                     <button className={styles.button} type="submit">로그인</button>
-                    <div className={styles.find}><a>아이디 찾기</a> | <a>비밀번호 찾기</a></div>
-                    <a className={styles.signup}>회원가입</a>
+                    <div className={styles.find}><Link>아이디 찾기</Link> | <Link>비밀번호 찾기</Link></div>
+                    <Link className={styles.signup}>회원가입</Link>
                 </div>
                 {errmsg ? <div className={styles.loginError}>
                     <p>아이디 혹은 비밀번호가</p>

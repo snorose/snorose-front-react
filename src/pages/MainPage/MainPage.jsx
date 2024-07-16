@@ -1,5 +1,6 @@
 import React from 'react';
+import user from '../LoginPage/authorize';
 
 export default function MainPage() {
-  return <main>메인홈</main>;
+  return <main>{user.userName}의 메인홈</main>;
 }

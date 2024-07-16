@@ -11,6 +11,7 @@ import MainPage from './pages/MainPage/MainPage';
 import MyPage from './pages/MyPage/MyPage';
 import NotificationPage from './pages/NotificationPage/NotificationPage';
 import reportWebVitals from './reportWebVitals';
+import Login from './pages/LoginPage/Login';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: '/exam-review', element: <ExamReviewPage /> },
       { path: '/notification', element: <NotificationPage /> },
       { path: '/my-page', element: <MyPage /> },
+      { path: '/login', element:<Login/>}
     ],
   },
 ]);
