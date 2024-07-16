@@ -1,0 +1,69 @@
+.post {
+  padding: 10px 0;
+  width: 100%;
+}
+
+.post_top {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  padding-bottom: 5px;
+}
+
+.profile {
+  display: flex;
+  width: 15px;
+  height: 15px;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.time {
+  font-size: 9px;
+}
+
+.edited {
+  font-size: 9px;
+}
+
+.post_center {
+  padding-bottom: 5px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.more_option {
+  margin-left: auto;
+  width: 15px;
+  height: 15px;
+  display: flex;
+}
+
+.post_bottom {
+  display: flex;
+  gap: 5px;
+  font-size: 10px;
+}
+
+.comment_icon {
+  display: flex;
+  width: 15px;
+  height: 15px;
+}
+
+.like_icon {
+  display: flex;
+  width: 15px;
+  height: 15px;
+}

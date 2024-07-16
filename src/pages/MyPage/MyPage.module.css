@@ -1,0 +1,115 @@
+.myPage {
+  display: flex;
+  flex-direction: column;
+  background-image: url('../../assets/mypage-background-gradation.svg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+/* 마이페이지 상단 정보 */
+.myPageUpper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 186px;
+  position: relative;
+}
+
+.logoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/logo-white.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.myInfo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 8px;
+}
+
+.name {
+  padding: 6px;
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.myImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 67px;
+  height: 65px;
+  flex-shrink: 0;
+  background-color: #fff;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.profileYearMember {
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+}
+
+/* 마이페이지 하단 정보 */
+.myPageLower {
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px 15px 0 0;
+  background-color: #fff;
+  padding: 18px;
+}
+
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 4px;
+  border-bottom: 1px solid #c7c7c7;
+}
+
+.pointContainer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.title {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.detailContent {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.detailContent .detailContentDesc {
+  font-weight: 300;
+}
+
+/* 회원 탈퇴, 로그아웃 */
+.accountActions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 4px;
+}
