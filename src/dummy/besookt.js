@@ -1,5 +1,6 @@
 export const BESOOKTS = [
   {
+    postId: 1,
     nickname: '익명',
     title: '지갑 분실물 찾습니다',
     timeAgo: '4시간 전',
@@ -9,6 +10,7 @@ export const BESOOKTS = [
     image: 'besookt1.png',
   },
   {
+    postId: 2,
     nickname: '익명',
     title: '미와쿠 새우붓가케 우동',
     timeAgo: '4시간 전',
@@ -17,6 +19,7 @@ export const BESOOKTS = [
     image: 'besookt2.png',
   },
   {
+    postId: 3,
     nickname: '익명',
     title: '졸업후 메이크업샵 차린 송이인데!',
     timeAgo: '4시간 전',
