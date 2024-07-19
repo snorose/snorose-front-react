@@ -1,10 +1,16 @@
 import Carousel from '../../components/Carousel/Carousel.jsx';
+import CategoryBoard from '../../components/CategoryBoard/CategoryBoard.jsx';
 import Header from '../../components/Header/Header';
 import Notice from '../../components/Notice/Notice.jsx';
 import Slide from '../../components/Carousel/Slide.jsx';
 import BANNER1 from '../../assets/images/ad_banner1.png';
 import BANNER2 from '../../assets/images/ad_banner2.png';
 import BANNER3 from '../../assets/images/ad_banner3.png';
+import { BOARDMENUS } from '../../constants/boardmenus.js';
+import { BESOOKTS } from '../../dummy/besookt.js';
+import Footer from '../../components/Footer/Footer.jsx';
+
+const BOARDS = BOARDMENUS.filter((board) => board.title !== '베숙트');
 
 export default function MainPage() {
   return (
@@ -16,7 +22,28 @@ export default function MainPage() {
         <Slide src={BANNER3} alt='banner3' />
       </Carousel>
       <Notice />
-      메인홈
+      <CategoryBoard title='카테고리'>
+        {BOARDS.map(({ id, title, desc }) => (
+          <CategoryBoard.Item icon={id} name={title} description={desc} />
+        ))}
+      </CategoryBoard>
+      {BESOOKTS.length > 0 && (
+        <CategoryBoard title='베숙트'>
+          {BESOOKTS.map(
+            ({ nickname, title, overview, boardName, timeAgo, image }) => (
+              <CategoryBoard.DetailItem
+                nickname={nickname}
+                title={title}
+                overview={overview}
+                boardName={boardName}
+                timeAgo={timeAgo}
+                image={image}
+              />
+            )
+          )}
+        </CategoryBoard>
+      )}
+      <Footer />
     </main>
   );
 }
