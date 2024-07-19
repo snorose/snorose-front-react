@@ -1,22 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './EditInfoPage.module.css';
-import arrowBackIcon from '../../../assets/icon-arrow-back.svg';
-import profileIcon from '../../../assets/icon-profile.svg';
+import Icon from '../../../components/Icon/Icon.jsx';
 
 export default function EditInfoPage() {
   return (
     <main className={styles.editInfoPage}>
       <div className={styles.topContainer}>
         <Link to='/my-page' className={styles.goBackBtn}>
-          <img src={arrowBackIcon} alt='뒤로가기' />
+          <div className={styles.arrowBackIconWrapper}>
+            <Icon id='arrow-back' />
+          </div>
         </Link>
-        <p className={styles.completionBtn}>완료</p>
+        <button className={styles.completionBtn}>완료</button>
       </div>
 
       <div className={styles.profileContainer}>
         <div className={styles.profileImg}>
-          <img src={profileIcon} alt='프로필 이미지' />
+          <Icon id='profile-basic-camera' />
         </div>
       </div>
 
@@ -39,6 +40,9 @@ export default function EditInfoPage() {
               className={styles.inputText}
               placeholder='생년월일을 선택하세요'
             />
+            <div className={styles.calendarIconWrapper}>
+              <Icon id='calendar' />
+            </div>
           </div>
         </div>
         <div className={styles.info}>
@@ -59,6 +63,9 @@ export default function EditInfoPage() {
               className={styles.inputText}
               placeholder='전공을 선택하세요'
             />
+            <div className={styles.arrowDownIconWrapper}>
+              <Icon id='arrow-down' />
+            </div>
           </div>
         </div>
       </div>

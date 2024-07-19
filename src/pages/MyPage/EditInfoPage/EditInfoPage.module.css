@@ -1,7 +1,7 @@
 .editInfoPage {
   display: flex;
   flex-direction: column;
-  padding: 1.125rem;
+  padding: 20px;
   width: 100%;
 }
 
@@ -9,18 +9,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 0;
 }
 
 .goBackBtn {
-  width: 0.5625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding-right: 14px;
 
-  img {
+  svg {
     width: 100%;
+    height: 100%;
   }
 }
 
+.arrowBackIconWrapper {
+  display: flex;
+}
+
 .completionBtn {
+  background-color: #fff;
+  padding: 14px 0 14px 14px;
   line-height: 150%;
   letter-spacing: -0.5px;
   color: #000;
@@ -68,9 +79,10 @@
 
 .inputWrapper {
   display: flex;
+  height: 40px;
   border-radius: 5px;
   background: var(--Miscellaneous-_Kit-Section-Fill, #f5f5f5);
-  padding: 12px;
+  padding-left: 12px;
 }
 
 .inputText {
@@ -84,7 +96,16 @@
   font-size: 12px;
 }
 
-.calendarInput {
+.calendarIconWrapper {
   display: flex;
-  justify-content: space-between;
+  width: 40px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.arrowDownIconWrapper {
+  display: flex;
+  width: 40px;
+  padding: 12px;
+  cursor: pointer;
 }
