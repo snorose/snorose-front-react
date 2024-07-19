@@ -1,7 +1,7 @@
 import PROFILE from '../../dummy/images/profile.png';
 import styles from './CategoryBoardItemDetail.module.css';
 import { ROLE } from '../../constants';
-import { user } from '../../dummy/user.js';
+import { USER } from '../../dummy/data';
 
 export default function CategoryBoardItemDetail({
   profile,
@@ -12,11 +12,11 @@ export default function CategoryBoardItemDetail({
   timeAgo,
   image,
 }) {
-  if (!user?.isLogin) {
+  if (!USER?.isLogin) {
     return <li className={styles.item}>로그인 후 이용 가능합니다.</li>;
   }
 
-  if (user?.role === ROLE.preUser) {
+  if (USER?.role === ROLE.preUser) {
     return <li className={styles.item}>등업 후 이용 가능합니다.</li>;
   }
 
