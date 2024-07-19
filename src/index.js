@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         path: '/board/besookt',
         element: (
           <ProtectedRoute
-            roles={[ROLE.User, ROLE.User2, ROLE.Admin, ROLE.Official]}
+            roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
           >
             <BoardListPage />
           </ProtectedRoute>
