@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './EditInfoPage.module.css';
-import arrowBackIcon from '../../assets/icon-arrow-back.svg';
-import profileIcon from '../../assets/icon-profile.svg';
+import arrowBackIcon from '../../../assets/icon-arrow-back.svg';
+import profileIcon from '../../../assets/icon-profile.svg';
 
 export default function EditInfoPage() {
   return (
