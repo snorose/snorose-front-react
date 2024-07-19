@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styles from './EditInfoPage.module.css';
 import arrowBackIcon from '../../assets/icon-arrow-back.svg';
 import profileIcon from '../../assets/icon-profile.svg';
-import calendarIcon from '../../assets/icon-calendar.svg';
 
 export default function EditInfoPage() {
   return (
@@ -19,35 +18,47 @@ export default function EditInfoPage() {
         <div className={styles.profileImg}>
           <img src={profileIcon} alt='프로필 이미지' />
         </div>
-        <p className={styles.profileEditBtn}>프로필 변경</p>
       </div>
 
       <div className={styles.infoContainer}>
-        <div className={styles.Info}>
-          <p className={styles.title}>이름</p>
-          <div className={styles.inputBox}>
-            <p className={styles.inputText}>이숙명</p>
+        <div className={styles.info}>
+          <h3 className={styles.title}>이름</h3>
+          <div className={styles.inputWrapper}>
+            <input
+              type='text'
+              className={styles.inputText}
+              placeholder='이름을 입력하세요'
+            />
           </div>
         </div>
-        <div className={styles.Info}>
-          <p className={styles.title}>생일</p>
-          <div className={`${styles.inputBox} ${styles.calendarInput}`}>
-            <div className={styles.calendarContainer}>
-              <img src={calendarIcon} alt='달력 아이콘' />
-            </div>
-            <p className={styles.inputText}>1996.01.01</p>
+        <div className={styles.info}>
+          <h3 className={styles.title}>생년월일</h3>
+          <div className={styles.inputWrapper}>
+            <input
+              type='text'
+              className={styles.inputText}
+              placeholder='생년월일을 선택하세요'
+            />
           </div>
         </div>
-        <div className={styles.Info}>
-          <p className={styles.title}>닉네임</p>
-          <div className={styles.inputBox}>
-            <p className={styles.inputText}>담두라</p>
+        <div className={styles.info}>
+          <h3 className={styles.title}>닉네임</h3>
+          <div className={styles.inputWrapper}>
+            <input
+              type='text'
+              className={styles.inputText}
+              placeholder='닉네임을 입력하세요'
+            />
           </div>
         </div>
-        <div className={styles.Info}>
-          <p className={styles.title}>전공</p>
-          <div className={styles.inputBox}>
-            <p className={styles.inputText}>시각영상디자인과</p>
+        <div className={styles.info}>
+          <h3 className={styles.title}>전공</h3>
+          <div className={styles.inputWrapper}>
+            <input
+              type='text'
+              className={styles.inputText}
+              placeholder='전공을 선택하세요'
+            />
           </div>
         </div>
       </div>
