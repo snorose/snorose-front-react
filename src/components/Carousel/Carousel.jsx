@@ -12,7 +12,7 @@ export default function Carousel({ children }) {
         carouselRef.current.style.transform = `translateX(0)`;
       } else {
         setCurrentIndex((prev) => prev + 1);
-        carouselRef.current.style.transform = `translateX(calc(-1 * (100% - 14px) * ${currentIndex + 1}))`;
+        carouselRef.current.style.transform = `translateX(calc(-1 * 100% * ${currentIndex + 1}))`;
       }
     }, 5000);
 
