@@ -5,13 +5,14 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
-import BoardListPage from './pages/BoardListPage/BoardListPage';
-import BoardPage from './pages/BoardPage/BoardPage';
+import { BoardPage, BoardListPage } from './pages/BoardPage';
+import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import MainPage from './pages/MainPage/MainPage';
 import MyPage from './pages/MyPage/MyPage';
+import DeleteAccountPage from './pages/MyPage/DeleteAccountPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import reportWebVitals from './reportWebVitals';
 import EditInfoPage from './pages/MyPage/EditInfoPage';
@@ -29,10 +30,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <MainPage /> },
       { path: 'home', element: <MainPage /> },
-      {
-        path: '/board',
-        element: <BoardPage />,
-      },
+      { path: '/board', element: <BoardPage /> },
       {
         path: '/board/first-snow',
         element: (
@@ -67,11 +65,15 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      { path: '/post', element: <PostPage /> },
+      { path: '/post-search', element: <PostSearchPage /> },
+      { path: '/post-write', element: <PostWritePage /> },
       { path: 'exam-review', element: <ExamReviewPage /> },
       { path: 'alert', element: <AlertPage /> },
       { path: 'my-page', element: <MyPage /> },
       { path: 'my-page/password', element: <ChangePassword /> },
       { path: 'my-page/edit-info', element: <EditInfoPage /> },
+      { path: 'my-page/delete-account', element: <DeleteAccountPage /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'notice', element: <NoticePage /> },
       { path: 'authentication', element: <AuthPage /> },

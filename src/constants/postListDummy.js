@@ -1,4 +1,4 @@
-const POSTLIST = [
+const POST_LIST = [
   {
     postId: 7,
     title: '제목7',
@@ -104,4 +104,4 @@ const POSTLIST = [
   
 ];
 
-export default POSTLIST;
+export default POST_LIST;
