@@ -1,8 +1,6 @@
 import Icon from '../../components/Icon/Icon.jsx';
 import styles from './CategoryBoardItem.module.css';
-import { ROLE } from '../../constants';
-
-const user = { isLogin: true, role: ROLE.preUser };
+import { user } from '../../dummy/user.js';
 
 export default function CategoryBoardItem({ icon, name, description }) {
   if (!user?.isLogin) {

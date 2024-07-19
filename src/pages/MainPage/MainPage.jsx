@@ -22,7 +22,7 @@ export default function MainPage() {
         <Slide src={BANNER3} alt='banner3' />
       </Carousel>
       <Notice />
-      <CategoryBoard title='카테고리'>
+      <CategoryBoard title='카테고리' to='/board'>
         {BOARDS.map(({ id, title, desc }) => (
           <CategoryBoard.Item
             key={id}
@@ -33,7 +33,7 @@ export default function MainPage() {
         ))}
       </CategoryBoard>
       {BESOOKTS.length > 0 && (
-        <CategoryBoard title='베숙트'>
+        <CategoryBoard title='베숙트' to='/board/besookt'>
           {BESOOKTS.map(
             ({
               postId,

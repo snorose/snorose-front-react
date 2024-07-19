@@ -1,9 +1,7 @@
 import PROFILE from '../../dummy/images/profile.png';
 import styles from './CategoryBoardItemDetail.module.css';
-
 import { ROLE } from '../../constants';
-
-const user = { isLogin: true, role: ROLE.preUser };
+import { user } from '../../dummy/user.js';
 
 export default function CategoryBoardItemDetail({
   profile,
