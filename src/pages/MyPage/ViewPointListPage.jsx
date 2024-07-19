@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './ViewPointListPage.module.css';
 import { Link } from 'react-router-dom';
 import Icon from '../../components/Icon/Icon';
 
 export default function ViewPointListPage() {
+  const chargePointsRef = useRef([]);
+
   useEffect(() => {
-    const chargePoints = document.querySelectorAll(`.${styles.chargePoint}`);
-    chargePoints.forEach((point) => {
+    chargePointsRef.current.forEach((point) => {
       const value = point.textContent.replace(/\s/g, '');
       if (parseInt(value) < 0) {
         point.classList.add(styles.negative);
