@@ -1,6 +1,10 @@
 import PROFILE from '../../dummy/images/profile.png';
 import styles from './CategoryBoardItemDetail.module.css';
 
+import { ROLE } from '../../constants';
+
+const user = { isLogin: true, role: ROLE.preUser };
+
 export default function CategoryBoardItemDetail({
   profile,
   nickname,
@@ -10,6 +14,14 @@ export default function CategoryBoardItemDetail({
   timeAgo,
   image,
 }) {
+  if (!user?.isLogin) {
+    return <li className={styles.item}>로그인 후 이용 가능합니다.</li>;
+  }
+
+  if (user?.role === ROLE.preUser) {
+    return <li className={styles.item}>등업 후 이용 가능합니다.</li>;
+  }
+
   const imgSrc = image ? require(`../../dummy/images/${image}`) : '';
 
   return (
