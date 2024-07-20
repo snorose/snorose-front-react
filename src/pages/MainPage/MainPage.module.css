@@ -1,8 +1,9 @@
+.header {
+  margin-bottom: 1.25rem;
+}
+
 .cards {
   margin: 1.5rem var(--default-margin) 1.75rem var(--default-margin);
-  display: flex;
-  justify-content: space-between;
-  gap: 0.45rem;
 }
 
 .notice {
