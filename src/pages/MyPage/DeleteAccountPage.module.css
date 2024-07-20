@@ -1,9 +1,9 @@
-.DeleteAccountPage {
+.deleteAccountPage {
   display: flex;
   flex-direction: column;
-  padding: 1.125rem;
+  padding: 1.25rem;
   width: 100%;
-  gap: 1.125rem;
+  height: 100vh;
 }
 
 /* 삭제 아이콘 */
@@ -11,67 +11,87 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  padding: 0.4375rem 0;
   width: 100%;
 }
 
 .closeIcon {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 1rem;
   height: 1rem;
 }
 
 /* 본문 */
-.title {
+.titleDescWrapper {
   display: flex;
-  justify-content: center;
-  font-size: 1rem;
-  font-weight: 500;
+  flex-direction: column;
+  padding: 0.4375rem 0;
+  gap: 0.875rem;
+  flex-grow: 1;
+}
+
+.title {
+  color: #000;
+  line-height: 130%;
+  letter-spacing: -0.03125rem;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 .descWrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
+  justify-content: start;
+  gap: 0.3125rem;
 }
 
 .desc {
-  width: 100%;
-  color: #666;
+  color: var(--Grey-4, var(--grey-3, #484848));
+  line-height: 150%;
+  letter-spacing: -0.03125rem;
   font-size: 0.875rem;
-  text-align: left;
+  font-weight: 500;
 }
 
+/* 하단 버튼 */
 .buttonWrapper {
   display: flex;
   flex-direction: column;
+  bottom: 0;
+  width: 100%;
   gap: 0.5rem;
+  padding-bottom: 6.25rem;
 }
 
 .goBackButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 2rem;
-  border-radius: 0.9375rem;
-  background: #5f86bf;
-  color: #fff;
-  font-size: 0.75rem;
+  width: 100%;
+  height: 2.9375rem;
+  border-radius: 0.3125rem;
+  background: var(--Blue-1, #ddebf6);
+  color: var(--Blue-3, #5f86bf);
+  font-size: 0.875rem;
   font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.03125rem;
 }
 
 .deleteAccountButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 2rem;
-  border-radius: 0.9375rem;
-  border: 0.03125rem solid #00368e;
-  background: #fff;
-  color: #00368e;
+  width: 100%;
+  height: 2.9375rem;
+  border-radius: 0.3125rem;
+  background: var(--Blue-4, #00368e);
+  color: #fff;
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.03125rem;
 }

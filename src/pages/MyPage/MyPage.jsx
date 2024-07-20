@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './MyPage.module.css';
 import { Link } from 'react-router-dom';
 import profileIcon from '../../assets/icon-profile.svg';
-import { Link } from 'react-router-dom';
 
 export default function MyPage() {
   return (
