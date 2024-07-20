@@ -22,6 +22,10 @@
   letter-spacing: -0.5px;
 }
 
+.name.notLogin {
+  color: #898989;
+}
+
 .desc {
   width: 4rem;
   font-weight: 400;
