@@ -1,4 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id='rightArrow' viewBox="0 0 12 13" fill="none">
+    <path d="M5.5 1.30859L10.8186 6.6272L5.5 11.9458" stroke="#484848" stroke-width="1.2" stroke-linecap="round"/>
+  </symbol>
   <symbol id="home" viewBox="0 0 14 16">
     <path d="M7 0L0 5.33333V16H4.375V9.77778H9.625V16H14V5.33333L7 0Z" />
   </symbol>
