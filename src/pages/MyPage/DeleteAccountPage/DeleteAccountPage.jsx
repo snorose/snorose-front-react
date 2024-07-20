@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './DeleteAccountPage.module.css';
 import { Link } from 'react-router-dom';
-import Icon from '../../components/Icon/Icon.jsx';
+import Icon from '../../../components/Icon/Icon.jsx';
 
 const descriptions = [
   '• 아이디, 이메일, 학번은 .. 목적으로 6개월간 보관됩니다',
@@ -11,19 +11,21 @@ const descriptions = [
 
 export default function DeleteAccountPage() {
   return (
-    <main className={styles.DeleteAccountPage}>
+    <main className={styles.deleteAccountPage}>
       <div className={styles.closeIconWrapper}>
         <Link to='/my-page' className={styles.closeIcon}>
           <Icon id='close' />
         </Link>
       </div>
-      <h1 className={styles.title}>탈퇴 시 아래 내용을 확인해주세요</h1>
-      <div className={styles.descWrapper}>
-        {descriptions.map((desc, index) => (
-          <p key={index} className={styles.desc}>
-            {desc}
-          </p>
-        ))}
+      <div className={styles.titleDescWrapper}>
+        <h1 className={styles.title}>탈퇴 시 아래 내용을 확인해주세요</h1>
+        <div className={styles.descWrapper}>
+          {descriptions.map((desc, index) => (
+            <p key={index} className={styles.desc}>
+              {desc}
+            </p>
+          ))}
+        </div>
       </div>
       <div className={styles.buttonWrapper}>
         <Link to='/my-page' className={styles.goBackButton}>
