@@ -1,4 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id='symbol' viewBox="0 0 19 12" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.45436 10.5563C8.48795 11.338 7.25751 11.8062 5.91772 11.8062C2.80964 11.8062 0.290039 9.28655 0.290039 6.17847C0.290039 3.07038 2.80964 0.550781 5.91772 0.550781C7.25751 0.550781 8.48795 1.01897 9.45436 1.80066C10.4208 1.01897 11.6512 0.550781 12.991 0.550781C16.0991 0.550781 18.6187 3.07038 18.6187 6.17847C18.6187 9.28655 16.0991 11.8062 12.991 11.8062C11.6512 11.8062 10.4208 11.338 9.45436 10.5563Z" fill="url(#paint0_radial_946_7274)"/>
+    <defs>
+    <radialGradient id="paint0_radial_946_7274" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(14.5572 7.1779) rotate(93.7817) scale(13.4734 22.0461)">
+    <stop offset="0.29142" stop-color="#C5D2FF"/>
+    <stop offset="1" stop-color="#82B5FF"/>
+    </radialGradient>
+    </defs>
+  </symbol>
+  <symbol id='more' viewBox="0 0 3 11" fill="none" >
+    <circle cx="1.5" cy="1.5" r="1.5" fill="#898989"/>
+    <circle cx="1.5" cy="5.5" r="1.5" fill="#898989"/>
+    <circle cx="1.5" cy="9.5" r="1.5" fill="#898989"/>
+  </symbol>
   <symbol id='rightArrow' viewBox="0 0 12 13" fill="none">
     <path d="M5.5 1.30859L10.8186 6.6272L5.5 11.9458" stroke="#484848" stroke-width="1.2" stroke-linecap="round"/>
   </symbol>
