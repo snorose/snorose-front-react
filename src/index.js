@@ -20,8 +20,6 @@ import HelpPage from './pages/HelpPage/HelpPage';
 import MainPage from './pages/MainPage/MainPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import reportWebVitals from './reportWebVitals';
-import EditInfoPage from './pages/MyPage/EditInfoPage';
-import ChangePassword from './pages/MyPage/ChangePassword';
 import App from './App';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import './index.css';

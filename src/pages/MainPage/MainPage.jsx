@@ -6,13 +6,13 @@ import MainPageListItem from '../../components/MainPageListItem/MainPageListItem
 import Margin from '../../components/Margin/Margin.jsx';
 import Slide from '../../components/Carousel/Slide.jsx';
 import { BESOOKTS, CAROUSEL_BANNER, USER } from '../../dummy/data';
-import { BOARDMENUS, ROLE } from '../../constants';
+import { BOARD_MENUS, ROLE } from '../../constants';
 import styles from './MainPage.module.css';
 import BoardCard from '../../components/BoardCard/BoardCard.jsx';
 import Flex from '../../components/Flex/Flex.jsx';
 import ListHeader from '../../components/ListHeader/ListHeader.jsx';
 
-const BOARDS = BOARDMENUS.filter((board) => board.title !== '베숙트');
+const BOARDS = BOARD_MENUS.filter((board) => board.title !== '베숙트');
 
 export default function MainPage() {
   return (
