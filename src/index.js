@@ -15,6 +15,7 @@ import {
   EditInfoPage,
   DeleteAccountPage,
 } from './pages/MyPage';
+import ViewPointListPage from './pages/MyPage/ViewPointListPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import HelpPage from './pages/HelpPage/HelpPage';
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
       { path: 'my-page', element: <MyPage /> },
       { path: 'my-page/password', element: <ChangePasswordPage /> },
       { path: 'my-page/edit-info', element: <EditInfoPage /> },
+      { path: 'my-page/view-point-list', element: <ViewPointListPage /> },
       { path: 'my-page/delete-account', element: <DeleteAccountPage /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'notice', element: <NoticePage /> },
