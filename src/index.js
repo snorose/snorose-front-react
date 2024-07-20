@@ -9,17 +9,19 @@ import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import { BoardPage, BoardListPage } from './pages/BoardPage';
 import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
+import {
+  MyPage,
+  ChangePasswordPage,
+  EditInfoPage,
+  DeleteAccountPage,
+} from './pages/MyPage';
+import ViewPointListPage from './pages/MyPage/ViewPointListPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import MainPage from './pages/MainPage/MainPage';
-import MyPage from './pages/MyPage/MyPage';
-import ViewPointListPage from './pages/MyPage/ViewPointListPage';
-import DeleteAccountPage from './pages/MyPage/DeleteAccountPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import reportWebVitals from './reportWebVitals';
-import EditInfoPage from './pages/MyPage/EditInfoPage';
-import ChangePassword from './pages/MyPage/ChangePassword';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +42,7 @@ const router = createBrowserRouter([
       { path: 'exam-review', element: <ExamReviewPage /> },
       { path: 'alert', element: <AlertPage /> },
       { path: 'my-page', element: <MyPage /> },
-      { path: 'my-page/password', element: <ChangePassword /> },
+      { path: 'my-page/password', element: <ChangePasswordPage /> },
       { path: 'my-page/edit-info', element: <EditInfoPage /> },
       { path: 'my-page/view-point-list', element: <ViewPointListPage /> },
       { path: 'my-page/delete-account', element: <DeleteAccountPage /> },
