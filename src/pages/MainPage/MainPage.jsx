@@ -1,13 +1,16 @@
 import Card from '../../components/Card/Card.jsx';
 import Carousel from '../../components/Carousel/Carousel.jsx';
-import CategoryBoard from '../../components/CategoryBoard/CategoryBoard.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import Header from '../../components/Header/Header';
+import MainPageListItem from '../../components/MainPageListItem/MainPageListItem.jsx';
 import Margin from '../../components/Margin/Margin.jsx';
 import Slide from '../../components/Carousel/Slide.jsx';
 import { BESOOKTS, CAROUSEL_BANNER, USER } from '../../dummy/data';
-import { BOARDMENUS } from '../../constants/boardmenus.js';
+import { BOARDMENUS, ROLE } from '../../constants';
 import styles from './MainPage.module.css';
+import BoardCard from '../../components/BoardCard/BoardCard.jsx';
+import Flex from '../../components/Flex/Flex.jsx';
+import ListHeader from '../../components/ListHeader/ListHeader.jsx';
 
 const BOARDS = BOARDMENUS.filter((board) => board.title !== '베숙트');
 
@@ -42,40 +45,49 @@ export default function MainPage() {
           />
         )}
       </Margin>
-      <CategoryBoard title='카테고리' to='/board'>
-        {BOARDS.map(({ id, title, desc }) => (
-          <CategoryBoard.Item
-            key={id}
-            icon={id}
-            name={title}
-            description={desc}
-          />
-        ))}
-      </CategoryBoard>
+      <Margin className={styles.community}>
+        <ListHeader to='/board' title='커뮤니티' />
+        <Flex gap='0.625rem'>
+          {BOARDS.map((board) => (
+            <BoardCard
+              key={board.id}
+              to={board.to}
+              name={board.title}
+              desc={board.desc}
+              backgroundImage={board.image}
+            />
+          ))}
+        </Flex>
+      </Margin>
       {BESOOKTS.length > 0 && (
-        <CategoryBoard title='베숙트' to='/board/besookt'>
-          {BESOOKTS.map(
-            ({
-              postId,
-              nickname,
-              title,
-              overview,
-              boardName,
-              timeAgo,
-              image,
-            }) => (
-              <CategoryBoard.DetailItem
-                key={postId}
-                nickname={nickname}
-                title={title}
-                overview={overview}
-                boardName={boardName}
-                timeAgo={timeAgo}
-                image={image}
-              />
-            )
-          )}
-        </CategoryBoard>
+        <Margin className={styles.besookt}>
+          <ListHeader to='/board/besookt' title='베숙트' />
+          <Flex direction='column' gap='0.375rem'>
+            {BESOOKTS.map(
+              ({
+                postId,
+                nickname,
+                title,
+                overview,
+                boardName,
+                timeAgo,
+                image,
+              }) => (
+                <MainPageListItem
+                  key={postId}
+                  postId={postId}
+                  displayName={nickname}
+                  title={title}
+                  overview={overview}
+                  boardName={boardName}
+                  createdAt={timeAgo}
+                  image={image}
+                  roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
+                />
+              )
+            )}
+          </Flex>
+        </Margin>
       )}
       <Footer />
     </main>

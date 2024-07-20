@@ -1,5 +1,5 @@
 .cards {
-  margin: 24px var(--default-margin) 7px var(--default-margin);
+  margin: 1.5rem var(--default-margin) 1.75rem var(--default-margin);
   display: flex;
   justify-content: space-between;
   gap: 0.45rem;
@@ -11,4 +11,8 @@
 
 .mark {
   flex: 3;
+}
+
+.community {
+  margin-bottom: 25px;
 }
