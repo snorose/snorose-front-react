@@ -1,20 +1,17 @@
 import { Link } from 'react-router-dom';
-import Icon from '../Icon/Icon';
 import styles from './Card.module.css';
 
 export default function Card({ className, to, title, tag, icon, isDark }) {
+  const imgSrc = icon?.id ? require(`../../assets/images/${icon.id}.svg`) : '';
+
   return (
-    <Link
-      className={`${styles.wrapper} ${className} ${isDark && styles.dark}`}
-      to={to}
-      style={{ width: '100%' }}
-    >
+    <Link className={`${className} ${isDark && styles.dark}`} to={to}>
       <div className={styles.card}>
         <div className={styles.text}>
           <span className={styles.title}>{title}</span>
           <span className={styles.tag}>[{tag}]</span>
         </div>
-        <Icon id={icon.id} width={icon.width} height={icon.height} />
+        <img className={styles.image} src={imgSrc} alt='aa' />
       </div>
     </Link>
   );

@@ -49,3 +49,7 @@
 .dark .tag {
   color: #f4f4f4;
 }
+
+.image {
+  mix-blend-mode: luminosity;
+}
