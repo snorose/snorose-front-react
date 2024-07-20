@@ -1,0 +1,14 @@
+.cards {
+  margin: 24px var(--default-margin) 7px var(--default-margin);
+  display: flex;
+  justify-content: space-between;
+  gap: 0.45rem;
+}
+
+.notice {
+  flex: 2;
+}
+
+.mark {
+  flex: 3;
+}
