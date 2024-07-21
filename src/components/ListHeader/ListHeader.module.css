@@ -1,0 +1,23 @@
+.header {
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+}
+
+.more {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 100%;
+  letter-spacing: -0.5px;
+  color: #484848;
+}

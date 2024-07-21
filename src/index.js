@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import App from './App';
-import './index.css';
+
 import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
@@ -22,6 +20,10 @@ import HelpPage from './pages/HelpPage/HelpPage';
 import MainPage from './pages/MainPage/MainPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import reportWebVitals from './reportWebVitals';
+import App from './App';
+import ProtectedRoute from './ProtectedRoute.jsx';
+import './index.css';
+import { ROLE } from './constants';
 
 const router = createBrowserRouter([
   {
@@ -32,10 +34,40 @@ const router = createBrowserRouter([
       { index: true, element: <MainPage /> },
       { path: 'home', element: <MainPage /> },
       { path: '/board', element: <BoardPage /> },
-      { path: '/board/first-snow', element: <BoardListPage /> },
-      { path: '/board/large-snow', element: <BoardListPage /> },
-      { path: '/board/permanent-snow', element: <BoardListPage /> },
-      { path: '/board/besookt', element: <BoardListPage /> },
+      {
+        path: '/board/first-snow',
+        element: (
+          <ProtectedRoute>
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/large-snow',
+        element: (
+          <ProtectedRoute>
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/permanent-snow',
+        element: (
+          <ProtectedRoute>
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/besookt',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
+          >
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
       { path: '/post', element: <PostPage /> },
       { path: '/post-search', element: <PostSearchPage /> },
       { path: '/post-write', element: <PostWritePage /> },
