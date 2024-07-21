@@ -9,9 +9,10 @@ import { Link } from 'react-router-dom';
 const BoardBar = ({ data }) => {
   return (
     <Link to={`/board/${data.id}`} className={styles.board_list_bar}>
-      <div className={styles.board_bar_background}>
-        <Icon id={data.id} />
-      </div>
+      <svg
+        className={styles.board_bar_background}
+        style={{ backgroundImage: `url("${data.image}")` }}
+      ></svg>
       <div className={styles.board_bar_text}>
         <div className={styles.board_bar_title}>{data.title}</div>
         <div className={styles.board_bar_description}>{data.desc}</div>
@@ -23,6 +24,7 @@ const BoardBar = ({ data }) => {
 export default function BoardPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const closeSidebar = () => setIsSidebarOpen(false);
+  console.log(BOARD_MENUS[0].image);
 
   return (
     <div className={styles.container}>
