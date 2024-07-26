@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { NAVBAR_MENUS } from '../../constants';
 import Icon from '../Icon/Icon';
@@ -22,6 +21,7 @@ export default function Navbar() {
                 <Icon
                   id={id}
                   fill={getCurrentMenuColor(id, '#00368E', '#BFD7EC')}
+                  stroke={getCurrentMenuColor(id, '#00368E', '#BFD7EC')}
                   {...props}
                 />
                 <span
