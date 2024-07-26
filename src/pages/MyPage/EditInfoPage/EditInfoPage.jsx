@@ -8,6 +8,7 @@ export default function EditInfoPage() {
   const [nickname, setNickname] = useState('');
   const [nameError, setNameError] = useState('');
   const [nicknameError, setNicknameError] = useState('');
+  const [profileImage, setProfileImage] = useState(null);
 
   const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
 
@@ -31,6 +32,14 @@ export default function EditInfoPage() {
     }
   };
 
+  // 프로필 이미지 선택시 이미지 파일 선택 기능
+  const handleProfileImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfileImage(URL.createObjectURL(file));
+    }
+  };
+
   return (
     <main className={styles.editInfoPage}>
       <div className={styles.topContainer}>
@@ -43,9 +52,27 @@ export default function EditInfoPage() {
       </div>
 
       <div className={styles.profileContainer}>
-        <div className={styles.profileImg}>
-          <Icon id='profile-basic-camera' />
+        <div
+          className={styles.profileImg}
+          onClick={() => document.getElementById('profileImageInput').click()}
+        >
+          {profileImage ? (
+            <img
+              src={profileImage}
+              alt='프로필'
+              className={styles.profilePreview}
+            />
+          ) : (
+            <Icon id='profile-basic-camera' />
+          )}
         </div>
+        <input
+          type='file'
+          id='profileImageInput'
+          style={{ display: 'none' }}
+          accept='image/*'
+          onChange={handleProfileImageChange}
+        />
       </div>
 
       <div className={styles.infoContainer}>
@@ -61,8 +88,8 @@ export default function EditInfoPage() {
               value={name}
               onChange={handleNameChange}
             />
+            {nameError && <p className={styles.errorMessage}>{nameError}</p>}
           </div>
-          {nameError && <p className={styles.errorMessage}>{nameError}</p>}
         </div>
         <div className={styles.info}>
           <h3 className={styles.title}>생년월일</h3>
@@ -89,10 +116,10 @@ export default function EditInfoPage() {
               value={nickname}
               onChange={handleNicknameChange}
             />
+            {nicknameError && (
+              <p className={styles.errorMessage}>{nicknameError}</p>
+            )}
           </div>
-          {nicknameError && (
-            <p className={styles.errorMessage}>{nicknameError}</p>
-          )}
         </div>
         <div className={styles.info}>
           <h3 className={styles.title}>전공</h3>

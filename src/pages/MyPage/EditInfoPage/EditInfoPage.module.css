@@ -49,6 +49,7 @@
   width: 77px;
   height: 77px;
   flex-shrink: 0;
+  cursor: pointer;
 
   img {
     width: 100%;
