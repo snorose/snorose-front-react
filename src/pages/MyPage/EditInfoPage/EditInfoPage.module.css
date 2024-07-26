@@ -49,6 +49,7 @@
   width: 77px;
   height: 77px;
   flex-shrink: 0;
+  cursor: pointer;
 
   img {
     width: 100%;
@@ -65,12 +66,13 @@
 .info {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px;
 }
 
 .title {
   color: var(--Grey-4, var(--grey-3, #484848));
 
+  padding-bottom: 3px;
   font-size: 14px;
   font-weight: 500;
   line-height: 150%;
@@ -92,8 +94,24 @@
   outline: none;
   line-height: 150%;
   letter-spacing: -0.5px;
-  color: var(--Grey-3-1, #898989);
+  color: var(--Black, #000);
   font-size: 12px;
+}
+
+.errorMessage {
+  color: var(--Pink-2, #ff4b6c);
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.errorInputWrapper {
+  background: var(--Pink-1, #fee9eb);
+}
+
+.errorInputText {
+  background: var(--Pink-1, #fee9eb);
+  border-radius: 5px;
 }
 
 .calendarIconWrapper {
