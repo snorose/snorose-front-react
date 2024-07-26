@@ -2,29 +2,13 @@ import styles from './BoardPage.module.css';
 import Icon from '../../../components/Icon/Icon.jsx';
 import Sponser from '../../../components/Sponser/Sponser.jsx';
 import Sidebar from '../../../components/Sidebar/Sidebar';
+import BoardBar from '../../../components/BoardBar/BoardBar.jsx';
 import { BOARD_MENUS } from '../../../constants/boardMenus.js';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-const BoardBar = ({ data }) => {
-  return (
-    <Link to={`/board/${data.id}`} className={styles.board_list_bar}>
-      <svg
-        className={styles.board_bar_background}
-        style={{ backgroundImage: `url("${data.image}")` }}
-      ></svg>
-      <div className={styles.board_bar_text}>
-        <div className={styles.board_bar_title}>{data.title}</div>
-        <div className={styles.board_bar_description}>{data.desc}</div>
-      </div>
-    </Link>
-  );
-};
 
 export default function BoardPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const closeSidebar = () => setIsSidebarOpen(false);
-  console.log(BOARD_MENUS[0].image);
 
   return (
     <div className={styles.container}>
