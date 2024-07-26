@@ -39,7 +39,7 @@ export const NAVBAR_MENUS = Object.freeze([
 export const SIDEBAR_MENUS = Object.freeze([
   {
     to: '/',
-    title: 'SNOROSE',
+    title: '스노로즈',
     items: [
       { to: '/about', name: 'About 스노로즈' },
       { to: '/notice', name: '공지사항' },
@@ -82,7 +82,7 @@ export const SIDEBAR_MENUS = Object.freeze([
 ]);
 
 export const NOT_LOGIN_MENUS = Object.freeze([
-  'SNOROSE',
+  '스노로즈',
   '문의/신고',
   '숙명여대',
 ]);
