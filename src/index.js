@@ -18,6 +18,9 @@ import NoticePage from './pages/NoticePage/NoticePage';
 import reportWebVitals from './reportWebVitals';
 import EditInfoPage from './pages/MyPage/EditInfoPage';
 import ChangePassword from './pages/MyPage/ChangePassword';
+import LoginPage from './pages/LoginPage/Login';
+import FindIdPage from './pages/LoginPage/FindIdPage/FindIdPage';
+import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +44,18 @@ const router = createBrowserRouter([
       { path: 'notice', element: <NoticePage /> },
       { path: 'authentication', element: <AuthPage /> },
       { path: 'help', element: <HelpPage /> },
+      {
+        path: 'login',
+        element: <LoginPage />,
+      },
+      {
+        path: 'findId',
+        element: <FindIdPage />,
+      },
+      {
+        path: 'foundId',
+        element: <FoundIdPage />,
+      },
     ],
   },
 ]);

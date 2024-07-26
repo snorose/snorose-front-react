@@ -1,0 +1,20 @@
+.submitBtn {
+  width: 22.063rem;
+  height: 2.938rem;
+  position: absolute;
+  bottom: 2.125rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.313rem;
+  border-radius: 5px;
+}
+.ready,
+.wrong {
+  background-color: #ddebf6;
+  color: #5f86bf;
+  pointer-events: none;
+}
+.right {
+  background-color: #00368e;
+  color: #ffffff;
+}
