@@ -1,7 +1,7 @@
 import styles from './BoardPage.module.css';
 import Icon from '../../../components/Icon/Icon.jsx';
 import Sponser from '../../../components/Sponser/Sponser.jsx';
-import { BOARD_MENUS } from '../../../constants/boardMenus.js';
+import { BOARD_MENUS } from '../../../constants';
 import { Link } from 'react-router-dom';
 
 const BoardBar = ({ data }) => {
