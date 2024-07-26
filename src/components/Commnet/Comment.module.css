@@ -1,0 +1,83 @@
+.comment {
+  width: 100%;
+
+  padding: 12px 17px;
+  border-bottom: 1px solid #c7c7c7;
+}
+
+.comment_top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment_left {
+  display: flex;
+}
+
+.profile_icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+}
+
+.name {
+  font-size: 10px;
+  padding-left: 5px;
+}
+
+.comment_right {
+  display: flex;
+  align-items: center;
+}
+
+.cnt_num {
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #5F86BF;
+}
+
+.comment_icon {
+  display: flex;
+  width: 15px;
+  height: 15px;
+  margin-right: 3px;
+  margin-left: 8px;
+
+}
+
+.like_icon {
+  display: flex;
+  width: 15px;
+  height: 15px;
+  margin-right: 3px;
+  margin-left: 8px;
+
+}
+
+.more_option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  margin-left: auto;
+  margin-left: 10px;
+
+}
+
+.comment_text {
+  font-size: 10px;
+  padding: 6px 0;
+}
+
+.comment_time {
+  color: #6a6a6a;
+}
+
+.nested_comment {
+    padding-left: 34px;
+    width: 100%;
+    background-color: #f0f0f0;
+  }

@@ -4,14 +4,6 @@ import styles from './App.module.css';
 import Navbar from './components/Navbar/Navbar';
 const menuWithNoNav = ['/login', '/findId', 'foundId'];
 
-/*function App() {
-  return ( 
-    <div className={styles.app}>
-      <Outlet />
-      <Navbar />
-    </div>
-  );
-}*/
 function noNav(location) {
   for (let i in menuWithNoNav) {
     if (location === menuWithNoNav[i]) {

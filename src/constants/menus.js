@@ -3,43 +3,43 @@ export const NAVBAR_MENUS = Object.freeze([
     id: 'home',
     label: '메인홈',
     fill: '#BFD7EC',
-    width: 14,
-    height: 16,
+    width: 24,
+    height: 24,
   },
   {
     id: 'board',
     label: '게시판',
     fill: '#BFD7EC',
-    width: 18,
-    height: 14,
+    width: 24,
+    height: 24,
   },
   {
     id: 'exam-review',
     label: '시험후기',
     fill: '#BFD7EC',
-    width: 14,
-    height: 17,
+    width: 24,
+    height: 24,
   },
   {
     id: 'alert',
     label: '알림',
     fill: '#BFD7EC',
-    width: 19,
-    height: 19,
+    width: 24,
+    height: 24,
   },
   {
     id: 'my-page',
     label: '마이페이지',
     fill: '#BFD7EC',
-    width: 16,
-    height: 16,
+    width: 24,
+    height: 24,
   },
 ]);
 
 export const SIDEBAR_MENUS = Object.freeze([
   {
     to: '/',
-    title: 'SNOROSE',
+    title: '스노로즈',
     items: [
       { to: '/about', name: 'About 스노로즈' },
       { to: '/notice', name: '공지사항' },
@@ -82,7 +82,7 @@ export const SIDEBAR_MENUS = Object.freeze([
 ]);
 
 export const NOT_LOGIN_MENUS = Object.freeze([
-  'SNOROSE',
+  '스노로즈',
   '문의/신고',
   '숙명여대',
 ]);

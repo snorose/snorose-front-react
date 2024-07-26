@@ -1,23 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import App from './App';
-import './index.css';
+
 import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
-import BoardListPage from './pages/BoardListPage/BoardListPage';
-import BoardPage from './pages/BoardPage/BoardPage';
+import { BoardPage, BoardListPage } from './pages/BoardPage';
+import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
+import {
+  MyPage,
+  ChangePasswordPage,
+  EditInfoPage,
+  DeleteAccountPage,
+} from './pages/MyPage';
+import ViewPointListPage from './pages/MyPage/ViewPointListPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import MainPage from './pages/MainPage/MainPage';
-import MyPage from './pages/MyPage/MyPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import reportWebVitals from './reportWebVitals';
-import EditInfoPage from './pages/MyPage/EditInfoPage';
-import ChangePassword from './pages/MyPage/ChangePassword';
+import App from './App';
+import ProtectedRoute from './ProtectedRoute.jsx';
+import './index.css';
+import { ROLE } from './constants';
 import LoginPage from './pages/LoginPage/Login';
 import FindIdPage from './pages/LoginPage/FindIdPage/FindIdPage';
 import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage';
@@ -31,15 +37,50 @@ const router = createBrowserRouter([
       { index: true, element: <MainPage /> },
       { path: 'home', element: <MainPage /> },
       { path: '/board', element: <BoardPage /> },
-      { path: '/board/first-snow', element: <BoardListPage /> },
-      { path: '/board/large-snow', element: <BoardListPage /> },
-      { path: '/board/permanent-snow', element: <BoardListPage /> },
-      { path: '/board/besookt', element: <BoardListPage /> },
+      {
+        path: '/board/first-snow',
+        element: (
+          <ProtectedRoute>
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/large-snow',
+        element: (
+          <ProtectedRoute>
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/permanent-snow',
+        element: (
+          <ProtectedRoute>
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/besookt',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
+          >
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      { path: '/post', element: <PostPage /> },
+      { path: '/post-search', element: <PostSearchPage /> },
+      { path: '/post-write', element: <PostWritePage /> },
       { path: 'exam-review', element: <ExamReviewPage /> },
       { path: 'alert', element: <AlertPage /> },
       { path: 'my-page', element: <MyPage /> },
-      { path: 'my-page/password', element: <ChangePassword /> },
+      { path: 'my-page/password', element: <ChangePasswordPage /> },
       { path: 'my-page/edit-info', element: <EditInfoPage /> },
+      { path: 'my-page/view-point-list', element: <ViewPointListPage /> },
+      { path: 'my-page/delete-account', element: <DeleteAccountPage /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'notice', element: <NoticePage /> },
       { path: 'authentication', element: <AuthPage /> },
