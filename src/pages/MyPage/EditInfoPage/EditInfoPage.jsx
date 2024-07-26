@@ -51,10 +51,12 @@ export default function EditInfoPage() {
       <div className={styles.infoContainer}>
         <div className={styles.info}>
           <h3 className={styles.title}>이름</h3>
-          <div className={styles.inputWrapper}>
+          <div
+            className={`${styles.inputWrapper} ${nameError ? styles.errorInputWrapper : ''}`}
+          >
             <input
               type='text'
-              className={styles.inputText}
+              className={`${styles.inputText} ${nameError ? styles.errorInputText : ''}`}
               placeholder='이름을 입력하세요'
               value={name}
               onChange={handleNameChange}
@@ -77,10 +79,12 @@ export default function EditInfoPage() {
         </div>
         <div className={styles.info}>
           <h3 className={styles.title}>닉네임</h3>
-          <div className={styles.inputWrapper}>
+          <div
+            className={`${styles.inputWrapper} ${nicknameError ? styles.errorInputWrapper : ''}`}
+          >
             <input
               type='text'
-              className={styles.inputText}
+              className={`${styles.inputText} ${nicknameError ? styles.errorInputText : ''}`}
               placeholder='닉네임을 입력하세요'
               value={nickname}
               onChange={handleNicknameChange}
