@@ -93,7 +93,7 @@
   outline: none;
   line-height: 150%;
   letter-spacing: -0.5px;
-  color: var(--Grey-3-1, #898989);
+  color: var(--Black, #000);
   font-size: 12px;
 }
 
