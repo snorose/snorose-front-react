@@ -3,7 +3,7 @@ import Icon from '../../../components/Icon/Icon.jsx';
 import Sponser from '../../../components/Sponser/Sponser.jsx';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import BoardBar from '../../../components/BoardBar/BoardBar.jsx';
-import { BOARD_MENUS } from '../../../constants/boardMenus.js';
+import { BOARD_MENUS } from '../../../constants';
 import { useState } from 'react';
 
 export default function BoardPage() {
