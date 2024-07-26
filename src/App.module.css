@@ -6,7 +6,6 @@
   margin: 0 auto;
   position: relative;
   background-color: white;
-  display: flex;
-  justify-content: center;
+  overflow-x: hidden;
   overflow-y: auto;
 }
