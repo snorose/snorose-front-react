@@ -43,6 +43,8 @@ export default function FindIdPage() {
     const endpoint = '/v1/users/findid';
     const headers = {
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': `https://dev.snorose.com`,
+      'Access-Control-Allow-Credentials': 'true',
     };
     try {
       const response = await axios.post(apiUrl + endpoint, formData, {

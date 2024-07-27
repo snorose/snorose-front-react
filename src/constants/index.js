@@ -1,4 +1,4 @@
-import { BOARD_MENUS } from './boardMenus.js';
+import { BOARD_MENUS } from './boardmenus.js';
 import { ERRORS } from './errors';
 import { NAVBAR_MENUS, NOT_LOGIN_MENUS, SIDEBAR_MENUS } from './menus';
 import { ROLE } from './role.js';

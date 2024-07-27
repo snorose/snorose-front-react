@@ -26,7 +26,7 @@ import './index.css';
 import { ROLE } from './constants';
 import LoginPage from './pages/LoginPage/Login';
 import FindIdPage from './pages/LoginPage/FindIdPage/FindIdPage';
-import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage';
+import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage.jsx';
 
 const router = createBrowserRouter([
   {
