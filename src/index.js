@@ -27,6 +27,7 @@ import { ROLE } from './constants';
 import LoginPage from './pages/LoginPage/Login';
 import FindIdPage from './pages/LoginPage/FindIdPage/FindIdPage';
 import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage.jsx';
+import NotFoundIdPage from './pages/LoginPage/NotFoundIdPage/NotFoundIdPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -90,12 +91,16 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: 'findId',
+        path: 'find-id',
         element: <FindIdPage />,
       },
       {
-        path: 'foundId',
+        path: 'found-id',
         element: <FoundIdPage />,
+      },
+      {
+        path: 'not-found-id',
+        element: <NotFoundIdPage />,
       },
     ],
   },

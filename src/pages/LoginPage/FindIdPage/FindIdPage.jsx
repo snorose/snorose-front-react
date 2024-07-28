@@ -39,7 +39,7 @@ export default function FindIdPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('작동은 된단다!');
-    const apiUrl = 'https://dev.snorose.com';
+    const apiUrl = 'http://13.124.33.41:8081';
     const endpoint = '/v1/users/findid';
     const headers = {
       'Content-Type': 'application/json',
@@ -50,9 +50,13 @@ export default function FindIdPage() {
       const response = await axios.post(apiUrl + endpoint, formData, {
         headers,
       });
-      navigate('/foundId', { state: { loginId: response.result.loginId } });
+      navigate('/found-id', {
+        state: { loginId: response.data.result.loginId },
+      });
     } catch (e) {
-      console.log(e);
+      if (!e.response.data.isSuccess) {
+        navigate('/not-found-id');
+      }
     }
   };
 

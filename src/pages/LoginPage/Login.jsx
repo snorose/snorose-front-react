@@ -19,7 +19,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = { loginId: id, password: pw };
-    const apiUrl = 'https://dev.snorose.com';
+    const apiUrl = 'http://13.124.33.41:8081';
     const endpoint = '/v1/users/login';
     const headers = {
       'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ export default function Login() {
             로그인
           </button>
           <div className={styles.find}>
-            <Link to='/findId'>아이디 찾기</Link> | <a>비밀번호 찾기</a>
+            <Link to='/find-id'>아이디 찾기</Link> | <a>비밀번호 찾기</a>
           </div>
           <a className={styles.signup}>회원가입</a>
         </div>

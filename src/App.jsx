@@ -2,7 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import styles from './App.module.css';
 
 import Navbar from './components/Navbar/Navbar';
-const menuWithNoNav = ['/login', '/findId', 'foundId'];
+const menuWithNoNav = ['/login', '/find-id', '/found-id', '/not-found-id'];
 
 function noNav(location) {
   for (let i in menuWithNoNav) {
