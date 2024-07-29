@@ -2,6 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import reportWebVitals from './reportWebVitals';
+
+import { ToastProvider } from './contexts/ToastContext.jsx';
+
+import App from './App';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
@@ -19,11 +24,10 @@ import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import MainPage from './pages/MainPage/MainPage';
 import NoticePage from './pages/NoticePage/NoticePage';
-import reportWebVitals from './reportWebVitals';
-import App from './App';
 import ProtectedRoute from './ProtectedRoute.jsx';
-import './index.css';
+
 import { ROLE } from './constants';
+import './index.css';
 
 const router = createBrowserRouter([
   {
@@ -89,7 +93,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode fri>
-    <RouterProvider router={router} />
+    <ToastProvider>
+      <RouterProvider router={router} />
+    </ToastProvider>
   </React.StrictMode>
 );
 
