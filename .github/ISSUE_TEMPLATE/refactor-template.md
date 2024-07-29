@@ -1,10 +1,9 @@
 ---
 name: Refactor Template
 about: 리팩토링 템플릿
-title: "[REFACTOR] 리팩토링 제목"
+title: '[REFACTOR] 리팩토링 제목'
 labels: "\U0001F6E0️ Refactor"
 assignees: ''
-
 ---
 
 ## 🤔 코드 개선 필요성

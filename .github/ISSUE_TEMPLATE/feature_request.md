@@ -1,10 +1,9 @@
 ---
 name: Feature request
 about: 기능 구현 템플릿
-title: "[FEAT] 구현할 기능"
-labels: "✨ Feature"
+title: '[FEAT] 구현할 기능'
+labels: '✨ Feature'
 assignees: ''
-
 ---
 
 ## 🔎 어떤 기능인가요?
