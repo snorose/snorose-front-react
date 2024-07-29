@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: hidden;
 }
 .pageFrame form {
   height: 100%;

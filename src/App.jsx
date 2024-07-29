@@ -1,24 +1,19 @@
 import { Outlet, useLocation } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
+import { MENU_WITHOUT_NAV } from './constants/menuWithoutNav';
 import styles from './App.module.css';
 
-import Navbar from './components/Navbar/Navbar';
-const menuWithNoNav = ['/login', '/find-id', '/found-id', '/not-found-id'];
-
-function noNav(location) {
-  for (let i in menuWithNoNav) {
-    if (location === menuWithNoNav[i]) {
-      return true;
-    }
-  }
-  return false;
+function checkNav(location) {
+  return !MENU_WITHOUT_NAV.includes(location);
 }
+
 function App() {
-  let location = useLocation();
-  let isNoNav = noNav(location.pathname);
+  const location = useLocation();
+  const isNav = checkNav(location.pathname);
   return (
     <div className={styles.app}>
       <Outlet />
-      {isNoNav ? '' : <Navbar />}
+      {isNav && <Navbar />}
     </div>
   );
 }

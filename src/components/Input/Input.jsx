@@ -1,12 +1,12 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import styles from './Input.module.css';
 
 export default function Input({
   title,
   placeholder,
-  inputStyle,
-  setInputStyle,
-  inputStyleCheck,
+  className,
+  setClassName,
+  classNameCheck,
   inputType,
   inputData,
   errMsg,
@@ -17,17 +17,17 @@ export default function Input({
       <input
         type='text'
         placeholder={placeholder}
-        className={styles[inputStyle] + ' ' + styles['input']}
+        className={`${styles[className]} ${styles['input']}`}
         onChange={(e) => {
           inputData[inputType] = e.target.value;
-          setInputStyle('ready');
+          setClassName('ready');
         }}
         onBlur={(e) => {
-          setInputStyle(inputStyleCheck(e.target.value));
+          setClassName(classNameCheck(e.target.value));
         }}
         spellCheck='false'
       />
-      {inputStyle === 'wrong' ? <p className={styles.errMsg}>{errMsg}</p> : ''}
+      {className === 'wrong' && <p className={styles.errMsg}>{errMsg}</p>}
     </div>
   );
 }

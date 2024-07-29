@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './Submit.module.css';
 
-export default function Submit({ btnName, btnState }) {
+export default function Submit({ btnName, className }) {
   return (
     <div>
       <button
-        className={styles[btnState] + ' ' + styles['submitBtn']}
+        className={`${styles[className]} ${styles['submitBtn']}`}
         type='submit'
       >
         {btnName}

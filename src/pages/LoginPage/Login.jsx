@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import styles from './Login.module.css';
 import Icon from '../../components/Icon/Icon';
+import styles from './Login.module.css';
 
 export default function Login() {
   const [id, setId] = useState('');
@@ -34,7 +34,6 @@ export default function Login() {
       console.log(response.data);
     } catch (e) {
       setErrmsg(true);
-      console.log(e);
     }
   };
 
@@ -86,15 +85,13 @@ export default function Login() {
                 event.preventDefault();
               }}
             >
-              {pwInputFocus ? (
+              {pwInputFocus && (
                 <Icon
                   id='visibility'
                   className={styles.visiblity}
                   width='14'
                   height='10'
                 ></Icon>
-              ) : (
-                ''
               )}
             </div>
           </div>
@@ -106,13 +103,11 @@ export default function Login() {
           </div>
           <a className={styles.signup}>회원가입</a>
         </div>
-        {errmsg ? (
+        {errmsg && (
           <div className={styles.loginError}>
             <p>아이디 혹은 비밀번호가</p>
             <p>일치하지 않습니다</p>
           </div>
-        ) : (
-          ''
         )}
       </form>
     </div>

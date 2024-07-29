@@ -11,6 +11,7 @@ export function checkSpecialChar(input) {
     return 'right';
   }
 }
+
 export function checkSookmyungMail(mail) {
   const splitMailArr = mail.split('@');
   if (mail.length === 0) {
@@ -22,6 +23,7 @@ export function checkSookmyungMail(mail) {
     return 'wrong';
   }
 }
+
 export function checkStudentNum(number) {
   const len = number.length;
   if (number.length === 0) {

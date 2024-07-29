@@ -1,7 +1,6 @@
 import { React, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styles from './FindIdPage.module.css';
 import Input from '../../../components/Input/Input';
 import Submit from '../../../components/Submit/Submit';
 import Icon from '../../../components/Icon/Icon';
@@ -10,6 +9,7 @@ import {
   checkSookmyungMail,
   checkStudentNum,
 } from './inputCheck';
+import styles from './FindIdPage.module.css';
 
 export default function FindIdPage() {
   const navigate = useNavigate();
@@ -21,6 +21,35 @@ export default function FindIdPage() {
     email: '',
     studentNumber: '',
   });
+  const inputProps = [
+    [
+      '이름',
+      '이름을 입력해주세요',
+      nameStyle,
+      setNameStyle,
+      checkSpecialChar,
+      'userName',
+      '특수문자는 사용할 수 없습니다',
+    ],
+    [
+      '숙명 구글 메일',
+      '숙명 구글 메일을 입력하세요',
+      emailStyle,
+      setEmailStyle,
+      checkSookmyungMail,
+      'email',
+      '숙명 이메일만 입력 가능합니다',
+    ],
+    [
+      '학번',
+      '학번을 입력하세요',
+      numberStyle,
+      setNumberStyle,
+      checkStudentNum,
+      'studentNumber',
+      '학번 형식이 옳지 않습니다',
+    ],
+  ];
   const submitState = () => {
     if (
       nameStyle === 'right' &&
@@ -38,15 +67,14 @@ export default function FindIdPage() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('작동은 된단다!');
     const apiUrl = 'http://13.124.33.41:8081';
     const endpoint = '/v1/users/findid';
     const headers = {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': `https://dev.snorose.com`,
       'Access-Control-Allow-Credentials': 'true',
     };
     try {
+      console.log(formData);
       const response = await axios.post(apiUrl + endpoint, formData, {
         headers,
       });
@@ -54,6 +82,7 @@ export default function FindIdPage() {
         state: { loginId: response.data.result.loginId },
       });
     } catch (e) {
+      console.log(e);
       if (!e.response.data.isSuccess) {
         navigate('/not-found-id');
       }
@@ -80,46 +109,30 @@ export default function FindIdPage() {
           >
             아이디 찾기
           </h1>
-          <Input
-            title='이름'
-            placeholder='이름을 입력해주세요'
-            inputStyle={nameStyle}
-            setInputStyle={setNameStyle}
-            inputStyleCheck={checkSpecialChar}
-            inputType='userName'
-            inputData={formData}
-            errMsg='특수문자는 사용할 수 없습니다'
-          />
-          <Input
-            title='숙명 구글 메일'
-            placeholder='숙명 구글 메일을 입력하세요'
-            inputStyle={emailStyle}
-            setInputStyle={setEmailStyle}
-            inputStyleCheck={checkSookmyungMail}
-            inputType='email'
-            inputData={formData}
-            errMsg='숙명 이메일만 입력 가능합니다'
-          />
-          <Input
-            title='학번'
-            placeholder='학번을 입력하세요'
-            inputStyle={numberStyle}
-            setInputStyle={setNumberStyle}
-            inputStyleCheck={checkStudentNum}
-            inputType='studentNumber'
-            inputData={formData}
-            errMsg='학번 형식이 옳지 않습니다'
-          />
 
-          {submitState() === 'wrong' ? (
+          {inputProps.map((props) => {
+            return (
+              <Input
+                title={props[0]}
+                placeholder={props[1]}
+                className={props[2]}
+                setClassName={props[3]}
+                classNameCheck={props[4]}
+                inputType={props[5]}
+                inputData={formData}
+                errMsg={props[6]}
+              />
+            );
+          })}
+
+          {submitState() === 'wrong' && (
             <div className={styles.errFrame}>
               <p>입력한 내용을 다시 한 번</p>
               <p>확인해주세요</p>
             </div>
-          ) : (
-            ''
           )}
-          <Submit btnName='다음으로' btnState={submitState()} />
+
+          <Submit btnName='다음으로' className={submitState()} />
         </div>
       </form>
     </div>
