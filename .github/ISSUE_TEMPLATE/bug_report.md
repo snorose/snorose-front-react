@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: 버그 템플릿
-title: '[FIX] 버그 제목'
+title: '[BUG] 버그 제목'
 labels: "\U0001F41E Bug"
 assignees: ''
 ---
