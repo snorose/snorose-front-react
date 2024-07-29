@@ -20,6 +20,7 @@ import HelpPage from './pages/HelpPage/HelpPage';
 import MainPage from './pages/MainPage/MainPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import reportWebVitals from './reportWebVitals';
+import SearchPage from './pages/SearchPage/SearchPage.jsx';
 import App from './App';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import './index.css';
@@ -35,10 +36,26 @@ const router = createBrowserRouter([
       { path: 'home', element: <MainPage /> },
       { path: '/board', element: <BoardPage /> },
       {
+        path: '/board/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: '/board/first-snow',
         element: (
           <ProtectedRoute>
             <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/first-snow/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
           </ProtectedRoute>
         ),
       },
@@ -51,10 +68,26 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/board/large-snow/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: '/board/permanent-snow',
         element: (
           <ProtectedRoute>
             <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/permanent-snow/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
           </ProtectedRoute>
         ),
       },
@@ -65,6 +98,14 @@ const router = createBrowserRouter([
             roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
           >
             <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/besookt/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
           </ProtectedRoute>
         ),
       },
