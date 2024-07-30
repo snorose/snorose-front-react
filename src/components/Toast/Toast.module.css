@@ -1,0 +1,16 @@
+.toast {
+  padding: 0.75rem 1rem;
+  background: rgba(72, 72, 72, 0.6);
+  border-radius: 0.375rem;
+  transition: 500ms opacity ease-in-out;
+}
+
+.message {
+  text-align: center;
+  word-break: keep-all;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+}
