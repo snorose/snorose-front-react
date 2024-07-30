@@ -1,8 +1,0 @@
-.status_bar {
-  height: 54px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  /* border: 1px solid gray; */
-  justify-content: center;
-}

@@ -8,7 +8,6 @@ import POST_LIST from '../../../constants/postListDummy.js';
 import PTR from '../../../components/PTR/PTR.jsx';
 import { POST_CATEGORIES } from '../../../constants/postCategories.js';
 import BoardHeader from '../../../components/BoardHeader/BoardHeader.jsx';
-import StatusBar from '../../../components/StatusBar/StatusBar.jsx';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
@@ -30,7 +29,6 @@ export default function BoardListPage() {
 
   return (
     <div className={styles.container}>
-      <StatusBar />
       <BoardHeader title={currentBoard} />
       <div className={styles.top}>
         <div className={styles.notification_bar}>
