@@ -2,29 +2,37 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import reportWebVitals from './reportWebVitals';
+
+import { ToastProvider } from './contexts/ToastContext.jsx';
+
+import { BoardListPage, BoardPage } from './pages/BoardPage';
+import {
+  ChangePasswordPage,
+  DeleteAccountPage,
+  EditInfoPage,
+  MyPage,
+} from './pages/MyPage';
+import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
+import App from './App';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
-import { BoardPage, BoardListPage } from './pages/BoardPage';
-import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
-import {
-  MyPage,
-  ChangePasswordPage,
-  EditInfoPage,
-  DeleteAccountPage,
-} from './pages/MyPage';
-import ViewPointListPage from './pages/MyPage/ViewPointListPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
+import FindIdPage from './pages/LoginPage/FindIdPage/FindIdPage';
+import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage';
 import HelpPage from './pages/HelpPage/HelpPage';
+import LoginPage from './pages/LoginPage/Login';
 import MainPage from './pages/MainPage/MainPage';
+import NotFoundIdPage from './pages/LoginPage/NotFoundIdPage/NotFoundIdPage';
 import NoticePage from './pages/NoticePage/NoticePage';
-import reportWebVitals from './reportWebVitals';
+import ProtectedRoute from './ProtectedRoute';
 import SearchPage from './pages/SearchPage/SearchPage.jsx';
-import App from './App';
-import ProtectedRoute from './ProtectedRoute.jsx';
-import './index.css';
+import ViewPointListPage from './pages/MyPage/ViewPointListPage';
+
 import { ROLE } from './constants';
+import './index.css';
 
 const router = createBrowserRouter([
   {
@@ -123,6 +131,22 @@ const router = createBrowserRouter([
       { path: 'notice', element: <NoticePage /> },
       { path: 'authentication', element: <AuthPage /> },
       { path: 'help', element: <HelpPage /> },
+      {
+        path: 'login',
+        element: <LoginPage />,
+      },
+      {
+        path: 'find-id',
+        element: <FindIdPage />,
+      },
+      {
+        path: 'found-id',
+        element: <FoundIdPage />,
+      },
+      {
+        path: 'not-found-id',
+        element: <NotFoundIdPage />,
+      },
     ],
   },
 ]);
@@ -130,7 +154,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode fri>
-    <RouterProvider router={router} />
+    <ToastProvider>
+      <RouterProvider router={router} />
+    </ToastProvider>
   </React.StrictMode>
 );
 
