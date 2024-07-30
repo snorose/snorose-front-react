@@ -24,9 +24,14 @@ import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import MainPage from './pages/MainPage/MainPage';
 import NoticePage from './pages/NoticePage/NoticePage';
-import ProtectedRoute from './ProtectedRoute.jsx';
+import ProtectedRoute from './ProtectedRoute';
+import LoginPage from './pages/LoginPage/Login';
+import FindIdPage from './pages/LoginPage/FindIdPage/FindIdPage';
+import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage';
+import NotFoundIdPage from './pages/LoginPage/NotFoundIdPage/NotFoundIdPage';
 
 import { ROLE } from './constants';
+
 import './index.css';
 
 const router = createBrowserRouter([
@@ -86,6 +91,22 @@ const router = createBrowserRouter([
       { path: 'notice', element: <NoticePage /> },
       { path: 'authentication', element: <AuthPage /> },
       { path: 'help', element: <HelpPage /> },
+      {
+        path: 'login',
+        element: <LoginPage />,
+      },
+      {
+        path: 'find-id',
+        element: <FindIdPage />,
+      },
+      {
+        path: 'found-id',
+        element: <FoundIdPage />,
+      },
+      {
+        path: 'not-found-id',
+        element: <NotFoundIdPage />,
+      },
     ],
   },
 ]);
