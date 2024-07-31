@@ -114,15 +114,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     padding: 1px;
   }
 }
 
 .pointList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--Blue-4, #00368e);
   font-size: 12px;
   line-height: 150%;
   letter-spacing: -0.5px;
+  gap: 3px;
+
+  svg {
+    width: 10px;
+    height: 10px;
+  }
 }

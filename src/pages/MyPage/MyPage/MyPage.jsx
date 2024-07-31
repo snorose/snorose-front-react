@@ -25,7 +25,12 @@ export default function MyPage() {
               <Icon id='point-circle' />
               39
             </div>
-            <div className={styles.pointList}>포인트 내역 보기</div>
+            <Link to='view-point-list'>
+              <a className={styles.pointList}>
+                포인트 내역 보기
+                <Icon id='arrow-right' />
+              </a>
+            </Link>
           </div>
         </div>
       </div>
