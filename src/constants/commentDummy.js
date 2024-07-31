@@ -35,7 +35,7 @@ export const COMMENT_LIST = Object.freeze([
         children: ['string'],
       },
       {
-        id: 3,
+        id: 4,
         postId: 1,
         userProfile: 'string',
         userDisplay: '송이3',
@@ -55,7 +55,7 @@ export const COMMENT_LIST = Object.freeze([
     ],
   },
   {
-    id: 3,
+    id: 5,
     postId: 1,
     userProfile: 'string',
     userDisplay: '송이2',
@@ -73,7 +73,7 @@ export const COMMENT_LIST = Object.freeze([
     children: [],
   },
   {
-    id: 3,
+    id: 6,
     postId: 1,
     userProfile: 'string',
     userDisplay: '송이3',
