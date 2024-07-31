@@ -9,10 +9,11 @@ export default function MyPage() {
         <div className={styles.logoOverlay}></div>
       </div>
 
+      <div className={styles.profileImage}>
+        <Icon id='profile-basic' />
+      </div>
+
       <div className={styles.myPageLower}>
-        <div className={styles.profileImage}>
-          <Icon id='profile-basic' />
-        </div>
         <div className={styles.myInfo}>
           <div className={styles.name}>힘하리</div>
           <div className={styles.studentIdMemberType}>
