@@ -28,45 +28,41 @@ import timeAgo from '../../../utils/timeAgo.js';
 export default function PostPage() {
   return (
     <div className={styles.container}>
-      <div className={styles.top}>
-        <div className={styles.header}>
-          <div className={styles.side_menu_btn}>
-            <Icon id='arrow-back' />
-          </div>
-        </div>
-        <div className={styles.profile}>
-          <div className={styles.profile_icon}>
-            <Icon id='profile' />
-          </div>
-          <p className={styles.name}>{POST_CONTENT.userDisplay}</p>
-          <div className={styles.more_option}>
-            <Icon id='more-option' />
-          </div>
-        </div>
-      </div>
       <div className={styles.content}>
-        <h1 className={styles.title}>{POST_CONTENT.title}</h1>
+        <div className={styles.contentTop}>
+          <div className={styles.contentTopLeft}>
+            <Icon id='cloud' width='25' height='16' />
+            <p>{POST_CONTENT.userDisplay}</p>
+            <p className={styles.dot}>·</p>
+            <p>
+              {POST_CONTENT.edited
+                ? timeAgo(POST_CONTENT.updatedAt) + ' (수정됨)'
+                : timeAgo(POST_CONTENT.createdAt)}
+            </p>
+          </div>
+          <Icon id='ellipsis-vertical' width='3' height='11' />
+        </div>
+
+        <div className={styles.title}>
+          <p>{POST_CONTENT.title}</p>
+          <p>{POST_CONTENT.viewCount} views</p>
+        </div>
         <p className={styles.text}>{POST_CONTENT.content}</p>
-        <p className={styles.edited}>
-          {POST_CONTENT.edited
-            ? timeAgo(POST_CONTENT.updatedAt) + ' (수정됨)'
-            : timeAgo(POST_CONTENT.createdAt)}
-        </p>
+
         <div className={styles.post_bottom}>
-          <div className={styles.comment_icon}>
-            <Icon id='comment' />
+          <div className={styles.count}>
+            <Icon id='comment' width='15' height='13' />
+            <p>3</p>
           </div>
-          <p className={styles.comment_cnt}>3</p>
-          <div className={styles.like_icon}>
-            <Icon id='blank-heart' />
+          <div className={styles.count}>
+            <Icon id='heart' width='13' height='12' />
+            <p>{POST_CONTENT.likeCount}</p>
           </div>
-          <p className={styles.like_cnt}>{POST_CONTENT.likeCount}</p>
-          <p className={styles.view_cnt}>{POST_CONTENT.viewCount} 조회</p>
         </div>
       </div>
       {COMMENT_LIST &&
         COMMENT_LIST.map((comment) => (
-          <Comment key={comment.id} data={comment} /> // `data` prop에 `comment` 객체를 전달
+          <Comment key={comment.id} data={comment} />
         ))}
       <InputBar />
     </div>
