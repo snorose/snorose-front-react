@@ -1,0 +1,35 @@
+.field {
+  padding: 0 1.25rem;
+  margin: 1.75rem 0;
+}
+
+.header {
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #484848;
+  position: relative;
+}
+
+.required {
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  position: absolute;
+  top: 0.125rem;
+  right: -0.625rem;
+  border-radius: 10px;
+  background-color: #ff4b6c;
+}
+
+.cagetories {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  row-gap: 9px;
+  column-gap: 13px;
+}

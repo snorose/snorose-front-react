@@ -20,6 +20,7 @@ import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
+import ExamReviewWritePage from './pages/ExamReviewWritePage/ExamReviewWritePage';
 import FindIdPage from './pages/LoginPage/FindIdPage/FindIdPage';
 import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage';
 import HelpPage from './pages/HelpPage/HelpPage';
@@ -121,6 +122,7 @@ const router = createBrowserRouter([
       { path: '/post-search', element: <PostSearchPage /> },
       { path: '/post-write', element: <PostWritePage /> },
       { path: 'exam-review', element: <ExamReviewPage /> },
+      { path: 'exam-review-write', element: <ExamReviewWritePage /> },
       { path: 'alert', element: <AlertPage /> },
       { path: 'my-page', element: <MyPage /> },
       { path: 'my-page/password', element: <ChangePasswordPage /> },
