@@ -6,32 +6,32 @@ import reportWebVitals from './reportWebVitals';
 
 import { ToastProvider } from './contexts/ToastContext.jsx';
 
+import { BoardListPage, BoardPage } from './pages/BoardPage';
+import {
+  ChangePasswordPage,
+  DeleteAccountPage,
+  EditInfoPage,
+  MyPage,
+} from './pages/MyPage';
+import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
 import App from './App';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
-import { BoardPage, BoardListPage } from './pages/BoardPage';
-import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
-import {
-  MyPage,
-  ChangePasswordPage,
-  EditInfoPage,
-  DeleteAccountPage,
-} from './pages/MyPage';
-import ViewPointListPage from './pages/MyPage/ViewPointListPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
-import HelpPage from './pages/HelpPage/HelpPage';
-import MainPage from './pages/MainPage/MainPage';
-import NoticePage from './pages/NoticePage/NoticePage';
-import ProtectedRoute from './ProtectedRoute';
-import LoginPage from './pages/LoginPage/Login';
 import FindIdPage from './pages/LoginPage/FindIdPage/FindIdPage';
 import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage';
+import HelpPage from './pages/HelpPage/HelpPage';
+import LoginPage from './pages/LoginPage/Login';
+import MainPage from './pages/MainPage/MainPage';
 import NotFoundIdPage from './pages/LoginPage/NotFoundIdPage/NotFoundIdPage';
+import NoticePage from './pages/NoticePage/NoticePage';
+import ProtectedRoute from './ProtectedRoute';
+import SearchPage from './pages/SearchPage/SearchPage.jsx';
+import ViewPointListPage from './pages/MyPage/ViewPointListPage';
 
 import { ROLE } from './constants';
-
 import './index.css';
 
 const router = createBrowserRouter([
@@ -44,10 +44,26 @@ const router = createBrowserRouter([
       { path: 'home', element: <MainPage /> },
       { path: '/board', element: <BoardPage /> },
       {
+        path: '/board/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: '/board/first-snow',
         element: (
           <ProtectedRoute>
             <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/first-snow/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
           </ProtectedRoute>
         ),
       },
@@ -60,10 +76,26 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/board/large-snow/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: '/board/permanent-snow',
         element: (
           <ProtectedRoute>
             <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/permanent-snow/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
           </ProtectedRoute>
         ),
       },
@@ -74,6 +106,14 @@ const router = createBrowserRouter([
             roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
           >
             <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/besookt/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
           </ProtectedRoute>
         ),
       },
