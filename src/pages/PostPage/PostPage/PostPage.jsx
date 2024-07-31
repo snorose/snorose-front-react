@@ -60,10 +60,14 @@ export default function PostPage() {
           </div>
         </div>
       </div>
-      {COMMENT_LIST &&
-        COMMENT_LIST.map((comment) => (
-          <Comment key={comment.id} data={comment} />
-        ))}
+      <div className={styles.comments}>
+        <p className={styles.commentsTitle}>댓글 2개</p>
+        {COMMENT_LIST &&
+          COMMENT_LIST.map((comment) => (
+            <Comment key={comment.id} data={comment} />
+          ))}
+      </div>
+
       <InputBar />
     </div>
   );
