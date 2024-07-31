@@ -11,7 +11,7 @@ const POST_LIST = [
   {
     postId: 6,
     title: '제목6',
-    userDisplay: '송이6',
+    userDisplay: '송이6엄청나게 이름 긴 어쩌구저쩌구블라블라블라',
     likeCount: 0,
     viewCount: 7,
     createdAt: '2024-05-05T07:29:29.197Z',

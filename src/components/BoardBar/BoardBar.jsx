@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function BoardBar({ data }) {
   return (
-    <Link to={`/board/${data.id}`} className={styles.board_list_bar}>
+    <Link to={`${data.to}`} className={styles.board_list_bar}>
       <svg
         className={styles.board_bar_background}
         style={{ backgroundImage: `url("${data.image}")` }}
