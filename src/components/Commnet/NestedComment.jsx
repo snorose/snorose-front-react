@@ -24,34 +24,38 @@ export default function NestedComment({ data, isLast }) {
 
   return (
     <div
-      className={styles.nested_comment}
-      style={{ borderBottom: isLast ? '1px solid #c7c7c7' : 'none' }}
+      className={styles.nestedComment}
+      style={{
+        paddingBottom: isLast ? '6px' : 'none',
+        borderBottomLeftRadius: isLast ? '5px' : '0px',
+        borderBottomRightRadius: isLast ? '5px' : '0px',
+      }}
     >
-      <div
-        className={styles.comment}
-        style={{ borderBottom: isLast ? 'none' : '1px solid #c7c7c7' }}
-      >
-        <div className={styles.comment_top}>
-          <div className={styles.comment_left}>
-            <div className={styles.profile_icon}>
-              <Icon id='profile' />
-            </div>
-            <p className={styles.name}>{userDisplay}</p>
+      <div className={styles.commentTop}>
+        <div className={styles.commentTopLeft}>
+          <div className={styles.nestedIcon}>
+            {!isLast && <Icon id='nested-arrow' width='15' height='15' />}
           </div>
-          <div className={styles.comment_right}>
-            <div className={styles.like_icon}>
-              <Icon id='blank-heart' />
-            </div>
-            <p className={styles.cnt_num}>{likeCount}</p>
-            <div className={styles.more_option}>
-              <Icon id='more-option' fill='#5F86BF' />
-            </div>
+
+          <div className={styles.cloud}>
+            <Icon id='cloud' width='19' heigth='13' />
           </div>
+          <p>{userDisplay}</p>
+          <p className={styles.dot}>·</p>
+          <p>
+            {isUpdated ? timeAgo(updatedAt) + ' (수정됨)' : timeAgo(createdAt)}
+          </p>
         </div>
-        <p className={styles.comment_text}>{content}</p>
-        <p className={styles.comment_time}>
-          {isUpdated ? timeAgo(updatedAt) + ' (수정됨)' : timeAgo(createdAt)}
-        </p>
+        <Icon id='ellipsis-vertical' width='3' height='11' />
+      </div>
+      <div className={styles.commentCenter}>
+        <div className={styles.nestedPadding}>{content}</div>
+      </div>
+      <div className={styles.commentBottom}>
+        <div className={styles.count}>
+          <Icon id='heart' width='13' height='12' />
+          <p>{likeCount}</p>
+        </div>
       </div>
     </div>
   );
