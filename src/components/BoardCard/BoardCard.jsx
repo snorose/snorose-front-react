@@ -9,15 +9,13 @@ export default function BoardCard({
   desc,
   backgroundImage,
 }) {
-  // const path = require(`../../assets/images/${backgroundImage}`);
-
   return (
     <Link className={`${styles.link} ${className}`} to={to}>
       <div
         className={styles.card}
-        // style={{
-        //   backgroundImage: `${USER?.isLogin ? `url(${path})` : ''}`,
-        // }}
+        style={{
+          backgroundImage: `${USER?.isLogin ? `url(${backgroundImage})` : ''}`,
+        }}
       >
         <p className={`${styles.name} ${!USER?.isLogin && styles.notLogin}`}>
           {USER?.isLogin ? name : '로그인하세요'}
