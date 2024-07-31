@@ -67,7 +67,6 @@ export default function PostPage() {
             <Comment key={comment.id} data={comment} />
           ))}
       </div>
-
       <InputBar />
     </div>
   );
