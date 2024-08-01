@@ -22,6 +22,7 @@ export default function ExamReviewWritePage() {
   const [test, setTest] = useState('');
   const [year, setYear] = useState();
   const [semester, setSemester] = useState();
+  const [isPF, setIsPF] = useState(false);
   const [classNumber, setClassNumber] = useState();
 
   return (
@@ -81,6 +82,13 @@ export default function ExamReviewWritePage() {
           placeholder='선택하세요'
         />
       </CategoryFieldset>
+      <CategoryFieldset
+        title='수강 학기'
+        required
+        hasCheckbox
+        value={isPF}
+        setFn={setIsPF}
+      />
       <CategoryFieldset title='수강 분반' required>
         <Dropdown
           options={CLASS_NUMBER}

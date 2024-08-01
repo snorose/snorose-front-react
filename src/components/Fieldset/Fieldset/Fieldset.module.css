@@ -5,6 +5,9 @@
 
 .header {
   margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .title {
@@ -32,4 +35,20 @@
   grid-template-columns: repeat(2, minmax(100px, 1fr));
   row-gap: 9px;
   column-gap: 13px;
+}
+
+.check {
+  width: 21px;
+  height: 21px;
+  border-radius: 21px;
+  border: 4px solid #d9d9d9;
+  cursor: pointer;
+}
+
+.input {
+  display: none;
+}
+
+.check:has(.input:checked) {
+  background-color: #00368e;
 }
