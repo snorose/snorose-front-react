@@ -1,6 +1,6 @@
-import styles from './CategoryFieldset.module.css';
+import styles from './Fieldset.module.css';
 
-export default function CategoryFieldset({ title, required, children }) {
+export default function Fieldset({ title, required, children }) {
   return (
     <div className={styles.field}>
       <div className={styles.header}>

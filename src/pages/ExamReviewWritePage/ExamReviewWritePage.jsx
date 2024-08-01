@@ -2,8 +2,14 @@ import { useState } from 'react';
 import {
   CategoryButton,
   CategoryFieldset,
-} from '../../components/CategoryFieldset';
-import { COURSE_CATEGORY, TEST_CATEGORY } from '../../constants';
+  Dropdown,
+} from '../../components/Fieldset';
+import {
+  COURSE_CATEGORY,
+  SEMESTERS,
+  TEST_CATEGORY,
+  YEARS,
+} from '../../constants';
 
 const courses = [
   { name: COURSE_CATEGORY.requiredMajor },
@@ -16,6 +22,8 @@ const tests = [{ name: TEST_CATEGORY.middle }, { name: TEST_CATEGORY.final }];
 export default function ExamReviewWritePage() {
   const [course, setCourse] = useState('');
   const [test, setTest] = useState('');
+  const [year, setYear] = useState();
+  const [semester, setSemester] = useState();
 
   return (
     <main>
@@ -42,6 +50,22 @@ export default function ExamReviewWritePage() {
             {name}
           </CategoryButton>
         ))}
+      </CategoryFieldset>
+      <CategoryFieldset title='수강 연도' required>
+        <Dropdown
+          options={YEARS}
+          select={year}
+          setFn={setYear}
+          placeholder='수강 연도를 선택해주세요'
+        />
+      </CategoryFieldset>
+      <CategoryFieldset title='수강 학기' required>
+        <Dropdown
+          options={SEMESTERS}
+          select={semester}
+          setFn={setSemester}
+          placeholder='수강 학기를 선택해주세요'
+        />
       </CategoryFieldset>
     </main>
   );
