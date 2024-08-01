@@ -37,31 +37,24 @@ export default function MyPage() {
           </div>
         </div>
 
+        {/* 탭 메뉴 */}
         <div className={styles.tabMenu}>
-          <div
-            className={`${styles.tab} ${activeTab === 'account' ? styles.active : ''}`}
-            onClick={() => {
-              setActiveTab('account');
-            }}
-          >
-            계정 정보
-          </div>
-          <div
-            className={`${styles.tab} ${activeTab === 'activity' ? styles.active : ''}`}
-            onClick={() => {
-              setActiveTab('activity');
-            }}
-          >
-            내 활동
-          </div>
-          <div
-            className={`${styles.tab} ${activeTab === 'guide' ? styles.active : ''}`}
-            onClick={() => setActiveTab('guide')}
-          >
-            이용 안내
-          </div>
+          {['account', 'activity', 'guide'].map((tab) => (
+            <div
+              key={tab}
+              className={`${styles.tab} ${activeTab === tab ? styles.active : ''}`}
+              onClick={() => {
+                setActiveTab(tab);
+              }}
+            >
+              {tab === 'account' && '계정 정보'}
+              {tab === 'activity' && '내 활동'}
+              {tab === 'guide' && '이용 안내'}
+            </div>
+          ))}
         </div>
 
+        {/* 계정 정보 */}
         {activeTab === 'account' && (
           <>
             <div className={styles.infoWrapper}>
@@ -90,6 +83,7 @@ export default function MyPage() {
           </>
         )}
 
+        {/* 내 활동 */}
         {activeTab === 'activity' && (
           <>
             <div className={styles.infoWrapper}>
@@ -107,6 +101,7 @@ export default function MyPage() {
           </>
         )}
 
+        {/* 이용 안내 */}
         {activeTab === 'guide' && (
           <>
             <div className={styles.infoWrapper}>
