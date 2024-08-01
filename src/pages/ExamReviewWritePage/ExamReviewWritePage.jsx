@@ -4,6 +4,7 @@ import {
   CategoryFieldset,
   Dropdown,
 } from '../../components/Fieldset';
+import CloseAppBar from '../../components/AppBar/CloseAppBar/CloseAppBar';
 import {
   CLASS_NUMBER,
   COURSE_CATEGORY,
@@ -11,8 +12,12 @@ import {
   TEST_CATEGORY,
   YEARS,
 } from '../../constants';
+import InputList from '../../components/Input/InputList/InputList.jsx';
+import InputItem from '../../components/Input/InputItem/InputItem.jsx';
 
 export default function ExamReviewWritePage() {
+  const [lectureName, setLectureName] = useState('');
+  const [professor, setProfessor] = useState('');
   const [course, setCourse] = useState('');
   const [test, setTest] = useState('');
   const [year, setYear] = useState();
@@ -21,6 +26,21 @@ export default function ExamReviewWritePage() {
 
   return (
     <main>
+      <CloseAppBar />
+      <InputList>
+        <InputItem
+          tag='강의명'
+          value={lectureName}
+          placeholder='강의명을 입력하세요'
+          setFn={setLectureName}
+        />
+        <InputItem
+          tag='교수명'
+          value={professor}
+          placeholder='교수명을 입력하세요'
+          setFn={setProfessor}
+        />
+      </InputList>
       <CategoryFieldset title='강의 종류' required>
         {COURSE_CATEGORY.map((item) => (
           <CategoryButton

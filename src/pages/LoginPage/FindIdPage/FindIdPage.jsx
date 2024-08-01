@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Input from '../../../components/Input/Input';
+import { Input } from '../../../components/Input';
 import Submit from '../../../components/Submit/Submit';
 import Icon from '../../../components/Icon/Icon';
 import {
