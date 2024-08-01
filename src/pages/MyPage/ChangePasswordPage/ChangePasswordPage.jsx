@@ -2,14 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ChangePasswordPage.module.css';
 import Icon from '../../../components/Icon/Icon';
+import BackAppBar from '../../../components/BackAppBar/BackAppBar';
 
 export default function ChangePasswordPage() {
   return (
     <main className={styles.changePasswordPage}>
-      <div className={styles.topContainer}>
-        <Icon id='arrow-back' />
-        <p className={styles.completeBtn}>완료</p>
-      </div>
+      <BackAppBar />
 
       <div className={styles.contentContainer}>
         <div className={styles.passwordWrapper}>
