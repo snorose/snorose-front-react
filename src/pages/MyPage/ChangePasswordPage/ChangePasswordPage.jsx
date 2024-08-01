@@ -10,27 +10,17 @@ export default function ChangePasswordPage() {
       <BackAppBar />
 
       <div className={styles.contentContainer}>
-        <div className={styles.passwordWrapper}>
-          <h3 className={styles.title}>현재 비밀번호</h3>
-          <div className={styles.password}>
-            <input type='password' className={styles.pwInput} />
-            <Icon id='opened-eye' />
+        {['현재 비밀번호', '새 비밀번호', '비밀번호 확인'].map((item) => (
+          <div className={styles.passwordWrapper}>
+            <h3 className={styles.title} key={item}>
+              {item}
+            </h3>
+            <div className={styles.password}>
+              <input type='password' className={styles.pwInput} />
+              <Icon id='opened-eye' />
+            </div>
           </div>
-        </div>
-        <div className={styles.passwordWrapper}>
-          <h3 className={styles.title}>새 비밀번호</h3>
-          <div className={styles.password}>
-            <input type='password' className={styles.pwInput} />
-            <Icon id='opened-eye' />
-          </div>
-        </div>
-        <div className={styles.passwordWrapper}>
-          <h3 className={styles.title}>비밀번호 확인</h3>
-          <div className={styles.password}>
-            <input type='password' className={styles.pwInput} />
-            <Icon id='opened-eye' />
-          </div>
-        </div>
+        ))}
       </div>
     </main>
   );
