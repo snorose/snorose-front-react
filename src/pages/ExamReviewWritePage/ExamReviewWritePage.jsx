@@ -5,6 +5,7 @@ import {
   Dropdown,
 } from '../../components/Fieldset';
 import {
+  CLASS_NUMBER,
   COURSE_CATEGORY,
   SEMESTERS,
   TEST_CATEGORY,
@@ -16,6 +17,7 @@ export default function ExamReviewWritePage() {
   const [test, setTest] = useState('');
   const [year, setYear] = useState();
   const [semester, setSemester] = useState();
+  const [classNumber, setClassNumber] = useState();
 
   return (
     <main>
@@ -48,7 +50,7 @@ export default function ExamReviewWritePage() {
           options={YEARS}
           select={year}
           setFn={setYear}
-          placeholder='수강 연도를 선택해주세요'
+          placeholder='선택하세요'
         />
       </CategoryFieldset>
       <CategoryFieldset title='수강 학기' required>
@@ -56,7 +58,15 @@ export default function ExamReviewWritePage() {
           options={SEMESTERS}
           select={semester}
           setFn={setSemester}
-          placeholder='수강 학기를 선택해주세요'
+          placeholder='선택하세요'
+        />
+      </CategoryFieldset>
+      <CategoryFieldset title='수강 분반' required>
+        <Dropdown
+          options={CLASS_NUMBER}
+          select={classNumber}
+          setFn={setClassNumber}
+          placeholder='선택하세요'
         />
       </CategoryFieldset>
     </main>

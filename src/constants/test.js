@@ -12,3 +12,4 @@ export const SEMESTERS = Object.freeze([
   '2학기',
   '겨울학기',
 ]);
+export const CLASS_NUMBER = Object.freeze([1, 2, 3]);
