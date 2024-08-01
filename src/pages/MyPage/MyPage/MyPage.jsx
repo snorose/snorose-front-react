@@ -65,26 +65,18 @@ export default function MyPage() {
         {activeTab === 'account' && (
           <>
             <div className={styles.infoWrapper}>
-              <div className={styles.info}>
-                <div className={styles.label}>아이디</div>
-                <div className={styles.value}>suen0904</div>
-              </div>
-              <div className={styles.info}>
-                <div className={styles.label}>이메일</div>
-                <div className={styles.value}>suen0904@sookmyung.ac.kr</div>
-              </div>
-              <div className={styles.info}>
-                <div className={styles.label}>학번</div>
-                <div className={styles.value}>17123123</div>
-              </div>
-              <div className={styles.info}>
-                <div className={styles.label}>전공</div>
-                <div className={styles.value}>시각영상디자인과</div>
-              </div>
-              <div className={styles.info}>
-                <div className={styles.label}>생년월일</div>
-                <div className={styles.value}>1996. 01. 01</div>
-              </div>
+              {[
+                { label: '아이디', value: 'suen0904' },
+                { label: '이메일', value: 'suen0904@sookmyung.ac.kr' },
+                { label: '학번', value: '17123123' },
+                { label: '전공', value: '시각영상디자인과' },
+                { label: '생년월일', value: '1996. 01. 01' },
+              ].map((info, index) => (
+                <div className={styles.info} key={index}>
+                  <div className={styles.label}>{info.label}</div>
+                  <div className={styles.value}>{info.value}</div>
+                </div>
+              ))}
             </div>
 
             <div className={styles.buttonWrapper}>
@@ -101,18 +93,16 @@ export default function MyPage() {
         {activeTab === 'activity' && (
           <>
             <div className={styles.infoWrapper}>
-              <div className={styles.ItemWrapper}>
-                <span>내 글 모아보기</span>
-                <Icon id='arrow-text-grey'></Icon>
-              </div>
-              <div className={styles.ItemWrapper}>
-                <span>댓글 닷 글 모아보기</span>
-                <Icon id='arrow-text-grey'></Icon>
-              </div>
-              <div className={styles.ItemWrapper}>
-                <span>다운 받은 시험 후기 모아보기</span>
-                <Icon id='arrow-text-grey'></Icon>
-              </div>
+              {[
+                '내 글 모아보기',
+                '댓글 닷 글 모아보기 ',
+                '다운 받은 시험 후기 모아보기',
+              ].map((item) => (
+                <div className={styles.ItemWrapper} key={item}>
+                  <span>{item}</span>
+                  <Icon id='arrow-text-grey'></Icon>
+                </div>
+              ))}
             </div>
           </>
         )}
@@ -120,14 +110,12 @@ export default function MyPage() {
         {activeTab === 'guide' && (
           <>
             <div className={styles.infoWrapper}>
-              <div className={styles.ItemWrapper}>
-                <span>개인정보 처리 방침</span>
-                <Icon id='arrow-text-grey'></Icon>
-              </div>
-              <div className={styles.ItemWrapper}>
-                <span>서비스 이용 약관</span>
-                <Icon id='arrow-text-grey'></Icon>
-              </div>
+              {['개인정보 처리 방침', '서비스 이용 약관'].map((item) => (
+                <div className={styles.ItemWrapper} key={item}>
+                  <span>{item}</span>
+                  <Icon id='arrow-text-grey'></Icon>
+                </div>
+              ))}
             </div>
 
             <div className={styles.buttonWrapper}>
