@@ -61,6 +61,36 @@ export default function MyPage() {
             이용 안내
           </div>
         </div>
+
+        {activeTab === 'account' && (
+          <div className={styles.infoWrapper}>
+            <div className={styles.info}>
+              <div className={styles.label}>아이디</div>
+              <div className={styles.value}>suen0904</div>
+            </div>
+            <div className={styles.info}>
+              <div className={styles.label}>이메일</div>
+              <div className={styles.value}>suen0904@sookmyung.ac.kr</div>
+            </div>
+            <div className={styles.info}>
+              <div className={styles.label}>학번</div>
+              <div className={styles.value}>17123123</div>
+            </div>
+            <div className={styles.info}>
+              <div className={styles.label}>전공</div>
+              <div className={styles.value}>시각영상디자인과</div>
+            </div>
+            <div className={styles.info}>
+              <div className={styles.label}>생년월일</div>
+              <div className={styles.value}>1996. 01. 01</div>
+            </div>
+          </div>
+        )}
+
+        <div className={styles.buttonWrapper}>
+          <a className={styles.editButton}>내 정보 수정</a>
+          <a className={styles.passwordButton}>비밀번호 변경</a>
+        </div>
       </div>
     </main>
   );
