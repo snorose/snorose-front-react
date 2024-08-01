@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import { ActionButton, CloseAppBar } from '../../components/AppBar';
 import {
   CategoryButton,
   CategoryFieldset,
   Dropdown,
 } from '../../components/Fieldset';
-import CloseAppBar from '../../components/AppBar/CloseAppBar/CloseAppBar';
 import {
   CLASS_NUMBER,
   COURSE_CATEGORY,
@@ -23,9 +23,9 @@ const FILE_MAX_SIZE = 1000 * 1000 * 10;
 export default function ExamReviewWritePage() {
   const [lectureName, setLectureName] = useState('');
   const [professor, setProfessor] = useState('');
-  const [course, setCourse] = useState('');
-  const [test, setTest] = useState('');
-  const [year, setYear] = useState();
+  const [lectureType, setLectureType] = useState('');
+  const [testType, setTestType] = useState('');
+  const [lectureYear, setLectureYear] = useState();
   const [semester, setSemester] = useState();
   const [isPF, setIsPF] = useState(false);
   const [classNumber, setClassNumber] = useState();
@@ -43,7 +43,9 @@ export default function ExamReviewWritePage() {
 
   return (
     <main className={styles.main}>
-      <CloseAppBar />
+      <CloseAppBar>
+        <ActionButton>게시</ActionButton>
+      </CloseAppBar>
       <InputList>
         <InputItem
           tag='강의명'
@@ -62,9 +64,9 @@ export default function ExamReviewWritePage() {
         {COURSE_CATEGORY.map((item) => (
           <CategoryButton
             key={item}
-            select={course}
+            select={lectureType}
             name={item}
-            callback={setCourse}
+            callback={setLectureType}
           >
             {item}
           </CategoryButton>
@@ -74,9 +76,9 @@ export default function ExamReviewWritePage() {
         {TEST_CATEGORY.map((item) => (
           <CategoryButton
             key={item}
-            select={test}
+            select={testType}
             name={item}
-            callback={setTest}
+            callback={setTestType}
           >
             {item}
           </CategoryButton>
@@ -85,8 +87,8 @@ export default function ExamReviewWritePage() {
       <CategoryFieldset title='수강 연도' required>
         <Dropdown
           options={YEARS}
-          select={year}
-          setFn={setYear}
+          select={lectureYear}
+          setFn={setLectureYear}
           placeholder='선택하세요'
         />
       </CategoryFieldset>
