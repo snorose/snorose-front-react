@@ -11,14 +11,6 @@ import {
   YEARS,
 } from '../../constants';
 
-const courses = [
-  { name: COURSE_CATEGORY.requiredMajor },
-  { name: COURSE_CATEGORY.major },
-  { name: COURSE_CATEGORY.requiredGeneral },
-  { name: COURSE_CATEGORY.general },
-];
-const tests = [{ name: TEST_CATEGORY.middle }, { name: TEST_CATEGORY.final }];
-
 export default function ExamReviewWritePage() {
   const [course, setCourse] = useState('');
   const [test, setTest] = useState('');
@@ -28,26 +20,26 @@ export default function ExamReviewWritePage() {
   return (
     <main>
       <CategoryFieldset title='강의 종류' required>
-        {courses.map(({ name }) => (
+        {COURSE_CATEGORY.map((item) => (
           <CategoryButton
-            key={name}
+            key={item}
             select={course}
-            name={name}
+            name={item}
             callback={setCourse}
           >
-            {name}
+            {item}
           </CategoryButton>
         ))}
       </CategoryFieldset>
       <CategoryFieldset title='시험 종류' required>
-        {tests.map(({ name }) => (
+        {TEST_CATEGORY.map((item) => (
           <CategoryButton
-            key={name}
+            key={item}
             select={test}
-            name={name}
+            name={item}
             callback={setTest}
           >
-            {name}
+            {item}
           </CategoryButton>
         ))}
       </CategoryFieldset>
