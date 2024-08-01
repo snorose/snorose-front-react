@@ -14,6 +14,8 @@ import {
 } from '../../constants';
 import InputList from '../../components/Input/InputList/InputList.jsx';
 import InputItem from '../../components/Input/InputItem/InputItem.jsx';
+import Textarea from '../../components/Fieldset/Textarea/Textarea.jsx';
+import styles from './ExamReviewWritePage.module.css';
 
 export default function ExamReviewWritePage() {
   const [lectureName, setLectureName] = useState('');
@@ -24,9 +26,10 @@ export default function ExamReviewWritePage() {
   const [semester, setSemester] = useState();
   const [isPF, setIsPF] = useState(false);
   const [classNumber, setClassNumber] = useState();
+  const [description, setDescription] = useState('');
 
   return (
-    <main>
+    <main className={styles.main}>
       <CloseAppBar />
       <InputList>
         <InputItem
@@ -83,7 +86,7 @@ export default function ExamReviewWritePage() {
         />
       </CategoryFieldset>
       <CategoryFieldset
-        title='수강 학기'
+        title='P/F 여부'
         required
         hasCheckbox
         value={isPF}
@@ -95,6 +98,13 @@ export default function ExamReviewWritePage() {
           select={classNumber}
           setFn={setClassNumber}
           placeholder='선택하세요'
+        />
+      </CategoryFieldset>
+      <CategoryFieldset title='시험 유형 및 설명'>
+        <Textarea
+          value={description}
+          setFn={setDescription}
+          placeholder='강의 시험 유형 및 부가적인 설명을 기술해주세요'
         />
       </CategoryFieldset>
     </main>
