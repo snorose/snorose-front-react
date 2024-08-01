@@ -89,14 +89,19 @@ export default function MyPage() {
           <>
             <div className={styles.infoWrapper}>
               {[
-                '내 글 모아보기',
-                '댓글 닷 글 모아보기 ',
-                '다운 받은 시험 후기 모아보기',
-              ].map((item) => (
-                <div className={styles.ItemWrapper} key={item}>
-                  <span>{item}</span>
-                  <Icon id='arrow-text-grey'></Icon>
-                </div>
+                { label: '내 글 모아보기', link: 'my-post' },
+                { label: '댓글 단 글 모아보기', link: 'comment' },
+                {
+                  label: '다운 받은 시험 후기 모아보기',
+                  link: 'download-test-review',
+                },
+              ].map((item, index) => (
+                <Link to={item.link}>
+                  <div className={styles.ItemWrapper} key={index}>
+                    <span>{item.label}</span>
+                    <Icon id='arrow-text-grey'></Icon>
+                  </div>
+                </Link>
               ))}
             </div>
           </>
