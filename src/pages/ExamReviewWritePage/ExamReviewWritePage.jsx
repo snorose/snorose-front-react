@@ -23,14 +23,23 @@ const FILE_MAX_SIZE = 1000 * 1000 * 10;
 export default function ExamReviewWritePage() {
   const [lectureName, setLectureName] = useState('');
   const [professor, setProfessor] = useState('');
-  const [lectureType, setLectureType] = useState('');
-  const [testType, setTestType] = useState('');
+  const [lectureType, setLectureType] = useState();
+  const [testType, setTestType] = useState();
   const [lectureYear, setLectureYear] = useState();
   const [semester, setSemester] = useState();
   const [isPF, setIsPF] = useState(false);
   const [classNumber, setClassNumber] = useState();
-  const [description, setDescription] = useState('');
+  const [content, setContent] = useState('');
   const [file, setFile] = useState();
+
+  const pass =
+    lectureName &&
+    professor &&
+    lectureType &&
+    testType &&
+    lectureYear &&
+    semester &&
+    classNumber;
 
   const handleFile = (event) => {
     const selectedFile = event.target.files[0];
@@ -44,7 +53,17 @@ export default function ExamReviewWritePage() {
   return (
     <main className={styles.main}>
       <CloseAppBar>
-        <ActionButton>게시</ActionButton>
+        <ActionButton
+          onClick={() => {
+            if (pass) {
+              alert('등록 완료!');
+            } else {
+              alert('필수 입력을 모두 작성해주세요');
+            }
+          }}
+        >
+          게시
+        </ActionButton>
       </CloseAppBar>
       <InputList>
         <InputItem
@@ -117,8 +136,8 @@ export default function ExamReviewWritePage() {
       </CategoryFieldset>
       <CategoryFieldset title='시험 유형 및 설명'>
         <Textarea
-          value={description}
-          setFn={setDescription}
+          value={content}
+          setFn={setContent}
           placeholder='강의 시험 유형 및 부가적인 설명을 기술해주세요'
         />
       </CategoryFieldset>
