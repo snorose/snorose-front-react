@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './MyPage.module.css';
 import Icon from '../../../components/Icon/Icon';
 
 export default function MyPage() {
+  const [activeTab, setActiveTab] = useState('account');
+
   return (
     <main className={styles.myPage}>
       <div className={styles.myPageUpper}>
@@ -32,6 +34,31 @@ export default function MyPage() {
                 <Icon id='arrow-right' />
               </a>
             </Link>
+          </div>
+        </div>
+
+        <div className={styles.tabMenu}>
+          <div
+            className={`${styles.tab} ${activeTab === 'account' ? styles.active : ''}`}
+            onClick={() => {
+              setActiveTab('account');
+            }}
+          >
+            계정 정보
+          </div>
+          <div
+            className={`${styles.tab} ${activeTab === 'activity' ? styles.active : ''}`}
+            onClick={() => {
+              setActiveTab('activity');
+            }}
+          >
+            내 활동
+          </div>
+          <div
+            className={`${styles.tab} ${activeTab === 'guide' ? styles.active : ''}`}
+            onClick={() => setActiveTab('guide')}
+          >
+            이용 안내
           </div>
         </div>
       </div>
