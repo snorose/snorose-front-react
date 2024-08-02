@@ -73,10 +73,10 @@ export default function ChangePasswordPage() {
       <div className={styles.contentContainer}>
         <div className={styles.passwordWrapper}>
           <h3 className={styles.title}>현재 비밀번호</h3>
-          <div className={styles.password}>
+          <div className={styles.inputWrapper}>
             <input
               type={currentPasswordType.type}
-              className={styles.passwordInput}
+              className={styles.inputText}
               placeholder='기존 비밀번호를 입력하세요'
             />
             <Icon
@@ -88,10 +88,12 @@ export default function ChangePasswordPage() {
 
         <div className={styles.passwordWrapper}>
           <h3 className={styles.title}>새 비밀번호</h3>
-          <div className={styles.password}>
+          <div
+            className={`${styles.inputWrapper} ${newPasswordError ? styles.errorInputWrapper : ''}`}
+          >
             <input
               type={newPasswordType.type}
-              className={styles.passwordInput}
+              className={`${styles.inputText} ${newPasswordError ? styles.errorInputText : ''}`}
               placeholder='새로운 비밀번호를 입력하세요'
               onChange={handlePasswordChange}
             />
@@ -107,10 +109,12 @@ export default function ChangePasswordPage() {
 
         <div className={styles.passwordWrapper}>
           <h3 className={styles.title}>비밀번호 확인</h3>
-          <div className={styles.password}>
+          <div
+            className={`${styles.inputWrapper} ${newPasswordCheckError ? styles.errorInputWrapper : ''}`}
+          >
             <input
               type={newPasswordCheckType.type}
-              className={styles.passwordInput}
+              className={`${styles.inputText} ${newPasswordCheckError ? styles.errorInputText : ''}`}
               placeholder='비밀번호를 다시 입력하세요'
               onChange={handlePasswordCheckChange}
             />
