@@ -3,6 +3,7 @@ import Icon from '../../../components/Icon/Icon.jsx';
 import Sponser from '../../../components/Sponser/Sponser.jsx';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import BoardBar from '../../../components/BoardBar/BoardBar.jsx';
+import Header from '../../../components/Header/Header.jsx';
 import { BOARD_MENUS } from '../../../constants';
 import { useState } from 'react';
 
@@ -12,27 +13,11 @@ export default function BoardPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.status_bar}>statusBar</div>
+      <Header />
       <div className={styles.padding_container}>
-        <div className={styles.header}>
-          <div className={styles.text_logo}>
-            <Icon id='text-logo' />
-          </div>
-          <div
-            className={styles.side_menu_btn}
-            onClick={(event) => {
-              event.stopPropagation();
-              setIsSidebarOpen((prev) => !prev);
-            }}
-          >
-            <Icon id='hamburger' />
-          </div>
-        </div>
         <div className={styles.searchbar_box}>
           <div className={styles.searchbar}>
-            <div>
-              <Icon id='search' />
-            </div>
+            <Icon id='search-grey' width='14' height='14' fill='#898989' />
             <input type='text' placeholder='전체 게시판 검색' />
           </div>
         </div>

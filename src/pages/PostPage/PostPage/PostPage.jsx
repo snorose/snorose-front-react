@@ -7,34 +7,12 @@ import { POST_CONTENT } from '../../../constants/postContentDummy.js';
 import { COMMENT_LIST } from '../../../constants/commentDummy.js';
 import timeAgo from '../../../utils/timeAgo.js';
 
-// const data = {
-//   id: 2,
-//   postId: 1,
-//   userProfile: 'string',
-//   userDisplay: '송이1',
-//   isWriter: true,
-//   content: 'comment test',
-//   likeCount: 1,
-//   reportCount: 0,
-//   createdAt: '2024-07-14T04:13:06.215Z',
-//   updatedAt: '2024-07-14T04:13:06.215Z',
-//   deletedAt: '2024-07-14T04:13:06.215Z',
-//   isVisible: true,
-//   isUpdated: true,
-//   isDeleted: false,
-//   parentId: 1,
-//   children: ['string'],
-// };
-
-// title, hasMenu, hasSearch, children
-
 export default function PostPage() {
   return (
     <div className={styles.container}>
       <div className={styles.backAppBar}>
         <BackAppBar />
       </div>
-
       <div className={styles.content}>
         <div className={styles.contentTop}>
           <div className={styles.contentTopLeft}>
@@ -49,13 +27,11 @@ export default function PostPage() {
           </div>
           <Icon id='ellipsis-vertical' width='3' height='11' />
         </div>
-
         <div className={styles.title}>
           <p>{POST_CONTENT.title}</p>
           <p>{POST_CONTENT.viewCount} views</p>
         </div>
         <p className={styles.text}>{POST_CONTENT.content}</p>
-
         <div className={styles.post_bottom}>
           <div className={styles.count}>
             <Icon id='comment' width='15' height='13' />
