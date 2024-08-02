@@ -14,13 +14,14 @@ body {
   font-size: 8px;
 }
 
-.refresh_icon {
+.top {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  width: 40px;
-  height: 50px;
-  top: 10px;
-  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  font-size: 8px;
+  padding: 10px 20px;
+  gap: 9px
 }
 
 .pencil_icon {
@@ -32,35 +33,7 @@ body {
   position: fixed;
   bottom: 160px;
   margin-right: 40px;
-
-  :first-child {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-.top {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 8px;
-  /* 양옆 여백 */
-  padding: 0 17px;
-  border-bottom: 1px solid gray;
-}
-
-.header {
-  height: 42px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-
-  h1 {
-    font-size: 12px;
-    font-weight: 700;
-    padding-left: 6px;
-  }
+  z-index: 999;
 }
 
 .side_menu_btn {
@@ -72,37 +45,44 @@ body {
 .notification_bar {
   width: 100%;
   background-color: #fee9eb;
-  height: 20px;
-  border-radius: 7px;
+  height: 2.188rem;
+  font-size: 0.688rem;
+  color: #ff4b6c;
+  border-radius: 5px;
   display: flex;
+  padding: 0.688rem 0.938rem;
   align-items: center;
+  gap: 0.861rem;
 }
 
 .notification_icon {
-  width: 20px;
-  height: 15px;
+  width: 0.663rem;
+  height: 0.791rem;
   display: flex;
 }
 
 .keyword_box {
   display: flex;
   width: 100%;
-  padding: 10px 0 10px 0;
   justify-content: baseline;
 }
 
 .keyword {
-  height: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 7px 5px;
-  border-radius: 8px;
-  border: 1px solid #5f86bf;
-  background: #ddebf6;
+  padding: 3px 14px;
+  border-radius: 20px;
+  background: #eaf5fd;
   margin-right: 5px;
   color: #5f86bf;
-  font-weight: 600;
+  
+  p {
+    font-size: 11px;
+    line-height: 150%;
+    letter-spacing: -0.5px;
+    font-weight: 400;
+  }
 }
 
 .content {
@@ -112,14 +92,17 @@ body {
   align-items: center;
   font-size: 8px;
   /* 양옆 여백 */
-  padding: 0 17px;
+  padding: 4px 17px 193px 17px;
+  row-gap: 8px;
 }
 
 .sponser {
   display: flex;
   width: 100%;
-  max-width: 450px;
   background-size: cover;
   position: fixed;
-  bottom: 46px;
+  justify-content: center;
+  bottom: 83px;
+  /* background-color: white; */
+  padding-bottom: 20px;
 }

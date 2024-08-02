@@ -7,45 +7,33 @@ import Sponser from '../../../components/Sponser/Sponser.jsx';
 import POST_LIST from '../../../constants/postListDummy.js';
 import PTR from '../../../components/PTR/PTR.jsx';
 import { POST_CATEGORIES } from '../../../constants/postCategories.js';
+import BoardHeader from '../../../components/BoardHeader/BoardHeader.jsx';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
   const currentPath = pathname.split('/')[2];
-  let currentBoard = '';
-
-  if (currentPath === 'first-snow') {
-    currentBoard = '첫눈온방';
-  } else if (currentPath === 'large-snow') {
-    currentBoard = '함박눈방';
-  } else if (currentPath === 'permanent-snow') {
-    currentBoard = '만년설방';
-  } else if (currentPath === 'besookt') {
-    currentBoard = '베숙트';
-  }
+  const boardMap = {
+    'first-snow': '첫눈온방',
+    'large-snow': '함박눈방',
+    'permanent-snow': '만년설방',
+    besookt: '베숙트',
+  };
+  const currentBoard = boardMap[currentPath] || '';
 
   const [selectedCategoryId, setSelectedCategoryId] = useState(currentPath);
-
   const getCurrentCategoryColor = (id, pointColor, defaultColor) =>
     id === selectedCategoryId ? pointColor : defaultColor;
-
   const handleCategoryClick = (id) => {
     setSelectedCategoryId(id);
   };
 
   return (
     <div className={styles.container}>
+      <BoardHeader title={currentBoard} />
       <div className={styles.top}>
-        <div className={styles.header}>
-          <div className={styles.side_menu_btn}>
-            <Icon id='hamburger' />
-          </div>
-          <h1>{currentBoard}</h1>
-        </div>
         <div className={styles.notification_bar}>
-          <div className={styles.notification_icon}>
-            <Icon id='notification-red' />
-          </div>
-          <p>필독 공지사항</p>
+          <Icon id='notification-red' width={11} height={13} />
+          <p>[필독] 공지사항</p>
         </div>
         <div className={styles.keyword_box}>
           {POST_CATEGORIES &&
@@ -57,30 +45,26 @@ export default function BoardListPage() {
                   backgroundColor: getCurrentCategoryColor(
                     id,
                     '#00368E',
-                    '#BFD7EC'
+                    '#EAF5FD'
                   ),
-                  color: getCurrentCategoryColor(id, '#FFFFFF', '#5F86BF'),
-                  border: getCurrentCategoryColor(id, '#00368E', '#5F86BF'),
+                  color: getCurrentCategoryColor(id, '#FFFFFF', '#00368E'),
                 }}
                 onClick={() => handleCategoryClick(id)} // 클릭 이벤트 핸들러 추가
               >
-                {label}
+                <p>{label}</p>
               </div>
             ))}
         </div>
       </div>
-      <div className={styles.content}>
-        <div className={styles.pencil_icon}>
-          <Icon id='pencil' />
-        </div>
-        <PTR>
+      <PTR>
+        <div className={styles.content}>
           {POST_LIST.map((post, index) => (
             <PostBar key={index} data={post} />
           ))}
-        </PTR>
-      </div>
-      <div className={styles.refresh_icon}>
-        <Icon id='refresh' />
+        </div>
+      </PTR>
+      <div className={styles.pencil_icon}>
+        <Icon id='pencil' width={65} height={65} />
       </div>
       <div className={styles.sponser}>
         <Sponser />
