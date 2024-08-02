@@ -29,6 +29,7 @@ export default function ChangePasswordPage() {
   const [newPasswordCheckError, setNewPasswordCheckError] = useState('');
 
   const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
+  const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
 
   // 새 비밀번호 유효성 검사 함수
   const handlePasswordChange = (e) => {
@@ -39,7 +40,8 @@ export default function ChangePasswordPage() {
       value.length < 8 ||
       !/[A-Za-z]/.test(value) ||
       !/\d/.test(value) ||
-      !specialCharRegex.test(value)
+      !specialCharRegex.test(value) ||
+      emojiRegex.text(value)
     ) {
       setNewPasswordError(
         '  영어, 숫자, 특수문자를 포함해 8자 이상으로 작성해주세요'
