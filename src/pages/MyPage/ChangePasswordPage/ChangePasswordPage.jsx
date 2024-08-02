@@ -89,11 +89,11 @@ export default function ChangePasswordPage() {
         <div className={styles.passwordWrapper}>
           <h3 className={styles.title}>새 비밀번호</h3>
           <div
-            className={`${styles.inputWrapper} ${newPasswordError ? styles.errorInputWrapper : ''}`}
+            className={`${styles.inputWrapper} ${newPassword && !newPasswordError ? styles.rightInputWrapper : ''}  ${newPasswordError ? styles.errorInputWrapper : ''}`}
           >
             <input
               type={newPasswordType.type}
-              className={`${styles.inputText} ${newPasswordError ? styles.errorInputText : ''}`}
+              className={`${styles.inputText}  ${newPassword && !newPasswordError ? styles.rightInputText : ''} ${newPasswordError ? styles.errorInputText : ''}`}
               placeholder='새로운 비밀번호를 입력하세요'
               onChange={handlePasswordChange}
             />
@@ -122,11 +122,11 @@ export default function ChangePasswordPage() {
         <div className={styles.passwordWrapper}>
           <h3 className={styles.title}>비밀번호 확인</h3>
           <div
-            className={`${styles.inputWrapper} ${newPasswordCheckError ? styles.errorInputWrapper : ''}`}
+            className={`${styles.inputWrapper} ${newPasswordCheck && !newPasswordCheckError ? styles.rightInputWrapper : ''} ${newPasswordCheckError ? styles.errorInputWrapper : ''}`}
           >
             <input
               type={newPasswordCheckType.type}
-              className={`${styles.inputText} ${newPasswordCheckError ? styles.errorInputText : ''}`}
+              className={`${styles.inputText} ${newPasswordCheck && !newPasswordCheckError ? styles.rightInputText : ''} ${newPasswordCheckError ? styles.errorInputText : ''}`}
               placeholder='비밀번호를 다시 입력하세요'
               onChange={handlePasswordCheckChange}
             />
