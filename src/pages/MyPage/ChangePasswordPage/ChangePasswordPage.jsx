@@ -99,7 +99,19 @@ export default function ChangePasswordPage() {
             />
             <Icon
               onClick={() => handlePasswordType(setNewPasswordType)}
-              id={newPasswordType.visible ? 'closed-eye' : 'opened-eye'}
+              id={
+                !newPassword
+                  ? newPasswordType.visible
+                    ? 'closed-eye'
+                    : 'opened-eye'
+                  : newPasswordError
+                    ? newPasswordType.visible
+                      ? 'closed -eye-pink'
+                      : 'opened-eye-pink'
+                    : newPasswordType.visible
+                      ? 'closed-eye-blue'
+                      : 'opened-eye-blue'
+              }
             />
           </div>
           {newPasswordError && (
@@ -122,7 +134,19 @@ export default function ChangePasswordPage() {
               onClick={() => {
                 handlePasswordType(setNewPasswordCheckType);
               }}
-              id={newPasswordCheckType.visible ? 'closed-eye' : 'opened-eye'}
+              id={
+                !newPassword
+                  ? newPasswordCheckType.visible
+                    ? 'closed-eye'
+                    : 'opened-eye'
+                  : newPasswordCheckError
+                    ? newPasswordCheckType.visible
+                      ? 'closed-eye-pink'
+                      : 'opened-eye-pink'
+                    : newPasswordCheckType.visible
+                      ? 'closed-eye-blue'
+                      : 'opened-eye-blue'
+              }
             />
           </div>
           {newPasswordCheckError && (
