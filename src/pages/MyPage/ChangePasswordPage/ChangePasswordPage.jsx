@@ -26,7 +26,10 @@ export default function ChangePasswordPage() {
 
   return (
     <main className={styles.changePasswordPage}>
-      <BackAppBar />
+      <div className={styles.topContainer}>
+        <BackAppBar />
+        <button className={styles.submitBtn}>완료</button>
+      </div>
 
       <div className={styles.contentContainer}>
         <div className={styles.passwordWrapper}>
