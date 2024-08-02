@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './BoardListPage.module.css';
 import Icon from '../../../components/Icon/Icon.jsx';
+import BackAppBar from '../../../components/BackAppBar/BackAppBar.jsx';
 import PostBar from '../../../components/PostBar/PostBar.jsx';
 import Sponser from '../../../components/Sponser/Sponser.jsx';
 import POST_LIST from '../../../constants/postListDummy.js';
 import PTR from '../../../components/PTR/PTR.jsx';
 import { POST_CATEGORIES } from '../../../constants/postCategories.js';
-import BoardHeader from '../../../components/BoardHeader/BoardHeader.jsx';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
@@ -29,7 +29,7 @@ export default function BoardListPage() {
 
   return (
     <div className={styles.container}>
-      <BoardHeader title={currentBoard} />
+      <BackAppBar title={currentBoard} hasMenu hasSearch />
       <div className={styles.top}>
         <div className={styles.notification_bar}>
           <Icon id='notification-red' width={11} height={13} />
