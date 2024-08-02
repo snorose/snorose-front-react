@@ -3,6 +3,13 @@ import styles from './ChangePasswordPage.module.css';
 import Icon from '../../../components/Icon/Icon';
 import BackAppBar from '../../../components/BackAppBar/BackAppBar';
 
+const handlePasswordType = (setter) => {
+  setter((prev) => ({
+    type: prev.visible ? 'password' : 'text',
+    visible: !prev.visible,
+  }));
+};
+
 export default function ChangePasswordPage() {
   const [currentPasswordType, setCurrentPasswordType] = useState({
     type: 'password',
@@ -16,12 +23,42 @@ export default function ChangePasswordPage() {
     type: 'password',
     visible: false,
   });
+  const [newPassword, setNewPassword] = useState('');
+  const [newPasswordCheck, setNewPasswordCheck] = useState('');
+  const [newPasswordError, setNewPasswordError] = useState('');
+  const [newPasswordCheckError, setNewPasswordCheckError] = useState('');
 
-  const handlePasswordType = (setter) => {
-    setter((prev) => ({
-      type: prev.visible ? 'password' : 'text',
-      visible: !prev.visible,
-    }));
+  const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
+
+  // 새 비밀번호 유효성 검사 함수
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setNewPassword(value);
+
+    if (
+      value.length < 8 ||
+      !/[A-Za-z]/.test(value) ||
+      !/\d/.test(value) ||
+      !specialCharRegex.test(value)
+    ) {
+      setNewPasswordError(
+        '  영어, 숫자, 특수문자를 포함해 8자 이상으로 작성해주세요'
+      );
+    } else {
+      setNewPasswordError('');
+    }
+  };
+
+  // 비밀번호 확인 유효성 검사 함수
+  const handlePasswordCheckChange = (e) => {
+    const value = e.target.value;
+    setNewPasswordCheck(value);
+
+    if (value !== newPassword) {
+      setNewPasswordCheckError('비밀번호가 일치하지 않습니다');
+    } else {
+      setNewPasswordCheckError('');
+    }
   };
 
   return (
@@ -54,12 +91,16 @@ export default function ChangePasswordPage() {
               type={newPasswordType.type}
               className={styles.passwordInput}
               placeholder='새로운 비밀번호를 입력하세요'
+              onChange={handlePasswordChange}
             />
             <Icon
               onClick={() => handlePasswordType(setNewPasswordType)}
               id={newPasswordType.visible ? 'closed-eye' : 'opened-eye'}
             />
           </div>
+          {newPasswordError && (
+            <p className={styles.errorMessage}>{newPasswordError}</p>
+          )}
         </div>
 
         <div className={styles.passwordWrapper}>
@@ -69,6 +110,7 @@ export default function ChangePasswordPage() {
               type={newPasswordCheckType.type}
               className={styles.passwordInput}
               placeholder='비밀번호를 다시 입력하세요'
+              onChange={handlePasswordCheckChange}
             />
             <Icon
               onClick={() => {
@@ -77,6 +119,9 @@ export default function ChangePasswordPage() {
               id={newPasswordCheckType.visible ? 'closed-eye' : 'opened-eye'}
             />
           </div>
+          {newPasswordCheckError && (
+            <p className={styles.errorMessage}>{newPasswordCheckError}</p>
+          )}
         </div>
       </div>
     </main>
