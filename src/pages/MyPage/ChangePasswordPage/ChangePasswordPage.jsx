@@ -41,7 +41,7 @@ export default function ChangePasswordPage() {
       !/[A-Za-z]/.test(value) ||
       !/\d/.test(value) ||
       !specialCharRegex.test(value) ||
-      emojiRegex.text(value)
+      emojiRegex.test(value)
     ) {
       setNewPasswordError(
         '  영어, 숫자, 특수문자를 포함해 8자 이상으로 작성해주세요'
@@ -106,7 +106,7 @@ export default function ChangePasswordPage() {
                     : 'opened-eye'
                   : newPasswordError
                     ? newPasswordType.visible
-                      ? 'closed -eye-pink'
+                      ? 'closed-eye-pink'
                       : 'opened-eye-pink'
                     : newPasswordType.visible
                       ? 'closed-eye-blue'
@@ -135,7 +135,7 @@ export default function ChangePasswordPage() {
                 handlePasswordType(setNewPasswordCheckType);
               }}
               id={
-                !newPassword
+                !newPasswordCheck
                   ? newPasswordCheckType.visible
                     ? 'closed-eye'
                     : 'opened-eye'
