@@ -38,6 +38,7 @@ export default function ChangePasswordPage() {
             <input
               type={currentPasswordType.type}
               className={styles.passwordInput}
+              placeholder='기존 비밀번호를 입력하세요'
             />
             <Icon
               onClick={() => handlePasswordType(setCurrentPasswordType)}
@@ -52,6 +53,7 @@ export default function ChangePasswordPage() {
             <input
               type={newPasswordType.type}
               className={styles.passwordInput}
+              placeholder='새로운 비밀번호를 입력하세요'
             />
             <Icon
               onClick={() => handlePasswordType(setNewPasswordType)}
@@ -66,6 +68,7 @@ export default function ChangePasswordPage() {
             <input
               type={newPasswordCheckType.type}
               className={styles.passwordInput}
+              placeholder='비밀번호를 다시 입력하세요'
             />
             <Icon
               onClick={() => {
