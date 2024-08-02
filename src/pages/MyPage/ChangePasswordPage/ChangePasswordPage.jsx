@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import styles from './ChangePasswordPage.module.css';
 import Icon from '../../../components/Icon/Icon';
 import BackAppBar from '../../../components/BackAppBar/BackAppBar';
+import ActionButton from '../../../components/AppBar/ActionButton/ActionButton';
 
 const handlePasswordType = (setter) => {
   setter((prev) => ({
     type: prev.visible ? 'password' : 'text',
     visible: !prev.visible,
   }));
+};
+
+const handlePasswordChangeSubmit = () => {
+  alert('비밀번호 변경이 완료되었습니다');
 };
 
 export default function ChangePasswordPage() {
@@ -67,7 +72,9 @@ export default function ChangePasswordPage() {
     <main className={styles.changePasswordPage}>
       <div className={styles.topContainer}>
         <BackAppBar />
-        <button className={styles.submitBtn}>완료</button>
+        <div className={styles.submitBtn}>
+          <ActionButton onClick={handlePasswordChangeSubmit}>완료</ActionButton>
+        </div>
       </div>
 
       <div className={styles.contentContainer}>
