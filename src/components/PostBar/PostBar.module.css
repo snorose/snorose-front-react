@@ -39,6 +39,11 @@
   line-height: 150%;
   font-weight: 500;
   letter-spacing: -0.5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .text {
@@ -47,10 +52,10 @@
   letter-spacing: -0.5px;
   color: #484848;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* 최대 3줄로 제한 */
-  -webkit-box-orient: vertical; /* 세로 방향으로 배치 */
-  overflow: hidden; /* 넘치는 텍스트 숨기기 */
-  text-overflow: ellipsis; /* 넘치는 텍스트를 말줄임표로 표시 */
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .more_option {
@@ -61,7 +66,12 @@
   display: flex;
   gap: 5px;
   font-size: 10px;
-  padding: 6px 0;
+  padding: 2px 0 0 0;
   align-items: center;
   justify-content: end;
+  color: #898989;
+
+  p {
+    margin-bottom: 3px;
+  }
 }
