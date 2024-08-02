@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.backAppBar {
+  background-color: #eaf5fd;
+}
+
 .content {
   width: 100%;
   display: flex;

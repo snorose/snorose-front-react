@@ -2,6 +2,7 @@ import styles from './PostPage.module.css';
 import Icon from '../../../components/Icon/Icon.jsx';
 import Comment from '../../../components/Commnet/Comment.jsx';
 import InputBar from '../../../components/InputBar/InputBar.jsx';
+import BackAppBar from '../../../components/BackAppBar/BackAppBar.jsx';
 import { POST_CONTENT } from '../../../constants/postContentDummy.js';
 import { COMMENT_LIST } from '../../../constants/commentDummy.js';
 import timeAgo from '../../../utils/timeAgo.js';
@@ -25,9 +26,15 @@ import timeAgo from '../../../utils/timeAgo.js';
 //   children: ['string'],
 // };
 
+// title, hasMenu, hasSearch, children
+
 export default function PostPage() {
   return (
     <div className={styles.container}>
+      <div className={styles.backAppBar}>
+        <BackAppBar />
+      </div>
+
       <div className={styles.content}>
         <div className={styles.contentTop}>
           <div className={styles.contentTopLeft}>
