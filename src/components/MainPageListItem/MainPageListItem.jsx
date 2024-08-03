@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
-import Icon from '../Icon/Icon.jsx';
+
+import { Icon } from '../Icon';
+
 import { USER } from '../../dummy/data';
+
 import styles from './MainPageListItem.module.css';
 
 export default function MainPageListItem({

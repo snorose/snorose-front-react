@@ -1,10 +1,8 @@
-import styles from './Comment.module.css';
-import Icon from '../../components/Icon/Icon.jsx';
-import NestedComment from './NestedComment.jsx';
-import { COMMENT_LIST } from '../../constants/commentDummy.js';
-import timeAgo from '../../utils/timeAgo.js';
+import { Icon } from '../../Icon';
+import timeAgo from '../../../utils/timeAgo.js';
+import styles from '../Comment/Comment.module.css';
 
-export default function Comment({ data }) {
+export default function NestedComment({ data, isLast }) {
   const {
     id,
     postId,
@@ -23,9 +21,16 @@ export default function Comment({ data }) {
     parentId,
     children,
   } = data;
+
   return (
-    <>
-      <div className={styles.comment}>
+    <div
+      className={styles.nested_comment}
+      style={{ borderBottom: isLast ? '1px solid #c7c7c7' : 'none' }}
+    >
+      <div
+        className={styles.comment}
+        style={{ borderBottom: isLast ? 'none' : '1px solid #c7c7c7' }}
+      >
         <div className={styles.comment_top}>
           <div className={styles.comment_left}>
             <div className={styles.profile_icon}>
@@ -34,10 +39,6 @@ export default function Comment({ data }) {
             <p className={styles.name}>{userDisplay}</p>
           </div>
           <div className={styles.comment_right}>
-            <div className={styles.comment_icon}>
-              <Icon id='comment' />
-            </div>
-            <p className={styles.cnt_num}>3</p>
             <div className={styles.like_icon}>
               <Icon id='blank-heart' />
             </div>
@@ -52,14 +53,6 @@ export default function Comment({ data }) {
           {isUpdated ? timeAgo(updatedAt) + ' (수정됨)' : timeAgo(createdAt)}
         </p>
       </div>
-      {children.length > 0 &&
-        children.map((childComment, index) => (
-          <NestedComment
-            key={childComment.id}
-            data={childComment}
-            isLast={index === children.length - 1}
-          />
-        ))}
-    </>
+    </div>
   );
 }

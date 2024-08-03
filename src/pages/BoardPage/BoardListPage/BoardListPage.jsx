@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import { BoardHeader } from '../../../components/BoardHeader';
+import { Icon } from '../../../components/Icon';
+import { PostBar } from '../../../components/PostBar';
+import { PTR } from '../../../components/PTR';
+import { Sponser } from '../../../components/Sponser';
+
+import { POST_CATEGORIES } from '../../../constants';
+import { POST_LIST } from '../../../dummy/data';
+
 import styles from './BoardListPage.module.css';
-import Icon from '../../../components/Icon/Icon.jsx';
-import PostBar from '../../../components/PostBar/PostBar.jsx';
-import Sponser from '../../../components/Sponser/Sponser.jsx';
-import POST_LIST from '../../../constants/postListDummy.js';
-import PTR from '../../../components/PTR/PTR.jsx';
-import { POST_CATEGORIES } from '../../../constants/postCategories.js';
-import BoardHeader from '../../../components/BoardHeader/BoardHeader.jsx';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();

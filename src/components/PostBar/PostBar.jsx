@@ -1,6 +1,6 @@
-import styles from './PostBar.module.css';
-import Icon from '../../components/Icon/Icon.jsx';
+import { Icon } from '../../components/Icon';
 import timeAgo from '../../utils/timeAgo.js';
+import styles from './PostBar.module.css';
 
 export default function PostBar({ data }) {
   const givenTime = data.createdAt;
@@ -20,7 +20,12 @@ export default function PostBar({ data }) {
       </div>
       <div className={styles.post_center}>
         <p className={styles.title}>{data.title}</p>
-        <p className={styles.text}>post_id로 텍스트 받아와서 post_id로 텍스트 받아와서 post_id로 텍스트 받아와서 post_id로 텍스트 받아와서 post_id로 텍스트 받아와서 post_id로 텍스트 받아와서 post_id로 텍스트 받아와서 post_id로 텍스트 받아와서 post_id로 텍스트 받아와서 post_id로 텍스트 받아와서</p>
+        <p className={styles.text}>
+          post_id로 텍스트 받아와서 post_id로 텍스트 받아와서 post_id로 텍스트
+          받아와서 post_id로 텍스트 받아와서 post_id로 텍스트 받아와서 post_id로
+          텍스트 받아와서 post_id로 텍스트 받아와서 post_id로 텍스트 받아와서
+          post_id로 텍스트 받아와서 post_id로 텍스트 받아와서
+        </p>
       </div>
       <div className={styles.post_bottom}>
         <Icon id='comment' width={12} height={10} fill='#D9D9D9' />

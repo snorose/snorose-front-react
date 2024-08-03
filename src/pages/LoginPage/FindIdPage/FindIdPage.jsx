@@ -1,14 +1,18 @@
-import { React, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
-import Input from '../../../components/Input/Input';
-import Submit from '../../../components/Submit/Submit';
-import Icon from '../../../components/Icon/Icon';
+
+import { Icon } from '../../../components/Icon';
+import { Input } from '../../../components/Input';
+import { Submit } from '../../../components/Submit';
+
 import {
   checkSpecialChar,
   checkSookmyungMail,
   checkStudentNum,
 } from './inputCheck';
+
 import styles from './FindIdPage.module.css';
 
 export default function FindIdPage() {
