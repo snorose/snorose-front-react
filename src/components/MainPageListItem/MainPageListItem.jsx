@@ -36,7 +36,7 @@ export default function MainPageListItem({
       <li className={styles.item}>
         <div className={styles.left}>
           <div className={styles.top}>
-            <Icon id='symbol' width={19} height={12} />
+            <Icon id='cloud' width={19} height={12} />
             <p className={styles.meta}>
               <span>{displayName}</span>
               <span className={styles.dot}></span>

@@ -32,7 +32,7 @@ export default function ViewPointListPage() {
         <div className={styles.pointBox}>
           <div className={styles.pointWrapper}>
             <div className={styles.pointIconWrapper}>
-              <Icon id='point-plus' className={styles.icon} />
+              <Icon id='heart-plus' className={styles.icon} />
             </div>
             <div className={styles.pointContent}>
               <div className={styles.pointTitle}>출석 포인트</div>
@@ -47,7 +47,7 @@ export default function ViewPointListPage() {
         <div className={styles.pointBox}>
           <div className={styles.pointWrapper}>
             <div className={styles.pointIconWrapper}>
-              <Icon id='point-plus' className={styles.icon} />
+              <Icon id='heart-plus' className={styles.icon} />
             </div>
             <div className={styles.pointContent}>
               <div className={styles.pointTitle}>게시글 포인트</div>
@@ -63,7 +63,7 @@ export default function ViewPointListPage() {
         <div className={styles.pointBox}>
           <div className={styles.pointWrapper}>
             <div className={styles.pointIconWrapper}>
-              <Icon id='point-plus' className={styles.icon} />
+              <Icon id='heart-plus' className={styles.icon} />
             </div>
             <div className={styles.pointContent}>
               <div className={styles.pointTitle}>댓글 포인트</div>
@@ -81,7 +81,7 @@ export default function ViewPointListPage() {
         <div className={styles.pointBox}>
           <div className={styles.pointWrapper}>
             <div className={styles.pointIconWrapper}>
-              <Icon id='point-minus' className={styles.icon} />
+              <Icon id='heart-minus' className={styles.icon} />
             </div>
             <div className={styles.pointContent}>
               <div className={styles.pointTitle}>시험후기 다운로드</div>
@@ -97,7 +97,7 @@ export default function ViewPointListPage() {
         <div className={styles.pointBox}>
           <div className={styles.pointWrapper}>
             <div className={styles.pointIconWrapper}>
-              <Icon id='point-plus' className={styles.icon} />
+              <Icon id='heart-plus' className={styles.icon} />
             </div>
             <div className={styles.pointContent}>
               <div className={styles.pointTitle}>인증 포인트</div>
@@ -112,7 +112,7 @@ export default function ViewPointListPage() {
         <div className={styles.pointBox}>
           <div className={styles.pointWrapper}>
             <div className={styles.pointIconWrapper}>
-              <Icon id='point-plus' className={styles.icon} />
+              <Icon id='heart-plus' className={styles.icon} />
             </div>
             <div className={styles.pointContent}>
               <div className={styles.pointTitle}>신고 포상 포인트</div>
@@ -127,7 +127,7 @@ export default function ViewPointListPage() {
         <div className={styles.pointBox}>
           <div className={styles.pointWrapper}>
             <div className={styles.pointIconWrapper}>
-              <Icon id='point-minus' className={styles.icon} />
+              <Icon id='heart-minus' className={styles.icon} />
             </div>
             <div className={styles.pointContent}>
               <div className={styles.pointTitle}>게시글 삭제 포인트</div>
@@ -143,7 +143,7 @@ export default function ViewPointListPage() {
         <div className={styles.pointBox}>
           <div className={styles.pointWrapper}>
             <div className={styles.pointIconWrapper}>
-              <Icon id='point-minus' className={styles.icon} />
+              <Icon id='heart-minus' className={styles.icon} />
             </div>
             <div className={styles.pointContent}>
               <div className={styles.pointTitle}>댓글 삭제 포인트</div>

@@ -15,7 +15,7 @@ export default function PostBar({ data }) {
         <p>{agoTime}</p>
         {data.notice ? <p className={styles.edited}>&nbsp;(수정됨)</p> : null}
         <div className={styles.more_option}>
-          <Icon id='more-option' width={3} height={11} fill='#484848' />
+          <Icon id='ellipsis-vertical' width={3} height={11} fill='#484848' />
         </div>
       </div>
       <div className={styles.post_center}>

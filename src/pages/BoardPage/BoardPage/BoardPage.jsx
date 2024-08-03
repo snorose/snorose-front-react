@@ -17,7 +17,7 @@ export default function BoardPage() {
       <div className={styles.padding_container}>
         <div className={styles.searchbar_box}>
           <div className={styles.searchbar}>
-            <Icon id='search-grey' width='14' height='14' fill='#898989' />
+            <Icon id='search' width='18' height='18' fill='#898989' />
             <input type='text' placeholder='전체 게시판 검색' />
           </div>
         </div>
@@ -33,7 +33,7 @@ export default function BoardPage() {
 
       <div className={styles.more_board_box}>
         <div className={styles.icon_logo}>
-          <Icon id='icon-logo' />
+          <Icon id='cloud' />
         </div>
         <p>스노로즈에서 더 다양한 게시판을 준비하고 있어요</p>
       </div>

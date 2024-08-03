@@ -12,7 +12,7 @@ export default function BackAppBar({ title, hasMenu, hasSearch, children }) {
       <div className={styles.backDiv}>
         <Icon
           className={styles.back}
-          id='arrow-back'
+          id='arrow-left'
           width={19}
           height={17}
           onClick={() => navigate(-1)}

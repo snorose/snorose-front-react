@@ -11,7 +11,7 @@ export default function Footer() {
         <div className={styles.menu}>
           <span>이용 약관</span>|<span>배너 및 광고 문의</span>|
           <span>개인정보 처리방침</span>|
-          <Icon id='insta' width={16.5} height={16.5} />
+          <Icon id='instagram' width={16.5} height={16.5} />
         </div>
       </div>
     </footer>

@@ -8,7 +8,7 @@ export default function ListHeader({ to, title }) {
       <h2 className={styles.title}>{title}</h2>
       <Link to={to} className={styles.more}>
         더보기
-        <Icon id='rightArrow' width={12} height={13} />
+        <Icon id='angle-right' width={14} height={14}/>
       </Link>
     </div>
   );

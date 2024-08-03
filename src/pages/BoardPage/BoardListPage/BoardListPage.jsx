@@ -53,7 +53,7 @@ export default function BoardListPage() {
           className={styles.notification_bar}
           onClick={handleNavClick('/alert')}
         >
-          <Icon id='bell-pink' width={11} height={13} />
+          <Icon id='notice-bell' width={11} height={13} />
           <p>[필독] 공지사항</p>
         </div>
         <div className={styles.keyword_box}>
