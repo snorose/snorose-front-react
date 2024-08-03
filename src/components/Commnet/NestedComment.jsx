@@ -1,6 +1,7 @@
 import styles from './Comment.module.css';
 import Icon from '../../components/Icon/Icon.jsx';
 import timeAgo from '../../utils/timeAgo.js';
+import { useState } from 'react';
 
 export default function NestedComment({ data, isLast }) {
   const {
@@ -10,6 +11,7 @@ export default function NestedComment({ data, isLast }) {
     userDisplay,
     isWriter,
     content,
+    liked, // 백엔드에서 추가 필요
     likeCount,
     reportCount,
     createdAt,
@@ -21,6 +23,11 @@ export default function NestedComment({ data, isLast }) {
     parentId,
     children,
   } = data;
+  const [isLiked, setIsLiked] = useState(liked);
+
+  const handleLikedClick = () => {
+    console.log('API로 liked 데이터 수정');
+  };
 
   return (
     <div
@@ -53,7 +60,13 @@ export default function NestedComment({ data, isLast }) {
       </div>
       <div className={styles.commentBottom}>
         <div className={styles.count}>
-          <Icon id='heart' width='13' height='12' />
+          <Icon
+            id='heart'
+            width='13'
+            height='12'
+            fill={isLiked ? '#5F86BF' : '#D9D9D9'}
+            onClick={handleLikedClick}
+          />
           <p>{likeCount}</p>
         </div>
       </div>

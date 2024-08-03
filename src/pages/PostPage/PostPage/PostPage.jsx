@@ -8,6 +8,7 @@ import { COMMENT_LIST } from '../../../constants/commentDummy.js';
 import timeAgo from '../../../utils/timeAgo.js';
 
 export default function PostPage() {
+
   return (
     <div className={styles.container}>
       <div className={styles.backAppBar}>
@@ -34,11 +35,11 @@ export default function PostPage() {
         <p className={styles.text}>{POST_CONTENT.content}</p>
         <div className={styles.post_bottom}>
           <div className={styles.count}>
-            <Icon id='comment' width='15' height='13' />
+            <Icon id='comment' width='15' height='13' fill={POST_CONTENT.liked ? '#5F86BF' : '#D9D9D9'} />
             <p>3</p>
           </div>
           <div className={styles.count}>
-            <Icon id='heart' width='13' height='12' />
+            <Icon id='heart' width='13' height='12'fill='#D9D9D9' />
             <p>{POST_CONTENT.likeCount}</p>
           </div>
         </div>

@@ -6,6 +6,7 @@ export const COMMENT_LIST = Object.freeze([
     userDisplay: '송이1',
     isWriter: true,
     content: '댓글 내용내용냐옹냐옹',
+    liked: false, // 백엔드에서 추가 필요
     likeCount: 12,
     reportCount: 0,
     createdAt: '2024-07-09T04:13:06.215Z',
@@ -22,7 +23,8 @@ export const COMMENT_LIST = Object.freeze([
         userProfile: 'string',
         userDisplay: '송이2',
         isWriter: true,
-        content: '댓글 두 번째다옹',
+        content: '댓글 두 번째다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 냐얀야냐',
+        liked: false, // 백엔드에서 추가 필요
         likeCount: 4,
         reportCount: 0,
         createdAt: '2024-07-14T04:13:06.215Z',
@@ -41,6 +43,7 @@ export const COMMENT_LIST = Object.freeze([
         userDisplay: '송이3',
         isWriter: true,
         content: '삼댓냥냥냥',
+        liked: true, // 백엔드에서 추가 필요
         likeCount: 2,
         reportCount: 0,
         createdAt: '2024-07-14T04:13:06.215Z',
@@ -61,6 +64,7 @@ export const COMMENT_LIST = Object.freeze([
     userDisplay: '송이2',
     isWriter: true,
     content: '댓글 두 번째다옹',
+    liked: true, // 백엔드에서 추가 필요
     likeCount: 4,
     reportCount: 0,
     createdAt: '2024-07-14T04:13:06.215Z',
@@ -79,6 +83,7 @@ export const COMMENT_LIST = Object.freeze([
     userDisplay: '송이3',
     isWriter: true,
     content: '삼댓냥냥냥',
+    liked: false, // 백엔드에서 추가 필요
     likeCount: 2,
     reportCount: 0,
     createdAt: '2024-07-14T04:13:06.215Z',

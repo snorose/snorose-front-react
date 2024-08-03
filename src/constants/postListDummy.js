@@ -3,7 +3,7 @@ const POST_LIST = [
     postId: 1,
     userId: 10,
     userDisplay: '송이1',
-    category: 'tip',
+    category: 'tip', // 백엔드에서 추가 필요
     title: '모기 빨리 잡는 방법',
     content: '일단 방문을 닫고, 불을 켠다. 그리고 흰 벽을 잘 관찰해보자.',
     viewCount: 50,
@@ -12,7 +12,7 @@ const POST_LIST = [
     reportCount: 0,
     createdAt: '2024-07-01T09:00:00.000Z',
     updatedAt: '2024-07-01T10:40:00.000Z',
-    liked: true,
+    liked: true, // 백엔드에서 추가 필요
     edited: true,
     notice: false,
   },
