@@ -1,7 +1,7 @@
+import { ROLE } from '../../../constants';
+import { USER } from '../../../dummy/data';
 import PROFILE from '../../dummy/images/profile.png';
 import styles from './CategoryBoardItemDetail.module.css';
-import { ROLE } from '../../constants';
-import { USER } from '../../dummy/data';
 
 export default function CategoryBoardItemDetail({
   profile,

@@ -1,8 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './ChangePasswordPage.module.css';
+
 import arrowBackIcon from '../../../assets/icon-arrow-back.svg';
 import eyeIcon from '../../../assets/icon-eye.svg';
+
+import styles from './ChangePasswordPage.module.css';
 
 export default function ChangePasswordPage() {
   return (

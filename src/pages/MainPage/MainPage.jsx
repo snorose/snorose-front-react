@@ -1,15 +1,16 @@
-import BoardCard from '../../components/BoardCard/BoardCard.jsx';
-import Card from '../../components/Card/Card.jsx';
-import Carousel from '../../components/Carousel/Carousel.jsx';
-import Flex from '../../components/Flex/Flex.jsx';
-import Footer from '../../components/Footer/Footer.jsx';
-import Header from '../../components/Header/Header';
-import ListHeader from '../../components/ListHeader/ListHeader.jsx';
-import MainPageListItem from '../../components/MainPageListItem/MainPageListItem.jsx';
-import Margin from '../../components/Margin/Margin.jsx';
-import Slide from '../../components/Carousel/Slide.jsx';
-import { BESOOKTS, CAROUSEL_BANNER, USER } from '../../dummy/data';
+import { BoardCard } from '../../components/BoardCard';
+import { Card } from '../../components/Card';
+import { Carousel, Slide } from '../../components/Carousel';
+import { Flex } from '../../components/Flex';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { ListHeader } from '../../components/ListHeader';
+import { MainPageListItem } from '../../components/MainPageListItem';
+import { Margin } from '../../components/Margin';
+
 import { BOARD_MENUS, ROLE } from '../../constants';
+import { BESOOKTS, CAROUSEL_BANNER, USER } from '../../dummy/data';
+
 import styles from './MainPage.module.css';
 
 const BOARDS = BOARD_MENUS.filter((board) => board.title !== '베숙트');

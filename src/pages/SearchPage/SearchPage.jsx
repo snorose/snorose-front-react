@@ -1,5 +1,7 @@
 import { useLocation } from 'react-router-dom';
-import Search from '../../components/Search/Search.jsx';
+
+import { Search } from '../../components/Search';
+
 import { PLACEHOLDER } from '../../constants';
 
 export default function SearchPage() {

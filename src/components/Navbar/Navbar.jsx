@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
+import { Icon } from '../Icon';
 import { NAVBAR_MENUS } from '../../constants';
-import Icon from '../Icon/Icon';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {

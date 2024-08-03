@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Icon from '../Icon/Icon';
+import { Icon } from '../Icon';
 import styles from './Search.module.css';
 
 export default function Search({ placeholder, onSearch }) {

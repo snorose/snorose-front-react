@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import { Icon } from '../../../components/Icon';
+
 import styles from './EditInfoPage.module.css';
-import Icon from '../../../components/Icon/Icon.jsx';
 
 export default function EditInfoPage() {
   const [name, setName] = useState('');

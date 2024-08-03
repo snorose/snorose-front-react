@@ -1,10 +1,12 @@
-import styles from './PostPage.module.css';
-import Icon from '../../../components/Icon/Icon.jsx';
-import Comment from '../../../components/Commnet/Comment.jsx';
-import InputBar from '../../../components/InputBar/InputBar.jsx';
-import { POST_CONTENT } from '../../../constants/postContentDummy.js';
-import { COMMENT_LIST } from '../../../constants/commentDummy.js';
+import { Comment } from '../../../components/Comment';
+import { Icon } from '../../../components/Icon';
+import { InputBar } from '../../../components/InputBar';
+
 import timeAgo from '../../../utils/timeAgo.js';
+
+import { COMMENT_LIST, POST_CONTENT } from '../../../dummy/data';
+
+import styles from './PostPage.module.css';
 
 // const data = {
 //   id: 2,
