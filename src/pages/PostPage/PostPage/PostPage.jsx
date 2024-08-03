@@ -39,7 +39,7 @@ export default function PostPage() {
             <p>3</p>
           </div>
           <div className={styles.count}>
-            <Icon id='heart' width='13' height='12'fill='#D9D9D9' />
+            <Icon id='like' width='13' height='12'fill='#D9D9D9' />
             <p>{POST_CONTENT.likeCount}</p>
           </div>
         </div>
