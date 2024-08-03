@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Icon from '../../Icon/Icon.jsx';
+import { Icon } from '../../Icon';
 import styles from './CloseAppBar.module.css';
 
 export default function CloseAppBar({ alignRight, children }) {

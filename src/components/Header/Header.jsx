@@ -1,7 +1,6 @@
-import React from 'react';
-import Icon from '../../components/Icon/Icon';
+import { Icon } from '../../components/Icon';
+import { MenuIcon } from '../MenuIcon';
 import styles from './Header.module.css';
-import MenuIcon from '../MenuIcon/MenuIcon.jsx';
 
 export default function Header({ className }) {
   return (

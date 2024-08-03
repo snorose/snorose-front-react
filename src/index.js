@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import { ToastProvider } from './contexts/ToastContext.jsx';
 
+import App from './App';
 import { BoardListPage, BoardPage } from './pages/BoardPage';
 import {
   ChangePasswordPage,
@@ -14,22 +15,21 @@ import {
   MyPage,
 } from './pages/MyPage';
 import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
-import App from './App';
-import AboutPage from './pages/AboutPage/AboutPage';
+import { AboutPage } from './pages/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
-import ErrorPage from './pages/ErrorPage/ErrorPage';
+import { ErrorPage } from './pages/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import FindIdPage from './pages/LoginPage/FindIdPage/FindIdPage';
 import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage';
 import HelpPage from './pages/HelpPage/HelpPage';
-import LoginPage from './pages/LoginPage/Login';
-import MainPage from './pages/MainPage/MainPage';
+import { LoginPage } from './pages/LoginPage';
+import { MainPage } from './pages/MainPage';
 import NotFoundIdPage from './pages/LoginPage/NotFoundIdPage/NotFoundIdPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import ProtectedRoute from './ProtectedRoute';
 import SearchPage from './pages/SearchPage/SearchPage.jsx';
-import ViewPointListPage from './pages/MyPage/ViewPointListPage';
+import ViewPointListPage from './pages/MyPage/ViewPointListPage/ViewPointListPage.jsx';
 
 import { ROLE } from './constants';
 import './index.css';

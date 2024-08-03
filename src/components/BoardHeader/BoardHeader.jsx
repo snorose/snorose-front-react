@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom';
-import Icon from '../Icon/Icon.jsx';
-import styles from './BoardHeader.module.css';
-import Sidebar from '../Sidebar/Sidebar.jsx';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { Icon } from '../Icon';
+import { Sidebar } from '../Sidebar';
+
+import styles from './BoardHeader.module.css';
+
 export default function BoardHeader({ to, title, setIsSidebarOpen }) {
   const [isOpen, setIsOpen] = useState(false);
 

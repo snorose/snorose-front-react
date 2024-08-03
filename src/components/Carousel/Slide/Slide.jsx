@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Slide.module.css';
 
 export default function Slide({ src, alt }) {
