@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Icon from '../Icon/Icon.jsx';
+import { Icon } from '../Icon';
 import styles from './ListHeader.module.css';
 
 export default function ListHeader({ to, title }) {

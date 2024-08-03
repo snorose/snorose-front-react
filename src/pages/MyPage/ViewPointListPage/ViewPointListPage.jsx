@@ -1,7 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import styles from './ViewPointListPage.module.css';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import Icon from '../../components/Icon/Icon';
+
+import { Icon } from '../../../components/Icon';
+
+import styles from './ViewPointListPage.module.css';
 
 export default function ViewPointListPage() {
   const chargePointsRef = useRef([]);

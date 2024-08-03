@@ -1,14 +1,13 @@
+import { Icon } from '../../../components/Icon';
+import { Comment } from '../../../components/Comment';
+import { InputBar } from '../../../components/InputBar';
+import { BackAppBar } from '../../../components/AppBar';
+import { POST_CONTENT } from '../../../dummy/data/postContent.js';
+import { COMMENT_LIST } from '../../../dummy/data/comment.js';
 import styles from './PostPage.module.css';
-import Icon from '../../../components/Icon/Icon.jsx';
-import Comment from '../../../components/Commnet/Comment.jsx';
-import InputBar from '../../../components/InputBar/InputBar.jsx';
-import BackAppBar from '../../../components/BackAppBar/BackAppBar.jsx';
-import { POST_CONTENT } from '../../../constants/postContentDummy.js';
-import { COMMENT_LIST } from '../../../constants/commentDummy.js';
 import timeAgo from '../../../utils/timeAgo.js';
 
 export default function PostPage() {
-
   return (
     <div className={styles.container}>
       <div className={styles.backAppBar}>
@@ -35,11 +34,16 @@ export default function PostPage() {
         <p className={styles.text}>{POST_CONTENT.content}</p>
         <div className={styles.post_bottom}>
           <div className={styles.count}>
-            <Icon id='comment' width='15' height='13' fill={POST_CONTENT.liked ? '#5F86BF' : '#D9D9D9'} />
+            <Icon
+              id='comment'
+              width='15'
+              height='13'
+              fill={POST_CONTENT.liked ? '#5F86BF' : '#D9D9D9'}
+            />
             <p>3</p>
           </div>
           <div className={styles.count}>
-            <Icon id='like' width='13' height='12'fill='#D9D9D9' />
+            <Icon id='like' width='13' height='12' fill='#D9D9D9' />
             <p>{POST_CONTENT.likeCount}</p>
           </div>
         </div>

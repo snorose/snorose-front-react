@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Icon from '../../components/Icon/Icon';
-import Sidebar from '../../components/Sidebar/Sidebar';
+import { Icon } from '../../components/Icon';
+import { Sidebar } from '../../components/Sidebar';
 
 export default function MenuIcon() {
   const [isOpen, setIsOpen] = useState(false);

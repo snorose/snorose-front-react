@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './BoardListPage.module.css';
 import Icon from '../../../components/Icon/Icon.jsx';
-import BackAppBar from '../../../components/BackAppBar/BackAppBar.jsx';
+import BackAppBar from '../../../components/AppBar/BackAppBar/BackAppBar.jsx';
 import PostBar from '../../../components/PostBar/PostBar.jsx';
 import Sponser from '../../../components/Sponser/Sponser.jsx';
-import POST_LIST from '../../../constants/postListDummy.js';
+import { POST_LIST } from '../../../dummy/data/postList.js';
 import PTR from '../../../components/PTR/PTR.jsx';
 import { POST_CATEGORIES } from '../../../constants/postCategories.js';
 
@@ -78,7 +78,12 @@ export default function BoardListPage() {
         </div>
       </PTR>
       <div className={styles.pencil_icon}>
-        <Icon id='pencil-circle' width={105} height={105} onClick={handleNavClick('/post-write')} />
+        <Icon
+          id='pencil-circle'
+          width={105}
+          height={105}
+          onClick={handleNavClick('/post-write')}
+        />
       </div>
       <div className={styles.sponser}>
         <Sponser />

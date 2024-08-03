@@ -1,8 +1,11 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+
 import axios from 'axios';
-import Icon from '../../components/Icon/Icon';
-import styles from './Login.module.css';
+
+import { Icon } from '../../../components/Icon';
+
+import styles from './LoginPage.module.css';
 
 export default function Login() {
   const [id, setId] = useState('');

@@ -1,9 +1,12 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Icon from '../Icon/Icon';
-import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '../../constants';
-import { USER } from '../../dummy/data';
-import List from './List/List';
+
+import { List } from '../../Sidebar';
+import { Icon } from '../../Icon';
+
+import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '../../../constants';
+import { USER } from '../../../dummy/data';
+
 import styles from './Sidebar.module.css';
 
 export default function Sidebar({ isOpen, setIsOpen }) {

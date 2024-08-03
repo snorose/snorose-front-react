@@ -1,4 +1,4 @@
-const POST_LIST = [
+export const POST_LIST = [
   {
     postId: 1,
     userId: 10,
@@ -104,5 +104,3 @@ const POST_LIST = [
     notice: false,
   },
 ];
-
-export default POST_LIST;

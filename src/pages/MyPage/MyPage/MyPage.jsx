@@ -1,7 +1,8 @@
-import React from 'react';
-import styles from './MyPage.module.css';
 import { Link } from 'react-router-dom';
+
 import profileIcon from '../../../assets/icon-profile.svg';
+
+import styles from './MyPage.module.css';
 
 export default function MyPage() {
   return (

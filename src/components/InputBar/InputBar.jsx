@@ -1,5 +1,5 @@
+import { Icon } from '../../components/Icon';
 import styles from './InputBar.module.css';
-import Icon from '../../components/Icon/Icon.jsx';
 
 export default function InputBar() {
   return (
