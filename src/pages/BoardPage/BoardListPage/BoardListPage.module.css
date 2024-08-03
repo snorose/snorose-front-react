@@ -21,7 +21,7 @@ body {
   align-items: center;
   font-size: 8px;
   padding: 10px 20px;
-  gap: 9px
+  gap: 9px;
 }
 
 .pencil_icon {
@@ -29,10 +29,8 @@ body {
   justify-content: end;
   width: 100%;
   max-width: 450px;
-  background-size: cover;
   position: fixed;
-  bottom: 160px;
-  margin-right: 40px;
+  bottom: 120px;
   z-index: 999;
 }
 
@@ -76,7 +74,7 @@ body {
   background: #eaf5fd;
   margin-right: 5px;
   color: #5f86bf;
-  
+
   p {
     font-size: 11px;
     line-height: 150%;
