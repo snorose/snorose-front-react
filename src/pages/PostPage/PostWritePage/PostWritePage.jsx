@@ -14,12 +14,19 @@ export default function PostWritePage() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isNotice, setIsNotice] = useState(false);
-  const [item, setItem] = useState('게시판을 선택해주세요');
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const roleId = 4; // 더미 역할 ID
+  const boardId = 'firstSnow'; // 더미 보드 아이디 ID
   const boardTitles = BOARD_MENUS.map((menu) => menu.title);
+  
+  // 현재 게시판 title
+  const getCurrentBoard = (id) => {
+    const currentBoard = BOARD_MENUS.find((board) => board.id === id);
+    return currentBoard ? currentBoard.title : '게시판을 선택해주세요';
+  };
+  const [item, setItem] = useState(getCurrentBoard(boardId));
 
   // 게시판 선택
   const handleDropDownOpen = () => {
@@ -54,6 +61,8 @@ export default function PostWritePage() {
       setTitle(newValue);
     }
   };
+
+  console.log();
 
   return (
     <div className={styles.container}>
