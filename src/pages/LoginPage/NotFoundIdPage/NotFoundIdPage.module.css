@@ -1,5 +1,6 @@
 .pageFrame {
-  width: 22.063rem;
+  width: 100%;
+  padding: 0 1.25rem;
   height: 100vh;
   display: flex;
   flex-direction: column;

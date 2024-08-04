@@ -1,16 +1,19 @@
 .pageFrame {
   width: 100%;
+  padding: 0 1.25rem;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow-y: hidden;
+  border: 1px solid red;
 }
 .pageFrame form {
+  width: 100%;
   height: 100%;
 }
 .findIdFrame {
-  width: 22.063rem;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
