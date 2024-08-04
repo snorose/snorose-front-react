@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '../../Icon';
 import styles from './CloseAppBar.module.css';
+import ActionButton from '../ActionButton/ActionButton';
 
-export default function CloseAppBar({ alignRight, children }) {
+export default function CloseAppBar({ alignRight, children, stroke, onClick }) {
   const navigate = useNavigate();
 
   return (
@@ -12,12 +13,17 @@ export default function CloseAppBar({ alignRight, children }) {
     >
       <Icon
         className={styles.close}
-        id='close'
-        width={31}
-        height={31}
+        id='x'
+        width={22}
+        height={22}
         onClick={() => navigate(-1)}
+        stroke={stroke}
       />
-      <div className={styles.actions}>{children}</div>
+      <ActionButton
+        className={styles.actions}
+        children={children}
+        onClick={onClick}
+      />
     </div>
   );
 }

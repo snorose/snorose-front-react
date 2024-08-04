@@ -132,7 +132,7 @@ export default function EditInfoPage() {
               placeholder='전공을 선택하세요'
             />
             <div className={styles.arrowDownIconWrapper}>
-              <Icon id='arrow-down' />
+              <Icon id='angle-down' />
             </div>
           </div>
         </div>

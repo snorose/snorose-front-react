@@ -90,7 +90,7 @@ export default function Login() {
             >
               {pwInputFocus && (
                 <Icon
-                  id='visibility'
+                  id='opened-eye'
                   className={styles.visiblity}
                   width='14'
                   height='10'

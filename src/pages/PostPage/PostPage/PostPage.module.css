@@ -3,56 +3,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 8px;
 }
 
-.top {
+.backAppBar {
+  background-color: #eaf5fd;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 8px;
-  /* 양옆 여백 */
-  padding: 0 17px;
-}
-
-.header {
-  height: 42px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.side_menu_btn {
-  width: 20px;
-  height: 15px;
-  display: flex;
-}
-
-.profile {
-  display: flex;
-  width: 100%;
-  justify-content: baseline;
-
-  align-items: center;
-}
-
-.profile_icon {
-  display: flex;
-  width: 30px;
-  height: 30px;
-}
-
-.name {
-  font-size: 11px;
-  padding-left: 5px;
-}
-
-.more_option {
-  margin-left: auto;
-  width: 15px;
-  height: 15px;
-  display: flex;
 }
 
 .content {
@@ -61,45 +16,91 @@
   flex-direction: column;
   font-size: 8px;
   /* 양옆 여백 */
-  padding: 0 17px 11px 17px;
-  border-bottom: 1px solid #c7c7c7;
+  padding: 10px 21px 11px 21px;
+  border-radius: 0px 0px 15px 15px;
+  background-color: #eaf5fd;
+}
+
+.contentTop {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  color: #898989;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.contentTopLeft {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.dot {
+  font-weight: 800;
 }
 
 .title {
-  font-size: 16px;
-  font-weight: 500;
-  padding: 11px 0;
+  display: flex;
+  align-items: end;
+  padding: 4px 0 26px 0;
+  gap: 6px;
+
+  p:nth-of-type(1) {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: -0.5px;
+    color: #484848;
+  }
+  p:nth-of-type(2) {
+    white-space: nowrap;
+    color: #5f86bf;
+    font-size: 11px;
+    line-height: 150%;
+    letter-spacing: -0.5px;
+  }
 }
 
 .text {
   font-size: 12px;
-}
-
-.edited {
-  font-size: 10px;
-  color: #6a6a6a;
-  padding: 11px 0 9px 0;
+  color: #484848;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  padding: 0 13px 13px 0;
 }
 
 .post_bottom {
   display: flex;
-  gap: 5px;
-  font-size: 10px;
-  color: #5f86bf;
+  justify-content: end;
+  gap: 12px;
 }
 
-.comment_icon {
+.count {
   display: flex;
-  width: 15px;
-  height: 15px;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+  color: #898989;
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
 }
 
-.like_icon {
+.comments {
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  padding: 0 20px;
   display: flex;
-  width: 15px;
-  height: 15px;
+  flex-direction: column;
+  row-gap: 7px;
 }
 
-.view_cnt {
-  margin-left: auto;
+.commentsTitle {
+  padding: 9px 0 2px 0;
 }

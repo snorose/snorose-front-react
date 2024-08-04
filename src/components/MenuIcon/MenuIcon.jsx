@@ -8,7 +8,7 @@ export default function MenuIcon() {
   return (
     <>
       <Icon
-        id='hamburger'
+        id='hamburger-menu'
         width={23}
         height={16}
         onClick={(event) => {
