@@ -1,0 +1,44 @@
+.container {
+  margin-top: 9px;
+  width: calc(100% - 40px);
+  padding: 13px 6px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  position: absolute;
+  z-index: 1000;
+}
+
+.invisible {
+  display: none;
+}
+
+.listBar {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 0 13px;
+  color: #898989;
+}
+
+.SelectedlistBar {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #ddebf6;
+  padding: 0 13px;
+  color: #00368e;
+}
+
+.item {
+  font-size: 13px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
