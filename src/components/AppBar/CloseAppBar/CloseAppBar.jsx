@@ -12,7 +12,7 @@ export default function CloseAppBar({ alignRight, children }) {
     >
       <Icon
         className={styles.close}
-        id='close'
+        id='x'
         width={31}
         height={31}
         onClick={() => navigate(-1)}

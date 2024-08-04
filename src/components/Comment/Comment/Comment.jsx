@@ -1,8 +1,8 @@
-import { Icon } from '../../Icon';
-import { NestedComment } from '../../Comment';
-import { COMMENT_LIST } from '../../../dummy/data';
-import timeAgo from '../../../utils/timeAgo.js';
 import styles from './Comment.module.css';
+import { Icon } from '../../../components/Icon';
+import { NestedComment } from '../';
+import timeAgo from '../../../utils/timeAgo.js';
+import { useState } from 'react';
 
 export default function Comment({ data }) {
   const {
@@ -12,6 +12,7 @@ export default function Comment({ data }) {
     userDisplay,
     isWriter,
     content,
+    liked,
     likeCount,
     reportCount,
     createdAt,
@@ -23,34 +24,37 @@ export default function Comment({ data }) {
     parentId,
     children,
   } = data;
+  const [isLiked, setIsLiked] = useState(liked);
+
+  const handleLikedClick = () => {
+    console.log('API로 liked 데이터 수정');
+  };
+
   return (
-    <>
-      <div className={styles.comment}>
-        <div className={styles.comment_top}>
-          <div className={styles.comment_left}>
-            <div className={styles.profile_icon}>
-              <Icon id='profile' />
-            </div>
-            <p className={styles.name}>{userDisplay}</p>
+    <div className={styles.comment}>
+      <div className={styles.commentTop}>
+        <div className={styles.commentTopLeft}>
+          <div className={styles.cloud}>
+            <Icon id='cloud' width='19' heigth='13' />
           </div>
-          <div className={styles.comment_right}>
-            <div className={styles.comment_icon}>
-              <Icon id='comment' />
-            </div>
-            <p className={styles.cnt_num}>3</p>
-            <div className={styles.like_icon}>
-              <Icon id='blank-heart' />
-            </div>
-            <p className={styles.cnt_num}>{likeCount}</p>
-            <div className={styles.more_option}>
-              <Icon id='more-option' fill='#5F86BF' />
-            </div>
-          </div>
+          <p>{userDisplay}</p>
+          <p className={styles.dot}>·</p>
+          <p>
+            {isUpdated ? timeAgo(updatedAt) + ' (수정됨)' : timeAgo(createdAt)}
+          </p>
         </div>
-        <p className={styles.comment_text}>{content}</p>
-        <p className={styles.comment_time}>
-          {isUpdated ? timeAgo(updatedAt) + ' (수정됨)' : timeAgo(createdAt)}
-        </p>
+        <Icon id='ellipsis-vertical' width='3' height='11' />
+      </div>
+      <div className={styles.commentCenter}>{content}</div>
+      <div className={styles.commentBottom}>
+        <div className={styles.count}>
+          <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
+          <p>3</p>
+        </div>
+        <div className={styles.count}>
+          <Icon id='heart' width='13' height='12' fill='#D9D9D9' />
+          <p>{likeCount}</p>
+        </div>
       </div>
       {children.length > 0 &&
         children.map((childComment, index) => (
@@ -60,6 +64,6 @@ export default function Comment({ data }) {
             isLast={index === children.length - 1}
           />
         ))}
-    </>
+    </div>
   );
 }

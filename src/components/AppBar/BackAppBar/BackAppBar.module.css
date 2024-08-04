@@ -1,5 +1,6 @@
 .appBar {
   padding: 0.875rem 1.25rem;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
