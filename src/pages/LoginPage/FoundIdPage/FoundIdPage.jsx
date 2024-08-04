@@ -53,7 +53,7 @@ export default function FoundIdPage() {
         <Link to='/'>
           <div className={styles.findPWButton}>
             <p>비밀번호 찾기</p>
-            <Icon id='arrow-right-grey' width='24px' height='24px' />
+            <Icon id='angle-right' width='24px' height='24px' />
           </div>
         </Link>
       </div>
