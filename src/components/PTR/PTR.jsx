@@ -1,5 +1,8 @@
-import React from 'react';
 import PullToRefresh from 'react-simple-pull-to-refresh';
+
+import { Icon } from '../Icon';
+
+import styles from './PTR.module.css';
 
 export default function PTR({ children }) {
   const handleRefresh = () => {
@@ -7,9 +10,22 @@ export default function PTR({ children }) {
       setTimeout(() => {
         console.log('Refreshed!');
         resolve();
-      }, 2000); // Example: Simulating a refresh delay of 2 seconds
+      }, 1500);
     });
   };
 
-  return <PullToRefresh onRefresh={handleRefresh}>{children}</PullToRefresh>;
+  return (
+    <PullToRefresh
+      onRefresh={handleRefresh}
+      refreshingContent={
+        <div className={styles.refreshBox}>
+          <div className={styles.refreshIcon}>
+            <Icon id='cloud' width='44' height='27' />
+          </div>
+        </div>
+      }
+    >
+      {children}
+    </PullToRefresh>
+  );
 }

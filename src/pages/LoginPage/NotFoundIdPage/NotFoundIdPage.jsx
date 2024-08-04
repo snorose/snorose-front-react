@@ -21,7 +21,7 @@ export default function NotFoundIdPage() {
       <div>
         <div className={styles.navFrame}>
           <Link to='/find-id'>
-            <Icon id='left-arrow' width='1.162rem' height='1.048rem' />
+            <Icon id='arrow-left' width='1.162rem' height='1.048rem' />
           </Link>
         </div>
         <p className={styles.pageTitle}>아이디 찾기</p>

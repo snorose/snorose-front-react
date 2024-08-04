@@ -1,7 +1,8 @@
-import React from 'react';
-import styles from './DeleteAccountPage.module.css';
 import { Link } from 'react-router-dom';
-import Icon from '../../../components/Icon/Icon.jsx';
+
+import { Icon } from '../../../components/Icon';
+
+import styles from './DeleteAccountPage.module.css';
 
 const descriptions = [
   '• 아이디, 이메일, 학번은 .. 목적으로 6개월간 보관됩니다',
@@ -14,7 +15,7 @@ export default function DeleteAccountPage() {
     <main className={styles.deleteAccountPage}>
       <div className={styles.closeIconWrapper}>
         <Link to='/my-page' className={styles.closeIcon}>
-          <Icon id='close' />
+          <Icon id='x' />
         </Link>
       </div>
       <div className={styles.titleDescWrapper}>

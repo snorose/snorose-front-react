@@ -1,0 +1,25 @@
+/* PTR.module.css */
+.refreshBox {
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+}
+
+.refreshIcon {
+  /* border: 1px solid blue; */
+  animation: rotateAndPause 1s linear infinite;
+}
+
+@keyframes rotateAndPause {
+  0% {
+    transform: rotate(0deg); /* 시작 상태 */
+  }
+  15% {
+    transform: rotate(180deg); /* 반 바퀴 회전 */
+  }
+  100% {
+    transform: rotate(180deg); /* 반 바퀴 회전 후 멈춤 */
+  }
+}

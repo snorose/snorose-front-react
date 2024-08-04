@@ -1,69 +1,77 @@
 .post {
-  padding: 10px 0;
+  padding: 13px 15px;
   width: 100%;
+  background-color: #f8f8f8;
+  border-radius: 5px;
 }
 
 .post_top {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  padding-bottom: 5px;
-}
-
-.profile {
-  display: flex;
-  width: 15px;
-  height: 15px;
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #484848;
+  padding-bottom: 9px;
 }
 
 .name {
-  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 156px;
+  padding-left: 6px;
 }
 
-.time {
-  font-size: 9px;
-}
-
-.edited {
-  font-size: 9px;
+.dot {
+  font-weight: 800;
+  padding: 0 3px;
 }
 
 .post_center {
-  padding-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
 }
 
 .title {
-  font-weight: 700;
-  font-size: 11px;
+  font-size: 14px;
+  line-height: 150%;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.title {
-  font-weight: 700;
-  font-size: 11px;
+.text {
+  font-size: 13px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #484848;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .more_option {
   margin-left: auto;
-  width: 15px;
-  height: 15px;
-  display: flex;
 }
 
 .post_bottom {
   display: flex;
   gap: 5px;
   font-size: 10px;
-}
+  padding: 5px 0 0 0;
+  align-items: center;
+  justify-content: end;
+  color: #898989;
 
-.comment_icon {
-  display: flex;
-  width: 15px;
-  height: 15px;
-}
-
-.like_icon {
-  display: flex;
-  width: 15px;
-  height: 15px;
+  p {
+    margin-bottom: 3px;
+  }
 }
