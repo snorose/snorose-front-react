@@ -1,7 +1,8 @@
-import React from 'react';
-import styles from './PTR.module.css';
-import Icon from '../Icon/Icon';
 import PullToRefresh from 'react-simple-pull-to-refresh';
+
+import { Icon } from '../Icon';
+
+import styles from './PTR.module.css';
 
 export default function PTR({ children }) {
   const handleRefresh = () => {

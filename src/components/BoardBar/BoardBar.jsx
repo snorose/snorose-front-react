@@ -1,5 +1,5 @@
-import styles from './BoardBar.module.css';
 import { Link } from 'react-router-dom';
+import styles from './BoardBar.module.css';
 
 export default function BoardBar({ data }) {
   return (

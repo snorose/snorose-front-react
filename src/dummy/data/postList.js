@@ -1,4 +1,4 @@
-const POST_LIST = [
+export const POST_LIST = [
   {
     postId: 7,
     title: '제목7',
@@ -43,8 +43,7 @@ const POST_LIST = [
     viewCount: 10,
     createdAt: '2024-07-05T07:29:29.197Z',
     notice: true,
-  }
-  ,
+  },
   {
     postId: 4,
     title: '제목4',
@@ -62,8 +61,7 @@ const POST_LIST = [
     viewCount: 10,
     createdAt: '2024-07-05T07:29:29.197Z',
     notice: true,
-  }
-  ,
+  },
   {
     postId: 4,
     title: '제목4',
@@ -81,8 +79,7 @@ const POST_LIST = [
     viewCount: 10,
     createdAt: '2024-07-05T07:29:29.197Z',
     notice: true,
-  }
-  ,
+  },
   {
     postId: 4,
     title: '제목4',
@@ -100,8 +97,5 @@ const POST_LIST = [
     viewCount: 10,
     createdAt: '2024-07-05T07:29:29.197Z',
     notice: true,
-  }
-  
+  },
 ];
-
-export default POST_LIST;

@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Notice.module.css';
 
 const noticeTitle = '시험후기 등록 기간 공지';

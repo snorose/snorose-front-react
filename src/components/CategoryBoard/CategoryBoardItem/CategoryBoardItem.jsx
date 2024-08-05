@@ -1,6 +1,6 @@
-import Icon from '../../components/Icon/Icon.jsx';
+import { Icon } from '../../Icon';
+import { USER } from '../../../dummy/data';
 import styles from './CategoryBoardItem.module.css';
-import { USER } from '../../dummy/data';
 
 export default function CategoryBoardItem({ icon, name, description }) {
   if (!USER?.isLogin) {

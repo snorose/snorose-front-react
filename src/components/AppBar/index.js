@@ -1,4 +1,3 @@
-import ActionButton from './ActionButton/ActionButton.jsx';
-import CloseAppBar from './CloseAppBar/CloseAppBar.jsx';
-
-export { ActionButton, CloseAppBar };
+export { default as ActionButton } from './ActionButton/ActionButton';
+export { default as BackAppBar } from './BackAppBar/BackAppBar';
+export { default as CloseAppBar } from './CloseAppBar/CloseAppBar';
