@@ -1,14 +1,12 @@
 export function checkSpecialChar(input) {
-  const format = /[ -/:-@[-`{-~]/;
-  const emojisRegex =
-    /\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\uFE0F\u20E3?|[\u{E0020}-\u{E007E}]+\u{E007F})?(\u200D(\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\uFE0F\u20E3?|[\u{E0020}-\u{E007E}]+\u{E007F})?))*/gu;
+  const format = /^[A-Za-z가-힣0-9 ]+$/;
   if (input.length === 0) {
     return 'ready';
   }
-  if (format.test(input) || emojisRegex.test(input)) {
-    return 'wrong';
-  } else {
+  if (format.test(input)) {
     return 'right';
+  } else {
+    return 'wrong';
   }
 }
 
@@ -17,7 +15,7 @@ export function checkSookmyungMail(mail) {
   if (mail.length === 0) {
     return 'ready';
   }
-  if (splitMailArr[1] === 'sookmyung.ac.kr') {
+  if (splitMailArr[1] === 'sookmyung.ac.kr' || splitMailArr[1] === 'sm.ac.kr') {
     return 'right';
   } else {
     return 'wrong';

@@ -78,7 +78,6 @@ export default function FindIdPage() {
       'Access-Control-Allow-Credentials': 'true',
     };
     try {
-      console.log(formData);
       const response = await axios.post(apiUrl + endpoint, formData, {
         headers,
       });
@@ -88,7 +87,7 @@ export default function FindIdPage() {
     } catch (e) {
       console.log(e);
       if (!e.response.data.isSuccess) {
-        navigate('/not-found-id');
+        navigate('/not-found-id', { state: { access: true } });
       }
     }
   };
@@ -97,46 +96,42 @@ export default function FindIdPage() {
     <div className={styles.pageFrame}>
       <form onSubmit={handleSubmit}>
         <div className={styles.findIdFrame}>
-          <Link to='/login'>
-            <Icon
-              id='left-arrow'
-              width='1.162rem'
-              height='1.048rem'
-              className={styles.arrowLeft}
-            />
-          </Link>
-          <h1
-            className={styles.pageTitle}
-            onClick={() => {
-              console.log(nameStyle, emailStyle, numberStyle);
-            }}
-          >
-            아이디 찾기
-          </h1>
-
-          {inputProps.map((props) => {
-            return (
-              <Input
-                title={props[0]}
-                placeholder={props[1]}
-                className={props[2]}
-                setClassName={props[3]}
-                classNameCheck={props[4]}
-                inputType={props[5]}
-                inputData={formData}
-                errMsg={props[6]}
+          <div>
+            <Link to='/login'>
+              <Icon
+                id='arrow-left'
+                width='1.162rem'
+                height='1.048rem'
+                className={styles.arrowLeft}
               />
-            );
-          })}
+            </Link>
+            <h1 className={styles.pageTitle}>아이디 찾기</h1>
 
-          {submitState() === 'wrong' && (
-            <div className={styles.errFrame}>
-              <p>입력한 내용을 다시 한 번</p>
-              <p>확인해주세요</p>
-            </div>
-          )}
+            {inputProps.map((props) => {
+              return (
+                <Input
+                  title={props[0]}
+                  placeholder={props[1]}
+                  className={props[2]}
+                  setClassName={props[3]}
+                  classNameCheck={props[4]}
+                  inputType={props[5]}
+                  inputData={formData}
+                  errMsg={props[6]}
+                />
+              );
+            })}
+          </div>
+          <div className={styles.buttonFrame}>
+            {submitState() === 'wrong' && (
+              <div className={styles.errFrame}>
+                <p>입력한 내용을 다시 한 번</p>
+                <p>확인해주세요</p>
+              </div>
+            )}
 
-          <Submit btnName='다음으로' className={submitState()} />
+            <Submit btnName='다음으로' className={submitState()} />
+          </div>
         </div>
       </form>
     </div>
