@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './MyPage.module.css';
 import Icon from '../../../components/Icon/Icon';
-import { Link } from 'react-router-dom';
-
+import { Link, useSearchParams } from 'react-router-dom';
 import AccountTab from './AccountTab';
 import ActivityTab from './ActivityTab';
 import GuideTab from './GuideTab';
 
 export default function MyPage() {
-  const [activeTab, setActiveTab] = useState('account');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeTab = searchParams.get('tab') || 'account';
+
+  const handleTabClick = (tab) => {
+    setSearchParams({ tab });
+  };
+
+  useEffect(() => {
+    if (!searchParams.get('tab')) {
+      setSearchParams({ tab: 'account' });
+    }
+  }, [searchParams, setSearchParams]);
 
   return (
     <main className={styles.myPage}>
@@ -51,7 +61,7 @@ export default function MyPage() {
                 activeTab === tab ? styles.active : ''
               }`}
               onClick={() => {
-                setActiveTab(tab);
+                handleTabClick(tab);
               }}
             >
               {tab === 'account' && '계정 정보'}
