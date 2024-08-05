@@ -3,6 +3,10 @@ import styles from './MyPage.module.css';
 import Icon from '../../../components/Icon/Icon';
 import { Link } from 'react-router-dom';
 
+import AccountTab from './AccountTab';
+import ActivityTab from './ActivityTab';
+import GuideTab from './GuideTab';
+
 export default function MyPage() {
   const [activeTab, setActiveTab] = useState('account');
 
@@ -43,7 +47,9 @@ export default function MyPage() {
           {['account', 'activity', 'guide'].map((tab) => (
             <div
               key={tab}
-              className={`${styles.tab} ${activeTab === tab ? styles.active : ''}`}
+              className={`${styles.tab} ${
+                activeTab === tab ? styles.active : ''
+              }`}
               onClick={() => {
                 setActiveTab(tab);
               }}
@@ -56,84 +62,13 @@ export default function MyPage() {
         </div>
 
         {/* 계정 정보 */}
-        {activeTab === 'account' && (
-          <>
-            <div className={styles.infoWrapper}>
-              {[
-                { label: '아이디', value: 'suen0904' },
-                { label: '이메일', value: 'suen0904@sookmyung.ac.kr' },
-                { label: '학번', value: '17123123' },
-                { label: '전공', value: '시각영상디자인과' },
-                { label: '생년월일', value: '1996. 01. 01' },
-              ].map((info, index) => (
-                <div className={styles.info} key={index}>
-                  <div className={styles.label}>{info.label}</div>
-                  <div className={styles.value}>{info.value}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className={styles.buttonWrapper}>
-              <Link to='edit-info'>
-                <div className={styles.editButton}>내 정보 수정</div>
-              </Link>
-              <Link to='password'>
-                <div className={styles.passwordButton}>비밀번호 변경</div>
-              </Link>
-            </div>
-          </>
-        )}
+        {activeTab === 'account' && <AccountTab />}
 
         {/* 내 활동 */}
-        {activeTab === 'activity' && (
-          <>
-            <div className={styles.infoWrapper}>
-              {[
-                { label: '내 글 모아보기', link: 'my-post' },
-                { label: '댓글 단 글 모아보기', link: 'comment' },
-                {
-                  label: '다운 받은 시험 후기 모아보기',
-                  link: 'download-test-review',
-                },
-              ].map((item, index) => (
-                <Link to={item.link}>
-                  <div className={styles.ItemWrapper} key={index}>
-                    <span>{item.label}</span>
-                    <Icon id='arrow-text-grey'></Icon>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </>
-        )}
+        {activeTab === 'activity' && <ActivityTab />}
 
         {/* 이용 안내 */}
-        {activeTab === 'guide' && (
-          <>
-            <div className={styles.infoWrapper}>
-              {[
-                { label: '개인정보 처리 방침', link: 'privacy-policy' },
-                { label: '서비스 이용 약관', link: 'service-policy' },
-              ].map((item, index) => (
-                <Link to={item.link}>
-                  <div className={styles.ItemWrapper} key={index}>
-                    <span>{item.label}</span>
-                    <Icon id='arrow-text-grey'></Icon>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            <div className={styles.buttonWrapper}>
-              <Link to='#'>
-                <div className={styles.editButton}>로그아웃</div>
-              </Link>
-              <Link to='delete-account'>
-                <div className={styles.passwordButton}>회원탈퇴</div>
-              </Link>
-            </div>
-          </>
-        )}
+        {activeTab === 'guide' && <GuideTab />}
       </div>
     </main>
   );
