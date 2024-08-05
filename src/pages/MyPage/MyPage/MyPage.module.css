@@ -148,19 +148,20 @@
 /* 탭 메뉴 */
 .tabMenu {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   margin: 29px 20px 14px;
   border-top: 1px solid var(--Grey-3, #d9d9d9);
 }
 
 .tab {
+  width: 100%;
+  padding: 15px;
   color: var(--Grey-3-1, #898989);
+  text-align: center;
   font-size: 14px;
   font-weight: 500;
   line-height: 150%;
   letter-spacing: -0.5px;
-  padding: 15px;
-  margin: 0 auto;
 }
 
 .tab.active {
