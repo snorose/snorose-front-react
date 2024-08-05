@@ -15,12 +15,14 @@ const ActivityTab = () => {
             link: 'download-test-review',
           },
         ].map((item, index) => (
-          <Link to={item.link} key={index}>
-            <div className={styles.ItemWrapper}>
-              <span>{item.label}</span>
-              <Icon id='angle-right' />
-            </div>
-          </Link>
+          <div className={styles.itemList}>
+            <Link to={item.link} key={index}>
+              <div className={styles.item}>
+                <span>{item.label}</span>
+                <Icon id='angle-right' />
+              </div>
+            </Link>
+          </div>
         ))}
       </div>
     </>

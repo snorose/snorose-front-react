@@ -244,21 +244,24 @@
 }
 
 /* 내 활동, 이용안내 */
-.ItemWrapper {
+.itemList {
+  border-bottom: 1px solid var(--Grey-3, #d9d9d9);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 12px 0;
   color: var(--Grey-4, var(--grey-3, #484848));
   font-size: 14px;
   font-weight: 500;
   line-height: 150%;
   letter-spacing: -0.5px;
-  border-bottom: 1px solid var(--Grey-3, #d9d9d9);
-  padding: 10px 0;
-
-  &:last-child {
-    border-bottom: none;
-  }
 
   svg {
     width: 16px;
