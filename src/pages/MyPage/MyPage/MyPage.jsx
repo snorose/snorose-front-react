@@ -46,7 +46,7 @@ export default function MyPage() {
             <Link to='view-point-list'>
               <a className={styles.pointList}>
                 포인트 내역 보기
-                <Icon id='arrow-text-blue' />
+                <Icon id='angle-right' fill='#00368e' />
               </a>
             </Link>
           </div>

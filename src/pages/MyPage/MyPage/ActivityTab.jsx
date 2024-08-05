@@ -18,7 +18,7 @@ const ActivityTab = () => {
           <Link to={item.link} key={index}>
             <div className={styles.ItemWrapper}>
               <span>{item.label}</span>
-              <Icon id='arrow-text-grey' />
+              <Icon id='angle-right' />
             </div>
           </Link>
         ))}
