@@ -15,7 +15,7 @@ export default function DeleteAccountPage() {
     <main className={styles.deleteAccountPage}>
       <div className={styles.closeIconWrapper}>
         <Link to='/my-page' className={styles.closeIcon}>
-          <Icon id='close' />
+          <Icon id='x' />
         </Link>
       </div>
       <div className={styles.titleDescWrapper}>

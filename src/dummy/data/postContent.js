@@ -13,6 +13,7 @@ export const POST_CONTENT = Object.freeze({
   createdAt: '2024-07-01T12:06:22.289Z',
   updatedAt: '2024-07-13T12:06:22.289Z',
   visible: true,
+  liked: true, // 백엔드에서 추가 필요
   edited: true,
   notice: true,
 });

@@ -44,7 +44,7 @@ export default function Login() {
     <div className={styles.loginframe}>
       <form onSubmit={handleSubmit}>
         <div className={styles.prev}>
-          <Icon id='arrow-back' width='9' height='14'></Icon>
+          <Icon id='arrow-left' width='9' height='14' />
         </div>
         <div className={styles.loginbody}>
           <p className={styles.title}>SNOROSE</p>
@@ -90,7 +90,7 @@ export default function Login() {
             >
               {pwInputFocus && (
                 <Icon
-                  id='visibility'
+                  id='opened-eye'
                   className={styles.visiblity}
                   width='14'
                   height='10'

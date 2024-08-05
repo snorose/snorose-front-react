@@ -1,0 +1,85 @@
+.pageFrame {
+  width: 100%;
+  padding: 0 1.25rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.navFrame {
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+}
+.pageTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+  margin-top: 0.875rem;
+}
+.pageExplanation {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.313rem;
+  color: #484848;
+  margin-top: 0.875rem;
+}
+.pageBottomFrame {
+  display: flex;
+  flex-direction: column;
+}
+.bodyFrame {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+.resultFrame {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1.875rem;
+}
+.result {
+  font-size: 1.563rem;
+  font-weight: 700;
+  color: #00368e;
+  line-height: 2.031rem;
+}
+.dot {
+  height: 0.375rem;
+  width: 0.375rem;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 0.438rem;
+}
+.first {
+  background-color: #acbcd7;
+}
+.second {
+  background-color: #7a95c1;
+}
+.third {
+  background-color: #00368e;
+}
+.img {
+  width: 13.25rem;
+  height: 14.5rem;
+  margin-bottom: 1.875rem;
+  margin-left: auto;
+}
+.loginButton {
+  margin-bottom: 1.125rem;
+}
+.findPWButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.875rem;
+  color: #484848;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+}
