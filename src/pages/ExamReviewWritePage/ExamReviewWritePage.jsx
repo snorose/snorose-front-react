@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { postExamReview } from '../../apis';
+
 import { ActionButton, CloseAppBar } from '../../components/AppBar';
 import {
   CategoryButton,
@@ -16,38 +20,61 @@ import Icon from '../../components/Icon/Icon';
 import InputList from '../../components/Input/InputList/InputList.jsx';
 import InputItem from '../../components/Input/InputItem/InputItem.jsx';
 import Textarea from '../../components/Fieldset/Textarea/Textarea.jsx';
+
 import styles from './ExamReviewWritePage.module.css';
 
-const FILE_MAX_SIZE = 1000 * 1000 * 10;
+const FILE_MAX_SIZE = 1024 * 1024 * 10;
 
 export default function ExamReviewWritePage() {
   const [lectureName, setLectureName] = useState('');
   const [professor, setProfessor] = useState('');
-  const [lectureType, setLectureType] = useState();
-  const [testType, setTestType] = useState();
-  const [lectureYear, setLectureYear] = useState();
-  const [semester, setSemester] = useState();
+  const [lectureType, setLectureType] = useState({});
+  const [examType, setExamType] = useState({});
+  const [lectureYear, setLectureYear] = useState({});
+  const [semester, setSemester] = useState({});
   const [isPF, setIsPF] = useState(false);
-  const [classNumber, setClassNumber] = useState();
+  const [classNumber, setClassNumber] = useState({});
   const [content, setContent] = useState('');
   const [file, setFile] = useState();
+
+  const navigate = useNavigate();
 
   const pass =
     lectureName &&
     professor &&
     lectureType &&
-    testType &&
+    examType &&
     lectureYear &&
     semester &&
-    classNumber;
+    classNumber &&
+    file;
 
   const handleFile = (event) => {
     const selectedFile = event.target.files[0];
+    event.target.value = '';
+
     if (selectedFile?.size > FILE_MAX_SIZE) {
       alert('파일은 최대 10MB까지 업로드 할 수 있습니다.');
       return;
     }
     setFile(selectedFile);
+  };
+
+  const data = {
+    isPF,
+    boardId: 32,
+    classNumber: classNumber?.id,
+    lectureName,
+    professor,
+    semester: semester?.id,
+    lectureType: lectureType?.id,
+    content,
+    examType: examType?.id,
+    lectureYear: lectureYear?.id,
+    title: '자료구조',
+    questionDetail: '서술형 1문제 객관식 9문제',
+    isOnline: false,
+    category: 'testCategory',
   };
 
   return (
@@ -56,7 +83,11 @@ export default function ExamReviewWritePage() {
         <ActionButton
           onClick={() => {
             if (pass) {
-              alert('등록 완료!');
+              postExamReview({ data, file }).then((response) => {
+                if (response.status === 201) {
+                  navigate('/exam-review');
+                }
+              });
             } else {
               alert('필수 입력을 모두 작성해주세요');
             }
@@ -80,26 +111,26 @@ export default function ExamReviewWritePage() {
         />
       </InputList>
       <CategoryFieldset title='강의 종류' required>
-        {COURSE_CATEGORY.map((item) => (
+        {COURSE_CATEGORY.map((option) => (
           <CategoryButton
-            key={item}
+            key={option.id}
             select={lectureType}
-            name={item}
+            option={option}
             callback={setLectureType}
           >
-            {item}
+            {option.name}
           </CategoryButton>
         ))}
       </CategoryFieldset>
       <CategoryFieldset title='시험 종류' required>
-        {TEST_CATEGORY.map((item) => (
+        {TEST_CATEGORY.map((option) => (
           <CategoryButton
-            key={item}
-            select={testType}
-            name={item}
-            callback={setTestType}
+            key={option.id}
+            select={examType}
+            option={option}
+            callback={setExamType}
           >
-            {item}
+            {option.name}
           </CategoryButton>
         ))}
       </CategoryFieldset>

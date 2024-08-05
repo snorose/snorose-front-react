@@ -1,15 +1,13 @@
 import styles from './CategoryButton.module.css';
 
-export default function CategoryButton({ select, name, callback, children }) {
-  const handleClick = (event) => {
-    const { name } = event.target;
-    callback(name);
+export default function CategoryButton({ select, option, callback, children }) {
+  const handleClick = () => {
+    callback(option);
   };
 
   return (
     <button
-      className={`${styles.button} ${select === name && styles.select}`}
-      name={name}
+      className={`${styles.button} ${select === option && styles.select}`}
       onClick={handleClick}
     >
       {children}
