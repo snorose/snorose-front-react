@@ -38,18 +38,18 @@ export default function MyPage() {
             <Icon id='middle-dot' />
             <div className={styles.memberType}>정회원</div>
           </div>
-          <div className={styles.pointWrapper}>
-            <div className={styles.point}>
-              <Icon id='point-circle' />
-              39
-            </div>
-            <Link to='view-point-list'>
+          <Link to='view-point-list'>
+            <div className={styles.pointWrapper}>
+              <div className={styles.point}>
+                <Icon id='point-circle' />
+                39
+              </div>
               <a className={styles.pointList}>
                 포인트 내역 보기
                 <Icon id='angle-right' fill='#00368e' />
               </a>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
 
         {/* 탭 메뉴 */}
