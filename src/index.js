@@ -13,24 +13,28 @@ import {
   DeleteAccountPage,
   EditInfoPage,
   MyPage,
+  PrivacyPolicyPage,
+  ServicePolicyPage,
+  ViewPointListPage,
 } from './pages/MyPage';
 import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
-import { AboutPage } from './pages/AboutPage';
+import {
+  FindIdPage,
+  FoundIdPage,
+  NotFoundIdPage,
+  LoginPage,
+} from './pages/LoginPage';
+import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import { ErrorPage } from './pages/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import ExamReviewWritePage from './pages/ExamReviewWritePage/ExamReviewWritePage';
-import FindIdPage from './pages/LoginPage/FindIdPage/FindIdPage';
-import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage';
 import HelpPage from './pages/HelpPage/HelpPage';
-import { LoginPage } from './pages/LoginPage';
-import { MainPage } from './pages/MainPage';
-import NotFoundIdPage from './pages/LoginPage/NotFoundIdPage/NotFoundIdPage';
+import MainPage from './pages/MainPage/MainPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import ProtectedRoute from './ProtectedRoute';
 import SearchPage from './pages/SearchPage/SearchPage.jsx';
-import ViewPointListPage from './pages/MyPage/ViewPointListPage/ViewPointListPage.jsx';
 
 import { ROLE } from './constants';
 import './index.css';
@@ -129,6 +133,8 @@ const router = createBrowserRouter([
       { path: 'my-page/edit-info', element: <EditInfoPage /> },
       { path: 'my-page/view-point-list', element: <ViewPointListPage /> },
       { path: 'my-page/delete-account', element: <DeleteAccountPage /> },
+      { path: 'my-page/privacy-policy', element: <PrivacyPolicyPage /> },
+      { path: 'my-page/service-policy', element: <ServicePolicyPage /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'notice', element: <NoticePage /> },
       { path: 'authentication', element: <AuthPage /> },

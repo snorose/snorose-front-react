@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './MyPage.module.css';
 import Icon from '../../../components/Icon/Icon';
+import { Link } from 'react-router-dom';
 
 export default function MyPage() {
   const [activeTab, setActiveTab] = useState('account');
@@ -105,11 +106,16 @@ export default function MyPage() {
         {activeTab === 'guide' && (
           <>
             <div className={styles.infoWrapper}>
-              {['개인정보 처리 방침', '서비스 이용 약관'].map((item) => (
-                <div className={styles.ItemWrapper} key={item}>
-                  <span>{item}</span>
-                  <Icon id='arrow-text-grey'></Icon>
-                </div>
+              {[
+                { label: '개인정보 처리 방침', link: 'privacy-policy' },
+                { label: '서비스 이용 약관', link: 'service-policy' },
+              ].map((item, index) => (
+                <Link to={item.link}>
+                  <div className={styles.ItemWrapper} key={index}>
+                    <span>{item.label}</span>
+                    <Icon id='arrow-text-grey'></Icon>
+                  </div>
+                </Link>
               ))}
             </div>
 
