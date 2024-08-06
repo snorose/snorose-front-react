@@ -1,15 +1,18 @@
+import { Icon } from '../../components/Icon';
 import styles from './InputBar.module.css';
-import Icon from '../../components/Icon/Icon.jsx';
 
 export default function InputBar() {
   return (
     <div className={styles.container}>
       <div className={styles.input_bar}>
-        <div className={styles.profile_icon}>
-          <Icon id='profile' />
-        </div>
-        <input className={styles.input_zone} placeholder='댓글을 입력하세요'></input>
-        <p className={styles.enter}>게시</p>
+        <Icon id='cloud' width='25' height='16' />
+        <input
+          className={styles.input_zone}
+          placeholder='댓글을 입력하세요'
+        ></input>
+      </div>
+      <div className={styles.enter}>
+        <Icon id='send' width='40' height='40' />
       </div>
     </div>
   );

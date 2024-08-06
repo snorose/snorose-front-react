@@ -1,0 +1,55 @@
+.pageFrame {
+  width: 100%;
+  padding: 0 1.25rem;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+  border: 1px solid red;
+}
+.pageFrame form {
+  width: 100%;
+  height: 100%;
+}
+.findIdFrame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.arrowLeft {
+  margin-top: 0.875rem;
+  margin-bottom: 1.703rem;
+}
+.pageTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 3.5rem;
+}
+.buttonFrame {
+  margin-bottom: 2.188rem;
+}
+.errFrame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6.625rem;
+  width: 14.625rem;
+  height: 3.625rem;
+  border-radius: 0.313rem;
+  background-color: #48484899;
+  color: #ffffff;
+  font-size: 0.75rem;
+  line-height: 0.975rem;
+  font-weight: 500;
+  margin: 0 auto;
+}
+.errFrame p {
+  display: block;
+}

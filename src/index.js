@@ -1,25 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import reportWebVitals from './reportWebVitals';
+
+import { ToastProvider } from './contexts/ToastContext.jsx';
+
 import App from './App';
-import './index.css';
-import AboutPage from './pages/AboutPage/AboutPage';
+import { BoardListPage, BoardPage } from './pages/BoardPage';
+import {
+  ChangePasswordPage,
+  DeleteAccountPage,
+  EditInfoPage,
+  MyPage,
+} from './pages/MyPage';
+import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
+import { AboutPage } from './pages/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
-import { BoardPage, BoardListPage } from './pages/BoardPage';
-import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
-import ErrorPage from './pages/ErrorPage/ErrorPage';
+import { ErrorPage } from './pages/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
+import ExamReviewWritePage from './pages/ExamReviewWritePage/ExamReviewWritePage';
+import FindIdPage from './pages/LoginPage/FindIdPage/FindIdPage';
+import FoundIdPage from './pages/LoginPage/FoundIdPage/FoundIdPage';
 import HelpPage from './pages/HelpPage/HelpPage';
-import MainPage from './pages/MainPage/MainPage';
-import MyPage from './pages/MyPage/MyPage';
-import DeleteAccountPage from './pages/MyPage/DeleteAccountPage';
+import { LoginPage } from './pages/LoginPage';
+import { MainPage } from './pages/MainPage';
+import NotFoundIdPage from './pages/LoginPage/NotFoundIdPage/NotFoundIdPage';
 import NoticePage from './pages/NoticePage/NoticePage';
-import reportWebVitals from './reportWebVitals';
-import Login from './pages/LoginPage/Login';
-import EditInfoPage from './pages/MyPage/EditInfoPage';
-import ChangePassword from './pages/MyPage/ChangePassword';
+import ProtectedRoute from './ProtectedRoute';
+import SearchPage from './pages/SearchPage/SearchPage.jsx';
+import ViewPointListPage from './pages/MyPage/ViewPointListPage/ViewPointListPage.jsx';
+
+import { ROLE } from './constants';
+import './index.css';
 
 const router = createBrowserRouter([
   {
@@ -30,24 +44,111 @@ const router = createBrowserRouter([
       { index: true, element: <MainPage /> },
       { path: 'home', element: <MainPage /> },
       { path: '/board', element: <BoardPage /> },
-      { path: '/login', element:<Login/>}
-      { path: '/board/first-snow', element: <BoardListPage /> },
-      { path: '/board/large-snow', element: <BoardListPage /> },
-      { path: '/board/permanent-snow', element: <BoardListPage /> },
-      { path: '/board/besookt', element: <BoardListPage /> },
+      {
+        path: '/board/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/first-snow',
+        element: (
+          <ProtectedRoute>
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/first-snow/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/large-snow',
+        element: (
+          <ProtectedRoute>
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/large-snow/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/permanent-snow',
+        element: (
+          <ProtectedRoute>
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/permanent-snow/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/besookt',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
+          >
+            <BoardListPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/board/besookt/search',
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
+        ),
+      },
       { path: '/post', element: <PostPage /> },
       { path: '/post-search', element: <PostSearchPage /> },
       { path: '/post-write', element: <PostWritePage /> },
       { path: 'exam-review', element: <ExamReviewPage /> },
+      { path: 'exam-review-write', element: <ExamReviewWritePage /> },
       { path: 'alert', element: <AlertPage /> },
       { path: 'my-page', element: <MyPage /> },
-      { path: 'my-page/password', element: <ChangePassword /> },
+      { path: 'my-page/password', element: <ChangePasswordPage /> },
       { path: 'my-page/edit-info', element: <EditInfoPage /> },
+      { path: 'my-page/view-point-list', element: <ViewPointListPage /> },
       { path: 'my-page/delete-account', element: <DeleteAccountPage /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'notice', element: <NoticePage /> },
       { path: 'authentication', element: <AuthPage /> },
       { path: 'help', element: <HelpPage /> },
+      {
+        path: 'login',
+        element: <LoginPage />,
+      },
+      {
+        path: 'find-id',
+        element: <FindIdPage />,
+      },
+      {
+        path: 'found-id',
+        element: <FoundIdPage />,
+      },
+      {
+        path: 'not-found-id',
+        element: <NotFoundIdPage />,
+      },
     ],
   },
 ]);
@@ -55,7 +156,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode fri>
-    <RouterProvider router={router} />
+    <ToastProvider>
+      <RouterProvider router={router} />
+    </ToastProvider>
   </React.StrictMode>
 );
 

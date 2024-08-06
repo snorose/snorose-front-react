@@ -1,86 +1,89 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './BoardListPage.module.css';
 import Icon from '../../../components/Icon/Icon.jsx';
+import BackAppBar from '../../../components/AppBar/BackAppBar/BackAppBar.jsx';
 import PostBar from '../../../components/PostBar/PostBar.jsx';
 import Sponser from '../../../components/Sponser/Sponser.jsx';
-import POST_LIST from '../../../constants/postListDummy.js';
+import { POST_LIST } from '../../../dummy/data/postList.js';
 import PTR from '../../../components/PTR/PTR.jsx';
 import { POST_CATEGORIES } from '../../../constants/postCategories.js';
 
 export default function BoardListPage() {
+  const navigate = useNavigate();
+  const handleNavClick = (to) => {
+    return () => {
+      navigate(to);
+    };
+  };
+
+  const boardMap = {
+    'first-snow': '첫눈온방',
+    'large-snow': '함박눈방',
+    'permanent-snow': '만년설방',
+    besookt: '베숙트',
+  };
+
   const { pathname } = useLocation();
   const currentPath = pathname.split('/')[2];
-  let currentBoard = '';
+  const currentBoard = boardMap[currentPath] || '';
 
-  if (currentPath === 'first-snow') {
-    currentBoard = '첫눈온방';
-  } else if (currentPath === 'large-snow') {
-    currentBoard = '함박눈방';
-  } else if (currentPath === 'permanent-snow') {
-    currentBoard = '만년설방';
-  } else if (currentPath === 'besookt') {
-    currentBoard = '베숙트';
-  }
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const filteredPosts = selectedCategory
+    ? POST_LIST.filter((post) => post.category === selectedCategory)
+    : POST_LIST;
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState(currentPath);
-
-  const getCurrentCategoryColor = (id, pointColor, defaultColor) =>
-    id === selectedCategoryId ? pointColor : defaultColor;
+  const getCategoryStyles = (id) => {
+    const isSelected = id === selectedCategory;
+    return {
+      backgroundColor: isSelected ? '#00368E' : '#EAF5FD',
+      color: isSelected ? '#FFFFFF' : '#00368E',
+    };
+  };
 
   const handleCategoryClick = (id) => {
-    setSelectedCategoryId(id);
+    setSelectedCategory(id);
   };
 
   return (
     <div className={styles.container}>
+      <BackAppBar title={currentBoard} hasMenu hasSearch />
       <div className={styles.top}>
-        <div className={styles.header}>
-          <div className={styles.side_menu_btn}>
-            <Icon id='hamburger' />
-          </div>
-          <h1>{currentBoard}</h1>
-        </div>
-        <div className={styles.notification_bar}>
-          <div className={styles.notification_icon}>
-            <Icon id='notification-red' />
-          </div>
-          <p>필독 공지사항</p>
+        <div
+          className={styles.notification_bar}
+          onClick={handleNavClick('/alert')}
+        >
+          <Icon id='notice-bell' width={11} height={13} />
+          <p>[필독] 공지사항</p>
         </div>
         <div className={styles.keyword_box}>
+          {POST_CATEGORIES.map(({ id, label }) => (
+            <div
+              key={id}
+              className={styles.keyword}
+              style={getCategoryStyles(id)}
+              onClick={() => handleCategoryClick(id)}
+            >
+              <p>{label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <PTR>
+        <div className={styles.content}>
           {POST_CATEGORIES &&
-            POST_CATEGORIES.map(({ id, label }) => (
-              <div
-                key={id}
-                className={styles.keyword}
-                style={{
-                  backgroundColor: getCurrentCategoryColor(
-                    id,
-                    '#00368E',
-                    '#BFD7EC'
-                  ),
-                  color: getCurrentCategoryColor(id, '#FFFFFF', '#5F86BF'),
-                  border: getCurrentCategoryColor(id, '#00368E', '#5F86BF'),
-                }}
-                onClick={() => handleCategoryClick(id)} // 클릭 이벤트 핸들러 추가
-              >
-                {label}
-              </div>
+            filteredPosts.map((post) => (
+              <PostBar key={post.postId} data={post} />
             ))}
         </div>
-      </div>
-      <div className={styles.content}>
-        <div className={styles.pencil_icon}>
-          <Icon id='pencil' />
-        </div>
-        <PTR>
-          {POST_LIST.map((post, index) => (
-            <PostBar key={index} data={post} />
-          ))}
-        </PTR>
-      </div>
-      <div className={styles.refresh_icon}>
-        <Icon id='refresh' />
+      </PTR>
+      <div className={styles.pencil_icon}>
+        <Icon
+          id='pencil-circle'
+          width={105}
+          height={105}
+          onClick={handleNavClick('/post-write')}
+        />
       </div>
       <div className={styles.sponser}>
         <Sponser />

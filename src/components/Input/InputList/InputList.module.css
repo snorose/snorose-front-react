@@ -1,0 +1,10 @@
+.container {
+  padding: 0.25rem 0.8125rem;
+  margin: 0 1.25rem;
+  background: #f0f0f0;
+  border-radius: 0.3125rem;
+}
+
+.container div:last-child {
+  border: none;
+}
