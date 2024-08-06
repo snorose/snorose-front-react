@@ -19,7 +19,7 @@ export default function NotFoundPwPage() {
     <div className={styles.pageFrame}>
       <div>
         <div className={styles.navFrame}>
-          <Link to='/find-id'>
+          <Link to='/find-pw'>
             <Icon id='arrow-left' width='1.162rem' height='1.048rem' />
           </Link>
         </div>

@@ -101,7 +101,13 @@ export default function FindPwPage() {
               </div>
             )}
 
-            <Submit btnName='다음으로' className={submitState()} />
+            <Submit btnName='완료' className={submitState()} />
+            <Link to='/find-id'>
+              <div className={styles.findIDButton}>
+                <p>아이디 찾기</p>
+                <Icon id='angle-right' width='24px' height='24px' />
+              </div>
+            </Link>
           </div>
         </div>
       </form>
