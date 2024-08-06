@@ -170,11 +170,13 @@ export default function ExamReviewWritePage() {
           value={content}
           setFn={setContent}
           placeholder='강의 시험 유형 및 부가적인 설명을 기술해주세요'
+          minRows='5'
+          maxRows='10'
         />
       </CategoryFieldset>
       <div className={styles.file}>
         <div className={styles.left}>
-          <Icon id='file' width={18} height={19} />
+          <Icon id='clip-board-list-blue' width={18} height={19} />
           <span className={styles.tag}>첨부파일</span>
         </div>
         <div className={styles.right}>
