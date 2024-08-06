@@ -8,7 +8,6 @@
   flex-direction: column;
   padding: 0 1.25rem 100px 1.25rem;
   width: 100%;
-  gap: 14px;
 }
 
 .topContainer {
@@ -44,68 +43,64 @@
   letter-spacing: -0.5px;
 }
 
-/* 위까지 수정완료 */
-
 .pointListContainer {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .pointBox {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #c7c7c7;
-  padding: 0.375rem 0;
+  align-items: center;
+  border-radius: 5px;
+  background: var(--Grey-1-1, #f4f4f4);
+  padding: 17px 15px;
 }
 
-.pointWrapper {
+.pointIconContentWrapper {
   display: flex;
-}
+  align-items: center;
+  gap: 15px;
 
-.pointIconWrapper {
-  display: flex;
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.icon {
-  width: 100%;
-  height: auto;
-  padding: 4px 0;
+  svg {
+    width: 26px;
+    height: 23px;
+  }
 }
 
 .pointContent {
   display: flex;
   flex-direction: column;
-  padding: 0 0.625rem;
-  gap: 0.2rem;
+  gap: 3px;
 }
 
 .pointTitle {
-  font-size: 0.75rem;
+  color: var(--Blue-4, #00368e);
+  font-size: 12px;
   font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
 }
 
 .pointDesc {
-  font-size: 0.5rem;
+  color: var(--grey-3, #484848);
+  font-style: normal;
+  line-height: 150%;
+  letter-spacing: -0.5px;
 }
 
 .pointDate {
-  color: #aeaeae;
-  font-size: 0.5rem;
-}
-
-.pointScore {
-  display: flex;
-  justify-content: flex-end;
+  color: var(--Grey-3-1, #898989);
+  font-size: 9px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
 }
 
 .chargePoint {
-  color: #5f86bf;
-  text-align: right;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-.negative {
-  color: #ff4b6c;
+  color: var(--Blue-4, #00368e);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
 }
