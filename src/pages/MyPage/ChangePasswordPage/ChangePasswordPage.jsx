@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './ChangePasswordPage.module.css';
 import Icon from '../../../components/Icon/Icon';
-import BackAppBar from '../../../components/BackAppBar/BackAppBar';
+import BackAppBar from '../../../components/AppBar/BackAppBar/BackAppBar';
 import ActionButton from '../../../components/AppBar/ActionButton/ActionButton';
 
 const handlePasswordType = (setter) => {
@@ -67,11 +67,12 @@ export default function ChangePasswordPage() {
       setNewPasswordCheckError('');
     }
   };
-
   return (
     <main className={styles.changePasswordPage}>
       <div className={styles.topContainer}>
-        <BackAppBar />
+        <p>
+          <BackAppBar />
+        </p>
         <div className={styles.submitBtn}>
           <ActionButton onClick={handlePasswordChangeSubmit}>완료</ActionButton>
         </div>
