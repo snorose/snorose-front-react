@@ -3,7 +3,7 @@ import Icon from '../../../components/Icon/Icon';
 import styles from './MyPage.module.css';
 import { Link } from 'react-router-dom';
 
-const GuideTab = () => {
+const PolicyTab = () => {
   return (
     <>
       <div className={styles.infoWrapper}>
@@ -34,4 +34,4 @@ const GuideTab = () => {
   );
 };
 
-export default GuideTab;
+export default PolicyTab;

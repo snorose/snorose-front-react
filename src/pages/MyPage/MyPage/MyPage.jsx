@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './MyPage.module.css';
 import Icon from '../../../components/Icon/Icon';
 import { Link, useSearchParams } from 'react-router-dom';
 import AccountTab from './AccountTab';
 import ActivityTab from './ActivityTab';
-import GuideTab from './GuideTab';
+import PolicyTab from './PolicyTab';
 
 export default function MyPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -54,7 +54,7 @@ export default function MyPage() {
 
         {/* 탭 메뉴 */}
         <div className={styles.tabMenu}>
-          {['account', 'activity', 'guide'].map((tab) => (
+          {['account', 'activity', 'policy'].map((tab) => (
             <div
               key={tab}
               className={`${styles.tab} ${
@@ -66,7 +66,7 @@ export default function MyPage() {
             >
               {tab === 'account' && '계정 정보'}
               {tab === 'activity' && '내 활동'}
-              {tab === 'guide' && '이용 안내'}
+              {tab === 'policy' && '이용 안내'}
             </div>
           ))}
         </div>
@@ -78,7 +78,7 @@ export default function MyPage() {
         {activeTab === 'activity' && <ActivityTab />}
 
         {/* 이용 안내 */}
-        {activeTab === 'guide' && <GuideTab />}
+        {activeTab === 'policy' && <PolicyTab />}
       </div>
     </main>
   );
