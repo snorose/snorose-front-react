@@ -3,6 +3,65 @@ import { Icon } from '../../../components/Icon';
 import styles from './ViewPointListPage.module.css';
 import { BackAppBar } from '../../../components/AppBar';
 
+const pointData = [
+  {
+    id: 1,
+    title: '출석 포인트',
+    desc: '',
+    date: '2024.06.01 15:23:00',
+    point: 2,
+  },
+  {
+    id: 2,
+    title: '게시글 포인트',
+    desc: '뫔뫄',
+    date: '2024.06.01 15:23:00',
+    point: 3,
+  },
+  {
+    id: 3,
+    title: '댓글 포인트',
+    desc: '어제 간식으로 나온거 맛있던데 총학 공지에 나와있는...',
+    date: '2024.06.01 15:23:00',
+    point: 1,
+  },
+  {
+    id: 4,
+    title: '시험후기 다운로드',
+    desc: '서양미술사/이교수',
+    date: '2024.06.01 15:23:00',
+    point: -50,
+  },
+  {
+    id: 5,
+    title: '인증 포인트',
+    desc: '',
+    date: '2024.06.01 15:23:00',
+    point: 50,
+  },
+  {
+    id: 6,
+    title: '신고 포상 포인트',
+    desc: '',
+    date: '2024.06.01 15:23:00',
+    point: 10,
+  },
+  {
+    id: 7,
+    title: '게시글 삭제 포인트',
+    desc: '아 미친 지각 각임',
+    date: '2024.06.01 15:23:00',
+    point: -3,
+  },
+  {
+    id: 8,
+    title: '댓글 삭제 포인트',
+    desc: '어제 간식으로 나온거 맛있던데 총학 공지에 나와있는...',
+    date: '2024.06.01 15:23:00',
+    point: -3,
+  },
+];
+
 export default function ViewPointListPage() {
   const chargePointsRef = useRef([]);
 
@@ -11,6 +70,13 @@ export default function ViewPointListPage() {
       const value = point.textContent.replace(/\s/g, '');
       if (parseInt(value) < 0) {
         point.classList.add(styles.negative);
+
+        const pointTitleElement = point
+          .closest(`.${styles.pointBox}`)
+          .querySelector(`.${styles.pointTitle}`);
+        if (pointTitleElement) {
+          pointTitleElement.classList.add(styles.negative);
+        }
       }
     });
   }, []);
@@ -31,102 +97,24 @@ export default function ViewPointListPage() {
         </div>
 
         <article className={styles.pointListContainer}>
-          <section className={styles.pointBox}>
-            <div className={styles.pointIconContentWrapper}>
-              <Icon id='heart-plus' />
-              <div className={styles.pointContent}>
-                <h2 className={styles.pointTitle}>출석 포인트</h2>
-                <time className={styles.pointDate}>2024.06.01 15:23:00</time>
+          {pointData.map((item, index) => (
+            <section key={item.id} className={styles.pointBox}>
+              <div className={styles.pointIconContentWrapper}>
+                <Icon id={item.point > 0 ? 'heart-plus' : 'heart-minus'} />
+                <div className={styles.pointContent}>
+                  <h2 className={styles.pointTitle}>{item.title}</h2>
+                  {item.desc && <p className={styles.pointDesc}>{item.desc}</p>}
+                  <time className={styles.pointDate}>{item.date}</time>
+                </div>
               </div>
-            </div>
-            <span className={styles.chargePoint}>+ 2</span>
-          </section>
-
-          <section className={styles.pointBox}>
-            <div className={styles.pointIconContentWrapper}>
-              <Icon id='heart-plus' />
-              <div className={styles.pointContent}>
-                <h2 className={styles.pointTitle}>게시글 포인트</h2>
-                <p className={styles.pointDesc}>뫔뫄</p>
-                <time className={styles.pointDate}>2024.06.01 15:23:00</time>
-              </div>
-            </div>
-            <span className={styles.chargePoint}>+ 3</span>
-          </section>
-
-          <section className={styles.pointBox}>
-            <div className={styles.pointIconContentWrapper}>
-              <Icon id='heart-plus' />
-              <div className={styles.pointContent}>
-                <h2 className={styles.pointTitle}>댓글 포인트</h2>
-                <p className={styles.pointDesc}>
-                  어제 간식으로 나온거 맛있던데 총학 공지에 나와있는...
-                </p>
-                <time className={styles.pointDate}>2024.06.01 15:23:00</time>
-              </div>
-            </div>
-            <span className={styles.chargePoint}>+ 1</span>
-          </section>
-
-          <section className={styles.pointBox}>
-            <div className={styles.pointIconContentWrapper}>
-              <Icon id='heart-minus' />
-              <div className={styles.pointContent}>
-                <h2 className={styles.pointTitle}>시험후기 다운로드</h2>
-                <p className={styles.pointDesc}>서양미술사/이교수</p>
-                <time className={styles.pointDate}>2024.06.01 15:23:00</time>
-              </div>
-            </div>
-            <span className={styles.chargePoint}>- 50</span>
-          </section>
-
-          <section className={styles.pointBox}>
-            <div className={styles.pointIconContentWrapper}>
-              <Icon id='heart-plus' />
-              <div className={styles.pointContent}>
-                <h2 className={styles.pointTitle}>인증 포인트</h2>
-                <time className={styles.pointDate}>2024.06.01 15:23:00</time>
-              </div>
-            </div>
-            <span className={styles.chargePoint}>+ 50</span>
-          </section>
-
-          <section className={styles.pointBox}>
-            <div className={styles.pointIconContentWrapper}>
-              <Icon id='heart-plus' />
-              <div className={styles.pointContent}>
-                <h2 className={styles.pointTitle}>신고 포상 포인트</h2>
-                <time className={styles.pointDate}>2024.06.01 15:23:00</time>
-              </div>
-            </div>
-            <span className={styles.chargePoint}>+ 10</span>
-          </section>
-
-          <section className={styles.pointBox}>
-            <div className={styles.pointIconContentWrapper}>
-              <Icon id='heart-minus' />
-              <div className={styles.pointContent}>
-                <h2 className={styles.pointTitle}>게시글 삭제 포인트</h2>
-                <p className={styles.pointDesc}>아 미친 지각 각임</p>
-                <time className={styles.pointDate}>2024.06.01 15:23:00</time>
-              </div>
-            </div>
-            <span className={styles.chargePoint}>- 3</span>
-          </section>
-
-          <section className={styles.pointBox}>
-            <div className={styles.pointIconContentWrapper}>
-              <Icon id='heart-minus' />
-              <div className={styles.pointContent}>
-                <h2 className={styles.pointTitle}>댓글 삭제 포인트</h2>
-                <p className={styles.pointDesc}>
-                  어제 간식으로 나온거 맛있던데 총학 공지에 나와있는...
-                </p>
-                <time className={styles.pointDate}>2024.06.01 15:23:00</time>
-              </div>
-            </div>
-            <span className={styles.chargePoint}>- 3</span>
-          </section>
+              <span
+                ref={(el) => (chargePointsRef.current[index] = el)}
+                className={styles.chargePoint}
+              >
+                {item.point > 0 ? `+${item.point}` : `${item.point}`}
+              </span>
+            </section>
+          ))}
         </article>
       </section>
     </main>
