@@ -43,6 +43,7 @@
   letter-spacing: -0.5px;
 }
 
+/* 포인트 내역 */
 .pointListContainer {
   display: flex;
   flex-direction: column;
@@ -85,7 +86,7 @@
 
 .pointDesc {
   color: var(--grey-3, #484848);
-  font-style: normal;
+  font-size: 9px;
   line-height: 150%;
   letter-spacing: -0.5px;
 }
