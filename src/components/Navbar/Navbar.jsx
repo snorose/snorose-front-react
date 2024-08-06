@@ -13,7 +13,7 @@ const NAVBAR_ = {
 
 export default function Navbar() {
   const { pathname } = useLocation();
-  const currentMenu = pathname.split('/')[1];
+  const currentMenu = pathname.split('/')[1] || 'home';
 
   return (
     <nav className={styles.nav}>
