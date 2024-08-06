@@ -1,12 +1,17 @@
 .policyPage {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem 1.25rem 100px 1.25rem;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.25rem 100px 1.25rem;
   width: 100%;
+  gap: 14px;
 }
 
 .title {
-  padding: 14px 0;
   font-size: 20px;
   font-weight: 700;
   line-height: 130%;
@@ -21,5 +26,5 @@
   font-size: 14px;
   line-height: 150%;
   letter-spacing: -0.5px;
-  white-space: pre-line; /* 줄바꿈과 공백을 유지하도록 설정 */
+  white-space: pre-line;
 }
