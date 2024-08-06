@@ -3,4 +3,5 @@ export const MENU_WITHOUT_NAV = [
   '/find-id',
   '/found-id',
   '/not-found-id',
+  '/exam-review-write',
 ];

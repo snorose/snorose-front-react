@@ -3,30 +3,36 @@ import { Icon } from '../Icon';
 import { NAVBAR_MENUS } from '../../constants';
 import styles from './Navbar.module.css';
 
+const NAVBAR_ = {
+  home: 'home',
+  board: 'board',
+  'exam-review': 'test',
+  alert: 'bell',
+  'my-page': 'mypage',
+};
+
 export default function Navbar() {
   const { pathname } = useLocation();
   const currentMenu = pathname.split('/')[1];
-  const getCurrentMenuColor = (id, pointColor, defaultColor) =>
-    id === currentMenu || (currentMenu === '' && id === 'home')
-      ? pointColor
-      : defaultColor;
 
   return (
     <nav className={styles.nav}>
       <ul className={styles.menus}>
         {NAVBAR_MENUS &&
-          NAVBAR_MENUS.map(({ id, label, fill, ...props }) => (
-            <Link key={id} to={`/${id}`}>
+          NAVBAR_MENUS.map(({ id, to, label, ...props }) => (
+            <Link key={id} to={to}>
               <li className={styles.menu}>
                 <Icon
-                  id={id}
-                  fill={getCurrentMenuColor(id, '#00368E', '#BFD7EC')}
-                  stroke={getCurrentMenuColor(id, '#00368E', '#BFD7EC')}
+                  id={id === NAVBAR_[currentMenu] ? `${id}-fill` : id}
                   {...props}
                 />
                 <span
                   style={{
-                    color: getCurrentMenuColor(id, '#00368E', '#5F86BF'),
+                    color:
+                      id === NAVBAR_[currentMenu] ||
+                      (currentMenu === '' && id === 'home')
+                        ? '#00368E'
+                        : '#5F86BF',
                   }}
                 >
                   {label}
