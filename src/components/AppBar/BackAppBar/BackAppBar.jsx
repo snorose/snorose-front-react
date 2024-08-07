@@ -9,9 +9,11 @@ export default function BackAppBar({
   hasSearch,
   children,
   hasSearchInput,
+  hasNotice,
 }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const displayTitle = hasNotice ? `${title} 공지` : title;
 
   return (
     <div className={hasSearchInput ? styles.hasGap : styles.appBar}>
@@ -23,7 +25,7 @@ export default function BackAppBar({
           height={17}
           onClick={() => navigate(-1)}
         />
-        {title && <span className={styles.title}>{title}</span>}
+        {displayTitle && <span className={styles.title}>{displayTitle}</span>}
       </div>
       <div className={hasSearchInput ? styles.hasWideWidth : styles.actions}>
         {hasSearch && (
