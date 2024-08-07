@@ -1,12 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Icon } from '../Icon';
 import styles from './Search.module.css';
 
-export default function Search({ placeholder, onSearch }) {
-  const [text, setText] = useState('');
-  const handleSearch = (event) => {
-    event.preventDefault();
+export default function Search({ placeholder, onSearch, keyWord }) {
+  const [text, setText] = useState(keyWord || ''); 
+
+  useEffect(() => {
+    setText(keyWord || '');
+  }, [keyWord]);
+
+  const handleChange = (event) => {
     setText(event.target.value);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      onSearch(text);
+    }
   };
 
   return (
@@ -17,7 +28,8 @@ export default function Search({ placeholder, onSearch }) {
         type='text'
         placeholder={placeholder}
         value={text}
-        onChange={handleSearch}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
     </div>
   );
