@@ -24,7 +24,7 @@ export default function PostBar({ data }) {
       </div>
       <div className={styles.post_bottom}>
         <Icon id='comment' width={13} height={11} fill='#D9D9D9' />
-        <p className={styles.comment_cnt}>{data.viewCount}</p>
+        <p className={styles.comment_cnt}>15</p>
         <Icon
           id='like'
           width={12}
