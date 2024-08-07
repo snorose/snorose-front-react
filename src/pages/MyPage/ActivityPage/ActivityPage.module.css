@@ -1,7 +1,109 @@
 .activityPage {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.25rem 100px 1.25rem;
   width: 100%;
-  height: 100vh;
+}
+
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+}
+
+/* 글 목록 */
+.contentListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contentBox {
+  display: flex;
+  flex-direction: column;
+  padding: 13px 15px;
+  border-radius: 5px;
+  background: var(--Grey-1, #f8f8f8);
+}
+
+.iconAuthorDateWrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--Grey-4, var(--grey-3, #484848));
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+
+  svg {
+    width: 18px;
+    height: 15px;
+  }
+}
+.authorDate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 10px 0 3px;
+}
+
+.contentTitle {
+  color: var(--Black, #000);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.contentDesc {
+  color: var(--Grey-4, var(--grey-3, #484848));
+  font-size: 13px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.boardCommentLikeWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boardName {
+  color: var(--Grey-3-1, #898989);
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.commentLikeWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  color: var(--Grey-3-1, #898989);
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+
+  svg {
+    width: 10px;
+    height: 10px;
+  }
 }
