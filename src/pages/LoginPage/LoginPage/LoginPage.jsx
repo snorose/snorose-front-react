@@ -102,7 +102,8 @@ export default function Login() {
             로그인
           </button>
           <div className={styles.find}>
-            <Link to='/find-id'>아이디 찾기</Link> | <a>비밀번호 찾기</a>
+            <Link to='/find-id'>아이디 찾기</Link> |{' '}
+            <Link to='/find-pw'>비밀번호 찾기</Link>
           </div>
           <a className={styles.signup}>회원가입</a>
         </div>

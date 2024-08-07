@@ -3,6 +3,7 @@ import styles from './ChangePasswordPage.module.css';
 import Icon from '../../../components/Icon/Icon';
 import { BackAppBar, ActionButton } from '../../../components/AppBar';
 
+
 const handlePasswordType = (setter) => {
   setter((prev) => ({
     type: prev.visible ? 'password' : 'text',
@@ -66,11 +67,12 @@ export default function ChangePasswordPage() {
       setNewPasswordCheckError('');
     }
   };
-
   return (
     <main className={styles.changePasswordPage}>
       <div className={styles.topContainer}>
-        <BackAppBar />
+        <p>
+          <BackAppBar />
+        </p>
         <div className={styles.submitBtn}>
           <ActionButton onClick={handlePasswordChangeSubmit}>완료</ActionButton>
         </div>
