@@ -40,7 +40,12 @@ export default function FoundPwPage() {
           <span className={`${styles.dot} ${styles.third}`}></span>
           <div className={styles.result}>
             <p>{email}</p>
-            <Icon id='pencil-underline' width='24px' height='24px' />
+            <Icon
+              id='pencil-underline'
+              width='24px'
+              height='24px'
+              fill-opacity='0'
+            />
           </div>
         </div>
       </div>
