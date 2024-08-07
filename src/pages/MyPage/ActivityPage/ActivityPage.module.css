@@ -1,6 +1,7 @@
 .activityPage {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .contentWrapper {
@@ -23,9 +24,23 @@
   letter-spacing: -0.5px;
 }
 
-/* 글 목록 */
 .contentListContainer {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.sponsor {
+  display: flex;
+  width: 100%;
+  max-width: 450px;
+  position: fixed;
+  padding: 0 20px;
+  bottom: 103px;
+  background-size: cover;
+  margin: 0 auto;
+}
+
+.sponsorImage {
+  width: 100%;
 }
