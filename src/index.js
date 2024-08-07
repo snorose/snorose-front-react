@@ -164,10 +164,6 @@ const router = createBrowserRouter([
         element: <FindPwPage />,
       },
       {
-        path: 'find-pw',
-        element: <FindPwPage />,
-      },
-      {
         path: 'found-id',
         element: <FoundIdPage />,
       },
@@ -176,16 +172,8 @@ const router = createBrowserRouter([
         element: <FoundPwPage />,
       },
       {
-        path: 'found-pw',
-        element: <FoundPwPage />,
-      },
-      {
         path: 'not-found-id',
         element: <NotFoundIdPage />,
-      },
-      {
-        path: 'not-found-pw',
-        element: <NotFoundPwPage />,
       },
       {
         path: 'not-found-pw',

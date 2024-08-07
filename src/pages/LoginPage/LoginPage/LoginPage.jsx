@@ -114,8 +114,8 @@ export default function Login() {
         </div>
         {errmsg && (
           <div className={styles.errFrame}>
-            <p>입력한 내용을 다시 한 번</p>
-            <p>확인해주세요</p>
+            <p>아이디 혹은 비밀번호가</p>
+            <p>일치하지 않습니다</p>
           </div>
         )}
       </form>
