@@ -21,12 +21,6 @@ import {
   ServicePolicyPage,
 } from './pages/MyPage';
 import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
-import {
-  FindIdPage,
-  FoundIdPage,
-  NotFoundIdPage,
-  LoginPage,
-} from './pages/LoginPage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
@@ -34,10 +28,19 @@ import { ErrorPage } from './pages/ErrorPage';
 import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import ExamReviewWritePage from './pages/ExamReviewWritePage/ExamReviewWritePage';
 import HelpPage from './pages/HelpPage/HelpPage';
-import MainPage from './pages/MainPage/MainPage';
+import { MainPage } from './pages/MainPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import ProtectedRoute from './ProtectedRoute';
 import SearchPage from './pages/SearchPage/SearchPage.jsx';
+import {
+  LoginPage,
+  FindIdPage,
+  FindPwPage,
+  FoundIdPage,
+  FoundPwPage,
+  NotFoundIdPage,
+  NotFoundPwPage,
+} from './pages/LoginPage';
 
 import { ROLE } from './constants';
 import './index.css';
@@ -157,12 +160,24 @@ const router = createBrowserRouter([
         element: <FindIdPage />,
       },
       {
+        path: 'find-pw',
+        element: <FindPwPage />,
+      },
+      {
         path: 'found-id',
         element: <FoundIdPage />,
       },
       {
+        path: 'found-pw',
+        element: <FoundPwPage />,
+      },
+      {
         path: 'not-found-id',
         element: <NotFoundIdPage />,
+      },
+      {
+        path: 'not-found-pw',
+        element: <NotFoundPwPage />,
       },
     ],
   },
