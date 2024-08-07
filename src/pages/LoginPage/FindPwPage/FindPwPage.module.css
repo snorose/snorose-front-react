@@ -27,15 +27,14 @@
   font-weight: 700;
   margin-bottom: 3.5rem;
 }
+.inputFrame {
+  margin-bottom: 1.5rem;
+}
 .errFrame {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 6.625rem;
   width: 14.625rem;
   height: 3.625rem;
   border-radius: 0.313rem;
@@ -45,6 +44,7 @@
   line-height: 0.975rem;
   font-weight: 500;
   margin: 0 auto;
+  margin-bottom: 1.625rem;
 }
 .errFrame p {
   display: block;
