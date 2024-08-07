@@ -29,9 +29,8 @@ import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
 import ExamReviewWritePage from './pages/ExamReviewWritePage/ExamReviewWritePage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import { MainPage } from './pages/MainPage';
-import NoticePage from './pages/NoticePage/NoticePage';
+import NoticeListPage from './pages/NoticeListPage/NoticeListPage';
 import ProtectedRoute from './ProtectedRoute';
-import SearchPage from './pages/SearchPage/SearchPage.jsx';
 import {
   LoginPage,
   FindIdPage,
@@ -45,6 +44,37 @@ import {
 import { ROLE } from './constants';
 import './index.css';
 
+const boardPaths = ['first-snow', 'large-snow', 'permanent-snow', 'besookt'];
+
+const boardRoutes = boardPaths.flatMap((boardPath) => [
+  {
+    path: `/board/${boardPath}`,
+    element: (
+      <ProtectedRoute>
+        <BoardListPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `/board/${boardPath}/search`,
+    element: (
+      <ProtectedRoute>
+        <PostSearchPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `/board/${boardPath}/notice`,
+    element: (
+      <ProtectedRoute
+        roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
+      >
+        <NoticeListPage />
+      </ProtectedRoute>
+    ),
+  },
+]);
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -54,82 +84,9 @@ const router = createBrowserRouter([
       { index: true, element: <MainPage /> },
       { path: 'home', element: <MainPage /> },
       { path: '/board', element: <BoardPage /> },
-      {
-        path: '/search/post',
-        element: (
-          <ProtectedRoute>
-            <SearchPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: '/board/first-snow',
-        element: (
-          <ProtectedRoute>
-            <BoardListPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: '/board/first-snow/search',
-        element: (
-          <ProtectedRoute>
-            <SearchPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: '/board/large-snow',
-        element: (
-          <ProtectedRoute>
-            <BoardListPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: '/board/large-snow/search',
-        element: (
-          <ProtectedRoute>
-            <SearchPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: '/board/permanent-snow',
-        element: (
-          <ProtectedRoute>
-            <BoardListPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: '/board/permanent-snow/search',
-        element: (
-          <ProtectedRoute>
-            <SearchPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: '/board/besookt',
-        element: (
-          <ProtectedRoute
-            roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
-          >
-            <BoardListPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: '/board/besookt/search',
-        element: (
-          <ProtectedRoute>
-            <SearchPage />
-          </ProtectedRoute>
-        ),
-      },
+      ...boardRoutes,
       { path: '/post', element: <PostPage /> },
-      { path: '/post-search', element: <PostSearchPage /> },
+      { path: '/search/post', element: <PostSearchPage /> },
       { path: '/post-write', element: <PostWritePage /> },
       { path: 'exam-review', element: <ExamReviewPage /> },
       { path: 'exam-review-write', element: <ExamReviewWritePage /> },
@@ -148,7 +105,7 @@ const router = createBrowserRouter([
         element: <DownloadTestReviewPage />,
       },
       { path: 'about', element: <AboutPage /> },
-      { path: 'notice', element: <NoticePage /> },
+      { path: 'notice', element: <NoticeListPage /> },
       { path: 'authentication', element: <AuthPage /> },
       { path: 'help', element: <HelpPage /> },
       {
