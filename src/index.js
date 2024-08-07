@@ -13,9 +13,21 @@ import {
   DeleteAccountPage,
   EditInfoPage,
   MyPage,
+  ViewPointListPage,
+  MyPostPage,
+  CommentPage,
+  DownloadTestReviewPage,
+  PrivacyPolicyPage,
+  ServicePolicyPage,
 } from './pages/MyPage';
 import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
-import { AboutPage } from './pages/AboutPage';
+import {
+  FindIdPage,
+  FoundIdPage,
+  NotFoundIdPage,
+  LoginPage,
+} from './pages/LoginPage';
+import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import { ErrorPage } from './pages/ErrorPage';
@@ -134,6 +146,14 @@ const router = createBrowserRouter([
       { path: 'my-page/edit-info', element: <EditInfoPage /> },
       { path: 'my-page/view-point-list', element: <ViewPointListPage /> },
       { path: 'my-page/delete-account', element: <DeleteAccountPage /> },
+      { path: 'my-page/privacy-policy', element: <PrivacyPolicyPage /> },
+      { path: 'my-page/service-policy', element: <ServicePolicyPage /> },
+      { path: 'my-page/my-post', element: <MyPostPage /> },
+      { path: 'my-page/comment', element: <CommentPage /> },
+      {
+        path: 'my-page/download-test-review',
+        element: <DownloadTestReviewPage />,
+      },
       { path: 'about', element: <AboutPage /> },
       { path: 'notice', element: <NoticePage /> },
       { path: 'authentication', element: <AuthPage /> },
