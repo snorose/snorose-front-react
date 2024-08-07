@@ -1,21 +1,22 @@
 .myPage {
+  position: relative;
   display: flex;
   flex-direction: column;
-  background-image: url('../../../assets/mypage-background-gradation.svg');
-  background-size: cover;
-  background-position: center;
+  opacity: 0.8;
+  background: radial-gradient(
+    200.19% 208.16% at -25.32% 33.26%,
+    #00368e 0%,
+    #1270fa 100%
+  );
   width: 100%;
 }
 
-/* 마이페이지 상단 정보 */
+/* 상단 배경 */
 .myPageUpper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  height: 186px;
-  position: relative;
+  height: 197px;
+  opacity: 0.8;
+  z-index: 1;
 }
 
 .logoOverlay {
@@ -23,93 +24,247 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-image: url('../../../assets/logo-white.svg');
+  height: 434px;
+  opacity: 0.8;
+  background-image: url('/src/assets/images/symbol_White.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.myInfo {
-  position: relative;
-  z-index: 1;
+.profileImage {
+  position: absolute;
+  top: 125px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 130px;
+  padding: 6px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+  z-index: 2;
+
+  svg {
+    width: 118px;
+    height: 118px;
+  }
+}
+
+/* 컨텐츠 내용 */
+.myPageLower {
   width: 100%;
+  flex-shrink: 0;
+  border-radius: 15px 15px 0px 0px;
+  background: #fff;
+  z-index: 1;
+  padding-bottom: 100px;
+}
+
+.myInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  color: #000;
-  font-size: 8px;
+  margin-top: 72px;
 }
 
 .name {
-  padding: 6px;
   color: #000;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 700;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+  margin-bottom: 5px;
 }
 
-.myImg {
+.studentIdMemberType {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 67px;
-  height: 65px;
-  flex-shrink: 0;
-  background-color: #fff;
-  padding: 4px;
-  border-radius: 50%;
-}
-
-.profileYearMember {
-  display: flex;
-  gap: 4px;
-  padding: 6px;
-}
-
-/* 마이페이지 하단 정보 */
-.myPageLower {
-  display: flex;
-  flex-direction: column;
-  border-radius: 15px 15px 0 0;
-  background-color: #fff;
-  padding: 18px;
-}
-
-.detailContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 8px 4px;
-  border-bottom: 1px solid #c7c7c7;
-}
-
-.pointContainer {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-}
-
-.title {
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.detailContent {
-  display: flex;
-  justify-content: space-between;
-  font-size: 8px;
+  color: var(--Grey-4, var(--grey-3, #484848));
+  font-size: 14px;
   font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  margin-bottom: 7px;
+  gap: 8px;
+
+  svg {
+    width: 3px;
+    height: 3px;
+  }
 }
 
-.detailContent .detailContentDesc {
-  font-weight: 300;
+.pointWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
-/* 회원 탈퇴, 로그아웃 */
-.accountActions {
+.point {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 57px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: var(--Blue-1, #ddebf6);
+  color: var(--Blue-4, #00368e);
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  gap: 4px;
+
+  svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    padding: 1px;
+  }
+}
+
+.pointList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--Blue-4, #00368e);
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  gap: 3px;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* 탭 메뉴 */
+.tabMenu {
+  display: flex;
+  margin: 29px 20px 14px;
+  border-top: 1px solid var(--Grey-3, #d9d9d9);
+}
+
+.tab {
+  width: 100%;
+  padding: 15px;
+  color: var(--Grey-3-1, #898989);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+}
+
+.tab.active {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  border-top: 2px solid var(--Blue-4, #00368e);
+}
+
+/* 계정 정보 */
+.infoWrapper {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 8px 4px;
+  padding: 4px 13px;
+  margin: 0 20px;
+  border-radius: 5px;
+  background: var(--Grey-1, #f8f8f8);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--Grey-3, #d9d9d9);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.label {
+  color: var(--Grey-3-1, #898989);
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.value {
+  color: var(--Grey-4, var(--grey-3, #484848));
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+/* 버튼 */
+.buttonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin: 20px;
+}
+
+.editButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 28px;
+  border-radius: 5px;
+  background: var(--Blue-4, #00368e);
+  color: #fff;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.passwordButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95px;
+  height: 28px;
+  border-radius: 5px;
+  background: var(--Blue-1, #ddebf6);
+  color: var(--Blue-4, #00368e);
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+/* 내 활동, 이용안내 */
+.itemList {
+  border-bottom: 1px solid var(--Grey-3, #d9d9d9);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  color: var(--Grey-4, var(--grey-3, #484848));
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
 }
