@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       { path: 'home', element: <MainPage /> },
       { path: '/board', element: <BoardPage /> },
       {
-        path: '/board/search',
+        path: '/search/post',
         element: (
           <ProtectedRoute>
             <SearchPage />
