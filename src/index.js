@@ -21,12 +21,6 @@ import {
   ServicePolicyPage,
 } from './pages/MyPage';
 import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
-import {
-  FindIdPage,
-  FoundIdPage,
-  NotFoundIdPage,
-  LoginPage,
-} from './pages/LoginPage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
@@ -38,7 +32,6 @@ import { MainPage } from './pages/MainPage';
 import NoticePage from './pages/NoticePage/NoticePage';
 import ProtectedRoute from './ProtectedRoute';
 import SearchPage from './pages/SearchPage/SearchPage.jsx';
-import ViewPointListPage from './pages/MyPage/ViewPointListPage/ViewPointListPage.jsx';
 import {
   LoginPage,
   FindIdPage,
@@ -48,7 +41,6 @@ import {
   NotFoundIdPage,
   NotFoundPwPage,
 } from './pages/LoginPage';
-
 
 import { ROLE } from './constants';
 import './index.css';
