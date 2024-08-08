@@ -27,15 +27,6 @@ export default function NoticeListPage() {
   return (
     <div className={styles.container}>
       <BackAppBar title={currentBoard} hasNotice={true} />
-      <div className={styles.top}>
-        <div
-          className={styles.notification_bar}
-          onClick={handleNavClick('/notice')}
-        >
-          <Icon id='notice-bell' width={11} height={13} />
-          <p>[필독] 공지사항</p>
-        </div>
-      </div>
       <div className={styles.content}>
         {NOTICE_LIST &&
           NOTICE_LIST.map((post) => <NoticeBar key={post.postId} data={post} />)}
