@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './ActivityPage.module.css';
+import Icon from '../../../components/Icon/Icon';
 import { BackAppBar } from '../../../components/AppBar';
 import { PostBar } from '../../../components/PostBar';
 import { Sponser } from '../../../components/Sponser';
-import frustratedWoman from '../../../assets/images/frustratedWoman.svg';
 
 const postsData = [
   {
@@ -75,11 +75,7 @@ export default function MyPostPage() {
             <div className={styles.noContentWrapper}>
               <p className={styles.noContentMessage}>아직 작성한 글이 없어요</p>
               <div className={styles.imageWrapper}>
-                <img
-                  src={frustratedWoman}
-                  alt='frustrated woman'
-                  className={styles.image}
-                />
+                <Icon id='no-post-star' className={styles.image} />
               </div>
             </div>
           )}

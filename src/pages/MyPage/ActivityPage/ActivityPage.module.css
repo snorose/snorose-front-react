@@ -51,7 +51,7 @@
   position: relative;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
+  flex-grow: 1;
 }
 
 .noContentMessage {
@@ -65,13 +65,12 @@
 .imageWrapper {
   display: flex;
   position: relative;
-  justify-content: flex-end;
-  width: 100%;
-  max-width: 450px;
+  justify-content: center;
 }
 
 .image {
-  width: 212px;
-  height: 232px;
-  margin-bottom: 280px;
+  position: absolute;
+  transform: translateY(100%);
+  width: 220px;
+  height: 182px;
 }

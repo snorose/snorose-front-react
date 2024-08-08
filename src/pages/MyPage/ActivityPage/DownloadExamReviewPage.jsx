@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './ActivityPage.module.css';
+import Icon from '../../../components/Icon/Icon';
 import { BackAppBar } from '../../../components/AppBar';
 import { PostBar } from '../../../components/PostBar';
 import { Sponser } from '../../../components/Sponser';
-import frustratedWoman from '../../../assets/images/frustratedWoman.svg';
 
 const downloadExamReview = [
   {
@@ -47,11 +47,7 @@ export default function DownloadExamReviewPage() {
                 아직 다운받은 후기가 없어요
               </p>
               <div className={styles.imageWrapper}>
-                <img
-                  src={frustratedWoman}
-                  alt='frustrated woman'
-                  className={styles.image}
-                />
+                <Icon id='no-review-star' className={styles.image} />
               </div>
             </div>
           )}
