@@ -1,0 +1,113 @@
+.alertPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  display: flex;
+  padding: 14px 20px;
+  justify-content: flex-end;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.25rem 100px 1.25rem;
+  width: 100%;
+}
+
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+}
+
+.readAllButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 18px;
+  border-radius: 3px;
+  background: var(--blue-0, #eaf5fd);
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: var(--Blue-3, #5f86bf);
+  font-size: 9px;
+}
+
+.alertListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alertBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  background: var(--Grey-1-1, #f4f4f4);
+  padding: 15px;
+}
+
+.alertBox.unread {
+  background: var(--blue-0, #eaf5fd);
+}
+
+.alertBox.unreadWarning {
+  background: var(--Pink-1, #fee9eb);
+}
+
+.alertIconContentWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alertIconContentWrapper svg {
+  width: 32px;
+  height: 32px;
+}
+
+.alertContent {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.alertTitle {
+  color: var(--Grey-4, var(--grey-3, #484848));
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+.alertTitle.unreadTitle {
+  color: var(--Blue-4, #00368e);
+}
+.alertTitle.unreadWarningTitle {
+  color: var(--Pink-2, #ff4b6c);
+}
+
+.alertDesc {
+  color: var(--grey-3, #484848);
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  white-space: pre-line;
+}
+.alertDesc.unreadDesc {
+  color: var(--Blue-3, #5f86bf);
+}
+.alertDesc.unreadWarningDesc {
+  color: var(--Pink-3, #ff849a);
+}
