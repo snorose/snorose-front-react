@@ -16,7 +16,7 @@ import {
   ViewPointListPage,
   MyPostPage,
   CommentPage,
-  DownloadTestReviewPage,
+  DownloadExamReviewPage,
   PrivacyPolicyPage,
   ServicePolicyPage,
 } from './pages/MyPage';
@@ -144,8 +144,8 @@ const router = createBrowserRouter([
       { path: 'my-page/my-post', element: <MyPostPage /> },
       { path: 'my-page/comment', element: <CommentPage /> },
       {
-        path: 'my-page/download-test-review',
-        element: <DownloadTestReviewPage />,
+        path: 'my-page/download-exam-review',
+        element: <DownloadExamReviewPage />,
       },
       { path: 'about', element: <AboutPage /> },
       { path: 'notice', element: <NoticePage /> },

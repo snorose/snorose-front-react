@@ -26,7 +26,7 @@ export default function PostBar({ data }) {
         <span className={styles.board}>{data.board}</span>
         <div className={styles.comment_like_wrapper}>
           <Icon id='comment' width={13} height={11} fill='#D9D9D9' />
-          <p className={styles.comment_cnt}>15</p>
+          <p className={styles.comment_cnt}>{data.commentCount}</p>
           <Icon
             id='like'
             width={12}
