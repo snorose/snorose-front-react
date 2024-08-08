@@ -131,7 +131,14 @@ const router = createBrowserRouter([
       { path: '/post', element: <PostPage /> },
       { path: '/post-search', element: <PostSearchPage /> },
       { path: '/post-write', element: <PostWritePage /> },
-      { path: 'exam-review', element: <ExamReviewPage /> },
+      {
+        path: 'exam-review',
+        element: (
+          <ProtectedRoute>
+            <ExamReviewPage />
+          </ProtectedRoute>
+        ),
+      },
       { path: 'exam-review-write', element: <ExamReviewWritePage /> },
       { path: 'alert', element: <AlertPage /> },
       { path: 'my-page', element: <MyPage /> },
