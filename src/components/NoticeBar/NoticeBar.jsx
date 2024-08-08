@@ -1,12 +1,11 @@
 import { Icon } from '../Icon/index.js';
-import timeAgo from '../../utils/timeAgo.js';
 import styles from './NoticeBar.module.css';
 
-export default function NoticeBar({ data }) {
+export default function NoticeBar({ data, onClick }) {
   const givenTime = data.createdAt;
 
   return (
-    <div className={styles.post}>
+    <div className={styles.post} onClick={onClick}>
       <div className={styles.post_top}>
         <p className={styles.title}>{data.title}</p>
         <div className={styles.more_option}>

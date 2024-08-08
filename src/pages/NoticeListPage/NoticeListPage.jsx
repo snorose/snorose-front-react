@@ -29,7 +29,7 @@ export default function NoticeListPage() {
       <BackAppBar title={currentBoard} hasNotice={true} />
       <div className={styles.content}>
         {NOTICE_LIST &&
-          NOTICE_LIST.map((post) => <NoticeBar key={post.postId} data={post} />)}
+          NOTICE_LIST.map((post) => <NoticeBar key={post.postId} data={post} onClick={handleNavClick('/post')}/>)}
       </div>
     </div>
   );
