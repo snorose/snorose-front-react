@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import reportWebVitals from './reportWebVitals';
@@ -25,7 +27,7 @@ import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import { ErrorPage } from './pages/ErrorPage';
-import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
+import { ExamReviewPage, ReviewDetailPage } from './pages/ExamReviewPage';
 import ExamReviewWritePage from './pages/ExamReviewWritePage/ExamReviewWritePage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import { MainPage } from './pages/MainPage';
@@ -131,7 +133,22 @@ const router = createBrowserRouter([
       { path: '/post', element: <PostPage /> },
       { path: '/post-search', element: <PostSearchPage /> },
       { path: '/post-write', element: <PostWritePage /> },
-      { path: 'exam-review', element: <ExamReviewPage /> },
+      {
+        path: 'exam-review',
+        element: (
+          <ProtectedRoute>
+            <ExamReviewPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'review/:postId',
+        element: (
+          <ProtectedRoute>
+            <ReviewDetailPage />
+          </ProtectedRoute>
+        ),
+      },
       { path: 'exam-review-write', element: <ExamReviewWritePage /> },
       { path: 'alert', element: <AlertPage /> },
       { path: 'my-page', element: <MyPage /> },
@@ -183,12 +200,17 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode fri>
-    <ToastProvider>
-      <RouterProvider router={router} />
-    </ToastProvider>
+    <QueryClientProvider client={queryClient}>
+      <ToastProvider>
+        <RouterProvider router={router} />
+      </ToastProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
