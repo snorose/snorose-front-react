@@ -18,13 +18,7 @@ const alertData = [
     isRead: false,
     isWarning: false,
   },
-  {
-    icon: 'comment-circle',
-    title: '스노르즈 포인트를 모으는 5가지 방법',
-    description: `함박눈님 게시글에 댓글이 달렸습니다.`,
-    isRead: false,
-    isWarning: false,
-  },
+
   {
     icon: 'comment-circle',
     title: '스노르즈 포인트를 모으는 5가지 방법',
@@ -38,6 +32,14 @@ const alertData = [
     description: `시험 후기 게시글 신고가 완료되어 20포인트가 적립되었습니다.`,
     isRead: true,
     isWarning: false,
+  },
+  {
+    icon: 'snow-circle',
+    title: '족보 거래 목격시 즉시 신고해주세요',
+    description: `최근 기밀사항을 알아 폭보 거래 제보가 증가하고 있습니다.
+족보 거래를 목격하시면 즉시 신고하고 100포인트를 적립하세요.`,
+    isRead: false,
+    isWarning: true,
   },
   {
     icon: 'snow-circle',
@@ -72,13 +74,42 @@ export default function AlertPage() {
 
         <article className={styles.alertListContainer}>
           {alertData.map((item, index) => (
-            <section className={styles.alertBox}>
+            <section
+              key={index}
+              className={`${styles.alertBox} ${
+                !item.isRead
+                  ? item.isWarning
+                    ? styles.unreadWarning
+                    : styles.unread
+                  : ''
+              }`}
+            >
               <div className={styles.alertIconContentWrapper}>
                 <Icon id={item.icon} fill='none' />
                 <div className={styles.alertContent}>
-                  <h2 className={styles.alertTitle}>{item.title}</h2>
+                  <h2
+                    className={`${styles.alertTitle} ${
+                      !item.isRead
+                        ? item.isWarning
+                          ? styles.unreadWarningTitle
+                          : styles.unreadTitle
+                        : ''
+                    }`}
+                  >
+                    {item.title}
+                  </h2>
                   {item.description && (
-                    <p className={styles.alertDesc}>{item.description}</p>
+                    <p
+                      className={`${styles.alertDesc} ${
+                        !item.isRead
+                          ? item.isWarning
+                            ? styles.unreadWarningDesc
+                            : styles.unreadDesc
+                          : ''
+                      }`}
+                    >
+                      {item.description}
+                    </p>
                   )}
                 </div>
               </div>
