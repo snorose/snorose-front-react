@@ -34,7 +34,7 @@ const alertData = [
     isWarning: false,
   },
   {
-    icon: 'snow-circle',
+    icon: 'snow-circle-pink',
     title: '족보 거래 목격시 즉시 신고해주세요',
     description: `최근 기밀사항을 알아 폭보 거래 제보가 증가하고 있습니다.
 족보 거래를 목격하시면 즉시 신고하고 100포인트를 적립하세요.`,
@@ -42,7 +42,7 @@ const alertData = [
     isWarning: true,
   },
   {
-    icon: 'snow-circle',
+    icon: 'snow-circle-blue',
     title: '족보 거래 목격시 즉시 신고해주세요',
     description: `최근 기밀사항을 알아 폭보 거래 제보가 증가하고 있습니다.
 족보 거래를 목격하시면 즉시 신고하고 100포인트를 적립하세요.`,
@@ -50,7 +50,7 @@ const alertData = [
     isWarning: true,
   },
   {
-    icon: 'snow-circle',
+    icon: 'snow-circle-blue',
     title: '시험후기 오픈 일정 알림',
     description: `시험후기 게시판 오픈일정 안내입니다. (24.12.20 - 25.01.15)
 자세한 내용은 공지사항을 확인하세요.`,
