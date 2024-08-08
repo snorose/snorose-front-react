@@ -27,7 +27,7 @@ import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import { ErrorPage } from './pages/ErrorPage';
-import ExamReviewPage from './pages/ExamReviewPage/ExamReviewPage';
+import { ExamReviewPage, ReviewDetailPage } from './pages/ExamReviewPage';
 import ExamReviewWritePage from './pages/ExamReviewWritePage/ExamReviewWritePage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import { MainPage } from './pages/MainPage';
@@ -138,6 +138,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <ExamReviewPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'review/:postId',
+        element: (
+          <ProtectedRoute>
+            <ReviewDetailPage />
           </ProtectedRoute>
         ),
       },

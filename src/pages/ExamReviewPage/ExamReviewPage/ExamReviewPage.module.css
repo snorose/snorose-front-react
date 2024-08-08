@@ -3,6 +3,10 @@
   margin: 0 1.25rem 0.625rem 1.25rem;
 }
 
+.to {
+  width: 100%;
+}
+
 .list {
   padding: 4px 17px 0 17px;
   display: flex;

@@ -1,15 +1,16 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
-import useIntersect from '../../hooks/useIntersect.jsx';
+import useIntersect from '../../../hooks/useIntersect.jsx';
 
-import { AppBar } from '../../components/AppBar';
-import { Loading } from '../../components/Loading';
-import { PostBar } from '../../components/PostBar';
-import { PTR } from '../../components/PTR';
-import { Search } from '../../components/Search';
-import { Target } from '../../components/Target';
+import { AppBar } from '../../../components/AppBar/index.js';
+import { Loading } from '../../../components/Loading/index.js';
+import { PostBar } from '../../../components/PostBar/index.js';
+import { PTR } from '../../../components/PTR/index.js';
+import { Search } from '../../../components/Search/index.js';
+import { Target } from '../../../components/Target/index.js';
 
-import { getReviewList } from '../../apis/examReview.js';
+import { getReviewList } from '../../../apis/examReview.js';
 
 import styles from './ExamReviewPage.module.css';
 
@@ -49,7 +50,13 @@ export default function ExamReviewPage() {
       <PTR>
         <ul className={styles.list}>
           {reviewList.map((post) => (
-            <PostBar key={post.postId} data={post} />
+            <Link
+              className={styles.to}
+              key={post.postId}
+              to={`/review/${post.postId}`}
+            >
+              <PostBar data={post} />
+            </Link>
           ))}
         </ul>
         {isFetching && <Loading />}
