@@ -78,11 +78,10 @@ export default function CommentPage() {
               <p className={styles.noContentMessage}>
                 아직 작성한 댓글이 없어요
               </p>
-
               <div className={styles.imageWrapper}>
                 <img
                   src={frustratedWoman}
-                  alt='frustrated woman image'
+                  alt='frustrated woman'
                   className={styles.image}
                 />
               </div>

@@ -46,11 +46,10 @@ export default function DownloadExamReviewPage() {
               <p className={styles.noContentMessage}>
                 아직 다운받은 후기가 없어요
               </p>
-
               <div className={styles.imageWrapper}>
                 <img
                   src={frustratedWoman}
-                  alt='frustrated woman image'
+                  alt='frustrated woman'
                   className={styles.image}
                 />
               </div>
