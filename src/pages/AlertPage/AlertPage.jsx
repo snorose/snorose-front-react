@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './AlertPage.module.css';
 import Icon from '../../components/Icon/Icon.jsx';
 import { MenuIcon } from '../../components/MenuIcon';
 
-const alertData = [
+const initialAlertData = [
   {
     type: 'addedToBoard',
     title: '내 글이 베숙트에 추가되었습니다',
@@ -76,6 +76,16 @@ const getIconId = (type, isRead) => {
 };
 
 export default function AlertPage() {
+  const [alerts, setAlerts] = useState(initialAlertData);
+
+  const markAllAsRead = () => {
+    const updatedAlerts = alerts.map((alert) => ({
+      ...alert,
+      isRead: true,
+    }));
+    setAlerts(updatedAlerts);
+  };
+
   return (
     <main className={styles.alertPage}>
       <header className={styles.menu}>
@@ -85,11 +95,13 @@ export default function AlertPage() {
       <section className={styles.contentWrapper}>
         <div className={styles.topContainer}>
           <h1 className={styles.title}>알림</h1>
-          <button className={styles.readAllButton}>모두 읽기</button>
+          <button className={styles.readAllButton} onClick={markAllAsRead}>
+            모두 읽기
+          </button>
         </div>
 
         <article className={styles.alertListContainer}>
-          {alertData.map((item, index) => (
+          {alerts.map((item, index) => (
             <section
               key={index}
               className={`${styles.alertBox} ${
