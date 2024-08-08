@@ -1,7 +1,7 @@
 .activityPage {
   display: flex;
-  flex-direction: column;
   position: relative;
+  flex-direction: column;
 }
 
 .contentWrapper {
@@ -28,17 +28,18 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 100px;
 }
 
 .sponsor {
   display: flex;
+  position: fixed;
+  margin: 0 auto;
+  bottom: 103px;
+  padding: 0 20px;
   width: 100%;
   max-width: 450px;
-  position: fixed;
-  padding: 0 20px;
-  bottom: 103px;
   background-size: cover;
-  margin: 0 auto;
 }
 
 .sponsorImage {
@@ -47,10 +48,10 @@
 
 .noContentWrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-  position: relative;
 }
 
 .noContentMessage {
@@ -63,10 +64,10 @@
 
 .imageWrapper {
   display: flex;
+  position: relative;
   justify-content: flex-end;
   width: 100%;
   max-width: 450px;
-  position: relative;
 }
 
 .image {
