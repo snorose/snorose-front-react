@@ -68,9 +68,11 @@ export default function MyPostPage() {
         </div>
 
         <article className={styles.contentListContainer}>
-          {postsData.map((post, index) => (
-            <PostBar key={index} data={post} />
-          ))}
+          {postsData.length > 0 ? (
+            postsData.map((post, index) => <PostBar key={index} data={post} />)
+          ) : (
+            <p className={styles.noContentMessage}>아직 작성한 글이 없어요</p>
+          )}
         </article>
       </section>
 

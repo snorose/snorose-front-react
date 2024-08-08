@@ -3,6 +3,7 @@ import styles from './ActivityPage.module.css';
 import { BackAppBar } from '../../../components/AppBar';
 import { PostBar } from '../../../components/PostBar';
 import { Sponser } from '../../../components/Sponser';
+import frustratedWoman from '../../../assets/images/frustratedWoman.svg';
 
 const commentsData = [
   {
@@ -68,9 +69,25 @@ export default function CommentPage() {
         </div>
 
         <article className={styles.contentListContainer}>
-          {commentsData.map((post, index) => (
-            <PostBar key={index} data={post} />
-          ))}
+          {commentsData.length > 0 ? (
+            commentsData.map((post, index) => (
+              <PostBar key={index} data={post} />
+            ))
+          ) : (
+            <div className={styles.noContentWrapper}>
+              <p className={styles.noContentMessage}>
+                아직 작성한 댓글이 없어요
+              </p>
+
+              <div className={styles.imageWrapper}>
+                <img
+                  src={frustratedWoman}
+                  alt='frustrated woman image'
+                  className={styles.image}
+                />
+              </div>
+            </div>
+          )}
         </article>
       </section>
 

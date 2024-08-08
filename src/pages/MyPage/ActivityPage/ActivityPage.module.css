@@ -44,3 +44,33 @@
 .sponsorImage {
   width: 100%;
 }
+
+.noContentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  position: relative;
+}
+
+.noContentMessage {
+  color: var(--Grey-4, var(--grey-3, #484848));
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+}
+
+.image {
+  width: 212px;
+  height: 232px;
+  margin-bottom: 280px;
+}
