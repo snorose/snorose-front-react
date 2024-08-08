@@ -37,7 +37,7 @@ export const REVIEW_LIST = [
   },
   {
     userDisplay: '송이23',
-    postId: 22,
+    postId: 23,
     title: '컴퓨터특강/이기용/001',
     likeCount: 101,
     viewCount: 123,
