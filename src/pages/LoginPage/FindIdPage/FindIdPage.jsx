@@ -107,18 +107,20 @@ export default function FindIdPage() {
             </Link>
             <h1 className={styles.pageTitle}>아이디 찾기</h1>
 
-            {inputProps.map((props) => {
+            {inputProps.map((props, i) => {
               return (
-                <Input
-                  title={props[0]}
-                  placeholder={props[1]}
-                  className={props[2]}
-                  setClassName={props[3]}
-                  classNameCheck={props[4]}
-                  inputType={props[5]}
-                  inputData={formData}
-                  errMsg={props[6]}
-                />
+                <div className={styles.inputFrame} key={i}>
+                  <Input
+                    title={props[0]}
+                    placeholder={props[1]}
+                    className={props[2]}
+                    setClassName={props[3]}
+                    classNameCheck={props[4]}
+                    inputType={props[5]}
+                    inputData={setFormData}
+                    errMsg={props[6]}
+                  />
+                </div>
               );
             })}
           </div>

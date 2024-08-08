@@ -44,7 +44,7 @@ export default function FoundPwPage() {
               id='pencil-underline'
               width='24px'
               height='24px'
-              fill-opacity='0'
+              fillOpacity='0'
             />
           </div>
         </div>

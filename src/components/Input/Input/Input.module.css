@@ -16,7 +16,6 @@
 .ready {
   border: 0;
   background-color: #f5f5f5;
-  margin-bottom: 1.5rem;
 }
 .ready:placeholder {
   color: #c7c7c7;
@@ -24,13 +23,11 @@
 .right {
   border: 0;
   background-color: #eaf5fd;
-  margin-bottom: 1.5rem;
   color: #00368e;
 }
 .wrong {
   border: 0;
   background-color: #fee9eb;
-  margin-bottom: 0.188rem;
   color: #ff4b6c;
 }
 .errMsg {

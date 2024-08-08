@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styles from './ChangePasswordPage.module.css';
 import Icon from '../../../components/Icon/Icon';
 import { BackAppBar, ActionButton } from '../../../components/AppBar';
+//import BackAppBar from '../../../components/AppBar/BackAppBar/BackAppBar';
+//import ActionButton from '../../../components/AppBar/ActionButton/ActionButton';
 
 
 const handlePasswordType = (setter) => {
