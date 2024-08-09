@@ -36,15 +36,20 @@ export default function PostSearchPage() {
         hasSearchInput={true}
       />
       <div className={styles.content}>
-        {keyword === '' ? null : noResult ? (
-          <div className={styles.noResult}>검색 결과가 없습니다</div>
-        ) : (
-          <div className={styles.posts}>
-            {POST_LIST &&
-              POST_LIST.map((post) => (
-                <PostBar key={post.postId} data={post} />
-              ))}
-          </div>
+        {keyword === '' ? null : (
+          <>
+            {noResult ? (
+              <div className={styles.noResult}>검색 결과가 없습니다</div>
+            ) : (
+              <div className={styles.posts}>
+                {POST_LIST
+                  ? POST_LIST.map((post) => (
+                      <PostBar key={post.postId} data={post} />
+                    ))
+                  : null}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

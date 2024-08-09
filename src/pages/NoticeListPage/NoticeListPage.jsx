@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './NoticeListPage.module.css';
-import { Icon } from '../../components/Icon';
 import { BackAppBar } from '../../components/AppBar';
 import { NOTICE_LIST } from '../../dummy/data/noticeList.js';
 import { NoticeBar } from '../../components/NoticeBar';
@@ -13,16 +12,16 @@ export default function NoticeListPage() {
     };
   };
 
-  const boardMap = {
-    'first-snow': '첫눈온방',
-    'large-snow': '함박눈방',
-    'permanent-snow': '만년설방',
+  const titleMap = {
+    'first-snow': '첫눈온방 공지',
+    'large-snow': '함박눈방 공지',
+    'permanent-snow': '만년설방 공지',
     besookt: '베숙트',
   };
 
   const { pathname } = useLocation();
   const currentPath = pathname.split('/')[2];
-  const currentBoard = boardMap[currentPath] || '';
+  const currentBoard = titleMap[currentPath] || '';
 
   return (
     <div className={styles.container}>
