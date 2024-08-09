@@ -2,7 +2,7 @@ import { Icon } from '../../components/Icon';
 import timeAgo from '../../utils/timeAgo.js';
 import styles from './PostBar.module.css';
 
-export default function PostBar({ data }) {
+export default function PostBar({ data, optionClick }) {
   const givenTime = data.createdAt;
   const agoTime = timeAgo(givenTime);
 
@@ -14,7 +14,7 @@ export default function PostBar({ data }) {
         <p className={styles.dot}>·</p>
         <p>{agoTime}</p>
         {data.notice ? <p className={styles.edited}>&nbsp;(수정됨)</p> : null}
-        <div className={styles.more_option}>
+        <div className={styles.more_option} onClick={optionClick}>
           <Icon id='ellipsis-vertical' width={3} height={11} fill='#484848' />
         </div>
       </div>

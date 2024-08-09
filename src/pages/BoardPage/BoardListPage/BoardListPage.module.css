@@ -31,7 +31,7 @@ body {
   max-width: 450px;
   position: fixed;
   bottom: 120px;
-  z-index: 999;
+  z-index: 10;
 }
 
 .side_menu_btn {

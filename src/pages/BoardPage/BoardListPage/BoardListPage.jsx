@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './BoardListPage.module.css';
 import Icon from '../../../components/Icon/Icon.jsx';
-import BackAppBar from '../../../components/AppBar/BackAppBar/BackAppBar.jsx';
-import PostBar from '../../../components/PostBar/PostBar.jsx';
-import Sponser from '../../../components/Sponser/Sponser.jsx';
+import { BackAppBar } from '../../../components/AppBar';
+import { PostBar } from '../../../components/PostBar';
+import { Sponser } from '../../../components/Sponser';
+import { OptionModal } from '../../../components/Modal/index.js';
 import { POST_LIST } from '../../../dummy/data/postList.js';
 import PTR from '../../../components/PTR/PTR.jsx';
 
 export default function BoardListPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+
   const navigate = useNavigate();
   const handleNavClick = (to) => {
     return () => {
@@ -41,7 +46,9 @@ export default function BoardListPage() {
       <PTR>
         <div className={styles.content}>
           {POST_LIST &&
-            POST_LIST.map((post) => <PostBar key={post.postId} data={post} />)}
+            POST_LIST.map((post) => (
+              <PostBar key={post.postId} data={post} optionClick={openModal} />
+            ))}
         </div>
       </PTR>
       <div className={styles.pencil_icon}>
@@ -55,6 +62,11 @@ export default function BoardListPage() {
       <div className={styles.sponser}>
         <Sponser />
       </div>
+      <OptionModal
+        id='post-report'
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+      />
     </div>
   );
 }
