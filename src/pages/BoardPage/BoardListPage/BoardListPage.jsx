@@ -5,7 +5,7 @@ import Icon from '../../../components/Icon/Icon.jsx';
 import { BackAppBar } from '../../../components/AppBar';
 import { PostBar } from '../../../components/PostBar';
 import { Sponser } from '../../../components/Sponser';
-import { OptionModal } from '../../../components/Modal/index.js';
+import { OptionModal } from '../../../components/Modal';
 import { POST_LIST } from '../../../dummy/data/postList.js';
 import PTR from '../../../components/PTR/PTR.jsx';
 
