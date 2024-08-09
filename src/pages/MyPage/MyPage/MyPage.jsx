@@ -44,10 +44,10 @@ export default function MyPage() {
                 <Icon id='point-circle' />
                 39
               </div>
-              <a className={styles.pointList}>
+              <div className={styles.pointList}>
                 포인트 내역 보기
                 <Icon id='angle-right' fill='#00368e' />
-              </a>
+              </div>
             </div>
           </Link>
         </div>
