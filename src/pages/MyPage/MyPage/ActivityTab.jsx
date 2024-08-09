@@ -12,7 +12,7 @@ const ActivityTab = () => {
           { label: '댓글 단 글 모아보기', link: 'comment' },
           {
             label: '다운 받은 시험 후기 모아보기',
-            link: 'download-test-review',
+            link: 'download-exam-review',
           },
         ].map((item, index) => (
           <div className={styles.itemList}>

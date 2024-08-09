@@ -23,15 +23,18 @@ export default function PostBar({ data, optionClick }) {
         <p className={styles.text}>{data.content}</p>
       </div>
       <div className={styles.post_bottom}>
-        <Icon id='comment' width={13} height={11} fill='#D9D9D9' />
-        <p className={styles.comment_cnt}>15</p>
-        <Icon
-          id='like'
-          width={12}
-          height={11}
-          fill={data.liked ? '#5F86BF' : '#D9D9D9'}
-        />
-        <p className={styles.like_cnt}>{data.likeCount}</p>
+        <span className={styles.board}>{data.board}</span>
+        <div className={styles.comment_like_wrapper}>
+          <Icon id='comment' width={13} height={11} fill='#D9D9D9' />
+          <p className={styles.comment_cnt}>{data.commentCount}</p>
+          <Icon
+            id='like'
+            width={12}
+            height={11}
+            fill={data.liked ? '#5F86BF' : '#D9D9D9'}
+          />
+          <p className={styles.like_cnt}>{data.likeCount}</p>
+        </div>
       </div>
     </div>
   );
