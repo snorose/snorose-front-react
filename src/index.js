@@ -46,11 +46,11 @@ import {
 import { ROLE } from './constants';
 import './index.css';
 
-const boardPaths = ['first-snow', 'large-snow', 'permanent-snow', 'besookt'];
+const boardIds = [21, 22, 23, 20];
 
-const boardRoutes = boardPaths.flatMap((boardPath) => [
+const boardRoutes = boardIds.flatMap((boardId) => [
   {
-    path: `/board/${boardPath}`,
+    path: `/v1/boards/${boardId}/posts/postlist`,
     element: (
       <ProtectedRoute>
         <BoardListPage />
@@ -58,7 +58,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     ),
   },
   {
-    path: `/board/${boardPath}/search`,
+    path: `/board/${boardId}/search`,
     element: (
       <ProtectedRoute>
         <PostSearchPage />
@@ -66,7 +66,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     ),
   },
   {
-    path: `/board/${boardPath}/notice`,
+    path: `/board/${boardId}/notice`,
     element: (
       <ProtectedRoute
         roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
@@ -157,7 +157,13 @@ const router = createBrowserRouter([
   },
 ]);
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
