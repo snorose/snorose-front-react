@@ -1,19 +1,21 @@
 import { Outlet, useLocation } from 'react-router-dom';
+
 import Navbar from './components/Navbar/Navbar';
-import { MENU_WITHOUT_NAV } from './constants/menuWithoutNav';
+
+import { findRouteByPath } from './utils/findRoute.js';
+import { routeList } from './route.js';
+
 import styles from './App.module.css';
 
-function checkNav(location) {
-  return !MENU_WITHOUT_NAV.includes(location);
-}
-
 function App() {
-  const location = useLocation();
-  const isNav = checkNav(location.pathname);
+  const { pathname } = useLocation();
+  const currentRoute = findRouteByPath(pathname, routeList);
+  const hideNav = currentRoute?.meta?.hideNav ?? false;
+
   return (
     <div className={styles.app}>
       <Outlet />
-      {isNav && <Navbar />}
+      {!hideNav && <Navbar />}
     </div>
   );
 }
