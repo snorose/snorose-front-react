@@ -1,16 +1,18 @@
 import { createContext, useState, useContext } from 'react';
-import Toast from '../components/Toast/Toast.jsx';
+import { Toast } from '../components/Toast';
 
 const ToastContext = createContext();
 
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
+
   const addToast = (toast) => {
     if (toasts.find((item) => item.id === toast.id)) {
       removeToast(toast);
     }
     setToasts((prev) => [...prev, toast]);
   };
+
   const removeToast = (toast) => {
     setToasts((prev) => prev.filter((item) => item.id !== toast.id));
   };
