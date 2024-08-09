@@ -15,17 +15,18 @@ import { getReviewList } from '../../../apis/examReview.js';
 import styles from './ExamReviewPage.module.css';
 
 export default function ExamReviewPage() {
-  const { data, hasNextPage, isFetching, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['reviewList'],
-    queryFn: ({ pageParam }) => getReviewList(pageParam),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      if (lastPage.length === 0) {
-        return undefined;
-      }
-      return lastPageParam + 1;
-    },
-  });
+  const { data, hasNextPage, isFetching, status, fetchNextPage } =
+    useInfiniteQuery({
+      queryKey: ['reviewList'],
+      queryFn: ({ pageParam }) => getReviewList(pageParam),
+      initialPageParam: 0,
+      getNextPageParam: (lastPage, allPages, lastPageParam) => {
+        if (lastPage?.length === 0) {
+          return undefined;
+        }
+        return lastPageParam + 1;
+      },
+    });
 
   const ref = useIntersect(
     async (entry, observer) => {
@@ -49,15 +50,16 @@ export default function ExamReviewPage() {
       />
       <PTR>
         <ul className={styles.list}>
-          {reviewList.map((post) => (
-            <Link
-              className={styles.to}
-              key={post.postId}
-              to={`/review/${post.postId}`}
-            >
-              <PostBar data={post} />
-            </Link>
-          ))}
+          {status !== 'error' &&
+            reviewList.map((post) => (
+              <Link
+                className={styles.to}
+                key={post.postId}
+                to={`/review/${post.postId}`}
+              >
+                <PostBar data={post} />
+              </Link>
+            ))}
         </ul>
         {isFetching && <Loading />}
         <Target ref={ref} height='100px' />
