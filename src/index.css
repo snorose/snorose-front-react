@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
 :root {
+  --default-width: 600px;
   --default-margin: 1.25rem;
 }
 

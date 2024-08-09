@@ -1,7 +1,7 @@
 /* 모달 공통 스타일 */
 .dim {
   width: 100vw;
-  max-width: 450px;
+  max-width: var(--default-width);
   height: 100vh;
   position: fixed;
   z-index: 11;
