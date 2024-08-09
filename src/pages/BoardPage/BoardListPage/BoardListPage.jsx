@@ -32,7 +32,7 @@ export default function BoardListPage() {
       <div className={styles.top}>
         <div
           className={styles.notification_bar}
-          onClick={handleNavClick('/alert')}
+          onClick={handleNavClick('./notice')}
         >
           <Icon id='notice-bell' width={11} height={13} />
           <p>[필독] 공지사항</p>
