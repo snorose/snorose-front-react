@@ -1,6 +1,6 @@
-import styles from './Modal.module.css'; 
-import { MODAL_OPTIONS } from '../../../constants/modalOptions';
-import Options from './Options'; 
+import styles from './Modal.module.css';
+import { MODAL_OPTIONS } from '../../constants/modalOptions';
+import Options from './Options';
 
 export default function OptionModal({ id, isOpen, setIsOpen }) {
   const modalOption = MODAL_OPTIONS.find((option) => option.id === id);

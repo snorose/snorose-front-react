@@ -1,5 +1,5 @@
 import styles from './Modal.module.css';
-import { MODAL_OPTIONS } from '../../../constants/modalOptions';
+import { MODAL_OPTIONS } from '../../constants/modalOptions';
 
 export default function DeleteModal({ id, isOpen, setIsOpen }) {
   const modalOption = MODAL_OPTIONS.find((option) => option.id === id);

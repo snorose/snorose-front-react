@@ -1,5 +1,5 @@
 import styles from './Modal.module.css';
-import { Icon } from '../../Icon';
+import { Icon } from '../Icon';
 import { useNavigate } from 'react-router-dom';
 
 export default function Options({ options }) {

@@ -1,5 +1,5 @@
 import styles from './Modal.module.css';
-import { MODAL_OPTIONS } from '../../../constants/modalOptions';
+import { MODAL_OPTIONS } from '../../constants/modalOptions';
 import { useState } from 'react';
 
 export default function TextAreaModal({ id, isOpen, setIsOpen }) {
