@@ -3,13 +3,8 @@ import { authAxios } from '../axios';
 const ENDPOINT = '/v1/reviews/review';
 
 export const getReviewList = async (page = 0) => {
-  try {
-    const response = await authAxios.get(`/v1/reviews/32/list/${page}`);
-    return response.data.result;
-  } catch (error) {
-    console.error(error);
-    alert('데이터를 불러오지 못 했습니다.');
-  }
+  const response = await authAxios.get(`/v1/reviews/32/list/${page}`);
+  return response.data.result;
 };
 
 export const postExamReview = async ({ data, file }) => {
