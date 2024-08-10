@@ -8,19 +8,19 @@
 
 .commentTop {
   width: 100%;
+  padding: 12px 14px 6px 14px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: #898989;
   font-size: 11px;
   line-height: 150%;
   letter-spacing: -0.5px;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 14px 6px 14px;
 }
 
 .commentTopLeft {
   display: flex;
-  align-items: end;
+  align-items: center;
   gap: 8px;
 }
 
@@ -31,7 +31,10 @@
 }
 
 .dot {
-  font-weight: 900;
+  width: 3px;
+  height: 3px;
+  background: #898989;
+  border-radius: 100%;
 }
 
 .commentCenter {
@@ -46,7 +49,7 @@
   display: flex;
   justify-content: end;
   gap: 8px;
-  padding: 4px 14px 6px 14px;
+  padding: 4px 14px 12px 14px;
 }
 
 .count {

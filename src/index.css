@@ -48,6 +48,8 @@ pre {
   box-sizing: border-box;
   font: inherit;
   vertical-align: baseline;
+  line-height: 150%;
+  letter-spacing: -0.5px;
 }
 
 p,
