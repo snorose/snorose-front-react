@@ -2,6 +2,7 @@
 @import url('https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css');
 
 :root {
+  --default-width: 600px;
   --default-margin: 1.25rem;
 }
 
