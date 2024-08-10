@@ -17,7 +17,7 @@ import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import { ErrorPage } from './pages/ErrorPage';
-import { ExamReviewPage, ReviewDetailPage } from './pages/ExamReviewPage';
+import { ExamReviewDetailPage, ExamReviewPage } from './pages/ExamReviewPage';
 import ExamReviewWritePage from './pages/ExamReviewWritePage/ExamReviewWritePage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import { MainPage } from './pages/MainPage';
@@ -88,10 +88,10 @@ export const routeList = [
         ),
       },
       {
-        path: '/review/:postId',
+        path: '/exam-review/:postId',
         element: (
           <ProtectedRoute>
-            <ReviewDetailPage />
+            <ExamReviewDetailPage />
           </ProtectedRoute>
         ),
         meta: { hideNav: true },

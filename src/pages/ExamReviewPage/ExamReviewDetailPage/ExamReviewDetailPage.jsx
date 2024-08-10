@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-export default function ReviewDetailPage() {
+export default function ExamReviewDetailPage() {
   const { postId } = useParams();
 
   console.log(postId);
