@@ -14,16 +14,17 @@ import useIntersect from '../../../hooks/useIntersect.jsx';
 import { getPostList } from '../../../apis/postList.js';
 import { Target } from '../../../components/Target/index.js';
 import { BOARD_MENUS } from '../../../constants/boardMenus.js';
-import { POST_LIST } from '../../../dummy/data/postList.js'; // test dummy
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
-  const currentBoardId = parseInt(pathname.split('/')[3], 10);
+  const currentBoardTextId = pathname.split('/')[2];
+  const currentBoard =
+    BOARD_MENUS.find((menu) => menu.textId === currentBoardTextId) || {};
 
   const { data, hasNextPage, isFetching, status, fetchNextPage, refetch } =
     useInfiniteQuery({
-      queryKey: ['postList', currentBoardId],
-      queryFn: ({ pageParam }) => getPostList(currentBoardId, pageParam),
+      queryKey: ['postList', currentBoard.id],
+      queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
       getNextPageParam: (lastPage, allPages, lastPageParam) => {
         if (lastPage.length === 0) {
           return undefined;
@@ -53,9 +54,6 @@ export default function BoardListPage() {
       navigate(to);
     };
   };
-
-  const currentBoard =
-    BOARD_MENUS.find((menu) => menu.id === currentBoardId) || {};
 
   const handleRefresh = () => {
     return refetch().then(() => {

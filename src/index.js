@@ -46,11 +46,11 @@ import {
 import { ROLE } from './constants';
 import './index.css';
 
-const boardIds = [21, 22, 23, 20];
+const boardIds = ['first-snow', 'large-snow', 'permanent-snow', 'besookt'];
 
 const boardRoutes = boardIds.flatMap((boardId) => [
   {
-    path: `/v1/boards/${boardId}/posts/postlist`,
+    path: `/board/${boardId}`,
     element: (
       <ProtectedRoute>
         <BoardListPage />

@@ -3,7 +3,7 @@ import styles from './BoardBar.module.css';
 
 export default function BoardBar({ data }) {
   return (
-    <Link to={`${data.to}`} className={styles.board_list_bar}>
+    <Link to={`/board/${data.textId}`} className={styles.board_list_bar}>
       <svg
         className={styles.board_bar_background}
         style={{ backgroundImage: `url("${data.image}")` }}
