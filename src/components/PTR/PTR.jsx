@@ -4,19 +4,11 @@ import { Icon } from '../Icon';
 
 import styles from './PTR.module.css';
 
-export default function PTR({ children }) {
-  const handleRefresh = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log('Refreshed!');
-        resolve();
-      }, 1500);
-    });
-  };
+export default function PTR({ children, onRefresh }) {
 
   return (
     <PullToRefresh
-      onRefresh={handleRefresh}
+      onRefresh={onRefresh}
       refreshingContent={
         <div className={styles.refreshBox}>
           <div className={styles.refreshIcon}>

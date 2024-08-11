@@ -1,15 +1,50 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useInfiniteQuery } from '@tanstack/react-query';
+
 import styles from './BoardListPage.module.css';
+
 import Icon from '../../../components/Icon/Icon.jsx';
 import { BackAppBar } from '../../../components/AppBar';
 import { PostBar } from '../../../components/PostBar';
 import { Sponser } from '../../../components/Sponser';
 import { OptionModal } from '../../../components/Modal';
-import { POST_LIST } from '../../../dummy/data/postList.js';
 import PTR from '../../../components/PTR/PTR.jsx';
+import useIntersect from '../../../hooks/useIntersect.jsx';
+import { getPostList } from '../../../apis/postList.js';
+import { Target } from '../../../components/Target/index.js';
+import { BOARD_MENUS } from '../../../constants/boardMenus.js';
 
 export default function BoardListPage() {
+  const { pathname } = useLocation();
+  const currentBoardTextId = pathname.split('/')[2];
+  const currentBoard =
+    BOARD_MENUS.find((menu) => menu.textId === currentBoardTextId) || {};
+
+  const { data, hasNextPage, isFetching, status, fetchNextPage, refetch } =
+    useInfiniteQuery({
+      queryKey: ['postList', currentBoard.id],
+      queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
+      getNextPageParam: (lastPage, allPages, lastPageParam) => {
+        if (lastPage.length === 0) {
+          return undefined;
+        }
+        return lastPage.length > 0 ? (lastPageParam || 0) + 1 : undefined;
+      },
+    });
+
+  const ref = useIntersect(
+    async (entry, observer) => {
+      observer.unobserve(entry.target);
+      if (hasNextPage && !isFetching) {
+        fetchNextPage();
+      }
+    },
+    { threshold: 0.8 }
+  );
+
+  const postList = data ? data.pages.flatMap((page) => page) : [];
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
 
@@ -20,20 +55,15 @@ export default function BoardListPage() {
     };
   };
 
-  const boardMap = {
-    'first-snow': '첫눈온방',
-    'large-snow': '함박눈방',
-    'permanent-snow': '만년설방',
-    besookt: '베숙트',
+  const handleRefresh = () => {
+    return refetch().then(() => {
+      console.log('Refreshed!');
+    });
   };
-
-  const { pathname } = useLocation();
-  const currentPath = pathname.split('/')[2];
-  const currentBoard = boardMap[currentPath] || '';
 
   return (
     <div className={styles.container}>
-      <BackAppBar title={currentBoard} hasMenu hasSearch />
+      <BackAppBar title={currentBoard.title} hasMenu hasSearch />
       <div className={styles.top}>
         <div
           className={styles.notification_bar}
@@ -43,11 +73,16 @@ export default function BoardListPage() {
           <p>[필독] 공지사항</p>
         </div>
       </div>
-      <PTR>
-        <div className={styles.content}>
-          {POST_LIST &&
-            POST_LIST.map((post) => (
-              <PostBar key={post.postId} data={post} optionClick={openModal} />
+      <PTR onRefresh={handleRefresh}>
+        <div className={styles.postListContainer}>
+          {status !== 'error' &&
+            postList.map((post) => (
+              <PostBar
+                key={post.postId}
+                data={post}
+                optionClick={openModal}
+                use='post'
+              />
             ))}
         </div>
       </PTR>
@@ -67,6 +102,7 @@ export default function BoardListPage() {
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
       />
+      <Target ref={ref} height='100px' />
     </div>
   );
 }
