@@ -84,6 +84,7 @@ export const routeList = [
       { path: '/home', element: <MainPage /> },
       { path: '/board', element: <BoardPage /> },
       ...boardRoutes,
+      { path: '/post', element: <PostPage /> },
       { path: '/search/post', element: <PostSearchPage /> },
       { path: '/post-write', element: <PostWritePage /> },
       {
