@@ -5,9 +5,6 @@
   border-radius: 5px;
 }
 
-
-
-
 .post_top {
   display: flex;
   align-items: center;
@@ -72,10 +69,27 @@
   display: flex;
   gap: 5px;
   font-size: 10px;
-  padding: 7px 0 0 0;
-  align-items: center;
-  justify-content: end;
+  padding: 5px 0 0 0;
   color: #898989;
+  justify-content: space-between;
+
+  p {
+    margin-bottom: 3px;
+  }
+}
+
+.board {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.comment_like_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 
   p {
     margin-bottom: 3px;

@@ -77,7 +77,12 @@ export default function BoardListPage() {
         <div className={styles.postListContainer}>
           {status !== 'error' &&
             postList.map((post) => (
-              <PostBar key={post.postId} data={post} optionClick={openModal} />
+              <PostBar
+                key={post.postId}
+                data={post}
+                optionClick={openModal}
+                use='post'
+              />
             ))}
         </div>
       </PTR>
