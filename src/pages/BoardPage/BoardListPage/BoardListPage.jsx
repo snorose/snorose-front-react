@@ -74,10 +74,12 @@ export default function BoardListPage() {
         </div>
       </div>
       <PTR onRefresh={handleRefresh}>
-        {status !== 'error' &&
-          postList.map((post) => (
-            <PostBar key={post.postId} data={post} optionClick={openModal} />
-          ))}
+        <div className={styles.postListContainer}>
+          {status !== 'error' &&
+            postList.map((post) => (
+              <PostBar key={post.postId} data={post} optionClick={openModal} />
+            ))}
+        </div>
       </PTR>
       <div className={styles.pencil_icon}>
         <Icon

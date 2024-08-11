@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import { Icon } from '../../../components/Icon';
 import { Comment } from '../../../components/Comment';
 import { InputBar } from '../../../components/InputBar';
@@ -8,6 +9,9 @@ import styles from './PostPage.module.css';
 import timeAgo from '../../../utils/timeAgo.js';
 
 export default function PostPage() {
+  const { postId } = useParams();
+  console.log(postId);
+
   return (
     <div className={styles.container}>
       <div className={styles.backAppBar}>

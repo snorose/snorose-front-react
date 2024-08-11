@@ -58,6 +58,14 @@ const boardRoutes = boardIds.flatMap((boardId) => [
     ),
   },
   {
+    path: `/board/${boardId}/post/:postId`,
+    element: (
+      <ProtectedRoute>
+        <PostPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: `/board/${boardId}/search`,
     element: (
       <ProtectedRoute>
@@ -87,7 +95,7 @@ const router = createBrowserRouter([
       { path: 'home', element: <MainPage /> },
       { path: '/board', element: <BoardPage /> },
       ...boardRoutes,
-      { path: '/post', element: <PostPage /> },
+      // { path: '/post', element: <PostPage /> },
       { path: '/search/post', element: <PostSearchPage /> },
       { path: '/post-write', element: <PostWritePage /> },
       {
