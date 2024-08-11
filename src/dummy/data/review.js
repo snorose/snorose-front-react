@@ -48,3 +48,27 @@ export const REVIEW_LIST = [
     isEdited: false,
   },
 ];
+
+export const REVIEW_DETAIL = {
+  userDisplay: '송이1',
+  postId: 1,
+  title: '자료구조',
+  content: '자료구조 설명입니다.',
+  viewCount: 10,
+  scrapCount: 2,
+  likeCount: 0,
+  createdAt: '2024-08-10T12:27:27.359Z',
+  lectureName: '자료구조',
+  professor: '홍길동',
+  classNumber: 1,
+  lectureYear: 2024,
+  semester: 'FIRST',
+  lectureType: 'MAJOR_ELECTIVE',
+  questionDetail: '서술형 1문제 단답형 9문제',
+  examType: 'MIDTERM',
+  fileName: 'test.pdf',
+  writer: true,
+  isPF: false,
+  isEdited: false,
+  confirmed: true,
+};

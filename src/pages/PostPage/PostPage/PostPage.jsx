@@ -53,7 +53,7 @@ export default function PostPage() {
         </div>
       </div>
       <div className={styles.comments}>
-        <p className={styles.commentsTitle}>댓글 2개</p>
+        <p className={styles.commentsTitle}>댓글 {COMMENT_LIST.length}개</p>
         {COMMENT_LIST &&
           COMMENT_LIST.map((comment) => (
             <Comment key={comment.id} data={comment} />

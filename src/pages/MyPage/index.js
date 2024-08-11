@@ -7,4 +7,4 @@ export { default as ServicePolicyPage } from './PolicyPage/ServicePolicyPage';
 export { default as ViewPointListPage } from './ViewPointListPage/ViewPointListPage';
 export { default as MyPostPage } from './ActivityPage/MyPostPage';
 export { default as CommentPage } from './ActivityPage/CommentPage';
-export { default as DownloadTestReviewPage } from './ActivityPage/DownloadTestReviewPage';
+export { default as DownloadExamReviewPage } from './ActivityPage/DownloadExamReviewPage';
