@@ -8,6 +8,10 @@ const descriptions = [
 ];
 
 export default function DeleteAccountPage() {
+  const handleDeleteAccount = () => {
+    alert('정말 탈퇴하시겠습니까?');
+  };
+
   return (
     <main className={styles.deleteAccountPage}>
       <CloseAppBar alignRight={true} stroke='#000' />
@@ -25,7 +29,12 @@ export default function DeleteAccountPage() {
         <Link to='/my-page?tab=policy' className={styles.goBackButton}>
           뒤로가기
         </Link>
-        <button className={styles.deleteAccountButton}>탈퇴하기</button>
+        <button
+          className={styles.deleteAccountButton}
+          onClick={handleDeleteAccount}
+        >
+          탈퇴하기
+        </button>
       </div>
     </main>
   );
