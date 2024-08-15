@@ -27,13 +27,16 @@
 
 .profileImgContainer {
   display: flex;
-  padding: 12px;
+  justify-content: center;
 }
 
 .profileImg {
+  --size: 102px;
+
   display: flex;
-  width: 77px;
-  height: 77px;
+  width: var(--size);
+  height: var(--size);
+  padding: 12px;
   flex-shrink: 0;
   cursor: pointer;
 

@@ -1,6 +1,5 @@
 import styles from './EditInfoPage.module.css';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Icon } from '../../../components/Icon';
 import { BackAppBar, ActionButton } from '../../../components/AppBar';
 
