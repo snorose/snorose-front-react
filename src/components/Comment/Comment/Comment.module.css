@@ -48,11 +48,10 @@
 .commentBottom {
   display: flex;
   justify-content: end;
-  gap: 8px;
-  padding: 4px 14px 12px 14px;
+  padding: 0 0 0 14px;
 }
 
-.count {
+.commentCount {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,6 +60,19 @@
   font-size: 11px;
   line-height: 150%;
   letter-spacing: -0.5px;
+  padding: 4px 5px 12px 14px;
+}
+
+.likedCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: #898989;
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  padding: 4px 14px 12px 5px;
 }
 
 .nestedComment {
@@ -71,11 +83,22 @@
   flex-direction: column;
 }
 
+.nestedCommentTop {
+  width: 100%;
+  padding: 12px 14px 2px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #898989;
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
 .nestedIcon {
   display: flex;
   width: 15px;
-  padding-top: 4px;
-  padding-bottom: 6px;
+  padding-bottom: 10px;
 }
 
 .nestedPadding {
