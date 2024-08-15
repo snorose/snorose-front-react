@@ -1,6 +1,8 @@
 import styles from './DeleteAccountPage.module.css';
 import { Link } from 'react-router-dom';
 import { CloseAppBar } from '../../../components/AppBar';
+import { withdrawAccount } from '../../../apis/userInfo';
+import { useNavigate } from 'react-router-dom';
 
 const descriptions = [
   '• 회원탈퇴 시 모든 정보가 영구적으로 삭제되며, 다시는 복구할 수 없습니다.',
@@ -8,8 +10,13 @@ const descriptions = [
 ];
 
 export default function DeleteAccountPage() {
-  const handleDeleteAccount = () => {
-    alert('정말 탈퇴하시겠습니까?');
+  const navigate = useNavigate();
+
+  const handleDeleteAccount = async () => {
+    const confirmation = window.confirm('정말로 탈퇴하시겠습니까?');
+    if (confirmation) {
+      await withdrawAccount(navigate);
+    }
   };
 
   return (
