@@ -76,8 +76,8 @@ export default function EditInfoPage() {
           />
         </div>
 
-        <div className={styles.infoContainer}>
-          <div className={styles.info}>
+        <div className={styles.contentContainer}>
+          <div className={styles.infoWrapper}>
             <h3 className={styles.title}>이름</h3>
             <div
               className={`${styles.inputWrapper} ${nameError ? styles.errorInputWrapper : ''}`}
@@ -89,10 +89,10 @@ export default function EditInfoPage() {
                 value={name}
                 onChange={handleNameChange}
               />
-              {nameError && <p className={styles.errorMessage}>{nameError}</p>}
             </div>
+            {nameError && <p className={styles.errorMessage}>{nameError}</p>}
           </div>
-          <div className={styles.info}>
+          <div className={styles.infoWrapper}>
             <h3 className={styles.title}>생년월일</h3>
             <div className={styles.inputWrapper}>
               <input
@@ -105,7 +105,7 @@ export default function EditInfoPage() {
               </div>
             </div>
           </div>
-          <div className={styles.info}>
+          <div className={styles.infoWrapper}>
             <h3 className={styles.title}>닉네임</h3>
             <div
               className={`${styles.inputWrapper} ${nicknameError ? styles.errorInputWrapper : ''}`}
@@ -117,12 +117,12 @@ export default function EditInfoPage() {
                 value={nickname}
                 onChange={handleNicknameChange}
               />
-              {nicknameError && (
-                <p className={styles.errorMessage}>{nicknameError}</p>
-              )}
             </div>
+            {nicknameError && (
+              <p className={styles.errorMessage}>{nicknameError}</p>
+            )}
           </div>
-          <div className={styles.info}>
+          <div className={styles.infoWrapper}>
             <h3 className={styles.title}>전공</h3>
             <div className={styles.inputWrapper}>
               <input

@@ -47,14 +47,15 @@
   }
 }
 
-.infoContainer {
+.contentContainer {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.info {
+.infoWrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
   gap: 6px;
 }
@@ -88,10 +89,12 @@
 }
 
 .errorMessage {
+  position: absolute;
   color: var(--Pink-2, #ff4b6c);
   font-size: 11px;
   line-height: 150%;
   letter-spacing: -0.5px;
+  top: 71px;
 }
 
 .errorInputWrapper {
@@ -106,7 +109,7 @@
 .calendarIconWrapper {
   display: flex;
   width: 40px;
-  padding: 12px;
+  padding: 10px;
   cursor: pointer;
 }
 
