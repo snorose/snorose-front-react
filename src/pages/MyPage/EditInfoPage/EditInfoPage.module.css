@@ -43,6 +43,7 @@
   img {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
   }
 }
 
@@ -55,13 +56,12 @@
 .info {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 6px;
 }
 
 .title {
   color: var(--Grey-4, var(--grey-3, #484848));
 
-  padding-bottom: 3px;
   font-size: 14px;
   font-weight: 500;
   line-height: 150%;
