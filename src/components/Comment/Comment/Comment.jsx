@@ -4,11 +4,17 @@ import { NestedComment } from '../';
 import timeAgo from '../../../utils/timeAgo.js';
 import { useState } from 'react';
 
-export default function Comment({ data }) {
+export default function Comment({ data, onCommentClick }) {
   const [isLiked, setIsLiked] = useState(false);
 
   const handleLikedClick = () => {
     console.log('API로 liked 데이터 수정');
+  };
+
+  const handleCommentClick = () => {
+    if (onCommentClick) {
+      onCommentClick(); // Call the passed click handler
+    }
   };
 
   return (
@@ -16,7 +22,7 @@ export default function Comment({ data }) {
       <div className={styles.commentTop}>
         <div className={styles.commentTopLeft}>
           <div className={styles.cloud}>
-            <Icon id='cloud' width='19' heigth='13' />
+            <Icon id='cloud' width='19' height='13' />
           </div>
           <p>{data.userDisplay}</p>
           <p className={styles.dot}>·</p>
@@ -28,7 +34,7 @@ export default function Comment({ data }) {
       </div>
       <div className={styles.commentCenter}>{data.content}</div>
       <div className={styles.commentBottom}>
-        <div className={styles.commentCount}>
+        <div className={styles.commentCount} onClick={handleCommentClick}>
           <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
           <p>{data.children.length}</p>
         </div>
