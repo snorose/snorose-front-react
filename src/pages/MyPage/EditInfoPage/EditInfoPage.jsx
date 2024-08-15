@@ -11,11 +11,13 @@ export default function EditInfoPage() {
   const [profileImage, setProfileImage] = useState(null);
 
   const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
+  const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
 
   const handleNameChange = (e) => {
     const value = e.target.value;
     setName(value);
-    if (specialCharRegex.test(value)) {
+
+    if (specialCharRegex.test(value) || emojiRegex.test(value)) {
       setNameError('특수문자는 사용할 수 없습니다');
     } else {
       setNameError('');
@@ -25,7 +27,8 @@ export default function EditInfoPage() {
   const handleNicknameChange = (e) => {
     const value = e.target.value;
     setNickname(value);
-    if (specialCharRegex.test(value)) {
+
+    if (specialCharRegex.test(value) || emojiRegex.test(value)) {
       setNicknameError('특수문자는 사용할 수 없습니다');
     } else {
       setNicknameError('');
