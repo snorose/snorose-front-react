@@ -148,7 +148,7 @@ export default function EditInfoPage() {
           <div className={styles.infoWrapper}>
             <h3 className={styles.title}>전공</h3>
             <div className={styles.inputWrapper}>
-              <select
+              {/* <select
                 className={styles.inputText}
                 value={major}
                 onChange={handleMajorChange}
@@ -159,7 +159,15 @@ export default function EditInfoPage() {
                     {major.name}
                   </option>
                 ))}
-              </select>
+              </select> */}
+              <input
+                type='text'
+                className={styles.inputText}
+                placeholder='전공을 선택하세요'
+              />
+              <div className={styles.arrowDownIconWrapper}>
+                <Icon id='angle-down' />
+              </div>
             </div>
           </div>
         </div>
