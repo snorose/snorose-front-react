@@ -48,6 +48,17 @@ export default function EditInfoPage() {
     }
   };
 
+  const handleBirthdateChange = (e) => {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length >= 5) {
+      value =
+        value.slice(0, 4) + '. ' + value.slice(4, 6) + '. ' + value.slice(6, 8);
+    } else if (value.length >= 3) {
+      value = value.slice(0, 4) + '. ' + value.slice(4, 6);
+    }
+    e.target.value = value;
+  };
+
   return (
     <main className={styles.editInfoPage}>
       <header className={styles.topContainer}>
@@ -106,7 +117,11 @@ export default function EditInfoPage() {
               <input
                 type='text'
                 className={styles.inputText}
-                placeholder='생년월일을 선택하세요'
+                placeholder='2000. 01. 01'
+                maxLength={12}
+                onChange={handleBirthdateChange}
+                pattern='\d{4}\.\d{2}\.\d{2}'
+                title='형식: YYYY.MM.DD (예: 2000. 01. 01)'
               />
               <div className={styles.calendarIconWrapper}>
                 <Icon id='calendar' />
@@ -145,9 +160,6 @@ export default function EditInfoPage() {
                   </option>
                 ))}
               </select>
-              {/* <div className={styles.arrowDownIconWrapper}>
-                <Icon id='angle-down' />
-              </div> */}
             </div>
           </div>
         </div>
