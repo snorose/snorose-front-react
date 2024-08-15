@@ -2,10 +2,12 @@ import styles from './EditInfoPage.module.css';
 import { useState } from 'react';
 import { Icon } from '../../../components/Icon';
 import { BackAppBar, ActionButton } from '../../../components/AppBar';
+import { MAJORS } from '../../../../src/constants';
 
 export default function EditInfoPage() {
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
+  const [major, setMajor] = useState('');
   const [nameError, setNameError] = useState('');
   const [nicknameError, setNicknameError] = useState('');
   const [profileImage, setProfileImage] = useState(null);
@@ -35,7 +37,10 @@ export default function EditInfoPage() {
     }
   };
 
-  // 프로필 이미지 선택시 이미지 파일 선택 기능
+  const handleMajorChange = (e) => {
+    setMajor(e.target.value);
+  };
+
   const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -128,14 +133,21 @@ export default function EditInfoPage() {
           <div className={styles.infoWrapper}>
             <h3 className={styles.title}>전공</h3>
             <div className={styles.inputWrapper}>
-              <input
-                type='text'
+              <select
                 className={styles.inputText}
-                placeholder='전공을 선택하세요'
-              />
-              <div className={styles.arrowDownIconWrapper}>
+                value={major}
+                onChange={handleMajorChange}
+              >
+                <option value=''>전공을 선택하세요</option>
+                {MAJORS.map((major) => (
+                  <option key={major.id} value={major.name}>
+                    {major.name}
+                  </option>
+                ))}
+              </select>
+              {/* <div className={styles.arrowDownIconWrapper}>
                 <Icon id='angle-down' />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
