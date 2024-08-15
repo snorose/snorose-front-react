@@ -3,7 +3,12 @@ import { Icon } from '../../../components/Icon';
 import timeAgo from '../../../utils/timeAgo.js';
 import { useState } from 'react';
 
-export default function NestedComment({ data, isLast, isFirst }) {
+export default function NestedComment({
+  data,
+  isLast,
+  isFirst,
+  onCommentOptionClick,
+}) {
   const [isLiked, setIsLiked] = useState(false);
 
   const handleLikedClick = () => {
@@ -33,7 +38,9 @@ export default function NestedComment({ data, isLast, isFirst }) {
             {timeAgo(data.createdAt)} {data.isUpdated ? ' (수정됨)' : null}
           </p>
         </div>
-        <Icon id='ellipsis-vertical' width='3' height='11' />
+        <p className={styles.dot3} onClick={onCommentOptionClick}>
+          <Icon id='ellipsis-vertical' width='3' height='11' />
+        </p>
       </div>
       <div className={styles.commentCenter}>
         <div className={styles.nestedPadding}>{data.content}</div>

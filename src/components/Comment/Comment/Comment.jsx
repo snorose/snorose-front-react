@@ -4,7 +4,11 @@ import { NestedComment } from '../';
 import timeAgo from '../../../utils/timeAgo.js';
 import { useState } from 'react';
 
-export default function Comment({ data, onCommentClick }) {
+export default function Comment({
+  data,
+  onCommentClick,
+  onCommentOptionClick,
+}) {
   const [isLiked, setIsLiked] = useState(false);
 
   const handleLikedClick = () => {
@@ -13,7 +17,7 @@ export default function Comment({ data, onCommentClick }) {
 
   const handleCommentClick = () => {
     if (onCommentClick) {
-      onCommentClick(); // Call the passed click handler
+      onCommentClick();
     }
   };
 
@@ -30,7 +34,9 @@ export default function Comment({ data, onCommentClick }) {
             {timeAgo(data.createdAt)} {data.isUpdated ? ' (수정됨)' : null}
           </p>
         </div>
-        <Icon id='ellipsis-vertical' width='3' height='11' />
+        <p className={styles.dot3} onClick={onCommentOptionClick}>
+          <Icon id='ellipsis-vertical' width='3' height='11' />
+        </p>
       </div>
       <div className={styles.commentCenter}>{data.content}</div>
       <div className={styles.commentBottom}>
@@ -50,6 +56,7 @@ export default function Comment({ data, onCommentClick }) {
             data={childComment}
             isLast={index === data.children.length - 1}
             isFirst={index === 0}
+            onCommentOptionClick={onCommentOptionClick}
           />
         ))}
     </div>

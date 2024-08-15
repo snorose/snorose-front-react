@@ -1,12 +1,11 @@
 import styles from './Modal.module.css';
 import { Icon } from '../Icon';
-import { useNavigate } from 'react-router-dom';
 
-export default function Options({ options }) {
-  const navigate = useNavigate();
-
-  const navTo = (to) => () => {
-    if (to) navigate(to);
+export default function Options({ options, functions }) {
+  const handleClick = (iconId) => () => {
+    if (iconId && functions[iconId]) {
+      functions[iconId]();
+    }
   };
 
   return (
@@ -15,7 +14,7 @@ export default function Options({ options }) {
         <div
           className={styles.optionBar}
           key={option.iconId}
-          onClick={navTo(option.nav)}
+          onClick={handleClick(option.iconId)}
         >
           <div className={styles.iconBox}>
             <Icon

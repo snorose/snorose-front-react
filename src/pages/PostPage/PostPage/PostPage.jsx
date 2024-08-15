@@ -4,6 +4,7 @@ import { Icon } from '../../../components/Icon';
 import { Comment } from '../../../components/Comment';
 import { InputBar } from '../../../components/InputBar';
 import { BackAppBar } from '../../../components/AppBar';
+import { OptionModal } from '../../../components/Modal';
 import { getPostContent } from '../../../apis/postContent.js';
 import { getCommentList } from '../../../apis/comment.js';
 import { BOARD_MENUS } from '../../../constants/boardMenus.js';
@@ -18,6 +19,7 @@ export default function PostPage() {
   const [postData, setPostData] = useState(null);
   const [commentData, setCommentData] = useState([]);
   const [commentParentId, setCommentParentId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const inputBarRef = useRef(null);
 
   // 게시글 데이터 받아오기
@@ -79,6 +81,14 @@ export default function PostPage() {
     return <div>댓글을 불러오는 중...</div>;
   }
 
+  const handleEdit = () => {
+    console.log('댓글 수정');
+  };
+
+  const handleDelete = () => {
+    console.log('댓글 삭제');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.backAppBar}>
@@ -121,7 +131,10 @@ export default function PostPage() {
           <Comment
             key={comment.id}
             data={comment}
-            onCommentClick={() => handleCommentClick(comment.id)} // Pass click handler to Comment
+            onCommentClick={() => handleCommentClick(comment.id)}
+            onCommentOptionClick={() => {
+              setIsModalOpen(true);
+            }}
           />
         ))}
       </div>
@@ -130,8 +143,16 @@ export default function PostPage() {
         parentId={commentParentId}
         onCommentSubmit={handleCommentSubmit}
         ref={inputBarRef}
-      />{' '}
-      {/* Attach ref and callback here */}
+      />
+      <OptionModal
+        id='comment-edit'
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+        functions={{
+          pencil: handleEdit,
+          trash: handleDelete,
+        }}
+      />
     </div>
   );
 }
