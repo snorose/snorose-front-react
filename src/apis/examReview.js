@@ -10,6 +10,11 @@ export const getReviewList = async (page = 0) => {
   return response.data.result;
 };
 
+export const deleteExamReview = async (postId) => {
+  const response = await authAxios.delete(`/v1/reviews/${postId}`);
+  return response;
+};
+
 export const postExamReview = async ({ data, file }) => {
   const formData = new FormData();
   const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
