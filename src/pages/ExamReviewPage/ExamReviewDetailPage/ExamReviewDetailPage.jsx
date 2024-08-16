@@ -94,12 +94,22 @@ export default function ExamReviewDetailPage() {
           </div>
           <div className={styles.more}>
             {writer && (
-              <Icon
-                id='trash'
-                width='12'
-                height='16'
-                onClick={() => deleteReview.mutate()}
-              />
+              <>
+                <Icon
+                  id='pencil'
+                  width='15'
+                  height='17'
+                  onClick={() =>
+                    navigate(`/exam-review/${postId}/edit`, { state: data })
+                  }
+                />
+                <Icon
+                  id='trash'
+                  width='12'
+                  height='16'
+                  onClick={() => deleteReview.mutate()}
+                />
+              </>
             )}
             <Icon id='ellipsis-vertical' width='3' height='11' />
           </div>
