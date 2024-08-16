@@ -34,7 +34,10 @@ export default function Comment({
             {timeAgo(data.createdAt)} {data.isUpdated ? ' (수정됨)' : null}
           </p>
         </div>
-        <p className={styles.dot3} onClick={onCommentOptionClick}>
+        <p
+          className={styles.dot3}
+          onClick={() => onCommentOptionClick(data.id)}
+        >
           <Icon id='ellipsis-vertical' width='3' height='11' />
         </p>
       </div>

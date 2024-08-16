@@ -4,9 +4,10 @@ import { Icon } from '../../../components/Icon';
 import { Comment } from '../../../components/Comment';
 import { InputBar } from '../../../components/InputBar';
 import { BackAppBar } from '../../../components/AppBar';
-import { OptionModal } from '../../../components/Modal';
+import { FetchLoading } from '../../../components/Loading';
+import { DeleteModal, OptionModal } from '../../../components/Modal';
 import { getPostContent } from '../../../apis/postContent.js';
-import { getCommentList } from '../../../apis/comment.js';
+import { getCommentList, deleteComment } from '../../../apis/comment.js';
 import { BOARD_MENUS } from '../../../constants/boardMenus.js';
 import styles from './PostPage.module.css';
 import timeAgo from '../../../utils/timeAgo.js';
@@ -19,7 +20,9 @@ export default function PostPage() {
   const [postData, setPostData] = useState(null);
   const [commentData, setCommentData] = useState([]);
   const [commentParentId, setCommentParentId] = useState(null);
+  const [selectedCommentId, setSelectedCommentId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSecondaryModalOpen, setIsSecondaryModalOpen] = useState(false);
   const inputBarRef = useRef(null);
 
   // 게시글 데이터 받아오기
@@ -48,9 +51,25 @@ export default function PostPage() {
     }
   };
 
+  // 댓글 삭제하기
+  const fetchCommentDelete = async () => {
+    try {
+      await deleteComment(postId, selectedCommentId);
+      await fetchCommentList(); // 삭제 후 댓글 목록 다시 가져오기
+    } catch (error) {
+      console.error('댓글 삭제에 실패했습니다.', error);
+    }
+  };
+
+  const handleDelete = async () => {
+    console.log(selectedCommentId);
+    await fetchCommentDelete();
+    setIsSecondaryModalOpen(false);
+  };
+
   useEffect(() => {
     fetchCommentList();
-  }, [postId]);
+  }, [postId]); // postId가 변경될 때마다 댓글 목록을 다시 불러옴
 
   // 게시글의 댓글 아이콘 클릭 시 댓글 입력창으로 포커스
   const handleCommentClick = (parentId) => {
@@ -73,20 +92,27 @@ export default function PostPage() {
     await fetchCommentList();
   };
 
+  // 더보기 아이콘 클릭 시, 댓글 ID 저장 및 삭제 모달 열기
+  const handleCommentOptionClick = (commentId) => {
+    setSelectedCommentId(commentId);
+    setIsModalOpen(true);
+  };
+
   if (!postData) {
-    return <div>불러오는 중...</div>;
+    return <FetchLoading>게시글을 불러오는 중...</FetchLoading>;
   }
 
   if (!commentData) {
-    return <div>댓글을 불러오는 중...</div>;
+    return <FetchLoading>댓글을 불러오는 중...</FetchLoading>;
   }
 
   const handleEdit = () => {
     console.log('댓글 수정');
   };
 
-  const handleDelete = () => {
-    console.log('댓글 삭제');
+  const handleDeleteMenuClick = () => {
+    setIsModalOpen(false);
+    setIsSecondaryModalOpen(true);
   };
 
   return (
@@ -132,9 +158,7 @@ export default function PostPage() {
             key={comment.id}
             data={comment}
             onCommentClick={() => handleCommentClick(comment.id)}
-            onCommentOptionClick={() => {
-              setIsModalOpen(true);
-            }}
+            onCommentOptionClick={handleCommentOptionClick}
           />
         ))}
       </div>
@@ -144,14 +168,21 @@ export default function PostPage() {
         onCommentSubmit={handleCommentSubmit}
         ref={inputBarRef}
       />
+
       <OptionModal
         id='comment-edit'
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
         functions={{
           pencil: handleEdit,
-          trash: handleDelete,
+          trash: handleDeleteMenuClick,
         }}
+      />
+      <DeleteModal
+        id='comment-delete'
+        isOpen={isSecondaryModalOpen}
+        setIsOpen={setIsSecondaryModalOpen}
+        redBtnFuction={handleDelete}
       />
     </div>
   );
