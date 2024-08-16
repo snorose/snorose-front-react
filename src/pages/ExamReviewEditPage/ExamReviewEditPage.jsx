@@ -27,8 +27,7 @@ export default function ExamReviewEditPage() {
   const navigate = useNavigate();
   const editReview = useMutation({
     mutationFn: (edit) => editReviewDetail(postId, edit),
-    onSuccess: (res) => {
-      console.log(res);
+    onSuccess: () => {
       queryClient.invalidateQueries(['reviewDetail', postId]);
       navigate(`/exam-review/${postId}`, { replace: true });
     },
