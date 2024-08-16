@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 100px;
 }
 
 .topContainer {
@@ -104,18 +105,4 @@
 .errorInputText {
   background: var(--Pink-1, #fee9eb);
   border-radius: 5px;
-}
-
-.calendarIconWrapper {
-  display: flex;
-  width: 40px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.arrowDownIconWrapper {
-  display: flex;
-  width: 40px;
-  padding: 12px;
-  cursor: pointer;
 }

@@ -2,14 +2,15 @@ import styles from './EditInfoPage.module.css';
 import { useState } from 'react';
 import { Icon } from '../../../components/Icon';
 import { BackAppBar, ActionButton } from '../../../components/AppBar';
-import { MAJORS } from '../../../../src/constants';
+import { CategoryFieldset, Dropdown } from '../../../components/Fieldset';
+import { MAJORS } from '../../../constants';
 
 export default function EditInfoPage() {
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
-  const [major, setMajor] = useState('');
   const [nameError, setNameError] = useState('');
   const [nicknameError, setNicknameError] = useState('');
+  const [major, setMajor] = useState({});
   const [profileImage, setProfileImage] = useState(null);
 
   const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
@@ -37,10 +38,6 @@ export default function EditInfoPage() {
     }
   };
 
-  const handleMajorChange = (e) => {
-    setMajor(e.target.value);
-  };
-
   const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -62,9 +59,9 @@ export default function EditInfoPage() {
   return (
     <main className={styles.editInfoPage}>
       <header className={styles.topContainer}>
-        <p>
+        <div>
           <BackAppBar />
-        </p>
+        </div>
         <div className={styles.submitBtn}>
           <ActionButton>완료</ActionButton>
         </div>
@@ -123,9 +120,6 @@ export default function EditInfoPage() {
                 pattern='\d{4}\.\d{2}\.\d{2}'
                 title='형식: YYYY.MM.DD (예: 2000. 01. 01)'
               />
-              <div className={styles.calendarIconWrapper}>
-                <Icon id='calendar' />
-              </div>
             </div>
           </div>
           <div className={styles.infoWrapper}>
@@ -145,33 +139,16 @@ export default function EditInfoPage() {
               <p className={styles.errorMessage}>{nicknameError}</p>
             )}
           </div>
-          <div className={styles.infoWrapper}>
-            <h3 className={styles.title}>전공</h3>
-            <div className={styles.inputWrapper}>
-              {/* <select
-                className={styles.inputText}
-                value={major}
-                onChange={handleMajorChange}
-              >
-                <option value=''>전공을 선택하세요</option>
-                {MAJORS.map((major) => (
-                  <option key={major.id} value={major.name}>
-                    {major.name}
-                  </option>
-                ))}
-              </select> */}
-              <input
-                type='text'
-                className={styles.inputText}
-                placeholder='전공을 선택하세요'
-              />
-              <div className={styles.arrowDownIconWrapper}>
-                <Icon id='angle-down' />
-              </div>
-            </div>
-          </div>
         </div>
       </section>
+      <CategoryFieldset title='전공' required>
+        <Dropdown
+          options={MAJORS}
+          select={major}
+          setFn={setMajor}
+          placeholder='선택하세요'
+        />
+      </CategoryFieldset>
     </main>
   );
 }
