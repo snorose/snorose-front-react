@@ -22,27 +22,31 @@ export default function DeleteAccountPage() {
   return (
     <main className={styles.deleteAccountPage}>
       <CloseAppBar alignRight={true} stroke='#000' />
-      <section className={styles.titleDescWrapper}>
-        <h1 className={styles.title}>탈퇴 시 아래 내용을 확인해주세요</h1>
-        <div className={styles.descWrapper}>
-          {descriptions.map((desc, index) => (
-            <p key={index} className={styles.desc}>
-              {desc}
-            </p>
-          ))}
+
+      <section className={styles.contentContainer}>
+        <div className={styles.titleDescWrapper}>
+          <h1 className={styles.title}>탈퇴 시 아래 내용을 확인해주세요</h1>
+          <div className={styles.descWrapper}>
+            {descriptions.map((desc, index) => (
+              <p key={index} className={styles.desc}>
+                {desc}
+              </p>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.buttonWrapper}>
+          <Link to='/my-page?tab=policy' className={styles.goBackButton}>
+            뒤로가기
+          </Link>
+          <button
+            className={styles.deleteAccountButton}
+            onClick={handleDeleteAccount}
+          >
+            탈퇴하기
+          </button>
         </div>
       </section>
-      <div className={styles.buttonWrapper}>
-        <Link to='/my-page?tab=policy' className={styles.goBackButton}>
-          뒤로가기
-        </Link>
-        <button
-          className={styles.deleteAccountButton}
-          onClick={handleDeleteAccount}
-        >
-          탈퇴하기
-        </button>
-      </div>
     </main>
   );
 }
