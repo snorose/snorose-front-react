@@ -133,3 +133,9 @@ code {
   transform: translateX(-50%);
   z-index: 2;
 }
+
+@media screen and (max-width: 400px) {
+  html {
+    font-size: 14px;
+  }
+}
