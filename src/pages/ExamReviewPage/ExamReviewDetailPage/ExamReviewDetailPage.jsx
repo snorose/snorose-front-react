@@ -1,23 +1,25 @@
 import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 import { BackAppBar } from '../../../components/AppBar/index.js';
-import { ReviewContentItem } from '../../../components/ReviewContentItem';
+import { Comment } from '../../../components/Comment';
 import { Icon } from '../../../components/Icon/index.js';
 import { InputBar } from '../../../components/InputBar';
+import { ReviewContentItem } from '../../../components/ReviewContentItem';
+import { ReviewDownload } from '../../../components/ReviewDownload';
+
+import { getReviewDetail } from '../../../apis/examReview.js';
 
 import { dateFormat } from '../../../utils/formatDate.js';
 import { convertToObject } from '../../../utils/convertDS.js';
-import { COMMENT_LIST, REVIEW_DETAIL } from '../../../dummy/data';
-
 import {
   COURSE_CATEGORY,
   SEMESTERS,
   TEST_CATEGORY,
 } from '../../../constants/index.js';
+import { COMMENT_LIST } from '../../../dummy/data';
 
 import styles from './ExamReviewDetailPage.module.css';
-import ReviewDownload from '../../../components/ReviewDownload/ReviewDownload.jsx';
-import Comment from '../../../components/Comment/Comment/Comment.jsx';
 
 const COURSE_TYPE = convertToObject(COURSE_CATEGORY);
 const SEMESTER = convertToObject(SEMESTERS);
@@ -25,22 +27,37 @@ const EXAM_TYPE = convertToObject(TEST_CATEGORY);
 
 export default function ExamReviewDetailPage() {
   const { postId } = useParams();
+  const { data } = useQuery({
+    queryKey: ['reviewDetail', postId],
+    queryFn: () => getReviewDetail(postId),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  if (data === undefined) return null;
+
   const {
+    viewCount,
+    scrapCount,
+    likeCount,
+    classNumber,
+    online,
+    isEdited,
+    writer,
+    examReviewId,
     userDisplay,
-    createdAt,
-    confirmed,
     title,
+    createdAt,
     lectureName,
     professor,
-    lectureType,
     lectureYear,
     semester,
+    lectureType,
     examType,
-    isPF,
-    questionDetail,
     fileName,
-  } = REVIEW_DETAIL;
-  console.log(postId);
+    questionDetail,
+    confirmed,
+    isPF,
+  } = data;
 
   return (
     <main>

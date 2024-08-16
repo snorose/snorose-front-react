@@ -1,6 +1,9 @@
 import { authAxios } from '../axios';
 
-const ENDPOINT = '/v1/reviews/review';
+export const getReviewDetail = async (postId) => {
+  const response = await authAxios.get(`/v1/reviews/${postId}`);
+  return response.data.result;
+};
 
 export const getReviewList = async (page = 0) => {
   const response = await authAxios.get(`/v1/reviews/32/list/${page}`);
@@ -15,7 +18,7 @@ export const postExamReview = async ({ data, file }) => {
   formData.append('file', file);
 
   try {
-    const response = await authAxios.post(ENDPOINT, formData, {
+    const response = await authAxios.post('/v1/reviews/review', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
 
