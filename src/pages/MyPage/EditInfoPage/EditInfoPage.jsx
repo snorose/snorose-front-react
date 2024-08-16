@@ -6,12 +6,13 @@ import { CategoryFieldset, Dropdown } from '../../../components/Fieldset';
 import { MAJORS } from '../../../constants';
 
 export default function EditInfoPage() {
+  const [profileImage, setProfileImage] = useState(null);
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
-  const [nameError, setNameError] = useState('');
-  const [nicknameError, setNicknameError] = useState('');
   const [major, setMajor] = useState({});
-  const [profileImage, setProfileImage] = useState(null);
+  const [nameError, setNameError] = useState('');
+  const [birthDateError, setBirthDateError] = useState('');
+  const [nicknameError, setNicknameError] = useState('');
 
   const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
   const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
@@ -20,8 +21,12 @@ export default function EditInfoPage() {
     const value = e.target.value;
     setName(value);
 
-    if (specialCharRegex.test(value) || emojiRegex.test(value)) {
-      setNameError('특수문자는 사용할 수 없습니다');
+    if (
+      specialCharRegex.test(value) ||
+      emojiRegex.test(value) ||
+      /\s/.test(value)
+    ) {
+      setNameError('특수문자와 띄어쓰기는 사용할 수 없습니다');
     } else {
       setNameError('');
     }
@@ -31,8 +36,12 @@ export default function EditInfoPage() {
     const value = e.target.value;
     setNickname(value);
 
-    if (specialCharRegex.test(value) || emojiRegex.test(value)) {
-      setNicknameError('특수문자는 사용할 수 없습니다');
+    if (
+      specialCharRegex.test(value) ||
+      emojiRegex.test(value) ||
+      /\s/.test(value)
+    ) {
+      setNicknameError('특수문자와 띄어쓰기는 사용할 수 없습니다');
     } else {
       setNicknameError('');
     }
@@ -45,15 +54,38 @@ export default function EditInfoPage() {
     }
   };
 
-  const handleBirthdateChange = (e) => {
-    let value = e.target.value.replace(/\D/g, '');
-    if (value.length >= 5) {
-      value =
-        value.slice(0, 4) + '. ' + value.slice(4, 6) + '. ' + value.slice(6, 8);
-    } else if (value.length >= 3) {
-      value = value.slice(0, 4) + '. ' + value.slice(4, 6);
+  const handleBirthDateChange = (e) => {
+    const input = e.target;
+    let value = input.value.replace(/[^0-9]/g, '');
+
+    if (value.length > 8) {
+      value = value.slice(0, 8);
     }
-    e.target.value = value;
+
+    input.value = value;
+
+    if (value.length === 8) {
+      const year = parseInt(value.slice(0, 4), 10);
+      const month = parseInt(value.slice(4, 6), 10);
+      const day = parseInt(value.slice(6, 8), 10);
+
+      const date = new Date(year, month - 1, day);
+      if (
+        date.getFullYear() !== year ||
+        date.getMonth() + 1 !== month ||
+        date.getDate() !== day
+      ) {
+        setBirthDateError('유효하지 않은 생년월일입니다.');
+      } else {
+        setBirthDateError('');
+      }
+    } else if (value.length > 0 && value.length < 8) {
+      setBirthDateError(
+        '생년월일 형식이 올바르지 않습니다. YYYYMMDD 형식으로 입력해주세요.'
+      );
+    } else {
+      setBirthDateError('');
+    }
   };
 
   return (
@@ -110,17 +142,22 @@ export default function EditInfoPage() {
           </div>
           <div className={styles.infoWrapper}>
             <h3 className={styles.title}>생년월일</h3>
-            <div className={styles.inputWrapper}>
+            <div
+              className={`${styles.inputWrapper} ${birthDateError ? styles.errorInputWrapper : ''}`}
+            >
               <input
                 type='text'
                 className={styles.inputText}
-                placeholder='2000. 01. 01'
+                placeholder='20020101'
                 maxLength={12}
-                onChange={handleBirthdateChange}
+                onChange={handleBirthDateChange}
                 pattern='\d{4}\.\d{2}\.\d{2}'
-                title='형식: YYYY.MM.DD (예: 2000. 01. 01)'
+                title='형식: YYYYMMDD (예: 20020101)'
               />
             </div>
+            {birthDateError && (
+              <p className={styles.errorMessage}>{birthDateError}</p>
+            )}
           </div>
           <div className={styles.infoWrapper}>
             <h3 className={styles.title}>닉네임</h3>
