@@ -26,6 +26,7 @@ export default function ExamReviewPage() {
         }
         return lastPageParam + 1;
       },
+      staleTime: 1000 * 60 * 5,
     });
 
   const ref = useIntersect(
