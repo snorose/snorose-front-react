@@ -100,7 +100,10 @@ export default function ExamReviewDetailPage() {
                   width='15'
                   height='17'
                   onClick={() =>
-                    navigate(`/exam-review/${postId}/edit`, { state: data })
+                    navigate(`/exam-review/${postId}/edit`, {
+                      state: data,
+                      replace: true,
+                    })
                   }
                 />
                 <Icon

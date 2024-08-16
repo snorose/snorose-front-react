@@ -34,7 +34,7 @@ export default function ExamReviewWritePage() {
   const [semester, setSemester] = useState({});
   const [isPF, setIsPF] = useState(false);
   const [classNumber, setClassNumber] = useState({});
-  const [content, setContent] = useState('');
+  const [questionDetail, setQuestionDetail] = useState('');
   const [file, setFile] = useState();
 
   const navigate = useNavigate();
@@ -68,13 +68,13 @@ export default function ExamReviewWritePage() {
     professor,
     semester: semester?.id,
     lectureType: lectureType?.id,
-    content,
     examType: examType?.id,
     lectureYear: lectureYear?.id,
     title: '자료구조',
-    questionDetail: '서술형 1문제 객관식 9문제',
+    questionDetail,
     isOnline: false,
     category: 'testCategory',
+    content: '',
   };
 
   return (
@@ -167,8 +167,8 @@ export default function ExamReviewWritePage() {
       </CategoryFieldset>
       <CategoryFieldset title='시험 유형 및 설명'>
         <Textarea
-          value={content}
-          setFn={setContent}
+          value={questionDetail}
+          setFn={setQuestionDetail}
           placeholder='강의 시험 유형 및 부가적인 설명을 기술해주세요'
           minRows='5'
           maxRows='10'

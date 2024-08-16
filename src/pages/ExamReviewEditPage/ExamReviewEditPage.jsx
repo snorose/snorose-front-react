@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 import { ActionButton, CloseAppBar } from '../../components/AppBar';
 import {
@@ -10,6 +11,8 @@ import {
 import { InputItem, InputList } from '../../components/Input';
 import { Textarea } from '../../components/Fieldset';
 
+import { editReviewDetail } from '../../apis';
+
 import {
   CLASS_NUMBER,
   COURSE_CATEGORY,
@@ -19,6 +22,18 @@ import {
 } from '../../constants';
 
 export default function ExamReviewEditPage() {
+  const { postId } = useParams();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const editReview = useMutation({
+    mutationFn: (edit) => editReviewDetail(postId, edit),
+    onSuccess: (res) => {
+      console.log(res);
+      queryClient.invalidateQueries(['reviewDetail', postId]);
+      navigate(`/exam-review/${postId}`, { replace: true });
+    },
+    onError: (error) => console.error(error),
+  });
   const { state } = useLocation();
 
   const [lectureName, setLectureName] = useState(state.lectureName);
@@ -39,7 +54,7 @@ export default function ExamReviewEditPage() {
   const [classNumber, setClassNumber] = useState(
     CLASS_NUMBER.find((number) => number.id === state.classNumber)
   );
-  const [content, setContent] = useState(state.questionDetail);
+  const [questionDetail, setQuestionDetail] = useState(state.questionDetail);
 
   const pass =
     lectureName &&
@@ -50,6 +65,21 @@ export default function ExamReviewEditPage() {
     semester &&
     classNumber;
 
+  const data = {
+    category: 'testCategory',
+    title: '자료구조',
+    content: '',
+    lectureName,
+    professor,
+    classNumber: classNumber?.id,
+    lectureYear: lectureYear?.id,
+    semester: semester?.id,
+    lectureType: lectureType?.id,
+    isPF,
+    examType: examType?.id,
+    questionDetail,
+  };
+
   return (
     <main>
       <CloseAppBar>
@@ -58,7 +88,7 @@ export default function ExamReviewEditPage() {
             if (!pass) {
               alert('필수입력을 모두 작성해주세요.');
             } else {
-              alert('수정 완료!');
+              editReview.mutate(data);
             }
           }}
         >
@@ -136,8 +166,8 @@ export default function ExamReviewEditPage() {
       </CategoryFieldset>
       <CategoryFieldset title='시험 유형 및 설명'>
         <Textarea
-          value={content}
-          setFn={setContent}
+          value={questionDetail}
+          setFn={setQuestionDetail}
           placeholder='강의 시험 유형 및 부가적인 설명을 기술해주세요'
           minRows='5'
           maxRows='10'

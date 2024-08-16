@@ -1,13 +1,20 @@
 import { authAxios } from '../axios';
 
+export const getReviewList = async (page = 0) => {
+  const response = await authAxios.get(`/v1/reviews/32/list/${page}`);
+  return response.data.result;
+};
+
 export const getReviewDetail = async (postId) => {
   const response = await authAxios.get(`/v1/reviews/${postId}`);
   return response.data.result;
 };
 
-export const getReviewList = async (page = 0) => {
-  const response = await authAxios.get(`/v1/reviews/32/list/${page}`);
-  return response.data.result;
+export const editReviewDetail = async (postId, edit) => {
+  const response = await authAxios.patch(`/v1/reviews/${postId}`, null, {
+    params: edit,
+  });
+  return response;
 };
 
 export const deleteExamReview = async (postId) => {
