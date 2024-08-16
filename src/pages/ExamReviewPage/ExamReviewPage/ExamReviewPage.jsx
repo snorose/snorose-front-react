@@ -10,7 +10,7 @@ import { PTR } from '../../../components/PTR/index.js';
 import { Search } from '../../../components/Search/index.js';
 import { Target } from '../../../components/Target/index.js';
 
-import { getReviewList } from '../../../apis/examReview.js';
+import { getReviewList } from '../../../apis';
 
 import styles from './ExamReviewPage.module.css';
 

@@ -8,7 +8,7 @@ import { InputBar } from '../../../components/InputBar';
 import { ReviewContentItem } from '../../../components/ReviewContentItem';
 import { ReviewDownload } from '../../../components/ReviewDownload';
 
-import { getReviewDetail } from '../../../apis/examReview.js';
+import { getReviewDetail } from '../../../apis';
 
 import { dateFormat } from '../../../utils/formatDate.js';
 import { convertToObject } from '../../../utils/convertDS.js';

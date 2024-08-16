@@ -1,3 +1,8 @@
-import { postExamReview } from './examReview.js';
+import { getPostList } from './postList.js';
+import {
+  getReviewDetail,
+  getReviewList,
+  postExamReview,
+} from './examReview.js';
 
-export { postExamReview };
+export { getPostList, getReviewDetail, getReviewList, postExamReview };
