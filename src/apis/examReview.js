@@ -1,10 +1,25 @@
 import { authAxios } from '../axios';
 
-const ENDPOINT = '/v1/reviews/review';
-
 export const getReviewList = async (page = 0) => {
   const response = await authAxios.get(`/v1/reviews/32/list/${page}`);
   return response.data.result;
+};
+
+export const getReviewDetail = async (postId) => {
+  const response = await authAxios.get(`/v1/reviews/${postId}`);
+  return response.data.result;
+};
+
+export const editReviewDetail = async (postId, edit) => {
+  const response = await authAxios.patch(`/v1/reviews/${postId}`, null, {
+    params: edit,
+  });
+  return response;
+};
+
+export const deleteExamReview = async (postId) => {
+  const response = await authAxios.delete(`/v1/reviews/${postId}`);
+  return response;
 };
 
 export const postExamReview = async ({ data, file }) => {
@@ -15,7 +30,7 @@ export const postExamReview = async ({ data, file }) => {
   formData.append('file', file);
 
   try {
-    const response = await authAxios.post(ENDPOINT, formData, {
+    const response = await authAxios.post('/v1/reviews/review', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
 

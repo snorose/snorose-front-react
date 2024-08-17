@@ -18,7 +18,8 @@ import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import { ErrorPage } from './pages/ErrorPage';
 import { ExamReviewDetailPage, ExamReviewPage } from './pages/ExamReviewPage';
-import ExamReviewWritePage from './pages/ExamReviewWritePage/ExamReviewWritePage';
+import { ExamReviewEditPage } from './pages/ExamReviewEditPage';
+import { ExamReviewWritePage } from './pages/ExamReviewWritePage';
 import HelpPage from './pages/HelpPage/HelpPage';
 import { MainPage } from './pages/MainPage';
 import NoticeListPage from './pages/NoticeListPage/NoticeListPage';
@@ -102,6 +103,11 @@ export const routeList = [
             <ExamReviewDetailPage />
           </ProtectedRoute>
         ),
+        meta: { hideNav: true },
+      },
+      {
+        path: '/exam-review/:postId/edit',
+        element: <ExamReviewEditPage />,
         meta: { hideNav: true },
       },
       {
