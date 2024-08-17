@@ -19,7 +19,13 @@ export default function DeleteModal({ id, isOpen, setIsOpen, redBtnFuction }) {
         </div>
         <div className={styles.deleteCenter}>{modalOption.children.text}</div>
         <div className={styles.deleteOrBack}>
-          <div className={styles.redBtn} onClick={redBtnFuction}>
+          <div
+            className={styles.redBtn}
+            onClick={() => {
+              redBtnFuction();
+              setIsOpen(false);
+            }}
+          >
             {modalOption.bottom.redBtn}
           </div>
           <div className={styles.greyBtn} onClick={() => setIsOpen(false)}>

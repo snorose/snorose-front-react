@@ -155,4 +155,16 @@ export const MODAL_OPTIONS = [
       greyBtn: '취소',
     },
   },
+  {
+    id: 'exam-review-download',
+    title: '다운로드 하시겠습니까?',
+    titleColor: '#000',
+    children: {
+      text: '다운로드 시 50 포인트가 차감됩니다.',
+    },
+    bottom: {
+      redBtn: '다운',
+      greyBtn: '취소',
+    },
+  },
 ];

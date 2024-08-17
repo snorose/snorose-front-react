@@ -1,6 +1,7 @@
 import { getPostList } from './postList.js';
 import {
   deleteExamReview,
+  downloadExamReview,
   editReviewDetail,
   getReviewDetail,
   getReviewList,
@@ -9,6 +10,7 @@ import {
 
 export {
   deleteExamReview,
+  downloadExamReview,
   editReviewDetail,
   getPostList,
   getReviewDetail,
