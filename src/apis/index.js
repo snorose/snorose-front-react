@@ -1,5 +1,6 @@
 import {
   deleteExamReview,
+  downloadExamReview,
   editReviewDetail,
   getReviewDetail,
   getReviewList,
@@ -10,6 +11,7 @@ import { getPostList } from './postList.js';
 
 export {
   deleteExamReview,
+  downloadExamReview,
   editReviewDetail,
   getCommentList,
   getPostList,

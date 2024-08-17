@@ -50,6 +50,8 @@ export default function ExamReviewDetailPage() {
     mutationFn: () => deleteExamReview(postId),
     onSuccess: () => {
       queryClient.invalidateQueries(['reviewList']);
+      queryClient.removeQueries(['reviewDetail', postId]);
+      queryClient.removeQueries(['reviewFile', postId]);
       navigate('/exam-review');
     },
   });
