@@ -14,7 +14,8 @@ export default function ReviewDownload({ className, fileName }) {
   const { data } = useQuery({
     queryKey: ['reviewFile', postId],
     queryFn: () => downloadExamReview(postId, fileName),
-    staleTime: 1000 * 60 * 5,
+    staleTime: Infinity,
+    gcTime: 1000 * 60 * 60 * 24 * 365,
   });
   const [isOpen, setIsOpen] = useState(false);
   const onDownload = () => {
