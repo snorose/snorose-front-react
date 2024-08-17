@@ -2,8 +2,11 @@ import React from 'react';
 import Icon from '../../../components/Icon/Icon';
 import styles from './MyPage.module.css';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 const PolicyTab = () => {
+  const { logout } = useAuth();
+
   return (
     <>
       <div className={styles.infoWrapper}>
@@ -23,9 +26,9 @@ const PolicyTab = () => {
       </div>
 
       <div className={styles.buttonWrapper}>
-        <Link to='/home'>
+        <button type='button' onClick={logout}>
           <div className={styles.editButton}>로그아웃</div>
-        </Link>
+        </button>
         <Link to='delete-account'>
           <div className={styles.passwordButton}>회원탈퇴</div>
         </Link>
