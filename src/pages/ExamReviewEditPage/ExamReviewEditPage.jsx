@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { postExamReview } from '../../apis';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 import { ActionButton, CloseAppBar } from '../../components/AppBar';
 import {
@@ -9,6 +8,11 @@ import {
   CategoryFieldset,
   Dropdown,
 } from '../../components/Fieldset';
+import { InputItem, InputList } from '../../components/Input';
+import { Textarea } from '../../components/Fieldset';
+
+import { editReviewDetail } from '../../apis';
+
 import {
   CLASS_NUMBER,
   COURSE_CATEGORY,
@@ -16,28 +20,40 @@ import {
   TEST_CATEGORY,
   YEARS,
 } from '../../constants';
-import Icon from '../../components/Icon/Icon';
-import InputList from '../../components/Input/InputList/InputList.jsx';
-import InputItem from '../../components/Input/InputItem/InputItem.jsx';
-import Textarea from '../../components/Fieldset/Textarea/Textarea.jsx';
 
-import styles from './ExamReviewWritePage.module.css';
-
-const FILE_MAX_SIZE = 1024 * 1024 * 10;
-
-export default function ExamReviewWritePage() {
-  const [lectureName, setLectureName] = useState('');
-  const [professor, setProfessor] = useState('');
-  const [lectureType, setLectureType] = useState({});
-  const [examType, setExamType] = useState({});
-  const [lectureYear, setLectureYear] = useState({});
-  const [semester, setSemester] = useState({});
-  const [isPF, setIsPF] = useState(false);
-  const [classNumber, setClassNumber] = useState({});
-  const [questionDetail, setQuestionDetail] = useState('');
-  const [file, setFile] = useState();
-
+export default function ExamReviewEditPage() {
+  const { postId } = useParams();
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const editReview = useMutation({
+    mutationFn: (edit) => editReviewDetail(postId, edit),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['reviewDetail', postId]);
+      navigate(`/exam-review/${postId}`, { replace: true });
+    },
+    onError: (error) => console.error(error),
+  });
+  const { state } = useLocation();
+
+  const [lectureName, setLectureName] = useState(state.lectureName);
+  const [professor, setProfessor] = useState(state.professor);
+  const [lectureType, setLectureType] = useState(
+    COURSE_CATEGORY.find((type) => type.id === state.lectureType)
+  );
+  const [examType, setExamType] = useState(
+    TEST_CATEGORY.find((type) => type.id === state.examType)
+  );
+  const [lectureYear, setLectureYear] = useState(
+    YEARS.find((year) => year.id === state.lectureYear)
+  );
+  const [semester, setSemester] = useState(
+    SEMESTERS.find((semester) => semester.id === state.semester)
+  );
+  const [isPF, setIsPF] = useState(state.isPF);
+  const [classNumber, setClassNumber] = useState(
+    CLASS_NUMBER.find((number) => number.id === state.classNumber)
+  );
+  const [questionDetail, setQuestionDetail] = useState(state.questionDetail);
 
   const pass =
     lectureName &&
@@ -46,54 +62,36 @@ export default function ExamReviewWritePage() {
     examType &&
     lectureYear &&
     semester &&
-    classNumber &&
-    file;
-
-  const handleFile = (event) => {
-    const selectedFile = event.target.files[0];
-    event.target.value = '';
-
-    if (selectedFile?.size > FILE_MAX_SIZE) {
-      alert('파일은 최대 10MB까지 업로드 할 수 있습니다.');
-      return;
-    }
-    setFile(selectedFile);
-  };
+    classNumber;
 
   const data = {
-    isPF,
-    boardId: 32,
-    classNumber: classNumber?.id,
+    category: 'testCategory',
+    title: '자료구조',
+    content: '',
     lectureName,
     professor,
+    classNumber: classNumber?.id,
+    lectureYear: lectureYear?.id,
     semester: semester?.id,
     lectureType: lectureType?.id,
+    isPF,
     examType: examType?.id,
-    lectureYear: lectureYear?.id,
-    title: '자료구조',
     questionDetail,
-    isOnline: false,
-    category: 'testCategory',
-    content: '',
   };
 
   return (
-    <main className={styles.main}>
+    <main>
       <CloseAppBar>
         <ActionButton
           onClick={() => {
-            if (pass) {
-              postExamReview({ data, file }).then((response) => {
-                if (response.status === 201) {
-                  navigate('/exam-review');
-                }
-              });
+            if (!pass) {
+              alert('필수입력을 모두 작성해주세요.');
             } else {
-              alert('필수 입력을 모두 작성해주세요');
+              editReview.mutate(data);
             }
           }}
         >
-          게시
+          수정
         </ActionButton>
       </CloseAppBar>
       <InputList>
@@ -174,16 +172,6 @@ export default function ExamReviewWritePage() {
           maxRows='10'
         />
       </CategoryFieldset>
-      <div className={styles.file}>
-        <div className={styles.left}>
-          <Icon id='clip-board-list-blue' width={18} height={19} />
-          <span className={styles.tag}>첨부파일</span>
-        </div>
-        <div className={styles.right}>
-          <label htmlFor='file'>{file?.name ?? '첨부된 파일이 없어요'}</label>
-          <input id='file' type='file' accept='.pdf' onChange={handleFile} />
-        </div>
-      </div>
     </main>
   );
 }

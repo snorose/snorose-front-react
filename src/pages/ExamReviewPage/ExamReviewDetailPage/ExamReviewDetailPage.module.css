@@ -40,6 +40,15 @@
   border-radius: 100%;
 }
 
+.more {
+  /* width: 20px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
 .title {
   margin: 0 var(--default-margin);
   font-weight: 700;

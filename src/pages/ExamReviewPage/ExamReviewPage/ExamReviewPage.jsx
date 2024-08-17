@@ -10,7 +10,7 @@ import { PTR } from '../../../components/PTR/index.js';
 import { Search } from '../../../components/Search/index.js';
 import { Target } from '../../../components/Target/index.js';
 
-import { getReviewList } from '../../../apis/examReview.js';
+import { getReviewList } from '../../../apis';
 
 import styles from './ExamReviewPage.module.css';
 
@@ -26,6 +26,7 @@ export default function ExamReviewPage() {
         }
         return lastPageParam + 1;
       },
+      staleTime: 1000 * 60 * 1,
     });
 
   const ref = useIntersect(
