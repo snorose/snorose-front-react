@@ -81,3 +81,10 @@
 .commentsTitle {
   padding: 9px 0 2px 0;
 }
+
+.failComment {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

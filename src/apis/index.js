@@ -1,4 +1,3 @@
-import { getPostList } from './postList.js';
 import {
   deleteExamReview,
   editReviewDetail,
@@ -6,12 +5,16 @@ import {
   getReviewList,
   postExamReview,
 } from './examReview.js';
+import { getCommentList, postComment } from './comment.js';
+import { getPostList } from './postList.js';
 
 export {
   deleteExamReview,
   editReviewDetail,
+  getCommentList,
   getPostList,
   getReviewDetail,
   getReviewList,
+  postComment,
   postExamReview,
 };
