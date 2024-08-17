@@ -46,8 +46,8 @@ export default function ReviewDownload({ className, fileName }) {
       <DeleteModal
         id='exam-review-download'
         isOpen={isOpen}
-        redFn={onDownload}
         setIsOpen={setIsOpen}
+        redBtnFuction={onDownload}
       />
     </>
   );

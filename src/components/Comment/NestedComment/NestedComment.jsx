@@ -3,27 +3,13 @@ import { Icon } from '../../../components/Icon';
 import timeAgo from '../../../utils/timeAgo.js';
 import { useState } from 'react';
 
-export default function NestedComment({ data, isLast }) {
-  const {
-    id,
-    postId,
-    userProfile,
-    userDisplay,
-    isWriter,
-    content,
-    liked, // 백엔드에서 추가 필요
-    likeCount,
-    reportCount,
-    createdAt,
-    updatedAt,
-    deletedAt,
-    isVisible,
-    isUpdated,
-    isDeleted,
-    parentId,
-    children,
-  } = data;
-  const [isLiked, setIsLiked] = useState(liked);
+export default function NestedComment({
+  data,
+  isLast,
+  isFirst,
+  onCommentOptionClick,
+}) {
+  const [isLiked, setIsLiked] = useState(false);
 
   const handleLikedClick = () => {
     console.log('API로 liked 데이터 수정');
@@ -38,28 +24,33 @@ export default function NestedComment({ data, isLast }) {
         borderBottomRightRadius: isLast ? '5px' : '0px',
       }}
     >
-      <div className={styles.commentTop}>
+      <div className={styles.nestedCommentTop}>
         <div className={styles.commentTopLeft}>
           <div className={styles.nestedIcon}>
-            {!isLast && <Icon id='nested-arrow' width='15' height='15' />}
+            {isFirst && <Icon id='nested-arrow' width='15' height='15' />}
           </div>
-
           <div className={styles.cloud}>
             <Icon id='cloud' width='19' heigth='13' />
           </div>
-          <p>{userDisplay}</p>
+          <p>{data.userDisplay}</p>
           <p className={styles.dot}>·</p>
           <p>
-            {isUpdated ? timeAgo(updatedAt) + ' (수정됨)' : timeAgo(createdAt)}
+            {timeAgo(data.createdAt)} {data.isUpdated ? ' (수정됨)' : null}
           </p>
         </div>
-        <Icon id='ellipsis-vertical' width='3' height='11' />
+
+        <p
+          className={styles.dot3}
+          onClick={() => onCommentOptionClick(data.id, data.content)}
+        >
+          <Icon id='ellipsis-vertical' width='3' height='11' />
+        </p>
       </div>
       <div className={styles.commentCenter}>
-        <div className={styles.nestedPadding}>{content}</div>
+        <div className={styles.nestedPadding}>{data.content}</div>
       </div>
       <div className={styles.commentBottom}>
-        <div className={styles.count}>
+        <div className={styles.likedCount}>
           <Icon
             id='like'
             width='13'
@@ -67,7 +58,7 @@ export default function NestedComment({ data, isLast }) {
             fill={isLiked ? '#5F86BF' : '#D9D9D9'}
             onClick={handleLikedClick}
           />
-          <p>{likeCount}</p>
+          <p>{data.likeCount}</p>
         </div>
       </div>
     </div>

@@ -83,6 +83,40 @@ export const MODAL_OPTIONS = [
     },
   },
   {
+    id: 'comment-edit',
+    title: '내 댓글',
+    titleColor: '#000',
+    children: [
+      {
+        iconId: 'pencil',
+        IconWidth: 14,
+        IconHeight: 16,
+        text: '수정하기',
+        nav: '/post',
+      },
+      {
+        iconId: 'trash',
+        IconWidth: 12,
+        IconHeight: 16,
+        text: '삭제하기',
+        color: '#FF4B6C',
+        nav: '/post-write',
+      },
+    ],
+  },
+  {
+    id: 'comment-delete',
+    title: '댓글을 삭제할까요?',
+    titleColor: '#000',
+    children: {
+      text: '댓글 삭제 시 포인트가 차감돼요',
+    },
+    bottom: {
+      redBtn: '삭제',
+      greyBtn: '취소',
+    },
+  },
+  {
     id: 'exam-review-report',
     title: '시험 후기 신고',
     titleColor: '#000',

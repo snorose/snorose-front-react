@@ -68,16 +68,16 @@ export default function ChangePasswordPage() {
   };
   return (
     <main className={styles.changePasswordPage}>
-      <div className={styles.topContainer}>
+      <header className={styles.topContainer}>
         <p>
           <BackAppBar />
         </p>
         <div className={styles.submitBtn}>
           <ActionButton onClick={handlePasswordChangeSubmit}>완료</ActionButton>
         </div>
-      </div>
+      </header>
 
-      <div className={styles.contentContainer}>
+      <section className={styles.contentContainer}>
         <div className={styles.passwordWrapper}>
           <h3 className={styles.title}>현재 비밀번호</h3>
           <div className={styles.inputWrapper}>
@@ -160,7 +160,7 @@ export default function ChangePasswordPage() {
             <p className={styles.errorMessage}>{newPasswordCheckError}</p>
           )}
         </div>
-      </div>
+      </section>
     </main>
   );
 }
