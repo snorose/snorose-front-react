@@ -7,3 +7,9 @@ export const withdrawAccount = async (body) => {
 
   return data;
 };
+
+export const getMyPageUserInfo = async () => {
+  const { data } = await authAxios.get('/v1/users/mypage');
+
+  return data;
+};
