@@ -5,7 +5,7 @@ import { MenuIcon } from '../MenuIcon';
 import styles from './Header.module.css';
 
 import { USER } from '../../dummy/data';
-import useAuth from '../../hooks/useAuth';
+import { useAuth } from '@/hooks';
 
 export default function Header({ className }) {
   const { logout } = useAuth();

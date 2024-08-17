@@ -8,7 +8,7 @@ import { BOARD_MENUS } from '../../../constants';
 import { DropDownMenu } from '../../../components/DropDownMenu';
 import formattedNowTime from '../../../utils/formattedNowTime';
 import styles from './PostWritePage.module.css';
-import useToast from '../../../hooks/useToast';
+import { useToast } from '@/hooks';
 
 export default function PostWritePage() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function PostWritePage() {
   const roleId = 4; // 더미 역할 ID
   const boardId = 'firstSnow'; // 더미 보드 아이디 ID
   const boardTitles = BOARD_MENUS.map((menu) => menu.title);
-  
+
   // 현재 게시판 title
   const getCurrentBoard = (id) => {
     const currentBoard = BOARD_MENUS.find((board) => board.id === id);
