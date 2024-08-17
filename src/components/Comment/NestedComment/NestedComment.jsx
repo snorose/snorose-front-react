@@ -38,7 +38,11 @@ export default function NestedComment({
             {timeAgo(data.createdAt)} {data.isUpdated ? ' (수정됨)' : null}
           </p>
         </div>
-        <p className={styles.dot3} onClick={() => onCommentOptionClick(data.id)}>
+
+        <p
+          className={styles.dot3}
+          onClick={() => onCommentOptionClick(data.id, data.content)}
+        >
           <Icon id='ellipsis-vertical' width='3' height='11' />
         </p>
       </div>

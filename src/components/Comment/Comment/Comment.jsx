@@ -36,7 +36,7 @@ export default function Comment({
         </div>
         <p
           className={styles.dot3}
-          onClick={() => onCommentOptionClick(data.id)}
+          onClick={() => onCommentOptionClick(data.id, data.content)}
         >
           <Icon id='ellipsis-vertical' width='3' height='11' />
         </p>
