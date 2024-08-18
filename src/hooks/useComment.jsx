@@ -16,9 +16,6 @@ export default function useComment() {
     queryKey: ['comments', postId],
     queryFn: () => getCommentList({ postId }),
     staleTime: 1000 * 60,
-    onError: (error) => {
-      console.error('댓글을 불러올 수 없습니다.', error);
-    },
   });
 
   const postComment = useMutation({
