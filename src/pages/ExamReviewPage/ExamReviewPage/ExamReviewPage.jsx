@@ -1,8 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 
-import useIntersect from '../../../hooks/useIntersect.jsx';
-
 import { AppBar } from '../../../components/AppBar/index.js';
 import { Loading } from '../../../components/Loading/index.js';
 import { PostBar } from '../../../components/PostBar/index.js';
@@ -13,6 +11,7 @@ import { Target } from '../../../components/Target/index.js';
 import { getReviewList } from '../../../apis';
 
 import styles from './ExamReviewPage.module.css';
+import { useIntersect } from '@/hooks';
 
 export default function ExamReviewPage() {
   const { data, hasNextPage, isFetching, status, fetchNextPage } =
