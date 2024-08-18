@@ -18,7 +18,9 @@ export default function CloseAppBar({ alignRight, children, stroke, onClick }) {
         onClick={() => navigate(-1)}
         stroke={stroke}
       />
-      <div className={styles.actions}>{children}</div>
+      <div className={styles.actions} onClick={onClick}>
+        {children}
+      </div>
     </div>
   );
 }
