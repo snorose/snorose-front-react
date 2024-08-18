@@ -30,6 +30,13 @@ export default function Comment({ data }) {
     setCommentId(undefined);
     setContent('');
   };
+
+  const handleReply = (e) => {
+    e.stopPropagation();
+    setCommentId(data.id);
+    inputFocus();
+  };
+
   // const handleLikedClick = () => {
   //   console.log('API로 liked 데이터 수정');
   // };
@@ -62,21 +69,14 @@ export default function Comment({ data }) {
         </div>
         <div className={styles.commentCenter}>{data.content}</div>
         <div className={styles.commentBottom}>
-          <div
-            className={styles.commentCount}
-            onClick={(e) => {
-              e.stopPropagation();
-              setCommentId(data.id);
-              inputFocus();
-            }}
-          >
+          <button className={styles.commentCount} onClick={handleReply}>
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
             <p>{data.children.length}</p>
-          </div>
-          <div className={styles.likedCount}>
+          </button>
+          <button className={styles.likedCount}>
             <Icon id='like' width='13' height='12' fill='#D9D9D9' />
             <p>{data.likeCount}</p>
-          </div>
+          </button>
         </div>
         {data.children.length > 0 &&
           data.children.map((childComment, index) => (

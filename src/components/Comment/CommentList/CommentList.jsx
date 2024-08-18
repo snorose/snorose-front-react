@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { filterDeletedComments } from '../../../utils/filterComment.js';
 
 import { Comment } from '../index.js';
@@ -9,6 +10,8 @@ import styles from './CommentList.module.css';
 
 export default function CommentList() {
   const { commentList } = useComment();
+
+  console.log(commentList);
 
   if (!commentList) {
     return <FetchLoading>댓글을 불러오는 중...</FetchLoading>;

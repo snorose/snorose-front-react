@@ -14,7 +14,7 @@ export default function useComment() {
 
   const { data: commentList } = useQuery({
     queryKey: ['comments', postId],
-    queryFn: () => getCommentList(postId),
+    queryFn: () => getCommentList({ postId }),
     staleTime: 1000 * 60,
     onError: (error) => {
       console.error('댓글을 불러올 수 없습니다.', error);
@@ -27,11 +27,11 @@ export default function useComment() {
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
-      const ERROR_STATUS = error.response.status;
+      const errorStatus = error.response.status;
 
-      if (ERROR_STATUS === 400) {
+      if (errorStatus === 400) {
         alert('댓글 등록에 실패했습니다.');
-      } else if (ERROR_STATUS === 404) {
+      } else if (errorStatus === 404) {
         alert('찾을 수 없는 댓글입니다.');
       }
     },
@@ -43,14 +43,14 @@ export default function useComment() {
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
-      const ERROR_STATUS = error.response.status;
-      const ERROR_CODE = error.response.data.code;
+      const errorStatus = error.response.status;
+      const errorCode = error.response.data.code;
 
-      if (ERROR_STATUS === 400) {
+      if (errorStatus === 400) {
         alert('댓글 삭제에 실패했습니다.');
-      } else if (ERROR_CODE === 404 && ERROR_CODE === 3031) {
+      } else if (errorCode === 404 && errorCode === 3031) {
         alert('사라진 게시글입니다.');
-      } else if (ERROR_CODE === 404 && ERROR_CODE === 3020) {
+      } else if (errorCode === 404 && errorCode === 3020) {
         alert('사라진 댓글입니다.');
       }
     },
@@ -63,14 +63,14 @@ export default function useComment() {
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
-      const ERROR_STATUS = error.response.status;
-      const ERROR_CODE = error.response.data.code;
+      const errorStatus = error.response.status;
+      const errorCode = error.response.data.code;
 
-      if (ERROR_STATUS === 400) {
+      if (errorStatus === 400) {
         alert('댓글 수정에 실패했습니다.');
-      } else if (ERROR_CODE === 404 && ERROR_CODE === 3031) {
+      } else if (errorCode === 404 && errorCode === 3031) {
         alert('사라진 게시글입니다.');
-      } else if (ERROR_CODE === 404 && ERROR_CODE === 3020) {
+      } else if (errorCode === 404 && errorCode === 3020) {
         alert('사라진 댓글입니다.');
       }
     },

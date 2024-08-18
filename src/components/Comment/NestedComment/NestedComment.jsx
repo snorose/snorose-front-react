@@ -70,7 +70,7 @@ export default function NestedComment({
           <div className={styles.nestedPadding}>{data.content}</div>
         </div>
         <div className={styles.commentBottom}>
-          <div className={styles.likedCount}>
+          <button className={styles.likedCount}>
             <Icon
               id='like'
               width='13'
@@ -79,7 +79,7 @@ export default function NestedComment({
               onClick={handleLikedClick}
             />
             <p>{data.likeCount}</p>
-          </div>
+          </button>
         </div>
       </div>
       <OptionModal

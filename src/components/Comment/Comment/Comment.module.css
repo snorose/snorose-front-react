@@ -50,33 +50,47 @@
 }
 
 .commentBottom {
+  margin-right: 8px;
+  margin-bottom: 8px;
   display: flex;
   justify-content: end;
   padding: 0 0 0 14px;
 }
 
 .commentCount {
+  padding: 4px 8px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 6px;
+  border-radius: 5px;
   color: #898989;
+  background-color: transparent;
   font-size: 11px;
   line-height: 150%;
   letter-spacing: -0.5px;
-  padding: 4px 5px 12px 14px;
+}
+
+.commentCount:hover {
+  background-color: #e8e8e8;
 }
 
 .likedCount {
+  padding: 4px 8px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 5px;
+  border-radius: 5px;
   color: #898989;
+  background-color: transparent;
   font-size: 11px;
   line-height: 150%;
   letter-spacing: -0.5px;
-  padding: 4px 14px 12px 5px;
+}
+
+.likedCount:hover {
+  background-color: #e8e8e8;
 }
 
 .nestedComment {

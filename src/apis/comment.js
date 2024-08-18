@@ -1,7 +1,7 @@
 import { authAxios } from '../axios';
 
 // 시험후기 댓글
-export const getCommentList = async (postId) => {
+export const getCommentList = async ({ postId }) => {
   const response = await authAxios.get(`/v1/posts/${postId}/comments`);
   return response.data.result;
 };
