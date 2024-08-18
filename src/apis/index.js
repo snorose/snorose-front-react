@@ -1,4 +1,11 @@
-import { getPostList } from './postList.js';
+import {
+  getPostList,
+  getPostContent,
+  postPost,
+  patchPost,
+  deletePost,
+} from './post.js';
+
 import {
   deleteExamReview,
   downloadExamReview,
