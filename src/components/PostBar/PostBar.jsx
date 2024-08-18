@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Icon } from '../../components/Icon';
 import { useNavigate } from 'react-router-dom';
 import timeAgo from '../../utils/timeAgo.js';
@@ -5,11 +6,21 @@ import styles from './PostBar.module.css';
 
 export default function PostBar({ data, optionClick, use }) {
   const navigate = useNavigate();
-  const givenTime = data.createdAt;
-  const agoTime = timeAgo(givenTime);
+  const [agoTime, setAgoTime] = useState(timeAgo(data.createdAt));
+
+  // timeAgo를 1분마다 업데이트
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setAgoTime(timeAgo(data.createdAt));
+    }, 60000);
+
+    return () => clearInterval(intervalId);
+  }, [data.createdAt]);
 
   const handlePostBarClick = () => {
-    use === 'post' && navigate(`./post/${data.postId}`);
+    if (use === 'post') {
+      navigate(`./post/${data.postId}`);
+    }
   };
 
   return (
@@ -19,8 +30,14 @@ export default function PostBar({ data, optionClick, use }) {
         <p className={styles.name}>{data.userDisplay}</p>
         <p className={styles.dot}>·</p>
         <p>{agoTime}</p>
-        {data.isEdited ? <p className={styles.edited}>&nbsp;(수정됨)</p> : null}
-        <div className={styles.more_option} onClick={optionClick}>
+        {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
+        <div
+          className={styles.more_option}
+          onClick={(e) => {
+            e.stopPropagation();
+            optionClick();
+          }}
+        >
           <Icon id='ellipsis-vertical' width={3} height={11} fill='#484848' />
         </div>
       </div>

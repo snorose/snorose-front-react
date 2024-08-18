@@ -6,7 +6,7 @@ import { InputBar } from '../../../components/InputBar';
 import { BackAppBar } from '../../../components/AppBar';
 import { FetchLoading } from '../../../components/Loading';
 import { DeleteModal, OptionModal } from '../../../components/Modal';
-import { getPostContent } from '../../../apis/postContent.js';
+import { getPostContent } from '../../../apis/post.js';
 import { getCommentList, deleteComment } from '../../../apis/comment.js';
 import { BOARD_MENUS } from '../../../constants/boardMenus.js';
 import styles from './PostPage.module.css';
@@ -35,6 +35,7 @@ export default function PostPage() {
         setPostData(data);
       } catch (error) {
         console.error('게시글 데이터를 불러오지 못했습니다.', error);
+        setPostData({}); // 기본값 설정
       }
     };
 
@@ -47,9 +48,10 @@ export default function PostPage() {
   const fetchCommentList = async () => {
     try {
       const data = await getCommentList(postId);
-      setCommentData(data);
+      setCommentData(Array.isArray(data) ? data : []); // 배열이 아닐 경우 빈 배열로 설정
     } catch (error) {
       console.error('댓글 데이터를 불러오지 못했습니다.', error);
+      setCommentData([]); // 기본값 설정
     }
   };
 
@@ -114,12 +116,8 @@ export default function PostPage() {
     setInputValue('');
   };
 
-  if (!postData) {
+  if (!postData || Object.keys(postData).length === 0) {
     return <FetchLoading>게시글을 불러오는 중...</FetchLoading>;
-  }
-
-  if (!commentData) {
-    return <FetchLoading>댓글을 불러오는 중...</FetchLoading>;
   }
 
   return (
@@ -131,7 +129,7 @@ export default function PostPage() {
         <div className={styles.contentTop}>
           <div className={styles.contentTopLeft}>
             <Icon id='cloud' width='25' height='16' />
-            <p>{postData.userDisplay}</p>
+            <p>{postData.userDisplay || 'Unknown'}</p>
             <p className={styles.dot}>·</p>
             <p>
               {timeAgo(postData.createdAt)}
@@ -143,23 +141,23 @@ export default function PostPage() {
           </div>
         </div>
         <div className={styles.title}>
-          <p>{postData.title}</p>
-          <p>{postData.viewCount} views</p>
+          <p>{postData.title || '제목 없음'}</p>
+          <p>{postData.viewCount || 0} views</p>
         </div>
-        <p className={styles.text}>{postData.content}</p>
+        <p className={styles.text}>{postData.content || '내용이 없습니다.'}</p>
         <div className={styles.post_bottom}>
           <div className={styles.count} onClick={handleCommentIconClick}>
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
-            <p>{commentData.length}</p>
+            <p>{postData.commentCount || 0}</p>
           </div>
           <div className={styles.count}>
             <Icon id='like' width='13' height='12' fill='#D9D9D9' />
-            <p>{postData.likeCount}</p>
+            <p>{postData.likeCount || 0}</p>
           </div>
         </div>
       </div>
       <div className={styles.comments}>
-        <p className={styles.commentsTitle}>댓글 {commentData.length}개</p>
+        <p className={styles.commentsTitle}>댓글 {postData.commentCount}개</p>
         {commentData.map((comment) => (
           <Comment
             key={comment.id}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -10,10 +10,11 @@ import { PostBar } from '../../../components/PostBar';
 import { Sponser } from '../../../components/Sponser';
 import { OptionModal } from '../../../components/Modal';
 import PTR from '../../../components/PTR/PTR.jsx';
-import { getPostList } from '../../../apis/postList.js';
+import { getPostList } from '../../../apis/post.js';
 import { Target } from '../../../components/Target/index.js';
 import { BOARD_MENUS } from '../../../constants/boardMenus.js';
 import { useIntersect } from '@/hooks';
+import timeAgo from '../../../utils/timeAgo'; // Import timeAgo utility
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
@@ -31,6 +32,7 @@ export default function BoardListPage() {
         }
         return lastPage.length > 0 ? (lastPageParam || 0) + 1 : undefined;
       },
+      refetchInterval: false,
     });
 
   const ref = useIntersect(
@@ -55,11 +57,14 @@ export default function BoardListPage() {
     };
   };
 
-  const handleRefresh = () => {
-    return refetch().then(() => {
-      console.log('Refreshed!');
-    });
-  };
+  // 게시글 리스트를 1초마다 새로 고침
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refetch().then(() => {});
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [refetch]);
 
   return (
     <div className={styles.container}>
@@ -73,13 +78,13 @@ export default function BoardListPage() {
           <p>[필독] 공지사항</p>
         </div>
       </div>
-      <PTR onRefresh={handleRefresh}>
+      <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
         <div className={styles.postListContainer}>
           {status !== 'error' &&
             postList.map((post) => (
               <PostBar
                 key={post.postId}
-                data={post}
+                data={{ ...post, timeAgo: timeAgo(post.date) }}
                 optionClick={openModal}
                 use='post'
               />
@@ -91,7 +96,7 @@ export default function BoardListPage() {
           id='pencil-circle'
           width={105}
           height={105}
-          onClick={handleNavClick('/post-write')}
+          onClick={handleNavClick('./post-write')}
         />
       </div>
       <div className={styles.sponser}>

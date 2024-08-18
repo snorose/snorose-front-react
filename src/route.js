@@ -56,6 +56,14 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     ),
   },
   {
+    path: `/board/${boardPath}/post-write`,
+    element: (
+      <ProtectedRoute>
+        <PostWritePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: `/board/${boardPath}/search`,
     element: (
       <ProtectedRoute>
