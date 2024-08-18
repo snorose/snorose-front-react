@@ -1,18 +1,14 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQueryClient, useQueries, useMutation } from '@tanstack/react-query';
+import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
 import { BackAppBar } from '../../../components/AppBar/index.js';
-import { Comment } from '../../../components/Comment';
+import { CommentList } from '../../../components/Comment';
 import { Icon } from '../../../components/Icon/index.js';
 import { InputBar } from '../../../components/InputBar';
 import { ReviewContentItem } from '../../../components/ReviewContentItem';
 import { ReviewDownload } from '../../../components/ReviewDownload';
 
-import {
-  deleteExamReview,
-  getCommentList,
-  getReviewDetail,
-} from '../../../apis';
+import { deleteExamReview, getReviewDetail } from '../../../apis';
 
 import { dateFormat } from '../../../utils/formatDate.js';
 import { convertToObject } from '../../../utils/convertDS.js';
@@ -30,22 +26,15 @@ const EXAM_TYPE = convertToObject(TEST_CATEGORY);
 
 export default function ExamReviewDetailPage() {
   const { postId } = useParams();
+  const { data } = useQuery({
+    queryKey: ['reviewDetail', postId],
+    queryFn: () => getReviewDetail(postId),
+    staleTime: 1000 * 60 * 5,
+  });
+
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [review, comment] = useQueries({
-    queries: [
-      {
-        queryKey: ['reviewDetail', postId],
-        queryFn: () => getReviewDetail(postId),
-        staleTime: 1000 * 60 * 5,
-      },
-      {
-        queryKey: ['comment', postId],
-        queryFn: () => getCommentList(postId),
-        staleTime: 1000 * 60 * 5,
-      },
-    ],
-  });
+
   const deleteReview = useMutation({
     mutationFn: () => deleteExamReview(postId),
     onSuccess: () => {
@@ -56,17 +45,14 @@ export default function ExamReviewDetailPage() {
     },
   });
 
-  if (review?.data === undefined) return null;
+  if (data === undefined) return null;
 
   const {
-    viewCount,
     scrapCount,
-    likeCount,
     classNumber,
     online,
     isEdited,
     writer,
-    examReviewId,
     userDisplay,
     title,
     createdAt,
@@ -80,7 +66,7 @@ export default function ExamReviewDetailPage() {
     questionDetail,
     confirmed,
     isPF,
-  } = review.data;
+  } = data;
 
   return (
     <main>
@@ -115,7 +101,7 @@ export default function ExamReviewDetailPage() {
                   height='17'
                   onClick={() =>
                     navigate(`/exam-review/${postId}/edit`, {
-                      state: review.data,
+                      state: data,
                       replace: true,
                     })
                   }
@@ -146,16 +132,7 @@ export default function ExamReviewDetailPage() {
         </div>
         <ReviewDownload className={styles.fileDownload} fileName={fileName} />
       </div>
-      <div className={styles.comments}>
-        <p className={styles.commentsTitle}>댓글 {comment?.data?.length}개</p>
-        {comment.data ? (
-          comment.data.map((comment) => (
-            <Comment key={comment.id} data={comment} />
-          ))
-        ) : (
-          <div className={styles.failComment}>댓글을 불러올 수 없습니다.</div>
-        )}
-      </div>
+      <CommentList />
       <InputBar />
     </main>
   );

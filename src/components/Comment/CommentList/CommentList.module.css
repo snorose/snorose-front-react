@@ -1,0 +1,21 @@
+.comments {
+  width: 100%;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  padding: 0 20px 100px 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 7px;
+}
+
+.commentsTitle {
+  padding: 9px 0 2px 0;
+}
+
+.failComment {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
