@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Icon } from '../../../components/Icon';
 import { Comment } from '../../../components/Comment';
 import { InputBar } from '../../../components/InputBar';
@@ -13,6 +13,7 @@ import styles from './PostPage.module.css';
 import timeAgo from '../../../utils/timeAgo.js';
 
 export default function PostPage() {
+  const navigate = useNavigate();
   const { postId } = useParams();
   const { pathname } = useLocation();
   const currentBoard =
@@ -22,12 +23,13 @@ export default function PostPage() {
   const [commentData, setCommentData] = useState([]);
   const [commentParentId, setCommentParentId] = useState(null);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
+  const [isPrimaryModalOpen, setIsPrimaryModalOpen] = useState(false);
   const [isSecondaryModalOpen, setIsSecondaryModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const inputBarRef = useRef(null);
 
-  // 게시글 데이터 받아오기
+  // 게시글 데이터 받아오기 API 호출
   useEffect(() => {
     const fetchPostContent = async () => {
       try {
@@ -44,7 +46,7 @@ export default function PostPage() {
     }
   }, [currentBoard.id, postId]);
 
-  // 댓글 데이터 받아오기
+  // 댓글 데이터 받아오기 API 호출
   const fetchCommentList = async () => {
     try {
       const data = await getCommentList(postId);
@@ -55,12 +57,7 @@ export default function PostPage() {
     }
   };
 
-  // postId가 변경될 때마다 댓글 목록을 다시 불러옴
-  useEffect(() => {
-    fetchCommentList();
-  }, [postId]);
-
-  // 댓글 삭제하기
+  // 댓글 삭제하기 API 호출
   const fetchCommentDelete = async () => {
     try {
       await deleteComment(postId, selectedCommentId);
@@ -75,42 +72,50 @@ export default function PostPage() {
     setIsSecondaryModalOpen(false);
   };
 
-  // 게시글의 댓글 아이콘 클릭 시 댓글 입력창으로 포커스
-  const handleCommentClick = (parentId) => {
+  // 게시글 및 댓글 데이터 초기화
+  useEffect(() => {
+    fetchCommentList();
+  }, [postId]);
+
+  // comment 아이콘 클릭 시 포커스 및 댓글 ID 설정
+  const handleCommentInteraction = (parentId = null) => {
     setCommentParentId(parentId);
     if (inputBarRef.current) {
       inputBarRef.current.focusInput();
     }
   };
 
-  // 댓글 아이콘 클릭 시 댓글 입력창으로 포커스
-  const handleCommentIconClick = () => {
-    setCommentParentId(null);
-    if (inputBarRef.current) {
+  // 더보기 아이콘 클릭 시 모달 type 설정 (post or comment)
+  const handleOptionClick = (type, commentId = null, commentContent = '') => {
+    setModalType(type);
+    if (type === 'comment') {
+      setSelectedCommentId(commentId);
+      setInputValue(commentContent);
+    }
+    setIsPrimaryModalOpen(true);
+  };
+
+  // 모달에서 수정 옵션 클릭 시
+  const handleEditMenuClick = () => {
+    if (modalType === 'post') {
+      navigate(`/post/edit`);
+    } else if (modalType === 'comment') {
+      setIsPrimaryModalOpen(false);
       inputBarRef.current.focusInput();
     }
   };
 
-  // 더보기 아이콘 클릭 시: 댓글 ID & 댓글 내용 저장
-  const handleCommentOptionClick = (commentId, commentContent) => {
-    setSelectedCommentId(commentId);
-    setInputValue(commentContent);
-    setIsModalOpen(true);
-  };
-
-  // 수정 메뉴 클릭 시
-  const handleEditMenuClick = () => {
-    setIsModalOpen(false);
-    inputBarRef.current.focusInput();
-  };
-
-  // 삭제 메뉴 클릭 시
+  // 모달에서 삭제 옵션 클릭 시
   const handleDeleteMenuClick = () => {
-    setIsModalOpen(false);
-    setIsSecondaryModalOpen(true);
+    if (modalType === 'post') {
+      navigate(`/post`);
+    } else if (modalType === 'comment') {
+      setIsPrimaryModalOpen(false);
+      setIsSecondaryModalOpen(true);
+    }
   };
 
-  // 편집 상태 초기화
+  // 댓글 편집 상태 초기화
   const resetEditingState = () => {
     setSelectedCommentId(null);
     setInputValue('');
@@ -136,7 +141,10 @@ export default function PostPage() {
               {postData.edited ? ' (수정됨)' : null}
             </p>
           </div>
-          <div className={styles.dot3}>
+          <div
+            className={styles.dot3}
+            onClick={() => handleOptionClick('post')}
+          >
             <Icon id='ellipsis-vertical' width='3' height='11' />
           </div>
         </div>
@@ -146,7 +154,10 @@ export default function PostPage() {
         </div>
         <p className={styles.text}>{postData.content || '내용이 없습니다.'}</p>
         <div className={styles.post_bottom}>
-          <div className={styles.count} onClick={handleCommentIconClick}>
+          <div
+            className={styles.count}
+            onClick={() => handleCommentInteraction()}
+          >
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
             <p>{postData.commentCount || 0}</p>
           </div>
@@ -162,8 +173,8 @@ export default function PostPage() {
           <Comment
             key={comment.id}
             data={comment}
-            onCommentClick={() => handleCommentClick(comment.id)}
-            onCommentOptionClick={handleCommentOptionClick}
+            onCommentClick={() => handleCommentInteraction(comment.id)}
+            onCommentOptionClick={handleOptionClick}
           />
         ))}
       </div>
@@ -177,21 +188,20 @@ export default function PostPage() {
         resetEditingState={resetEditingState}
         ref={inputBarRef}
       />
-
       <OptionModal
-        id='comment-edit'
-        isOpen={isModalOpen}
-        setIsOpen={setIsModalOpen}
+        id={modalType === 'post' ? 'post-edit' : 'comment-edit'}
+        isOpen={isPrimaryModalOpen}
+        setIsOpen={setIsPrimaryModalOpen}
         functions={{
           pencil: handleEditMenuClick,
           trash: handleDeleteMenuClick,
         }}
       />
       <DeleteModal
-        id='comment-delete'
+        id={modalType === 'post' ? 'post-delete' : 'comment-delete'}
         isOpen={isSecondaryModalOpen}
         setIsOpen={setIsSecondaryModalOpen}
-        redBtnFuction={handleDelete}
+        redBtnFunction={handleDelete}
       />
     </div>
   );

@@ -41,7 +41,7 @@ export default function NestedComment({
 
         <p
           className={styles.dot3}
-          onClick={() => onCommentOptionClick(data.id, data.content)}
+          onClick={() => onCommentOptionClick('comment', data.id, data.content)}
         >
           <Icon id='ellipsis-vertical' width='3' height='11' />
         </p>
