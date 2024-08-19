@@ -164,6 +164,9 @@ export const routeList = [
       {
         path: '/my-page/view-point-list',
         element: <ViewPointListPage />,
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/my-page/delete-account',

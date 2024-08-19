@@ -1,12 +1,13 @@
 .viewPointListPage {
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .contentWrapper {
   display: flex;
   flex-direction: column;
-  padding: 0 1.25rem 100px 1.25rem;
+  padding: 0 1.25rem 42px 1.25rem;
   width: 100%;
 }
 
