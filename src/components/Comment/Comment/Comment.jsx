@@ -1,25 +1,44 @@
+import React from 'react';
 import styles from './Comment.module.css';
 import { Icon } from '../../../components/Icon';
 import { NestedComment } from '../';
 import timeAgo from '../../../utils/timeAgo.js';
-import { useState } from 'react';
 
 export default function Comment({
   data,
   onCommentClick,
   onCommentOptionClick,
 }) {
-  const [isLiked, setIsLiked] = useState(false);
-
-  const handleLikedClick = () => {
-    console.log('API로 liked 데이터 수정');
-  };
-
   const handleCommentClick = () => {
     if (onCommentClick) {
       onCommentClick();
     }
   };
+
+  const renderChildren = (children) => {
+    return (
+      children.length > 0 &&
+      children.map((childComment, index) => (
+        <div key={childComment.id} className={styles.nestedCommentWrapper}>
+          <NestedComment
+            data={childComment}
+            isLast={index === children.length - 1}
+            isFirst={index === 0}
+            onCommentOptionClick={onCommentOptionClick}
+          />
+        </div>
+      ))
+    );
+  };
+
+  if (data.isDeleted) {
+    return (
+      <div className={styles.comment}>
+        <div className={styles.deletedComment}>(삭제된 댓글입니다)</div>
+        {renderChildren(data.children)}
+      </div>
+    );
+  }
 
   return (
     <div className={styles.comment}>
@@ -52,16 +71,7 @@ export default function Comment({
           <p>{data.likeCount}</p>
         </div>
       </div>
-      {data.children.length > 0 &&
-        data.children.map((childComment, index) => (
-          <NestedComment
-            key={childComment.id}
-            data={childComment}
-            isLast={index === data.children.length - 1}
-            isFirst={index === 0}
-            onCommentOptionClick={onCommentOptionClick}
-          />
-        ))}
+      {renderChildren(data.children)}
     </div>
   );
 }

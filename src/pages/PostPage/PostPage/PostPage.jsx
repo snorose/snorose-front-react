@@ -29,7 +29,7 @@ export default function PostPage() {
   const [inputValue, setInputValue] = useState('');
   const inputBarRef = useRef(null);
 
-  // 게시글 데이터 받아오기 API 호출
+  // 게시글 데이터 받아오기
   useEffect(() => {
     const fetchPostContent = async () => {
       try {
@@ -46,18 +46,18 @@ export default function PostPage() {
     }
   }, [currentBoard.id, postId]);
 
-  // 댓글 데이터 받아오기 API 호출
+  // 댓글 데이터 받아오기
   const fetchCommentList = async () => {
     try {
       const data = await getCommentList(postId);
-      setCommentData(Array.isArray(data) ? data : []); // 배열이 아닐 경우 빈 배열로 설정
+      setCommentData(Array.isArray(data) ? filterDeletedComments(data) : []);
     } catch (error) {
       console.error('댓글 데이터를 불러오지 못했습니다.', error);
       setCommentData([]); // 기본값 설정
     }
   };
 
-  // 댓글 삭제하기 API 호출
+  // 댓글 삭제하기
   const fetchCommentDelete = async () => {
     try {
       await deleteComment(postId, selectedCommentId);
@@ -72,12 +72,33 @@ export default function PostPage() {
     setIsSecondaryModalOpen(false);
   };
 
-  // 게시글 및 댓글 데이터 초기화
+  // 삭제된 댓글과 대댓글을 재귀적으로 필터링
+  const filterDeletedComments = (comments) => {
+    return comments
+      .map((comment) => {
+        const filteredChildren = filterDeletedComments(comment.children);
+        if (comment.isDeleted) {
+          if (filteredChildren.length > 0) {
+            return {
+              ...comment,
+              children: filteredChildren,
+            };
+          }
+          return null;
+        }
+        return {
+          ...comment,
+          children: filteredChildren,
+        };
+      })
+      .filter(Boolean);
+  };
+
   useEffect(() => {
     fetchCommentList();
   }, [postId]);
 
-  // comment 아이콘 클릭 시 포커스 및 댓글 ID 설정
+  // 댓글 아이콘 클릭 및 댓글 클릭 시 포커스 및 댓글 ID 설정
   const handleCommentInteraction = (parentId = null) => {
     setCommentParentId(parentId);
     if (inputBarRef.current) {
@@ -107,12 +128,8 @@ export default function PostPage() {
 
   // 모달에서 삭제 옵션 클릭 시
   const handleDeleteMenuClick = () => {
-    if (modalType === 'post') {
-      navigate(`/post`);
-    } else if (modalType === 'comment') {
-      setIsPrimaryModalOpen(false);
-      setIsSecondaryModalOpen(true);
-    }
+    setIsPrimaryModalOpen(false);
+    setIsSecondaryModalOpen(true);
   };
 
   // 댓글 편집 상태 초기화
@@ -149,21 +166,21 @@ export default function PostPage() {
           </div>
         </div>
         <div className={styles.title}>
-          <p>{postData.title || '제목 없음'}</p>
-          <p>{postData.viewCount || 0} views</p>
+          <p>{postData.title}</p>
+          <p>{postData.viewCount} views</p>
         </div>
-        <p className={styles.text}>{postData.content || '내용이 없습니다.'}</p>
+        <p className={styles.text}>{postData.content}</p>
         <div className={styles.post_bottom}>
           <div
             className={styles.count}
             onClick={() => handleCommentInteraction()}
           >
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
-            <p>{postData.commentCount || 0}</p>
+            <p>{postData.commentCount}</p>
           </div>
           <div className={styles.count}>
             <Icon id='like' width='13' height='12' fill='#D9D9D9' />
-            <p>{postData.likeCount || 0}</p>
+            <p>{postData.likeCount}</p>
           </div>
         </div>
       </div>

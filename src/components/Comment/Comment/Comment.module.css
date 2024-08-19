@@ -109,3 +109,15 @@
   width: 100%;
   padding-left: 22px;
 }
+
+.deletedComment {
+  width: 100%;
+  padding: 15px 14px;
+  border-radius: 5px;
+  background: #f8f8f8;
+  color: #898989;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+
+}

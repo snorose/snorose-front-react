@@ -1,21 +1,10 @@
 import { authAxios } from '../axios';
 
-// 댓글과 대댓글을 재귀적으로 필터링하는 함수
-const filterDeletedComments = (comments) => {
-  return comments
-    .filter((comment) => !comment.isDeleted)
-    .map((comment) => ({
-      ...comment,
-      children: filterDeletedComments(comment.children),
-    }));
-};
-
 // 댓글 목록을 가져오는 API
 export const getCommentList = async (postId) => {
   try {
     const response = await authAxios.get(`/v1/posts/${postId}/comments`);
-    const filteredComments = filterDeletedComments(response.data.result);
-    return filteredComments;
+    return response.data.result;
   } catch (error) {
     console.error('댓글 목록을 가져오는 데 실패했습니다.', error);
     return error.response;
@@ -82,8 +71,8 @@ export const patchComment = async ({
     content,
   });
   const editedComment = {
-    parentId: parentId || 0, // parentId가 없는 경우 0으로 기본값 설정
-    content: content, // 외부에서 받은 content 값 사용
+    parentId: parentId || 0,
+    content: content,
   };
 
   try {
