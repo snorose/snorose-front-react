@@ -2,12 +2,13 @@
   display: flex;
   position: relative;
   flex-direction: column;
+  height: 100vh;
 }
 
 .contentWrapper {
   display: flex;
   flex-direction: column;
-  padding: 0 1.25rem 100px 1.25rem;
+  padding: 0 1.25rem 54px 1.25rem;
   width: 100%;
 }
 
@@ -26,6 +27,7 @@
 
 .contentListContainer {
   display: flex;
+  height: 100%;
   flex-direction: column;
   gap: 8px;
   margin-bottom: 100px;
@@ -35,10 +37,10 @@
   display: flex;
   position: fixed;
   margin: 0 auto;
-  bottom: 103px;
+  bottom: 54px;
   padding: 0 20px;
   width: 100%;
-  max-width: 450px;
+  max-width: 600px;
   background-size: cover;
 }
 

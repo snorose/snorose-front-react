@@ -81,13 +81,31 @@ export const routeList = [
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <MainPage /> },
-      { path: '/home', element: <MainPage /> },
-      { path: '/board', element: <BoardPage /> },
+      {
+        index: true,
+        element: <MainPage />,
+      },
+      {
+        path: '/home',
+        element: <MainPage />,
+      },
+      {
+        path: '/board',
+        element: <BoardPage />,
+      },
       ...boardRoutes,
-      { path: '/post', element: <PostPage /> },
-      { path: '/search/post', element: <PostSearchPage /> },
-      { path: '/post-write', element: <PostWritePage /> },
+      {
+        path: '/post',
+        element: <PostPage />,
+      },
+      {
+        path: '/search/post',
+        element: <PostSearchPage />,
+      },
+      {
+        path: '/post-write',
+        element: <PostWritePage />,
+      },
       {
         path: '/exam-review',
         element: (
@@ -103,70 +121,159 @@ export const routeList = [
             <ExamReviewDetailPage />
           </ProtectedRoute>
         ),
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/exam-review/:postId/edit',
         element: <ExamReviewEditPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/exam-review-write',
         element: <ExamReviewWritePage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
-      { path: '/alert', element: <AlertPage /> },
-      { path: '/my-page', element: <MyPage /> },
-      { path: '/my-page/password', element: <ChangePasswordPage /> },
-      { path: '/my-page/edit-info', element: <EditInfoPage /> },
-      { path: '/my-page/view-point-list', element: <ViewPointListPage /> },
-      { path: '/my-page/delete-account', element: <DeleteAccountPage /> },
-      { path: '/my-page/privacy-policy', element: <PrivacyPolicyPage /> },
-      { path: '/my-page/service-policy', element: <ServicePolicyPage /> },
-      { path: '/my-page/my-post', element: <MyPostPage /> },
-      { path: '/my-page/comment', element: <CommentPage /> },
+      {
+        path: '/alert',
+        element: <AlertPage />,
+      },
+      {
+        path: '/my-page',
+        element: <MyPage />,
+      },
+      {
+        path: '/my-page/password',
+        element: <ChangePasswordPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/edit-info',
+        element: <EditInfoPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/view-point-list',
+        element: <ViewPointListPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/delete-account',
+        element: <DeleteAccountPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/privacy-policy',
+        element: <PrivacyPolicyPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/service-policy',
+        element: <ServicePolicyPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/my-post',
+        element: <MyPostPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/comment',
+        element: <CommentPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
       {
         path: '/my-page/download-exam-review',
         element: <DownloadExamReviewPage />,
+        meta: {
+          hideNav: true,
+        },
       },
-      { path: '/about', element: <AboutPage /> },
-      { path: '/notice', element: <NoticeListPage /> },
-      { path: '/authentication', element: <AuthPage /> },
-      { path: '/help', element: <HelpPage /> },
+      {
+        path: '/about',
+        element: <AboutPage />,
+      },
+      {
+        path: '/notice',
+        element: <NoticeListPage />,
+      },
+      {
+        path: '/authentication',
+        element: <AuthPage />,
+      },
+      {
+        path: '/help',
+        element: <HelpPage />,
+      },
       {
         path: '/login',
         element: <LoginPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/find-id',
         element: <FindIdPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/find-pw',
         element: <FindPwPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/found-id',
         element: <FoundIdPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/found-pw',
         element: <FoundPwPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/not-found-id',
         element: <NotFoundIdPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/not-found-pw',
         element: <NotFoundPwPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
     ],
   },
