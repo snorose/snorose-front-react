@@ -8,43 +8,9 @@ const handlePasswordChangeSubmit = () => {
 };
 
 export default function ChangePasswordPage() {
+  const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordCheck, setNewPasswordCheck] = useState('');
-  const [newPasswordError, setNewPasswordError] = useState('');
-  const [newPasswordCheckError, setNewPasswordCheckError] = useState('');
-
-  const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
-  const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
-
-  // 새 비밀번호 유효성 검사 함수
-  const handlePasswordChange = (value) => {
-    setNewPassword(value);
-
-    if (
-      value.length < 8 ||
-      !/[A-Za-z]/.test(value) ||
-      !/\d/.test(value) ||
-      !specialCharRegex.test(value) ||
-      emojiRegex.test(value)
-    ) {
-      setNewPasswordError(
-        '영어, 숫자, 특수문자를 포함해 8자 이상으로 작성해주세요'
-      );
-    } else {
-      setNewPasswordError('');
-    }
-  };
-
-  // 비밀번호 확인 유효성 검사 함수
-  const handlePasswordCheckChange = (value) => {
-    setNewPasswordCheck(value);
-
-    if (value !== newPassword) {
-      setNewPasswordCheckError('비밀번호가 일치하지 않습니다');
-    } else {
-      setNewPasswordCheckError('');
-    }
-  };
 
   return (
     <main className={styles.changePasswordPage}>
@@ -61,22 +27,26 @@ export default function ChangePasswordPage() {
         <InputPassword
           title='현재 비밀번호'
           placeholder='기존 비밀번호를 입력하세요'
+          value={currentPassword}
+          onChange={setCurrentPassword}
+          isStatic
         />
 
         <InputPassword
           title='새 비밀번호'
           placeholder='새로운 비밀번호를 입력하세요'
           value={newPassword}
-          onChange={handlePasswordChange}
-          errorMessage={newPasswordError}
+          onChange={setNewPassword}
+          validatePassword
         />
 
         <InputPassword
           title='비밀번호 확인'
           placeholder='비밀번호를 다시 입력하세요'
           value={newPasswordCheck}
-          onChange={handlePasswordCheckChange}
-          errorMessage={newPasswordCheckError}
+          onChange={setNewPasswordCheck}
+          isPasswordCheck
+          compareValue={newPassword}
         />
       </section>
     </main>
