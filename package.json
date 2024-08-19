@@ -44,8 +44,8 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
     "@tanstack/react-query-devtools": "^5.51.23",
-    "craco": "^0.0.3",
     "prettier": "^3.3.2",
     "react-app-alias": "^2.2.2"
   },
