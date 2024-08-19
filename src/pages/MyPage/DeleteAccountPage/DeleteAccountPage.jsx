@@ -1,13 +1,15 @@
 import styles from './DeleteAccountPage.module.css';
 import { Link } from 'react-router-dom';
-import { CloseAppBar } from '../../../components/AppBar';
+import { CloseAppBar } from '@/components/AppBar';
 
 import { useState } from 'react';
 import { useAuth } from '@/hooks';
+import { InputPassword } from '@/components/InputPassword';
 
 const descriptions = [
   '• 회원탈퇴 시 모든 정보가 영구적으로 삭제되며, 다시는 복구할 수 없습니다.',
   '• 보유 포인트 및 포인트 기록은 복구가 불가능합니다.',
+  '• 비밀번호를 입력해야 탈퇴가 가능해요',
 ];
 
 export default function DeleteAccountPage() {
@@ -46,6 +48,14 @@ export default function DeleteAccountPage() {
             value={password}
             onChange={handlePasswordInputChange}
           />
+
+          {/* <InputPassword
+            title='비밀번호'
+            placeholder='비밀번호를 입력하세요'
+            value={password}
+            onChange={handlePasswordInputChange}
+            isStatic
+          /> */}
         </div>
 
         <div className={styles.buttonWrapper}>
