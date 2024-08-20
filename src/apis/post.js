@@ -13,7 +13,13 @@ export const getPostContent = async (boardId, postId) => {
 };
 
 // 게시글을 등록하는 API
-export const postPost = async ({ category, boardId, title, content, isNotice }) => {
+export const postPost = async ({
+  category,
+  boardId,
+  title,
+  content,
+  isNotice,
+}) => {
   const data = {
     category: category,
     title: title,

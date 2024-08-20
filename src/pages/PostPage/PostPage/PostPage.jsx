@@ -37,7 +37,7 @@ export default function PostPage() {
         setPostData(data);
       } catch (error) {
         console.error('게시글 데이터를 불러오지 못했습니다.', error);
-        setPostData({}); // 기본값 설정
+        setPostData({});
       }
     };
 
@@ -53,7 +53,7 @@ export default function PostPage() {
       setCommentData(Array.isArray(data) ? filterComments(data) : []);
     } catch (error) {
       console.error('댓글 데이터를 불러오지 못했습니다.', error);
-      setCommentData([]); // 기본값 설정
+      setCommentData([]);
     }
   };
 
@@ -67,16 +67,11 @@ export default function PostPage() {
     }
   };
 
+  // 게시글 삭제하기
   const handleDelete = async () => {
     if (modalType === 'post') {
-      try {
-        await deletePost();
-        alert('게시글이 삭제되었습니다.');
-        navigate('/'); // 게시글 삭제 후 홈으로 네비게이션
-      } catch (error) {
-        console.error('게시글 삭제에 실패했습니다.', error);
-      }
-      return;
+      await deletePost(currentBoard.id, postId);
+      navigate(`/board/${currentBoard.textId}`);
     } else if (modalType === 'comment') {
       await fetchCommentDelete();
     }
@@ -162,10 +157,6 @@ export default function PostPage() {
   if (!postData || Object.keys(postData).length === 0) {
     return <FetchLoading>게시글을 불러오는 중...</FetchLoading>;
   }
-
-  // if (postData === undefined) {
-  //   return <div>게시글을 찾을 수 없습니다.</div>; // 게시글이 없거나 오류가 발생한 경우
-  // }
 
   return (
     <div className={styles.container}>
