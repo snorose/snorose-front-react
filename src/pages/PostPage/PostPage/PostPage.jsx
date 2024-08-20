@@ -78,37 +78,37 @@ export default function PostPage() {
     setIsSecondaryModalOpen(false);
   };
 
-  // 삭제된 댓글과 대댓글을 재귀적으로 필터링
-  const filterComments = (comments) => {
-    return comments
-      .map((comment) => {
-        const filteredChildren = filterComments(comment.children);
-        if (comment.isDeleted) {
-          if (filteredChildren.length > 0) {
-            return {
-              ...comment,
-              children: filteredChildren,
-            };
-          }
-          return null;
+// 삭제된 댓글과 대댓글을 재귀적으로 필터링
+const filterComments = (comments) => {
+  return comments
+    .map((comment) => {
+      const filteredChildren = filterComments(comment.children);
+      if (comment.isDeleted) {
+        if (filteredChildren.length > 0) {
+          return {
+            ...comment,
+            children: filteredChildren,
+          };
         }
-        if (comment.isWriterWithdrawn) {
-          if (filteredChildren.length > 0) {
-            return {
-              ...comment,
-              userDisplay: '(알 수 없음)',
-              children: filteredChildren,
-            };
-          }
-          return null;
+        return null;
+      }
+      if (comment.isWriterWithdrawn) {
+        if (filteredChildren.length > 0) {
+          return {
+            ...comment,
+            userDisplay: '(알 수 없음)',
+            children: filteredChildren,
+          };
         }
-        return {
-          ...comment,
-          children: filteredChildren,
-        };
-      })
-      .filter(Boolean);
-  };
+        return null;
+      }
+      return {
+        ...comment,
+        children: filteredChildren,
+      };
+    })
+    .filter(Boolean);
+};
 
   useEffect(() => {
     fetchCommentList();

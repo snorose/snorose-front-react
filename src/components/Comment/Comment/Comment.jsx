@@ -31,6 +31,19 @@ export default function Comment({
     );
   };
 
+  // 신고된 글 (isDeleted는 false, isVisible은 false인 경우)
+  if (!data.isVisible && !data.isDeleted) {
+    return (
+      <div className={styles.comment}>
+        <div className={styles.deletedComment}>
+          (관리자에 의해 숨겨진 댓글입니다)
+        </div>
+        {renderChildren(data.children)}
+      </div>
+    );
+  }
+
+  // 삭제된 글 (isDeleted는 true, isVisible은 false인 경우)
   if (data.isDeleted) {
     return (
       <div className={styles.comment}>
