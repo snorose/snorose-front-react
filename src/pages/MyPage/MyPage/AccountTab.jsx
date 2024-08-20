@@ -1,21 +1,18 @@
 import { useMemo } from 'react';
 import styles from './MyPage.module.css';
-import { Link } from 'react-router-dom';
-import { getMyPageUserInfo } from '../../../apis/userInfo';
-import { useQuery } from '@tanstack/react-query';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks';
 
 const AccountTab = () => {
-  const { data, isPending, isError } = useQuery({
-    queryKey: ['myPageUserInfo'],
-    queryFn: getMyPageUserInfo,
-  });
+  const navigate = useNavigate();
+  const { userInfo, status } = useAuth();
 
   const userInfoList = useMemo(() => {
-    if (data === undefined) {
+    if (userInfo === null) {
       return [];
     }
 
-    const { loginId, email, studentNumber, major, birthday } = data.result;
+    const { loginId, email, studentNumber, major, birthday } = userInfo;
 
     return [
       {
@@ -39,13 +36,15 @@ const AccountTab = () => {
         value: birthday.replaceAll('-', '.'),
       },
     ];
-  }, [data]);
+  }, [userInfo]);
 
-  if (isPending) {
+  if (status === 'loading') {
     return <div>Loading...</div>;
   }
 
-  if (isError) {
+  if (status === 'unauthenticated') {
+    navigate('/login');
+
     return null;
   }
 

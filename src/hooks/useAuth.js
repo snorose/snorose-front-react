@@ -1,8 +1,22 @@
 import { useNavigate } from 'react-router-dom';
-import { withdrawAccount } from '@/apis';
+import { useEffect } from 'react';
+import { getMyPageUserInfo, withdrawAccount } from '@/apis';
+import { useQuery } from '@tanstack/react-query';
+import { useRecoilState } from 'recoil';
+import { authState } from '@/stores';
 
 const useAuth = () => {
+  const [{ userInfo, status }, setAuth] = useRecoilState(authState);
+
   const navigate = useNavigate();
+
+  const hasToken = !!localStorage.getItem('token');
+
+  const { data: userInfoData } = useQuery({
+    queryKey: ['myPageUserInfo'],
+    queryFn: getMyPageUserInfo,
+    enabled: hasToken,
+  });
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -21,7 +35,27 @@ const useAuth = () => {
     }
   };
 
+  useEffect(() => {
+    if (!hasToken) {
+      setAuth({
+        userInfo: null,
+        status: 'unauthenticated',
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userInfoData !== undefined) {
+      setAuth({
+        userInfo: userInfoData.result,
+        status: 'authenticated',
+      });
+    }
+  }, [userInfoData]);
+
   return {
+    userInfo,
+    status,
     logout,
     withdraw,
   };
