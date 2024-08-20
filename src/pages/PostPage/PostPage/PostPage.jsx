@@ -6,7 +6,7 @@ import { InputBar } from '../../../components/InputBar';
 import { BackAppBar } from '../../../components/AppBar';
 import { FetchLoading } from '../../../components/Loading';
 import { DeleteModal, OptionModal } from '../../../components/Modal';
-import { getPostContent } from '../../../apis/post.js';
+import { getPostContent, deletePost } from '../../../apis/post.js';
 import { getCommentList, deleteComment } from '../../../apis/comment.js';
 import { BOARD_MENUS } from '../../../constants/boardMenus.js';
 import styles from './PostPage.module.css';
@@ -50,7 +50,7 @@ export default function PostPage() {
   const fetchCommentList = async () => {
     try {
       const data = await getCommentList(postId);
-      setCommentData(Array.isArray(data) ? filterDeletedComments(data) : []);
+      setCommentData(Array.isArray(data) ? filterComments(data) : []);
     } catch (error) {
       console.error('댓글 데이터를 불러오지 못했습니다.', error);
       setCommentData([]); // 기본값 설정
@@ -68,19 +68,40 @@ export default function PostPage() {
   };
 
   const handleDelete = async () => {
-    await fetchCommentDelete();
+    if (modalType === 'post') {
+      try {
+        await deletePost();
+        alert('게시글이 삭제되었습니다.');
+        navigate('/'); // 게시글 삭제 후 홈으로 네비게이션
+      } catch (error) {
+        console.error('게시글 삭제에 실패했습니다.', error);
+      }
+      return;
+    } else if (modalType === 'comment') {
+      await fetchCommentDelete();
+    }
     setIsSecondaryModalOpen(false);
   };
 
   // 삭제된 댓글과 대댓글을 재귀적으로 필터링
-  const filterDeletedComments = (comments) => {
+  const filterComments = (comments) => {
     return comments
       .map((comment) => {
-        const filteredChildren = filterDeletedComments(comment.children);
+        const filteredChildren = filterComments(comment.children);
         if (comment.isDeleted) {
           if (filteredChildren.length > 0) {
             return {
               ...comment,
+              children: filteredChildren,
+            };
+          }
+          return null;
+        }
+        if (comment.isWriterWithdrawn) {
+          if (filteredChildren.length > 0) {
+            return {
+              ...comment,
+              userDisplay: '(알 수 없음)',
               children: filteredChildren,
             };
           }
@@ -141,6 +162,10 @@ export default function PostPage() {
   if (!postData || Object.keys(postData).length === 0) {
     return <FetchLoading>게시글을 불러오는 중...</FetchLoading>;
   }
+
+  // if (postData === undefined) {
+  //   return <div>게시글을 찾을 수 없습니다.</div>; // 게시글이 없거나 오류가 발생한 경우
+  // }
 
   return (
     <div className={styles.container}>
