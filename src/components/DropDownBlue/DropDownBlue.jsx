@@ -27,6 +27,16 @@ export default function DropDownBlue({ options, placeholder, select, setFn }) {
         </span>
       </div>
       <ul className={styles.list}>
+        <li
+          className={styles.option}
+          key={placeholder}
+          onClick={() => {
+            setFn(undefined);
+            setIsOpen(false);
+          }}
+        >
+          {placeholder}
+        </li>
         {options.map((option) => (
           <li
             className={styles.option}
