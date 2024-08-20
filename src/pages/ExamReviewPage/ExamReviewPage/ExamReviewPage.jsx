@@ -41,9 +41,9 @@ export default function ExamReviewPage() {
             boardId: BOARD_ID['exam-review'],
             page: pageParam,
             keyword,
-            lectureYear: lectureYear.id,
-            semester: semester.id,
-            examType: examType.id,
+            lectureYear: lectureYear?.id,
+            semester: semester?.id,
+            examType: examType?.id,
           })
       : ({ pageParam }) => getReviewList(pageParam),
   });
