@@ -135,7 +135,7 @@ export default function PostPage() {
   // 모달에서 수정 옵션 클릭 시
   const handleEditMenuClick = () => {
     if (modalType === 'post') {
-      navigate(`/post/edit`);
+      navigate(`./edit`);
     } else if (modalType === 'comment') {
       setIsPrimaryModalOpen(false);
       inputBarRef.current.focusInput();

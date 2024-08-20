@@ -12,7 +12,12 @@ import {
   PrivacyPolicyPage,
   ServicePolicyPage,
 } from './pages/MyPage';
-import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
+import {
+  PostPage,
+  PostSearchPage,
+  PostWritePage,
+  PostEditPage,
+} from './pages/PostPage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AlertPage from './pages/AlertPage/AlertPage';
 import AuthPage from './pages/AuthPage/AuthPage';
@@ -64,6 +69,14 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     ),
   },
   {
+    path: `/board/${boardPath}/post/:postId/edit`,
+    element: (
+      <ProtectedRoute>
+        <PostEditPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: `/board/${boardPath}/search`,
     element: (
       <ProtectedRoute>
@@ -95,7 +108,6 @@ export const routeList = [
       ...boardRoutes,
       { path: '/post', element: <PostPage /> },
       { path: '/search/post', element: <PostSearchPage /> },
-      { path: '/post-write', element: <PostWritePage /> },
       {
         path: '/exam-review',
         element: (
