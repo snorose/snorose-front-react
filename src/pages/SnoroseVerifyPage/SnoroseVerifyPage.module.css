@@ -5,9 +5,13 @@
 }
 
 .indicator {
-  margin: 13px var(--default-margin) 28px var(--default-margin);
+  margin: 9px var(--default-margin) 28px var(--default-margin);
   display: flex;
   gap: 11px;
+}
+
+.check {
+  margin: 13px var(--default-margin) 19px calc(var(--default-margin) - 3px);
 }
 
 .dot {

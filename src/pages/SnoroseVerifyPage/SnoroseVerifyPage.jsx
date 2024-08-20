@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { BackAppBar } from '@/components/AppBar';
+import { Icon } from '@/components/Icon';
 import { TermsPage, VerifyPage, CompletePage } from './index.js';
 
 import { TITLE_DES } from '../../constants';
@@ -14,7 +15,14 @@ export default function SnoroseVerifyPage() {
   return (
     <main className={styles.main}>
       <BackAppBar title='인증 신청' />
-      {step !== 'complete' && (
+      {step === 'complete' ? (
+        <Icon
+          className={styles.check}
+          id='check-thick'
+          width='24'
+          height='24'
+        />
+      ) : (
         <div className={styles.indicator}>
           <span
             className={`${styles.dot} ${step === 'terms' && styles.select}`}

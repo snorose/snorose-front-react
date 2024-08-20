@@ -12,9 +12,6 @@ export default function VerifyPage({ setStep }) {
   };
   const { id, pw } = data;
 
-  console.log(id);
-  console.log(pw);
-
   return (
     <section className={styles.content}>
       <div className={styles.verify}>
