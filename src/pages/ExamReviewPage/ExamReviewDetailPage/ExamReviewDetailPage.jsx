@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
+import { useToast } from '@/hooks';
+
 import { BackAppBar } from '@/components/AppBar/index.js';
 import { CommentList } from '@/components/Comment';
 import { Icon } from '@/components/Icon/index.js';
@@ -22,7 +24,6 @@ import {
 } from '@/constants/index.js';
 
 import styles from './ExamReviewDetailPage.module.css';
-import { useToast } from '@/hooks/index.js';
 
 const COURSE_TYPE = convertToObject(COURSE_CATEGORY);
 const SEMESTER = convertToObject(SEMESTERS);

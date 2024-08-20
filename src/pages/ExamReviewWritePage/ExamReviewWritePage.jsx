@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { postExamReview, updatePoint } from '@/apis';
 
-import { useToast } from '@/hooks/index.js';
+import { useToast } from '@/hooks';
 
 import { ActionButton, CloseAppBar } from '@/components/AppBar';
 import {

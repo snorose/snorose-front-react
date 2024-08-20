@@ -7,6 +7,10 @@ const TOAST = Object.freeze({
     id: 'EXAM_REVIEW_DELETE',
     message: '100P 차감되었어요',
   },
+  EXAM_REVIEW_DOWNLOAD: {
+    id: 'EXAM_REVIEW_DOWNLOAD',
+    message: '50P 차감되었어요',
+  },
 });
 
 export { TOAST };
