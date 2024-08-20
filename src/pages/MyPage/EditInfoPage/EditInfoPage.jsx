@@ -1,21 +1,40 @@
 import styles from './EditInfoPage.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Icon } from '../../../components/Icon';
 import { BackAppBar, ActionButton } from '../../../components/AppBar';
 import { CategoryFieldset, Dropdown } from '../../../components/Fieldset';
 import { MAJORS } from '../../../constants';
+import { useMutation } from '@tanstack/react-query';
+import { updateUserInfo } from '@/apis';
+import { useAuth } from '@/hooks';
 
 export default function EditInfoPage() {
+  const { userInfo, status } = useAuth({
+    isRequiredAuth: true,
+  });
+
   const [profileImage, setProfileImage] = useState(null);
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
   const [major, setMajor] = useState({});
   const [nameError, setNameError] = useState('');
+  const [birthDate, setBirthDate] = useState('');
   const [birthDateError, setBirthDateError] = useState('');
   const [nicknameError, setNicknameError] = useState('');
 
   const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
   const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
+
+  const {
+    mutate: updateUserInfoMutate,
+    error: updateUserInfoError,
+    isPending: isUpdateUserInfoPending,
+    isError: isUpdateUserInfoError,
+    isSuccess: isUpdateUserInfoSuccess,
+  } = useMutation({
+    mutationKey: ['updateUserInfo'],
+    mutationFn: (body) => updateUserInfo(body),
+  });
 
   const handleNameChange = (e) => {
     const value = e.target.value;
@@ -86,7 +105,66 @@ export default function EditInfoPage() {
     } else {
       setBirthDateError('');
     }
+
+    setBirthDate(e.target.value);
   };
+
+  const handleSubmitButtonClick = () => {
+    const [year, month, day] = [
+      birthDate.slice(0, 4),
+      birthDate.slice(4, 6),
+      birthDate.slice(6, 8),
+    ];
+
+    updateUserInfoMutate({
+      userName: name,
+      birthday: `${year}-${month}-${day}`,
+      nickname,
+      userProfile: profileImage || undefined,
+      major: major.name || undefined,
+    });
+  };
+
+  useEffect(() => {
+    if (userInfo === null) {
+      return;
+    }
+
+    const { userProfile, userName, birthday, nickname, major } = userInfo;
+
+    setProfileImage(userProfile);
+    setName(userName);
+    setBirthDate(birthday.replaceAll('-', ''));
+    setNickname(nickname);
+    setMajor({
+      id: major,
+      name: major,
+    });
+  }, [userInfo]);
+
+  useEffect(() => {
+    if (isUpdateUserInfoSuccess) {
+      alert('회원 정보 수정이 완료되었습니다.');
+    }
+
+    if (isUpdateUserInfoError) {
+      alert(
+        updateUserInfoError.response.data.userProfile ||
+          updateUserInfoError.response.data.userName ||
+          updateUserInfoError.response.data.birthday ||
+          updateUserInfoError.response.data.nickname ||
+          updateUserInfoError.response.data.major
+      );
+    }
+  }, [isUpdateUserInfoSuccess, isUpdateUserInfoError, updateUserInfoError]);
+
+  if (status === 'loading') {
+    return <div>loading...</div>;
+  }
+
+  if (status === 'unauthenticated') {
+    return null;
+  }
 
   return (
     <main className={styles.editInfoPage}>
@@ -95,7 +173,13 @@ export default function EditInfoPage() {
           <BackAppBar />
         </div>
         <div className={styles.submitBtn}>
-          <ActionButton>완료</ActionButton>
+          <ActionButton
+            type='button'
+            disabled={isUpdateUserInfoPending}
+            onClick={handleSubmitButtonClick}
+          >
+            완료
+          </ActionButton>
         </div>
       </header>
 
@@ -105,7 +189,7 @@ export default function EditInfoPage() {
             className={styles.profileImg}
             onClick={() => document.getElementById('profileImageInput').click()}
           >
-            {profileImage ? (
+            {profileImage !== null ? (
               <img
                 src={profileImage}
                 alt='프로필'
@@ -150,6 +234,7 @@ export default function EditInfoPage() {
                 className={styles.inputText}
                 placeholder='20020101'
                 maxLength={12}
+                value={birthDate.replaceAll('-', '')}
                 onChange={handleBirthDateChange}
                 pattern='\d{4}\.\d{2}\.\d{2}'
                 title='형식: YYYYMMDD (예: 20020101)'

@@ -13,3 +13,9 @@ export const getMyPageUserInfo = async () => {
 
   return data;
 };
+
+export const updateUserInfo = async (body) => {
+  const { data } = await authAxios.patch('/v1/users/mypage', body);
+
+  return data;
+};
