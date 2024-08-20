@@ -1,0 +1,37 @@
+.content {
+  flex: 1;
+  margin: 0 var(--default-margin);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.terms {
+  flex: 1;
+  margin-bottom: 14px;
+  padding: 14px;
+  background: #f5f5f5;
+  border-radius: 5px;
+}
+
+.text {
+  word-break: keep-all;
+  text-wrap: wrap;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #484848;
+}
+
+.button {
+  width: 100%;
+  padding: 13px 0;
+  border-radius: 0.3125rem;
+  background: var(--Blue-4, #00368e);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.03125rem;
+}

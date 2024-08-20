@@ -1,4 +1,7 @@
 import App from './App';
+import ProtectedRoute from './ProtectedRoute';
+import { AboutPage } from './pages/AboutPage';
+import { AlertPage } from './pages/AlertPage';
 import { BoardListPage, BoardPage } from './pages/BoardPage';
 import {
   ChangePasswordPage,
@@ -12,18 +15,11 @@ import {
   PrivacyPolicyPage,
   ServicePolicyPage,
 } from './pages/MyPage';
-import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
-import AboutPage from './pages/AboutPage/AboutPage';
-import AlertPage from './pages/AlertPage/AlertPage';
-import AuthPage from './pages/AuthPage/AuthPage';
 import { ErrorPage } from './pages/ErrorPage';
 import { ExamReviewDetailPage, ExamReviewPage } from './pages/ExamReviewPage';
 import { ExamReviewEditPage } from './pages/ExamReviewEditPage';
 import { ExamReviewWritePage } from './pages/ExamReviewWritePage';
 import HelpPage from './pages/HelpPage/HelpPage';
-import { MainPage } from './pages/MainPage';
-import NoticeListPage from './pages/NoticeListPage/NoticeListPage';
-import ProtectedRoute from './ProtectedRoute';
 import {
   LoginPage,
   FindIdPage,
@@ -33,6 +29,10 @@ import {
   NotFoundIdPage,
   NotFoundPwPage,
 } from './pages/LoginPage';
+import { NoticeListPage } from './pages/NoticeListPage';
+import { MainPage } from './pages/MainPage';
+import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
+import { SnoroseVerifyPage } from './pages/SnoroseVerifyPage';
 
 import { ROLE } from './constants';
 
@@ -219,8 +219,15 @@ export const routeList = [
         element: <NoticeListPage />,
       },
       {
-        path: '/authentication',
-        element: <AuthPage />,
+        path: '/verify',
+        element: (
+          <ProtectedRoute>
+            <SnoroseVerifyPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/help',

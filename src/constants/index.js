@@ -12,6 +12,7 @@ import { NAVBAR_MENUS, NOT_LOGIN_MENUS, SIDEBAR_MENUS } from './menus';
 import { PLACEHOLDER } from './search.js';
 import { POST_CATEGORIES } from './postCategories.js';
 import { ROLE } from './role.js';
+import { TITLE_DES, TERMS } from './verify.js';
 import { TOAST } from './toast.js';
 
 export {
@@ -27,6 +28,8 @@ export {
   SEMESTERS,
   POST_CATEGORIES,
   SIDEBAR_MENUS,
+  TITLE_DES,
+  TERMS,
   TEST_CATEGORY,
   TOAST,
   YEARS,

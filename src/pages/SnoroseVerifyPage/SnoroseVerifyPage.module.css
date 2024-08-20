@@ -1,0 +1,39 @@
+.main {
+  height: 94%;
+  display: flex;
+  flex-direction: column;
+}
+
+.indicator {
+  margin: 13px var(--default-margin) 28px var(--default-margin);
+  display: flex;
+  gap: 11px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 100%;
+  background-color: #f0f0f0;
+}
+
+.dot.select {
+  background: #00368e;
+}
+
+.title {
+  margin: 0 var(--default-margin) 16px var(--default-margin);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+}
+
+.description {
+  margin: 0 var(--default-margin);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #484848;
+}
