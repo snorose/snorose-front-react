@@ -16,6 +16,8 @@ import { ROLE } from './role.js';
 import { TITLE_DES, TERMS } from './verify.js';
 import { TOAST } from './toast.js';
 
+export * from './role.js';
+
 export {
   BOARD_MENUS,
   CLASS_NUMBER,

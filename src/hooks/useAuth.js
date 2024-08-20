@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useRecoilState } from 'recoil';
 import { authState } from '@/stores';
 
-const useAuth = () => {
+const useAuth = ({ isRequiredAuth = false } = {}) => {
   const [{ userInfo, status }, setAuth] = useRecoilState(authState);
 
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const useAuth = () => {
         status: 'unauthenticated',
       });
     }
-  }, []);
+  }, [hasToken, setAuth]);
 
   useEffect(() => {
     if (userInfoData !== undefined) {
@@ -51,7 +51,13 @@ const useAuth = () => {
         status: 'authenticated',
       });
     }
-  }, [userInfoData]);
+  }, [userInfoData, setAuth]);
+
+  useEffect(() => {
+    if (isRequiredAuth && status === 'unauthenticated') {
+      navigate('/login');
+    }
+  }, [isRequiredAuth, status, navigate]);
 
   return {
     userInfo,

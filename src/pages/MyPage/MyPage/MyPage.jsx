@@ -5,8 +5,13 @@ import { Link, useSearchParams } from 'react-router-dom';
 import AccountTab from './AccountTab';
 import ActivityTab from './ActivityTab';
 import PolicyTab from './PolicyTab';
+import { useAuth } from '@/hooks';
+import { ROLE_NAME } from '@/constants';
 
 export default function MyPage() {
+  const { userInfo, status } = useAuth({
+    isRequiredAuth: true,
+  });
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = searchParams.get('tab') || 'account';
 
@@ -20,6 +25,14 @@ export default function MyPage() {
     }
   }, [searchParams, setSearchParams]);
 
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (status === 'unauthenticated' || userInfo === null) {
+    return null;
+  }
+
   return (
     <main className={styles.myPage}>
       <div className={styles.myPageUpper}>
@@ -27,22 +40,30 @@ export default function MyPage() {
       </div>
 
       <div className={styles.profileImage}>
-        <Icon id='profile-basic' />
+        {userInfo.userProfile === null ? (
+          <Icon id='profile-basic' />
+        ) : (
+          <img src={userInfo.userProfile} alt={`${userInfo.userName} 프로필`} />
+        )}
       </div>
 
       <div className={styles.myPageLower}>
         <div className={styles.myInfo}>
-          <div className={styles.name}>힘하리</div>
+          <div className={styles.name}>{userInfo.userName}</div>
           <div className={styles.studentIdMemberType}>
-            <div className={styles.studentId}>17학번</div>
+            <div className={styles.studentId}>
+              {userInfo.studentNumber.slice(0, 2)}학번
+            </div>
             <Icon id='middle-dot' />
-            <div className={styles.memberType}>정회원</div>
+            <div className={styles.memberType}>
+              {ROLE_NAME[userInfo.userRoleId]}
+            </div>
           </div>
           <Link to='view-point-list'>
             <div className={styles.pointWrapper}>
               <div className={styles.point}>
                 <Icon id='point-circle' />
-                39
+                {userInfo.balance}
               </div>
               <div className={styles.pointList}>
                 포인트 내역 보기

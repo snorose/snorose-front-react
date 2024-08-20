@@ -40,15 +40,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   width: 130px;
   height: 130px;
   padding: 6px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
   z-index: 2;
 
-  svg {
+  & > svg {
     width: 118px;
     height: 118px;
+  }
+
+  & > img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
   }
 }
 

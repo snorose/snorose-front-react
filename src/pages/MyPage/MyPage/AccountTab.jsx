@@ -1,10 +1,9 @@
 import { useMemo } from 'react';
 import styles from './MyPage.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks';
 
 const AccountTab = () => {
-  const navigate = useNavigate();
   const { userInfo, status } = useAuth();
 
   const userInfoList = useMemo(() => {
@@ -43,8 +42,6 @@ const AccountTab = () => {
   }
 
   if (status === 'unauthenticated') {
-    navigate('/login');
-
     return null;
   }
 
