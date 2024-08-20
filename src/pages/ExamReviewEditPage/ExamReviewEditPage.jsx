@@ -2,24 +2,24 @@ import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-import { ActionButton, CloseAppBar } from '../../components/AppBar';
+import { editReviewDetail } from '@/apis';
+
+import { ActionButton, CloseAppBar } from '@/components/AppBar';
 import {
   CategoryButton,
   CategoryFieldset,
   Dropdown,
-} from '../../components/Fieldset';
-import { InputItem, InputList } from '../../components/Input';
-import { Textarea } from '../../components/Fieldset';
-
-import { editReviewDetail } from '../../apis';
+} from '@/components/Fieldset';
+import { InputItem, InputList } from '@/components/Input';
+import { Textarea } from '@/components/Fieldset';
 
 import {
-  CLASS_NUMBER,
-  COURSE_CATEGORY,
+  CLASS_NUMBERS,
+  EXAM_TYPES,
+  LECTURE_TYPES,
   SEMESTERS,
-  TEST_CATEGORY,
   YEARS,
-} from '../../constants';
+} from '@/constants';
 
 export default function ExamReviewEditPage() {
   const { postId } = useParams();
@@ -38,10 +38,10 @@ export default function ExamReviewEditPage() {
   const [lectureName, setLectureName] = useState(state.lectureName);
   const [professor, setProfessor] = useState(state.professor);
   const [lectureType, setLectureType] = useState(
-    COURSE_CATEGORY.find((type) => type.id === state.lectureType)
+    LECTURE_TYPES.find((type) => type.id === state.lectureType)
   );
   const [examType, setExamType] = useState(
-    TEST_CATEGORY.find((type) => type.id === state.examType)
+    EXAM_TYPES.find((type) => type.id === state.examType)
   );
   const [lectureYear, setLectureYear] = useState(
     YEARS.find((year) => year.id === state.lectureYear)
@@ -51,7 +51,7 @@ export default function ExamReviewEditPage() {
   );
   const [isPF, setIsPF] = useState(state.isPF);
   const [classNumber, setClassNumber] = useState(
-    CLASS_NUMBER.find((number) => number.id === state.classNumber)
+    CLASS_NUMBERS.find((number) => number.id === state.classNumber)
   );
   const [questionDetail, setQuestionDetail] = useState(state.questionDetail);
 
@@ -109,7 +109,7 @@ export default function ExamReviewEditPage() {
         />
       </InputList>
       <CategoryFieldset title='강의 종류' required>
-        {COURSE_CATEGORY.map((option) => (
+        {LECTURE_TYPES.map((option) => (
           <CategoryButton
             key={option.id}
             select={lectureType}
@@ -121,7 +121,7 @@ export default function ExamReviewEditPage() {
         ))}
       </CategoryFieldset>
       <CategoryFieldset title='시험 종류' required>
-        {TEST_CATEGORY.map((option) => (
+        {EXAM_TYPES.map((option) => (
           <CategoryButton
             key={option.id}
             select={examType}
@@ -157,7 +157,7 @@ export default function ExamReviewEditPage() {
       />
       <CategoryFieldset title='수강 분반' required>
         <Dropdown
-          options={CLASS_NUMBER}
+          options={CLASS_NUMBERS}
           select={classNumber}
           setFn={setClassNumber}
           placeholder='선택하세요'
