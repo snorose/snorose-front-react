@@ -6,25 +6,44 @@ import { getReviewList, searchByBoard } from '@/apis';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll.jsx';
 
 import { AppBar } from '@/components/AppBar';
+import { DropDownBlue } from '@/components/DropDownBlue';
 import { Loading } from '@/components/Loading';
 import { PostBar } from '@/components/PostBar';
 import { PTR } from '@/components/PTR';
 import { Search } from '@/components/Search';
 
-import { BOARD_ID } from '@/constants';
+import { BOARD_ID, YEARS, SEMESTERS, EXAM_TYPES } from '@/constants';
 
 import styles from './ExamReviewPage.module.css';
 
 export default function ExamReviewPage() {
-  const [keyword, setKeyword] = useState();
+  const [keyword, setKeyword] = useState('');
+  const [lectureYear, setLectureYear] = useState();
+  const [semester, setSemester] = useState();
+  const [examType, setExamType] = useState();
+
   const { data, ref, isFetching, status, Target } = useInfiniteScroll({
-    queryKey: keyword ? ['reviewList', 'search', keyword] : ['reviewList'],
+    queryKey: keyword
+      ? [
+          'reviewList',
+          'search',
+          keyword,
+          {
+            lectureYear: lectureYear?.id,
+            semester: semester?.id,
+            examType: examType?.id,
+          },
+        ]
+      : ['reviewList'],
     queryFn: keyword
       ? ({ pageParam }) =>
           searchByBoard({
             boardId: BOARD_ID['exam-review'],
             page: pageParam,
             keyword,
+            lectureYear: lectureYear.id,
+            semester: semester.id,
+            examType: examType.id,
           })
       : ({ pageParam }) => getReviewList(pageParam),
   });
@@ -42,6 +61,26 @@ export default function ExamReviewPage() {
         placeholder='시험후기 검색'
         setKeyword={setKeyword}
       />
+      <div className={styles.filters}>
+        <DropDownBlue
+          options={YEARS}
+          placeholder='연도'
+          select={lectureYear}
+          setFn={setLectureYear}
+        />
+        <DropDownBlue
+          options={SEMESTERS}
+          placeholder='학기'
+          select={semester}
+          setFn={setSemester}
+        />
+        <DropDownBlue
+          options={EXAM_TYPES}
+          placeholder='시험 종류'
+          select={examType}
+          setFn={setExamType}
+        />
+      </div>
       <PTR>
         <ul className={styles.list}>
           {status !== 'error' && reviewList.length > 0 ? (
@@ -55,7 +94,9 @@ export default function ExamReviewPage() {
               </Link>
             ))
           ) : (
-            <div className={styles.noting}>후기를 등록해주세요</div>
+            <div className={styles.noting}>
+              {keyword ? '검색 결과가 없습니다' : '후기를 등록해주세요'}
+            </div>
           )}
         </ul>
         {isFetching && <Loading />}
