@@ -1,19 +1,20 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
+import { deleteExamReview, getReviewDetail, updatePoint } from '@/apis';
+
 import { useToast } from '@/hooks';
 
-import { BackAppBar } from '@/components/AppBar/index.js';
+import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
-import { Icon } from '@/components/Icon/index.js';
+import { Icon } from '@/components/Icon';
 import { InputBar } from '@/components/InputBar';
 import { ReviewContentItem } from '@/components/ReviewContentItem';
 import { ReviewDownload } from '@/components/ReviewDownload';
 
-import { deleteExamReview, getReviewDetail, updatePoint } from '@/apis';
-
 import { dateFormat } from '@/utils/formatDate.js';
 import { convertToObject } from '@/utils/convertDS.js';
+
 import {
   COURSE_CATEGORY,
   POINT_CATEGORY_ENUM,
@@ -21,7 +22,7 @@ import {
   SEMESTERS,
   TEST_CATEGORY,
   TOAST,
-} from '@/constants/index.js';
+} from '@/constants';
 
 import styles from './ExamReviewDetailPage.module.css';
 

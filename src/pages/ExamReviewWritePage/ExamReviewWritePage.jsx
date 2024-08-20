@@ -11,10 +11,9 @@ import {
   CategoryFieldset,
   Dropdown,
 } from '@/components/Fieldset';
-import Icon from '@/components/Icon/Icon';
-import InputList from '@/components/Input/InputList/InputList.jsx';
-import InputItem from '@/components/Input/InputItem/InputItem.jsx';
-import Textarea from '@/components/Fieldset/Textarea/Textarea.jsx';
+import { Icon } from '@/components/Icon';
+import { InputItem, InputList } from '@/components/Input';
+import { Textarea } from '@/components/Fieldset';
 
 import {
   CLASS_NUMBER,
