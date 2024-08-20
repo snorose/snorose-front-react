@@ -1,22 +1,28 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
-import { BackAppBar } from '../../../components/AppBar/index.js';
-import { CommentList } from '../../../components/Comment';
-import { Icon } from '../../../components/Icon/index.js';
-import { InputBar } from '../../../components/InputBar';
-import { ReviewContentItem } from '../../../components/ReviewContentItem';
-import { ReviewDownload } from '../../../components/ReviewDownload';
+import { deleteExamReview, getReviewDetail, updatePoint } from '@/apis';
 
-import { deleteExamReview, getReviewDetail } from '../../../apis';
+import { useToast } from '@/hooks';
 
-import { dateFormat } from '../../../utils/formatDate.js';
-import { convertToObject } from '../../../utils/convertDS.js';
+import { BackAppBar } from '@/components/AppBar';
+import { CommentList } from '@/components/Comment';
+import { Icon } from '@/components/Icon';
+import { InputBar } from '@/components/InputBar';
+import { ReviewContentItem } from '@/components/ReviewContentItem';
+import { ReviewDownload } from '@/components/ReviewDownload';
+
+import { dateFormat } from '@/utils/formatDate.js';
+import { convertToObject } from '@/utils/convertDS.js';
+
 import {
   COURSE_CATEGORY,
+  POINT_CATEGORY_ENUM,
+  POINT_SOURCE_ENUM,
   SEMESTERS,
   TEST_CATEGORY,
-} from '../../../constants/index.js';
+  TOAST,
+} from '@/constants';
 
 import styles from './ExamReviewDetailPage.module.css';
 
@@ -26,6 +32,7 @@ const EXAM_TYPE = convertToObject(TEST_CATEGORY);
 
 export default function ExamReviewDetailPage() {
   const { postId } = useParams();
+  const { toast } = useToast();
   const { data } = useQuery({
     queryKey: ['reviewDetail', postId],
     queryFn: () => getReviewDetail(postId),
@@ -41,6 +48,17 @@ export default function ExamReviewDetailPage() {
       queryClient.invalidateQueries(['reviewList']);
       queryClient.removeQueries(['reviewDetail', postId]);
       queryClient.removeQueries(['reviewFile', postId]);
+
+      updatePoint({
+        userId: 62, // userId로 변경 필요
+        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DELETE,
+        source: POINT_SOURCE_ENUM.REVIEW,
+        sourceId: postId,
+      }).then(({ status }) => {
+        if (status === 200) {
+          toast(TOAST.EXAM_REVIEW_DELETE);
+        }
+      });
       navigate('/exam-review');
     },
   });

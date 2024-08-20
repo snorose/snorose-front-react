@@ -10,6 +10,7 @@ import { ERRORS } from './errors';
 import { MAJORS } from './majors';
 import { NAVBAR_MENUS, NOT_LOGIN_MENUS, SIDEBAR_MENUS } from './menus';
 import { PLACEHOLDER } from './search.js';
+import { POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM } from './point.js';
 import { POST_CATEGORIES } from './postCategories.js';
 import { ROLE } from './role.js';
 import { TITLE_DES, TERMS } from './verify.js';
@@ -26,6 +27,8 @@ export {
   ROLE,
   PLACEHOLDER,
   SEMESTERS,
+  POINT_CATEGORY_ENUM,
+  POINT_SOURCE_ENUM,
   POST_CATEGORIES,
   SIDEBAR_MENUS,
   TITLE_DES,

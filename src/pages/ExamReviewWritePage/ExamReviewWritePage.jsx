@@ -1,31 +1,37 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { postExamReview } from '../../apis';
+import { postExamReview, updatePoint } from '@/apis';
 
-import { ActionButton, CloseAppBar } from '../../components/AppBar';
+import { useToast } from '@/hooks';
+
+import { ActionButton, CloseAppBar } from '@/components/AppBar';
 import {
   CategoryButton,
   CategoryFieldset,
   Dropdown,
-} from '../../components/Fieldset';
+} from '@/components/Fieldset';
+import { Icon } from '@/components/Icon';
+import { InputItem, InputList } from '@/components/Input';
+import { Textarea } from '@/components/Fieldset';
+
 import {
   CLASS_NUMBER,
   COURSE_CATEGORY,
+  POINT_CATEGORY_ENUM,
+  POINT_SOURCE_ENUM,
   SEMESTERS,
   TEST_CATEGORY,
+  TOAST,
   YEARS,
-} from '../../constants';
-import Icon from '../../components/Icon/Icon';
-import InputList from '../../components/Input/InputList/InputList.jsx';
-import InputItem from '../../components/Input/InputItem/InputItem.jsx';
-import Textarea from '../../components/Fieldset/Textarea/Textarea.jsx';
+} from '@/constants';
 
 import styles from './ExamReviewWritePage.module.css';
 
 const FILE_MAX_SIZE = 1024 * 1024 * 10;
 
 export default function ExamReviewWritePage() {
+  const { toast } = useToast();
   const [lectureName, setLectureName] = useState('');
   const [professor, setProfessor] = useState('');
   const [lectureType, setLectureType] = useState({});
@@ -83,8 +89,18 @@ export default function ExamReviewWritePage() {
         <ActionButton
           onClick={() => {
             if (pass) {
-              postExamReview({ data, file }).then((response) => {
-                if (response.status === 201) {
+              postExamReview({ data, file }).then(({ status, data }) => {
+                if (status === 201) {
+                  updatePoint({
+                    userId: 62, // userId로 교체해야합니다.
+                    category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
+                    source: POINT_SOURCE_ENUM.REVIEW,
+                    sourceId: data.result.postId,
+                  }).then(({ status }) => {
+                    if (status === 200) {
+                      toast(TOAST.EXAM_REVIEW_CREATE);
+                    }
+                  });
                   navigate('/exam-review');
                 }
               });
