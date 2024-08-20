@@ -1,42 +1,22 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 
-import { AppBar } from '../../../components/AppBar/index.js';
-import { Loading } from '../../../components/Loading/index.js';
-import { PostBar } from '../../../components/PostBar/index.js';
-import { PTR } from '../../../components/PTR/index.js';
-import { Search } from '../../../components/Search/index.js';
-import { Target } from '../../../components/Target/index.js';
+import { getReviewList } from '@/apis';
 
-import { getReviewList } from '../../../apis';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll.jsx';
+
+import { AppBar } from '@/components/AppBar';
+import { Loading } from '@/components/Loading';
+import { PostBar } from '@/components/PostBar';
+import { PTR } from '@/components/PTR';
+import { Search } from '@/components/Search';
 
 import styles from './ExamReviewPage.module.css';
-import { useIntersect } from '@/hooks';
 
 export default function ExamReviewPage() {
-  const { data, hasNextPage, isFetching, status, fetchNextPage } =
-    useInfiniteQuery({
-      queryKey: ['reviewList'],
-      queryFn: ({ pageParam }) => getReviewList(pageParam),
-      initialPageParam: 0,
-      getNextPageParam: (lastPage, allPages, lastPageParam) => {
-        if (lastPage?.length === 0) {
-          return undefined;
-        }
-        return lastPageParam + 1;
-      },
-      staleTime: 1000 * 60 * 1,
-    });
-
-  const ref = useIntersect(
-    async (entry, observer) => {
-      observer.unobserve(entry.target);
-      if (hasNextPage && !isFetching) {
-        fetchNextPage();
-      }
-    },
-    { threshold: 0.8 }
-  );
+  const { data, ref, isFetching, status, Target } = useInfiniteScroll({
+    queryKey: ['reviewList'],
+    queryFn: ({ pageParam }) => getReviewList(pageParam),
+  });
 
   const reviewList = data ? data.pages.flatMap((page) => page) : [];
 
