@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
 import { BackAppBar } from '../../../components/AppBar/index.js';
-import { Comment } from '../../../components/Comment';
+import { CommentList } from '../../../components/Comment';
 import { Icon } from '../../../components/Icon/index.js';
 import { InputBar } from '../../../components/InputBar';
 import { ReviewContentItem } from '../../../components/ReviewContentItem';
@@ -17,7 +17,6 @@ import {
   SEMESTERS,
   TEST_CATEGORY,
 } from '../../../constants/index.js';
-import { COMMENT_LIST } from '../../../dummy/data';
 
 import styles from './ExamReviewDetailPage.module.css';
 
@@ -27,13 +26,15 @@ const EXAM_TYPE = convertToObject(TEST_CATEGORY);
 
 export default function ExamReviewDetailPage() {
   const { postId } = useParams();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { data } = useQuery({
     queryKey: ['reviewDetail', postId],
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
   });
+
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const deleteReview = useMutation({
     mutationFn: () => deleteExamReview(postId),
     onSuccess: () => {
@@ -47,14 +48,11 @@ export default function ExamReviewDetailPage() {
   if (data === undefined) return null;
 
   const {
-    viewCount,
     scrapCount,
-    likeCount,
     classNumber,
     online,
     isEdited,
     writer,
-    examReviewId,
     userDisplay,
     title,
     createdAt,
@@ -134,13 +132,7 @@ export default function ExamReviewDetailPage() {
         </div>
         <ReviewDownload className={styles.fileDownload} fileName={fileName} />
       </div>
-      <div className={styles.comments}>
-        <p className={styles.commentsTitle}>댓글 {COMMENT_LIST.length}개</p>
-        {COMMENT_LIST &&
-          COMMENT_LIST.map((comment) => (
-            <Comment key={comment.id} data={comment} />
-          ))}
-      </div>
+      <CommentList />
       <InputBar />
     </main>
   );

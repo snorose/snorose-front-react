@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import { CommentContextProvider } from './contexts/CommentContext.jsx';
 import { ToastProvider } from './contexts/ToastContext.jsx';
 
 import { routeList } from './route.js';
@@ -17,8 +22,15 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 0,
+      refetchOnWindowFocus: false,
+    },
+    mutations: {
+      onError: (error) => console.error(error),
     },
   },
+  queryCache: new QueryCache({
+    onError: (error) => console.error(error),
+  }),
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,7 +38,9 @@ root.render(
   <React.StrictMode fri>
     <QueryClientProvider client={queryClient}>
       <ToastProvider>
-        <RouterProvider router={router} />
+        <CommentContextProvider>
+          <RouterProvider router={router} />
+        </CommentContextProvider>
       </ToastProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
