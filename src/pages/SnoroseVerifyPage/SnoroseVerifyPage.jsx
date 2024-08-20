@@ -27,7 +27,7 @@ export default function SnoroseVerifyPage() {
       <div className={styles.title}>{title}</div>
       {description && <div className={styles.description}>{description}</div>}
       {step === 'terms' && <TermsPage setStep={setStep} />}
-      {step === 'verify' && <VerifyPage />}
+      {step === 'verify' && <VerifyPage setStep={setStep} />}
       {step === 'complete' && <CompletePage />}
     </main>
   );

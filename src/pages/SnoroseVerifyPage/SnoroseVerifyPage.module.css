@@ -27,13 +27,15 @@
   font-size: 20px;
   line-height: 130%;
   letter-spacing: -0.5px;
+  white-space: pre-line;
 }
 
 .description {
-  margin: 0 var(--default-margin);
+  margin: 0 var(--default-margin) 27px var(--default-margin);
   font-weight: 500;
   font-size: 14px;
   line-height: 150%;
   letter-spacing: -0.5px;
   color: #484848;
+  white-space: pre-line;
 }
