@@ -1,3 +1,4 @@
+import { BOARD_ID } from './board.js';
 import { BOARD_MENUS } from './boardMenus.js';
 import {
   CLASS_NUMBER,
@@ -17,6 +18,7 @@ import { TITLE_DES, TERMS } from './verify.js';
 import { TOAST } from './toast.js';
 
 export {
+  BOARD_ID,
   BOARD_MENUS,
   CLASS_NUMBER,
   COURSE_CATEGORY,
