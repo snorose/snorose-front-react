@@ -1,21 +1,30 @@
 import styles from './DeleteAccountPage.module.css';
 import { Link } from 'react-router-dom';
-import { CloseAppBar } from '../../../components/AppBar';
-import { withdrawAccount } from '../../../apis/userInfo';
-import { useNavigate } from 'react-router-dom';
+import { CloseAppBar } from '@/components/AppBar';
+
+import { useState } from 'react';
+import { useAuth } from '@/hooks';
+import { InputPassword } from '@/components/InputPassword';
 
 const descriptions = [
   '• 회원탈퇴 시 모든 정보가 영구적으로 삭제되며, 다시는 복구할 수 없습니다.',
   '• 보유 포인트 및 포인트 기록은 복구가 불가능합니다.',
+  '• 비밀번호를 입력해야 탈퇴가 가능해요',
 ];
 
 export default function DeleteAccountPage() {
-  const navigate = useNavigate();
+  const { withdraw } = useAuth();
+  const [password, setPassword] = useState('');
 
-  const handleDeleteAccount = async () => {
+  const handlePasswordInputChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleDeleteAccountButtonClick = () => {
     const confirmation = window.confirm('정말로 탈퇴하시겠습니까?');
+
     if (confirmation) {
-      await withdrawAccount(navigate);
+      withdraw(password);
     }
   };
 
@@ -33,6 +42,20 @@ export default function DeleteAccountPage() {
               </p>
             ))}
           </div>
+
+          <input
+            type='password'
+            value={password}
+            onChange={handlePasswordInputChange}
+          />
+
+          {/* <InputPassword
+            title='비밀번호'
+            placeholder='비밀번호를 입력하세요'
+            value={password}
+            onChange={handlePasswordInputChange}
+            isStatic
+          /> */}
         </div>
 
         <div className={styles.buttonWrapper}>
@@ -41,7 +64,7 @@ export default function DeleteAccountPage() {
           </Link>
           <button
             className={styles.deleteAccountButton}
-            onClick={handleDeleteAccount}
+            onClick={handleDeleteAccountButtonClick}
           >
             탈퇴하기
           </button>

@@ -10,10 +10,10 @@ import { PostBar } from '../../../components/PostBar';
 import { Sponser } from '../../../components/Sponser';
 import { OptionModal } from '../../../components/Modal';
 import PTR from '../../../components/PTR/PTR.jsx';
-import useIntersect from '../../../hooks/useIntersect.jsx';
 import { getPostList } from '../../../apis/postList.js';
 import { Target } from '../../../components/Target/index.js';
 import { BOARD_MENUS } from '../../../constants/boardMenus.js';
+import { useIntersect } from '@/hooks';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
