@@ -60,6 +60,18 @@ export default function ChangePasswordPage() {
     });
   };
 
+  const handleCurrentPasswordInputChange = (e) => {
+    setCurrentPassword(e.target.value);
+  };
+
+  const handleNewPasswordInputChange = (e) => {
+    setNewPassword(e.target.value);
+  };
+
+  const handleConfirmNewPasswordInputChange = (e) => {
+    setNewPasswordCheck(e.target.value);
+  };
+
   useEffect(() => {
     if (newPassword) {
       validatePasswordStrength(newPassword);
@@ -116,24 +128,24 @@ export default function ChangePasswordPage() {
           title='현재 비밀번호'
           placeholder='기존 비밀번호를 입력하세요'
           value={currentPassword}
-          onChange={setCurrentPassword}
           isStatic
+          onChange={handleCurrentPasswordInputChange}
         />
 
         <InputPassword
           title='새 비밀번호'
           placeholder='새로운 비밀번호를 입력하세요'
           value={newPassword}
-          onChange={setNewPassword}
           errorMessage={newPasswordError}
+          onChange={handleNewPasswordInputChange}
         />
 
         <InputPassword
-          title='비밀번호 확인'
-          placeholder='비밀번호를 다시 입력하세요'
+          title='새 비밀번호 확인'
+          placeholder='새 비밀번호를 다시 입력하세요'
           value={newPasswordCheck}
-          onChange={setNewPasswordCheck}
           errorMessage={newPasswordCheckError}
+          onChange={handleConfirmNewPasswordInputChange}
         />
       </section>
     </main>

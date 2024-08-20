@@ -20,6 +20,10 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
 
   const logout = () => {
     localStorage.removeItem('token');
+    setAuth({
+      userInfo: null,
+      statue: 'unauthenticated',
+    });
     navigate('/');
   };
 

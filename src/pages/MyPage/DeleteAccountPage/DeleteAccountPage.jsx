@@ -43,19 +43,13 @@ export default function DeleteAccountPage() {
             ))}
           </div>
 
-          <input
-            type='password'
-            value={password}
-            onChange={handlePasswordInputChange}
-          />
-
-          {/* <InputPassword
+          <InputPassword
             title='비밀번호'
             placeholder='비밀번호를 입력하세요'
             value={password}
             onChange={handlePasswordInputChange}
             isStatic
-          /> */}
+          />
         </div>
 
         <div className={styles.buttonWrapper}>
