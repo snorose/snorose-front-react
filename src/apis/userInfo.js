@@ -19,3 +19,9 @@ export const updateUserInfo = async (body) => {
 
   return data;
 };
+
+export const updatePassword = async (body) => {
+  const { data } = await authAxios.patch('/v1/users/mypage/password', body);
+
+  return data;
+};

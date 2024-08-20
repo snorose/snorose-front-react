@@ -4,7 +4,7 @@ import { Icon } from '../../../components/Icon';
 import { BackAppBar, ActionButton } from '../../../components/AppBar';
 import { CategoryFieldset, Dropdown } from '../../../components/Fieldset';
 import { MAJORS } from '../../../constants';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateUserInfo } from '@/apis';
 import { useAuth } from '@/hooks';
 
@@ -24,6 +24,8 @@ export default function EditInfoPage() {
 
   const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
   const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
+
+  const queryClient = useQueryClient();
 
   const {
     mutate: updateUserInfoMutate,
@@ -145,6 +147,11 @@ export default function EditInfoPage() {
   useEffect(() => {
     if (isUpdateUserInfoSuccess) {
       alert('회원 정보 수정이 완료되었습니다.');
+      queryClient.invalidateQueries({
+        queryKey: ['myPageUserInfo'],
+      });
+
+      return;
     }
 
     if (isUpdateUserInfoError) {
@@ -156,7 +163,12 @@ export default function EditInfoPage() {
           updateUserInfoError.response.data.major
       );
     }
-  }, [isUpdateUserInfoSuccess, isUpdateUserInfoError, updateUserInfoError]);
+  }, [
+    queryClient,
+    isUpdateUserInfoSuccess,
+    isUpdateUserInfoError,
+    updateUserInfoError,
+  ]);
 
   if (status === 'loading') {
     return <div>loading...</div>;
