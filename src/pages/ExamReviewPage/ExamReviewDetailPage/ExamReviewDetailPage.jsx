@@ -59,7 +59,7 @@ export default function ExamReviewDetailPage() {
           toast(TOAST.EXAM_REVIEW_DELETE);
         }
       });
-      navigate('/exam-review');
+      navigate('/board/exam-review');
     },
   });
 
@@ -118,7 +118,7 @@ export default function ExamReviewDetailPage() {
                   width='15'
                   height='17'
                   onClick={() =>
-                    navigate(`/exam-review/${postId}/edit`, {
+                    navigate(`/board/exam-review/${postId}/edit`, {
                       state: data,
                       replace: true,
                     })

@@ -107,7 +107,7 @@ export const routeList = [
         element: <PostWritePage />,
       },
       {
-        path: '/exam-review',
+        path: '/board/exam-review',
         element: (
           <ProtectedRoute>
             <ExamReviewPage />
@@ -115,7 +115,7 @@ export const routeList = [
         ),
       },
       {
-        path: '/exam-review/:postId',
+        path: '/board/exam-review/:postId',
         element: (
           <ProtectedRoute>
             <ExamReviewDetailPage />
@@ -126,14 +126,14 @@ export const routeList = [
         },
       },
       {
-        path: '/exam-review/:postId/edit',
+        path: '/board/exam-review/:postId/edit',
         element: <ExamReviewEditPage />,
         meta: {
           hideNav: true,
         },
       },
       {
-        path: '/exam-review-write',
+        path: '/board/exam-review-write',
         element: <ExamReviewWritePage />,
         meta: {
           hideNav: true,

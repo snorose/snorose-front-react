@@ -35,7 +35,7 @@ export default function ExamReviewPage() {
               <Link
                 className={styles.to}
                 key={post.postId}
-                to={`/exam-review/${post.postId}`}
+                to={`/board/exam-review/${post.postId}`}
               >
                 <PostBar data={post} />
               </Link>

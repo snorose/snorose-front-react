@@ -101,7 +101,7 @@ export default function ExamReviewWritePage() {
                       toast(TOAST.EXAM_REVIEW_CREATE);
                     }
                   });
-                  navigate('/exam-review');
+                  navigate('/board/exam-review');
                 }
               });
             } else {
