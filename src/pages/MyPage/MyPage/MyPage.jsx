@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
 import styles from './MyPage.module.css';
-import Icon from '../../../components/Icon/Icon';
+import Icon from '@/components/Icon/Icon';
+import React, { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { useAuth } from '@/hooks';
+import { ROLE_NAME } from '@/constants';
 import AccountTab from './AccountTab';
 import ActivityTab from './ActivityTab';
 import PolicyTab from './PolicyTab';
-import { useAuth } from '@/hooks';
-import { ROLE_NAME } from '@/constants';
 
 export default function MyPage() {
   const { userInfo, status } = useAuth({
@@ -36,7 +36,11 @@ export default function MyPage() {
   return (
     <main className={styles.myPage}>
       <div className={styles.myPageUpper}>
-        <div className={styles.logoOverlay}></div>
+        <div className={styles.logoOverlay}>
+          <Link to='edit-info'>
+            <Icon id='pencil-underline' fill='#fff' stroke='#fff' />
+          </Link>
+        </div>
       </div>
 
       <div className={styles.profileImage}>
