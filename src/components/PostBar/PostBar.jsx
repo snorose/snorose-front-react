@@ -30,16 +30,29 @@ export default function PostBar({ data, optionClick, use }) {
       </div>
       <div className={styles.post_bottom}>
         <span className={styles.board}>{data.board}</span>
-        <div className={styles.comment_like_wrapper}>
-          <Icon id='comment' width={13} height={11} fill='#D9D9D9' />
-          <p className={styles.comment_cnt}>{data.commentCount}</p>
+        <div className={styles.iconContainer}>
+          <Icon
+            className={styles.comment}
+            id='comment'
+            width='13'
+            height='11'
+            fill='#D9D9D9'
+          />
+          <span>{data.commentCount}</span>
           <Icon
             id='like'
-            width={12}
-            height={11}
+            width='12'
+            height='11'
             fill={data.liked ? '#5F86BF' : '#D9D9D9'}
           />
-          <p className={styles.like_cnt}>{data.likeCount}</p>
+          <span>{data.likeCount}</span>
+          <Icon
+            id='bookmark-fill'
+            width='9'
+            height='11'
+            fill={data.liked ? '#5F86BF' : '#D9D9D9'}
+          />
+          <span>{data.scrapCount}</span>
         </div>
       </div>
     </div>
