@@ -41,3 +41,27 @@ export const getMyCommentList = async (params = {}) => {
 
   return data.result;
 };
+
+export const getMyReviewFileList = async (params = {}) => {
+  const { data } = await authAxios.get('/v1/users/mypage/reviewFileList', {
+    params,
+  });
+
+  return data.result;
+};
+
+export const getMyScrapReviewList = async (params) => {
+  const { data } = await authAxios.get('/v1/scraps/reviews', {
+    params,
+  });
+
+  return data.result;
+};
+
+export const getMyScrapPostList = async (params) => {
+  const { data } = await authAxios.get('/v1/scraps/posts', {
+    params,
+  });
+
+  return data.result;
+};

@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from 'react';
 import styles from './ActivityPage.module.css';
-import Icon from '../../../components/Icon/Icon';
-import { BackAppBar } from '../../../components/AppBar';
-import { PostBar } from '../../../components/PostBar';
-import { Sponser } from '../../../components/Sponser';
+import Icon from '@/components/Icon/Icon';
+import { BackAppBar } from '@/components/AppBar';
+import { PostBar } from '@/components/PostBar';
+import { Sponser } from '@/components/Sponser';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getMyCommentList } from '@/apis';
 import { useInView } from 'react-intersection-observer';
