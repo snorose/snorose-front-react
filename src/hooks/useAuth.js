@@ -1,29 +1,39 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { getMyPageUserInfo, withdrawAccount } from '@/apis';
 import { useQuery } from '@tanstack/react-query';
-import { useRecoilState } from 'recoil';
-import { authState } from '@/stores';
 
 const useAuth = ({ isRequiredAuth = false } = {}) => {
-  const [{ userInfo, status }, setAuth] = useRecoilState(authState);
-
   const navigate = useNavigate();
 
   const hasToken = !!localStorage.getItem('token');
 
-  const { data: userInfoData } = useQuery({
+  const {
+    data: userInfoData,
+    isFetching,
+    isSuccess,
+  } = useQuery({
     queryKey: ['myPageUserInfo'],
     queryFn: getMyPageUserInfo,
     enabled: hasToken,
+    staleTime: 1000 * 60 * 60 * 7,
+    gcTime: 1000 * 60 * 60 * 7,
   });
+
+  const status = useMemo(() => {
+    if (isFetching) {
+      return 'loading';
+    }
+
+    if (isSuccess) {
+      return 'authenticated';
+    }
+
+    return 'unauthenticated';
+  }, [isFetching, isSuccess]);
 
   const logout = () => {
     localStorage.removeItem('token');
-    setAuth({
-      userInfo: null,
-      statue: 'unauthenticated',
-    });
     navigate('/');
   };
 
@@ -40,31 +50,13 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
   };
 
   useEffect(() => {
-    if (!hasToken) {
-      setAuth({
-        userInfo: null,
-        status: 'unauthenticated',
-      });
-    }
-  }, [hasToken, setAuth]);
-
-  useEffect(() => {
-    if (userInfoData !== undefined) {
-      setAuth({
-        userInfo: userInfoData.result,
-        status: 'authenticated',
-      });
-    }
-  }, [userInfoData, setAuth]);
-
-  useEffect(() => {
     if (isRequiredAuth && status === 'unauthenticated') {
       navigate('/login');
     }
   }, [isRequiredAuth, status, navigate]);
 
   return {
-    userInfo,
+    userInfo: userInfoData?.result,
     status,
     logout,
     withdraw,

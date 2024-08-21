@@ -1,49 +1,36 @@
-import { useMemo } from 'react';
 import styles from './MyPage.module.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks';
 
+const USER_INFO_ITEM_LABEL = Object.freeze({
+  loginId: '아이디',
+  email: '이메일',
+  studentNumber: '학번',
+  major: '전공',
+  birthday: '생년월일',
+});
+
 const AccountTab = () => {
   const { userInfo, status } = useAuth();
-
-  const userInfoList = useMemo(() => {
-    if (userInfo === null) {
-      return [];
-    }
-
-    const { loginId, email, studentNumber, major, birthday } = userInfo;
-
-    return [
-      {
-        label: '아이디',
-        value: loginId,
-      },
-      {
-        label: '이메일',
-        value: email,
-      },
-      {
-        label: '학번',
-        value: studentNumber,
-      },
-      {
-        label: '전공',
-        value: major,
-      },
-      {
-        label: '생년월일',
-        value: birthday.replaceAll('-', '.'),
-      },
-    ];
-  }, [userInfo]);
 
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
 
-  if (status === 'unauthenticated') {
+  if (status === 'unauthenticated' || userInfo === undefined) {
     return null;
   }
+
+  const userInfoValue = {
+    ...userInfo,
+    birthday: userInfo.birthday.replaceAll('-', ''),
+  };
+  const userInfoList = Object.entries(USER_INFO_ITEM_LABEL).map(
+    ([key, label]) => ({
+      label,
+      value: userInfoValue[key],
+    })
+  );
 
   return (
     <div>

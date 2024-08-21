@@ -29,7 +29,7 @@ export default function MyPage() {
     return <div>Loading...</div>;
   }
 
-  if (status === 'unauthenticated' || userInfo === null) {
+  if (status === 'unauthenticated') {
     return null;
   }
 
@@ -53,7 +53,7 @@ export default function MyPage() {
 
       <div className={styles.myPageLower}>
         <div className={styles.myInfo}>
-          <div className={styles.name}>{userInfo.userName}</div>
+          <div className={styles.name}>{userInfo.nickname}</div>
           <div className={styles.studentIdMemberType}>
             <div className={styles.studentId}>
               {userInfo.studentNumber.slice(0, 2)}학번

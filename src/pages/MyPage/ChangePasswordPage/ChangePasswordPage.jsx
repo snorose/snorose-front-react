@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './ChangePasswordPage.module.css';
 import { BackAppBar, ActionButton } from '@/components/AppBar';
 import InputPassword from '@/components/InputPassword/InputPassword';
@@ -15,16 +15,18 @@ export default function ChangePasswordPage() {
 
   const navigate = useNavigate();
 
-  const {
-    mutate: updatePasswordMutate,
-    error: updatePasswordError,
-    isPending: isUpdatePasswordPending,
-    isError: isUpdatePasswordError,
-    isSuccess: isUpdatePasswordSuccess,
-  } = useMutation({
-    mutationKey: ['updatePassword'],
-    mutationFn: (body) => updatePassword(body),
-  });
+  const { mutate: updatePasswordMutate, isPending: isUpdatePasswordPending } =
+    useMutation({
+      mutationKey: ['updatePassword'],
+      mutationFn: (body) => updatePassword(body),
+      onSuccess: () => {
+        alert('비밀번호 수정이 완료되었습니다.');
+        navigate('/my-page');
+      },
+      onError: ({ response }) => {
+        alert(response.data.message);
+      },
+    });
 
   const validatePasswordStrength = (password) => {
     const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
@@ -92,24 +94,6 @@ export default function ChangePasswordPage() {
       setNewPasswordCheckError('');
     }
   }, [newPasswordCheck, newPassword]);
-
-  useEffect(() => {
-    if (isUpdatePasswordSuccess) {
-      alert('비밀번호 수정이 완료되었습니다.');
-      navigate('/my-page');
-
-      return;
-    }
-
-    if (isUpdatePasswordError) {
-      alert(updatePasswordError.response.data.message);
-    }
-  }, [
-    navigate,
-    isUpdatePasswordSuccess,
-    isUpdatePasswordError,
-    updatePasswordError,
-  ]);
 
   return (
     <main className={styles.changePasswordPage}>

@@ -7,6 +7,7 @@ import { MAJORS } from '../../../constants';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateUserInfo } from '@/apis';
 import { useAuth } from '@/hooks';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditInfoPage() {
   const { userInfo, status } = useAuth({
@@ -23,21 +24,38 @@ export default function EditInfoPage() {
   const [nicknameError, setNicknameError] = useState('');
 
   const validNameRegex = /^[a-zA-Z가-힣\s]*$/;
+  const validNicknameRegex = /^[a-zA-Z가-힣0-9]*$/;
   const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
   const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
 
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
-  const {
-    mutate: updateUserInfoMutate,
-    error: updateUserInfoError,
-    isPending: isUpdateUserInfoPending,
-    isError: isUpdateUserInfoError,
-    isSuccess: isUpdateUserInfoSuccess,
-  } = useMutation({
-    mutationKey: ['updateUserInfo'],
-    mutationFn: (body) => updateUserInfo(body),
-  });
+  const { mutate: updateUserInfoMutate, isPending: isUpdateUserInfoPending } =
+    useMutation({
+      mutationKey: ['updateUserInfo'],
+      mutationFn: (body) => updateUserInfo(body),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['myPageUserInfo'],
+        });
+
+        alert('회원 정보 수정이 완료되었습니다.');
+        navigate('/my-page');
+      },
+      onError: ({ response }) => {
+        const { data } = response;
+
+        alert(
+          data.userProfile ||
+            data.userName ||
+            data.birthday ||
+            data.nickname ||
+            data.major ||
+            data.message
+        );
+      },
+    });
 
   const handleNameChange = (e) => {
     const value = e.target.value;
@@ -63,13 +81,15 @@ export default function EditInfoPage() {
     setNickname(value);
 
     if (
-      !validNameRegex.test(value) ||
+      !validNicknameRegex.test(value) ||
       value.length < 2 ||
       value.length > 30 ||
       specialCharRegex.test(value) ||
       emojiRegex.test(value)
     ) {
-      setNicknameError('특수문자를 제외한 2자 이상 30자 이하로 작성해주세요');
+      setNicknameError(
+        '특수문자, 띄어쓰기를 제외한 2자 이상 30자 이하로 작성해주세요'
+      );
     } else {
       setNicknameError('');
     }
@@ -135,7 +155,7 @@ export default function EditInfoPage() {
   };
 
   useEffect(() => {
-    if (userInfo === null) {
+    if (userInfo === undefined) {
       return;
     }
 
@@ -150,32 +170,6 @@ export default function EditInfoPage() {
       name: major,
     });
   }, [userInfo]);
-
-  useEffect(() => {
-    if (isUpdateUserInfoSuccess) {
-      alert('회원 정보 수정이 완료되었습니다.');
-      queryClient.invalidateQueries({
-        queryKey: ['myPageUserInfo'],
-      });
-
-      return;
-    }
-
-    if (isUpdateUserInfoError) {
-      alert(
-        updateUserInfoError.response.data.userProfile ||
-          updateUserInfoError.response.data.userName ||
-          updateUserInfoError.response.data.birthday ||
-          updateUserInfoError.response.data.nickname ||
-          updateUserInfoError.response.data.major
-      );
-    }
-  }, [
-    queryClient,
-    isUpdateUserInfoSuccess,
-    isUpdateUserInfoError,
-    updateUserInfoError,
-  ]);
 
   if (status === 'loading') {
     return <div>loading...</div>;
