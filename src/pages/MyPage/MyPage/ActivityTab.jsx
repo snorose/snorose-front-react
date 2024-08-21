@@ -21,12 +21,12 @@ const ActivityTab = () => {
             link: 'download-exam-review',
           },
           {
-            label: '스크랩 모아보기',
-            link: 'scrap',
+            label: '스크랩한 시험 후기 모아보기',
+            link: 'scrap-exam-review',
           },
           {
-            label: '시험 후기 스크랩 모아보기',
-            link: 'scrap-exam-review',
+            label: '스크랩 모아보기',
+            link: 'scrap',
           },
         ].map((item, index) => (
           <div className={styles.itemList}>

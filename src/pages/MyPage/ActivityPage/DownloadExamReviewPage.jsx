@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import styles from './ActivityPage.module.css';
 import Icon from '@/components/Icon/Icon';
 import { BackAppBar } from '@/components/AppBar';

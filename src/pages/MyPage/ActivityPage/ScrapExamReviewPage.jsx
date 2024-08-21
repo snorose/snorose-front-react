@@ -57,7 +57,7 @@ export default function ScrapExamReviewPage() {
           ) : (
             <div className={styles.noContentWrapper}>
               <p className={styles.noContentMessage}>
-                아직 다운받은 후기가 없어요
+                아직 스크랩한 시험 후기가 없어요
               </p>
               <div className={styles.imageWrapper}>
                 <Icon id='no-review-star' className={styles.image} />
