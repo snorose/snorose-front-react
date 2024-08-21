@@ -32,6 +32,9 @@ import {
   NotFoundIdPage,
   NotFoundPwPage,
 } from './pages/LoginPage';
+import SignUpPage from './pages/LoginPage/SignUpPage/SignUpPage';
+import SignUpSuccessPage from './pages/LoginPage/SignUpPage/SignUpSuccessPage/SignUpSuccessPage';
+import SignUpFailurePage from './pages/LoginPage/SignUpPage/SignUpPageStages/SignUpFailure/SignUpFailurePage';
 
 import { ROLE } from './constants';
 
@@ -160,6 +163,21 @@ export const routeList = [
       {
         path: '/not-found-pw',
         element: <NotFoundPwPage />,
+        meta: { hideNav: true },
+      },
+      {
+        path: '/signup',
+        element: <SignUpPage />,
+        meta: { hideNav: true },
+      },
+      {
+        path: '/signup/success',
+        element: <SignUpSuccessPage />,
+        meta: { hideNav: true },
+      },
+      {
+        path: '/signup/failure',
+        element: <SignUpFailurePage />,
         meta: { hideNav: true },
       },
     ],

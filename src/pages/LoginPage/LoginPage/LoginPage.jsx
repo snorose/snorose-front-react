@@ -108,7 +108,7 @@ export default function Login() {
             <Link to='/find-pw'>비밀번호 찾기</Link>
           </div>
           <div className={styles.signup}>
-            <Link to='/login'>아직 회원이 아니신가요?</Link>
+            <Link to='/signup'>아직 회원이 아니신가요?</Link>
             <Icon id='angle-right' width='1.5rem' height='1.5rem' />
           </div>
         </div>

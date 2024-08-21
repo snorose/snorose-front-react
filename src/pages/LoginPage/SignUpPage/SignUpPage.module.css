@@ -1,0 +1,28 @@
+.pageFrame {
+  width: 100%;
+  padding: 0 1.25rem;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+}
+.signupFrame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.navFrame {
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+}
+.stageDotsFrame {
+  margin-top: 0.813rem;
+  margin-bottom: 1.813rem;
+}
+.submit {
+  margin-bottom: 2.125rem;
+}
