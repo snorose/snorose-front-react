@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import timeAgo from '../../utils/timeAgo.js';
 import styles from './PostBar.module.css';
 
-export default function PostBar({ data, optionClick, use }) {
+export default function PostBar({ data, optionClick, use, hasLike = true }) {
   const navigate = useNavigate();
   const givenTime = data.createdAt;
   const agoTime = timeAgo(givenTime);
@@ -30,16 +30,33 @@ export default function PostBar({ data, optionClick, use }) {
       </div>
       <div className={styles.post_bottom}>
         <span className={styles.board}>{data.board}</span>
-        <div className={styles.comment_like_wrapper}>
-          <Icon id='comment' width={13} height={11} fill='#D9D9D9' />
-          <p className={styles.comment_cnt}>{data.commentCount}</p>
+        <div className={styles.iconContainer}>
           <Icon
-            id='like'
-            width={12}
-            height={11}
+            className={styles.comment}
+            id='comment'
+            width='13'
+            height='11'
+            fill='#D9D9D9'
+          />
+          <span>{data.commentCount}</span>
+          {hasLike && (
+            <>
+              <Icon
+                id='like'
+                width='12'
+                height='11'
+                fill={data.liked ? '#5F86BF' : '#D9D9D9'}
+              />
+              <span>{data.likeCount}</span>
+            </>
+          )}
+          <Icon
+            id='bookmark-fill'
+            width='9'
+            height='11'
             fill={data.liked ? '#5F86BF' : '#D9D9D9'}
           />
-          <p className={styles.like_cnt}>{data.likeCount}</p>
+          <span>{data.scrapCount}</span>
         </div>
       </div>
     </div>

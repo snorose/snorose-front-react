@@ -87,12 +87,17 @@
   letter-spacing: -0.5px;
 }
 
-.comment_like_wrapper {
+.iconContainer {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 7px;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #898989;
+}
 
-  p {
-    margin-bottom: 3px;
-  }
+.comment {
+  margin-top: 1px;
 }
