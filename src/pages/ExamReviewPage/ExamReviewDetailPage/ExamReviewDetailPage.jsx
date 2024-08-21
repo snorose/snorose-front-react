@@ -16,19 +16,19 @@ import { dateFormat } from '@/utils/formatDate.js';
 import { convertToObject } from '@/utils/convertDS.js';
 
 import {
-  COURSE_CATEGORY,
+  LECTURE_TYPES,
   POINT_CATEGORY_ENUM,
   POINT_SOURCE_ENUM,
   SEMESTERS,
-  TEST_CATEGORY,
+  EXAM_TYPES,
   TOAST,
 } from '@/constants';
 
 import styles from './ExamReviewDetailPage.module.css';
 
-const COURSE_TYPE = convertToObject(COURSE_CATEGORY);
+const COURSE_TYPE = convertToObject(LECTURE_TYPES);
 const SEMESTER = convertToObject(SEMESTERS);
-const EXAM_TYPE = convertToObject(TEST_CATEGORY);
+const EXAM_TYPE = convertToObject(EXAM_TYPES);
 
 export default function ExamReviewDetailPage() {
   const { postId } = useParams();
@@ -59,7 +59,7 @@ export default function ExamReviewDetailPage() {
           toast(TOAST.EXAM_REVIEW_DELETE);
         }
       });
-      navigate('/exam-review');
+      navigate('/board/exam-review');
     },
   });
 
@@ -118,7 +118,7 @@ export default function ExamReviewDetailPage() {
                   width='15'
                   height='17'
                   onClick={() =>
-                    navigate(`/exam-review/${postId}/edit`, {
+                    navigate(`/board/exam-review/${postId}/edit`, {
                       state: data,
                       replace: true,
                     })

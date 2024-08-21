@@ -1,8 +1,8 @@
-import App from './App';
-import ProtectedRoute from './ProtectedRoute';
-import { AboutPage } from './pages/AboutPage';
-import { AlertPage } from './pages/AlertPage';
-import { BoardListPage, BoardPage } from './pages/BoardPage';
+import App from '@/App';
+import ProtectedRoute from '@/ProtectedRoute';
+import { AboutPage } from '@/pages/AboutPage';
+import { AlertPage } from '@/pages/AlertPage';
+import { BoardListPage, BoardPage } from '@/pages/BoardPage';
 import {
   ChangePasswordPage,
   DeleteAccountPage,
@@ -14,12 +14,12 @@ import {
   DownloadExamReviewPage,
   PrivacyPolicyPage,
   ServicePolicyPage,
-} from './pages/MyPage';
-import { ErrorPage } from './pages/ErrorPage';
-import { ExamReviewDetailPage, ExamReviewPage } from './pages/ExamReviewPage';
-import { ExamReviewEditPage } from './pages/ExamReviewEditPage';
-import { ExamReviewWritePage } from './pages/ExamReviewWritePage';
-import HelpPage from './pages/HelpPage/HelpPage';
+} from '@/pages/MyPage';
+import { ErrorPage } from '@/pages/ErrorPage';
+import { ExamReviewDetailPage, ExamReviewPage } from '@/pages/ExamReviewPage';
+import { ExamReviewEditPage } from '@/pages/ExamReviewEditPage';
+import { ExamReviewWritePage } from '@/pages/ExamReviewWritePage';
+import HelpPage from '@/pages/HelpPage/HelpPage';
 import {
   LoginPage,
   FindIdPage,
@@ -28,13 +28,13 @@ import {
   FoundPwPage,
   NotFoundIdPage,
   NotFoundPwPage,
-} from './pages/LoginPage';
-import { NoticeListPage } from './pages/NoticeListPage';
-import { MainPage } from './pages/MainPage';
-import { PostPage, PostSearchPage, PostWritePage } from './pages/PostPage';
-import { SnoroseVerifyPage } from './pages/SnoroseVerifyPage';
+} from '@/pages/LoginPage';
+import { NoticeListPage } from '@/pages/NoticeListPage';
+import { MainPage } from '@/pages/MainPage';
+import { PostPage, PostSearchPage, PostWritePage } from '@/pages/PostPage';
+import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
-import { ROLE } from './constants';
+import { ROLE } from '@/constants';
 
 const boardPaths = ['first-snow', 'large-snow', 'permanent-snow', 'besookt'];
 
@@ -107,7 +107,7 @@ export const routeList = [
         element: <PostWritePage />,
       },
       {
-        path: '/exam-review',
+        path: '/board/exam-review',
         element: (
           <ProtectedRoute>
             <ExamReviewPage />
@@ -115,7 +115,7 @@ export const routeList = [
         ),
       },
       {
-        path: '/exam-review/:postId',
+        path: '/board/exam-review/:postId',
         element: (
           <ProtectedRoute>
             <ExamReviewDetailPage />
@@ -126,14 +126,14 @@ export const routeList = [
         },
       },
       {
-        path: '/exam-review/:postId/edit',
+        path: '/board/exam-review/:postId/edit',
         element: <ExamReviewEditPage />,
         meta: {
           hideNav: true,
         },
       },
       {
-        path: '/exam-review-write',
+        path: '/board/exam-review-write',
         element: <ExamReviewWritePage />,
         meta: {
           hideNav: true,

@@ -16,12 +16,12 @@ import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
 
 import {
-  CLASS_NUMBER,
-  COURSE_CATEGORY,
+  CLASS_NUMBERS,
+  EXAM_TYPES,
+  LECTURE_TYPES,
   POINT_CATEGORY_ENUM,
   POINT_SOURCE_ENUM,
   SEMESTERS,
-  TEST_CATEGORY,
   TOAST,
   YEARS,
 } from '@/constants';
@@ -101,7 +101,7 @@ export default function ExamReviewWritePage() {
                       toast(TOAST.EXAM_REVIEW_CREATE);
                     }
                   });
-                  navigate('/exam-review');
+                  navigate('/board/exam-review');
                 }
               });
             } else {
@@ -127,7 +127,7 @@ export default function ExamReviewWritePage() {
         />
       </InputList>
       <CategoryFieldset title='강의 종류' required>
-        {COURSE_CATEGORY.map((option) => (
+        {LECTURE_TYPES.map((option) => (
           <CategoryButton
             key={option.id}
             select={lectureType}
@@ -139,7 +139,7 @@ export default function ExamReviewWritePage() {
         ))}
       </CategoryFieldset>
       <CategoryFieldset title='시험 종류' required>
-        {TEST_CATEGORY.map((option) => (
+        {EXAM_TYPES.map((option) => (
           <CategoryButton
             key={option.id}
             select={examType}
@@ -175,7 +175,7 @@ export default function ExamReviewWritePage() {
       />
       <CategoryFieldset title='수강 분반' required>
         <Dropdown
-          options={CLASS_NUMBER}
+          options={CLASS_NUMBERS}
           select={classNumber}
           setFn={setClassNumber}
           placeholder='선택하세요'
