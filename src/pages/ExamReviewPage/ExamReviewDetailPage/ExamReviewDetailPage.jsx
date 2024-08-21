@@ -66,24 +66,24 @@ export default function ExamReviewDetailPage() {
   if (data === undefined) return null;
 
   const {
-    scrapCount,
-    classNumber,
-    online,
-    isEdited,
-    writer,
     userDisplay,
+    isWriter,
     title,
+    commentCount,
+    scrapCount,
+    isScrap,
     createdAt,
     lectureName,
     professor,
     lectureYear,
     semester,
     lectureType,
-    examType,
-    fileName,
-    questionDetail,
-    confirmed,
     isPF,
+    examType,
+    isConfirmed,
+    fileName,
+    isEdited,
+    questionDetail,
   } = data;
 
   return (
@@ -101,7 +101,8 @@ export default function ExamReviewDetailPage() {
             <span>{userDisplay}</span>
             <span className={styles.dot}></span>
             <span>{dateFormat(createdAt)}</span>
-            {confirmed && (
+            {isEdited && <span>&nbsp;(수정됨)</span>}
+            {isConfirmed && (
               <Icon
                 className={styles.checkCircleIcon}
                 id='check-circle'
@@ -111,7 +112,7 @@ export default function ExamReviewDetailPage() {
             )}
           </div>
           <div className={styles.more}>
-            {writer && (
+            {isWriter && (
               <>
                 <Icon
                   id='pencil'
