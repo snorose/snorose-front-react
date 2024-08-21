@@ -84,8 +84,6 @@ export default function ExamReviewWritePage() {
     category: '',
   };
 
-  console.log(data);
-
   return (
     <main className={styles.main}>
       <CloseAppBar>
