@@ -38,6 +38,8 @@ import { PostPage, PostSearchPage, PostWritePage, PostEditPage } from '@/pages/P
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/constants';
+import ScrapPage from './pages/MyPage/ActivityPage/ScrapPage';
+import ScrapExamReviewPage from './pages/MyPage/ActivityPage/ScrapExamReviewPage';
 
 const boardPaths = ['first-snow', 'large-snow', 'permanent-snow', 'besookt'];
 
@@ -225,6 +227,20 @@ export const routeList = [
       {
         path: '/my-page/download-exam-review',
         element: <DownloadExamReviewPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/scrap',
+        element: <ScrapPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/scrap-exam-review',
+        element: <ScrapExamReviewPage />,
         meta: {
           hideNav: true,
         },
