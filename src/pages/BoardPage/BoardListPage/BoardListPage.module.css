@@ -24,16 +24,6 @@ body {
   gap: 9px;
 }
 
-.pencil_icon {
-  display: flex;
-  justify-content: end;
-  width: 100%;
-  max-width: 450px;
-  position: fixed;
-  bottom: 120px;
-  z-index: 10;
-}
-
 .side_menu_btn {
   width: 20px;
   height: 15px;
