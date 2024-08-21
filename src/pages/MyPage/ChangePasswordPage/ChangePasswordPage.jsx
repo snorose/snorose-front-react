@@ -54,6 +54,11 @@ export default function ChangePasswordPage() {
   };
 
   const handleSubmitButtonClick = () => {
+    if (newPassword !== newPasswordCheck) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
     updatePasswordMutate({
       currentPassword,
       newPassword,
@@ -115,7 +120,9 @@ export default function ChangePasswordPage() {
         <div className={styles.submitBtn}>
           <ActionButton
             type='button'
-            disabled={isUpdatePasswordPending}
+            disabled={
+              isUpdatePasswordPending || newPassword !== newPasswordCheck
+            }
             onClick={handleSubmitButtonClick}
           >
             완료
