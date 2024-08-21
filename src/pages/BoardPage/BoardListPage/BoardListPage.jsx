@@ -99,7 +99,7 @@ export default function BoardListPage() {
         setIsOpen={setIsModalOpen}
       />
       <Target ref={ref} height='100px' />
-      <WriteButton to='/board/exam-review-write' />
+      <WriteButton to='/post-write' />
     </div>
   );
 }
