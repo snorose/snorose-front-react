@@ -16,6 +16,7 @@ import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
 
 import {
+  BOARD_ID,
   CLASS_NUMBERS,
   EXAM_TYPES,
   LECTURE_TYPES,
@@ -39,6 +40,7 @@ export default function ExamReviewWritePage() {
   const [lectureYear, setLectureYear] = useState({});
   const [semester, setSemester] = useState({});
   const [isPF, setIsPF] = useState(false);
+  const [isOnline, setIsOnline] = useState(false);
   const [classNumber, setClassNumber] = useState({});
   const [questionDetail, setQuestionDetail] = useState('');
   const [file, setFile] = useState();
@@ -68,20 +70,21 @@ export default function ExamReviewWritePage() {
 
   const data = {
     isPF,
-    boardId: 32,
+    boardId: BOARD_ID['exam-review'],
     classNumber: classNumber?.id,
     lectureName,
     professor,
+    questionDetail,
     semester: semester?.id,
     lectureType: lectureType?.id,
+    content: '',
     examType: examType?.id,
     lectureYear: lectureYear?.id,
-    title: '자료구조',
-    questionDetail,
-    isOnline: false,
-    category: 'testCategory',
-    content: '',
+    isOnline,
+    category: '',
   };
+
+  console.log(data);
 
   return (
     <main className={styles.main}>
@@ -172,6 +175,13 @@ export default function ExamReviewWritePage() {
         hasCheckbox
         value={isPF}
         setFn={setIsPF}
+      />
+      <CategoryFieldset
+        title='온라인(비대면 수업) 여부'
+        required
+        hasCheckbox
+        value={isOnline}
+        setFn={setIsOnline}
       />
       <CategoryFieldset title='수강 분반' required>
         <Dropdown

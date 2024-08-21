@@ -2,18 +2,22 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import styles from './BoardListPage.module.css';
+import { getPostList } from '@/apis/postList.js';
 
-import Icon from '../../../components/Icon/Icon.jsx';
-import { BackAppBar } from '../../../components/AppBar';
-import { PostBar } from '../../../components/PostBar';
-import { Sponser } from '../../../components/Sponser';
-import { OptionModal } from '../../../components/Modal';
-import PTR from '../../../components/PTR/PTR.jsx';
-import { getPostList } from '../../../apis/postList.js';
-import { Target } from '../../../components/Target/index.js';
-import { BOARD_MENUS } from '../../../constants/boardMenus.js';
 import { useIntersect } from '@/hooks';
+
+import { BackAppBar } from '@/components/AppBar';
+import { Icon } from '@/components/Icon';
+import { OptionModal } from '@/components/Modal';
+import { PostBar } from '@/components/PostBar';
+import { Sponser } from '@/components/Sponser';
+import { Target } from '@/components/Target/index.js';
+import { WriteButton } from '@/components/WriteButton';
+import PTR from '@/components/PTR/PTR.jsx';
+
+import { BOARD_MENUS } from '@/constants';
+
+import styles from './BoardListPage.module.css';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
@@ -86,14 +90,6 @@ export default function BoardListPage() {
             ))}
         </div>
       </PTR>
-      <div className={styles.pencil_icon}>
-        <Icon
-          id='pencil-circle'
-          width={105}
-          height={105}
-          onClick={handleNavClick('/post-write')}
-        />
-      </div>
       <div className={styles.sponser}>
         <Sponser />
       </div>
@@ -103,6 +99,7 @@ export default function BoardListPage() {
         setIsOpen={setIsModalOpen}
       />
       <Target ref={ref} height='100px' />
+      <WriteButton to='/board/exam-review-write' />
     </div>
   );
 }

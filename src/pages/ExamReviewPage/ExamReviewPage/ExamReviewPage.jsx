@@ -11,6 +11,7 @@ import { Loading } from '@/components/Loading';
 import { PostBar } from '@/components/PostBar';
 import { PTR } from '@/components/PTR';
 import { Search } from '@/components/Search';
+import { WriteButton } from '@/components/WriteButton';
 
 import { BOARD_ID, YEARS, SEMESTERS, EXAM_TYPES } from '@/constants';
 
@@ -102,6 +103,7 @@ export default function ExamReviewPage() {
         {isFetching && <Loading />}
         {reviewList.length > 0 && <Target ref={ref} height='100px' />}
       </PTR>
+      <WriteButton to='/board/exam-review-write' />
     </main>
   );
 }
