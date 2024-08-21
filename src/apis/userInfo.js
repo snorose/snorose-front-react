@@ -25,3 +25,19 @@ export const updatePassword = async (body) => {
 
   return data;
 };
+
+export const getMyPostList = async (params = {}) => {
+  const { data } = await authAxios.get('/v1/users/mypage/posts', {
+    params,
+  });
+
+  return data.result;
+};
+
+export const getMyCommentList = async (params = {}) => {
+  const { data } = await authAxios.get('/v1/users/mypage/comments', {
+    params,
+  });
+
+  return data.result;
+};
