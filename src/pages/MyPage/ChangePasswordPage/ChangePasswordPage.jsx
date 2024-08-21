@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './ChangePasswordPage.module.css';
 import { BackAppBar, ActionButton } from '@/components/AppBar';
 import InputPassword from '@/components/InputPassword/InputPassword';
-
-const handlePasswordChangeSubmit = () => {
-  alert('비밀번호 변경이 완료되었습니다');
-};
+import { useMutation } from '@tanstack/react-query';
+import { updatePassword } from '@/apis';
+import { useNavigate } from 'react-router-dom';
 
 export default function ChangePasswordPage() {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -14,21 +13,20 @@ export default function ChangePasswordPage() {
   const [newPasswordError, setNewPasswordError] = useState('');
   const [newPasswordCheckError, setNewPasswordCheckError] = useState('');
 
-  useEffect(() => {
-    if (newPassword) {
-      validatePasswordStrength(newPassword);
-    } else {
-      setNewPasswordError('');
-    }
-  }, [newPassword]);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (newPasswordCheck) {
-      validatePasswordMatch(newPasswordCheck, newPassword);
-    } else {
-      setNewPasswordCheckError('');
-    }
-  }, [newPasswordCheck, newPassword]);
+  const { mutate: updatePasswordMutate, isPending: isUpdatePasswordPending } =
+    useMutation({
+      mutationKey: ['updatePassword'],
+      mutationFn: (body) => updatePassword(body),
+      onSuccess: () => {
+        alert('비밀번호 수정이 완료되었습니다.');
+        navigate('/my-page');
+      },
+      onError: ({ response }) => {
+        alert(response.data.message);
+      },
+    });
 
   const validatePasswordStrength = (password) => {
     const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
@@ -57,6 +55,46 @@ export default function ChangePasswordPage() {
     }
   };
 
+  const handleSubmitButtonClick = () => {
+    if (newPassword !== newPasswordCheck) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    updatePasswordMutate({
+      currentPassword,
+      newPassword,
+    });
+  };
+
+  const handleCurrentPasswordInputChange = (e) => {
+    setCurrentPassword(e.target.value);
+  };
+
+  const handleNewPasswordInputChange = (e) => {
+    setNewPassword(e.target.value);
+  };
+
+  const handleConfirmNewPasswordInputChange = (e) => {
+    setNewPasswordCheck(e.target.value);
+  };
+
+  useEffect(() => {
+    if (newPassword) {
+      validatePasswordStrength(newPassword);
+    } else {
+      setNewPasswordError('');
+    }
+  }, [newPassword]);
+
+  useEffect(() => {
+    if (newPasswordCheck) {
+      validatePasswordMatch(newPasswordCheck, newPassword);
+    } else {
+      setNewPasswordCheckError('');
+    }
+  }, [newPasswordCheck, newPassword]);
+
   return (
     <main className={styles.changePasswordPage}>
       <header className={styles.topContainer}>
@@ -64,7 +102,15 @@ export default function ChangePasswordPage() {
           <BackAppBar />
         </p>
         <div className={styles.submitBtn}>
-          <ActionButton onClick={handlePasswordChangeSubmit}>완료</ActionButton>
+          <ActionButton
+            type='button'
+            disabled={
+              isUpdatePasswordPending || newPassword !== newPasswordCheck
+            }
+            onClick={handleSubmitButtonClick}
+          >
+            완료
+          </ActionButton>
         </div>
       </header>
 
@@ -73,24 +119,24 @@ export default function ChangePasswordPage() {
           title='현재 비밀번호'
           placeholder='기존 비밀번호를 입력하세요'
           value={currentPassword}
-          onChange={setCurrentPassword}
           isStatic
+          onChange={handleCurrentPasswordInputChange}
         />
 
         <InputPassword
           title='새 비밀번호'
           placeholder='새로운 비밀번호를 입력하세요'
           value={newPassword}
-          onChange={setNewPassword}
           errorMessage={newPasswordError}
+          onChange={handleNewPasswordInputChange}
         />
 
         <InputPassword
-          title='비밀번호 확인'
-          placeholder='비밀번호를 다시 입력하세요'
+          title='새 비밀번호 확인'
+          placeholder='새 비밀번호를 다시 입력하세요'
           value={newPasswordCheck}
-          onChange={setNewPasswordCheck}
           errorMessage={newPasswordCheckError}
+          onChange={handleConfirmNewPasswordInputChange}
         />
       </section>
     </main>
