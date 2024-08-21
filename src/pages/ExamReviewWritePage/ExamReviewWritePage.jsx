@@ -1,31 +1,37 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { postExamReview } from '../../apis';
+import { postExamReview, updatePoint } from '@/apis';
 
-import { ActionButton, CloseAppBar } from '../../components/AppBar';
+import { useToast } from '@/hooks';
+
+import { ActionButton, CloseAppBar } from '@/components/AppBar';
 import {
   CategoryButton,
   CategoryFieldset,
   Dropdown,
-} from '../../components/Fieldset';
+} from '@/components/Fieldset';
+import { Icon } from '@/components/Icon';
+import { InputItem, InputList } from '@/components/Input';
+import { Textarea } from '@/components/Fieldset';
+
 import {
-  CLASS_NUMBER,
-  COURSE_CATEGORY,
+  CLASS_NUMBERS,
+  EXAM_TYPES,
+  LECTURE_TYPES,
+  POINT_CATEGORY_ENUM,
+  POINT_SOURCE_ENUM,
   SEMESTERS,
-  TEST_CATEGORY,
+  TOAST,
   YEARS,
-} from '../../constants';
-import Icon from '../../components/Icon/Icon';
-import InputList from '../../components/Input/InputList/InputList.jsx';
-import InputItem from '../../components/Input/InputItem/InputItem.jsx';
-import Textarea from '../../components/Fieldset/Textarea/Textarea.jsx';
+} from '@/constants';
 
 import styles from './ExamReviewWritePage.module.css';
 
 const FILE_MAX_SIZE = 1024 * 1024 * 10;
 
 export default function ExamReviewWritePage() {
+  const { toast } = useToast();
   const [lectureName, setLectureName] = useState('');
   const [professor, setProfessor] = useState('');
   const [lectureType, setLectureType] = useState({});
@@ -34,7 +40,7 @@ export default function ExamReviewWritePage() {
   const [semester, setSemester] = useState({});
   const [isPF, setIsPF] = useState(false);
   const [classNumber, setClassNumber] = useState({});
-  const [content, setContent] = useState('');
+  const [questionDetail, setQuestionDetail] = useState('');
   const [file, setFile] = useState();
 
   const navigate = useNavigate();
@@ -68,13 +74,13 @@ export default function ExamReviewWritePage() {
     professor,
     semester: semester?.id,
     lectureType: lectureType?.id,
-    content,
     examType: examType?.id,
     lectureYear: lectureYear?.id,
     title: '자료구조',
-    questionDetail: '서술형 1문제 객관식 9문제',
+    questionDetail,
     isOnline: false,
     category: 'testCategory',
+    content: '',
   };
 
   return (
@@ -83,9 +89,19 @@ export default function ExamReviewWritePage() {
         <ActionButton
           onClick={() => {
             if (pass) {
-              postExamReview({ data, file }).then((response) => {
-                if (response.status === 201) {
-                  navigate('/exam-review');
+              postExamReview({ data, file }).then(({ status, data }) => {
+                if (status === 201) {
+                  updatePoint({
+                    userId: 62, // userId로 교체해야합니다.
+                    category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
+                    source: POINT_SOURCE_ENUM.REVIEW,
+                    sourceId: data.result.postId,
+                  }).then(({ status }) => {
+                    if (status === 200) {
+                      toast(TOAST.EXAM_REVIEW_CREATE);
+                    }
+                  });
+                  navigate('/board/exam-review');
                 }
               });
             } else {
@@ -111,7 +127,7 @@ export default function ExamReviewWritePage() {
         />
       </InputList>
       <CategoryFieldset title='강의 종류' required>
-        {COURSE_CATEGORY.map((option) => (
+        {LECTURE_TYPES.map((option) => (
           <CategoryButton
             key={option.id}
             select={lectureType}
@@ -123,7 +139,7 @@ export default function ExamReviewWritePage() {
         ))}
       </CategoryFieldset>
       <CategoryFieldset title='시험 종류' required>
-        {TEST_CATEGORY.map((option) => (
+        {EXAM_TYPES.map((option) => (
           <CategoryButton
             key={option.id}
             select={examType}
@@ -159,7 +175,7 @@ export default function ExamReviewWritePage() {
       />
       <CategoryFieldset title='수강 분반' required>
         <Dropdown
-          options={CLASS_NUMBER}
+          options={CLASS_NUMBERS}
           select={classNumber}
           setFn={setClassNumber}
           placeholder='선택하세요'
@@ -167,8 +183,8 @@ export default function ExamReviewWritePage() {
       </CategoryFieldset>
       <CategoryFieldset title='시험 유형 및 설명'>
         <Textarea
-          value={content}
-          setFn={setContent}
+          value={questionDetail}
+          setFn={setQuestionDetail}
           placeholder='강의 시험 유형 및 부가적인 설명을 기술해주세요'
           minRows='5'
           maxRows='10'

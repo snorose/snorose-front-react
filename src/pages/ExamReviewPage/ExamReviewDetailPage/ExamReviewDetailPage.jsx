@@ -1,46 +1,90 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
-import { BackAppBar } from '../../../components/AppBar/index.js';
-import { ReviewContentItem } from '../../../components/ReviewContentItem';
-import { Icon } from '../../../components/Icon/index.js';
-import { InputBar } from '../../../components/InputBar';
+import { deleteExamReview, getReviewDetail, updatePoint } from '@/apis';
 
-import { dateFormat } from '../../../utils/formatDate.js';
-import { convertToObject } from '../../../utils/convertDS.js';
-import { COMMENT_LIST, REVIEW_DETAIL } from '../../../dummy/data';
+import { useToast } from '@/hooks';
+
+import { BackAppBar } from '@/components/AppBar';
+import { CommentList } from '@/components/Comment';
+import { Icon } from '@/components/Icon';
+import { InputBar } from '@/components/InputBar';
+import { ReviewContentItem } from '@/components/ReviewContentItem';
+import { ReviewDownload } from '@/components/ReviewDownload';
+
+import { dateFormat } from '@/utils/formatDate.js';
+import { convertToObject } from '@/utils/convertDS.js';
 
 import {
-  COURSE_CATEGORY,
+  LECTURE_TYPES,
+  POINT_CATEGORY_ENUM,
+  POINT_SOURCE_ENUM,
   SEMESTERS,
-  TEST_CATEGORY,
-} from '../../../constants/index.js';
+  EXAM_TYPES,
+  TOAST,
+} from '@/constants';
 
 import styles from './ExamReviewDetailPage.module.css';
-import ReviewDownload from '../../../components/ReviewDownload/ReviewDownload.jsx';
-import Comment from '../../../components/Comment/Comment/Comment.jsx';
 
-const COURSE_TYPE = convertToObject(COURSE_CATEGORY);
+const COURSE_TYPE = convertToObject(LECTURE_TYPES);
 const SEMESTER = convertToObject(SEMESTERS);
-const EXAM_TYPE = convertToObject(TEST_CATEGORY);
+const EXAM_TYPE = convertToObject(EXAM_TYPES);
 
 export default function ExamReviewDetailPage() {
   const { postId } = useParams();
+  const { toast } = useToast();
+  const { data } = useQuery({
+    queryKey: ['reviewDetail', postId],
+    queryFn: () => getReviewDetail(postId),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const deleteReview = useMutation({
+    mutationFn: () => deleteExamReview(postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['reviewList']);
+      queryClient.removeQueries(['reviewDetail', postId]);
+      queryClient.removeQueries(['reviewFile', postId]);
+
+      updatePoint({
+        userId: 62, // userId로 변경 필요
+        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DELETE,
+        source: POINT_SOURCE_ENUM.REVIEW,
+        sourceId: postId,
+      }).then(({ status }) => {
+        if (status === 200) {
+          toast(TOAST.EXAM_REVIEW_DELETE);
+        }
+      });
+      navigate('/board/exam-review');
+    },
+  });
+
+  if (data === undefined) return null;
+
   const {
+    scrapCount,
+    classNumber,
+    online,
+    isEdited,
+    writer,
     userDisplay,
-    createdAt,
-    confirmed,
     title,
+    createdAt,
     lectureName,
     professor,
-    lectureType,
     lectureYear,
     semester,
+    lectureType,
     examType,
-    isPF,
-    questionDetail,
     fileName,
-  } = REVIEW_DETAIL;
-  console.log(postId);
+    questionDetail,
+    confirmed,
+    isPF,
+  } = data;
 
   return (
     <main>
@@ -66,7 +110,30 @@ export default function ExamReviewDetailPage() {
               />
             )}
           </div>
-          <Icon id='ellipsis-vertical' width='3' height='11' />
+          <div className={styles.more}>
+            {writer && (
+              <>
+                <Icon
+                  id='pencil'
+                  width='15'
+                  height='17'
+                  onClick={() =>
+                    navigate(`/board/exam-review/${postId}/edit`, {
+                      state: data,
+                      replace: true,
+                    })
+                  }
+                />
+                <Icon
+                  id='trash'
+                  width='12'
+                  height='16'
+                  onClick={() => deleteReview.mutate()}
+                />
+              </>
+            )}
+            <Icon id='ellipsis-vertical' width='3' height='11' />
+          </div>
         </div>
         <div className={styles.title}>{title}</div>
         <div className={styles.content}>
@@ -83,13 +150,7 @@ export default function ExamReviewDetailPage() {
         </div>
         <ReviewDownload className={styles.fileDownload} fileName={fileName} />
       </div>
-      <div className={styles.comments}>
-        <p className={styles.commentsTitle}>댓글 2개</p>
-        {COMMENT_LIST &&
-          COMMENT_LIST.map((comment) => (
-            <Comment key={comment.id} data={comment} />
-          ))}
-      </div>
+      <CommentList />
       <InputBar />
     </main>
   );

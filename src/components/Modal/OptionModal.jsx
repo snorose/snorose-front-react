@@ -2,7 +2,13 @@ import styles from './Modal.module.css';
 import { MODAL_OPTIONS } from '../../constants/modalOptions';
 import Options from './Options';
 
-export default function OptionModal({ id, isOpen, setIsOpen }) {
+export default function OptionModal({
+  id,
+  isOpen,
+  setIsOpen,
+  closeFn,
+  functions,
+}) {
   const modalOption = MODAL_OPTIONS.find((option) => option.id === id);
 
   if (!isOpen || !modalOption) return null;
@@ -19,10 +25,16 @@ export default function OptionModal({ id, isOpen, setIsOpen }) {
           </div>
         </div>
         <div className={styles.center}>
-          <Options options={modalOption.children} />
+          <Options options={modalOption.children} functions={functions} />
         </div>
         <div className={styles.bottom}>
-          <div className={styles.leftCloseBtn} onClick={() => setIsOpen(false)}>
+          <div
+            className={styles.leftCloseBtn}
+            onClick={() => {
+              closeFn();
+              setIsOpen(false);
+            }}
+          >
             닫기
           </div>
         </div>

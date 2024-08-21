@@ -1,69 +1,121 @@
-import styles from './Comment.module.css';
-import { Icon } from '../../../components/Icon';
-import { NestedComment } from '../';
-import timeAgo from '../../../utils/timeAgo.js';
 import { useState } from 'react';
 
-export default function Comment({ data }) {
-  const {
-    id,
-    postId,
-    userProfile,
-    userDisplay,
-    isWriter,
-    content,
-    liked,
-    likeCount,
-    reportCount,
-    createdAt,
-    updatedAt,
-    deletedAt,
-    isVisible,
-    isUpdated,
-    isDeleted,
-    parentId,
-    children,
-  } = data;
-  const [isLiked, setIsLiked] = useState(liked);
+import { useCommentContext } from '../../../contexts/CommentContext.jsx';
 
-  const handleLikedClick = () => {
-    console.log('API로 liked 데이터 수정');
+import useComment from '../../../hooks/useComment.jsx';
+
+import { DeleteModal, OptionModal } from '../../../components/Modal';
+import { Icon } from '../../../components/Icon';
+import { NestedComment } from '../';
+
+import timeAgo from '../../../utils/timeAgo.js';
+
+import styles from './Comment.module.css';
+
+export default function Comment({ data }) {
+  // const [isLiked, setIsLiked] = useState(false);
+  const { setIsEdit, commentId, setCommentId, setContent, inputFocus } =
+    useCommentContext();
+  const { deleteComment } = useComment();
+  const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const onCommentOptionClick = ({ id, parentId, content }) => {
+    setCommentId(id);
+    setContent(content);
+    setIsOptionModalOpen(true);
   };
 
+  const onCloseClick = () => {
+    setCommentId(undefined);
+    setContent('');
+  };
+
+  const handleReply = (e) => {
+    e.stopPropagation();
+    setCommentId(data.id);
+    inputFocus();
+  };
+
+  // const handleLikedClick = () => {
+  //   console.log('API로 liked 데이터 수정');
+  // };
+
   return (
-    <div className={styles.comment}>
-      <div className={styles.commentTop}>
-        <div className={styles.commentTopLeft}>
-          <div className={styles.cloud}>
-            <Icon id='cloud' width='19' heigth='13' />
+    <>
+      <div className={styles.comment} onClick={() => setCommentId(undefined)}>
+        <div className={styles.commentTop}>
+          <div className={styles.commentTopLeft}>
+            <div className={styles.cloud}>
+              <Icon id='cloud' width='19' height='13' />
+            </div>
+            <p>{data.userDisplay}</p>
+            <p className={styles.dot}>·</p>
+            <p>
+              {timeAgo(data.createdAt)} {data.isUpdated ? ' (수정됨)' : null}
+            </p>
           </div>
-          <p>{userDisplay}</p>
-          <p className={styles.dot}>·</p>
-          <p>
-            {isUpdated ? timeAgo(updatedAt) + ' (수정됨)' : timeAgo(createdAt)}
+          <p
+            className={styles.dot3}
+            onClick={(e) => {
+              e.stopPropagation();
+              onCommentOptionClick(data);
+            }}
+          >
+            {data.isWriter && (
+              <Icon id='ellipsis-vertical' width='3' height='11' />
+            )}
           </p>
         </div>
-        <Icon id='ellipsis-vertical' width='3' height='11' />
-      </div>
-      <div className={styles.commentCenter}>{content}</div>
-      <div className={styles.commentBottom}>
-        <div className={styles.count}>
-          <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
-          <p>3</p>
+        <div className={styles.commentCenter}>{data.content}</div>
+        <div className={styles.commentBottom}>
+          <button className={styles.commentCount} onClick={handleReply}>
+            <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
+            <p>{data.children.length}</p>
+          </button>
+          <button className={styles.likedCount}>
+            <Icon id='like' width='13' height='12' fill='#D9D9D9' />
+            <p>{data.likeCount}</p>
+          </button>
         </div>
-        <div className={styles.count}>
-          <Icon id='like' width='13' height='12' fill='#D9D9D9' />
-          <p>{likeCount}</p>
-        </div>
+        {data.children.length > 0 &&
+          data.children.map((childComment, index) => (
+            <NestedComment
+              key={childComment.id}
+              data={childComment}
+              isLast={index === data.children.length - 1}
+              isFirst={index === 0}
+              onCommentOptionClick={onCommentOptionClick}
+            />
+          ))}
       </div>
-      {children.length > 0 &&
-        children.map((childComment, index) => (
-          <NestedComment
-            key={childComment.id}
-            data={childComment}
-            isLast={index === children.length - 1}
-          />
-        ))}
-    </div>
+      <OptionModal
+        id='comment-edit'
+        isOpen={isOptionModalOpen}
+        setIsOpen={setIsOptionModalOpen}
+        closeFn={onCloseClick}
+        functions={{
+          pencil: () => {
+            setIsOptionModalOpen(false);
+            setIsEdit(true);
+            inputFocus();
+          },
+          trash: () => {
+            setIsDeleteModalOpen(true);
+            setIsOptionModalOpen(false);
+          },
+        }}
+      />
+      <DeleteModal
+        id='comment-delete'
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setIsDeleteModalOpen}
+        redBtnFuction={() => {
+          deleteComment.mutate({ commentId });
+          setCommentId(undefined);
+          setContent('');
+        }}
+      />
+    </>
   );
 }

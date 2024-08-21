@@ -1,44 +1,57 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import useIntersect from '../../../hooks/useIntersect.jsx';
+import { getReviewList, searchByBoard } from '@/apis';
 
-import { AppBar } from '../../../components/AppBar/index.js';
-import { Loading } from '../../../components/Loading/index.js';
-import { PostBar } from '../../../components/PostBar/index.js';
-import { PTR } from '../../../components/PTR/index.js';
-import { Search } from '../../../components/Search/index.js';
-import { Target } from '../../../components/Target/index.js';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll.jsx';
 
-import { getReviewList } from '../../../apis/examReview.js';
+import { AppBar } from '@/components/AppBar';
+import { DropDownBlue } from '@/components/DropDownBlue';
+import { Loading } from '@/components/Loading';
+import { PostBar } from '@/components/PostBar';
+import { PTR } from '@/components/PTR';
+import { Search } from '@/components/Search';
+
+import { BOARD_ID, YEARS, SEMESTERS, EXAM_TYPES } from '@/constants';
 
 import styles from './ExamReviewPage.module.css';
 
 export default function ExamReviewPage() {
-  const { data, hasNextPage, isFetching, status, fetchNextPage } =
-    useInfiniteQuery({
-      queryKey: ['reviewList'],
-      queryFn: ({ pageParam }) => getReviewList(pageParam),
-      initialPageParam: 0,
-      getNextPageParam: (lastPage, allPages, lastPageParam) => {
-        if (lastPage?.length === 0) {
-          return undefined;
-        }
-        return lastPageParam + 1;
-      },
-    });
+  const [keyword, setKeyword] = useState('');
+  const [lectureYear, setLectureYear] = useState();
+  const [semester, setSemester] = useState();
+  const [examType, setExamType] = useState();
 
-  const ref = useIntersect(
-    async (entry, observer) => {
-      observer.unobserve(entry.target);
-      if (hasNextPage && !isFetching) {
-        fetchNextPage();
-      }
-    },
-    { threshold: 0.8 }
-  );
+  const { data, ref, isFetching, status, Target } = useInfiniteScroll({
+    queryKey: keyword
+      ? [
+          'reviewList',
+          'search',
+          keyword,
+          {
+            lectureYear: lectureYear?.id,
+            semester: semester?.id,
+            examType: examType?.id,
+          },
+        ]
+      : ['reviewList'],
+    queryFn: keyword
+      ? ({ pageParam }) =>
+          searchByBoard({
+            boardId: BOARD_ID['exam-review'],
+            page: pageParam,
+            keyword,
+            lectureYear: lectureYear?.id,
+            semester: semester?.id,
+            examType: examType?.id,
+          })
+      : ({ pageParam }) => getReviewList(pageParam),
+  });
 
-  const reviewList = data ? data.pages.flatMap((page) => page) : [];
+  const reviewList =
+    data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page)
+      : [];
 
   return (
     <main>
@@ -46,23 +59,48 @@ export default function ExamReviewPage() {
       <Search
         className={styles.search}
         placeholder='시험후기 검색'
-        onSearch={() => {}}
+        setKeyword={setKeyword}
       />
+      <div className={styles.filters}>
+        <DropDownBlue
+          options={YEARS}
+          placeholder='연도'
+          select={lectureYear}
+          setFn={setLectureYear}
+        />
+        <DropDownBlue
+          options={SEMESTERS}
+          placeholder='학기'
+          select={semester}
+          setFn={setSemester}
+        />
+        <DropDownBlue
+          options={EXAM_TYPES}
+          placeholder='시험 종류'
+          select={examType}
+          setFn={setExamType}
+        />
+      </div>
       <PTR>
         <ul className={styles.list}>
-          {status !== 'error' &&
+          {status !== 'error' && reviewList.length > 0 ? (
             reviewList.map((post) => (
               <Link
                 className={styles.to}
                 key={post.postId}
-                to={`/exam-review/${post.postId}`}
+                to={`/board/exam-review/${post.postId}`}
               >
                 <PostBar data={post} />
               </Link>
-            ))}
+            ))
+          ) : (
+            <div className={styles.noting}>
+              {keyword ? '검색 결과가 없습니다' : '후기를 등록해주세요'}
+            </div>
+          )}
         </ul>
         {isFetching && <Loading />}
-        <Target ref={ref} height='100px' />
+        {reviewList.length > 0 && <Target ref={ref} height='100px' />}
       </PTR>
     </main>
   );

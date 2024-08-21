@@ -1,7 +1,7 @@
 import styles from './Modal.module.css';
 import { MODAL_OPTIONS } from '../../constants/modalOptions';
 
-export default function DeleteModal({ id, isOpen, setIsOpen }) {
+export default function DeleteModal({ id, isOpen, setIsOpen, redBtnFuction }) {
   const modalOption = MODAL_OPTIONS.find((option) => option.id === id);
 
   if (!isOpen || !modalOption) return null;
@@ -19,7 +19,15 @@ export default function DeleteModal({ id, isOpen, setIsOpen }) {
         </div>
         <div className={styles.deleteCenter}>{modalOption.children.text}</div>
         <div className={styles.deleteOrBack}>
-          <div className={styles.redBtn}>{modalOption.bottom.redBtn}</div>
+          <div
+            className={styles.redBtn}
+            onClick={() => {
+              redBtnFuction();
+              setIsOpen(false);
+            }}
+          >
+            {modalOption.bottom.redBtn}
+          </div>
           <div className={styles.greyBtn} onClick={() => setIsOpen(false)}>
             {modalOption.bottom.greyBtn}
           </div>

@@ -4,7 +4,10 @@
   max-width: var(--default-width);
   height: 100vh;
   position: fixed;
-  z-index: 11;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;

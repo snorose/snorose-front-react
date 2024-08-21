@@ -15,7 +15,7 @@ export const NAVBAR_MENUS = Object.freeze([
   },
   {
     id: 'test',
-    to: '/exam-review',
+    to: '/board/exam-review',
     label: '시험후기',
     width: 24,
     height: 24,

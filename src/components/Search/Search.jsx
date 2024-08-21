@@ -1,22 +1,12 @@
-import { useState, useEffect } from 'react';
-import { Icon } from '../Icon';
+import { Icon } from '@/components//Icon';
+
 import styles from './Search.module.css';
 
-export default function Search({ className, placeholder, onSearch, keyWord }) {
-  const [text, setText] = useState(keyWord || '');
-
-  useEffect(() => {
-    setText(keyWord || '');
-  }, [keyWord]);
-
-  const handleChange = (event) => {
-    setText(event.target.value);
-  };
-
+export default function Search({ className, placeholder, setKeyword }) {
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      onSearch(text);
+      setKeyword(event.target.value);
     }
   };
 
@@ -27,8 +17,6 @@ export default function Search({ className, placeholder, onSearch, keyWord }) {
         className={styles.search}
         type='text'
         placeholder={placeholder}
-        value={text}
-        onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
     </div>
