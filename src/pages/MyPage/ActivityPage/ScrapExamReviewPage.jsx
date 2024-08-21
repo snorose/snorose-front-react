@@ -1,30 +1,43 @@
-import React from 'react';
+import { useEffect, useMemo } from 'react';
 import styles from './ActivityPage.module.css';
-import Icon from '../../../components/Icon/Icon';
-import { BackAppBar } from '../../../components/AppBar';
-import { PostBar } from '../../../components/PostBar';
-import { Sponser } from '../../../components/Sponser';
-
-const downloadExamReview = [
-  {
-    userDisplay: '눈송슈',
-    createdAt: '2024-08-07T12:00:00Z',
-    title: '한국경제사/김두한/001',
-    content: '23-겨울계절/기말',
-    likeCount: 0,
-    commentCount: 2,
-  },
-  {
-    userDisplay: '작은만두',
-    createdAt: '2024-07-06T06:28:00Z',
-    title: '세법/윤서준/001',
-    content: '22-1/기말',
-    likeCount: 6,
-    commentCount: 16,
-  },
-];
+import Icon from '@/components/Icon/Icon';
+import { BackAppBar } from '@/components/AppBar';
+import { PostBar } from '@/components/PostBar';
+import { Sponser } from '@/components/Sponser';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { getMyScrapReviewList } from '@/apis';
+import { useInView } from 'react-intersection-observer';
 
 export default function ScrapExamReviewPage() {
+  const { inView } = useInView();
+
+  const { data, isPending, isError, hasNextPage, fetchNextPage } =
+    useInfiniteQuery({
+      queryKey: ['getMyScrapReviewList'],
+      queryFn: ({ page = 0 }) => getMyScrapReviewList({ page }),
+      getNextPageParam: (lastPage, _, lastPageParam) => {
+        return lastPage.length > 0 ? lastPageParam + 1 : undefined;
+      },
+    });
+
+  const myScrapReviewList = useMemo(() => {
+    return data ? data.pages.flatMap((page) => page) : [];
+  }, [data]);
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, fetchNextPage]);
+
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return null;
+  }
+
   return (
     <main className={styles.activityPage}>
       <header>
@@ -37,8 +50,8 @@ export default function ScrapExamReviewPage() {
         </div>
 
         <article className={styles.contentListContainer}>
-          {downloadExamReview.length > 0 ? (
-            downloadExamReview.map((post, index) => (
+          {myScrapReviewList.length > 0 ? (
+            myScrapReviewList.map((post, index) => (
               <PostBar key={index} data={post} />
             ))
           ) : (
