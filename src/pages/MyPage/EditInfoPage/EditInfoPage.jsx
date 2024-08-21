@@ -22,6 +22,7 @@ export default function EditInfoPage() {
   const [birthDateError, setBirthDateError] = useState('');
   const [nicknameError, setNicknameError] = useState('');
 
+  const validNameRegex = /^[a-zA-Z가-힣\s]*$/;
   const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
   const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
 
@@ -43,11 +44,15 @@ export default function EditInfoPage() {
     setName(value);
 
     if (
+      !validNameRegex.test(value) ||
+      value.length < 2 ||
+      value.length > 10 ||
       specialCharRegex.test(value) ||
-      emojiRegex.test(value) ||
-      /\s/.test(value)
+      emojiRegex.test(value)
     ) {
-      setNameError('특수문자와 띄어쓰기는 사용할 수 없습니다');
+      setNameError(
+        '영어 대소문자, 한글만 가능하며, 2자 이상 10자 이하로 작성해주세요.'
+      );
     } else {
       setNameError('');
     }
@@ -58,11 +63,13 @@ export default function EditInfoPage() {
     setNickname(value);
 
     if (
+      !validNameRegex.test(value) ||
+      value.length < 2 ||
+      value.length > 30 ||
       specialCharRegex.test(value) ||
-      emojiRegex.test(value) ||
-      /\s/.test(value)
+      emojiRegex.test(value)
     ) {
-      setNicknameError('특수문자와 띄어쓰기는 사용할 수 없습니다');
+      setNicknameError('특수문자를 제외한 2자 이상 30자 이하로 작성해주세요');
     } else {
       setNicknameError('');
     }
