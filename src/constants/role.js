@@ -5,3 +5,11 @@ export const ROLE = Object.freeze({
   admin: 4,
   official: 5,
 });
+
+export const ROLE_NAME = Object.freeze({
+  1: '준회원',
+  2: '정회원',
+  3: '정회원2',
+  4: '리자',
+  5: '공식계정',
+});

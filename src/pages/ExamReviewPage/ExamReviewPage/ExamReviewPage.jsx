@@ -90,7 +90,7 @@ export default function ExamReviewPage() {
                 key={post.postId}
                 to={`/board/exam-review/${post.postId}`}
               >
-                <PostBar data={post} />
+                <PostBar data={post} hasLike={false} />
               </Link>
             ))
           ) : (

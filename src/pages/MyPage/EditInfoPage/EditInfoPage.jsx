@@ -1,32 +1,76 @@
 import styles from './EditInfoPage.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Icon } from '../../../components/Icon';
 import { BackAppBar, ActionButton } from '../../../components/AppBar';
 import { CategoryFieldset, Dropdown } from '../../../components/Fieldset';
 import { MAJORS } from '../../../constants';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { updateUserInfo } from '@/apis';
+import { useAuth } from '@/hooks';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditInfoPage() {
+  const { userInfo, status } = useAuth({
+    isRequiredAuth: true,
+  });
+
   const [profileImage, setProfileImage] = useState(null);
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
   const [major, setMajor] = useState({});
   const [nameError, setNameError] = useState('');
+  const [birthDate, setBirthDate] = useState('');
   const [birthDateError, setBirthDateError] = useState('');
   const [nicknameError, setNicknameError] = useState('');
 
+  const validNameRegex = /^[a-zA-Z가-힣\s]*$/;
+  const validNicknameRegex = /^[a-zA-Z가-힣0-9]*$/;
   const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
   const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
+
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const { mutate: updateUserInfoMutate, isPending: isUpdateUserInfoPending } =
+    useMutation({
+      mutationKey: ['updateUserInfo'],
+      mutationFn: (body) => updateUserInfo(body),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['myPageUserInfo'],
+        });
+
+        alert('회원 정보 수정이 완료되었습니다.');
+        navigate('/my-page');
+      },
+      onError: ({ response }) => {
+        const { data } = response;
+
+        alert(
+          data.userProfile ||
+            data.userName ||
+            data.birthday ||
+            data.nickname ||
+            data.major ||
+            data.message
+        );
+      },
+    });
 
   const handleNameChange = (e) => {
     const value = e.target.value;
     setName(value);
 
     if (
+      !validNameRegex.test(value) ||
+      value.length < 2 ||
+      value.length > 10 ||
       specialCharRegex.test(value) ||
-      emojiRegex.test(value) ||
-      /\s/.test(value)
+      emojiRegex.test(value)
     ) {
-      setNameError('특수문자와 띄어쓰기는 사용할 수 없습니다');
+      setNameError(
+        '영어 대소문자, 한글만 가능하며, 2자 이상 10자 이하로 작성해주세요.'
+      );
     } else {
       setNameError('');
     }
@@ -37,11 +81,15 @@ export default function EditInfoPage() {
     setNickname(value);
 
     if (
+      !validNicknameRegex.test(value) ||
+      value.length < 2 ||
+      value.length > 30 ||
       specialCharRegex.test(value) ||
-      emojiRegex.test(value) ||
-      /\s/.test(value)
+      emojiRegex.test(value)
     ) {
-      setNicknameError('특수문자와 띄어쓰기는 사용할 수 없습니다');
+      setNicknameError(
+        '특수문자, 띄어쓰기를 제외한 2자 이상 30자 이하로 작성해주세요'
+      );
     } else {
       setNicknameError('');
     }
@@ -86,7 +134,50 @@ export default function EditInfoPage() {
     } else {
       setBirthDateError('');
     }
+
+    setBirthDate(e.target.value);
   };
+
+  const handleSubmitButtonClick = () => {
+    const [year, month, day] = [
+      birthDate.slice(0, 4),
+      birthDate.slice(4, 6),
+      birthDate.slice(6, 8),
+    ];
+
+    updateUserInfoMutate({
+      userName: name,
+      birthday: `${year}-${month}-${day}`,
+      nickname,
+      userProfile: profileImage || undefined,
+      major: major.name || undefined,
+    });
+  };
+
+  useEffect(() => {
+    if (userInfo === undefined) {
+      return;
+    }
+
+    const { userProfile, userName, birthday, nickname, major } = userInfo;
+
+    setProfileImage(userProfile);
+    setName(userName);
+    setBirthDate(birthday.replaceAll('-', ''));
+    setNickname(nickname);
+    setMajor({
+      id: major,
+      name: major,
+    });
+  }, [userInfo]);
+
+  if (status === 'loading') {
+    return <div>loading...</div>;
+  }
+
+  if (status === 'unauthenticated') {
+    return null;
+  }
 
   return (
     <main className={styles.editInfoPage}>
@@ -95,7 +186,13 @@ export default function EditInfoPage() {
           <BackAppBar />
         </div>
         <div className={styles.submitBtn}>
-          <ActionButton>완료</ActionButton>
+          <ActionButton
+            type='button'
+            disabled={isUpdateUserInfoPending}
+            onClick={handleSubmitButtonClick}
+          >
+            완료
+          </ActionButton>
         </div>
       </header>
 
@@ -105,7 +202,7 @@ export default function EditInfoPage() {
             className={styles.profileImg}
             onClick={() => document.getElementById('profileImageInput').click()}
           >
-            {profileImage ? (
+            {profileImage !== null ? (
               <img
                 src={profileImage}
                 alt='프로필'
@@ -150,6 +247,7 @@ export default function EditInfoPage() {
                 className={styles.inputText}
                 placeholder='20020101'
                 maxLength={12}
+                value={birthDate.replaceAll('-', '')}
                 onChange={handleBirthDateChange}
                 pattern='\d{4}\.\d{2}\.\d{2}'
                 title='형식: YYYYMMDD (예: 20020101)'
