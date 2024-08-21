@@ -40,12 +40,19 @@
   border-radius: 100%;
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+
 .more {
   /* width: 20px; */
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   cursor: pointer;
 }
 
@@ -66,4 +73,27 @@
 
 .fileDownload {
   margin: 0 var(--default-margin) 0 auto;
+}
+
+.counts {
+  margin: 15px var(--default-margin) 0 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #898989;
+}
+
+.count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.comment {
+  margin-top: 1px;
 }
