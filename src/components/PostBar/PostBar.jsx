@@ -1,5 +1,5 @@
 import { Icon } from '../../components/Icon';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import timeAgo from '../../utils/timeAgo.js';
 import styles from './PostBar.module.css';
 
@@ -7,9 +7,12 @@ export default function PostBar({ data, optionClick, use, hasLike = true }) {
   const navigate = useNavigate();
   const givenTime = data.createdAt;
   const agoTime = timeAgo(givenTime);
+  const { pathname } = useLocation();
+  const current = pathname.split('/')[2];
 
   const handlePostBarClick = () => {
-    use === 'post' && navigate(`./post/${data.postId}`);
+    use === 'post' && navigate(`/board/${current}/post/${data.postId}`);
+    use === 'board' && navigate('/post-search');
   };
 
   return (

@@ -99,7 +99,7 @@ export const routeList = [
         element: <PostPage />,
       },
       {
-        path: '/search/post',
+        path: '/post-search',
         element: <PostSearchPage />,
       },
       {
