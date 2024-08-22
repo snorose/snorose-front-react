@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { useCommentContext } from '../../../contexts/CommentContext.jsx';
-import useComment from '../../../hooks/useComment.jsx';
 
-import { DeleteModal, OptionModal } from '../../../components/Modal';
-import { Icon } from '../../../components/Icon';
-import { NestedComment } from '../';
+import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import timeAgo from '../../../utils/timeAgo.js';
+import useComment from '@/hooks/useComment.jsx';
+
+import { DeleteModal, OptionModal } from '@/components/Modal';
+import { Icon } from '@/components/Icon';
+import { NestedComment } from '@/components/Comment';
+
+import timeAgo from '@/utils/timeAgo.js';
 
 import styles from './Comment.module.css';
 
@@ -33,11 +35,6 @@ export default function Comment({ data }) {
     setCommentId(data.id);
     inputFocus();
   };
-
-  // const handleLikedClick = () => {
-  //   console.log('API로 liked 데이터 수정');
-  // };
-  // >>>>>>> dev
 
   return (
     <>

@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Icon } from '../../components/Icon';
-import { useNavigate } from 'react-router-dom';
-import timeAgo from '../../utils/timeAgo.js';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+import { Icon } from '@/components/Icon';
+
+import timeAgo from '@/utils/timeAgo.js';
+
 import styles from './PostBar.module.css';
 
 export default function PostBar({ data, optionClick, use, hasLike = true }) {
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const [agoTime, setAgoTime] = useState(timeAgo(data.createdAt));
+  const currentBoard = pathname.split('/')[2];
 
   // timeAgo를 1분마다 업데이트
   useEffect(() => {
@@ -19,7 +24,7 @@ export default function PostBar({ data, optionClick, use, hasLike = true }) {
 
   const handlePostBarClick = () => {
     if (use === 'post') {
-      navigate(`./post/${data.postId}`);
+      navigate(`/board/${currentBoard}/post/${data.postId}`);
     }
   };
 

@@ -42,6 +42,14 @@ const TOAST = Object.freeze({
     id: 'post-delete-error',
     message: '알 수 없는 오류가 발생했습니다.',
   },
+  emptyTitle: {
+    id: 'empty-text-error',
+    message: '내용을 입력하세요.',
+  },
+  emptyText: {
+    id: 'empty-title-error',
+    message: '제목을 입력하세요.',
+  },
 });
 
 export { TOAST };

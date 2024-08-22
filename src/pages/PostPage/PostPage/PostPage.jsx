@@ -1,18 +1,25 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { useCommentContext } from '../../../contexts/CommentContext.jsx';
-import useComment from '../../../hooks/useComment.jsx';
-import { Icon } from '../../../components/Icon';
-import { CommentList } from '../../../components/Comment';
-import { InputBar } from '../../../components/InputBar';
-import { BackAppBar } from '../../../components/AppBar';
-import { FetchLoading } from '../../../components/Loading';
-import { OptionModal, DeleteModal } from '@/components/Modal/index.js';
-import { getPostContent, deletePost } from '../../../apis/post.js';
-import timeAgo from '../../../utils/timeAgo.js';
-import { filterDeletedComments } from '../../../utils/filterComment.js';
+
+import { getPostContent, deletePost } from '@/apis/post.js';
+
+import { useCommentContext } from '@/contexts/CommentContext.jsx';
+
+import useComment from '@/hooks/useComment.jsx';
+
+import { BackAppBar } from '@/components/AppBar';
+import { CommentList } from '@/components/Comment';
+import { DeleteModal, OptionModal } from '@/components/Modal/index.js';
+import { FetchLoading } from '@/components/Loading';
+import { Icon } from '@/components/Icon';
+import { InputBar } from '@/components/InputBar';
+
+import { filterDeletedComments } from '@/utils/filterComment.js';
+import timeAgo from '@/utils/timeAgo.js';
+
+import { BOARD_MENUS } from '@/constants/boardMenus.js';
+
 import styles from './PostPage.module.css';
-import { BOARD_MENUS } from '../../../constants/boardMenus.js';
 
 export default function PostPage() {
   const navigate = useNavigate();
@@ -107,7 +114,7 @@ export default function PostPage() {
             <p className={styles.dot}>·</p>
             <p>
               {timeAgo(postData.createdAt)}
-              {postData.edited ? ' (수정됨)' : null}
+              {postData.isEdited && ' (수정됨)'}
             </p>
           </div>
           <div

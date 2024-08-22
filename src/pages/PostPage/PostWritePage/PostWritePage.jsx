@@ -1,15 +1,23 @@
-import TextareaAutosize from 'react-textarea-autosize';
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Icon } from '../../../components/Icon';
-import { CloseAppBar } from '../../../components/AppBar';
-import { TOAST } from '../../../constants';
-import { BOARD_MENUS } from '../../../constants';
-import { DropDownMenu } from '../../../components/DropDownMenu';
-import { postPost } from '../../../apis/post';
-import formattedNowTime from '../../../utils/formattedNowTime';
-import styles from './PostWritePage.module.css';
+import TextareaAutosize from 'react-textarea-autosize';
+
+import { postPost } from '@/apis/post';
+
 import { useToast } from '@/hooks';
+
+import { Icon } from '@/components/Icon';
+import { CloseAppBar } from '@/components/AppBar';
+import { DropDownMenu } from '@/components/DropDownMenu';
+
+import { TOAST } from '@/constants';
+import { BOARD_MENUS } from '@/constants';
+
+import formattedNowTime from '@/utils/formattedNowTime';
+
+import styles from './PostWritePage.module.css';
+
+const roleId = 4; // dummy
 
 export default function PostWritePage() {
   const navigate = useNavigate();
@@ -19,52 +27,18 @@ export default function PostWritePage() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [boardTitle, setBoardTitle] = useState('');
-  const [boardId, setBoardId] = useState('');
 
-  // 더미 역할 ID
-  const roleId = 4;
-
-  // 현재 경로에서 textId 추출
   const textId = pathname.split('/')[2];
+  const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
+  const [boardTitle, setBoardTitle] = useState(
+    currentBoard?.title ?? '게시판을 선택해주세요'
+  );
+  const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
 
   // 게시판 제목 목록에서 '베숙트' 제외
   const boardTitles = BOARD_MENUS.filter((menu) => menu.title !== '베숙트').map(
     (menu) => menu.title
   );
-
-  // 현재 경로의 textId를 바탕으로 게시판 제목과 ID를 설정
-  useEffect(() => {
-    const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
-    if (currentBoard) {
-      setBoardTitle(currentBoard.title);
-      setBoardId(currentBoard.id);
-    } else {
-      setBoardTitle('게시판을 선택해주세요');
-      setBoardId('');
-    }
-  }, [textId]);
-
-  // data 객체 상태 설정
-  const [data, setData] = useState({
-    category: null,
-    boardId: boardId,
-    title: title,
-    content: text,
-    isNotice: isNotice,
-  });
-
-  // 데이터 업데이트 핸들러
-  useEffect(() => {
-    setData((prevData) => ({
-      ...prevData,
-      category: null,
-      boardId: boardId,
-      title: title,
-      content: text,
-      isNotice: isNotice,
-    }));
-  }, [boardId, title, text, isNotice]);
 
   // 게시판 선택 핸들러
   const handleDropDownOpen = () => {
@@ -86,6 +60,14 @@ export default function PostWritePage() {
   // 공지 여부 선택 핸들러
   const handleIsNotice = () => {
     setIsNotice((prev) => !prev);
+  };
+
+  const data = {
+    category: null,
+    boardId,
+    title,
+    content: text,
+    isNotice,
   };
 
   // 게시글 등록 유효성 검사 및 제출

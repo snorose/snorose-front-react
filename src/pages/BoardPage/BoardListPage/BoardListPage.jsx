@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -14,6 +14,7 @@ import { Sponser } from '@/components/Sponser';
 import { Target } from '@/components/Target/index.js';
 import { WriteButton } from '@/components/WriteButton';
 import PTR from '@/components/PTR/PTR.jsx';
+
 import timeAgo from '@/utils/timeAgo';
 
 import { BOARD_MENUS } from '@/constants';
@@ -60,15 +61,6 @@ export default function BoardListPage() {
       navigate(to);
     };
   };
-
-  // 게시글 리스트를 1초마다 새로 고침
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      refetch().then(() => {});
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [refetch]);
 
   return (
     <div className={styles.container}>

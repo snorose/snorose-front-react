@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import { useCommentContext } from '../../../contexts/CommentContext.jsx';
+import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import useComment from '../../../hooks/useComment.jsx';
+import useComment from '@/hooks/useComment.jsx';
 
-import { DeleteModal, OptionModal } from '../../../components/Modal';
-import { Icon } from '../../../components/Icon';
+import { DeleteModal, OptionModal } from '@/components/Modal';
+import { Icon } from '@/components/Icon';
 
-import timeAgo from '../../../utils/timeAgo.js';
+import timeAgo from '@/utils/timeAgo.js';
 
 import styles from '../Comment/Comment.module.css';
 
@@ -66,29 +66,6 @@ export default function NestedComment({
             )}
           </p>
         </div>
-{/* <<<<<<< HEAD
-
-        <p
-          className={styles.dot3}
-          onClick={() => onCommentOptionClick('comment', data.id, data.content)}
-        >
-          <Icon id='ellipsis-vertical' width='3' height='11' />
-        </p>
-      </div>
-      <div className={styles.commentCenter}>
-        <div className={styles.nestedPadding}>{data.content}</div>
-      </div>
-      <div className={styles.commentBottom}>
-        <div className={styles.likedCount}>
-          <Icon
-            id='like'
-            width='13'
-            height='12'
-            fill={isLiked ? '#5F86BF' : '#D9D9D9'}
-            onClick={handleLikedClick}
-          />
-          <p>{data.likeCount}</p> */}
-{/* ======= */}
         <div className={styles.commentCenter}>
           <div className={styles.nestedPadding}>{data.content}</div>
         </div>
@@ -103,7 +80,6 @@ export default function NestedComment({
             />
             <p>{data.likeCount}</p>
           </button>
-{/* >>>>>>> dev */}
         </div>
       </div>
       <OptionModal
