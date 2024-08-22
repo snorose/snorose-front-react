@@ -9,6 +9,7 @@ export default function BackAppBar({
   hasSearch,
   children,
   hasSearchInput,
+  isDark,
 }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function BackAppBar({
           id='arrow-left'
           width={19}
           height={17}
+          fill={isDark && 'white'}
           onClick={() => navigate(-1)}
         />
         {title && <span className={styles.title}>{title}</span>}

@@ -1,0 +1,81 @@
+/* top */
+
+.top {
+  display: flex;
+  flex-direction: column;
+  background-color: #00368e;
+  border-radius: 0px 0px 15px 15px;
+}
+
+.title {
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 130%;
+  text-align: center;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  white-space: pre-line;
+}
+
+.calendar {
+  display: flex;
+  justify-content: center;
+}
+
+.attendanceButton {
+  margin: 26px var(--default-margin);
+  padding: 13px 0;
+  background: #eaf5fd;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: -0.5px;
+  color: #00368e;
+}
+
+.attendanceButton:active {
+  filter: brightness(0.9);
+}
+
+/* bottom */
+
+.bottom {
+  margin: 17px 0 50px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  margin: 0 var(--default-margin);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eaf5fd;
+  border-radius: 5px;
+}
+
+.itemLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #00368e;
+}
+
+.description {
+  font-size: 13px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #484848;
+}
