@@ -1,26 +1,6 @@
-import {
-  getPostList,
-  getPostContent,
-  postPost,
-  patchPost,
-  deletePost,
-} from './post.js';
-
-import {
-  deleteExamReview,
-  downloadExamReview,
-  editReviewDetail,
-  getReviewDetail,
-  getReviewList,
-  postExamReview,
-} from './examReview.js';
-
-export {
-  deleteExamReview,
-  downloadExamReview,
-  editReviewDetail,
-  getPostList,
-  getReviewDetail,
-  getReviewList,
-  postExamReview,
-};
+export * from './comment';
+export * from './examReview';
+export * from './point';
+export * from './post';
+export * from './search.js';
+export * from './userInfo';

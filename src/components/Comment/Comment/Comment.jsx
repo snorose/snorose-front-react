@@ -1,90 +1,119 @@
-import React from 'react';
-import styles from './Comment.module.css';
+import { useState } from 'react';
+import { useCommentContext } from '../../../contexts/CommentContext.jsx';
+import useComment from '../../../hooks/useComment.jsx';
+
+import { DeleteModal, OptionModal } from '../../../components/Modal';
 import { Icon } from '../../../components/Icon';
 import { NestedComment } from '../';
+
 import timeAgo from '../../../utils/timeAgo.js';
 
-export default function Comment({
-  data,
-  onCommentClick,
-  onCommentOptionClick,
-}) {
-  const handleCommentClick = () => {
-    if (onCommentClick) {
-      onCommentClick();
-    }
+import styles from './Comment.module.css';
+
+export default function Comment({ data }) {
+  const { setIsEdit, commentId, setCommentId, setContent, inputFocus } =
+    useCommentContext();
+  const { deleteComment } = useComment();
+  const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const onCommentOptionClick = ({ id, parentId, content }) => {
+    setCommentId(id);
+    setContent(content);
+    setIsOptionModalOpen(true);
   };
 
-  const renderChildren = (children) => {
-    return (
-      children.length > 0 &&
-      children.map((childComment, index) => (
-        <div key={childComment.id} className={styles.nestedCommentWrapper}>
-          <NestedComment
-            data={childComment}
-            isLast={index === children.length - 1}
-            isFirst={index === 0}
-            onCommentOptionClick={onCommentOptionClick}
-          />
-        </div>
-      ))
-    );
+  const onCloseClick = () => {
+    setCommentId(undefined);
+    setContent('');
   };
 
-  // 신고된 글 (isDeleted는 false, isVisible은 false인 경우)
-  if (!data.isVisible && !data.isDeleted) {
-    return (
-      <div className={styles.comment}>
-        <div className={styles.deletedComment}>
-          (관리자에 의해 숨겨진 댓글입니다)
-        </div>
-        {renderChildren(data.children)}
-      </div>
-    );
-  }
+  const handleReply = (e) => {
+    e.stopPropagation();
+    setCommentId(data.id);
+    inputFocus();
+  };
 
-  // 삭제된 글 (isDeleted는 true, isVisible은 false인 경우)
-  if (data.isDeleted) {
-    return (
-      <div className={styles.comment}>
-        <div className={styles.deletedComment}>(삭제된 댓글입니다)</div>
-        {renderChildren(data.children)}
-      </div>
-    );
-  }
+  // const handleLikedClick = () => {
+  //   console.log('API로 liked 데이터 수정');
+  // };
+  // >>>>>>> dev
 
   return (
-    <div className={styles.comment}>
-      <div className={styles.commentTop}>
-        <div className={styles.commentTopLeft}>
-          <div className={styles.cloud}>
-            <Icon id='cloud' width='19' height='13' />
+    <>
+      <div className={styles.comment} onClick={() => setCommentId(undefined)}>
+        <div className={styles.commentTop}>
+          <div className={styles.commentTopLeft}>
+            <div className={styles.cloud}>
+              <Icon id='cloud' width='19' height='13' />
+            </div>
+            <p>{data.userDisplay}</p>
+            <p className={styles.dot}>·</p>
+            <p>
+              {timeAgo(data.createdAt)} {data.isUpdated ? ' (수정됨)' : null}
+            </p>
           </div>
-          <p>{data.userDisplay}</p>
-          <p className={styles.dot}>·</p>
-          <p>
-            {timeAgo(data.createdAt)} {data.isUpdated ? ' (수정됨)' : null}
+          <p
+            className={styles.dot3}
+            onClick={(e) => {
+              e.stopPropagation();
+              onCommentOptionClick(data);
+            }}
+          >
+            {data.isWriter && (
+              <Icon id='ellipsis-vertical' width='3' height='11' />
+            )}
           </p>
         </div>
-        <p
-          className={styles.dot3}
-          onClick={() => onCommentOptionClick('comment', data.id, data.content)}
-        >
-          <Icon id='ellipsis-vertical' width='3' height='11' />
-        </p>
-      </div>
-      <div className={styles.commentCenter}>{data.content}</div>
-      <div className={styles.commentBottom}>
-        <div className={styles.commentCount} onClick={handleCommentClick}>
-          <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
-          <p>{data.children.length}</p>
+        <div className={styles.commentCenter}>{data.content}</div>
+        <div className={styles.commentBottom}>
+          <button className={styles.commentCount} onClick={handleReply}>
+            <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
+            <p>{data.children.length}</p>
+          </button>
+          <button className={styles.likedCount}>
+            <Icon id='like' width='13' height='12' fill='#D9D9D9' />
+            <p>{data.likeCount}</p>
+          </button>
         </div>
-        <div className={styles.likedCount}>
-          <Icon id='like' width='13' height='12' fill='#D9D9D9' />
-          <p>{data.likeCount}</p>
-        </div>
+        {data.children.length > 0 &&
+          data.children.map((childComment, index) => (
+            <NestedComment
+              key={childComment.id}
+              data={childComment}
+              isLast={index === data.children.length - 1}
+              isFirst={index === 0}
+              onCommentOptionClick={onCommentOptionClick}
+            />
+          ))}
       </div>
-      {renderChildren(data.children)}
-    </div>
+      <OptionModal
+        id='comment-edit'
+        isOpen={isOptionModalOpen}
+        setIsOpen={setIsOptionModalOpen}
+        closeFn={onCloseClick}
+        functions={{
+          pencil: () => {
+            setIsOptionModalOpen(false);
+            setIsEdit(true);
+            inputFocus();
+          },
+          trash: () => {
+            setIsDeleteModalOpen(true);
+            setIsOptionModalOpen(false);
+          },
+        }}
+      />
+      <DeleteModal
+        id='comment-delete'
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setIsDeleteModalOpen}
+        redBtnFunction={() => {
+          deleteComment.mutate({ commentId });
+          setCommentId(undefined);
+          setContent('');
+        }}
+      />
+    </>
   );
 }

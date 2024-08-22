@@ -1,8 +1,16 @@
 const TOAST = Object.freeze({
-  test: { id: 'test', message: '토스트 테스트 중입니다!' },
-  test2: { id: 'test2', message: '토스트 메시지 여러 개 띄우기 가능??' },
-  emptyTitle: { id: 'empty-title', message: '제목을 입력하세요' },
-  emptyText: { id: 'empty-text', message: '내용을 입력하세요' },
+  EXAM_REVIEW_CREATE: {
+    id: 'EXAM_REVIEW_CREATE',
+    message: '100P 적립이 완료되었어요',
+  },
+  EXAM_REVIEW_DELETE: {
+    id: 'EXAM_REVIEW_DELETE',
+    message: '100P 차감되었어요',
+  },
+  EXAM_REVIEW_DOWNLOAD: {
+    id: 'EXAM_REVIEW_DOWNLOAD',
+    message: '50P 차감되었어요',
+  },
   postEditSuccess: { id: 'post-edit-success', message: '게시글 수정 완료' },
   postEditFail: { id: 'post-edit-fail', message: '게시글 수정 실패' },
   postCreateSuccess: {

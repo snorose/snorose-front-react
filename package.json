@@ -17,6 +17,7 @@
     "react-scripts": "5.0.1",
     "react-simple-pull-to-refresh": "^1.3.3",
     "react-textarea-autosize": "^8.5.3",
+    "recoil": "^0.7.7",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
@@ -44,8 +45,8 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
     "@tanstack/react-query-devtools": "^5.51.23",
-    "craco": "^0.0.3",
     "prettier": "^3.3.2",
     "react-app-alias": "^2.2.2"
   },

@@ -1,37 +1,40 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useCommentContext } from '../../../contexts/CommentContext.jsx';
+import useComment from '../../../hooks/useComment.jsx';
 import { Icon } from '../../../components/Icon';
-import { Comment } from '../../../components/Comment';
+import { CommentList } from '../../../components/Comment';
 import { InputBar } from '../../../components/InputBar';
 import { BackAppBar } from '../../../components/AppBar';
 import { FetchLoading } from '../../../components/Loading';
-import { DeleteModal, OptionModal } from '../../../components/Modal';
+import { OptionModal, DeleteModal } from '@/components/Modal/index.js';
 import { getPostContent, deletePost } from '../../../apis/post.js';
-import { getCommentList, deleteComment } from '../../../apis/comment.js';
-import { BOARD_MENUS } from '../../../constants/boardMenus.js';
-import styles from './PostPage.module.css';
 import timeAgo from '../../../utils/timeAgo.js';
+import { filterDeletedComments } from '../../../utils/filterComment.js';
+import styles from './PostPage.module.css';
+import { BOARD_MENUS } from '../../../constants/boardMenus.js';
 
 export default function PostPage() {
   const navigate = useNavigate();
   const { postId } = useParams();
   const { pathname } = useLocation();
+  const { inputFocus } = useCommentContext();
+  const { commentList } = useComment();
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === pathname.split('/')[2]) || {};
-
   const [postData, setPostData] = useState(null);
-  const [commentData, setCommentData] = useState([]);
-  const [commentParentId, setCommentParentId] = useState(null);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
   const [modalType, setModalType] = useState('');
   const [isPrimaryModalOpen, setIsPrimaryModalOpen] = useState(false);
   const [isSecondaryModalOpen, setIsSecondaryModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const inputBarRef = useRef(null);
+  const filterdCommentList = filterDeletedComments(commentList);
 
   // 게시글 데이터 받아오기
   useEffect(() => {
     const fetchPostContent = async () => {
+      // console.log(postId, currentBoard.id);
       try {
         const data = await getPostContent(currentBoard.id, postId);
         setPostData(data);
@@ -46,80 +49,13 @@ export default function PostPage() {
     }
   }, [currentBoard.id, postId]);
 
-  // 댓글 데이터 받아오기
-  const fetchCommentList = async () => {
-    try {
-      const data = await getCommentList(postId);
-      setCommentData(Array.isArray(data) ? filterComments(data) : []);
-    } catch (error) {
-      console.error('댓글 데이터를 불러오지 못했습니다.', error);
-      setCommentData([]);
-    }
-  };
-
-  // 댓글 삭제하기
-  const fetchCommentDelete = async () => {
-    try {
-      await deleteComment(postId, selectedCommentId);
-      await fetchCommentList(); // 삭제 후 댓글 목록 다시 가져오기
-    } catch (error) {
-      console.error('댓글 삭제에 실패했습니다.', error);
-    }
-  };
-
   // 게시글 삭제하기
   const handleDelete = async () => {
     if (modalType === 'post') {
       await deletePost(currentBoard.id, postId);
       navigate(`/board/${currentBoard.textId}`);
-    } else if (modalType === 'comment') {
-      await fetchCommentDelete();
     }
     setIsSecondaryModalOpen(false);
-  };
-
-// 삭제된 댓글과 대댓글을 재귀적으로 필터링
-const filterComments = (comments) => {
-  return comments
-    .map((comment) => {
-      const filteredChildren = filterComments(comment.children);
-      if (comment.isDeleted) {
-        if (filteredChildren.length > 0) {
-          return {
-            ...comment,
-            children: filteredChildren,
-          };
-        }
-        return null;
-      }
-      if (comment.isWriterWithdrawn) {
-        if (filteredChildren.length > 0) {
-          return {
-            ...comment,
-            userDisplay: '(알 수 없음)',
-            children: filteredChildren,
-          };
-        }
-        return null;
-      }
-      return {
-        ...comment,
-        children: filteredChildren,
-      };
-    })
-    .filter(Boolean);
-};
-
-  useEffect(() => {
-    fetchCommentList();
-  }, [postId]);
-
-  // 댓글 아이콘 클릭 및 댓글 클릭 시 포커스 및 댓글 ID 설정
-  const handleCommentInteraction = (parentId = null) => {
-    setCommentParentId(parentId);
-    if (inputBarRef.current) {
-      inputBarRef.current.focusInput();
-    }
   };
 
   // 더보기 아이콘 클릭 시 모달 type 설정 (post or comment)
@@ -154,7 +90,7 @@ const filterComments = (comments) => {
     setInputValue('');
   };
 
-  if (!postData || Object.keys(postData).length === 0) {
+  if (!postData) {
     return <FetchLoading>게시글을 불러오는 중...</FetchLoading>;
   }
 
@@ -187,12 +123,9 @@ const filterComments = (comments) => {
         </div>
         <p className={styles.text}>{postData.content}</p>
         <div className={styles.post_bottom}>
-          <div
-            className={styles.count}
-            onClick={() => handleCommentInteraction()}
-          >
+          <div className={styles.count} onClick={inputFocus}>
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
-            <p>{postData.commentCount}</p>
+            <p>{filterdCommentList?.length}</p>
           </div>
           <div className={styles.count}>
             <Icon id='like' width='13' height='12' fill='#D9D9D9' />
@@ -200,31 +133,14 @@ const filterComments = (comments) => {
           </div>
         </div>
       </div>
-      <div className={styles.comments}>
-        <p className={styles.commentsTitle}>댓글 {postData.commentCount}개</p>
-        {commentData.map((comment) => (
-          <Comment
-            key={comment.id}
-            data={comment}
-            onCommentClick={() => handleCommentInteraction(comment.id)}
-            onCommentOptionClick={handleOptionClick}
-          />
-        ))}
-      </div>
-      <InputBar
-        postId={postId}
-        parentId={commentParentId}
-        onCommentSubmit={fetchCommentList}
-        inputValue={inputValue}
-        isEditing={!!selectedCommentId}
-        selectedCommentId={selectedCommentId}
-        resetEditingState={resetEditingState}
-        ref={inputBarRef}
-      />
       <OptionModal
         id={modalType === 'post' ? 'post-edit' : 'comment-edit'}
         isOpen={isPrimaryModalOpen}
         setIsOpen={setIsPrimaryModalOpen}
+        closeFn={() => {
+          resetEditingState();
+          setIsPrimaryModalOpen(false);
+        }}
         functions={{
           pencil: handleEditMenuClick,
           trash: handleDeleteMenuClick,
@@ -236,6 +152,8 @@ const filterComments = (comments) => {
         setIsOpen={setIsSecondaryModalOpen}
         redBtnFunction={handleDelete}
       />
+      <CommentList postId={postId} />
+      <InputBar />
     </div>
   );
 }

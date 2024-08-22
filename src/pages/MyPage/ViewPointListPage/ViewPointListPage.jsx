@@ -60,6 +60,20 @@ const pointData = [
     date: '2024.06.01 15:23:00',
     point: -3,
   },
+  {
+    id: 8,
+    title: '댓글 삭제 포인트',
+    desc: '어제 간식으로 나온거 맛있던데 총학 공지에 나와있는...',
+    date: '2024.06.01 15:23:00',
+    point: -3,
+  },
+  {
+    id: 8,
+    title: '댓글 삭제 포인트',
+    desc: '어제 간식으로 나온거 맛있던데 총학 공지에 나와있는...',
+    date: '2024.06.01 15:23:00',
+    point: -3,
+  },
 ];
 
 export default function ViewPointListPage() {

@@ -1,19 +1,27 @@
 import { authAxios } from '../axios';
 
-const ENDPOINT = '/v1/users';
+export const withdrawAccount = async (body) => {
+  const { data } = await authAxios.delete('/v1/users/withdraw', {
+    data: body,
+  });
 
-export const withdrawAccount = async (navigate) => {
-  try {
-    const response = await authAxios.delete(`${ENDPOINT}/withdraw`);
+  return data;
+};
 
-    if (response.status === 200) {
-      alert('회원 탈퇴가 완료되었습니다.');
-      navigate('/home');
-    }
+export const getMyPageUserInfo = async () => {
+  const { data } = await authAxios.get('/v1/users/mypage');
 
-    return response;
-  } catch (error) {
-    alert('회원 탈퇴에 실패했습니다. 다시 시도해주세요.');
-    return error.response;
-  }
+  return data;
+};
+
+export const updateUserInfo = async (body) => {
+  const { data } = await authAxios.patch('/v1/users/mypage', body);
+
+  return data;
+};
+
+export const updatePassword = async (body) => {
+  const { data } = await authAxios.patch('/v1/users/mypage/password', body);
+
+  return data;
 };

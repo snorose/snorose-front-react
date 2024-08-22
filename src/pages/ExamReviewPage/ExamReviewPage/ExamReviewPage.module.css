@@ -3,8 +3,11 @@
   margin: 0 1.25rem 0.625rem 1.25rem;
 }
 
-.to {
-  width: 100%;
+.filters {
+  margin: 0 var(--default-margin) 14px var(--default-margin);
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .list {
@@ -13,4 +16,12 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
+}
+
+.to {
+  width: 100%;
+}
+
+.noting {
+  margin-top: 70px;
 }

@@ -1,5 +1,8 @@
-import App from './App';
-import { BoardListPage, BoardPage } from './pages/BoardPage';
+import App from '@/App';
+import ProtectedRoute from '@/ProtectedRoute';
+import { AboutPage } from '@/pages/AboutPage';
+import { AlertPage } from '@/pages/AlertPage';
+import { BoardListPage, BoardPage } from '@/pages/BoardPage';
 import {
   ChangePasswordPage,
   DeleteAccountPage,
@@ -11,24 +14,12 @@ import {
   DownloadExamReviewPage,
   PrivacyPolicyPage,
   ServicePolicyPage,
-} from './pages/MyPage';
-import {
-  PostPage,
-  PostSearchPage,
-  PostWritePage,
-  PostEditPage,
-} from './pages/PostPage';
-import AboutPage from './pages/AboutPage/AboutPage';
-import AlertPage from './pages/AlertPage/AlertPage';
-import AuthPage from './pages/AuthPage/AuthPage';
-import { ErrorPage } from './pages/ErrorPage';
-import { ExamReviewDetailPage, ExamReviewPage } from './pages/ExamReviewPage';
-import { ExamReviewEditPage } from './pages/ExamReviewEditPage';
-import { ExamReviewWritePage } from './pages/ExamReviewWritePage';
-import HelpPage from './pages/HelpPage/HelpPage';
-import { MainPage } from './pages/MainPage';
-import NoticeListPage from './pages/NoticeListPage/NoticeListPage';
-import ProtectedRoute from './ProtectedRoute';
+} from '@/pages/MyPage';
+import { ErrorPage } from '@/pages/ErrorPage';
+import { ExamReviewDetailPage, ExamReviewPage } from '@/pages/ExamReviewPage';
+import { ExamReviewEditPage } from '@/pages/ExamReviewEditPage';
+import { ExamReviewWritePage } from '@/pages/ExamReviewWritePage';
+import HelpPage from '@/pages/HelpPage/HelpPage';
 import {
   LoginPage,
   FindIdPage,
@@ -37,9 +28,13 @@ import {
   FoundPwPage,
   NotFoundIdPage,
   NotFoundPwPage,
-} from './pages/LoginPage';
+} from '@/pages/LoginPage';
+import { NoticeListPage } from '@/pages/NoticeListPage';
+import { MainPage } from '@/pages/MainPage';
+import { PostPage, PostSearchPage, PostWritePage, PostEditPage } from '@/pages/PostPage';
+import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
-import { ROLE } from './constants';
+import { ROLE } from '@/constants';
 
 const boardPaths = ['first-snow', 'large-snow', 'permanent-snow', 'besookt'];
 
@@ -102,14 +97,33 @@ export const routeList = [
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <MainPage /> },
-      { path: '/home', element: <MainPage /> },
-      { path: '/board', element: <BoardPage /> },
-      ...boardRoutes,
-      { path: '/post', element: <PostPage /> },
-      { path: '/search/post', element: <PostSearchPage /> },
       {
-        path: '/exam-review',
+        index: true,
+        element: <MainPage />,
+      },
+      {
+        path: '/home',
+        element: <MainPage />,
+      },
+      {
+        path: '/board',
+        element: <BoardPage />,
+      },
+      ...boardRoutes,
+      {
+        path: '/post',
+        element: <PostPage />,
+      },
+      {
+        path: '/search/post',
+        element: <PostSearchPage />,
+      },
+      {
+        path: '/post-write',
+        element: <PostWritePage />,
+      },
+      {
+        path: '/board/exam-review',
         element: (
           <ProtectedRoute>
             <ExamReviewPage />
@@ -117,76 +131,172 @@ export const routeList = [
         ),
       },
       {
-        path: '/exam-review/:postId',
+        path: '/board/exam-review/:postId',
         element: (
           <ProtectedRoute>
             <ExamReviewDetailPage />
           </ProtectedRoute>
         ),
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
-        path: '/exam-review/:postId/edit',
+        path: '/board/exam-review/:postId/edit',
         element: <ExamReviewEditPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
-        path: '/exam-review-write',
+        path: '/board/exam-review-write',
         element: <ExamReviewWritePage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
-      { path: '/alert', element: <AlertPage /> },
-      { path: '/my-page', element: <MyPage /> },
-      { path: '/my-page/password', element: <ChangePasswordPage /> },
-      { path: '/my-page/edit-info', element: <EditInfoPage /> },
-      { path: '/my-page/view-point-list', element: <ViewPointListPage /> },
-      { path: '/my-page/delete-account', element: <DeleteAccountPage /> },
-      { path: '/my-page/privacy-policy', element: <PrivacyPolicyPage /> },
-      { path: '/my-page/service-policy', element: <ServicePolicyPage /> },
-      { path: '/my-page/my-post', element: <MyPostPage /> },
-      { path: '/my-page/comment', element: <CommentPage /> },
+      {
+        path: '/alert',
+        element: <AlertPage />,
+      },
+      {
+        path: '/my-page',
+        element: <MyPage />,
+      },
+      {
+        path: '/my-page/password',
+        element: <ChangePasswordPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/edit-info',
+        element: <EditInfoPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/view-point-list',
+        element: <ViewPointListPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/delete-account',
+        element: <DeleteAccountPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/privacy-policy',
+        element: <PrivacyPolicyPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/service-policy',
+        element: <ServicePolicyPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/my-post',
+        element: <MyPostPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/comment',
+        element: <CommentPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
       {
         path: '/my-page/download-exam-review',
         element: <DownloadExamReviewPage />,
+        meta: {
+          hideNav: true,
+        },
       },
-      { path: '/about', element: <AboutPage /> },
-      { path: '/notice', element: <NoticeListPage /> },
-      { path: '/authentication', element: <AuthPage /> },
-      { path: '/help', element: <HelpPage /> },
+      {
+        path: '/about',
+        element: <AboutPage />,
+      },
+      {
+        path: '/notice',
+        element: <NoticeListPage />,
+      },
+      {
+        path: '/verify',
+        element: (
+          <ProtectedRoute>
+            <SnoroseVerifyPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/help',
+        element: <HelpPage />,
+      },
       {
         path: '/login',
         element: <LoginPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/find-id',
         element: <FindIdPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/find-pw',
         element: <FindPwPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/found-id',
         element: <FoundIdPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/found-pw',
         element: <FoundPwPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/not-found-id',
         element: <NotFoundIdPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/not-found-pw',
         element: <NotFoundPwPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
     ],
   },

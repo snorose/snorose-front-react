@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import Icon from '../../Icon/Icon.jsx';
+
+import { Icon } from '@/components/Icon';
+
 import styles from './Dropdown.module.css';
 
 export default function Dropdown({ options, placeholder, select, setFn }) {
