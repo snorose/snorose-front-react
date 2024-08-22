@@ -3,7 +3,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import timeAgo from '../../utils/timeAgo.js';
 import styles from './PostBar.module.css';
 
-export default function PostBar({ data, optionClick, use, hasLike = true }) {
+export default function PostBar({
+  data,
+  optionClick,
+  use,
+  hasComment = true,
+  hasLike = true,
+}) {
   const navigate = useNavigate();
   const givenTime = data.createdAt;
   const agoTime = timeAgo(givenTime);
@@ -32,16 +38,20 @@ export default function PostBar({ data, optionClick, use, hasLike = true }) {
         <p className={styles.text}>{data.content}</p>
       </div>
       <div className={styles.post_bottom}>
-        <span className={styles.board}>{data.board}</span>
+        <span className={styles.board}>{data.boardName}</span>
         <div className={styles.iconContainer}>
-          <Icon
-            className={styles.comment}
-            id='comment'
-            width='13'
-            height='11'
-            fill='#D9D9D9'
-          />
-          <span>{data.commentCount}</span>
+          {hasComment && (
+            <>
+              <Icon
+                className={styles.comment}
+                id='comment'
+                width='13'
+                height='11'
+                fill='#D9D9D9'
+              />
+              <span>{data.commentCount}</span>
+            </>
+          )}
           {hasLike && (
             <>
               <Icon

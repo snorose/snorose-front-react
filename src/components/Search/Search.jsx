@@ -1,8 +1,19 @@
-import { Icon } from '@/components//Icon';
-
+import { Icon } from '@/components/Icon';
 import styles from './Search.module.css';
 
-export default function Search({ className, placeholder, setKeyword }) {
+export default function Search({
+  className,
+  placeholder,
+  keyword,
+  setKeyword,
+  isAllSearch,
+}) {
+  const handleChange = (event) => {
+    if (!isAllSearch) {
+      setKeyword(event.target.value);
+    }
+  };
+
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -16,7 +27,9 @@ export default function Search({ className, placeholder, setKeyword }) {
       <input
         className={styles.search}
         type='text'
+        value={keyword}
         placeholder={placeholder}
+        onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
     </div>

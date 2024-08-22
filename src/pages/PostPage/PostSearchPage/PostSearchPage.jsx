@@ -1,30 +1,40 @@
 import styles from './PostSearchPage.module.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Search } from '../../../components/Search';
 import { BackAppBar } from '../../../components/AppBar';
 import { PostBar } from '../../../components/PostBar';
 import { BOARD_ID, PLACEHOLDER } from '@/constants';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll.jsx';
-import { searchByBoard } from '@/apis';
+import { searchByBoard, searchAllBoard } from '@/apis';
 
 export default function PostSearchPage() {
   const { pathname } = useLocation();
   const current = pathname.split('/')[2];
-  const [keyword, setKeyword] = useState('');
+  const urlKeyword = decodeURIComponent(pathname.split('/')[4] || '');
+  const [keyword, setKeyword] = useState(urlKeyword);
 
   const handleSearch = (text) => {
     setKeyword(text);
   };
 
+  useEffect(() => {
+    setKeyword(urlKeyword);
+  }, [urlKeyword]);
+
   const { data, ref, isFetching, Target } = useInfiniteScroll({
     queryKey: ['postList', keyword || 'default'],
-    queryFn: ({ pageParam }) =>
-      searchByBoard({
-        boardId: BOARD_ID[current],
-        page: pageParam,
-        keyword: keyword || '',
-      }),
+    queryFn: ({ pageParam }) => {
+      if (current === 'all') {
+        return searchAllBoard({ page: pageParam, keyword: keyword || '' });
+      } else {
+        return searchByBoard({
+          boardId: BOARD_ID[current],
+          page: pageParam,
+          keyword: keyword || '',
+        });
+      }
+    },
   });
 
   const postList =
@@ -36,8 +46,9 @@ export default function PostSearchPage() {
         children={
           <Search
             placeholder={PLACEHOLDER[current]}
-            onSearch={handleSearch}
-            setKeyword={setKeyword}
+            keyword={keyword}
+            setKeyword={handleSearch}
+            isAllSearch={false}
           />
         }
         hasSearchInput={true}
@@ -48,7 +59,7 @@ export default function PostSearchPage() {
         ) : (
           <div className={styles.posts}>
             {postList.map((post) => (
-              <PostBar key={post.postId} data={post} use='post' />
+              <PostBar key={post.postId} data={post} use='post' hasComment={false}/>
             ))}
           </div>
         )}

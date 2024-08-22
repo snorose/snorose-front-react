@@ -23,3 +23,14 @@ export const searchByBoard = async ({
     return response.data.result;
   }
 };
+
+export const searchAllBoard = async ({ page, keyword }) => {
+  if (keyword !== '') {
+    const response = await authAxios.get(`/v1/search/post/${page}`, {
+      params: {
+        keyword,
+      },
+    });
+    return response.data.result;
+  }
+};
