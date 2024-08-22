@@ -39,7 +39,7 @@ export default function MainPage() {
           {USER?.isLogin && (
             <Card
               className={styles.mark}
-              to='/'
+              to='/attendance'
               title='오늘의 출석체크'
               tag='출석체크'
               imgPath='flag.svg'

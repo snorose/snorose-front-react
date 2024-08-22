@@ -2,6 +2,7 @@ import App from '@/App';
 import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
 import { AlertPage } from '@/pages/AlertPage';
+import { AttendancePage } from '@/pages/AttendancePage';
 import { BoardListPage, BoardPage } from '@/pages/BoardPage';
 import {
   ChangePasswordPage,
@@ -135,6 +136,13 @@ export const routeList = [
       {
         path: '/board/exam-review-write',
         element: <ExamReviewWritePage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/attendance',
+        element: <AttendancePage />,
         meta: {
           hideNav: true,
         },
