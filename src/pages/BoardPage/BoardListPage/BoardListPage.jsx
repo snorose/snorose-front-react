@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { getPostList } from '@/apis/postList.js';
+import { getNoticeLine } from '@/apis/notice.js';
 
 import { useIntersect } from '@/hooks';
 
@@ -36,6 +37,22 @@ export default function BoardListPage() {
         return lastPage.length > 0 ? (lastPageParam || 0) + 1 : undefined;
       },
     });
+
+  const [noticeTitle, setNoticeTitle] = useState('');
+
+  useEffect(() => {
+    const fetchNoticeLine = async () => {
+      try {
+        const data = await getNoticeLine(currentBoard.id);
+        setNoticeTitle(data.title || ''); // Update state with fetched title
+      } catch (error) {
+        console.error('Failed to fetch notice line', error);
+        setNoticeTitle(''); // Fallback in case of error
+      }
+    };
+
+    fetchNoticeLine();
+  }, [currentBoard.id]);
 
   const ref = useIntersect(
     async (entry, observer) => {
@@ -74,7 +91,7 @@ export default function BoardListPage() {
           onClick={handleNavClick('./notice')}
         >
           <Icon id='notice-bell' width={11} height={13} />
-          <p>[필독] 공지사항</p>
+          <p>[필독]&nbsp;&nbsp;{noticeTitle}</p>
         </div>
       </div>
       <PTR onRefresh={handleRefresh}>
