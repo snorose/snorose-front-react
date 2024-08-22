@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
@@ -32,6 +33,7 @@ const EXAM_TYPE = convertToObject(EXAM_TYPES);
 
 export default function ExamReviewDetailPage() {
   const { postId } = useParams();
+  const [isScraped, setIsScraped] = useState(false);
   const { toast } = useToast();
   const { data } = useQuery({
     queryKey: ['reviewDetail', postId],
@@ -66,24 +68,24 @@ export default function ExamReviewDetailPage() {
   if (data === undefined) return null;
 
   const {
-    scrapCount,
-    classNumber,
-    online,
-    isEdited,
-    writer,
     userDisplay,
+    isWriter,
     title,
+    commentCount,
+    scrapCount,
+    isScrap,
     createdAt,
     lectureName,
     professor,
     lectureYear,
     semester,
     lectureType,
-    examType,
-    fileName,
-    questionDetail,
-    confirmed,
     isPF,
+    examType,
+    isConfirmed,
+    fileName,
+    isEdited,
+    questionDetail,
   } = data;
 
   return (
@@ -101,7 +103,8 @@ export default function ExamReviewDetailPage() {
             <span>{userDisplay}</span>
             <span className={styles.dot}></span>
             <span>{dateFormat(createdAt)}</span>
-            {confirmed && (
+            {isEdited && <span>&nbsp;(수정됨)</span>}
+            {isConfirmed && (
               <Icon
                 className={styles.checkCircleIcon}
                 id='check-circle'
@@ -110,29 +113,38 @@ export default function ExamReviewDetailPage() {
               />
             )}
           </div>
-          <div className={styles.more}>
-            {writer && (
-              <>
-                <Icon
-                  id='pencil'
-                  width='15'
-                  height='17'
-                  onClick={() =>
-                    navigate(`/board/exam-review/${postId}/edit`, {
-                      state: data,
-                      replace: true,
-                    })
-                  }
-                />
-                <Icon
-                  id='trash'
-                  width='12'
-                  height='16'
-                  onClick={() => deleteReview.mutate()}
-                />
-              </>
-            )}
-            <Icon id='ellipsis-vertical' width='3' height='11' />
+          <div className={styles.actions}>
+            <Icon
+              id={isScrap || isScraped ? 'bookmark-fill' : 'bookmark-line'}
+              width='14'
+              height='18'
+              fill='#5F86BF'
+              onClick={() => setIsScraped((prev) => !prev)}
+            />
+            <div className={styles.more}>
+              {isWriter && (
+                <>
+                  <Icon
+                    id='pencil'
+                    width='15'
+                    height='17'
+                    onClick={() =>
+                      navigate(`/board/exam-review/${postId}/edit`, {
+                        state: data,
+                        replace: true,
+                      })
+                    }
+                  />
+                  <Icon
+                    id='trash'
+                    width='12'
+                    height='16'
+                    onClick={() => deleteReview.mutate()}
+                  />
+                </>
+              )}
+              <Icon id='ellipsis-vertical' width='3' height='11' />
+            </div>
           </div>
         </div>
         <div className={styles.title}>{title}</div>
@@ -149,6 +161,22 @@ export default function ExamReviewDetailPage() {
           <ReviewContentItem tag='시험 유형 및 문항수' value={questionDetail} />
         </div>
         <ReviewDownload className={styles.fileDownload} fileName={fileName} />
+        <div className={styles.counts}>
+          <div className={styles.count}>
+            <Icon
+              className={styles.comment}
+              id='comment'
+              width='15'
+              height='14'
+              fill='#5F86BF'
+            />
+            <span>{commentCount}</span>
+          </div>
+          <div className={styles.count}>
+            <Icon id='bookmark-fill' width='10' height='13' fill='#5F86BF' />
+            <span>{scrapCount}</span>
+          </div>
+        </div>
       </div>
       <CommentList />
       <InputBar />
