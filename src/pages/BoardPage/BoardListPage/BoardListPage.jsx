@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { getPostList } from '@/apis/post';
+import { getNoticeLine } from '@/apis/notice.js';
 
 import { useIntersect } from '@/hooks';
 
@@ -50,6 +51,21 @@ export default function BoardListPage() {
     { threshold: 0.8 }
   );
 
+  // 1줄 공지 데이터 받아오기
+  const [noticeTitle, setNoticeTitle] = useState('');
+  const { data: noticeLineData } = useQuery({
+    queryKey: ['noticeLine', currentBoard.id],
+    queryFn: () => getNoticeLine(currentBoard?.id),
+    enabled: !!currentBoard?.id,
+  });
+
+  // 데이터 화면 표시
+  useEffect(() => {
+    if (noticeLineData) {
+      setNoticeTitle(noticeLineData.title);
+    }
+  }, [noticeLineData]);
+
   const postList = data ? data.pages.flatMap((page) => page) : [];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,7 +87,7 @@ export default function BoardListPage() {
           onClick={handleNavClick('./notice')}
         >
           <Icon id='notice-bell' width={11} height={13} />
-          <p>[필독] 공지사항</p>
+          <p>[필독]&nbsp;&nbsp;{noticeTitle}</p>
         </div>
       </div>
       <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
