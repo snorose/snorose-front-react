@@ -15,7 +15,8 @@ export default function ScrapExamReviewPage() {
   const { data, isPending, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ['getMyScrapReviewList'],
-      queryFn: ({ page = 0 }) => getMyScrapReviewList({ page }),
+      queryFn: ({ pageParam }) => getMyScrapReviewList({ page: pageParam }),
+      initialPageParam: 0,
       getNextPageParam: (lastPage, _, lastPageParam) => {
         return lastPage.length > 0 ? lastPageParam + 1 : undefined;
       },
@@ -54,7 +55,7 @@ export default function ScrapExamReviewPage() {
           {myScrapReviewList.length > 0 ? (
             myScrapReviewList.map((post, index) => (
               <Link
-                key={index}
+                key={post.postId}
                 ref={index === myScrapReviewList.length - 2 ? ref : undefined}
                 to={`/board/exam-review/${post.postId}`}
               >

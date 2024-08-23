@@ -16,7 +16,8 @@ export default function ScrapPage() {
   const { data, isPending, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ['getMyScrapPostList'],
-      queryFn: ({ page = 0 }) => getMyScrapPostList({ page }),
+      queryFn: ({ pageParam }) => getMyScrapPostList({ page: pageParam }),
+      initialPageParam: 0,
       getNextPageParam: (lastPage, _, lastPageParam) => {
         return lastPage.length > 0 ? lastPageParam + 1 : undefined;
       },
@@ -55,7 +56,7 @@ export default function ScrapPage() {
           {myScrapPostList.length > 0 ? (
             myScrapPostList.map((post, index) => (
               <Link
-                key={index}
+                key={post.postId}
                 ref={index === myScrapPostList.length - 2 ? ref : undefined}
                 to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
               >

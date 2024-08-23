@@ -15,7 +15,8 @@ export default function DownloadExamReviewPage() {
   const { data, isPending, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ['getMyReviewFileList'],
-      queryFn: ({ page = 0 }) => getMyReviewFileList({ page }),
+      queryFn: ({ pageParam }) => getMyReviewFileList({ page: pageParam }),
+      initialPageParam: 0,
       getNextPageParam: (lastPage, _, lastPageParam) => {
         return lastPage.length > 0 ? lastPageParam + 1 : undefined;
       },
@@ -54,7 +55,7 @@ export default function DownloadExamReviewPage() {
           {myReviewFileList.length > 0 ? (
             myReviewFileList.map((post, index) => (
               <Link
-                key={index}
+                key={post.postId}
                 ref={index === myReviewFileList.length - 2 ? ref : undefined}
                 to={`/board/exam-review/${post.postId}`}
               >

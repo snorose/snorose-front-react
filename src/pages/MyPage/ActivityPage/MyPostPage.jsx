@@ -16,7 +16,8 @@ export default function MyPostPage() {
   const { data, isPending, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ['getMyPostList'],
-      queryFn: ({ page = 0 }) => getMyPostList({ page }),
+      queryFn: ({ pageParam }) => getMyPostList({ page: pageParam }),
+      initialPageParam: 0,
       getNextPageParam: (lastPage, _, lastPageParam) => {
         return lastPage.length > 0 ? lastPageParam + 1 : undefined;
       },
@@ -55,7 +56,7 @@ export default function MyPostPage() {
           {myPostList.length > 0 ? (
             myPostList.map((post, index) => (
               <Link
-                key={index}
+                key={post.postId}
                 ref={index === myPostList.length - 2 ? ref : undefined}
                 to={`/board/${getBoardTextId(post.boardId)}/post/${post.postId}`}
               >

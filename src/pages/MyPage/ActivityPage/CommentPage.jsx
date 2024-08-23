@@ -16,7 +16,8 @@ export default function CommentPage() {
   const { data, isPending, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ['getMyCommentList'],
-      queryFn: ({ page = 0 }) => getMyCommentList({ page }),
+      queryFn: ({ pageParam }) => getMyCommentList({ page: pageParam }),
+      initialPageParam: 0,
       getNextPageParam: (lastPage, _, lastPageParam) => {
         return lastPage.length > 0 ? lastPageParam + 1 : undefined;
       },
@@ -55,7 +56,7 @@ export default function CommentPage() {
           {myCommentList.length > 0 ? (
             myCommentList.map((post, index) => (
               <Link
-                key={index}
+                key={post.postId}
                 ref={index === myCommentList.length - 2 ? ref : undefined}
                 to={`/board/${getBoardTextId(post.boardId)}/post/${post.postId}`}
               >
