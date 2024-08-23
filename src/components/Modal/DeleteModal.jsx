@@ -1,7 +1,8 @@
-import styles from './Modal.module.css';
-import { MODAL_OPTIONS } from '../../constants/modalOptions';
+import { MODAL_OPTIONS } from '@/constants/modalOptions';
 
-export default function DeleteModal({ id, isOpen, setIsOpen, redBtnFuction }) {
+import styles from './Modal.module.css';
+
+export default function DeleteModal({ id, isOpen, setIsOpen, redBtnFunction }) {
   const modalOption = MODAL_OPTIONS.find((option) => option.id === id);
 
   if (!isOpen || !modalOption) return null;
@@ -22,7 +23,7 @@ export default function DeleteModal({ id, isOpen, setIsOpen, redBtnFuction }) {
           <div
             className={styles.redBtn}
             onClick={() => {
-              redBtnFuction();
+              redBtnFunction();
               setIsOpen(false);
             }}
           >

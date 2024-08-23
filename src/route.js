@@ -31,7 +31,7 @@ import {
 } from '@/pages/LoginPage';
 import { NoticeListPage } from '@/pages/NoticeListPage';
 import { MainPage } from '@/pages/MainPage';
-import { PostPage, PostSearchPage, PostWritePage } from '@/pages/PostPage';
+import { PostPage, PostSearchPage, PostWritePage, PostEditPage } from '@/pages/PostPage';
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/constants';
@@ -52,6 +52,22 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute>
         <PostPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `/board/${boardPath}/post-write`,
+    element: (
+      <ProtectedRoute>
+        <PostWritePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `/board/${boardPath}/post/:postId/edit`,
+    element: (
+      <ProtectedRoute>
+        <PostEditPage />
       </ProtectedRoute>
     ),
   },

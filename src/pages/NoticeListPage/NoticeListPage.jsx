@@ -1,33 +1,36 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import styles from './NoticeListPage.module.css';
-import { BackAppBar } from '../../components/AppBar';
-import { NoticeBar } from '../../components/NoticeBar';
-import { getNoticeList } from '../../apis/notice.js';
+import { useQuery } from '@tanstack/react-query';
+
+import { BackAppBar } from '@/components/AppBar';
+import NoticeBar from '@/components/NoticeBar/NoticeBar.jsx';
+
+import { getNoticeList } from '@/apis/notice';
 import { BOARD_MENUS } from '../../constants';
+
+import styles from './NoticeListPage.module.css';
 
 export default function NoticeListPage() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [noticeList, setNoticeList] = useState([]);
-
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === currentBoardTextId) || {};
 
-  useEffect(() => {
-    const fetchNoticeList = async () => {
-      try {
-        const data = await getNoticeList(currentBoard.id);
-        setNoticeList(data || []);
-      } catch (error) {
-        console.error('Failed to fetch notice list', error);
-        setNoticeList([]);
-      }
-    };
+  // 게시글 데이터 받아오기
+  const { data } = useQuery({
+    queryKey: ['noticeList', currentBoard?.id],
+    queryFn: () => getNoticeList(currentBoard?.id),
+    enabled: !!currentBoard?.id,
+  });
 
-    fetchNoticeList();
-  }, [currentBoard.id]);
+  // 데이터 화면 표시
+  useEffect(() => {
+    if (data) {
+      setNoticeList(data);
+    }
+  }, [data]);
 
   const handleNavClick = (to) => {
     return () => {
@@ -37,7 +40,7 @@ export default function NoticeListPage() {
 
   return (
     <div className={styles.container}>
-      <BackAppBar title={currentBoard.textId} hasNotice={true} />
+      <BackAppBar title={`${currentBoard.title} 공지`} hasNotice={true} />
       <div className={styles.content}>
         {Array.isArray(noticeList) &&
           noticeList.map((post) => (

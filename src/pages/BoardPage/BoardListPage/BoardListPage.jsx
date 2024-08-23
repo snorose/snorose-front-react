@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import { getPostList } from '@/apis/postList.js';
+import { getPostList } from '@/apis/post';
 import { getNoticeLine } from '@/apis/notice.js';
 
 import { useIntersect } from '@/hooks';
@@ -15,6 +15,8 @@ import { Sponser } from '@/components/Sponser';
 import { Target } from '@/components/Target/index.js';
 import { WriteButton } from '@/components/WriteButton';
 import PTR from '@/components/PTR/PTR.jsx';
+
+import timeAgo from '@/utils/timeAgo';
 
 import { BOARD_MENUS } from '@/constants';
 
@@ -36,23 +38,8 @@ export default function BoardListPage() {
         }
         return lastPage.length > 0 ? (lastPageParam || 0) + 1 : undefined;
       },
+      refetchInterval: false,
     });
-
-  const [noticeTitle, setNoticeTitle] = useState('');
-
-  useEffect(() => {
-    const fetchNoticeLine = async () => {
-      try {
-        const data = await getNoticeLine(currentBoard.id);
-        setNoticeTitle(data.title || ''); // Update state with fetched title
-      } catch (error) {
-        console.error('Failed to fetch notice line', error);
-        setNoticeTitle(''); // Fallback in case of error
-      }
-    };
-
-    fetchNoticeLine();
-  }, [currentBoard.id]);
 
   const ref = useIntersect(
     async (entry, observer) => {
@@ -64,6 +51,21 @@ export default function BoardListPage() {
     { threshold: 0.8 }
   );
 
+  // 1줄 공지 데이터 받아오기
+  const [noticeTitle, setNoticeTitle] = useState('');
+  const { data: noticeLineData } = useQuery({
+    queryKey: ['noticeLine', currentBoard.id],
+    queryFn: () => getNoticeLine(currentBoard?.id),
+    enabled: !!currentBoard?.id,
+  });
+
+  // 데이터 화면 표시
+  useEffect(() => {
+    if (noticeLineData) {
+      setNoticeTitle(noticeLineData.title);
+    }
+  }, [noticeLineData]);
+
   const postList = data ? data.pages.flatMap((page) => page) : [];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -74,12 +76,6 @@ export default function BoardListPage() {
     return () => {
       navigate(to);
     };
-  };
-
-  const handleRefresh = () => {
-    return refetch().then(() => {
-      console.log('Refreshed!');
-    });
   };
 
   return (
@@ -94,13 +90,13 @@ export default function BoardListPage() {
           <p>[필독]&nbsp;&nbsp;{noticeTitle}</p>
         </div>
       </div>
-      <PTR onRefresh={handleRefresh}>
+      <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
         <div className={styles.postListContainer}>
           {status !== 'error' &&
             postList.map((post) => (
               <PostBar
                 key={post.postId}
-                data={post}
+                data={{ ...post, timeAgo: timeAgo(post.date) }}
                 optionClick={openModal}
                 use='post'
               />
