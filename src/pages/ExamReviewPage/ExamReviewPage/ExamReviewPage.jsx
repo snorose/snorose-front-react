@@ -5,13 +5,15 @@ import { getReviewList, searchByBoard } from '@/apis';
 
 import useInfiniteScroll from '@/hooks/useInfiniteScroll.jsx';
 
-import { AppBar } from '@/components/AppBar';
-import { DropDownBlue } from '@/components/DropDownBlue';
-import { Loading } from '@/components/Loading';
-import { PostBar } from '@/components/PostBar';
-import { PTR } from '@/components/PTR';
-import { Search } from '@/components/Search';
-import { WriteButton } from '@/components/WriteButton';
+import {
+  AppBar,
+  DropDownBlue,
+  Loading,
+  PostBar,
+  PTR,
+  Search,
+  WriteButton,
+} from '@/components';
 
 import { BOARD_ID, YEARS, SEMESTERS, EXAM_TYPES } from '@/constants';
 
@@ -89,7 +91,7 @@ export default function ExamReviewPage() {
               <Link
                 className={styles.to}
                 key={post.postId}
-                to={`/board/exam-review/${post.postId}`}
+                to={`/board/exam-review/post/${post.postId}`}
               >
                 <PostBar data={post} hasLike={false} />
               </Link>

@@ -1,19 +1,22 @@
-import { BoardCard } from '../../components/BoardCard';
-import { Card } from '../../components/Card';
-import { Carousel, Slide } from '../../components/Carousel';
-import { Flex } from '../../components/Flex';
-import { Footer } from '../../components/Footer';
-import { Header } from '../../components/Header';
-import { ListHeader } from '../../components/ListHeader';
-import { MainPageListItem } from '../../components/MainPageListItem';
-import { Margin } from '../../components/Margin';
+import {
+  BoardCard,
+  Card,
+  Carousel,
+  Footer,
+  Header,
+  ListHeader,
+  MainPageListItem,
+  Margin,
+  Slide,
+  Flex,
+} from '@/components';
 
-import { BOARD_MENUS, ROLE } from '../../constants';
-import { BESOOKTS, CAROUSEL_BANNER, USER } from '../../dummy/data';
+import { BOARD_MENUS, ROLE } from '@/constants';
+import { BESOOKTS, CAROUSEL_BANNER, USER } from '@/dummy/data';
 
 import styles from './MainPage.module.css';
 
-const BOARDS = BOARD_MENUS.filter((board) => board.title !== '베숙트');
+const BOARDS = BOARD_MENUS.filter((board) => [21, 22, 23].includes(board.id));
 
 export default function MainPage() {
   return (

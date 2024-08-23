@@ -32,4 +32,11 @@ export const BOARD_MENUS = [
     desc: '추천을 가장 많이\n받은 게시물 모아보기',
     image: besookt,
   },
+  {
+    id: 32,
+    textId: 'exam-review',
+    title: '시험후기',
+    desc: '시험 정보를 조회할 수\n있는 게시판입니다.',
+    image: besookt,
+  },
 ];

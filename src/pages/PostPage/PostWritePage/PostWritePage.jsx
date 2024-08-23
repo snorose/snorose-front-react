@@ -35,10 +35,9 @@ export default function PostWritePage() {
   );
   const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
 
-  // 게시판 제목 목록에서 '베숙트' 제외
-  const boardTitles = BOARD_MENUS.filter((menu) => menu.title !== '베숙트').map(
-    (menu) => menu.title
-  );
+  const boardTitles = BOARD_MENUS.filter((menu) =>
+    [21, 22, 23].includes(menu.id)
+  ).map((menu) => menu.title);
 
   // 게시판 선택 핸들러
   const handleDropDownOpen = () => {

@@ -54,7 +54,7 @@ export default function DownloadExamReviewPage() {
               <Link
                 key={post.postId}
                 ref={index === myReviewFileList.length - 2 ? ref : undefined}
-                to={`/board/exam-review/${post.postId}`}
+                to={`/board/exam-review/post/${post.postId}`}
               >
                 <PostBar data={post} hasLike={false} />
               </Link>

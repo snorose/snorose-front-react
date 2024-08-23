@@ -34,7 +34,12 @@ import SignUpSuccessPage from './pages/LoginPage/SignUpPage/SignUpSuccessPage/Si
 import SignUpFailurePage from './pages/LoginPage/SignUpPage/SignUpPageStages/SignUpFailure/SignUpFailurePage';
 import { NoticeListPage } from '@/pages/NoticeListPage';
 import { MainPage } from '@/pages/MainPage';
-import { PostPage, PostSearchPage, PostWritePage, PostEditPage } from '@/pages/PostPage';
+import {
+  PostPage,
+  PostSearchPage,
+  PostWritePage,
+  PostEditPage,
+} from '@/pages/PostPage';
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/constants';
@@ -136,7 +141,7 @@ export const routeList = [
         ),
       },
       {
-        path: '/board/exam-review/:postId',
+        path: '/board/exam-review/post/:postId',
         element: (
           <ProtectedRoute>
             <ExamReviewDetailPage />
