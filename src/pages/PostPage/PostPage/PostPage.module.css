@@ -49,23 +49,23 @@
 .title {
   display: flex;
   align-items: end;
-  padding: 8px 0 26px 0;
-  gap: 6px;
+  padding: 8px 10px 26px 0;
 
-  p:nth-of-type(1) {
+  p {
     font-size: 20px;
     font-weight: 700;
     line-height: 130%;
     letter-spacing: -0.5px;
     color: #484848;
   }
-  p:nth-of-type(2) {
+  span {
     white-space: nowrap;
     color: #5f86bf;
     font-size: 11px;
+    font-weight: 400;
     line-height: 150%;
     letter-spacing: -0.5px;
-    padding-bottom: 3px;
+    padding-left: 2px;
   }
 }
 
@@ -82,18 +82,22 @@
 .post_bottom {
   display: flex;
   justify-content: end;
-  gap: 12px;
-  padding-right: 10px;
+  padding: 0 10px 0 0;
 }
 
 .count {
   display: flex;
   align-items: center;
   justify-content: center;
-
+  padding: 4px 8px;
+  border-radius: 5px;
   gap: 6px;
   color: #898989;
   font-size: 11px;
   line-height: 150%;
   letter-spacing: -0.5px;
+}
+
+.count:hover {
+  background-color: #ffffffCC;
 }
