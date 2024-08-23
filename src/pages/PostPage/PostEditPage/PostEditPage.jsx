@@ -38,12 +38,23 @@ export default function PostEditPage() {
     enabled: !!currentBoard?.id && !!postId,
   });
 
+  // 데이터 화면 표시
+  useEffect(() => {
+    if (data) {
+      console.log('Data updated:', data);
+      setTitle(data.title);
+      setText(data.content);
+      setIsNotice(data.isNotice);
+      setUserDisplay(data.userDisplay);
+    }
+  }, [data]);
+
   // 게시글 수정
   const mutation = useMutation({
     mutationFn: (updatedPost) => patchPost(updatedPost),
     onSuccess: () => {
       queryClient.invalidateQueries(['postContent', postId]);
-      navigate(-1); // Go back to the previous page after successful update
+      navigate(-1);
       toast(TOAST.postEditSuccess);
     },
     onError: () => {
@@ -83,17 +94,6 @@ export default function PostEditPage() {
       isNotice,
     });
   };
-
-  // 데이터 화면 표시
-  useEffect(() => {
-    if (data) {
-      console.log('Data updated:', data);
-      setTitle(data.title);
-      setText(data.content);
-      setIsNotice(data.isNotice);
-      setUserDisplay(data.userDisplay || '');
-    }
-  }, [data]);
 
   if (isLoading) {
     return <div>로딩 중...</div>;

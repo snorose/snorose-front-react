@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 import { getPostContent, deletePost } from '@/apis/post.js';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-
 import useComment from '@/hooks/useComment.jsx';
 
 import { BackAppBar } from '@/components/AppBar';
@@ -39,22 +39,18 @@ export default function PostPage() {
   const filterdCommentList = filterDeletedComments(commentList);
 
   // 게시글 데이터 받아오기
-  useEffect(() => {
-    const fetchPostContent = async () => {
-      // console.log(postId, currentBoard.id);
-      try {
-        const data = await getPostContent(currentBoard.id, postId);
-        setPostData(data);
-      } catch (error) {
-        console.error('게시글 데이터를 불러오지 못했습니다.', error);
-        setPostData({});
-      }
-    };
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['postContent', postId],
+    queryFn: () => getPostContent(currentBoard?.id, postId),
+    enabled: !!currentBoard?.id && !!postId,
+  });
 
-    if (currentBoard.id && postId) {
-      fetchPostContent();
+  // 데이터 화면 표시
+  useEffect(() => {
+    if (data) {
+      setPostData(data);
     }
-  }, [currentBoard.id, postId]);
+  }, [data]);
 
   // 게시글 삭제하기
   const handleDelete = async () => {
@@ -97,8 +93,17 @@ export default function PostPage() {
     setInputValue('');
   };
 
-  if (!postData) {
+  // 로딩과 에러 상태에 따라 조건부 렌더링
+  if (isLoading) {
     return <FetchLoading>게시글을 불러오는 중...</FetchLoading>;
+  }
+
+  if (error) {
+    return <FetchLoading>게시글 불러오기에 실패했습니다.</FetchLoading>;
+  }
+
+  if (!postData) {
+    return <FetchLoading>게시글을 찾을 수 없습니다.</FetchLoading>;
   }
 
   return (

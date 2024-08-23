@@ -44,12 +44,19 @@ export const deletePost = async (boardId, postId) => {
 };
 
 // 게시글을 수정
-export const patchPost = async ({ boardId, postId, title, content }) => {
+export const patchPost = async ({
+  boardId,
+  postId,
+  title,
+  content,
+  isNotice,
+}) => {
   const editedPost = {
     postId: postId,
     category: null,
     title: title,
     content: content,
+    isNotice: isNotice,
   };
 
   const response = await authAxios.patch(
