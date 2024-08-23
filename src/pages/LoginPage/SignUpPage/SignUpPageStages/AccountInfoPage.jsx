@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 import Input from '../../../../components/Input/Input/Input';
 import SpecialInput from '../../../../components/Input/Input/SpecialInput';
 import { Submit } from '../../../../components/Submit';
@@ -71,6 +71,7 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
             inputType={'loginId'}
             inputData={setFormData}
             data={formData}
+            errMsg={'특수문자를 제외한 5자 이상 30자 이하를 입력하세요'}
           />
         </div>
         <div className={styles.inputFrame}>
@@ -116,12 +117,7 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
           />
         </div>
       </div>
-      <div
-        className={styles.submit}
-        onClick={() => {
-          console.log(formData);
-        }}
-      >
+      <div className={styles.submit}>
         <Submit
           btnName='다음으로'
           className={setDoneState()}

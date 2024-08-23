@@ -1,5 +1,5 @@
 export function checkSpecialChar(input) {
-  const format = /^[A-Za-z가-힣0-9 ]+$/;
+  const format = /^[A-Za-z가-힣ㄱ-ㅎ0-9 ]+$/;
   if (!input?.length) {
     return 'ready';
   }
@@ -34,11 +34,16 @@ export function checkStudentNum(number) {
 }
 
 export function checkID(id) {
-  if (id) return 'right';
+  const format = /^[A-Za-z가-힣ㄱ-ㅎ0-9 ]+$/;
+  if (id?.length === 0) {
+    return 'ready';
+  } else if (id.length >= 5 && id.length <= 30 && format.test(id))
+    return 'right';
   else return 'wrong';
 }
 
 export function checkPW(pw) {
+  if (pw?.length === 0) return 'ready';
   let isAlphabet,
     isNumber,
     isSpecialChar = false;

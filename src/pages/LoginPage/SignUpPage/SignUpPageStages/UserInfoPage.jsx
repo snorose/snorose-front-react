@@ -1,9 +1,7 @@
 import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Input from '../../../../components/Input/Input/Input';
 import { Submit } from '../../../../components/Submit';
-import { Icon } from '../../../../components/Icon';
 import { MAJORS } from '../../../../constants/majors';
 import {
   checkSpecialChar,
@@ -11,6 +9,7 @@ import {
   checkBirthday,
 } from '../../FindIdPage/inputCheck';
 import Dropdown from '../../../../components/Fieldset/Dropdown/Dropdown.jsx';
+import { RegisterAPI } from '../../../../apis/signup';
 import styles from './UserInfoPage.module.css';
 
 export default function UserInfoPage({ setFormData, formData }) {
@@ -18,7 +17,6 @@ export default function UserInfoPage({ setFormData, formData }) {
   const [stuNumStyle, setStuNumStyle] = useState('ready');
   const [birthdayStyle, setBirthdayStyle] = useState('ready');
   const navigate = useNavigate();
-
   const checkDone = () => {
     if (
       nicknameStyle === 'right' &&
@@ -29,37 +27,11 @@ export default function UserInfoPage({ setFormData, formData }) {
     }
     return 'ready';
   };
-  const postToAPI = async () => {
-    const apiUrl = 'http://13.124.33.41:8081';
-    const endpoint = '/v1/users/register';
-    const data = { ...formData, userRoleId: 1, isBlacklist: false };
-    data['major'] = data['name'];
-    delete data['name'];
-    console.log(data);
-    try {
-      const response = await axios.post(apiUrl + endpoint, data);
-      if (response.data.isSuccess) {
-        navigate('/signup/success');
-      }
-      console.log(response);
-    } catch (e) {
-      navigate('/signup/failure', {
-        state: { message: e.response.data.message },
-      });
-      console.log(e);
-    }
-  };
+
   return (
     <div className={styles.pageFrame}>
       <div className={styles.scrollFrame}>
-        <p
-          className={styles.text}
-          onClick={() => {
-            console.log(formData);
-          }}
-        >
-          사용자 정보 입력
-        </p>
+        <p className={styles.text}>사용자 정보 입력</p>
         <div className={styles.inputFrame}>
           <Input
             title={'닉네임'}
@@ -115,7 +87,7 @@ export default function UserInfoPage({ setFormData, formData }) {
         <Submit
           btnName='다음으로'
           className={checkDone()}
-          onClick={postToAPI}
+          onClick={() => RegisterAPI(formData, navigate)}
         />
       </div>
     </div>

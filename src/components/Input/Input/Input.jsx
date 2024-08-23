@@ -30,7 +30,13 @@ export default function Input({
     <>
       {title && <p className={styles.title}>{title}</p>}
       <input
-        value={data ? (data[inputType] ? data[inputType] : '') : undefined}
+        value={
+          data !== undefined
+            ? data[inputType]
+              ? data[inputType]
+              : ''
+            : undefined
+        }
         type={type}
         placeholder={placeholder}
         className={`${styles[className]} ${styles['input']}`}

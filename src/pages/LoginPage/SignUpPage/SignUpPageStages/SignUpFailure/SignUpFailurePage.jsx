@@ -8,13 +8,13 @@ import styles from './SignUpFailurePage.module.css';
 export default function SignUpFailurePage() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  /*useEffect(() => {
+  useEffect(() => {
     try {
-      const checkAccess = state.access;
+      const checkAccess = state.message;
     } catch (e) {
       navigate('/login');
     }
-  }, []);*/
+  }, []);
 
   return (
     <div className={styles.pageFrame}>

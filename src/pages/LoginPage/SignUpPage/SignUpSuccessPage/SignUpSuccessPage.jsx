@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { React, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Submit } from '../../../../components/Submit';
 import { Icon } from '../../../../components/Icon';
 import excitedWoman from '../../../../assets/images/excitedWoman.svg';
@@ -7,6 +7,14 @@ import styles from './SignUpSuccessPage.module.css';
 
 export default function SignUpSuccessPage() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  useEffect(() => {
+    try {
+      const checkAccess = state.access;
+    } catch (e) {
+      navigate('/login');
+    }
+  }, []);
   return (
     <div className={styles.pageFrame}>
       <div>

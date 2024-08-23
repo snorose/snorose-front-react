@@ -44,10 +44,7 @@ export default function SignUpPage() {
             setStage={setStage}
           />
         ) : stage === 2 ? (
-          <AuthorizationPage
-            email={'mnevermore1122@sookmyung.ac.kr'}
-            setStage={setStage}
-          />
+          <AuthorizationPage email={formData.email} setStage={setStage} />
         ) : (
           <UserInfoPage
             setFormData={setFormData}

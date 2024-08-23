@@ -5,3 +5,5 @@ export * from './postContent';
 export * from './postList';
 export * from './search.js';
 export * from './userInfo';
+export * from './signup';
+export * from './login';

@@ -6,6 +6,9 @@ export default function Submit({ btnName, className, ...props }) {
       <button
         className={`${styles[className]} ${styles['submitBtn']}`}
         type='submit'
+        onKeyDown={(e) => {
+          if (className === 'ready') e.preventDefault();
+        }}
         {...props}
       >
         {btnName}

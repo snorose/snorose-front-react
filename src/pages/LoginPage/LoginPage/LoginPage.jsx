@@ -1,47 +1,27 @@
-import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-
-import axios from 'axios';
-
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Icon } from '../../../components/Icon';
 import Input from '../../../components/Input/Input/Input';
 import { Submit } from '../../../components/Submit';
 import snoroseLogo from '../../../assets/images/snoroseLogo.svg';
-
+import { LoginAPI } from '@/apis';
 import styles from './LoginPage.module.css';
 
 export default function Login() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ loginId: '', password: '' });
   const [errmsg, setErrmsg] = useState(false);
   const [visBtnClick, setVisBtnClick] = useState(false);
+  const [user, setUser] = useState();
   const toggleVisBtn = () => {
     setVisBtnClick((prev) => !prev);
-  };
-  const [user, setUser] = useState();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const apiUrl = 'http://13.124.33.41:8081';
-    const endpoint = '/v1/users/login';
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    try {
-      const response = await axios.post(apiUrl + endpoint, formData, {
-        headers: headers,
-      });
-      setUser(response.data);
-      setErrmsg(false);
-      localStorage.setItem('user', response.data);
-      console.log(response.data);
-    } catch (e) {
-      setErrmsg(true);
-    }
   };
 
   return (
     <div className={styles.loginframe}>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => LoginAPI(e, setUser, setErrmsg, formData, navigate)}
+      >
         <div className={styles.prev}>
           <Link to='/'>
             <Icon id='arrow-left' width='1.162rem' height='1.048rem' />
