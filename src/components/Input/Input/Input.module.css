@@ -9,9 +9,15 @@
   height: 2.563rem;
   border-radius: 6px;
   padding-left: 15px;
+  padding-right: 0.625rem;
   font-size: 0.75rem;
   line-height: 1.125rem;
   outline: 0;
+}
+.input [type='date']::-webkit-calendar-picker-indicator {
+  width: 10rem;
+  height: 1.188rem;
+  background-color: blue;
 }
 .ready {
   border: 0;
@@ -35,5 +41,4 @@
   font-weight: 400;
   line-height: 1.031rem;
   color: #ff4b6c;
-  margin-bottom: 0.25rem;
 }

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import { useCommentContext } from '../../../contexts/CommentContext.jsx';
+import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import useComment from '../../../hooks/useComment.jsx';
+import useComment from '@/hooks/useComment.jsx';
 
-import { DeleteModal, OptionModal } from '../../../components/Modal';
-import { Icon } from '../../../components/Icon';
+import { DeleteModal, OptionModal } from '@/components/Modal';
+import { Icon } from '@/components/Icon';
 
-import timeAgo from '../../../utils/timeAgo.js';
+import timeAgo from '@/utils/timeAgo.js';
 
 import styles from '../Comment/Comment.module.css';
 
@@ -103,7 +103,7 @@ export default function NestedComment({
         id='comment-delete'
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
-        redBtnFuction={() => {
+        redBtnFunction={() => {
           deleteComment.mutate({ commentId });
           setCommentId(undefined);
           setContent('');

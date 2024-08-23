@@ -1,44 +1,76 @@
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Icon } from '../../../components/Icon';
-import { CloseAppBar } from '../../../components/AppBar';
-import { TOAST } from '../../../constants';
-import { BOARD_MENUS } from '../../../constants';
-import { DropDownMenu } from '../../../components/DropDownMenu';
-import formattedNowTime from '../../../utils/formattedNowTime';
-import styles from './PostWritePage.module.css';
+
+import { postPost } from '@/apis/post';
+
 import { useToast } from '@/hooks';
+
+import { Icon } from '@/components/Icon';
+import { CloseAppBar } from '@/components/AppBar';
+import { DropDownMenu } from '@/components/DropDownMenu';
+
+import { TOAST } from '@/constants';
+import { BOARD_MENUS } from '@/constants';
+
+import formattedNowTime from '@/utils/formattedNowTime';
+
+import styles from './PostWritePage.module.css';
+
+const roleId = 4; // dummy
 
 export default function PostWritePage() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { toast } = useToast();
   const [isNotice, setIsNotice] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const roleId = 4; // 더미 역할 ID
-  const boardId = 'firstSnow'; // 더미 보드 아이디 ID
-  const boardTitles = BOARD_MENUS.map((menu) => menu.title);
 
-  // 현재 게시판 title
-  const getCurrentBoard = (id) => {
-    const currentBoard = BOARD_MENUS.find((board) => board.id === id);
-    return currentBoard ? currentBoard.title : '게시판을 선택해주세요';
-  };
-  const [item, setItem] = useState(getCurrentBoard(boardId));
+  const textId = pathname.split('/')[2];
+  const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
+  const [boardTitle, setBoardTitle] = useState(
+    currentBoard?.title ?? '게시판을 선택해주세요'
+  );
+  const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
 
-  // 게시판 선택
+  // 게시판 제목 목록에서 '베숙트' 제외
+  const boardTitles = BOARD_MENUS.filter((menu) => menu.title !== '베숙트').map(
+    (menu) => menu.title
+  );
+
+  // 게시판 선택 핸들러
   const handleDropDownOpen = () => {
     setDropDownOpen((prev) => !prev);
   };
 
-  // 공지 여부 선택
+  // 게시판 제목 선택 핸들러
+  const handleBoardTitleChange = (selectedTitle) => {
+    const selectedBoard = BOARD_MENUS.find(
+      (menu) => menu.title === selectedTitle
+    );
+    if (selectedBoard) {
+      setBoardTitle(selectedBoard.title);
+      setBoardId(selectedBoard.id);
+    }
+    setDropDownOpen(false);
+  };
+
+  // 공지 여부 선택 핸들러
   const handleIsNotice = () => {
     setIsNotice((prev) => !prev);
   };
 
-  // 게시글 등록 유효성 검사 (오류 토스트 띄우기)
+  const data = {
+    category: null,
+    boardId,
+    title,
+    content: text,
+    isNotice,
+  };
+
+  // 게시글 등록 유효성 검사 및 제출
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim()) {
@@ -49,9 +81,10 @@ export default function PostWritePage() {
       toast(TOAST.emptyText);
       return;
     }
-    console.log('제목:', title);
-    console.log('내용:', text);
-    navigate('/post');
+    console.log(data);
+    postPost(data);
+
+    navigate(-1); // 제출 후 이동할 경로 설정
   };
 
   // 제목 40자 제한
@@ -62,8 +95,6 @@ export default function PostWritePage() {
     }
   };
 
-  console.log();
-
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -73,14 +104,14 @@ export default function PostWritePage() {
         <div className={styles.categorySelect} onClick={handleDropDownOpen}>
           <div>
             <Icon id='clip-board-list' width='18' height='19' />
-            <p className={styles.categorySelectText}>{item}</p>
+            <p className={styles.categorySelectText}>{boardTitle}</p>
           </div>
           <Icon id='angle-down' width='14' height='7' />
         </div>
         <DropDownMenu
           options={boardTitles}
-          item={item}
-          setItem={setItem}
+          item={boardTitle}
+          setItem={handleBoardTitleChange} // 수정된 핸들러
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
           backgroundColor={'#fff'}
@@ -125,7 +156,7 @@ export default function PostWritePage() {
       </div>
       <div
         className={styles.bottom}
-        onClick={(e) => {
+        onClick={() => {
           setDropDownOpen(false);
         }}
       ></div>

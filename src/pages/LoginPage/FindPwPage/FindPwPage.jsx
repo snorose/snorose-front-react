@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Icon } from '../../../components/Icon';
 import { Input } from '../../../components/Input';
 import { Submit } from '../../../components/Submit';
 import { checkSpecialChar, checkSookmyungMail } from '../FindIdPage/inputCheck';
+import { FindPWAPI } from '@/apis';
 import styles from './FindPwPage.module.css';
 
 export default function FindPwPage() {
@@ -40,31 +40,14 @@ export default function FindPwPage() {
     else if (idStyle === 'wrong' || emailStyle === 'wrong') return 'wrong';
     else return 'ready';
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const apiUrl = 'http://13.124.33.41:8081';
-    const endpoint = '/v1/users/findPW';
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true',
-    };
-    try {
-      await axios.post(apiUrl + endpoint, formData, {
-        headers,
-      });
-      navigate('/found-pw', {
-        state: { email: formData.email },
-      });
-    } catch (e) {
-      if (!e.response.data.isSuccess) {
-        navigate('/not-found-pw', { state: { access: true } });
-      }
-    }
-  };
 
   return (
     <div className={styles.pageFrame}>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          FindPWAPI(e, formData, navigate);
+        }}
+      >
         <div className={styles.findIdFrame}>
           <div>
             <Link to='/login'>

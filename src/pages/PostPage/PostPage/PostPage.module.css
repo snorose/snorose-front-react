@@ -76,6 +76,7 @@
   line-height: 150%;
   letter-spacing: -0.5px;
   padding: 0 13px 15px 0;
+  white-space: pre-wrap; /* 줄바꿈과 공백을 유지 */
 }
 
 .post_bottom {

@@ -4,15 +4,26 @@ import { Icon } from '@/components/Icon';
 
 import styles from './Dropdown.module.css';
 
-export default function Dropdown({ options, placeholder, select, setFn }) {
+export default function Dropdown({
+  options,
+  placeholder,
+  select,
+  setFn,
+  color,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const updateSelect = (event) => {
-    setFn(JSON.parse(event.target.dataset.value));
+    setFn((prev) => ({ ...prev, ...JSON.parse(event.target.dataset.value) }));
     setIsOpen(false);
   };
 
   return (
-    <div className={`${styles.dropdown} ${isOpen && styles.open}`}>
+    <div
+      className={`${styles.dropdown} ${isOpen && styles.open}`}
+      style={{
+        backgroundColor: !isOpen && select?.name && color,
+      }}
+    >
       <div
         className={`${styles.select} ${select || styles.unselect}`}
         onClick={() => setIsOpen((prev) => !prev)}

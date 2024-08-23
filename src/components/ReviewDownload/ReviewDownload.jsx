@@ -64,7 +64,7 @@ export default function ReviewDownload({ className, fileName }) {
         id='exam-review-download'
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        redBtnFuction={onDownload}
+        redBtnFunction={onDownload}
       />
     </>
   );

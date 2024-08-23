@@ -29,9 +29,12 @@ import {
   NotFoundIdPage,
   NotFoundPwPage,
 } from '@/pages/LoginPage';
+import SignUpPage from './pages/LoginPage/SignUpPage/SignUpPage';
+import SignUpSuccessPage from './pages/LoginPage/SignUpPage/SignUpSuccessPage/SignUpSuccessPage';
+import SignUpFailurePage from './pages/LoginPage/SignUpPage/SignUpPageStages/SignUpFailure/SignUpFailurePage';
 import { NoticeListPage } from '@/pages/NoticeListPage';
 import { MainPage } from '@/pages/MainPage';
-import { PostPage, PostSearchPage, PostWritePage } from '@/pages/PostPage';
+import { PostPage, PostSearchPage, PostWritePage, PostEditPage } from '@/pages/PostPage';
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/constants';
@@ -52,6 +55,22 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute>
         <PostPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `/board/${boardPath}/post-write`,
+    element: (
+      <ProtectedRoute>
+        <PostWritePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `/board/${boardPath}/post/:postId/edit`,
+    element: (
+      <ProtectedRoute>
+        <PostEditPage />
       </ProtectedRoute>
     ),
   },
@@ -278,9 +297,22 @@ export const routeList = [
       {
         path: '/not-found-pw',
         element: <NotFoundPwPage />,
-        meta: {
-          hideNav: true,
-        },
+        meta: { hideNav: true },
+      },
+      {
+        path: '/signup',
+        element: <SignUpPage />,
+        meta: { hideNav: true },
+      },
+      {
+        path: '/signup/success',
+        element: <SignUpSuccessPage />,
+        meta: { hideNav: true },
+      },
+      {
+        path: '/signup/failure',
+        element: <SignUpFailurePage />,
+        meta: { hideNav: true },
       },
     ],
   },
