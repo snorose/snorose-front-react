@@ -3,6 +3,8 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { getPostContent, deletePost } from '@/apis/post.js';
+import { postScrap, deleteScrap } from '@/apis/scrap';
+import { postLike, deleteLike } from '@/apis/like';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import useComment from '@/hooks/useComment.jsx';
@@ -35,6 +37,8 @@ export default function PostPage() {
   const [isPrimaryModalOpen, setIsPrimaryModalOpen] = useState(false);
   const [isSecondaryModalOpen, setIsSecondaryModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [isScraped, setIsScraped] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const inputBarRef = useRef(null);
   const filterdCommentList = filterDeletedComments(commentList);
 
@@ -44,6 +48,34 @@ export default function PostPage() {
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
   });
+
+  // 스크랩 클릭
+  const handleScrap = async () => {
+    console.log('scrap icon click');
+    // if (postData.isScraped) {
+    //   await deleteScrap(postId);
+    // } else {
+    //   await postScrap(postId);
+    // }
+    // // setPostData((prevData) => ({
+    // //   ...prevData,
+    // //   isScraped: !prevData.isScraped,
+    // // }));
+  };
+
+  // 좋아요 로직
+  const handleLike = async (type) => {
+    console.log('post-like icon click', type);
+    // if (postData.isLiked) {
+    //   await deleteLike(postId);
+    // } else {
+    //   await postLike(postId);
+    // }
+    // // setPostData((prevData) => ({
+    // //   ...prevData,
+    // //   isLiked: !prevData.isLiked,
+    // // }));
+  };
 
   // 데이터 화면 표시
   useEffect(() => {
@@ -130,8 +162,9 @@ export default function PostPage() {
           </div>
         </div>
         <div className={styles.title}>
-          <p>{postData.title}</p>
-          <p>{postData.viewCount} views</p>
+          <p>
+            {postData.title} <span>{postData.viewCount} views</span>
+          </p>
         </div>
         <p className={styles.text}>{postData.content}</p>
         <div className={styles.post_bottom}>
@@ -139,9 +172,13 @@ export default function PostPage() {
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
             <p>{filterdCommentList?.length}</p>
           </div>
-          <div className={styles.count}>
+          <div className={styles.count} onClick={() => handleLike('post')}>
             <Icon id='like' width='13' height='12' fill='#D9D9D9' />
             <p>{postData.likeCount}</p>
+          </div>
+          <div className={styles.count} onClick={() => handleScrap}>
+            <Icon id='bookmark-fill' width='10' height='13' fill='#D9D9D9' />
+            <p>{postData.scrapCount}</p>
           </div>
         </div>
       </div>

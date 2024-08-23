@@ -11,44 +11,51 @@ const TOAST = Object.freeze({
     id: 'EXAM_REVIEW_DOWNLOAD',
     message: '50P 차감되었어요',
   },
-  postEditSuccess: { id: 'post-edit-success', message: '게시글 수정 완료' },
-  postEditFail: { id: 'post-edit-fail', message: '게시글 수정 실패' },
-  postCreateSuccess: {
-    id: 'post-create-success',
+  POST_EDIT_SUCCESS: { id: 'POST_EDIT_SUCCESS', message: '게시글 수정 완료' },
+  POST_EDIT_FAIL: { id: 'POST_EDIT_FAIL', message: '게시글 수정 실패' },
+  POST_CREATE_SUCCESS: {
+    id: 'POST-CREATE-SUCCESS',
     message: '게시글 등록 성공!',
   },
-  postCreateFail: {
-    id: 'post-create-fail',
+  POST_CREATE_FAIL: {
+    id: 'POST_CREATE_FAIL',
     message: '게시글 등록에 실패했습니다.',
   },
-  postDeleteSuccess: {
-    id: 'post-delete-success',
+  POST_DELETE_SUCCESS: {
+    id: 'POST_DELETE_SUCCESS',
     message: '게시글이 삭제되었습니다.',
   },
-  postDeleteFail: {
-    id: 'post-delete-fail',
+  POST_DELETE_FAIL: {
+    id: 'POST_DELETE_FAIL',
     message: '게시글 삭제에 실패했습니다.',
   },
-  postNotFound: { id: 'post-not-found', message: '게시글을 찾을 수 없습니다.' },
-  postEditError: {
-    id: 'post-edit-error',
+  POST_NOT_FOUND: {
+    id: 'POST_NOT_FOUND',
+    message: '게시글을 찾을 수 없습니다.',
+  },
+  POST_EDIT_ERROR: {
+    id: 'POST_EDIT_ERROR',
     message: '알 수 없는 오류가 발생했습니다.',
   },
-  postCreateError: {
-    id: 'post-create-error',
+  POST_CREATE_ERROR: {
+    id: 'POST_CREATE_ERROR',
     message: '알 수 없는 오류가 발생했습니다.',
   },
-  postDeleteError: {
-    id: 'post-delete-error',
+  POST_DELETE_ERROR: {
+    id: 'POST_DELETE_ERROR',
     message: '알 수 없는 오류가 발생했습니다.',
   },
-  emptyTitle: {
-    id: 'empty-text-error',
+  EMPTY_TITLE: {
+    id: 'EMPTY_TITLE_ERROR',
     message: '내용을 입력하세요.',
   },
-  emptyText: {
-    id: 'empty-title-error',
+  EMPTY_TEXT: {
+    id: 'EMPTY_TEXT_ERROR',
     message: '제목을 입력하세요.',
+  },
+  EMPTY_BOARDID: {
+    id: 'EMPTY_BOARD_ERROR',
+    message: '게시판을 선택하세요.',
   },
 });
 
