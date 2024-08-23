@@ -3,11 +3,9 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { getPostContent, deletePost } from '@/apis/post.js';
-import { postScrap, deleteScrap } from '@/apis/scrap';
-import { postLike, deleteLike } from '@/apis/like';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import useComment from '@/hooks/useComment.jsx';
+import { useComment, useLike, useScrap } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
@@ -37,45 +35,30 @@ export default function PostPage() {
   const [isPrimaryModalOpen, setIsPrimaryModalOpen] = useState(false);
   const [isSecondaryModalOpen, setIsSecondaryModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const [isScraped, setIsScraped] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const inputBarRef = useRef(null);
   const filterdCommentList = filterDeletedComments(commentList);
 
   // 게시글 데이터 받아오기
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['postContent', postId],
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
   });
 
-  // 스크랩 클릭
-  const handleScrap = async () => {
-    console.log('scrap icon click');
-    // if (postData.isScraped) {
-    //   await deleteScrap(postId);
-    // } else {
-    //   await postScrap(postId);
-    // }
-    // // setPostData((prevData) => ({
-    // //   ...prevData,
-    // //   isScraped: !prevData.isScraped,
-    // // }));
-  };
+  // 스크랩 훅 사용
+  const { isScrapped, toggleScrap } = useScrap(
+    postId,
+    data?.isScrapped,
+    refetch
+  );
 
-  // 좋아요 로직
-  const handleLike = async (type) => {
-    console.log('post-like icon click', type);
-    // if (postData.isLiked) {
-    //   await deleteLike(postId);
-    // } else {
-    //   await postLike(postId);
-    // }
-    // // setPostData((prevData) => ({
-    // //   ...prevData,
-    // //   isLiked: !prevData.isLiked,
-    // // }));
-  };
+  // 좋아요 훅 사용
+  const { isLiked, toggleLike } = useLike(
+    'posts',
+    postId,
+    data?.isLiked,
+    refetch
+  );
 
   // 데이터 화면 표시
   useEffect(() => {
@@ -172,12 +155,22 @@ export default function PostPage() {
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
             <p>{filterdCommentList?.length}</p>
           </div>
-          <div className={styles.count} onClick={() => handleLike('post')}>
-            <Icon id='like' width='13' height='12' fill='#D9D9D9' />
+          <div className={styles.count} onClick={toggleLike}>
+            <Icon
+              id='like'
+              width='13'
+              height='12'
+              fill={isLiked ? '#5F86BF' : '#D9D9D9'}
+            />
             <p>{postData.likeCount}</p>
           </div>
-          <div className={styles.count} onClick={() => handleScrap}>
-            <Icon id='bookmark-fill' width='10' height='13' fill='#D9D9D9' />
+          <div className={styles.count} onClick={toggleScrap}>
+            <Icon
+              id='bookmark-fill'
+              width='10'
+              height='13'
+              fill={isScrapped ? '#5F86BF' : '#D9D9D9'}
+            />
             <p>{postData.scrapCount}</p>
           </div>
         </div>
