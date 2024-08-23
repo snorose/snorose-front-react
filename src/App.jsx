@@ -6,6 +6,7 @@ import { findRouteByPath } from './utils/findRoute.js';
 import { routeList } from './route.js';
 
 import styles from './App.module.css';
+import { RecoilRoot } from 'recoil';
 
 function App() {
   const { pathname } = useLocation();
@@ -13,10 +14,12 @@ function App() {
   const hideNav = currentRoute?.meta?.hideNav ?? false;
 
   return (
-    <div className={styles.app}>
-      <Outlet />
-      {!hideNav && <Navbar />}
-    </div>
+    <RecoilRoot>
+      <div className={styles.app}>
+        <Outlet />
+        {!hideNav && <Navbar />}
+      </div>
+    </RecoilRoot>
   );
 }
 
