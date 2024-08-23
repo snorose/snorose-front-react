@@ -1,12 +1,10 @@
 import styles from './DeleteAccountPage.module.css';
 import { Link } from 'react-router-dom';
-import { CloseAppBar } from '@/components/AppBar';
-
+import { CloseAppBar, InputPassword } from '@/components';
 import { useState } from 'react';
 import { useAuth } from '@/hooks';
-import { InputPassword } from '@/components/InputPassword';
 
-const descriptions = [
+const DESCRIPTION_LIST = [
   '• 회원탈퇴 시 모든 정보가 영구적으로 삭제되며, 다시는 복구할 수 없습니다.',
   '• 보유 포인트 및 포인트 기록은 복구가 불가능합니다.',
   '• 비밀번호를 입력해야 탈퇴가 가능해요',
@@ -36,7 +34,7 @@ export default function DeleteAccountPage() {
         <div className={styles.titleDescWrapper}>
           <h1 className={styles.title}>탈퇴 시 아래 내용을 확인해주세요</h1>
           <div className={styles.descWrapper}>
-            {descriptions.map((desc, index) => (
+            {DESCRIPTION_LIST.map((desc, index) => (
               <p key={index} className={styles.desc}>
                 {desc}
               </p>

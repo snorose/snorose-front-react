@@ -1,13 +1,15 @@
 import styles from './BoardPage.module.css';
-import Header from '../../../components/Header/Header.jsx';
-import { BOARD_MENUS } from '../../../constants';
+import {
+  BoardBar,
+  Header,
+  Icon,
+  Sidebar,
+  Sponser,
+  Search,
+} from '@/components/';
+import { BOARD_MENUS } from '@/constants';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BoardBar } from '../../../components/BoardBar';
-import { Icon } from '../../../components/Icon';
-import { Sidebar } from '../../../components/Sidebar';
-import { Sponser } from '../../../components/Sponser';
-import Search from '../../../components/Search/Search.jsx';
 
 export default function BoardPage() {
   const navigate = useNavigate();
@@ -35,7 +37,9 @@ export default function BoardPage() {
         <div className={styles.board_box}>
           <div className={styles.board_title}>커뮤니티</div>
           <div className={styles.board_list_box}>
-            {BOARD_MENUS.map((board, index) => (
+            {BOARD_MENUS.filter((board) =>
+              [20, 21, 22, 23].includes(board.id)
+            ).map((board, index) => (
               <BoardBar key={index} data={board} />
             ))}
           </div>

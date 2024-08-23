@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './ChangePasswordPage.module.css';
-import { BackAppBar, ActionButton } from '@/components/AppBar';
-import InputPassword from '@/components/InputPassword/InputPassword';
+import { BackAppBar, ActionButton, InputPassword } from '@/components';
 import { useMutation } from '@tanstack/react-query';
 import { updatePassword } from '@/apis';
 import { useNavigate } from 'react-router-dom';

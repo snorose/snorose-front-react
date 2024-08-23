@@ -1,13 +1,24 @@
 import styles from './EditInfoPage.module.css';
 import { useEffect, useState } from 'react';
-import { Icon } from '../../../components/Icon';
-import { BackAppBar, ActionButton } from '../../../components/AppBar';
-import { CategoryFieldset, Dropdown } from '../../../components/Fieldset';
-import { MAJORS } from '../../../constants';
+import {
+  Icon,
+  BackAppBar,
+  ActionButton,
+  CategoryFieldset,
+  Dropdown,
+} from '@/components';
+import { MAJORS } from '@/constants';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateUserInfo } from '@/apis';
 import { useAuth } from '@/hooks';
 import { useNavigate } from 'react-router-dom';
+
+const VALIDATIONS = Object.freeze({
+  NAME: /^[a-zA-Z가-힣\s]*$/,
+  NICKNAME: /^[a-zA-Z가-힣0-9]*$/,
+  SPECIAL_CHAR: /[!@#\$%\^\&*\)\(+=._-]/,
+  EMOJI: /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g,
+});
 
 export default function EditInfoPage() {
   const { userInfo, status } = useAuth({
@@ -22,11 +33,6 @@ export default function EditInfoPage() {
   const [birthDate, setBirthDate] = useState('');
   const [birthDateError, setBirthDateError] = useState('');
   const [nicknameError, setNicknameError] = useState('');
-
-  const validNameRegex = /^[a-zA-Z가-힣\s]*$/;
-  const validNicknameRegex = /^[a-zA-Z가-힣0-9]*$/;
-  const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
-  const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
 
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -62,11 +68,11 @@ export default function EditInfoPage() {
     setName(value);
 
     if (
-      !validNameRegex.test(value) ||
+      !VALIDATIONS.NAME.test(value) ||
       value.length < 2 ||
       value.length > 10 ||
-      specialCharRegex.test(value) ||
-      emojiRegex.test(value)
+      VALIDATIONS.SPECIAL_CHAR.test(value) ||
+      VALIDATIONS.EMOJI.test(value)
     ) {
       setNameError(
         '영어 대소문자, 한글만 가능하며, 2자 이상 10자 이하로 작성해주세요.'
@@ -81,11 +87,11 @@ export default function EditInfoPage() {
     setNickname(value);
 
     if (
-      !validNicknameRegex.test(value) ||
+      !VALIDATIONS.NICKNAME.test(value) ||
       value.length < 2 ||
       value.length > 30 ||
-      specialCharRegex.test(value) ||
-      emojiRegex.test(value)
+      VALIDATIONS.SPECIAL_CHAR.test(value) ||
+      VALIDATIONS.EMOJI.test(value)
     ) {
       setNicknameError(
         '특수문자, 띄어쓰기를 제외한 2자 이상 30자 이하로 작성해주세요'
