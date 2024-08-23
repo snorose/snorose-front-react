@@ -7,9 +7,11 @@ import { Sponser } from '@/components/Sponser';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getMyScrapPostList } from '@/apis';
 import { useInView } from 'react-intersection-observer';
+import { getBoardTitleToTextId } from '@/utils';
+import { Link } from 'react-router-dom';
 
 export default function ScrapPage() {
-  const { inView } = useInView();
+  const { ref, inView } = useInView();
 
   const { data, isPending, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
@@ -52,7 +54,12 @@ export default function ScrapPage() {
         <article className={styles.contentListContainer}>
           {myScrapPostList.length > 0 ? (
             myScrapPostList.map((post, index) => (
-              <PostBar key={index} data={post} />
+              <Link
+                ref={index === myScrapPostList.length - 2 ? ref : undefined}
+                to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
+              >
+                <PostBar key={index} data={post} />{' '}
+              </Link>
             ))
           ) : (
             <div className={styles.noContentWrapper}>
