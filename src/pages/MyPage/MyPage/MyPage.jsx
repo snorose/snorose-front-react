@@ -1,5 +1,5 @@
 import styles from './MyPage.module.css';
-import Icon from '@/components/Icon/Icon';
+import { Icon } from '@/components';
 import React, { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks';
