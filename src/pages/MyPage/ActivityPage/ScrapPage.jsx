@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import styles from './ActivityPage.module.css';
 import Icon from '@/components/Icon/Icon';
 import { BackAppBar } from '@/components/AppBar';
@@ -58,7 +58,7 @@ export default function ScrapPage() {
                 ref={index === myScrapPostList.length - 2 ? ref : undefined}
                 to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
               >
-                <PostBar key={index} data={post} />{' '}
+                <PostBar key={index} data={post} />
               </Link>
             ))
           ) : (

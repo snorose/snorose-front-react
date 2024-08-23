@@ -7,12 +7,10 @@ import { Sponser } from '@/components/Sponser';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { getMyReviewFileList } from '@/apis';
-// import { Link } from 'react-router-dom';
-// import { getBoardTextId } from '@/utils';
+import { Link } from 'react-router-dom';
 
 export default function DownloadExamReviewPage() {
-  const { inView } = useInView();
-  // const { ref, inView } = useInView();
+  const { ref, inView } = useInView();
 
   const { data, isPending, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
@@ -55,12 +53,12 @@ export default function DownloadExamReviewPage() {
         <article className={styles.contentListContainer}>
           {myReviewFileList.length > 0 ? (
             myReviewFileList.map((post, index) => (
-              // <Link
-              //   ref={index === myReviewFileList.length - 2 ? ref : undefined}
-              //   to={`/board/${getBoardTextId(post.boardId)}/post/${post.postId}`}
-              // >
-              <PostBar key={index} data={post} hasLike={false} />
-              // </Link>
+              <Link
+                ref={index === myReviewFileList.length - 2 ? ref : undefined}
+                to={`/board/exam-review/${post.postId}`}
+              >
+                <PostBar key={index} data={post} hasLike={false} />
+              </Link>
             ))
           ) : (
             <div className={styles.noContentWrapper}>

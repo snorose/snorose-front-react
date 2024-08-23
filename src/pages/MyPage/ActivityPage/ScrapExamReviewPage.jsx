@@ -7,7 +7,6 @@ import { Sponser } from '@/components/Sponser';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getMyScrapReviewList } from '@/apis';
 import { useInView } from 'react-intersection-observer';
-import { getBoardTitleToTextId } from '@/utils';
 import { Link } from 'react-router-dom';
 
 export default function ScrapExamReviewPage() {
@@ -56,7 +55,7 @@ export default function ScrapExamReviewPage() {
             myScrapReviewList.map((post, index) => (
               <Link
                 ref={index === myScrapReviewList.length - 2 ? ref : undefined}
-                to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
+                to={`/board/exam-review/${post.postId}`}
               >
                 <PostBar key={index} data={post} hasLike={false} />
               </Link>
