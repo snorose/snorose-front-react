@@ -4,7 +4,6 @@ import Icon from '@/components/Icon/Icon';
 import { BackAppBar } from '@/components/AppBar';
 import { PostBar } from '@/components/PostBar';
 import { Sponser } from '@/components/Sponser';
-
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getMyPostList } from '@/apis';
 import { Link } from 'react-router-dom';
@@ -56,10 +55,11 @@ export default function MyPostPage() {
           {myPostList.length > 0 ? (
             myPostList.map((post, index) => (
               <Link
+                key={index}
                 ref={index === myPostList.length - 2 ? ref : undefined}
                 to={`/board/${getBoardTextId(post.boardId)}/post/${post.postId}`}
               >
-                <PostBar key={index} data={post} />
+                <PostBar data={post} />
               </Link>
             ))
           ) : (

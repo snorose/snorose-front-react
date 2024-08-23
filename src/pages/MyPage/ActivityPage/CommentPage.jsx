@@ -55,10 +55,11 @@ export default function CommentPage() {
           {myCommentList.length > 0 ? (
             myCommentList.map((post, index) => (
               <Link
+                key={index}
                 ref={index === myCommentList.length - 2 ? ref : undefined}
                 to={`/board/${getBoardTextId(post.boardId)}/post/${post.postId}`}
               >
-                <PostBar key={index} data={post} />
+                <PostBar data={post} />
               </Link>
             ))
           ) : (

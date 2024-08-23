@@ -29,8 +29,8 @@ const ActivityTab = () => {
             link: 'scrap',
           },
         ].map((item, index) => (
-          <div className={styles.itemList}>
-            <Link to={item.link} key={index}>
+          <div className={styles.itemList} key={index}>
+            <Link to={item.link}>
               <div className={styles.item}>
                 <span>{item.label}</span>
                 <Icon id='angle-right' />

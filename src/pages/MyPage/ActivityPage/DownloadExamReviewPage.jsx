@@ -54,10 +54,11 @@ export default function DownloadExamReviewPage() {
           {myReviewFileList.length > 0 ? (
             myReviewFileList.map((post, index) => (
               <Link
+                key={index}
                 ref={index === myReviewFileList.length - 2 ? ref : undefined}
                 to={`/board/exam-review/${post.postId}`}
               >
-                <PostBar key={index} data={post} hasLike={false} />
+                <PostBar data={post} hasLike={false} />
               </Link>
             ))
           ) : (

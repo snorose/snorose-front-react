@@ -55,10 +55,11 @@ export default function ScrapPage() {
           {myScrapPostList.length > 0 ? (
             myScrapPostList.map((post, index) => (
               <Link
+                key={index}
                 ref={index === myScrapPostList.length - 2 ? ref : undefined}
                 to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
               >
-                <PostBar key={index} data={post} />
+                <PostBar data={post} />
               </Link>
             ))
           ) : (

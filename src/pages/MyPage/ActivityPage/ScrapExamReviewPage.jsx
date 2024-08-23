@@ -54,10 +54,11 @@ export default function ScrapExamReviewPage() {
           {myScrapReviewList.length > 0 ? (
             myScrapReviewList.map((post, index) => (
               <Link
+                key={index}
                 ref={index === myScrapReviewList.length - 2 ? ref : undefined}
                 to={`/board/exam-review/${post.postId}`}
               >
-                <PostBar key={index} data={post} hasLike={false} />
+                <PostBar data={post} hasLike={false} />
               </Link>
             ))
           ) : (
