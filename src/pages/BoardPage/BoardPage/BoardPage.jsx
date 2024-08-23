@@ -14,8 +14,11 @@ export default function BoardPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const closeSidebar = () => setIsSidebarOpen(false);
 
-  const handleKeyword = (text) => {
-    navigate(`/board/all/search/${encodeURIComponent(text)}`);
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' && event.target.value.trim() !== '') {
+      event.preventDefault();
+      navigate(`/board/all/search/${encodeURIComponent(event.target.value)}`);
+    }
   };
 
   return (
@@ -25,7 +28,7 @@ export default function BoardPage() {
         <div className={styles.searchbar_box}>
           <Search
             placeholder='전체 게시판 내 검색'
-            setKeyword={handleKeyword}
+            handleKeyDown={handleKeyDown}
             isAllSearch={true}
           />
         </div>

@@ -6,17 +6,11 @@ export default function Search({
   placeholder,
   keyword,
   setKeyword,
+  handleKeyDown,
   isAllSearch,
 }) {
   const handleChange = (event) => {
     if (!isAllSearch) {
-      setKeyword(event.target.value);
-    }
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
       setKeyword(event.target.value);
     }
   };
