@@ -58,7 +58,7 @@ export default function ScrapExamReviewPage() {
                 ref={index === myScrapReviewList.length - 2 ? ref : undefined}
                 to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
               >
-                <PostBar key={index} data={post} />{' '}
+                <PostBar key={index} data={post} hasLike={false} />
               </Link>
             ))
           ) : (

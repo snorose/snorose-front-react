@@ -59,7 +59,7 @@ export default function DownloadExamReviewPage() {
               //   ref={index === myReviewFileList.length - 2 ? ref : undefined}
               //   to={`/board/${getBoardTextId(post.boardId)}/post/${post.postId}`}
               // >
-              <PostBar key={index} data={post} />
+              <PostBar key={index} data={post} hasLike={false} />
               // </Link>
             ))
           ) : (
