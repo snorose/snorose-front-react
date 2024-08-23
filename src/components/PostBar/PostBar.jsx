@@ -7,7 +7,13 @@ import timeAgo from '@/utils/timeAgo.js';
 
 import styles from './PostBar.module.css';
 
-export default function PostBar({ data, optionClick, use, hasLike = true }) {
+export default function PostBar({
+  data,
+  optionClick,
+  use,
+  hasComment = true,
+  hasLike = true,
+}) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [agoTime, setAgoTime] = useState(timeAgo(data.createdAt));
@@ -23,9 +29,8 @@ export default function PostBar({ data, optionClick, use, hasLike = true }) {
   }, [data.createdAt]);
 
   const handlePostBarClick = () => {
-    if (use === 'post') {
-      navigate(`/board/${currentBoard}/post/${data.postId}`);
-    }
+    use === 'post' && navigate(`/board/${currentBoard}/post/${data.postId}`);
+    use === 'board' && navigate('/post-search');
   };
 
   return (
@@ -51,16 +56,20 @@ export default function PostBar({ data, optionClick, use, hasLike = true }) {
         <p className={styles.text}>{data.content}</p>
       </div>
       <div className={styles.post_bottom}>
-        <span className={styles.board}>{data.board}</span>
+        <span className={styles.board}>{data.boardName}</span>
         <div className={styles.iconContainer}>
-          <Icon
-            className={styles.comment}
-            id='comment'
-            width='13'
-            height='11'
-            fill='#D9D9D9'
-          />
-          <span>{data.commentCount}</span>
+          {hasComment && (
+            <>
+              <Icon
+                className={styles.comment}
+                id='comment'
+                width='13'
+                height='11'
+                fill='#D9D9D9'
+              />
+              <span>{data.commentCount}</span>
+            </>
+          )}
           {hasLike && (
             <>
               <Icon

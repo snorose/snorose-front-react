@@ -14,12 +14,11 @@ export default function BoardPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const closeSidebar = () => setIsSidebarOpen(false);
 
-  // const handleSearch = (query) => {
-  //   navigate(`/search/post/0?keyword=${encodeURIComponent(query)}`);
-  // };
-
-  const handleSearch = () => {
-    navigate('/search/post');
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' && event.target.value.trim() !== '') {
+      event.preventDefault();
+      navigate(`/board/all/search/${encodeURIComponent(event.target.value)}`);
+    }
   };
 
   return (
@@ -27,7 +26,11 @@ export default function BoardPage() {
       <Header />
       <div className={styles.padding_container}>
         <div className={styles.searchbar_box}>
-          <Search placeholder='전체 게시판 내 검색' onSearch={handleSearch} />
+          <Search
+            placeholder='전체 게시판 내 검색'
+            handleKeyDown={handleKeyDown}
+            isAllSearch={true}
+          />
         </div>
         <div className={styles.board_box}>
           <div className={styles.board_title}>커뮤니티</div>

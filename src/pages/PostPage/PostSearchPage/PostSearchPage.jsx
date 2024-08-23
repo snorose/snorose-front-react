@@ -1,21 +1,51 @@
 import styles from './PostSearchPage.module.css';
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Search } from '../../../components/Search';
-import { PLACEHOLDER } from '../../../constants';
-import { BackAppBar } from '../../../components/AppBar';
-import { PostBar } from '../../../components/PostBar';
-import { POST_LIST } from '../../../dummy/data/postList.js';
+
+import { Search } from '@/components/Search';
+import { BackAppBar } from '@/components/AppBar';
+import { PostBar } from '@/components/PostBar';
+import { FetchLoading } from '@/components/Loading';
+
+import { BOARD_ID, PLACEHOLDER } from '@/constants';
+
+import useInfiniteScroll from '@/hooks/useInfiniteScroll.jsx';
+import { searchByBoard, searchAllBoard } from '@/apis';
 
 export default function PostSearchPage() {
   const { pathname } = useLocation();
   const current = pathname.split('/')[2];
-  const [keyword, setKeyword] = useState('url에서 가져온 query값');
-  const result = POST_LIST; // dummy
+  const urlKeyword = decodeURIComponent(pathname.split('/')[4] || '');
+  const [keyword, setKeyword] = useState(urlKeyword);
+  const [searchKeyword, setSearchKeyword] = useState(urlKeyword);
 
-  const handleSearch = (text) => {
-    setKeyword(text);
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      setSearchKeyword(event.target.value);
+    }
   };
+
+  const { data, ref, isFetching, Target } = useInfiniteScroll({
+    queryKey: ['postList', searchKeyword || 'default'],
+    queryFn: ({ pageParam }) => {
+      if (current === 'all') {
+        return searchAllBoard({
+          page: pageParam,
+          keyword: searchKeyword || '',
+        });
+      } else {
+        return searchByBoard({
+          boardId: BOARD_ID[current],
+          page: pageParam,
+          keyword: searchKeyword || '',
+        });
+      }
+    },
+  });
+
+  const postList =
+    data && data.pages ? data.pages.flatMap((page) => page || []) : [];
 
   return (
     <div className={styles.container}>
@@ -23,22 +53,36 @@ export default function PostSearchPage() {
         children={
           <Search
             placeholder={PLACEHOLDER[current]}
-            onSearch={handleSearch}
-            keyWord={keyword}
+            keyword={keyword}
+            setKeyword={(text) => setKeyword(text)}
+            handleKeyDown={handleKeyDown}
+            isAllSearch={false}
           />
         }
         hasSearchInput={true}
       />
       <div className={styles.content}>
-        {keyword && result.length === 0 ? (
-          <div className={styles.noResult}>검색 결과가 없습니다</div>
+        {isFetching ? (
+          <FetchLoading>검색 중</FetchLoading>
         ) : (
-          <div className={styles.posts}>
-            {result.map((post) => (
-              <PostBar key={post.postId} data={post} />
-            ))}
-          </div>
+          <>
+            {searchKeyword !== '' && postList.length === 0 ? (
+              <div className={styles.noResult}>검색 결과가 없습니다</div>
+            ) : (
+              <div className={styles.posts}>
+                {postList.map((post) => (
+                  <PostBar
+                    key={post.postId}
+                    data={post}
+                    use='post'
+                    hasComment={false}
+                  />
+                ))}
+              </div>
+            )}
+          </>
         )}
+        {postList.length > 0 && <Target ref={ref} height='100px' />}
       </div>
     </div>
   );
