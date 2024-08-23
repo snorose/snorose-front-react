@@ -1,18 +1,14 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
-import axios from 'axios';
-
 import { Icon } from '../../../components/Icon';
 import { Input } from '../../../components/Input';
 import { Submit } from '../../../components/Submit';
-
 import {
   checkSpecialChar,
   checkSookmyungMail,
   checkStudentNum,
 } from './inputCheck';
-
+import { FindIDAPI } from '@/apis';
 import styles from './FindIdPage.module.css';
 
 export default function FindIdPage() {
@@ -69,32 +65,14 @@ export default function FindIdPage() {
       return 'wrong';
     else return 'ready';
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const apiUrl = 'http://13.124.33.41:8081';
-    const endpoint = '/v1/users/findid';
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true',
-    };
-    try {
-      const response = await axios.post(apiUrl + endpoint, formData, {
-        headers,
-      });
-      navigate('/found-id', {
-        state: { loginId: response.data.result.loginId },
-      });
-    } catch (e) {
-      console.log(e);
-      if (!e.response.data.isSuccess) {
-        navigate('/not-found-id', { state: { access: true } });
-      }
-    }
-  };
 
   return (
     <div className={styles.pageFrame}>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          FindIDAPI(e, formData, navigate);
+        }}
+      >
         <div className={styles.findIdFrame}>
           <div>
             <Link to='/login'>

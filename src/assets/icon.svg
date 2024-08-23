@@ -92,8 +92,10 @@
   <symbol id="check" viewBox="0 0 24 24">
     <path d="M7 12.9718L10.7471 17L18 8" stroke="#00368E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
-  <symbol id="check-thick"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M3 13.2864L9.13167 20L21 5" stroke="#00368E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <symbol id='check-thick' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="check-thick">
+      <path id="Vector 3" d="M3 13.2864L9.13167 20L21 5" stroke="#00368E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
   </symbol>
   <symbol id="x" viewBox="0 0 22 22">
     <path d="M3.63037 18.8906L18.8912 3.62982" stroke-width="2.5" stroke-linecap="round"/>

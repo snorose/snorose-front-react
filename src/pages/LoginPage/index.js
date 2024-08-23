@@ -5,3 +5,5 @@ export { default as FoundIdPage } from './FoundIdPage/FoundIdPage';
 export { default as FoundPwPage } from './FoundPwPage/FoundPwPage';
 export { default as NotFoundIdPage } from './NotFoundIdPage/NotFoundIdPage';
 export { default as NotFoundPwPage } from './NotFoundPwPage/NotFoundPwPage';
+export { default as SignUpPage } from './SignUpPage/SignUpPage';
+export { default as SignUpSucessPage } from './SignUpPage/SignUpSuccessPage/SignUpSuccessPage';
