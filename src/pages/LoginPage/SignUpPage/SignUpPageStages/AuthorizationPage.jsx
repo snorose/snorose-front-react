@@ -8,7 +8,6 @@ import styles from './AuthorizationPage.module.css';
 export default function AuthorizationPage({ email, setStage }) {
   const [authNum, setAuthNum] = useState('');
   const [codeStyle, setCodeStyle] = useState('ready');
-  const data = { email, authNum };
   useEffect(() => {
     SendUserAPI(email);
   }, []);
