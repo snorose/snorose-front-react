@@ -4,6 +4,7 @@ import { postLike, deleteLike } from '@/apis/like';
 // 좋아요 훅
 const useLike = (type, typeId, initialState, refetch) => {
   const [isLiked, setIsLiked] = useState(initialState);
+  const [error, setError] = useState(null);
 
   const toggleLike = async () => {
     try {
@@ -11,8 +12,10 @@ const useLike = (type, typeId, initialState, refetch) => {
       await action(type, typeId);
       setIsLiked((prev) => !prev);
       refetch();
-    } catch (error) {
-      console.error('좋아요 에러:', error);
+      setError(null);
+    } catch (err) {
+      setError(err);
+      console.error('좋아요 에러:', err);
     }
   };
 
@@ -20,7 +23,7 @@ const useLike = (type, typeId, initialState, refetch) => {
     setIsLiked(initialState);
   }, [initialState]);
 
-  return { isLiked, toggleLike };
+  return { isLiked, toggleLike, error };
 };
 
 export default useLike;

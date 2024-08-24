@@ -4,6 +4,7 @@ import { postScrap, deleteScrap } from '@/apis/scrap';
 // 스크랩 훅
 const useScrap = (postId, initialState, refetch) => {
   const [isScrapped, setIsScrapped] = useState(initialState);
+  const [error, setError] = useState(null);
 
   const toggleScrap = async () => {
     try {
@@ -11,8 +12,10 @@ const useScrap = (postId, initialState, refetch) => {
       await action(postId);
       setIsScrapped((prev) => !prev);
       refetch();
-    } catch (error) {
-      console.error('스크랩 에러:', error);
+      setError(null);
+    } catch (err) {
+      setError(err);
+      console.error('스크랩 에러:', err);
     }
   };
 
@@ -20,7 +23,7 @@ const useScrap = (postId, initialState, refetch) => {
     setIsScrapped(initialState);
   }, [initialState]);
 
-  return { isScrapped, toggleScrap };
+  return { isScrapped, toggleScrap, error };
 };
 
 export default useScrap;

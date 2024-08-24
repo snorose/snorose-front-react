@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getPostContent, deletePost } from '@/apis/post.js';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import { useComment, useLike, useScrap } from '@/hooks';
+import { useComment, useLike, useScrap, useToast } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
@@ -18,11 +18,13 @@ import { filterDeletedComments } from '@/utils/filterComment.js';
 import timeAgo from '@/utils/timeAgo.js';
 
 import { BOARD_MENUS } from '@/constants/boardMenus.js';
+import { TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
 
 export default function PostPage() {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const { postId } = useParams();
   const { pathname } = useLocation();
   const { inputFocus } = useCommentContext();
@@ -47,19 +49,32 @@ export default function PostPage() {
   });
 
   // 스크랩 훅 사용
-  const { isScrapped, toggleScrap } = useScrap(
-    postId,
-    data?.isScrapped,
-    refetch
-  );
+  const {
+    isScrapped,
+    toggleScrap,
+    error: scrapError,
+  } = useScrap(postId, data?.isScrapped, refetch);
+
+  // 스크랩 처리 시 에러 메시지 표시
+  useEffect(() => {
+    if (scrapError?.response?.status === 403) {
+      toast(TOAST.SCRAP_SELF_ERROR);
+    }
+  }, [scrapError]);
 
   // 좋아요 훅 사용
-  const { isLiked, toggleLike } = useLike(
-    'posts',
-    postId,
-    data?.isLiked,
-    refetch
-  );
+  const {
+    isLiked,
+    toggleLike,
+    error: likeError,
+  } = useLike('posts', postId, data?.isLiked, refetch);
+
+  // 좋아요 처리 시 에러 메시지 표시
+  useEffect(() => {
+    if (likeError?.response?.status === 403) {
+      toast(TOAST.LIKE_SELF_ERROR);
+    }
+  }, [likeError]);
 
   // 데이터 화면 표시
   useEffect(() => {

@@ -57,6 +57,14 @@ const TOAST = Object.freeze({
     id: 'EMPTY_BOARD_ERROR',
     message: '게시판을 선택하세요.',
   },
+  LIKE_SELF_ERROR: {
+    id: 'LIKE_SELF_ERROR',
+    message: '자신의 글에는 좋아요를 누를 수 없습니다.',
+  },
+  SCRAP_SELF_ERROR: {
+    id: 'SCRAP_SELF_ERROR',
+    message: '자신의 글은 스크랩할 수 없습니다.',
+  },
 });
 
 export { TOAST };
