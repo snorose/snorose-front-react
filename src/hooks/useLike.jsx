@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { postLike, deleteLike } from '@/apis/like';
 
 // 좋아요 훅
-const useLike = (type, typeId, initialState, refetch) => {
+const useLike = (type, typeId, initialState,  refetch = () => {}) => {
   const [isLiked, setIsLiked] = useState(initialState);
   const [error, setError] = useState(null);
 

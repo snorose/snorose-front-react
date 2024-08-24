@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import useComment from '@/hooks/useComment.jsx';
+import { useToast, useLike, useComment } from '@/hooks';
 
 import { DeleteModal, OptionModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
@@ -10,14 +10,31 @@ import { NestedComment } from '@/components/Comment';
 
 import timeAgo from '@/utils/timeAgo.js';
 
+import { TOAST } from '@/constants';
+
 import styles from './Comment.module.css';
 
 export default function Comment({ data }) {
   const { setIsEdit, commentId, setCommentId, setContent, inputFocus } =
     useCommentContext();
-  const { deleteComment } = useComment();
+  const { deleteComment, refetch } = useComment();
+  const { toast } = useToast();
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // 좋아요 훅 사용
+  const {
+    isLiked,
+    toggleLike,
+    error: likeError,
+  } = useLike('comments', data.id, data?.isLiked, refetch);
+
+  // 좋아요 처리 시 에러 메시지 표시
+  useEffect(() => {
+    if (likeError?.response?.status === 403) {
+      toast(TOAST.LIKE_SELF_ERROR);
+    }
+  }, [likeError]);
 
   const onCommentOptionClick = ({ id, parentId, content }) => {
     setCommentId(id);
@@ -68,8 +85,13 @@ export default function Comment({ data }) {
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
             <p>{data.children.length}</p>
           </button>
-          <button className={styles.likedCount}>
-            <Icon id='like' width='13' height='12' fill='#D9D9D9' />
+          <button className={styles.likedCount} onClick={toggleLike}>
+            <Icon
+              id='like'
+              width='13'
+              height='12'
+              fill={isLiked ? '#5F86BF' : '#D9D9D9'}
+            />
             <p>{data.likeCount}</p>
           </button>
         </div>
