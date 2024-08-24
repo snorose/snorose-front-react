@@ -47,11 +47,11 @@ const TOAST = Object.freeze({
   },
   EMPTY_TITLE: {
     id: 'EMPTY_TITLE_ERROR',
-    message: '내용을 입력하세요.',
+    message: '제목을 입력하세요.',
   },
   EMPTY_TEXT: {
     id: 'EMPTY_TEXT_ERROR',
-    message: '제목을 입력하세요.',
+    message: '내용을 입력하세요.',
   },
   EMPTY_BOARDID: {
     id: 'EMPTY_BOARD_ERROR',
