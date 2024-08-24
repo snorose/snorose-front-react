@@ -8,7 +8,7 @@ export default function WriteButton({ to }) {
   return (
     <Link to={to}>
       <button className={styles.button}>
-        <Icon id='pencil' width='30' height='30' />
+        <Icon id='pencil-blue' width='30' height='30' fill='#BFD7EC' />
       </button>
     </Link>
   );

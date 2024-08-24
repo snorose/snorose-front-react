@@ -77,14 +77,6 @@ export default function BoardListPageHasCategory() {
             ))}
         </div>
       </PTR>
-      <div className={styles.pencil_icon}>
-        <Icon
-          id='pencil-circle'
-          width={105}
-          height={105}
-          onClick={handleNavClick('/post-write')}
-        />
-      </div>
       <div className={styles.sponser}>
         <Sponser />
       </div>
