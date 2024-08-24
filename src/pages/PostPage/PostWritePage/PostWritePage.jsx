@@ -86,6 +86,7 @@ export default function PostWritePage() {
       return;
     }
     try {
+      console.log(data);
       await postPost(data);
       toast(TOAST.POST_CREATE_SUCCESS);
       navigate(-1);

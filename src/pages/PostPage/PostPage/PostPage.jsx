@@ -32,8 +32,9 @@ export default function PostPage() {
   const [postData, setPostData] = useState(null);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
   const [modalType, setModalType] = useState('');
-  const [isPrimaryModalOpen, setIsPrimaryModalOpen] = useState(false);
-  const [isSecondaryModalOpen, setIsSecondaryModalOpen] = useState(false);
+  const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const inputBarRef = useRef(null);
   const filterdCommentList = filterDeletedComments(commentList);
@@ -73,7 +74,7 @@ export default function PostPage() {
       await deletePost(currentBoard.id, postId);
       navigate(`/board/${currentBoard.textId}`);
     }
-    setIsSecondaryModalOpen(false);
+    setIsDeleteModalOpen(false);
   };
 
   // 더보기 아이콘 클릭 시 모달 type 설정 (post or comment)
@@ -83,7 +84,7 @@ export default function PostPage() {
       setSelectedCommentId(commentId);
       setInputValue(commentContent);
     }
-    setIsPrimaryModalOpen(true);
+    setIsOptionsModalOpen(true);
   };
 
   // 모달에서 수정 옵션 클릭 시
@@ -91,15 +92,21 @@ export default function PostPage() {
     if (modalType === 'post') {
       navigate(`./edit`);
     } else if (modalType === 'comment') {
-      setIsPrimaryModalOpen(false);
+      setIsOptionsModalOpen(false);
       inputBarRef.current.focusInput();
     }
   };
 
   // 모달에서 삭제 옵션 클릭 시
   const handleDeleteMenuClick = () => {
-    setIsPrimaryModalOpen(false);
-    setIsSecondaryModalOpen(true);
+    setIsOptionsModalOpen(false);
+    setIsDeleteModalOpen(true);
+  };
+
+  // 모달에서 신고 옵션 클릭 시
+  const handleReportMenuClick = () => {
+    setIsOptionsModalOpen(false);
+    setIsReportModalOpen(true);
   };
 
   // 댓글 편집 상태 초기화
@@ -176,23 +183,30 @@ export default function PostPage() {
         </div>
       </div>
       <OptionModal
-        id={modalType === 'post' ? 'post-edit' : 'comment-edit'}
-        isOpen={isPrimaryModalOpen}
-        setIsOpen={setIsPrimaryModalOpen}
+        id={modalType === 'post' ? 'post-more-options' : 'comment-more-options'}
+        isOpen={isOptionsModalOpen}
+        setIsOpen={setIsOptionsModalOpen}
         closeFn={() => {
           resetEditingState();
-          setIsPrimaryModalOpen(false);
+          setIsOptionsModalOpen(false);
         }}
         functions={{
           pencil: handleEditMenuClick,
           trash: handleDeleteMenuClick,
+          report: handleReportMenuClick,
         }}
       />
       <DeleteModal
         id={modalType === 'post' ? 'post-delete' : 'comment-delete'}
-        isOpen={isSecondaryModalOpen}
-        setIsOpen={setIsSecondaryModalOpen}
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setIsDeleteModalOpen}
         redBtnFunction={handleDelete}
+      />
+      <OptionModal
+        id='report'
+        isOpen={isReportModalOpen}
+        setIsOpen={setIsReportModalOpen}
+        closeFn={() => setIsReportModalOpen(false)}
       />
       <CommentList postId={postId} />
       <InputBar />

@@ -1,6 +1,6 @@
 export const MODAL_OPTIONS = [
   {
-    id: 'post-report',
+    id: 'report',
     title: '게시글/유저 신고',
     titleColor: '#FF4B6C',
     children: [
@@ -49,7 +49,7 @@ export const MODAL_OPTIONS = [
     ],
   },
   {
-    id: 'post-edit',
+    id: 'post-more-options',
     title: '내 게시글',
     titleColor: '#000',
     children: [
@@ -68,6 +68,13 @@ export const MODAL_OPTIONS = [
         color: '#FF4B6C',
         nav: '/post-write',
       },
+      {
+        iconId: 'report',
+        IconWidth: 12,
+        IconHeight: 16,
+        text: '신고하기',
+        color: '#FF4B6C',
+      },
     ],
   },
   {
@@ -83,7 +90,7 @@ export const MODAL_OPTIONS = [
     },
   },
   {
-    id: 'comment-edit',
+    id: 'comment-more-options',
     title: '내 댓글',
     titleColor: '#000',
     children: [
@@ -101,6 +108,13 @@ export const MODAL_OPTIONS = [
         text: '삭제하기',
         color: '#FF4B6C',
         nav: '/post-write',
+      },
+      {
+        iconId: 'report',
+        IconWidth: 12,
+        IconHeight: 16,
+        text: '신고하기',
+        color: '#FF4B6C',
       },
     ],
   },

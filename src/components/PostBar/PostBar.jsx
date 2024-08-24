@@ -41,15 +41,6 @@ export default function PostBar({
         <p className={styles.dot}>·</p>
         <p>{agoTime}</p>
         {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
-        <div
-          className={styles.more_option}
-          onClick={(e) => {
-            e.stopPropagation();
-            optionClick();
-          }}
-        >
-          <Icon id='ellipsis-vertical' width={3} height={11} fill='#484848' />
-        </div>
       </div>
       <div className={styles.post_center}>
         <p className={styles.title}>{data.title}</p>
