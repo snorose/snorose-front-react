@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styles from './ViewPointListPage.module.css';
 import { BackAppBar, Icon } from '@/components';
+import { useAuth } from '@/hooks';
 
 const pointData = [
   {
@@ -77,6 +78,9 @@ const pointData = [
 
 export default function ViewPointListPage() {
   const chargePointsRef = useRef([]);
+  const { userInfo, status } = useAuth({
+    isRequiredAuth: true,
+  });
 
   useEffect(() => {
     chargePointsRef.current.forEach((point) => {
@@ -94,6 +98,14 @@ export default function ViewPointListPage() {
     });
   }, []);
 
+  if (status === 'loading') {
+    return <div>loading...</div>;
+  }
+
+  if (status === 'unauthenticated') {
+    return null;
+  }
+
   return (
     <main className={styles.viewPointListPage}>
       <header>
@@ -105,7 +117,7 @@ export default function ViewPointListPage() {
           <h1 className={styles.title}>보유 포인트</h1>
           <div className={styles.totalPointWrapper}>
             <Icon id='point-circle' />
-            <span className={styles.totalPoint}>39</span>
+            <span className={styles.totalPoint}>{userInfo.balance}</span>
           </div>
         </div>
 
