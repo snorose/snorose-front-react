@@ -30,7 +30,7 @@ export * from './ReviewContentItem';
 export * from './ReviewDownload';
 export * from './Search';
 export * from './Sidebar';
-export * from './Sponser';
+export * from './Sponsor';
 export * from './StageDots';
 export * from './Submit';
 export * from './Target';

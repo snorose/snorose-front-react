@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './BoardListPageHasCategory.module.css';
-import Icon from '../../../components/Icon/Icon.jsx';
-import BackAppBar from '../../../components/AppBar/BackAppBar/BackAppBar.jsx';
-import PostBar from '../../../components/PostBar/PostBar.jsx';
-import Sponser from '../../../components/Sponser/Sponser.jsx';
-import { POST_LIST } from '../../../dummy/data/postList.js';
-import PTR from '../../../components/PTR/PTR.jsx';
-import { POST_CATEGORIES } from '../../../constants/postCategories.js';
+import { BackAppBar, Icon, PostBar, Sponsor, PTR } from '@/components';
+import { POST_LIST } from '@/dummy/data/postList.js';
+import { POST_CATEGORIES } from '@/constants/postCategories.js';
 
 export default function BoardListPageHasCategory() {
   const navigate = useNavigate();
@@ -85,8 +81,8 @@ export default function BoardListPageHasCategory() {
           onClick={handleNavClick('/post-write')}
         />
       </div>
-      <div className={styles.sponser}>
-        <Sponser />
+      <div className={styles.sponsor}>
+        <Sponsor />
       </div>
     </div>
   );

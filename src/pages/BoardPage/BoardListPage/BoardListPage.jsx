@@ -7,14 +7,16 @@ import { getNoticeLine } from '@/apis/notice.js';
 
 import { useIntersect } from '@/hooks';
 
-import { BackAppBar } from '@/components/AppBar';
-import { Icon } from '@/components/Icon';
-import { OptionModal } from '@/components/Modal';
-import { PostBar } from '@/components/PostBar';
-import { Sponser } from '@/components/Sponser';
-import { Target } from '@/components/Target/index.js';
-import { WriteButton } from '@/components/WriteButton';
-import PTR from '@/components/PTR/PTR.jsx';
+import {
+  BackAppBar,
+  Icon,
+  OptionModal,
+  PostBar,
+  Sponsor,
+  PTR,
+  Target,
+  WriteButton,
+} from '@/components';
 
 import timeAgo from '@/utils/timeAgo';
 
@@ -103,8 +105,8 @@ export default function BoardListPage() {
             ))}
         </div>
       </PTR>
-      <div className={styles.sponser}>
-        <Sponser />
+      <div className={styles.sponsor}>
+        <Sponsor />
       </div>
       <OptionModal
         id='post-report'
