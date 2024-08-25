@@ -12,7 +12,7 @@ export default function useComment() {
   const { postId } = useParams();
   const queryClient = useQueryClient();
 
-  const { data: commentList } = useQuery({
+  const { data: commentList, refetch } = useQuery({
     queryKey: ['comments', postId],
     queryFn: () => getCommentList({ postId }),
     staleTime: 1000 * 60,
@@ -76,5 +76,5 @@ export default function useComment() {
     },
   });
 
-  return { commentList, postComment, deleteComment, editComment };
+  return { commentList, postComment, deleteComment, editComment, refetch };
 }

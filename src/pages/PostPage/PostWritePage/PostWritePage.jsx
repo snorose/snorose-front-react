@@ -70,20 +70,28 @@ export default function PostWritePage() {
   };
 
   // 게시글 등록 유효성 검사 및 제출
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (boardId === '') {
+      toast(TOAST.EMPTY_BOARDID);
+      return;
+    }
     if (!title.trim()) {
-      toast(TOAST.emptyTitle);
+      toast(TOAST.EMPTY_TITLE);
       return;
     }
     if (!text.trim()) {
-      toast(TOAST.emptyText);
+      toast(TOAST.EMPTY_TEXT);
       return;
     }
-    console.log(data);
-    postPost(data);
-
-    navigate(-1); // 제출 후 이동할 경로 설정
+    try {
+      console.log(data);
+      await postPost(data);
+      toast(TOAST.POST_CREATE_SUCCESS);
+      navigate(-1);
+    } catch (error) {
+      toast(TOAST.POST_CREATE_FAIL);
+    }
   };
 
   // 제목 40자 제한
@@ -110,7 +118,7 @@ export default function PostWritePage() {
         <DropDownMenu
           options={boardTitles}
           item={boardTitle}
-          setItem={handleBoardTitleChange} // 수정된 핸들러
+          setItem={handleBoardTitleChange}
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
           backgroundColor={'#fff'}

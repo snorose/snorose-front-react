@@ -55,10 +55,10 @@ export default function PostEditPage() {
     onSuccess: () => {
       queryClient.invalidateQueries(['postContent', postId]);
       navigate(-1);
-      toast(TOAST.postEditSuccess);
+      toast(TOAST.POST_EDIT_SUCCESS);
     },
     onError: () => {
-      toast(TOAST.postEditFail);
+      toast(TOAST.POST_EDIT_FAIL);
     },
   });
 
@@ -79,11 +79,11 @@ export default function PostEditPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim()) {
-      toast(TOAST.emptyTitle);
+      toast(TOAST.EMPTY_TITLE);
       return;
     }
     if (!text.trim()) {
-      toast(TOAST.emptyText);
+      toast(TOAST.EMPTY_TEXT);
       return;
     }
     mutation.mutate({

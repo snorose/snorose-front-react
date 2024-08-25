@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import useComment from '@/hooks/useComment.jsx';
+import { useToast, useLike, useComment } from '@/hooks';
 
 import { DeleteModal, OptionModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 
 import timeAgo from '@/utils/timeAgo.js';
+
+import { TOAST } from '@/constants';
 
 import styles from '../Comment/Comment.module.css';
 
@@ -19,7 +21,8 @@ export default function NestedComment({
 }) {
   const { setIsEdit, commentId, setCommentId, setContent, inputFocus } =
     useCommentContext();
-  const { deleteComment } = useComment();
+  const { deleteComment, refetch } = useComment();
+  const { toast } = useToast();
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -28,11 +31,19 @@ export default function NestedComment({
     setContent('');
   };
 
-  const [isLiked, setIsLiked] = useState(false);
+  // 좋아요 훅 사용
+  const {
+    isLiked,
+    toggleLike,
+    error: likeError,
+  } = useLike('comments', data.id, data?.isLiked, refetch);
 
-  const handleLikedClick = () => {
-    console.log('API로 liked 데이터 수정');
-  };
+  // 좋아요 처리 시 에러 메시지 표시
+  useEffect(() => {
+    if (likeError?.response?.status === 403) {
+      toast(TOAST.LIKE_SELF_ERROR);
+    }
+  }, [likeError]);
 
   const {
     id,
@@ -101,7 +112,7 @@ export default function NestedComment({
               width='13'
               height='12'
               fill={isLiked ? '#5F86BF' : '#D9D9D9'}
-              onClick={handleLikedClick}
+              onClick={toggleLike}
             />
             <span>{data.likeCount.toLocaleString()}</span>
           </button>

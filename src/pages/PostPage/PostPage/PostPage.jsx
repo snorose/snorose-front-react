@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getPostContent, deletePost } from '@/apis/post.js';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import useComment from '@/hooks/useComment.jsx';
+import { useComment, useLike, useScrap, useToast } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
@@ -18,11 +18,14 @@ import { filterDeletedComments } from '@/utils/filterComment.js';
 import timeAgo from '@/utils/timeAgo.js';
 
 import { BOARD_MENUS } from '@/constants/boardMenus.js';
+import { TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
 
 export default function PostPage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
   const { postId } = useParams();
   const { pathname } = useLocation();
   const { inputFocus } = useCommentContext();
@@ -32,18 +35,49 @@ export default function PostPage() {
   const [postData, setPostData] = useState(null);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
   const [modalType, setModalType] = useState('');
-  const [isPrimaryModalOpen, setIsPrimaryModalOpen] = useState(false);
-  const [isSecondaryModalOpen, setIsSecondaryModalOpen] = useState(false);
+  const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const inputBarRef = useRef(null);
   const filterdCommentList = filterDeletedComments(commentList);
 
   // 게시글 데이터 받아오기
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['postContent', postId],
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
   });
+
+  // // 스크랩 훅 사용
+  // const {
+  //   isScrapped,
+  //   toggleScrap,
+  //   error: scrapError,
+  // } = useScrap(postId, data?.isScrapped, refetch);
+
+  // // 스크랩 처리 시 에러 메시지 표시
+  // useEffect(() => {
+  //   if (scrapError?.response?.status === 403) {
+  //     toast(TOAST.SCRAP_SELF_ERROR);
+  //   }
+  // }, [scrapError]);
+
+  const { scrap, deleteScrap } = useScrap();
+
+  // 좋아요 훅 사용
+  const {
+    isLiked,
+    toggleLike,
+    error: likeError,
+  } = useLike('posts', postId, data?.isLiked, refetch);
+
+  // 좋아요 처리 시 에러 메시지 표시
+  useEffect(() => {
+    if (likeError?.response?.status === 403) {
+      toast(TOAST.LIKE_SELF_ERROR);
+    }
+  }, [likeError]);
 
   // 데이터 화면 표시
   useEffect(() => {
@@ -58,7 +92,7 @@ export default function PostPage() {
       await deletePost(currentBoard.id, postId);
       navigate(`/board/${currentBoard.textId}`);
     }
-    setIsSecondaryModalOpen(false);
+    setIsDeleteModalOpen(false);
   };
 
   // 더보기 아이콘 클릭 시 모달 type 설정 (post or comment)
@@ -68,7 +102,7 @@ export default function PostPage() {
       setSelectedCommentId(commentId);
       setInputValue(commentContent);
     }
-    setIsPrimaryModalOpen(true);
+    setIsOptionsModalOpen(true);
   };
 
   // 모달에서 수정 옵션 클릭 시
@@ -76,15 +110,21 @@ export default function PostPage() {
     if (modalType === 'post') {
       navigate(`./edit`);
     } else if (modalType === 'comment') {
-      setIsPrimaryModalOpen(false);
+      setIsOptionsModalOpen(false);
       inputBarRef.current.focusInput();
     }
   };
 
   // 모달에서 삭제 옵션 클릭 시
   const handleDeleteMenuClick = () => {
-    setIsPrimaryModalOpen(false);
-    setIsSecondaryModalOpen(true);
+    setIsOptionsModalOpen(false);
+    setIsDeleteModalOpen(true);
+  };
+
+  // 모달에서 신고 옵션 클릭 시
+  const handleReportMenuClick = () => {
+    setIsOptionsModalOpen(false);
+    setIsReportModalOpen(true);
   };
 
   // 댓글 편집 상태 초기화
@@ -139,30 +179,56 @@ export default function PostPage() {
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
             <p>{filterdCommentList?.length.toLocaleString()}</p>
           </div>
-          <div className={styles.count}>
-            <Icon id='like' width='13' height='12' fill='#D9D9D9' />
+          <div className={styles.count} onClick={toggleLike}>
+            <Icon
+              id='like'
+              width='13'
+              height='12'
+              fill={isLiked ? '#5F86BF' : '#D9D9D9'}
+            />
             <p>{postData.likeCount.toLocaleString()}</p>
+          </div>
+          <div
+            className={styles.count}
+            onClick={() =>
+              postData.isScrapped ? deleteScrap.mutate() : scrap.mutate()
+            }
+          >
+            <Icon
+              id='bookmark-fill'
+              width='10'
+              height='13'
+              fill={postData.isScrapped ? '#5F86BF' : '#D9D9D9'}
+            />
+            <p>{postData.scrapCount}</p>
           </div>
         </div>
       </div>
       <OptionModal
-        id={modalType === 'post' ? 'post-edit' : 'comment-edit'}
-        isOpen={isPrimaryModalOpen}
-        setIsOpen={setIsPrimaryModalOpen}
+        id={modalType === 'post' ? 'post-more-options' : 'comment-more-options'}
+        isOpen={isOptionsModalOpen}
+        setIsOpen={setIsOptionsModalOpen}
         closeFn={() => {
           resetEditingState();
-          setIsPrimaryModalOpen(false);
+          setIsOptionsModalOpen(false);
         }}
         functions={{
           pencil: handleEditMenuClick,
           trash: handleDeleteMenuClick,
+          report: handleReportMenuClick,
         }}
       />
       <DeleteModal
         id={modalType === 'post' ? 'post-delete' : 'comment-delete'}
-        isOpen={isSecondaryModalOpen}
-        setIsOpen={setIsSecondaryModalOpen}
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setIsDeleteModalOpen}
         redBtnFunction={handleDelete}
+      />
+      <OptionModal
+        id='report'
+        isOpen={isReportModalOpen}
+        setIsOpen={setIsReportModalOpen}
+        closeFn={() => setIsReportModalOpen(false)}
       />
       <CommentList postId={postId} />
       <InputBar />

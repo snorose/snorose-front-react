@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { filterDeletedComments } from '../../../utils/filterComment.js';
 
 import { Comment } from '../index.js';

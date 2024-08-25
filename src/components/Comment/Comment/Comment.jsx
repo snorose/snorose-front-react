@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import useComment from '@/hooks/useComment.jsx';
+import { useToast, useLike, useComment } from '@/hooks';
 
 import { DeleteModal, OptionModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
@@ -10,18 +10,36 @@ import { NestedComment } from '@/components/Comment';
 
 import timeAgo from '@/utils/timeAgo.js';
 
+import { TOAST } from '@/constants';
+
 import styles from './Comment.module.css';
 
 export default function Comment({ data }) {
   const { setIsEdit, commentId, setCommentId, setContent, inputFocus } =
     useCommentContext();
-  const { deleteComment } = useComment();
+  const { deleteComment, refetch } = useComment();
+  const { toast } = useToast();
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const onCommentOptionClick = ({ id, parentId, content }) => {
-    setCommentId(id);
-    setContent(content);
+  // 좋아요 훅 사용
+  const {
+    isLiked,
+    toggleLike,
+    error: likeError,
+  } = useLike('comments', data.id, data?.isLiked, refetch);
+
+  // 좋아요 처리 시 에러 메시지 표시
+  useEffect(() => {
+    if (likeError?.response?.status === 403) {
+      toast(TOAST.LIKE_SELF_ERROR);
+    }
+  }, [likeError]);
+
+  const onCommentOptionClick = (data) => {
+    console.log('Comment option clicked', data);
+    setCommentId(data.id);
+    setContent(data.content);
     setIsOptionModalOpen(true);
   };
 
@@ -49,7 +67,6 @@ export default function Comment({ data }) {
     isVisible,
     isUpdated,
     isDeleted,
-    isLiked,
     children,
   } = data;
 
@@ -93,9 +110,14 @@ export default function Comment({ data }) {
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
             <p>{children.length}</p>
           </button>
-          <button className={styles.likedCount}>
-            <Icon id='like' width='13' height='12' fill='#D9D9D9' />
-            <span>{likeCount.toLocaleString()}</span>
+          <button className={styles.likedCount} onClick={toggleLike}>
+            <Icon
+              id='like'
+              width='13'
+              height='12'
+              fill={isLiked ? '#5F86BF' : '#D9D9D9'}
+            />
+            <span>{data.likeCount.toLocaleString()}</span>
           </button>
         </div>
         {children.length > 0 &&
@@ -110,7 +132,7 @@ export default function Comment({ data }) {
           ))}
       </div>
       <OptionModal
-        id='comment-edit'
+        id='comment-more-options'
         isOpen={isOptionModalOpen}
         setIsOpen={setIsOptionModalOpen}
         closeFn={onCloseClick}
