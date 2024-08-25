@@ -19,7 +19,9 @@ export default function CommentList() {
 
   return (
     <div className={styles.comments}>
-      <p className={styles.commentsTitle}>댓글 {commentList?.length}개</p>
+      <p className={styles.commentsTitle}>
+        댓글 {commentList?.length.toLocaleString()}개
+      </p>
       {commentList ? (
         commentList.map((comment) => (
           <Comment key={comment.id} data={comment} />

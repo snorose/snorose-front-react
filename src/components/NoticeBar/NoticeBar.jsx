@@ -20,14 +20,18 @@ export default function NoticeBar({ data, onClick }) {
         <div className={styles.postBottomLeft}>{formattedDate}</div>
         <div className={styles.postBottomRight}>
           <Icon id='comment' width={13} height={11} fill='#D9D9D9' />
-          <p className={styles.comment_cnt}>{data.commentCount}</p>
+          <span className={styles.comment_cnt}>
+            {data.commentCount.toLocaleString()}
+          </span>
           <Icon
             id='like'
             width={12}
             height={11}
             fill={data.liked ? '#5F86BF' : '#D9D9D9'}
           />
-          <p className={styles.like_cnt}>{data.likeCount}</p>
+          <span className={styles.like_cnt}>
+            {data.likeCount.toLocaleString()}
+          </span>
         </div>
       </div>
     </div>

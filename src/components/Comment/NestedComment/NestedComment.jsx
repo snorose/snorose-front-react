@@ -103,7 +103,7 @@ export default function NestedComment({
               fill={isLiked ? '#5F86BF' : '#D9D9D9'}
               onClick={handleLikedClick}
             />
-            <p>{data.likeCount}</p>
+            <span>{data.likeCount.toLocaleString()}</span>
           </button>
         </div>
       </div>
