@@ -137,7 +137,7 @@ export const MODAL_OPTIONS = [
   },
   {
     id: 'exam-review-edit',
-    title: '내 게시글',
+    title: '내가 작성한 시험 후기',
     titleColor: '#000',
     children: [
       {
@@ -159,10 +159,10 @@ export const MODAL_OPTIONS = [
   },
   {
     id: 'exam-review-delete',
-    title: '게시글을 삭제할까요?',
+    title: '시험 후기를 삭제할까요?',
     titleColor: '#000',
     children: {
-      text: '',
+      text: '시험 후기 삭제 시 포인트가 차감돼요',
     },
     bottom: {
       redBtn: '삭제',

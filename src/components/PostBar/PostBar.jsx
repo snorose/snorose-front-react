@@ -49,7 +49,8 @@ export default function PostBar({
       <div className={styles.post_bottom}>
         <span className={styles.board}>{data.boardName}</span>
         <div className={styles.iconContainer}>
-          {hasComment && (
+          {/* 서버 수정 후 조건문 제거 처리 필요 */}
+          {hasComment && data.commentCount !== undefined && (
             <>
               <Icon
                 className={styles.comment}
@@ -58,7 +59,7 @@ export default function PostBar({
                 height='11'
                 fill='#D9D9D9'
               />
-              <span>{data.commentCount}</span>
+              <span>{data.commentCount.toLocaleString()}</span>
             </>
           )}
           {hasLike && (
@@ -69,16 +70,21 @@ export default function PostBar({
                 height='11'
                 fill={data.liked ? '#5F86BF' : '#D9D9D9'}
               />
-              <span>{data.likeCount}</span>
+              <span>{data.likeCount.toLocaleString()}</span>
             </>
           )}
-          <Icon
-            id='bookmark-fill'
-            width='9'
-            height='11'
-            fill={data.liked ? '#5F86BF' : '#D9D9D9'}
-          />
-          <span>{data.scrapCount}</span>
+          {/* 서버 수정 후 조건문 제거 처리 필요 */}
+          {data.scrapCount !== undefined && (
+            <>
+              <Icon
+                id='bookmark-fill'
+                width='9'
+                height='11'
+                fill={data.liked ? '#5F86BF' : '#D9D9D9'}
+              />
+              <span>{data.scrapCount.toLocaleString()}</span>
+            </>
+          )}
         </div>
       </div>
     </div>
