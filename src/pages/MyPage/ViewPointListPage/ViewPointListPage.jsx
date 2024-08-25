@@ -6,6 +6,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getPointList } from '@/apis';
 import { useInView } from 'react-intersection-observer';
 import { format } from 'date-fns';
+import { POINT_CATEGORY_KOREAN_ENUM } from '@/constants/point';
 
 export default function ViewPointListPage() {
   const { userInfo, status } = useAuth({
@@ -74,7 +75,7 @@ export default function ViewPointListPage() {
                       <h2
                         className={`${styles.pointTitle} ${difference < 0 ? styles.negative : ''}`}
                       >
-                        {category}
+                        {POINT_CATEGORY_KOREAN_ENUM[category]}
                       </h2>
                       {reviewTitle && (
                         <span className={styles.pointDesc}>{reviewTitle}</span>
