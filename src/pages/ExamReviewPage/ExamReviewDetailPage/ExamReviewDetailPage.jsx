@@ -172,11 +172,11 @@ export default function ExamReviewDetailPage() {
               height='14'
               fill='#5F86BF'
             />
-            <span>{commentCount}</span>
+            <span>{commentCount.toLocaleString()}</span>
           </div>
           <div className={styles.count}>
             <Icon id='bookmark-fill' width='10' height='13' fill='#5F86BF' />
-            <span>{scrapCount}</span>
+            <span>{scrapCount.toLocaleString()}</span>
           </div>
         </div>
       </div>

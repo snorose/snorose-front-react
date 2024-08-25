@@ -131,17 +131,17 @@ export default function PostPage() {
         </div>
         <div className={styles.title}>
           <p>{postData.title}</p>
-          <p>{postData.viewCount} views</p>
+          <p>{postData.viewCount.toLocaleString()} views</p>
         </div>
         <p className={styles.text}>{postData.content}</p>
         <div className={styles.post_bottom}>
           <div className={styles.count} onClick={inputFocus}>
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
-            <p>{filterdCommentList?.length}</p>
+            <p>{filterdCommentList?.length.toLocaleString()}</p>
           </div>
           <div className={styles.count}>
             <Icon id='like' width='13' height='12' fill='#D9D9D9' />
-            <p>{postData.likeCount}</p>
+            <p>{postData.likeCount.toLocaleString()}</p>
           </div>
         </div>
       </div>

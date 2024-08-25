@@ -95,7 +95,7 @@ export default function Comment({ data }) {
           </button>
           <button className={styles.likedCount}>
             <Icon id='like' width='13' height='12' fill='#D9D9D9' />
-            <p>{likeCount}</p>
+            <span>{likeCount.toLocaleString()}</span>
           </button>
         </div>
         {children.length > 0 &&
