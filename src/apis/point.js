@@ -16,3 +16,11 @@ export const updatePoint = async ({
   });
   return response;
 };
+
+export const getPointList = async (params) => {
+  const { data } = await authAxios.get('/v1/points/log', {
+    params,
+  });
+
+  return data.result;
+};

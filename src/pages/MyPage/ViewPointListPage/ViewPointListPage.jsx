@@ -1,98 +1,49 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo } from 'react';
 import styles from './ViewPointListPage.module.css';
 import { BackAppBar, Icon } from '@/components';
-
-const pointData = [
-  {
-    id: 1,
-    title: '출석 포인트',
-    desc: '',
-    date: '2024.06.01 15:23:00',
-    point: 2,
-  },
-  {
-    id: 2,
-    title: '게시글 포인트',
-    desc: '뫔뫄',
-    date: '2024.06.01 15:23:00',
-    point: 3,
-  },
-  {
-    id: 3,
-    title: '댓글 포인트',
-    desc: '어제 간식으로 나온거 맛있던데 총학 공지에 나와있는...',
-    date: '2024.06.01 15:23:00',
-    point: 1,
-  },
-  {
-    id: 4,
-    title: '시험후기 다운로드',
-    desc: '서양미술사/이교수',
-    date: '2024.06.01 15:23:00',
-    point: -50,
-  },
-  {
-    id: 5,
-    title: '인증 포인트',
-    desc: '',
-    date: '2024.06.01 15:23:00',
-    point: 50,
-  },
-  {
-    id: 6,
-    title: '신고 포상 포인트',
-    desc: '',
-    date: '2024.06.01 15:23:00',
-    point: 10,
-  },
-  {
-    id: 7,
-    title: '게시글 삭제 포인트',
-    desc: '아 미친 지각 각임',
-    date: '2024.06.01 15:23:00',
-    point: -3,
-  },
-  {
-    id: 8,
-    title: '댓글 삭제 포인트',
-    desc: '어제 간식으로 나온거 맛있던데 총학 공지에 나와있는...',
-    date: '2024.06.01 15:23:00',
-    point: -3,
-  },
-  {
-    id: 8,
-    title: '댓글 삭제 포인트',
-    desc: '어제 간식으로 나온거 맛있던데 총학 공지에 나와있는...',
-    date: '2024.06.01 15:23:00',
-    point: -3,
-  },
-  {
-    id: 8,
-    title: '댓글 삭제 포인트',
-    desc: '어제 간식으로 나온거 맛있던데 총학 공지에 나와있는...',
-    date: '2024.06.01 15:23:00',
-    point: -3,
-  },
-];
+import { useAuth } from '@/hooks';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { getPointList } from '@/apis';
+import { useInView } from 'react-intersection-observer';
+import { format } from 'date-fns';
+import { POINT_CATEGORY_KOREAN_ENUM } from '@/constants/point';
 
 export default function ViewPointListPage() {
-  const chargePointsRef = useRef([]);
+  const { userInfo, status } = useAuth({
+    isRequiredAuth: true,
+  });
+  const { ref, inView } = useInView();
+
+  const { data, isPending, isError, hasNextPage, fetchNextPage } =
+    useInfiniteQuery({
+      queryKey: ['getPointList'],
+      queryFn: ({ pageParam }) => getPointList({ page: pageParam }),
+      // 서버 API 수정 후 1 > 0으로 값 수정 필요
+      initialPageParam: 1,
+      getNextPageParam: (lastPage, _, lastPageParam) => {
+        return lastPage.length > 0 ? lastPageParam + 1 : undefined;
+      },
+    });
+
+  const pointList = useMemo(() => {
+    return data
+      ? data.pages.flatMap(({ pointLogResponse }) => pointLogResponse)
+      : [];
+  }, [data]);
 
   useEffect(() => {
-    chargePointsRef.current.forEach((point) => {
-      const value = point.textContent.replace(/\s/g, '');
-      if (parseInt(value) < 0) {
-        point.classList.add(styles.negative);
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, fetchNextPage]);
 
-        const pointTitleElement = point
-          .closest(`.${styles.pointBox}`)
-          .querySelector(`.${styles.pointTitle}`);
-        if (pointTitleElement) {
-          pointTitleElement.classList.add(styles.negative);
-        }
-      }
-    });
-  }, []);
+  if (status === 'loading' || isPending) {
+    return <div>loading...</div>;
+  }
+
+  if (status === 'unauthenticated' || isError) {
+    return null;
+  }
 
   return (
     <main className={styles.viewPointListPage}>
@@ -100,36 +51,55 @@ export default function ViewPointListPage() {
         <BackAppBar stroke='#000' />
       </header>
 
-      <section className={styles.contentWrapper}>
+      <div className={styles.contentWrapper}>
         <div className={styles.topContainer}>
           <h1 className={styles.title}>보유 포인트</h1>
           <div className={styles.totalPointWrapper}>
             <Icon id='point-circle' />
-            <span className={styles.totalPoint}>39</span>
+            <span className={styles.totalPoint}>
+              {userInfo.balance.toLocaleString()}
+            </span>
           </div>
         </div>
 
-        <article className={styles.pointListContainer}>
-          {pointData.map((item, index) => (
-            <section key={item.id} className={styles.pointBox}>
-              <div className={styles.pointIconContentWrapper}>
-                <Icon id={item.point > 0 ? 'heart-plus' : 'heart-minus'} />
-                <div className={styles.pointContent}>
-                  <h2 className={styles.pointTitle}>{item.title}</h2>
-                  {item.desc && <p className={styles.pointDesc}>{item.desc}</p>}
-                  <time className={styles.pointDate}>{item.date}</time>
-                </div>
-              </div>
-              <span
-                ref={(el) => (chargePointsRef.current[index] = el)}
-                className={styles.chargePoint}
-              >
-                {item.point > 0 ? `+${item.point}` : `${item.point}`}
-              </span>
-            </section>
-          ))}
-        </article>
-      </section>
+        {pointList.length > 0 ? (
+          <ul className={styles.pointListContainer}>
+            {pointList.map(
+              ({ id, difference, category, createdAt, reviewTitle }, index) => (
+                <li
+                  key={id}
+                  className={styles.pointBox}
+                  ref={pointList.length - 2 === index ? ref : undefined}
+                >
+                  <div className={styles.pointIconContentWrapper}>
+                    <Icon id={difference > 0 ? 'heart-plus' : 'heart-minus'} />
+                    <div className={styles.pointContent}>
+                      <h2
+                        className={`${styles.pointTitle} ${difference < 0 ? styles.negative : ''}`}
+                      >
+                        {POINT_CATEGORY_KOREAN_ENUM[category]}
+                      </h2>
+                      {reviewTitle && (
+                        <span className={styles.pointDesc}>{reviewTitle}</span>
+                      )}
+                      <span className={styles.pointDate}>
+                        {format(new Date(createdAt), 'yyyy.MM.dd HH:mm:ss')}
+                      </span>
+                    </div>
+                  </div>
+                  <span
+                    className={`${styles.chargePoint} ${difference < 0 ? styles.negative : ''}`}
+                  >
+                    {`${difference > 0 ? '+' : ''}${difference.toLocaleString()}`}
+                  </span>
+                </li>
+              )
+            )}
+          </ul>
+        ) : (
+          <p>적립된 포인트 내역이 없습니다.</p>
+        )}
+      </div>
     </main>
   );
 }
