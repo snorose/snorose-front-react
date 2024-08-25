@@ -56,7 +56,9 @@ export default function ViewPointListPage() {
           <h1 className={styles.title}>보유 포인트</h1>
           <div className={styles.totalPointWrapper}>
             <Icon id='point-circle' />
-            <span className={styles.totalPoint}>{userInfo.balance}</span>
+            <span className={styles.totalPoint}>
+              {userInfo.balance.toLocaleString()}
+            </span>
           </div>
         </div>
 
@@ -88,7 +90,7 @@ export default function ViewPointListPage() {
                   <span
                     className={`${styles.chargePoint} ${difference < 0 ? styles.negative : ''}`}
                   >
-                    {`${difference > 0 ? '+' : ''}${difference}`}
+                    {`${difference > 0 ? '+' : ''}${difference.toLocaleString()}`}
                   </span>
                 </li>
               )
