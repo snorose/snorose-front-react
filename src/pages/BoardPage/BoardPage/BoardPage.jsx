@@ -31,7 +31,6 @@ export default function BoardPage() {
           <Search
             placeholder='전체 게시판 내 검색'
             handleKeyDown={handleKeyDown}
-            isAllSearch={true}
           />
         </div>
         <div className={styles.board_box}>

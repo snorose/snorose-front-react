@@ -17,28 +17,27 @@ export default function PostSearchPage() {
   const current = pathname.split('/')[2];
   const urlKeyword = decodeURIComponent(pathname.split('/')[4] || '');
   const [keyword, setKeyword] = useState(urlKeyword);
-  const [searchKeyword, setSearchKeyword] = useState(urlKeyword);
 
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && event.target.value.trim() !== '') {
       event.preventDefault();
-      setSearchKeyword(event.target.value);
+      setKeyword(event.target.value);
     }
   };
 
   const { data, ref, isFetching, Target } = useInfiniteScroll({
-    queryKey: ['postList', searchKeyword || 'default'],
+    queryKey: ['postList', keyword || 'default'],
     queryFn: ({ pageParam }) => {
       if (current === 'all') {
         return searchAllBoard({
           page: pageParam,
-          keyword: searchKeyword || '',
+          keyword: keyword || '',
         });
       } else {
         return searchByBoard({
           boardId: BOARD_ID[current],
           page: pageParam,
-          keyword: searchKeyword || '',
+          keyword: keyword || '',
         });
       }
     },
@@ -54,9 +53,7 @@ export default function PostSearchPage() {
           <Search
             placeholder={PLACEHOLDER[current]}
             keyword={keyword}
-            setKeyword={(text) => setKeyword(text)}
             handleKeyDown={handleKeyDown}
-            isAllSearch={false}
           />
         }
         hasSearchInput={true}
@@ -66,7 +63,7 @@ export default function PostSearchPage() {
           <FetchLoading>검색 중</FetchLoading>
         ) : (
           <>
-            {searchKeyword !== '' && postList.length === 0 ? (
+            {keyword !== '' && postList.length === 0 ? (
               <div className={styles.noResult}>검색 결과가 없습니다</div>
             ) : (
               <div className={styles.posts}>

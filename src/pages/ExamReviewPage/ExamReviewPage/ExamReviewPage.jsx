@@ -51,6 +51,13 @@ export default function ExamReviewPage() {
       : ({ pageParam }) => getReviewList(pageParam),
   });
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' && event.target.value.trim() !== '') {
+      event.preventDefault();
+      setKeyword(event.target.value);
+    }
+  };
+
   const reviewList =
     data && !data.pages.includes(undefined)
       ? data.pages.flatMap((page) => page)
@@ -62,7 +69,7 @@ export default function ExamReviewPage() {
       <Search
         className={styles.search}
         placeholder='시험후기 검색'
-        setKeyword={setKeyword}
+        handleKeyDown={handleKeyDown}
       />
       <div className={styles.filters}>
         <DropDownBlue
