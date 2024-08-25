@@ -4,6 +4,7 @@ import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
 import { deleteExamReview, getReviewDetail, updatePoint } from '@/apis';
 
+import { useScrap } from '@/hooks';
 import { useToast } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
@@ -33,16 +34,14 @@ const EXAM_TYPE = convertToObject(EXAM_TYPES);
 
 export default function ExamReviewDetailPage() {
   const { postId } = useParams();
-  const [isScraped, setIsScraped] = useState(false);
-  const { toast } = useToast();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const { data } = useQuery({
     queryKey: ['reviewDetail', postId],
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
   });
-
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const deleteReview = useMutation({
     mutationFn: () => deleteExamReview(postId),
@@ -64,6 +63,9 @@ export default function ExamReviewDetailPage() {
       navigate('/board/exam-review');
     },
   });
+
+  const { scrap, deleteScrap } = useScrap();
+  const { toast } = useToast();
 
   if (data === undefined) return null;
 
@@ -115,11 +117,11 @@ export default function ExamReviewDetailPage() {
           </div>
           <div className={styles.actions}>
             <Icon
-              id={isScrap || isScraped ? 'bookmark-fill' : 'bookmark-line'}
+              id={isScrap ? 'bookmark-fill' : 'bookmark-line'}
               width='14'
               height='18'
               fill='#5F86BF'
-              onClick={() => setIsScraped((prev) => !prev)}
+              onClick={() => (isScrap ? deleteScrap.mutate() : scrap.mutate())}
             />
             <div className={styles.more}>
               {isWriter && (
