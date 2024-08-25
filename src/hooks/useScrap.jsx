@@ -6,7 +6,9 @@ import { scrap as ScrapApi, deleteScrap as deleteScrapApi } from '../apis';
 export default function useScrap() {
   const { postId } = useParams();
   const { pathname } = useLocation();
+
   const currentBoard = pathname.split('/')[2];
+
   const queryClient = useQueryClient();
 
   const scrap = useMutation({

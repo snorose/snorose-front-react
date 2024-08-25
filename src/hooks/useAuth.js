@@ -37,15 +37,23 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
     navigate('/');
   };
 
-  const withdraw = async (currentPassword) => {
+  const withdraw = async (currentPassword, { onSuccess, onError } = {}) => {
     try {
       await withdrawAccount({
         currentPassword,
       });
       alert('회원 탈퇴가 완료되었습니다.');
       logout();
+
+      if (onSuccess !== undefined) {
+        onSuccess();
+      }
     } catch {
       alert('회원 탈퇴에 실패했습니다. 다시 시도해주세요.');
+
+      if (onError !== undefined) {
+        onError();
+      }
     }
   };
 

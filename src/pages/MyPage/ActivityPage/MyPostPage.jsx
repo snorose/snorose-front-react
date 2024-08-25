@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import styles from './ActivityPage.module.css';
-import { BackAppBar, Icon, PostBar, Sponser } from '@/components';
+import { BackAppBar, Icon, PostBar, Sponsor } from '@/components';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getMyPostList } from '@/apis';
 import { Link } from 'react-router-dom';
@@ -72,7 +72,7 @@ export default function MyPostPage() {
       </section>
 
       <div className={styles.sponsor}>
-        <Sponser className={styles.sponsorImage} />
+        <Sponsor className={styles.sponsorImage} />
       </div>
     </main>
   );

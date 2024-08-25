@@ -1,8 +1,8 @@
 import styles from './DeleteAccountPage.module.css';
 import { Link } from 'react-router-dom';
-import { CloseAppBar, InputPassword } from '@/components';
+import { CloseAppBar, ConfirmModal, InputPassword } from '@/components';
 import { useState } from 'react';
-import { useAuth } from '@/hooks';
+import { useAuth, useModal } from '@/hooks';
 
 const DESCRIPTION_LIST = [
   '• 회원탈퇴 시 모든 정보가 영구적으로 삭제되며, 다시는 복구할 수 없습니다.',
@@ -11,19 +11,19 @@ const DESCRIPTION_LIST = [
 ];
 
 export default function DeleteAccountPage() {
-  const { withdraw } = useAuth();
   const [password, setPassword] = useState('');
+
+  const { withdraw } = useAuth();
+  const withdrawConfirmModal = useModal();
 
   const handlePasswordInputChange = (event) => {
     setPassword(event.target.value);
   };
 
-  const handleDeleteAccountButtonClick = () => {
-    const confirmation = window.confirm('정말로 탈퇴하시겠습니까?');
-
-    if (confirmation) {
-      withdraw(password);
-    }
+  const handleModalPrimaryButtonClick = () => {
+    withdraw(password, {
+      onError: withdrawConfirmModal.closeModal,
+    });
   };
 
   return (
@@ -55,13 +55,23 @@ export default function DeleteAccountPage() {
             뒤로가기
           </Link>
           <button
+            disabled={password === ''}
             className={styles.deleteAccountButton}
-            onClick={handleDeleteAccountButtonClick}
+            onClick={withdrawConfirmModal.openModal}
           >
             탈퇴하기
           </button>
         </div>
       </section>
+
+      <ConfirmModal
+        isOpen={withdrawConfirmModal.isOpen}
+        title='정말로 탈퇴하시겠습니까?'
+        primaryButtonText='확인'
+        secondaryButtonText='취소'
+        onPrimaryButtonClick={handleModalPrimaryButtonClick}
+        onSecondaryButtonClick={withdrawConfirmModal.closeModal}
+      />
     </main>
   );
 }

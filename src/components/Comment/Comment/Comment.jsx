@@ -105,6 +105,13 @@ export default function Comment({ data }) {
             (isVisible ? content : '(관리자에 의해 차단된 댓글입니다)')}
           {isDeleted && '(삭제된 댓글입니다)'}
         </div>
+        <div
+          className={`${styles.commentCenter} ${(isDeleted || !isVisible) && styles.hide}`}
+        >
+          {!isDeleted &&
+            (isVisible ? content : '(관리자에 의해 차단된 댓글입니다)')}
+          {isDeleted && '(삭제된 댓글입니다)'}
+        </div>
         <div className={styles.commentBottom}>
           <button className={styles.commentCount} onClick={handleReply}>
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
