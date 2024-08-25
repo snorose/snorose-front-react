@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import styles from './ActivityPage.module.css';
-import { BackAppBar, Icon, PostBar, Sponser } from '@/components';
+import { BackAppBar, Icon, PostBar, Sponsor } from '@/components';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { getMyReviewFileList } from '@/apis';
@@ -73,7 +73,7 @@ export default function DownloadExamReviewPage() {
       </section>
 
       <div className={styles.sponsor}>
-        <Sponser className={styles.sponsorImage} />
+        <Sponsor className={styles.sponsorImage} />
       </div>
     </main>
   );
