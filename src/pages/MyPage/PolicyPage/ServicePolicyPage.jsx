@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './PolicyPage.module.css';
-import { CloseAppBar } from '../../../components/AppBar';
+import { CloseAppBar } from '@/components/AppBar';
 
 const ServicePolicyPageContent = `제 1 장 총칙
 

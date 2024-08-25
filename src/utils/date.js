@@ -5,3 +5,14 @@ export const dateFormat = (date) => {
   const day = `${dateObj.getDate()}`.padStart(2, '0');
   return `${year}.${month}.${day}`;
 };
+
+export const isToday = (date) => {
+  const target = new Date(date);
+  const today = new Date();
+
+  return (
+    target.getFullYear() === today.getFullYear() &&
+    target.getMonth() === today.getMonth() &&
+    target.getDate() === today.getDate()
+  );
+};

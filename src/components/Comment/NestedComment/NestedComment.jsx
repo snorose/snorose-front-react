@@ -45,6 +45,23 @@ export default function NestedComment({
     }
   }, [likeError]);
 
+  const {
+    id,
+    postId,
+    userDisplay,
+    isWriter,
+    isWriterWithdrawn,
+    content,
+    likeCount,
+    createdAt,
+    updatedAt,
+    isVisible,
+    isUpdated,
+    isDeleted,
+    // isLiked,
+    children,
+  } = data;
+
   return (
     <>
       <div
@@ -64,21 +81,29 @@ export default function NestedComment({
             <div className={styles.cloud}>
               <Icon id='cloud' width='19' heigth='13' />
             </div>
-            <p>{data.userDisplay}</p>
+            <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
+              {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
+            </p>
             <p className={styles.dot}>·</p>
             <p>
-              {timeAgo(data.createdAt)} {data.isUpdated ? ' (수정됨)' : null}
+              {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
             </p>
           </div>
 
           <p className={styles.dot3} onClick={() => onCommentOptionClick(data)}>
-            {data.isWriter && (
+            {isWriter && !isDeleted && (
               <Icon id='ellipsis-vertical' width='3' height='11' />
             )}
           </p>
         </div>
         <div className={styles.commentCenter}>
-          <div className={styles.nestedPadding}>{data.content}</div>
+          <div
+            className={`${styles.nestedPadding} ${(isDeleted || !isVisible) && styles.hide}`}
+          >
+            {!isDeleted &&
+              (isVisible ? content : '(관리자에 의해 차단된 댓글입니다)')}
+            {isDeleted && '(삭제된 댓글입니다)'}
+          </div>
         </div>
         <div className={styles.commentBottom}>
           <button className={styles.likedCount}>

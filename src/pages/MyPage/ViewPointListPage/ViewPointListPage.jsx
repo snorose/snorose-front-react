@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { Icon } from '../../../components/Icon';
 import styles from './ViewPointListPage.module.css';
-import { BackAppBar } from '../../../components/AppBar';
+import { BackAppBar, Icon } from '@/components';
 
 const pointData = [
   {

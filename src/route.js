@@ -2,6 +2,7 @@ import App from '@/App';
 import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
 import { AlertPage } from '@/pages/AlertPage';
+import { AttendancePage } from '@/pages/AttendancePage';
 import { BoardListPage, BoardPage } from '@/pages/BoardPage';
 import {
   ChangePasswordPage,
@@ -34,10 +35,17 @@ import SignUpSuccessPage from './pages/LoginPage/SignUpPage/SignUpSuccessPage/Si
 import SignUpFailurePage from './pages/LoginPage/SignUpPage/SignUpPageStages/SignUpFailure/SignUpFailurePage';
 import { NoticeListPage } from '@/pages/NoticeListPage';
 import { MainPage } from '@/pages/MainPage';
-import { PostPage, PostSearchPage, PostWritePage, PostEditPage } from '@/pages/PostPage';
+import {
+  PostPage,
+  PostSearchPage,
+  PostWritePage,
+  PostEditPage,
+} from '@/pages/PostPage';
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/constants';
+import ScrapPage from './pages/MyPage/ActivityPage/ScrapPage';
+import ScrapExamReviewPage from './pages/MyPage/ActivityPage/ScrapExamReviewPage';
 
 const boardPaths = ['first-snow', 'large-snow', 'permanent-snow', 'besookt'];
 
@@ -134,7 +142,7 @@ export const routeList = [
         ),
       },
       {
-        path: '/board/exam-review/:postId',
+        path: '/board/exam-review/post/:postId',
         element: (
           <ProtectedRoute>
             <ExamReviewDetailPage />
@@ -154,6 +162,13 @@ export const routeList = [
       {
         path: '/board/exam-review-write',
         element: <ExamReviewWritePage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/attendance',
+        element: <AttendancePage />,
         meta: {
           hideNav: true,
         },
@@ -225,6 +240,20 @@ export const routeList = [
       {
         path: '/my-page/download-exam-review',
         element: <DownloadExamReviewPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/scrap',
+        element: <ScrapPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/scrap-exam-review',
+        element: <ScrapExamReviewPage />,
         meta: {
           hideNav: true,
         },

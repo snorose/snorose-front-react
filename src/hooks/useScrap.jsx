@@ -1,29 +1,35 @@
-import { useState, useEffect } from 'react';
-import { postScrap, deleteScrap } from '@/apis/scrap';
+import { useParams, useLocation } from 'react-router-dom';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-// 스크랩 훅
-const useScrap = (postId, initialState, refetch) => {
-  const [isScrapped, setIsScrapped] = useState(initialState);
-  const [error, setError] = useState(null);
+import { scrap as ScrapApi, deleteScrap as deleteScrapApi } from '../apis';
 
-  const toggleScrap = async () => {
-    try {
-      const action = isScrapped ? deleteScrap : postScrap;
-      await action(postId);
-      setIsScrapped((prev) => !prev);
-      refetch();
-      setError(null);
-    } catch (err) {
-      setError(err);
-      console.error('스크랩 에러:', err);
-    }
-  };
+export default function useScrap() {
+  const { postId } = useParams();
+  const { pathname } = useLocation();
+  const currentBoard = pathname.split('/')[2];
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    setIsScrapped(initialState);
-  }, [initialState]);
+  const scrap = useMutation({
+    mutationFn: () => ScrapApi({ postId }),
+    onSuccess: () => {
+      if (currentBoard === 'exam-review') {
+        queryClient.invalidateQueries(['reviewDetail', postId]);
+      } else {
+        queryClient.invalidateQueries(['postContent', postId]);
+      }
+    },
+  });
 
-  return { isScrapped, toggleScrap, error };
-};
+  const deleteScrap = useMutation({
+    mutationFn: () => deleteScrapApi({ postId }),
+    onSuccess: () => {
+      if (currentBoard === 'exam-review') {
+        queryClient.invalidateQueries(['reviewDetail', postId]);
+      } else {
+        queryClient.invalidateQueries(['postContent', postId]);
+      }
+    },
+  });
 
-export default useScrap;
+  return { scrap, deleteScrap };
+}

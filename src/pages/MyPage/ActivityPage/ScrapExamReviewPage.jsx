@@ -2,25 +2,24 @@ import { useEffect, useMemo } from 'react';
 import styles from './ActivityPage.module.css';
 import { BackAppBar, Icon, PostBar, Sponser } from '@/components';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getMyPostList } from '@/apis';
-import { Link } from 'react-router-dom';
+import { getMyScrapReviewList } from '@/apis';
 import { useInView } from 'react-intersection-observer';
-import { getBoardTextId } from '@/utils';
+import { Link } from 'react-router-dom';
 
-export default function MyPostPage() {
+export default function ScrapExamReviewPage() {
   const { ref, inView } = useInView();
 
   const { data, isPending, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
-      queryKey: ['getMyPostList'],
-      queryFn: ({ pageParam }) => getMyPostList({ page: pageParam }),
+      queryKey: ['getMyScrapReviewList'],
+      queryFn: ({ pageParam }) => getMyScrapReviewList({ page: pageParam }),
       initialPageParam: 0,
       getNextPageParam: (lastPage, _, lastPageParam) => {
         return lastPage.length > 0 ? lastPageParam + 1 : undefined;
       },
     });
 
-  const myPostList = useMemo(() => {
+  const myScrapReviewList = useMemo(() => {
     return data ? data.pages.flatMap((page) => page) : [];
   }, [data]);
 
@@ -46,25 +45,27 @@ export default function MyPostPage() {
 
       <section className={styles.contentWrapper}>
         <div className={styles.topContainer}>
-          <h1 className={styles.title}>내가 쓴 글</h1>
+          <h1 className={styles.title}>시험 후기 스크랩</h1>
         </div>
 
         <article className={styles.contentListContainer}>
-          {myPostList.length > 0 ? (
-            myPostList.map((post, index) => (
+          {myScrapReviewList.length > 0 ? (
+            myScrapReviewList.map((post, index) => (
               <Link
                 key={post.postId}
-                ref={index === myPostList.length - 2 ? ref : undefined}
-                to={`/board/${getBoardTextId(post.boardId)}/post/${post.postId}`}
+                ref={index === myScrapReviewList.length - 2 ? ref : undefined}
+                to={`/board/exam-review/post/${post.postId}`}
               >
-                <PostBar data={post} />
+                <PostBar data={post} hasLike={false} />
               </Link>
             ))
           ) : (
             <div className={styles.noContentWrapper}>
-              <p className={styles.noContentMessage}>아직 작성한 글이 없어요</p>
+              <p className={styles.noContentMessage}>
+                아직 스크랩한 시험 후기가 없어요
+              </p>
               <div className={styles.imageWrapper}>
-                <Icon id='no-post-star' className={styles.image} />
+                <Icon id='no-review-star' className={styles.image} />
               </div>
             </div>
           )}

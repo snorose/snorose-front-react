@@ -7,7 +7,7 @@ const NAVBAR_ID = {
   '/home': 'home',
   '/board': 'board',
   '/board/exam-review': 'test',
-  '/alert': 'bell',
+  // '/alert': 'bell',
   '/my-page': 'mypage',
 };
 

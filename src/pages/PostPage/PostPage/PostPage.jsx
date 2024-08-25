@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getPostContent, deletePost } from '@/apis/post.js';
 
@@ -24,6 +24,7 @@ import styles from './PostPage.module.css';
 
 export default function PostPage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { toast } = useToast();
   const { postId } = useParams();
   const { pathname } = useLocation();
@@ -48,19 +49,21 @@ export default function PostPage() {
     enabled: !!currentBoard?.id && !!postId,
   });
 
-  // 스크랩 훅 사용
-  const {
-    isScrapped,
-    toggleScrap,
-    error: scrapError,
-  } = useScrap(postId, data?.isScrapped, refetch);
+  // // 스크랩 훅 사용
+  // const {
+  //   isScrapped,
+  //   toggleScrap,
+  //   error: scrapError,
+  // } = useScrap(postId, data?.isScrapped, refetch);
 
-  // 스크랩 처리 시 에러 메시지 표시
-  useEffect(() => {
-    if (scrapError?.response?.status === 403) {
-      toast(TOAST.SCRAP_SELF_ERROR);
-    }
-  }, [scrapError]);
+  // // 스크랩 처리 시 에러 메시지 표시
+  // useEffect(() => {
+  //   if (scrapError?.response?.status === 403) {
+  //     toast(TOAST.SCRAP_SELF_ERROR);
+  //   }
+  // }, [scrapError]);
+
+  const { scrap, deleteScrap } = useScrap();
 
   // 좋아요 훅 사용
   const {
@@ -186,12 +189,17 @@ export default function PostPage() {
             />
             <p>{postData.likeCount}</p>
           </div>
-          <div className={styles.count} onClick={toggleScrap}>
+          <div
+            className={styles.count}
+            onClick={() =>
+              postData.isScrapped ? deleteScrap.mutate() : scrap.mutate()
+            }
+          >
             <Icon
               id='bookmark-fill'
               width='10'
               height='13'
-              fill={isScrapped ? '#5F86BF' : '#D9D9D9'}
+              fill={postData.isScrapped ? '#5F86BF' : '#D9D9D9'}
             />
             <p>{postData.scrapCount}</p>
           </div>

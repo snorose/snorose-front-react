@@ -36,9 +36,10 @@ export default function Comment({ data }) {
     }
   }, [likeError]);
 
-  const onCommentOptionClick = ({ id, parentId, content }) => {
-    setCommentId(id);
-    setContent(content);
+  const onCommentOptionClick = (data) => {
+    console.log('Comment option clicked', data);
+    setCommentId(data.id);
+    setContent(data.content);
     setIsOptionModalOpen(true);
   };
 
@@ -53,6 +54,22 @@ export default function Comment({ data }) {
     inputFocus();
   };
 
+  const {
+    id,
+    postId,
+    userDisplay,
+    isWriter,
+    isWriterWithdrawn,
+    content,
+    likeCount,
+    createdAt,
+    updatedAt,
+    isVisible,
+    isUpdated,
+    isDeleted,
+    children,
+  } = data;
+
   return (
     <>
       <div className={styles.comment} onClick={() => setCommentId(undefined)}>
@@ -61,10 +78,12 @@ export default function Comment({ data }) {
             <div className={styles.cloud}>
               <Icon id='cloud' width='19' height='13' />
             </div>
-            <p>{data.userDisplay}</p>
+            <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
+              {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
+            </p>
             <p className={styles.dot}>·</p>
             <p>
-              {timeAgo(data.createdAt)} {data.isUpdated ? ' (수정됨)' : null}
+              {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
             </p>
           </div>
           <p
@@ -74,16 +93,22 @@ export default function Comment({ data }) {
               onCommentOptionClick(data);
             }}
           >
-            {data.isWriter && (
+            {isWriter && !isDeleted && (
               <Icon id='ellipsis-vertical' width='3' height='11' />
             )}
           </p>
         </div>
-        <div className={styles.commentCenter}>{data.content}</div>
+        <div
+          className={`${styles.commentCenter} ${(isDeleted || !isVisible) && styles.hide}`}
+        >
+          {!isDeleted &&
+            (isVisible ? content : '(관리자에 의해 차단된 댓글입니다)')}
+          {isDeleted && '(삭제된 댓글입니다)'}
+        </div>
         <div className={styles.commentBottom}>
           <button className={styles.commentCount} onClick={handleReply}>
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
-            <p>{data.children.length}</p>
+            <p>{children.length}</p>
           </button>
           <button className={styles.likedCount} onClick={toggleLike}>
             <Icon
@@ -95,19 +120,19 @@ export default function Comment({ data }) {
             <p>{data.likeCount}</p>
           </button>
         </div>
-        {data.children.length > 0 &&
-          data.children.map((childComment, index) => (
+        {children.length > 0 &&
+          children.map((childComment, index) => (
             <NestedComment
               key={childComment.id}
               data={childComment}
-              isLast={index === data.children.length - 1}
+              isLast={index === children.length - 1}
               isFirst={index === 0}
               onCommentOptionClick={onCommentOptionClick}
             />
           ))}
       </div>
       <OptionModal
-        id='comment-edit'
+        id='comment-more-options'
         isOpen={isOptionModalOpen}
         setIsOpen={setIsOptionModalOpen}
         closeFn={onCloseClick}

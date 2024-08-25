@@ -1,12 +1,11 @@
-import { authAxios } from '../axios';
+import { authAxios } from '@/axios/index.js';
 
-// 게시글 스크랩 추가 & 삭제
-export const postScrap = async (postId) => {
+export const scrap = async ({ postId }) => {
   const response = await authAxios.post(`/v1/scraps/posts/${postId}`);
-  return response.data.result;
+  return response;
 };
 
-export const deleteScrap = async (postId) => {
+export const deleteScrap = async ({ postId }) => {
   const response = await authAxios.delete(`/v1/scraps/posts/${postId}`);
-  return response.data.result;
+  return response;
 };
