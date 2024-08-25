@@ -14,7 +14,7 @@ import { InputBar } from '@/components/InputBar';
 import { ReviewContentItem } from '@/components/ReviewContentItem';
 import { ReviewDownload } from '@/components/ReviewDownload';
 
-import { dateFormat } from '@/utils/formatDate.js';
+import { dateFormat } from '@/utils/date.js';
 import { convertToObject } from '@/utils/convertDS.js';
 
 import {
