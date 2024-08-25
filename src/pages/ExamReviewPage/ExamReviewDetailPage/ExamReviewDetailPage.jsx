@@ -9,6 +9,7 @@ import { useToast } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
+import { DeleteModal, OptionModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 import { InputBar } from '@/components/InputBar';
 import { ReviewContentItem } from '@/components/ReviewContentItem';
@@ -67,7 +68,17 @@ export default function ExamReviewDetailPage() {
   const { scrap, deleteScrap } = useScrap();
   const { toast } = useToast();
 
+  const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   if (data === undefined) return null;
+
+  const edit = () =>
+    navigate(`/board/exam-review/${postId}/edit`, {
+      state: data,
+      replace: true,
+    });
+  const remove = () => deleteReview.mutate();
 
   const {
     userDisplay,
@@ -123,30 +134,14 @@ export default function ExamReviewDetailPage() {
               fill='#5F86BF'
               onClick={() => (isScrap ? deleteScrap.mutate() : scrap.mutate())}
             />
-            <div className={styles.more}>
-              {isWriter && (
-                <>
-                  <Icon
-                    id='pencil'
-                    width='15'
-                    height='17'
-                    onClick={() =>
-                      navigate(`/board/exam-review/${postId}/edit`, {
-                        state: data,
-                        replace: true,
-                      })
-                    }
-                  />
-                  <Icon
-                    id='trash'
-                    width='12'
-                    height='16'
-                    onClick={() => deleteReview.mutate()}
-                  />
-                </>
-              )}
-              <Icon id='ellipsis-vertical' width='3' height='11' />
-            </div>
+            {isWriter && (
+              <Icon
+                onClick={() => setIsOptionModalOpen(true)}
+                id='ellipsis-vertical'
+                width='3'
+                height='11'
+              />
+            )}
           </div>
         </div>
         <div className={styles.title}>{title}</div>
@@ -182,6 +177,25 @@ export default function ExamReviewDetailPage() {
       </div>
       <CommentList />
       <InputBar />
+      <OptionModal
+        id='exam-review-edit'
+        isOpen={isOptionModalOpen}
+        setIsOpen={setIsOptionModalOpen}
+        closeFn={() => setIsOptionModalOpen(false)}
+        functions={{
+          pencil: edit,
+          trash: () => {
+            setIsOptionModalOpen(false);
+            setIsDeleteModalOpen(true);
+          },
+        }}
+      />
+      <DeleteModal
+        id='exam-review-delete'
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setIsDeleteModalOpen}
+        redBtnFunction={remove}
+      />
     </main>
   );
 }
