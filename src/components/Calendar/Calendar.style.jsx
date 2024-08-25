@@ -7,9 +7,9 @@ import 'react-calendar/dist/Calendar.css';
 export const StyledCalendar = styled(Calendar)`
   // calendar
   .react-calendar {
-    margin: 0 20px;
+    margin: 0 1.25rem;
     background-color: rgba(95, 133, 191, 0.4);
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     border: none;
   }
 
@@ -18,14 +18,14 @@ export const StyledCalendar = styled(Calendar)`
     margin: 0; // 배경색 해결되면 삭제
     /* background-color: rgba(95, 133, 191, 0.4); */
     background-color: #2556a2;
-    border-radius: 5px 5px 0 0;
+    border-radius: 0.3125rem 0.3125rem 0 0;
   }
 
   .react-calendar__navigation__label {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 130%;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3125rem;
     color: #ffffff;
     cursor: auto;
   }
@@ -54,23 +54,23 @@ export const StyledCalendar = styled(Calendar)`
   }
 
   .react-calendar__viewContainer {
-    padding-top: 16px; // 배경색 해결되면 삭제
+    padding-top: 1rem; // 배경색 해결되면 삭제
     /* background-color: rgba(95, 133, 191, 0.4); */
     background-color: #2556a2;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 0.3125rem 0.3125rem;
   }
 
   // weekday
   .react-calendar__month-view__weekdays__weekday {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 150%;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3125rem;
     color: #ffffff;
   }
 
   // tile
   .react-calendar__tile {
-    padding: 2px 0;
+    padding: 0.125rem 0;
     display: flex;
     justify-content: center;
     cursor: normal;
