@@ -7,6 +7,7 @@ export * from './Carousel';
 // export * from './CategoryBoard';
 export * from './Comment';
 export * from './DropDownBlue';
+export * from './DropDownMenu';
 export * from './Fieldset';
 export * from './Flex';
 export * from './Footer';
