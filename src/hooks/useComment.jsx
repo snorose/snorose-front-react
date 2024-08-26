@@ -1,6 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
+import { useToast } from '@/hooks';
+import { TOAST } from '@/constants';
+
 import {
   deleteComment as remove,
   getCommentList,
@@ -11,6 +14,7 @@ import {
 export default function useComment() {
   const { postId } = useParams();
   const queryClient = useQueryClient();
+  const { toast } = useToast();
 
   const { data: commentList, refetch } = useQuery({
     queryKey: ['comments', postId],
@@ -28,9 +32,9 @@ export default function useComment() {
       const errorStatus = error.response.status;
 
       if (errorStatus === 400) {
-        alert('댓글 등록에 실패했습니다.');
+        toast(TOAST.COMMENT_CREATE_FAIL);
       } else if (errorStatus === 404) {
-        alert('찾을 수 없는 댓글입니다.');
+        toast(TOAST.COMMENT_NOT_FOUND);
       }
     },
   });
@@ -46,11 +50,11 @@ export default function useComment() {
       const errorCode = error.response.data.code;
 
       if (errorStatus === 400) {
-        alert('댓글 삭제에 실패했습니다.');
+        toast(TOAST.COMMENT_DELETE_FAIL);
       } else if (errorCode === 404 && errorCode === 3031) {
-        alert('사라진 게시글입니다.');
+        toast(TOAST.POST_NOT_FOUND);
       } else if (errorCode === 404 && errorCode === 3020) {
-        alert('사라진 댓글입니다.');
+        toast(TOAST.COMMENT_NOT_FOUND);
       }
     },
   });
@@ -67,11 +71,11 @@ export default function useComment() {
       const errorCode = error.response.data.code;
 
       if (errorStatus === 400) {
-        alert('댓글 수정에 실패했습니다.');
+        toast(TOAST.COMMENT_EDIT_FAIL);
       } else if (errorCode === 404 && errorCode === 3031) {
-        alert('사라진 게시글입니다.');
+        toast(TOAST.POST_NOT_FOUND);
       } else if (errorCode === 404 && errorCode === 3020) {
-        alert('사라진 댓글입니다.');
+        toast(TOAST.COMMENT_NOT_FOUND);
       }
     },
   });
