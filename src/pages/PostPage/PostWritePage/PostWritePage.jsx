@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
@@ -161,12 +161,6 @@ export default function PostWritePage() {
           />
         </div>
       </div>
-      <div
-        className={styles.bottom}
-        onClick={() => {
-          setDropDownOpen(false);
-        }}
-      ></div>
     </div>
   );
 }
