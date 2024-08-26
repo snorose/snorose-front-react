@@ -18,7 +18,7 @@ export default function useComment() {
     staleTime: 1000 * 60,
   });
 
-  // 게시글 작성
+  // 댓글 작성
   const postComment = useMutation({
     mutationFn: ({ content, parentId }) => post({ postId, parentId, content }),
     onSuccess: () => {
@@ -35,7 +35,7 @@ export default function useComment() {
     },
   });
 
-  // 게시글 삭제
+  // 댓글 삭제
   const deleteComment = useMutation({
     mutationFn: ({ commentId }) => remove({ postId, commentId }),
     onSuccess: () => {
@@ -55,7 +55,7 @@ export default function useComment() {
     },
   });
 
-  // 게시글 수정
+  // 댓글 수정
   const editComment = useMutation({
     mutationFn: ({ commentId, content, parentId }) =>
       edit({ postId, commentId, content, parentId }),
