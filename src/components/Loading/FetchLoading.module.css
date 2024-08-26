@@ -17,7 +17,7 @@
 }
 
 .icon {
-  animation: rotateAndPause 3s linear infinite;
+  animation: rotateAndPause 2s linear infinite;
 }
 
 @keyframes rotateAndPause {
