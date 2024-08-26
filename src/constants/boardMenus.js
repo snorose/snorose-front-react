@@ -25,13 +25,14 @@ export const BOARD_MENUS = [
     desc: '졸업생 전용 게시판',
     image: permanentSnow,
   },
-  {
-    id: 20,
-    textId: 'besookt',
-    title: '베숙트',
-    desc: '추천을 가장 많이\n받은 게시물 모아보기',
-    image: besookt,
-  },
+  // 2차 개발 시 추가 예정
+  // {
+  //   id: 20,
+  //   textId: 'besookt',
+  //   title: '베숙트',
+  //   desc: '추천을 가장 많이\n받은 게시물 모아보기',
+  //   image: besookt,
+  // },
   {
     id: 32,
     textId: 'exam-review',
