@@ -1,29 +1,47 @@
-import { useState, useEffect } from 'react';
-import { postLike, deleteLike } from '@/apis/like';
+import { useLocation } from 'react-router-dom';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { useToast } from '@/hooks';
+import { TOAST } from '@/constants';
 
-// 좋아요 훅
-const useLike = (type, typeId, initialState, refetch = () => {}) => {
-  const [isLiked, setIsLiked] = useState(initialState);
-  const [error, setError] = useState(null);
+import { postLike as LikeApi, deleteLike as DeleteLikeApi } from '@/apis';
 
-  const toggleLike = async () => {
-    try {
-      const action = isLiked ? deleteLike : postLike;
-      await action(type, typeId);
-      setIsLiked((prev) => !prev);
-      refetch();
-      setError(null);
-    } catch (err) {
-      setError(err);
-      console.error('좋아요 에러:', err);
-    }
-  };
+export default function useLike({ type, typeId }) {
+  const { pathname } = useLocation();
+  const currentBoard = pathname.split('/')[2];
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
 
-  useEffect(() => {
-    setIsLiked(initialState);
-  }, [initialState]);
+  const like = useMutation({
+    mutationFn: () => LikeApi(type, typeId),
+    onSuccess: () => {
+      if (currentBoard === 'exam-review') {
+        queryClient.invalidateQueries(['reviewDetail', typeId]);
+      } else {
+        queryClient.invalidateQueries(['postContent', typeId]);
+      }
+    },
+    onError: (error) => {
+      if (error?.response?.status === 403) {
+        toast(TOAST.LIKE_SELF_ERROR);
+      }
+    },
+  });
 
-  return { isLiked, toggleLike, error };
-};
+  const deleteLike = useMutation({
+    mutationFn: () => DeleteLikeApi(type, typeId),
+    onSuccess: () => {
+      if (currentBoard === 'exam-review') {
+        queryClient.invalidateQueries(['reviewDetail', typeId]);
+      } else {
+        queryClient.invalidateQueries(['postContent', typeId]);
+      }
+    },
+    onError: (error) => {
+      if (error?.response?.status === 403) {
+        toast(TOAST.LIKE_SELF_ERROR);
+      }
+    },
+  });
 
-export default useLike;
+  return { like, deleteLike };
+}

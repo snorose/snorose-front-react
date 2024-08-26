@@ -5,6 +5,7 @@ export * from './notice';
 export * from './point';
 export * from './post';
 export * from './scrap';
+export * from './like';
 export * from './search.js';
 export * from './signup';
 export * from './userInfo';
