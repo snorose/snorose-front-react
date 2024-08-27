@@ -16,6 +16,7 @@ import {
   PTR,
   Target,
   WriteButton,
+  FetchLoading,
 } from '@/components';
 
 import timeAgo from '@/utils/timeAgo';
@@ -30,18 +31,26 @@ export default function BoardListPage() {
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === currentBoardTextId) || {};
 
-  const { data, hasNextPage, isFetching, status, fetchNextPage, refetch } =
-    useInfiniteQuery({
-      queryKey: ['postList', currentBoard.id],
-      queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
-      getNextPageParam: (lastPage, allPages, lastPageParam) => {
-        if (lastPage.length === 0) {
-          return undefined;
-        }
-        return lastPage.length > 0 ? (lastPageParam || 0) + 1 : undefined;
-      },
-      refetchInterval: false,
-    });
+  const {
+    data,
+    hasNextPage,
+    isFetching,
+    isLoading,
+    isError,
+    status,
+    fetchNextPage,
+    refetch,
+  } = useInfiniteQuery({
+    queryKey: ['postList', currentBoard.id],
+    queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
+    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+      if (lastPage.length === 0) {
+        return undefined;
+      }
+      return lastPage.length > 0 ? (lastPageParam || 0) + 1 : undefined;
+    },
+    refetchInterval: false,
+  });
 
   const ref = useIntersect(
     async (entry, observer) => {
@@ -79,6 +88,26 @@ export default function BoardListPage() {
       navigate(to);
     };
   };
+
+  if (isLoading) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading>게시글 불러오는 중...</FetchLoading>
+      </>
+    );
+  }
+
+  if (isError) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading animation={false}>
+          게시글을 불러오지 못했습니다.
+        </FetchLoading>
+      </>
+    );
+  }
 
   return (
     <div className={styles.container}>
