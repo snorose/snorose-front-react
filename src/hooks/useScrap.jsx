@@ -5,6 +5,9 @@ import { TOAST } from '@/constants';
 
 import { scrap as ScrapApi, deleteScrap as deleteScrapApi } from '../apis';
 
+import { useToast } from '@/hooks';
+import { TOAST } from '@/constants/toast.js';
+
 export default function useScrap() {
   const { toast } = useToast();
   const { postId } = useParams();
@@ -22,7 +25,7 @@ export default function useScrap() {
       }
     },
     onError: (error) => {
-      if (error?.response?.status === 403) {
+      if (error?.response?.data?.code === 3801) {
         toast(TOAST.SCRAP_SELF_ERROR);
       }
     },
