@@ -122,16 +122,8 @@ export const routeList = [
       },
       ...boardRoutes,
       {
-        path: '/post',
-        element: <PostPage />,
-      },
-      {
         path: '/board/all/search/:keyword',
         element: <PostSearchPage />,
-      },
-      {
-        path: '/post-write',
-        element: <PostWritePage />,
       },
       {
         path: '/board/exam-review',
