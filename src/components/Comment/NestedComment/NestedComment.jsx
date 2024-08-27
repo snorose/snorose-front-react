@@ -106,13 +106,12 @@ export default function NestedComment({
           </div>
         </div>
         <div className={styles.commentBottom}>
-          <button className={styles.likedCount}>
+          <button className={styles.likedCount} onClick={toggleLike}>
             <Icon
               id='like'
               width='13'
               height='12'
               fill={isLiked ? '#5F86BF' : '#D9D9D9'}
-              onClick={toggleLike}
             />
             <span>{data.likeCount.toLocaleString()}</span>
           </button>
