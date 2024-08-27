@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { getPostContent, deletePost } from '@/apis/post.js';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import { useComment, useLike, useScrap, useToast } from '@/hooks';
+import { useComment, useLike, useScrap } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
@@ -18,14 +18,11 @@ import { filterDeletedComments } from '@/utils/filterComment.js';
 import timeAgo from '@/utils/timeAgo.js';
 
 import { BOARD_MENUS } from '@/constants/boardMenus.js';
-import { TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
 
 export default function PostPage() {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const { toast } = useToast();
   const { postId } = useParams();
   const { pathname } = useLocation();
   const { inputFocus } = useCommentContext();
@@ -43,41 +40,14 @@ export default function PostPage() {
   const filterdCommentList = filterDeletedComments(commentList);
 
   // 게시글 데이터 받아오기
-  const { data, isLoading, error, refetch } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['postContent', postId],
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
   });
 
-  // // 스크랩 훅 사용
-  // const {
-  //   isScrapped,
-  //   toggleScrap,
-  //   error: scrapError,
-  // } = useScrap(postId, data?.isScrapped, refetch);
-
-  // // 스크랩 처리 시 에러 메시지 표시
-  // useEffect(() => {
-  //   if (scrapError?.response?.status === 403) {
-  //     toast(TOAST.SCRAP_SELF_ERROR);
-  //   }
-  // }, [scrapError]);
-
   const { scrap, deleteScrap } = useScrap();
-
-  // 좋아요 훅 사용
-  const {
-    isLiked,
-    toggleLike,
-    error: likeError,
-  } = useLike('posts', postId, data?.isLiked, refetch);
-
-  // 좋아요 처리 시 에러 메시지 표시
-  useEffect(() => {
-    if (likeError?.response?.status === 403) {
-      toast(TOAST.LIKE_SELF_ERROR);
-    }
-  }, [likeError]);
+  const { like, deleteLike } = useLike({ type: 'posts', typeId: postId });
 
   // 데이터 화면 표시
   useEffect(() => {
@@ -170,8 +140,10 @@ export default function PostPage() {
           </div>
         </div>
         <div className={styles.title}>
-          <p>{postData.title}</p>
-          <p>{postData.viewCount.toLocaleString()} views</p>
+          <p>
+            {postData.title}
+            <span>&nbsp;&nbsp;{postData.viewCount.toLocaleString()} views</span>
+          </p>
         </div>
         <p className={styles.text}>{postData.content}</p>
         <div className={styles.post_bottom}>
@@ -179,12 +151,17 @@ export default function PostPage() {
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
             <p>{filterdCommentList?.length.toLocaleString()}</p>
           </div>
-          <div className={styles.count} onClick={toggleLike}>
+          <div
+            className={styles.count}
+            onClick={() =>
+              postData.isLiked ? deleteLike.mutate() : like.mutate()
+            }
+          >
             <Icon
               id='like'
               width='13'
               height='12'
-              fill={isLiked ? '#5F86BF' : '#D9D9D9'}
+              fill={postData.isLiked ? '#5F86BF' : '#D9D9D9'}
             />
             <p>{postData.likeCount.toLocaleString()}</p>
           </div>

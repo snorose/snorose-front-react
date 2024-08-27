@@ -5,5 +5,4 @@ export { default as useIntersect } from './useIntersect';
 export { default as useScrap } from './useScrap';
 export { default as useToast } from './useToast';
 export { default as useLike } from './useLike';
-
 export { default as useModal } from './useModal';

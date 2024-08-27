@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import { useToast, useLike, useComment } from '@/hooks';
+import { useLike, useComment } from '@/hooks';
 
 import { DeleteModal, OptionModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 
 import timeAgo from '@/utils/timeAgo.js';
-
-import { TOAST } from '@/constants';
 
 import styles from '../Comment/Comment.module.css';
 
@@ -21,29 +19,16 @@ export default function NestedComment({
 }) {
   const { setIsEdit, commentId, setCommentId, setContent, inputFocus } =
     useCommentContext();
-  const { deleteComment, refetch } = useComment();
-  const { toast } = useToast();
+  const { deleteComment } = useComment();
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
 
   const onCloseClick = () => {
     setCommentId(undefined);
     setContent('');
   };
-
-  // 좋아요 훅 사용
-  const {
-    isLiked,
-    toggleLike,
-    error: likeError,
-  } = useLike('comments', data.id, data?.isLiked, refetch);
-
-  // 좋아요 처리 시 에러 메시지 표시
-  useEffect(() => {
-    if (likeError?.response?.status === 403) {
-      toast(TOAST.LIKE_SELF_ERROR);
-    }
-  }, [likeError]);
 
   const {
     id,
@@ -52,6 +37,7 @@ export default function NestedComment({
     isWriter,
     isWriterWithdrawn,
     content,
+    isLiked,
     likeCount,
     createdAt,
     updatedAt,
@@ -106,13 +92,15 @@ export default function NestedComment({
           </div>
         </div>
         <div className={styles.commentBottom}>
-          <button className={styles.likedCount}>
+          <button
+            className={styles.likedCount}
+            onClick={() => (isLiked ? deleteLike.mutate() : like.mutate())}
+          >
             <Icon
               id='like'
               width='13'
               height='12'
               fill={isLiked ? '#5F86BF' : '#D9D9D9'}
-              onClick={toggleLike}
             />
             <span>{data.likeCount.toLocaleString()}</span>
           </button>

@@ -1,17 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { postPost } from '@/apis/post';
 
-import { useToast } from '@/hooks';
+import { useToast, useAuth } from '@/hooks';
 
-import { Icon } from '@/components/Icon';
-import { CloseAppBar } from '@/components/AppBar';
-import { DropDownMenu } from '@/components/DropDownMenu';
+import { Icon, CloseAppBar, DropDownMenu, FetchLoading } from '@/components';
 
-import { TOAST } from '@/constants';
-import { BOARD_MENUS } from '@/constants';
+import { TOAST, BOARD_MENUS } from '@/constants';
 
 import formattedNowTime from '@/utils/formattedNowTime';
 
@@ -23,6 +20,7 @@ export default function PostWritePage() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { toast } = useToast();
+  const { userInfo, status } = useAuth();
   const [isNotice, setIsNotice] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
@@ -102,6 +100,10 @@ export default function PostWritePage() {
     }
   };
 
+  if (status === 'loading') {
+    return <FetchLoading>로딩 중...</FetchLoading>;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -126,7 +128,7 @@ export default function PostWritePage() {
         <div className={styles.profileBox}>
           <div className={styles.profileBoxLeft}>
             <Icon id='cloud' width='25' height='16' />
-            <p>김준희</p>
+            <p>{userInfo.nickname}</p>
             <p className={styles.dot}></p>
             <p>{formattedNowTime()}</p>
           </div>
@@ -161,12 +163,6 @@ export default function PostWritePage() {
           />
         </div>
       </div>
-      <div
-        className={styles.bottom}
-        onClick={() => {
-          setDropDownOpen(false);
-        }}
-      ></div>
     </div>
   );
 }
