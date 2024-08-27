@@ -1,5 +1,7 @@
 import { useParams, useLocation } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { useToast } from '@/hooks';
+import { TOAST } from '@/constants';
 
 import { scrap as ScrapApi, deleteScrap as deleteScrapApi } from '../apis';
 
@@ -10,9 +12,7 @@ export default function useScrap() {
   const { toast } = useToast();
   const { postId } = useParams();
   const { pathname } = useLocation();
-
   const currentBoard = pathname.split('/')[2];
-
   const queryClient = useQueryClient();
 
   const scrap = useMutation({
@@ -25,8 +25,8 @@ export default function useScrap() {
       }
     },
     onError: (error) => {
-      if (error.response.data.code === 3801) {
-        toast(TOAST.NO_SELF_SCRAP);
+      if (error?.response?.data?.code === 3801) {
+        toast(TOAST.SCRAP_SELF_ERROR);
       }
     },
   });
@@ -38,6 +38,11 @@ export default function useScrap() {
         queryClient.invalidateQueries(['reviewDetail', postId]);
       } else {
         queryClient.invalidateQueries(['postContent', postId]);
+      }
+    },
+    onError: (error) => {
+      if (error?.response?.status === 403) {
+        toast(TOAST.SCRAP_SELF_ERROR);
       }
     },
   });
