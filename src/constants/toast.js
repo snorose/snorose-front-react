@@ -11,6 +11,10 @@ const TOAST = Object.freeze({
     id: 'EXAM_REVIEW_DOWNLOAD',
     message: '50P 차감되었어요',
   },
+  NO_SELF_SCRAP: {
+    id: 'NO_SELF_SCROP',
+    message: '내 게시글은 스크랩할 수 없어요',
+  },
   POST_EDIT_SUCCESS: { id: 'POST_EDIT_SUCCESS', message: '게시글 수정 완료' },
   POST_EDIT_FAIL: { id: 'POST_EDIT_FAIL', message: '게시글 수정 실패' },
   POST_CREATE_SUCCESS: {

@@ -3,7 +3,11 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 import { scrap as ScrapApi, deleteScrap as deleteScrapApi } from '../apis';
 
+import { useToast } from '@/hooks';
+import { TOAST } from '@/constants/toast.js';
+
 export default function useScrap() {
+  const { toast } = useToast();
   const { postId } = useParams();
   const { pathname } = useLocation();
 
@@ -18,6 +22,11 @@ export default function useScrap() {
         queryClient.invalidateQueries(['reviewDetail', postId]);
       } else {
         queryClient.invalidateQueries(['postContent', postId]);
+      }
+    },
+    onError: (error) => {
+      if (error.response.data.code === 3801) {
+        toast(TOAST.NO_SELF_SCRAP);
       }
     },
   });
