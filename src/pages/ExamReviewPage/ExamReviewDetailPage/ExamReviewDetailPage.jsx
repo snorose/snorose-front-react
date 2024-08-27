@@ -81,24 +81,24 @@ export default function ExamReviewDetailPage() {
   const remove = () => deleteReview.mutate();
 
   const {
-    userDisplay,
-    isWriter,
-    title,
     commentCount,
-    scrapCount,
-    isScrap,
     createdAt,
-    lectureName,
-    professor,
-    lectureYear,
-    semester,
-    lectureType,
-    isPF,
     examType,
-    isConfirmed,
     fileName,
+    isConfirmed,
     isEdited,
+    isPF,
+    isScrapped,
+    isWriter,
+    lectureName,
+    lectureType,
+    lectureYear,
+    professor,
     questionDetail,
+    scrapCount,
+    semester,
+    title,
+    userDisplay,
   } = data;
 
   return (
@@ -126,23 +126,15 @@ export default function ExamReviewDetailPage() {
               />
             )}
           </div>
-          <div className={styles.actions}>
+          {isWriter && (
             <Icon
-              id={isScrap ? 'bookmark-fill' : 'bookmark-line'}
-              width='14'
-              height='18'
-              fill='#5F86BF'
-              onClick={() => (isScrap ? deleteScrap.mutate() : scrap.mutate())}
+              onClick={() => setIsOptionModalOpen(true)}
+              id='ellipsis-vertical'
+              width='3'
+              height='11'
+              style={{ padding: '0 4px', cursor: 'pointer' }}
             />
-            {isWriter && (
-              <Icon
-                onClick={() => setIsOptionModalOpen(true)}
-                id='ellipsis-vertical'
-                width='3'
-                height='11'
-              />
-            )}
-          </div>
+          )}
         </div>
         <div className={styles.title}>{title}</div>
         <div className={styles.content}>
@@ -158,8 +150,8 @@ export default function ExamReviewDetailPage() {
           <ReviewContentItem tag='시험 유형 및 문항수' value={questionDetail} />
         </div>
         <ReviewDownload className={styles.fileDownload} fileName={fileName} />
-        <div className={styles.counts}>
-          <div className={styles.count}>
+        <div className={styles.actions}>
+          <div className={styles.action}>
             <Icon
               className={styles.comment}
               id='comment'
@@ -169,8 +161,16 @@ export default function ExamReviewDetailPage() {
             />
             <span>{commentCount.toLocaleString()}</span>
           </div>
-          <div className={styles.count}>
-            <Icon id='bookmark-fill' width='10' height='13' fill='#5F86BF' />
+          <div
+            className={styles.action}
+            onClick={() => (isScrapped ? deleteScrap.mutate() : scrap.mutate())}
+          >
+            <Icon
+              id='bookmark-fill'
+              width='10'
+              height='13'
+              fill={isScrapped ? '#5F86BF' : '#D9D9D9'}
+            />
             <span>{scrapCount.toLocaleString()}</span>
           </div>
         </div>
