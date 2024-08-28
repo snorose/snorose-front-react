@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { List } from '../../Sidebar';
-import { Icon } from '../../Icon';
+import { List } from '@/components/Sidebar';
+import { Icon } from '@/components/Icon';
 
-import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '../../../constants';
-import { USER } from '../../../dummy/data';
+import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '@/constants';
+import { USER } from '@/dummy/data';
 
 import styles from './Sidebar.module.css';
 
