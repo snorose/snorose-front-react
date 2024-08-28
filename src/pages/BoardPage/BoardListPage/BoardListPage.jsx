@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-import { getPostList } from '@/apis/post';
-import { getNoticeLine } from '@/apis/notice.js';
+import { getNoticeLine, getPostList } from '@/apis';
 
-import { useIntersect } from '@/hooks';
+import { useInfiniteScroll } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { Icon } from '@/components/Icon';
@@ -28,28 +27,10 @@ export default function BoardListPage() {
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === currentBoardTextId) || {};
 
-  const { data, hasNextPage, isFetching, status, fetchNextPage, refetch } =
-    useInfiniteQuery({
-      queryKey: ['postList', currentBoard.id],
-      queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
-      getNextPageParam: (lastPage, allPages, lastPageParam) => {
-        if (lastPage.length === 0) {
-          return undefined;
-        }
-        return lastPage.length > 0 ? (lastPageParam || 0) + 1 : undefined;
-      },
-      refetchInterval: false,
-    });
-
-  const ref = useIntersect(
-    async (entry, observer) => {
-      observer.unobserve(entry.target);
-      if (hasNextPage && !isFetching) {
-        fetchNextPage();
-      }
-    },
-    { threshold: 0.8 }
-  );
+  const { data, ref, status, refetch } = useInfiniteScroll({
+    queryKey: ['postList', currentBoard.id],
+    queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
+  });
 
   // 1줄 공지 데이터 받아오기
   const [noticeTitle, setNoticeTitle] = useState('');
@@ -66,7 +47,10 @@ export default function BoardListPage() {
     }
   }, [noticeLineData]);
 
-  const postList = data ? data.pages.flatMap((page) => page) : [];
+  const postList =
+    data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page)
+      : [];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);

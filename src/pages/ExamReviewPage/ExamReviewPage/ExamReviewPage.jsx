@@ -1,67 +1,39 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import { getReviewList, searchByBoard } from '@/apis';
+import { getReviewList } from '@/apis';
 
-import useInfiniteScroll from '@/hooks/useInfiniteScroll.jsx';
+import { useInfiniteScroll, useSearch } from '@/hooks';
 
-import {
-  AppBar,
-  DropDownBlue,
-  Loading,
-  PostBar,
-  PTR,
-  Search,
-  WriteButton,
-} from '@/components';
+import { ExamReviewList, ExamReviewSearchList } from '@/pages/ExamReviewPage';
 
-import { BOARD_ID, YEARS, SEMESTERS, EXAM_TYPES } from '@/constants';
+import { AppBar, DropDownBlue, PTR, Search, WriteButton } from '@/components';
+
+import { YEARS, SEMESTERS, EXAM_TYPES } from '@/constants';
 
 import styles from './ExamReviewPage.module.css';
 
 export default function ExamReviewPage() {
-  const [keyword, setKeyword] = useState('');
+  const { pathname } = useLocation();
+  const urlKeyword = decodeURIComponent(pathname.split('/')[4] || '');
+
   const [lectureYear, setLectureYear] = useState();
   const [semester, setSemester] = useState();
   const [examType, setExamType] = useState();
 
-  const { data, ref, isFetching, status, Target } = useInfiniteScroll({
-    queryKey: keyword
-      ? [
-          'reviewList',
-          'search',
-          keyword,
-          {
-            lectureYear: lectureYear?.id,
-            semester: semester?.id,
-            examType: examType?.id,
-          },
-        ]
-      : ['reviewList'],
-    queryFn: keyword
-      ? ({ pageParam }) =>
-          searchByBoard({
-            boardId: BOARD_ID['exam-review'],
-            page: pageParam,
-            keyword,
-            lectureYear: lectureYear?.id,
-            semester: semester?.id,
-            examType: examType?.id,
-          })
-      : ({ pageParam }) => getReviewList(pageParam),
+  const reviewResult = useInfiniteScroll({
+    queryKey: ['reviewList'],
+    queryFn: ({ pageParam }) => getReviewList(pageParam),
   });
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter' && event.target.value.trim() !== '') {
-      event.preventDefault();
-      setKeyword(event.target.value);
-    }
-  };
-
-  const reviewList =
-    data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page)
-      : [];
+  const searchResult = useSearch({
+    urlKeyword,
+    filterOption: {
+      lectureYear: lectureYear?.id,
+      semester: semester?.id,
+      examType: examType?.id,
+    },
+  });
 
   return (
     <main>
@@ -69,7 +41,8 @@ export default function ExamReviewPage() {
       <Search
         className={styles.search}
         placeholder='시험후기 검색'
-        handleKeyDown={handleKeyDown}
+        value={searchResult.keyword}
+        onChange={searchResult.handleChange}
       />
       <div className={styles.filters}>
         <DropDownBlue
@@ -92,25 +65,11 @@ export default function ExamReviewPage() {
         />
       </div>
       <PTR>
-        <ul className={styles.list}>
-          {status !== 'error' && reviewList.length > 0 ? (
-            reviewList.map((post) => (
-              <Link
-                className={styles.to}
-                key={post.postId}
-                to={`/board/exam-review/post/${post.postId}`}
-              >
-                <PostBar data={post} hasLike={false} />
-              </Link>
-            ))
-          ) : (
-            <div className={styles.noting}>
-              {keyword ? '검색 결과가 없습니다' : '후기를 등록해주세요'}
-            </div>
-          )}
-        </ul>
-        {isFetching && <Loading />}
-        {reviewList.length > 0 && <Target ref={ref} height='100px' />}
+        {searchResult.debouncedKeyword ? (
+          <ExamReviewSearchList result={searchResult} />
+        ) : (
+          <ExamReviewList result={reviewResult} />
+        )}
       </PTR>
       <WriteButton to='/board/exam-review-write' />
     </main>
