@@ -85,7 +85,7 @@ export default function MainPage() {
           ))}
         </Flex>
       </Margin>
-      {BESOOKTS.length > 0 && (
+      {/* {BESOOKTS.length > 0 && (
         <Margin className={styles.besookt}>
           <ListHeader to='/board/besookt' title='베숙트' />
           <Flex direction='column' gap='0.375rem'>
@@ -114,7 +114,7 @@ export default function MainPage() {
             )}
           </Flex>
         </Margin>
-      )}
+      )} */}
       <Footer />
     </main>
   );
