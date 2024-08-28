@@ -1,3 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
+
+import { getHomeNotice } from '@/apis';
+
 import { useAuth } from '@/hooks';
 
 import {
@@ -24,6 +28,16 @@ export default function MainPage() {
   const { status } = useAuth();
   const isLogin = status === 'authenticated';
 
+  const { data, isError } = useQuery({
+    queryKey: ['homeNotice'],
+    queryFn: () => getHomeNotice(),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  if (isError || !data) {
+    return null;
+  }
+
   return (
     <main>
       <Header className={styles.header} />
@@ -37,7 +51,7 @@ export default function MainPage() {
           <Card
             className={styles.notice}
             to='/notice'
-            title='시험후기 등록 기간 공지'
+            title={data.title}
             tag='공지'
             imgPath='megaphone.svg'
             icon={{ id: 'megaphone', width: 128, height: 131 }}
