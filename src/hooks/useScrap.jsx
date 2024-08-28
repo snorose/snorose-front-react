@@ -1,12 +1,11 @@
 import { useParams, useLocation } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
+
+import { scrap as ScrapApi, deleteScrap as deleteScrapApi } from '@/apis';
+
 import { useToast } from '@/hooks';
+
 import { TOAST } from '@/constants';
-
-import { scrap as ScrapApi, deleteScrap as deleteScrapApi } from '../apis';
-
-import { useToast } from '@/hooks';
-import { TOAST } from '@/constants/toast.js';
 
 export default function useScrap() {
   const { toast } = useToast();
