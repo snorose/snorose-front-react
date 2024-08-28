@@ -93,12 +93,15 @@ body {
 }
 
 .sponsor {
-  display: flex;
   width: 100%;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
   background-size: cover;
   position: fixed;
-  justify-content: center;
-  bottom: 83px;
-  /* background-color: white; */
-  padding-bottom: 20px;
+  bottom: 6px;
+}
+
+.writeButton {
+  bottom: 19px;
 }
