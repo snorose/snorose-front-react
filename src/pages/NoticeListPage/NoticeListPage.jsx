@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { BackAppBar } from '@/components/AppBar';
-import NoticeBar from '@/components/NoticeBar/NoticeBar.jsx';
+import { BackAppBar, NoticeBar, FetchLoading } from '@/components';
 
 import { getNoticeList } from '@/apis/notice';
 import { BOARD_MENUS } from '../../constants';
@@ -19,7 +18,7 @@ export default function NoticeListPage() {
     BOARD_MENUS.find((menu) => menu.textId === currentBoardTextId) || {};
 
   // 게시글 데이터 받아오기
-  const { data } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['noticeList', currentBoard?.id],
     queryFn: () => getNoticeList(currentBoard?.id),
     enabled: !!currentBoard?.id,
@@ -37,6 +36,26 @@ export default function NoticeListPage() {
       navigate(to);
     };
   };
+
+  if (isLoading) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading>공지글 불러오는 중...</FetchLoading>
+      </>
+    );
+  }
+
+  if (isError) {
+    return (
+      <>
+        <BackAppBar />;
+        <FetchLoading animation={false}>
+          게시글을 불러오지 못했습니다.
+        </FetchLoading>
+      </>
+    );
+  }
 
   return (
     <div className={styles.container}>

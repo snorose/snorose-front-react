@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import useComment from '@/hooks/useComment.jsx';
+import { useLike, useComment } from '@/hooks';
 
 import { DeleteModal, OptionModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
@@ -23,16 +23,30 @@ export default function NestedComment({
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
+
   const onCloseClick = () => {
     setCommentId(undefined);
     setContent('');
   };
 
-  const [isLiked, setIsLiked] = useState(false);
-
-  const handleLikedClick = () => {
-    console.log('API로 liked 데이터 수정');
-  };
+  const {
+    id,
+    postId,
+    userDisplay,
+    isWriter,
+    isWriterWithdrawn,
+    content,
+    isLiked,
+    likeCount,
+    createdAt,
+    updatedAt,
+    isVisible,
+    isUpdated,
+    isDeleted,
+    // isLiked,
+    children,
+  } = data;
 
   return (
     <>
@@ -53,32 +67,42 @@ export default function NestedComment({
             <div className={styles.cloud}>
               <Icon id='cloud' width='19' heigth='13' />
             </div>
-            <p>{data.userDisplay}</p>
+            <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
+              {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
+            </p>
             <p className={styles.dot}>·</p>
             <p>
-              {timeAgo(data.createdAt)} {data.isUpdated ? ' (수정됨)' : null}
+              {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
             </p>
           </div>
 
           <p className={styles.dot3} onClick={() => onCommentOptionClick(data)}>
-            {data.isWriter && (
+            {isWriter && !isDeleted && (
               <Icon id='ellipsis-vertical' width='3' height='11' />
             )}
           </p>
         </div>
         <div className={styles.commentCenter}>
-          <div className={styles.nestedPadding}>{data.content}</div>
+          <div
+            className={`${styles.nestedPadding} ${(isDeleted || !isVisible) && styles.hide}`}
+          >
+            {!isDeleted &&
+              (isVisible ? content : '(관리자에 의해 차단된 댓글입니다)')}
+            {isDeleted && '(삭제된 댓글입니다)'}
+          </div>
         </div>
         <div className={styles.commentBottom}>
-          <button className={styles.likedCount}>
+          <button
+            className={styles.likedCount}
+            onClick={() => (isLiked ? deleteLike.mutate() : like.mutate())}
+          >
             <Icon
               id='like'
               width='13'
               height='12'
               fill={isLiked ? '#5F86BF' : '#D9D9D9'}
-              onClick={handleLikedClick}
             />
-            <p>{data.likeCount}</p>
+            <span>{data.likeCount.toLocaleString()}</span>
           </button>
         </div>
       </div>

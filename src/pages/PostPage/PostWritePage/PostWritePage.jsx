@@ -1,17 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { postPost } from '@/apis/post';
 
-import { useToast } from '@/hooks';
+import { useToast, useAuth } from '@/hooks';
 
-import { Icon } from '@/components/Icon';
-import { CloseAppBar } from '@/components/AppBar';
-import { DropDownMenu } from '@/components/DropDownMenu';
+import { Icon, CloseAppBar, DropDownMenu, FetchLoading } from '@/components';
 
-import { TOAST } from '@/constants';
-import { BOARD_MENUS } from '@/constants';
+import { TOAST, BOARD_MENUS } from '@/constants';
 
 import formattedNowTime from '@/utils/formattedNowTime';
 
@@ -23,6 +20,7 @@ export default function PostWritePage() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { toast } = useToast();
+  const { userInfo, status } = useAuth();
   const [isNotice, setIsNotice] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
@@ -70,20 +68,28 @@ export default function PostWritePage() {
   };
 
   // 게시글 등록 유효성 검사 및 제출
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (boardId === '') {
+      toast(TOAST.EMPTY_BOARDID);
+      return;
+    }
     if (!title.trim()) {
-      toast(TOAST.emptyTitle);
+      toast(TOAST.EMPTY_TITLE);
       return;
     }
     if (!text.trim()) {
-      toast(TOAST.emptyText);
+      toast(TOAST.EMPTY_TEXT);
       return;
     }
-    console.log(data);
-    postPost(data);
-
-    navigate(-1); // 제출 후 이동할 경로 설정
+    try {
+      console.log(data);
+      await postPost(data);
+      toast(TOAST.POST_CREATE_SUCCESS);
+      navigate(-1);
+    } catch (error) {
+      toast(TOAST.POST_CREATE_FAIL);
+    }
   };
 
   // 제목 40자 제한
@@ -93,6 +99,10 @@ export default function PostWritePage() {
       setTitle(newValue);
     }
   };
+
+  if (status === 'loading') {
+    return <FetchLoading>로딩 중...</FetchLoading>;
+  }
 
   return (
     <div className={styles.container}>
@@ -110,7 +120,7 @@ export default function PostWritePage() {
         <DropDownMenu
           options={boardTitles}
           item={boardTitle}
-          setItem={handleBoardTitleChange} // 수정된 핸들러
+          setItem={handleBoardTitleChange}
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
           backgroundColor={'#fff'}
@@ -118,7 +128,7 @@ export default function PostWritePage() {
         <div className={styles.profileBox}>
           <div className={styles.profileBoxLeft}>
             <Icon id='cloud' width='25' height='16' />
-            <p>김준희</p>
+            <p>{userInfo.nickname}</p>
             <p className={styles.dot}></p>
             <p>{formattedNowTime()}</p>
           </div>
@@ -153,12 +163,6 @@ export default function PostWritePage() {
           />
         </div>
       </div>
-      <div
-        className={styles.bottom}
-        onClick={() => {
-          setDropDownOpen(false);
-        }}
-      ></div>
     </div>
   );
 }

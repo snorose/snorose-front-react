@@ -6,14 +6,17 @@ import { getNoticeLine, getPostList } from '@/apis';
 
 import { useInfiniteScroll } from '@/hooks';
 
-import { BackAppBar } from '@/components/AppBar';
-import { Icon } from '@/components/Icon';
-import { OptionModal } from '@/components/Modal';
-import { PostBar } from '@/components/PostBar';
-import { Sponser } from '@/components/Sponser';
-import { Target } from '@/components/Target/index.js';
-import { WriteButton } from '@/components/WriteButton';
-import PTR from '@/components/PTR/PTR.jsx';
+import {
+  BackAppBar,
+  Icon,
+  OptionModal,
+  PostBar,
+  Sponsor,
+  PTR,
+  Target,
+  WriteButton,
+  FetchLoading,
+} from '@/components';
 
 import timeAgo from '@/utils/timeAgo';
 
@@ -27,7 +30,7 @@ export default function BoardListPage() {
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === currentBoardTextId) || {};
 
-  const { data, ref, status, refetch } = useInfiniteScroll({
+  const { data, ref, isLoading, status, isError, refetch } = useInfiniteScroll({
     queryKey: ['postList', currentBoard.id],
     queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
   });
@@ -62,6 +65,26 @@ export default function BoardListPage() {
     };
   };
 
+  if (isLoading) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading>게시글 불러오는 중...</FetchLoading>
+      </>
+    );
+  }
+
+  if (isError) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading animation={false}>
+          게시글을 불러오지 못했습니다.
+        </FetchLoading>
+      </>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <BackAppBar title={currentBoard.title} hasMenu hasSearch />
@@ -87,8 +110,8 @@ export default function BoardListPage() {
             ))}
         </div>
       </PTR>
-      <div className={styles.sponser}>
-        <Sponser />
+      <div className={styles.sponsor}>
+        <Sponsor />
       </div>
       <OptionModal
         id='post-report'

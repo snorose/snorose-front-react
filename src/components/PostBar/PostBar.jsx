@@ -41,15 +41,6 @@ export default function PostBar({
         <p className={styles.dot}>·</p>
         <p>{agoTime}</p>
         {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
-        <div
-          className={styles.more_option}
-          onClick={(e) => {
-            e.stopPropagation();
-            optionClick();
-          }}
-        >
-          <Icon id='ellipsis-vertical' width={3} height={11} fill='#484848' />
-        </div>
       </div>
       <div className={styles.post_center}>
         <p className={styles.title}>{data.title}</p>
@@ -58,7 +49,8 @@ export default function PostBar({
       <div className={styles.post_bottom}>
         <span className={styles.board}>{data.boardName}</span>
         <div className={styles.iconContainer}>
-          {hasComment && (
+          {/* 서버 수정 후 조건문 제거 처리 필요 */}
+          {hasComment && data.commentCount !== undefined && (
             <>
               <Icon
                 className={styles.comment}
@@ -67,7 +59,7 @@ export default function PostBar({
                 height='11'
                 fill='#D9D9D9'
               />
-              <span>{data.commentCount}</span>
+              <span>{data.commentCount.toLocaleString()}</span>
             </>
           )}
           {hasLike && (
@@ -76,18 +68,23 @@ export default function PostBar({
                 id='like'
                 width='12'
                 height='11'
-                fill={data.liked ? '#5F86BF' : '#D9D9D9'}
+                fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
               />
-              <span>{data.likeCount}</span>
+              <span>{data.likeCount.toLocaleString()}</span>
             </>
           )}
-          <Icon
-            id='bookmark-fill'
-            width='9'
-            height='11'
-            fill={data.liked ? '#5F86BF' : '#D9D9D9'}
-          />
-          <span>{data.scrapCount}</span>
+          {/* 서버 수정 후 조건문 제거 처리 필요 */}
+          {data.scrapCount !== undefined && (
+            <>
+              <Icon
+                id='bookmark-fill'
+                width='9'
+                height='11'
+                fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
+              />
+              <span>{data.scrapCount.toLocaleString()}</span>
+            </>
+          )}
         </div>
       </div>
     </div>

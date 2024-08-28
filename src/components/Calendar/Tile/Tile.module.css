@@ -1,0 +1,36 @@
+.tile {
+  width: 33px;
+  height: 51px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.day {
+  width: 33px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+}
+
+.day.today {
+  border-radius: 100%;
+  background: #ddebf6;
+  font-weight: 700;
+  color: #00368e;
+}
+
+.balance {
+  font-size: 11px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: -0.5px;
+  color: #ff849a;
+}

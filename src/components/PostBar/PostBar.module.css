@@ -58,13 +58,6 @@
   text-overflow: ellipsis;
 }
 
-.more_option {
-  margin-left: auto;
-  display: flex;
-  justify-content: end;
-  width: 20px;
-}
-
 .post_bottom {
   display: flex;
   align-items: center;

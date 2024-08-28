@@ -4,7 +4,7 @@ import {
   Header,
   Icon,
   Sidebar,
-  Sponser,
+  Sponsor,
   Search,
 } from '@/components/';
 import { BOARD_MENUS } from '@/constants';
@@ -56,8 +56,8 @@ export default function BoardPage() {
         <p>스노로즈에서 더 다양한 게시판을 준비하고 있어요</p>
       </div>
       <div className={styles.padding_container}>
-        <div className={styles.sponser}>
-          <Sponser />
+        <div className={styles.sponsor}>
+          <Sponsor />
         </div>
       </div>
       {isSidebarOpen && <Sidebar closeSidebar={closeSidebar} />}
