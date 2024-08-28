@@ -6,7 +6,7 @@ import {
   YEAR_SECONDS,
 } from '../constants/seconds.js';
 
-function timeAgo(date) {
+export function timeAgo(date) {
   const currentDate = new Date();
   const givenDate = new Date(date);
   const seconds = Math.floor((currentDate - givenDate) / 1000);
@@ -30,5 +30,3 @@ function timeAgo(date) {
     return years + '년 전';
   }
 }
-
-export default timeAgo;

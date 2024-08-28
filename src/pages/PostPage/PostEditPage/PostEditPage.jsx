@@ -4,10 +4,14 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { getPostContent, patchPost } from '@/apis/post';
+
 import { useToast } from '@/hooks';
+
 import { CloseAppBar } from '@/components/AppBar';
 import { Icon } from '@/components/Icon';
-import formattedNowTime from '@/utils/formattedNowTime';
+
+import { formattedNowTime } from '@/utils';
+
 import { BOARD_MENUS } from '@/constants';
 import { TOAST } from '@/constants';
 

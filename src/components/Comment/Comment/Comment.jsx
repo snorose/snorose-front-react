@@ -8,7 +8,7 @@ import { DeleteModal, OptionModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 import { NestedComment } from '@/components/Comment';
 
-import timeAgo from '@/utils/timeAgo.js';
+import { timeAgo } from '@/utils';
 
 import styles from './Comment.module.css';
 

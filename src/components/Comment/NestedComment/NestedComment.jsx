@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
@@ -7,7 +7,7 @@ import { useLike, useComment } from '@/hooks';
 import { DeleteModal, OptionModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 
-import timeAgo from '@/utils/timeAgo.js';
+import { timeAgo } from '@/utils';
 
 import styles from '../Comment/Comment.module.css';
 

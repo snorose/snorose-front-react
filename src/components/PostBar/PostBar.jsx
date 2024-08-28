@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Icon } from '@/components/Icon';
 
-import timeAgo from '@/utils/timeAgo.js';
+import { timeAgo } from '@/utils';
 
 import styles from './PostBar.module.css';
 
