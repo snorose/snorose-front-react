@@ -1,3 +1,5 @@
+import { useAuth } from '@/hooks';
+
 import {
   BoardCard,
   Card,
@@ -12,13 +14,16 @@ import {
 } from '@/components';
 
 import { BOARD_MENUS, ROLE } from '@/constants';
-import { BESOOKTS, CAROUSEL_BANNER, USER } from '@/dummy/data';
+import { BESOOKTS, CAROUSEL_BANNER } from '@/dummy/data';
 
 import styles from './MainPage.module.css';
 
 const BOARDS = BOARD_MENUS.filter((board) => [21, 22, 23].includes(board.id));
 
 export default function MainPage() {
+  const { status } = useAuth();
+  const isLogin = status === 'authenticated';
+
   return (
     <main>
       <Header className={styles.header} />
@@ -36,10 +41,10 @@ export default function MainPage() {
             tag='공지'
             imgPath='megaphone.svg'
             icon={{ id: 'megaphone', width: 128, height: 131 }}
-            isDark={USER?.isLogin ? false : true}
+            isDark={isLogin ? false : true}
           />
 
-          {USER?.isLogin && (
+          {isLogin && (
             <Card
               className={styles.mark}
               to='/attendance'
