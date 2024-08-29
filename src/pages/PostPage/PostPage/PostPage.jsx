@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
@@ -35,13 +35,9 @@ export default function PostPage() {
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === pathname.split('/')[2]) || {};
   const [postData, setPostData] = useState(null);
-  const [selectedCommentId, setSelectedCommentId] = useState(null);
-  const [modalType, setModalType] = useState('');
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const inputBarRef = useRef(null);
   const filterdCommentList = filterDeletedComments(commentList);
 
   // 게시글 데이터 받아오기
@@ -63,71 +59,31 @@ export default function PostPage() {
 
   // 게시글 삭제 핸들러
   const handleDelete = async () => {
-    if (modalType === 'post') {
-      try {
-        const response = await deletePost(currentBoard.id, postId);
+    try {
+      const response = await deletePost(currentBoard.id, postId);
 
-        if (response.status === 200) {
-          const pointResponse = await updatePoint({
-            userId: 35, // 추후 id 연결 필요
-            category: POINT_CATEGORY_ENUM.POST_DELETE,
-            source: POINT_SOURCE_ENUM.POST,
-            sourceId: postId,
-          });
+      if (response.status === 200) {
+        const pointResponse = await updatePoint({
+          userId: 35, // 추후 id 연결 필요
+          category: POINT_CATEGORY_ENUM.POST_DELETE,
+          source: POINT_SOURCE_ENUM.POST,
+          sourceId: postId,
+        });
 
-          if (pointResponse.status === 200) {
-            toast(TOAST.POST_DELETE_SUCCESS);
-            navigate(`/board/${currentBoard.textId}`);
-          } else {
-            throw new Error('Point update failed');
-          }
+        if (pointResponse.status === 200) {
+          toast(TOAST.POST_DELETE_SUCCESS);
+          navigate(`/board/${currentBoard.textId}`);
         } else {
-          throw new Error('Post delete failed');
+          throw new Error('Point update failed');
         }
-      } catch (error) {
-        toast(TOAST.POST_DELETE_FAIL);
-      } finally {
-        setIsDeleteModalOpen(false);
+      } else {
+        throw new Error('Post delete failed');
       }
+    } catch (error) {
+      toast(TOAST.POST_DELETE_FAIL);
+    } finally {
+      setIsDeleteModalOpen(false);
     }
-  };
-
-  // 더보기 아이콘 클릭 시 모달 type 설정 (post or comment)
-  const handleOptionClick = (type, commentId = null, commentContent = '') => {
-    setModalType(type);
-    if (type === 'comment') {
-      setSelectedCommentId(commentId);
-      setInputValue(commentContent);
-    }
-    setIsOptionsModalOpen(true);
-  };
-
-  // 모달에서 수정 옵션 클릭 시
-  const handleEditMenuClick = () => {
-    if (modalType === 'post') {
-      navigate(`./edit`);
-    } else if (modalType === 'comment') {
-      setIsOptionsModalOpen(false);
-      inputBarRef.current.focusInput();
-    }
-  };
-
-  // 모달에서 삭제 옵션 클릭 시
-  const handleDeleteMenuClick = () => {
-    setIsOptionsModalOpen(false);
-    setIsDeleteModalOpen(true);
-  };
-
-  // 모달에서 신고 옵션 클릭 시
-  const handleReportMenuClick = () => {
-    setIsOptionsModalOpen(false);
-    setIsReportModalOpen(true);
-  };
-
-  // 댓글 편집 상태 초기화
-  const resetEditingState = () => {
-    setSelectedCommentId(null);
-    setInputValue('');
   };
 
   // 로딩과 에러 상태에 따라 조건부 렌더링
@@ -180,7 +136,12 @@ export default function PostPage() {
           </div>
           <div
             className={styles.dot3}
-            onClick={() => handleOptionClick('post')}
+            onClick={() => {
+              console.log(postData);
+              postData.isWriter
+                ? setIsOptionsModalOpen(true)
+                : setIsReportModalOpen(true);
+            }}
           >
             <Icon id='ellipsis-vertical' width='3' height='11' />
           </div>
@@ -228,21 +189,22 @@ export default function PostPage() {
         </div>
       </div>
       <OptionModal
-        id={modalType === 'post' ? 'post-more-options' : 'comment-more-options'}
+        id='post-more-options'
         isOpen={isOptionsModalOpen}
         setIsOpen={setIsOptionsModalOpen}
         closeFn={() => {
-          resetEditingState();
           setIsOptionsModalOpen(false);
         }}
         functions={{
-          pencil: handleEditMenuClick,
-          trash: handleDeleteMenuClick,
-          report: handleReportMenuClick,
+          pencil: () => navigate(`./edit`),
+          trash: () => {
+            setIsOptionsModalOpen(false);
+            setIsDeleteModalOpen(true);
+          },
         }}
       />
       <DeleteModal
-        id={modalType === 'post' ? 'post-delete' : 'comment-delete'}
+        id='post-delete'
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
         redBtnFunction={handleDelete}

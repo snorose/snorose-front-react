@@ -68,13 +68,6 @@ export const MODAL_OPTIONS = [
         color: '#FF4B6C',
         nav: '/post-write',
       },
-      {
-        iconId: 'report',
-        IconWidth: 12,
-        IconHeight: 16,
-        text: '신고하기',
-        color: '#FF4B6C',
-      },
     ],
   },
   {
@@ -108,13 +101,6 @@ export const MODAL_OPTIONS = [
         text: '삭제하기',
         color: '#FF4B6C',
         nav: '/post-write',
-      },
-      {
-        iconId: 'report',
-        IconWidth: 12,
-        IconHeight: 16,
-        text: '신고하기',
-        color: '#FF4B6C',
       },
     ],
   },
