@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { postPost } from '@/apis/post';
+import { postPost, updatePoint } from '@/apis';
 
 import { useToast, useAuth } from '@/hooks';
 
@@ -10,7 +10,12 @@ import { Icon, CloseAppBar, DropDownMenu, FetchLoading } from '@/components';
 
 import { formattedNowTime } from '@/utils';
 
-import { TOAST, BOARD_MENUS } from '@/constants';
+import {
+  BOARD_MENUS,
+  POINT_CATEGORY_ENUM,
+  POINT_SOURCE_ENUM,
+  TOAST,
+} from '@/constants';
 
 import styles from './PostWritePage.module.css';
 
@@ -67,9 +72,10 @@ export default function PostWritePage() {
     isNotice,
   };
 
-  // 게시글 등록 유효성 검사 및 제출
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
+    // 유효성 검사
     if (boardId === '') {
       toast(TOAST.EMPTY_BOARDID);
       return;
@@ -82,16 +88,34 @@ export default function PostWritePage() {
       toast(TOAST.EMPTY_TEXT);
       return;
     }
-    try {
-      console.log(data);
-      await postPost(data);
-      toast(TOAST.POST_CREATE_SUCCESS);
-      navigate(-1);
-    } catch (error) {
-      toast(TOAST.POST_CREATE_FAIL);
-    }
-  };
 
+    // 게시글 등록
+    postPost(data)
+      .then((response) => {
+        if (response.status === 201) {
+          
+          return updatePoint({
+            userId: userInfo.userId, 
+            category: POINT_CATEGORY_ENUM.POST_CREATE,
+            source: POINT_SOURCE_ENUM.POST,
+            sourceId: response.data.result.postId,
+          });
+        } else {
+          throw new Error('Post creation failed');
+        }
+      })
+      .then((pointResponse) => {
+        if (pointResponse.status === 200) {
+          toast(TOAST.POST_CREATE_SUCCESS);
+          navigate(-1);
+        } else {
+          throw new Error('Point update failed');
+        }
+      })
+      .catch((error) => {
+        toast(TOAST.POST_CREATE_FAIL);
+      });
+  };
   // 제목 40자 제한
   const handleTitleChange = (e) => {
     const newValue = e.target.value;
