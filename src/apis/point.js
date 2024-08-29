@@ -24,3 +24,10 @@ export const getPointList = async (params) => {
 
   return data.result;
 };
+
+export const getMonthlyAttendanceHistory = async ({ year, month }) => {
+  const response = await authAxios.get('/v1/points/attendance', {
+    params: { year, month },
+  });
+  return response.data.result;
+};
