@@ -98,6 +98,10 @@ const TOAST = Object.freeze({
     id: 'COMMENT_DELETE_ERROR',
     message: '알 수 없는 오류가 발생했습니다.',
   },
+  EMPTY_COMMENT: {
+    id: 'EMPTY_COMMENT',
+    message:'댓글을 입력하세요.',
+  },
   EMPTY_TITLE: {
     id: 'EMPTY_TITLE_ERROR',
     message: '제목을 입력하세요.',

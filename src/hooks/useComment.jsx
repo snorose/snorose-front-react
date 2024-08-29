@@ -2,14 +2,15 @@ import { useParams } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
 import { useToast } from '@/hooks';
-import { TOAST } from '@/constants';
+import { TOAST, POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM } from '@/constants';
 
 import {
   deleteComment as remove,
   getCommentList,
   postComment as post,
   editComment as edit,
-} from '../apis/comment.js';
+  updatePoint,
+} from '@/apis';
 
 export default function useComment() {
   const { postId } = useParams();
@@ -22,19 +23,45 @@ export default function useComment() {
     staleTime: 1000 * 60,
   });
 
-  // 댓글 작성
   const postComment = useMutation({
-    mutationFn: ({ content, parentId }) => post({ postId, parentId, content }),
+    mutationFn: async ({ content, parentId }) => {
+      const response = await post({ postId, parentId, content });
+      const newCommentId = response.data.result.id;
+
+      if (response.status === 201) {
+        try {
+          const pointResponse = await updatePoint({
+            userId: 35, // 실제 userId로 교체해야 합니다.
+            category: POINT_CATEGORY_ENUM.COMMENT_CREATE,
+            source: POINT_SOURCE_ENUM.COMMENT,
+            sourceId: newCommentId,
+          });
+
+          if (pointResponse.status !== 200) {
+            throw new Error('Point update failed');
+          }
+        } catch (error) {
+          console.error('Point update error:', error);
+          toast(TOAST.COMMENT_CREATE_FAIL);
+        }
+      } else {
+        toast(TOAST.COMMENT_CREATE_FAIL);
+      }
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
-      const errorStatus = error.response.status;
-
-      if (errorStatus === 400) {
+      console.log('Mutation error:', error);
+      if (error.response) {
+        const errorStatus = error.response.status;
+        if (errorStatus === 404) {
+          toast(TOAST.COMMENT_NOT_FOUND);
+        } else {
+          toast(TOAST.COMMENT_CREATE_FAIL);
+        }
+      } else {
         toast(TOAST.COMMENT_CREATE_FAIL);
-      } else if (errorStatus === 404) {
-        toast(TOAST.COMMENT_NOT_FOUND);
       }
     },
   });
