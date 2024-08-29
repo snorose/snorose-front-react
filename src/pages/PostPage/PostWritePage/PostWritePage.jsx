@@ -8,9 +8,9 @@ import { useToast, useAuth } from '@/hooks';
 
 import { Icon, CloseAppBar, DropDownMenu, FetchLoading } from '@/components';
 
-import { TOAST, BOARD_MENUS } from '@/constants';
+import { formattedNowTime } from '@/utils';
 
-import formattedNowTime from '@/utils/formattedNowTime';
+import { TOAST, BOARD_MENUS } from '@/constants';
 
 import styles from './PostWritePage.module.css';
 

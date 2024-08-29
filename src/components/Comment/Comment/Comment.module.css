@@ -58,11 +58,11 @@
 }
 
 .commentBottom {
+  min-height: 40px;
   margin-right: 8px;
-  margin-bottom: 8px;
   display: flex;
   justify-content: end;
-  padding: 0 0 0 14px;
+  align-items: center;
 }
 
 .commentCount {

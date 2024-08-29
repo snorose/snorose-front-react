@@ -14,8 +14,7 @@ import { FetchLoading } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 import { InputBar } from '@/components/InputBar';
 
-import { filterDeletedComments } from '@/utils/filterComment.js';
-import timeAgo from '@/utils/timeAgo.js';
+import { filterDeletedComments, timeAgo } from '@/utils';
 
 import { BOARD_MENUS } from '@/constants/boardMenus.js';
 

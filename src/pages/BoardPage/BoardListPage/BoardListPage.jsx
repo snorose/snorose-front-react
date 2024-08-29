@@ -18,7 +18,7 @@ import {
   FetchLoading,
 } from '@/components';
 
-import timeAgo from '@/utils/timeAgo';
+import { timeAgo } from '@/utils';
 
 import { BOARD_MENUS } from '@/constants';
 
