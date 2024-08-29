@@ -62,7 +62,6 @@ export default function ChangePasswordPage() {
 
   const handleSubmitButtonClick = () => {
     if (newPassword !== newPasswordCheck) {
-      alert('비밀번호가 일치하지 않습니다.');
       return;
     }
 
