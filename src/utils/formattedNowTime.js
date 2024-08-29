@@ -1,4 +1,4 @@
-function formattedNowTime() {
+export function formattedNowTime() {
   const formattedNowTime = new Date()
     .toLocaleString('en-US', {
       month: '2-digit',
@@ -11,5 +11,3 @@ function formattedNowTime() {
 
   return formattedNowTime;
 }
-
-export default formattedNowTime;

@@ -39,13 +39,6 @@
   border-radius: 100%;
 }
 
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  cursor: pointer;
-}
-
 .title {
   margin: 0 var(--default-margin);
   font-weight: 700;
@@ -65,22 +58,28 @@
   margin: 0 var(--default-margin) 0 auto;
 }
 
-.counts {
+.actions {
   margin: 15px var(--default-margin) 0 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 12px;
   font-size: 11px;
   line-height: 150%;
   letter-spacing: -0.5px;
   color: #898989;
 }
 
-.count {
+.action {
+  padding: 4px 8px;
   display: flex;
   align-items: center;
   gap: 6px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.action:hover {
+  background-color: #ffffffcc;
 }
 
 .comment {

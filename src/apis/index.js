@@ -1,5 +1,6 @@
 export * from './comment';
 export * from './examReview';
+export * from './like';
 export * from './login';
 export * from './notice';
 export * from './point';

@@ -1,3 +1,9 @@
+import { useQuery } from '@tanstack/react-query';
+
+import { getHomeNotice } from '@/apis';
+
+import { useAuth } from '@/hooks';
+
 import {
   BoardCard,
   Card,
@@ -12,13 +18,26 @@ import {
 } from '@/components';
 
 import { BOARD_MENUS, ROLE } from '@/constants';
-import { BESOOKTS, CAROUSEL_BANNER, USER } from '@/dummy/data';
+import { BESOOKTS, CAROUSEL_BANNER } from '@/dummy/data';
 
 import styles from './MainPage.module.css';
 
 const BOARDS = BOARD_MENUS.filter((board) => [21, 22, 23].includes(board.id));
 
 export default function MainPage() {
+  const { status } = useAuth();
+  const isLogin = status === 'authenticated';
+
+  const { data, isError } = useQuery({
+    queryKey: ['homeNotice'],
+    queryFn: () => getHomeNotice(),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  if (isError || !data) {
+    return null;
+  }
+
   return (
     <main>
       <Header className={styles.header} />
@@ -32,14 +51,14 @@ export default function MainPage() {
           <Card
             className={styles.notice}
             to='/notice'
-            title='시험후기 등록 기간 공지'
+            title={data.title}
             tag='공지'
             imgPath='megaphone.svg'
             icon={{ id: 'megaphone', width: 128, height: 131 }}
-            isDark={USER?.isLogin ? false : true}
+            isDark={isLogin ? false : true}
           />
 
-          {USER?.isLogin && (
+          {isLogin && (
             <Card
               className={styles.mark}
               to='/attendance'
@@ -66,7 +85,7 @@ export default function MainPage() {
           ))}
         </Flex>
       </Margin>
-      {BESOOKTS.length > 0 && (
+      {/* {BESOOKTS.length > 0 && (
         <Margin className={styles.besookt}>
           <ListHeader to='/board/besookt' title='베숙트' />
           <Flex direction='column' gap='0.375rem'>
@@ -95,7 +114,7 @@ export default function MainPage() {
             )}
           </Flex>
         </Margin>
-      )}
+      )} */}
       <Footer />
     </main>
   );

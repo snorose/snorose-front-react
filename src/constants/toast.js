@@ -11,6 +11,10 @@ const TOAST = Object.freeze({
     id: 'EXAM_REVIEW_DOWNLOAD',
     message: '50P 차감되었어요',
   },
+  NO_SELF_SCRAP: {
+    id: 'NO_SELF_SCROP',
+    message: '내 게시글은 스크랩할 수 없어요',
+  },
   POST_EDIT_SUCCESS: { id: 'POST_EDIT_SUCCESS', message: '게시글 수정 완료' },
   POST_EDIT_FAIL: { id: 'POST_EDIT_FAIL', message: '게시글 수정 실패' },
   POST_CREATE_SUCCESS: {
@@ -45,6 +49,44 @@ const TOAST = Object.freeze({
     id: 'POST_DELETE_ERROR',
     message: '알 수 없는 오류가 발생했습니다.',
   },
+  COMMENT_EDIT_SUCCESS: {
+    id: 'COMMENT_EDIT_SUCCESS',
+    message: '댓글 수정 완료',
+  },
+  COMMENT_EDIT_FAIL: { id: 'COMMENT_EDIT_FAIL', message: '댓글 수정 실패' },
+  COMMENT_CREATE_SUCCESS: {
+    id: 'COMMENT-CREATE-SUCCESS',
+    message: '댓글 등록 성공!',
+  },
+  COMMENT_CREATE_FAIL: {
+    id: 'COMMENT_CREATE_FAIL',
+    message: '댓글 등록에 실패했습니다.',
+  },
+  COMMENT_DELETE_SUCCESS: {
+    id: 'COMMENT_DELETE_SUCCESS',
+    message: '댓글이 삭제되었습니다.',
+  },
+  COMMENT_DELETE_FAIL: {
+    id: 'COMMENT_DELETE_FAIL',
+    message: '댓글 삭제에 실패했습니다.',
+  },
+  COMMENT_NOT_FOUND: {
+    id: 'COMMENT_NOT_FOUND',
+    message: '댓글을 찾을 수 없습니다.',
+  },
+  COMMENT_EDIT_ERROR: {
+    id: 'COMMENT_EDIT_ERROR',
+    message: '알 수 없는 오류가 발생했습니다.',
+  },
+  COMMENT_CREATE_ERROR: {
+    id: 'COMMENT_CREATE_ERROR',
+    message: '알 수 없는 오류가 발생했습니다.',
+  },
+  COMMENT_DELETE_ERROR: {
+    id: 'COMMENT_DELETE_ERROR',
+    message: '알 수 없는 오류가 발생했습니다.',
+  },
+
   EMPTY_TITLE: {
     id: 'EMPTY_TITLE_ERROR',
     message: '제목을 입력하세요.',

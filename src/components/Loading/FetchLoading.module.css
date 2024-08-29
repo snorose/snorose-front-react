@@ -1,6 +1,7 @@
+/* 기본 로딩 스타일 */
 .loading {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 56px - 86px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,14 +21,18 @@
   animation: rotateAndPause 2s linear infinite;
 }
 
+.icon_static {
+  animation: none;
+}
+
 @keyframes rotateAndPause {
   0% {
-    transform: rotate(0deg); /* 시작 상태 */
+    transform: rotate(0deg);
   }
   15% {
-    transform: rotate(180deg); /* 반 바퀴 회전 */
+    transform: rotate(180deg);
   }
   100% {
-    transform: rotate(180deg); /* 반 바퀴 회전 후 멈춤 */
+    transform: rotate(180deg);
   }
 }

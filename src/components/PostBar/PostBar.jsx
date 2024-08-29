@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Icon } from '@/components/Icon';
 
-import timeAgo from '@/utils/timeAgo.js';
+import { timeAgo } from '@/utils';
 
 import styles from './PostBar.module.css';
 
@@ -68,7 +68,7 @@ export default function PostBar({
                 id='like'
                 width='12'
                 height='11'
-                fill={data.liked ? '#5F86BF' : '#D9D9D9'}
+                fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
               />
               <span>{data.likeCount.toLocaleString()}</span>
             </>
@@ -80,7 +80,7 @@ export default function PostBar({
                 id='bookmark-fill'
                 width='9'
                 height='11'
-                fill={data.liked ? '#5F86BF' : '#D9D9D9'}
+                fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
               />
               <span>{data.scrapCount.toLocaleString()}</span>
             </>

@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-import { getPostList } from '@/apis/post';
-import { getNoticeLine } from '@/apis/notice.js';
+import { getNoticeLine, getPostList } from '@/apis';
 
-import { useIntersect } from '@/hooks';
+import { useInfiniteScroll } from '@/hooks';
 
 import {
   BackAppBar,
@@ -16,9 +15,10 @@ import {
   PTR,
   Target,
   WriteButton,
+  FetchLoading,
 } from '@/components';
 
-import timeAgo from '@/utils/timeAgo';
+import { timeAgo } from '@/utils';
 
 import { BOARD_MENUS } from '@/constants';
 
@@ -30,28 +30,10 @@ export default function BoardListPage() {
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === currentBoardTextId) || {};
 
-  const { data, hasNextPage, isFetching, status, fetchNextPage, refetch } =
-    useInfiniteQuery({
-      queryKey: ['postList', currentBoard.id],
-      queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
-      getNextPageParam: (lastPage, allPages, lastPageParam) => {
-        if (lastPage.length === 0) {
-          return undefined;
-        }
-        return lastPage.length > 0 ? (lastPageParam || 0) + 1 : undefined;
-      },
-      refetchInterval: false,
-    });
-
-  const ref = useIntersect(
-    async (entry, observer) => {
-      observer.unobserve(entry.target);
-      if (hasNextPage && !isFetching) {
-        fetchNextPage();
-      }
-    },
-    { threshold: 0.8 }
-  );
+  const { data, ref, isLoading, status, isError, refetch } = useInfiniteScroll({
+    queryKey: ['postList', currentBoard.id],
+    queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
+  });
 
   // 1줄 공지 데이터 받아오기
   const [noticeTitle, setNoticeTitle] = useState('');
@@ -68,7 +50,10 @@ export default function BoardListPage() {
     }
   }, [noticeLineData]);
 
-  const postList = data ? data.pages.flatMap((page) => page) : [];
+  const postList =
+    data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page)
+      : [];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -79,6 +64,26 @@ export default function BoardListPage() {
       navigate(to);
     };
   };
+
+  if (isLoading) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading>게시글 불러오는 중...</FetchLoading>
+      </>
+    );
+  }
+
+  if (isError) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading animation={false}>
+          게시글을 불러오지 못했습니다.
+        </FetchLoading>
+      </>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -114,7 +119,10 @@ export default function BoardListPage() {
         setIsOpen={setIsModalOpen}
       />
       <Target ref={ref} height='100px' />
-      <WriteButton to='/post-write' />
+      <WriteButton
+        to={`/board/${currentBoardTextId}/post-write`}
+        className={styles.writeButton}
+      />
     </div>
   );
 }
