@@ -4,18 +4,34 @@ import { Icon } from '@/components/Icon';
 
 import styles from './DropDownBlue.module.css';
 
-export default function DropDownBlue({ options, placeholder, select, setFn }) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function DropDownBlue({
+  options,
+  placeholder,
+  select,
+  setFn,
+  name,
+  isOpen,
+  setIsOpen,
+}) {
+  const handleToggle = () => {
+    setIsOpen((prev) => {
+      for (const key in prev) {
+        prev[key] = false;
+      }
+      return { ...prev, [name]: !isOpen };
+    });
+  };
+
   const updateSelect = (event) => {
     setFn(JSON.parse(event.target.dataset.value));
-    setIsOpen(false);
+    handleToggle();
   };
 
   return (
     <div className={`${styles.dropdown} ${isOpen && styles.open}`}>
       <div
         className={`${styles.select} ${select || styles.unselect}`}
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={handleToggle}
       >
         <Icon
           id={isOpen ? 'angle-up-blue' : 'angle-down-blue'}
@@ -32,7 +48,7 @@ export default function DropDownBlue({ options, placeholder, select, setFn }) {
           key={placeholder}
           onClick={() => {
             setFn(undefined);
-            setIsOpen(false);
+            handleToggle();
           }}
         >
           {placeholder}
