@@ -23,43 +23,27 @@ export default function useComment() {
     staleTime: 1000 * 60,
   });
 
+  // 댓글 생성
   const postComment = useMutation({
     mutationFn: async ({ content, parentId }) => {
       const response = await post({ postId, parentId, content });
       const newCommentId = response.data.result.id;
-
       if (response.status === 201) {
-        try {
-          const pointResponse = await updatePoint({
-            userId: 35, // 실제 userId로 교체해야 합니다.
-            category: POINT_CATEGORY_ENUM.COMMENT_CREATE,
-            source: POINT_SOURCE_ENUM.COMMENT,
-            sourceId: newCommentId,
-          });
-
-          if (pointResponse.status !== 200) {
-            throw new Error('Point update failed');
-          }
-        } catch (error) {
-          console.error('Point update error:', error);
-          toast(TOAST.COMMENT_CREATE_FAIL);
-        }
-      } else {
-        toast(TOAST.COMMENT_CREATE_FAIL);
+        await updatePoint({
+          userId: 35, // 실제 userId로 교체해야 합니다.
+          category: POINT_CATEGORY_ENUM.COMMENT_CREATE,
+          source: POINT_SOURCE_ENUM.COMMENT,
+          sourceId: newCommentId,
+        });
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
-      console.log('Mutation error:', error);
-      if (error.response) {
-        const errorStatus = error.response.status;
-        if (errorStatus === 404) {
-          toast(TOAST.COMMENT_NOT_FOUND);
-        } else {
-          toast(TOAST.COMMENT_CREATE_FAIL);
-        }
+      console.log('댓글 생성 에러:', error);
+      if (error.response.status === 404) {
+        toast(TOAST.COMMENT_NOT_FOUND);
       } else {
         toast(TOAST.COMMENT_CREATE_FAIL);
       }
