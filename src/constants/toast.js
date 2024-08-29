@@ -1,4 +1,16 @@
 const TOAST = Object.freeze({
+  ATTENDANCE_SUCCESS: {
+    id: 'ATTENDANCE',
+    message: '출석체크 완료',
+  },
+  ATTENDANCE_ONLY_ONCE_ERROR: {
+    id: 'ATTENDANCE_ONLY_ONCE_ERROR',
+    message: '출석은 하루에 한 번만 가능해요',
+  },
+  ATTENDANCE_FAIL: {
+    id: 'ATTENDANCE_FAIL',
+    message: '출석체크 실패',
+  },
   EXAM_REVIEW_CREATE: {
     id: 'EXAM_REVIEW_CREATE',
     message: '100P 적립이 완료되었어요',
@@ -19,7 +31,7 @@ const TOAST = Object.freeze({
   POST_EDIT_FAIL: { id: 'POST_EDIT_FAIL', message: '게시글 수정 실패' },
   POST_CREATE_SUCCESS: {
     id: 'POST-CREATE-SUCCESS',
-    message: '게시글 등록 성공!',
+    message: '2P 적립이 완료되었어요',
   },
   POST_CREATE_FAIL: {
     id: 'POST_CREATE_FAIL',
@@ -86,7 +98,6 @@ const TOAST = Object.freeze({
     id: 'COMMENT_DELETE_ERROR',
     message: '알 수 없는 오류가 발생했습니다.',
   },
-
   EMPTY_TITLE: {
     id: 'EMPTY_TITLE_ERROR',
     message: '제목을 입력하세요.',

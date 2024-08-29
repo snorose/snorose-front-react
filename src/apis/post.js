@@ -32,7 +32,7 @@ export const postPost = async ({
     `/v1/boards/${boardId}/posts/newpost`,
     data
   );
-  return response.data.result;
+  return response;
 };
 
 // 게시글 삭제

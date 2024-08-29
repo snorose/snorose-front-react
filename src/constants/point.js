@@ -41,6 +41,7 @@ export const POINT_CATEGORY_KOREAN_ENUM = Object.freeze({
   COMMENT_DELETE: '댓글 삭제',
   EXAM_REVIEW_CREATE: '시험후기 작성',
   EXAM_REVIEW_DOWNLOAD: '시험후기 다운로드',
+  EXAM_REVIEW_DELETE: '시험후기 삭제',
   LECTURE_REVIEW_CREATE: '강의후기 작성',
   POINT_REWARD_10_LIKES: '좋아요 10개 게시글',
   POINT_REWARD_100_LIKES: '좋아요 100개 게시글',

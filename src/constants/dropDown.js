@@ -36,10 +36,12 @@ export const SEMESTERS = Object.freeze([
   },
 ]);
 
-export const YEARS = Object.freeze([
-  { id: 2020, name: '2020' },
-  { id: 2021, name: '2021' },
-  { id: 2022, name: '2022' },
-  { id: 2023, name: '2023' },
-  { id: 2024, name: '2024' },
-]);
+export const YEARS = Object.freeze(
+  [
+    { id: 2024, name: '2024' },
+    { id: 2023, name: '2023' },
+    { id: 2022, name: '2022' },
+    { id: 2021, name: '2021' },
+    { id: 2020, name: '2020' },
+  ].sort((a, b) => b.id - a.id)
+);
