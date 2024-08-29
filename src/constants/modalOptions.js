@@ -70,10 +70,10 @@ export const MODAL_OPTIONS = [
       },
       {
         iconId: 'report',
-        IconWidth: 12,
+        IconWidth: 15,
         IconHeight: 16,
         text: '신고하기',
-        color: '#FF4B6C',
+        color: '#5F86BF',
       },
     ],
   },
