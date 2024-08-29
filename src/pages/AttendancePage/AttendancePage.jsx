@@ -28,7 +28,7 @@ export default function AttendancePage() {
           className={styles.attendanceButton}
           onClick={() => {
             updatePoint({
-              userId: 62, // userId 교체 필요함
+              userId: 32, // userId 교체 필요함
               category: POINT_CATEGORY_ENUM.ATTENDANCE,
               source: POINT_SOURCE_ENUM.ATTENDANCE,
             })
@@ -43,7 +43,9 @@ export default function AttendancePage() {
                   toast(TOAST.ATTENDANCE_SUCCESS);
                 }
               })
-              .catch(({ status }) => {
+              .catch(({ response }) => {
+                const { status } = response;
+
                 if (status === 403) {
                   toast(TOAST.ATTENDANCE_ONLY_ONCE_ERROR);
                 } else {
