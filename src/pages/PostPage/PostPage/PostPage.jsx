@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { getPostContent, deletePost } from '@/apis/post.js';
+import { getPostContent, deletePost, updatePoint } from '@/apis';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import { useComment, useLike, useScrap } from '@/hooks';
+import { useComment, useLike, useScrap, useToast } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
@@ -16,7 +16,12 @@ import { InputBar } from '@/components/InputBar';
 
 import { filterDeletedComments, timeAgo } from '@/utils';
 
-import { BOARD_MENUS } from '@/constants/boardMenus.js';
+import {
+  BOARD_MENUS,
+  POINT_CATEGORY_ENUM,
+  POINT_SOURCE_ENUM,
+  TOAST,
+} from '@/constants';
 
 import styles from './PostPage.module.css';
 
@@ -26,6 +31,7 @@ export default function PostPage() {
   const { pathname } = useLocation();
   const { inputFocus } = useCommentContext();
   const { commentList } = useComment();
+  const { toast } = useToast();
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === pathname.split('/')[2]) || {};
   const [postData, setPostData] = useState(null);
@@ -55,13 +61,35 @@ export default function PostPage() {
     }
   }, [data]);
 
-  // 게시글 삭제하기
+  // 게시글 삭제 핸들러
   const handleDelete = async () => {
     if (modalType === 'post') {
-      await deletePost(currentBoard.id, postId);
-      navigate(`/board/${currentBoard.textId}`);
+      try {
+        const response = await deletePost(currentBoard.id, postId);
+
+        if (response.status === 200) {
+          const pointResponse = await updatePoint({
+            userId: 35, // 추후 id 연결 필요
+            category: POINT_CATEGORY_ENUM.POST_DELETE,
+            source: POINT_SOURCE_ENUM.POST,
+            sourceId: postId,
+          });
+
+          if (pointResponse.status === 200) {
+            toast(TOAST.POST_DELETE_SUCCESS);
+            navigate(`/board/${currentBoard.textId}`);
+          } else {
+            throw new Error('Point update failed');
+          }
+        } else {
+          throw new Error('Post delete failed');
+        }
+      } catch (error) {
+        toast(TOAST.POST_DELETE_FAIL);
+      } finally {
+        setIsDeleteModalOpen(false);
+      }
     }
-    setIsDeleteModalOpen(false);
   };
 
   // 더보기 아이콘 클릭 시 모달 type 설정 (post or comment)
@@ -104,15 +132,34 @@ export default function PostPage() {
 
   // 로딩과 에러 상태에 따라 조건부 렌더링
   if (isLoading) {
-    return <FetchLoading>게시글을 불러오는 중...</FetchLoading>;
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading>게시글 불러오는 중...</FetchLoading>
+      </>
+    );
   }
 
   if (error) {
-    return <FetchLoading>게시글 불러오기에 실패했습니다.</FetchLoading>;
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading animation={false}>
+          게시글을 불러오지 못했습니다.
+        </FetchLoading>
+      </>
+    );
   }
 
   if (!postData) {
-    return <FetchLoading>게시글을 찾을 수 없습니다.</FetchLoading>;
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading animation={false}>
+          게시글을 찾을 수 없습니다.
+        </FetchLoading>
+      </>
+    );
   }
 
   return (

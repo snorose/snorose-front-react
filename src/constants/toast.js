@@ -31,7 +31,7 @@ const TOAST = Object.freeze({
   POST_EDIT_FAIL: { id: 'POST_EDIT_FAIL', message: '게시글 수정 실패' },
   POST_CREATE_SUCCESS: {
     id: 'POST-CREATE-SUCCESS',
-    message: '게시글 등록 성공!',
+    message: '2P 적립이 완료되었어요',
   },
   POST_CREATE_FAIL: {
     id: 'POST_CREATE_FAIL',
