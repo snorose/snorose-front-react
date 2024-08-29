@@ -125,6 +125,14 @@ const TOAST = Object.freeze({
     id: 'UPDATE_USER_INFO_SUCCESS',
     message: '회원 정보 수정이 완료되었습니다.',
   },
+  WITHDRAW_ACCOUNT_SUCCESS: {
+    id: 'UPDATE_USER_INFO_SUCCESS',
+    message: '회원 탈퇴가 완료되었습니다.',
+  },
+  WITHDRAW_ACCOUNT_ERROR: {
+    id: 'WITHDRAW_ACCOUNT_ERROR',
+    message: '회원 탈퇴에 실패했습니다.\n다시 시도해주세요.',
+  },
 });
 
 export { TOAST };

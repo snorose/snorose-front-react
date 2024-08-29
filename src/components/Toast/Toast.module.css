@@ -12,5 +12,6 @@
   font-size: 0.75rem;
   line-height: 130%;
   letter-spacing: -0.5px;
+  white-space: pre-wrap;
   color: #ffffff;
 }
