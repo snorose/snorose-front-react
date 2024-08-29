@@ -29,14 +29,9 @@ export default function PostPage() {
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === pathname.split('/')[2]) || {};
   const [postData, setPostData] = useState(null);
-  const [selectedCommentId, setSelectedCommentId] = useState(null);
-  const [modalType, setModalType] = useState('');
-  const [modalId, setModalId] = useState('');
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const inputBarRef = useRef(null);
   const filterdCommentList = filterDeletedComments(commentList);
 
   // 게시글 데이터 받아오기
@@ -58,77 +53,41 @@ export default function PostPage() {
 
   // 게시글 삭제하기
   const handleDelete = async () => {
-    if (modalType === 'post') {
-      await deletePost(currentBoard.id, postId);
-      navigate(`/board/${currentBoard.textId}`);
-    }
+    await deletePost(currentBoard.id, postId);
+    navigate(`/board/${currentBoard.textId}`);
     setIsDeleteModalOpen(false);
-  };
-
-  // 더보기 아이콘 클릭 시 모달 type 설정 (post or comment)
-  const handleOptionClick = (type, commentId = null, commentContent = '') => {
-    setModalType(type);
-    if (type === 'comment') {
-      setSelectedCommentId(commentId);
-      setInputValue(commentContent);
-    }
-    setIsOptionsModalOpen(true);
-
-    if (postData.isWriter) {
-      console.log(modalType);
-      if (modalType === 'post') {
-        setModalId('my-post-more-options');
-      } else if (modalType === 'comment') {
-        setModalId('my-comment-more-options');
-      }
-    } else {
-      if (modalType === 'post') {
-        setModalId('post-more-options');
-      } else if (modalType === 'comment') {
-        setModalId('comment-more-options');
-      }
-    }
-  };
-
-  // 모달에서 수정 옵션 클릭 시
-  const handleEditMenuClick = () => {
-    if (modalType === 'post') {
-      navigate(`./edit`);
-    } else if (modalType === 'comment') {
-      setIsOptionsModalOpen(false);
-      inputBarRef.current.focusInput();
-    }
-  };
-
-  // 모달에서 삭제 옵션 클릭 시
-  const handleDeleteMenuClick = () => {
-    setIsOptionsModalOpen(false);
-    setIsDeleteModalOpen(true);
-  };
-
-  // 모달에서 신고 옵션 클릭 시
-  const handleReportMenuClick = () => {
-    setIsOptionsModalOpen(false);
-    setIsReportModalOpen(true);
-  };
-
-  // 댓글 편집 상태 초기화
-  const resetEditingState = () => {
-    setSelectedCommentId(null);
-    setInputValue('');
   };
 
   // 로딩과 에러 상태에 따라 조건부 렌더링
   if (isLoading) {
-    return <FetchLoading>게시글을 불러오는 중...</FetchLoading>;
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading>게시글을 불러오는 중...</FetchLoading>
+      </>
+    );
   }
 
   if (error) {
-    return <FetchLoading>게시글 불러오기에 실패했습니다.</FetchLoading>;
+    return (
+      <>
+        <BackAppBar />;
+        <FetchLoading animation={false}>
+          게시글을 불러오지 못했습니다.
+        </FetchLoading>
+      </>
+    );
   }
 
   if (!postData) {
-    return <FetchLoading>게시글을 찾을 수 없습니다.</FetchLoading>;
+    return (
+      <>
+        <BackAppBar />;
+        <FetchLoading animation={false}>
+          게시글을 찾을 수 없습니다.
+        </FetchLoading>
+      </>
+    );
   }
 
   return (
@@ -149,7 +108,7 @@ export default function PostPage() {
           </div>
           <div
             className={styles.dot3}
-            onClick={() => handleOptionClick('post')}
+            onClick={() => setIsOptionsModalOpen(true)}
           >
             <Icon id='ellipsis-vertical' width='3' height='11' />
           </div>
@@ -197,26 +156,31 @@ export default function PostPage() {
         </div>
       </div>
       <OptionModal
-        id={modalId}
+        id={postData.isWriter ? 'my-post-more-options' : 'post-more-options'}
         isOpen={isOptionsModalOpen}
         setIsOpen={setIsOptionsModalOpen}
         closeFn={() => {
-          resetEditingState();
           setIsOptionsModalOpen(false);
         }}
         functions={
           postData.isWriter
             ? {
-                pencil: handleEditMenuClick,
-                trash: handleDeleteMenuClick,
+                pencil: () => navigate(`./edit`),
+                trash: () => {
+                  setIsOptionsModalOpen(false);
+                  setIsDeleteModalOpen(true);
+                },
               }
             : {
-                report: handleReportMenuClick,
+                report: () => {
+                  setIsOptionsModalOpen(false);
+                  setIsReportModalOpen(true);
+                },
               }
         }
       />
       <DeleteModal
-        id={modalType === 'post' ? 'post-delete' : 'comment-delete'}
+        id='post-delete'
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
         redBtnFunction={handleDelete}
