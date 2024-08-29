@@ -45,7 +45,9 @@ export default function AttendancePage() {
               })
               .catch(({ status }) => {
                 if (status === 403) {
-                  toast(TOAST.ATTENDANCE_ERROR);
+                  toast(TOAST.ATTENDANCE_ONLY_ONCE_ERROR);
+                } else {
+                  toast(TOAST.ATTENDANCE_FAIL);
                 }
               });
           }}

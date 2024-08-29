@@ -3,9 +3,13 @@ const TOAST = Object.freeze({
     id: 'ATTENDANCE',
     message: '출석체크 완료',
   },
-  ATTENDANCE_ERROR: {
-    id: 'ATTENDANCE_ERROR',
+  ATTENDANCE_ONLY_ONCE_ERROR: {
+    id: 'ATTENDANCE_ONLY_ONCE_ERROR',
     message: '출석은 하루에 한 번만 가능해요',
+  },
+  ATTENDANCE_FAIL: {
+    id: 'ATTENDANCE_FAIL',
+    message: '출석체크 실패',
   },
   EXAM_REVIEW_CREATE: {
     id: 'EXAM_REVIEW_CREATE',
