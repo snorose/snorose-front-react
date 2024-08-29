@@ -31,6 +31,7 @@ export default function PostPage() {
   const [postData, setPostData] = useState(null);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
   const [modalType, setModalType] = useState('');
+  const [modalId, setModalId] = useState('');
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -72,6 +73,21 @@ export default function PostPage() {
       setInputValue(commentContent);
     }
     setIsOptionsModalOpen(true);
+
+    if (postData.isWriter) {
+      console.log(modalType);
+      if (modalType === 'post') {
+        setModalId('my-post-more-options');
+      } else if (modalType === 'comment') {
+        setModalId('my-comment-more-options');
+      }
+    } else {
+      if (modalType === 'post') {
+        setModalId('post-more-options');
+      } else if (modalType === 'comment') {
+        setModalId('comment-more-options');
+      }
+    }
   };
 
   // 모달에서 수정 옵션 클릭 시
@@ -181,18 +197,23 @@ export default function PostPage() {
         </div>
       </div>
       <OptionModal
-        id={modalType === 'post' ? 'post-more-options' : 'comment-more-options'}
+        id={modalId}
         isOpen={isOptionsModalOpen}
         setIsOpen={setIsOptionsModalOpen}
         closeFn={() => {
           resetEditingState();
           setIsOptionsModalOpen(false);
         }}
-        functions={{
-          pencil: handleEditMenuClick,
-          trash: handleDeleteMenuClick,
-          report: handleReportMenuClick,
-        }}
+        functions={
+          postData.isWriter
+            ? {
+                pencil: handleEditMenuClick,
+                trash: handleDeleteMenuClick,
+              }
+            : {
+                report: handleReportMenuClick,
+              }
+        }
       />
       <DeleteModal
         id={modalType === 'post' ? 'post-delete' : 'comment-delete'}

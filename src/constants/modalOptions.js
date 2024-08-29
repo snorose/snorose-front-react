@@ -49,7 +49,7 @@ export const MODAL_OPTIONS = [
     ],
   },
   {
-    id: 'post-more-options',
+    id: 'my-post-more-options',
     title: '내 게시글',
     titleColor: '#000',
     children: [
@@ -68,6 +68,13 @@ export const MODAL_OPTIONS = [
         color: '#FF4B6C',
         nav: '/post-write',
       },
+    ],
+  },
+  {
+    id: 'post-more-options',
+    title: '게시글',
+    titleColor: '#000',
+    children: [
       {
         iconId: 'report',
         IconWidth: 15,
@@ -90,7 +97,7 @@ export const MODAL_OPTIONS = [
     },
   },
   {
-    id: 'comment-more-options',
+    id: 'my-comment-more-options',
     title: '내 댓글',
     titleColor: '#000',
     children: [
@@ -109,12 +116,19 @@ export const MODAL_OPTIONS = [
         color: '#FF4B6C',
         nav: '/post-write',
       },
+    ],
+  },
+  {
+    id: 'comment-more-options',
+    title: '댓글',
+    titleColor: '#000',
+    children: [
       {
         iconId: 'report',
-        IconWidth: 12,
+        IconWidth: 15,
         IconHeight: 16,
         text: '신고하기',
-        color: '#FF4B6C',
+        color: '#5F86BF',
       },
     ],
   },
