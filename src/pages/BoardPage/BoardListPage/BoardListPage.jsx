@@ -119,7 +119,10 @@ export default function BoardListPage() {
         setIsOpen={setIsModalOpen}
       />
       <Target ref={ref} height='100px' />
-      <WriteButton to='/post-write' />
+      <WriteButton
+        to={`/board/${currentBoardTextId}/post-write`}
+        className={styles.writeButton}
+      />
     </div>
   );
 }
