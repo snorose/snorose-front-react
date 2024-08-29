@@ -15,8 +15,14 @@ const TOAST = Object.freeze({
     id: 'NO_SELF_SCROP',
     message: '내 게시글은 스크랩할 수 없어요',
   },
-  POST_EDIT_SUCCESS: { id: 'POST_EDIT_SUCCESS', message: '게시글 수정 완료' },
-  POST_EDIT_FAIL: { id: 'POST_EDIT_FAIL', message: '게시글 수정 실패' },
+  POST_EDIT_SUCCESS: {
+    id: 'POST_EDIT_SUCCESS',
+    message: '게시글 수정 완료',
+  },
+  POST_EDIT_FAIL: {
+    id: 'POST_EDIT_FAIL',
+    message: '게시글 수정 실패',
+  },
   POST_CREATE_SUCCESS: {
     id: 'POST-CREATE-SUCCESS',
     message: '게시글 등록 성공!',
@@ -53,7 +59,10 @@ const TOAST = Object.freeze({
     id: 'COMMENT_EDIT_SUCCESS',
     message: '댓글 수정 완료',
   },
-  COMMENT_EDIT_FAIL: { id: 'COMMENT_EDIT_FAIL', message: '댓글 수정 실패' },
+  COMMENT_EDIT_FAIL: {
+    id: 'COMMENT_EDIT_FAIL',
+    message: '댓글 수정 실패',
+  },
   COMMENT_CREATE_SUCCESS: {
     id: 'COMMENT-CREATE-SUCCESS',
     message: '댓글 등록 성공!',
@@ -106,6 +115,11 @@ const TOAST = Object.freeze({
   SCRAP_SELF_ERROR: {
     id: 'SCRAP_SELF_ERROR',
     message: '자신의 글은 스크랩할 수 없습니다.',
+  },
+
+  UPDATE_PASSWORD_SUCCESS: {
+    id: 'UPDATE_PASSWORD_SUCCESS',
+    message: '비밀번호 수정이 완료되었습니다.',
   },
 });
 
