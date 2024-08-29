@@ -121,6 +121,10 @@ const TOAST = Object.freeze({
     id: 'UPDATE_PASSWORD_SUCCESS',
     message: '비밀번호 수정이 완료되었습니다.',
   },
+  UPDATE_USER_INFO_SUCCESS: {
+    id: 'UPDATE_USER_INFO_SUCCESS',
+    message: '회원 정보 수정이 완료되었습니다.',
+  },
 });
 
 export { TOAST };
