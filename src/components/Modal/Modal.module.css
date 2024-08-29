@@ -46,7 +46,7 @@
 .bottom {
   display: flex;
   justify-content: end;
-  padding: 0 28px 10px 28px;
+  padding: 6px 28px 10px 28px;
 }
 
 .leftCloseBtn {

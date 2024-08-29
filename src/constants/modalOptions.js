@@ -49,7 +49,7 @@ export const MODAL_OPTIONS = [
     ],
   },
   {
-    id: 'my-post-more-options',
+    id: 'post-more-options',
     title: '내 게시글',
     titleColor: '#000',
     children: [
@@ -71,20 +71,6 @@ export const MODAL_OPTIONS = [
     ],
   },
   {
-    id: 'post-more-options',
-    title: '게시글',
-    titleColor: '#000',
-    children: [
-      {
-        iconId: 'report',
-        IconWidth: 15,
-        IconHeight: 16,
-        text: '신고하기',
-        color: '#5F86BF',
-      },
-    ],
-  },
-  {
     id: 'post-delete',
     title: '게시글을 삭제할까요?',
     titleColor: '#000',
@@ -97,7 +83,7 @@ export const MODAL_OPTIONS = [
     },
   },
   {
-    id: 'my-comment-more-options',
+    id: 'comment-more-options',
     title: '내 댓글',
     titleColor: '#000',
     children: [
@@ -115,20 +101,6 @@ export const MODAL_OPTIONS = [
         text: '삭제하기',
         color: '#FF4B6C',
         nav: '/post-write',
-      },
-    ],
-  },
-  {
-    id: 'comment-more-options',
-    title: '댓글',
-    titleColor: '#000',
-    children: [
-      {
-        iconId: 'report',
-        IconWidth: 15,
-        IconHeight: 16,
-        text: '신고하기',
-        color: '#5F86BF',
       },
     ],
   },

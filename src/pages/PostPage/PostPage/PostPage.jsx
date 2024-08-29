@@ -108,7 +108,12 @@ export default function PostPage() {
           </div>
           <div
             className={styles.dot3}
-            onClick={() => setIsOptionsModalOpen(true)}
+            onClick={() => {
+              console.log(postData);
+              postData.isWriter
+                ? setIsOptionsModalOpen(true)
+                : setIsReportModalOpen(true);
+            }}
           >
             <Icon id='ellipsis-vertical' width='3' height='11' />
           </div>
@@ -156,28 +161,19 @@ export default function PostPage() {
         </div>
       </div>
       <OptionModal
-        id={postData.isWriter ? 'my-post-more-options' : 'post-more-options'}
+        id='post-more-options'
         isOpen={isOptionsModalOpen}
         setIsOpen={setIsOptionsModalOpen}
         closeFn={() => {
           setIsOptionsModalOpen(false);
         }}
-        functions={
-          postData.isWriter
-            ? {
-                pencil: () => navigate(`./edit`),
-                trash: () => {
-                  setIsOptionsModalOpen(false);
-                  setIsDeleteModalOpen(true);
-                },
-              }
-            : {
-                report: () => {
-                  setIsOptionsModalOpen(false);
-                  setIsReportModalOpen(true);
-                },
-              }
-        }
+        functions={{
+          pencil: () => navigate(`./edit`),
+          trash: () => {
+            setIsOptionsModalOpen(false);
+            setIsDeleteModalOpen(true);
+          },
+        }}
       />
       <DeleteModal
         id='post-delete'
