@@ -157,7 +157,7 @@ export default function ExamReviewDetailPage() {
               id='comment'
               width='15'
               height='14'
-              fill='#5F86BF'
+              fill='#D9D9D9'
             />
             <span>{commentCount.toLocaleString()}</span>
           </div>
