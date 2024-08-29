@@ -1,7 +1,7 @@
 const TOAST = Object.freeze({
   ATTENDANCE_SUCCESS: {
     id: 'ATTENDANCE',
-    message: '출석체크가 완료되었어요',
+    message: '출석체크 완료',
   },
   ATTENDANCE_ERROR: {
     id: 'ATTENDANCE_ERROR',
