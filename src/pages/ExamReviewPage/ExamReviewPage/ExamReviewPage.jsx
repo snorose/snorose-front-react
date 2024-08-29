@@ -17,6 +17,11 @@ export default function ExamReviewPage() {
   const { pathname } = useLocation();
   const urlKeyword = decodeURIComponent(pathname.split('/')[4] || '');
 
+  const [isOpen, setIsOpen] = useState({
+    year: false,
+    semester: false,
+    examType: false,
+  });
   const [lectureYear, setLectureYear] = useState();
   const [semester, setSemester] = useState();
   const [examType, setExamType] = useState();
@@ -48,20 +53,29 @@ export default function ExamReviewPage() {
         <DropDownBlue
           options={YEARS}
           placeholder='연도'
+          name='year'
           select={lectureYear}
           setFn={setLectureYear}
+          isOpen={isOpen['year']}
+          setIsOpen={setIsOpen}
         />
         <DropDownBlue
           options={SEMESTERS}
           placeholder='학기'
+          name='semester'
           select={semester}
           setFn={setSemester}
+          isOpen={isOpen['semester']}
+          setIsOpen={setIsOpen}
         />
         <DropDownBlue
           options={EXAM_TYPES}
           placeholder='시험 종류'
+          name='examType'
           select={examType}
           setFn={setExamType}
+          isOpen={isOpen['examType']}
+          setIsOpen={setIsOpen}
         />
       </div>
       <PTR>
