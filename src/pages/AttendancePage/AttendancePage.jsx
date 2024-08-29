@@ -1,3 +1,5 @@
+import { useQueryClient } from '@tanstack/react-query';
+
 import { updatePoint } from '@/apis';
 
 import { useToast } from '@/hooks';
@@ -11,6 +13,7 @@ import { POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM, TOAST } from '@/constants';
 import styles from './AttendancePage.module.css';
 
 export default function AttendancePage() {
+  const queryClient = useQueryClient();
   const { toast } = useToast();
 
   return (
@@ -31,6 +34,12 @@ export default function AttendancePage() {
             })
               .then(({ status }) => {
                 if (status === 200) {
+                  const today = new Date();
+                  queryClient.invalidateQueries([
+                    'monthlyAttendanceHistory',
+                    today.getFullYear(),
+                    today.getMonth() + 1,
+                  ]);
                   toast(TOAST.ATTENDANCE_SUCCESS);
                 }
               })
