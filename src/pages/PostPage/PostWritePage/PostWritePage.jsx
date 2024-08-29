@@ -93,9 +93,8 @@ export default function PostWritePage() {
     postPost(data)
       .then((response) => {
         if (response.status === 201) {
-          
           return updatePoint({
-            userId: userInfo.userId, 
+            userId: 35, // userId로 교체해야합니다.
             category: POINT_CATEGORY_ENUM.POST_CREATE,
             source: POINT_SOURCE_ENUM.POST,
             sourceId: response.data.result.postId,
