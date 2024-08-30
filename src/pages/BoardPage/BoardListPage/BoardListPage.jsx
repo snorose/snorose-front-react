@@ -135,7 +135,7 @@ export default function BoardListPage() {
       />
       <Target ref={ref} height='100px' />
       <WriteButton
-        onClick={handleWriteButtonClick} 
+        onClick={handleWriteButtonClick}
         className={styles.writeButton}
       />
     </div>
