@@ -4,10 +4,14 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { getPostContent, patchPost } from '@/apis/post';
+
 import { useToast } from '@/hooks';
+
 import { CloseAppBar } from '@/components/AppBar';
 import { Icon } from '@/components/Icon';
-import formattedNowTime from '@/utils/formattedNowTime';
+
+import { formattedNowTime } from '@/utils';
+
 import { BOARD_MENUS } from '@/constants';
 import { TOAST } from '@/constants';
 
@@ -55,10 +59,10 @@ export default function PostEditPage() {
     onSuccess: () => {
       queryClient.invalidateQueries(['postContent', postId]);
       navigate(-1);
-      toast(TOAST.postEditSuccess);
+      toast(TOAST.POST_EDIT_SUCCESS);
     },
     onError: () => {
-      toast(TOAST.postEditFail);
+      toast(TOAST.POST_EDIT_FAIL);
     },
   });
 
@@ -79,11 +83,11 @@ export default function PostEditPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim()) {
-      toast(TOAST.emptyTitle);
+      toast(TOAST.EMPTY_TITLE);
       return;
     }
     if (!text.trim()) {
-      toast(TOAST.emptyText);
+      toast(TOAST.EMPTY_TEXT);
       return;
     }
     mutation.mutate({

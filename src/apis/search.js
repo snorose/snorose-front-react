@@ -2,33 +2,25 @@ import { authAxios } from '@/axios/index.js';
 
 export const searchByBoard = async ({
   boardId,
+  boardType,
   page,
   keyword,
   lectureYear,
   semester,
   examType,
 }) => {
-  if (keyword !== '') {
-    const response = await authAxios.get(
-      `/v1/search/boards/${boardId}/${page}`,
-      {
-        params: {
-          keyword,
-          ...(lectureYear && { lectureYear }),
-          ...(semester && { semester }),
-          ...(examType && { examType }),
-        },
-      }
-    );
-    return response.data.result;
-  }
-};
+  const endpoint =
+    boardType === 'all'
+      ? `/v1/search/post/${page}`
+      : `/v1/search/boards/${boardId}/${page}`;
 
-export const searchAllBoard = async ({ page, keyword }) => {
   if (keyword !== '') {
-    const response = await authAxios.get(`/v1/search/post/${page}`, {
+    const response = await authAxios.get(endpoint, {
       params: {
         keyword,
+        ...(lectureYear && { lectureYear }),
+        ...(semester && { semester }),
+        ...(examType && { examType }),
       },
     });
     return response.data.result;

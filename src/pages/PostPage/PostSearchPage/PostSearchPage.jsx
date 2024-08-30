@@ -1,47 +1,25 @@
-import styles from './PostSearchPage.module.css';
-import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { Search } from '@/components/Search';
+import { useSearch } from '@/hooks';
+
 import { BackAppBar } from '@/components/AppBar';
-import { PostBar } from '@/components/PostBar';
 import { FetchLoading } from '@/components/Loading';
+import { PostBar } from '@/components/PostBar';
+import { Search } from '@/components/Search';
+import { Target } from '@/components/Target';
 
-import { BOARD_ID, PLACEHOLDER } from '@/constants';
+import { PLACEHOLDER } from '@/constants';
 
-import useInfiniteScroll from '@/hooks/useInfiniteScroll.jsx';
-import { searchByBoard, searchAllBoard } from '@/apis';
+import styles from './PostSearchPage.module.css';
 
 export default function PostSearchPage() {
   const { pathname } = useLocation();
   const current = pathname.split('/')[2];
+
   const urlKeyword = decodeURIComponent(pathname.split('/')[4] || '');
-  const [keyword, setKeyword] = useState(urlKeyword);
-  const [searchKeyword, setSearchKeyword] = useState(urlKeyword);
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      setSearchKeyword(event.target.value);
-    }
-  };
-
-  const { data, ref, isFetching, Target } = useInfiniteScroll({
-    queryKey: ['postList', searchKeyword || 'default'],
-    queryFn: ({ pageParam }) => {
-      if (current === 'all') {
-        return searchAllBoard({
-          page: pageParam,
-          keyword: searchKeyword || '',
-        });
-      } else {
-        return searchByBoard({
-          boardId: BOARD_ID[current],
-          page: pageParam,
-          keyword: searchKeyword || '',
-        });
-      }
-    },
+  const { data, ref, isLoading, keyword, handleChange } = useSearch({
+    urlKeyword,
   });
 
   const postList =
@@ -54,19 +32,17 @@ export default function PostSearchPage() {
           <Search
             placeholder={PLACEHOLDER[current]}
             keyword={keyword}
-            setKeyword={(text) => setKeyword(text)}
-            handleKeyDown={handleKeyDown}
-            isAllSearch={false}
+            onChange={handleChange}
           />
         }
         hasSearchInput={true}
       />
       <div className={styles.content}>
-        {isFetching ? (
+        {isLoading ? (
           <FetchLoading>검색 중</FetchLoading>
         ) : (
           <>
-            {searchKeyword !== '' && postList.length === 0 ? (
+            {keyword !== '' && postList.length === 0 ? (
               <div className={styles.noResult}>검색 결과가 없습니다</div>
             ) : (
               <div className={styles.posts}>

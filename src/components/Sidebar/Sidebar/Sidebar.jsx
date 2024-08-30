@@ -1,18 +1,22 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { List } from '../../Sidebar';
-import { Icon } from '../../Icon';
+import { useAuth } from '@/hooks';
 
-import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '../../../constants';
-import { USER } from '../../../dummy/data';
+import { List } from '@/components/Sidebar';
+import { Icon } from '@/components/Icon';
+
+import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '@/constants';
 
 import styles from './Sidebar.module.css';
 
 export default function Sidebar({ isOpen, setIsOpen }) {
-  const MENUS = USER.isLogin
-    ? SIDEBAR_MENUS
-    : SIDEBAR_MENUS.filter((menu) => NOT_LOGIN_MENUS.includes(menu.title));
+  const { status } = useAuth();
+
+  const MENUS =
+    status === 'authenticated'
+      ? SIDEBAR_MENUS
+      : SIDEBAR_MENUS.filter((menu) => NOT_LOGIN_MENUS.includes(menu.title));
   const handleEventPropagation = (event) => {
     event.stopPropagation();
   };

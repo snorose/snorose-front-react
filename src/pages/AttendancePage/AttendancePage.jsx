@@ -1,10 +1,21 @@
+import { useQueryClient } from '@tanstack/react-query';
+
+import { updatePoint } from '@/apis';
+
+import { useToast } from '@/hooks';
+
+import { BackAppBar } from '@/components/AppBar';
 import { Calendar } from '@/components/Calendar';
 import { Icon } from '@/components/Icon';
 
+import { POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM, TOAST } from '@/constants';
+
 import styles from './AttendancePage.module.css';
-import { BackAppBar } from '@/components/AppBar/index.js';
 
 export default function AttendancePage() {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
   return (
     <main>
       <div className={styles.top}>
@@ -13,7 +24,36 @@ export default function AttendancePage() {
         <div className={styles.calendar}>
           <Calendar />
         </div>
-        <button className={styles.attendanceButton}>
+        <button
+          className={styles.attendanceButton}
+          onClick={() => {
+            updatePoint({
+              userId: 32, // userId 교체 필요함
+              category: POINT_CATEGORY_ENUM.ATTENDANCE,
+              source: POINT_SOURCE_ENUM.ATTENDANCE,
+            })
+              .then(({ status }) => {
+                if (status === 200) {
+                  const today = new Date();
+                  queryClient.invalidateQueries([
+                    'monthlyAttendanceHistory',
+                    today.getFullYear(),
+                    today.getMonth() + 1,
+                  ]);
+                  toast(TOAST.ATTENDANCE_SUCCESS);
+                }
+              })
+              .catch(({ response }) => {
+                const { status } = response;
+
+                if (status === 403) {
+                  toast(TOAST.ATTENDANCE_ONLY_ONCE_ERROR);
+                } else {
+                  toast(TOAST.ATTENDANCE_FAIL);
+                }
+              });
+          }}
+        >
           출석하고 포인트 받기
         </button>
       </div>

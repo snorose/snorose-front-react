@@ -1,20 +1,14 @@
 import { Icon } from '@/components/Icon';
+
 import styles from './Search.module.css';
 
 export default function Search({
   className,
   placeholder,
   keyword,
-  setKeyword,
-  handleKeyDown,
-  isAllSearch,
+  onChange = () => {},
+  handleKeyDown = () => {},
 }) {
-  const handleChange = (event) => {
-    if (!isAllSearch) {
-      setKeyword(event.target.value);
-    }
-  };
-
   return (
     <div className={`${styles.container} ${className}`}>
       <Icon id='search' width={14} height={14} stroke='#898989' />
@@ -23,7 +17,7 @@ export default function Search({
         type='text'
         value={keyword}
         placeholder={placeholder}
-        onChange={handleChange}
+        onChange={onChange}
         onKeyDown={handleKeyDown}
       />
     </div>

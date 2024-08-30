@@ -9,6 +9,7 @@ import { useToast } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
+import { DeleteModal, OptionModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 import { InputBar } from '@/components/InputBar';
 import { ReviewContentItem } from '@/components/ReviewContentItem';
@@ -67,27 +68,37 @@ export default function ExamReviewDetailPage() {
   const { scrap, deleteScrap } = useScrap();
   const { toast } = useToast();
 
+  const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   if (data === undefined) return null;
 
+  const edit = () =>
+    navigate(`/board/exam-review/${postId}/edit`, {
+      state: data,
+      replace: true,
+    });
+  const remove = () => deleteReview.mutate();
+
   const {
-    userDisplay,
-    isWriter,
-    title,
     commentCount,
-    scrapCount,
-    isScrap,
     createdAt,
-    lectureName,
-    professor,
-    lectureYear,
-    semester,
-    lectureType,
-    isPF,
     examType,
-    isConfirmed,
     fileName,
+    isConfirmed,
     isEdited,
+    isPF,
+    isScrapped,
+    isWriter,
+    lectureName,
+    lectureType,
+    lectureYear,
+    professor,
     questionDetail,
+    scrapCount,
+    semester,
+    title,
+    userDisplay,
   } = data;
 
   return (
@@ -115,39 +126,15 @@ export default function ExamReviewDetailPage() {
               />
             )}
           </div>
-          <div className={styles.actions}>
+          {isWriter && (
             <Icon
-              id={isScrap ? 'bookmark-fill' : 'bookmark-line'}
-              width='14'
-              height='18'
-              fill='#5F86BF'
-              onClick={() => (isScrap ? deleteScrap.mutate() : scrap.mutate())}
+              onClick={() => setIsOptionModalOpen(true)}
+              id='ellipsis-vertical'
+              width='3'
+              height='11'
+              style={{ padding: '0 4px', cursor: 'pointer' }}
             />
-            <div className={styles.more}>
-              {isWriter && (
-                <>
-                  <Icon
-                    id='pencil'
-                    width='15'
-                    height='17'
-                    onClick={() =>
-                      navigate(`/board/exam-review/${postId}/edit`, {
-                        state: data,
-                        replace: true,
-                      })
-                    }
-                  />
-                  <Icon
-                    id='trash'
-                    width='12'
-                    height='16'
-                    onClick={() => deleteReview.mutate()}
-                  />
-                </>
-              )}
-              <Icon id='ellipsis-vertical' width='3' height='11' />
-            </div>
-          </div>
+          )}
         </div>
         <div className={styles.title}>{title}</div>
         <div className={styles.content}>
@@ -163,25 +150,52 @@ export default function ExamReviewDetailPage() {
           <ReviewContentItem tag='시험 유형 및 문항수' value={questionDetail} />
         </div>
         <ReviewDownload className={styles.fileDownload} fileName={fileName} />
-        <div className={styles.counts}>
-          <div className={styles.count}>
+        <div className={styles.actions}>
+          <div className={styles.action}>
             <Icon
               className={styles.comment}
               id='comment'
               width='15'
               height='14'
-              fill='#5F86BF'
+              fill='#D9D9D9'
             />
-            <span>{commentCount}</span>
+            <span>{commentCount.toLocaleString()}</span>
           </div>
-          <div className={styles.count}>
-            <Icon id='bookmark-fill' width='10' height='13' fill='#5F86BF' />
-            <span>{scrapCount}</span>
+          <div
+            className={styles.action}
+            onClick={() => (isScrapped ? deleteScrap.mutate() : scrap.mutate())}
+          >
+            <Icon
+              id='bookmark-fill'
+              width='10'
+              height='13'
+              fill={isScrapped ? '#5F86BF' : '#D9D9D9'}
+            />
+            <span>{scrapCount.toLocaleString()}</span>
           </div>
         </div>
       </div>
       <CommentList />
       <InputBar />
+      <OptionModal
+        id='exam-review-edit'
+        isOpen={isOptionModalOpen}
+        setIsOpen={setIsOptionModalOpen}
+        closeFn={() => setIsOptionModalOpen(false)}
+        functions={{
+          pencil: edit,
+          trash: () => {
+            setIsOptionModalOpen(false);
+            setIsDeleteModalOpen(true);
+          },
+        }}
+      />
+      <DeleteModal
+        id='exam-review-delete'
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setIsDeleteModalOpen}
+        redBtnFunction={remove}
+      />
     </main>
   );
 }
