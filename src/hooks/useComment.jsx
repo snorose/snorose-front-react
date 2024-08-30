@@ -42,7 +42,6 @@ export default function useComment() {
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
-      console.log('댓글 생성 에러:', error);
       if (error.response.status === 404) {
         toast(TOAST.COMMENT_NOT_FOUND);
       } else {
@@ -55,7 +54,6 @@ export default function useComment() {
   const deleteComment = useMutation({
     mutationFn: async ({ commentId }) => {
       const response = await remove({ postId, commentId });
-      console.log('response:', response);
       if (response.status === 200) {
         await updatePoint({
           userId: 35, // 실제 userId로 교체해야 합니다.
@@ -70,7 +68,6 @@ export default function useComment() {
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
-      console.log('댓글 삭제 오류:', error);
       const errorStatus = error.response.status;
       const errorCode = error.response.data.code;
 
