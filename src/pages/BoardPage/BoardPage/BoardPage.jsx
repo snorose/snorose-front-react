@@ -4,7 +4,7 @@ import {
   Header,
   Icon,
   Sidebar,
-  Sponser,
+  Sponsor,
   Search,
 } from '@/components/';
 import { BOARD_MENUS } from '@/constants';
@@ -13,13 +13,14 @@ import { useNavigate } from 'react-router-dom';
 
 export default function BoardPage() {
   const navigate = useNavigate();
+  const [keyword, setKeyword] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const closeSidebar = () => setIsSidebarOpen(false);
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && event.target.value.trim() !== '') {
       event.preventDefault();
-      navigate(`/board/all/search/${encodeURIComponent(event.target.value)}`);
+      navigate(`/board/all/search/${encodeURIComponent(keyword)}`);
     }
   };
 
@@ -30,8 +31,10 @@ export default function BoardPage() {
         <div className={styles.searchbar_box}>
           <Search
             placeholder='전체 게시판 내 검색'
+            keyword={keyword}
+            onChange={(event) => setKeyword(event.target.value)}
+            setKeyword={setKeyword}
             handleKeyDown={handleKeyDown}
-            isAllSearch={true}
           />
         </div>
         <div className={styles.board_box}>
@@ -53,8 +56,8 @@ export default function BoardPage() {
         <p>스노로즈에서 더 다양한 게시판을 준비하고 있어요</p>
       </div>
       <div className={styles.padding_container}>
-        <div className={styles.sponser}>
-          <Sponser />
+        <div className={styles.sponsor}>
+          <Sponsor />
         </div>
       </div>
       {isSidebarOpen && <Sidebar closeSidebar={closeSidebar} />}

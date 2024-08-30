@@ -1,5 +1,5 @@
 import styles from './EditInfoPage.module.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Icon,
   BackAppBar,
@@ -7,10 +7,14 @@ import {
   CategoryFieldset,
   Dropdown,
 } from '@/components';
-import { MAJORS } from '@/constants';
+import {
+  MAJORS,
+  TOAST,
+  PRIVATE_USER_INFO_UPDATE_PERMISSION_ROLE_ID_LIST,
+} from '@/constants';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateUserInfo } from '@/apis';
-import { useAuth } from '@/hooks';
+import { useAuth, useToast } from '@/hooks';
 import { useNavigate } from 'react-router-dom';
 
 const VALIDATIONS = Object.freeze({
@@ -36,6 +40,7 @@ export default function EditInfoPage() {
 
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const { mutate: updateUserInfoMutate, isPending: isUpdateUserInfoPending } =
     useMutation({
@@ -46,22 +51,34 @@ export default function EditInfoPage() {
           queryKey: ['myPageUserInfo'],
         });
 
-        alert('회원 정보 수정이 완료되었습니다.');
+        toast(TOAST.UPDATE_USER_INFO_SUCCESS);
         navigate('/my-page');
       },
       onError: ({ response }) => {
         const { data } = response;
 
-        alert(
-          data.userProfile ||
+        toast({
+          id: 'UPDATE_USER_INFO_ERROR',
+          message:
+            data.userProfile ||
             data.userName ||
             data.birthday ||
             data.nickname ||
             data.major ||
-            data.message
-        );
+            data.message,
+        });
       },
     });
+
+  const disabledPrivateUserInfoInput = useMemo(() => {
+    if (userInfo === undefined) {
+      return true;
+    }
+
+    return !PRIVATE_USER_INFO_UPDATE_PERMISSION_ROLE_ID_LIST.includes(
+      userInfo.userRoleId
+    );
+  }, [userInfo]);
 
   const handleNameChange = (e) => {
     const value = e.target.value;
@@ -230,58 +247,51 @@ export default function EditInfoPage() {
         <div className={styles.contentContainer}>
           <div className={styles.infoWrapper}>
             <h3 className={styles.title}>이름</h3>
-            <div
-              className={`${styles.inputWrapper} ${nameError ? styles.errorInputWrapper : ''}`}
-            >
-              <input
-                type='text'
-                className={`${styles.inputText} ${nameError ? styles.errorInputText : ''}`}
-                placeholder='이름을 입력하세요'
-                value={name}
-                onChange={handleNameChange}
-              />
-            </div>
+            <input
+              type='text'
+              className={`${styles.inputText} ${nameError ? styles.errorInputText : ''}`}
+              placeholder='이름을 입력하세요'
+              value={name}
+              disabled={disabledPrivateUserInfoInput}
+              onChange={handleNameChange}
+            />
             {nameError && <p className={styles.errorMessage}>{nameError}</p>}
           </div>
+
           <div className={styles.infoWrapper}>
             <h3 className={styles.title}>생년월일</h3>
-            <div
-              className={`${styles.inputWrapper} ${birthDateError ? styles.errorInputWrapper : ''}`}
-            >
-              <input
-                type='text'
-                className={styles.inputText}
-                placeholder='20020101'
-                maxLength={12}
-                value={birthDate.replaceAll('-', '')}
-                onChange={handleBirthDateChange}
-                pattern='\d{4}\.\d{2}\.\d{2}'
-                title='형식: YYYYMMDD (예: 20020101)'
-              />
-            </div>
+            <input
+              type='text'
+              className={`${styles.inputText} ${birthDateError ? styles.errorInputText : ''}`}
+              placeholder='20020101'
+              maxLength={12}
+              value={birthDate.replaceAll('-', '')}
+              pattern='\d{4}\.\d{2}\.\d{2}'
+              title='형식: YYYYMMDD (예: 20020101)'
+              disabled={disabledPrivateUserInfoInput}
+              onChange={handleBirthDateChange}
+            />
             {birthDateError && (
               <p className={styles.errorMessage}>{birthDateError}</p>
             )}
           </div>
+
           <div className={styles.infoWrapper}>
             <h3 className={styles.title}>닉네임</h3>
-            <div
-              className={`${styles.inputWrapper} ${nicknameError ? styles.errorInputWrapper : ''}`}
-            >
-              <input
-                type='text'
-                className={`${styles.inputText} ${nicknameError ? styles.errorInputText : ''}`}
-                placeholder='닉네임을 입력하세요'
-                value={nickname}
-                onChange={handleNicknameChange}
-              />
-            </div>
+            <input
+              type='text'
+              className={`${styles.inputText} ${nicknameError ? styles.errorInputText : ''}`}
+              placeholder='닉네임을 입력하세요'
+              value={nickname}
+              onChange={handleNicknameChange}
+            />
             {nicknameError && (
               <p className={styles.errorMessage}>{nicknameError}</p>
             )}
           </div>
         </div>
       </section>
+
       <CategoryFieldset title='전공' required>
         <Dropdown
           options={MAJORS}

@@ -1,44 +1,70 @@
 import { useParams } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
+import { useToast } from '@/hooks';
+import { TOAST, POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM } from '@/constants';
+
 import {
   deleteComment as remove,
   getCommentList,
   postComment as post,
   editComment as edit,
-} from '../apis/comment.js';
+  updatePoint,
+} from '@/apis';
 
 export default function useComment() {
   const { postId } = useParams();
   const queryClient = useQueryClient();
+  const { toast } = useToast();
 
-  const { data: commentList } = useQuery({
+  const { data: commentList, refetch } = useQuery({
     queryKey: ['comments', postId],
     queryFn: () => getCommentList({ postId }),
     staleTime: 1000 * 60,
   });
 
-  // 게시글 작성
+  // 댓글 생성
   const postComment = useMutation({
-    mutationFn: ({ content, parentId }) => post({ postId, parentId, content }),
+    mutationFn: async ({ content, parentId }) => {
+      const response = await post({ postId, parentId, content });
+      const newCommentId = response.data.result.id;
+      if (response.status === 201) {
+        await updatePoint({
+          userId: 35, // 실제 userId로 교체해야 합니다.
+          category: POINT_CATEGORY_ENUM.COMMENT_CREATE,
+          source: POINT_SOURCE_ENUM.COMMENT,
+          sourceId: newCommentId,
+        });
+      }
+    },
     onSuccess: () => {
+      toast(TOAST.COMMENT_CREATE_SUCCESS);
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
-      const errorStatus = error.response.status;
-
-      if (errorStatus === 400) {
-        alert('댓글 등록에 실패했습니다.');
-      } else if (errorStatus === 404) {
-        alert('찾을 수 없는 댓글입니다.');
+      if (error.response.status === 404) {
+        toast(TOAST.COMMENT_NOT_FOUND);
+      } else {
+        toast(TOAST.COMMENT_CREATE_FAIL);
       }
     },
   });
 
-  // 게시글 삭제
+  // 댓글 삭제
   const deleteComment = useMutation({
-    mutationFn: ({ commentId }) => remove({ postId, commentId }),
+    mutationFn: async ({ commentId }) => {
+      const response = await remove({ postId, commentId });
+      if (response.status === 200) {
+        await updatePoint({
+          userId: 35, // 실제 userId로 교체해야 합니다.
+          category: POINT_CATEGORY_ENUM.COMMENT_DELETE,
+          source: POINT_SOURCE_ENUM.COMMENT,
+          sourceId: commentId,
+        });
+      }
+    },
     onSuccess: () => {
+      toast(TOAST.COMMENT_DELETE_SUCCESS);
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
@@ -46,16 +72,18 @@ export default function useComment() {
       const errorCode = error.response.data.code;
 
       if (errorStatus === 400) {
-        alert('댓글 삭제에 실패했습니다.');
+        toast(TOAST.COMMENT_DELETE_FAIL);
       } else if (errorCode === 404 && errorCode === 3031) {
-        alert('사라진 게시글입니다.');
+        toast(TOAST.POST_NOT_FOUND);
       } else if (errorCode === 404 && errorCode === 3020) {
-        alert('사라진 댓글입니다.');
+        toast(TOAST.COMMENT_NOT_FOUND);
+      } else {
+        toast(TOAST.COMMENT_DELETE_FAIL);
       }
     },
   });
 
-  // 게시글 수정
+  // 댓글 수정
   const editComment = useMutation({
     mutationFn: ({ commentId, content, parentId }) =>
       edit({ postId, commentId, content, parentId }),
@@ -67,14 +95,14 @@ export default function useComment() {
       const errorCode = error.response.data.code;
 
       if (errorStatus === 400) {
-        alert('댓글 수정에 실패했습니다.');
+        toast(TOAST.COMMENT_EDIT_FAIL);
       } else if (errorCode === 404 && errorCode === 3031) {
-        alert('사라진 게시글입니다.');
+        toast(TOAST.POST_NOT_FOUND);
       } else if (errorCode === 404 && errorCode === 3020) {
-        alert('사라진 댓글입니다.');
+        toast(TOAST.COMMENT_NOT_FOUND);
       }
     },
   });
 
-  return { commentList, postComment, deleteComment, editComment };
+  return { commentList, postComment, deleteComment, editComment, refetch };
 }

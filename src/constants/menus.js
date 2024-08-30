@@ -42,11 +42,11 @@ export const SIDEBAR_MENUS = Object.freeze([
     title: '스노로즈',
     items: [
       { to: '/about', name: 'About 스노로즈' },
-      { to: '/notice', name: '공지사항' },
+      // { to: '/notice', name: '공지사항' },
     ],
   },
   {
-    to: '/authentication',
+    to: '/verify',
     title: '인증',
   },
   {
@@ -56,17 +56,17 @@ export const SIDEBAR_MENUS = Object.freeze([
       { to: '/board/first-snow', name: '첫눈온방' },
       { to: '/board/large-snow', name: '함박눈방' },
       { to: '/board/permanent-snow', name: '만년설방' },
-      { to: '/board/besookt', name: '베숙트' },
+      // { to: '/board/besookt', name: '베숙트' },
     ],
   },
   {
-    to: '/exam-review',
+    to: '/board/exam-review',
     title: '시험후기',
   },
-  {
-    to: '/help',
-    title: '문의/신고',
-  },
+  // {
+  //   to: '/help',
+  //   title: '문의/신고',
+  // },
   {
     to: '/',
     title: '숙명여대',

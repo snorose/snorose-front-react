@@ -1,4 +1,16 @@
 const TOAST = Object.freeze({
+  ATTENDANCE_SUCCESS: {
+    id: 'ATTENDANCE',
+    message: '출석체크 완료',
+  },
+  ATTENDANCE_ONLY_ONCE_ERROR: {
+    id: 'ATTENDANCE_ONLY_ONCE_ERROR',
+    message: '출석은 하루에 한 번만 가능해요',
+  },
+  ATTENDANCE_FAIL: {
+    id: 'ATTENDANCE_FAIL',
+    message: '출석체크 실패',
+  },
   EXAM_REVIEW_CREATE: {
     id: 'EXAM_REVIEW_CREATE',
     message: '100P 적립이 완료되었어요',
@@ -11,44 +23,130 @@ const TOAST = Object.freeze({
     id: 'EXAM_REVIEW_DOWNLOAD',
     message: '50P 차감되었어요',
   },
-  postEditSuccess: { id: 'post-edit-success', message: '게시글 수정 완료' },
-  postEditFail: { id: 'post-edit-fail', message: '게시글 수정 실패' },
-  postCreateSuccess: {
-    id: 'post-create-success',
-    message: '게시글 등록 성공!',
+  NO_SELF_SCRAP: {
+    id: 'NO_SELF_SCROP',
+    message: '내 게시글은 스크랩할 수 없어요',
   },
-  postCreateFail: {
-    id: 'post-create-fail',
+  POST_EDIT_SUCCESS: {
+    id: 'POST_EDIT_SUCCESS',
+    message: '게시글 수정 완료',
+  },
+  POST_EDIT_FAIL: {
+    id: 'POST_EDIT_FAIL',
+    message: '게시글 수정 실패',
+  },
+  POST_CREATE_SUCCESS: {
+    id: 'POST-CREATE-SUCCESS',
+    message: '2P 적립이 완료되었어요',
+  },
+  POST_CREATE_FAIL: {
+    id: 'POST_CREATE_FAIL',
     message: '게시글 등록에 실패했습니다.',
   },
-  postDeleteSuccess: {
-    id: 'post-delete-success',
+  POST_DELETE_SUCCESS: {
+    id: 'POST_DELETE_SUCCESS',
     message: '게시글이 삭제되었습니다.',
   },
-  postDeleteFail: {
-    id: 'post-delete-fail',
+  POST_DELETE_FAIL: {
+    id: 'POST_DELETE_FAIL',
     message: '게시글 삭제에 실패했습니다.',
   },
-  postNotFound: { id: 'post-not-found', message: '게시글을 찾을 수 없습니다.' },
-  postEditError: {
-    id: 'post-edit-error',
+  POST_NOT_FOUND: {
+    id: 'POST_NOT_FOUND',
+    message: '게시글을 찾을 수 없습니다.',
+  },
+  POST_EDIT_ERROR: {
+    id: 'POST_EDIT_ERROR',
     message: '알 수 없는 오류가 발생했습니다.',
   },
-  postCreateError: {
-    id: 'post-create-error',
+  POST_CREATE_ERROR: {
+    id: 'POST_CREATE_ERROR',
     message: '알 수 없는 오류가 발생했습니다.',
   },
-  postDeleteError: {
-    id: 'post-delete-error',
+  POST_DELETE_ERROR: {
+    id: 'POST_DELETE_ERROR',
     message: '알 수 없는 오류가 발생했습니다.',
   },
-  emptyTitle: {
-    id: 'empty-text-error',
+  COMMENT_EDIT_SUCCESS: {
+    id: 'COMMENT_EDIT_SUCCESS',
+    message: '댓글 수정 완료',
+  },
+  COMMENT_EDIT_FAIL: {
+    id: 'COMMENT_EDIT_FAIL',
+    message: '댓글 수정 실패',
+  },
+  COMMENT_CREATE_SUCCESS: {
+    id: 'COMMENT-CREATE-SUCCESS',
+    message: '1P 적립이 완료되었어요',
+  },
+  COMMENT_CREATE_FAIL: {
+    id: 'COMMENT_CREATE_FAIL',
+    message: '댓글 등록에 실패했습니다.',
+  },
+  COMMENT_DELETE_SUCCESS: {
+    id: 'COMMENT_DELETE_SUCCESS',
+    message: '댓글이 삭제되었습니다.',
+  },
+  COMMENT_DELETE_FAIL: {
+    id: 'COMMENT_DELETE_FAIL',
+    message: '댓글 삭제에 실패했습니다.',
+  },
+  COMMENT_NOT_FOUND: {
+    id: 'COMMENT_NOT_FOUND',
+    message: '댓글을 찾을 수 없습니다.',
+  },
+  COMMENT_EDIT_ERROR: {
+    id: 'COMMENT_EDIT_ERROR',
+    message: '알 수 없는 오류가 발생했습니다.',
+  },
+  COMMENT_CREATE_ERROR: {
+    id: 'COMMENT_CREATE_ERROR',
+    message: '알 수 없는 오류가 발생했습니다.',
+  },
+  COMMENT_DELETE_ERROR: {
+    id: 'COMMENT_DELETE_ERROR',
+    message: '알 수 없는 오류가 발생했습니다.',
+  },
+  EMPTY_COMMENT: {
+    id: 'EMPTY_COMMENT',
+    message:'댓글을 입력하세요.',
+  },
+  EMPTY_TITLE: {
+    id: 'EMPTY_TITLE_ERROR',
+    message: '제목을 입력하세요.',
+  },
+  EMPTY_TEXT: {
+    id: 'EMPTY_TEXT_ERROR',
     message: '내용을 입력하세요.',
   },
-  emptyText: {
-    id: 'empty-title-error',
-    message: '제목을 입력하세요.',
+  EMPTY_BOARDID: {
+    id: 'EMPTY_BOARD_ERROR',
+    message: '게시판을 선택하세요.',
+  },
+  LIKE_SELF_ERROR: {
+    id: 'LIKE_SELF_ERROR',
+    message: '자신의 글에는 좋아요를 누를 수 없습니다.',
+  },
+  SCRAP_SELF_ERROR: {
+    id: 'SCRAP_SELF_ERROR',
+    message: '자신의 글은 스크랩할 수 없습니다.',
+  },
+
+  UPDATE_PASSWORD_SUCCESS: {
+    id: 'UPDATE_PASSWORD_SUCCESS',
+    message: '비밀번호 수정이 완료되었습니다.',
+  },
+  UPDATE_USER_INFO_SUCCESS: {
+    id: 'UPDATE_USER_INFO_SUCCESS',
+    message: '회원 정보 수정이 완료되었습니다.',
+  },
+  WITHDRAW_ACCOUNT_SUCCESS: {
+    id: 'UPDATE_USER_INFO_SUCCESS',
+    message: '회원 탈퇴가 완료되었습니다.',
+  },
+  WITHDRAW_ACCOUNT_ERROR: {
+    id: 'WITHDRAW_ACCOUNT_ERROR',
+    message: '회원 탈퇴에 실패했습니다.\n다시 시도해주세요.',
   },
 });
 

@@ -4,6 +4,8 @@ import { BackAppBar, ActionButton, InputPassword } from '@/components';
 import { useMutation } from '@tanstack/react-query';
 import { updatePassword } from '@/apis';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '@/hooks';
+import { TOAST } from '@/constants';
 
 export default function ChangePasswordPage() {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -13,17 +15,21 @@ export default function ChangePasswordPage() {
   const [newPasswordCheckError, setNewPasswordCheckError] = useState('');
 
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const { mutate: updatePasswordMutate, isPending: isUpdatePasswordPending } =
     useMutation({
       mutationKey: ['updatePassword'],
       mutationFn: (body) => updatePassword(body),
       onSuccess: () => {
-        alert('비밀번호 수정이 완료되었습니다.');
+        toast(TOAST.UPDATE_PASSWORD_SUCCESS);
         navigate('/my-page');
       },
       onError: ({ response }) => {
-        alert(response.data.message);
+        toast({
+          id: 'UPDATE_PASSWORD_ERROR',
+          message: response.data.message,
+        });
       },
     });
 
@@ -56,7 +62,6 @@ export default function ChangePasswordPage() {
 
   const handleSubmitButtonClick = () => {
     if (newPassword !== newPasswordCheck) {
-      alert('비밀번호가 일치하지 않습니다.');
       return;
     }
 

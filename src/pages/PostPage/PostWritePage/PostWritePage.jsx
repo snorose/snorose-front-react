@@ -1,19 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { postPost } from '@/apis/post';
+import { postPost, updatePoint } from '@/apis';
 
-import { useToast } from '@/hooks';
+import { useToast, useAuth } from '@/hooks';
 
-import { Icon } from '@/components/Icon';
-import { CloseAppBar } from '@/components/AppBar';
-import { DropDownMenu } from '@/components/DropDownMenu';
+import { Icon, CloseAppBar, DropDownMenu, FetchLoading } from '@/components';
 
-import { TOAST } from '@/constants';
-import { BOARD_MENUS } from '@/constants';
+import { formattedNowTime } from '@/utils';
 
-import formattedNowTime from '@/utils/formattedNowTime';
+import {
+  BOARD_MENUS,
+  POINT_CATEGORY_ENUM,
+  POINT_SOURCE_ENUM,
+  TOAST,
+} from '@/constants';
 
 import styles from './PostWritePage.module.css';
 
@@ -23,6 +25,7 @@ export default function PostWritePage() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { toast } = useToast();
+  const { userInfo, status } = useAuth();
   const [isNotice, setIsNotice] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
@@ -69,23 +72,49 @@ export default function PostWritePage() {
     isNotice,
   };
 
-  // 게시글 등록 유효성 검사 및 제출
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // 유효성 검사
+    if (boardId === '') {
+      toast(TOAST.EMPTY_BOARDID);
+      return;
+    }
     if (!title.trim()) {
-      toast(TOAST.emptyTitle);
+      toast(TOAST.EMPTY_TITLE);
       return;
     }
     if (!text.trim()) {
-      toast(TOAST.emptyText);
+      toast(TOAST.EMPTY_TEXT);
       return;
     }
-    console.log(data);
-    postPost(data);
 
-    navigate(-1); // 제출 후 이동할 경로 설정
+    // 게시글 등록
+    postPost(data)
+      .then((response) => {
+        if (response.status === 201) {
+          return updatePoint({
+            userId: 35, // userId로 교체해야합니다.
+            category: POINT_CATEGORY_ENUM.POST_CREATE,
+            source: POINT_SOURCE_ENUM.POST,
+            sourceId: response.data.result.postId,
+          });
+        } else {
+          throw new Error('Post creation failed');
+        }
+      })
+      .then((pointResponse) => {
+        if (pointResponse.status === 200) {
+          toast(TOAST.POST_CREATE_SUCCESS);
+          navigate(-1);
+        } else {
+          throw new Error('Point update failed');
+        }
+      })
+      .catch((error) => {
+        toast(TOAST.POST_CREATE_FAIL);
+      });
   };
-
   // 제목 40자 제한
   const handleTitleChange = (e) => {
     const newValue = e.target.value;
@@ -93,6 +122,10 @@ export default function PostWritePage() {
       setTitle(newValue);
     }
   };
+
+  if (status === 'loading') {
+    return <FetchLoading>로딩 중...</FetchLoading>;
+  }
 
   return (
     <div className={styles.container}>
@@ -110,7 +143,7 @@ export default function PostWritePage() {
         <DropDownMenu
           options={boardTitles}
           item={boardTitle}
-          setItem={handleBoardTitleChange} // 수정된 핸들러
+          setItem={handleBoardTitleChange}
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
           backgroundColor={'#fff'}
@@ -118,7 +151,7 @@ export default function PostWritePage() {
         <div className={styles.profileBox}>
           <div className={styles.profileBoxLeft}>
             <Icon id='cloud' width='25' height='16' />
-            <p>김준희</p>
+            <p>{userInfo.nickname}</p>
             <p className={styles.dot}></p>
             <p>{formattedNowTime()}</p>
           </div>
@@ -153,12 +186,6 @@ export default function PostWritePage() {
           />
         </div>
       </div>
-      <div
-        className={styles.bottom}
-        onClick={() => {
-          setDropDownOpen(false);
-        }}
-      ></div>
     </div>
   );
 }

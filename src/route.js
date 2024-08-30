@@ -2,6 +2,7 @@ import App from '@/App';
 import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
 import { AlertPage } from '@/pages/AlertPage';
+import { AttendancePage } from '@/pages/AttendancePage';
 import { BoardListPage, BoardPage } from '@/pages/BoardPage';
 import {
   ChangePasswordPage,
@@ -56,6 +57,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         <BoardListPage />
       </ProtectedRoute>
     ),
+    meta: {
+      hideNav: true,
+    },
   },
   {
     path: `/board/${boardPath}/post/:postId`,
@@ -64,6 +68,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         <PostPage />
       </ProtectedRoute>
     ),
+    meta: {
+      hideNav: true,
+    },
   },
   {
     path: `/board/${boardPath}/post-write`,
@@ -72,6 +79,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         <PostWritePage />
       </ProtectedRoute>
     ),
+    meta: {
+      hideNav: true,
+    },
   },
   {
     path: `/board/${boardPath}/post/:postId/edit`,
@@ -80,6 +90,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         <PostEditPage />
       </ProtectedRoute>
     ),
+    meta: {
+      hideNav: true,
+    },
   },
   {
     path: `/board/${boardPath}/search`,
@@ -88,6 +101,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         <PostSearchPage />
       </ProtectedRoute>
     ),
+    meta: {
+      hideNav: true,
+    },
   },
   {
     path: `/board/${boardPath}/notice`,
@@ -98,6 +114,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         <NoticeListPage />
       </ProtectedRoute>
     ),
+    meta: {
+      hideNav: true,
+    },
   },
 ]);
 
@@ -121,16 +140,11 @@ export const routeList = [
       },
       ...boardRoutes,
       {
-        path: '/post',
-        element: <PostPage />,
-      },
-      {
         path: '/board/all/search/:keyword',
         element: <PostSearchPage />,
-      },
-      {
-        path: '/post-write',
-        element: <PostWritePage />,
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/board/exam-review',
@@ -166,9 +180,19 @@ export const routeList = [
         },
       },
       {
-        path: '/alert',
-        element: <AlertPage />,
+        path: '/attendance',
+        element: <AttendancePage />,
+        meta: {
+          hideNav: true,
+        },
       },
+      // {
+      //   path: '/alert',
+      //   element: <AlertPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
       {
         path: '/my-page',
         element: <MyPage />,
@@ -253,10 +277,16 @@ export const routeList = [
       {
         path: '/about',
         element: <AboutPage />,
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/notice',
         element: <NoticeListPage />,
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/verify',
@@ -272,6 +302,9 @@ export const routeList = [
       {
         path: '/help',
         element: <HelpPage />,
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/login',
@@ -318,22 +351,30 @@ export const routeList = [
       {
         path: '/not-found-pw',
         element: <NotFoundPwPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/signup',
         element: <SignUpPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/signup/success',
         element: <SignUpSuccessPage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/signup/failure',
         element: <SignUpFailurePage />,
-        meta: { hideNav: true },
+        meta: {
+          hideNav: true,
+        },
       },
     ],
   },

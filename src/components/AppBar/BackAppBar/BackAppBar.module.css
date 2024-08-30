@@ -3,6 +3,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  background-color: transparent;
 }
 
 .hasGap {
@@ -42,4 +43,3 @@
   gap: 1rem;
   width: 100%;
 }
-
