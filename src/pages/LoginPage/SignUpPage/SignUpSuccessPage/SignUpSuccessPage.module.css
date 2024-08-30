@@ -1,0 +1,27 @@
+.pageFrame {
+  height: 100%;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.icon {
+  margin-top: 3.313rem;
+  margin-bottom: 1.188rem;
+}
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+  margin-bottom: 0.5rem;
+}
+.img {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 0.813rem;
+}
+.submit {
+  margin-top: 1.875rem;
+  margin-bottom: 2.125rem;
+}

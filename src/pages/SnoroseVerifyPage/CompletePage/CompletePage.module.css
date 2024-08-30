@@ -1,0 +1,15 @@
+.content {
+  flex: 1;
+  margin: 0 var(--default-margin);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.illust {
+  margin-bottom: 100px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  padding: 0.6875rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f4f4f4;
+  border-radius: 5px;
+}
+
+.search {
+  flex: 1;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #000;
+}
+
+.search::placeholder {
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #898989;
+}

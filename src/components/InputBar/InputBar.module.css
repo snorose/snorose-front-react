@@ -1,0 +1,51 @@
+.container {
+  max-width: var(--default-width);
+  width: 100%;
+  height: 83px;
+  padding: 15px 15px 30px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border-radius: 10px 10px 0px 0px;
+  box-shadow: 0px -4px 7px #ddebf6;
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+}
+
+.input_bar {
+  background-color: #f4f4f4;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border-radius: 5px;
+}
+
+.input_zone {
+  width: 100%;
+  height: 20px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.input_zone::placeholder {
+  color: #898989;
+}
+
+.profile_icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+}
+
+.enter {
+  cursor: pointer;
+}

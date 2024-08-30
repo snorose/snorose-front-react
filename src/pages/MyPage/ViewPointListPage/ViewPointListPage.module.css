@@ -1,0 +1,112 @@
+.viewPointListPage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.25rem 54px 1.25rem;
+  width: 100%;
+}
+
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+}
+
+.totalPointWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+.totalPoint {
+  color: var(--Blue-4, #00368e);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+/* 포인트 내역 */
+.pointListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pointBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  background: var(--Grey-1-1, #f4f4f4);
+  padding: 15px;
+}
+
+.pointIconContentWrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  svg {
+    width: 26px;
+    height: 23px;
+  }
+}
+
+.pointContent {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pointTitle {
+  color: var(--Blue-4, #00368e);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.pointDesc {
+  color: var(--grey-3, #484848);
+  font-size: 9px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.pointDate {
+  color: var(--Grey-3-1, #898989);
+  font-size: 9px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.chargePoint {
+  color: var(--Blue-4, #00368e);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.negative {
+  color: var(--Pink-2, #ff4b6c);
+}

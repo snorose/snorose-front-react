@@ -1,0 +1,146 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  user-drag: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+a {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.prev {
+  display: flex;
+  width: 100%;
+  height: 2.75rem;
+  align-items: center;
+}
+
+.prev:hover {
+  cursor: pointer;
+}
+
+.loginframe {
+  background-color: white;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.loginbody {
+  font-size: 0.5625rem;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.logo {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6.417rem;
+  margin-bottom: 1.538rem;
+}
+.title {
+  font-size: 0.875rem;
+  font-family: 'Black Han Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.313rem;
+  font-style: normal;
+  margin-bottom: 3.577rem;
+}
+.input {
+  margin-bottom: 1.063rem;
+}
+.pwFrame {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 2.563rem;
+  border-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  padding-right: 0.625rem;
+}
+.ready {
+  background-color: #f5f5f5;
+}
+.wrong {
+  background-color: #fee9eb;
+}
+.pwInput {
+  width: 80%;
+  background-color: blue;
+  display: inline-block;
+}
+.visibility {
+  display: inline-block;
+}
+.visibility:hover {
+  cursor: pointer;
+}
+
+.button {
+  display: block;
+  width: 11.25rem;
+  height: 2rem;
+  background-color: #00368e;
+  color: #ffffff;
+  margin: 1.125rem auto;
+  border-radius: 0.4375rem;
+}
+.errMsg {
+  color: red;
+  margin-top: 0.221rem;
+  margin-bottom: 1.029rem;
+  text-align: left;
+}
+
+.find {
+  display: flex;
+  justify-content: center;
+  color: #898989;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  margin-top: 2.313rem;
+  margin-bottom: 0.75rem;
+}
+.divider {
+  margin: 0 0.688rem;
+}
+.signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.313rem;
+}
+
+.errFrame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 14.625rem;
+  height: 3.625rem;
+  border-radius: 0.313rem;
+  background-color: #48484899;
+  color: #ffffff;
+  font-size: 0.75rem;
+  line-height: 0.975rem;
+  font-weight: 500;
+  margin: 0 auto;
+  margin-top: 1.313rem;
+}
+.loginError p {
+  display: block;
+  transform: translateY(50%);
+}

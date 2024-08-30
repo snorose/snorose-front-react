@@ -1,0 +1,21 @@
+.pageFrame {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.scrollFrame {
+  overflow-y: scroll;
+}
+.text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+  margin-bottom: 1.875rem;
+}
+.inputFrame {
+  margin-bottom: 1.5rem;
+}
+.submit {
+  margin-bottom: 2.125rem;
+}

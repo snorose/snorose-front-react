@@ -1,0 +1,78 @@
+.activityPage {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.25rem 54px 1.25rem;
+  width: 100%;
+}
+
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+}
+
+.contentListContainer {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 100px;
+}
+
+.sponsor {
+  display: flex;
+  position: fixed;
+  margin: 0 auto;
+  bottom: 54px;
+  padding: 0 20px;
+  width: 100%;
+  max-width: 600px;
+  background-size: cover;
+}
+
+.sponsorImage {
+  width: 100%;
+}
+
+.noContentWrapper {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.noContentMessage {
+  color: var(--Grey-4, var(--grey-3, #484848));
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.imageWrapper {
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
+.image {
+  position: absolute;
+  transform: translateY(100%);
+  width: 220px;
+  height: 182px;
+}

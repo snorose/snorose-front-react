@@ -1,0 +1,65 @@
+import React, { useState } from 'react';
+import { Icon } from '../Icon';
+import styles from './InputPassword.module.css';
+
+const InputPassword = ({
+  title = '',
+  placeholder = '',
+  value = '',
+  onChange,
+  errorMessage = '',
+  isStatic = false,
+}) => {
+  const [passwordType, setPasswordType] = useState({
+    type: 'password',
+    visible: false,
+  });
+
+  const handlePasswordType = () => {
+    setPasswordType((prev) => ({
+      type: prev.visible ? 'password' : 'text',
+      visible: !prev.visible,
+    }));
+  };
+
+  const handleInputChange = (e) => {
+    if (onChange) {
+      onChange(e);
+    }
+  };
+
+  const iconColor = errorMessage
+    ? '#ff4b6c'
+    : value && !errorMessage && !isStatic
+      ? '#00368e'
+      : '#898989';
+
+  return (
+    <div className={styles.container}>
+      {title && <h3 className={styles.title}>{title}</h3>}
+      <div
+        className={`${styles.inputWrapper} ${
+          !isStatic && value && !errorMessage ? styles.rightInputWrapper : ''
+        } ${!isStatic && errorMessage ? styles.errorInputWrapper : ''}`}
+      >
+        <input
+          type={passwordType.type}
+          className={`${styles.inputText} ${
+            !isStatic && value && !errorMessage ? styles.rightInputText : ''
+          } ${!isStatic && errorMessage ? styles.errorInputText : ''}`}
+          placeholder={placeholder}
+          value={value}
+          onChange={handleInputChange}
+        />
+        <Icon
+          onClick={handlePasswordType}
+          id={passwordType.visible ? 'closed-eye' : 'opened-eye'}
+          fill={iconColor}
+        />
+      </div>
+      {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+    </div>
+  );
+};
+
+export default InputPassword;

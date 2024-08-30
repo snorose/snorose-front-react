@@ -1,0 +1,25 @@
+.item {
+  padding: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 0.5px solid #c7c7c7;
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 12px;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.name {
+  flex: 1;
+}
+
+.desc {
+  font-weight: 300;
+  font-size: 6px;
+  line-height: 9px;
+}

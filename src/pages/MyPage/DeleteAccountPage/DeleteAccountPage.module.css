@@ -1,0 +1,85 @@
+.deleteAccountPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.titleDescWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 14px;
+  flex-grow: 1;
+}
+
+.title {
+  color: #000;
+  line-height: 130%;
+  letter-spacing: -0.03125rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.descWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.3125rem;
+  padding-bottom: 13px;
+}
+
+.desc {
+  color: var(--Grey-4, var(--grey-3, #484848));
+  line-height: 150%;
+  letter-spacing: -0.03125rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* 하단 버튼 */
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+  width: 100%;
+  gap: 0.5rem;
+  padding: 20px 20px 54px;
+}
+
+.goBackButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2.9375rem;
+  border-radius: 0.3125rem;
+  background: var(--Blue-1, #ddebf6);
+  color: var(--Blue-3, #5f86bf);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.03125rem;
+}
+
+.deleteAccountButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2.9375rem;
+  border-radius: 0.3125rem;
+  background: var(--Blue-4, #00368e);
+  color: #fff;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.03125rem;
+}
