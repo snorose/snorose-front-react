@@ -2,9 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 import { getMyPageUserInfo, withdrawAccount } from '@/apis';
 import { useQuery } from '@tanstack/react-query';
+import { useToast } from '.';
+import { TOAST } from '@/constants';
 
 const useAuth = ({ isRequiredAuth = false } = {}) => {
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const hasToken = !!localStorage.getItem('token');
 
@@ -42,14 +45,14 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
       await withdrawAccount({
         currentPassword,
       });
-      alert('회원 탈퇴가 완료되었습니다.');
+      toast(TOAST.WITHDRAW_ACCOUNT_SUCCESS);
       logout();
 
       if (onSuccess !== undefined) {
         onSuccess();
       }
     } catch {
-      alert('회원 탈퇴에 실패했습니다. 다시 시도해주세요.');
+      toast(TOAST.WITHDRAW_ACCOUNT_ERROR);
 
       if (onError !== undefined) {
         onError();

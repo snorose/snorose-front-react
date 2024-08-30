@@ -7,10 +7,10 @@ import {
   CategoryFieldset,
   Dropdown,
 } from '@/components';
-import { MAJORS } from '@/constants';
+import { MAJORS, TOAST } from '@/constants';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateUserInfo } from '@/apis';
-import { useAuth } from '@/hooks';
+import { useAuth, useToast } from '@/hooks';
 import { useNavigate } from 'react-router-dom';
 
 const VALIDATIONS = Object.freeze({
@@ -36,6 +36,7 @@ export default function EditInfoPage() {
 
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const { mutate: updateUserInfoMutate, isPending: isUpdateUserInfoPending } =
     useMutation({
@@ -46,20 +47,22 @@ export default function EditInfoPage() {
           queryKey: ['myPageUserInfo'],
         });
 
-        alert('회원 정보 수정이 완료되었습니다.');
+        toast(TOAST.UPDATE_USER_INFO_SUCCESS);
         navigate('/my-page');
       },
       onError: ({ response }) => {
         const { data } = response;
 
-        alert(
-          data.userProfile ||
+        toast({
+          id: 'UPDATE_USER_INFO_ERROR',
+          message:
+            data.userProfile ||
             data.userName ||
             data.birthday ||
             data.nickname ||
             data.major ||
-            data.message
-        );
+            data.message,
+        });
       },
     });
 

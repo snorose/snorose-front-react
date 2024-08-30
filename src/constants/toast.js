@@ -27,8 +27,14 @@ const TOAST = Object.freeze({
     id: 'NO_SELF_SCROP',
     message: '내 게시글은 스크랩할 수 없어요',
   },
-  POST_EDIT_SUCCESS: { id: 'POST_EDIT_SUCCESS', message: '게시글 수정 완료' },
-  POST_EDIT_FAIL: { id: 'POST_EDIT_FAIL', message: '게시글 수정 실패' },
+  POST_EDIT_SUCCESS: {
+    id: 'POST_EDIT_SUCCESS',
+    message: '게시글 수정 완료',
+  },
+  POST_EDIT_FAIL: {
+    id: 'POST_EDIT_FAIL',
+    message: '게시글 수정 실패',
+  },
   POST_CREATE_SUCCESS: {
     id: 'POST-CREATE-SUCCESS',
     message: '2P 적립이 완료되었어요',
@@ -65,7 +71,10 @@ const TOAST = Object.freeze({
     id: 'COMMENT_EDIT_SUCCESS',
     message: '댓글 수정 완료',
   },
-  COMMENT_EDIT_FAIL: { id: 'COMMENT_EDIT_FAIL', message: '댓글 수정 실패' },
+  COMMENT_EDIT_FAIL: {
+    id: 'COMMENT_EDIT_FAIL',
+    message: '댓글 수정 실패',
+  },
   COMMENT_CREATE_SUCCESS: {
     id: 'COMMENT-CREATE-SUCCESS',
     message: '1P 적립이 완료되었어요',
@@ -121,6 +130,23 @@ const TOAST = Object.freeze({
   SCRAP_SELF_ERROR: {
     id: 'SCRAP_SELF_ERROR',
     message: '자신의 글은 스크랩할 수 없습니다.',
+  },
+
+  UPDATE_PASSWORD_SUCCESS: {
+    id: 'UPDATE_PASSWORD_SUCCESS',
+    message: '비밀번호 수정이 완료되었습니다.',
+  },
+  UPDATE_USER_INFO_SUCCESS: {
+    id: 'UPDATE_USER_INFO_SUCCESS',
+    message: '회원 정보 수정이 완료되었습니다.',
+  },
+  WITHDRAW_ACCOUNT_SUCCESS: {
+    id: 'UPDATE_USER_INFO_SUCCESS',
+    message: '회원 탈퇴가 완료되었습니다.',
+  },
+  WITHDRAW_ACCOUNT_ERROR: {
+    id: 'WITHDRAW_ACCOUNT_ERROR',
+    message: '회원 탈퇴에 실패했습니다.\n다시 시도해주세요.',
   },
 });
 
