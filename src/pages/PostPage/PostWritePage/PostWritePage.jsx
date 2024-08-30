@@ -89,6 +89,7 @@ export default function PostWritePage() {
       return;
     }
 
+
     // 게시글 등록
     postPost(data)
       .then((response) => {

@@ -13,3 +13,9 @@ export const ROLE_NAME = Object.freeze({
   4: '리자',
   5: '공식계정',
 });
+
+export const BOARD_POST_WRITE = Object.freeze({
+  21: [1, 2, 4, 5],
+  22: [2, 4],
+  23: [2, 4],
+});
