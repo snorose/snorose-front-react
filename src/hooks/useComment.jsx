@@ -38,6 +38,7 @@ export default function useComment() {
       }
     },
     onSuccess: () => {
+      toast(TOAST.COMMENT_CREATE_SUCCESS);
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
@@ -60,7 +61,7 @@ export default function useComment() {
           userId: 35, // 실제 userId로 교체해야 합니다.
           category: POINT_CATEGORY_ENUM.COMMENT_DELETE,
           source: POINT_SOURCE_ENUM.COMMENT,
-          sourceId: undefined,
+          sourceId: commentId,
         });
       }
     },
