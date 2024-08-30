@@ -68,7 +68,7 @@ const TOAST = Object.freeze({
   COMMENT_EDIT_FAIL: { id: 'COMMENT_EDIT_FAIL', message: '댓글 수정 실패' },
   COMMENT_CREATE_SUCCESS: {
     id: 'COMMENT-CREATE-SUCCESS',
-    message: '댓글 등록 성공!',
+    message: '1P 적립이 완료되었어요',
   },
   COMMENT_CREATE_FAIL: {
     id: 'COMMENT_CREATE_FAIL',
@@ -97,6 +97,10 @@ const TOAST = Object.freeze({
   COMMENT_DELETE_ERROR: {
     id: 'COMMENT_DELETE_ERROR',
     message: '알 수 없는 오류가 발생했습니다.',
+  },
+  EMPTY_COMMENT: {
+    id: 'EMPTY_COMMENT',
+    message:'댓글을 입력하세요.',
   },
   EMPTY_TITLE: {
     id: 'EMPTY_TITLE_ERROR',
