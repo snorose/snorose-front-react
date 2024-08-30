@@ -30,6 +30,25 @@ export const deleteExamReview = async (postId) => {
   return response;
 };
 
+export const checkExamReviewDuplication = async ({
+  lectureName,
+  professor,
+  classNumber,
+  lectureYear,
+  semester,
+  examType,
+}) => {
+  const response = await authAxios.post('/v1/reviews/check-duplication', {
+    lectureName,
+    professor,
+    classNumber,
+    lectureYear,
+    semester,
+    examType,
+  });
+  return response;
+};
+
 export const postExamReview = async ({ data, file }) => {
   const formData = new FormData();
   const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });

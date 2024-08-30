@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { postExamReview, updatePoint } from '@/apis';
+import {
+  postExamReview,
+  updatePoint,
+  checkExamReviewDuplication,
+} from '@/apis';
 
 import { useToast } from '@/hooks';
 
@@ -11,6 +15,7 @@ import {
   CategoryFieldset,
   Dropdown,
 } from '@/components/Fieldset';
+import { ConfirmModal } from '@/components';
 import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
@@ -20,6 +25,7 @@ import {
   CLASS_NUMBERS,
   EXAM_TYPES,
   LECTURE_TYPES,
+  MODAL_CONFIRM,
   POINT_CATEGORY_ENUM,
   POINT_SOURCE_ENUM,
   SEMESTERS,
@@ -30,6 +36,7 @@ import {
 import styles from './ExamReviewWritePage.module.css';
 
 const FILE_MAX_SIZE = 1024 * 1024 * 10;
+const USER_ID = 62;
 
 export default function ExamReviewWritePage() {
   const { toast } = useToast();
@@ -44,6 +51,8 @@ export default function ExamReviewWritePage() {
   const [classNumber, setClassNumber] = useState({});
   const [questionDetail, setQuestionDetail] = useState('');
   const [file, setFile] = useState();
+
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -68,7 +77,7 @@ export default function ExamReviewWritePage() {
     setFile(selectedFile);
   };
 
-  const data = {
+  const formBody = {
     isPF,
     boardId: BOARD_ID['exam-review'],
     classNumber: classNumber?.id,
@@ -88,12 +97,33 @@ export default function ExamReviewWritePage() {
     <main className={styles.main}>
       <CloseAppBar>
         <ActionButton
-          onClick={() => {
-            if (pass) {
-              postExamReview({ data, file }).then(({ status, data }) => {
+          onClick={async () => {
+            if (!pass) {
+              toast(TOAST.EXAM_REVIEW_CREATE_VALIDATE);
+              return;
+            }
+
+            try {
+              const { data } = await checkExamReviewDuplication({
+                lectureName,
+                professor,
+                classNumber: classNumber?.id,
+                lectureYear: lectureYear?.id,
+                semester: semester?.id,
+                examType: examType?.id,
+              });
+
+              if (data.result.isDuplicated) {
+                setIsConfirmModalOpen(true);
+              } else {
+                const { data, status } = await postExamReview({
+                  data: formBody,
+                  file,
+                });
+
                 if (status === 201) {
                   updatePoint({
-                    userId: 62, // userId로 교체해야합니다.
+                    userId: USER_ID, // userId로 교체해야합니다.
                     category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
                     source: POINT_SOURCE_ENUM.REVIEW,
                     sourceId: data.result.postId,
@@ -104,9 +134,11 @@ export default function ExamReviewWritePage() {
                   });
                   navigate('/board/exam-review');
                 }
-              });
-            } else {
-              alert('필수 입력을 모두 작성해주세요');
+              }
+            } catch (error) {
+              if (error.response.status === 500) {
+                toast(TOAST.SERVER_ERROR_500);
+              }
             }
           }}
         >
@@ -208,6 +240,42 @@ export default function ExamReviewWritePage() {
           <input id='file' type='file' accept='.pdf' onChange={handleFile} />
         </div>
       </div>
+      <ConfirmModal
+        isOpen={isConfirmModalOpen}
+        title={MODAL_CONFIRM.EXAM_REVIEW_DUPLICATION.title}
+        message={MODAL_CONFIRM.EXAM_REVIEW_DUPLICATION.message}
+        primaryButtonText='확인'
+        secondaryButtonText='취소'
+        onPrimaryButtonClick={async () => {
+          try {
+            const { data, status } = await postExamReview({
+              data: formBody,
+              file,
+            });
+
+            if (status === 201) {
+              updatePoint({
+                userId: USER_ID, // userId로 교체해야합니다.
+                category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
+                source: POINT_SOURCE_ENUM.REVIEW,
+                sourceId: data.result.postId,
+              }).then(({ status }) => {
+                if (status === 200) {
+                  toast(TOAST.EXAM_REVIEW_CREATE);
+                }
+              });
+              navigate('/board/exam-review');
+            }
+          } catch (error) {
+            if (error.response.status === 500) {
+              toast(TOAST.SERVER_ERROR_500);
+            }
+          }
+        }}
+        onSecondaryButtonClick={() => {
+          setIsConfirmModalOpen(false);
+        }}
+      />
     </main>
   );
 }

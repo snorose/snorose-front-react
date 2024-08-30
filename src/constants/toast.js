@@ -1,4 +1,8 @@
 const TOAST = Object.freeze({
+  SERVER_ERROR_500: {
+    id: 'SERVER_ERROR_500',
+    message: '서버 에러, 관리자에게 문의 바랍니다.',
+  },
   ATTENDANCE_SUCCESS: {
     id: 'ATTENDANCE',
     message: '출석체크 완료',
@@ -10,6 +14,10 @@ const TOAST = Object.freeze({
   ATTENDANCE_FAIL: {
     id: 'ATTENDANCE_FAIL',
     message: '출석체크 실패',
+  },
+  EXAM_REVIEW_CREATE_VALIDATE: {
+    id: 'EXAM_REVIEW_CREATE_VALIDATE',
+    message: '필수 입력을 모두 작성해주세요',
   },
   EXAM_REVIEW_CREATE: {
     id: 'EXAM_REVIEW_CREATE',
