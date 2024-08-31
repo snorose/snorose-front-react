@@ -12,6 +12,8 @@ import {
   updatePoint,
 } from '@/apis';
 
+import { USER } from '@/dummy/data';
+
 export default function useComment() {
   const { postId } = useParams();
   const queryClient = useQueryClient();
@@ -30,7 +32,7 @@ export default function useComment() {
       const newCommentId = response.data.result.id;
       if (response.status === 201) {
         await updatePoint({
-          userId: 35, // 실제 userId로 교체해야 합니다.
+          userId: USER.userId, // 실제 userId로 교체해야 합니다.
           category: POINT_CATEGORY_ENUM.COMMENT_CREATE,
           source: POINT_SOURCE_ENUM.COMMENT,
           sourceId: newCommentId,
@@ -56,7 +58,7 @@ export default function useComment() {
       const response = await remove({ postId, commentId });
       if (response.status === 200) {
         await updatePoint({
-          userId: 35, // 실제 userId로 교체해야 합니다.
+          userId: USER.userId, // 실제 userId로 교체해야 합니다.
           category: POINT_CATEGORY_ENUM.COMMENT_DELETE,
           source: POINT_SOURCE_ENUM.COMMENT,
           sourceId: commentId,
