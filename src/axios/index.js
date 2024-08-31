@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const authAxios = axios.create({
-  baseURL: 'https://13.124.33.41:8081',
+  baseURL: process.env.REACT_APP_SERVER_DOMAIN,
   headers: {
     'Content-Type': 'application/json',
     withCredentials: true,
