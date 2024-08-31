@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const authAxios = axios.create({
+const authAxios = axios.create({
   baseURL: process.env.REACT_APP_SERVER_DOMAIN,
   headers: {
     'Content-Type': 'application/json',
@@ -8,3 +8,7 @@ export const authAxios = axios.create({
     Authorization: `Bearer ${localStorage.getItem('token')}`,
   },
 });
+
+authAxios.defaults.timeout = 5000;
+
+export { authAxios };
