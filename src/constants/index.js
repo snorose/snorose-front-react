@@ -8,6 +8,7 @@ export * from './modalOptions.js';
 export * from './point.js';
 export * from './postCategories.js';
 export * from './role.js';
+export * from './route.js';
 export * from './search.js';
 export * from './seconds.js';
 export * from './toast.js';

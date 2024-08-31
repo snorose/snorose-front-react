@@ -10,7 +10,7 @@ export async function LoginAPI(
   setTokens
 ) {
   e.preventDefault();
-  const apiUrl = 'http://13.124.33.41:8081';
+  const apiUrl = process.env.REACT_APP_SERVER_DOMAIN;
   const endpoint = '/v1/users/login';
   try {
     const response = await axios.post(apiUrl + endpoint, formData);

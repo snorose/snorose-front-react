@@ -1,3 +1,3 @@
 import { ROLE } from '../../constants';
 
-export const USER = { isLogin: true, role: ROLE.user };
+export const USER = { userId: 62, isLogin: true, role: ROLE.user };

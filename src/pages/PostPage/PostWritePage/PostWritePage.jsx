@@ -17,6 +17,8 @@ import {
   TOAST,
 } from '@/constants';
 
+import { USER } from '@/dummy/data';
+
 import styles from './PostWritePage.module.css';
 
 const roleId = 4; // dummy
@@ -89,12 +91,13 @@ export default function PostWritePage() {
       return;
     }
 
+
     // 게시글 등록
     postPost(data)
       .then((response) => {
         if (response.status === 201) {
           return updatePoint({
-            userId: 35, // userId로 교체해야합니다.
+            userId: USER.userId, // userId로 교체해야합니다.
             category: POINT_CATEGORY_ENUM.POST_CREATE,
             source: POINT_SOURCE_ENUM.POST,
             sourceId: response.data.result.postId,
