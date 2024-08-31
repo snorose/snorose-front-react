@@ -27,10 +27,6 @@ const TOAST = Object.freeze({
     id: 'NO_SELF_SCROP',
     message: '내 게시글은 스크랩할 수 없어요',
   },
-  NO_AUTH_POST_WRITE: {
-    id: 'NO_AUTH_POST_WRITE',
-    message: '게시글 작성 권한이 없습니다.',
-  },
   POST_EDIT_SUCCESS: { id: 'POST_EDIT_SUCCESS', message: '게시글 수정 완료' },
   POST_EDIT_FAIL: { id: 'POST_EDIT_FAIL', message: '게시글 수정 실패' },
   POST_CREATE_SUCCESS: {

@@ -4,9 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getNoticeLine, getPostList } from '@/apis';
 
-import { TOAST } from '@/constants';
-import { USER } from '@/dummy/data';
-
 import { useInfiniteScroll, useToast } from '@/hooks';
 
 import {
@@ -23,17 +20,15 @@ import {
 
 import { timeAgo } from '@/utils';
 
-import { BOARD_MENUS, BOARD_POST_WRITE } from '@/constants';
+import { BOARD_MENUS } from '@/constants';
 
 import styles from './BoardListPage.module.css';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
-  const { toast } = useToast();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === currentBoardTextId) || {};
-  const boardPostWriteAuth = BOARD_POST_WRITE[currentBoard.id] || [];
 
   const { data, ref, isLoading, status, isError, refetch } = useInfiniteScroll({
     queryKey: ['postList', currentBoard.id],
@@ -68,16 +63,6 @@ export default function BoardListPage() {
     return () => {
       navigate(to);
     };
-  };
-
-  // 게시글 작성 권한 확인
-  const handleWriteButtonClick = () => {
-    console.log('현재 유저 role: ', USER?.role);
-    if (boardPostWriteAuth.includes(USER?.role)) {
-      navigate(`/board/${currentBoardTextId}/post-write`);
-    } else {
-      toast(TOAST.NO_AUTH_POST_WRITE); // 권한이 없을 때의 토스트 메시지
-    }
   };
 
   if (isLoading) {
@@ -135,7 +120,7 @@ export default function BoardListPage() {
       />
       <Target ref={ref} height='100px' />
       <WriteButton
-        onClick={handleWriteButtonClick}
+        onClick={handleNavClick(`./post-write`)}
         className={styles.writeButton}
       />
     </div>

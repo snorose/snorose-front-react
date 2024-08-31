@@ -47,13 +47,43 @@ import { ROLE } from '@/constants';
 import ScrapPage from './pages/MyPage/ActivityPage/ScrapPage';
 import ScrapExamReviewPage from './pages/MyPage/ActivityPage/ScrapExamReviewPage';
 
+const getRolesForReadBoard = (boardPath) => {
+  switch (boardPath) {
+    case 'first-snow':
+      return [ROLE.preUser, ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
+    case 'large-snow':
+      return [ROLE.user, ROLE.admin, ROLE.official];
+    case 'permanent-snow':
+      return [ROLE.user, ROLE.admin, ROLE.official];
+    default:
+      return [];
+  }
+};
+
+const getRolesForWriteBoard = (boardPath) => {
+  switch (boardPath) {
+    case 'first-snow':
+      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
+    case 'large-snow':
+      return [ROLE.user, ROLE.admin];
+    case 'permanent-snow':
+      return [ROLE.user, ROLE.admin];
+    default:
+      return [];
+  }
+};
+
 const boardPaths = ['first-snow', 'large-snow', 'permanent-snow', 'besookt'];
 
 const boardRoutes = boardPaths.flatMap((boardPath) => [
   {
     path: `/board/${boardPath}`,
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute
+        roles={getRolesForReadBoard(boardPath)}
+        to={`/board`}
+        message={'게시판 접근 권한이 없습니다.'}
+      >
         <BoardListPage />
       </ProtectedRoute>
     ),
@@ -64,7 +94,11 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
   {
     path: `/board/${boardPath}/post/:postId`,
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute
+        roles={getRolesForReadBoard(boardPath)}
+        to={`/board/${boardPath}`}
+        message={'게시글 접근 권한이 없습니다.'}
+      >
         <PostPage />
       </ProtectedRoute>
     ),
@@ -75,7 +109,11 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
   {
     path: `/board/${boardPath}/post-write`,
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute
+        roles={getRolesForWriteBoard(boardPath)}
+        to={`/board/${boardPath}`}
+        message={'게시글 작성 권한이 없습니다.'}
+      >
         <PostWritePage />
       </ProtectedRoute>
     ),
@@ -86,7 +124,11 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
   {
     path: `/board/${boardPath}/post/:postId/edit`,
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute
+        roles={getRolesForWriteBoard(boardPath)}
+        to={`/board/${boardPath}/post/:postId`}
+        message={'게시글 편집 권한이 없습니다.'}
+      >
         <PostEditPage />
       </ProtectedRoute>
     ),
@@ -97,7 +139,11 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
   {
     path: `/board/${boardPath}/search`,
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute
+        roles={getRolesForReadBoard(boardPath)}
+        to={`/board`}
+        message={'게시판 접근 권한이 없습니다.'}
+      >
         <PostSearchPage />
       </ProtectedRoute>
     ),
@@ -109,7 +155,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     path: `/board/${boardPath}/notice`,
     element: (
       <ProtectedRoute
-        roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
+        roles={getRolesForReadBoard(boardPath)}
+        to={`/board`}
+        message={'게시판 접근 권한이 없습니다.'}
       >
         <NoticeListPage />
       </ProtectedRoute>
@@ -149,7 +197,11 @@ export const routeList = [
       {
         path: '/board/exam-review',
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            to={`/home`}
+            message={'시험후기 게시판 접근 권한이 없습니다.'}
+          >
             <ExamReviewPage />
           </ProtectedRoute>
         ),
@@ -157,7 +209,11 @@ export const routeList = [
       {
         path: '/board/exam-review/post/:postId',
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            to={`/home`}
+            message={'시험후기 접근 권한이 없습니다.'}
+          >
             <ExamReviewDetailPage />
           </ProtectedRoute>
         ),
@@ -167,14 +223,26 @@ export const routeList = [
       },
       {
         path: '/board/exam-review/:postId/edit',
-        element: <ExamReviewEditPage />,
+        element: (
+          <ExamReviewEditPage
+            roles={[ROLE.user, ROLE.admin]}
+            to={`/home`}
+            message={'시험후기 수정 권한이 없습니다.'}
+          />
+        ),
         meta: {
           hideNav: true,
         },
       },
       {
         path: '/board/exam-review-write',
-        element: <ExamReviewWritePage />,
+        element: (
+          <ExamReviewWritePage
+            roles={[ROLE.user, ROLE.admin]}
+            to={`/home`}
+            message={'시험후기 작성 권한이 없습니다.'}
+          />
+        ),
         meta: {
           hideNav: true,
         },
