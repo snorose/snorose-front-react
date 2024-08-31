@@ -11,6 +11,8 @@ import { Icon } from '@//components/Icon';
 
 import { POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM, TOAST } from '@/constants';
 
+import { USER } from '@/dummy/data';
+
 import styles from './ReviewDownload.module.css';
 
 export default function ReviewDownload({ className, fileName }) {
@@ -37,7 +39,7 @@ export default function ReviewDownload({ className, fileName }) {
     window.URL.revokeObjectURL(fileUrl);
 
     updatePoint({
-      userId: 62, // userId로 변경 필요
+      userId: USER.userId, // userId로 변경 필요
       category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DOWNLOAD,
       source: POINT_SOURCE_ENUM.REVIEW,
       sourceId: postId,

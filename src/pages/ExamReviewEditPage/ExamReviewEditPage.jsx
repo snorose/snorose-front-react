@@ -17,6 +17,7 @@ import {
   CLASS_NUMBERS,
   EXAM_TYPES,
   LECTURE_TYPES,
+  ROUTE,
   SEMESTERS,
   YEARS,
 } from '@/constants';
@@ -29,7 +30,7 @@ export default function ExamReviewEditPage() {
     mutationFn: (edit) => editReviewDetail(postId, edit),
     onSuccess: () => {
       queryClient.invalidateQueries(['reviewDetail', postId]);
-      navigate(`/exam-review/${postId}`, { replace: true });
+      navigate(ROUTE.examReviewDetail(postId), { replace: true });
     },
     onError: (error) => console.error(error),
   });
@@ -50,6 +51,7 @@ export default function ExamReviewEditPage() {
     SEMESTERS.find((semester) => semester.id === state.semester)
   );
   const [isPF, setIsPF] = useState(state.isPF);
+  const [isOnline, setIsOnline] = useState(state.isOnline);
   const [classNumber, setClassNumber] = useState(
     CLASS_NUMBERS.find((number) => number.id === state.classNumber)
   );
@@ -65,18 +67,18 @@ export default function ExamReviewEditPage() {
     classNumber;
 
   const data = {
-    category: 'testCategory',
-    title: '자료구조',
-    content: '',
+    isPF,
+    classNumber: classNumber?.id,
     lectureName,
     professor,
-    classNumber: classNumber?.id,
-    lectureYear: lectureYear?.id,
+    questionDetail,
     semester: semester?.id,
     lectureType: lectureType?.id,
-    isPF,
+    content: '',
     examType: examType?.id,
-    questionDetail,
+    lectureYear: lectureYear?.id,
+    isOnline,
+    category: '',
   };
 
   return (
@@ -154,6 +156,13 @@ export default function ExamReviewEditPage() {
         hasCheckbox
         value={isPF}
         setFn={setIsPF}
+      />
+      <CategoryFieldset
+        title='온라인(비대면 수업) 여부'
+        required
+        hasCheckbox
+        value={isOnline}
+        setFn={setIsOnline}
       />
       <CategoryFieldset title='수강 분반' required>
         <Dropdown

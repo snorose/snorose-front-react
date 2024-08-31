@@ -27,6 +27,8 @@ import {
   YEARS,
 } from '@/constants';
 
+import { USER } from '@/dummy/data';
+
 import styles from './ExamReviewWritePage.module.css';
 
 const FILE_MAX_SIZE = 1024 * 1024 * 10;
@@ -93,7 +95,7 @@ export default function ExamReviewWritePage() {
               postExamReview({ data, file }).then(({ status, data }) => {
                 if (status === 201) {
                   updatePoint({
-                    userId: 62, // userId로 교체해야합니다.
+                    userId: USER.userId, // userId로 교체해야합니다.
                     category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
                     source: POINT_SOURCE_ENUM.REVIEW,
                     sourceId: data.result.postId,
