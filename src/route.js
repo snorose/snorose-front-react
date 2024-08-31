@@ -50,7 +50,7 @@ import ScrapExamReviewPage from './pages/MyPage/ActivityPage/ScrapExamReviewPage
 const getRolesForReadBoard = (boardPath) => {
   switch (boardPath) {
     case 'first-snow':
-      return [ROLE.preUser, ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
+      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
     case 'large-snow':
       return [ROLE.user, ROLE.admin, ROLE.official];
     case 'permanent-snow':
