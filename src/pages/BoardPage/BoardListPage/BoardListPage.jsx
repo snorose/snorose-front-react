@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getNoticeLine, getPostList } from '@/apis';
 
-import { useInfiniteScroll, useToast } from '@/hooks';
+import { useInfiniteScroll } from '@/hooks';
 
 import {
   BackAppBar,
@@ -120,7 +120,7 @@ export default function BoardListPage() {
       />
       <Target ref={ref} height='100px' />
       <WriteButton
-        onClick={handleNavClick(`./post-write`)}
+        to={`/board/${currentBoardTextId}/post-write`}
         className={styles.writeButton}
       />
     </div>
