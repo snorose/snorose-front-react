@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getBannerImage, getHomeNotice } from '@/apis';
+import { getHomeNotice } from '@/apis';
 
 import { useAuth } from '@/hooks';
 
@@ -34,17 +34,6 @@ export default function MainPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const { data: bannerData, isError: bannerIsError } = useQuery({
-    queryKey: ['banner'],
-    queryFn: () => getBannerImage(),
-    gcTime: Infinity,
-    staleTime: 1000 * 60 * 5,
-  });
-
-  if (bannerIsError || !bannerData) {
-    return null;
-  }
-
   if (isError || !data) {
     return null;
   }
@@ -52,11 +41,7 @@ export default function MainPage() {
   return (
     <main>
       <Header className={styles.header} />
-      <Carousel>
-        {bannerData.map((banner, index) => (
-          <Slide key={index} src={banner} alt='banner' />
-        ))}
-      </Carousel>
+      <Carousel />
       <Margin className={styles.cards}>
         <Flex gap='0.45rem'>
           <Card
