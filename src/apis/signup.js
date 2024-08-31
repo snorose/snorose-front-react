@@ -5,14 +5,12 @@ export async function RegisterAPI(formData, navigate) {
   delete data['name'];
   try {
     const response = await axios.post(
-      'http://13.124.33.41:8081/v1/users/register',
+      process.env.REACT_APP_SERVER_DOMAIN + '/v1/users/register',
       data
     );
-    if (response.data.isSuccess) {
-      navigate('/signup/success', {
-        state: { access: true },
-      });
-    }
+    navigate('/signup/success', {
+      state: { access: true },
+    });
   } catch (e) {
     navigate('/signup/failure', {
       state: { message: e.response.data.message },
@@ -20,7 +18,7 @@ export async function RegisterAPI(formData, navigate) {
   }
 }
 export async function SendUserAPI(email) {
-  const apiUrl = 'http://13.124.33.41:8081';
+  const apiUrl = process.env.REACT_APP_SERVER_DOMAIN;
   const endpoint = '/v1/users/sendUser';
   const data = { email: email };
   try {
@@ -30,7 +28,7 @@ export async function SendUserAPI(email) {
   }
 }
 export async function CertifyUserAPI(data) {
-  const apiUrl = 'http://13.124.33.41:8081';
+  const apiUrl = process.env.REACT_APP_SERVER_DOMAIN;
   const endpoint = '/v1/users/certifyUser';
   if (data.authNum?.length === 0) {
     return 'ready';

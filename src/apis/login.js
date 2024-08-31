@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { React, useContext } from 'react';
+import { useContext } from 'react';
 import { TokenContext } from '@/contexts/TokenContext';
 export async function LoginAPI(
   e,
@@ -14,12 +14,9 @@ export async function LoginAPI(
   const endpoint = '/v1/users/login';
   try {
     const response = await axios.post(apiUrl + endpoint, formData);
-    if (response.data.isSuccess) {
-      const accessToken = response.data.result.tokenResponse.accessToken;
-      const refreshToken = response.data.result.tokenResponse.refreshToken;
-      setTokens((prev) => ({ ...prev, accessToken, refreshToken }));
-      navigate('/');
-    }
+    const { accessToken, refreshToken } = response.data.result.tokenResponse;
+    setTokens((prev) => ({ ...prev, accessToken, refreshToken }));
+    navigate('/');
     setUser(response.data);
     setErrmsg(false);
     localStorage.setItem('user', response.data);
@@ -33,7 +30,7 @@ export async function ReissueAPI() {
     if (!tokens.refreshToken) {
       window.location.href = '/login';
     } else {
-      const apiUrl = 'http://13.124.33.41:8081';
+      const apiUrl = process.env.REACT_APP_SERVER_DOMAIN;
       const endpoint = '/v1/users/reissue';
       const response = await axios.post(apiUrl + endpoint, tokens.accessToken);
       setTokens((prev) => ({ ...prev, accessToken: response.accessToken }));
@@ -43,7 +40,7 @@ export async function ReissueAPI() {
 
 export async function FindIDAPI(e, formData, navigate) {
   e.preventDefault();
-  const apiUrl = 'http://13.124.33.41:8081';
+  const apiUrl = process.env.REACT_APP_SERVER_DOMAIN;
   const endpoint = '/v1/users/findid';
   const headers = {
     'Content-Type': 'application/json',
@@ -64,7 +61,7 @@ export async function FindIDAPI(e, formData, navigate) {
 }
 export async function FindPWAPI(e, formData, navigate) {
   e.preventDefault();
-  const apiUrl = 'http://13.124.33.41:8081';
+  const apiUrl = process.env.REACT_APP_SERVER_DOMAIN;
   const endpoint = '/v1/users/findPW';
   const headers = {
     'Content-Type': 'application/json',
