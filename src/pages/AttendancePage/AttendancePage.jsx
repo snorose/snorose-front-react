@@ -9,6 +9,7 @@ import { Calendar } from '@/components/Calendar';
 import { Icon } from '@/components/Icon';
 
 import { POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM, TOAST } from '@/constants';
+import { USER } from '@/dummy/data';
 
 import styles from './AttendancePage.module.css';
 
@@ -28,7 +29,7 @@ export default function AttendancePage() {
           className={styles.attendanceButton}
           onClick={() => {
             updatePoint({
-              userId: 32, // userId 교체 필요함
+              userId: USER.userId, // userId 교체 필요함
               category: POINT_CATEGORY_ENUM.ATTENDANCE,
               source: POINT_SOURCE_ENUM.ATTENDANCE,
             })
