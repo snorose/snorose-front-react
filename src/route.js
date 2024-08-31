@@ -199,7 +199,6 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            to={`/home`}
             message={'시험후기 게시판 접근 권한이 없습니다.'}
           >
             <ExamReviewPage />
@@ -211,7 +210,6 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            to={`/home`}
             message={'시험후기 접근 권한이 없습니다.'}
           >
             <ExamReviewDetailPage />
@@ -226,7 +224,6 @@ export const routeList = [
         element: (
           <ExamReviewEditPage
             roles={[ROLE.user, ROLE.admin]}
-            to={`/home`}
             message={'시험후기 수정 권한이 없습니다.'}
           />
         ),
@@ -239,7 +236,6 @@ export const routeList = [
         element: (
           <ExamReviewWritePage
             roles={[ROLE.user, ROLE.admin]}
-            to={`/home`}
             message={'시험후기 작성 권한이 없습니다.'}
           />
         ),

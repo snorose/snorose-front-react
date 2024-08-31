@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { USER } from './dummy/data';
 
 // 토큰이 유효한지 확인하는 로직 필요
-export default function ProtectedRoute({ roles, children, to, message }) {
+export default function ProtectedRoute({ roles, children, to = '/', message }) {
   const token = localStorage.getItem('token');
 
   if (!token) {
