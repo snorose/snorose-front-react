@@ -1,13 +1,11 @@
-import axios from 'axios';
+import { noAuthAxios } from '@/axios';
 export async function RegisterAPI(formData, navigate) {
+  const endpoint = '/v1/users/register';
   const data = { ...formData, userRoleId: 1, isBlacklist: false };
   data['major'] = data['name'];
   delete data['name'];
   try {
-    const response = await axios.post(
-      process.env.REACT_APP_SERVER_DOMAIN + '/v1/users/register',
-      data
-    );
+    await noAuthAxios.post(endpoint, data);
     navigate('/signup/success', {
       state: { access: true },
     });
@@ -18,23 +16,21 @@ export async function RegisterAPI(formData, navigate) {
   }
 }
 export async function SendUserAPI(email) {
-  const apiUrl = process.env.REACT_APP_SERVER_DOMAIN;
   const endpoint = '/v1/users/sendUser';
   const data = { email: email };
   try {
-    const response = await axios.post(apiUrl + endpoint, data);
+    await noAuthAxios.post(endpoint, data);
   } catch (e) {
     console.log(e);
   }
 }
 export async function CertifyUserAPI(data) {
-  const apiUrl = process.env.REACT_APP_SERVER_DOMAIN;
   const endpoint = '/v1/users/certifyUser';
   if (data.authNum?.length === 0) {
     return 'ready';
   } else {
     try {
-      const response = await axios.post(apiUrl + endpoint, data);
+      const response = await noAuthAxios.post(endpoint, data);
       if (response.data.isSuccess) {
         return 'right';
       } else {
