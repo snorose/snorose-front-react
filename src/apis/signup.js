@@ -1,5 +1,5 @@
 import { authAxios } from '@/axios';
-export async function RegisterAPI(formData, navigate) {
+export const register = async (formData, navigate) => {
   const endpoint = '/v1/users/register';
   const data = { ...formData, userRoleId: 1, isBlacklist: false };
   data['major'] = data['name'];
@@ -14,15 +14,15 @@ export async function RegisterAPI(formData, navigate) {
       state: { message: e.response.data.message },
     });
   }
-}
-export async function SendUserAPI(email) {
+};
+export async function sendUser(email) {
   const endpoint = '/v1/users/sendUser';
   const data = { email: email };
   try {
     await authAxios.post(endpoint, data);
   } catch (e) {}
 }
-export async function CertifyUserAPI(data) {
+export const certifyUser = async (data) => {
   const endpoint = '/v1/users/certifyUser';
   if (data.authNum?.length === 0) {
     return 'ready';
@@ -38,4 +38,4 @@ export async function CertifyUserAPI(data) {
       return 'wrong';
     }
   }
-}
+};

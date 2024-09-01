@@ -1,5 +1,5 @@
 import { authAxios } from '@/axios';
-export async function LoginAPI(e, setUser, setErrmsg, formData, navigate) {
+export const login = async (e, setUser, setErrmsg, formData, navigate) => {
   e.preventDefault();
   const endpoint = '/v1/users/login';
   try {
@@ -13,9 +13,9 @@ export async function LoginAPI(e, setUser, setErrmsg, formData, navigate) {
   } catch (e) {
     setErrmsg(true);
   }
-}
+};
 
-export async function FindIDAPI(e, formData, navigate) {
+export const findId = async (e, formData, navigate) => {
   e.preventDefault();
   const endpoint = '/v1/users/findid';
   try {
@@ -28,8 +28,8 @@ export async function FindIDAPI(e, formData, navigate) {
       navigate('/not-found-id', { state: { access: true } });
     }
   }
-}
-export async function FindPWAPI(e, formData, navigate) {
+};
+export const findPw = async (e, formData, navigate) => {
   e.preventDefault();
   const endpoint = '/v1/users/findPW';
   try {
@@ -42,4 +42,4 @@ export async function FindPWAPI(e, formData, navigate) {
       navigate('/not-found-pw', { state: { access: true } });
     }
   }
-}
+};
