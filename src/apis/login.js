@@ -1,40 +1,19 @@
 import axios from 'axios';
 import { useContext } from 'react';
-import { TokenContext } from '@/contexts/TokenContext';
-export async function LoginAPI(
-  e,
-  setUser,
-  setErrmsg,
-  formData,
-  navigate,
-  setTokens
-) {
+export async function LoginAPI(e, setUser, setErrmsg, formData, navigate) {
   e.preventDefault();
   const apiUrl = process.env.REACT_APP_SERVER_DOMAIN;
   const endpoint = '/v1/users/login';
   try {
     const response = await axios.post(apiUrl + endpoint, formData);
     const { accessToken, refreshToken } = response.data.result.tokenResponse;
-    setTokens((prev) => ({ ...prev, accessToken, refreshToken }));
     navigate('/');
     setUser(response.data);
     setErrmsg(false);
-    localStorage.setItem('user', response.data);
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
   } catch (e) {
     setErrmsg(true);
-  }
-}
-export async function ReissueAPI() {
-  const { tokens, setTokens } = useContext(TokenContext);
-  if (!tokens.accessToken) {
-    if (!tokens.refreshToken) {
-      window.location.href = '/login';
-    } else {
-      const apiUrl = process.env.REACT_APP_SERVER_DOMAIN;
-      const endpoint = '/v1/users/reissue';
-      const response = await axios.post(apiUrl + endpoint, tokens.accessToken);
-      setTokens((prev) => ({ ...prev, accessToken: response.accessToken }));
-    }
   }
 }
 

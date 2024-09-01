@@ -5,7 +5,6 @@ import Input from '../../../components/Input/Input/Input';
 import { Submit } from '../../../components/Submit';
 import snoroseLogo from '../../../assets/images/snoroseLogo.svg';
 import { LoginAPI } from '@/apis';
-import { TokenContext } from '@/contexts/TokenContext';
 import styles from './LoginPage.module.css';
 
 export default function Login() {
@@ -14,7 +13,6 @@ export default function Login() {
   const [errmsg, setErrmsg] = useState(false);
   const [visBtnClick, setVisBtnClick] = useState(false);
   const [user, setUser] = useState();
-  const { tokens, setTokens } = useContext(TokenContext);
   const toggleVisBtn = () => {
     setVisBtnClick((prev) => !prev);
   };
@@ -22,9 +20,7 @@ export default function Login() {
   return (
     <div className={styles.loginframe}>
       <form
-        onSubmit={(e) =>
-          LoginAPI(e, setUser, setErrmsg, formData, navigate, setTokens)
-        }
+        onSubmit={(e) => LoginAPI(e, setUser, setErrmsg, formData, navigate)}
       >
         <div className={styles.prev}>
           <Link to='/'>

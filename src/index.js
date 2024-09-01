@@ -10,7 +10,6 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { CommentContextProvider } from './contexts/CommentContext.jsx';
 import { ToastProvider } from './contexts/ToastContext.jsx';
-import { TokenProvider } from './contexts/TokenContext.jsx';
 
 import { routeList } from './route.js';
 
@@ -38,13 +37,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode fri>
     <QueryClientProvider client={queryClient}>
-      <TokenProvider>
-        <ToastProvider>
-          <CommentContextProvider>
-            <RouterProvider router={router} />
-          </CommentContextProvider>
-        </ToastProvider>
-      </TokenProvider>
+      <ToastProvider>
+        <CommentContextProvider>
+          <RouterProvider router={router} />
+        </CommentContextProvider>
+      </ToastProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>
