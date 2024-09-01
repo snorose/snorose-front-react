@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getPostContent, deletePost, updatePoint } from '@/apis';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import { useComment, useLike, useScrap, useToast } from '@/hooks';
+import { useLike, useScrap, useToast } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
@@ -14,7 +14,7 @@ import { FetchLoading } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 import { InputBar } from '@/components/InputBar';
 
-import { filterDeletedComments, timeAgo } from '@/utils';
+import { timeAgo } from '@/utils';
 
 import {
   BOARD_MENUS,
@@ -32,7 +32,6 @@ export default function PostPage() {
   const { postId } = useParams();
   const { pathname } = useLocation();
   const { inputFocus } = useCommentContext();
-  const { commentList } = useComment();
   const { toast } = useToast();
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === pathname.split('/')[2]) || {};
@@ -40,7 +39,6 @@ export default function PostPage() {
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const filterdCommentList = filterDeletedComments(commentList);
 
   // 게시글 데이터 받아오기
   const { data, isLoading, error } = useQuery({
@@ -162,7 +160,7 @@ export default function PostPage() {
         <div className={styles.post_bottom}>
           <div className={styles.count} onClick={inputFocus}>
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
-            <p>{filterdCommentList?.length.toLocaleString()}</p>
+            <p>{postData.commentCount.toLocaleString()}</p>
           </div>
           <div
             className={styles.count}
@@ -221,7 +219,7 @@ export default function PostPage() {
         setIsOpen={setIsReportModalOpen}
         closeFn={() => setIsReportModalOpen(false)}
       />
-      <CommentList postId={postId} />
+      <CommentList commentCount={postData.commentCount} />
       <InputBar />
     </div>
   );

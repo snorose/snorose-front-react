@@ -1,4 +1,4 @@
-import { filterDeletedComments } from '../../../utils/filterComment.js';
+import { filterVisibleComments } from '@/utils/filterComment.js';
 
 import { Comment } from '../index.js';
 import { FetchLoading } from '../../Loading';
@@ -7,22 +7,21 @@ import useComment from '../../../hooks/useComment.jsx';
 
 import styles from './CommentList.module.css';
 
-export default function CommentList() {
+export default function CommentList({ commentCount }) {
   const { commentList } = useComment();
+  const filteredCommentList = filterVisibleComments(commentList);
 
   if (!commentList) {
     return <FetchLoading>댓글을 불러오는 중...</FetchLoading>;
   }
 
-  console.log(commentList);
-
   return (
     <div className={styles.comments}>
       <p className={styles.commentsTitle}>
-        댓글 {commentList?.length.toLocaleString()}개
+        댓글 {commentCount.toLocaleString()}개
       </p>
       {commentList ? (
-        commentList.map((comment) => (
+        filteredCommentList.map((comment) => (
           <Comment key={comment.id} data={comment} />
         ))
       ) : (

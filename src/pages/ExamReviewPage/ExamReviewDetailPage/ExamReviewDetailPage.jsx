@@ -177,7 +177,7 @@ export default function ExamReviewDetailPage() {
           </div>
         </div>
       </div>
-      <CommentList />
+      <CommentList commentCount={commentCount} />
       <InputBar />
       <OptionModal
         id='exam-review-edit'
