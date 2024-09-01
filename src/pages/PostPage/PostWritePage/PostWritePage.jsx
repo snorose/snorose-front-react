@@ -77,15 +77,15 @@ export default function PostWritePage() {
 
     // 유효성 검사
     if (boardId === '') {
-      toast(TOAST.EMPTY_BOARDID);
+      toast(TOAST.POST.emptyBoard);
       return;
     }
     if (!title.trim()) {
-      toast(TOAST.EMPTY_TITLE);
+      toast(TOAST.POST.emptyTitle);
       return;
     }
     if (!text.trim()) {
-      toast(TOAST.EMPTY_TEXT);
+      toast(TOAST.POST.emptyContent);
       return;
     }
 
@@ -94,25 +94,21 @@ export default function PostWritePage() {
       .then((response) => {
         if (response.status === 201) {
           return updatePoint({
-            userId: 35, // userId로 교체해야합니다.
+            userId: 62, // userId로 교체해야합니다.
             category: POINT_CATEGORY_ENUM.POST_CREATE,
             source: POINT_SOURCE_ENUM.POST,
             sourceId: response.data.result.postId,
           });
-        } else {
-          throw new Error('Post creation failed');
         }
       })
       .then((pointResponse) => {
         if (pointResponse.status === 200) {
-          toast(TOAST.POST_CREATE_SUCCESS);
+          toast(TOAST.POST.create);
           navigate(-1);
-        } else {
-          throw new Error('Point update failed');
         }
       })
-      .catch((error) => {
-        toast(TOAST.POST_CREATE_FAIL);
+      .catch(({ response }) => {
+        toast(response.data.message);
       });
   };
   // 제목 40자 제한

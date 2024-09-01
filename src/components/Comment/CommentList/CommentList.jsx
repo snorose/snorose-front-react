@@ -14,8 +14,6 @@ export default function CommentList() {
     return <FetchLoading>댓글을 불러오는 중...</FetchLoading>;
   }
 
-  console.log(commentList);
-
   return (
     <div className={styles.comments}>
       <p className={styles.commentsTitle}>

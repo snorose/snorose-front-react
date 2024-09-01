@@ -5,8 +5,6 @@ import { scrap as ScrapApi, deleteScrap as deleteScrapApi } from '@/apis';
 
 import { useToast } from '@/hooks';
 
-import { TOAST } from '@/constants';
-
 export default function useScrap() {
   const { toast } = useToast();
   const { postId } = useParams();
@@ -23,10 +21,8 @@ export default function useScrap() {
         queryClient.invalidateQueries(['postContent', postId]);
       }
     },
-    onError: (error) => {
-      if (error?.response?.data?.code === 3801) {
-        toast(TOAST.SCRAP_SELF_ERROR);
-      }
+    onError: ({ response }) => {
+      toast(response.data.message);
     },
   });
 
@@ -39,10 +35,8 @@ export default function useScrap() {
         queryClient.invalidateQueries(['postContent', postId]);
       }
     },
-    onError: (error) => {
-      if (error?.response?.status === 403) {
-        toast(TOAST.SCRAP_SELF_ERROR);
-      }
+    onError: ({ response }) => {
+      toast(response.data.message);
     },
   });
 

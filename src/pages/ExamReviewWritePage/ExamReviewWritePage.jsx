@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import {
   postExamReview,
@@ -51,8 +51,11 @@ export default function ExamReviewWritePage() {
         sourceId,
       }),
     onSuccess: () => {
-      toast(TOAST.EXAM_REVIEW_CREATE);
+      toast(TOAST.EXAM_REVIEW.create);
       navigate('/board/exam-review', { replace: true });
+    },
+    onError: ({ response }) => {
+      toast(response.data.message);
     },
   });
 
@@ -65,8 +68,8 @@ export default function ExamReviewWritePage() {
     onSuccess: ({ data }) => {
       getPoint.mutate({ sourceId: data.result.postId });
     },
-    onError: (error) => {
-      console.log(error);
+    onError: ({ response }) => {
+      toast(response.data.message);
     },
   });
 
@@ -117,10 +120,8 @@ export default function ExamReviewWritePage() {
         semester: semester?.id,
         examType: examType?.id,
       });
-    } catch (error) {
-      if (error.response.status === 500) {
-        toast(TOAST.SERVER_ERROR_500);
-      }
+    } catch ({ response }) {
+      toast(response.data.message);
     }
   };
 
@@ -146,7 +147,7 @@ export default function ExamReviewWritePage() {
         <ActionButton
           onClick={async () => {
             if (!pass) {
-              toast(TOAST.EXAM_REVIEW_CREATE_VALIDATE);
+              toast(TOAST.EXAM_REVIEW.validate);
               return;
             }
 

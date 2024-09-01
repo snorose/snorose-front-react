@@ -28,7 +28,7 @@ export default function AttendancePage() {
           className={styles.attendanceButton}
           onClick={() => {
             updatePoint({
-              userId: 32, // userId 교체 필요함
+              userId: 62, // userId 교체 필요함
               category: POINT_CATEGORY_ENUM.ATTENDANCE,
               source: POINT_SOURCE_ENUM.ATTENDANCE,
             })
@@ -40,17 +40,11 @@ export default function AttendancePage() {
                     today.getFullYear(),
                     today.getMonth() + 1,
                   ]);
-                  toast(TOAST.ATTENDANCE_SUCCESS);
+                  toast(TOAST.ATTENDANCE.attendance);
                 }
               })
               .catch(({ response }) => {
-                const { status } = response;
-
-                if (status === 403) {
-                  toast(TOAST.ATTENDANCE_ONLY_ONCE_ERROR);
-                } else {
-                  toast(TOAST.ATTENDANCE_FAIL);
-                }
+                toast(response.data.message);
               });
           }}
         >

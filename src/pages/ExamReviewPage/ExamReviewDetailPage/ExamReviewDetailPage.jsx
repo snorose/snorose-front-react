@@ -44,6 +44,22 @@ export default function ExamReviewDetailPage() {
     staleTime: 1000 * 60 * 5,
   });
 
+  const losePoint = useMutation({
+    mutationFn: () =>
+      updatePoint({
+        userId: 62, // userId로 교체해야합니다.
+        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DELETE,
+        source: POINT_SOURCE_ENUM.REVIEW,
+        sourceId: postId,
+      }),
+    onSuccess: () => {
+      toast(TOAST.EXAM_REVIEW.delete);
+    },
+    onError: ({ response }) => {
+      toast(response.data.message);
+    },
+  });
+
   const deleteReview = useMutation({
     mutationFn: () => deleteExamReview(postId),
     onSuccess: () => {
@@ -51,17 +67,11 @@ export default function ExamReviewDetailPage() {
       queryClient.removeQueries(['reviewDetail', postId]);
       queryClient.removeQueries(['reviewFile', postId]);
 
-      updatePoint({
-        userId: 62, // userId로 변경 필요
-        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DELETE,
-        source: POINT_SOURCE_ENUM.REVIEW,
-        sourceId: postId,
-      }).then(({ status }) => {
-        if (status === 200) {
-          toast(TOAST.EXAM_REVIEW_DELETE);
-        }
-      });
-      navigate('/board/exam-review');
+      navigate('/board/exam-review', { replace: true });
+      losePoint.mutate();
+    },
+    onError: ({ response }) => {
+      toast(response.data.message);
     },
   });
 

@@ -56,29 +56,9 @@ export const postExamReview = async ({ data, file }) => {
   formData.append('post', blob);
   formData.append('file', file);
 
-  try {
-    const response = await authAxios.post('/v1/reviews/review', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+  const response = await authAxios.post('/v1/reviews/review', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 
-    if (response.status === 201) {
-      alert(
-        '후기 등록이 완료되었어요! 후기는 관리자 인증 전까지 수정 가능해요'
-      );
-    }
-
-    return response;
-  } catch (error) {
-    if (error.response.status === 400) {
-      alert('pdf 파일만 업로드할 수 있습니다.');
-    } else if (error.response.status === 404) {
-      alert('존재하지 않는 게시판입니다.');
-    } else if (error.response.status === 409) {
-      alert('중복 후기가 있습니다.');
-    } else if (error.response.status === 413) {
-      alert('용량이 10MB 미만인 파일만 업로드할 수 있습니다.');
-    }
-
-    return error.response;
-  }
+  return response;
 };

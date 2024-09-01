@@ -64,23 +64,19 @@ export default function PostPage() {
 
       if (response.status === 200) {
         const pointResponse = await updatePoint({
-          userId: 35, // 추후 id 연결 필요
+          userId: 62, // 추후 id 연결 필요
           category: POINT_CATEGORY_ENUM.POST_DELETE,
           source: POINT_SOURCE_ENUM.POST,
           sourceId: postId,
         });
 
         if (pointResponse.status === 200) {
-          toast(TOAST.POST_DELETE_SUCCESS);
+          toast(TOAST.POST.delete);
           navigate(`/board/${currentBoard.textId}`);
-        } else {
-          throw new Error('Point update failed');
         }
-      } else {
-        throw new Error('Post delete failed');
       }
-    } catch (error) {
-      toast(TOAST.POST_DELETE_FAIL);
+    } catch ({ response }) {
+      toast(response.data.message);
     } finally {
       setIsDeleteModalOpen(false);
     }
