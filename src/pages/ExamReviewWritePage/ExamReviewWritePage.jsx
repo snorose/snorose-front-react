@@ -222,20 +222,6 @@ export default function ExamReviewWritePage() {
           placeholder='선택하세요'
         />
       </CategoryFieldset>
-      <CategoryFieldset
-        title='P/F 여부'
-        required
-        hasCheckbox
-        value={isPF}
-        setFn={setIsPF}
-      />
-      <CategoryFieldset
-        title='온라인(비대면 수업) 여부'
-        required
-        hasCheckbox
-        value={isOnline}
-        setFn={setIsOnline}
-      />
       <CategoryFieldset title='수강 분반' required>
         <Dropdown
           options={CLASS_NUMBERS}
@@ -244,6 +230,20 @@ export default function ExamReviewWritePage() {
           placeholder='선택하세요'
         />
       </CategoryFieldset>
+      <CategoryFieldset
+        title='P/F 수업입니다'
+        required
+        hasCheckbox
+        value={isPF}
+        setFn={setIsPF}
+      />
+      <CategoryFieldset
+        title='온라인 수업입니다'
+        required
+        hasCheckbox
+        value={isOnline}
+        setFn={setIsOnline}
+      />
       <CategoryFieldset title='시험 유형 및 설명'>
         <Textarea
           value={questionDetail}
