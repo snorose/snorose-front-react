@@ -21,7 +21,6 @@ import { USER } from '@/dummy/data';
 
 import styles from './PostWritePage.module.css';
 
-const roleId = 4; // dummy
 
 export default function PostWritePage() {
   const navigate = useNavigate();
@@ -160,7 +159,7 @@ export default function PostWritePage() {
           </div>
           <div
             className={
-              roleId === 4
+              USER.role === 4
                 ? styles.profileBoxRight
                 : styles.profileBoxRightInvisible
             }

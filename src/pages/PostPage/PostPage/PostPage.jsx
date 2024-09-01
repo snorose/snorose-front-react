@@ -137,6 +137,10 @@ export default function PostPage() {
             </p>
           </div>
           <div
+            style={{
+              display:
+                postData.isNotice && !postData.isWriter ? 'none' : 'block',
+            }}
             className={styles.dot3}
             onClick={() => {
               console.log(postData);
