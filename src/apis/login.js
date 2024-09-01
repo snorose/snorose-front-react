@@ -1,9 +1,9 @@
-import { noAuthAxios } from '@/axios';
+import { authAxios } from '@/axios';
 export async function LoginAPI(e, setUser, setErrmsg, formData, navigate) {
   e.preventDefault();
   const endpoint = '/v1/users/login';
   try {
-    const response = await noAuthAxios.post(endpoint, formData);
+    const response = await authAxios.post(endpoint, formData);
     const { accessToken, refreshToken } = response.data.result.tokenResponse;
     navigate('/');
     setUser(response.data);
@@ -19,7 +19,7 @@ export async function FindIDAPI(e, formData, navigate) {
   e.preventDefault();
   const endpoint = '/v1/users/findid';
   try {
-    const response = await noAuthAxios.post(endpoint, formData);
+    const response = await authAxios.post(endpoint, formData);
     navigate('/found-id', {
       state: { loginId: response.data.result.loginId },
     });
@@ -33,7 +33,7 @@ export async function FindPWAPI(e, formData, navigate) {
   e.preventDefault();
   const endpoint = '/v1/users/findPW';
   try {
-    await noAuthAxios.post(endpoint, formData);
+    await authAxios.post(endpoint, formData);
     navigate('/found-pw', {
       state: { email: formData.email },
     });

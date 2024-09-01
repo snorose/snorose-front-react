@@ -5,14 +5,12 @@ const authAxios = axios.create({
   headers: {
     'Content-Type': 'application/json',
     withCredentials: true,
-    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    Authorization: !!localStorage.getItem('accessToken')
+      ? `Bearer ${localStorage.getItem('accessToken')}`
+      : undefined,
   },
 });
 
 authAxios.defaults.timeout = 5000;
 
-const noAuthAxios = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_DOMAIN,
-});
-
-export { authAxios, noAuthAxios };
+export { authAxios };

@@ -1,11 +1,11 @@
-import { noAuthAxios } from '@/axios';
+import { authAxios } from '@/axios';
 export async function RegisterAPI(formData, navigate) {
   const endpoint = '/v1/users/register';
   const data = { ...formData, userRoleId: 1, isBlacklist: false };
   data['major'] = data['name'];
   delete data['name'];
   try {
-    await noAuthAxios.post(endpoint, data);
+    await authAxios.post(endpoint, data);
     navigate('/signup/success', {
       state: { access: true },
     });
@@ -19,7 +19,7 @@ export async function SendUserAPI(email) {
   const endpoint = '/v1/users/sendUser';
   const data = { email: email };
   try {
-    await noAuthAxios.post(endpoint, data);
+    await authAxios.post(endpoint, data);
   } catch (e) {}
 }
 export async function CertifyUserAPI(data) {
@@ -28,7 +28,7 @@ export async function CertifyUserAPI(data) {
     return 'ready';
   } else {
     try {
-      const response = await noAuthAxios.post(endpoint, data);
+      const response = await authAxios.post(endpoint, data);
       if (response.data.isSuccess) {
         return 'right';
       } else {
