@@ -67,6 +67,11 @@
   line-height: 150%;
   letter-spacing: -0.5px;
   color: #898989;
+
+  div:nth-of-type(2):hover {
+    background-color: #ffffffcc;
+    cursor: pointer;
+  }
 }
 
 .action {
@@ -75,11 +80,6 @@
   align-items: center;
   gap: 6px;
   border-radius: 5px;
-  cursor: pointer;
-}
-
-.action:hover {
-  background-color: #ffffffcc;
 }
 
 .comment {

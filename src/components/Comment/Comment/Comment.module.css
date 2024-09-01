@@ -43,6 +43,7 @@
 
 .dot3 {
   padding: 20px 14px 2px 10px;
+  cursor: pointer;
 }
 
 .commentCenter {
