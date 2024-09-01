@@ -51,22 +51,20 @@ export default function EditInfoPage() {
           queryKey: ['myPageUserInfo'],
         });
 
-        toast(TOAST.UPDATE_USER_INFO_SUCCESS);
+        toast(TOAST.USER.editUserInfo);
         navigate('/my-page');
       },
       onError: ({ response }) => {
         const { data } = response;
 
-        toast({
-          id: 'UPDATE_USER_INFO_ERROR',
-          message:
-            data.userProfile ||
+        toast(
+          data.userProfile ||
             data.userName ||
             data.birthday ||
             data.nickname ||
             data.major ||
-            data.message,
-        });
+            data.message
+        );
       },
     });
 

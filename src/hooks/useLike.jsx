@@ -1,8 +1,8 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { useToast } from '@/hooks';
-import { TOAST } from '@/constants';
 
 import { postLike as LikeApi, deleteLike as DeleteLikeApi } from '@/apis';
+
+import { useToast } from '@/hooks';
 
 export default function useLike({ type, typeId }) {
   const queryClient = useQueryClient();
@@ -13,10 +13,8 @@ export default function useLike({ type, typeId }) {
     onSuccess: () => {
       queryClient.invalidateQueries(['comments', typeId]);
     },
-    onError: (error) => {
-      if (error?.response?.status === 403) {
-        toast(TOAST.LIKE_SELF_ERROR);
-      }
+    onError: ({ response }) => {
+      toast(response.data.message);
     },
   });
 
@@ -25,10 +23,8 @@ export default function useLike({ type, typeId }) {
     onSuccess: () => {
       queryClient.invalidateQueries(['comments', typeId]);
     },
-    onError: (error) => {
-      if (error?.response?.status === 403) {
-        toast(TOAST.LIKE_SELF_ERROR);
-      }
+    onError: ({ response }) => {
+      toast(response.data.message);
     },
   });
 

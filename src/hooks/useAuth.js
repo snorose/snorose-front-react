@@ -45,14 +45,14 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
       await withdrawAccount({
         currentPassword,
       });
-      toast(TOAST.WITHDRAW_ACCOUNT_SUCCESS);
+      toast(TOAST.USER.withdraw);
       logout();
 
       if (onSuccess !== undefined) {
         onSuccess();
       }
-    } catch {
-      toast(TOAST.WITHDRAW_ACCOUNT_ERROR);
+    } catch ({ response }) {
+      toast(response.data.message);
 
       if (onError !== undefined) {
         onError();

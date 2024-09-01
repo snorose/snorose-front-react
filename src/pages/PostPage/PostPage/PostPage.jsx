@@ -71,16 +71,12 @@ export default function PostPage() {
         });
 
         if (pointResponse.status === 200) {
-          toast(TOAST.POST_DELETE_SUCCESS);
+          toast(TOAST.POST.delete);
           navigate(`/board/${currentBoard.textId}`);
-        } else {
-          throw new Error('Point update failed');
         }
-      } else {
-        throw new Error('Post delete failed');
       }
-    } catch (error) {
-      toast(TOAST.POST_DELETE_FAIL);
+    } catch ({ response }) {
+      toast(response.data.message);
     } finally {
       setIsDeleteModalOpen(false);
     }
