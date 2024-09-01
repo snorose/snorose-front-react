@@ -31,8 +31,8 @@ const InputBar = () => {
       return;
     }
 
-    console.log(commentId);
-    console.log(content);
+    console.log('commentId: ', commentId);
+    console.log('content: ', content);
 
     if (isEdit) {
       editComment.mutate({

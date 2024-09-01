@@ -44,6 +44,7 @@ export default function useComment() {
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
+      console.error(error);
       if (error.response.status === 404) {
         toast(TOAST.COMMENT_NOT_FOUND);
       } else {
@@ -70,6 +71,7 @@ export default function useComment() {
       queryClient.invalidateQueries(['comments', postId]);
     },
     onError: (error) => {
+      console.error(error);
       const errorStatus = error.response.status;
       const errorCode = error.response.data.code;
 
