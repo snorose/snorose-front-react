@@ -98,6 +98,7 @@ export default function ExamReviewWritePage() {
     lectureYear &&
     semester &&
     classNumber &&
+    questionDetail &&
     file;
 
   const handleFile = (event) => {
@@ -244,7 +245,7 @@ export default function ExamReviewWritePage() {
         value={isOnline}
         setFn={setIsOnline}
       />
-      <CategoryFieldset title='시험 유형 및 설명'>
+      <CategoryFieldset title='시험 유형 및 설명' required>
         <Textarea
           value={questionDetail}
           setFn={setQuestionDetail}
