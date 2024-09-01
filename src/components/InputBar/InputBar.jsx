@@ -51,6 +51,7 @@ const InputBar = () => {
   // Enter 키 입력 시 댓글 등록
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
+      e.preventDefault(); 
       submitComment();
     }
   };
