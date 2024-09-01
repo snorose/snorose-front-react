@@ -16,7 +16,7 @@ import {
   CategoryFieldset,
   Dropdown,
 } from '@/components/Fieldset';
-import { ConfirmModal } from '@/components';
+import { ConfirmModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
