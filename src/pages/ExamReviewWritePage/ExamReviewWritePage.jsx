@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import {
   postExamReview,
@@ -40,6 +41,35 @@ const USER_ID = 62;
 
 export default function ExamReviewWritePage() {
   const { toast } = useToast();
+
+  const getPoint = useMutation({
+    mutationFn: ({ sourceId }) =>
+      updatePoint({
+        userId: USER_ID, // userId로 교체해야합니다.
+        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
+        source: POINT_SOURCE_ENUM.REVIEW,
+        sourceId,
+      }),
+    onSuccess: () => {
+      toast(TOAST.EXAM_REVIEW_CREATE);
+      navigate('/board/exam-review', { replace: true });
+    },
+  });
+
+  const createExamReview = useMutation({
+    mutationFn: ({ data, file }) =>
+      postExamReview({
+        data,
+        file,
+      }),
+    onSuccess: ({ data }) => {
+      getPoint.mutate({ sourceId: data.result.postId });
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
   const [lectureName, setLectureName] = useState('');
   const [professor, setProfessor] = useState('');
   const [lectureType, setLectureType] = useState({});
@@ -77,6 +107,23 @@ export default function ExamReviewWritePage() {
     setFile(selectedFile);
   };
 
+  const checkDuplication = async () => {
+    try {
+      return await checkExamReviewDuplication({
+        lectureName,
+        professor,
+        classNumber: classNumber?.id,
+        lectureYear: lectureYear?.id,
+        semester: semester?.id,
+        examType: examType?.id,
+      });
+    } catch (error) {
+      if (error.response.status === 500) {
+        toast(TOAST.SERVER_ERROR_500);
+      }
+    }
+  };
+
   const formBody = {
     isPF,
     boardId: BOARD_ID['exam-review'],
@@ -103,43 +150,17 @@ export default function ExamReviewWritePage() {
               return;
             }
 
-            try {
-              const { data } = await checkExamReviewDuplication({
-                lectureName,
-                professor,
-                classNumber: classNumber?.id,
-                lectureYear: lectureYear?.id,
-                semester: semester?.id,
-                examType: examType?.id,
-              });
+            const { data } = await checkDuplication();
 
-              if (data.result.isDuplicated) {
-                setIsConfirmModalOpen(true);
-              } else {
-                const { data, status } = await postExamReview({
-                  data: formBody,
-                  file,
-                });
-
-                if (status === 201) {
-                  updatePoint({
-                    userId: USER_ID, // userId로 교체해야합니다.
-                    category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
-                    source: POINT_SOURCE_ENUM.REVIEW,
-                    sourceId: data.result.postId,
-                  }).then(({ status }) => {
-                    if (status === 200) {
-                      toast(TOAST.EXAM_REVIEW_CREATE);
-                    }
-                  });
-                  navigate('/board/exam-review');
-                }
-              }
-            } catch (error) {
-              if (error.response.status === 500) {
-                toast(TOAST.SERVER_ERROR_500);
-              }
+            if (data.result.isDuplicated) {
+              setIsConfirmModalOpen(true);
+              return;
             }
+
+            createExamReview.mutate({
+              data: formBody,
+              file,
+            });
           }}
         >
           게시
@@ -246,32 +267,12 @@ export default function ExamReviewWritePage() {
         message={MODAL_CONFIRM.EXAM_REVIEW_DUPLICATION.message}
         primaryButtonText='확인'
         secondaryButtonText='취소'
-        onPrimaryButtonClick={async () => {
-          try {
-            const { data, status } = await postExamReview({
-              data: formBody,
-              file,
-            });
-
-            if (status === 201) {
-              updatePoint({
-                userId: USER_ID, // userId로 교체해야합니다.
-                category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
-                source: POINT_SOURCE_ENUM.REVIEW,
-                sourceId: data.result.postId,
-              }).then(({ status }) => {
-                if (status === 200) {
-                  toast(TOAST.EXAM_REVIEW_CREATE);
-                }
-              });
-              navigate('/board/exam-review');
-            }
-          } catch (error) {
-            if (error.response.status === 500) {
-              toast(TOAST.SERVER_ERROR_500);
-            }
-          }
-        }}
+        onPrimaryButtonClick={() =>
+          createExamReview.mutate({
+            data: formBody,
+            file,
+          })
+        }
         onSecondaryButtonClick={() => {
           setIsConfirmModalOpen(false);
         }}
