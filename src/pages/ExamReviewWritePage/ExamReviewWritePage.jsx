@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 
-import { postExamReview, updatePoint } from '@/apis';
+import {
+  postExamReview,
+  updatePoint,
+  checkExamReviewDuplication,
+} from '@/apis';
 
 import { useToast } from '@/hooks';
 
@@ -11,6 +16,7 @@ import {
   CategoryFieldset,
   Dropdown,
 } from '@/components/Fieldset';
+import { ConfirmModal } from '@/components';
 import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
@@ -20,6 +26,7 @@ import {
   CLASS_NUMBERS,
   EXAM_TYPES,
   LECTURE_TYPES,
+  MODAL_CONFIRM,
   POINT_CATEGORY_ENUM,
   POINT_SOURCE_ENUM,
   SEMESTERS,
@@ -35,6 +42,38 @@ const FILE_MAX_SIZE = 1024 * 1024 * 10;
 
 export default function ExamReviewWritePage() {
   const { toast } = useToast();
+
+  const getPoint = useMutation({
+    mutationFn: ({ sourceId }) =>
+      updatePoint({
+        userId: USER.userId, // userId로 교체해야합니다.
+        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
+        source: POINT_SOURCE_ENUM.REVIEW,
+        sourceId,
+      }),
+    onSuccess: () => {
+      toast(TOAST.EXAM_REVIEW.create);
+      navigate('/board/exam-review', { replace: true });
+    },
+    onError: ({ response }) => {
+      toast(response.data.message);
+    },
+  });
+
+  const createExamReview = useMutation({
+    mutationFn: ({ data, file }) =>
+      postExamReview({
+        data,
+        file,
+      }),
+    onSuccess: ({ data }) => {
+      getPoint.mutate({ sourceId: data.result.postId });
+    },
+    onError: ({ response }) => {
+      toast(response.data.message);
+    },
+  });
+
   const [lectureName, setLectureName] = useState('');
   const [professor, setProfessor] = useState('');
   const [lectureType, setLectureType] = useState({});
@@ -46,6 +85,8 @@ export default function ExamReviewWritePage() {
   const [classNumber, setClassNumber] = useState({});
   const [questionDetail, setQuestionDetail] = useState('');
   const [file, setFile] = useState();
+
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -70,7 +111,22 @@ export default function ExamReviewWritePage() {
     setFile(selectedFile);
   };
 
-  const data = {
+  const checkDuplication = async () => {
+    try {
+      return await checkExamReviewDuplication({
+        lectureName,
+        professor,
+        classNumber: classNumber?.id,
+        lectureYear: lectureYear?.id,
+        semester: semester?.id,
+        examType: examType?.id,
+      });
+    } catch ({ response }) {
+      toast(response.data.message);
+    }
+  };
+
+  const formBody = {
     isPF,
     boardId: BOARD_ID['exam-review'],
     classNumber: classNumber?.id,
@@ -90,26 +146,23 @@ export default function ExamReviewWritePage() {
     <main className={styles.main}>
       <CloseAppBar>
         <ActionButton
-          onClick={() => {
-            if (pass) {
-              postExamReview({ data, file }).then(({ status, data }) => {
-                if (status === 201) {
-                  updatePoint({
-                    userId: USER.userId, // userId로 교체해야합니다.
-                    category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
-                    source: POINT_SOURCE_ENUM.REVIEW,
-                    sourceId: data.result.postId,
-                  }).then(({ status }) => {
-                    if (status === 200) {
-                      toast(TOAST.EXAM_REVIEW_CREATE);
-                    }
-                  });
-                  navigate('/board/exam-review');
-                }
-              });
-            } else {
-              alert('필수 입력을 모두 작성해주세요');
+          onClick={async () => {
+            if (!pass) {
+              toast(TOAST.EXAM_REVIEW.validate);
+              return;
             }
+
+            const { data } = await checkDuplication();
+
+            if (data.result.isDuplicated) {
+              setIsConfirmModalOpen(true);
+              return;
+            }
+
+            createExamReview.mutate({
+              data: formBody,
+              file,
+            });
           }}
         >
           게시
@@ -210,6 +263,22 @@ export default function ExamReviewWritePage() {
           <input id='file' type='file' accept='.pdf' onChange={handleFile} />
         </div>
       </div>
+      <ConfirmModal
+        isOpen={isConfirmModalOpen}
+        title={MODAL_CONFIRM.EXAM_REVIEW_DUPLICATION.title}
+        message={MODAL_CONFIRM.EXAM_REVIEW_DUPLICATION.message}
+        primaryButtonText='확인'
+        secondaryButtonText='취소'
+        onPrimaryButtonClick={() =>
+          createExamReview.mutate({
+            data: formBody,
+            file,
+          })
+        }
+        onSecondaryButtonClick={() => {
+          setIsConfirmModalOpen(false);
+        }}
+      />
     </main>
   );
 }

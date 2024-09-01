@@ -40,15 +40,11 @@ export default function useComment() {
       }
     },
     onSuccess: () => {
-      toast(TOAST.COMMENT_CREATE_SUCCESS);
+      toast(TOAST.COMMENT.create);
       queryClient.invalidateQueries(['comments', postId]);
     },
-    onError: (error) => {
-      if (error.response.status === 404) {
-        toast(TOAST.COMMENT_NOT_FOUND);
-      } else {
-        toast(TOAST.COMMENT_CREATE_FAIL);
-      }
+    onError: ({ response }) => {
+      toast(response.data.message);
     },
   });
 
@@ -66,22 +62,11 @@ export default function useComment() {
       }
     },
     onSuccess: () => {
-      toast(TOAST.COMMENT_DELETE_SUCCESS);
+      toast(TOAST.COMMENT.delete);
       queryClient.invalidateQueries(['comments', postId]);
     },
-    onError: (error) => {
-      const errorStatus = error.response.status;
-      const errorCode = error.response.data.code;
-
-      if (errorStatus === 400) {
-        toast(TOAST.COMMENT_DELETE_FAIL);
-      } else if (errorCode === 404 && errorCode === 3031) {
-        toast(TOAST.POST_NOT_FOUND);
-      } else if (errorCode === 404 && errorCode === 3020) {
-        toast(TOAST.COMMENT_NOT_FOUND);
-      } else {
-        toast(TOAST.COMMENT_DELETE_FAIL);
-      }
+    onError: ({ response }) => {
+      toast(response.data.message);
     },
   });
 
@@ -92,17 +77,8 @@ export default function useComment() {
     onSuccess: () => {
       queryClient.invalidateQueries(['comments', postId]);
     },
-    onError: (error) => {
-      const errorStatus = error.response.status;
-      const errorCode = error.response.data.code;
-
-      if (errorStatus === 400) {
-        toast(TOAST.COMMENT_EDIT_FAIL);
-      } else if (errorCode === 404 && errorCode === 3031) {
-        toast(TOAST.POST_NOT_FOUND);
-      } else if (errorCode === 404 && errorCode === 3020) {
-        toast(TOAST.COMMENT_NOT_FOUND);
-      }
+    onError: ({ response }) => {
+      toast(response.data.message);
     },
   });
 

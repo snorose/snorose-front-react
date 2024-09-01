@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { downloadExamReview, updatePoint } from '@/apis';
 
@@ -18,15 +18,16 @@ import styles from './ReviewDownload.module.css';
 export default function ReviewDownload({ className, fileName }) {
   const { postId } = useParams();
   const { toast } = useToast();
+
   const { data } = useQuery({
     queryKey: ['reviewFile', postId],
     queryFn: () => downloadExamReview(postId, fileName),
     staleTime: Infinity,
-    gcTime: 1000 * 60 * 60 * 24 * 365,
+    gcTime: Infinity,
   });
   const [isOpen, setIsOpen] = useState(false);
 
-  const onDownload = () => {
+  const download = () => {
     const blob = new Blob([data.data], {
       type: 'application/pdf',
     });
@@ -37,18 +38,24 @@ export default function ReviewDownload({ className, fileName }) {
     link.setAttribute('download', fileName);
     link.click();
     window.URL.revokeObjectURL(fileUrl);
-
-    updatePoint({
-      userId: USER.userId, // userId로 변경 필요
-      category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DOWNLOAD,
-      source: POINT_SOURCE_ENUM.REVIEW,
-      sourceId: postId,
-    }).then(({ status }) => {
-      if (status === 200) {
-        toast(TOAST.EXAM_REVIEW_DOWNLOAD);
-      }
-    });
   };
+
+  const losePoint = useMutation({
+    mutationFn: ({ sourceId }) =>
+      updatePoint({
+        userId: USER.userId, // userId로 변경 필요
+        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DOWNLOAD,
+        source: POINT_SOURCE_ENUM.REVIEW,
+        sourceId,
+      }),
+    onSuccess: () => {
+      download();
+      toast(TOAST.EXAM_REVIEW.download);
+    },
+    onError: ({ response }) => {
+      toast(response.data.message);
+    },
+  });
 
   return (
     <>
@@ -66,7 +73,9 @@ export default function ReviewDownload({ className, fileName }) {
         id='exam-review-download'
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        redBtnFunction={onDownload}
+        redBtnFunction={() => {
+          losePoint.mutate({ sourceId: postId });
+        }}
       />
     </>
   );

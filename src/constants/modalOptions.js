@@ -168,3 +168,19 @@ export const MODAL_OPTIONS = [
     },
   },
 ];
+
+export const MODAL_CONFIRM = {
+  EXAM_REVIEW_DUPLICATION: {
+    title: `중복후기가 있습니다
+          계속 업로드 하시겠습니까?`,
+    message: (
+      <>
+        중복 후기의 경우, 먼저 올라온 후기보다 <br />더 많은 문제가 기록된
+        경우만 허용됩니다. <br />
+        이외 모든 족보는 무통보 삭제되며 <br />
+        포인트 회수 및 <span style={{ color: '#FF4B6C' }}>경고 1회</span>가
+        부여됩니다.
+      </>
+    ),
+  },
+};

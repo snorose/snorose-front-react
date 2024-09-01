@@ -22,7 +22,6 @@ export default function Comment({ data }) {
   const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
 
   const onCommentOptionClick = (data) => {
-    console.log('Comment option clicked', data);
     setCommentId(data.id);
     setContent(data.content);
     setIsOptionModalOpen(true);
