@@ -5,6 +5,8 @@ import { Icon } from '@/components/Icon';
 
 import { timeAgo } from '@/utils';
 
+import { BOARD_MENUS } from '@/constants';
+
 import styles from './PostBar.module.css';
 
 export default function PostBar({
@@ -18,6 +20,10 @@ export default function PostBar({
   const navigate = useNavigate();
   const [agoTime, setAgoTime] = useState(timeAgo(data.createdAt));
   const currentBoard = pathname.split('/')[2];
+  const searchBoardId =
+    currentBoard !== 'all'
+      ? currentBoard
+      : BOARD_MENUS.find(({ title }) => title === data.boardName)?.textId;
 
   // timeAgo를 1분마다 업데이트
   useEffect(() => {
@@ -29,7 +35,7 @@ export default function PostBar({
   }, [data.createdAt]);
 
   const handlePostBarClick = () => {
-    use === 'post' && navigate(`/board/${currentBoard}/post/${data.postId}`);
+    use === 'post' && navigate(`/board/${searchBoardId}/post/${data.postId}`);
     use === 'board' && navigate('/post-search');
   };
 
