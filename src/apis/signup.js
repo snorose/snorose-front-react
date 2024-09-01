@@ -20,9 +20,7 @@ export async function SendUserAPI(email) {
   const data = { email: email };
   try {
     await noAuthAxios.post(endpoint, data);
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
 }
 export async function CertifyUserAPI(data) {
   const endpoint = '/v1/users/certifyUser';

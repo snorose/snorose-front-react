@@ -15,6 +15,4 @@ const noAuthAxios = axios.create({
   baseURL: process.env.REACT_APP_SERVER_DOMAIN,
 });
 
-noAuthAxios.defaults.timeout = 5000;
-
 export { authAxios, noAuthAxios };
