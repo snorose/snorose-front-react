@@ -1,3 +1,4 @@
+import TextareaAutosize from 'react-textarea-autosize';
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
 import { useComment, useToast } from '@/hooks';
@@ -58,13 +59,14 @@ const InputBar = () => {
     <div className={styles.container}>
       <div className={styles.input_bar}>
         <Icon id='cloud' width='25' height='16' />
-        <input
+        <TextareaAutosize
           ref={inputRef}
           className={styles.input_zone}
           placeholder='댓글을 입력하세요'
           value={content}
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
+          maxRows={5}
         />
       </div>
       <Icon
