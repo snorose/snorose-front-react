@@ -31,9 +31,6 @@ const InputBar = () => {
       return;
     }
 
-    console.log(commentId);
-    console.log(content);
-
     if (isEdit) {
       editComment.mutate({
         commentId,
@@ -51,7 +48,7 @@ const InputBar = () => {
   // Enter 키 입력 시 댓글 등록
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      e.preventDefault(); 
+      e.preventDefault();
       submitComment();
     }
   };
