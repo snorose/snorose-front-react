@@ -23,6 +23,8 @@ import {
   TOAST,
 } from '@/constants';
 
+import { USER } from '@/dummy/data';
+
 import styles from './PostPage.module.css';
 
 export default function PostPage() {
@@ -64,7 +66,7 @@ export default function PostPage() {
 
       if (response.status === 200) {
         const pointResponse = await updatePoint({
-          userId: 62, // 추후 id 연결 필요
+          userId: USER.userId, // 추후 id 연결 필요
           category: POINT_CATEGORY_ENUM.POST_DELETE,
           source: POINT_SOURCE_ENUM.POST,
           sourceId: postId,

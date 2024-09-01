@@ -34,10 +34,11 @@ import {
   YEARS,
 } from '@/constants';
 
+import { USER } from '@/dummy/data';
+
 import styles from './ExamReviewWritePage.module.css';
 
 const FILE_MAX_SIZE = 1024 * 1024 * 10;
-const USER_ID = 62;
 
 export default function ExamReviewWritePage() {
   const { toast } = useToast();
@@ -45,7 +46,7 @@ export default function ExamReviewWritePage() {
   const getPoint = useMutation({
     mutationFn: ({ sourceId }) =>
       updatePoint({
-        userId: USER_ID, // userId로 교체해야합니다.
+        userId: USER.userId, // userId로 교체해야합니다.
         category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
         source: POINT_SOURCE_ENUM.REVIEW,
         sourceId,

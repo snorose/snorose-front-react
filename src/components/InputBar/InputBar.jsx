@@ -1,6 +1,7 @@
-import { useCommentContext } from '../../contexts/CommentContext.jsx';
+import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import useComment from '../../hooks/useComment.jsx';
+import { useComment, useToast } from '@/hooks';
+import { TOAST } from '@/constants';
 
 import { Icon } from '../../components/Icon';
 
@@ -8,6 +9,8 @@ import styles from './InputBar.module.css';
 
 const InputBar = () => {
   const { editComment, postComment } = useComment();
+  const { toast } = useToast();
+
   const {
     isEdit,
     setIsEdit,
@@ -17,14 +20,18 @@ const InputBar = () => {
     setContent,
     inputRef,
   } = useCommentContext();
+
   const handleInputChange = (e) => setContent(e.target.value);
 
   // 댓글 등록 or 수정
   const submitComment = () => {
     if (!content.trim()) {
-      alert('댓글을 입력하세요.');
+      toast(TOAST.EMPTY_COMMENT);
       return;
     }
+
+    console.log(commentId);
+    console.log(content);
 
     if (isEdit) {
       editComment.mutate({

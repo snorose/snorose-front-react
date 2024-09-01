@@ -13,3 +13,5 @@ export const ROLE_NAME = Object.freeze({
   4: '리자',
   5: '공식계정',
 });
+
+export const PRIVATE_USER_INFO_UPDATE_PERMISSION_ROLE_ID_LIST = [1];

@@ -21,6 +21,11 @@ const TOAST = Object.freeze({
     delete: '댓글이 삭제되었습니다.',
     edit: '댓글 수정 완료',
   },
+  USER: {
+    editPassword: '비밀번호 수정이 완료되었습니다.',
+    editUserInfo: '회원 정보 수정이 완료되었습니다.',
+    withdraw: '회원 탈퇴가 완료되었습니다.',
+  },
 });
 
 export { TOAST };

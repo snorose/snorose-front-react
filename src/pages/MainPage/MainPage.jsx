@@ -41,11 +41,7 @@ export default function MainPage() {
   return (
     <main>
       <Header className={styles.header} />
-      <Carousel>
-        {CAROUSEL_BANNER.map((banner, index) => (
-          <Slide key={index} src={banner} alt='banner' />
-        ))}
-      </Carousel>
+      <Carousel />
       <Margin className={styles.cards}>
         <Flex gap='0.45rem'>
           <Card

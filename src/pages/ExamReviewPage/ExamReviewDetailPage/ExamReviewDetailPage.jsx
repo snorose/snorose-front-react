@@ -27,6 +27,8 @@ import {
   TOAST,
 } from '@/constants';
 
+import { USER } from '@/dummy/data';
+
 import styles from './ExamReviewDetailPage.module.css';
 
 const COURSE_TYPE = convertToObject(LECTURE_TYPES);
@@ -47,7 +49,7 @@ export default function ExamReviewDetailPage() {
   const losePoint = useMutation({
     mutationFn: () =>
       updatePoint({
-        userId: 62, // userId로 교체해야합니다.
+        userId: USER.userId, // userId로 교체해야합니다.
         category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DELETE,
         source: POINT_SOURCE_ENUM.REVIEW,
         sourceId: postId,

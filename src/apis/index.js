@@ -1,3 +1,4 @@
+export * from './banner';
 export * from './comment';
 export * from './examReview';
 export * from './like';
