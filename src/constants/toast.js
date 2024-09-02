@@ -6,6 +6,7 @@ const TOAST = Object.freeze({
     validate: '필수 입력을 모두 작성해주세요',
     create: '100P 적립이 완료되었어요',
     delete: '100P 차감되었어요',
+    edit: '시험후기 수정 완료',
     download: '50P 차감되었어요',
   },
   POST: {
