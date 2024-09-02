@@ -4,7 +4,7 @@ import { Icon } from '../../../components/Icon';
 import { Input } from '../../../components/Input';
 import { Submit } from '../../../components/Submit';
 import { checkSpecialChar, checkSookmyungMail } from '../FindIdPage/inputCheck';
-import { FindPWAPI } from '@/apis';
+import { findPw } from '@/apis';
 import styles from './FindPwPage.module.css';
 
 export default function FindPwPage() {
@@ -45,7 +45,7 @@ export default function FindPwPage() {
     <div className={styles.pageFrame}>
       <form
         onSubmit={(e) => {
-          FindPWAPI(e, formData, navigate);
+          findPw(e, formData, navigate);
         }}
       >
         <div className={styles.findIdFrame}>

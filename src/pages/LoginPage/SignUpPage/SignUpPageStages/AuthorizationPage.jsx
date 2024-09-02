@@ -2,14 +2,14 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import Input from '../../../../components/Input/Input/Input';
 import { Submit } from '../../../../components/Submit';
-import { SendUserAPI } from '@/apis';
+import { sendUser } from '@/apis';
 import styles from './AuthorizationPage.module.css';
 
 export default function AuthorizationPage({ email, setStage }) {
   const [authNum, setAuthNum] = useState('');
   const [codeStyle, setCodeStyle] = useState('ready');
   useEffect(() => {
-    SendUserAPI(email);
+    sendUser(email);
   }, []);
   async function CertifyUserAPI(input) {
     const apiUrl = 'http://13.124.33.41:8081/v1/users/certifyUser';

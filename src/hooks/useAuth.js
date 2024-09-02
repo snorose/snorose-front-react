@@ -9,7 +9,7 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const hasToken = !!localStorage.getItem('token');
+  const hasToken = !!localStorage.getItem('accessToken');
 
   const {
     data: userInfoData,
