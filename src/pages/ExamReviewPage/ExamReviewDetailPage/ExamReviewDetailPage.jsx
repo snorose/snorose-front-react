@@ -140,13 +140,13 @@ export default function ExamReviewDetailPage() {
             )}
           </div>
           <Icon
+            className={styles.more}
             onClick={() =>
               isWriter ? setIsOptionModalOpen(true) : setIsReportModalOpen(true)
             }
             id='ellipsis-vertical'
             width='3'
             height='11'
-            style={{ padding: '0 4px', cursor: 'pointer' }}
           />
         </div>
         <div className={styles.title}>{title}</div>
