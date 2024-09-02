@@ -5,7 +5,9 @@ const authAxios = axios.create({
   headers: {
     'Content-Type': 'application/json',
     withCredentials: true,
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
+    Authorization: !!localStorage.getItem('accessToken')
+      ? `Bearer ${localStorage.getItem('accessToken')}`
+      : undefined,
   },
 });
 

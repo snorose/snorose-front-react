@@ -1,42 +1,34 @@
-import axios from 'axios';
-export async function RegisterAPI(formData, navigate) {
+import { authAxios } from '@/axios';
+export const register = async (formData, navigate) => {
+  const endpoint = '/v1/users/register';
   const data = { ...formData, userRoleId: 1, isBlacklist: false };
   data['major'] = data['name'];
   delete data['name'];
   try {
-    const response = await axios.post(
-      'http://13.124.33.41:8081/v1/users/register',
-      data
-    );
-    if (response.data.isSuccess) {
-      navigate('/signup/success', {
-        state: { access: true },
-      });
-    }
+    await authAxios.post(endpoint, data);
+    navigate('/signup/success', {
+      state: { access: true },
+    });
   } catch (e) {
     navigate('/signup/failure', {
       state: { message: e.response.data.message },
     });
   }
-}
-export async function SendUserAPI(email) {
-  const apiUrl = 'http://13.124.33.41:8081';
+};
+export async function sendUser(email) {
   const endpoint = '/v1/users/sendUser';
   const data = { email: email };
   try {
-    const response = await axios.post(apiUrl + endpoint, data);
-  } catch (e) {
-    console.log(e);
-  }
+    await authAxios.post(endpoint, data);
+  } catch (e) {}
 }
-export async function CertifyUserAPI(data) {
-  const apiUrl = 'http://13.124.33.41:8081';
+export const certifyUser = async (data) => {
   const endpoint = '/v1/users/certifyUser';
   if (data.authNum?.length === 0) {
     return 'ready';
   } else {
     try {
-      const response = await axios.post(apiUrl + endpoint, data);
+      const response = await authAxios.post(endpoint, data);
       if (response.data.isSuccess) {
         return 'right';
       } else {
@@ -46,4 +38,4 @@ export async function CertifyUserAPI(data) {
       return 'wrong';
     }
   }
-}
+};

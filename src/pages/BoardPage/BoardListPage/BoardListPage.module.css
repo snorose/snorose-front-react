@@ -41,6 +41,7 @@ body {
   padding: 0.688rem 0.938rem;
   align-items: center;
   gap: 0.861rem;
+  cursor: pointer;
 }
 
 .notification_icon {

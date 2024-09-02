@@ -1,4 +1,11 @@
-import { createContext, useState, useRef, useMemo, useContext } from 'react';
+import {
+  createContext,
+  useState,
+  useRef,
+  useMemo,
+  useContext,
+  useEffect,
+} from 'react';
 
 const CommentContext = createContext();
 
@@ -25,6 +32,14 @@ export function CommentContextProvider({ children }) {
     }),
     [isEdit, commentId, content]
   );
+
+  const onBlur = () => setCommentId(undefined);
+
+  useEffect(() => {
+    window.addEventListener('click', onBlur);
+
+    return () => window.removeEventListener('click', onBlur);
+  }, []);
 
   return (
     <CommentContext.Provider value={value}>{children}</CommentContext.Provider>

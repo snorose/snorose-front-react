@@ -22,14 +22,11 @@ export default function ChangePasswordPage() {
       mutationKey: ['updatePassword'],
       mutationFn: (body) => updatePassword(body),
       onSuccess: () => {
-        toast(TOAST.UPDATE_PASSWORD_SUCCESS);
+        toast(TOAST.USER.editPassword);
         navigate('/my-page');
       },
       onError: ({ response }) => {
-        toast({
-          id: 'UPDATE_PASSWORD_ERROR',
-          message: response.data.message,
-        });
+        toast(response.data.message);
       },
     });
 

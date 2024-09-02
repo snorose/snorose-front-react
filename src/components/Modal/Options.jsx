@@ -2,7 +2,7 @@ import styles from './Modal.module.css';
 import { Icon } from '../Icon';
 
 export default function Options({ options, functions }) {
-  const handleClick = (iconId) => () => {
+  const handleClick = (iconId) => {
     if (iconId && functions[iconId]) {
       functions[iconId]();
     }
@@ -14,7 +14,10 @@ export default function Options({ options, functions }) {
         <div
           className={styles.optionBar}
           key={option.iconId}
-          onClick={handleClick(option.iconId)}
+          onClick={(event) => {
+            event.stopPropagation();
+            handleClick(option.iconId);
+          }}
         >
           <div className={styles.iconBox}>
             <Icon

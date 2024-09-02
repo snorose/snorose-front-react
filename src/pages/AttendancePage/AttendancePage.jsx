@@ -41,17 +41,11 @@ export default function AttendancePage() {
                     today.getFullYear(),
                     today.getMonth() + 1,
                   ]);
-                  toast(TOAST.ATTENDANCE_SUCCESS);
+                  toast(TOAST.ATTENDANCE.attendance);
                 }
               })
               .catch(({ response }) => {
-                const { status } = response;
-
-                if (status === 403) {
-                  toast(TOAST.ATTENDANCE_ONLY_ONCE_ERROR);
-                } else {
-                  toast(TOAST.ATTENDANCE_FAIL);
-                }
+                toast(response.data.message);
               });
           }}
         >

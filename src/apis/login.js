@@ -1,32 +1,25 @@
-import axios from 'axios';
-export async function LoginAPI(e, setUser, setErrmsg, formData, navigate) {
+import { authAxios } from '@/axios';
+export const login = async (e, setUser, setErrmsg, formData, navigate) => {
   e.preventDefault();
-  const apiUrl = process.env.REACT_APP_SERVER_DOMAIN;
   const endpoint = '/v1/users/login';
   try {
-    const response = await axios.post(apiUrl + endpoint, formData);
-    if (response.data.isSuccess) {
-      navigate('/');
-    }
+    const response = await authAxios.post(endpoint, formData);
+    const { accessToken, refreshToken } = response.data.result.tokenResponse;
+    navigate('/');
     setUser(response.data);
     setErrmsg(false);
-    localStorage.setItem('user', response.data);
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
   } catch (e) {
     setErrmsg(true);
   }
-}
-export async function FindIDAPI(e, formData, navigate) {
+};
+
+export const findId = async (e, formData, navigate) => {
   e.preventDefault();
-  const apiUrl = 'http://13.124.33.41:8081';
   const endpoint = '/v1/users/findid';
-  const headers = {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Credentials': 'true',
-  };
   try {
-    const response = await axios.post(apiUrl + endpoint, formData, {
-      headers,
-    });
+    const response = await authAxios.post(endpoint, formData);
     navigate('/found-id', {
       state: { loginId: response.data.result.loginId },
     });
@@ -35,19 +28,12 @@ export async function FindIDAPI(e, formData, navigate) {
       navigate('/not-found-id', { state: { access: true } });
     }
   }
-}
-export async function FindPWAPI(e, formData, navigate) {
+};
+export const findPw = async (e, formData, navigate) => {
   e.preventDefault();
-  const apiUrl = 'http://13.124.33.41:8081';
   const endpoint = '/v1/users/findPW';
-  const headers = {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Credentials': 'true',
-  };
   try {
-    await axios.post(apiUrl + endpoint, formData, {
-      headers,
-    });
+    await authAxios.post(endpoint, formData);
     navigate('/found-pw', {
       state: { email: formData.email },
     });
@@ -56,4 +42,4 @@ export async function FindPWAPI(e, formData, navigate) {
       navigate('/not-found-pw', { state: { access: true } });
     }
   }
-}
+};

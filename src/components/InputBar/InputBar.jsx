@@ -31,26 +31,24 @@ const InputBar = () => {
       return;
     }
 
-    console.log(commentId);
-    console.log(content);
-
     if (isEdit) {
       editComment.mutate({
         commentId,
         content,
       });
       setIsEdit(false);
+      setCommentId(undefined);
     } else {
       postComment.mutate({ parentId: commentId, content });
     }
 
-    setCommentId(undefined);
     setContent('');
   };
 
   // Enter 키 입력 시 댓글 등록
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       submitComment();
     }
   };

@@ -46,6 +46,22 @@ export default function ExamReviewDetailPage() {
     staleTime: 1000 * 60 * 5,
   });
 
+  const losePoint = useMutation({
+    mutationFn: () =>
+      updatePoint({
+        userId: USER.userId, // userId로 교체해야합니다.
+        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DELETE,
+        source: POINT_SOURCE_ENUM.REVIEW,
+        sourceId: postId,
+      }),
+    onSuccess: () => {
+      toast(TOAST.EXAM_REVIEW.delete);
+    },
+    onError: ({ response }) => {
+      toast(response.data.message);
+    },
+  });
+
   const deleteReview = useMutation({
     mutationFn: () => deleteExamReview(postId),
     onSuccess: () => {
@@ -53,17 +69,11 @@ export default function ExamReviewDetailPage() {
       queryClient.removeQueries(['reviewDetail', postId]);
       queryClient.removeQueries(['reviewFile', postId]);
 
-      updatePoint({
-        userId: USER.userId, // userId로 변경 필요
-        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DELETE,
-        source: POINT_SOURCE_ENUM.REVIEW,
-        sourceId: postId,
-      }).then(({ status }) => {
-        if (status === 200) {
-          toast(TOAST.EXAM_REVIEW_DELETE);
-        }
-      });
-      navigate('/board/exam-review');
+      navigate('/board/exam-review', { replace: true });
+      losePoint.mutate();
+    },
+    onError: ({ response }) => {
+      toast(response.data.message);
     },
   });
 
@@ -72,6 +82,7 @@ export default function ExamReviewDetailPage() {
 
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
   if (data === undefined) return null;
 
@@ -128,15 +139,15 @@ export default function ExamReviewDetailPage() {
               />
             )}
           </div>
-          {isWriter && (
-            <Icon
-              onClick={() => setIsOptionModalOpen(true)}
-              id='ellipsis-vertical'
-              width='3'
-              height='11'
-              style={{ padding: '0 4px', cursor: 'pointer' }}
-            />
-          )}
+          <Icon
+            className={styles.more}
+            onClick={() =>
+              isWriter ? setIsOptionModalOpen(true) : setIsReportModalOpen(true)
+            }
+            id='ellipsis-vertical'
+            width='3'
+            height='11'
+          />
         </div>
         <div className={styles.title}>{title}</div>
         <div className={styles.content}>
@@ -177,7 +188,7 @@ export default function ExamReviewDetailPage() {
           </div>
         </div>
       </div>
-      <CommentList />
+      <CommentList commentCount={commentCount} />
       <InputBar />
       <OptionModal
         id='exam-review-edit'
@@ -197,6 +208,12 @@ export default function ExamReviewDetailPage() {
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
         redBtnFunction={remove}
+      />
+      <OptionModal
+        id='report'
+        isOpen={isReportModalOpen}
+        setIsOpen={setIsReportModalOpen}
+        closeFn={() => setIsReportModalOpen(false)}
       />
     </main>
   );
