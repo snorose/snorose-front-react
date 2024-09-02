@@ -39,6 +39,11 @@
   border-radius: 100%;
 }
 
+.more {
+  padding: 0 4px;
+  cursor: pointer;
+}
+
 .title {
   margin: 0 var(--default-margin);
   font-weight: 700;

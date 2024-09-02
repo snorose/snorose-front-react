@@ -82,6 +82,7 @@ export default function ExamReviewDetailPage() {
 
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
   if (data === undefined) return null;
 
@@ -138,15 +139,15 @@ export default function ExamReviewDetailPage() {
               />
             )}
           </div>
-          {isWriter && (
-            <Icon
-              onClick={() => setIsOptionModalOpen(true)}
-              id='ellipsis-vertical'
-              width='3'
-              height='11'
-              style={{ padding: '0 4px', cursor: 'pointer' }}
-            />
-          )}
+          <Icon
+            className={styles.more}
+            onClick={() =>
+              isWriter ? setIsOptionModalOpen(true) : setIsReportModalOpen(true)
+            }
+            id='ellipsis-vertical'
+            width='3'
+            height='11'
+          />
         </div>
         <div className={styles.title}>{title}</div>
         <div className={styles.content}>
@@ -207,6 +208,12 @@ export default function ExamReviewDetailPage() {
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
         redBtnFunction={remove}
+      />
+      <OptionModal
+        id='report'
+        isOpen={isReportModalOpen}
+        setIsOpen={setIsReportModalOpen}
+        closeFn={() => setIsReportModalOpen(false)}
       />
     </main>
   );
