@@ -1,4 +1,4 @@
-import iconSvg from '../../assets/icon.svg';
+import iconSvg from '@/assets/icon.svg';
 
 export default function Icon({ id, fill, ...props }) {
   return (

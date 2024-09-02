@@ -1,35 +1,43 @@
 import { useState } from 'react';
 
 import { Button, Input } from '@/pages/SnoroseVerifyPage';
+// import { Input } from '@/components/Input';
+
+import { checkEmailFormat } from '@/utils/validate.js';
 
 import styles from './VerifyPage.module.css';
+import { InputPassword } from '@/components/index.js';
 
 export default function VerifyPage({ setStep }) {
-  const [data, setData] = useState({ id: '', pw: '' });
-  const handleData = (event) => {
-    const { value, name } = event.target;
-    setData((prev) => ({ ...prev, [name]: value }));
-  };
-  const { id, pw } = data;
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
+  const [email, setEmail] = useState('');
 
   return (
     <section className={styles.content}>
       <div className={styles.verify}>
         <Input
           label='아이디'
-          name='id'
           type='text'
           value={id}
           placeholder='숙명포털 아이디를 입력해주세요'
-          onChange={handleData}
+          onChange={(event) => setId(event.target.value)}
+        />
+        <InputPassword
+          title='비밀번호'
+          placeholder='숙명포털 비밀번호를 입력해주세요'
+          value={pw}
+          onChange={(event) => setPw(event.target.value)}
+          isStatic
         />
         <Input
-          label='비밀번호'
-          name='pw'
-          type='password'
-          value={pw}
-          placeholder='숙명포털 비밀번호를 입력해주세요'
-          onChange={handleData}
+          label='이메일'
+          type='text'
+          value={email}
+          placeholder='이메일을 입력해주세요'
+          onChange={(event) => setEmail(event.target.value)}
+          validate={checkEmailFormat}
+          errorMessage='올바른 이메일을 입력해주세요'
         />
       </div>
       <Button
