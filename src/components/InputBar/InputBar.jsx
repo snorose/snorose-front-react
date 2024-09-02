@@ -37,11 +37,11 @@ const InputBar = () => {
         content,
       });
       setIsEdit(false);
+      setCommentId(undefined);
     } else {
       postComment.mutate({ parentId: commentId, content });
     }
 
-    setCommentId(undefined);
     setContent('');
   };
 

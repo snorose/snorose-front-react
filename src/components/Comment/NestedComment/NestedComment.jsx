@@ -33,15 +33,10 @@ export default function NestedComment({
 
   return (
     <div
-      className={styles.nestedComment}
+      className={`${styles.nestedComment} ${isLast && styles.isLast}`}
       onClick={(e) => {
         e.stopPropagation();
         setCommentId(undefined);
-      }}
-      style={{
-        paddingBottom: isLast ? '6px' : 'none',
-        borderBottomLeftRadius: isLast ? '5px' : '0px',
-        borderBottomRightRadius: isLast ? '5px' : '0px',
       }}
     >
       <div className={styles.nestedCommentTop}>
@@ -85,6 +80,7 @@ export default function NestedComment({
         {!isDeleted && (
           <button
             className={styles.likedCount}
+            type='button'
             onClick={() => (isLiked ? deleteLike.mutate() : like.mutate())}
           >
             <Icon
