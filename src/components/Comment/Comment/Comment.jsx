@@ -16,15 +16,16 @@ export default function Comment({ data }) {
   const { setIsEdit, commentId, setCommentId, setContent, inputFocus } =
     useCommentContext();
   const { deleteComment } = useComment();
+  const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
+
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
   const onCommentOptionClick = (data) => {
     setCommentId(data.id);
     setContent(data.content);
-    setIsOptionModalOpen(true);
+    data.isWriter ? setIsOptionModalOpen(true) : setIsReportModalOpen(true);
   };
 
   const onCloseClick = () => {
@@ -40,7 +41,6 @@ export default function Comment({ data }) {
 
   const {
     userDisplay,
-    isWriter,
     isWriterWithdrawn,
     content,
     isLiked,
@@ -75,7 +75,7 @@ export default function Comment({ data }) {
               onCommentOptionClick(data);
             }}
           >
-            {isWriter && !isDeleted && (
+            {!isDeleted && isVisible && (
               <Icon id='ellipsis-vertical' width='3' height='11' />
             )}
           </p>
@@ -90,12 +90,17 @@ export default function Comment({ data }) {
         <div className={styles.commentBottom}>
           {!isDeleted && (
             <>
-              <button className={styles.commentCount} onClick={handleReply}>
+              <button
+                className={styles.commentCount}
+                type='button'
+                onClick={handleReply}
+              >
                 <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
                 <p>{children.length}</p>
               </button>
               <button
                 className={styles.likedCount}
+                type='button'
                 onClick={() => (isLiked ? deleteLike.mutate() : like.mutate())}
               >
                 <Icon
@@ -145,6 +150,15 @@ export default function Comment({ data }) {
           deleteComment.mutate({ commentId });
           setCommentId(undefined);
           setContent('');
+        }}
+      />
+      <OptionModal
+        id='report'
+        isOpen={isReportModalOpen}
+        setIsOpen={setIsReportModalOpen}
+        closeFn={() => {
+          onCloseClick();
+          setIsReportModalOpen(false);
         }}
       />
     </>

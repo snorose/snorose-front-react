@@ -110,6 +110,11 @@
   flex-direction: column;
 }
 
+.nestedComment.isLast {
+  padding-bottom: 6px;
+  border-radius: 0 0 5px 5px;
+}
+
 .nestedCommentTop {
   width: 100%;
   padding: 10px 0 0 14px;
