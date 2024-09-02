@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { verifySookmyungPortal } from '@/apis';
+
 import { Button, Input } from '@/pages/SnoroseVerifyPage';
 
 import { InputPassword } from '@/components/index.js';
@@ -7,13 +9,40 @@ import { InputPassword } from '@/components/index.js';
 import { isEmailValid } from '@/utils/validate.js';
 
 import styles from './VerifyPage.module.css';
+import { useToast } from '@/hooks/index.js';
+import { TOAST } from '@/constants/toast.js';
 
 export default function VerifyPage({ setStep }) {
-  const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
+  const { toast } = useToast();
+  const [studentId, setStudentId] = useState('');
+  const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const isAllFieldsCompleted = id && pw && email;
+  const isAllFieldsCompleted = studentId && password && email;
+
+  const verify = async () => {
+    if (!isAllFieldsCompleted) {
+      toast(TOAST.VERIFY.notCompleted);
+      return;
+    }
+
+    if (!isEmailValid(email)) {
+      toast(TOAST.VERIFY.invalidEmail);
+      return;
+    }
+
+    try {
+      await verifySookmyungPortal({
+        studentId,
+        password,
+        email,
+      });
+
+      setStep('complete');
+    } catch ({ response }) {
+      toast(response.data.message);
+    }
+  };
 
   return (
     <section className={styles.content}>
@@ -21,15 +50,15 @@ export default function VerifyPage({ setStep }) {
         <Input
           label='아이디'
           type='text'
-          value={id}
+          value={studentId}
           placeholder='숙명포털 아이디를 입력해주세요'
-          onChange={(event) => setId(event.target.value)}
+          onChange={(event) => setStudentId(event.target.value)}
         />
         <InputPassword
           title='비밀번호'
           placeholder='숙명포털 비밀번호를 입력해주세요'
-          value={pw}
-          onChange={(event) => setPw(event.target.value)}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
           isStatic
         />
         <Input
@@ -42,16 +71,7 @@ export default function VerifyPage({ setStep }) {
           errorMessage='올바른 이메일을 입력해주세요'
         />
       </div>
-      <Button
-        onClick={() => {
-          if (isAllFieldsCompleted && isEmailValid(email)) {
-            console.log('인증~~');
-            setStep('complete');
-          }
-        }}
-      >
-        인증
-      </Button>
+      <Button onClick={verify}>인증</Button>
     </section>
   );
 }

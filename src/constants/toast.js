@@ -109,7 +109,7 @@ const TOAST = Object.freeze({
   },
   EMPTY_COMMENT: {
     id: 'EMPTY_COMMENT',
-    message:'댓글을 입력하세요.',
+    message: '댓글을 입력하세요.',
   },
   EMPTY_TITLE: {
     id: 'EMPTY_TITLE_ERROR',
@@ -147,6 +147,10 @@ const TOAST = Object.freeze({
   WITHDRAW_ACCOUNT_ERROR: {
     id: 'WITHDRAW_ACCOUNT_ERROR',
     message: '회원 탈퇴에 실패했습니다.\n다시 시도해주세요.',
+  },
+  VERIFY: {
+    notCompleted: '모두 입력해주세요',
+    invalidEmail: '올바른 이메일을 입력해주세요',
   },
 });
 
