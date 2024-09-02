@@ -1,17 +1,19 @@
 import { useState } from 'react';
 
 import { Button, Input } from '@/pages/SnoroseVerifyPage';
-// import { Input } from '@/components/Input';
 
-import { checkEmailFormat } from '@/utils/validate.js';
+import { InputPassword } from '@/components/index.js';
+
+import { isEmailValid } from '@/utils/validate.js';
 
 import styles from './VerifyPage.module.css';
-import { InputPassword } from '@/components/index.js';
 
 export default function VerifyPage({ setStep }) {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [email, setEmail] = useState('');
+
+  const isAllFieldsCompleted = id && pw && email;
 
   return (
     <section className={styles.content}>
@@ -36,14 +38,16 @@ export default function VerifyPage({ setStep }) {
           value={email}
           placeholder='이메일을 입력해주세요'
           onChange={(event) => setEmail(event.target.value)}
-          validate={checkEmailFormat}
+          validate={isEmailValid}
           errorMessage='올바른 이메일을 입력해주세요'
         />
       </div>
       <Button
         onClick={() => {
-          console.log('인증~~');
-          setStep('complete');
+          if (isAllFieldsCompleted && isEmailValid(email)) {
+            console.log('인증~~');
+            setStep('complete');
+          }
         }}
       >
         인증
