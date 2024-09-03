@@ -1,14 +1,15 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Icon } from '../../../components/Icon';
 import Input from '../../../components/Input/Input/Input';
 import { Submit } from '../../../components/Submit';
 import snoroseLogo from '../../../assets/images/snoroseLogo.svg';
-import { login } from '@/apis';
+import { useLogin } from '@/apis';
 import styles from './LoginPage.module.css';
 
 export default function Login() {
   const navigate = useNavigate();
+  const login = useLogin();
   const [formData, setFormData] = useState({ loginId: '', password: '' });
   const [errmsg, setErrmsg] = useState(false);
   const [visBtnClick, setVisBtnClick] = useState(false);
@@ -90,12 +91,6 @@ export default function Login() {
             <Icon id='angle-right' width='1.5rem' height='1.5rem' />
           </div>
         </div>
-        {errmsg && (
-          <div className={styles.errFrame}>
-            <p>아이디 혹은 비밀번호가</p>
-            <p>일치하지 않습니다</p>
-          </div>
-        )}
       </form>
     </div>
   );

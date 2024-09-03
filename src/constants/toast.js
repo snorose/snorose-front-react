@@ -27,6 +27,9 @@ const TOAST = Object.freeze({
     editUserInfo: '회원 정보 수정이 완료되었습니다.',
     withdraw: '회원 탈퇴가 완료되었습니다.',
   },
+  LOGIN: {
+    loginFailure: '아이디 혹은 비밀번호가 일치하지 않습니다.',
+  },
 });
 
 export { TOAST };
