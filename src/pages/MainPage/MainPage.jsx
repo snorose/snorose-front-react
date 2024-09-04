@@ -13,12 +13,11 @@ import {
   ListHeader,
   MainPageListItem,
   Margin,
-  Slide,
   Flex,
 } from '@/components';
 
 import { BOARD_MENUS, ROLE } from '@/constants';
-import { BESOOKTS, CAROUSEL_BANNER } from '@/dummy/data';
+import { BESOOKTS } from '@/dummy/data';
 
 import styles from './MainPage.module.css';
 

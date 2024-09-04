@@ -27,6 +27,10 @@ const TOAST = Object.freeze({
     editUserInfo: '회원 정보 수정이 완료되었습니다.',
     withdraw: '회원 탈퇴가 완료되었습니다.',
   },
+  VERIFY: {
+    notCompleted: '모두 입력해주세요',
+    invalidEmail: '올바른 이메일을 입력해주세요',
+  },
 });
 
 export { TOAST };

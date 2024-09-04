@@ -6,3 +6,4 @@ export * from './findRoute.js';
 export * from './formattedNowTime.js';
 export * from './getBoardTextId.js';
 export * from './timeAgo.js';
+export * from './validate.js';

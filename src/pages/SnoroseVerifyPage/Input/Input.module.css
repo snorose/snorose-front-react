@@ -24,3 +24,16 @@
 .input::placeholder {
   color: #898989;
 }
+
+.input.isInvalid {
+  background: #fee9eb;
+  color: #ff4b6c;
+}
+
+.errorMessage {
+  margin-top: 3px;
+  font-size: 11px;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #ff4b6c;
+}
