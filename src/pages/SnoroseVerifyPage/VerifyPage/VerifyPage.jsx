@@ -1,45 +1,77 @@
 import { useState } from 'react';
 
+import { verifySookmyungPortal } from '@/apis';
+
 import { Button, Input } from '@/pages/SnoroseVerifyPage';
 
+import { InputPassword } from '@/components/index.js';
+
+import { isEmailValid } from '@/utils/validate.js';
+
 import styles from './VerifyPage.module.css';
+import { useToast } from '@/hooks/index.js';
+import { TOAST } from '@/constants/toast.js';
 
 export default function VerifyPage({ setStep }) {
-  const [data, setData] = useState({ id: '', pw: '' });
-  const handleData = (event) => {
-    const { value, name } = event.target;
-    setData((prev) => ({ ...prev, [name]: value }));
+  const { toast } = useToast();
+  const [studentId, setStudentId] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+
+  const isAllFieldsCompleted = studentId && password && email;
+
+  const verify = async () => {
+    if (!isAllFieldsCompleted) {
+      toast(TOAST.VERIFY.notCompleted);
+      return;
+    }
+
+    if (!isEmailValid(email)) {
+      toast(TOAST.VERIFY.invalidEmail);
+      return;
+    }
+
+    try {
+      await verifySookmyungPortal({
+        studentId,
+        password,
+        email,
+      });
+
+      setStep('complete');
+    } catch ({ response }) {
+      toast(response.data.message);
+    }
   };
-  const { id, pw } = data;
 
   return (
     <section className={styles.content}>
       <div className={styles.verify}>
         <Input
           label='아이디'
-          name='id'
           type='text'
-          value={id}
+          value={studentId}
           placeholder='숙명포털 아이디를 입력해주세요'
-          onChange={handleData}
+          onChange={(event) => setStudentId(event.target.value)}
+        />
+        <InputPassword
+          title='비밀번호'
+          placeholder='숙명포털 비밀번호를 입력해주세요'
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          isStatic
         />
         <Input
-          label='비밀번호'
-          name='pw'
-          type='password'
-          value={pw}
-          placeholder='숙명포털 비밀번호를 입력해주세요'
-          onChange={handleData}
+          label='이메일'
+          type='text'
+          value={email}
+          placeholder='이메일을 입력해주세요'
+          onChange={(event) => setEmail(event.target.value)}
+          validate={isEmailValid}
+          errorMessage='올바른 이메일을 입력해주세요'
         />
       </div>
-      <Button
-        onClick={() => {
-          console.log('인증~~');
-          setStep('complete');
-        }}
-      >
-        인증
-      </Button>
+      <Button onClick={verify}>인증</Button>
     </section>
   );
 }

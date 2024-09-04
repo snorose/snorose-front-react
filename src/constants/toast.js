@@ -30,6 +30,10 @@ const TOAST = Object.freeze({
   LOGIN: {
     loginFailure: '아이디 혹은 비밀번호가 일치하지 않습니다.',
   },
+  VERIFY: {
+    notCompleted: '모두 입력해주세요',
+    invalidEmail: '올바른 이메일을 입력해주세요',
+  },
 });
 
 export { TOAST };

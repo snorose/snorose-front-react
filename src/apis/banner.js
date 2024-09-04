@@ -1,4 +1,4 @@
-import { authAxios } from '@/axios/index.js';
+import { authAxios } from '@/axios';
 
 export const getBannerImage = async () => {
   const response = await authAxios.get('/v1/home/banners/view');
