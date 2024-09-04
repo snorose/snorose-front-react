@@ -1,3 +1,4 @@
+export * from './attendance.js';
 export * from './board.js';
 export * from './boardMenus.js';
 export * from './dropDown.js';

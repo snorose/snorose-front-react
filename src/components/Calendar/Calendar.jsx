@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { getMonthlyAttendanceHistory } from '@/apis';
@@ -8,8 +8,9 @@ import { Tile } from '@/components/Calendar';
 
 import { StyledCalendar } from '@/components/Calendar/Calendar.style.jsx';
 
-export default function Calendar() {
+export default function Calendar({ callback }) {
   const today = new Date();
+  const [activeStartDate, setActiveStartDate] = useState(new Date());
   const [year, setYear] = useState(today.getFullYear());
   const [month, setMonth] = useState(today.getMonth() + 1);
 
@@ -18,6 +19,10 @@ export default function Calendar() {
     queryFn: () => getMonthlyAttendanceHistory({ year, month }),
     staleTime: 1000 * 60 * 7,
   });
+
+  useEffect(() => {
+    callback(data);
+  }, [data]);
 
   if (!data) {
     return null;
@@ -41,8 +46,10 @@ export default function Calendar() {
       showNeighboringMonth={false}
       tileContent={({ date }) => <Tile date={date} data={data} />}
       formatDay={() => {}}
+      activeStartDate={activeStartDate}
       onActiveStartDateChange={({ activeStartDate }) => {
         const active = new Date(activeStartDate);
+        setActiveStartDate(activeStartDate);
         setYear(() => active.getFullYear());
         setMonth(() => active.getMonth() + 1);
       }}
