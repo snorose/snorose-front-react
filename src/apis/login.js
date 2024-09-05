@@ -1,18 +1,26 @@
 import { authAxios } from '@/axios';
-export const login = async (e, setUser, setErrmsg, formData, navigate) => {
-  e.preventDefault();
-  const endpoint = '/v1/users/login';
-  try {
-    const response = await authAxios.post(endpoint, formData);
-    const { accessToken, refreshToken } = response.data.result.tokenResponse;
-    navigate('/');
-    setUser(response.data);
-    setErrmsg(false);
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
-  } catch (e) {
-    setErrmsg(true);
-  }
+import { useToast } from '@/hooks';
+import { TOAST } from '@/constants';
+
+export const useLogin = () => {
+  const { toast } = useToast();
+  const login = async (e, setUser, setErrmsg, formData, navigate) => {
+    e.preventDefault();
+    const endpoint = '/v1/users/login';
+    try {
+      const response = await authAxios.post(endpoint, formData);
+      const { accessToken, refreshToken } = response.data.result.tokenResponse;
+      navigate('/');
+      setUser(response.data);
+      setErrmsg(false);
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+    } catch (e) {
+      toast(TOAST.LOGIN.loginFailure);
+      setErrmsg(true);
+    }
+  };
+  return login;
 };
 
 export const findId = async (e, formData, navigate) => {

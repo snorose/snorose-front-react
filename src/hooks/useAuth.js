@@ -36,7 +36,7 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
   }, [isFetching, isSuccess]);
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
     navigate('/');
   };
 
