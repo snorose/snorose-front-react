@@ -1,4 +1,4 @@
-import { authAxios } from '@/axios';
+import { defaultAxios } from '@/axios';
 import { useToast } from '@/hooks';
 import { TOAST } from '@/constants';
 
@@ -8,7 +8,7 @@ export const useLogin = () => {
     e.preventDefault();
     const endpoint = '/v1/users/login';
     try {
-      const response = await authAxios.post(endpoint, formData);
+      const response = await defaultAxios.post(endpoint, formData);
       const { accessToken, refreshToken } = response.data.result.tokenResponse;
       navigate('/');
       setUser(response.data);
@@ -27,7 +27,7 @@ export const findId = async (e, formData, navigate) => {
   e.preventDefault();
   const endpoint = '/v1/users/findid';
   try {
-    const response = await authAxios.post(endpoint, formData);
+    const response = await defaultAxios.post(endpoint, formData);
     navigate('/found-id', {
       state: { loginId: response.data.result.loginId },
     });
@@ -41,7 +41,7 @@ export const findPw = async (e, formData, navigate) => {
   e.preventDefault();
   const endpoint = '/v1/users/findPW';
   try {
-    await authAxios.post(endpoint, formData);
+    await defaultAxios.post(endpoint, formData);
     navigate('/found-pw', {
       state: { email: formData.email },
     });
