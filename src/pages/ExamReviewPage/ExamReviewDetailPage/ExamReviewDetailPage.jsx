@@ -7,6 +7,8 @@ import { deleteExamReview, getReviewDetail, updatePoint } from '@/apis';
 import { useScrap } from '@/hooks';
 import { useToast } from '@/hooks';
 
+import { NotFoundPage } from '@/pages/NotFoundPage';
+
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
 import { DeleteModal, OptionModal } from '@/components/Modal';
@@ -40,7 +42,7 @@ export default function ExamReviewDetailPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { data } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ['reviewDetail', postId],
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
@@ -83,6 +85,10 @@ export default function ExamReviewDetailPage() {
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+
+  if (error?.response.status === 404) {
+    return <NotFoundPage />;
+  }
 
   if (data === undefined) return null;
 

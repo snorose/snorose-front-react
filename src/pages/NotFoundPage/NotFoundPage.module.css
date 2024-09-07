@@ -1,0 +1,21 @@
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  font-size: 80px;
+  color: #00368e;
+  font-weight: 700;
+}
+
+.text {
+  margin-bottom: 20px;
+}
+
+.button {
+  width: 20%;
+}
