@@ -25,6 +25,7 @@ import {
   BOARD_ID,
   CLASS_NUMBERS,
   EXAM_TYPES,
+  FILE_MAX_SIZE,
   LECTURE_TYPES,
   MODAL_CONFIRM,
   POINT_CATEGORY_ENUM,
@@ -37,8 +38,6 @@ import {
 import { USER } from '@/dummy/data';
 
 import styles from './ExamReviewWritePage.module.css';
-
-const FILE_MAX_SIZE = 1024 * 1024 * 10;
 
 export default function ExamReviewWritePage() {
   const { toast } = useToast();
