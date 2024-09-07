@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { getPostContent, deletePost, updatePoint } from '@/apis';
+import { getPostContent, deletePost } from '@/apis';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import { useLike, useScrap, useToast } from '@/hooks';
@@ -16,14 +16,7 @@ import { InputBar } from '@/components/InputBar';
 
 import { timeAgo } from '@/utils';
 
-import {
-  BOARD_MENUS,
-  POINT_CATEGORY_ENUM,
-  POINT_SOURCE_ENUM,
-  TOAST,
-} from '@/constants';
-
-import { USER } from '@/dummy/data';
+import { BOARD_MENUS, TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
 
@@ -63,17 +56,8 @@ export default function PostPage() {
       const response = await deletePost(currentBoard.id, postId);
 
       if (response.status === 200) {
-        const pointResponse = await updatePoint({
-          userId: USER.userId, // 추후 id 연결 필요
-          category: POINT_CATEGORY_ENUM.POST_DELETE,
-          source: POINT_SOURCE_ENUM.POST,
-          sourceId: postId,
-        });
-
-        if (pointResponse.status === 200) {
-          toast(TOAST.POST.delete);
-          navigate(`/board/${currentBoard.textId}`);
-        }
+        toast(TOAST.POST.delete);
+        navigate(`/board/${currentBoard.textId}`);
       }
     } catch ({ response }) {
       toast(response.data.message);
