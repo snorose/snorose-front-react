@@ -48,7 +48,7 @@ export default function ExamReviewWritePage() {
       const { status } = response;
 
       if (status === 500) {
-        toast(response.data.message);
+        toast(TOAST.SERVER_ERROR['500']);
         return;
       }
 

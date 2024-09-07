@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
-import { deleteExamReview, getReviewDetail, updatePoint } from '@/apis';
+import { deleteExamReview, getReviewDetail } from '@/apis';
 
 import { useScrap } from '@/hooks';
 import { useToast } from '@/hooks';
@@ -18,16 +18,7 @@ import { ReviewDownload } from '@/components/ReviewDownload';
 import { dateFormat } from '@/utils/date.js';
 import { convertToObject } from '@/utils/convertDS.js';
 
-import {
-  LECTURE_TYPES,
-  POINT_CATEGORY_ENUM,
-  POINT_SOURCE_ENUM,
-  SEMESTERS,
-  EXAM_TYPES,
-  TOAST,
-} from '@/constants';
-
-import { USER } from '@/dummy/data';
+import { LECTURE_TYPES, SEMESTERS, EXAM_TYPES, TOAST } from '@/constants';
 
 import styles from './ExamReviewDetailPage.module.css';
 
@@ -46,33 +37,23 @@ export default function ExamReviewDetailPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const losePoint = useMutation({
-    mutationFn: () =>
-      updatePoint({
-        userId: USER.userId, // userId로 교체해야합니다.
-        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DELETE,
-        source: POINT_SOURCE_ENUM.REVIEW,
-        sourceId: postId,
-      }),
-    onSuccess: () => {
-      toast(TOAST.EXAM_REVIEW.delete);
-    },
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
-  });
-
   const deleteReview = useMutation({
     mutationFn: () => deleteExamReview(postId),
     onSuccess: () => {
-      queryClient.invalidateQueries(['reviewList']);
+      queryClient.removeQueries(['reviewList']);
       queryClient.removeQueries(['reviewDetail', postId]);
       queryClient.removeQueries(['reviewFile', postId]);
 
+      toast(TOAST.EXAM_REVIEW.delete);
       navigate('/board/exam-review', { replace: true });
-      losePoint.mutate();
     },
     onError: ({ response }) => {
+      const { status } = response;
+
+      if (status === 500) {
+        toast(TOAST.SERVER_ERROR['500']);
+      }
+
       toast(response.data.message);
     },
   });
@@ -91,7 +72,6 @@ export default function ExamReviewDetailPage() {
       state: data,
       replace: true,
     });
-  const remove = () => deleteReview.mutate();
 
   const {
     commentCount,
@@ -207,7 +187,7 @@ export default function ExamReviewDetailPage() {
         id='exam-review-delete'
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
-        redBtnFunction={remove}
+        redBtnFunction={() => deleteReview.mutate()}
       />
       <OptionModal
         id='report'
