@@ -57,7 +57,7 @@
 }
 
 .noContentMessage {
-  color: var(--Grey-4, var(--grey-3, #484848));
+  color: #484848;
   font-size: 16px;
   font-weight: 500;
   line-height: 150%;
@@ -66,13 +66,15 @@
 
 .imageWrapper {
   display: flex;
+  justify-content: flex-end;
   position: relative;
-  justify-content: center;
+  width: auto;
+  height: auto;
+  min-height: 580px;
 }
 
 .image {
   position: absolute;
-  transform: translateY(100%);
-  width: 220px;
-  height: 182px;
+  right: 0px;
+  bottom: 0px;
 }
