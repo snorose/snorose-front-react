@@ -48,7 +48,7 @@ export default function ExamReviewWritePage() {
       const { status } = response;
 
       if (status === 500) {
-        toast(TOAST.SERVER_ERROR['500']);
+        toast(TOAST.ERROR.SERVER);
         return;
       }
 
@@ -105,7 +105,7 @@ export default function ExamReviewWritePage() {
         examType: examType?.id,
       });
     } catch (error) {
-      toast(TOAST.SERVER_ERROR['500']);
+      toast(TOAST.ERROR.SERVER);
       throw error;
     }
   };

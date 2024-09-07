@@ -51,7 +51,8 @@ export default function ExamReviewDetailPage() {
       const { status } = response;
 
       if (status === 500) {
-        toast(TOAST.SERVER_ERROR['500']);
+        toast(TOAST.ERROR.SERVER);
+        return;
       }
 
       toast(response.data.message);
