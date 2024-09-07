@@ -1,11 +1,12 @@
 import { useEffect, useMemo } from 'react';
 import styles from './ActivityPage.module.css';
-import { BackAppBar, Icon, PostBar, Sponsor } from '@/components';
+import { BackAppBar, PostBar, Sponsor } from '@/components';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getMyPostList } from '@/apis';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { getBoardTextId } from '@/utils';
+import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 export default function MyPostPage() {
   const { ref, inView } = useInView();
@@ -64,7 +65,11 @@ export default function MyPostPage() {
             <div className={styles.noContentWrapper}>
               <p className={styles.noContentMessage}>아직 작성한 글이 없어요</p>
               <div className={styles.imageWrapper}>
-                <Icon id='no-post-star' className={styles.image} />
+                <img
+                  src={frustratedWomanIllustration}
+                  alt='frustrated woman image'
+                  className={styles.image}
+                />
               </div>
             </div>
           )}
