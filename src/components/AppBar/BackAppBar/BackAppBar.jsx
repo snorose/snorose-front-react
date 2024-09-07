@@ -10,9 +10,21 @@ export default function BackAppBar({
   children,
   hasSearchInput,
   isDark,
+  backNavTo,
 }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const currentBoard = pathname.split('/')[2];
+
+  const getNavPath = () => {
+    if (backNavTo) {
+      return backNavTo;
+    } else if (pathname.split('/')[3] === 'search') {
+      return `/board/${currentBoard}`;
+    } else {
+      return -1;
+    }
+  };
 
   return (
     <div className={hasSearchInput ? styles.hasGap : styles.appBar}>
@@ -23,7 +35,7 @@ export default function BackAppBar({
           width={19}
           height={17}
           fill={isDark && 'white'}
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(getNavPath())}
         />
         {title && <span className={styles.title}>{title}</span>}
       </div>

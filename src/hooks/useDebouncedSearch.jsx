@@ -1,34 +1,41 @@
-import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useState, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { searchByBoard } from '@/apis';
 
 import { useInfiniteScroll } from '@/hooks';
 
+import { debounce } from '@/utils';
 import { BOARD_ID } from '@/constants';
 
-export default function useSearch({ urlKeyword, filterOption }) {
+export default function useDebouncedSearch({ urlKeyword, filterOption }) {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const boardType = pathname.split('/')[2];
 
   const [keyword, setKeyword] = useState(urlKeyword ?? '');
-  const [newUrlKeyword, setNewUrlKeyword] = useState(keyword ?? '');
+  const [debouncedKeyword, setDebouncedKeyword] = useState('');
+
+  const debouncedSearch = useCallback(
+    (value) =>
+      debounce(() => {
+        setDebouncedKeyword(value);
+      }, 500),
+    []
+  );
 
   const handleChange = (event) => {
     setKeyword(event.target.value);
-  };
-
-  const hadleOnKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      navigate(`/board/${boardType}/search/${encodeURIComponent(keyword)}`);
-      setNewUrlKeyword(encodeURIComponent(keyword));
-    }
+    debouncedSearch(event.target.value);
   };
 
   const { data, ref, isLoading, isFetching, status, isError, error } =
     useInfiniteScroll({
-      queryKey: ['search', newUrlKeyword, boardType, filterOption],
+      queryKey: [
+        'search',
+        boardType,
+        debouncedKeyword || 'default',
+        filterOption,
+      ],
       queryFn: ({ pageParam }) =>
         searchByBoard({
           boardId: BOARD_ID[boardType],
@@ -37,6 +44,7 @@ export default function useSearch({ urlKeyword, filterOption }) {
           keyword,
           ...filterOption,
         }),
+      enabled: !!debouncedKeyword,
     });
 
   return {
@@ -48,8 +56,7 @@ export default function useSearch({ urlKeyword, filterOption }) {
     isError,
     error,
     keyword,
-    urlKeyword,
+    debouncedKeyword,
     handleChange,
-    hadleOnKeyDown,
   };
 }

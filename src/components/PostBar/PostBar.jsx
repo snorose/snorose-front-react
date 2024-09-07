@@ -3,13 +3,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Icon } from '@/components/Icon';
 
-import { timeAgo } from '@/utils';
+import { timeAgo, getBoardTitleToTextId } from '@/utils';
 
 import styles from './PostBar.module.css';
 
 export default function PostBar({
   data,
-  optionClick,
   use,
   hasComment = true,
   hasLike = true,
@@ -17,7 +16,10 @@ export default function PostBar({
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [agoTime, setAgoTime] = useState(timeAgo(data.createdAt));
-  const currentBoard = pathname.split('/')[2];
+  const currentBoard =
+    pathname.split('/')[3] === 'search'
+      ? getBoardTitleToTextId(data.boardName)
+      : pathname.split('/')[2];
 
   // timeAgo를 1분마다 업데이트
   useEffect(() => {

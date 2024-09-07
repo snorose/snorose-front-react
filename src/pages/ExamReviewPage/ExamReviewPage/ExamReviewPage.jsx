@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import { getReviewList } from '@/apis';
 
-import { useInfiniteScroll, useSearch } from '@/hooks';
+import { useInfiniteScroll, useDebouncedSearch } from '@/hooks';
 
 import { ExamReviewList, ExamReviewSearchList } from '@/pages/ExamReviewPage';
 
@@ -31,7 +31,7 @@ export default function ExamReviewPage() {
     queryFn: ({ pageParam }) => getReviewList(pageParam),
   });
 
-  const searchResult = useSearch({
+  const searchResult = useDebouncedSearch({
     urlKeyword,
     filterOption: {
       lectureYear: lectureYear?.id,
