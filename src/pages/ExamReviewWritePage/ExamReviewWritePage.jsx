@@ -2,11 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
-import {
-  postExamReview,
-  updatePoint,
-  checkExamReviewDuplication,
-} from '@/apis';
+import { postExamReview, checkExamReviewDuplication } from '@/apis';
 
 import { useToast } from '@/hooks';
 
@@ -28,36 +24,15 @@ import {
   FILE_MAX_SIZE,
   LECTURE_TYPES,
   MODAL_CONFIRM,
-  POINT_CATEGORY_ENUM,
-  POINT_SOURCE_ENUM,
   SEMESTERS,
   TOAST,
   YEARS,
 } from '@/constants';
 
-import { USER } from '@/dummy/data';
-
 import styles from './ExamReviewWritePage.module.css';
 
 export default function ExamReviewWritePage() {
   const { toast } = useToast();
-
-  const getPoint = useMutation({
-    mutationFn: ({ sourceId }) =>
-      updatePoint({
-        userId: USER.userId, // userId로 교체해야합니다.
-        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
-        source: POINT_SOURCE_ENUM.REVIEW,
-        sourceId,
-      }),
-    onSuccess: () => {
-      toast(TOAST.EXAM_REVIEW.create);
-      navigate('/board/exam-review', { replace: true });
-    },
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
-  });
 
   const createExamReview = useMutation({
     mutationFn: ({ data, file }) =>
@@ -66,9 +41,17 @@ export default function ExamReviewWritePage() {
         file,
       }),
     onSuccess: ({ data }) => {
-      getPoint.mutate({ sourceId: data.result.postId });
+      toast(TOAST.EXAM_REVIEW.create);
+      navigate('/board/exam-review', { replace: true });
     },
     onError: ({ response }) => {
+      const { status } = response;
+
+      if (status === 500) {
+        toast(response.data.message);
+        return;
+      }
+
       toast(response.data.message);
     },
   });
@@ -121,8 +104,9 @@ export default function ExamReviewWritePage() {
         semester: semester?.id,
         examType: examType?.id,
       });
-    } catch ({ response }) {
-      toast(response.data.message);
+    } catch (error) {
+      toast(TOAST.SERVER_ERROR['500']);
+      throw error;
     }
   };
 
@@ -152,10 +136,14 @@ export default function ExamReviewWritePage() {
               return;
             }
 
-            const { data } = await checkDuplication();
+            try {
+              const response = await checkDuplication();
 
-            if (data.result.isDuplicated) {
-              setIsConfirmModalOpen(true);
+              if (response?.data.result.isDuplicated) {
+                setIsConfirmModalOpen(true);
+                return;
+              }
+            } catch (error) {
               return;
             }
 
