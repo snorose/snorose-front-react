@@ -23,6 +23,6 @@ export const searchByBoard = async ({
         ...(examType && { examType }),
       },
     });
-    return response.data.result;
+    return response?.data.result;
   }
 };
