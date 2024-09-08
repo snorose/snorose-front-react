@@ -19,10 +19,15 @@ export default function useSearch({ urlKeyword, filterOption }) {
     setKeyword(event.target.value);
   };
 
-  const hadleOnKeyDown = (event) => {
+  const handleOnKeyDown = (event) => {
     if (event.key === 'Enter') {
-      navigate(`/board/${boardType}/search/${encodeURIComponent(keyword)}`);
-      setNewUrlKeyword(encodeURIComponent(keyword));
+      if (event.target.value.trim() === '') {
+        setNewUrlKeyword(encodeURIComponent(keyword));
+        navigate(`/board/${boardType}`);
+      } else {
+        setNewUrlKeyword(encodeURIComponent(keyword));
+        navigate(`/board/${boardType}/search/${encodeURIComponent(keyword)}`);
+      }
     }
   };
 
@@ -50,6 +55,6 @@ export default function useSearch({ urlKeyword, filterOption }) {
     keyword,
     urlKeyword,
     handleChange,
-    hadleOnKeyDown,
+    handleOnKeyDown,
   };
 }

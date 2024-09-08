@@ -18,7 +18,7 @@ export default function PostSearchPage() {
 
   const urlKeyword = decodeURIComponent(pathname.split('/')[4] || '');
 
-  const { data, ref, isLoading, handleChange, hadleOnKeyDown, keyword } =
+  const { data, ref, isLoading, handleChange, handleOnKeyDown, keyword } =
     useSearch({
       urlKeyword,
     });
@@ -33,7 +33,7 @@ export default function PostSearchPage() {
           <Search
             placeholder={PLACEHOLDER[current]}
             keyword={keyword}
-            handleKeyDown={hadleOnKeyDown}
+            handleKeyDown={handleOnKeyDown}
             onChange={handleChange}
           />
         }
