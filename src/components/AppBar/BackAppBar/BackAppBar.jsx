@@ -14,13 +14,10 @@ export default function BackAppBar({
 }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const currentBoard = pathname.split('/')[2];
 
   const getNavPath = () => {
     if (backNavTo) {
       return backNavTo;
-    } else if (pathname.split('/')[3] === 'search') {
-      return `/board/${currentBoard}`;
     } else {
       return -1;
     }

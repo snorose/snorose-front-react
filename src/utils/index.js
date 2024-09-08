@@ -1,6 +1,5 @@
 export * from './convertDS.js';
 export * from './date.js';
-export * from './debounce.js';
 export * from './filterComment.js';
 export * from './findRoute.js';
 export * from './formattedNowTime.js';
