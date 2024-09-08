@@ -14,7 +14,7 @@ export const BOARD_MENUS = [
   },
   {
     id: 22,
-    to: '/board/first-snow',
+    to: '/board/large-snow',
     textId: 'large-snow',
     title: '함박눈방',
     desc: '눈송이 모두가\n이용하는 커뮤니티',
@@ -22,7 +22,7 @@ export const BOARD_MENUS = [
   },
   {
     id: 23,
-    to: '/board/first-snow',
+    to: '/board/permanent-snow',
     textId: 'permanent-snow',
     title: '만년설방',
     desc: '졸업생 전용 게시판',
