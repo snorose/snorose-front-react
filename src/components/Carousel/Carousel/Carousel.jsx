@@ -31,11 +31,15 @@ export default function Carousel() {
       }
     }, 5000);
 
+    if (isError) {
+      clearInterval(carouselTimer);
+    }
+
     return () => clearInterval(carouselTimer);
-  }, [bannerList.length, currentIndex]);
+  }, [bannerList.length, currentIndex, isError]);
 
   if (isError || !bannerList) {
-    return <div>불러올 수 없습니다</div>;
+    return <div className={styles.error}>이미지를 불러올 수 없습니다</div>;
   }
 
   return (
