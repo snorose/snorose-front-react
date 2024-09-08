@@ -252,9 +252,6 @@ export const routeList = [
             <ExamReviewDetailPage />
           </ProtectedRoute>
         ),
-        meta: {
-          hideNav: true,
-        },
       },
       {
         path: '/board/exam-review/:postId/edit',
