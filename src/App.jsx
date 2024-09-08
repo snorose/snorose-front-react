@@ -16,8 +16,6 @@ function App() {
       )
     : pathname;
 
-  console.log(checkedPath);
-
   const currentRoute = findRouteByPath(checkedPath, routeList);
   const hideNav = currentRoute?.meta?.hideNav ?? false;
 
