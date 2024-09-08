@@ -137,6 +137,21 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     },
   },
   {
+    path: `/board/${boardPath}/search`,
+    element: (
+      <ProtectedRoute
+        roles={getRolesForReadBoard(boardPath)}
+        to={`/board`}
+        message={'게시판 접근 권한이 없습니다.'}
+      >
+        <PostSearchPage />
+      </ProtectedRoute>
+    ),
+    meta: {
+      hideNav: true,
+    },
+  },
+  {
     path: `/board/${boardPath}/search/:keyword?`,
     element: (
       <ProtectedRoute
@@ -187,6 +202,13 @@ export const routeList = [
         element: <BoardPage />,
       },
       ...boardRoutes,
+      {
+        path: '/board/all/search',
+        element: <PostSearchPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
       {
         path: '/board/all/search/:keyword',
         element: <PostSearchPage />,

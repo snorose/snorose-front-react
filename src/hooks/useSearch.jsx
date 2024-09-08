@@ -23,7 +23,9 @@ export default function useSearch({ urlKeyword, filterOption }) {
     if (event.key === 'Enter') {
       if (event.target.value.trim() === '') {
         setNewUrlKeyword(encodeURIComponent(keyword));
-        navigate(`/board/${boardType}`);
+        boardType === 'exam-review'
+          ? navigate(`/board/${boardType}`)
+          : navigate(`/board/${boardType}/search`);
       } else {
         setNewUrlKeyword(encodeURIComponent(keyword));
         navigate(`/board/${boardType}/search/${encodeURIComponent(keyword)}`);
