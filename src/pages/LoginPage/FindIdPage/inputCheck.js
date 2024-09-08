@@ -24,7 +24,7 @@ export function checkSookmyungMail(mail) {
 
 export function checkStudentNum(number) {
   if (number) {
-    if (number?.length === 7) {
+    if (number?.length === 7 && !isNaN(number)) {
       return 'right';
     } else {
       return 'wrong';

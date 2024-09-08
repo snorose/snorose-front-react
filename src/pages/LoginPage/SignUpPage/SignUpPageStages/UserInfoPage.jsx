@@ -9,7 +9,7 @@ import {
   checkBirthday,
 } from '../../FindIdPage/inputCheck';
 import Dropdown from '../../../../components/Fieldset/Dropdown/Dropdown.jsx';
-import { register } from '../../../../apis/signup';
+import { register } from '../../../../apis/signUp';
 import styles from './UserInfoPage.module.css';
 
 export default function UserInfoPage({ setFormData, formData }) {
