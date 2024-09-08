@@ -155,6 +155,21 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     },
   },
   {
+    path: `/board/${boardPath}/search/:keyword?`,
+    element: (
+      <ProtectedRoute
+        roles={getRolesForReadBoard(boardPath)}
+        to={`/board`}
+        message={'게시판 접근 권한이 없습니다.'}
+      >
+        <PostSearchPage />
+      </ProtectedRoute>
+    ),
+    meta: {
+      hideNav: true,
+    },
+  },
+  {
     path: `/board/${boardPath}/notice`,
     element: (
       <ProtectedRoute
@@ -191,6 +206,13 @@ export const routeList = [
       },
       ...boardRoutes,
       {
+        path: '/board/all/search',
+        element: <PostSearchPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
         path: '/board/all/search/:keyword',
         element: <PostSearchPage />,
         meta: {
@@ -208,6 +230,18 @@ export const routeList = [
           </ProtectedRoute>
         ),
       },
+      {
+        path: '/board/exam-review/search/:keyword?',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            message={'시험후기 게시판 접근 권한이 없습니다.'}
+          >
+            <ExamReviewPage />
+          </ProtectedRoute>
+        ),
+      },
+
       {
         path: '/board/exam-review/post/:postId',
         element: (

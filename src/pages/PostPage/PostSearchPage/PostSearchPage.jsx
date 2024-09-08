@@ -18,9 +18,10 @@ export default function PostSearchPage() {
 
   const urlKeyword = decodeURIComponent(pathname.split('/')[4] || '');
 
-  const { data, ref, isLoading, keyword, handleChange } = useSearch({
-    urlKeyword,
-  });
+  const { data, ref, isLoading, handleChange, handleOnKeyDown, keyword } =
+    useSearch({
+      urlKeyword,
+    });
 
   const postList =
     data && data.pages ? data.pages.flatMap((page) => page || []) : [];
@@ -32,17 +33,19 @@ export default function PostSearchPage() {
           <Search
             placeholder={PLACEHOLDER[current]}
             keyword={keyword}
+            handleKeyDown={handleOnKeyDown}
             onChange={handleChange}
           />
         }
         hasSearchInput={true}
+        backNavTo={current !== 'all' ? `/board/${current}` : `/board`}
       />
       <div className={styles.content}>
         {isLoading ? (
           <FetchLoading>검색 중</FetchLoading>
         ) : (
           <>
-            {keyword !== '' && postList.length === 0 ? (
+            {urlKeyword !== '' && postList.length === 0 ? (
               <div className={styles.noResult}>검색 결과가 없습니다</div>
             ) : (
               <div className={styles.posts}>

@@ -6,8 +6,8 @@ export default function Search({
   className,
   placeholder,
   keyword,
-  onChange = () => {},
-  handleKeyDown = () => {},
+  onChange,
+  handleKeyDown,
 }) {
   return (
     <div className={`${styles.container} ${className}`}>

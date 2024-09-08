@@ -3,15 +3,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Icon } from '@/components/Icon';
 
-import { timeAgo } from '@/utils';
-
-import { BOARD_MENUS } from '@/constants';
+import { timeAgo, getBoardTitleToTextId } from '@/utils';
 
 import styles from './PostBar.module.css';
 
 export default function PostBar({
   data,
-  optionClick,
   use,
   hasComment = true,
   hasLike = true,
@@ -19,11 +16,10 @@ export default function PostBar({
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [agoTime, setAgoTime] = useState(timeAgo(data.createdAt));
-  const currentBoard = pathname.split('/')[2];
-  const searchBoardId =
-    currentBoard !== 'all'
-      ? currentBoard
-      : BOARD_MENUS.find(({ title }) => title === data.boardName)?.textId;
+  const currentBoard =
+    pathname.split('/')[3] === 'search'
+      ? getBoardTitleToTextId(data.boardName)
+      : pathname.split('/')[2];
 
   // timeAgo를 1분마다 업데이트
   useEffect(() => {
@@ -35,7 +31,7 @@ export default function PostBar({
   }, [data.createdAt]);
 
   const handlePostBarClick = () => {
-    use === 'post' && navigate(`/board/${searchBoardId}/post/${data.postId}`);
+    use === 'post' && navigate(`/board/${currentBoard}/post/${data.postId}`);
     use === 'board' && navigate('/post-search');
   };
 
