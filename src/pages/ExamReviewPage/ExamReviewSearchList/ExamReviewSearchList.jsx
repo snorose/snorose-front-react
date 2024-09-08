@@ -7,12 +7,9 @@ import { Target } from '@/components/Target';
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
 
 export default function ExamReviewSearchList({ result }) {
-  const { data, ref, isLoading, isError, error } = result;
-
-  const searchList =
-    data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page)
-      : [];
+  const { ref, isLoading, isError, error } = result || {};
+  const pages = result?.pages || [];
+  const searchList = pages.flatMap((page) => page);
 
   if (isLoading) {
     return <FetchLoading>검색 중</FetchLoading>;

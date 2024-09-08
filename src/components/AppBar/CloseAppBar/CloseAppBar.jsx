@@ -4,7 +4,12 @@ import { Icon } from '@/components/Icon';
 
 import styles from './CloseAppBar.module.css';
 
-export default function CloseAppBar({ alignRight, children, stroke, onClick }) {
+export default function CloseAppBar({
+  alignRight,
+  children,
+  stroke = 'black',
+  onClick,
+}) {
   const navigate = useNavigate();
 
   return (
@@ -15,8 +20,8 @@ export default function CloseAppBar({ alignRight, children, stroke, onClick }) {
       <Icon
         className={styles.close}
         id='x'
-        width={22}
-        height={22}
+        width='22'
+        height='22'
         onClick={() => navigate(-1)}
         stroke={stroke}
       />

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { postPost, updatePoint } from '@/apis';
+import { postPost } from '@/apis';
 
 import { useToast, useAuth } from '@/hooks';
 
@@ -10,18 +10,11 @@ import { Icon, CloseAppBar, DropDownMenu, FetchLoading } from '@/components';
 
 import { formattedNowTime } from '@/utils';
 
-import {
-  BOARD_MENUS,
-  POINT_CATEGORY_ENUM,
-  POINT_SOURCE_ENUM,
-  TOAST,
-} from '@/constants';
+import { BOARD_MENUS, TOAST } from '@/constants';
 
 import { USER } from '@/dummy/data';
 
 import styles from './PostWritePage.module.css';
-
-const roleId = 4; // dummy
 
 export default function PostWritePage() {
   const navigate = useNavigate();
@@ -79,15 +72,15 @@ export default function PostWritePage() {
 
     // 유효성 검사
     if (boardId === '') {
-      toast(TOAST.EMPTY_BOARDID);
+      toast(TOAST.POST.emptyBoard);
       return;
     }
     if (!title.trim()) {
-      toast(TOAST.EMPTY_TITLE);
+      toast(TOAST.POST.emptyTitle);
       return;
     }
     if (!text.trim()) {
-      toast(TOAST.EMPTY_TEXT);
+      toast(TOAST.POST.emptyContent);
       return;
     }
 
@@ -95,28 +88,15 @@ export default function PostWritePage() {
     postPost(data)
       .then((response) => {
         if (response.status === 201) {
-          return updatePoint({
-            userId: USER.userId, // userId로 교체해야합니다.
-            category: POINT_CATEGORY_ENUM.POST_CREATE,
-            source: POINT_SOURCE_ENUM.POST,
-            sourceId: response.data.result.postId,
-          });
-        } else {
-          throw new Error('Post creation failed');
-        }
-      })
-      .then((pointResponse) => {
-        if (pointResponse.status === 200) {
-          toast(TOAST.POST_CREATE_SUCCESS);
+          toast(TOAST.POST.create);
           navigate(-1);
-        } else {
-          throw new Error('Point update failed');
         }
       })
-      .catch((error) => {
-        toast(TOAST.POST_CREATE_FAIL);
+      .catch(({ response }) => {
+        toast(response.data.message);
       });
   };
+
   // 제목 40자 제한
   const handleTitleChange = (e) => {
     const newValue = e.target.value;
@@ -159,7 +139,7 @@ export default function PostWritePage() {
           </div>
           <div
             className={
-              roleId === 4
+              USER.role === 4
                 ? styles.profileBoxRight
                 : styles.profileBoxRightInvisible
             }

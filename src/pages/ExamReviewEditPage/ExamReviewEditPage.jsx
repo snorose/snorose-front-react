@@ -4,6 +4,8 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 import { editReviewDetail } from '@/apis';
 
+import { useToast } from '@/hooks';
+
 import { ActionButton, CloseAppBar } from '@/components/AppBar';
 import {
   CategoryButton,
@@ -19,22 +21,28 @@ import {
   LECTURE_TYPES,
   ROUTE,
   SEMESTERS,
+  TOAST,
   YEARS,
 } from '@/constants';
 
 export default function ExamReviewEditPage() {
   const { postId } = useParams();
-  const queryClient = useQueryClient();
+  const { state } = useLocation();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
   const editReview = useMutation({
     mutationFn: (edit) => editReviewDetail(postId, edit),
     onSuccess: () => {
       queryClient.invalidateQueries(['reviewDetail', postId]);
       navigate(ROUTE.examReviewDetail(postId), { replace: true });
+      toast(TOAST.EXAM_REVIEW.edit);
     },
-    onError: (error) => console.error(error),
+    onError: ({ response }) => {
+      toast(response.data.message);
+    },
   });
-  const { state } = useLocation();
 
   const [lectureName, setLectureName] = useState(state.lectureName);
   const [professor, setProfessor] = useState(state.professor);
@@ -150,20 +158,6 @@ export default function ExamReviewEditPage() {
           placeholder='선택하세요'
         />
       </CategoryFieldset>
-      <CategoryFieldset
-        title='P/F 여부'
-        required
-        hasCheckbox
-        value={isPF}
-        setFn={setIsPF}
-      />
-      <CategoryFieldset
-        title='온라인(비대면 수업) 여부'
-        required
-        hasCheckbox
-        value={isOnline}
-        setFn={setIsOnline}
-      />
       <CategoryFieldset title='수강 분반' required>
         <Dropdown
           options={CLASS_NUMBERS}
@@ -172,7 +166,21 @@ export default function ExamReviewEditPage() {
           placeholder='선택하세요'
         />
       </CategoryFieldset>
-      <CategoryFieldset title='시험 유형 및 설명'>
+      <CategoryFieldset
+        title='P/F 수업입니다'
+        required
+        hasCheckbox
+        value={isPF}
+        setFn={setIsPF}
+      />
+      <CategoryFieldset
+        title='온라인 수업입니다'
+        required
+        hasCheckbox
+        value={isOnline}
+        setFn={setIsOnline}
+      />
+      <CategoryFieldset title='시험 유형 및 설명' required>
         <Textarea
           value={questionDetail}
           setFn={setQuestionDetail}

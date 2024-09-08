@@ -24,6 +24,7 @@
   background-color: transparent;
   padding: 0 13px;
   color: #898989;
+  cursor: pointer;
 }
 
 .SelectedlistBar {
@@ -35,6 +36,7 @@
   background-color: #ddebf6;
   padding: 0 13px;
   color: #00368e;
+  cursor: pointer;
 }
 
 .item {

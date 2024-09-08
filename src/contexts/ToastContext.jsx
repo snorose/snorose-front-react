@@ -1,20 +1,23 @@
 import { createContext, useState, useContext } from 'react';
-import { Toast } from '../components/Toast';
+
+import { v4 as uuidv4 } from 'uuid';
+
+import { Toast } from '@/components/Toast';
 
 const ToastContext = createContext();
 
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 
-  const addToast = (toast) => {
-    if (toasts.find((item) => item.id === toast.id)) {
-      removeToast(toast);
+  const addToast = (message) => {
+    if (toasts.find((item) => item.message === message)) {
+      removeToast(message);
     }
-    setToasts((prev) => [...prev, toast]);
+    setToasts((prev) => [...prev, { id: uuidv4(), message }]);
   };
 
-  const removeToast = (toast) => {
-    setToasts((prev) => prev.filter((item) => item.id !== toast.id));
+  const removeToast = (message) => {
+    setToasts((prev) => prev.filter((item) => item.message !== message));
   };
 
   return (

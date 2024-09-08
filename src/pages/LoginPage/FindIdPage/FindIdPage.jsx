@@ -8,7 +8,7 @@ import {
   checkSookmyungMail,
   checkStudentNum,
 } from './inputCheck';
-import { FindIDAPI } from '@/apis';
+import { findId } from '@/apis';
 import styles from './FindIdPage.module.css';
 
 export default function FindIdPage() {
@@ -70,7 +70,7 @@ export default function FindIdPage() {
     <div className={styles.pageFrame}>
       <form
         onSubmit={(e) => {
-          FindIDAPI(e, formData, navigate);
+          findId(e, formData, navigate);
         }}
       >
         <div className={styles.findIdFrame}>

@@ -9,7 +9,7 @@ import {
   checkBirthday,
 } from '../../FindIdPage/inputCheck';
 import Dropdown from '../../../../components/Fieldset/Dropdown/Dropdown.jsx';
-import { RegisterAPI } from '../../../../apis/signup';
+import { register } from '../../../../apis/signUp';
 import styles from './UserInfoPage.module.css';
 
 export default function UserInfoPage({ setFormData, formData }) {
@@ -87,7 +87,7 @@ export default function UserInfoPage({ setFormData, formData }) {
         <Submit
           btnName='다음으로'
           className={checkDone()}
-          onClick={() => RegisterAPI(formData, navigate)}
+          onClick={() => register(formData, navigate)}
         />
       </div>
     </div>

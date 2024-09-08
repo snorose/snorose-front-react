@@ -1,10 +1,11 @@
 import { useEffect, useMemo } from 'react';
 import styles from './ActivityPage.module.css';
-import { BackAppBar, Icon, PostBar, Sponsor } from '@/components';
+import { BackAppBar, PostBar, Sponsor } from '@/components';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { getMyReviewFileList } from '@/apis';
 import { Link } from 'react-router-dom';
+import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 export default function DownloadExamReviewPage() {
   const { ref, inView } = useInView();
@@ -65,7 +66,11 @@ export default function DownloadExamReviewPage() {
                 아직 다운받은 후기가 없어요
               </p>
               <div className={styles.imageWrapper}>
-                <Icon id='no-review-star' className={styles.image} />
+                <img
+                  src={frustratedWomanIllustration}
+                  alt='frustrated woman image'
+                  className={styles.image}
+                />
               </div>
             </div>
           )}
