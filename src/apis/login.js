@@ -9,7 +9,7 @@ export const useLogin = () => {
     const endpoint = '/v1/users/login';
     try {
       const response = await authAxios.post(endpoint, formData);
-      const { accessToken, refreshToken } = response.data.result.tokenResponse;
+      const { accessToken, refreshToken } = response?.data.result.tokenResponse;
       navigate('/');
       setUser(response.data);
       setErrmsg(false);
@@ -29,7 +29,7 @@ export const findId = async (e, formData, navigate) => {
   try {
     const response = await authAxios.post(endpoint, formData);
     navigate('/found-id', {
-      state: { loginId: response.data.result.loginId },
+      state: { loginId: response?.data.result.loginId },
     });
   } catch (e) {
     if (!e.response.data.isSuccess) {

@@ -9,6 +9,20 @@ const authAxios = axios.create({
   },
 });
 
-authAxios.defaults.timeout = 5000;
+authAxios.defaults.timeout = 1000 * 15;
+
+authAxios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.code === 'ECONNABORTED') {
+      alert('타임아웃');
+      return;
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 export { authAxios };

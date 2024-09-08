@@ -10,12 +10,12 @@ export const downloadExamReview = async (postId, fileName) => {
 
 export const getReviewList = async (page = 0) => {
   const response = await authAxios.get(`/v1/reviews/32/list/${page}`);
-  return response.data.result;
+  return response?.data.result;
 };
 
 export const getReviewDetail = async (postId) => {
   const response = await authAxios.get(`/v1/reviews/${postId}`);
-  return response.data.result;
+  return response?.data.result;
 };
 
 export const editReviewDetail = async (postId, edit) => {

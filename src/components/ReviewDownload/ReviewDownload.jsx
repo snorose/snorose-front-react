@@ -53,6 +53,13 @@ export default function ReviewDownload({ className, fileName }) {
       toast(TOAST.EXAM_REVIEW.download);
     },
     onError: ({ response }) => {
+      const { status } = response;
+
+      if (status === 500) {
+        toast(TOAST.SERVER_ERROR['500']);
+        return;
+      }
+
       toast(response.data.message);
     },
   });
