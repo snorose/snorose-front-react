@@ -38,7 +38,7 @@ export default function PostSearchPage() {
           />
         }
         hasSearchInput={true}
-        backNavTo={'/board'}
+        backNavTo={current !== 'all' ? `/board/${current}` : `/board`}
       />
       <div className={styles.content}>
         {isLoading ? (
