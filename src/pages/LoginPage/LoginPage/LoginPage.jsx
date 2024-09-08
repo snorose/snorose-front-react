@@ -11,16 +11,15 @@ export default function Login() {
   const navigate = useNavigate();
   const login = useLogin();
   const [formData, setFormData] = useState({ loginId: '', password: '' });
-  const [errmsg, setErrmsg] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [visBtnClick, setVisBtnClick] = useState(false);
-  const [user, setUser] = useState();
   const toggleVisBtn = () => {
     setVisBtnClick((prev) => !prev);
   };
 
   return (
     <div className={styles.loginframe}>
-      <form onSubmit={(e) => login(e, setUser, setErrmsg, formData, navigate)}>
+      <form onSubmit={(e) => login(e, setIsError, formData, navigate)}>
         <div className={styles.prev}>
           <Link to='/'>
             <Icon id='arrow-left' width='1.162rem' height='1.048rem' />
@@ -36,37 +35,37 @@ export default function Login() {
           <div
             className={styles.input}
             onChange={() => {
-              setErrmsg(false);
+              setIsError(false);
             }}
           >
             <Input
               placeholder={'아이디'}
-              className={errmsg ? 'wrong' : 'ready'}
+              className={isError ? 'wrong' : 'ready'}
               inputType={'loginId'}
               inputData={setFormData}
             />
           </div>
           <div
-            className={!errmsg ? styles.input : undefined}
+            className={!isError ? styles.input : undefined}
             onChange={() => {
-              setErrmsg(false);
+              setIsError(false);
               if (!formData.password) setVisBtnClick(false);
             }}
           >
             <div
-              className={`${styles.pwFrame} ${styles[errmsg ? 'wrong' : 'ready']}`}
+              className={`${styles.pwFrame} ${styles[isError ? 'wrong' : 'ready']}`}
             >
               <Input
                 type={visBtnClick ? 'text' : 'password'}
                 placeholder={'영어, 숫자, 특수문자를 포함한 비밀번호'}
-                className={errmsg ? 'wrong' : 'ready'}
+                className={isError ? 'wrong' : 'ready'}
                 inputType={'password'}
                 inputData={setFormData}
               />
               {formData.password && (
                 <Icon
                   id={visBtnClick ? 'closed-eye' : 'opened-eye'}
-                  fill={errmsg ? '#ff4b6c' : '#898989'}
+                  fill={isError ? '#ff4b6c' : '#898989'}
                   width='1.5rem'
                   height='1.5rem'
                   className={styles.visibility}
@@ -75,7 +74,7 @@ export default function Login() {
               )}
             </div>
           </div>
-          {errmsg && (
+          {isError && (
             <p className={styles.errMsg}>
               아이디 혹은 비밀번호가 일치하지 않습니다
             </p>
