@@ -2,9 +2,9 @@ import { Icon } from '@/components/Icon';
 
 import styles from './Modal.module.css';
 
-export default function Options({ options, functions }) {
+export default function Options({ options, functions, onOptionClick }) {
   const handleClick = (iconId) => {
-    if (iconId && functions[iconId]) {
+    if (iconId && functions !== undefined && functions[iconId]) {
       functions[iconId]();
     }
   };
@@ -15,9 +15,15 @@ export default function Options({ options, functions }) {
         <div
           className={styles.optionBar}
           key={option.iconId}
+          data-value={option.value}
+          data-misung='미성이 사랑해요'
           onClick={(event) => {
             event.stopPropagation();
             handleClick(option.iconId);
+
+            if (onOptionClick !== undefined) {
+              onOptionClick(event);
+            }
           }}
         >
           <div className={styles.iconBox}>

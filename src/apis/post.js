@@ -66,3 +66,13 @@ export const patchPost = async ({
 
   return response;
 };
+
+// 게시글 신고
+export const reportPost = async (boardId, postId, body) => {
+  const { data } = await authAxios.post(
+    `/v1/boards/${boardId}/posts/report/${postId}`,
+    body
+  );
+
+  return data;
+};

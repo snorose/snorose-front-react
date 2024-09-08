@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { getPostContent, deletePost } from '@/apis';
+import { getPostContent, deletePost, reportPost } from '@/apis';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
@@ -46,6 +46,17 @@ export default function PostPage() {
   const { scrap, deleteScrap } = useScrap();
   const { like, deleteLike } = useLike({ type: 'posts', typeId: postId });
 
+  const { mutate: reportPostMutate } = useMutation({
+    mutationKey: 'reportPost',
+    mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
+    onSuccess: ({ message }) => {
+      toast(message);
+    },
+    onError: () => {
+      toast('신고에 실패했습니다.');
+    },
+  });
+
   // 데이터 화면 표시
   useEffect(() => {
     if (data) {
@@ -67,6 +78,15 @@ export default function PostPage() {
     } finally {
       setIsDeleteModalOpen(false);
     }
+  };
+
+  const handleOptionModalOptionClick = (event) => {
+    const reportType = event.currentTarget.dataset.value;
+
+    reportPostMutate({
+      reportType,
+    });
+    setIsReportModalOpen(false);
   };
 
   // 로딩과 에러 상태에 따라 조건부 렌더링
@@ -206,6 +226,7 @@ export default function PostPage() {
         id='report'
         isOpen={isReportModalOpen}
         setIsOpen={setIsReportModalOpen}
+        onOptionClick={handleOptionModalOptionClick}
         closeFn={() => setIsReportModalOpen(false)}
       />
       <CommentList commentCount={postData.commentCount} />
