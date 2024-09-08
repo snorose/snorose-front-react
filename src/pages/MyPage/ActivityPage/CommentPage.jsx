@@ -6,6 +6,7 @@ import { getMyCommentList } from '@/apis';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import { getBoardTextId } from '@/utils';
+import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 export default function CommentPage() {
   const { ref, inView } = useInView();
@@ -66,7 +67,11 @@ export default function CommentPage() {
                 아직 작성한 댓글이 없어요
               </p>
               <div className={styles.imageWrapper}>
-                <Icon id='no-comment-star' className={styles.image} />
+                <img
+                  src={frustratedWomanIllustration}
+                  alt='frustrated woman image'
+                  className={styles.image}
+                />
               </div>
             </div>
           )}

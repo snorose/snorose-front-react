@@ -1,5 +1,7 @@
 import { defaultAxios } from '@/axios';
+
 import { useToast } from '@/hooks';
+
 import { TOAST } from '@/constants';
 
 export const useLogin = () => {
@@ -10,7 +12,7 @@ export const useLogin = () => {
 
     try {
       const response = await defaultAxios.post(endpoint, formData);
-      const { accessToken, refreshToken } = response.data.result.tokenResponse;
+      const { accessToken, refreshToken } = response?.data.result.tokenResponse;
 
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
@@ -22,6 +24,7 @@ export const useLogin = () => {
       setIsError(true);
     }
   };
+  
   return login;
 };
 
@@ -31,8 +34,9 @@ export const findId = async (e, formData, navigate) => {
 
   try {
     const response = await defaultAxios.post(endpoint, formData);
+    
     navigate('/found-id', {
-      state: { loginId: response.data.result.loginId },
+      state: { loginId: response?.data.result.loginId },
     });
   } catch (e) {
     if (!e.response.data.isSuccess) {
@@ -47,6 +51,7 @@ export const findPw = async (e, formData, navigate) => {
 
   try {
     await defaultAxios.post(endpoint, formData);
+    
     navigate('/found-pw', {
       state: { email: formData.email },
     });
