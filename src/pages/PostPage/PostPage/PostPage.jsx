@@ -7,6 +7,8 @@ import { getPostContent, deletePost, updatePoint } from '@/apis';
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import { useLike, useScrap, useToast } from '@/hooks';
 
+import { NotFoundPage } from '@/pages/NotFoundPage';
+
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
 import { DeleteModal, OptionModal } from '@/components/Modal/index.js';
@@ -90,6 +92,10 @@ export default function PostPage() {
         <FetchLoading>게시글 불러오는 중...</FetchLoading>
       </>
     );
+  }
+
+  if (error?.response.status === 404) {
+    return <NotFoundPage />;
   }
 
   if (error) {

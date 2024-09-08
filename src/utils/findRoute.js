@@ -1,5 +1,9 @@
 export const findRouteByPath = (path, routeList) => {
   for (const route of routeList) {
+    if (route.path === '*') {
+      continue;
+    }
+
     const routePathRegex = new RegExp(
       '^' + route.path?.replace(/:\w+/g, '\\w+') + '$'
     );
@@ -15,4 +19,7 @@ export const findRouteByPath = (path, routeList) => {
       }
     }
   }
+
+  const notFoundRoute = routeList[routeList.length - 1];
+  return notFoundRoute;
 };
