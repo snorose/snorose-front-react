@@ -22,7 +22,8 @@ export default function DeleteModal({ id, isOpen, setIsOpen, redBtnFunction }) {
         <div className={styles.deleteOrBack}>
           <div
             className={styles.redBtn}
-            onClick={() => {
+            onClick={(event) => {
+              event.stopPropagation();
               redBtnFunction();
               setIsOpen(false);
             }}

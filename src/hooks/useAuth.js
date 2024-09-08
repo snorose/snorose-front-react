@@ -9,7 +9,7 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const hasToken = !!localStorage.getItem('token');
+  const hasToken = !!localStorage.getItem('accessToken');
 
   const {
     data: userInfoData,
@@ -36,7 +36,7 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
   }, [isFetching, isSuccess]);
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
     navigate('/');
   };
 
@@ -45,14 +45,14 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
       await withdrawAccount({
         currentPassword,
       });
-      toast(TOAST.WITHDRAW_ACCOUNT_SUCCESS);
+      toast(TOAST.USER.withdraw);
       logout();
 
       if (onSuccess !== undefined) {
         onSuccess();
       }
-    } catch {
-      toast(TOAST.WITHDRAW_ACCOUNT_ERROR);
+    } catch ({ response }) {
+      toast(response.data.message);
 
       if (onError !== undefined) {
         onError();

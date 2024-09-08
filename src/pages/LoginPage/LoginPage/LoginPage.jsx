@@ -4,11 +4,12 @@ import { Icon } from '../../../components/Icon';
 import Input from '../../../components/Input/Input/Input';
 import { Submit } from '../../../components/Submit';
 import snoroseLogo from '../../../assets/images/snoroseLogo.svg';
-import { LoginAPI } from '@/apis';
+import { useLogin } from '@/apis';
 import styles from './LoginPage.module.css';
 
 export default function Login() {
   const navigate = useNavigate();
+  const login = useLogin();
   const [formData, setFormData] = useState({ loginId: '', password: '' });
   const [errmsg, setErrmsg] = useState(false);
   const [visBtnClick, setVisBtnClick] = useState(false);
@@ -19,9 +20,7 @@ export default function Login() {
 
   return (
     <div className={styles.loginframe}>
-      <form
-        onSubmit={(e) => LoginAPI(e, setUser, setErrmsg, formData, navigate)}
-      >
+      <form onSubmit={(e) => login(e, setUser, setErrmsg, formData, navigate)}>
         <div className={styles.prev}>
           <Link to='/'>
             <Icon id='arrow-left' width='1.162rem' height='1.048rem' />
@@ -92,12 +91,6 @@ export default function Login() {
             <Icon id='angle-right' width='1.5rem' height='1.5rem' />
           </div>
         </div>
-        {errmsg && (
-          <div className={styles.errFrame}>
-            <p>아이디 혹은 비밀번호가</p>
-            <p>일치하지 않습니다</p>
-          </div>
-        )}
       </form>
     </div>
   );

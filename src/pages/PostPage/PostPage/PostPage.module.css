@@ -44,6 +44,7 @@
 
 .dot3 {
   padding: 10px;
+  cursor: pointer;
 }
 
 .title {
@@ -83,6 +84,12 @@
   display: flex;
   justify-content: end;
   padding: 0 10px 0 0;
+
+  div:nth-of-type(2):hover,
+  div:nth-of-type(3):hover {
+    background-color: #ffffffcc;
+    cursor: pointer;
+  }
 }
 
 .count {
@@ -96,8 +103,4 @@
   font-size: 11px;
   line-height: 150%;
   letter-spacing: -0.5px;
-}
-
-.count:hover {
-  background-color: #ffffffCC;
 }

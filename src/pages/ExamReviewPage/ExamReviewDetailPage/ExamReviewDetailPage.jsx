@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
-import { deleteExamReview, getReviewDetail, updatePoint } from '@/apis';
+import { deleteExamReview, getReviewDetail } from '@/apis';
 
 import { useScrap } from '@/hooks';
 import { useToast } from '@/hooks';
+
+import { NotFoundPage } from '@/pages/NotFoundPage';
 
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
@@ -18,16 +20,7 @@ import { ReviewDownload } from '@/components/ReviewDownload';
 import { dateFormat } from '@/utils/date.js';
 import { convertToObject } from '@/utils/convertDS.js';
 
-import {
-  LECTURE_TYPES,
-  POINT_CATEGORY_ENUM,
-  POINT_SOURCE_ENUM,
-  SEMESTERS,
-  EXAM_TYPES,
-  TOAST,
-} from '@/constants';
-
-import { USER } from '@/dummy/data';
+import { LECTURE_TYPES, SEMESTERS, EXAM_TYPES, TOAST } from '@/constants';
 
 import styles from './ExamReviewDetailPage.module.css';
 
@@ -40,7 +33,7 @@ export default function ExamReviewDetailPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { data } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ['reviewDetail', postId],
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
@@ -49,21 +42,22 @@ export default function ExamReviewDetailPage() {
   const deleteReview = useMutation({
     mutationFn: () => deleteExamReview(postId),
     onSuccess: () => {
-      queryClient.invalidateQueries(['reviewList']);
+      queryClient.removeQueries(['reviewList']);
       queryClient.removeQueries(['reviewDetail', postId]);
       queryClient.removeQueries(['reviewFile', postId]);
 
-      updatePoint({
-        userId: USER.userId, // userId로 변경 필요
-        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DELETE,
-        source: POINT_SOURCE_ENUM.REVIEW,
-        sourceId: postId,
-      }).then(({ status }) => {
-        if (status === 200) {
-          toast(TOAST.EXAM_REVIEW_DELETE);
-        }
-      });
-      navigate('/board/exam-review');
+      toast(TOAST.EXAM_REVIEW.delete);
+      navigate('/board/exam-review', { replace: true });
+    },
+    onError: ({ response }) => {
+      const { status } = response;
+
+      if (status === 500) {
+        toast(TOAST.ERROR.SERVER);
+        return;
+      }
+
+      toast(response.data.message);
     },
   });
 
@@ -72,6 +66,11 @@ export default function ExamReviewDetailPage() {
 
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+
+  if (error?.response.status === 404) {
+    return <NotFoundPage />;
+  }
 
   if (data === undefined) return null;
 
@@ -80,7 +79,6 @@ export default function ExamReviewDetailPage() {
       state: data,
       replace: true,
     });
-  const remove = () => deleteReview.mutate();
 
   const {
     commentCount,
@@ -128,15 +126,15 @@ export default function ExamReviewDetailPage() {
               />
             )}
           </div>
-          {isWriter && (
-            <Icon
-              onClick={() => setIsOptionModalOpen(true)}
-              id='ellipsis-vertical'
-              width='3'
-              height='11'
-              style={{ padding: '0 4px', cursor: 'pointer' }}
-            />
-          )}
+          <Icon
+            className={styles.more}
+            onClick={() =>
+              isWriter ? setIsOptionModalOpen(true) : setIsReportModalOpen(true)
+            }
+            id='ellipsis-vertical'
+            width='3'
+            height='11'
+          />
         </div>
         <div className={styles.title}>{title}</div>
         <div className={styles.content}>
@@ -196,7 +194,13 @@ export default function ExamReviewDetailPage() {
         id='exam-review-delete'
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
-        redBtnFunction={remove}
+        redBtnFunction={() => deleteReview.mutate()}
+      />
+      <OptionModal
+        id='report'
+        isOpen={isReportModalOpen}
+        setIsOpen={setIsReportModalOpen}
+        closeFn={() => setIsReportModalOpen(false)}
       />
     </main>
   );

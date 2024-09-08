@@ -1,7 +1,7 @@
 import App from '@/App';
 import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
-import { AlertPage } from '@/pages/AlertPage';
+// import { AlertPage } from '@/pages/AlertPage';
 import { AttendancePage } from '@/pages/AttendancePage';
 import { BoardListPage, BoardPage } from '@/pages/BoardPage';
 import {
@@ -15,6 +15,8 @@ import {
   DownloadExamReviewPage,
   PrivacyPolicyPage,
   ServicePolicyPage,
+  ScrapPage,
+  ScrapExamReviewPage,
 } from '@/pages/MyPage';
 import { ErrorPage } from '@/pages/ErrorPage';
 import { ExamReviewDetailPage, ExamReviewPage } from '@/pages/ExamReviewPage';
@@ -30,9 +32,12 @@ import {
   NotFoundIdPage,
   NotFoundPwPage,
 } from '@/pages/LoginPage';
-import SignUpPage from './pages/LoginPage/SignUpPage/SignUpPage';
-import SignUpSuccessPage from './pages/LoginPage/SignUpPage/SignUpSuccessPage/SignUpSuccessPage';
-import SignUpFailurePage from './pages/LoginPage/SignUpPage/SignUpPageStages/SignUpFailure/SignUpFailurePage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
+import {
+  SignUpPage,
+  SignUpSuccessPage,
+  SignUpFailurePage,
+} from '@/pages/LoginPage';
 import { NoticeListPage } from '@/pages/NoticeListPage';
 import { MainPage } from '@/pages/MainPage';
 import {
@@ -44,8 +49,6 @@ import {
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/constants';
-import ScrapPage from './pages/MyPage/ActivityPage/ScrapPage';
-import ScrapExamReviewPage from './pages/MyPage/ActivityPage/ScrapExamReviewPage';
 
 const getRolesForReadBoard = (boardPath) => {
   switch (boardPath) {
@@ -470,6 +473,13 @@ export const routeList = [
       {
         path: '/signup/failure',
         element: <SignUpFailurePage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
         meta: {
           hideNav: true,
         },

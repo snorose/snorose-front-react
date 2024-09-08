@@ -15,7 +15,7 @@ export default function Toast({ toast }) {
     }, 3000);
 
     const unmount = setTimeout(() => {
-      removeToast(toast);
+      removeToast(toast.message);
     }, 3500);
 
     return () => {

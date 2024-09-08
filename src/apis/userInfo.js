@@ -1,67 +1,67 @@
 import { authAxios } from '../axios';
 
 export const withdrawAccount = async (body) => {
-  const { data } = await authAxios.delete('/v1/users/withdraw', {
+  const response = await authAxios.delete('/v1/users/withdraw', {
     data: body,
   });
 
-  return data;
+  return response?.data;
 };
 
 export const getMyPageUserInfo = async () => {
-  const { data } = await authAxios.get('/v1/users/mypage');
+  const response = await authAxios.get('/v1/users/mypage');
 
-  return data;
+  return response?.data;
 };
 
 export const updateUserInfo = async (body) => {
-  const { data } = await authAxios.patch('/v1/users/mypage', body);
+  const response = await authAxios.patch('/v1/users/mypage', body);
 
-  return data;
+  return response?.data;
 };
 
 export const updatePassword = async (body) => {
-  const { data } = await authAxios.patch('/v1/users/mypage/password', body);
+  const response = await authAxios.patch('/v1/users/mypage/password', body);
 
-  return data;
+  return response?.data;
 };
 
 export const getMyPostList = async (params = {}) => {
-  const { data } = await authAxios.get('/v1/users/mypage/posts', {
+  const response = await authAxios.get('/v1/users/mypage/posts', {
     params,
   });
 
-  return data.result;
+  return response?.data.result;
 };
 
 export const getMyCommentList = async (params = {}) => {
-  const { data } = await authAxios.get('/v1/users/mypage/comments', {
+  const response = await authAxios.get('/v1/users/mypage/comments', {
     params,
   });
 
-  return data.result;
+  return response?.data.result;
 };
 
 export const getMyReviewFileList = async (params = {}) => {
-  const { data } = await authAxios.get('/v1/users/mypage/reviewFileList', {
+  const response = await authAxios.get('/v1/users/mypage/reviewFileList', {
     params,
   });
 
-  return data.result;
+  return response?.data.result;
 };
 
 export const getMyScrapReviewList = async (params) => {
-  const { data } = await authAxios.get('/v1/scraps/reviews', {
+  const response = await authAxios.get('/v1/scraps/reviews', {
     params,
   });
 
-  return data.result;
+  return response?.data.result;
 };
 
 export const getMyScrapPostList = async (params) => {
-  const { data } = await authAxios.get('/v1/scraps/posts', {
+  const response = await authAxios.get('/v1/scraps/posts', {
     params,
   });
 
-  return data.result;
+  return response?.data.result;
 };

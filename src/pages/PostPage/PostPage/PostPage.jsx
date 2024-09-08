@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { getPostContent, deletePost, updatePoint } from '@/apis';
+import { getPostContent, deletePost } from '@/apis';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import { useLike, useScrap, useToast } from '@/hooks';
+
+import { NotFoundPage } from '@/pages/NotFoundPage';
 
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
@@ -16,14 +18,7 @@ import { InputBar } from '@/components/InputBar';
 
 import { timeAgo } from '@/utils';
 
-import {
-  BOARD_MENUS,
-  POINT_CATEGORY_ENUM,
-  POINT_SOURCE_ENUM,
-  TOAST,
-} from '@/constants';
-
-import { USER } from '@/dummy/data';
+import { BOARD_MENUS, TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
 
@@ -63,24 +58,11 @@ export default function PostPage() {
       const response = await deletePost(currentBoard.id, postId);
 
       if (response.status === 200) {
-        const pointResponse = await updatePoint({
-          userId: USER.userId, // 추후 id 연결 필요
-          category: POINT_CATEGORY_ENUM.POST_DELETE,
-          source: POINT_SOURCE_ENUM.POST,
-          sourceId: postId,
-        });
-
-        if (pointResponse.status === 200) {
-          toast(TOAST.POST_DELETE_SUCCESS);
-          navigate(`/board/${currentBoard.textId}`);
-        } else {
-          throw new Error('Point update failed');
-        }
-      } else {
-        throw new Error('Post delete failed');
+        toast(TOAST.POST.delete);
+        navigate(`/board/${currentBoard.textId}`);
       }
-    } catch (error) {
-      toast(TOAST.POST_DELETE_FAIL);
+    } catch ({ response }) {
+      toast(response.data.message);
     } finally {
       setIsDeleteModalOpen(false);
     }
@@ -94,6 +76,10 @@ export default function PostPage() {
         <FetchLoading>게시글 불러오는 중...</FetchLoading>
       </>
     );
+  }
+
+  if (error?.response.status === 404) {
+    return <NotFoundPage />;
   }
 
   if (error) {
