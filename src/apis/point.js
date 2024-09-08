@@ -1,4 +1,4 @@
-import { authAxios } from '@/axios/index.js';
+import { authAxios } from '@/axios';
 
 export const updatePoint = async ({
   userId,
@@ -18,16 +18,16 @@ export const updatePoint = async ({
 };
 
 export const getPointList = async (params) => {
-  const { data } = await authAxios.get('/v1/points/log', {
+  const response = await authAxios.get('/v1/points/log', {
     params,
   });
 
-  return data.result;
+  return response?.data.result;
 };
 
 export const getMonthlyAttendanceHistory = async ({ year, month }) => {
   const response = await authAxios.get('/v1/points/attendance', {
     params: { year, month },
   });
-  return response.data.result;
+  return response?.data.result;
 };

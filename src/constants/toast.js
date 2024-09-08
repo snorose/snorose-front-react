@@ -34,6 +34,10 @@ const TOAST = Object.freeze({
     notCompleted: '모두 입력해주세요',
     invalidEmail: '올바른 이메일을 입력해주세요',
   },
+  ERROR: {
+    SERVER: '서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요',
+    NETWORK: '네트워크 에러. 잠시 후 다시 시도해주세요',
+  },
 });
 
 export { TOAST };

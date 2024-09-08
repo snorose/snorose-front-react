@@ -6,4 +6,5 @@ export { default as FoundPwPage } from './FoundPwPage/FoundPwPage';
 export { default as NotFoundIdPage } from './NotFoundIdPage/NotFoundIdPage';
 export { default as NotFoundPwPage } from './NotFoundPwPage/NotFoundPwPage';
 export { default as SignUpPage } from './SignUpPage/SignUpPage';
-export { default as SignUpSucessPage } from './SignUpPage/SignUpSuccessPage/SignUpSuccessPage';
+export { default as SignUpSuccessPage } from './SignUpPage/SignUpSuccessPage/SignUpSuccessPage';
+export { default as SignUpFailurePage } from './SignUpPage/SignUpPageStages/SignUpFailure/SignUpFailurePage';

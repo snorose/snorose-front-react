@@ -5,13 +5,13 @@ export const getPostList = async (boardId, page = 0) => {
   const response = await authAxios.get(
     `/v1/boards/${boardId}/posts/postlist?page=${page}`
   );
-  return response.data.result;
+  return response?.data.result;
 };
 
 // 게시글 상세 조회
 export const getPostContent = async (boardId, postId) => {
   const response = await authAxios.get(`/v1/boards/${boardId}/posts/${postId}`);
-  return response.data.result;
+  return response?.data.result;
 };
 
 // 게시글 등록

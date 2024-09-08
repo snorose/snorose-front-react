@@ -8,3 +8,5 @@ export { default as ViewPointListPage } from './ViewPointListPage/ViewPointListP
 export { default as MyPostPage } from './ActivityPage/MyPostPage';
 export { default as CommentPage } from './ActivityPage/CommentPage';
 export { default as DownloadExamReviewPage } from './ActivityPage/DownloadExamReviewPage';
+export { default as ScrapPage } from './ActivityPage/ScrapPage';
+export { default as ScrapExamReviewPage } from './ActivityPage/ScrapExamReviewPage';
