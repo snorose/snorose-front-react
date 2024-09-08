@@ -14,7 +14,8 @@ export const ROUTE = Object.freeze({
   examReviewDetail: (postId) => `/board/exam-review/post/${postId}`,
   examReviewWrite: '/board/exam-review-write',
   examReviewEdit: (postId) => `/board/exam-review/${postId}/edit`,
-  examReviewSearch: (keyword) => `/board/exam-review/search/${keyword}`,
+  examReviewSearch: (keyword) =>
+    `/board/exam-review/search/${encodeURIComponent(keyword)}`,
   mypage: '/my-page',
   mypagePassword: '/my-page/password',
   mypageEditInfo: '/my-page/edit-info',

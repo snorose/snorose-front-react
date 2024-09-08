@@ -10,8 +10,13 @@ function App() {
   const { keyword } = useParams();
 
   const checkedPath = keyword
-    ? pathname.replace(`/search/:keyword?`, `/search/${keyword}`)
+    ? pathname.replace(
+        /\/search\/[^/]+/,
+        `/search/${encodeURIComponent(keyword)}`
+      )
     : pathname;
+
+  console.log(checkedPath);
 
   const currentRoute = findRouteByPath(checkedPath, routeList);
   const hideNav = currentRoute?.meta?.hideNav ?? false;

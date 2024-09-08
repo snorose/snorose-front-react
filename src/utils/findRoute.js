@@ -1,14 +1,20 @@
 export const findRouteByPath = (path, routeList) => {
+  const decodedPath = decodeURIComponent(path);
+
   for (const route of routeList) {
-    if (route.path === '*') {
+    if (!route.path || route.path === '*') {
       continue;
     }
-
     const routePathRegex = new RegExp(
-      '^' + route.path?.replace(/:\w+/g, '\\w+') + '$'
+      '^' +
+        route.path
+          .replace(/\/:\w+(\?)?/g, '/([^/]+)?')
+          .replace(/\/\*/g, '(/.*)?') +
+        '$',
+      'i'
     );
 
-    if (routePathRegex.test(path)) {
+    if (routePathRegex.test(decodedPath)) {
       return route;
     }
 
