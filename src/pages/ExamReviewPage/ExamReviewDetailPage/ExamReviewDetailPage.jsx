@@ -69,17 +69,41 @@ export default function ExamReviewDetailPage() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
-  if (error?.response.status === 404) {
-    return <NotFoundPage />;
-  }
-
-  if (data === undefined) return null;
-
   const edit = () =>
     navigate(`/board/exam-review/${postId}/edit`, {
       state: data,
       replace: true,
     });
+
+  console.log(isLoading);
+
+  if (isLoading) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading>게시글 불러오는 중...</FetchLoading>
+      </>
+    );
+  }
+
+  if (error?.response.status === 404) {
+    return <NotFoundPage />;
+  }
+
+  if (error?.response.status === 404) {
+    return <NotFoundPage />;
+  }
+
+  if (isError) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading animation={false}>
+          게시글을 불러오지 못했습니다.
+        </FetchLoading>
+      </>
+    );
+  }
 
   const {
     commentCount,
@@ -100,31 +124,7 @@ export default function ExamReviewDetailPage() {
     semester,
     title,
     userDisplay,
-  } = data;
-
-  if (isLoading) {
-    return (
-      <>
-        <BackAppBar />
-        <FetchLoading>게시글 불러오는 중...</FetchLoading>
-      </>
-    );
-  }
-
-  if (error?.response.status === 404) {
-    return <NotFoundPage />;
-  }
-
-  if (isError) {
-    return (
-      <>
-        <BackAppBar />
-        <FetchLoading animation={false}>
-          게시글을 불러오지 못했습니다.
-        </FetchLoading>
-      </>
-    );
-  }
+  } = data ?? {};
 
   return (
     <main>
