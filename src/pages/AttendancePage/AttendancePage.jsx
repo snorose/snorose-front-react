@@ -23,6 +23,7 @@ export default function AttendancePage() {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const [attendanceHistoryByMonth, setAttendanceHistoryByMonth] = useState([]);
+  const [disabled, setDisabled] = useState(false);
   const { title, content } =
     attendanceHistoryByMonth?.length > 0
       ? ATTENDANCE_MESSAGE.CONSECUTIVE
@@ -38,7 +39,9 @@ export default function AttendancePage() {
         </div>
         <button
           className={styles.attendanceButton}
+          disabled={disabled}
           onClick={() => {
+            setDisabled(true);
             updatePoint({
               userId: USER.userId, // userId 교체 필요함
               category: POINT_CATEGORY_ENUM.ATTENDANCE,
@@ -57,6 +60,9 @@ export default function AttendancePage() {
               })
               .catch(({ response }) => {
                 toast(response.data.message);
+              })
+              .finally(() => {
+                setDisabled(false);
               });
           }}
         >
