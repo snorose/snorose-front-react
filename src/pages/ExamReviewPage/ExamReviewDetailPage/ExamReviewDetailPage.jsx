@@ -12,6 +12,7 @@ import { NotFoundPage } from '@/pages/NotFoundPage';
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
 import { DeleteModal, OptionModal } from '@/components/Modal';
+import { FetchLoading } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 import { InputBar } from '@/components/InputBar';
 import { ReviewContentItem } from '@/components/ReviewContentItem';
@@ -33,7 +34,7 @@ export default function ExamReviewDetailPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { data, error } = useQuery({
+  const { data, error, isError, isLoading } = useQuery({
     queryKey: ['reviewDetail', postId],
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
@@ -100,6 +101,30 @@ export default function ExamReviewDetailPage() {
     title,
     userDisplay,
   } = data;
+
+  if (isLoading) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading>게시글 불러오는 중...</FetchLoading>
+      </>
+    );
+  }
+
+  if (error?.response.status === 404) {
+    return <NotFoundPage />;
+  }
+
+  if (isError) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading animation={false}>
+          게시글을 불러오지 못했습니다.
+        </FetchLoading>
+      </>
+    );
+  }
 
   return (
     <main>
