@@ -1,7 +1,7 @@
-import { authAxios } from '../axios';
+import { authAxios, defaultAxios } from '../axios';
 
 export const getHomeNotice = async () => {
-  const response = await authAxios.get('/v1/notices/home');
+  const response = await defaultAxios.get('/v1/notices/home');
   return response?.data.result;
 };
 
