@@ -87,7 +87,12 @@ export default function BoardListPage() {
 
   return (
     <div className={styles.container}>
-      <BackAppBar title={currentBoard.title} hasMenu hasSearch backNavTo={'/board'}/>
+      <BackAppBar
+        title={currentBoard.title}
+        hasMenu
+        hasSearch
+        backNavTo={'/board'}
+      />
       <div className={styles.top}>
         <div
           className={styles.notification_bar}
