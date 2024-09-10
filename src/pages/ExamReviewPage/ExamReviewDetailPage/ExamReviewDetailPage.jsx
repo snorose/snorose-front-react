@@ -90,10 +90,6 @@ export default function ExamReviewDetailPage() {
     return <NotFoundPage />;
   }
 
-  if (error?.response.status === 404) {
-    return <NotFoundPage />;
-  }
-
   if (isError) {
     return (
       <>
