@@ -1,57 +1,39 @@
-import { useEffect, useMemo } from 'react';
-import styles from './ViewPointListPage.module.css';
-import { BackAppBar, Icon } from '@/components';
-import { useAuth } from '@/hooks';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { getPointList } from '@/apis';
-import { useInView } from 'react-intersection-observer';
 import { format } from 'date-fns';
+
+import { getPointList } from '@/apis';
+
+import { useAuth, usePagination } from '@/hooks';
+
+import { BackAppBar, FetchLoading, Icon } from '@/components';
+
 import { POINT_CATEGORY_KOREAN_ENUM } from '@/constants/point';
 
+import styles from './ViewPointListPage.module.css';
+
 export default function ViewPointListPage() {
-  const { userInfo, status } = useAuth({
+  const { userInfo } = useAuth({
     isRequiredAuth: true,
   });
-  const { ref, inView } = useInView();
 
-  const { data, isPending, isError, hasNextPage, fetchNextPage } =
-    useInfiniteQuery({
-      queryKey: ['getPointList'],
-      queryFn: ({ pageParam }) => getPointList({ page: pageParam }),
-      // 서버 API 수정 후 1 > 0으로 값 수정 필요
-      initialPageParam: 1,
-      getNextPageParam: (lastPage, _, lastPageParam) => {
-        if (lastPage?.hasNext) {
-          return null;
-        }
+  const { data, ref, isLoading, isError } = usePagination({
+    queryKey: ['getPointList'],
+    queryFn: ({ pageParam }) => getPointList({ page: pageParam }),
+  });
 
-        if (lastPage?.length === 0) {
-          return null;
-        }
+  if (isLoading) {
+    return <FetchLoading>불러오는 중</FetchLoading>;
+  }
 
-        return lastPageParam + 1;
-      },
-    });
+  if (isError) {
+    return (
+      <FetchLoading animation={false}>잠시 후 다시 시도해 주세요</FetchLoading>
+    );
+  }
 
-  const pointList = useMemo(() => {
-    return data && !data.pages.includes(undefined)
+  const pointList =
+    data && !data.pages.includes(undefined)
       ? data.pages.flatMap((page) => page.data)
       : [];
-  }, [data]);
-
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-  }, [inView, hasNextPage, fetchNextPage]);
-
-  if (status === 'loading' || isPending) {
-    return <div>loading...</div>;
-  }
-
-  if (status === 'unauthenticated' || isError) {
-    return null;
-  }
 
   return (
     <main className={styles.viewPointListPage}>
@@ -77,7 +59,7 @@ export default function ViewPointListPage() {
                 <li
                   key={id}
                   className={styles.pointBox}
-                  ref={pointList.length - 2 === index ? ref : undefined}
+                  ref={pointList.length - 1 === index ? ref : undefined}
                 >
                   <div className={styles.pointIconContentWrapper}>
                     <Icon id={difference > 0 ? 'heart-plus' : 'heart-minus'} />
