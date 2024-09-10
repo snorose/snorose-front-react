@@ -2,15 +2,17 @@ import { useState } from 'react';
 
 import { verifySookmyungPortal } from '@/apis';
 
+import { useToast } from '@/hooks/index.js';
+
 import { Button, Input } from '@/pages/SnoroseVerifyPage';
 
-import { InputPassword } from '@/components/index.js';
+import { InputPassword } from '@/components';
 
-import { isEmailValid } from '@/utils/validate.js';
+import { isEmailValid } from '@/utils';
+
+import { TOAST } from '@/constants';
 
 import styles from './VerifyPage.module.css';
-import { useToast } from '@/hooks/index.js';
-import { TOAST } from '@/constants/toast.js';
 
 export default function VerifyPage({ setStep }) {
   const { toast } = useToast();

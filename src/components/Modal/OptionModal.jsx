@@ -1,6 +1,8 @@
+import { Options } from '@/components/Modal';
+
+import { MODAL_OPTIONS } from '@/constants';
+
 import styles from './Modal.module.css';
-import { MODAL_OPTIONS } from '../../constants/modalOptions';
-import Options from './Options';
 
 export default function OptionModal({
   id,

@@ -1,12 +1,15 @@
-import { React, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import StageDots from '../../../components/StageDots/StageDots';
-import { Icon } from '../../../components/Icon';
+
+import { Icon } from '@/components/Icon';
+import { StageDots } from '@/components/StageDots';
+
 import {
   AccountInfoPage,
   AuthorizationPage,
   UserInfoPage,
-} from './SignUpPageStages';
+} from '@/pages/LoginPage/SignUpPage/SignUpPageStages';
+
 import styles from './SignUpPage.module.css';
 
 export default function SignUpPage() {

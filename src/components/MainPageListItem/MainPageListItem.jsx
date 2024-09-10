@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
 
+<<<<<<< Updated upstream
 import { Icon } from '../Icon';
+=======
+import { useAuth } from '@/hooks';
+
+import { Icon } from '@/components/Icon';
+>>>>>>> Stashed changes
 
 import { USER } from '../../dummy/data';
 

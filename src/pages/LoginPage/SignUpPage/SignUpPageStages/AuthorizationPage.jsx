@@ -1,10 +1,10 @@
-import { React, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { defaultAxios } from '@/axios';
 
 import { sendUser } from '@/apis';
 
-import Input from '@/components/Input/Input/Input';
+import { Input } from '@/components/Input';
 import { Submit } from '@/components/Submit';
 
 import styles from './AuthorizationPage.module.css';

@@ -1,11 +1,15 @@
 import { useEffect, useMemo } from 'react';
-import styles from './ActivityPage.module.css';
-import { BackAppBar, PostBar, Sponsor } from '@/components';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { getMyScrapReviewList } from '@/apis';
-import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
+
+import { getMyScrapReviewList } from '@/apis';
+
+import { BackAppBar, PostBar, Sponsor } from '@/components';
+
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
+
+import styles from './ActivityPage.module.css';
 
 export default function ScrapExamReviewPage() {
   const { ref, inView } = useInView();

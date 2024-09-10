@@ -1,15 +1,16 @@
 import { useParams } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
-import { useToast } from '@/hooks';
-import { TOAST } from '@/constants';
-
 import {
   deleteComment as remove,
   getCommentList,
   postComment as post,
   editComment as edit,
 } from '@/apis';
+
+import { useToast } from '@/hooks';
+
+import { TOAST } from '@/constants';
 
 export default function useComment() {
   const { postId } = useParams();

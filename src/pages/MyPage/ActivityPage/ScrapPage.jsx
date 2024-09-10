@@ -1,12 +1,17 @@
 import { useEffect, useMemo } from 'react';
-import styles from './ActivityPage.module.css';
-import { BackAppBar, PostBar, Sponsor } from '@/components';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { getMyScrapPostList } from '@/apis';
-import { useInView } from 'react-intersection-observer';
-import { getBoardTitleToTextId } from '@/utils';
 import { Link } from 'react-router-dom';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
+
+import { getMyScrapPostList } from '@/apis';
+
+import { BackAppBar, PostBar, Sponsor } from '@/components';
+
+import { getBoardTitleToTextId } from '@/utils';
+
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
+
+import styles from './ActivityPage.module.css';
 
 export default function ScrapPage() {
   const { ref, inView } = useInView();

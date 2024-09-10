@@ -1,5 +1,14 @@
+<<<<<<< Updated upstream
 import { Icon } from '../../Icon';
 import { USER } from '../../../dummy/data';
+=======
+import { useAuth } from '@/hooks';
+
+import { Icon } from '@/components/Icon';
+
+import { USER_STATUS } from '@/constants';
+
+>>>>>>> Stashed changes
 import styles from './CategoryBoardItem.module.css';
 
 export default function CategoryBoardItem({ icon, name, description }) {

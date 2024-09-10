@@ -1,10 +1,12 @@
 import TextareaAutosize from 'react-textarea-autosize';
+
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
 import { useComment, useToast } from '@/hooks';
-import { TOAST } from '@/constants';
 
-import { Icon } from '../../components/Icon';
+import { Icon } from '@/components/Icon';
+
+import { TOAST } from '@/constants';
 
 import styles from './InputBar.module.css';
 

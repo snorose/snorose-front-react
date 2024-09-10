@@ -1,10 +1,17 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Icon } from '../../../components/Icon';
-import { Input } from '../../../components/Input';
-import { Submit } from '../../../components/Submit';
-import { checkSpecialChar, checkSookmyungMail } from '../FindIdPage/inputCheck';
+
 import { findPw } from '@/apis';
+
+import { Icon } from '@/components/Icon';
+import { Input } from '@/components/Input';
+import { Submit } from '@/components/Submit';
+
+import {
+  checkSpecialChar,
+  checkSookmyungMail,
+} from '@/pages/LoginPage/FindIdPage/inputCheck.js';
+
 import styles from './FindPwPage.module.css';
 
 export default function FindPwPage() {

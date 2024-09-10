@@ -1,6 +1,15 @@
+<<<<<<< Updated upstream
 import { ROLE } from '../../../constants';
 import { USER } from '../../../dummy/data';
 import PROFILE from '../../dummy/images/profile.png';
+=======
+import { useAuth } from '@/hooks';
+
+import { ROLE, USER_STATUS } from '@/components/constants';
+
+import PROFILE from '@/dummy/images/profile.png';
+
+>>>>>>> Stashed changes
 import styles from './CategoryBoardItemDetail.module.css';
 
 export default function CategoryBoardItemDetail({

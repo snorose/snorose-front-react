@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Icon } from '../../../components/Icon';
-import { Input } from '../../../components/Input';
-import { Submit } from '../../../components/Submit';
+
+import { findId } from '@/apis';
+
+import { Icon } from '@/components/Icon';
+import { Input } from '@/components/Input';
+import { Submit } from '@/components/Submit';
+
 import {
   checkSpecialChar,
   checkSookmyungMail,
   checkStudentNum,
-} from './inputCheck';
-import { findId } from '@/apis';
+} from '@/pages/LoginPage/FindIdPage/inputCheck.js';
+
 import styles from './FindIdPage.module.css';
 
 export default function FindIdPage() {

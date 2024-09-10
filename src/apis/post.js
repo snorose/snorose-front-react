@@ -1,4 +1,4 @@
-import { authAxios } from '../axios';
+import { authAxios } from '@/axios';
 
 // 게시글 리스트 가져오기
 export const getPostList = async (boardId, page = 0) => {

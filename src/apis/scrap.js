@@ -1,4 +1,4 @@
-import { authAxios } from '@/axios/index.js';
+import { authAxios } from '@/axios';
 
 export const scrap = async ({ postId }) => {
   const response = await authAxios.post(`/v1/scraps/posts/${postId}`);

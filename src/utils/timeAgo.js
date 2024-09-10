@@ -4,7 +4,7 @@ import {
   DAY_SECONDS,
   MONTH_SECONDS,
   YEAR_SECONDS,
-} from '../constants/seconds.js';
+} from '@/constants';
 
 export function timeAgo(date) {
   const currentDate = new Date();

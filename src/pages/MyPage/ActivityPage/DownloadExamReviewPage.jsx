@@ -1,11 +1,15 @@
 import { useEffect, useMemo } from 'react';
-import styles from './ActivityPage.module.css';
-import { BackAppBar, PostBar, Sponsor } from '@/components';
+import { Link } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
+
 import { getMyReviewFileList } from '@/apis';
-import { Link } from 'react-router-dom';
+
+import { BackAppBar, PostBar, Sponsor } from '@/components';
+
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
+
+import styles from './ActivityPage.module.css';
 
 export default function DownloadExamReviewPage() {
   const { ref, inView } = useInView();

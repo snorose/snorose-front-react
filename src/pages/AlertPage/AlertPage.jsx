@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
+import { Icon } from '@/components/Icon';
+import { MenuIcon } from '@/components/MenuIcon';
+
 import styles from './AlertPage.module.css';
-import Icon from '../../components/Icon/Icon.jsx';
-import { MenuIcon } from '../../components/MenuIcon';
 
 const initialAlertData = [
   {

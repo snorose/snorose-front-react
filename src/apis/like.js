@@ -1,4 +1,4 @@
-import { authAxios } from '../axios';
+import { authAxios } from '@/axios';
 
 // 좋아요 추가 & 삭제 (type=posts or comments, typeId=postId or commentId)
 export const postLike = async (type, typeId) => {
