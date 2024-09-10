@@ -11,7 +11,7 @@ export default function ExamReviewList({ result }) {
 
   const reviewList =
     data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page)
+      ? data.pages.flatMap((page) => page.data)
       : [];
 
   if (isLoading) {
@@ -20,7 +20,7 @@ export default function ExamReviewList({ result }) {
 
   if (isError) {
     if (error.response.status === 404) {
-      return <div className={styles.error}>검색 결과가 없습니다</div>;
+      return;
     }
 
     return <div className={styles.error}>잠시 후 다시 시도해 주세요</div>;

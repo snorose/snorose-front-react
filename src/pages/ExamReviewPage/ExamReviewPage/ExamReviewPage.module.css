@@ -1,3 +1,9 @@
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .search {
   width: calc(100% - 1.25rem * 2);
   margin: 0 1.25rem 0.625rem 1.25rem;

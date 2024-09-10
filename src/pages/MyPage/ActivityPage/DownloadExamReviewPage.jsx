@@ -21,7 +21,9 @@ export default function DownloadExamReviewPage() {
     });
 
   const myReviewFileList = useMemo(() => {
-    return data ? data.pages.flatMap((page) => page) : [];
+    return data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page.data)
+      : [];
   }, [data]);
 
   useEffect(() => {

@@ -21,13 +21,21 @@ export default function ViewPointListPage() {
       // 서버 API 수정 후 1 > 0으로 값 수정 필요
       initialPageParam: 1,
       getNextPageParam: (lastPage, _, lastPageParam) => {
-        return lastPage.length > 0 ? lastPageParam + 1 : undefined;
+        if (lastPage?.hasNext) {
+          return null;
+        }
+
+        if (lastPage?.length === 0) {
+          return null;
+        }
+
+        return lastPageParam + 1;
       },
     });
 
   const pointList = useMemo(() => {
-    return data
-      ? data.pages.flatMap(({ pointLogResponse }) => pointLogResponse)
+    return data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page.data)
       : [];
   }, [data]);
 

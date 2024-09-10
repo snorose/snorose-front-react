@@ -52,7 +52,7 @@ export default function BoardListPage() {
 
   const postList =
     data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page)
+      ? data.pages.flatMap((page) => page.data)
       : [];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,7 +87,12 @@ export default function BoardListPage() {
 
   return (
     <div className={styles.container}>
-      <BackAppBar title={currentBoard.title} hasMenu hasSearch backNavTo={'/board'}/>
+      <BackAppBar
+        title={currentBoard.title}
+        hasMenu
+        hasSearch
+        backNavTo={'/board'}
+      />
       <div className={styles.top}>
         <div
           className={styles.notification_bar}
