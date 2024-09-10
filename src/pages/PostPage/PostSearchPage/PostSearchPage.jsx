@@ -24,7 +24,9 @@ export default function PostSearchPage() {
     });
 
   const postList =
-    data && data.pages ? data.pages.flatMap((page) => page || []) : [];
+    data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page.data)
+      : [];
 
   return (
     <div className={styles.container}>

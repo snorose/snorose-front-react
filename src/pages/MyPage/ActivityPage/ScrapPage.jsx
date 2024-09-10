@@ -22,7 +22,9 @@ export default function ScrapPage() {
     });
 
   const myScrapPostList = useMemo(() => {
-    return data ? data.pages.flatMap((page) => page) : [];
+    return data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page.data)
+      : [];
   }, [data]);
 
   useEffect(() => {
