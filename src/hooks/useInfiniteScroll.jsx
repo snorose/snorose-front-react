@@ -18,7 +18,7 @@ export default function useInfiniteScroll({ queryKey, queryFn }) {
     queryFn,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      if (lastPage?.hasNext) {
+      if (!lastPage?.hasNext) {
         return null;
       }
 
