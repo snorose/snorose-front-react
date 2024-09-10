@@ -50,7 +50,7 @@ export default function ExamReviewPage() {
   const { isLoading, handleChange, handleOnKeyDown, keyword } = searchResult;
 
   return (
-    <main className={styles.main}>
+    <main>
       <AppBar title='시험후기' />
       <Search
         className={styles.search}
