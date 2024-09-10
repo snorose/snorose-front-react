@@ -75,8 +75,6 @@ export default function ExamReviewDetailPage() {
       replace: true,
     });
 
-  console.log(isLoading);
-
   if (isLoading) {
     return (
       <>
@@ -84,10 +82,6 @@ export default function ExamReviewDetailPage() {
         <FetchLoading>게시글 불러오는 중...</FetchLoading>
       </>
     );
-  }
-
-  if (error?.response.status === 404) {
-    return <NotFoundPage />;
   }
 
   if (error?.response.status === 404) {

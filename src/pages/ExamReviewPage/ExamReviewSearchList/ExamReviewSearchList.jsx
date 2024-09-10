@@ -8,8 +8,11 @@ import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.
 
 export default function ExamReviewSearchList({ result }) {
   const { data, ref, isLoading, isError, error } = result || {};
-  const pages = data?.pages || [];
-  const searchList = pages.flatMap((page) => page);
+
+  const searchList =
+    data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page.data)
+      : [];
 
   if (isLoading) {
     return <FetchLoading>검색 중</FetchLoading>;

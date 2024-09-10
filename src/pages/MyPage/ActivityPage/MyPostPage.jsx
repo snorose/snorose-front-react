@@ -22,7 +22,9 @@ export default function MyPostPage() {
     });
 
   const myPostList = useMemo(() => {
-    return data ? data.pages.flatMap((page) => page) : [];
+    return data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page.data)
+      : [];
   }, [data]);
 
   useEffect(() => {

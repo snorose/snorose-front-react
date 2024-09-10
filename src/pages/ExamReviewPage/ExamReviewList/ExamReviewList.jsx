@@ -11,7 +11,7 @@ export default function ExamReviewList({ result }) {
 
   const reviewList =
     data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page)
+      ? data.pages.flatMap((page) => page.data)
       : [];
 
   if (isLoading) {

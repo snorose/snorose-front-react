@@ -52,7 +52,7 @@ export default function BoardListPage() {
 
   const postList =
     data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page)
+      ? data.pages.flatMap((page) => page.data)
       : [];
 
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -22,7 +22,9 @@ export default function CommentPage() {
     });
 
   const myCommentList = useMemo(() => {
-    return data ? data.pages.flatMap((page) => page) : [];
+    return data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page.data)
+      : [];
   }, [data]);
 
   useEffect(() => {
@@ -68,16 +70,15 @@ export default function CommentPage() {
               </p>
               <div className={styles.imageWrapper}>
                 <img
-                  src={frustratedWomanIllustration}
-                  alt='frustrated woman image'
                   className={styles.image}
+                  src={frustratedWomanIllustration}
+                  alt='frustrated woman'
                 />
               </div>
             </div>
           )}
         </article>
       </section>
-
       <div className={styles.sponsor}>
         <Sponsor className={styles.sponsorImage} />
       </div>
