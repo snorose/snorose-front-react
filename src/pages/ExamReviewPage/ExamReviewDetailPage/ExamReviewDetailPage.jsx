@@ -75,8 +75,6 @@ export default function ExamReviewDetailPage() {
       replace: true,
     });
 
-  console.log(isLoading);
-
   if (isLoading) {
     return (
       <>
