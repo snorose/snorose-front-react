@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { getReviewList } from '@/apis';
 
@@ -38,14 +38,7 @@ export default function ExamReviewPage() {
     queryFn: ({ pageParam }) => getReviewList(pageParam),
   });
 
-  const {
-    data: searchData,
-    ref,
-    isLoading,
-    handleChange,
-    handleOnKeyDown,
-    keyword,
-  } = useSearch({
+  const searchResult = useSearch({
     urlKeyword,
     filterOption: {
       lectureYear: lectureYear?.id,
@@ -54,8 +47,10 @@ export default function ExamReviewPage() {
     },
   });
 
+  const { isLoading, handleChange, handleOnKeyDown, keyword } = searchResult;
+
   return (
-    <main>
+    <main className={styles.main}>
       <AppBar title='시험후기' />
       <Search
         className={styles.search}
@@ -98,13 +93,12 @@ export default function ExamReviewPage() {
       ) : (
         <PTR>
           {urlKeyword !== '' ? (
-            <ExamReviewSearchList result={searchData || []} />
+            <ExamReviewSearchList result={searchResult} />
           ) : (
             <ExamReviewList result={reviewResult || []} />
           )}
         </PTR>
       )}
-
       <WriteButton to='/board/exam-review-write' />
     </main>
   );

@@ -24,10 +24,6 @@ export default function Calendar({ callback }) {
     callback(data);
   }, [data]);
 
-  if (!data) {
-    return null;
-  }
-
   return (
     <StyledCalendar
       defaultValue={new Date()}

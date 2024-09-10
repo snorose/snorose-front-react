@@ -7,8 +7,8 @@ import { Target } from '@/components/Target';
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
 
 export default function ExamReviewSearchList({ result }) {
-  const { ref, isLoading, isError, error } = result || {};
-  const pages = result?.pages || [];
+  const { data, ref, isLoading, isError, error } = result || {};
+  const pages = data?.pages || [];
   const searchList = pages.flatMap((page) => page);
 
   if (isLoading) {

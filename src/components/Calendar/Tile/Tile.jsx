@@ -4,7 +4,7 @@ import { isToday } from '@/utils/date.js';
 
 import styles from './Tile.module.css';
 
-export default function Tile({ date, data }) {
+export default function Tile({ date, data = [] }) {
   const currentDate = new Date(date);
   const checked = data.find(({ createdAt }) => {
     const checkedDate = new Date(createdAt);

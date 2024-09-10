@@ -231,7 +231,7 @@ export const routeList = [
         ),
       },
       {
-        path: '/board/exam-review/search/:keyword?',
+        path: '/board/exam-review/search/:keyword',
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}

@@ -36,7 +36,7 @@ export default function PostPage() {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
   // 게시글 데이터 받아오기
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, isError } = useQuery({
     queryKey: ['postContent', postId],
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
@@ -82,7 +82,7 @@ export default function PostPage() {
     return <NotFoundPage />;
   }
 
-  if (error) {
+  if (isError) {
     return (
       <>
         <BackAppBar />

@@ -5,7 +5,7 @@ export const findRouteByPath = (path, routeList) => {
     }
 
     const routePathRegex = new RegExp(
-      '^' + route.path?.replace(/:\w+/g, '\\w+') + '$'
+      '^' + route.path?.replace(/:\w+/g, '[^/]+') + '$'
     );
 
     if (routePathRegex.test(path)) {
