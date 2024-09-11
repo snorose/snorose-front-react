@@ -313,7 +313,11 @@ export const routeList = [
       },
       {
         path: '/my-page/view-point-list',
-        element: <ViewPointListPage />,
+        element: (
+          <ProtectedRoute>
+            <ViewPointListPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { BoardBar, Header, Icon, Sidebar, Sponsor, Search } from '@/components';
+import { BoardBar, Header, Icon, Sidebar, Search } from '@/components';
 
 import { BOARD_MENUS } from '@/constants';
 
@@ -50,11 +50,6 @@ export default function BoardPage() {
           <Icon id='cloud' />
         </div>
         <p>스노로즈에서 더 다양한 게시판을 준비하고 있어요</p>
-      </div>
-      <div className={styles.padding_container}>
-        <div className={styles.sponsor}>
-          <Sponsor />
-        </div>
       </div>
       {isSidebarOpen && <Sidebar closeSidebar={closeSidebar} />}
     </div>

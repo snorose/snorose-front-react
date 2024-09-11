@@ -7,3 +7,7 @@ export const getBoardTextId = (boardId) => {
 export const getBoardTitleToTextId = (boardName) => {
   return BOARD_MENUS.find(({ title }) => title === boardName).textId;
 };
+
+export const getBoard = (boardTextId) => {
+  return BOARD_MENUS.find((menu) => menu.textId === boardTextId);
+};

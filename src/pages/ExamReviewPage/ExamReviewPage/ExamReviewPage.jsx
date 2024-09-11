@@ -3,18 +3,11 @@ import { useLocation } from 'react-router-dom';
 
 import { getReviewList } from '@/apis';
 
-import { useInfiniteScroll, useSearch } from '@/hooks';
+import { usePagination, useSearch } from '@/hooks';
 
 import { ExamReviewList, ExamReviewSearchList } from '@/pages/ExamReviewPage';
 
-import {
-  AppBar,
-  DropDownBlue,
-  PTR,
-  Search,
-  WriteButton,
-  FetchLoading,
-} from '@/components';
+import { AppBar, DropDownBlue, PTR, Search, WriteButton } from '@/components';
 
 import { YEARS, SEMESTERS, EXAM_TYPES } from '@/constants';
 
@@ -33,9 +26,10 @@ export default function ExamReviewPage() {
   const [semester, setSemester] = useState();
   const [examType, setExamType] = useState();
 
-  const reviewResult = useInfiniteScroll({
+  const reviewResult = usePagination({
     queryKey: ['reviewList'],
     queryFn: ({ pageParam }) => getReviewList(pageParam),
+    enabled: urlKeyword === '',
   });
 
   const searchResult = useSearch({
@@ -47,7 +41,7 @@ export default function ExamReviewPage() {
     },
   });
 
-  const { isLoading, handleChange, handleOnKeyDown, keyword } = searchResult;
+  const { handleChange, handleOnKeyDown, keyword } = searchResult;
 
   return (
     <main>
@@ -88,17 +82,13 @@ export default function ExamReviewPage() {
           setIsOpen={setIsOpen}
         />
       </div>
-      {isLoading ? (
-        <FetchLoading>검색 중</FetchLoading>
-      ) : (
-        <PTR>
-          {urlKeyword !== '' ? (
-            <ExamReviewSearchList result={searchResult} />
-          ) : (
-            <ExamReviewList result={reviewResult || []} />
-          )}
-        </PTR>
-      )}
+      <PTR>
+        {urlKeyword !== '' ? (
+          <ExamReviewSearchList result={searchResult} />
+        ) : (
+          <ExamReviewList result={reviewResult} />
+        )}
+      </PTR>
       <WriteButton to='/board/exam-review-write' />
     </main>
   );
