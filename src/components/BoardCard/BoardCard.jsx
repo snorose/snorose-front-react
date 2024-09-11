@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
-import { USER } from '../../dummy/data';
+
+import { useAuth } from '@/hooks';
+
+import { USER_STATUS } from '@/constants';
+
 import styles from './BoardCard.module.css';
 
 export default function BoardCard({
@@ -9,19 +13,23 @@ export default function BoardCard({
   desc,
   backgroundImage,
 }) {
+  const { status } = useAuth();
+
   return (
     <Link className={`${styles.link} ${className}`} to={to}>
       <div
         className={styles.card}
         style={{
-          backgroundImage: `${USER?.isLogin ? `url(${backgroundImage})` : ''}`,
+          backgroundImage: `${status === USER_STATUS.isLogin ? `url(${backgroundImage})` : ''}`,
         }}
       >
-        <p className={`${styles.name} ${!USER?.isLogin && styles.notLogin}`}>
-          {USER?.isLogin ? name : '로그인하세요'}
+        <p
+          className={`${styles.name} ${!status === USER_STATUS.isLogin && styles.notLogin}`}
+        >
+          {status === USER_STATUS.isLogin ? name : '로그인하세요'}
         </p>
         <p className={styles.desc}>
-          {USER?.isLogin ? desc : `로그인 후\n이용 가능합니다`}
+          {status === USER_STATUS.isLogin ? desc : `로그인 후\n이용 가능합니다`}
         </p>
       </div>
     </Link>

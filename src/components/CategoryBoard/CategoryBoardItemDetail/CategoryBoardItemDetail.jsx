@@ -1,6 +1,9 @@
-import { ROLE } from '../../../constants';
-import { USER } from '../../../dummy/data';
+import { useAuth } from '@/hooks';
+
+import { ROLE, USER_STATUS } from '../../../constants';
+
 import PROFILE from '../../dummy/images/profile.png';
+
 import styles from './CategoryBoardItemDetail.module.css';
 
 export default function CategoryBoardItemDetail({
@@ -12,11 +15,13 @@ export default function CategoryBoardItemDetail({
   timeAgo,
   image,
 }) {
-  if (!USER?.isLogin) {
+  const { status, userInfo } = useAuth();
+
+  if (status === USER_STATUS.isLogout) {
     return <li className={styles.item}>로그인 후 이용 가능합니다.</li>;
   }
 
-  if (USER?.role === ROLE.preUser) {
+  if (userInfo.userRoleId === ROLE.preUser) {
     return <li className={styles.item}>등업 후 이용 가능합니다.</li>;
   }
 

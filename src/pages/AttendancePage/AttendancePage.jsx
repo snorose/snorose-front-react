@@ -3,7 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { updatePoint } from '@/apis';
 
-import { useToast } from '@/hooks';
+import { useAuth, useToast } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { Calendar } from '@/components/Calendar';
@@ -15,12 +15,12 @@ import {
   POINT_SOURCE_ENUM,
   TOAST,
 } from '@/constants';
-import { USER } from '@/dummy/data';
 
 import styles from './AttendancePage.module.css';
 
 export default function AttendancePage() {
   const queryClient = useQueryClient();
+  const { userInfo } = useAuth();
   const { toast } = useToast();
   const [attendanceHistoryByMonth, setAttendanceHistoryByMonth] = useState([]);
   const [disabled, setDisabled] = useState(false);
@@ -43,7 +43,7 @@ export default function AttendancePage() {
           onClick={() => {
             setDisabled(true);
             updatePoint({
-              userId: USER.userId, // userId 교체 필요함
+              userId: userInfo.userId,
               category: POINT_CATEGORY_ENUM.ATTENDANCE,
               source: POINT_SOURCE_ENUM.ATTENDANCE,
             })
