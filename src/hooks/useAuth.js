@@ -18,6 +18,7 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
     data: userInfoData,
     isFetching,
     isSuccess,
+    refetch,
   } = useQuery({
     queryKey: ['myPageUserInfo'],
     queryFn: getMyPageUserInfo,
@@ -41,6 +42,7 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
   const logout = () => {
     localStorage.removeItem('accessToken');
     navigate('/');
+    refetch();
   };
 
   const withdraw = async (currentPassword, { onSuccess, onError } = {}) => {
