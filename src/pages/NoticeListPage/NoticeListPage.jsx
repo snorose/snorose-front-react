@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
+import { getNoticeList } from '@/apis/notice';
+
 import { BackAppBar, NoticeBar, FetchLoading } from '@/components';
 
-import { getNoticeList } from '@/apis/notice';
-import { BOARD_MENUS } from '../../constants';
+import { BOARD_MENUS } from '@/constants';
 
 import styles from './NoticeListPage.module.css';
 

@@ -1,12 +1,18 @@
 import { useEffect, useMemo } from 'react';
-import styles from './ViewPointListPage.module.css';
-import { BackAppBar, Icon } from '@/components';
-import { useAuth } from '@/hooks';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getPointList } from '@/apis';
 import { useInView } from 'react-intersection-observer';
+
 import { format } from 'date-fns';
-import { POINT_CATEGORY_KOREAN_ENUM } from '@/constants/point';
+
+import { getPointList } from '@/apis';
+
+import { useAuth } from '@/hooks';
+
+import { BackAppBar, Icon } from '@/components';
+
+import { POINT_CATEGORY_KOREAN_ENUM } from '@/constants';
+
+import styles from './ViewPointListPage.module.css';
 
 export default function ViewPointListPage() {
   const { userInfo, status } = useAuth({

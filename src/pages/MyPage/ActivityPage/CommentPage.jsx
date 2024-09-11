@@ -1,12 +1,17 @@
 import { useEffect, useMemo } from 'react';
-import styles from './ActivityPage.module.css';
-import { BackAppBar, Icon, PostBar, Sponsor } from '@/components';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { getMyCommentList } from '@/apis';
-import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
+
+import { getMyCommentList } from '@/apis';
+
+import { BackAppBar, PostBar, Sponsor } from '@/components';
+
 import { getBoardTextId } from '@/utils';
+
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
+
+import styles from './ActivityPage.module.css';
 
 export default function CommentPage() {
   const { ref, inView } = useInView();

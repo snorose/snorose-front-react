@@ -1,4 +1,4 @@
-import { authAxios } from '@/axios/index.js';
+import { authAxios } from '@/axios';
 
 export const searchByBoard = async ({
   boardId,

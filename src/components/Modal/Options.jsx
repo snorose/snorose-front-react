@@ -1,5 +1,6 @@
+import { Icon } from '@/components/Icon';
+
 import styles from './Modal.module.css';
-import { Icon } from '../Icon';
 
 export default function Options({ options, functions }) {
   const handleClick = (iconId) => {

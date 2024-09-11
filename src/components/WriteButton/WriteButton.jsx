@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { Icon } from '@/components/Icon/index.js';
+import { Icon } from '@/components/Icon';
 
 import styles from './WriteButton.module.css';
 

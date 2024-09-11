@@ -1,6 +1,6 @@
 import { useAuth } from '@/hooks';
 
-import { Icon } from '../../Icon';
+import { Icon } from '@/components/Icon';
 
 import { USER_STATUS } from '@/constants';
 

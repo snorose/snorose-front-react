@@ -1,8 +1,8 @@
 import { useAuth } from '@/hooks';
 
-import { ROLE, USER_STATUS } from '../../../constants';
+import { ROLE, USER_STATUS } from '@/components/constants';
 
-import PROFILE from '../../dummy/images/profile.png';
+import PROFILE from '@/dummy/images/profile.png';
 
 import styles from './CategoryBoardItemDetail.module.css';
 

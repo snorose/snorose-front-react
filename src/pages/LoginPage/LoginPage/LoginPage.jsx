@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Icon } from '../../../components/Icon';
-import Input from '../../../components/Input/Input/Input';
-import { Submit } from '../../../components/Submit';
-import snoroseLogo from '../../../assets/images/snoroseLogo.svg';
+
 import { useLogin } from '@/apis';
+
+import { Icon } from '@/components/Icon';
+import { Input } from '@/components/Input';
+import { Submit } from '@/components/Submit';
+
+import snoroseLogo from '@/assets/images/snoroseLogo.svg';
+
 import styles from './LoginPage.module.css';
 
 export default function Login() {

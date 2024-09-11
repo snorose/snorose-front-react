@@ -1,5 +1,6 @@
+import { Icon } from '@/components/Icon';
+
 import styles from './FetchLoading.module.css';
-import { Icon } from '../Icon';
 
 export default function FetchLoading({ children, animation = true }) {
   return (

@@ -1,8 +1,11 @@
-import styles from './DeleteAccountPage.module.css';
-import { Link } from 'react-router-dom';
-import { CloseAppBar, ConfirmModal, InputPassword } from '@/components';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { useAuth, useModal } from '@/hooks';
+
+import { CloseAppBar, ConfirmModal, InputPassword } from '@/components';
+
+import styles from './DeleteAccountPage.module.css';
 
 const DESCRIPTION_LIST = [
   '• 회원탈퇴 시 모든 정보가 영구적으로 삭제되며, 다시는 복구할 수 없습니다.',

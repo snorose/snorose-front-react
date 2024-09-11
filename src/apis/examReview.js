@@ -1,4 +1,4 @@
-import { authAxios } from '../axios';
+import { authAxios } from '@/axios';
 
 export const downloadExamReview = async (postId, fileName) => {
   const response = await authAxios.get(

@@ -7,7 +7,7 @@ import { downloadExamReview, updatePoint } from '@/apis';
 import { useAuth, useToast } from '@/hooks';
 
 import { DeleteModal } from '@/components/Modal';
-import { Icon } from '@//components/Icon';
+import { Icon } from '@/components/Icon';
 
 import { POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM, TOAST } from '@/constants';
 
