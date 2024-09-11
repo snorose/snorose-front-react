@@ -22,7 +22,6 @@ import { ErrorPage } from '@/pages/ErrorPage';
 import { ExamReviewDetailPage, ExamReviewPage } from '@/pages/ExamReviewPage';
 import { ExamReviewEditPage } from '@/pages/ExamReviewEditPage';
 import { ExamReviewWritePage } from '@/pages/ExamReviewWritePage';
-import HelpPage from '@/pages/HelpPage/HelpPage';
 import {
   LoginPage,
   FindIdPage,
@@ -396,13 +395,6 @@ export const routeList = [
             <SnoroseVerifyPage />
           </ProtectedRoute>
         ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/help',
-        element: <HelpPage />,
         meta: {
           hideNav: true,
         },

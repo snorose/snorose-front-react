@@ -10,9 +10,7 @@ import { Icon, CloseAppBar, DropDownMenu, FetchLoading } from '@/components';
 
 import { formattedNowTime } from '@/utils';
 
-import { BOARD_MENUS, TOAST } from '@/constants';
-
-import { USER } from '@/dummy/data';
+import { BOARD_MENUS, ROLE, TOAST } from '@/constants';
 
 import styles from './PostWritePage.module.css';
 
@@ -139,7 +137,7 @@ export default function PostWritePage() {
           </div>
           <div
             className={
-              USER.role === 4
+              userInfo.userRoleId === ROLE.admin
                 ? styles.profileBoxRight
                 : styles.profileBoxRightInvisible
             }
