@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getPostContent, deletePost } from '@/apis';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
+
 import { useLike, useScrap, useToast } from '@/hooks';
 
 import { NotFoundPage } from '@/pages/NotFoundPage';

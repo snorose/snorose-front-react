@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Icon } from '@/components/Icon';
 
 import styles from './DropDownBlue.module.css';

@@ -4,8 +4,7 @@ import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
 import { deleteExamReview, getReviewDetail } from '@/apis';
 
-import { useScrap } from '@/hooks';
-import { useToast } from '@/hooks';
+import { useScrap, useToast } from '@/hooks';
 
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
@@ -18,8 +17,7 @@ import { InputBar } from '@/components/InputBar';
 import { ReviewContentItem } from '@/components/ReviewContentItem';
 import { ReviewDownload } from '@/components/ReviewDownload';
 
-import { dateFormat } from '@/utils/date.js';
-import { convertToObject } from '@/utils/convertDS.js';
+import { dateFormat, convertToObject } from '@/utils';
 
 import { LECTURE_TYPES, SEMESTERS, EXAM_TYPES, TOAST } from '@/constants';
 

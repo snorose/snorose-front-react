@@ -12,8 +12,7 @@ import { Icon } from '@/components/Icon';
 
 import { formattedNowTime } from '@/utils';
 
-import { BOARD_MENUS } from '@/constants';
-import { TOAST } from '@/constants';
+import { BOARD_MENUS, TOAST } from '@/constants';
 
 import styles from './PostEditPage.module.css';
 

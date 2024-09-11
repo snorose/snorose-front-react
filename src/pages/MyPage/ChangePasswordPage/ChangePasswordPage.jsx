@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
-import styles from './ChangePasswordPage.module.css';
-import { BackAppBar, ActionButton, InputPassword } from '@/components';
-import { useMutation } from '@tanstack/react-query';
-import { updatePassword } from '@/apis';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+
+import { updatePassword } from '@/apis';
+
 import { useToast } from '@/hooks';
+
+import { BackAppBar, ActionButton, InputPassword } from '@/components';
+
 import { TOAST } from '@/constants';
+
+import styles from './ChangePasswordPage.module.css';
 
 export default function ChangePasswordPage() {
   const [currentPassword, setCurrentPassword] = useState('');

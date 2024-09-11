@@ -1,8 +1,11 @@
-import { React, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Submit } from '../../../../components/Submit';
-import { Icon } from '../../../../components/Icon';
-import excitedWoman from '../../../../assets/images/excitedWoman.svg';
+
+import { Icon } from '@/components/Icon';
+import { Submit } from '@/components/Submit';
+
+import excitedWoman from '@/assets/images/excitedWoman.svg';
+
 import styles from './SignUpSuccessPage.module.css';
 
 export default function SignUpSuccessPage() {

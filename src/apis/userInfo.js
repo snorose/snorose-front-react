@@ -1,4 +1,4 @@
-import { authAxios } from '../axios';
+import { authAxios } from '@/axios';
 
 export const withdrawAccount = async (body) => {
   const response = await authAxios.delete('/v1/users/withdraw', {

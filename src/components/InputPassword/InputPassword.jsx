@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Icon } from '../Icon';
+import { useState } from 'react';
+
+import { Icon } from '@/components/Icon';
+
 import styles from './InputPassword.module.css';
 
 const InputPassword = ({

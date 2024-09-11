@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import styles from './BoardListPageHasCategory.module.css';
+
 import { BackAppBar, Icon, PostBar, Sponsor, PTR } from '@/components';
-import { POST_LIST } from '@/dummy/data/postList.js';
-import { POST_CATEGORIES } from '@/constants/postCategories.js';
+
+import { POST_CATEGORIES } from '@/constants';
+import { POST_LIST } from '@/dummy/data';
+
+import styles from './BoardListPageHasCategory.module.css';
 
 export default function BoardListPageHasCategory() {
   const navigate = useNavigate();

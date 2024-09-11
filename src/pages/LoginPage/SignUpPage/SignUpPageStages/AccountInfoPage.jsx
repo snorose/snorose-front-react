@@ -1,14 +1,16 @@
-import { React, useState } from 'react';
-import Input from '../../../../components/Input/Input/Input';
-import SpecialInput from '../../../../components/Input/Input/SpecialInput';
-import { Submit } from '../../../../components/Submit';
+import { useState } from 'react';
+
+import { Input, SpecialInput } from '@/components/Input';
+import { Submit } from '@/components/Submit';
+
 import {
   checkSpecialChar,
   checkSookmyungMail,
   checkID,
   checkPW,
   checkIfSame,
-} from '../../FindIdPage/inputCheck';
+} from '@/pages/LoginPage/FindIdPage/inputCheck.js';
+
 import styles from './AccountInfoPage.module.css';
 
 export default function AccountInfoPage({ formData, setFormData, setStage }) {

@@ -1,8 +1,11 @@
-import { React, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import Icon from '../../../components/Icon/Icon';
-import Submit from '../../../components/Submit/Submit';
-import excitedWoman from '../../../assets/images/excitedWoman.svg';
+
+import { Icon } from '@/components/Icon';
+import { Submit } from '@/components/Submit';
+
+import excitedWoman from '@/assets/images/excitedWoman.svg';
+
 import styles from './FoundIdPage.module.css';
 
 export default function FoundIdPage() {

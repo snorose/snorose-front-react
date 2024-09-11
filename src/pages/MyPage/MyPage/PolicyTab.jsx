@@ -1,8 +1,10 @@
-import React from 'react';
-import Icon from '../../../components/Icon/Icon';
-import styles from './MyPage.module.css';
 import { Link } from 'react-router-dom';
+
 import { useAuth } from '@/hooks';
+
+import { Icon } from '@/components/Icon';
+
+import styles from './MyPage.module.css';
 
 const PolicyTab = () => {
   const { logout } = useAuth();

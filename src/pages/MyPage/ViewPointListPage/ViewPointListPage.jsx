@@ -6,7 +6,7 @@ import { useAuth, usePagination } from '@/hooks';
 
 import { BackAppBar, FetchLoading, Icon } from '@/components';
 
-import { POINT_CATEGORY_KOREAN_ENUM } from '@/constants/point';
+import { POINT_CATEGORY_KOREAN_ENUM } from '@/constants';
 
 import styles from './ViewPointListPage.module.css';
 

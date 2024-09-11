@@ -4,19 +4,18 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { downloadExamReview, updatePoint } from '@/apis';
 
-import { useToast } from '@/hooks';
+import { useAuth, useToast } from '@/hooks';
 
 import { DeleteModal } from '@/components/Modal';
-import { Icon } from '@//components/Icon';
+import { Icon } from '@/components/Icon';
 
 import { POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM, TOAST } from '@/constants';
-
-import { USER } from '@/dummy/data';
 
 import styles from './ReviewDownload.module.css';
 
 export default function ReviewDownload({ className, fileName }) {
   const { postId } = useParams();
+  const { userInfo } = useAuth();
   const { toast } = useToast();
 
   const { data } = useQuery({
@@ -43,7 +42,7 @@ export default function ReviewDownload({ className, fileName }) {
   const losePoint = useMutation({
     mutationFn: ({ sourceId }) =>
       updatePoint({
-        userId: USER.userId, // userId로 변경 필요
+        userId: userInfo.userId,
         category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DOWNLOAD,
         source: POINT_SOURCE_ENUM.REVIEW,
         sourceId,

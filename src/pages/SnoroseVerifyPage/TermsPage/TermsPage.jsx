@@ -1,6 +1,6 @@
 import { Button } from '@/pages/SnoroseVerifyPage';
 
-import { TERMS } from '../../../constants';
+import { TERMS } from '@/constants';
 
 import styles from './TermsPage.module.css';
 

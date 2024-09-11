@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { getMyCommentList } from '@/apis';
 
-import { usePagination } from '@/hooks/index.js';
+import { usePagination } from '@/hooks';
 
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 

@@ -1,5 +1,6 @@
-import styles from './ConfirmModal.module.css';
 import { Portal } from '@/components';
+
+import styles from './ConfirmModal.module.css';
 
 export default function ConfirmModal({
   isOpen,
