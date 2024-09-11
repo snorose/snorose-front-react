@@ -13,8 +13,10 @@ export default function TermsPage({ setStep }) {
       <div className={styles.terms}>
         <pre className={styles.text}>
           {startTerms}
-          {list.map((item) => (
-            <li className={styles.item}>{item}</li>
+          {list.map(({ id, text }) => (
+            <li key={id} className={styles.item}>
+              {text}
+            </li>
           ))}
           <br />
           {endTerms}

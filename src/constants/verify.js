@@ -1,9 +1,14 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const TERMS = Object.freeze({
   text: [
     '회원님의 정보는 아래와 같이 활용됩니다.',
     '계속 진행 시 개인정보 수집 이용에 동의하는 것으로 간주합니다.',
   ],
-  list: ['숙명인 여부 확인', '학적 확인'],
+  list: [
+    { id: uuidv4(), text: '숙명인 여부 확인' },
+    { id: uuidv4(), text: '학적 확인' },
+  ],
 });
 
 export const TITLE_DES = Object.freeze({
