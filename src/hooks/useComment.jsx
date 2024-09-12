@@ -94,11 +94,49 @@ export default function useComment() {
     },
   });
 
+  const setAsUpdated = ({ comments, commentId, content }) => {
+    return comments.map((comment) =>
+      comment.id === commentId
+        ? { ...comment, content, isUpdated: true }
+        : comment
+    );
+  };
+
   const editComment = useMutation({
-    mutationFn: ({ commentId, content, parentId }) =>
-      edit({ postId, commentId, content, parentId }),
-    onSuccess: () => {
-      queryClient.invalidateQueries(['comments', postId]);
+    mutationFn: async ({ commentId, content, parentId }) => {
+      return await edit({ postId, commentId, content, parentId });
+    },
+    onSuccess: ({ data }) => {
+      queryClient.setQueryData(['comments', postId], (prev) => {
+        const { result: editedComment } = data;
+        const { id, parentId, content } = editedComment;
+        const flattenComments = flatPaginationCache(prev);
+
+        if (parentId) {
+          const updatedComments = flattenComments.map((comment) =>
+            comment.id === parentId
+              ? {
+                  ...comment,
+                  children: setAsUpdated({
+                    comments: comment.children,
+                    commentId: id,
+                    content,
+                  }),
+                }
+              : comment
+          );
+          return toPaginationCacheFormat(updatedComments);
+        }
+
+        const updatedComments = setAsUpdated({
+          comments: flattenComments,
+          commentId: id,
+          content,
+        });
+        return toPaginationCacheFormat(updatedComments);
+      });
+
+      toast(TOAST.COMMENT.edit);
     },
     onError: ({ response }) => {
       toast(response.data.message);
