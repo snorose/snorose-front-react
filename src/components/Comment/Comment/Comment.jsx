@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
@@ -12,7 +12,8 @@ import { timeAgo } from '@/utils';
 
 import styles from './Comment.module.css';
 
-export default function Comment({ data }) {
+const Comment = forwardRef((props, ref) => {
+  const { data } = props;
   const { setIsEdit, commentId, setCommentId, setContent, inputFocus } =
     useCommentContext();
   const { deleteComment } = useComment();
@@ -54,7 +55,11 @@ export default function Comment({ data }) {
 
   return (
     <>
-      <div className={styles.comment} onClick={() => setCommentId(undefined)}>
+      <div
+        ref={ref}
+        className={styles.comment}
+        onClick={() => setCommentId(undefined)}
+      >
         <div className={styles.commentTop}>
           <div className={styles.commentTopLeft}>
             <div className={styles.cloud}>
@@ -163,4 +168,6 @@ export default function Comment({ data }) {
       />
     </>
   );
-}
+});
+
+export default Comment;

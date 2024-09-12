@@ -37,7 +37,7 @@ export default function usePagination({ queryKey, queryFn, enabled }) {
     if (inView && hasNextPage && !isFetching) {
       fetchNextPage();
     }
-  }, [inView]);
+  }, [inView, hasNextPage, isFetching, fetchNextPage]);
 
   return { data, isLoading, isFetching, status, isError, error, refetch, ref };
 }

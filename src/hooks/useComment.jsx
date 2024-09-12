@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 import {
   deleteComment as remove,
@@ -8,8 +8,9 @@ import {
   editComment as edit,
 } from '@/apis';
 
-import { useToast } from '@/hooks';
+import { usePagination, useToast } from '@/hooks';
 
+import { flatPaginationCache, toPaginationCacheFormat } from '@/utils';
 import { TOAST } from '@/constants';
 
 export default function useComment() {
@@ -17,27 +18,44 @@ export default function useComment() {
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
-  const { data: commentList, refetch } = useQuery({
+  const { data, isLoading, isError, ref } = usePagination({
     queryKey: ['comments', postId],
-    queryFn: () => getCommentList({ postId }),
-    staleTime: 1000 * 60,
+    queryFn: ({ pageParam }) => getCommentList({ postId, page: pageParam }),
   });
 
-  // 댓글 생성
+  const commentList = flatPaginationCache(data);
+
   const postComment = useMutation({
     mutationFn: async ({ content, parentId }) => {
-      await post({ postId, parentId, content });
+      return await post({ postId, parentId, content });
     },
-    onSuccess: () => {
+    onSuccess: (response) => {
+      const { result: newComment } = response.data;
+
+      queryClient.setQueryData(['comments', postId], (prev) => {
+        const flattenComments = flatPaginationCache(prev);
+        const { parentId } = newComment;
+
+        if (parentId) {
+          const newComments = flattenComments.map((comment) =>
+            comment.id === parentId
+              ? { ...comment, children: [...comment.children, newComment] }
+              : comment
+          );
+          return toPaginationCacheFormat(newComments);
+        }
+
+        const newComments = [...flattenComments, newComment];
+        return toPaginationCacheFormat(newComments);
+      });
+
       toast(TOAST.COMMENT.create);
-      queryClient.invalidateQueries(['comments', postId]);
     },
     onError: ({ response }) => {
       toast(response.data.message);
     },
   });
 
-  // 댓글 삭제
   const deleteComment = useMutation({
     mutationFn: async ({ commentId }) => {
       await remove({ postId, commentId });
@@ -51,7 +69,6 @@ export default function useComment() {
     },
   });
 
-  // 댓글 수정
   const editComment = useMutation({
     mutationFn: ({ commentId, content, parentId }) =>
       edit({ postId, commentId, content, parentId }),
@@ -63,5 +80,13 @@ export default function useComment() {
     },
   });
 
-  return { commentList, postComment, deleteComment, editComment, refetch };
+  return {
+    commentList,
+    isLoading,
+    isError,
+    postComment,
+    deleteComment,
+    editComment,
+    ref,
+  };
 }
