@@ -29,12 +29,11 @@ export default function useComment() {
     mutationFn: async ({ content, parentId }) => {
       return await post({ postId, parentId, content });
     },
-    onSuccess: (response) => {
-      const { result: newComment } = response.data;
-
+    onSuccess: ({ data }) => {
       queryClient.setQueryData(['comments', postId], (prev) => {
-        const flattenComments = flatPaginationCache(prev);
+        const { result: newComment } = data;
         const { parentId } = newComment;
+        const flattenComments = flatPaginationCache(prev);
 
         if (parentId) {
           const newComments = flattenComments.map((comment) =>
@@ -56,13 +55,39 @@ export default function useComment() {
     },
   });
 
+  const setAsDeleted = (comments, commentId) => {
+    return comments.map((comment) =>
+      comment.id === commentId ? { ...comment, isDeleted: true } : comment
+    );
+  };
+
   const deleteComment = useMutation({
     mutationFn: async ({ commentId }) => {
-      await remove({ postId, commentId });
+      return await remove({ postId, commentId });
     },
-    onSuccess: () => {
+    onSuccess: ({ data }) => {
+      queryClient.setQueryData(['comments', postId], (prev) => {
+        const { result: deletedComment } = data;
+        const { id, parentId } = deletedComment;
+        const flattenComments = flatPaginationCache(prev);
+
+        if (parentId) {
+          const updatedComments = flattenComments.map((comment) =>
+            comment.id === parentId
+              ? {
+                  ...comment,
+                  children: setAsDeleted(comment.children, id),
+                }
+              : comment
+          );
+          return toPaginationCacheFormat(updatedComments);
+        }
+
+        const updatedComments = setAsDeleted(flattenComments, id);
+        return toPaginationCacheFormat(updatedComments);
+      });
+
       toast(TOAST.COMMENT.delete);
-      queryClient.invalidateQueries(['comments', postId]);
     },
     onError: ({ response }) => {
       toast(response.data.message);
