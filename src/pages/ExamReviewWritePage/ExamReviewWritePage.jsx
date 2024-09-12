@@ -11,15 +11,16 @@ import {
   CategoryButton,
   CategoryFieldset,
   Dropdown,
+  TextField,
 } from '@/components/Fieldset';
 import { ConfirmModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
 
+import { isNumber } from '@/utils';
 import {
   BOARD_ID,
-  CLASS_NUMBERS,
   EXAM_TYPES,
   FILE_MAX_SIZE,
   LECTURE_TYPES,
@@ -64,7 +65,7 @@ export default function ExamReviewWritePage() {
   const [semester, setSemester] = useState({});
   const [isPF, setIsPF] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
-  const [classNumber, setClassNumber] = useState({});
+  const [classNumber, setClassNumber] = useState();
   const [questionDetail, setQuestionDetail] = useState('');
   const [file, setFile] = useState();
 
@@ -99,7 +100,7 @@ export default function ExamReviewWritePage() {
       return await checkExamReviewDuplication({
         lectureName,
         professor,
-        classNumber: classNumber?.id,
+        classNumber: Number(classNumber),
         lectureYear: lectureYear?.id,
         semester: semester?.id,
         examType: examType?.id,
@@ -113,7 +114,7 @@ export default function ExamReviewWritePage() {
   const formBody = {
     isPF,
     boardId: BOARD_ID['exam-review'],
-    classNumber: classNumber?.id,
+    classNumber: Number(classNumber),
     lectureName,
     professor,
     questionDetail,
@@ -211,11 +212,15 @@ export default function ExamReviewWritePage() {
         />
       </CategoryFieldset>
       <CategoryFieldset title='수강 분반' required>
-        <Dropdown
-          options={CLASS_NUMBERS}
-          select={classNumber}
-          setFn={setClassNumber}
-          placeholder='선택하세요'
+        <TextField
+          value={classNumber}
+          onChange={(event) => {
+            const { value } = event.target;
+            if (isNumber(value) || value === '') {
+              setClassNumber(event.target.value);
+            }
+          }}
+          placeholder='수강 분반을 입력하세요'
         />
       </CategoryFieldset>
       <CategoryFieldset
@@ -232,7 +237,7 @@ export default function ExamReviewWritePage() {
         value={isOnline}
         setFn={setIsOnline}
       />
-      <CategoryFieldset title='시험 유형 및 설명' required>
+      <CategoryFieldset title='문항 수 및 시험 유형 설명' required>
         <Textarea
           value={questionDetail}
           setFn={setQuestionDetail}
