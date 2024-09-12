@@ -395,7 +395,15 @@ export const routeList = [
       },
       {
         path: '/notice',
-        element: <NoticeListPage />,
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin, ROLE.official]}
+            message={'등업 후 이용 가능합니다'}
+          >
+            <NoticeListPage />
+          </ProtectedRoute>
+        ),
+
         meta: {
           hideNav: true,
         },
