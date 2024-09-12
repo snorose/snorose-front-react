@@ -1,5 +1,4 @@
 import { Icon } from '@/components/Icon';
-
 import styles from './Modal.module.css';
 
 export default function Options({ options, functions, onOptionClick }) {
@@ -16,7 +15,6 @@ export default function Options({ options, functions, onOptionClick }) {
           className={styles.optionBar}
           key={option.iconId}
           data-value={option.value}
-          data-misung='미성이 사랑해요'
           onClick={(event) => {
             event.stopPropagation();
             handleClick(option.iconId);
