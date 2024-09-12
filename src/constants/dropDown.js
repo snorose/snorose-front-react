@@ -23,12 +23,12 @@ export const SEMESTERS = Object.freeze([
     name: '1학기',
   },
   {
-    id: 'SECOND',
-    name: '2학기',
-  },
-  {
     id: 'SUMMER',
     name: '여름학기',
+  },
+  {
+    id: 'SECOND',
+    name: '2학기',
   },
   {
     id: 'WINTER',
