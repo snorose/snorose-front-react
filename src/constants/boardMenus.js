@@ -5,6 +5,14 @@ import besookt from '@/assets/images/besookt-board-page.svg';
 
 export const BOARD_MENUS = [
   {
+    id: 12,
+    to: '/board/notice',
+    textId: 'notice',
+    title: '전체',
+    desc: '',
+    image: '',
+  },
+  {
     id: 21,
     to: '/board/first-snow',
     textId: 'first-snow',

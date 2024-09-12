@@ -45,7 +45,7 @@ export default function MainPage() {
         <Flex gap='0.45rem'>
           <Card
             className={styles.notice}
-            to='/notice'
+            to='/board/notice'
             title={data.title}
             tag='공지'
             imgPath='megaphone.svg'
