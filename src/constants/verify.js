@@ -22,6 +22,6 @@ export const TITLE_DES = Object.freeze({
   },
   complete: {
     title: '스노로즈 인증 신청이 완료되었어요!',
-    description: '인증이 완료될 경우 \n 알림을 통해 확인하실 수 있어요',
+    description: '인증이 완료될 경우 \n 이메일을 통해 확인하실 수 있어요',
   },
 });
