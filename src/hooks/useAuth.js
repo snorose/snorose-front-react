@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -8,7 +8,7 @@ import { useToast } from '@/hooks';
 
 import { TOAST } from '@/constants';
 
-const useAuth = ({ isRequiredAuth = false } = {}) => {
+const useAuth = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -66,12 +66,6 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
       }
     }
   };
-
-  useEffect(() => {
-    if (isRequiredAuth && status === 'unauthenticated') {
-      navigate('/login');
-    }
-  }, [isRequiredAuth, status, navigate]);
 
   return {
     userInfo: userInfoData?.result,

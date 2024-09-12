@@ -12,9 +12,7 @@ import { ROLE_NAME } from '@/constants';
 import styles from './MyPage.module.css';
 
 export default function MyPage() {
-  const { userInfo, status } = useAuth({
-    isRequiredAuth: true,
-  });
+  const { userInfo, status } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = searchParams.get('tab') || 'account';
 
