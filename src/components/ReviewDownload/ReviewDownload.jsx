@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 import { downloadExamReview, updatePoint } from '@/apis';
 
@@ -13,20 +13,22 @@ import { POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM, TOAST } from '@/constants';
 
 import styles from './ReviewDownload.module.css';
 
-export default function ReviewDownload({ className, fileName }) {
+export default function ReviewDownload({
+  className,
+  fileName,
+  isDownloaded,
+  isWriter,
+}) {
   const { postId } = useParams();
   const { userInfo } = useAuth();
   const { toast } = useToast();
-
-  const { data } = useQuery({
-    queryKey: ['reviewFile', postId],
-    queryFn: () => downloadExamReview(postId, fileName),
-    staleTime: Infinity,
-    gcTime: Infinity,
-  });
   const [isOpen, setIsOpen] = useState(false);
 
-  const download = () => {
+  const queryClient = useQueryClient();
+
+  const download = async () => {
+    const data = await downloadExamReview(postId, fileName);
+
     const blob = new Blob([data.data], {
       type: 'application/pdf',
     });
@@ -49,6 +51,9 @@ export default function ReviewDownload({ className, fileName }) {
       }),
     onSuccess: () => {
       download();
+      queryClient.setQueryData(['reviewDetail', postId], (prev) => {
+        return { ...prev, isDownloaded: true };
+      });
       toast(TOAST.EXAM_REVIEW.download);
     },
     onError: ({ response }) => {
@@ -69,6 +74,12 @@ export default function ReviewDownload({ className, fileName }) {
         className={` ${styles.layout} ${className}`}
         onClick={(event) => {
           event.stopPropagation();
+
+          if (isWriter || isDownloaded) {
+            losePoint.mutate({ sourceId: postId });
+            return;
+          }
+
           setIsOpen(true);
         }}
       >

@@ -103,6 +103,7 @@ export default function ExamReviewDetailPage() {
     examType,
     fileName,
     isConfirmed,
+    isDownloaded,
     isEdited,
     isPF,
     isScrapped,
@@ -166,7 +167,12 @@ export default function ExamReviewDetailPage() {
           <ReviewContentItem tag='P/F 여부' value={isPF ? 'O' : 'X'} />
           <ReviewContentItem tag='시험 유형 및 문항수' value={questionDetail} />
         </div>
-        <ReviewDownload className={styles.fileDownload} fileName={fileName} />
+        <ReviewDownload
+          className={styles.fileDownload}
+          fileName={fileName}
+          isDownloaded={isDownloaded}
+          isWriter={isWriter}
+        />
         <div className={styles.actions}>
           <div className={styles.action}>
             <Icon
