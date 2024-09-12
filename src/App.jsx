@@ -2,9 +2,10 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import { RecoilRoot } from 'recoil';
 
-import Navbar from '@/components/Navbar/Navbar';
+import { Navbar } from '@/components/Navbar';
 
-import { findRouteByPath } from '@/utils/findRoute.js';
+import { findRouteByPath } from '@/utils';
+
 import { routeList } from '@/route.js';
 
 import styles from './App.module.css';

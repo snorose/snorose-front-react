@@ -1,4 +1,4 @@
-import { useToastContext } from '../contexts/ToastContext.jsx';
+import { useToastContext } from '@/contexts/ToastContext.jsx';
 
 export default function useToast() {
   const { addToast } = useToastContext();

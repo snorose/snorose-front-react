@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
 
-import { useIntersect } from '@/hooks';
-
-export default function useInfiniteScroll({ queryKey, queryFn }) {
+export default function usePagination({ queryKey, queryFn, enabled }) {
   const {
     data,
     hasNextPage,
@@ -28,17 +28,16 @@ export default function useInfiniteScroll({ queryKey, queryFn }) {
 
       return lastPageParam + 1;
     },
+    enabled,
   });
 
-  const ref = useIntersect(
-    async (entry, observer) => {
-      observer.unobserve(entry.target);
-      if (hasNextPage && !isFetching) {
-        fetchNextPage();
-      }
-    },
-    { threshold: 0.8 }
-  );
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetching) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   return { data, isLoading, isFetching, status, isError, error, refetch, ref };
 }

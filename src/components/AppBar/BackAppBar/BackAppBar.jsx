@@ -1,6 +1,8 @@
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { Icon } from '../../Icon';
-import { MenuIcon } from '../../MenuIcon';
+
+import { Icon } from '@/components/Icon';
+import { MenuIcon } from '@/components/MenuIcon';
+
 import styles from './BackAppBar.module.css';
 
 export default function BackAppBar({

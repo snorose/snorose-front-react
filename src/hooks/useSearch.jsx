@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { searchByBoard } from '@/apis';
 
-import { useInfiniteScroll } from '@/hooks';
+import { usePagination } from '@/hooks';
 
 import { BOARD_ID } from '@/constants';
 
@@ -34,7 +34,7 @@ export default function useSearch({ urlKeyword, filterOption }) {
   };
 
   const { data, ref, isLoading, isFetching, status, isError, error } =
-    useInfiniteScroll({
+    usePagination({
       queryKey: ['search', newUrlKeyword, boardType, filterOption],
       queryFn: ({ pageParam }) =>
         searchByBoard({

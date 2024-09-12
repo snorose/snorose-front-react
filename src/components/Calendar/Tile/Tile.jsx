@@ -1,6 +1,6 @@
 import { Icon } from '@/components/Icon';
 
-import { isToday } from '@/utils/date.js';
+import { isToday } from '@/utils';
 
 import styles from './Tile.module.css';
 

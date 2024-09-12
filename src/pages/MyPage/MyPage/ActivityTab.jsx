@@ -1,7 +1,8 @@
-import React from 'react';
-import Icon from '../../../components/Icon/Icon';
-import styles from './MyPage.module.css';
 import { Link } from 'react-router-dom';
+
+import { Icon } from '@/components/Icon';
+
+import styles from './MyPage.module.css';
 
 const ActivityTab = () => {
   return (

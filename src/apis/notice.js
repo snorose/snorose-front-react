@@ -1,4 +1,4 @@
-import { authAxios, defaultAxios } from '../axios';
+import { authAxios, defaultAxios } from '@/axios';
 
 export const getHomeNotice = async () => {
   const response = await defaultAxios.get('/v1/notices/home');

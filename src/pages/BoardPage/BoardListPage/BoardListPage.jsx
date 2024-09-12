@@ -1,69 +1,42 @@
-import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { getNoticeLine, getPostList } from '@/apis';
 
-import { useInfiniteScroll } from '@/hooks';
+import { usePagination } from '@/hooks';
 
 import {
   BackAppBar,
   Icon,
   OptionModal,
   PostBar,
-  Sponsor,
   PTR,
-  Target,
   WriteButton,
   FetchLoading,
 } from '@/components';
 
-import { timeAgo } from '@/utils';
-
-import { BOARD_MENUS } from '@/constants';
+import { getBoard, timeAgo } from '@/utils';
 
 import styles from './BoardListPage.module.css';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
   const currentBoardTextId = pathname.split('/')[2];
-  const currentBoard =
-    BOARD_MENUS.find((menu) => menu.textId === currentBoardTextId) || {};
+  const currentBoard = getBoard(currentBoardTextId);
 
-  const { data, ref, isLoading, status, isError, refetch } = useInfiniteScroll({
+  const { data, ref, isLoading, status, isError, refetch } = usePagination({
     queryKey: ['postList', currentBoard.id],
     queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
   });
 
-  // 1줄 공지 데이터 받아오기
-  const [noticeTitle, setNoticeTitle] = useState('');
   const { data: noticeLineData } = useQuery({
     queryKey: ['noticeLine', currentBoard.id],
     queryFn: () => getNoticeLine(currentBoard?.id),
-    enabled: !!currentBoard?.id,
   });
-
-  // 데이터 화면 표시
-  useEffect(() => {
-    if (noticeLineData) {
-      setNoticeTitle(noticeLineData.title);
-    }
-  }, [noticeLineData]);
-
-  const postList =
-    data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page.data)
-      : [];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
-
-  const navigate = useNavigate();
-  const handleNavClick = (to) => {
-    return () => {
-      navigate(to);
-    };
-  };
 
   if (isLoading) {
     return (
@@ -85,6 +58,11 @@ export default function BoardListPage() {
     );
   }
 
+  const postList =
+    data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page.data)
+      : [];
+
   return (
     <div className={styles.container}>
       <BackAppBar
@@ -94,36 +72,36 @@ export default function BoardListPage() {
         backNavTo={'/board'}
       />
       <div className={styles.top}>
-        <div
+        <Link
           className={styles.notification_bar}
-          onClick={handleNavClick('./notice')}
+          to={`/board/${currentBoardTextId}/notice`}
         >
           <Icon id='notice-bell' width={11} height={13} />
-          <p>[필독]&nbsp;&nbsp;{noticeTitle}</p>
-        </div>
+          <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
+        </Link>
       </div>
       <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
         <div className={styles.postListContainer}>
           {status !== 'error' &&
-            postList.map((post) => (
-              <PostBar
+            postList.map((post, index) => (
+              <Link
+                ref={index === postList.length - 1 ? ref : undefined}
                 key={post.postId}
-                data={{ ...post, timeAgo: timeAgo(post.date) }}
-                optionClick={openModal}
-                use='post'
-              />
+                to={`/board/${currentBoardTextId}/post/${post.postId}`}
+              >
+                <PostBar
+                  data={{ ...post, timeAgo: timeAgo(post.date) }}
+                  optionClick={openModal}
+                />
+              </Link>
             ))}
         </div>
       </PTR>
-      <div className={styles.sponsor}>
-        <Sponsor />
-      </div>
       <OptionModal
         id='post-report'
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
       />
-      <Target ref={ref} height='100px' />
       <WriteButton
         to={`/board/${currentBoardTextId}/post-write`}
         className={styles.writeButton}

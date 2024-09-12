@@ -1,6 +1,8 @@
-import styles from './Modal.module.css';
-import { MODAL_OPTIONS } from '../../constants/modalOptions';
 import { useState } from 'react';
+
+import { MODAL_OPTIONS } from '@/constants';
+
+import styles from './Modal.module.css';
 
 export default function TextAreaModal({ id, isOpen, setIsOpen }) {
   const [reportVal, setReportVal] = useState('');

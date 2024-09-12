@@ -1,7 +1,7 @@
-import firstSnow from '../assets/images/firstSnow-board-page.svg';
-import largeSnow from '../assets/images/largeSnow-board-page.svg';
-import permanentSnow from '../assets/images/permanentSnow-board-page.svg';
-import besookt from '../assets/images/besookt-board-page.svg';
+import firstSnow from '@/assets/images/firstSnow-board-page.svg';
+import largeSnow from '@/assets/images/largeSnow-board-page.svg';
+import permanentSnow from '@/assets/images/permanentSnow-board-page.svg';
+import besookt from '@/assets/images/besookt-board-page.svg';
 
 export const BOARD_MENUS = [
   {

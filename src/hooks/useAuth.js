@@ -1,8 +1,11 @@
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
-import { getMyPageUserInfo, withdrawAccount } from '@/apis';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useToast } from '.';
+
+import { getMyPageUserInfo, withdrawAccount } from '@/apis';
+
+import { useToast } from '@/hooks';
+
 import { TOAST } from '@/constants';
 
 const useAuth = ({ isRequiredAuth = false } = {}) => {
@@ -15,6 +18,7 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
     data: userInfoData,
     isFetching,
     isSuccess,
+    refetch,
   } = useQuery({
     queryKey: ['myPageUserInfo'],
     queryFn: getMyPageUserInfo,
@@ -38,6 +42,7 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
   const logout = () => {
     localStorage.removeItem('accessToken');
     navigate('/');
+    refetch();
   };
 
   const withdraw = async (currentPassword, { onSuccess, onError } = {}) => {

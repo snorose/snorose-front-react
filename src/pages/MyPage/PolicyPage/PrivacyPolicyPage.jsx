@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './PolicyPage.module.css';
 import { CloseAppBar } from '@/components/AppBar';
+
+import styles from './PolicyPage.module.css';
 
 const privacyPolicyContent = `스노로즈는 회원의 사생활 및 개인정보를 적극적으로 보호하여 정보화 사회에서의 통신의 자유를 보장하고자  개인정보보호법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률에 따라 아래와 같이 개인정보보호정책을 명시하여 실천하고 있습니다.
 

@@ -1,12 +1,15 @@
-import styles from './MyPage.module.css';
-import { Icon } from '@/components';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+
 import { useAuth } from '@/hooks';
+
+import { AccountTab, ActivityTab, PolicyTab } from '@/pages/MyPage/MyPage';
+
+import { Icon } from '@/components';
+
 import { ROLE_NAME } from '@/constants';
-import AccountTab from './AccountTab';
-import ActivityTab from './ActivityTab';
-import PolicyTab from './PolicyTab';
+
+import styles from './MyPage.module.css';
 
 export default function MyPage() {
   const { userInfo, status } = useAuth({

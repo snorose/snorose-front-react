@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Icon } from '@/components/Icon';
 
-import { timeAgo, getBoardTitleToTextId } from '@/utils';
+import { timeAgo } from '@/utils';
 
 import styles from './PostBar.module.css';
 
@@ -13,13 +12,7 @@ export default function PostBar({
   hasComment = true,
   hasLike = true,
 }) {
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
   const [agoTime, setAgoTime] = useState(timeAgo(data.createdAt));
-  const currentBoard =
-    pathname.split('/')[3] === 'search'
-      ? getBoardTitleToTextId(data.boardName)
-      : pathname.split('/')[2];
 
   // timeAgo를 1분마다 업데이트
   useEffect(() => {
@@ -30,13 +23,8 @@ export default function PostBar({
     return () => clearInterval(intervalId);
   }, [data.createdAt]);
 
-  const handlePostBarClick = () => {
-    use === 'post' && navigate(`/board/${currentBoard}/post/${data.postId}`);
-    use === 'board' && navigate('/post-search');
-  };
-
   return (
-    <div className={styles.post} onClick={handlePostBarClick}>
+    <div className={styles.post}>
       <div className={styles.post_top}>
         <Icon id='cloud' width={18} height={11} />
         <p className={styles.name}>{data.userDisplay}</p>

@@ -1,9 +1,9 @@
-import { filterVisibleComments } from '@/utils/filterComment.js';
+import { useComment } from '@/hooks';
 
-import { Comment } from '../index.js';
-import { FetchLoading } from '../../Loading';
+import { Comment } from '@/components/Comment';
+import { FetchLoading } from '@/components/Loading';
 
-import useComment from '../../../hooks/useComment.jsx';
+import { filterVisibleComments } from '@/utils';
 
 import styles from './CommentList.module.css';
 

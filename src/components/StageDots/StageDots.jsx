@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function StageDots({ quantity, current, size, width, gap }) {
   let dotsArr = [...Array(quantity)].fill(false);
   dotsArr[current - 1] = true;
