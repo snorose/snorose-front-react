@@ -303,7 +303,11 @@ export const routeList = [
       // },
       {
         path: '/my-page',
-        element: <MyPage />,
+        element: (
+          <ProtectedRoute>
+            <MyPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/my-page/password',

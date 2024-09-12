@@ -1,9 +1,3 @@
-export const CLASS_NUMBERS = Object.freeze([
-  { id: 1, name: '1' },
-  { id: 2, name: '2' },
-  { id: 3, name: '3' },
-]);
-
 export const EXAM_TYPES = Object.freeze([
   { id: 'MIDTERM', name: '중간고사' },
   { id: 'FINALTERM', name: '기말고사' },

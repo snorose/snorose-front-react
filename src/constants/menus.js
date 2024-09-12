@@ -42,7 +42,7 @@ export const SIDEBAR_MENUS = Object.freeze([
     title: '스노로즈',
     items: [
       { to: '/about', name: 'About 스노로즈' },
-      // { to: '/notice', name: '공지사항' },
+      { to: '/notice', name: '공지사항' },
     ],
   },
   {
