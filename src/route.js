@@ -58,7 +58,7 @@ const getRolesForReadBoard = (boardPath) => {
     case 'permanent-snow':
       return [ROLE.user, ROLE.admin, ROLE.official];
     case 'all':
-      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official]; // 또는 모든 권한 부여
+      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
     default:
       return [];
   }
