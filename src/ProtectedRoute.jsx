@@ -14,7 +14,7 @@ export default function ProtectedRoute({ roles, children, to = '/', message }) {
 
   if (status === USER_STATUS.isLogout) {
     alert('로그인이 필요합니다.');
-    return <Navigate to={to} replace={true} />;
+    return <Navigate to={'/login'} replace={true} />;
   }
 
   if (roles && !roles.includes(userInfo?.userRoleId)) {
