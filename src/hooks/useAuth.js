@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getMyPageUserInfo, withdrawAccount } from '@/apis';
 
@@ -10,6 +10,7 @@ import { TOAST } from '@/constants';
 
 const useAuth = ({ isRequiredAuth = false } = {}) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { toast } = useToast();
 
   const hasToken = !!localStorage.getItem('accessToken');
@@ -41,6 +42,7 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
 
   const logout = () => {
     localStorage.removeItem('accessToken');
+    queryClient.removeQueries(['myPageUserInfo']);
     navigate('/');
     refetch();
   };
