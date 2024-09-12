@@ -140,7 +140,9 @@ export default function PostPage() {
         <div className={styles.title}>
           <p>
             {postData.title}
-            <span>&nbsp;&nbsp;{postData.viewCount.toLocaleString()} views</span>
+            <span className={styles.views}>
+              &nbsp;&nbsp;{postData.viewCount.toLocaleString()} views
+            </span>
           </p>
         </div>
         <p className={styles.text}>{postData.content}</p>
