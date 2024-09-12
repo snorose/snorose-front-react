@@ -8,6 +8,10 @@ import { USER_STATUS } from './constants';
 export default function ProtectedRoute({ roles, children, to = '/', message }) {
   const { status, userInfo } = useAuth();
 
+  if (status === USER_STATUS.loading) {
+    return;
+  }
+
   if (status === USER_STATUS.isLogout) {
     alert('로그인이 필요합니다.');
     return <Navigate to={to} replace={true} />;
