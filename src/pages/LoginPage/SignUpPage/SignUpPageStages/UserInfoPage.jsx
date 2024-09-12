@@ -70,7 +70,8 @@ export default function UserInfoPage({ setFormData, formData }) {
             select={formData}
             setFn={setFormData}
             placeholder='전공을 선택하세요'
-            color='#EAF5FD'
+            backgroundColor='#EAF5FD'
+            color='#00368E'
           />
         </div>
         <div className={styles.inputFrame}>
