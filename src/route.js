@@ -57,6 +57,8 @@ const getRolesForReadBoard = (boardPath) => {
       return [ROLE.user, ROLE.admin, ROLE.official];
     case 'permanent-snow':
       return [ROLE.user, ROLE.admin, ROLE.official];
+    case 'all':
+      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official]; // 또는 모든 권한 부여
     default:
       return [];
   }
@@ -75,7 +77,13 @@ const getRolesForWriteBoard = (boardPath) => {
   }
 };
 
-const boardPaths = ['first-snow', 'large-snow', 'permanent-snow', 'besookt'];
+const boardPaths = [
+  'first-snow',
+  'large-snow',
+  'permanent-snow',
+  'besookt',
+  'all',
+];
 
 const boardRoutes = boardPaths.flatMap((boardPath) => [
   {
