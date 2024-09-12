@@ -195,7 +195,7 @@ export default function ExamReviewDetailPage() {
       <CommentList commentCount={commentCount} />
       <InputBar />
       <OptionModal
-        id='exam-review-edit'
+        id={isConfirmed ? 'confirmed-exam-review-option' : 'exam-review-option'}
         isOpen={isOptionModalOpen}
         setIsOpen={setIsOptionModalOpen}
         closeFn={() => setIsOptionModalOpen(false)}

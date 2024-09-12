@@ -122,7 +122,7 @@ export const MODAL_OPTIONS = [
     titleColor: '#000',
   },
   {
-    id: 'exam-review-edit',
+    id: 'exam-review-option',
     title: '내가 작성한 시험 후기',
     titleColor: '#000',
     children: [
@@ -133,6 +133,21 @@ export const MODAL_OPTIONS = [
         text: '수정하기',
         nav: '/post',
       },
+      {
+        iconId: 'trash',
+        IconWidth: 12,
+        IconHeight: 16,
+        text: '삭제하기',
+        color: '#FF4B6C',
+        nav: '/post-write',
+      },
+    ],
+  },
+  {
+    id: 'confirmed-exam-review-option',
+    title: '내가 작성한 시험 후기',
+    titleColor: '#000',
+    children: [
       {
         iconId: 'trash',
         IconWidth: 12,
