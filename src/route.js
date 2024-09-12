@@ -394,7 +394,7 @@ export const routeList = [
         },
       },
       {
-        path: '/notice',
+        path: '/board/notice',
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin, ROLE.official]}
@@ -403,7 +403,20 @@ export const routeList = [
             <NoticeListPage />
           </ProtectedRoute>
         ),
-
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/board/notice/post/:postId',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin, ROLE.official]}
+            message={'등업 후 이용 가능합니다'}
+          >
+            <PostPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },
