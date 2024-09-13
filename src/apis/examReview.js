@@ -1,6 +1,6 @@
 import { authAxios } from '@/axios';
 
-export const downloadExamReview = async (postId, fileName) => {
+export const getExamReview = async (postId, fileName) => {
   const response = await authAxios.get(
     `/v1/reviews/files/${postId}/download/${fileName}`,
     { responseType: 'blob' }
