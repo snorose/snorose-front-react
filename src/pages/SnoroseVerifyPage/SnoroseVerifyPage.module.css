@@ -42,4 +42,5 @@
   letter-spacing: -0.5px;
   color: #484848;
   white-space: pre-line;
+  word-break: keep-all;
 }

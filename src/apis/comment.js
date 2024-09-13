@@ -1,7 +1,11 @@
 import { authAxios } from '@/axios';
 
-export const getCommentList = async ({ postId }) => {
-  const response = await authAxios.get(`/v1/posts/${postId}/comments`);
+export const getCommentList = async ({ postId, page = 0 }) => {
+  const response = await authAxios.get(`/v1/posts/${postId}/comments`, {
+    params: {
+      page,
+    },
+  });
   return response?.data.result;
 };
 
