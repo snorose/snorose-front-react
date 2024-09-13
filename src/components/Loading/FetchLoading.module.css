@@ -1,0 +1,38 @@
+.loading {
+  flex: 1;
+  width: 100%;
+  height: calc(100% - 56px - 86px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.centerBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+  font-size: 13px;
+  padding: 30px 0;
+}
+
+.icon {
+  animation: rotateAndPause 2s linear infinite;
+}
+
+.icon_static {
+  animation: none;
+}
+
+@keyframes rotateAndPause {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}

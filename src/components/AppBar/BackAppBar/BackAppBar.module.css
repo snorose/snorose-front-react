@@ -3,6 +3,15 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  background-color: transparent;
+}
+
+.hasGap {
+  padding: 0.875rem 1.25rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .backDiv {
@@ -26,4 +35,11 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.hasWideWidth {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
 }

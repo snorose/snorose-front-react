@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css');
 
 :root {
+  --default-width: 600px;
   --default-margin: 1.25rem;
 }
 
@@ -46,6 +48,8 @@ pre {
   box-sizing: border-box;
   font: inherit;
   vertical-align: baseline;
+  line-height: 150%;
+  letter-spacing: -0.5px;
 }
 
 p,
@@ -89,6 +93,7 @@ html {
 body {
   margin: 0;
   font-family:
+    'Spoqa Han Sans Neo',
     'Noto Sans KR',
     -apple-system,
     BlinkMacSystemFont,
@@ -123,8 +128,14 @@ code {
   align-items: center;
   gap: 4px;
   position: fixed;
-  bottom: 6.25rem;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   z-index: 2;
+}
+
+@media screen and (max-width: 400px) {
+  html {
+    font-size: 14px;
+  }
 }

@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import { Icon } from '../Icon';
+import { useAuth } from '@/hooks';
 
-import { USER } from '../../dummy/data';
+import { Icon } from '@/components/Icon';
+
+import { USER_STATUS } from '@/constants';
 
 import styles from './MainPageListItem.module.css';
 
@@ -16,7 +18,9 @@ export default function MainPageListItem({
   image,
   roles,
 }) {
-  if (!USER?.isLogin) {
+  const { status, userInfo } = useAuth();
+
+  if (status === USER_STATUS.isLogout) {
     return (
       <li className={`${styles.item} ${styles.denied}`}>
         로그인 후 이용 가능합니다.
@@ -24,7 +28,7 @@ export default function MainPageListItem({
     );
   }
 
-  if (!roles.includes(USER?.role)) {
+  if (!roles.includes(userInfo.userRoleId)) {
     return (
       <li className={`${styles.item} ${styles.denied}`}>
         등업 완료 후 이용 가능합니다.

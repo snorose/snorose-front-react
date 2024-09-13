@@ -1,0 +1,24 @@
+.search {
+  width: calc(100% - 1.25rem * 2);
+  margin: 0 1.25rem 0.625rem 1.25rem;
+}
+
+.filters {
+  margin: 0 var(--default-margin) 14px var(--default-margin);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.list {
+  padding: 4px 17px 0 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.to {
+  width: 100%;
+}

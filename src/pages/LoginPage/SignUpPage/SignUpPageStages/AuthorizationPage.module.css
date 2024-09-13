@@ -1,0 +1,17 @@
+.pageFrame {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+}
+.text {
+  margin-bottom: 1.688rem;
+}
+.submit {
+  margin-bottom: 2.125rem;
+}

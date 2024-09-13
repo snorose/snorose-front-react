@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import styles from './MyPage.module.css';
-import Icon from '../../../components/Icon/Icon';
+import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import AccountTab from './AccountTab';
-import ActivityTab from './ActivityTab';
-import GuideTab from './GuideTab';
+
+import { useAuth } from '@/hooks';
+
+import { AccountTab, ActivityTab, PolicyTab } from '@/pages/MyPage/MyPage';
+
+import { Icon } from '@/components';
+
+import { ROLE_NAME } from '@/constants';
+
+import styles from './MyPage.module.css';
 
 export default function MyPage() {
+  const { userInfo, status } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = searchParams.get('tab') || 'account';
 
@@ -20,41 +26,61 @@ export default function MyPage() {
     }
   }, [searchParams, setSearchParams]);
 
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (status === 'unauthenticated') {
+    return null;
+  }
+
   return (
     <main className={styles.myPage}>
       <div className={styles.myPageUpper}>
-        <div className={styles.logoOverlay}></div>
+        <div className={styles.logoOverlay}>
+          <Link to='edit-info'>
+            <Icon id='pencil-underline' fill='#fff' stroke='#fff' />
+          </Link>
+        </div>
       </div>
 
       <div className={styles.profileImage}>
-        <Icon id='profile-basic' />
+        {userInfo.userProfile === null ? (
+          <Icon id='profile-basic' />
+        ) : (
+          <img src={userInfo.userProfile} alt={`${userInfo.userName} 프로필`} />
+        )}
       </div>
 
       <div className={styles.myPageLower}>
         <div className={styles.myInfo}>
-          <div className={styles.name}>힘하리</div>
+          <div className={styles.name}>{userInfo.nickname}</div>
           <div className={styles.studentIdMemberType}>
-            <div className={styles.studentId}>17학번</div>
+            <div className={styles.studentId}>
+              {userInfo.studentNumber.slice(0, 2)}학번
+            </div>
             <Icon id='middle-dot' />
-            <div className={styles.memberType}>정회원</div>
+            <div className={styles.memberType}>
+              {ROLE_NAME[userInfo.userRoleId]}
+            </div>
           </div>
           <Link to='view-point-list'>
             <div className={styles.pointWrapper}>
               <div className={styles.point}>
                 <Icon id='point-circle' />
-                39
+                {userInfo.balance}
               </div>
-              <a className={styles.pointList}>
+              <div className={styles.pointList}>
                 포인트 내역 보기
                 <Icon id='angle-right' fill='#00368e' />
-              </a>
+              </div>
             </div>
           </Link>
         </div>
 
         {/* 탭 메뉴 */}
         <div className={styles.tabMenu}>
-          {['account', 'activity', 'guide'].map((tab) => (
+          {['account', 'activity', 'policy'].map((tab) => (
             <div
               key={tab}
               className={`${styles.tab} ${
@@ -66,7 +92,7 @@ export default function MyPage() {
             >
               {tab === 'account' && '계정 정보'}
               {tab === 'activity' && '내 활동'}
-              {tab === 'guide' && '이용 안내'}
+              {tab === 'policy' && '이용 안내'}
             </div>
           ))}
         </div>
@@ -78,7 +104,7 @@ export default function MyPage() {
         {activeTab === 'activity' && <ActivityTab />}
 
         {/* 이용 안내 */}
-        {activeTab === 'guide' && <GuideTab />}
+        {activeTab === 'policy' && <PolicyTab />}
       </div>
     </main>
   );

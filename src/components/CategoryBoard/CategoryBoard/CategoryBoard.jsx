@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
+
 import {
   CategoryBoardItem,
   CategoryBoardItemDetail,
-} from '../../CategoryBoard';
+} from '@/components/CategoryBoard';
+
 import styles from './CategoryBoard.module.css';
 
 function CategoryBoardMain({ title, to, children }) {

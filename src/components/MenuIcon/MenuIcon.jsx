@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Icon } from '../../components/Icon';
-import { Sidebar } from '../../components/Sidebar';
+
+import { Icon } from '@/components/Icon';
+import { Sidebar } from '@/components/Sidebar';
 
 export default function MenuIcon() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,7 @@ export default function MenuIcon() {
           event.stopPropagation();
           setIsOpen((prev) => !prev);
         }}
+        style={{ cursor: 'pointer' }}
       />
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
     </>

@@ -1,118 +1,99 @@
-import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
+import { useLogin } from '@/apis';
 
-import { Icon } from '../../../components/Icon';
+import { Icon } from '@/components/Icon';
+import { Input } from '@/components/Input';
+import { Submit } from '@/components/Submit';
+
+import snoroseLogo from '@/assets/images/snoroseLogo.svg';
 
 import styles from './LoginPage.module.css';
 
 export default function Login() {
-  const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
-  const [errmsg, setErrmsg] = useState(false);
+  const navigate = useNavigate();
+  const login = useLogin();
+  const [formData, setFormData] = useState({ loginId: '', password: '' });
+  const [isError, setIsError] = useState(false);
   const [visBtnClick, setVisBtnClick] = useState(false);
   const toggleVisBtn = () => {
     setVisBtnClick((prev) => !prev);
   };
-  const [pwInputFocus, setPwInputFocus] = useState(false);
-  const pwInputRef = useRef();
-  const [user, setUser] = useState();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const user = { loginId: id, password: pw };
-    const apiUrl = 'http://13.124.33.41:8081';
-    const endpoint = '/v1/users/login';
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    try {
-      const response = await axios.post(apiUrl + endpoint, user, {
-        headers: headers,
-      });
-      setUser(response.data);
-      setErrmsg(false);
-      localStorage.setItem('user', response.data);
-      console.log(response.data);
-    } catch (e) {
-      setErrmsg(true);
-    }
-  };
 
   return (
     <div className={styles.loginframe}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => login(e, setIsError, formData, navigate)}>
         <div className={styles.prev}>
-          <Icon id='arrow-left' width='9' height='14' />
+          <Link to='/'>
+            <Icon id='arrow-left' width='1.162rem' height='1.048rem' />
+          </Link>
         </div>
         <div className={styles.loginbody}>
-          <p className={styles.title}>SNOROSE</p>
-          <p>숙명인의 회원 커뮤니티</p>
-          <p>스노로즈에 오신 것을 환영합니다</p>
-          <input
-            type='text'
-            placeholder='아이디'
-            onChange={(e) => {
-              setId(e.target.value);
-            }}
-            className={styles.idInput}
-          />
+          <img src={snoroseLogo} alt='스노로즈 로고' className={styles.logo} />
+          <p className={styles.title}>
+            숙명인을 위한 커뮤니티,
+            <br />
+            스노로즈에 오신 것을 환영합니다!
+          </p>
           <div
-            tabIndex='0'
-            onFocus={() => setPwInputFocus(true)}
-            onBlur={() => {
-              setPwInputFocus(false);
-              setVisBtnClick(false);
+            className={styles.input}
+            onChange={() => {
+              setIsError(false);
             }}
-            className={styles.pwWrapper}
           >
-            <input
-              type={visBtnClick ? 'text' : 'password'}
-              placeholder='영어, 숫자, 특수문자를 포함한 비밀번호'
-              onChange={(e) => {
-                setPw(e.target.value);
-              }}
-              className={styles.pwInput}
-              ref={pwInputRef}
+            <Input
+              placeholder={'아이디'}
+              className={isError ? 'wrong' : 'ready'}
+              inputType={'loginId'}
+              inputData={setFormData}
             />
+          </div>
+          <div
+            className={!isError ? styles.input : undefined}
+            onChange={() => {
+              setIsError(false);
+              if (!formData.password) setVisBtnClick(false);
+            }}
+          >
             <div
-              className={styles.pwEyes}
-              onMouseDown={(e) => {
-                e.preventDefault();
-                toggleVisBtn();
-                pwInputRef.current.focus();
-              }}
-              onMouseUp={(event) => {
-                //이거 없으면 pwInput input의 type이 바뀔때 커서가 자꾸 앞으로 재조정됨
-                event.preventDefault();
-              }}
+              className={`${styles.pwFrame} ${styles[isError ? 'wrong' : 'ready']}`}
             >
-              {pwInputFocus && (
+              <Input
+                type={visBtnClick ? 'text' : 'password'}
+                placeholder={'영어, 숫자, 특수문자를 포함한 비밀번호'}
+                className={isError ? 'wrong' : 'ready'}
+                inputType={'password'}
+                inputData={setFormData}
+              />
+              {formData.password && (
                 <Icon
-                  id='opened-eye'
-                  className={styles.visiblity}
-                  width='14'
-                  height='10'
-                ></Icon>
+                  id={visBtnClick ? 'closed-eye' : 'opened-eye'}
+                  fill={isError ? '#ff4b6c' : '#898989'}
+                  width='1.5rem'
+                  height='1.5rem'
+                  className={styles.visibility}
+                  onClick={toggleVisBtn}
+                />
               )}
             </div>
           </div>
-          <button className={styles.button} type='submit'>
-            로그인
-          </button>
+          {isError && (
+            <p className={styles.errMsg}>
+              아이디 혹은 비밀번호가 일치하지 않습니다
+            </p>
+          )}
+          <Submit btnName='로그인하기' className='right' />
           <div className={styles.find}>
-            <Link to='/find-id'>아이디 찾기</Link> |{' '}
+            <Link to='/find-id'>아이디 찾기</Link>
+            <p className={styles.divider}>|</p>
             <Link to='/find-pw'>비밀번호 찾기</Link>
           </div>
-          <a className={styles.signup}>회원가입</a>
-        </div>
-        {errmsg && (
-          <div className={styles.loginError}>
-            <p>아이디 혹은 비밀번호가</p>
-            <p>일치하지 않습니다</p>
+          <div className={styles.signup}>
+            <Link to='/signup'>아직 회원이 아니신가요?</Link>
+            <Icon id='angle-right' width='1.5rem' height='1.5rem' />
           </div>
-        )}
+        </div>
       </form>
     </div>
   );

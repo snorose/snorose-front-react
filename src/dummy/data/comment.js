@@ -23,7 +23,8 @@ export const COMMENT_LIST = Object.freeze([
         userProfile: 'string',
         userDisplay: '송이2',
         isWriter: true,
-        content: '댓글 두 번째다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 냐얀야냐',
+        content:
+          '댓글 두 번째다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 긴 대댓글이다옹 냐얀야냐',
         liked: false, // 백엔드에서 추가 필요
         likeCount: 4,
         reportCount: 0,

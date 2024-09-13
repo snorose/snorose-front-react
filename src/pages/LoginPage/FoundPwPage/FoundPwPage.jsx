@@ -1,8 +1,11 @@
-import { React, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import Icon from '../../../components/Icon/Icon';
-import Submit from '../../../components/Submit/Submit';
-import EnlightenedWoman from '../../../assets/images/EnlightenedWoman.svg';
+
+import { Icon } from '@/components/Icon';
+import { Submit } from '@/components/Submit';
+
+import EnlightenedWoman from '@/assets/images/EnlightenedWoman.svg';
+
 import styles from './FoundPwPage.module.css';
 
 export default function FoundPwPage() {
@@ -44,7 +47,7 @@ export default function FoundPwPage() {
               id='pencil-underline'
               width='24px'
               height='24px'
-              fill-opacity='0'
+              fillOpacity='0'
             />
           </div>
         </div>

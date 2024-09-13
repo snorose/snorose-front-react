@@ -1,23 +1,24 @@
 .container {
-  display: flex;
-  align-items: center;
+  max-width: var(--default-width);
   width: 100%;
-  height: 83px;
+  min-height: 83px;
   padding: 15px 15px 30px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 8px;
-  border-radius: 10px 10px 0px 0px;
   background: #fff;
-  z-index: 999;
+  border-radius: 10px 10px 0px 0px;
+  box-shadow: 0px -4px 7px #ddebf6;
   position: fixed;
   bottom: 0;
-  max-width: 450px;
+  z-index: 999;
 }
 
 .input_bar {
-  /* border: 1px solid red; */
   background-color: #f4f4f4;
   width: 100%;
-  height: 40px;
+  min-height: 40px;
   display: flex;
   align-items: center;
   gap: 7px;
@@ -26,19 +27,18 @@
 }
 
 .input_zone {
-  /* border: 1px solid blue; */
   width: 100%;
-  height: 20px;
+  min-height: 20px;
   outline: none;
   border: none;
   background-color: transparent;
+  font-weight: 400;
+  font-size: 12px;
+  resize: none;
+}
 
-  ::placeholder {
-    font-size: 14px;
-    line-height: 150%; /* 21px */
-    letter-spacing: -0.5px;
-    color: #f4f4f4;
-  }
+.input_zone::placeholder {
+  color: #898989;
 }
 
 .profile_icon {
@@ -48,8 +48,5 @@
 }
 
 .enter {
-  /* border: 1px solid red; */
-  display: flex;
-  width: 40px;
-  height: 40px;
+  cursor: pointer;
 }

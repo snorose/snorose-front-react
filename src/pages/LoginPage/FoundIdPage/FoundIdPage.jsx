@@ -1,8 +1,11 @@
-import { React, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import Icon from '../../../components/Icon/Icon';
-import Submit from '../../../components/Submit/Submit';
-import excitedWoman from '../../../assets/images/excitedWoman.svg';
+
+import { Icon } from '@/components/Icon';
+import { Submit } from '@/components/Submit';
+
+import excitedWoman from '@/assets/images/excitedWoman.svg';
+
 import styles from './FoundIdPage.module.css';
 
 export default function FoundIdPage() {
@@ -50,7 +53,7 @@ export default function FoundIdPage() {
             <Submit btnName='로그인하기' className='right' />
           </div>
         </Link>
-        <Link to='/'>
+        <Link to='/find-pw'>
           <div className={styles.findPWButton}>
             <p>비밀번호 찾기</p>
             <Icon id='angle-right' width='24px' height='24px' />

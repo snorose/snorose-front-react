@@ -15,18 +15,18 @@ export const NAVBAR_MENUS = Object.freeze([
   },
   {
     id: 'test',
-    to: '/exam-review',
+    to: '/board/exam-review',
     label: '시험후기',
     width: 24,
     height: 24,
   },
-  {
-    id: 'bell',
-    to: '/alert',
-    label: '알림',
-    width: 24,
-    height: 24,
-  },
+  // {
+  //   id: 'bell',
+  //   to: '/alert',
+  //   label: '알림',
+  //   width: 24,
+  //   height: 24,
+  // },
   {
     id: 'mypage',
     to: '/my-page',
@@ -46,7 +46,7 @@ export const SIDEBAR_MENUS = Object.freeze([
     ],
   },
   {
-    to: '/authentication',
+    to: '/verify',
     title: '인증',
   },
   {
@@ -56,17 +56,17 @@ export const SIDEBAR_MENUS = Object.freeze([
       { to: '/board/first-snow', name: '첫눈온방' },
       { to: '/board/large-snow', name: '함박눈방' },
       { to: '/board/permanent-snow', name: '만년설방' },
-      { to: '/board/besookt', name: '베숙트' },
+      // { to: '/board/besookt', name: '베숙트' },
     ],
   },
   {
-    to: '/exam-review',
+    to: '/board/exam-review',
     title: '시험후기',
   },
-  {
-    to: '/help',
-    title: '문의/신고',
-  },
+  // {
+  //   to: '/help',
+  //   title: '문의/신고',
+  // },
   {
     to: '/',
     title: '숙명여대',

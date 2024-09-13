@@ -6,8 +6,18 @@
   align-items: center;
 }
 
-.login {
+.action {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button {
   background-color: white;
-  color: #00368e;
   font-weight: bold;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+  color: #00368e;
 }

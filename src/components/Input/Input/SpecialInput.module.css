@@ -1,0 +1,53 @@
+.title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.313rem;
+  margin-bottom: 0.349rem;
+}
+.input {
+  width: 100%;
+  height: 2.563rem;
+  border-radius: 6px;
+  padding-left: 15px;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  outline: 0;
+  border: 0;
+}
+.pwFrame {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 2.563rem;
+  border-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  padding-right: 0.625rem;
+}
+.ready {
+  background-color: #f5f5f5;
+}
+.right {
+  background-color: #eaf5fd;
+}
+.wrong {
+  background-color: #fee9eb;
+}
+.pwInput {
+  width: 80%;
+  background-color: blue;
+  display: inline-block;
+}
+.icon {
+  display: inline-block;
+}
+.icon:hover {
+  cursor: pointer;
+}
+.error {
+  color: #ff4b6c;
+  font-size: 0.688rem;
+  line-height: 1.031rem;
+  font-weight: 400;
+  margin-top: 0.188rem;
+}

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Icon } from '../Icon';
-import { Sidebar } from '../Sidebar';
+import { Icon } from '@/components/Icon';
+import { Sidebar } from '@/components/Sidebar';
 
 import styles from './BoardHeader.module.css';
 
@@ -38,4 +38,3 @@ export default function BoardHeader({ to, title, setIsSidebarOpen }) {
     </>
   );
 }
-

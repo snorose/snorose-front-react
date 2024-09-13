@@ -1,45 +1,62 @@
-import { BoardCard } from '../../components/BoardCard';
-import { Card } from '../../components/Card';
-import { Carousel, Slide } from '../../components/Carousel';
-import { Flex } from '../../components/Flex';
-import { Footer } from '../../components/Footer';
-import { Header } from '../../components/Header';
-import { ListHeader } from '../../components/ListHeader';
-import { MainPageListItem } from '../../components/MainPageListItem';
-import { Margin } from '../../components/Margin';
+import { useQuery } from '@tanstack/react-query';
 
-import { BOARD_MENUS, ROLE } from '../../constants';
-import { BESOOKTS, CAROUSEL_BANNER, USER } from '../../dummy/data';
+import { getHomeNotice } from '@/apis';
+
+import { useAuth } from '@/hooks';
+
+import {
+  BoardCard,
+  Card,
+  Carousel,
+  Footer,
+  Header,
+  ListHeader,
+  MainPageListItem,
+  Margin,
+  Flex,
+} from '@/components';
+
+import { BOARD_MENUS, ROLE } from '@/constants';
+import { BESOOKTS } from '@/dummy/data';
 
 import styles from './MainPage.module.css';
 
-const BOARDS = BOARD_MENUS.filter((board) => board.title !== '베숙트');
+const BOARDS = BOARD_MENUS.filter((board) => [21, 22, 23].includes(board.id));
 
 export default function MainPage() {
+  const { status } = useAuth();
+  const isLogin = status === 'authenticated';
+
+  const { data, isError } = useQuery({
+    queryKey: ['homeNotice'],
+    queryFn: () => getHomeNotice(),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  if (isError || !data) {
+    return null;
+  }
+
   return (
     <main>
       <Header className={styles.header} />
-      <Carousel>
-        {CAROUSEL_BANNER.map((banner, index) => (
-          <Slide key={index} src={banner} alt='banner' />
-        ))}
-      </Carousel>
+      <Carousel />
       <Margin className={styles.cards}>
         <Flex gap='0.45rem'>
           <Card
             className={styles.notice}
-            to='/notice'
-            title='시험후기 등록 기간 공지'
+            to='/board/notice'
+            title={data.title}
             tag='공지'
             imgPath='megaphone.svg'
             icon={{ id: 'megaphone', width: 128, height: 131 }}
-            isDark={USER?.isLogin ? false : true}
+            isDark={isLogin ? false : true}
           />
 
-          {USER?.isLogin && (
+          {isLogin && (
             <Card
               className={styles.mark}
-              to='/'
+              to='/attendance'
               title='오늘의 출석체크'
               tag='출석체크'
               imgPath='flag.svg'
@@ -63,7 +80,7 @@ export default function MainPage() {
           ))}
         </Flex>
       </Margin>
-      {BESOOKTS.length > 0 && (
+      {/* {BESOOKTS.length > 0 && (
         <Margin className={styles.besookt}>
           <ListHeader to='/board/besookt' title='베숙트' />
           <Flex direction='column' gap='0.375rem'>
@@ -92,7 +109,7 @@ export default function MainPage() {
             )}
           </Flex>
         </Margin>
-      )}
+      )} */}
       <Footer />
     </main>
   );

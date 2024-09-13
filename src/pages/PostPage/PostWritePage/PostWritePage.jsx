@@ -1,57 +1,98 @@
-import TextareaAutosize from 'react-textarea-autosize';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Icon } from '../../../components/Icon';
-import { CloseAppBar } from '../../../components/AppBar';
-import { TOAST } from '../../../constants';
-import { BOARD_MENUS } from '../../../constants';
-import { DropDownMenu } from '../../../components/DropDownMenu';
-import formattedNowTime from '../../../utils/formattedNowTime';
+import { useNavigate, useLocation } from 'react-router-dom';
+import TextareaAutosize from 'react-textarea-autosize';
+
+import { postPost } from '@/apis';
+
+import { useToast, useAuth } from '@/hooks';
+
+import { Icon, CloseAppBar, DropDownMenu, FetchLoading } from '@/components';
+
+import { formattedNowTime } from '@/utils';
+
+import { BOARD_MENUS, ROLE, TOAST } from '@/constants';
+
 import styles from './PostWritePage.module.css';
-import useToast from '../../../hooks/useToast';
 
 export default function PostWritePage() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { toast } = useToast();
+  const { userInfo, status } = useAuth();
   const [isNotice, setIsNotice] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const roleId = 4; // 더미 역할 ID
-  const boardId = 'firstSnow'; // 더미 보드 아이디 ID
-  const boardTitles = BOARD_MENUS.map((menu) => menu.title);
-  
-  // 현재 게시판 title
-  const getCurrentBoard = (id) => {
-    const currentBoard = BOARD_MENUS.find((board) => board.id === id);
-    return currentBoard ? currentBoard.title : '게시판을 선택해주세요';
-  };
-  const [item, setItem] = useState(getCurrentBoard(boardId));
 
-  // 게시판 선택
+  const textId = pathname.split('/')[2];
+  const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
+  const [boardTitle, setBoardTitle] = useState(
+    currentBoard?.title ?? '게시판을 선택해주세요'
+  );
+  const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
+
+  const boardTitles = BOARD_MENUS.filter((menu) =>
+    [21, 22, 23].includes(menu.id)
+  ).map((menu) => menu.title);
+
+  // 게시판 선택 핸들러
   const handleDropDownOpen = () => {
     setDropDownOpen((prev) => !prev);
   };
 
-  // 공지 여부 선택
+  // 게시판 제목 선택 핸들러
+  const handleBoardTitleChange = (selectedTitle) => {
+    const selectedBoard = BOARD_MENUS.find(
+      (menu) => menu.title === selectedTitle
+    );
+    if (selectedBoard) {
+      setBoardTitle(selectedBoard.title);
+      setBoardId(selectedBoard.id);
+    }
+    setDropDownOpen(false);
+  };
+
+  // 공지 여부 선택 핸들러
   const handleIsNotice = () => {
     setIsNotice((prev) => !prev);
   };
 
-  // 게시글 등록 유효성 검사 (오류 토스트 띄우기)
+  const data = {
+    category: null,
+    boardId,
+    title,
+    content: text,
+    isNotice,
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // 유효성 검사
+    if (boardId === '') {
+      toast(TOAST.POST.emptyBoard);
+      return;
+    }
     if (!title.trim()) {
-      toast(TOAST.emptyTitle);
+      toast(TOAST.POST.emptyTitle);
       return;
     }
     if (!text.trim()) {
-      toast(TOAST.emptyText);
+      toast(TOAST.POST.emptyContent);
       return;
     }
-    console.log('제목:', title);
-    console.log('내용:', text);
-    navigate('/post');
+
+    // 게시글 등록
+    postPost(data)
+      .then((response) => {
+        if (response.status === 201) {
+          toast(TOAST.POST.create);
+          navigate(-1);
+        }
+      })
+      .catch(({ response }) => {
+        toast(response.data.message);
+      });
   };
 
   // 제목 40자 제한
@@ -62,7 +103,9 @@ export default function PostWritePage() {
     }
   };
 
-  console.log();
+  if (status === 'loading') {
+    return <FetchLoading>로딩 중...</FetchLoading>;
+  }
 
   return (
     <div className={styles.container}>
@@ -73,14 +116,14 @@ export default function PostWritePage() {
         <div className={styles.categorySelect} onClick={handleDropDownOpen}>
           <div>
             <Icon id='clip-board-list' width='18' height='19' />
-            <p className={styles.categorySelectText}>{item}</p>
+            <p className={styles.categorySelectText}>{boardTitle}</p>
           </div>
           <Icon id='angle-down' width='14' height='7' />
         </div>
         <DropDownMenu
           options={boardTitles}
-          item={item}
-          setItem={setItem}
+          item={boardTitle}
+          setItem={handleBoardTitleChange}
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
           backgroundColor={'#fff'}
@@ -88,13 +131,13 @@ export default function PostWritePage() {
         <div className={styles.profileBox}>
           <div className={styles.profileBoxLeft}>
             <Icon id='cloud' width='25' height='16' />
-            <p>김준희</p>
+            <p>{userInfo.nickname}</p>
             <p className={styles.dot}></p>
             <p>{formattedNowTime()}</p>
           </div>
           <div
             className={
-              roleId === 4
+              userInfo.userRoleId === ROLE.admin
                 ? styles.profileBoxRight
                 : styles.profileBoxRightInvisible
             }
@@ -123,12 +166,6 @@ export default function PostWritePage() {
           />
         </div>
       </div>
-      <div
-        className={styles.bottom}
-        onClick={(e) => {
-          setDropDownOpen(false);
-        }}
-      ></div>
     </div>
   );
 }

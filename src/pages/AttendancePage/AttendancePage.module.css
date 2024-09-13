@@ -1,0 +1,86 @@
+/* top */
+
+.top {
+  display: flex;
+  flex-direction: column;
+  background-color: #00368e;
+  border-radius: 0px 0px 0.9375rem 0.9375rem;
+}
+
+.title {
+  margin-bottom: 1.875rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 130%;
+  text-align: center;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  white-space: pre-line;
+}
+
+.calendar {
+  display: flex;
+  justify-content: center;
+}
+
+.attendanceButton {
+  margin: 1.625rem var(--default-margin);
+  padding: 0.8125rem 0;
+  background: #eaf5fd;
+  border-radius: 0.3125rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: -0.5px;
+  color: #00368e;
+}
+
+.attendanceButton:active {
+  filter: brightness(0.9);
+}
+
+.attendanceButton:disabled {
+  cursor: not-allowed;
+  filter: brightness(0.5);
+}
+
+/* bottom */
+
+.bottom {
+  margin: 1.0625rem 0 3.125rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.item {
+  margin: 0 var(--default-margin);
+  padding: 0.875rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eaf5fd;
+  border-radius: 0.3125rem;
+}
+
+.itemLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #00368e;
+}
+
+.description {
+  font-size: 0.8125rem;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  color: #484848;
+}

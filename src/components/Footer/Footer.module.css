@@ -1,5 +1,5 @@
 .footer {
-  padding: 1.75rem 0 7rem 0;
+  padding-top: 1.75rem;
   margin-top: 2.75rem;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,6 @@
   text-align: center;
   letter-spacing: -0.5px;
   color: #6a6a6a;
-  background: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);
 }
 
 .contact {

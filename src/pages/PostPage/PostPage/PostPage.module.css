@@ -16,7 +16,7 @@
   flex-direction: column;
   font-size: 8px;
   /* 양옆 여백 */
-  padding: 10px 21px 11px 21px;
+  padding: 10px 11px 11px 21px;
   border-radius: 0px 0px 15px 15px;
   background-color: #eaf5fd;
 }
@@ -42,26 +42,33 @@
   font-weight: 800;
 }
 
+.dot3 {
+  padding: 10px;
+  cursor: pointer;
+}
+
 .title {
   display: flex;
   align-items: end;
-  padding: 4px 0 26px 0;
-  gap: 6px;
+  padding: 8px 10px 26px 0;
 
-  p:nth-of-type(1) {
+  p {
     font-size: 20px;
     font-weight: 700;
     line-height: 130%;
     letter-spacing: -0.5px;
     color: #484848;
   }
-  p:nth-of-type(2) {
-    white-space: nowrap;
-    color: #5f86bf;
-    font-size: 11px;
-    line-height: 150%;
-    letter-spacing: -0.5px;
-  }
+}
+
+.views {
+  white-space: nowrap;
+  color: #5f86bf;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  padding-left: 2px;
 }
 
 .text {
@@ -70,37 +77,31 @@
   font-size: 14px;
   line-height: 150%;
   letter-spacing: -0.5px;
-  padding: 0 13px 13px 0;
+  padding: 0 13px 15px 0;
+  white-space: pre-wrap; /* 줄바꿈과 공백을 유지 */
 }
 
 .post_bottom {
   display: flex;
   justify-content: end;
-  gap: 12px;
+  padding: 0 10px 0 0;
+
+  div:nth-of-type(2):hover,
+  div:nth-of-type(3):hover {
+    background-color: #ffffffcc;
+    cursor: pointer;
+  }
 }
 
 .count {
   display: flex;
   align-items: center;
   justify-content: center;
-
+  padding: 4px 8px;
+  border-radius: 5px;
   gap: 6px;
   color: #898989;
   font-size: 11px;
   line-height: 150%;
   letter-spacing: -0.5px;
-}
-
-.comments {
-  font-size: 12px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 7px;
-}
-
-.commentsTitle {
-  padding: 9px 0 2px 0;
 }

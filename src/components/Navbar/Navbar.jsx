@@ -1,19 +1,22 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Icon } from '../Icon';
-import { NAVBAR_MENUS } from '../../constants';
+
+import { Icon } from '@/components/Icon';
+
+import { NAVBAR_MENUS } from '@/constants';
+
 import styles from './Navbar.module.css';
 
-const NAVBAR_ = {
-  home: 'home',
-  board: 'board',
-  'exam-review': 'test',
-  alert: 'bell',
-  'my-page': 'mypage',
+const NAVBAR_ID = {
+  '/': 'home',
+  '/home': 'home',
+  '/board': 'board',
+  '/board/exam-review': 'test',
+  // '/alert': 'bell',
+  '/my-page': 'mypage',
 };
 
 export default function Navbar() {
   const { pathname } = useLocation();
-  const currentMenu = pathname.split('/')[1];
 
   return (
     <nav className={styles.nav}>
@@ -23,14 +26,14 @@ export default function Navbar() {
             <Link key={id} to={to}>
               <li className={styles.menu}>
                 <Icon
-                  id={id === NAVBAR_[currentMenu] ? `${id}-fill` : id}
+                  id={id === NAVBAR_ID[pathname] ? `${id}-fill` : id}
                   {...props}
                 />
                 <span
                   style={{
                     color:
-                      id === NAVBAR_[currentMenu] ||
-                      (currentMenu === '' && id === 'home')
+                      id === NAVBAR_ID[pathname] ||
+                      (pathname === '' && id === 'home')
                         ? '#00368E'
                         : '#5F86BF',
                   }}

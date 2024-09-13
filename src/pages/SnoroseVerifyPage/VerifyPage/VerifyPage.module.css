@@ -1,0 +1,13 @@
+.content {
+  flex: 1;
+  margin: 0 var(--default-margin);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.verify {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}

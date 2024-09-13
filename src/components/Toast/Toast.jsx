@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useToastContext } from '../../contexts/ToastContext.jsx';
+import { useToastContext } from '@/contexts/ToastContext.jsx';
 
 import styles from './Toast.module.css';
 
@@ -15,7 +15,7 @@ export default function Toast({ toast }) {
     }, 3000);
 
     const unmount = setTimeout(() => {
-      removeToast(toast);
+      removeToast(toast.message);
     }, 3500);
 
     return () => {

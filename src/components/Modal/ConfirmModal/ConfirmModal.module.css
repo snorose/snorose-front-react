@@ -1,0 +1,69 @@
+/* 모달 공통 스타일 */
+.dim {
+  width: 100vw;
+  max-width: var(--default-width);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(228, 228, 228, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 288px;
+  padding: 20px 10px 10px;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.buttonGroup {
+  display: flex;
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%;
+  color: var(--Black);
+  white-space: pre-line;
+}
+
+.deleteCenter {
+  width: 80%;
+  text-align: center;
+  color: #484848;
+  font-size: 0.75rem;
+  line-height: 150%;
+  letter-spacing: -0.03125rem;
+  white-space: pre-line;
+}
+
+.primaryButton {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: transparent;
+  font-weight: 500;
+  line-height: 150%;
+  color: #ff4b6c;
+}
+
+.secondaryButton {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: transparent;
+  font-weight: 500;
+  line-height: 150%;
+  color: #898989;
+}

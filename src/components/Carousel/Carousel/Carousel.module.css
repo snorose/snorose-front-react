@@ -21,3 +21,12 @@
 .dot.current {
   background-color: #00368e;
 }
+
+.error {
+  min-height: 112px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5e5e5;
+  color: #6e6e6e;
+}
