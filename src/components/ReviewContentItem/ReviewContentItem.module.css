@@ -14,6 +14,8 @@
 }
 
 .tag {
+  margin-right: 14px;
+  flex-shrink: 0;
   font-size: 12px;
   letter-spacing: -0.5px;
   color: #898989;
@@ -22,4 +24,8 @@
 .value {
   font-size: 14px;
   color: #484848;
+}
+
+.flexStart {
+  align-self: flex-start;
 }
