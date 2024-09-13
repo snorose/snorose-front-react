@@ -16,7 +16,7 @@ import {
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
 
-import { isNumber } from '@/utils';
+import { validClassNumber } from '@/utils';
 import {
   EXAM_TYPES,
   LECTURE_TYPES,
@@ -163,9 +163,8 @@ export default function ExamReviewEditPage() {
           onChange={(event) => {
             const { value } = event.target;
 
-            if (isNumber(value) || value === '') {
+            if (validClassNumber(value)) {
               setClassNumber(value);
-              return;
             }
           }}
           placeholder='수강 분반을 입력하세요'
