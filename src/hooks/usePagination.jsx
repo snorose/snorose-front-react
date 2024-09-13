@@ -22,10 +22,6 @@ export default function usePagination({ queryKey, queryFn, enabled }) {
         return null;
       }
 
-      if (lastPage?.length === 0) {
-        return null;
-      }
-
       return lastPageParam + 1;
     },
     enabled,
