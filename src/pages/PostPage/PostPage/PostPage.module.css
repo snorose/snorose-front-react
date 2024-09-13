@@ -59,15 +59,16 @@
     letter-spacing: -0.5px;
     color: #484848;
   }
-  span {
-    white-space: nowrap;
-    color: #5f86bf;
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 150%;
-    letter-spacing: -0.5px;
-    padding-left: 2px;
-  }
+}
+
+.views {
+  white-space: nowrap;
+  color: #5f86bf;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  padding-left: 2px;
 }
 
 .text {

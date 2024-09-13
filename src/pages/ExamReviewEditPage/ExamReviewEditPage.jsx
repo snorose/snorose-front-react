@@ -11,12 +11,13 @@ import {
   CategoryButton,
   CategoryFieldset,
   Dropdown,
+  TextField,
 } from '@/components/Fieldset';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
 
+import { isNumber } from '@/utils';
 import {
-  CLASS_NUMBERS,
   EXAM_TYPES,
   LECTURE_TYPES,
   ROUTE,
@@ -60,9 +61,7 @@ export default function ExamReviewEditPage() {
   );
   const [isPF, setIsPF] = useState(state.isPF);
   const [isOnline, setIsOnline] = useState(state.isOnline);
-  const [classNumber, setClassNumber] = useState(
-    CLASS_NUMBERS.find((number) => number.id === state.classNumber)
-  );
+  const [classNumber, setClassNumber] = useState(state.classNumber);
   const [questionDetail, setQuestionDetail] = useState(state.questionDetail);
 
   const pass =
@@ -76,7 +75,7 @@ export default function ExamReviewEditPage() {
 
   const data = {
     isPF,
-    classNumber: classNumber?.id,
+    classNumber: Number(classNumber),
     lectureName,
     professor,
     questionDetail,
@@ -159,11 +158,15 @@ export default function ExamReviewEditPage() {
         />
       </CategoryFieldset>
       <CategoryFieldset title='수강 분반' required>
-        <Dropdown
-          options={CLASS_NUMBERS}
-          select={classNumber}
-          setFn={setClassNumber}
-          placeholder='선택하세요'
+        <TextField
+          value={classNumber}
+          onChange={(event) => {
+            const { value } = event.target;
+            if (isNumber(value) || value === '') {
+              setClassNumber(event.target.value);
+            }
+          }}
+          placeholder='수강 분반을 입력하세요'
         />
       </CategoryFieldset>
       <CategoryFieldset
@@ -180,7 +183,7 @@ export default function ExamReviewEditPage() {
         value={isOnline}
         setFn={setIsOnline}
       />
-      <CategoryFieldset title='시험 유형 및 설명' required>
+      <CategoryFieldset title='문항 수 및 시험 유형 설명' required>
         <Textarea
           value={questionDetail}
           setFn={setQuestionDetail}

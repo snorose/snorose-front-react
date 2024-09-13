@@ -5,5 +5,6 @@ export * from './findRoute.js';
 export * from './formattedNowTime.js';
 export * from './getBoardTextId.js';
 export * from './pagination.js';
+export * from './regex.js';
 export * from './timeAgo.js';
 export * from './validate.js';

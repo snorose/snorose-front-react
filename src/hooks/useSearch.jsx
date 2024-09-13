@@ -26,10 +26,24 @@ export default function useSearch({ urlKeyword, filterOption }) {
         boardType === 'exam-review'
           ? navigate(`/board/${boardType}`)
           : navigate(`/board/${boardType}/search`);
-      } else {
-        setNewUrlKeyword(encodeURIComponent(keyword));
-        navigate(`/board/${boardType}/search/${encodeURIComponent(keyword)}`);
+        return;
       }
+
+      setNewUrlKeyword(encodeURIComponent(keyword));
+
+      if (boardType === 'exam-review') {
+        const param = Object.entries(filterOption).reduce(
+          (result, [key, value]) =>
+            value ? `${result}&${key}=${value}` : result,
+          ''
+        );
+
+        navigate(
+          `/board/${boardType}/search/${encodeURIComponent(keyword)}?${param}`
+        );
+        return;
+      }
+      navigate(`/board/${boardType}/search/${encodeURIComponent(keyword)}`);
     }
   };
 

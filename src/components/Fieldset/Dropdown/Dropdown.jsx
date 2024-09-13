@@ -10,6 +10,7 @@ export default function Dropdown({
   select,
   setFn,
   color,
+  backgroundColor,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const updateSelect = (event) => {
@@ -21,15 +22,18 @@ export default function Dropdown({
     <div
       className={`${styles.dropdown} ${isOpen && styles.open}`}
       style={{
-        backgroundColor: !isOpen && select?.name && color,
+        backgroundColor: !isOpen && select?.name && backgroundColor,
+        color: !isOpen && select?.name && color,
       }}
     >
       <div
         className={`${styles.select} ${select || styles.unselect}`}
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        {select?.name ?? placeholder}
-        <Icon id='arrow-down' width={13} height={8} stroke='#000000' />
+        {select?.name ?? (
+          <span className={styles.placeholder}>{placeholder}</span>
+        )}
+        <Icon id='arrow-down' width={13} height={8} />
       </div>
       <ul className={styles.list}>
         {options.map((option) => (

@@ -31,6 +31,14 @@ export default function PostBar({
         <p className={styles.dot}>·</p>
         <p>{agoTime}</p>
         {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
+        {data.isConfirmed && (
+          <Icon
+            className={styles.checkCircleIcon}
+            id='check-circle'
+            width='12'
+            height='12'
+          />
+        )}
       </div>
       <div className={styles.post_center}>
         <p className={styles.title}>{data.title}</p>

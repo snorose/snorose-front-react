@@ -57,6 +57,8 @@ const getRolesForReadBoard = (boardPath) => {
       return [ROLE.user, ROLE.admin, ROLE.official];
     case 'permanent-snow':
       return [ROLE.user, ROLE.admin, ROLE.official];
+    case 'all':
+      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
     default:
       return [];
   }
@@ -75,7 +77,13 @@ const getRolesForWriteBoard = (boardPath) => {
   }
 };
 
-const boardPaths = ['first-snow', 'large-snow', 'permanent-snow', 'besookt'];
+const boardPaths = [
+  'first-snow',
+  'large-snow',
+  'permanent-snow',
+  'besookt',
+  'all',
+];
 
 const boardRoutes = boardPaths.flatMap((boardPath) => [
   {
@@ -295,7 +303,11 @@ export const routeList = [
       // },
       {
         path: '/my-page',
-        element: <MyPage />,
+        element: (
+          <ProtectedRoute>
+            <MyPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/my-page/password',
@@ -386,8 +398,29 @@ export const routeList = [
         },
       },
       {
-        path: '/notice',
-        element: <NoticeListPage />,
+        path: '/board/notice',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin, ROLE.official]}
+            message={'등업 후 이용 가능합니다'}
+          >
+            <NoticeListPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/board/notice/post/:postId',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin, ROLE.official]}
+            message={'등업 후 이용 가능합니다'}
+          >
+            <PostPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },
