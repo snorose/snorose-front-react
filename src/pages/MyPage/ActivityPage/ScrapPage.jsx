@@ -1,42 +1,37 @@
-import { useEffect, useMemo } from 'react';
-import styles from './ActivityPage.module.css';
-import { BackAppBar, Icon, PostBar, Sponsor } from '@/components';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { getMyScrapPostList } from '@/apis';
-import { useInView } from 'react-intersection-observer';
-import { getBoardTitleToTextId } from '@/utils';
 import { Link } from 'react-router-dom';
 
+import { getMyScrapPostList } from '@/apis';
+
+import { usePagination } from '@/hooks';
+
+import { BackAppBar, FetchLoading, PostBar } from '@/components';
+
+import { getBoardTitleToTextId } from '@/utils';
+
+import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
+
+import styles from './ActivityPage.module.css';
+
 export default function ScrapPage() {
-  const { ref, inView } = useInView();
+  const { data, ref, isLoading, isError } = usePagination({
+    queryKey: ['getMyScrapPostList'],
+    queryFn: ({ pageParam }) => getMyScrapPostList({ page: pageParam }),
+  });
 
-  const { data, isPending, isError, hasNextPage, fetchNextPage } =
-    useInfiniteQuery({
-      queryKey: ['getMyScrapPostList'],
-      queryFn: ({ pageParam }) => getMyScrapPostList({ page: pageParam }),
-      initialPageParam: 0,
-      getNextPageParam: (lastPage, _, lastPageParam) => {
-        return lastPage.length > 0 ? lastPageParam + 1 : undefined;
-      },
-    });
-
-  const myScrapPostList = useMemo(() => {
-    return data ? data.pages.flatMap((page) => page) : [];
-  }, [data]);
-
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-  }, [inView, hasNextPage, fetchNextPage]);
-
-  if (isPending) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return <FetchLoading>불러오는 중</FetchLoading>;
   }
 
   if (isError) {
-    return null;
+    return (
+      <FetchLoading animation={false}>잠시 후 다시 시도해 주세요</FetchLoading>
+    );
   }
+
+  const myScrapPostList =
+    data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page.data)
+      : [];
 
   return (
     <main className={styles.activityPage}>
@@ -66,16 +61,16 @@ export default function ScrapPage() {
                 아직 스크랩 한 글이 없어요
               </p>
               <div className={styles.imageWrapper}>
-                <Icon id='no-review-star' className={styles.image} />
+                <img
+                  src={frustratedWomanIllustration}
+                  alt='frustrated woman'
+                  className={styles.image}
+                />
               </div>
             </div>
           )}
         </article>
       </section>
-
-      <div className={styles.sponsor}>
-        <Sponsor className={styles.sponsorImage} />
-      </div>
     </main>
   );
 }

@@ -1,6 +1,8 @@
-import { React, useState } from 'react';
-import Input from './Input';
-import { Icon } from '../../Icon';
+import { useState } from 'react';
+
+import { Icon } from '@/components/Icon';
+import { Input } from '@/components/Input';
+
 import styles from './SpecialInput.module.css';
 
 export default function SpecialInput({

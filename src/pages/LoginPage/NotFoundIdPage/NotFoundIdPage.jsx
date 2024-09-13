@@ -1,8 +1,11 @@
-import { React, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Icon from '../../../components/Icon/Icon';
-import Submit from '../../../components/Submit/Submit';
-import frustratedWoman from '../../../assets/images/frustratedWoman.svg';
+
+import { Icon } from '@/components/Icon';
+import { Submit } from '@/components/Submit';
+
+import frustratedWoman from '@/assets/images/frustratedWoman.svg';
+
 import styles from './NotFoundIdPage.module.css';
 
 export default function NotFoundIdPage() {

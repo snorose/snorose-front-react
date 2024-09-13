@@ -1,12 +1,14 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
-import Navbar from './components/Navbar/Navbar';
+import { RecoilRoot } from 'recoil';
 
-import { findRouteByPath } from './utils/findRoute.js';
-import { routeList } from './route.js';
+import { Navbar } from '@/components/Navbar';
+
+import { findRouteByPath } from '@/utils';
+
+import { routeList } from '@/route.js';
 
 import styles from './App.module.css';
-import { RecoilRoot } from 'recoil';
 
 function App() {
   const { pathname } = useLocation();

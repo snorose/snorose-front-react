@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { postPost, updatePoint } from '@/apis';
+import { postPost } from '@/apis';
 
 import { useToast, useAuth } from '@/hooks';
 
@@ -10,17 +10,9 @@ import { Icon, CloseAppBar, DropDownMenu, FetchLoading } from '@/components';
 
 import { formattedNowTime } from '@/utils';
 
-import {
-  BOARD_MENUS,
-  POINT_CATEGORY_ENUM,
-  POINT_SOURCE_ENUM,
-  TOAST,
-} from '@/constants';
-
-import { USER } from '@/dummy/data';
+import { BOARD_MENUS, ROLE, TOAST } from '@/constants';
 
 import styles from './PostWritePage.module.css';
-
 
 export default function PostWritePage() {
   const navigate = useNavigate();
@@ -94,16 +86,6 @@ export default function PostWritePage() {
     postPost(data)
       .then((response) => {
         if (response.status === 201) {
-          return updatePoint({
-            userId: USER.userId, // userId로 교체해야합니다.
-            category: POINT_CATEGORY_ENUM.POST_CREATE,
-            source: POINT_SOURCE_ENUM.POST,
-            sourceId: response.data.result.postId,
-          });
-        }
-      })
-      .then((pointResponse) => {
-        if (pointResponse.status === 200) {
           toast(TOAST.POST.create);
           navigate(-1);
         }
@@ -112,6 +94,7 @@ export default function PostWritePage() {
         toast(response.data.message);
       });
   };
+
   // 제목 40자 제한
   const handleTitleChange = (e) => {
     const newValue = e.target.value;
@@ -154,7 +137,7 @@ export default function PostWritePage() {
           </div>
           <div
             className={
-              USER.role === 4
+              userInfo.userRoleId === ROLE.admin
                 ? styles.profileBoxRight
                 : styles.profileBoxRightInvisible
             }

@@ -1,12 +1,16 @@
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useMemo } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+
 import { getMyPageUserInfo, withdrawAccount } from '@/apis';
-import { useQuery } from '@tanstack/react-query';
-import { useToast } from '.';
+
+import { useToast } from '@/hooks';
+
 import { TOAST } from '@/constants';
 
-const useAuth = ({ isRequiredAuth = false } = {}) => {
+const useAuth = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { toast } = useToast();
 
   const hasToken = !!localStorage.getItem('accessToken');
@@ -15,6 +19,7 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
     data: userInfoData,
     isFetching,
     isSuccess,
+    refetch,
   } = useQuery({
     queryKey: ['myPageUserInfo'],
     queryFn: getMyPageUserInfo,
@@ -37,7 +42,9 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
 
   const logout = () => {
     localStorage.removeItem('accessToken');
+    queryClient.removeQueries(['myPageUserInfo']);
     navigate('/');
+    refetch();
   };
 
   const withdraw = async (currentPassword, { onSuccess, onError } = {}) => {
@@ -59,12 +66,6 @@ const useAuth = ({ isRequiredAuth = false } = {}) => {
       }
     }
   };
-
-  useEffect(() => {
-    if (isRequiredAuth && status === 'unauthenticated') {
-      navigate('/login');
-    }
-  }, [isRequiredAuth, status, navigate]);
 
   return {
     userInfo: userInfoData?.result,

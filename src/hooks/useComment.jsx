@@ -1,86 +1,155 @@
 import { useParams } from 'react-router-dom';
-import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
-
-import { useToast } from '@/hooks';
-import { TOAST, POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM } from '@/constants';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 import {
   deleteComment as remove,
   getCommentList,
   postComment as post,
   editComment as edit,
-  updatePoint,
 } from '@/apis';
 
-import { USER } from '@/dummy/data';
+import { usePagination, useToast } from '@/hooks';
+
+import { flatPaginationCache, toPaginationCacheFormat } from '@/utils';
+import { TOAST } from '@/constants';
 
 export default function useComment() {
   const { postId } = useParams();
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
-  const { data: commentList, refetch } = useQuery({
+  const { data, isLoading, isError, ref } = usePagination({
     queryKey: ['comments', postId],
-    queryFn: () => getCommentList({ postId }),
-    staleTime: 1000 * 60,
+    queryFn: ({ pageParam }) => getCommentList({ postId, page: pageParam }),
   });
 
-  // 댓글 생성
+  const commentList = flatPaginationCache(data);
+
   const postComment = useMutation({
     mutationFn: async ({ content, parentId }) => {
-      const response = await post({ postId, parentId, content });
-      const newCommentId = response.data.result.id;
-      if (response.status === 201) {
-        await updatePoint({
-          userId: USER.userId, // 실제 userId로 교체해야 합니다.
-          category: POINT_CATEGORY_ENUM.COMMENT_CREATE,
-          source: POINT_SOURCE_ENUM.COMMENT,
-          sourceId: newCommentId,
-        });
-      }
+      return await post({ postId, parentId, content });
     },
-    onSuccess: () => {
+    onSuccess: ({ data }) => {
+      queryClient.setQueryData(['comments', postId], (prev) => {
+        const { result: newComment } = data;
+        const { parentId } = newComment;
+        const flattenComments = flatPaginationCache(prev);
+
+        if (parentId) {
+          const newComments = flattenComments.map((comment) =>
+            comment.id === parentId
+              ? { ...comment, children: [...comment.children, newComment] }
+              : comment
+          );
+          return toPaginationCacheFormat(newComments);
+        }
+
+        const newComments = [...flattenComments, newComment];
+        return toPaginationCacheFormat(newComments);
+      });
+
       toast(TOAST.COMMENT.create);
-      queryClient.invalidateQueries(['comments', postId]);
     },
     onError: ({ response }) => {
       toast(response.data.message);
     },
   });
 
-  // 댓글 삭제
+  const setAsDeleted = (comments, commentId) => {
+    return comments.map((comment) =>
+      comment.id === commentId ? { ...comment, isDeleted: true } : comment
+    );
+  };
+
   const deleteComment = useMutation({
     mutationFn: async ({ commentId }) => {
-      const response = await remove({ postId, commentId });
-      if (response.status === 200) {
-        await updatePoint({
-          userId: USER.userId, // 실제 userId로 교체해야 합니다.
-          category: POINT_CATEGORY_ENUM.COMMENT_DELETE,
-          source: POINT_SOURCE_ENUM.COMMENT,
-          sourceId: commentId,
-        });
-      }
+      return await remove({ postId, commentId });
     },
-    onSuccess: () => {
+    onSuccess: ({ data }) => {
+      queryClient.setQueryData(['comments', postId], (prev) => {
+        const { result: deletedComment } = data;
+        const { id, parentId } = deletedComment;
+        const flattenComments = flatPaginationCache(prev);
+
+        if (parentId) {
+          const updatedComments = flattenComments.map((comment) =>
+            comment.id === parentId
+              ? {
+                  ...comment,
+                  children: setAsDeleted(comment.children, id),
+                }
+              : comment
+          );
+          return toPaginationCacheFormat(updatedComments);
+        }
+
+        const updatedComments = setAsDeleted(flattenComments, id);
+        return toPaginationCacheFormat(updatedComments);
+      });
+
       toast(TOAST.COMMENT.delete);
-      queryClient.invalidateQueries(['comments', postId]);
     },
     onError: ({ response }) => {
       toast(response.data.message);
     },
   });
 
-  // 댓글 수정
+  const setAsUpdated = ({ comments, commentId, content }) => {
+    return comments.map((comment) =>
+      comment.id === commentId
+        ? { ...comment, content, isUpdated: true }
+        : comment
+    );
+  };
+
   const editComment = useMutation({
-    mutationFn: ({ commentId, content, parentId }) =>
-      edit({ postId, commentId, content, parentId }),
-    onSuccess: () => {
-      queryClient.invalidateQueries(['comments', postId]);
+    mutationFn: async ({ commentId, content, parentId }) => {
+      return await edit({ postId, commentId, content, parentId });
+    },
+    onSuccess: ({ data }) => {
+      queryClient.setQueryData(['comments', postId], (prev) => {
+        const { result: editedComment } = data;
+        const { id, parentId, content } = editedComment;
+        const flattenComments = flatPaginationCache(prev);
+
+        if (parentId) {
+          const updatedComments = flattenComments.map((comment) =>
+            comment.id === parentId
+              ? {
+                  ...comment,
+                  children: setAsUpdated({
+                    comments: comment.children,
+                    commentId: id,
+                    content,
+                  }),
+                }
+              : comment
+          );
+          return toPaginationCacheFormat(updatedComments);
+        }
+
+        const updatedComments = setAsUpdated({
+          comments: flattenComments,
+          commentId: id,
+          content,
+        });
+        return toPaginationCacheFormat(updatedComments);
+      });
+
+      toast(TOAST.COMMENT.edit);
     },
     onError: ({ response }) => {
       toast(response.data.message);
     },
   });
 
-  return { commentList, postComment, deleteComment, editComment, refetch };
+  return {
+    commentList,
+    isLoading,
+    isError,
+    postComment,
+    deleteComment,
+    editComment,
+    ref,
+  };
 }

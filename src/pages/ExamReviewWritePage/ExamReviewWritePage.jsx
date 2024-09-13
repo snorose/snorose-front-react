@@ -2,11 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
-import {
-  postExamReview,
-  updatePoint,
-  checkExamReviewDuplication,
-} from '@/apis';
+import { postExamReview, checkExamReviewDuplication } from '@/apis';
 
 import { useToast } from '@/hooks';
 
@@ -15,50 +11,29 @@ import {
   CategoryButton,
   CategoryFieldset,
   Dropdown,
+  TextField,
 } from '@/components/Fieldset';
 import { ConfirmModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
 
+import { isNumber } from '@/utils';
 import {
   BOARD_ID,
-  CLASS_NUMBERS,
   EXAM_TYPES,
+  FILE_MAX_SIZE,
   LECTURE_TYPES,
   MODAL_CONFIRM,
-  POINT_CATEGORY_ENUM,
-  POINT_SOURCE_ENUM,
   SEMESTERS,
   TOAST,
   YEARS,
 } from '@/constants';
 
-import { USER } from '@/dummy/data';
-
 import styles from './ExamReviewWritePage.module.css';
-
-const FILE_MAX_SIZE = 1024 * 1024 * 10;
 
 export default function ExamReviewWritePage() {
   const { toast } = useToast();
-
-  const getPoint = useMutation({
-    mutationFn: ({ sourceId }) =>
-      updatePoint({
-        userId: USER.userId, // userId로 교체해야합니다.
-        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_CREATE,
-        source: POINT_SOURCE_ENUM.REVIEW,
-        sourceId,
-      }),
-    onSuccess: () => {
-      toast(TOAST.EXAM_REVIEW.create);
-      navigate('/board/exam-review', { replace: true });
-    },
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
-  });
 
   const createExamReview = useMutation({
     mutationFn: ({ data, file }) =>
@@ -67,9 +42,17 @@ export default function ExamReviewWritePage() {
         file,
       }),
     onSuccess: ({ data }) => {
-      getPoint.mutate({ sourceId: data.result.postId });
+      toast(TOAST.EXAM_REVIEW.create);
+      navigate('/board/exam-review', { replace: true });
     },
     onError: ({ response }) => {
+      const { status } = response;
+
+      if (status === 500) {
+        toast(TOAST.ERROR.SERVER);
+        return;
+      }
+
       toast(response.data.message);
     },
   });
@@ -82,7 +65,7 @@ export default function ExamReviewWritePage() {
   const [semester, setSemester] = useState({});
   const [isPF, setIsPF] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
-  const [classNumber, setClassNumber] = useState({});
+  const [classNumber, setClassNumber] = useState();
   const [questionDetail, setQuestionDetail] = useState('');
   const [file, setFile] = useState();
 
@@ -117,20 +100,21 @@ export default function ExamReviewWritePage() {
       return await checkExamReviewDuplication({
         lectureName,
         professor,
-        classNumber: classNumber?.id,
+        classNumber: Number(classNumber),
         lectureYear: lectureYear?.id,
         semester: semester?.id,
         examType: examType?.id,
       });
-    } catch ({ response }) {
-      toast(response.data.message);
+    } catch (error) {
+      toast(TOAST.ERROR.SERVER);
+      throw error;
     }
   };
 
   const formBody = {
     isPF,
     boardId: BOARD_ID['exam-review'],
-    classNumber: classNumber?.id,
+    classNumber: Number(classNumber),
     lectureName,
     professor,
     questionDetail,
@@ -153,10 +137,14 @@ export default function ExamReviewWritePage() {
               return;
             }
 
-            const { data } = await checkDuplication();
+            try {
+              const response = await checkDuplication();
 
-            if (data.result.isDuplicated) {
-              setIsConfirmModalOpen(true);
+              if (response?.data.result.isDuplicated) {
+                setIsConfirmModalOpen(true);
+                return;
+              }
+            } catch (error) {
               return;
             }
 
@@ -224,11 +212,15 @@ export default function ExamReviewWritePage() {
         />
       </CategoryFieldset>
       <CategoryFieldset title='수강 분반' required>
-        <Dropdown
-          options={CLASS_NUMBERS}
-          select={classNumber}
-          setFn={setClassNumber}
-          placeholder='선택하세요'
+        <TextField
+          value={classNumber}
+          onChange={(event) => {
+            const { value } = event.target;
+            if (isNumber(value) || value === '') {
+              setClassNumber(event.target.value);
+            }
+          }}
+          placeholder='수강 분반을 입력하세요'
         />
       </CategoryFieldset>
       <CategoryFieldset
@@ -245,7 +237,7 @@ export default function ExamReviewWritePage() {
         value={isOnline}
         setFn={setIsOnline}
       />
-      <CategoryFieldset title='시험 유형 및 설명' required>
+      <CategoryFieldset title='문항 수 및 시험 유형 설명' required>
         <Textarea
           value={questionDetail}
           setFn={setQuestionDetail}

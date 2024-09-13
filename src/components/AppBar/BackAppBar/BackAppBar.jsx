@@ -1,6 +1,8 @@
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { Icon } from '../../Icon';
-import { MenuIcon } from '../../MenuIcon';
+
+import { Icon } from '@/components/Icon';
+import { MenuIcon } from '@/components/MenuIcon';
+
 import styles from './BackAppBar.module.css';
 
 export default function BackAppBar({
@@ -10,9 +12,18 @@ export default function BackAppBar({
   children,
   hasSearchInput,
   isDark,
+  backNavTo,
 }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  const getNavPath = () => {
+    if (backNavTo) {
+      return backNavTo;
+    } else {
+      return -1;
+    }
+  };
 
   return (
     <div className={hasSearchInput ? styles.hasGap : styles.appBar}>
@@ -23,7 +34,7 @@ export default function BackAppBar({
           width={19}
           height={17}
           fill={isDark && 'white'}
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(getNavPath())}
         />
         {title && <span className={styles.title}>{title}</span>}
       </div>

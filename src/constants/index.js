@@ -1,7 +1,9 @@
+export * from './attendance.js';
 export * from './board.js';
 export * from './boardMenus.js';
 export * from './dropDown.js';
 export * from './errors.js';
+export * from './examReview.js';
 export * from './majors.js';
 export * from './menus.js';
 export * from './modalOptions.js';
@@ -11,5 +13,6 @@ export * from './role.js';
 export * from './route.js';
 export * from './search.js';
 export * from './seconds.js';
+export * from './user.js';
 export * from './toast.js';
 export * from './verify.js';

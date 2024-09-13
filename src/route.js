@@ -1,7 +1,7 @@
 import App from '@/App';
 import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
-import { AlertPage } from '@/pages/AlertPage';
+// import { AlertPage } from '@/pages/AlertPage';
 import { AttendancePage } from '@/pages/AttendancePage';
 import { BoardListPage, BoardPage } from '@/pages/BoardPage';
 import {
@@ -15,12 +15,13 @@ import {
   DownloadExamReviewPage,
   PrivacyPolicyPage,
   ServicePolicyPage,
+  ScrapPage,
+  ScrapExamReviewPage,
 } from '@/pages/MyPage';
 import { ErrorPage } from '@/pages/ErrorPage';
 import { ExamReviewDetailPage, ExamReviewPage } from '@/pages/ExamReviewPage';
 import { ExamReviewEditPage } from '@/pages/ExamReviewEditPage';
 import { ExamReviewWritePage } from '@/pages/ExamReviewWritePage';
-import HelpPage from '@/pages/HelpPage/HelpPage';
 import {
   LoginPage,
   FindIdPage,
@@ -30,9 +31,12 @@ import {
   NotFoundIdPage,
   NotFoundPwPage,
 } from '@/pages/LoginPage';
-import SignUpPage from './pages/LoginPage/SignUpPage/SignUpPage';
-import SignUpSuccessPage from './pages/LoginPage/SignUpPage/SignUpSuccessPage/SignUpSuccessPage';
-import SignUpFailurePage from './pages/LoginPage/SignUpPage/SignUpPageStages/SignUpFailure/SignUpFailurePage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
+import {
+  SignUpPage,
+  SignUpSuccessPage,
+  SignUpFailurePage,
+} from '@/pages/LoginPage';
 import { NoticeListPage } from '@/pages/NoticeListPage';
 import { MainPage } from '@/pages/MainPage';
 import {
@@ -44,8 +48,6 @@ import {
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/constants';
-import ScrapPage from './pages/MyPage/ActivityPage/ScrapPage';
-import ScrapExamReviewPage from './pages/MyPage/ActivityPage/ScrapExamReviewPage';
 
 const getRolesForReadBoard = (boardPath) => {
   switch (boardPath) {
@@ -55,6 +57,8 @@ const getRolesForReadBoard = (boardPath) => {
       return [ROLE.user, ROLE.admin, ROLE.official];
     case 'permanent-snow':
       return [ROLE.user, ROLE.admin, ROLE.official];
+    case 'all':
+      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
     default:
       return [];
   }
@@ -73,7 +77,13 @@ const getRolesForWriteBoard = (boardPath) => {
   }
 };
 
-const boardPaths = ['first-snow', 'large-snow', 'permanent-snow', 'besookt'];
+const boardPaths = [
+  'first-snow',
+  'large-snow',
+  'permanent-snow',
+  'besookt',
+  'all',
+];
 
 const boardRoutes = boardPaths.flatMap((boardPath) => [
   {
@@ -152,6 +162,21 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     },
   },
   {
+    path: `/board/${boardPath}/search/:keyword?`,
+    element: (
+      <ProtectedRoute
+        roles={getRolesForReadBoard(boardPath)}
+        to={`/board`}
+        message={'게시판 접근 권한이 없습니다.'}
+      >
+        <PostSearchPage />
+      </ProtectedRoute>
+    ),
+    meta: {
+      hideNav: true,
+    },
+  },
+  {
     path: `/board/${boardPath}/notice`,
     element: (
       <ProtectedRoute
@@ -188,6 +213,13 @@ export const routeList = [
       },
       ...boardRoutes,
       {
+        path: '/board/all/search',
+        element: <PostSearchPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
         path: '/board/all/search/:keyword',
         element: <PostSearchPage />,
         meta: {
@@ -205,6 +237,18 @@ export const routeList = [
           </ProtectedRoute>
         ),
       },
+      {
+        path: '/board/exam-review/search/:keyword',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            message={'시험후기 게시판 접근 권한이 없습니다.'}
+          >
+            <ExamReviewPage />
+          </ProtectedRoute>
+        ),
+      },
+
       {
         path: '/board/exam-review/post/:postId',
         element: (
@@ -259,7 +303,11 @@ export const routeList = [
       // },
       {
         path: '/my-page',
-        element: <MyPage />,
+        element: (
+          <ProtectedRoute>
+            <MyPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/my-page/password',
@@ -277,7 +325,11 @@ export const routeList = [
       },
       {
         path: '/my-page/view-point-list',
-        element: <ViewPointListPage />,
+        element: (
+          <ProtectedRoute>
+            <ViewPointListPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },
@@ -346,8 +398,29 @@ export const routeList = [
         },
       },
       {
-        path: '/notice',
-        element: <NoticeListPage />,
+        path: '/board/notice',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin, ROLE.official]}
+            message={'등업 후 이용 가능합니다'}
+          >
+            <NoticeListPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/board/notice/post/:postId',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin, ROLE.official]}
+            message={'등업 후 이용 가능합니다'}
+          >
+            <PostPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },
@@ -359,13 +432,6 @@ export const routeList = [
             <SnoroseVerifyPage />
           </ProtectedRoute>
         ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/help',
-        element: <HelpPage />,
         meta: {
           hideNav: true,
         },
@@ -436,6 +502,13 @@ export const routeList = [
       {
         path: '/signup/failure',
         element: <SignUpFailurePage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
         meta: {
           hideNav: true,
         },

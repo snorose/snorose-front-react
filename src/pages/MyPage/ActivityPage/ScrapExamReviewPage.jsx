@@ -1,41 +1,35 @@
-import { useEffect, useMemo } from 'react';
-import styles from './ActivityPage.module.css';
-import { BackAppBar, Icon, PostBar, Sponsor } from '@/components';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { getMyScrapReviewList } from '@/apis';
-import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 
+import { getMyScrapReviewList } from '@/apis';
+
+import { usePagination } from '@/hooks';
+
+import { BackAppBar, FetchLoading, PostBar } from '@/components';
+
+import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
+
+import styles from './ActivityPage.module.css';
+
 export default function ScrapExamReviewPage() {
-  const { ref, inView } = useInView();
+  const { data, ref, isLoading, isError } = usePagination({
+    queryKey: ['getMyScrapReviewList'],
+    queryFn: ({ pageParam }) => getMyScrapReviewList({ page: pageParam }),
+  });
 
-  const { data, isPending, isError, hasNextPage, fetchNextPage } =
-    useInfiniteQuery({
-      queryKey: ['getMyScrapReviewList'],
-      queryFn: ({ pageParam }) => getMyScrapReviewList({ page: pageParam }),
-      initialPageParam: 0,
-      getNextPageParam: (lastPage, _, lastPageParam) => {
-        return lastPage.length > 0 ? lastPageParam + 1 : undefined;
-      },
-    });
-
-  const myScrapReviewList = useMemo(() => {
-    return data ? data.pages.flatMap((page) => page) : [];
-  }, [data]);
-
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-  }, [inView, hasNextPage, fetchNextPage]);
-
-  if (isPending) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return <FetchLoading>불러오는 중</FetchLoading>;
   }
 
   if (isError) {
-    return null;
+    return (
+      <FetchLoading animation={false}>잠시 후 다시 시도해 주세요</FetchLoading>
+    );
   }
+
+  const myScrapReviewList =
+    data && !data.pages.includes(undefined)
+      ? data.pages.flatMap((page) => page.data)
+      : [];
 
   return (
     <main className={styles.activityPage}>
@@ -53,7 +47,7 @@ export default function ScrapExamReviewPage() {
             myScrapReviewList.map((post, index) => (
               <Link
                 key={post.postId}
-                ref={index === myScrapReviewList.length - 2 ? ref : undefined}
+                ref={index === myScrapReviewList.length - 1 ? ref : undefined}
                 to={`/board/exam-review/post/${post.postId}`}
               >
                 <PostBar data={post} hasLike={false} />
@@ -65,16 +59,16 @@ export default function ScrapExamReviewPage() {
                 아직 스크랩한 시험 후기가 없어요
               </p>
               <div className={styles.imageWrapper}>
-                <Icon id='no-review-star' className={styles.image} />
+                <img
+                  src={frustratedWomanIllustration}
+                  alt='frustrated woman'
+                  className={styles.image}
+                />
               </div>
             </div>
           )}
         </article>
       </section>
-
-      <div className={styles.sponsor}>
-        <Sponsor className={styles.sponsorImage} />
-      </div>
     </main>
   );
 }

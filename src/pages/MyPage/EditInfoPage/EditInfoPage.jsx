@@ -1,5 +1,11 @@
-import styles from './EditInfoPage.module.css';
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { updateUserInfo } from '@/apis';
+
+import { useAuth, useToast } from '@/hooks';
+
 import {
   Icon,
   BackAppBar,
@@ -7,15 +13,14 @@ import {
   CategoryFieldset,
   Dropdown,
 } from '@/components';
+
 import {
   MAJORS,
   TOAST,
   PRIVATE_USER_INFO_UPDATE_PERMISSION_ROLE_ID_LIST,
 } from '@/constants';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateUserInfo } from '@/apis';
-import { useAuth, useToast } from '@/hooks';
-import { useNavigate } from 'react-router-dom';
+
+import styles from './EditInfoPage.module.css';
 
 const VALIDATIONS = Object.freeze({
   NAME: /^[a-zA-Z가-힣\s]*$/,

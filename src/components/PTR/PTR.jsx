@@ -1,11 +1,10 @@
 import PullToRefresh from 'react-simple-pull-to-refresh';
 
-import { Icon } from '../Icon';
+import { Icon } from '@/components/Icon';
 
 import styles from './PTR.module.css';
 
 export default function PTR({ children, onRefresh }) {
-
   return (
     <PullToRefresh
       onRefresh={onRefresh}

@@ -1,4 +1,4 @@
-import { authAxios } from '@/axios/index.js';
+import { authAxios } from '@/axios';
 
 export const searchByBoard = async ({
   boardId,
@@ -23,6 +23,6 @@ export const searchByBoard = async ({
         ...(examType && { examType }),
       },
     });
-    return response.data.result;
+    return response?.data.result;
   }
 };

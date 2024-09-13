@@ -1,15 +1,20 @@
-import { React, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Input from '../../../../components/Input/Input/Input';
-import { Submit } from '../../../../components/Submit';
-import { MAJORS } from '../../../../constants/majors';
+
+import { register } from '@/apis';
+
+import { Dropdown } from '@/components/Fieldset';
+import { Input } from '@/components/Input';
+import { Submit } from '@/components/Submit';
+
 import {
   checkSpecialChar,
   checkStudentNum,
   checkBirthday,
-} from '../../FindIdPage/inputCheck';
-import Dropdown from '../../../../components/Fieldset/Dropdown/Dropdown.jsx';
-import { register } from '../../../../apis/signup';
+} from '@/pages/LoginPage/FindIdPage/inputCheck.js';
+
+import { MAJORS } from '@/constants';
+
 import styles from './UserInfoPage.module.css';
 
 export default function UserInfoPage({ setFormData, formData }) {
@@ -65,7 +70,8 @@ export default function UserInfoPage({ setFormData, formData }) {
             select={formData}
             setFn={setFormData}
             placeholder='전공을 선택하세요'
-            color='#EAF5FD'
+            backgroundColor='#EAF5FD'
+            color='#00368E'
           />
         </div>
         <div className={styles.inputFrame}>

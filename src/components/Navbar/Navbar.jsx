@@ -1,9 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Icon } from '../Icon';
-import { NAVBAR_MENUS } from '../../constants';
+
+import { Icon } from '@/components/Icon';
+
+import { NAVBAR_MENUS } from '@/constants';
+
 import styles from './Navbar.module.css';
 
 const NAVBAR_ID = {
+  '/': 'home',
   '/home': 'home',
   '/board': 'board',
   '/board/exam-review': 'test',

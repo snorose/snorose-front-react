@@ -1,4 +1,4 @@
-import { MenuIcon } from '../../MenuIcon';
+import { MenuIcon } from '@/components/MenuIcon';
 
 import styles from './AppBar.module.css';
 

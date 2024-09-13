@@ -1,4 +1,5 @@
-import { Icon } from '../Icon/index.js';
+import { Icon } from '@/components/Icon';
+
 import styles from './NoticeBar.module.css';
 
 export default function NoticeBar({ data, onClick }) {

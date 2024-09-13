@@ -2,32 +2,24 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
-import { deleteExamReview, getReviewDetail, updatePoint } from '@/apis';
+import { deleteExamReview, getReviewDetail } from '@/apis';
 
-import { useScrap } from '@/hooks';
-import { useToast } from '@/hooks';
+import { useScrap, useToast } from '@/hooks';
+
+import { NotFoundPage } from '@/pages/NotFoundPage';
 
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
 import { DeleteModal, OptionModal } from '@/components/Modal';
+import { FetchLoading } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 import { InputBar } from '@/components/InputBar';
 import { ReviewContentItem } from '@/components/ReviewContentItem';
 import { ReviewDownload } from '@/components/ReviewDownload';
 
-import { dateFormat } from '@/utils/date.js';
-import { convertToObject } from '@/utils/convertDS.js';
+import { dateFormat, convertToObject } from '@/utils';
 
-import {
-  LECTURE_TYPES,
-  POINT_CATEGORY_ENUM,
-  POINT_SOURCE_ENUM,
-  SEMESTERS,
-  EXAM_TYPES,
-  TOAST,
-} from '@/constants';
-
-import { USER } from '@/dummy/data';
+import { LECTURE_TYPES, SEMESTERS, EXAM_TYPES, TOAST } from '@/constants';
 
 import styles from './ExamReviewDetailPage.module.css';
 
@@ -40,39 +32,30 @@ export default function ExamReviewDetailPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { data } = useQuery({
+  const { data, error, isError, isLoading } = useQuery({
     queryKey: ['reviewDetail', postId],
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
   });
 
-  const losePoint = useMutation({
-    mutationFn: () =>
-      updatePoint({
-        userId: USER.userId, // userId로 교체해야합니다.
-        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DELETE,
-        source: POINT_SOURCE_ENUM.REVIEW,
-        sourceId: postId,
-      }),
-    onSuccess: () => {
-      toast(TOAST.EXAM_REVIEW.delete);
-    },
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
-  });
-
   const deleteReview = useMutation({
     mutationFn: () => deleteExamReview(postId),
     onSuccess: () => {
-      queryClient.invalidateQueries(['reviewList']);
+      queryClient.removeQueries(['reviewList']);
       queryClient.removeQueries(['reviewDetail', postId]);
       queryClient.removeQueries(['reviewFile', postId]);
 
+      toast(TOAST.EXAM_REVIEW.delete);
       navigate('/board/exam-review', { replace: true });
-      losePoint.mutate();
     },
     onError: ({ response }) => {
+      const { status } = response;
+
+      if (status === 500) {
+        toast(TOAST.ERROR.SERVER);
+        return;
+      }
+
       toast(response.data.message);
     },
   });
@@ -84,14 +67,35 @@ export default function ExamReviewDetailPage() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
-  if (data === undefined) return null;
-
   const edit = () =>
     navigate(`/board/exam-review/${postId}/edit`, {
       state: data,
       replace: true,
     });
-  const remove = () => deleteReview.mutate();
+
+  if (isLoading) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading>게시글 불러오는 중...</FetchLoading>
+      </>
+    );
+  }
+
+  if (error?.response.status === 404) {
+    return <NotFoundPage />;
+  }
+
+  if (isError) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading animation={false}>
+          게시글을 불러오지 못했습니다.
+        </FetchLoading>
+      </>
+    );
+  }
 
   const {
     commentCount,
@@ -99,6 +103,7 @@ export default function ExamReviewDetailPage() {
     examType,
     fileName,
     isConfirmed,
+    isDownloaded,
     isEdited,
     isPF,
     isScrapped,
@@ -112,7 +117,7 @@ export default function ExamReviewDetailPage() {
     semester,
     title,
     userDisplay,
-  } = data;
+  } = data ?? {};
 
   return (
     <main>
@@ -162,7 +167,12 @@ export default function ExamReviewDetailPage() {
           <ReviewContentItem tag='P/F 여부' value={isPF ? 'O' : 'X'} />
           <ReviewContentItem tag='시험 유형 및 문항수' value={questionDetail} />
         </div>
-        <ReviewDownload className={styles.fileDownload} fileName={fileName} />
+        <ReviewDownload
+          className={styles.fileDownload}
+          fileName={fileName}
+          isDownloaded={isDownloaded}
+          isWriter={isWriter}
+        />
         <div className={styles.actions}>
           <div className={styles.action}>
             <Icon
@@ -191,7 +201,7 @@ export default function ExamReviewDetailPage() {
       <CommentList commentCount={commentCount} />
       <InputBar />
       <OptionModal
-        id='exam-review-edit'
+        id={isConfirmed ? 'confirmed-exam-review-option' : 'exam-review-option'}
         isOpen={isOptionModalOpen}
         setIsOpen={setIsOptionModalOpen}
         closeFn={() => setIsOptionModalOpen(false)}
@@ -207,7 +217,7 @@ export default function ExamReviewDetailPage() {
         id='exam-review-delete'
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
-        redBtnFunction={remove}
+        redBtnFunction={() => deleteReview.mutate()}
       />
       <OptionModal
         id='report'

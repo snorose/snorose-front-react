@@ -1,24 +1,30 @@
-import { React, useState, useEffect } from 'react';
-import axios from 'axios';
-import Input from '../../../../components/Input/Input/Input';
-import { Submit } from '../../../../components/Submit';
+import { useState, useEffect } from 'react';
+
+import { defaultAxios } from '@/axios';
+
 import { sendUser } from '@/apis';
+
+import { Input } from '@/components/Input';
+import { Submit } from '@/components/Submit';
+
 import styles from './AuthorizationPage.module.css';
 
 export default function AuthorizationPage({ email, setStage }) {
   const [authNum, setAuthNum] = useState('');
   const [codeStyle, setCodeStyle] = useState('ready');
+
   useEffect(() => {
     sendUser(email);
-  }, []);
+  }, [email]);
+
   async function CertifyUserAPI(input) {
-    const apiUrl = 'http://13.124.33.41:8081/v1/users/certifyUser';
     const data = { email: email, authNum: input };
+
     if (input?.length === 0) {
       return 'ready';
     } else {
       try {
-        const response = await axios.post(apiUrl, data);
+        const response = await defaultAxios.post('/v1/users/certifyUser', data);
         if (response.data.isSuccess) {
           return 'right';
         } else {
@@ -29,6 +35,7 @@ export default function AuthorizationPage({ email, setStage }) {
       }
     }
   }
+
   return (
     <div className={styles.pageFrame}>
       <div>
@@ -50,7 +57,6 @@ export default function AuthorizationPage({ email, setStage }) {
           />
         </div>
       </div>
-
       <div className={styles.submit}>
         <Submit
           btnName='다음으로'

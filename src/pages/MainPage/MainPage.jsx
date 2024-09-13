@@ -13,12 +13,11 @@ import {
   ListHeader,
   MainPageListItem,
   Margin,
-  Slide,
   Flex,
 } from '@/components';
 
 import { BOARD_MENUS, ROLE } from '@/constants';
-import { BESOOKTS, CAROUSEL_BANNER } from '@/dummy/data';
+import { BESOOKTS } from '@/dummy/data';
 
 import styles from './MainPage.module.css';
 
@@ -46,7 +45,7 @@ export default function MainPage() {
         <Flex gap='0.45rem'>
           <Card
             className={styles.notice}
-            to='/notice'
+            to='/board/notice'
             title={data.title}
             tag='공지'
             imgPath='megaphone.svg'

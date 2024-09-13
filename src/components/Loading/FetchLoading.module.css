@@ -1,5 +1,5 @@
-/* 기본 로딩 스타일 */
 .loading {
+  flex: 1;
   width: 100%;
   height: calc(100% - 56px - 86px);
   display: flex;

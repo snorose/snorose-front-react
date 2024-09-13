@@ -1,9 +1,17 @@
-import firstSnow from '../assets/images/firstSnow-board-page.svg';
-import largeSnow from '../assets/images/largeSnow-board-page.svg';
-import permanentSnow from '../assets/images/permanentSnow-board-page.svg';
-import besookt from '../assets/images/besookt-board-page.svg';
+import firstSnow from '@/assets/images/firstSnow-board-page.svg';
+import largeSnow from '@/assets/images/largeSnow-board-page.svg';
+import permanentSnow from '@/assets/images/permanentSnow-board-page.svg';
+import besookt from '@/assets/images/besookt-board-page.svg';
 
 export const BOARD_MENUS = [
+  {
+    id: 12,
+    to: '/board/notice',
+    textId: 'notice',
+    title: '전체',
+    desc: '',
+    image: '',
+  },
   {
     id: 21,
     to: '/board/first-snow',
@@ -14,7 +22,7 @@ export const BOARD_MENUS = [
   },
   {
     id: 22,
-    to: '/board/first-snow',
+    to: '/board/large-snow',
     textId: 'large-snow',
     title: '함박눈방',
     desc: '눈송이 모두가\n이용하는 커뮤니티',
@@ -22,7 +30,7 @@ export const BOARD_MENUS = [
   },
   {
     id: 23,
-    to: '/board/first-snow',
+    to: '/board/permanent-snow',
     textId: 'permanent-snow',
     title: '만년설방',
     desc: '졸업생 전용 게시판',

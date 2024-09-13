@@ -8,5 +8,6 @@ export * from './point';
 export * from './post';
 export * from './scrap';
 export * from './search.js';
-export * from './signup';
+export * from './signUp';
 export * from './userInfo';
+export * from './verify';
