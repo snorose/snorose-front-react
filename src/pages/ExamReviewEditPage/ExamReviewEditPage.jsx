@@ -162,8 +162,10 @@ export default function ExamReviewEditPage() {
           value={classNumber}
           onChange={(event) => {
             const { value } = event.target;
+
             if (isNumber(value) || value === '') {
-              setClassNumber(event.target.value);
+              setClassNumber(value);
+              return;
             }
           }}
           placeholder='수강 분반을 입력하세요'
