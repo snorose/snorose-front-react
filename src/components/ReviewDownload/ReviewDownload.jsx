@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
-import { downloadExamReview, updatePoint } from '@/apis';
+import { getExamReview } from '@/apis';
 
-import { useAuth, useToast } from '@/hooks';
+import { useToast } from '@/hooks';
 
 import { DeleteModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 
-import { POINT_CATEGORY_ENUM, POINT_SOURCE_ENUM, TOAST } from '@/constants';
+import { TOAST } from '@/constants';
 
 import styles from './ReviewDownload.module.css';
 
@@ -20,14 +20,13 @@ export default function ReviewDownload({
   isWriter,
 }) {
   const { postId } = useParams();
-  const { userInfo } = useAuth();
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
 
   const queryClient = useQueryClient();
 
-  const download = async () => {
-    const data = await downloadExamReview(postId, fileName);
+  const downloadExamReview = async () => {
+    const data = await getExamReview(postId, fileName);
 
     const blob = new Blob([data.data], {
       type: 'application/pdf',
@@ -41,32 +40,21 @@ export default function ReviewDownload({
     window.URL.revokeObjectURL(fileUrl);
   };
 
-  const losePoint = useMutation({
-    mutationFn: ({ sourceId }) =>
-      updatePoint({
-        userId: userInfo.userId,
-        category: POINT_CATEGORY_ENUM.EXAM_REVIEW_DOWNLOAD,
-        source: POINT_SOURCE_ENUM.REVIEW,
-        sourceId,
-      }),
-    onSuccess: () => {
-      download();
+  const handleDownload = async () => {
+    try {
+      await downloadExamReview();
+
       queryClient.setQueryData(['reviewDetail', postId], (prev) => {
         return { ...prev, isDownloaded: true };
       });
+
       toast(TOAST.EXAM_REVIEW.download);
-    },
-    onError: ({ response }) => {
-      const { status } = response;
-
-      if (status === 500) {
-        toast(TOAST.SERVER_ERROR['500']);
-        return;
-      }
-
-      toast(response.data.message);
-    },
-  });
+    } catch ({ response }) {
+      const text = await response.data.text();
+      const { message } = JSON.parse(text);
+      toast(message);
+    }
+  };
 
   return (
     <>
@@ -76,7 +64,7 @@ export default function ReviewDownload({
           event.stopPropagation();
 
           if (isWriter || isDownloaded) {
-            losePoint.mutate({ sourceId: postId });
+            handleDownload();
             return;
           }
 
@@ -90,9 +78,7 @@ export default function ReviewDownload({
         id='exam-review-download'
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        redBtnFunction={() => {
-          losePoint.mutate({ sourceId: postId });
-        }}
+        redBtnFunction={handleDownload}
       />
     </>
   );
