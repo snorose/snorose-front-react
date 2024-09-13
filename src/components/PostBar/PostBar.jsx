@@ -6,12 +6,7 @@ import { timeAgo } from '@/utils';
 
 import styles from './PostBar.module.css';
 
-export default function PostBar({
-  data,
-  use,
-  hasComment = true,
-  hasLike = true,
-}) {
+export default function PostBar({ data, hasComment = true, hasLike = true }) {
   const [agoTime, setAgoTime] = useState(timeAgo(data.createdAt));
 
   // timeAgo를 1분마다 업데이트
