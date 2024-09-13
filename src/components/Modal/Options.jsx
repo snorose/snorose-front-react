@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/components';
 import styles from './Modal.module.css';
 
 export default function Options({ options, functions, onOptionClick }) {

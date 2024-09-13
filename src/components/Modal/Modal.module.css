@@ -1,16 +1,16 @@
 /* 모달 공통 스타일 */
 .dim {
-  width: 100vw;
-  max-width: var(--default-width);
-  height: 100vh;
+  display: flex;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
   z-index: 1000;
-  display: flex;
-  align-items: center;
+  width: 100vw;
+  max-width: var(--default-width);
+  height: 100vh;
   justify-content: center;
+  transform: translateX(-50%);
   background: rgba(228, 228, 228, 0.6);
   backdrop-filter: blur(10px);
   /* Note: backdrop-filter has minimal browser support */
@@ -56,26 +56,28 @@
   font-weight: 500;
   line-height: 150%;
   letter-spacing: -0.5px;
+  cursor: pointer;
 }
 
 .options {
-  padding: 0 30px;
   display: flex;
   flex-direction: column;
   row-gap: 8px;
+  padding: 0 30px;
 }
 
 .optionBar {
   display: flex;
   gap: 15px;
   padding: 4px 0;
+  cursor: pointer;
 }
 
 .iconBox {
-  width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 30px;
 }
 
 .optionText {
@@ -96,10 +98,10 @@
 
 .deleteCenter {
   display: flex;
+  color: #484848;
   justify-content: center;
   color: #484848;
   font-size: 13px;
-  font-style: normal;
   font-weight: 400;
   line-height: 192%;
   letter-spacing: -0.5px;
@@ -135,18 +137,18 @@
 }
 
 .textArea {
+  display: block;
+  width: 100%;
+  height: 106px;
+  padding: 8px;
+  background-color: transparent;
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
+  outline: none;
   color: #484848;
   font-size: 12px;
   font-weight: 400;
   line-height: 130%;
   letter-spacing: -0.5px;
-  outline: none;
-  border: 1px solid #d9d9d9;
-  border-radius: 3px;
-  background-color: transparent;
-  display: block;
-  width: 100%;
   resize: none;
-  height: 106px;
-  padding: 8px;
 }
