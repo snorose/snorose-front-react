@@ -22,6 +22,14 @@ export default function useComment() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
+  const updateCommentCache = (actionIfTargetComment) => {
+    queryClient.setQueryData(['comments', postId], (prev) => {
+      const flattenComments = flatPaginationCache(prev);
+      const updatedComments = flattenComments.map(actionIfTargetComment);
+      return toPaginationCacheFormat(updatedComments);
+    });
+  };
+
   const postComment = useMutation({
     mutationFn: async ({ content, parentId }) => {
       return await post({ postId, parentId, content });
@@ -61,16 +69,12 @@ export default function useComment() {
       const { result: deletedComment } = data;
       const { id } = deletedComment;
 
-      queryClient.setQueryData(['comments', postId], (prev) => {
-        const flattenComments = flatPaginationCache(prev);
-        const updatedComments = flattenComments.map((comment) =>
-          deleteIfTargetComment({
-            comment,
-            targetId: id,
-          })
-        );
-        return toPaginationCacheFormat(updatedComments);
-      });
+      updateCommentCache((comment) =>
+        deleteIfTargetComment({
+          comment,
+          targetId: id,
+        })
+      );
 
       toast(TOAST.COMMENT.delete);
     },
@@ -87,17 +91,13 @@ export default function useComment() {
       const { result: editedComment } = data;
       const { id, content } = editedComment;
 
-      queryClient.setQueryData(['comments', postId], (prev) => {
-        const flattenComments = flatPaginationCache(prev);
-        const updatedComments = flattenComments.map((comment) =>
-          editIfTargetComment({
-            comment,
-            targetId: id,
-            content,
-          })
-        );
-        return toPaginationCacheFormat(updatedComments);
-      });
+      updateCommentCache((comment) =>
+        editIfTargetComment({
+          comment,
+          targetId: id,
+          content,
+        })
+      );
 
       toast(TOAST.COMMENT.edit);
     },
