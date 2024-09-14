@@ -22,19 +22,21 @@ export default function useScrap() {
     }));
   };
 
+  const onScrapSuccess = ({ data }) => {
+    const { result } = data;
+    const { isScrapped, scrapCount } = result;
+
+    updateScrapCache({
+      type:
+        currentBoard === 'exam-review' ? SCRAP_TYPE.review : SCRAP_TYPE.post,
+      isScrapped,
+      scrapCount,
+    });
+  };
+
   const scrap = useMutation({
     mutationFn: () => ScrapApi({ postId }),
-    onSuccess: ({ data }) => {
-      const { result } = data;
-      const { isScrapped, scrapCount } = result;
-
-      updateScrapCache({
-        type:
-          currentBoard === 'exam-review' ? SCRAP_TYPE.review : SCRAP_TYPE.post,
-        isScrapped,
-        scrapCount,
-      });
-    },
+    onSuccess: onScrapSuccess,
     onError: ({ response }) => {
       toast(response.data.message);
     },
@@ -42,17 +44,7 @@ export default function useScrap() {
 
   const deleteScrap = useMutation({
     mutationFn: () => deleteScrapApi({ postId }),
-    onSuccess: ({ data }) => {
-      const { result } = data;
-      const { isScrapped, scrapCount } = result;
-
-      updateScrapCache({
-        type:
-          currentBoard === 'exam-review' ? SCRAP_TYPE.review : SCRAP_TYPE.post,
-        isScrapped,
-        scrapCount,
-      });
-    },
+    onSuccess: onScrapSuccess,
     onError: ({ response }) => {
       toast(response.data.message);
     },
