@@ -33,10 +33,10 @@ export default function ReviewDownload({
       type: 'application/pdf',
     });
     const fileUrl = window.URL.createObjectURL(blob);
-
+    const downloadedFileName = `${fileName.split('.')[0]}_${Date.now()}.pdf`;
     const link = document.createElement('a');
     link.setAttribute('href', fileUrl);
-    link.setAttribute('download', fileName);
+    link.setAttribute('download', downloadedFileName);
     link.click();
     window.URL.revokeObjectURL(fileUrl);
   };
