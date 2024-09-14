@@ -8,6 +8,7 @@ import { Comment } from '@/components/Comment';
 import { FetchLoading } from '@/components/Loading';
 
 import { filterVisibleComments, flatPaginationCache } from '@/utils';
+import { QUERY_KEY } from '@/constants';
 
 import styles from './CommentList.module.css';
 
@@ -15,7 +16,7 @@ export default function CommentList({ commentCount }) {
   const { postId } = useParams();
 
   const { data, isLoading, isError, ref } = usePagination({
-    queryKey: ['comments', postId],
+    queryKey: [QUERY_KEY.comments, postId],
     queryFn: ({ pageParam }) => getCommentList({ postId, page: pageParam }),
   });
 
@@ -30,16 +31,16 @@ export default function CommentList({ commentCount }) {
   }
 
   const commentList = flatPaginationCache(data);
-  const filteredCommentList = filterVisibleComments(commentList);
+  const VisibledCommentList = filterVisibleComments(commentList);
 
   return (
     <div className={styles.comments}>
       <p className={styles.commentsTitle}>
         댓글 {commentCount.toLocaleString()}개
       </p>
-      {filteredCommentList.map((comment, index) => (
+      {VisibledCommentList.map((comment, index) => (
         <Comment
-          ref={index === filteredCommentList.length - 1 ? ref : undefined}
+          ref={index === VisibledCommentList.length - 1 ? ref : undefined}
           key={comment.id}
           data={comment}
         />

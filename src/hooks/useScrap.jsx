@@ -1,54 +1,53 @@
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-import { scrap as ScrapApi, deleteScrap as deleteScrapApi } from '@/apis';
+import { scrap as scrapApi, unscrap as unscrapApi } from '@/apis';
 
 import { useToast } from '@/hooks';
 
-import { SCRAP_TYPE } from '@/constants';
+import { MUTATION_KEY, QUERY_KEY } from '@/constants';
 
 export default function useScrap() {
   const { toast } = useToast();
   const { postId } = useParams();
-  const { pathname } = useLocation();
-  const currentBoard = pathname.split('/')[2];
+
   const queryClient = useQueryClient();
 
-  const updateScrapCache = ({ type, isScrapped, scrapCount }) => {
-    queryClient.setQueryData([type, postId], (prev) => ({
+  const updateScrapCache = ({ isScrapped, scrapCount }) => {
+    queryClient.setQueryData([QUERY_KEY.post, postId], (prev) => ({
       ...prev,
       isScrapped,
       scrapCount,
     }));
   };
 
-  const onScrapSuccess = ({ data }) => {
+  const onSuccess = ({ data }) => {
     const { result } = data;
     const { isScrapped, scrapCount } = result;
 
     updateScrapCache({
-      type:
-        currentBoard === 'exam-review' ? SCRAP_TYPE.review : SCRAP_TYPE.post,
       isScrapped,
       scrapCount,
     });
   };
 
+  const onError = ({ response }) => {
+    toast(response.data.message);
+  };
+
   const scrap = useMutation({
-    mutationFn: () => ScrapApi({ postId }),
-    onSuccess: onScrapSuccess,
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
+    mutationKey: [MUTATION_KEY.scrap],
+    mutationFn: () => scrapApi({ postId }),
+    onSuccess,
+    onError,
   });
 
-  const deleteScrap = useMutation({
-    mutationFn: () => deleteScrapApi({ postId }),
-    onSuccess: onScrapSuccess,
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
+  const unscrap = useMutation({
+    mutationKey: [MUTATION_KEY.unscrap],
+    mutationFn: () => unscrapApi({ postId }),
+    onSuccess,
+    onError,
   });
 
-  return { scrap, deleteScrap };
+  return { scrap, unscrap };
 }

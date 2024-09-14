@@ -3,7 +3,7 @@ export const LIKE_TYPE = Object.freeze({
   comment: 'comments',
 });
 
-export const SCRAP_TYPE = Object.freeze({
-  post: 'postContent',
-  review: 'reviewDetail',
+export const COMMENT_ACTION_TYPE = Object.freeze({
+  create: 'create',
+  delete: 'delete',
 });

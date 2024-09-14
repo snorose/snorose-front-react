@@ -3,7 +3,7 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { getPostContent, patchPost } from '@/apis/post';
+import { getPostContent, patchPost } from '@/apis';
 
 import { useToast } from '@/hooks';
 
@@ -12,7 +12,7 @@ import { Icon } from '@/components/Icon';
 
 import { formattedNowTime } from '@/utils';
 
-import { BOARD_MENUS, TOAST } from '@/constants';
+import { BOARD_MENUS, MUTATION_KEY, QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './PostEditPage.module.css';
 
@@ -36,7 +36,7 @@ export default function PostEditPage() {
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
-    queryKey: ['postContent', postId],
+    queryKey: [QUERY_KEY.post, postId],
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
   });
@@ -44,7 +44,6 @@ export default function PostEditPage() {
   // 데이터 화면 표시
   useEffect(() => {
     if (data) {
-      console.log('Data updated:', data);
       setTitle(data.title);
       setText(data.content);
       setIsNotice(data.isNotice);
@@ -54,9 +53,10 @@ export default function PostEditPage() {
 
   // 게시글 수정
   const mutation = useMutation({
-    mutationFn: (updatedPost) => patchPost(updatedPost),
+    mutationKey: [MUTATION_KEY.editPost],
+    mutationFn: patchPost,
     onSuccess: () => {
-      queryClient.invalidateQueries(['postContent', postId]);
+      queryClient.invalidateQueries([QUERY_KEY.post, postId]);
       navigate(-1);
       toast(TOAST.POST.edit);
     },

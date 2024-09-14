@@ -5,7 +5,7 @@ import { searchByBoard } from '@/apis';
 
 import { usePagination } from '@/hooks';
 
-import { BOARD_ID } from '@/constants';
+import { BOARD_ID, QUERY_KEY } from '@/constants';
 
 export default function useSearch({ urlKeyword, filterOption }) {
   const { pathname } = useLocation();
@@ -49,7 +49,7 @@ export default function useSearch({ urlKeyword, filterOption }) {
 
   const { data, ref, isLoading, isFetching, status, isError, error } =
     usePagination({
-      queryKey: ['search', newUrlKeyword, boardType, filterOption],
+      queryKey: [QUERY_KEY.search, newUrlKeyword, boardType, filterOption],
       queryFn: ({ pageParam }) =>
         searchByBoard({
           boardId: BOARD_ID[boardType],

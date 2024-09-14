@@ -6,10 +6,11 @@ import { getBannerImage } from '@/apis';
 import { Slide } from '@/components';
 
 import styles from './Carousel.module.css';
+import { QUERY_KEY } from '@/constants/reactQuery.js';
 
 export default function Carousel() {
   const { data, isError } = useQuery({
-    queryKey: ['banner'],
+    queryKey: [QUERY_KEY.banner],
     queryFn: () => getBannerImage(),
     gcTime: Infinity,
     staleTime: 1000 * 60 * 5,

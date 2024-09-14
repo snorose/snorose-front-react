@@ -13,6 +13,7 @@ import {
   ATTENDANCE_MESSAGE,
   POINT_CATEGORY_ENUM,
   POINT_SOURCE_ENUM,
+  QUERY_KEY,
   TOAST,
 } from '@/constants';
 
@@ -51,7 +52,7 @@ export default function AttendancePage() {
                 if (status === 200) {
                   const today = new Date();
                   queryClient.invalidateQueries([
-                    'monthlyAttendanceHistory',
+                    QUERY_KEY.attendance,
                     today.getFullYear(),
                     today.getMonth() + 1,
                   ]);

@@ -6,6 +6,8 @@ import { Icon } from '@/components/Icon';
 
 import { timeAgo } from '@/utils';
 
+import { LIKE_TYPE } from '@/constants';
+
 import styles from '../Comment/Comment.module.css';
 
 export default function NestedComment({
@@ -16,7 +18,10 @@ export default function NestedComment({
 }) {
   const { setCommentId } = useCommentContext();
 
-  const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
+  const { like, unlike } = useLike({
+    type: LIKE_TYPE.comment,
+    sourceId: data.id,
+  });
 
   const {
     userDisplay,
@@ -81,7 +86,7 @@ export default function NestedComment({
           <button
             className={styles.likedCount}
             type='button'
-            onClick={() => (isLiked ? deleteLike.mutate() : like.mutate())}
+            onClick={() => (isLiked ? unlike.mutate() : like.mutate())}
           >
             <Icon
               id='like'

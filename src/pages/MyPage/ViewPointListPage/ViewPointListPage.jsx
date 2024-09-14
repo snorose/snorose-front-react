@@ -6,7 +6,7 @@ import { useAuth, usePagination } from '@/hooks';
 
 import { BackAppBar, FetchLoading, Icon } from '@/components';
 
-import { POINT_CATEGORY_KOREAN_ENUM } from '@/constants';
+import { POINT_CATEGORY_KOREAN_ENUM, QUERY_KEY } from '@/constants';
 
 import styles from './ViewPointListPage.module.css';
 
@@ -16,7 +16,7 @@ export default function ViewPointListPage() {
   });
 
   const { data, ref, isLoading, isError } = usePagination({
-    queryKey: ['getPointList'],
+    queryKey: [QUERY_KEY.pointHistory],
     queryFn: ({ pageParam }) => getPointList({ page: pageParam }),
   });
 

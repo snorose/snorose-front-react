@@ -20,6 +20,8 @@ import { validClassNumber } from '@/utils';
 import {
   EXAM_TYPES,
   LECTURE_TYPES,
+  MUTATION_KEY,
+  QUERY_KEY,
   ROUTE,
   SEMESTERS,
   TOAST,
@@ -34,9 +36,10 @@ export default function ExamReviewEditPage() {
   const { toast } = useToast();
 
   const editReview = useMutation({
+    mutationKey: [MUTATION_KEY.editExamReview],
     mutationFn: (edit) => editReviewDetail(postId, edit),
     onSuccess: () => {
-      queryClient.invalidateQueries(['reviewDetail', postId]);
+      queryClient.invalidateQueries([QUERY_KEY.post, postId]);
       navigate(ROUTE.examReviewDetail(postId), { replace: true });
       toast(TOAST.EXAM_REVIEW.edit);
     },

@@ -8,13 +8,14 @@ import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
 import { getBoardTitleToTextId } from '@/utils';
 
+import { QUERY_KEY } from '@/constants';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './ActivityPage.module.css';
 
 export default function ScrapPage() {
   const { data, ref, isLoading, isError } = usePagination({
-    queryKey: ['getMyScrapPostList'],
+    queryKey: [QUERY_KEY.myScrappedPosts],
     queryFn: ({ pageParam }) => getMyScrapPostList({ page: pageParam }),
   });
 

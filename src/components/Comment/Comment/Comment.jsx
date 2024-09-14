@@ -9,6 +9,7 @@ import { Icon } from '@/components/Icon';
 import { NestedComment } from '@/components/Comment';
 
 import { timeAgo } from '@/utils';
+
 import { LIKE_TYPE } from '@/constants';
 
 import styles from './Comment.module.css';
@@ -18,9 +19,9 @@ const Comment = forwardRef((props, ref) => {
   const { setIsEdit, commentId, setCommentId, setContent, inputFocus } =
     useCommentContext();
   const { deleteComment } = useComment();
-  const { like, deleteLike } = useLike({
+  const { like, unlike } = useLike({
     type: LIKE_TYPE.comment,
-    typeId: data.id,
+    sourceId: data.id,
   });
 
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
@@ -110,7 +111,7 @@ const Comment = forwardRef((props, ref) => {
               <button
                 className={styles.likedCount}
                 type='button'
-                onClick={() => (isLiked ? deleteLike.mutate() : like.mutate())}
+                onClick={() => (isLiked ? unlike.mutate() : like.mutate())}
               >
                 <Icon
                   id='like'

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-import { postLike as LikeApi, deleteLike as DeleteLikeApi } from '@/apis';
+import { like as likeApi, unlike as unlikeApi } from '@/apis';
 
 import { useToast } from '@/hooks';
 import {
@@ -9,15 +9,16 @@ import {
   toPaginationCacheFormat,
   updateLikeIfTargetComment,
 } from '@/utils';
-import { LIKE_TYPE } from '@/constants';
 
-export default function useLike({ type, typeId }) {
+import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY } from '@/constants';
+
+export default function useLike({ type, sourceId }) {
   const queryClient = useQueryClient();
   const { postId } = useParams();
   const { toast } = useToast();
 
   const updatePostLikeCache = ({ isLiked, likeCount }) => {
-    queryClient.setQueryData(['postContent', postId], (prev) => ({
+    queryClient.setQueryData([QUERY_KEY.post, postId], (prev) => ({
       ...prev,
       isLiked,
       likeCount,
@@ -25,7 +26,7 @@ export default function useLike({ type, typeId }) {
   };
 
   const updateCommentLikeCache = ({ targetId, isLiked, likeCount }) => {
-    queryClient.setQueryData(['comments', postId], (prev) => {
+    queryClient.setQueryData([QUERY_KEY.comments, postId], (prev) => {
       const flattenComments = flatPaginationCache(prev);
       const updatedComments = flattenComments.map((comment) =>
         updateLikeIfTargetComment({
@@ -39,41 +40,35 @@ export default function useLike({ type, typeId }) {
     });
   };
 
+  const onSuccess = ({ data }) => {
+    const { result } = data;
+    const { isLiked, likeCount } = result;
+
+    if (type === LIKE_TYPE.post) {
+      updatePostLikeCache({ isLiked, likeCount });
+      return;
+    }
+
+    updateCommentLikeCache({ targetId: sourceId, isLiked, likeCount });
+  };
+
+  const onError = ({ response }) => {
+    toast(response.data.message);
+  };
+
   const like = useMutation({
-    mutationFn: () => LikeApi(type, typeId),
-    onSuccess: ({ data }) => {
-      const { result } = data;
-      const { isLiked, likeCount } = result;
-
-      if (type === LIKE_TYPE.post) {
-        updatePostLikeCache({ isLiked, likeCount });
-        return;
-      }
-
-      updateCommentLikeCache({ targetId: typeId, isLiked, likeCount });
-    },
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
+    mutationKey: [MUTATION_KEY.like],
+    mutationFn: () => likeApi({ type, sourceId }),
+    onSuccess,
+    onError,
   });
 
-  const deleteLike = useMutation({
-    mutationFn: () => DeleteLikeApi(type, typeId),
-    onSuccess: ({ data }) => {
-      const { result } = data;
-      const { isLiked, likeCount } = result;
-
-      if (type === LIKE_TYPE.post) {
-        updatePostLikeCache({ isLiked, likeCount });
-        return;
-      }
-
-      updateCommentLikeCache({ targetId: typeId, isLiked, likeCount });
-    },
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
+  const unlike = useMutation({
+    mutationKey: [MUTATION_KEY.unlike],
+    mutationFn: () => unlikeApi({ type, sourceId }),
+    onSuccess,
+    onError,
   });
 
-  return { like, deleteLike };
+  return { like, unlike };
 }

@@ -16,7 +16,7 @@ import {
   Flex,
 } from '@/components';
 
-import { BOARD_MENUS, ROLE } from '@/constants';
+import { BOARD_MENUS, QUERY_KEY, ROLE } from '@/constants';
 import { BESOOKTS } from '@/dummy/data';
 
 import styles from './MainPage.module.css';
@@ -28,7 +28,7 @@ export default function MainPage() {
   const isLogin = status === 'authenticated';
 
   const { data, isError } = useQuery({
-    queryKey: ['homeNotice'],
+    queryKey: [QUERY_KEY.homeNotice],
     queryFn: () => getHomeNotice(),
     staleTime: 1000 * 60 * 5,
   });

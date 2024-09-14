@@ -18,6 +18,8 @@ import {
   MAJORS,
   TOAST,
   PRIVATE_USER_INFO_UPDATE_PERMISSION_ROLE_ID_LIST,
+  MUTATION_KEY,
+  QUERY_KEY,
 } from '@/constants';
 
 import styles from './EditInfoPage.module.css';
@@ -49,11 +51,11 @@ export default function EditInfoPage() {
 
   const { mutate: updateUserInfoMutate, isPending: isUpdateUserInfoPending } =
     useMutation({
-      mutationKey: ['updateUserInfo'],
+      mutationKey: [MUTATION_KEY.updateUserInfo],
       mutationFn: (body) => updateUserInfo(body),
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: ['myPageUserInfo'],
+          queryKey: [QUERY_KEY.userInfo],
         });
 
         toast(TOAST.USER.editUserInfo);

@@ -18,7 +18,7 @@ import { Icon } from '@/components/Icon';
 import { InputBar } from '@/components/InputBar';
 
 import { timeAgo } from '@/utils';
-import { BOARD_MENUS, LIKE_TYPE, TOAST } from '@/constants';
+import { BOARD_MENUS, LIKE_TYPE, QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
 
@@ -35,15 +35,15 @@ export default function PostPage() {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
   const { data, isLoading, error, isError } = useQuery({
-    queryKey: ['postContent', postId],
+    queryKey: [QUERY_KEY.post, postId],
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
   });
 
-  const { scrap, deleteScrap } = useScrap();
-  const { like, deleteLike } = useLike({
+  const { scrap, unscrap } = useScrap();
+  const { like, unlike } = useLike({
     type: LIKE_TYPE.post,
-    typeId: postId,
+    sourceId: postId,
   });
 
   const handleDelete = async () => {
@@ -143,7 +143,7 @@ export default function PostPage() {
           </div>
           <div
             className={styles.count}
-            onClick={() => (data.isLiked ? deleteLike.mutate() : like.mutate())}
+            onClick={() => (data.isLiked ? unlike.mutate() : like.mutate())}
           >
             <Icon
               id='like'
@@ -156,7 +156,7 @@ export default function PostPage() {
           <div
             className={styles.count}
             onClick={() =>
-              data.isScrapped ? deleteScrap.mutate() : scrap.mutate()
+              data.isScrapped ? unscrap.mutate() : scrap.mutate()
             }
           >
             <Icon
@@ -165,7 +165,7 @@ export default function PostPage() {
               height='13'
               fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
             />
-            <p>{data.scrapCount}</p>
+            <p>{data.scrapCount.toLocaleString()}</p>
           </div>
         </div>
       </div>
