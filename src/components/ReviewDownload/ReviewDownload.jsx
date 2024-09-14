@@ -9,6 +9,7 @@ import { useToast } from '@/hooks';
 import { DeleteModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 
+import { isPC } from '@/utils';
 import { TOAST } from '@/constants';
 
 import styles from './ReviewDownload.module.css';
@@ -48,7 +49,9 @@ export default function ReviewDownload({
         return { ...prev, isDownloaded: true };
       });
 
-      toast(TOAST.EXAM_REVIEW.download);
+      if (isPC()) {
+        toast(TOAST.EXAM_REVIEW.download);
+      }
     } catch ({ response }) {
       const text = await response.data.text();
       const { message } = JSON.parse(text);
