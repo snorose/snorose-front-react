@@ -9,6 +9,7 @@ import { Icon } from '@/components/Icon';
 import { NestedComment } from '@/components/Comment';
 
 import { timeAgo } from '@/utils';
+import { LIKE_TYPE } from '@/constants';
 
 import styles from './Comment.module.css';
 
@@ -17,7 +18,10 @@ const Comment = forwardRef((props, ref) => {
   const { setIsEdit, commentId, setCommentId, setContent, inputFocus } =
     useCommentContext();
   const { deleteComment } = useComment();
-  const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
+  const { like, deleteLike } = useLike({
+    type: LIKE_TYPE.comment,
+    typeId: data.id,
+  });
 
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
