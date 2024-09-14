@@ -7,4 +7,3 @@ export * from './getBoardTextId.js';
 export * from './pagination.js';
 export * from './timeAgo.js';
 export * from './validate.js';
-export * from './window.js';
