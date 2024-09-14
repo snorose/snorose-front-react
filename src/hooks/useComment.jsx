@@ -9,7 +9,12 @@ import {
 
 import { useToast } from '@/hooks';
 
-import { flatPaginationCache, toPaginationCacheFormat } from '@/utils';
+import {
+  deleteIfTargetComment,
+  editIfTargetComment,
+  flatPaginationCache,
+  toPaginationCacheFormat,
+} from '@/utils';
 import { TOAST } from '@/constants';
 
 export default function useComment() {
@@ -22,9 +27,10 @@ export default function useComment() {
       return await post({ postId, parentId, content });
     },
     onSuccess: ({ data }) => {
+      const { result: newComment } = data;
+      const { parentId } = newComment;
+
       queryClient.setQueryData(['comments', postId], (prev) => {
-        const { result: newComment } = data;
-        const { parentId } = newComment;
         const flattenComments = flatPaginationCache(prev);
 
         if (parentId) {
@@ -47,35 +53,22 @@ export default function useComment() {
     },
   });
 
-  const setAsDeleted = (comments, commentId) => {
-    return comments.map((comment) =>
-      comment.id === commentId ? { ...comment, isDeleted: true } : comment
-    );
-  };
-
   const deleteComment = useMutation({
     mutationFn: async ({ commentId }) => {
       return await remove({ postId, commentId });
     },
     onSuccess: ({ data }) => {
+      const { result: deletedComment } = data;
+      const { id } = deletedComment;
+
       queryClient.setQueryData(['comments', postId], (prev) => {
-        const { result: deletedComment } = data;
-        const { id, parentId } = deletedComment;
         const flattenComments = flatPaginationCache(prev);
-
-        if (parentId) {
-          const updatedComments = flattenComments.map((comment) =>
-            comment.id === parentId
-              ? {
-                  ...comment,
-                  children: setAsDeleted(comment.children, id),
-                }
-              : comment
-          );
-          return toPaginationCacheFormat(updatedComments);
-        }
-
-        const updatedComments = setAsDeleted(flattenComments, id);
+        const updatedComments = flattenComments.map((comment) =>
+          deleteIfTargetComment({
+            comment,
+            targetId: id,
+          })
+        );
         return toPaginationCacheFormat(updatedComments);
       });
 
@@ -86,45 +79,23 @@ export default function useComment() {
     },
   });
 
-  const setAsUpdated = ({ comments, commentId, content }) => {
-    return comments.map((comment) =>
-      comment.id === commentId
-        ? { ...comment, content, isUpdated: true }
-        : comment
-    );
-  };
-
   const editComment = useMutation({
     mutationFn: async ({ commentId, content, parentId }) => {
       return await edit({ postId, commentId, content, parentId });
     },
     onSuccess: ({ data }) => {
+      const { result: editedComment } = data;
+      const { id, content } = editedComment;
+
       queryClient.setQueryData(['comments', postId], (prev) => {
-        const { result: editedComment } = data;
-        const { id, parentId, content } = editedComment;
         const flattenComments = flatPaginationCache(prev);
-
-        if (parentId) {
-          const updatedComments = flattenComments.map((comment) =>
-            comment.id === parentId
-              ? {
-                  ...comment,
-                  children: setAsUpdated({
-                    comments: comment.children,
-                    commentId: id,
-                    content,
-                  }),
-                }
-              : comment
-          );
-          return toPaginationCacheFormat(updatedComments);
-        }
-
-        const updatedComments = setAsUpdated({
-          comments: flattenComments,
-          commentId: id,
-          content,
-        });
+        const updatedComments = flattenComments.map((comment) =>
+          editIfTargetComment({
+            comment,
+            targetId: id,
+            content,
+          })
+        );
         return toPaginationCacheFormat(updatedComments);
       });
 

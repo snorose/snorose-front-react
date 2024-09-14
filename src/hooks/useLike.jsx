@@ -24,11 +24,16 @@ export default function useLike({ type, typeId }) {
     }));
   };
 
-  const updateCommentLikeCache = ({ commentId, isLiked, likeCount }) => {
+  const updateCommentLikeCache = ({ targetId, isLiked, likeCount }) => {
     queryClient.setQueryData(['comments', postId], (prev) => {
       const flattenComments = flatPaginationCache(prev);
       const updatedComments = flattenComments.map((comment) =>
-        updateLikeIfTargetComment({ comment, commentId, isLiked, likeCount })
+        updateLikeIfTargetComment({
+          comment,
+          targetId,
+          isLiked,
+          likeCount,
+        })
       );
       return toPaginationCacheFormat(updatedComments);
     });
@@ -45,7 +50,7 @@ export default function useLike({ type, typeId }) {
         return;
       }
 
-      updateCommentLikeCache({ commentId: typeId, isLiked, likeCount });
+      updateCommentLikeCache({ targetId: typeId, isLiked, likeCount });
     },
     onError: ({ response }) => {
       toast(response.data.message);
@@ -63,7 +68,7 @@ export default function useLike({ type, typeId }) {
         return;
       }
 
-      updateCommentLikeCache({ commentId: typeId, isLiked, likeCount });
+      updateCommentLikeCache({ targetId: typeId, isLiked, likeCount });
     },
     onError: ({ response }) => {
       toast(response.data.message);
