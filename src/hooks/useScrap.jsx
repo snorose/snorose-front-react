@@ -5,6 +5,8 @@ import { scrap as ScrapApi, deleteScrap as deleteScrapApi } from '@/apis';
 
 import { useToast } from '@/hooks';
 
+import { SCRAP_TYPE } from '@/constants';
+
 export default function useScrap() {
   const { toast } = useToast();
   const { postId } = useParams();
@@ -12,14 +14,26 @@ export default function useScrap() {
   const currentBoard = pathname.split('/')[2];
   const queryClient = useQueryClient();
 
+  const updateScrapCache = ({ type, isScrapped, scrapCount }) => {
+    queryClient.setQueryData([type, postId], (prev) => ({
+      ...prev,
+      isScrapped,
+      scrapCount,
+    }));
+  };
+
   const scrap = useMutation({
     mutationFn: () => ScrapApi({ postId }),
-    onSuccess: () => {
-      if (currentBoard === 'exam-review') {
-        queryClient.invalidateQueries(['reviewDetail', postId]);
-      } else {
-        queryClient.invalidateQueries(['postContent', postId]);
-      }
+    onSuccess: ({ data }) => {
+      const { result } = data;
+      const { isScrapped, scrapCount } = result;
+
+      updateScrapCache({
+        type:
+          currentBoard === 'exam-review' ? SCRAP_TYPE.review : SCRAP_TYPE.post,
+        isScrapped,
+        scrapCount,
+      });
     },
     onError: ({ response }) => {
       toast(response.data.message);
@@ -28,12 +42,16 @@ export default function useScrap() {
 
   const deleteScrap = useMutation({
     mutationFn: () => deleteScrapApi({ postId }),
-    onSuccess: () => {
-      if (currentBoard === 'exam-review') {
-        queryClient.invalidateQueries(['reviewDetail', postId]);
-      } else {
-        queryClient.invalidateQueries(['postContent', postId]);
-      }
+    onSuccess: ({ data }) => {
+      const { result } = data;
+      const { isScrapped, scrapCount } = result;
+
+      updateScrapCache({
+        type:
+          currentBoard === 'exam-review' ? SCRAP_TYPE.review : SCRAP_TYPE.post,
+        isScrapped,
+        scrapCount,
+      });
     },
     onError: ({ response }) => {
       toast(response.data.message);
