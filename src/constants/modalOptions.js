@@ -1,11 +1,11 @@
-import { REPORT_TYPE_MODAL_OPTION_CHILDREN } from './board';
+import { POST_REPORT_TYPE_MODAL_OPTION_CHILDREN } from './board';
 
 export const MODAL_OPTIONS = [
   {
     id: 'report',
-    title: '게시글/유저 신고',
+    title: '게시글신고',
     titleColor: '#FF4B6C',
-    children: REPORT_TYPE_MODAL_OPTION_CHILDREN,
+    children: POST_REPORT_TYPE_MODAL_OPTION_CHILDREN,
   },
   {
     id: 'post-more-options',
