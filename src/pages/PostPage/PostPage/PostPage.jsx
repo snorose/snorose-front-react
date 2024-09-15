@@ -60,7 +60,7 @@ export default function PostPage() {
 
       if (response.status === 200) {
         toast(TOAST.POST.delete);
-        navigate(`/board/${currentBoard.textId}`);
+        navigate(-1);
       }
     } catch ({ response }) {
       toast(response.data.message);

@@ -8,7 +8,7 @@ export const BOARD_MENUS = [
     id: 12,
     to: '/board/notice',
     textId: 'notice',
-    title: '전체',
+    title: '공지사항',
     desc: '',
     image: '',
   },
