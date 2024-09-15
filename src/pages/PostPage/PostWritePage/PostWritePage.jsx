@@ -87,7 +87,9 @@ export default function PostWritePage() {
       .then((response) => {
         if (response.status === 201) {
           toast(TOAST.POST.create);
-          navigate(-1);
+          currentBoard.id === 12 || isNotice
+            ? navigate(`/board/${currentBoard.textId}/notice`)
+            : navigate(-1);
         }
       })
       .catch(({ response }) => {
@@ -113,21 +115,33 @@ export default function PostWritePage() {
         <CloseAppBar children='등록' stroke='#000' onClick={handleSubmit} />
       </div>
       <div className={styles.center}>
-        <div className={styles.categorySelect} onClick={handleDropDownOpen}>
-          <div>
-            <Icon id='clip-board-list' width='18' height='19' />
-            <p className={styles.categorySelectText}>{boardTitle}</p>
+        {textId === 'notice' ? (
+          <div className={styles.categorySelect}>
+            <div>
+              <Icon id='clip-board-list' width='18' height='19' />
+              <p className={styles.categorySelectText}>{boardTitle}</p>
+            </div>
           </div>
-          <Icon id='angle-down' width='14' height='7' />
-        </div>
-        <DropDownMenu
-          options={boardTitles}
-          item={boardTitle}
-          setItem={handleBoardTitleChange}
-          dropDownOpen={dropDownOpen}
-          setDropDownOpen={setDropDownOpen}
-          backgroundColor={'#fff'}
-        />
+        ) : (
+          <>
+            <div className={styles.categorySelect} onClick={handleDropDownOpen}>
+              <div>
+                <Icon id='clip-board-list' width='18' height='19' />
+                <p className={styles.categorySelectText}>{boardTitle}</p>
+              </div>
+              <Icon id='angle-down' width='14' height='7' />
+            </div>
+            <DropDownMenu
+              options={boardTitles}
+              item={boardTitle}
+              setItem={handleBoardTitleChange}
+              dropDownOpen={dropDownOpen}
+              setDropDownOpen={setDropDownOpen}
+              backgroundColor={'#fff'}
+            />
+          </>
+        )}
+
         <div className={styles.profileBox}>
           <div className={styles.profileBoxLeft}>
             <Icon id='cloud' width='25' height='16' />
@@ -135,21 +149,23 @@ export default function PostWritePage() {
             <p className={styles.dot}></p>
             <p>{formattedNowTime()}</p>
           </div>
-          <div
-            className={
-              userInfo.userRoleId === ROLE.admin
-                ? styles.profileBoxRight
-                : styles.profileBoxRightInvisible
-            }
-            onClick={handleIsNotice}
-          >
-            <p>공지글</p>
-            <Icon
-              id={isNotice ? 'toggle-on' : 'toggle-off'}
-              width='25'
-              height='16'
-            />
-          </div>
+          {textId !== 'notice' && (
+            <div
+              className={
+                userInfo.userRoleId === ROLE.admin
+                  ? styles.profileBoxRight
+                  : styles.profileBoxRightInvisible
+              }
+              onClick={handleIsNotice}
+            >
+              <p>공지글</p>
+              <Icon
+                id={isNotice ? 'toggle-on' : 'toggle-off'}
+                width='25'
+                height='16'
+              />
+            </div>
+          )}
         </div>
         <div className={styles.content}>
           <TextareaAutosize
