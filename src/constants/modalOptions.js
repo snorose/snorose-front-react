@@ -1,4 +1,5 @@
 import {
+  COMMENT_REPORT_TYPE_MODAL_OPTION_CHILDREN,
   POST_REPORT_TYPE_MODAL_OPTION_CHILDREN,
   USER_REPORT_TYPE_MODAL_OPTION_CHILDREN,
 } from './board';
@@ -30,6 +31,12 @@ export const MODAL_OPTIONS = [
     title: '게시글 신고',
     titleColor: '#FF4B6C',
     children: POST_REPORT_TYPE_MODAL_OPTION_CHILDREN,
+  },
+  {
+    id: 'comment-report',
+    title: '댓글 신고',
+    titleColor: '#FF4B6C',
+    children: COMMENT_REPORT_TYPE_MODAL_OPTION_CHILDREN,
   },
   {
     id: 'user-report',

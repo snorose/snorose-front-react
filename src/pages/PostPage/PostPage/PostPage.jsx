@@ -64,7 +64,7 @@ export default function PostPage() {
 
   const { mutate: reportUserMutate } = useMutation({
     mutationKey: 'reportUser',
-    mutationFn: (body) => reportUser(currentBoard?.id, postId, body),
+    mutationFn: (body) => reportUser(body),
     onSuccess: ({ message }) => {
       toast(message);
     },
@@ -121,6 +121,7 @@ export default function PostPage() {
     const reportType = event.currentTarget.dataset.value;
 
     reportUserMutate({
+      // targetUserId,
       reportType,
     });
 
