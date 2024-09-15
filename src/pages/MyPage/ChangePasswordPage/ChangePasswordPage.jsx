@@ -18,6 +18,7 @@ export default function ChangePasswordPage() {
   const [newPasswordCheck, setNewPasswordCheck] = useState('');
   const [newPasswordError, setNewPasswordError] = useState('');
   const [newPasswordCheckError, setNewPasswordCheckError] = useState('');
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -49,8 +50,10 @@ export default function ChangePasswordPage() {
       setNewPasswordError(
         '영어, 숫자, 특수문자를 포함해 8자 이상으로 작성해주세요'
       );
+      setIsPasswordValid(false);
     } else {
       setNewPasswordError('');
+      setIsPasswordValid(true);
     }
   };
 
@@ -90,6 +93,7 @@ export default function ChangePasswordPage() {
       validatePasswordStrength(newPassword);
     } else {
       setNewPasswordError('');
+      setIsPasswordValid(false);
     }
   }, [newPassword]);
 
@@ -111,7 +115,9 @@ export default function ChangePasswordPage() {
           <ActionButton
             type='button'
             disabled={
-              isUpdatePasswordPending || newPassword !== newPasswordCheck
+              isUpdatePasswordPending ||
+              newPassword !== newPasswordCheck ||
+              !isPasswordValid
             }
             onClick={handleSubmitButtonClick}
           >
