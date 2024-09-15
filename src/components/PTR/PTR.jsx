@@ -11,10 +11,11 @@ export default function PTR({ children, onRefresh }) {
       refreshingContent={
         <div className={styles.refreshBox}>
           <div className={styles.refreshIcon}>
-            <Icon id='cloud' width='44' height='27' />
+            <Icon id='cloud' width='34' height='21' />
           </div>
         </div>
       }
+      pullingContent=''
     >
       {children}
     </PullToRefresh>
