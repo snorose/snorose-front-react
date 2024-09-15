@@ -1,13 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
-import { getReviewList } from '@/apis';
+import { getReviewList, getNoticeLine } from '@/apis';
 
 import { usePagination, useSearch } from '@/hooks';
 
 import { ExamReviewList, ExamReviewSearchList } from '@/pages/ExamReviewPage';
 
-import { AppBar, DropDownBlue, PTR, Search, WriteButton } from '@/components';
+import {
+  AppBar,
+  DropDownBlue,
+  PTR,
+  Search,
+  WriteButton,
+  Icon,
+} from '@/components';
 
 import { convertToObject } from '@/utils';
 import { YEARS, SEMESTERS, EXAM_TYPES } from '@/constants';
@@ -60,6 +68,11 @@ export default function ExamReviewPage() {
 
   const { handleChange, handleOnKeyDown, keyword } = searchResult;
 
+  const { data: noticeLineData } = useQuery({
+    queryKey: ['noticeLine', 32],
+    queryFn: () => getNoticeLine(32),
+  });
+
   useEffect(() => {
     const filterOption = {
       lectureYear: lectureYear?.id,
@@ -84,6 +97,16 @@ export default function ExamReviewPage() {
   return (
     <main>
       <AppBar title='시험후기' />
+      <div className={styles.notification}>
+        <Link
+          className={styles.notification_bar}
+          to={`/board/exam-review/notice`}
+        >
+          <Icon id='notice-bell' width={11} height={13} />
+          <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
+        </Link>
+      </div>
+
       <Search
         className={styles.search}
         placeholder='시험후기 검색'
