@@ -6,6 +6,7 @@ import styles from './MyPage.module.css';
 
 const USER_INFO_ITEM_LABEL = Object.freeze({
   loginId: '아이디',
+  userName: '이름',
   email: '이메일',
   studentNumber: '학번',
   major: '전공',
