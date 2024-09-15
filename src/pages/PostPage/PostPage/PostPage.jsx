@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { getPostContent, deletePost, reportPost } from '@/apis';
+import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
@@ -10,12 +10,15 @@ import { useLike, useScrap, useToast } from '@/hooks';
 
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
-import { BackAppBar } from '@/components/AppBar';
-import { CommentList } from '@/components/Comment';
-import { DeleteModal, OptionModal } from '@/components/Modal/index.js';
-import { FetchLoading } from '@/components/Loading';
-import { Icon } from '@/components/Icon';
-import { InputBar } from '@/components/InputBar';
+import {
+  BackAppBar,
+  CommentList,
+  DeleteModal,
+  OptionModal,
+  FetchLoading,
+  Icon,
+  InputBar,
+} from '@/components';
 
 import { timeAgo } from '@/utils';
 
@@ -35,6 +38,8 @@ export default function PostPage() {
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
+  const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
 
   // 게시글 데이터 받아오기
   const { data, isLoading, error, isError } = useQuery({
@@ -49,6 +54,17 @@ export default function PostPage() {
   const { mutate: reportPostMutate } = useMutation({
     mutationKey: 'reportPost',
     mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
+    onSuccess: ({ message }) => {
+      toast(message);
+    },
+    onError: () => {
+      toast('신고에 실패했습니다.');
+    },
+  });
+
+  const { mutate: reportUserMutate } = useMutation({
+    mutationKey: 'reportUser',
+    mutationFn: (body) => reportUser(currentBoard?.id, postId, body),
     onSuccess: ({ message }) => {
       toast(message);
     },
@@ -80,13 +96,35 @@ export default function PostPage() {
     }
   };
 
-  const handleOptionModalOptionClick = (event) => {
+  const handleReportOptionModalOptionClick = (event) => {
+    const reportCategory = event.currentTarget.dataset.value;
+
+    setIsReportModalOpen(false);
+
+    if (reportCategory === 'post-report') {
+      setIsPostReportModalOpen(true);
+    } else if (reportCategory === 'user-report') {
+      setIsUserReportModalOpen(true);
+    }
+  };
+
+  const handlePostReportOptionModalOptionClick = (event) => {
     const reportType = event.currentTarget.dataset.value;
 
     reportPostMutate({
       reportType,
     });
-    setIsReportModalOpen(false);
+    setIsPostReportModalOpen(false);
+  };
+
+  const handleUserReportOptionModalOptionClick = (event) => {
+    const reportType = event.currentTarget.dataset.value;
+
+    reportUserMutate({
+      reportType,
+    });
+
+    setIsUserReportModalOpen(false);
   };
 
   // 로딩과 에러 상태에 따라 조건부 렌더링
@@ -226,8 +264,22 @@ export default function PostPage() {
         id='report'
         isOpen={isReportModalOpen}
         setIsOpen={setIsReportModalOpen}
-        onOptionClick={handleOptionModalOptionClick}
+        onOptionClick={handleReportOptionModalOptionClick}
         closeFn={() => setIsReportModalOpen(false)}
+      />
+      <OptionModal
+        id='post-report'
+        isOpen={isPostReportModalOpen}
+        setIsOpen={setIsPostReportModalOpen}
+        onOptionClick={handlePostReportOptionModalOptionClick}
+        closeFn={() => setIsPostReportModalOpen(false)}
+      />
+      <OptionModal
+        id='user-report'
+        isOpen={isUserReportModalOpen}
+        setIsOpen={setIsUserReportModalOpen}
+        onOptionClick={handleUserReportOptionModalOptionClick}
+        closeFn={() => setIsUserReportModalOpen(false)}
       />
       <CommentList commentCount={postData.commentCount} />
       <InputBar />

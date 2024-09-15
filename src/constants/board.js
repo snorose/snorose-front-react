@@ -6,6 +6,7 @@ export const BOARD_ID = Object.freeze({
   'exam-review': 32,
 });
 
+// 게시글 신고
 export const POST_REPORT_TYPE_ENUM = Object.freeze({
   POST_PERSONAL_ABUSE: 'POST_PERSONAL_ABUSE',
   POST_COMMERCIAL_AD: 'POST_COMMERCIAL_AD',
@@ -87,6 +88,62 @@ export const POST_REPORT_TYPE_MODAL_OPTION_CHILDREN = [
   },
 ];
 
+// 유저 신고
+export const USER_REPORT_TYPE_ENUM = Object.freeze({
+  USER_IMPERSONATION: 'USER_IMPERSONATION',
+  USER_FRAUD: 'USER_FRAUD',
+  USER_EXTERNAL_PARTY: 'USER_EXTERNAL_PARTY',
+  USER_HARASSMENT: 'USER_HARASSMENT',
+  USER_OTHER: 'USER_OTHER',
+});
+
+export const USER_REPORT_TYPE_KOREAN_ENUM = Object.freeze({
+  USER_IMPERSONATION: '타인 사칭',
+  USER_FRAUD: '사기',
+  USER_EXTERNAL_PARTY: '외부인',
+  USER_HARASSMENT: '괴롭힘/사이버폭력',
+  USER_OTHER: '기타',
+});
+
+export const USER_REPORT_TYPE_MODAL_OPTION_CHILDREN = [
+  {
+    iconId: 'user-sunglasses',
+    IconWidth: 18,
+    IconHeight: 21,
+    text: USER_REPORT_TYPE_KOREAN_ENUM.USER_IMPERSONATION,
+    value: USER_REPORT_TYPE_ENUM.USER_IMPERSONATION,
+  },
+  {
+    iconId: 'ban',
+    IconWidth: 18,
+    IconHeight: 18,
+    text: USER_REPORT_TYPE_KOREAN_ENUM.USER_FRAUD,
+    value: USER_REPORT_TYPE_ENUM.USER_FRAUD,
+  },
+  {
+    iconId: 'user-stranger',
+    IconWidth: 18,
+    IconHeight: 21,
+    text: USER_REPORT_TYPE_KOREAN_ENUM.USER_EXTERNAL_PARTY,
+    value: USER_REPORT_TYPE_ENUM.USER_EXTERNAL_PARTY,
+  },
+  {
+    iconId: 'abuse-comment',
+    IconWidth: 25,
+    IconHeight: 18,
+    text: USER_REPORT_TYPE_KOREAN_ENUM.USER_HARASSMENT,
+    value: USER_REPORT_TYPE_ENUM.USER_HARASSMENT,
+  },
+  {
+    iconId: 'horizontal-dot3',
+    IconWidth: 18,
+    IconHeight: 18,
+    text: USER_REPORT_TYPE_KOREAN_ENUM.USER_OTHER,
+    value: USER_REPORT_TYPE_ENUM.USER_OTHER,
+  },
+];
+
+// 댓글 신고
 export const COMMENT_REPORT_TYPE_ENUM = Object.freeze({
   COMMENT_PERSONAL_ABUSE: 'COMMENT_PERSONAL_ABUSE',
   COMMENT_COMMERCIAL_AD: 'COMMENT_COMMERCIAL_AD',

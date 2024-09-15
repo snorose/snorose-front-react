@@ -1,11 +1,41 @@
-import { POST_REPORT_TYPE_MODAL_OPTION_CHILDREN } from './board';
+import {
+  POST_REPORT_TYPE_MODAL_OPTION_CHILDREN,
+  USER_REPORT_TYPE_MODAL_OPTION_CHILDREN,
+} from './board';
 
 export const MODAL_OPTIONS = [
   {
     id: 'report',
-    title: '게시글신고',
+    title: '신고하기',
+    titleColor: '#FF4B6C',
+    children: [
+      {
+        iconId: 'note',
+        IconWidth: 25,
+        IconHeight: 18,
+        text: '게시글 신고',
+        value: 'post-report',
+      },
+      {
+        iconId: 'user',
+        IconWidth: 19,
+        IconHeight: 21,
+        text: '이용자 신고',
+        value: 'user-report',
+      },
+    ],
+  },
+  {
+    id: 'post-report',
+    title: '게시글 신고',
     titleColor: '#FF4B6C',
     children: POST_REPORT_TYPE_MODAL_OPTION_CHILDREN,
+  },
+  {
+    id: 'user-report',
+    title: '이용자 신고',
+    titleColor: '#FF4B6C',
+    children: USER_REPORT_TYPE_MODAL_OPTION_CHILDREN,
   },
   {
     id: 'post-more-options',

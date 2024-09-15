@@ -76,3 +76,10 @@ export const reportPost = async (boardId, postId, body) => {
 
   return data;
 };
+
+// 유저 신고
+export const reportUser = async (body) => {
+  const { data } = await authAxios.post(`/v1/users/report`, body);
+
+  return data;
+};
