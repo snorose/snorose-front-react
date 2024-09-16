@@ -34,7 +34,7 @@ export function checkStudentNum(number) {
 }
 
 export function checkID(id) {
-  const format = /^[A-Za-z가-힣ㄱ-ㅎ0-9 ]+$/;
+  const format = /^[A-Za-z0-9 ]+$/;
   if (id?.length === 0) {
     return 'ready';
   } else if (id.length >= 5 && id.length <= 30 && format.test(id))
