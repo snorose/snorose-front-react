@@ -33,11 +33,7 @@ export default function SpecialInput({
     else return c3;
   };
   return (
-    <div
-      onChange={() => {
-        setIsBtnClick(false);
-      }}
-    >
+    <div>
       <div className={styles.title}>{title}</div>
       <div className={`${styles.pwFrame} ${styles[className]}`}>
         <Input

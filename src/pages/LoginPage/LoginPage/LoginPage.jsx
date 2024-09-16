@@ -52,8 +52,7 @@ export default function Login() {
           <div
             className={!isError ? styles.input : undefined}
             onChange={() => {
-              setIsError(false);
-              if (!formData.password) setVisBtnClick(false);
+              setErrmsg(false);
             }}
           >
             <div
