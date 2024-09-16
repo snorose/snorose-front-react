@@ -2,15 +2,16 @@ import { forwardRef, useState } from 'react';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import { useLike, useComment } from '@/hooks';
-
-import { DeleteModal, OptionModal } from '@/components/Modal';
+import { useLike, useComment, useToast, useModal } from '@/hooks';
+import { DeleteModal, OptionModal, ConfirmModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 import { NestedComment } from '@/components/Comment';
 
 import { timeAgo } from '@/utils';
 
 import styles from './Comment.module.css';
+import { useMutation } from '@tanstack/react-query';
+import { reportComment } from '@/apis';
 
 const Comment = forwardRef((props, ref) => {
   const { data } = props;
@@ -18,10 +19,37 @@ const Comment = forwardRef((props, ref) => {
     useCommentContext();
   const { deleteComment } = useComment();
   const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
+  const { toast } = useToast();
 
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [selectedReportType, setSelectedReportType] = useState();
+  const reportConfirmModal = useModal();
+
+  const { mutate: reportCommentMutate } = useMutation({
+    mutationKey: 'reportComment',
+    mutationFn: (body) => reportComment(data.postId, data.id, body),
+    onSuccess: ({ message }) => {
+      setIsReportModalOpen(false);
+      reportConfirmModal.closeModal();
+      toast(message);
+    },
+    onError: () => {
+      toast('댓글 신고에 실패했습니다.');
+    },
+  });
+
+  const handleCommentReportOptionModalOptionClick = (event) => {
+    setSelectedReportType(event.currentTarget.dataset.value);
+    reportConfirmModal.openModal();
+  };
+
+  const handleReportConfirmModalPrimaryButtonClick = () => {
+    reportCommentMutate({
+      reportType: selectedReportType,
+    });
+  };
 
   const onCommentOptionClick = (data) => {
     setCommentId(data.id);
@@ -158,13 +186,22 @@ const Comment = forwardRef((props, ref) => {
         }}
       />
       <OptionModal
-        id='report'
+        id='comment-report'
         isOpen={isReportModalOpen}
         setIsOpen={setIsReportModalOpen}
         closeFn={() => {
           onCloseClick();
           setIsReportModalOpen(false);
         }}
+        onOptionClick={handleCommentReportOptionModalOptionClick}
+      />
+      <ConfirmModal
+        title='해당 댓글을 신고할까요?'
+        isOpen={reportConfirmModal.isOpen}
+        primaryButtonText='확인'
+        secondaryButtonText='취소'
+        onPrimaryButtonClick={handleReportConfirmModalPrimaryButtonClick}
+        onSecondaryButtonClick={reportConfirmModal.closeModal}
       />
     </>
   );
