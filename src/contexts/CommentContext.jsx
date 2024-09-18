@@ -33,13 +33,17 @@ export function CommentContextProvider({ children }) {
     [isEdit, commentId, content]
   );
 
-  const onBlur = () => setCommentId(undefined);
+  const onBlur = () => {
+    if (!isEdit) {
+      setCommentId(undefined);
+    }
+  };
 
   useEffect(() => {
     window.addEventListener('click', onBlur);
 
     return () => window.removeEventListener('click', onBlur);
-  }, []);
+  }, [isEdit]);
 
   return (
     <CommentContext.Provider value={value}>{children}</CommentContext.Provider>
