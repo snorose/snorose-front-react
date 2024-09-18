@@ -8,14 +8,7 @@ import { usePagination, useSearch } from '@/hooks';
 
 import { ExamReviewList, ExamReviewSearchList } from '@/pages/ExamReviewPage';
 
-import {
-  AppBar,
-  DropDownBlue,
-  PTR,
-  Search,
-  WriteButton,
-  Icon,
-} from '@/components';
+import { AppBar, DropDownBlue, Search, WriteButton, Icon } from '@/components';
 
 import { convertToObject } from '@/utils';
 import { YEARS, SEMESTERS, EXAM_TYPES } from '@/constants';
@@ -143,13 +136,13 @@ export default function ExamReviewPage() {
           setIsOpen={setIsOpen}
         />
       </div>
-      <PTR>
-        {urlKeyword !== '' ? (
-          <ExamReviewSearchList result={searchResult} />
-        ) : (
-          <ExamReviewList result={reviewResult} />
-        )}
-      </PTR>
+
+      {urlKeyword !== '' ? (
+        <ExamReviewSearchList result={searchResult} />
+      ) : (
+        <ExamReviewList result={reviewResult} />
+      )}
+
       <WriteButton to='/board/exam-review-write' />
     </main>
   );
