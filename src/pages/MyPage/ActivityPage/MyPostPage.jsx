@@ -13,7 +13,7 @@ import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 import styles from './ActivityPage.module.css';
 
 export default function MyPostPage() {
-  const { data, ref, isLoading, isError } = usePagination({
+  const { data, error, ref, isLoading, isError } = usePagination({
     queryKey: ['getMyPostList'],
     queryFn: ({ pageParam }) => getMyPostList({ page: pageParam }),
   });
@@ -23,9 +23,9 @@ export default function MyPostPage() {
   }
 
   if (isError) {
-    return (
-      <FetchLoading animation={false}>잠시 후 다시 시도해 주세요</FetchLoading>
-    );
+    const { message } = error.response.data;
+
+    return <FetchLoading animation={false}>{message}</FetchLoading>;
   }
 
   const myPostList =
