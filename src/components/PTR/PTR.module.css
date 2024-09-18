@@ -1,14 +1,12 @@
 /* PTR.module.css */
 .refreshBox {
-  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px;
+  padding-bottom: 30px;
 }
 
 .refreshIcon {
-  /* border: 1px solid blue; */
   animation: rotateAndPause 1s linear infinite;
 }
 
