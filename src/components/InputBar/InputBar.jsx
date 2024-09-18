@@ -42,6 +42,7 @@ const InputBar = () => {
       setCommentId(undefined);
     } else {
       postComment.mutate({ parentId: commentId, content });
+      setCommentId(undefined);
     }
 
     setContent('');
