@@ -33,13 +33,17 @@ export function CommentContextProvider({ children }) {
     [isEdit, commentId, content]
   );
 
-  const onBlur = () => setCommentId(undefined);
+  const onBlur = (event) => {
+    // 클릭한 요소가 input이 아닐 경우에만 commentId를 undefined로 설정
+    if (!isEdit && !inputRef.current?.contains(event.target)) {
+      setCommentId(undefined);
+    }
+  };
 
   useEffect(() => {
     window.addEventListener('click', onBlur);
-
     return () => window.removeEventListener('click', onBlur);
-  }, []);
+  }, [isEdit]);
 
   return (
     <CommentContext.Provider value={value}>{children}</CommentContext.Provider>

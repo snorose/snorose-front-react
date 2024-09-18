@@ -87,6 +87,9 @@ const Comment = forwardRef((props, ref) => {
         ref={ref}
         className={styles.comment}
         onClick={() => setCommentId(undefined)}
+        style={{
+          backgroundColor: commentId === data.id ? '#DDEBF6' : '#f8f8f8',
+        }}
       >
         <div className={styles.commentTop}>
           <div className={styles.commentTopLeft}>
