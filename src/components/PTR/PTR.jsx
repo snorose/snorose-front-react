@@ -42,7 +42,7 @@ export default function PTR({ children, onRefresh }) {
         if (containerRef.current) {
           containerRef.current.style.transform = 'translate(0,0)';
         }
-      }, 1000);
+      }, 3000);
 
       refreshPromise.finally(() => {
         clearTimeout(timeoutId);
