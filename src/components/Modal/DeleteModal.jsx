@@ -2,13 +2,18 @@ import { MODAL_OPTIONS } from '@/constants';
 
 import styles from './Modal.module.css';
 
-export default function DeleteModal({ id, isOpen, setIsOpen, redBtnFunction }) {
+export default function DeleteModal({
+  id,
+  isOpen,
+  closeFunction,
+  redBtnFunction,
+}) {
   const modalOption = MODAL_OPTIONS.find((option) => option.id === id);
 
   if (!isOpen || !modalOption) return null;
 
   return (
-    <div className={styles.dim}>
+    <div className={styles.dim} onClick={(event) => event.stopPropagation()}>
       <div className={styles.container}>
         <div className={styles.noBottomLineTop}>
           <div
@@ -22,15 +27,14 @@ export default function DeleteModal({ id, isOpen, setIsOpen, redBtnFunction }) {
         <div className={styles.deleteOrBack}>
           <div
             className={styles.redBtn}
-            onClick={(event) => {
-              event.stopPropagation();
+            onClick={() => {
               redBtnFunction();
-              setIsOpen(false);
+              closeFunction();
             }}
           >
             {modalOption.bottom.redBtn}
           </div>
-          <div className={styles.greyBtn} onClick={() => setIsOpen(false)}>
+          <div className={styles.greyBtn} onClick={closeFunction}>
             {modalOption.bottom.greyBtn}
           </div>
         </div>

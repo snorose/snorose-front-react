@@ -17,7 +17,7 @@ export default function OptionModal({
   if (!isOpen || !modalOption) return null;
 
   return (
-    <div className={styles.dim}>
+    <div className={styles.dim} onClick={(event) => event.stopPropagation()}>
       <div className={styles.container}>
         <div className={styles.top}>
           <div
