@@ -12,7 +12,6 @@ export default function PTR({ children, onRefresh }) {
       (event.touches && event.touches[0] && event.touches[0].clientY) ||
       event.clientY;
     setStartY(clientY);
-    event.preventDefault();
   }
 
   function handleMove(event) {
@@ -23,8 +22,6 @@ export default function PTR({ children, onRefresh }) {
       const pullDistance = clientY - startY;
 
       if (pullDistance > 0) {
-        event.preventDefault();
-
         if (pullDistance > 80 && containerRef.current) {
           containerRef.current.style.transform = 'translate(0, 30px)';
           containerRef.current.style.transition = '0.3s';

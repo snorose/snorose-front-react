@@ -21,6 +21,10 @@ export default function Sidebar({ isOpen, setIsOpen }) {
     event.stopPropagation();
   };
 
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
   useEffect(() => {
     const close = () => setIsOpen(false);
 
@@ -49,7 +53,11 @@ export default function Sidebar({ isOpen, setIsOpen }) {
               <Link to={to}>
                 <h3 className={styles.title}>{title}</h3>
               </Link>
-              <List className={styles.item} items={items} />
+              <List
+                className={styles.item}
+                items={items}
+                onItemClick={handleLinkClick}
+              />
             </div>
           ))}
       </aside>
