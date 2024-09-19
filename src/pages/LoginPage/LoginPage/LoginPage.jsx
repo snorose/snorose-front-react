@@ -49,12 +49,7 @@ export default function Login() {
               inputData={setFormData}
             />
           </div>
-          <div
-            className={!isError ? styles.input : undefined}
-            onChange={() => {
-              setErrmsg(false);
-            }}
-          >
+          <div className={!isError ? styles.input : undefined}>
             <div
               className={`${styles.pwFrame} ${styles[isError ? 'wrong' : 'ready']}`}
             >
