@@ -258,7 +258,7 @@ export default function PostPage() {
       <DeleteModal
         id='post-delete'
         isOpen={isDeleteModalOpen}
-        setIsOpen={setIsDeleteModalOpen}
+        closeFunction={() => setIsDeleteModalOpen(false)}
         redBtnFunction={handleDelete}
       />
       <OptionModal

@@ -1,4 +1,7 @@
 /* PTR.module.css */
+.ptrContainer {
+  width: 100%;
+}
 .refreshBox {
   display: flex;
   align-items: center;
