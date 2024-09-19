@@ -6,8 +6,6 @@ import { useComment, useToast } from '@/hooks';
 
 import { Icon } from '@/components/Icon';
 
-import { TOAST } from '@/constants';
-
 import styles from './InputBar.module.css';
 
 const InputBar = () => {
@@ -29,7 +27,7 @@ const InputBar = () => {
   // 댓글 등록 or 수정
   const submitComment = () => {
     if (!content.trim()) {
-      toast(TOAST.EMPTY_COMMENT);
+      toast('댓글 내용을 입력하세요.');
       return;
     }
 

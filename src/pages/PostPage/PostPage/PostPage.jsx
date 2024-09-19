@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { getPostContent, deletePost } from '@/apis';
+import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
@@ -10,12 +10,15 @@ import { useLike, useScrap, useToast } from '@/hooks';
 
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
-import { BackAppBar } from '@/components/AppBar';
-import { CommentList } from '@/components/Comment';
-import { DeleteModal, OptionModal } from '@/components/Modal/index.js';
-import { FetchLoading } from '@/components/Loading';
-import { Icon } from '@/components/Icon';
-import { InputBar } from '@/components/InputBar';
+import {
+  BackAppBar,
+  CommentList,
+  DeleteModal,
+  OptionModal,
+  FetchLoading,
+  Icon,
+  InputBar,
+} from '@/components';
 
 import { timeAgo } from '@/utils';
 import { BOARD_MENUS, LIKE_TYPE, QUERY_KEY, TOAST } from '@/constants';
@@ -33,6 +36,8 @@ export default function PostPage() {
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
+  const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
@@ -46,13 +51,35 @@ export default function PostPage() {
     sourceId: postId,
   });
 
+  const { mutate: reportPostMutate } = useMutation({
+    mutationKey: 'reportPost',
+    mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
+    onSuccess: ({ message }) => {
+      toast(message);
+    },
+    onError: () => {
+      toast('신고에 실패했습니다.');
+    },
+  });
+
+  const { mutate: reportUserMutate } = useMutation({
+    mutationKey: 'reportUser',
+    mutationFn: (body) => reportUser(body),
+    onSuccess: ({ message }) => {
+      toast(message);
+    },
+    onError: () => {
+      toast('신고에 실패했습니다.');
+    },
+  });
+
   const handleDelete = async () => {
     try {
       const response = await deletePost(currentBoard.id, postId);
 
       if (response.status === 200) {
         toast(TOAST.POST.delete);
-        navigate(`/board/${currentBoard.textId}`);
+        navigate(-1);
       }
     } catch ({ response }) {
       toast(response.data.message);
@@ -61,6 +88,39 @@ export default function PostPage() {
     }
   };
 
+  const handleReportOptionModalOptionClick = (event) => {
+    const reportCategory = event.currentTarget.dataset.value;
+
+    setIsReportModalOpen(false);
+
+    if (reportCategory === 'post-report') {
+      setIsPostReportModalOpen(true);
+    } else if (reportCategory === 'user-report') {
+      setIsUserReportModalOpen(true);
+    }
+  };
+
+  const handlePostReportOptionModalOptionClick = (event) => {
+    const reportType = event.currentTarget.dataset.value;
+
+    reportPostMutate({
+      reportType,
+    });
+    setIsPostReportModalOpen(false);
+  };
+
+  const handleUserReportOptionModalOptionClick = (event) => {
+    const reportType = event.currentTarget.dataset.value;
+
+    reportUserMutate({
+      // targetUserId,
+      reportType,
+    });
+
+    setIsUserReportModalOpen(false);
+  };
+
+  // 로딩과 에러 상태에 따라 조건부 렌더링
   if (isLoading) {
     return (
       <>
@@ -187,16 +247,31 @@ export default function PostPage() {
       <DeleteModal
         id='post-delete'
         isOpen={isDeleteModalOpen}
-        setIsOpen={setIsDeleteModalOpen}
+        closeFunction={() => setIsDeleteModalOpen(false)}
         redBtnFunction={handleDelete}
       />
       <OptionModal
         id='report'
         isOpen={isReportModalOpen}
         setIsOpen={setIsReportModalOpen}
+        onOptionClick={handleReportOptionModalOptionClick}
         closeFn={() => setIsReportModalOpen(false)}
       />
       <CommentList commentCount={data.commentCount} />
+      <OptionModal
+        id='post-report'
+        isOpen={isPostReportModalOpen}
+        setIsOpen={setIsPostReportModalOpen}
+        onOptionClick={handlePostReportOptionModalOptionClick}
+        closeFn={() => setIsPostReportModalOpen(false)}
+      />
+      <OptionModal
+        id='user-report'
+        isOpen={isUserReportModalOpen}
+        setIsOpen={setIsUserReportModalOpen}
+        onOptionClick={handleUserReportOptionModalOptionClick}
+        closeFn={() => setIsUserReportModalOpen(false)}
+      />
       <InputBar />
     </div>
   );

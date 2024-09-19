@@ -272,7 +272,7 @@ export default function EditInfoPage() {
               maxLength={12}
               value={birthDate.replaceAll('-', '')}
               pattern='\d{4}\.\d{2}\.\d{2}'
-              title='형식: YYYYMMDD (예: 20020101)'
+              title='형식: YYYYMMDD (예: 19060522)'
               disabled={disabledPrivateUserInfoInput}
               onChange={handleBirthDateChange}
             />

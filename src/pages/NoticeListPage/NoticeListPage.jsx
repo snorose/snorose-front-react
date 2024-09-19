@@ -4,14 +4,17 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getNoticeList } from '@/apis/notice';
 
-import { BackAppBar, NoticeBar, FetchLoading } from '@/components';
+import { BackAppBar, NoticeBar, FetchLoading, WriteButton } from '@/components';
 
 import { BOARD_MENUS, QUERY_KEY } from '@/constants';
+
+import { useAuth } from '@/hooks';
 
 import styles from './NoticeListPage.module.css';
 
 export default function NoticeListPage() {
   const navigate = useNavigate();
+  const { userInfo } = useAuth();
   const { pathname } = useLocation();
   const [noticeList, setNoticeList] = useState([]);
   const currentBoardTextId = pathname.split('/')[2];
@@ -60,7 +63,19 @@ export default function NoticeListPage() {
 
   return (
     <div className={styles.container}>
-      <BackAppBar title={`${currentBoard.title} 공지`} hasNotice={true} />
+      <BackAppBar
+        title={
+          currentBoardTextId === 'notice'
+            ? '공지사항'
+            : `${currentBoard.title} 공지`
+        }
+        hasNotice={true}
+        backNavTo={
+          currentBoardTextId === 'notice'
+            ? '/home'
+            : `/board/${currentBoardTextId}`
+        }
+      />
       <div className={styles.content}>
         {Array.isArray(noticeList) &&
           noticeList.map((post) => (
@@ -73,6 +88,12 @@ export default function NoticeListPage() {
             />
           ))}
       </div>
+      {userInfo.userRoleId === 4 && currentBoardTextId === 'notice' && (
+        <WriteButton
+          to={`/board/${currentBoardTextId}/post-write`}
+          className={styles.writeButton}
+        />
+      )}
     </div>
   );
 }

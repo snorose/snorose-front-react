@@ -68,7 +68,7 @@ export default function MyPage() {
             <div className={styles.pointWrapper}>
               <div className={styles.point}>
                 <Icon id='point-circle' />
-                {userInfo.balance}
+                {userInfo.balance.toLocaleString()}
               </div>
               <div className={styles.pointList}>
                 포인트 내역 보기

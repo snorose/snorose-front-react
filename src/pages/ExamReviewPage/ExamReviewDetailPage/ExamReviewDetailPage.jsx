@@ -227,7 +227,7 @@ export default function ExamReviewDetailPage() {
       <DeleteModal
         id='exam-review-delete'
         isOpen={isDeleteModalOpen}
-        setIsOpen={setIsDeleteModalOpen}
+        closeFunction={() => setIsDeleteModalOpen(false)}
         redBtnFunction={() => deleteReview.mutate()}
       />
       <OptionModal
