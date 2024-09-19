@@ -16,7 +16,7 @@ const useAuth = () => {
   const hasToken = !!localStorage.getItem('accessToken');
 
   const {
-    data: userInfoData,
+    data: userInfo,
     isFetching,
     isSuccess,
     refetch,
@@ -68,7 +68,7 @@ const useAuth = () => {
   };
 
   return {
-    userInfo: userInfoData?.result,
+    userInfo,
     status,
     logout,
     withdraw,
