@@ -15,8 +15,14 @@ import { reportComment } from '@/apis';
 
 const Comment = forwardRef((props, ref) => {
   const { data } = props;
-  const { setIsEdit, commentId, setCommentId, setContent, inputFocus } =
-    useCommentContext();
+  const {
+    setIsEdit,
+    commentId,
+    setCommentId,
+    setContent,
+    inputFocus,
+    resetCommentState,
+  } = useCommentContext();
   const { deleteComment } = useComment();
   const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
   const { toast } = useToast();
@@ -62,8 +68,8 @@ const Comment = forwardRef((props, ref) => {
     setContent('');
   };
 
-  const handleReply = (e) => {
-    e.stopPropagation();
+  const handleReply = () => {
+    resetCommentState();
     setCommentId(data.id);
     inputFocus();
   };
@@ -86,7 +92,7 @@ const Comment = forwardRef((props, ref) => {
       <div
         ref={ref}
         className={styles.comment}
-        onClick={() => setCommentId(undefined)}
+        onClick={(event) => event.stopPropagation()}
         style={{
           backgroundColor: commentId === data.id ? '#DDEBF6' : '#f8f8f8',
         }}
@@ -106,10 +112,7 @@ const Comment = forwardRef((props, ref) => {
           </div>
           <p
             className={styles.dot3}
-            onClick={(e) => {
-              e.stopPropagation();
-              onCommentOptionClick(data);
-            }}
+            onClick={(e) => onCommentOptionClick(data)}
           >
             {!isDeleted && isVisible && (
               <Icon id='ellipsis-vertical' width='3' height='11' />
@@ -181,12 +184,11 @@ const Comment = forwardRef((props, ref) => {
       <DeleteModal
         id='comment-delete'
         isOpen={isDeleteModalOpen}
-        setIsOpen={setIsDeleteModalOpen}
-        redBtnFunction={() => {
-          deleteComment.mutate({ commentId });
-          setCommentId(undefined);
-          setContent('');
+        closeFunction={() => {
+          resetCommentState();
+          setIsDeleteModalOpen(false);
         }}
+        redBtnFunction={() => deleteComment.mutate({ commentId })}
       />
       <OptionModal
         id='comment-report'

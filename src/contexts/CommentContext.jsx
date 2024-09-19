@@ -19,6 +19,12 @@ export function CommentContextProvider({ children }) {
     inputRef.current?.focus();
   };
 
+  const resetCommentState = () => {
+    setCommentId(undefined);
+    setIsEdit(false);
+    setContent('');
+  };
+
   const value = useMemo(
     () => ({
       isEdit,
@@ -29,20 +35,14 @@ export function CommentContextProvider({ children }) {
       setContent,
       inputRef,
       inputFocus,
+      resetCommentState,
     }),
     [isEdit, commentId, content]
   );
 
-  const onBlur = (event) => {
-    // 클릭한 요소가 input이 아닐 경우에만 commentId를 undefined로 설정
-    if (!isEdit && !inputRef.current?.contains(event.target)) {
-      setCommentId(undefined);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('click', onBlur);
-    return () => window.removeEventListener('click', onBlur);
+    window.addEventListener('click', resetCommentState);
+    return () => window.removeEventListener('click', resetCommentState);
   }, [isEdit]);
 
   return (
