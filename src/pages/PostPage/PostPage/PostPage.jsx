@@ -178,7 +178,6 @@ export default function PostPage() {
             }}
             className={styles.dot3}
             onClick={() => {
-              console.log(data);
               data.isWriter
                 ? setIsOptionsModalOpen(true)
                 : setIsReportModalOpen(true);
@@ -229,6 +228,8 @@ export default function PostPage() {
           </div>
         </div>
       </div>
+      <CommentList commentCount={data.commentCount} />
+      <InputBar />
       <OptionModal
         id='post-more-options'
         isOpen={isOptionsModalOpen}
@@ -257,7 +258,6 @@ export default function PostPage() {
         onOptionClick={handleReportOptionModalOptionClick}
         closeFn={() => setIsReportModalOpen(false)}
       />
-      <CommentList commentCount={data.commentCount} />
       <OptionModal
         id='post-report'
         isOpen={isPostReportModalOpen}
@@ -272,7 +272,6 @@ export default function PostPage() {
         onOptionClick={handleUserReportOptionModalOptionClick}
         closeFn={() => setIsUserReportModalOpen(false)}
       />
-      <InputBar />
     </div>
   );
 }

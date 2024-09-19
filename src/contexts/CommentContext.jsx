@@ -43,7 +43,7 @@ export function CommentContextProvider({ children }) {
   useEffect(() => {
     window.addEventListener('click', resetCommentState);
     return () => window.removeEventListener('click', resetCommentState);
-  }, [isEdit]);
+  }, []);
 
   return (
     <CommentContext.Provider value={value}>{children}</CommentContext.Provider>

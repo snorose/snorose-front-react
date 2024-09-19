@@ -58,13 +58,7 @@ export default function NestedComment({
             {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
           </p>
         </div>
-        <p
-          className={styles.dot3}
-          onClick={(e) => {
-            e.stopPropagation();
-            onCommentOptionClick(data);
-          }}
-        >
+        <p className={styles.dot3} onClick={(e) => onCommentOptionClick(data)}>
           {!isDeleted && isVisible && (
             <Icon id='ellipsis-vertical' width='3' height='11' />
           )}

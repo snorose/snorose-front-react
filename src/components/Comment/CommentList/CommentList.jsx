@@ -31,16 +31,16 @@ export default function CommentList({ commentCount }) {
   }
 
   const commentList = flatPaginationCache(data);
-  const VisibledCommentList = filterVisibleComments(commentList);
+  const visibledCommentList = filterVisibleComments(commentList);
 
   return (
     <div className={styles.comments}>
       <p className={styles.commentsTitle}>
         댓글 {commentCount.toLocaleString()}개
       </p>
-      {VisibledCommentList.map((comment, index) => (
+      {visibledCommentList.map((comment, index) => (
         <Comment
-          ref={index === VisibledCommentList.length - 1 ? ref : undefined}
+          ref={index === visibledCommentList.length - 1 ? ref : undefined}
           key={comment.id}
           data={comment}
         />
