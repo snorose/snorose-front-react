@@ -21,7 +21,13 @@ import {
 } from '@/components';
 
 import { timeAgo } from '@/utils';
-import { BOARD_MENUS, LIKE_TYPE, QUERY_KEY, TOAST } from '@/constants';
+import {
+  BOARD_MENUS,
+  LIKE_TYPE,
+  MUTATION_KEY,
+  QUERY_KEY,
+  TOAST,
+} from '@/constants';
 
 import styles from './PostPage.module.css';
 
@@ -52,7 +58,7 @@ export default function PostPage() {
   });
 
   const { mutate: reportPostMutate } = useMutation({
-    mutationKey: 'reportPost',
+    mutationKey: MUTATION_KEY.reportPost,
     mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
     onSuccess: ({ message }) => {
       toast(message);
@@ -63,7 +69,7 @@ export default function PostPage() {
   });
 
   const { mutate: reportUserMutate } = useMutation({
-    mutationKey: 'reportUser',
+    mutationKey: MUTATION_KEY.reportUser,
     mutationFn: (body) => reportUser(body),
     onSuccess: ({ message }) => {
       toast(message);

@@ -19,6 +19,8 @@ export const QUERY_KEY = Object.freeze({
 
 export const MUTATION_KEY = Object.freeze({
   editPost: 'editPost',
+  reportPost: 'reportPost',
+  reportUser: 'reportUser',
   createExamReview: 'createExamReview',
   deleteExamReview: 'deleteExamReview',
   editExamReview: 'editExamReview',
