@@ -11,7 +11,7 @@ export const withdrawAccount = async (body) => {
 export const getMyPageUserInfo = async () => {
   const response = await authAxios.get('/v1/users/mypage');
 
-  return response?.data;
+  return response?.data.result;
 };
 
 export const updateUserInfo = async (body) => {

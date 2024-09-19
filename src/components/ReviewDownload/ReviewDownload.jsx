@@ -48,6 +48,11 @@ export default function ReviewDownload({
         return { ...prev, isDownloaded: true };
       });
 
+      queryClient.setQueryData(['myPageUserInfo'], (prev) => ({
+        ...prev,
+        balance: prev.balance - 50,
+      }));
+
       toast(TOAST.EXAM_REVIEW.download);
     } catch ({ response }) {
       const text = await response.data.text();
