@@ -44,13 +44,16 @@ export default function ReviewDownload({
     try {
       await downloadExamReview();
 
+      const reviewDetail = queryClient.getQueryData(['reviewDetail', postId]);
+      const { isDownloaded } = reviewDetail ?? { isDownloaded: false };
+
       queryClient.setQueryData(['reviewDetail', postId], (prev) => {
         return { ...prev, isDownloaded: true };
       });
 
       queryClient.setQueryData(['myPageUserInfo'], (prev) => ({
         ...prev,
-        balance: prev.balance - 50,
+        balance: isDownloaded ? prev.balance : prev.balance - 50,
       }));
 
       toast(TOAST.EXAM_REVIEW.download);
