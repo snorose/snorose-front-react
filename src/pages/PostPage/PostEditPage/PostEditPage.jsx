@@ -125,21 +125,23 @@ export default function PostEditPage() {
             <p className={styles.dot}></p>
             <p>{formattedNowTime()}</p>
           </div>
-          <div
-            className={
-              roleId === 4
-                ? styles.profileBoxRight
-                : styles.profileBoxRightInvisible
-            }
-            onClick={handleIsNotice}
-          >
-            <p>공지글</p>
-            <Icon
-              id={isNotice ? 'toggle-on' : 'toggle-off'}
-              width='25'
-              height='16'
-            />
-          </div>
+          {textId !== 'notice' && (
+            <div
+              className={
+                roleId === 4
+                  ? styles.profileBoxRight
+                  : styles.profileBoxRightInvisible
+              }
+              onClick={handleIsNotice}
+            >
+              <p>공지글</p>
+              <Icon
+                id={isNotice ? 'toggle-on' : 'toggle-off'}
+                width='25'
+                height='16'
+              />
+            </div>
+          )}
         </div>
         <div className={styles.content}>
           <TextareaAutosize

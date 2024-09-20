@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 
-import { FetchLoading } from '@/components/Loading';
-import { PostBar } from '@/components/PostBar';
+import { FetchLoading, PostBar, PTR } from '@/components';
 
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
 
 export default function ExamReviewList({ result }) {
-  const { data, ref, isLoading, isError } = result;
+  const { data, ref, isLoading, isError, refetch } = result;
 
   if (isLoading) {
     return <FetchLoading>불러오는 중</FetchLoading>;
@@ -26,17 +25,19 @@ export default function ExamReviewList({ result }) {
       : [];
 
   return (
-    <ul className={styles.list}>
-      {reviewList.map((post, index) => (
-        <Link
-          className={styles.to}
-          ref={index === reviewList.length - 1 ? ref : undefined}
-          key={post.postId}
-          to={`/board/exam-review/post/${post.postId}`}
-        >
-          <PostBar data={post} hasLike={false} />
-        </Link>
-      ))}
-    </ul>
+    <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
+      <ul className={styles.list}>
+        {reviewList.map((post, index) => (
+          <Link
+            className={styles.to}
+            ref={index === reviewList.length - 1 ? ref : undefined}
+            key={post.postId}
+            to={`/board/exam-review/post/${post.postId}`}
+          >
+            <PostBar data={post} hasLike={false} />
+          </Link>
+        ))}
+      </ul>
+    </PTR>
   );
 }

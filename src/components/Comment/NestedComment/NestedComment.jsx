@@ -14,8 +14,7 @@ export default function NestedComment({
   isFirst,
   onCommentOptionClick,
 }) {
-  const { setCommentId } = useCommentContext();
-
+  const { commentId } = useCommentContext();
   const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
 
   const {
@@ -28,15 +27,14 @@ export default function NestedComment({
     isVisible,
     isUpdated,
     isDeleted,
-    // isLiked,
   } = data;
 
   return (
     <div
       className={`${styles.nestedComment} ${isLast && styles.isLast}`}
-      onClick={(e) => {
-        e.stopPropagation();
-        setCommentId(undefined);
+      onClick={(event) => event.stopPropagation()}
+      style={{
+        backgroundColor: commentId === data.id ? '#DDEBF6' : '#f0f0f0',
       }}
     >
       <div className={styles.nestedCommentTop}>

@@ -19,7 +19,13 @@ import { ReviewDownload } from '@/components/ReviewDownload';
 
 import { dateFormat, convertToObject } from '@/utils';
 
-import { LECTURE_TYPES, SEMESTERS, EXAM_TYPES, TOAST } from '@/constants';
+import {
+  LECTURE_TYPES,
+  SEMESTERS,
+  EXAM_TYPES,
+  TOAST,
+  FLEX_ALIGN,
+} from '@/constants';
 
 import styles from './ExamReviewDetailPage.module.css';
 
@@ -165,7 +171,11 @@ export default function ExamReviewDetailPage() {
           />
           <ReviewContentItem tag='시험 종류' value={EXAM_TYPE[examType]} />
           <ReviewContentItem tag='P/F 여부' value={isPF ? 'O' : 'X'} />
-          <ReviewContentItem tag='시험 유형 및 문항수' value={questionDetail} />
+          <ReviewContentItem
+            tag='시험 유형 및 문항수'
+            value={questionDetail}
+            align={FLEX_ALIGN.flexStart}
+          />
         </div>
         <ReviewDownload
           className={styles.fileDownload}
@@ -216,7 +226,7 @@ export default function ExamReviewDetailPage() {
       <DeleteModal
         id='exam-review-delete'
         isOpen={isDeleteModalOpen}
-        setIsOpen={setIsDeleteModalOpen}
+        closeFunction={() => setIsDeleteModalOpen(false)}
         redBtnFunction={() => deleteReview.mutate()}
       />
       <OptionModal

@@ -59,6 +59,8 @@ const getRolesForReadBoard = (boardPath) => {
       return [ROLE.user, ROLE.admin, ROLE.official];
     case 'all':
       return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
+    case 'notice':
+      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
     default:
       return [];
   }
@@ -72,6 +74,8 @@ const getRolesForWriteBoard = (boardPath) => {
       return [ROLE.user, ROLE.admin];
     case 'permanent-snow':
       return [ROLE.user, ROLE.admin];
+    case 'notice':
+      return [ROLE.admin];
     default:
       return [];
   }
@@ -83,6 +87,7 @@ const boardPaths = [
   'permanent-snow',
   'besookt',
   'all',
+  'notice',
 ];
 
 const boardRoutes = boardPaths.flatMap((boardPath) => [
@@ -94,7 +99,22 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         to={`/board`}
         message={'게시판 접근 권한이 없습니다.'}
       >
-        <BoardListPage />
+        {boardPath === 'notice' ? <NoticeListPage /> : <BoardListPage />}
+      </ProtectedRoute>
+    ),
+    meta: {
+      hideNav: true,
+    },
+  },
+  {
+    path: `/board/${boardPath}/notice`,
+    element: (
+      <ProtectedRoute
+        roles={getRolesForReadBoard(boardPath)}
+        to={`/board`}
+        message={'게시판 접근 권한이 없습니다.'}
+      >
+        <NoticeListPage />
       </ProtectedRoute>
     ),
     meta: {
@@ -176,21 +196,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
       hideNav: true,
     },
   },
-  {
-    path: `/board/${boardPath}/notice`,
-    element: (
-      <ProtectedRoute
-        roles={getRolesForReadBoard(boardPath)}
-        to={`/board`}
-        message={'게시판 접근 권한이 없습니다.'}
-      >
-        <NoticeListPage />
-      </ProtectedRoute>
-    ),
-    meta: {
-      hideNav: true,
-    },
-  },
 ]);
 
 export const routeList = [
@@ -236,6 +241,20 @@ export const routeList = [
             <ExamReviewPage />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: `/board/exam-review/notice`,
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            message={'시험후기 게시판 접근 권한이 없습니다.'}
+          >
+            <NoticeListPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/board/exam-review/search/:keyword',
@@ -397,34 +416,7 @@ export const routeList = [
           hideNav: true,
         },
       },
-      {
-        path: '/board/notice',
-        element: (
-          <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin, ROLE.official]}
-            message={'등업 후 이용 가능합니다'}
-          >
-            <NoticeListPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/board/notice/post/:postId',
-        element: (
-          <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin, ROLE.official]}
-            message={'등업 후 이용 가능합니다'}
-          >
-            <PostPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
+
       {
         path: '/verify',
         element: (

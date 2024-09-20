@@ -9,6 +9,8 @@ import { Icon } from '@/components';
 
 import { ROLE_NAME } from '@/constants';
 
+import defaultProfile from '@/assets/images/defaultProfile.svg';
+
 import styles from './MyPage.module.css';
 
 export default function MyPage() {
@@ -39,17 +41,21 @@ export default function MyPage() {
       <div className={styles.myPageUpper}>
         <div className={styles.logoOverlay}>
           <Link to='edit-info'>
-            <Icon id='pencil-underline' fill='#fff' stroke='#fff' />
+            <Icon
+              className={styles.editIcon}
+              id='pencil-underline'
+              fill='#fff'
+              stroke='#fff'
+            />
           </Link>
         </div>
       </div>
 
       <div className={styles.profileImage}>
-        {userInfo.userProfile === null ? (
-          <Icon id='profile-basic' />
-        ) : (
-          <img src={userInfo.userProfile} alt={`${userInfo.userName} 프로필`} />
-        )}
+        <img
+          src={userInfo.userProfile ?? defaultProfile}
+          alt={`${userInfo.userName} 프로필`}
+        />
       </div>
 
       <div className={styles.myPageLower}>
@@ -68,7 +74,7 @@ export default function MyPage() {
             <div className={styles.pointWrapper}>
               <div className={styles.point}>
                 <Icon id='point-circle' />
-                {userInfo.balance}
+                {userInfo.balance.toLocaleString()}
               </div>
               <div className={styles.pointList}>
                 포인트 내역 보기

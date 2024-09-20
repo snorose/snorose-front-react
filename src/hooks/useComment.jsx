@@ -3,27 +3,19 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 import {
   deleteComment as remove,
-  getCommentList,
   postComment as post,
   editComment as edit,
 } from '@/apis';
 
-import { usePagination, useToast } from '@/hooks';
+import { useToast } from '@/hooks';
 
 import { flatPaginationCache, toPaginationCacheFormat } from '@/utils';
 import { TOAST } from '@/constants';
 
 export default function useComment() {
   const { postId } = useParams();
-  const queryClient = useQueryClient();
   const { toast } = useToast();
-
-  const { data, isLoading, isError, ref } = usePagination({
-    queryKey: ['comments', postId],
-    queryFn: ({ pageParam }) => getCommentList({ postId, page: pageParam }),
-  });
-
-  const commentList = flatPaginationCache(data);
+  const queryClient = useQueryClient();
 
   const postComment = useMutation({
     mutationFn: async ({ content, parentId }) => {
@@ -144,12 +136,8 @@ export default function useComment() {
   });
 
   return {
-    commentList,
-    isLoading,
-    isError,
     postComment,
     deleteComment,
     editComment,
-    ref,
   };
 }
