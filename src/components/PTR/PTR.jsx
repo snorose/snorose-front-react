@@ -9,27 +9,28 @@ export default function PTR({ children, onRefresh }) {
 
   function handleStart(event) {
     const clientY =
-      (event.touches && event.touches[0] && event.touches[0].clientY) ||
-      event.clientY;
+      (event.touches && event.touches[0].clientY) || event.clientY;
     setStartY(clientY);
     event.preventDefault();
   }
 
   function handleMove(event) {
     const clientY =
-      (event.touches && event.touches[0] && event.touches[0].clientY) ||
-      event.clientY;
+      (event.touches && event.touches[0].clientY) || event.clientY;
     if (startY !== undefined) {
       const pullDistance = clientY - startY;
 
+      // pullDistance가 특정 값보다 클 때만 preventDefault() 호출
       if (pullDistance > 0) {
-        event.preventDefault();
-
         if (pullDistance > 80 && containerRef.current) {
+          event.preventDefault(); // 스크롤을 막습니다.
           containerRef.current.style.transform = 'translate(0, 30px)';
           containerRef.current.style.transition = '0.3s';
           setRefreshing(true);
         }
+      } else {
+        // 위로 스크롤할 때는 preventDefault를 호출하지 않음
+        return;
       }
     }
   }
@@ -61,17 +62,17 @@ export default function PTR({ children, onRefresh }) {
     document.addEventListener('touchstart', handleStart, options);
     document.addEventListener('touchmove', handleMove, options);
     document.addEventListener('touchend', handleEnd, options);
-    document.addEventListener('mousedown', handleStart, options);
-    document.addEventListener('mousemove', handleMove, options);
-    document.addEventListener('mouseup', handleEnd, options);
+    document.addEventListener('mousedown', handleStart);
+    document.addEventListener('mousemove', handleMove);
+    document.addEventListener('mouseup', handleEnd);
 
     return () => {
       document.removeEventListener('touchstart', handleStart, options);
       document.removeEventListener('touchmove', handleMove, options);
       document.removeEventListener('touchend', handleEnd, options);
-      document.removeEventListener('mousedown', handleStart, options);
-      document.removeEventListener('mousemove', handleMove, options);
-      document.removeEventListener('mouseup', handleEnd, options);
+      document.removeEventListener('mousedown', handleStart);
+      document.removeEventListener('mousemove', handleMove);
+      document.removeEventListener('mouseup', handleEnd);
     };
   }, [refreshing, startY, onRefresh]);
 
