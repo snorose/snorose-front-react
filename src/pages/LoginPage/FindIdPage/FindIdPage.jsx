@@ -107,13 +107,6 @@ export default function FindIdPage() {
             })}
           </div>
           <div className={styles.buttonFrame}>
-            {submitState() === 'wrong' && (
-              <div className={styles.errFrame}>
-                <p>입력한 내용을 다시 한 번</p>
-                <p>확인해주세요</p>
-              </div>
-            )}
-
             <Submit btnName='다음으로' className={submitState()} />
           </div>
         </div>
