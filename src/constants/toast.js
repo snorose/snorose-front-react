@@ -28,7 +28,8 @@ const TOAST = Object.freeze({
     withdraw: '회원 탈퇴되었어요',
   },
   LOGIN: {
-    loginFailure: '아이디 혹은 비밀번호가 일치하지 않아요',
+    emptyId: '아이디를 입력해주세요',
+    emptyPw: '비밀번호를 입력해주세요',
   },
   VERIFY: {
     notCompleted: '모두 입력해주세요',
