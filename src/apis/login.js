@@ -20,11 +20,11 @@ export const useLogin = () => {
       setIsError(false);
       navigate('/');
     } catch (e) {
-      toast(TOAST.LOGIN.loginFailure);
+      toast(e.response.data.message);
       setIsError(true);
     }
   };
-  
+
   return login;
 };
 
@@ -34,7 +34,7 @@ export const findId = async (e, formData, navigate) => {
 
   try {
     const response = await defaultAxios.post(endpoint, formData);
-    
+
     navigate('/found-id', {
       state: { loginId: response?.data.result.loginId },
     });
@@ -51,7 +51,7 @@ export const findPw = async (e, formData, navigate) => {
 
   try {
     await defaultAxios.post(endpoint, formData);
-    
+
     navigate('/found-pw', {
       state: { email: formData.email },
     });
