@@ -56,6 +56,7 @@ a:hover {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
   padding-right: 0.625rem;
+  margin-bottom: 1rem;
 }
 .ready {
   background-color: #f5f5f5;
@@ -74,7 +75,6 @@ a:hover {
 .visibility:hover {
   cursor: pointer;
 }
-
 .button {
   display: block;
   width: 11.25rem;
@@ -83,12 +83,6 @@ a:hover {
   color: #ffffff;
   margin: 1.125rem auto;
   border-radius: 0.4375rem;
-}
-.errMsg {
-  color: red;
-  margin-top: 0.221rem;
-  margin-bottom: 1.029rem;
-  text-align: left;
 }
 
 .find {
@@ -112,7 +106,6 @@ a:hover {
   font-size: 0.875rem;
   line-height: 1.313rem;
 }
-
 .errFrame {
   display: flex;
   flex-direction: column;

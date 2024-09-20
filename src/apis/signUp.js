@@ -25,24 +25,7 @@ export async function sendUser(email) {
 
   try {
     await defaultAxios.post(endpoint, data);
-  } catch (e) {}
-}
-
-export const certifyUser = async (data) => {
-  const endpoint = '/v1/users/certifyUser';
-
-  if (data.authNum?.length === 0) {
-    return 'ready';
-  } else {
-    try {
-      const response = await defaultAxios.post(endpoint, data);
-      if (response.data.isSuccess) {
-        return 'right';
-      } else {
-        return 'wrong';
-      }
-    } catch (e) {
-      return 'wrong';
-    }
+  } catch (e) {
+    console.log(e);
   }
-};
+}

@@ -47,7 +47,7 @@ export default function UserInfoPage({ setFormData, formData }) {
             inputType={'nickname'}
             inputData={setFormData}
             data={formData}
-            errMsg={'특수문자는 사용할 수 없습니다'}
+            errMsg={'특수문자 제외 2자 이상 20자 이하로 작성해주세요'}
           />
         </div>
         <div className={styles.inputFrame}>

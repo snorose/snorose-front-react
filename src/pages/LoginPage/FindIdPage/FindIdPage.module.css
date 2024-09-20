@@ -33,25 +33,3 @@
 .buttonFrame {
   margin-bottom: 2.188rem;
 }
-.errFrame {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 6.625rem;
-  width: 14.625rem;
-  height: 3.625rem;
-  border-radius: 0.313rem;
-  background-color: #48484899;
-  color: #ffffff;
-  font-size: 0.75rem;
-  line-height: 0.975rem;
-  font-weight: 500;
-  margin: 0 auto;
-}
-.errFrame p {
-  display: block;
-}

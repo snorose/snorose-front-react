@@ -42,10 +42,17 @@ export default function Input({
         placeholder={placeholder}
         className={`${styles[className]} ${styles['input']}`}
         onChange={(e) => {
-          inputData((prev) => ({ ...prev, [inputType]: e.target.value }));
+          inputData((prev) => ({
+            ...prev,
+            [inputType]: e.target.value,
+          }));
           if (setClassName !== undefined) setClassName('ready');
         }}
         onBlur={(e) => {
+          inputData((prev) => ({
+            ...prev,
+            [inputType]: e.target.value.trim(),
+          }));
           if (setClassName !== undefined) {
             const checkedClass = classNameCheck(e.target.value);
             checkedClass instanceof Promise

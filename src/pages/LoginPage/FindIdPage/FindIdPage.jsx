@@ -8,7 +8,7 @@ import { Input } from '@/components/Input';
 import { Submit } from '@/components/Submit';
 
 import {
-  checkSpecialChar,
+  checkName,
   checkSookmyungMail,
   checkStudentNum,
 } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
@@ -31,7 +31,7 @@ export default function FindIdPage() {
       '이름을 입력해주세요',
       nameStyle,
       setNameStyle,
-      checkSpecialChar,
+      checkName,
       'userName',
       '특수문자는 사용할 수 없습니다',
     ],
@@ -107,13 +107,6 @@ export default function FindIdPage() {
             })}
           </div>
           <div className={styles.buttonFrame}>
-            {submitState() === 'wrong' && (
-              <div className={styles.errFrame}>
-                <p>입력한 내용을 다시 한 번</p>
-                <p>확인해주세요</p>
-              </div>
-            )}
-
             <Submit btnName='다음으로' className={submitState()} />
           </div>
         </div>

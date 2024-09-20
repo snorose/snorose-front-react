@@ -10,21 +10,29 @@ export const useLogin = () => {
     e.preventDefault();
     const endpoint = '/v1/users/login';
 
-    try {
-      const response = await defaultAxios.post(endpoint, formData);
-      const { accessToken, refreshToken } = response?.data.result.tokenResponse;
+    if (!formData.loginId) {
+      toast(TOAST.LOGIN.emptyId);
+    } else if (!formData.password) {
+      toast(TOAST.LOGIN.emptyPw);
+    } else {
+      try {
+        const response = await defaultAxios.post(endpoint, formData);
+        const { accessToken, refreshToken } =
+          response?.data.result.tokenResponse;
 
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
 
-      setIsError(false);
-      navigate('/');
-    } catch (e) {
-      toast(TOAST.LOGIN.loginFailure);
-      setIsError(true);
+        setIsError(false);
+        navigate('/');
+      } catch (e) {
+        toast(e.response.data.message);
+        setIsError(true);
+        console.log(e);
+      }
     }
   };
-  
+
   return login;
 };
 
@@ -34,7 +42,7 @@ export const findId = async (e, formData, navigate) => {
 
   try {
     const response = await defaultAxios.post(endpoint, formData);
-    
+
     navigate('/found-id', {
       state: { loginId: response?.data.result.loginId },
     });
@@ -51,7 +59,7 @@ export const findPw = async (e, formData, navigate) => {
 
   try {
     await defaultAxios.post(endpoint, formData);
-    
+
     navigate('/found-pw', {
       state: { email: formData.email },
     });

@@ -49,7 +49,12 @@ export default function Login() {
               inputData={setFormData}
             />
           </div>
-          <div className={!isError ? styles.input : undefined}>
+          <div
+            className={!isError ? styles.input : undefined}
+            onChange={() => {
+              setIsError(false);
+            }}
+          >
             <div
               className={`${styles.pwFrame} ${styles[isError ? 'wrong' : 'ready']}`}
             >
@@ -72,11 +77,6 @@ export default function Login() {
               )}
             </div>
           </div>
-          {isError && (
-            <p className={styles.errMsg}>
-              아이디 혹은 비밀번호가 일치하지 않습니다
-            </p>
-          )}
           <Submit btnName='로그인하기' className='right' />
           <div className={styles.find}>
             <Link to='/find-id'>아이디 찾기</Link>
