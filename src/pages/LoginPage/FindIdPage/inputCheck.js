@@ -1,10 +1,10 @@
 export function checkName(input) {
   input = input.trim();
-  const format = /^[A-Za-z가-힣ㄱ-ㅎ]+$/;
+  const format = /^[A-Za-z가-힣]+$/;
   if (!input?.length) {
     return 'ready';
   }
-  if (format.test(input)) {
+  if (format.test(input) && input?.length > 1 && input?.length < 31) {
     return 'right';
   } else {
     return 'wrong';
@@ -65,7 +65,7 @@ export function checkPW(pw) {
   let isAlphabet,
     isNumber,
     isSpecialChar = false;
-  if (pw?.length < 8 || pw?.length > 16) {
+  if (pw?.length < 8 || pw?.length > 17) {
     return 'wrong';
   }
   pw.split('').map((char) => {
