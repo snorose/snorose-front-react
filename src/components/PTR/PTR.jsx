@@ -12,7 +12,6 @@ export default function PTR({ children, onRefresh }) {
       (event.touches && event.touches[0] && event.touches[0].clientY) ||
       event.clientY;
     setStartY(clientY);
-    event.preventDefault();
   }
 
   function handleMove(event) {
@@ -23,8 +22,6 @@ export default function PTR({ children, onRefresh }) {
       const pullDistance = clientY - startY;
 
       if (pullDistance > 0) {
-        event.preventDefault();
-
         if (pullDistance > 80 && containerRef.current) {
           containerRef.current.style.transform = 'translate(0, 30px)';
           containerRef.current.style.transition = '0.3s';
@@ -56,22 +53,20 @@ export default function PTR({ children, onRefresh }) {
   }
 
   useEffect(() => {
-    const options = { passive: false };
-
-    document.addEventListener('touchstart', handleStart, options);
-    document.addEventListener('touchmove', handleMove, options);
-    document.addEventListener('touchend', handleEnd, options);
-    document.addEventListener('mousedown', handleStart, options);
-    document.addEventListener('mousemove', handleMove, options);
-    document.addEventListener('mouseup', handleEnd, options);
+    document.addEventListener('touchstart', handleStart);
+    document.addEventListener('touchmove', handleMove);
+    document.addEventListener('touchend', handleEnd);
+    document.addEventListener('mousedown', handleStart);
+    document.addEventListener('mousemove', handleMove);
+    document.addEventListener('mouseup', handleEnd);
 
     return () => {
-      document.removeEventListener('touchstart', handleStart, options);
-      document.removeEventListener('touchmove', handleMove, options);
-      document.removeEventListener('touchend', handleEnd, options);
-      document.removeEventListener('mousedown', handleStart, options);
-      document.removeEventListener('mousemove', handleMove, options);
-      document.removeEventListener('mouseup', handleEnd, options);
+      document.removeEventListener('touchstart', handleStart);
+      document.removeEventListener('touchmove', handleMove);
+      document.removeEventListener('touchend', handleEnd);
+      document.removeEventListener('mousedown', handleStart);
+      document.removeEventListener('mousemove', handleMove);
+      document.removeEventListener('mouseup', handleEnd);
     };
   }, [refreshing, startY, onRefresh]);
 
