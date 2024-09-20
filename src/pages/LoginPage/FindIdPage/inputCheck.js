@@ -17,7 +17,7 @@ export function checkSpecialChar(input) {
   if (!input?.length) {
     return 'ready';
   }
-  if (format.test(input)) {
+  if (format.test(input) && input?.length > 1 && input?.length < 21) {
     return 'right';
   } else {
     return 'wrong';
@@ -65,7 +65,7 @@ export function checkPW(pw) {
   let isAlphabet,
     isNumber,
     isSpecialChar = false;
-  if (pw?.length < 8) {
+  if (pw?.length < 8 || pw?.length > 16) {
     return 'wrong';
   }
   pw.split('').map((char) => {

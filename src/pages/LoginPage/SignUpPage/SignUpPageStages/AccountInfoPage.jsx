@@ -93,7 +93,9 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
             color3={'#ff4b6c'}
             state1={'text'}
             state2={'password'}
-            errMsg={'영어, 숫자, 특수문자를 포함해 8자 이상으로 작성해주세요'}
+            errMsg={
+              '영어, 숫자, 특수문자를 포함해 8자 이상 15자 이하로 작성해주세요'
+            }
           />
         </div>
         <div className={styles.inputFrame}>
