@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { defaultAxios } from '@/axios';
 
-import { sendUser } from '@/apis';
+import { sendUser, certifyUser } from '@/apis';
 
 import { Input } from '@/components/Input';
 import { Submit } from '@/components/Submit';
@@ -31,6 +31,7 @@ export default function AuthorizationPage({ email, setStage }) {
           return 'wrong';
         }
       } catch (e) {
+        console.log(e);
         return 'wrong';
       }
     }

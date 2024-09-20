@@ -4,7 +4,7 @@ import { Input, SpecialInput } from '@/components/Input';
 import { Submit } from '@/components/Submit';
 
 import {
-  checkSpecialChar,
+  checkName,
   checkSookmyungMail,
   checkID,
   checkPW,
@@ -43,7 +43,7 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
             placeholder={'이름을 입력하세요'}
             className={nameStyle}
             setClassName={setNameStyle}
-            classNameCheck={checkSpecialChar}
+            classNameCheck={checkName}
             inputType={'userName'}
             inputData={setFormData}
             data={formData}
