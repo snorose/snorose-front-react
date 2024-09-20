@@ -30,25 +30,6 @@
 .inputFrame {
   margin-bottom: 1.5rem;
 }
-.errFrame {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 14.625rem;
-  height: 3.625rem;
-  border-radius: 0.313rem;
-  background-color: #48484899;
-  color: #ffffff;
-  font-size: 0.75rem;
-  line-height: 0.975rem;
-  font-weight: 500;
-  margin: 0 auto;
-  margin-bottom: 1.625rem;
-}
-.errFrame p {
-  display: block;
-}
 .findIDButton {
   display: flex;
   justify-content: center;

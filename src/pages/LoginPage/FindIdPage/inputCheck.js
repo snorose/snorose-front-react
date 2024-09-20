@@ -1,6 +1,19 @@
+export function checkName(input) {
+  input = input.trim();
+  const format = /^[A-Za-z가-힣ㄱ-ㅎ]+$/;
+  if (!input?.length) {
+    return 'ready';
+  }
+  if (format.test(input)) {
+    return 'right';
+  } else {
+    return 'wrong';
+  }
+}
+
 export function checkSpecialChar(input) {
   input = input.trim();
-  const format = /^[A-Za-z가-힣ㄱ-ㅎ0-9 ]+$/;
+  const format = /^[A-Za-z가-힣ㄱ-ㅎ0-9]+$/;
   if (!input?.length) {
     return 'ready';
   }
@@ -38,7 +51,7 @@ export function checkStudentNum(number) {
 
 export function checkID(id) {
   id = id.trim();
-  const format = /^[A-Za-z0-9 ]+$/;
+  const format = /^[A-Za-z0-9]+$/;
   if (id?.length === 0) {
     return 'ready';
   } else if (id.length >= 5 && id.length <= 30 && format.test(id))
