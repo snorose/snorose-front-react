@@ -25,9 +25,9 @@ export const POINT_CATEGORY_ENUM = Object.freeze({
   POINT_REWARD_1000_LIKES: 'POINT_REWARD_1000_LIKES', // 좋아요 1000개 게시글
   POINT_REWARD_USER_AUTH: 'POINT_REWARD_USER_AUTH', // 정회원 인증 기념
   POINT_REWARD_ETC: 'POINT_REWARD_ETC', // 기타 사유
+  POINT_DEDUCTION_ETC: 'POINT_DEDUCTION_ETC', // 기타 사유
 
   POINT_DEDUCTION_FLOODING: 'POINT_DEDUCTION_FLOODING', // 도배
-  POINT_DEDUCTION_ETC: 'POINT_DEDUCTION_ETC', // 기타 사유
 
   EVENT: 'EVENT',
   ETC: 'ETC',
@@ -35,27 +35,36 @@ export const POINT_CATEGORY_ENUM = Object.freeze({
 
 export const POINT_CATEGORY_KOREAN_ENUM = Object.freeze({
   ATTENDANCE: '출석체크',
+
   POST_CREATE: '게시글 작성',
   POST_DELETE: '게시글 삭제',
+
   COMMENT_CREATE: '댓글 작성',
   COMMENT_DELETE: '댓글 삭제',
+
   EXAM_REVIEW_CREATE: '시험후기 작성',
   EXAM_REVIEW_DOWNLOAD: '시험후기 다운로드',
   EXAM_REVIEW_DELETE: '시험후기 삭제',
+
   LECTURE_REVIEW_CREATE: '강의후기 작성',
-  POINT_REWARD_10_LIKES: '좋아요 10개 게시글',
-  POINT_REWARD_100_LIKES: '좋아요 100개 게시글',
-  POINT_REWARD_1000_LIKES: '좋아요 1,000개 게시글',
-  POINT_REWARD_USER_AUTH: '정회원 인증 기념',
+  LECTURE_REVIEW_DELETE: '강의후기 삭제',
+
   POINT_REWARD_REPORT_GENERAL: '일반 신고 보상 (호칭, 도배 등)',
   POINT_REWARD_REPORT_EXAM_REVIEW:
     '시험후기 관련 신고 보상 (중복/허위 족보 등)',
   POINT_REWARD_REPORT_OUTSIDER: '외부인 신고 보상',
   POINT_REWARD_REPORT_PERMANENT_DEMOTION:
     '영구강등에 해당하는 위반사항 신고 보상 (외부 유출, 아이디 공유 등)',
+
+  POINT_REWARD_10_LIKES: '좋아요 10개 게시글',
+  POINT_REWARD_100_LIKES: '좋아요 100개 게시글',
+  POINT_REWARD_1000_LIKES: '좋아요 1,000개 게시글',
+  POINT_REWARD_USER_AUTH: '정회원 인증 기념',
   POINT_REWARD_ETC: '포인트 보상 - 기타 사유',
-  POINT_DEDUCTION_FlOODING: '포인트 차감 - 도배',
   POINT_DEDUCTION_ETC: '포인트 차감 - 기타 사유',
+
+  POINT_DEDUCTION_FlOODING: '포인트 차감 - 도배',
+
   EVENT: '이벤트',
   ETC: '기타',
 });

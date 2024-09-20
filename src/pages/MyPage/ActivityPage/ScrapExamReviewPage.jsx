@@ -11,7 +11,7 @@ import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 import styles from './ActivityPage.module.css';
 
 export default function ScrapExamReviewPage() {
-  const { data, ref, isLoading, isError } = usePagination({
+  const { data, error, ref, isLoading, isError } = usePagination({
     queryKey: ['getMyScrapReviewList'],
     queryFn: ({ pageParam }) => getMyScrapReviewList({ page: pageParam }),
   });
@@ -21,9 +21,9 @@ export default function ScrapExamReviewPage() {
   }
 
   if (isError) {
-    return (
-      <FetchLoading animation={false}>잠시 후 다시 시도해 주세요</FetchLoading>
-    );
+    const { message } = error.response.data;
+
+    return <FetchLoading animation={false}>{message}</FetchLoading>;
   }
 
   const myScrapReviewList =

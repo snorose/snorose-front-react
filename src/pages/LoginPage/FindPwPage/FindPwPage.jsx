@@ -8,7 +8,7 @@ import { Input } from '@/components/Input';
 import { Submit } from '@/components/Submit';
 
 import {
-  checkSpecialChar,
+  checkID,
   checkSookmyungMail,
 } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
 
@@ -28,9 +28,9 @@ export default function FindPwPage() {
       '아이디를 입력해주세요',
       idStyle,
       setIdStyle,
-      checkSpecialChar,
+      checkID,
       'loginId',
-      '특수문자는 사용할 수 없습니다',
+      '아이디는 영어, 숫자만 가능합니다',
     ],
     [
       '숙명 구글 메일',

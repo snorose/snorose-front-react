@@ -6,6 +6,7 @@ import styles from './MyPage.module.css';
 
 const USER_INFO_ITEM_LABEL = Object.freeze({
   loginId: '아이디',
+  userName: '이름',
   email: '이메일',
   studentNumber: '학번',
   major: '전공',
@@ -25,8 +26,9 @@ const AccountTab = () => {
 
   const userInfoValue = {
     ...userInfo,
-    birthday: userInfo.birthday.replaceAll('-', ''),
+    birthday: `${userInfo.birthday.slice(0, 4)}.${userInfo.birthday.slice(5, 7)}.${userInfo.birthday.slice(8, 10)}`,
   };
+
   const userInfoList = Object.entries(USER_INFO_ITEM_LABEL).map(
     ([key, label]) => ({
       label,

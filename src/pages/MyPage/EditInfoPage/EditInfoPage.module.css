@@ -34,18 +34,25 @@
 .profileImg {
   --size: 102px;
 
-  display: flex;
   width: var(--size);
   height: var(--size);
   padding: 12px;
+  display: flex;
   flex-shrink: 0;
+  position: relative;
   cursor: pointer;
+}
 
-  & > img {
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 50%;
-  }
+.profileImg img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.blueCamera {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 }
 
 .contentContainer {

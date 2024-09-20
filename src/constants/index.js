@@ -1,3 +1,4 @@
+export * from './align.js';
 export * from './attendance.js';
 export * from './board.js';
 export * from './boardMenus.js';

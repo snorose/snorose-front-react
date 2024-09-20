@@ -18,7 +18,7 @@ import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
 
-import { isNumber } from '@/utils';
+import { validClassNumber } from '@/utils';
 import {
   BOARD_ID,
   EXAM_TYPES,
@@ -65,7 +65,7 @@ export default function ExamReviewWritePage() {
   const [semester, setSemester] = useState({});
   const [isPF, setIsPF] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
-  const [classNumber, setClassNumber] = useState();
+  const [classNumber, setClassNumber] = useState('');
   const [questionDetail, setQuestionDetail] = useState('');
   const [file, setFile] = useState();
 
@@ -216,8 +216,9 @@ export default function ExamReviewWritePage() {
           value={classNumber}
           onChange={(event) => {
             const { value } = event.target;
-            if (isNumber(value) || value === '') {
-              setClassNumber(event.target.value);
+
+            if (validClassNumber(value)) {
+              setClassNumber(value);
             }
           }}
           placeholder='수강 분반을 입력하세요'

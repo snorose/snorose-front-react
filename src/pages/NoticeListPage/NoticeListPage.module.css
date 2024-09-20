@@ -25,3 +25,7 @@ body {
   padding: 4px 17px 193px 17px;
   row-gap: 8px;
 }
+
+.writeButton {
+  bottom: 19px;
+}

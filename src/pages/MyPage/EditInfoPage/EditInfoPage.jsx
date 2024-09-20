@@ -20,6 +20,8 @@ import {
   PRIVATE_USER_INFO_UPDATE_PERMISSION_ROLE_ID_LIST,
 } from '@/constants';
 
+import defaultProfile from '@/assets/images/defaultProfile.svg';
+
 import styles from './EditInfoPage.module.css';
 
 const VALIDATIONS = Object.freeze({
@@ -228,15 +230,17 @@ export default function EditInfoPage() {
             className={styles.profileImg}
             onClick={() => document.getElementById('profileImageInput').click()}
           >
-            {profileImage !== null ? (
-              <img
-                src={profileImage}
-                alt='프로필'
-                className={styles.profilePreview}
-              />
-            ) : (
-              <Icon id='profile-basic-camera' />
-            )}
+            <img
+              src={profileImage ?? defaultProfile}
+              alt='프로필'
+              className={styles.profilePreview}
+            />
+            <Icon
+              className={styles.blueCamera}
+              id='blue-camera'
+              width='24'
+              height='24'
+            />
           </div>
           <input
             type='file'
@@ -270,7 +274,7 @@ export default function EditInfoPage() {
               maxLength={12}
               value={birthDate.replaceAll('-', '')}
               pattern='\d{4}\.\d{2}\.\d{2}'
-              title='형식: YYYYMMDD (예: 20020101)'
+              title='형식: YYYYMMDD (예: 19060522)'
               disabled={disabledPrivateUserInfoInput}
               onChange={handleBirthDateChange}
             />
