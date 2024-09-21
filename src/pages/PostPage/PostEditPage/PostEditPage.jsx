@@ -5,22 +5,20 @@ import TextareaAutosize from 'react-textarea-autosize';
 
 import { getPostContent, patchPost } from '@/apis/post';
 
-import { useToast } from '@/hooks';
+import { useToast, useAuth } from '@/hooks';
 
-import { CloseAppBar } from '@/components/AppBar';
-import { Icon } from '@/components/Icon';
+import { FetchLoading, BackAppBar, CloseAppBar, Icon } from '@/components';
 
 import { formattedNowTime } from '@/utils';
 
-import { BOARD_MENUS, TOAST } from '@/constants';
+import { BOARD_MENUS, TOAST, ROLE } from '@/constants';
 
 import styles from './PostEditPage.module.css';
-
-const roleId = 4; // 더미 역할 ID
 
 export default function PostEditPage() {
   const { postId } = useParams();
   const { pathname } = useLocation();
+  const { userInfo, status } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -98,12 +96,22 @@ export default function PostEditPage() {
     });
   };
 
-  if (isLoading) {
-    return <div>로딩 중...</div>;
+  if (status === 'loading' || isLoading) {
+    return (
+      <>
+        <BackAppBar />
+        <FetchLoading>로딩 중...</FetchLoading>
+      </>
+    );
   }
 
   if (error) {
-    return <div>Error loading post content</div>;
+    return (
+      <>
+        <BackAppBar animation={false} />
+        <FetchLoading>게시글 정보를 불러오지 못했습니다</FetchLoading>
+      </>
+    );
   }
 
   return (
@@ -128,7 +136,7 @@ export default function PostEditPage() {
           {textId !== 'notice' && (
             <div
               className={
-                roleId === 4
+                userInfo.userRoleId === ROLE.admin
                   ? styles.profileBoxRight
                   : styles.profileBoxRightInvisible
               }

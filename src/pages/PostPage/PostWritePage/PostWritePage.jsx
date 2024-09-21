@@ -106,7 +106,11 @@ export default function PostWritePage() {
   };
 
   if (status === 'loading') {
-    return <FetchLoading>로딩 중...</FetchLoading>;
+    return (
+      <>
+        <FetchLoading>로딩 중...</FetchLoading>
+      </>
+    );
   }
 
   return (
