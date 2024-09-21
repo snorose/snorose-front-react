@@ -19,10 +19,12 @@ export function CommentContextProvider({ children }) {
     inputRef.current?.focus();
   };
 
-  const resetCommentState = () => {
-    setCommentId(undefined);
-    setIsEdit(false);
-    setContent('');
+  const resetCommentState = (event) => {
+    if (event && inputRef.current && !inputRef.current.contains(event.target)) {
+      setCommentId(undefined);
+      setIsEdit(false);
+      // setContent('');
+    }
   };
 
   const value = useMemo(
@@ -43,7 +45,7 @@ export function CommentContextProvider({ children }) {
   useEffect(() => {
     window.addEventListener('click', resetCommentState);
     return () => window.removeEventListener('click', resetCommentState);
-  }, [isEdit]);
+  }, []);
 
   return (
     <CommentContext.Provider value={value}>{children}</CommentContext.Provider>
