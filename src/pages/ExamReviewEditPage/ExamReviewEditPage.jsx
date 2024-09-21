@@ -106,12 +106,14 @@ export default function ExamReviewEditPage() {
       <InputList>
         <InputItem
           tag='강의명'
+          required
           value={lectureName}
           placeholder='강의명을 입력하세요'
           setFn={setLectureName}
         />
         <InputItem
           tag='교수명'
+          required
           value={professor}
           placeholder='교수명을 입력하세요'
           setFn={setProfessor}

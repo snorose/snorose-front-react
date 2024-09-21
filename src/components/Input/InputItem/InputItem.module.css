@@ -6,11 +6,24 @@
 }
 
 .tag {
+  align-self: flex-start;
+  position: relative;
   font-weight: 400;
   font-size: 11px;
   line-height: 150%;
   letter-spacing: -0.5px;
   color: #898989;
+}
+
+.required {
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  position: absolute;
+  top: 0.125rem;
+  right: -0.625rem;
+  border-radius: 10px;
+  background-color: #ff4b6c;
 }
 
 .input {
