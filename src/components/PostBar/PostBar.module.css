@@ -4,6 +4,7 @@
   background-color: #f8f8f8;
   border-radius: 5px;
   cursor: pointer;
+  user-select: none;
 }
 
 .post_top {

@@ -23,6 +23,7 @@ export default function PTR({ children, onRefresh }) {
       const ptrTouchZone = containerRef.current?.querySelector(
         `.${styles.ptrTouchZone}`
       );
+
       if (ptrTouchZone) {
         const touchZoneRect = ptrTouchZone.getBoundingClientRect();
 
@@ -32,15 +33,15 @@ export default function PTR({ children, onRefresh }) {
           touchZoneRect.top <= clientY &&
           clientY <= touchZoneRect.bottom
         ) {
-          ptrTouchZone.style.pointerEvents = 'none'; // 클릭 이벤트 차단
+          ptrTouchZone.style.pointerEvents = 'auto'; // 클릭 이벤트 허용
           if (pullDistance > 80) {
+            ptrTouchZone.style.pointerEvents = 'none'; // 클릭 이벤트 차단
             event.preventDefault(); // 스크롤을 막습니다.
             containerRef.current.style.transform = 'translate(0, 30px)';
             containerRef.current.style.transition = '0.3s';
             setRefreshing(true);
           }
         } else {
-          ptrTouchZone.style.pointerEvents = 'auto'; // 클릭 이벤트 허용
         }
       }
     }
