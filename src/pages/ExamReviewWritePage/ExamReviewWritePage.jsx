@@ -226,14 +226,12 @@ export default function ExamReviewWritePage() {
       </CategoryFieldset>
       <CategoryFieldset
         title='P/F 수업입니다'
-        required
         hasCheckbox
         value={isPF}
         setFn={setIsPF}
       />
       <CategoryFieldset
         title='온라인 수업입니다'
-        required
         hasCheckbox
         value={isOnline}
         setFn={setIsOnline}
