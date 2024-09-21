@@ -1,6 +1,6 @@
 .notification {
   width: 100%;
-  padding: 10px var(--default-margin);
+  padding: 0.625rem var(--default-margin);
 }
 
 .notification_bar {
@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   gap: 0.861rem;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   background-color: #fee9eb;
   font-size: 0.688rem;
   color: #ff4b6c;
@@ -29,18 +29,18 @@
 }
 
 .filters {
-  margin: 0 var(--default-margin) 14px var(--default-margin);
+  margin: 0 var(--default-margin) 0.875rem var(--default-margin);
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 0.3125rem;
 }
 
 .list {
-  padding: 4px 17px 0 17px;
+  padding: 0.25rem 1rem 0 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   overflow: hidden;
 }
 

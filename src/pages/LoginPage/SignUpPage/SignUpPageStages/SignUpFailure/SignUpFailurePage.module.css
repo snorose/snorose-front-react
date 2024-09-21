@@ -7,34 +7,38 @@
   justify-content: space-between;
   margin: 0 auto;
 }
+
 .navFrame {
   height: 2.75rem;
   display: flex;
   align-items: center;
 }
+
 .pageTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  line-height: 1.625rem;
   margin-top: 0.875rem;
 }
+
 .pageExplanation {
   font-size: 0.875rem;
   font-weight: 500;
-  line-height: 1.313rem;
   color: #484848;
   margin-top: 0.875rem;
 }
+
 .pageBottomFrame {
   display: flex;
   flex-direction: column;
 }
+
 .img {
   width: 13.25rem;
   height: 14.5rem;
   margin-bottom: 1.875rem;
   margin-left: auto;
 }
+
 .loginButton {
   margin-bottom: 2.063rem;
 }

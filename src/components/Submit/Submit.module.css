@@ -3,15 +3,16 @@
   height: 2.938rem;
   font-weight: 500;
   font-size: 0.875rem;
-  line-height: 1.313rem;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
 }
+
 .ready,
 .wrong {
   background-color: #ddebf6;
   color: #5f86bf;
   pointer-events: none;
 }
+
 .right {
   background-color: #00368e;
   color: #ffffff;

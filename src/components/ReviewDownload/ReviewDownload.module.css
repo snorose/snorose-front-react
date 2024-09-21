@@ -1,11 +1,10 @@
 .layout {
-  padding: 5px 12px;
+  padding: 0.3125rem 0.75rem;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   background: #bfd7ec;
-  border-radius: 5px;
-  font-weight: 400;
-  font-size: 12px;
+  border-radius: 0.3125rem;
+  font-size: 0.75rem;
   color: #00368e;
 }

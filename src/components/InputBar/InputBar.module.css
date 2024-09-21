@@ -1,39 +1,38 @@
 .container {
   max-width: var(--default-width);
   width: 100%;
-  min-height: 83px;
-  padding: 15px 15px 30px 15px;
+  min-height: 5.25rem;
+  padding: 0.9375rem 0.9375rem 1.875rem 0.9375rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   background: #fff;
-  border-radius: 10px 10px 0px 0px;
-  box-shadow: 0px -4px 7px #ddebf6;
+  border-radius: 0.625rem 0.625rem 0 0;
+  box-shadow: 0 -0.25rem 0.4375rem #ddebf6;
   position: fixed;
   bottom: 0;
-  z-index: 999;
+  z-index: 1;
 }
 
 .input_bar {
   background-color: #f4f4f4;
   width: 100%;
-  min-height: 40px;
+  min-height: 2.5rem;
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 9px 12px;
-  border-radius: 5px;
+  gap: 0.4375rem;
+  padding: 0.5625rem 0.75rem;
+  border-radius: 0.3125rem;
 }
 
 .input_zone {
   width: 100%;
-  min-height: 20px;
+  min-height: 1.25rem;
   outline: none;
   border: none;
   background-color: transparent;
-  font-weight: 400;
-  font-size: 12px;
+  font-size: 0.75rem;
   resize: none;
 }
 
@@ -43,8 +42,8 @@
 
 .profile_icon {
   display: flex;
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .enter {
