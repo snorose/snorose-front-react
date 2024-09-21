@@ -11,7 +11,7 @@ export default function Navbar() {
 
   const isActive = ({ id, to }) =>
     pathname === to ||
-    (id === 'home' && pathname === '') ||
+    (id === 'home' && pathname === '/') ||
     (id === 'test' && pathname.startsWith('/board/exam-review/search'));
 
   return (
