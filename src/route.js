@@ -420,7 +420,10 @@ export const routeList = [
       {
         path: '/verify',
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute
+            roles={[ROLE.preUser, ROLE.admin]}
+            message='이미 인증을 완료했거나 인증 대상이 아닙니다'
+          >
             <SnoroseVerifyPage />
           </ProtectedRoute>
         ),
