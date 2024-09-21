@@ -87,9 +87,10 @@ export default function PostWritePage() {
       .then((response) => {
         if (response.status === 201) {
           toast(TOAST.POST.create);
+          const newPostId = response.data.result.postId;
           currentBoard.id === 12 || isNotice
             ? navigate(`/board/${currentBoard.textId}/notice`)
-            : navigate(-1);
+            : navigate(`/board/${currentBoard.textId}/post/${newPostId}`);
         }
       })
       .catch(({ response }) => {
