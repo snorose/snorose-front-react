@@ -8,6 +8,7 @@ export default function CloseAppBar({
   alignRight,
   children,
   stroke = 'black',
+  xClick,
   onClick,
 }) {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function CloseAppBar({
         id='x'
         width='22'
         height='22'
-        onClick={() => navigate(-1)}
+        onClick={xClick ? xClick : () => navigate(-1)}
         stroke={stroke}
       />
       <div className={styles.actions} onClick={onClick}>
