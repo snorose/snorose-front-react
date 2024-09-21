@@ -16,7 +16,6 @@
 .ptrTouchZone {
   width: 100%;
   height: 300px;
-  border: 1px solid red;
   position: absolute;
   z-index: 1;
   user-select: none;
