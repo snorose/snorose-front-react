@@ -18,7 +18,6 @@ import {
   ScrapPage,
   ScrapExamReviewPage,
 } from '@/pages/MyPage';
-import { ErrorPage } from '@/pages/ErrorPage';
 import { ExamReviewDetailPage, ExamReviewPage } from '@/pages/ExamReviewPage';
 import { ExamReviewEditPage } from '@/pages/ExamReviewEditPage';
 import { ExamReviewWritePage } from '@/pages/ExamReviewWritePage';
@@ -202,7 +201,6 @@ export const routeList = [
   {
     path: '/',
     element: <App />,
-    errorElement: <ErrorPage />,
     children: [
       {
         index: true,

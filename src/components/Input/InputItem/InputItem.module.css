@@ -8,21 +8,18 @@
 .tag {
   align-self: flex-start;
   position: relative;
-  font-weight: 400;
-  font-size: 11px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.6875rem;
   color: #898989;
 }
 
 .required {
-  width: 5px;
-  height: 5px;
+  width: 0.3125rem;
+  height: 0.3125rem;
   display: inline-block;
   position: absolute;
   top: 0.125rem;
   right: -0.625rem;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   background-color: #ff4b6c;
 }
 
@@ -31,9 +28,7 @@
   border: none;
   outline: none;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.875rem;
   color: #484848;
 }
 

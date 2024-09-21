@@ -7,104 +7,92 @@
 .contentWrapper {
   display: flex;
   flex-direction: column;
-  padding: 0 1.25rem 54px 1.25rem;
+  padding: 0 1.25rem 3.375rem 1.25rem;
   width: 100%;
 }
 
 .topContainer {
   display: flex;
   justify-content: space-between;
-  padding: 14px 0;
+  padding: 0.875rem 0;
 }
 
 .title {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
-  line-height: 130%;
-  letter-spacing: -0.5px;
 }
 
 .totalPointWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 0.25rem;
 
   svg {
-    width: 17px;
-    height: 17px;
+    width: 1rem;
+    height: 1rem;
   }
 }
 
 .totalPoint {
   color: var(--Blue-4, #00368e);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.5px;
 }
 
 /* 포인트 내역 */
 .pointListContainer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 .pointBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   background: var(--Grey-1-1, #f4f4f4);
-  padding: 15px;
+  padding: 0.9375rem;
 }
 
 .pointIconContentWrapper {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 0.9375rem;
 
   svg {
-    width: 26px;
-    height: 23px;
+    width: 1.625rem;
+    height: 1.4375rem;
   }
 }
 
 .pointContent {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 0.1875rem;
 }
 
 .pointTitle {
   color: var(--Blue-4, #00368e);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.5px;
 }
 
 .pointDesc {
   color: var(--grey-3, #484848);
-  font-size: 9px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.5625rem;
 }
 
 .pointDate {
   color: var(--Grey-3-1, #898989);
-  font-size: 9px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.5625rem;
 }
 
 .chargePoint {
   color: var(--Blue-4, #00368e);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.5px;
 }
 
 .negative {

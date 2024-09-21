@@ -5,14 +5,14 @@
 
 .menu {
   display: flex;
-  padding: 14px 20px;
+  padding: 0.875rem 1.25rem;
   justify-content: flex-end;
 }
 
 .contentWrapper {
   display: flex;
   flex-direction: column;
-  padding: 0 1.25rem 100px 1.25rem;
+  padding: 0 1.25rem 6.25rem 1.25rem;
   width: 100%;
 }
 
@@ -20,43 +20,39 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 0;
+  padding: 0.875rem 0;
 }
 
 .title {
   font-size: 20px;
   font-weight: 700;
-  line-height: 130%;
-  letter-spacing: -0.5px;
 }
 
 .readAllButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 52px;
-  height: 18px;
-  border-radius: 3px;
+  width: 3.25rem;
+  height: 1.125rem;
+  border-radius: 0.1875rem;
   background: var(--blue-0, #eaf5fd);
-  line-height: 150%;
-  letter-spacing: -0.5px;
   color: var(--Blue-3, #5f86bf);
-  font-size: 9px;
+  font-size: 0.5625rem;
 }
 
 .alertListContainer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 .alertBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   background: var(--Grey-1-1, #f4f4f4);
-  padding: 15px;
+  padding: 0.9375rem;
 }
 
 .alertBox.unread {
@@ -70,26 +66,24 @@
 .alertIconContentWrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 .alertIconContentWrapper svg {
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
 }
 
 .alertContent {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 0.1875rem;
 }
 
 .alertTitle {
   color: var(--Grey-4, var(--grey-3, #484848));
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.5px;
 }
 .alertTitle.unreadTitle {
   color: var(--Blue-4, #00368e);
@@ -100,9 +94,7 @@
 
 .alertDesc {
   color: var(--grey-3, #484848);
-  font-size: 11px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.6875rem;
   white-space: pre-line;
 }
 .alertDesc.unreadDesc {

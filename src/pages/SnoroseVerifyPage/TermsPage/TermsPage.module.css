@@ -8,22 +8,19 @@
 
 .terms {
   flex: 1;
-  margin-bottom: 14px;
-  padding: 14px;
+  margin-bottom: 0.875rem;
+  padding: 0.875rem;
   background: #f5f5f5;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
 }
 
 .text {
   word-break: keep-all;
   text-wrap: wrap;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.875rem;
   color: #484848;
 }
 
 .item {
-  margin-left: 10px;
+  margin-left: 0.625rem;
 }

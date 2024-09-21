@@ -11,12 +11,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 8px;
+  font-size: 0.5rem;
 }
 
 .top {
   width: 100%;
-  padding: 10px var(--default-margin);
+  padding: 0.625rem var(--default-margin);
 }
 
 .notification_bar {
@@ -25,7 +25,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.861rem;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   background-color: #fee9eb;
   font-size: 0.688rem;
   color: #ff4b6c;
@@ -34,8 +34,8 @@ body {
 }
 
 .side_menu_btn {
-  width: 20px;
-  height: 15px;
+  width: 1.25rem;
+  height: 0.9375rem;
   display: flex;
 }
 
@@ -47,10 +47,10 @@ body {
 
 .postListContainer {
   width: 100%;
-  padding: 0 20px;
+  padding: 0 1.25rem;
   display: flex;
   flex-direction: column;
-  row-gap: 8px;
+  row-gap: 0.5rem;
 }
 
 .to {
@@ -67,17 +67,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 3px 14px;
-  border-radius: 20px;
+  padding: 0.1875rem 0.875rem;
+  border-radius: 1.25rem;
   background: #eaf5fd;
-  margin-right: 5px;
+  margin-right: 0.3125rem;
   color: #5f86bf;
 
   p {
-    font-size: 11px;
-    line-height: 150%;
-    letter-spacing: -0.5px;
-    font-weight: 400;
+    font-size: 0.6875rem;
   }
 }
 
@@ -86,22 +83,22 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 8px;
+  font-size: 0.5rem;
   /* 양옆 여백 */
-  padding: 4px 17px 193px 17px;
-  row-gap: 8px;
+  padding: 0.25rem 1rem 12rem 1rem;
+  row-gap: 0.5rem;
 }
 
 .sponsor {
   width: 100%;
-  padding-bottom: 20px;
+  padding-bottom: 1.25rem;
   display: flex;
   justify-content: center;
   background-size: cover;
   position: fixed;
-  bottom: 6px;
+  bottom: 0.375rem;
 }
 
 .writeButton {
-  bottom: 19px;
+  bottom: 1.1875rem;
 }
