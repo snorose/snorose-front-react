@@ -111,6 +111,7 @@ export default function ExamReviewDetailPage() {
     isConfirmed,
     isDownloaded,
     isEdited,
+    isOnline,
     isPF,
     isScrapped,
     isWriter,
@@ -171,6 +172,10 @@ export default function ExamReviewDetailPage() {
           />
           <ReviewContentItem tag='시험 종류' value={EXAM_TYPE[examType]} />
           <ReviewContentItem tag='P/F 여부' value={isPF ? 'O' : 'X'} />
+          <ReviewContentItem
+            tag='온라인 수업 여부'
+            value={isOnline ? 'O' : 'X'}
+          />
           <ReviewContentItem
             tag='시험 유형 및 문항수'
             value={questionDetail}
