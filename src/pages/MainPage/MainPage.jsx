@@ -48,8 +48,11 @@ export default function MainPage() {
             to='/board/notice'
             title={data.title}
             tag='공지'
-            imgPath='megaphone.svg'
-            icon={{ id: 'megaphone', width: 128, height: 131 }}
+            icon={{
+              id: isLogin ? 'blueMegaphone' : 'megaphone',
+              mixBlendMode: isLogin ? 'color-burn' : 'luminosity',
+              rotate: isLogin ? -34.271 : 34.27,
+            }}
             isDark={isLogin ? false : true}
           />
 
@@ -57,10 +60,9 @@ export default function MainPage() {
             <Card
               className={styles.mark}
               to='/attendance'
-              title='오늘의 출석체크'
+              title={`오늘의\n출석체크`}
               tag='출석체크'
-              imgPath='flag.svg'
-              icon={{ id: 'flag', width: 85, height: 101 }}
+              icon={{ id: 'flag', mixBlendMode: 'luminosity' }}
               isDark
             />
           )}
