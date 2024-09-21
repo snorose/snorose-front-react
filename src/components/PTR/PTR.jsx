@@ -11,7 +11,6 @@ export default function PTR({ children, onRefresh }) {
     const clientY =
       (event.touches && event.touches[0].clientY) || event.clientY;
     setStartY(clientY);
-    event.preventDefault();
   }
 
   function handleMove(event) {
@@ -20,17 +19,29 @@ export default function PTR({ children, onRefresh }) {
     if (startY !== undefined) {
       const pullDistance = clientY - startY;
 
-      // pullDistance가 특정 값보다 클 때만 preventDefault() 호출
-      if (pullDistance > 0) {
-        if (pullDistance > 80 && containerRef.current) {
-          event.preventDefault(); // 스크롤을 막습니다.
-          containerRef.current.style.transform = 'translate(0, 30px)';
-          containerRef.current.style.transition = '0.3s';
-          setRefreshing(true);
+      // ptrTouchZone 요소가 존재하는지 확인
+      const ptrTouchZone = containerRef.current?.querySelector(
+        `.${styles.ptrTouchZone}`
+      );
+      if (ptrTouchZone) {
+        const touchZoneRect = ptrTouchZone.getBoundingClientRect();
+
+        // ptrTouchZone 안에서 위로 땡긴 경우
+        if (
+          pullDistance > 0 &&
+          touchZoneRect.top <= clientY &&
+          clientY <= touchZoneRect.bottom
+        ) {
+          ptrTouchZone.style.pointerEvents = 'none'; // 클릭 이벤트 차단
+          if (pullDistance > 80) {
+            event.preventDefault(); // 스크롤을 막습니다.
+            containerRef.current.style.transform = 'translate(0, 30px)';
+            containerRef.current.style.transition = '0.3s';
+            setRefreshing(true);
+          }
+        } else {
+          ptrTouchZone.style.pointerEvents = 'auto'; // 클릭 이벤트 허용
         }
-      } else {
-        // 위로 스크롤할 때는 preventDefault를 호출하지 않음
-        return;
       }
     }
   }
@@ -63,7 +74,7 @@ export default function PTR({ children, onRefresh }) {
     document.addEventListener('touchmove', handleMove, options);
     document.addEventListener('touchend', handleEnd, options);
     document.addEventListener('mousedown', handleStart);
-    document.addEventListener('mousemove', handleMove);
+    document.addEventListener('mousemove', handleMove, options);
     document.addEventListener('mouseup', handleEnd);
 
     return () => {
@@ -84,8 +95,10 @@ export default function PTR({ children, onRefresh }) {
             <Icon id='cloud' width='34' height='21' />
           </div>
         </div>
-      ) : null}
-      {children}
+      ) : (
+        <div className={styles.ptrTouchZone} />
+      )}
+      <div className={styles.content}>{children}</div>
     </div>
   );
 }
