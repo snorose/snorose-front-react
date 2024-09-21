@@ -79,6 +79,19 @@ export const MODAL_OPTIONS = [
     },
   },
   {
+    id: 'post-write-exit-check',
+    title: '작성 중인 글이 있습니다.',
+    titleColor: '#000',
+    children: {
+      text: '게시글 작성을 취소하시겠습니까?',
+    },
+    bottom: {
+      redBtn: '삭제',
+      greyBtn: '취소',
+    },
+  },
+
+  {
     id: 'comment-more-options',
     title: '내 댓글',
     titleColor: '#000',
