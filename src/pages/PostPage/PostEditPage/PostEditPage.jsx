@@ -7,7 +7,13 @@ import { getPostContent, patchPost } from '@/apis/post';
 
 import { useToast, useAuth } from '@/hooks';
 
-import { FetchLoading, BackAppBar, CloseAppBar, Icon } from '@/components';
+import {
+  FetchLoading,
+  BackAppBar,
+  CloseAppBar,
+  Icon,
+  DeleteModal,
+} from '@/components';
 
 import { formattedNowTime } from '@/utils';
 
@@ -31,6 +37,7 @@ export default function PostEditPage() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [userDisplay, setUserDisplay] = useState('');
+  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
@@ -42,7 +49,7 @@ export default function PostEditPage() {
   // 데이터 화면 표시
   useEffect(() => {
     if (data) {
-      console.log('Data updated:', data);
+      // console.log('Data updated:', data);
       setTitle(data.title);
       setText(data.content);
       setIsNotice(data.isNotice);
@@ -115,57 +122,76 @@ export default function PostEditPage() {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.top}>
-        <CloseAppBar children='수정' stroke='#000' onClick={handleSubmit} />
-      </div>
-      <div className={styles.center}>
-        <div className={styles.categorySelect}>
-          <div>
-            <Icon id='clip-board-list' width='18' height='19' />
-            <p className={styles.categorySelectText}>{boardTitle}</p>
-          </div>
+    <>
+      <div className={styles.container}>
+        <div className={styles.top}>
+          <CloseAppBar
+            children='수정'
+            stroke='#000'
+            onClick={handleSubmit}
+            xClick={() => {
+              data.title !== title ||
+              data.content !== text ||
+              data.isNotice !== isNotice
+                ? setIsCheckModalOpen(true)
+                : navigate(-1);
+            }}
+          />
         </div>
-        <div className={styles.profileBox}>
-          <div className={styles.profileBoxLeft}>
-            <Icon id='cloud' width='25' height='16' />
-            <p>{userDisplay}</p>
-            <p className={styles.dot}></p>
-            <p>{formattedNowTime()}</p>
-          </div>
-          {textId !== 'notice' && (
-            <div
-              className={
-                userInfo.userRoleId === ROLE.admin
-                  ? styles.profileBoxRight
-                  : styles.profileBoxRightInvisible
-              }
-              onClick={handleIsNotice}
-            >
-              <p>공지글</p>
-              <Icon
-                id={isNotice ? 'toggle-on' : 'toggle-off'}
-                width='25'
-                height='16'
-              />
+        <div className={styles.center}>
+          <div className={styles.categorySelect}>
+            <div>
+              <Icon id='clip-board-list' width='18' height='19' />
+              <p className={styles.categorySelectText}>{boardTitle}</p>
             </div>
-          )}
-        </div>
-        <div className={styles.content}>
-          <TextareaAutosize
-            className={styles.title}
-            placeholder='제목'
-            value={title}
-            onChange={handleTitleChange}
-          />
-          <TextareaAutosize
-            className={styles.text}
-            placeholder='내용'
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
+          </div>
+          <div className={styles.profileBox}>
+            <div className={styles.profileBoxLeft}>
+              <Icon id='cloud' width='25' height='16' />
+              <p>{userDisplay}</p>
+              <p className={styles.dot}></p>
+              <p>{formattedNowTime()}</p>
+            </div>
+            {textId !== 'notice' && (
+              <div
+                className={
+                  userInfo.userRoleId === ROLE.admin
+                    ? styles.profileBoxRight
+                    : styles.profileBoxRightInvisible
+                }
+                onClick={handleIsNotice}
+              >
+                <p>공지글</p>
+                <Icon
+                  id={isNotice ? 'toggle-on' : 'toggle-off'}
+                  width='25'
+                  height='16'
+                />
+              </div>
+            )}
+          </div>
+          <div className={styles.content}>
+            <TextareaAutosize
+              className={styles.title}
+              placeholder='제목'
+              value={title}
+              onChange={handleTitleChange}
+            />
+            <TextareaAutosize
+              className={styles.text}
+              placeholder='내용'
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+          </div>
         </div>
       </div>
-    </div>
+      <DeleteModal
+        id='post-edit-exit-check'
+        isOpen={isCheckModalOpen}
+        closeFunction={() => setIsCheckModalOpen(false)}
+        redBtnFunction={() => navigate(-1)}
+      />
+    </>
   );
 }

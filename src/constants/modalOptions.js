@@ -90,6 +90,18 @@ export const MODAL_OPTIONS = [
       greyBtn: '취소',
     },
   },
+  {
+    id: 'post-edit-exit-check',
+    title: '수정 중인 글이 있습니다.',
+    titleColor: '#000',
+    children: {
+      text: '게시글 수정을 취소하시겠습니까?',
+    },
+    bottom: {
+      redBtn: '수정 취소',
+      greyBtn: '계속 수정',
+    },
+  },
 
   {
     id: 'comment-more-options',
