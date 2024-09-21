@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Card.module.css';
 
 export default function Card({ className, to, title, tag, icon, isDark }) {
+  const { mixBlendMode, rotate } = icon;
   const imgSrc = icon?.id ? require(`../../assets/images/${icon.id}.svg`) : '';
 
   return (
@@ -12,7 +13,11 @@ export default function Card({ className, to, title, tag, icon, isDark }) {
           <span className={styles.title}>{title}</span>
           <span className={styles.tag}>[{tag}]</span>
         </div>
-        <img className={styles.image} src={imgSrc} alt='aa' />
+        <img
+          style={{ mixBlendMode, transform: `rotateZ(${rotate ?? 0}deg)` }}
+          src={imgSrc}
+          alt={icon.id}
+        />
       </div>
     </Link>
   );
