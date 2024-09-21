@@ -168,7 +168,7 @@ export default function ExamReviewDetailPage() {
           <ReviewContentItem tag='강의 종류' value={COURSE_TYPE[lectureType]} />
           <ReviewContentItem
             tag='수강 학기'
-            value={`${lectureYear % 100}-${SEMESTER[semester]}`}
+            value={`${String(lectureYear % 100).padStart(2, '0')}-${SEMESTER[semester]}`}
           />
           <ReviewContentItem tag='시험 종류' value={EXAM_TYPE[examType]} />
           <ReviewContentItem tag='P/F 여부' value={isPF ? 'O' : 'X'} />
