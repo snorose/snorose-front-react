@@ -52,6 +52,7 @@
   line-height: 150%;
   letter-spacing: -0.5px;
   padding: 0 14px;
+  white-space: pre-wrap;
 }
 
 .commentCenter.hide {

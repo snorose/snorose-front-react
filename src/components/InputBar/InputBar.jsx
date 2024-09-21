@@ -46,9 +46,13 @@ const InputBar = () => {
     setContent('');
   };
 
-  // Enter 키 입력 시 댓글 등록
+  // command + enter 또는 ctrl + enter 입력 시 댓글 등록
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    if (
+      (isMac && e.key === 'Enter' && e.metaKey) ||
+      (!isMac && e.key === 'Enter' && e.ctrlKey)
+    ) {
       e.preventDefault();
       submitComment();
     }
@@ -63,8 +67,8 @@ const InputBar = () => {
           className={styles.input_zone}
           placeholder='댓글을 입력하세요'
           value={content}
+          onKeyDown={handleKeyPress}
           onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
           maxRows={5}
         />
       </div>
