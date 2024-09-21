@@ -31,6 +31,11 @@ const InputBar = () => {
       return;
     }
 
+    if (content.length > 1000) {
+      toast('댓글은 1000자 이내로 작성해주세요.');
+      return;
+    }
+
     if (isEdit) {
       editComment.mutate({
         commentId,
