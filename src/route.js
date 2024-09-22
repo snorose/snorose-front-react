@@ -59,7 +59,13 @@ const getRolesForReadBoard = (boardPath) => {
     case 'all':
       return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
     case 'notice':
-      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
+      return [
+        ROLE.preUser,
+        ROLE.user,
+        ROLE.admin,
+        ROLE.official,
+        ROLE.blacklist,
+      ];
     default:
       return [];
   }
@@ -95,7 +101,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        to={`/board`}
         message={'게시판 접근 권한이 없습니다.'}
       >
         {boardPath === 'notice' ? <NoticeListPage /> : <BoardListPage />}
@@ -110,7 +115,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        to={`/board`}
         message={'게시판 접근 권한이 없습니다.'}
       >
         <NoticeListPage />
@@ -125,7 +129,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        to={`/board/${boardPath}`}
         message={'게시글 접근 권한이 없습니다.'}
       >
         <PostPage />
@@ -140,7 +143,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForWriteBoard(boardPath)}
-        to={`/board/${boardPath}`}
         message={'게시글 작성 권한이 없습니다.'}
       >
         <PostWritePage />
@@ -155,7 +157,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForWriteBoard(boardPath)}
-        to={`/board/${boardPath}/post/:postId`}
         message={'게시글 편집 권한이 없습니다.'}
       >
         <PostEditPage />
@@ -170,7 +171,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        to={`/board`}
         message={'게시판 접근 권한이 없습니다.'}
       >
         <PostSearchPage />
@@ -185,7 +185,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        to={`/board`}
         message={'게시판 접근 권한이 없습니다.'}
       >
         <PostSearchPage />
@@ -215,13 +214,6 @@ export const routeList = [
         element: <BoardPage />,
       },
       ...boardRoutes,
-      {
-        path: '/board/all/search',
-        element: <PostSearchPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
       {
         path: '/board/all/search/:keyword',
         element: <PostSearchPage />,
@@ -283,10 +275,12 @@ export const routeList = [
       {
         path: '/board/exam-review/:postId/edit',
         element: (
-          <ExamReviewEditPage
+          <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
             message={'시험후기 수정 권한이 없습니다.'}
-          />
+          >
+            <ExamReviewEditPage />
+          </ProtectedRoute>
         ),
         meta: {
           hideNav: true,
@@ -295,10 +289,12 @@ export const routeList = [
       {
         path: '/board/exam-review-write',
         element: (
-          <ExamReviewWritePage
+          <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
             message={'시험후기 작성 권한이 없습니다.'}
-          />
+          >
+            <ExamReviewWritePage />
+          </ProtectedRoute>
         ),
         meta: {
           hideNav: true,
@@ -328,14 +324,22 @@ export const routeList = [
       },
       {
         path: '/my-page/password',
-        element: <ChangePasswordPage />,
+        element: (
+          <ProtectedRoute>
+            <ChangePasswordPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },
       },
       {
         path: '/my-page/edit-info',
-        element: <EditInfoPage />,
+        element: (
+          <ProtectedRoute>
+            <EditInfoPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },
@@ -353,7 +357,11 @@ export const routeList = [
       },
       {
         path: '/my-page/delete-account',
-        element: <DeleteAccountPage />,
+        element: (
+          <ProtectedRoute>
+            <DeleteAccountPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },
@@ -374,35 +382,55 @@ export const routeList = [
       },
       {
         path: '/my-page/my-post',
-        element: <MyPostPage />,
+        element: (
+          <ProtectedRoute>
+            <MyPostPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },
       },
       {
         path: '/my-page/comment',
-        element: <CommentPage />,
+        element: (
+          <ProtectedRoute>
+            <CommentPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },
       },
       {
         path: '/my-page/download-exam-review',
-        element: <DownloadExamReviewPage />,
+        element: (
+          <ProtectedRoute>
+            <DownloadExamReviewPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },
       },
       {
         path: '/my-page/scrap',
-        element: <ScrapPage />,
+        element: (
+          <ProtectedRoute>
+            <ScrapPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },
       },
       {
         path: '/my-page/scrap-exam-review',
-        element: <ScrapExamReviewPage />,
+        element: (
+          <ProtectedRoute>
+            <ScrapExamReviewPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },

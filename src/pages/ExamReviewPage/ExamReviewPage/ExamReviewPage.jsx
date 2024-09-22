@@ -78,12 +78,13 @@ export default function ExamReviewPage() {
     );
 
     if (keyword === '') {
-      navigate(`/board/exam-review`);
+      navigate(`/board/exam-review`, { replace: true });
       return;
     }
 
     navigate(
-      `/board/exam-review/search/${encodeURIComponent(keyword)}?${param}`
+      `/board/exam-review/search/${encodeURIComponent(keyword)}?${param}`,
+      { replace: true }
     );
   }, [lectureYear, semester, examType]);
 
