@@ -62,7 +62,7 @@ export default function ExamReviewPage() {
   const { handleChange, handleOnKeyDown, keyword } = searchResult;
 
   const { data: noticeLineData } = useQuery({
-    queryKey: ['noticeLine', 32],
+    queryKey: [QUERY_KEY.noticeLine, 32],
     queryFn: () => getNoticeLine(32),
   });
 

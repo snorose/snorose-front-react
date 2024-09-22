@@ -9,7 +9,7 @@ import { NestedComment } from '@/components/Comment';
 
 import { timeAgo } from '@/utils';
 
-import { LIKE_TYPE } from '@/constants';
+import { LIKE_TYPE, MUTATION_KEY } from '@/constants';
 
 import styles from './Comment.module.css';
 import { useMutation } from '@tanstack/react-query';
@@ -39,7 +39,7 @@ const Comment = forwardRef((props, ref) => {
   const reportConfirmModal = useModal();
 
   const { mutate: reportCommentMutate } = useMutation({
-    mutationKey: 'reportComment',
+    mutationKey: [MUTATION_KEY.reportComment],
     mutationFn: (body) => reportComment(data.postId, data.id, body),
     onSuccess: ({ message }) => {
       setIsReportModalOpen(false);
