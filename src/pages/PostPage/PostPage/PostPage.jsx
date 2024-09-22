@@ -58,7 +58,7 @@ export default function PostPage() {
   });
 
   const { mutate: reportPostMutate } = useMutation({
-    mutationKey: MUTATION_KEY.reportPost,
+    mutationKey: [MUTATION_KEY.reportPost],
     mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
     onSuccess: ({ message }) => {
       toast(message);
@@ -69,7 +69,7 @@ export default function PostPage() {
   });
 
   const { mutate: reportUserMutate } = useMutation({
-    mutationKey: MUTATION_KEY.reportUser,
+    mutationKey: [MUTATION_KEY.reportUser],
     mutationFn: (body) => reportUser(body),
     onSuccess: ({ message }) => {
       toast(message);
@@ -130,7 +130,7 @@ export default function PostPage() {
   if (isLoading) {
     return (
       <>
-        <BackAppBar notFixed/>
+        <BackAppBar notFixed />
         <FetchLoading>게시글 불러오는 중...</FetchLoading>
       </>
     );
@@ -143,7 +143,7 @@ export default function PostPage() {
   if (isError) {
     return (
       <>
-        <BackAppBar notFixed/>
+        <BackAppBar notFixed />
         <FetchLoading animation={false}>
           게시글을 불러오지 못했습니다.
         </FetchLoading>
@@ -154,7 +154,7 @@ export default function PostPage() {
   if (!data) {
     return (
       <>
-        <BackAppBar notFixed/>
+        <BackAppBar notFixed />
         <FetchLoading animation={false}>
           게시글을 찾을 수 없습니다.
         </FetchLoading>
