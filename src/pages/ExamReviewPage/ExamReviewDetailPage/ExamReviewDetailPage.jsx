@@ -25,6 +25,8 @@ import {
   EXAM_TYPES,
   TOAST,
   FLEX_ALIGN,
+  QUERY_KEY,
+  MUTATION_KEY,
 } from '@/constants';
 
 import styles from './ExamReviewDetailPage.module.css';
@@ -39,17 +41,16 @@ export default function ExamReviewDetailPage() {
   const queryClient = useQueryClient();
 
   const { data, error, isError, isLoading } = useQuery({
-    queryKey: ['reviewDetail', postId],
+    queryKey: [QUERY_KEY.post, postId],
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
   });
 
   const deleteReview = useMutation({
+    mutationKey: [MUTATION_KEY.deleteExamReview],
     mutationFn: () => deleteExamReview(postId),
     onSuccess: () => {
-      queryClient.removeQueries(['reviewList']);
-      queryClient.removeQueries(['reviewDetail', postId]);
-      queryClient.removeQueries(['reviewFile', postId]);
+      queryClient.removeQueries([QUERY_KEY.post, postId]);
 
       toast(TOAST.EXAM_REVIEW.delete);
       navigate('/board/exam-review', { replace: true });
@@ -66,7 +67,7 @@ export default function ExamReviewDetailPage() {
     },
   });
 
-  const { scrap, deleteScrap } = useScrap();
+  const { scrap, unscrap } = useScrap();
   const { toast } = useToast();
 
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
@@ -201,7 +202,7 @@ export default function ExamReviewDetailPage() {
           </div>
           <div
             className={styles.action}
-            onClick={() => (isScrapped ? deleteScrap.mutate() : scrap.mutate())}
+            onClick={() => (isScrapped ? unscrap.mutate() : scrap.mutate())}
           >
             <Icon
               id='bookmark-fill'

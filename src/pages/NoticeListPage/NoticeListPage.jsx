@@ -6,7 +6,7 @@ import { getNoticeList } from '@/apis/notice';
 
 import { BackAppBar, NoticeBar, FetchLoading, WriteButton } from '@/components';
 
-import { BOARD_MENUS } from '@/constants';
+import { BOARD_MENUS, QUERY_KEY } from '@/constants';
 
 import { useAuth } from '@/hooks';
 
@@ -23,7 +23,7 @@ export default function NoticeListPage() {
 
   // 게시글 데이터 받아오기
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['noticeList', currentBoard?.id],
+    queryKey: [QUERY_KEY.notices, currentBoard?.id],
     queryFn: () => getNoticeList(currentBoard?.id),
     enabled: !!currentBoard?.id,
   });

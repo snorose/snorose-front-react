@@ -7,14 +7,15 @@ import { usePagination } from '@/hooks';
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
 import { getBoardTextId } from '@/utils';
+import { QUERY_KEY } from '@/constants';
 
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './ActivityPage.module.css';
 
 export default function CommentPage() {
-  const { data, error, ref, isLoading, isError } = usePagination({
-    queryKey: ['getMyCommentList'],
+  const { data, ref, isLoading, isError, error } = usePagination({
+    queryKey: [QUERY_KEY.myCommentedPosts],
     queryFn: ({ pageParam }) => getMyCommentList({ page: pageParam }),
   });
 
