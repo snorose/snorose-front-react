@@ -1,5 +1,6 @@
 .main {
-  margin-bottom: 50px;
+  margin-bottom: 3.125rem;
+  padding-top: 3.875rem;
 }
 
 .file {
@@ -18,9 +19,7 @@
 
 .tag {
   font-weight: 500;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.875rem;
   color: #484848;
 }
 
@@ -33,10 +32,7 @@ label[for='file'] {
   display: block;
   background: #f0f0f0;
   border-radius: 0.3125rem;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.8125rem;
   color: #898989;
 }
 

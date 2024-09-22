@@ -4,8 +4,6 @@
   border: none;
   border-bottom: 0.5px solid rgba(137, 137, 137, 0.7);
   font-weight: 500;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.875rem;
   color: #484848;
 }

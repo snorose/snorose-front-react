@@ -1,22 +1,22 @@
 .button {
-  width: 72px;
-  height: 72px;
+  width: 4.5rem;
+  height: 4.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  right: 15px;
-  bottom: 100px;
+  right: 0.9375rem;
+  bottom: 6.25rem;
   border-radius: 100%;
   background: rgba(255, 255, 255, 0.7);
-  box-shadow: 4px 4px 19.1px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(7.05px);
+  box-shadow: 0.25rem 0.25rem 1.1875rem rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(0.4375rem);
   z-index: 1;
 }
 
 @media only screen and (min-width: 600px) {
-  /* (100vw  - 600px) / 2 - 15px */
+  /* (100vw  - 600px) / 2 - 0.9375rem */
   .button {
-    right: calc(100vw / 2 - 600px / 2 + 15px);
+    right: calc(100vw / 2 - 600px / 2 + 0.9375rem);
   }
 }

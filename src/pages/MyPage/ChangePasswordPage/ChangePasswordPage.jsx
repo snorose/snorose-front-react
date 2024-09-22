@@ -8,7 +8,7 @@ import { useToast } from '@/hooks';
 
 import { BackAppBar, ActionButton, InputPassword } from '@/components';
 
-import { TOAST } from '@/constants';
+import { MUTATION_KEY, TOAST } from '@/constants';
 
 import styles from './ChangePasswordPage.module.css';
 
@@ -25,7 +25,7 @@ export default function ChangePasswordPage() {
 
   const { mutate: updatePasswordMutate, isPending: isUpdatePasswordPending } =
     useMutation({
-      mutationKey: ['updatePassword'],
+      mutationKey: [MUTATION_KEY.updatePassword],
       mutationFn: (body) => updatePassword(body),
       onSuccess: () => {
         toast(TOAST.USER.editPassword);
@@ -109,7 +109,7 @@ export default function ChangePasswordPage() {
     <main className={styles.changePasswordPage}>
       <header className={styles.topContainer}>
         <p>
-          <BackAppBar />
+          <BackAppBar notFixed />
         </p>
         <div className={styles.submitBtn}>
           <ActionButton

@@ -9,7 +9,7 @@ import { Icon } from '@/components/Icon';
 import styles from './InputBar.module.css';
 
 const InputBar = () => {
-  const { editComment, postComment } = useComment();
+  const { editComment, createComment } = useComment();
   const { toast } = useToast();
 
   const {
@@ -31,6 +31,11 @@ const InputBar = () => {
       return;
     }
 
+    if (content.length > 1000) {
+      toast('댓글은 1000자 이내로 작성해주세요.');
+      return;
+    }
+
     if (isEdit) {
       editComment.mutate({
         commentId,
@@ -39,16 +44,19 @@ const InputBar = () => {
       setIsEdit(false);
       setCommentId(undefined);
     } else {
-      postComment.mutate({ parentId: commentId, content });
-      setCommentId(undefined);
+      createComment.mutate({ parentId: commentId, content });
     }
 
     setContent('');
   };
 
-  // Enter 키 입력 시 댓글 등록
+  // command + enter 또는 ctrl + enter 입력 시 댓글 등록
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    if (
+      (isMac && e.key === 'Enter' && e.metaKey) ||
+      (!isMac && e.key === 'Enter' && e.ctrlKey)
+    ) {
       e.preventDefault();
       submitComment();
     }
@@ -63,8 +71,8 @@ const InputBar = () => {
           className={styles.input_zone}
           placeholder='댓글을 입력하세요'
           value={content}
+          onKeyDown={handleKeyPress}
           onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
           maxRows={5}
         />
       </div>

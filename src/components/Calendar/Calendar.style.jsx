@@ -24,8 +24,6 @@ export const StyledCalendar = styled(Calendar)`
   .react-calendar__navigation__label {
     font-weight: 700;
     font-size: 1.125rem;
-    line-height: 130%;
-    letter-spacing: -0.3125rem;
     color: #ffffff;
     cursor: auto;
   }
@@ -63,8 +61,6 @@ export const StyledCalendar = styled(Calendar)`
   // weekday
   .react-calendar__month-view__weekdays__weekday {
     font-size: 1rem;
-    line-height: 150%;
-    letter-spacing: -0.3125rem;
     color: #ffffff;
   }
 

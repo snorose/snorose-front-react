@@ -5,18 +5,18 @@
 }
 
 .indicator {
-  margin: 9px var(--default-margin) 28px var(--default-margin);
+  margin: 0.5625rem var(--default-margin) 28px var(--default-margin);
   display: flex;
-  gap: 11px;
+  gap: 0.6875rem;
 }
 
 .check {
-  margin: 13px var(--default-margin) 19px calc(var(--default-margin) - 3px);
+  margin: 0.8125rem var(--default-margin) 1.1875rem calc(var(--default-margin) - 0.1875rem);
 }
 
 .dot {
-  width: 9px;
-  height: 9px;
+  width: 0.5625rem;
+  height: 0.5625rem;
   border-radius: 100%;
   background-color: #f0f0f0;
 }
@@ -26,20 +26,16 @@
 }
 
 .title {
-  margin: 0 var(--default-margin) 16px var(--default-margin);
+  margin: 0 var(--default-margin) 1rem var(--default-margin);
   font-weight: 700;
-  font-size: 20px;
-  line-height: 130%;
-  letter-spacing: -0.5px;
+  font-size: 1.25rem;
   white-space: pre-line;
 }
 
 .description {
-  margin: 0 var(--default-margin) 27px var(--default-margin);
+  margin: 0 var(--default-margin) 1.6875rem var(--default-margin);
   font-weight: 500;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.875rem;
   color: #484848;
   white-space: pre-line;
   word-break: keep-all;

@@ -21,7 +21,7 @@ export default function usePagination({ queryKey, queryFn, enabled }) {
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam) => {
       if (!lastPage?.hasNext) {
-        return null;
+        return undefined;
       }
       return lastPageParam + 1;
     },
@@ -37,7 +37,9 @@ export default function usePagination({ queryKey, queryFn, enabled }) {
     await refetch();
   }, [queryClient, queryKey, refetch]);
 
-  const { ref, inView } = useInView();
+  const { ref, inView } = useInView({
+    threshold: 0.8,
+  });
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetching) {

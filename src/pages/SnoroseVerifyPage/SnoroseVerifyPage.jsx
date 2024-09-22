@@ -15,7 +15,7 @@ export default function SnoroseVerifyPage() {
 
   return (
     <main className={styles.main}>
-      <BackAppBar title='인증 신청' />
+      <BackAppBar title='인증 신청' notFixed />
       {step === 'complete' ? (
         <Icon
           className={styles.check}

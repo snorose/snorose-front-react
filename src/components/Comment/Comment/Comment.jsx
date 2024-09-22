@@ -9,6 +9,8 @@ import { NestedComment } from '@/components/Comment';
 
 import { timeAgo } from '@/utils';
 
+import { LIKE_TYPE, MUTATION_KEY } from '@/constants';
+
 import styles from './Comment.module.css';
 import { useMutation } from '@tanstack/react-query';
 import { reportComment } from '@/apis';
@@ -24,7 +26,10 @@ const Comment = forwardRef((props, ref) => {
     resetCommentState,
   } = useCommentContext();
   const { deleteComment } = useComment();
-  const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
+  const { like, unlike } = useLike({
+    type: LIKE_TYPE.comment,
+    sourceId: data.id,
+  });
   const { toast } = useToast();
 
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
@@ -34,7 +39,7 @@ const Comment = forwardRef((props, ref) => {
   const reportConfirmModal = useModal();
 
   const { mutate: reportCommentMutate } = useMutation({
-    mutationKey: 'reportComment',
+    mutationKey: [MUTATION_KEY.reportComment],
     mutationFn: (body) => reportComment(data.postId, data.id, body),
     onSuccess: ({ message }) => {
       setIsReportModalOpen(false);
@@ -140,7 +145,7 @@ const Comment = forwardRef((props, ref) => {
               <button
                 className={styles.likedCount}
                 type='button'
-                onClick={() => (isLiked ? deleteLike.mutate() : like.mutate())}
+                onClick={() => (isLiked ? unlike.mutate() : like.mutate())}
               >
                 <Icon
                   id='like'
@@ -186,6 +191,7 @@ const Comment = forwardRef((props, ref) => {
         isOpen={isDeleteModalOpen}
         closeFunction={() => {
           resetCommentState();
+          setContent('');
           setIsDeleteModalOpen(false);
         }}
         redBtnFunction={() => deleteComment.mutate({ commentId })}

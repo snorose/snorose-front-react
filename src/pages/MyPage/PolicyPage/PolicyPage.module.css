@@ -6,25 +6,22 @@
 .contentWrapper {
   display: flex;
   flex-direction: column;
-  padding: 0 1.25rem 54px 1.25rem;
+  padding: 0 1.25rem 3.375rem 1.25rem;
   width: 100%;
-  gap: 14px;
+  gap: 0.875rem;
+  padding-top: 3.125rem;
 }
 
 .title {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
-  line-height: 130%;
-  letter-spacing: -0.5px;
 }
 
 .content {
-  padding: 16px 13px;
-  border-radius: 5px;
+  padding: 1rem 0.8125rem;
+  border-radius: 0.3125rem;
   background: var(--Miscellaneous-_Kit-Section-Fill, #f5f5f5);
   color: var(--Grey-4, var(--grey-3, #484848));
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.875rem;
   white-space: pre-line;
 }

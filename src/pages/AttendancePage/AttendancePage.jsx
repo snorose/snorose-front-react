@@ -13,6 +13,7 @@ import {
   ATTENDANCE_MESSAGE,
   POINT_CATEGORY_ENUM,
   POINT_SOURCE_ENUM,
+  QUERY_KEY,
   TOAST,
 } from '@/constants';
 
@@ -32,7 +33,7 @@ export default function AttendancePage() {
   return (
     <main>
       <div className={styles.top}>
-        <BackAppBar isDark />
+        <BackAppBar isDark backgroundColor={'transparent'} notFixed />
         <h2 className={styles.title}>{`매일 출석체크하고 \n 포인트 모아요`}</h2>
         <div className={styles.calendar}>
           <Calendar callback={setAttendanceHistoryByMonth} />
@@ -51,7 +52,7 @@ export default function AttendancePage() {
                 if (status === 200) {
                   const today = new Date();
                   queryClient.invalidateQueries([
-                    'monthlyAttendanceHistory',
+                    QUERY_KEY.attendance,
                     today.getFullYear(),
                     today.getMonth() + 1,
                   ]);

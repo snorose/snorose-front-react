@@ -3,15 +3,19 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: transparent;
+  max-width: 600px;
+  position: fixed;
+  top: 0;
+  z-index: 10;
 }
 
 .hasGap {
   padding: 0.875rem 1.25rem;
   width: 100%;
+  max-width: 600px;
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 0.75rem;
 }
 
 .backDiv {
@@ -27,8 +31,6 @@
 .title {
   font-weight: 700;
   font-size: 1.25rem;
-  line-height: 130%;
-  letter-spacing: -0.5px;
 }
 
 .actions {

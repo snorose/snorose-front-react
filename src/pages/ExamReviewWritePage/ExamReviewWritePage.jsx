@@ -25,6 +25,7 @@ import {
   FILE_MAX_SIZE,
   LECTURE_TYPES,
   MODAL_CONFIRM,
+  MUTATION_KEY,
   SEMESTERS,
   TOAST,
   YEARS,
@@ -36,6 +37,7 @@ export default function ExamReviewWritePage() {
   const { toast } = useToast();
 
   const createExamReview = useMutation({
+    mutationKey: [MUTATION_KEY.createExamReview],
     mutationFn: ({ data, file }) =>
       postExamReview({
         data,

@@ -1,11 +1,9 @@
 .button {
   width: 100%;
-  padding: 13px 0;
+  padding: 0.8125rem 0;
   border-radius: 0.3125rem;
   background: var(--Blue-4, #00368e);
   color: #fff;
   font-size: 0.875rem;
   font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.03125rem;
 }

@@ -48,7 +48,6 @@ pre {
   box-sizing: border-box;
   font: inherit;
   vertical-align: baseline;
-  line-height: 150%;
   letter-spacing: -0.5px;
 }
 
@@ -107,6 +106,7 @@ body {
     'Helvetica Neue',
     sans-serif;
   font-optical-sizing: auto;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
