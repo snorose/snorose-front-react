@@ -55,8 +55,7 @@ export default function useComment() {
     mutationFn: async ({ content, parentId }) => {
       return await post({ postId, parentId, content });
     },
-    onSuccess: ({ data }) => {
-      const { result: newComment } = data;
+    onSuccess: (newComment) => {
       const { parentId } = newComment;
 
       queryClient.setQueryData([QUERY_KEY.comments, postId], (prev) => {
@@ -86,8 +85,7 @@ export default function useComment() {
     mutationFn: async ({ commentId }) => {
       return await remove({ postId, commentId });
     },
-    onSuccess: ({ data }) => {
-      const { result: deletedComment } = data;
+    onSuccess: (deletedComment) => {
       const { id } = deletedComment;
 
       updateCommentCache((comment) =>
@@ -108,8 +106,7 @@ export default function useComment() {
     mutationFn: async ({ commentId, content, parentId }) => {
       return await edit({ postId, commentId, content, parentId });
     },
-    onSuccess: ({ data }) => {
-      const { result: editedComment } = data;
+    onSuccess: (editedComment) => {
       const { id, content } = editedComment;
 
       updateCommentCache((comment) =>
