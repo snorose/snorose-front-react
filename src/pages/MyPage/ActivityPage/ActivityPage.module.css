@@ -8,7 +8,7 @@
 .contentWrapper {
   display: flex;
   flex-direction: column;
-  padding: 0 1.25rem 54px 1.25rem;
+  padding: 0 1.25rem 3.375rem 1.25rem;
   width: 100%;
   padding-top: 45px;
 }
@@ -16,33 +16,29 @@
 .topContainer {
   display: flex;
   justify-content: space-between;
-  padding: 14px 0;
+  padding: 0.875rem 0;
 }
 
 .title {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
-  line-height: 130%;
-  letter-spacing: -0.5px;
 }
 
 .contentListContainer {
   display: flex;
   height: 100%;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 100px;
+  gap: 0.5rem;
+  margin-bottom: 6.25rem;
 }
 
 .sponsor {
   display: flex;
   position: fixed;
   margin: 0 auto;
-  bottom: 54px;
-  padding: 0 20px;
+  bottom: 3.375rem;
+  padding: 0 1.25rem;
   width: 100%;
-  max-width: 600px;
-  background-size: cover;
 }
 
 .sponsorImage {
@@ -59,10 +55,8 @@
 
 .noContentMessage {
   color: #484848;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.5px;
 }
 
 .imageWrapper {
@@ -71,11 +65,11 @@
   position: relative;
   width: auto;
   height: auto;
-  min-height: 580px;
+  min-height: 36.25rem;
 }
 
 .image {
   position: absolute;
-  right: 0px;
-  bottom: 0px;
+  right: 0;
+  bottom: 0;
 }

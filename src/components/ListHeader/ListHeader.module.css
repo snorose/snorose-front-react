@@ -7,8 +7,6 @@
 .title {
   font-weight: 700;
   font-size: 1rem;
-  line-height: 130%;
-  letter-spacing: -0.5px;
 }
 
 .more {
@@ -17,7 +15,5 @@
   gap: 1px;
   font-weight: 500;
   font-size: 0.75rem;
-  line-height: 100%;
-  letter-spacing: -0.5px;
   color: #484848;
 }

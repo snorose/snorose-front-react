@@ -7,13 +7,13 @@
 }
 
 .error {
-  font-size: 80px;
+  font-size: 5rem;
   color: #00368e;
   font-weight: 700;
 }
 
 .text {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 .button {

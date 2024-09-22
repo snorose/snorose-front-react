@@ -13,35 +13,33 @@
 .title {
   font-weight: 500;
   font-size: 0.875rem;
-  line-height: 150%;
-  letter-spacing: -0.5px;
   color: #484848;
   position: relative;
 }
 
 .required {
-  width: 5px;
-  height: 5px;
+  width: 0.3125rem;
+  height: 0.3125rem;
   display: inline-block;
   position: absolute;
   top: 0.125rem;
   right: -0.625rem;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   background-color: #ff4b6c;
 }
 
 .cagetories {
   display: grid;
   grid-template-columns: repeat(2, minmax(100px, 1fr));
-  row-gap: 9px;
-  column-gap: 13px;
+  row-gap: 0.5625rem;
+  column-gap: 0.8125rem;
 }
 
 .check {
-  width: 21px;
-  height: 21px;
-  border-radius: 21px;
-  border: 4px solid #d9d9d9;
+  width: 1.3125rem;
+  height: 1.3125rem;
+  border-radius: 1.3125rem;
+  border: 0.25rem solid #d9d9d9;
   cursor: pointer;
 }
 

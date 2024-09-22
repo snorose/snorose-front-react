@@ -14,15 +14,13 @@
 .titleDescWrapper {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  gap: 14px;
+  padding: 1.25rem;
+  gap: 0.875rem;
   flex-grow: 1;
 }
 
 .title {
   color: #000;
-  line-height: 130%;
-  letter-spacing: -0.03125rem;
   font-size: 1.25rem;
   font-weight: 700;
 }
@@ -32,13 +30,11 @@
   flex-direction: column;
   justify-content: start;
   gap: 0.3125rem;
-  padding-bottom: 13px;
+  padding-bottom: 0.8125rem;
 }
 
 .desc {
   color: var(--Grey-4, var(--grey-3, #484848));
-  line-height: 150%;
-  letter-spacing: -0.03125rem;
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -50,7 +46,7 @@
   bottom: 0;
   width: 100%;
   gap: 0.5rem;
-  padding: 20px 20px 54px;
+  padding: 1.25rem 1.25rem 3.375rem;
 }
 
 .goBackButton {
@@ -64,9 +60,7 @@
   color: var(--Blue-3, #5f86bf);
   font-size: 0.875rem;
   font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.03125rem;
-}
+  }
 
 .deleteAccountButton {
   display: flex;
@@ -80,6 +74,4 @@
   text-align: center;
   font-size: 0.875rem;
   font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.03125rem;
 }
