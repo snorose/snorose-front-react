@@ -41,7 +41,7 @@ export default function BoardListPage() {
   if (isLoading) {
     return (
       <>
-        <BackAppBar />
+        <BackAppBar notFixed/>
         <FetchLoading>게시글 불러오는 중...</FetchLoading>
       </>
     );
@@ -50,7 +50,7 @@ export default function BoardListPage() {
   if (isError) {
     return (
       <>
-        <BackAppBar />
+        <BackAppBar notFixed/>
         <FetchLoading animation={false}>
           게시글을 불러오지 못했습니다.
         </FetchLoading>

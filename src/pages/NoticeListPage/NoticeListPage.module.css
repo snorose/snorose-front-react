@@ -22,7 +22,7 @@ body {
   align-items: center;
   font-size: 0.5rem;
   /* 양옆 여백 */
-  padding: 0.25rem 1rem 12rem 1rem;
+  padding: 4rem 1rem 12rem 1rem;
   row-gap: 0.5rem;
 }
 

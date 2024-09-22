@@ -129,6 +129,7 @@ export default function PostWritePage() {
             children='등록'
             stroke='#000'
             onClick={handleSubmit}
+            backgroundColor={'#eaf5fd'}
             xClick={() => {
               title.trim() || text.trim()
                 ? setIsCheckModalOpen(true)

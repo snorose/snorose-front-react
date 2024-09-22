@@ -211,7 +211,7 @@ export default function EditInfoPage() {
     <main className={styles.editInfoPage}>
       <header className={styles.topContainer}>
         <div>
-          <BackAppBar />
+          <BackAppBar notFixed/>
         </div>
         <div className={styles.submitBtn}>
           <ActionButton
