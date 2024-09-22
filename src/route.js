@@ -95,7 +95,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        to={`/board`}
         message={'게시판 접근 권한이 없습니다.'}
       >
         {boardPath === 'notice' ? <NoticeListPage /> : <BoardListPage />}
@@ -110,7 +109,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        to={`/board`}
         message={'게시판 접근 권한이 없습니다.'}
       >
         <NoticeListPage />
@@ -125,7 +123,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        to={`/board/${boardPath}`}
         message={'게시글 접근 권한이 없습니다.'}
       >
         <PostPage />
@@ -140,7 +137,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForWriteBoard(boardPath)}
-        to={`/board/${boardPath}`}
         message={'게시글 작성 권한이 없습니다.'}
       >
         <PostWritePage />
@@ -155,7 +151,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForWriteBoard(boardPath)}
-        to={`/board/${boardPath}/post/:postId`}
         message={'게시글 편집 권한이 없습니다.'}
       >
         <PostEditPage />
@@ -170,7 +165,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        to={`/board`}
         message={'게시판 접근 권한이 없습니다.'}
       >
         <PostSearchPage />
@@ -185,7 +179,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        to={`/board`}
         message={'게시판 접근 권한이 없습니다.'}
       >
         <PostSearchPage />
