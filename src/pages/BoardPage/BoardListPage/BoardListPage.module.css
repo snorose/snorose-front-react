@@ -28,7 +28,8 @@ body {
   gap: 0.861rem;
   border-radius: 0.3125rem;
   background-color: #fee9eb;
-  font-size: 0.688rem;
+  /* font-size: 0.688rem; */
+  font-size: 0.8125rem;
   color: #ff4b6c;
   box-sizing: border-box;
   cursor: pointer;
