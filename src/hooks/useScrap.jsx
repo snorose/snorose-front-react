@@ -21,10 +21,7 @@ export default function useScrap() {
     }));
   };
 
-  const onSuccess = ({ data }) => {
-    const { result } = data;
-    const { isScrapped, scrapCount } = result;
-
+  const onSuccess = ({ isScrapped, scrapCount }) => {
     updateScrapCache({
       isScrapped,
       scrapCount,

@@ -40,10 +40,7 @@ export default function useLike({ type, sourceId }) {
     });
   };
 
-  const onSuccess = ({ data }) => {
-    const { result } = data;
-    const { isLiked, likeCount } = result;
-
+  const onSuccess = ({ isLiked, likeCount }) => {
     if (type === LIKE_TYPE.post) {
       updatePostLikeCache({ isLiked, likeCount });
       return;
@@ -58,7 +55,9 @@ export default function useLike({ type, sourceId }) {
 
   const like = useMutation({
     mutationKey: [MUTATION_KEY.like],
-    mutationFn: () => likeApi({ type, sourceId }),
+    mutationFn: async () => {
+      return await likeApi({ type, sourceId });
+    },
     onSuccess,
     onError,
   });
