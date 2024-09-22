@@ -5,6 +5,7 @@
   flex-direction: column;
   background-color: #00368e;
   border-radius: 0px 0px 0.9375rem 0.9375rem;
+  padding-top: 54px;
 }
 
 .title {

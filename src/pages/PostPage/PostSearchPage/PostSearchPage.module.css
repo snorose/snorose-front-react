@@ -8,6 +8,7 @@
   flex-direction: column;
   align-items: center;
   font-size: 8px;
+  padding-top: 68px;
 }
 
 .posts {

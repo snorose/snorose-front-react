@@ -17,6 +17,7 @@ body {
 .top {
   width: 100%;
   padding: 10px var(--default-margin);
+  padding-top: 64px;
 }
 
 .notification_bar {

@@ -106,7 +106,7 @@ export default function PostEditPage() {
   if (status === 'loading' || isLoading) {
     return (
       <>
-        <BackAppBar />
+        <BackAppBar notFixed/>
         <FetchLoading>로딩 중...</FetchLoading>
       </>
     );
@@ -115,7 +115,7 @@ export default function PostEditPage() {
   if (error) {
     return (
       <>
-        <BackAppBar animation={false} />
+        <BackAppBar animation={false} notFixed/>
         <FetchLoading>게시글 정보를 불러오지 못했습니다</FetchLoading>
       </>
     );
@@ -129,6 +129,7 @@ export default function PostEditPage() {
             children='수정'
             stroke='#000'
             onClick={handleSubmit}
+            backgroundColor={'#eaf5fd'}
             xClick={() => {
               data.title !== title ||
               data.content !== text ||

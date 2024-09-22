@@ -82,7 +82,7 @@ export default function ExamReviewDetailPage() {
   if (isLoading) {
     return (
       <>
-        <BackAppBar />
+        <BackAppBar notFixed/>
         <FetchLoading>게시글 불러오는 중...</FetchLoading>
       </>
     );
@@ -95,7 +95,7 @@ export default function ExamReviewDetailPage() {
   if (isError) {
     return (
       <>
-        <BackAppBar />
+        <BackAppBar notFixed/>
         <FetchLoading animation={false}>
           게시글을 불러오지 못했습니다.
         </FetchLoading>
@@ -129,7 +129,7 @@ export default function ExamReviewDetailPage() {
   return (
     <main>
       <div className={styles.top}>
-        <BackAppBar />
+        <BackAppBar backgroundColor={'#eaf5fd'} />
         <div className={styles.displayBox}>
           <div className={styles.displayBoxLeft}>
             <Icon

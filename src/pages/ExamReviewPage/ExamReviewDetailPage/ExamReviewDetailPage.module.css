@@ -1,6 +1,7 @@
 .top {
   width: 100%;
   padding-bottom: 23px;
+  padding-top: 45px;
   display: flex;
   flex-direction: column;
   background-color: #eaf5fd;

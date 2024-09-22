@@ -109,7 +109,7 @@ export default function ChangePasswordPage() {
     <main className={styles.changePasswordPage}>
       <header className={styles.topContainer}>
         <p>
-          <BackAppBar />
+          <BackAppBar notFixed />
         </p>
         <div className={styles.submitBtn}>
           <ActionButton

@@ -26,6 +26,8 @@ import {
   YEARS,
 } from '@/constants';
 
+import styles from './ExamReviewEditPage.module.css';
+
 export default function ExamReviewEditPage() {
   const { postId } = useParams();
   const { state } = useLocation();
@@ -89,7 +91,7 @@ export default function ExamReviewEditPage() {
   };
 
   return (
-    <main>
+    <main className={styles.container}>
       <CloseAppBar>
         <ActionButton
           onClick={() => {
