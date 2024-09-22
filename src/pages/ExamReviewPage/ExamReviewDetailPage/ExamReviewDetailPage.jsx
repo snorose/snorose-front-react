@@ -83,7 +83,7 @@ export default function ExamReviewDetailPage() {
   if (isLoading) {
     return (
       <>
-        <BackAppBar />
+        <BackAppBar notFixed/>
         <FetchLoading>게시글 불러오는 중...</FetchLoading>
       </>
     );
@@ -96,7 +96,7 @@ export default function ExamReviewDetailPage() {
   if (isError) {
     return (
       <>
-        <BackAppBar />
+        <BackAppBar notFixed/>
         <FetchLoading animation={false}>
           게시글을 불러오지 못했습니다.
         </FetchLoading>
@@ -112,6 +112,7 @@ export default function ExamReviewDetailPage() {
     isConfirmed,
     isDownloaded,
     isEdited,
+    isOnline,
     isPF,
     isScrapped,
     isWriter,
@@ -129,7 +130,7 @@ export default function ExamReviewDetailPage() {
   return (
     <main>
       <div className={styles.top}>
-        <BackAppBar />
+        <BackAppBar backgroundColor={'#eaf5fd'} />
         <div className={styles.displayBox}>
           <div className={styles.displayBoxLeft}>
             <Icon
@@ -168,10 +169,14 @@ export default function ExamReviewDetailPage() {
           <ReviewContentItem tag='강의 종류' value={COURSE_TYPE[lectureType]} />
           <ReviewContentItem
             tag='수강 학기'
-            value={`${lectureYear % 100}-${SEMESTER[semester]}`}
+            value={`${String(lectureYear % 100).padStart(2, '0')}-${SEMESTER[semester]}`}
           />
           <ReviewContentItem tag='시험 종류' value={EXAM_TYPE[examType]} />
           <ReviewContentItem tag='P/F 여부' value={isPF ? 'O' : 'X'} />
+          <ReviewContentItem
+            tag='온라인 수업 여부'
+            value={isOnline ? 'O' : 'X'}
+          />
           <ReviewContentItem
             tag='시험 유형 및 문항수'
             value={questionDetail}

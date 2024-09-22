@@ -22,6 +22,8 @@ import {
   QUERY_KEY,
 } from '@/constants';
 
+import defaultProfile from '@/assets/images/defaultProfile.svg';
+
 import styles from './EditInfoPage.module.css';
 
 const VALIDATIONS = Object.freeze({
@@ -211,7 +213,7 @@ export default function EditInfoPage() {
     <main className={styles.editInfoPage}>
       <header className={styles.topContainer}>
         <div>
-          <BackAppBar />
+          <BackAppBar notFixed/>
         </div>
         <div className={styles.submitBtn}>
           <ActionButton
@@ -230,15 +232,17 @@ export default function EditInfoPage() {
             className={styles.profileImg}
             onClick={() => document.getElementById('profileImageInput').click()}
           >
-            {profileImage !== null ? (
-              <img
-                src={profileImage}
-                alt='프로필'
-                className={styles.profilePreview}
-              />
-            ) : (
-              <Icon id='profile-basic-camera' />
-            )}
+            <img
+              src={profileImage ?? defaultProfile}
+              alt='프로필'
+              className={styles.profilePreview}
+            />
+            <Icon
+              className={styles.blueCamera}
+              id='blue-camera'
+              width='24'
+              height='24'
+            />
           </div>
           <input
             type='file'

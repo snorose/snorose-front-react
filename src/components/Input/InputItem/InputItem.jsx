@@ -3,6 +3,7 @@ import styles from './InputItem.module.css';
 export default function InputItem({
   className,
   tag,
+  required,
   value,
   placeholder,
   setFn,
@@ -13,7 +14,10 @@ export default function InputItem({
 
   return (
     <div className={`${styles.item} ${className}`}>
-      <span className={styles.tag}>{tag}</span>
+      <span className={styles.tag}>
+        {tag}
+        {required && <span className={styles.required}></span>}
+      </span>
       <input
         className={styles.input}
         type='text'

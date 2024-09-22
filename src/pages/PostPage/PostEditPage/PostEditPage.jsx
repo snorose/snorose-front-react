@@ -5,22 +5,25 @@ import TextareaAutosize from 'react-textarea-autosize';
 
 import { getPostContent, patchPost } from '@/apis';
 
-import { useToast } from '@/hooks';
+import { useToast, useAuth } from '@/hooks';
 
-import { CloseAppBar } from '@/components/AppBar';
-import { Icon } from '@/components/Icon';
+import {
+  FetchLoading,
+  BackAppBar,
+  CloseAppBar,
+  Icon,
+  DeleteModal,
+} from '@/components';
 
 import { formattedNowTime } from '@/utils';
-
-import { BOARD_MENUS, MUTATION_KEY, QUERY_KEY, TOAST } from '@/constants';
+import { BOARD_MENUS, TOAST, ROLE, MUTATION_KEY, QUERY_KEY, } from '@/constants';
 
 import styles from './PostEditPage.module.css';
-
-const roleId = 4; // 더미 역할 ID
 
 export default function PostEditPage() {
   const { postId } = useParams();
   const { pathname } = useLocation();
+  const { userInfo, status } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -33,6 +36,7 @@ export default function PostEditPage() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [userDisplay, setUserDisplay] = useState('');
+  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
@@ -98,66 +102,96 @@ export default function PostEditPage() {
     });
   };
 
-  if (isLoading) {
-    return <div>로딩 중...</div>;
+  if (status === 'loading' || isLoading) {
+    return (
+      <>
+        <BackAppBar notFixed/>
+        <FetchLoading>로딩 중...</FetchLoading>
+      </>
+    );
   }
 
   if (error) {
-    return <div>Error loading post content</div>;
+    return (
+      <>
+        <BackAppBar animation={false} notFixed/>
+        <FetchLoading>게시글 정보를 불러오지 못했습니다</FetchLoading>
+      </>
+    );
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.top}>
-        <CloseAppBar children='수정' stroke='#000' onClick={handleSubmit} />
-      </div>
-      <div className={styles.center}>
-        <div className={styles.categorySelect}>
-          <div>
-            <Icon id='clip-board-list' width='18' height='19' />
-            <p className={styles.categorySelectText}>{boardTitle}</p>
-          </div>
+    <>
+      <div className={styles.container}>
+        <div className={styles.top}>
+          <CloseAppBar
+            children='수정'
+            stroke='#000'
+            onClick={handleSubmit}
+            backgroundColor={'#eaf5fd'}
+            xClick={() => {
+              data.title !== title ||
+              data.content !== text ||
+              data.isNotice !== isNotice
+                ? setIsCheckModalOpen(true)
+                : navigate(-1);
+            }}
+          />
         </div>
-        <div className={styles.profileBox}>
-          <div className={styles.profileBoxLeft}>
-            <Icon id='cloud' width='25' height='16' />
-            <p>{userDisplay}</p>
-            <p className={styles.dot}></p>
-            <p>{formattedNowTime()}</p>
-          </div>
-          {textId !== 'notice' && (
-            <div
-              className={
-                roleId === 4
-                  ? styles.profileBoxRight
-                  : styles.profileBoxRightInvisible
-              }
-              onClick={handleIsNotice}
-            >
-              <p>공지글</p>
-              <Icon
-                id={isNotice ? 'toggle-on' : 'toggle-off'}
-                width='25'
-                height='16'
-              />
+        <div className={styles.center}>
+          <div className={styles.categorySelect}>
+            <div>
+              <Icon id='clip-board-list' width='18' height='19' />
+              <p className={styles.categorySelectText}>{boardTitle}</p>
             </div>
-          )}
-        </div>
-        <div className={styles.content}>
-          <TextareaAutosize
-            className={styles.title}
-            placeholder='제목'
-            value={title}
-            onChange={handleTitleChange}
-          />
-          <TextareaAutosize
-            className={styles.text}
-            placeholder='내용'
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
+          </div>
+          <div className={styles.profileBox}>
+            <div className={styles.profileBoxLeft}>
+              <Icon id='cloud' width='25' height='16' />
+              <p>{userDisplay}</p>
+              <p className={styles.dot}></p>
+              <p>{formattedNowTime()}</p>
+            </div>
+            {textId !== 'notice' && (
+              <div
+                className={
+                  userInfo.userRoleId === ROLE.admin
+                    ? styles.profileBoxRight
+                    : styles.profileBoxRightInvisible
+                }
+                onClick={handleIsNotice}
+              >
+                <p>공지글</p>
+                <Icon
+                  id={isNotice ? 'toggle-on' : 'toggle-off'}
+                  width='25'
+                  height='16'
+                />
+              </div>
+            )}
+          </div>
+          <div className={styles.content}>
+            <TextareaAutosize
+              className={styles.title}
+              placeholder='제목'
+              value={title}
+              onChange={handleTitleChange}
+            />
+            <TextareaAutosize
+              className={styles.text}
+              placeholder='내용'
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+          </div>
         </div>
       </div>
-    </div>
+      <DeleteModal
+        id='post-edit-exit-check'
+        isOpen={isCheckModalOpen}
+        closeFunction={() => setIsCheckModalOpen(false)}
+        redBtnFunction={() => navigate(-1)}
+      />
+    </>
   );
 }

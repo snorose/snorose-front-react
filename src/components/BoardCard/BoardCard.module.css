@@ -16,10 +16,8 @@
 }
 
 .name {
-  font-weight: 500;
   font-size: 0.75rem;
-  line-height: 130%;
-  letter-spacing: -0.5px;
+  font-weight: 500;
 }
 
 .name.notLogin {
@@ -28,10 +26,7 @@
 
 .desc {
   width: 4rem;
-  font-weight: 400;
   font-size: 0.5625rem;
-  line-height: 130%;
-  letter-spacing: -0.5px;
   color: #898989;
   word-break: keep-all;
 }

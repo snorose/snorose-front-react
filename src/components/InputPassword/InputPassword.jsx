@@ -54,9 +54,11 @@ const InputPassword = ({
           onChange={handleInputChange}
         />
         <Icon
-          onClick={handlePasswordType}
           id={passwordType.visible ? 'closed-eye' : 'opened-eye'}
+          width='18'
+          height='13'
           fill={iconColor}
+          onClick={handlePasswordType}
         />
       </div>
       {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}

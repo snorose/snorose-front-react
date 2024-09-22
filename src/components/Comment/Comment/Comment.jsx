@@ -191,6 +191,7 @@ const Comment = forwardRef((props, ref) => {
         isOpen={isDeleteModalOpen}
         closeFunction={() => {
           resetCommentState();
+          setContent('');
           setIsDeleteModalOpen(false);
         }}
         redBtnFunction={() => deleteComment.mutate({ commentId })}

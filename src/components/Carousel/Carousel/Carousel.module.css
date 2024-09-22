@@ -14,7 +14,7 @@
 .dot {
   width: 0.375rem;
   height: 0.375rem;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   background-color: #bfd7ec;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .error {
-  min-height: 112px;
+  min-height: 7rem;
   display: flex;
   justify-content: center;
   align-items: center;

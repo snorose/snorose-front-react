@@ -9,6 +9,8 @@ import { Icon } from '@/components';
 
 import { ROLE_NAME } from '@/constants';
 
+import defaultProfile from '@/assets/images/defaultProfile.svg';
+
 import styles from './MyPage.module.css';
 
 export default function MyPage() {
@@ -39,17 +41,23 @@ export default function MyPage() {
       <div className={styles.myPageUpper}>
         <div className={styles.logoOverlay}>
           <Link to='edit-info'>
-            <Icon id='pencil-underline' fill='#fff' stroke='#fff' />
+            <Icon
+              className={styles.editIcon}
+              id='pencil-underline'
+              width='20'
+              height='20'
+              fill='#fff'
+              stroke='#fff'
+            />
           </Link>
         </div>
       </div>
 
       <div className={styles.profileImage}>
-        {userInfo.userProfile === null ? (
-          <Icon id='profile-basic' />
-        ) : (
-          <img src={userInfo.userProfile} alt={`${userInfo.userName} 프로필`} />
-        )}
+        <img
+          src={userInfo.userProfile ?? defaultProfile}
+          alt={`${userInfo.userName} 프로필`}
+        />
       </div>
 
       <div className={styles.myPageLower}>
@@ -59,7 +67,7 @@ export default function MyPage() {
             <div className={styles.studentId}>
               {userInfo.studentNumber.slice(0, 2)}학번
             </div>
-            <Icon id='middle-dot' />
+            <Icon id='middle-dot' width='5' height='5' />
             <div className={styles.memberType}>
               {ROLE_NAME[userInfo.userRoleId]}
             </div>
@@ -67,12 +75,12 @@ export default function MyPage() {
           <Link to='view-point-list'>
             <div className={styles.pointWrapper}>
               <div className={styles.point}>
-                <Icon id='point-circle' />
+                <Icon id='point-circle' width='32' height='32' />
                 {userInfo.balance.toLocaleString()}
               </div>
               <div className={styles.pointList}>
                 포인트 내역 보기
-                <Icon id='angle-right' fill='#00368e' />
+                <Icon id='angle-right' width='16' height='16' fill='#00368e' />
               </div>
             </div>
           </Link>

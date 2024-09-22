@@ -45,7 +45,7 @@ export default function ViewPointListPage() {
         <div className={styles.topContainer}>
           <h1 className={styles.title}>보유 포인트</h1>
           <div className={styles.totalPointWrapper}>
-            <Icon id='point-circle' />
+            <Icon id='point-circle' width='32' height='32' />
             <span className={styles.totalPoint}>
               {userInfo.balance.toLocaleString()}
             </span>
@@ -62,7 +62,11 @@ export default function ViewPointListPage() {
                   ref={pointList.length - 1 === index ? ref : undefined}
                 >
                   <div className={styles.pointIconContentWrapper}>
-                    <Icon id={difference > 0 ? 'heart-plus' : 'heart-minus'} />
+                    <Icon
+                      id={difference > 0 ? 'heart-plus' : 'heart-minus'}
+                      width='27'
+                      height='24'
+                    />
                     <div className={styles.pointContent}>
                       <h2
                         className={`${styles.pointTitle} ${difference < 0 ? styles.negative : ''}`}

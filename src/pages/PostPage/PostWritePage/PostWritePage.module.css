@@ -6,10 +6,11 @@
 
 .top {
   width: 100%;
+  padding-top: 3.25rem;
 }
 
 .center {
-  padding: 0 20px;
+  padding: 0 1.25rem;
   background-color: #eaf5fd;
 }
 
@@ -17,46 +18,42 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0 15px 0;
+  padding: 0.625rem 0 0.9375rem 0;
   border-bottom: 0.5px solid #898989;
   stroke-width: 0.5px;
   cursor: pointer;
 
   div {
-    gap: 14px;
+    gap: 0.875rem;
     display: flex;
     align-items: center;
   }
 }
 
 .categorySelectText {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.5px;
 }
 
 .profileBox {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px 0 18px 0;
+  padding: 1.375rem 0 1.125rem 0;
   color: #898989;
-  font-size: 12px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.75rem;
 }
 
 .profileBoxLeft {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 0.4375rem;
 }
 
 .profileBoxRight {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 0.125rem;
   color: #000;
 }
 
@@ -65,8 +62,8 @@
 }
 
 .dot {
-  width: 3px;
-  height: 3px;
+  width: 0.1875rem;
+  height: 0.1875rem;
   border-radius: 50%;
   background-color: #898989;
 }
@@ -74,16 +71,14 @@
 .content {
   display: flex;
   flex-direction: column;
-  row-gap: 36px;
-  padding-bottom: 110px;
+  row-gap: 2.25rem;
+  padding-bottom: 6.875rem;
 }
 
 .title {
   color: #484848;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
-  line-height: 130%;
-  letter-spacing: -0.5px;
   outline: none;
   border: none;
   background-color: transparent;
@@ -94,16 +89,13 @@
 
 .text {
   color: #484848;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.875rem;
   outline: none;
   border: none;
   background-color: transparent;
   display: block;
   width: 100%;
-  min-height: 100px;
+  min-height: 6.25rem;
   resize: none;
 }
 

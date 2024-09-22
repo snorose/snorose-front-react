@@ -8,7 +8,7 @@
   transform: translateX(-50%);
   z-index: 1;
   background: rgba(228, 228, 228, 0.6);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0.625rem);
   /* Note: backdrop-filter has minimal browser support */
 }
 
@@ -18,7 +18,7 @@
   padding: 1.25rem 0 0 1.875rem;
   position: absolute;
   right: 0;
-  border-radius: 1rem 0px 0px 0px;
+  border-radius: 1rem 0 0 0;
   background-color: #ffffff;
 }
 
@@ -31,15 +31,10 @@
   margin: 1rem 0;
   font-weight: 700;
   font-size: 1rem;
-  line-height: 150%;
-  letter-spacing: -0.5px;
   color: #484848;
 }
 
 .item {
-  font-weight: 400;
   font-size: 0.875rem;
-  line-height: 150%;
-  letter-spacing: -0.5px;
   color: #484848;
 }

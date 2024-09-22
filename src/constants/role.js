@@ -4,6 +4,7 @@ export const ROLE = Object.freeze({
   user2: 3,
   admin: 4,
   official: 5,
+  blacklist: 6,
 });
 
 export const ROLE_NAME = Object.freeze({
@@ -12,6 +13,7 @@ export const ROLE_NAME = Object.freeze({
   3: '정회원2',
   4: '리자',
   5: '공식계정',
+  6: '강등/영구강등',
 });
 
 export const PRIVATE_USER_INFO_UPDATE_PERMISSION_ROLE_ID_LIST = [1];

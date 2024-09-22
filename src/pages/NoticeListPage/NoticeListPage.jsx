@@ -44,7 +44,7 @@ export default function NoticeListPage() {
   if (isLoading) {
     return (
       <>
-        <BackAppBar />
+        <BackAppBar notFixed />
         <FetchLoading>공지글 불러오는 중...</FetchLoading>
       </>
     );
@@ -53,7 +53,7 @@ export default function NoticeListPage() {
   if (isError) {
     return (
       <>
-        <BackAppBar />;
+        <BackAppBar notFixed />;
         <FetchLoading animation={false}>
           게시글을 불러오지 못했습니다.
         </FetchLoading>

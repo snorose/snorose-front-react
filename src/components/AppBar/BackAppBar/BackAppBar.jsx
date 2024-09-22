@@ -12,7 +12,9 @@ export default function BackAppBar({
   children,
   hasSearchInput,
   isDark,
+  notFixed,
   backNavTo,
+  backgroundColor,
 }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -26,7 +28,13 @@ export default function BackAppBar({
   };
 
   return (
-    <div className={hasSearchInput ? styles.hasGap : styles.appBar}>
+    <div
+      className={hasSearchInput ? styles.hasGap : styles.appBar}
+      style={{
+        backgroundColor: backgroundColor ? backgroundColor : '#fff',
+        position: notFixed ? 'relative' : 'fixed',
+      }}
+    >
       <div className={styles.backDiv}>
         <Icon
           className={styles.back}

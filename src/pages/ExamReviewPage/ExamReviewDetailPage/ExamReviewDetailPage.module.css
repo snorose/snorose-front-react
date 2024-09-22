@@ -1,20 +1,19 @@
 .top {
   width: 100%;
-  padding-bottom: 23px;
+  padding-bottom: 1.4375rem;
+  padding-top: 2.813rem;
   display: flex;
   flex-direction: column;
   background-color: #eaf5fd;
-  border-radius: 0px 0px 15px 15px;
+  border-radius: 0 0 0.9375rem 0.9375rem;
 }
 
 .displayBox {
-  margin: 12px var(--default-margin) 4px var(--default-margin);
+  margin: 0.75rem var(--default-margin) 0.25rem var(--default-margin);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.75rem;
   color: #898989;
 }
 
@@ -24,39 +23,37 @@
 }
 
 .cloudIcon {
-  margin-right: 7px;
+  margin-right: 0.4375rem;
 }
 
 .checkCircleIcon {
-  margin-left: 4px;
+  margin-left: 0.25rem;
 }
 
 .dot {
-  width: 3px;
-  height: 3px;
-  margin: 0 8px;
+  width: 0.1875rem;
+  height: 0.1875rem;
+  margin: 0 0.5rem;
   background: #898989;
   border-radius: 100%;
 }
 
 .more {
-  padding: 0 4px;
+  padding: 0 0.25rem;
   cursor: pointer;
 }
 
 .title {
   margin: 0 var(--default-margin);
   font-weight: 700;
-  font-size: 16px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 1rem;
 }
 
 .content {
-  padding: 2px 13px;
-  margin: 23px var(--default-margin);
+  padding: 0.125rem 0.8125rem;
+  margin: 1.4375rem var(--default-margin);
   background: #ffffff;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
 }
 
 .fileDownload {
@@ -64,13 +61,11 @@
 }
 
 .actions {
-  margin: 15px var(--default-margin) 0 0;
+  margin: 0.9375rem var(--default-margin) 0 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-size: 11px;
-  line-height: 150%;
-  letter-spacing: -0.5px;
+  font-size: 0.6875rem;
   color: #898989;
 
   div:nth-of-type(2):hover {
@@ -80,11 +75,11 @@
 }
 
 .action {
-  padding: 4px 8px;
+  padding: 0.25rem 0.5rem;
   display: flex;
   align-items: center;
-  gap: 6px;
-  border-radius: 5px;
+  gap: 0.375rem;
+  border-radius: 0.3125rem;
 }
 
 .comment {

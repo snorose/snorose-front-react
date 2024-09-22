@@ -4,7 +4,7 @@ import { Input, SpecialInput } from '@/components/Input';
 import { Submit } from '@/components/Submit';
 
 import {
-  checkSpecialChar,
+  checkName,
   checkSookmyungMail,
   checkID,
   checkPW,
@@ -43,11 +43,11 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
             placeholder={'이름을 입력하세요'}
             className={nameStyle}
             setClassName={setNameStyle}
-            classNameCheck={checkSpecialChar}
+            classNameCheck={checkName}
             inputType={'userName'}
             inputData={setFormData}
             data={formData}
-            errMsg={'특수문자는 사용할 수 없습니다'}
+            errMsg={'한글 또는 영어 대소문자로 2자 이상 30자 이하로 입력하세요'}
           />
         </div>
         <div className={styles.inputFrame}>
@@ -73,7 +73,7 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
             inputType={'loginId'}
             inputData={setFormData}
             data={formData}
-            errMsg={'특수문자를 제외한 5자 이상 30자 이하를 입력하세요'}
+            errMsg={'특수문자를 제외한 5자 이상 30자 이하로 입력하세요'}
           />
         </div>
         <div className={styles.inputFrame}>
@@ -93,7 +93,9 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
             color3={'#ff4b6c'}
             state1={'text'}
             state2={'password'}
-            errMsg={'영어, 숫자, 특수문자를 포함해 8자 이상으로 작성해주세요'}
+            errMsg={
+              '영어, 숫자, 특수문자를 포함해 8자 이상 16자 이하로 작성해주세요'
+            }
           />
         </div>
         <div className={styles.inputFrame}>

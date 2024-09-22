@@ -28,6 +28,8 @@ import {
   YEARS,
 } from '@/constants';
 
+import styles from './ExamReviewEditPage.module.css';
+
 export default function ExamReviewEditPage() {
   const { postId } = useParams();
   const { state } = useLocation();
@@ -92,7 +94,7 @@ export default function ExamReviewEditPage() {
   };
 
   return (
-    <main>
+    <main className={styles.container}>
       <CloseAppBar>
         <ActionButton
           onClick={() => {
@@ -109,12 +111,14 @@ export default function ExamReviewEditPage() {
       <InputList>
         <InputItem
           tag='강의명'
+          required
           value={lectureName}
           placeholder='강의명을 입력하세요'
           setFn={setLectureName}
         />
         <InputItem
           tag='교수명'
+          required
           value={professor}
           placeholder='교수명을 입력하세요'
           setFn={setProfessor}
@@ -175,14 +179,12 @@ export default function ExamReviewEditPage() {
       </CategoryFieldset>
       <CategoryFieldset
         title='P/F 수업입니다'
-        required
         hasCheckbox
         value={isPF}
         setFn={setIsPF}
       />
       <CategoryFieldset
         title='온라인 수업입니다'
-        required
         hasCheckbox
         value={isOnline}
         setFn={setIsOnline}

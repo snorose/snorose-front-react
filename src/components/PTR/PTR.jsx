@@ -9,26 +9,39 @@ export default function PTR({ children, onRefresh }) {
 
   function handleStart(event) {
     const clientY =
-      (event.touches && event.touches[0] && event.touches[0].clientY) ||
-      event.clientY;
+      (event.touches && event.touches[0].clientY) || event.clientY;
     setStartY(clientY);
-    event.preventDefault();
   }
 
   function handleMove(event) {
     const clientY =
-      (event.touches && event.touches[0] && event.touches[0].clientY) ||
-      event.clientY;
+      (event.touches && event.touches[0].clientY) || event.clientY;
     if (startY !== undefined) {
       const pullDistance = clientY - startY;
 
-      if (pullDistance > 0) {
-        event.preventDefault();
+      // ptrTouchZone 요소가 존재하는지 확인
+      const ptrTouchZone = containerRef.current?.querySelector(
+        `.${styles.ptrTouchZone}`
+      );
 
-        if (pullDistance > 80 && containerRef.current) {
-          containerRef.current.style.transform = 'translate(0, 30px)';
-          containerRef.current.style.transition = '0.3s';
-          setRefreshing(true);
+      if (ptrTouchZone) {
+        const touchZoneRect = ptrTouchZone.getBoundingClientRect();
+
+        // ptrTouchZone 안에서 위로 땡긴 경우
+        if (
+          pullDistance > 0 &&
+          touchZoneRect.top <= clientY &&
+          clientY <= touchZoneRect.bottom
+        ) {
+          ptrTouchZone.style.pointerEvents = 'auto'; // 클릭 이벤트 허용
+          if (pullDistance > 80) {
+            ptrTouchZone.style.pointerEvents = 'none'; // 클릭 이벤트 차단
+            event.preventDefault(); // 스크롤을 막습니다.
+            containerRef.current.style.transform = 'translate(0, 30px)';
+            containerRef.current.style.transition = '0.3s';
+            setRefreshing(true);
+          }
+        } else {
         }
       }
     }
@@ -61,17 +74,17 @@ export default function PTR({ children, onRefresh }) {
     document.addEventListener('touchstart', handleStart, options);
     document.addEventListener('touchmove', handleMove, options);
     document.addEventListener('touchend', handleEnd, options);
-    document.addEventListener('mousedown', handleStart, options);
+    document.addEventListener('mousedown', handleStart);
     document.addEventListener('mousemove', handleMove, options);
-    document.addEventListener('mouseup', handleEnd, options);
+    document.addEventListener('mouseup', handleEnd);
 
     return () => {
       document.removeEventListener('touchstart', handleStart, options);
       document.removeEventListener('touchmove', handleMove, options);
       document.removeEventListener('touchend', handleEnd, options);
-      document.removeEventListener('mousedown', handleStart, options);
-      document.removeEventListener('mousemove', handleMove, options);
-      document.removeEventListener('mouseup', handleEnd, options);
+      document.removeEventListener('mousedown', handleStart);
+      document.removeEventListener('mousemove', handleMove);
+      document.removeEventListener('mouseup', handleEnd);
     };
   }, [refreshing, startY, onRefresh]);
 
@@ -83,8 +96,10 @@ export default function PTR({ children, onRefresh }) {
             <Icon id='cloud' width='34' height='21' />
           </div>
         </div>
-      ) : null}
-      {children}
+      ) : (
+        <div className={styles.ptrTouchZone} />
+      )}
+      <div className={styles.content}>{children}</div>
     </div>
   );
 }
