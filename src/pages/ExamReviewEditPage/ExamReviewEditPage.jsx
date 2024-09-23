@@ -180,13 +180,13 @@ export default function ExamReviewEditPage() {
       <CategoryFieldset
         title='P/F 수업입니다'
         hasCheckbox
-        value={isPF}
+        checked={isPF}
         setFn={setIsPF}
       />
       <CategoryFieldset
         title='온라인 수업입니다'
         hasCheckbox
-        value={isOnline}
+        checked={isOnline}
         setFn={setIsOnline}
       />
       <CategoryFieldset title='문항 수 및 시험 유형 설명' required>
