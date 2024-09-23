@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
-import { deleteExamReview, getReviewDetail } from '@/apis';
+import {
+  deleteExamReview,
+  getReviewDetail,
+  reportPost,
+  reportUser,
+} from '@/apis';
 
 import { useScrap, useToast } from '@/hooks';
 
@@ -20,6 +25,7 @@ import { ReviewDownload } from '@/components/ReviewDownload';
 import { dateFormat, convertToObject } from '@/utils';
 
 import {
+  BOARD_MENUS,
   LECTURE_TYPES,
   SEMESTERS,
   EXAM_TYPES,
@@ -36,14 +42,47 @@ const SEMESTER = convertToObject(SEMESTERS);
 const EXAM_TYPE = convertToObject(EXAM_TYPES);
 
 export default function ExamReviewDetailPage() {
+  const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
+  const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
+
+  const { pathname } = useLocation();
   const { postId } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { scrap, unscrap } = useScrap();
+  const { toast } = useToast();
+  const currentBoard =
+    BOARD_MENUS.find((menu) => menu.textId === pathname.split('/')[2]) || {};
 
   const { data, error, isError, isLoading } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
+  });
+
+  const { mutate: reportPostMutate } = useMutation({
+    mutationKey: [MUTATION_KEY.reportPost],
+    mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
+    onSuccess: ({ message }) => {
+      toast(message);
+    },
+    onError: () => {
+      toast('신고에 실패했습니다.');
+    },
+  });
+
+  const { mutate: reportUserMutate } = useMutation({
+    mutationKey: [MUTATION_KEY.reportUser],
+    mutationFn: (body) => reportUser(body),
+    onSuccess: ({ message }) => {
+      toast(message);
+    },
+    onError: () => {
+      toast('신고에 실패했습니다.');
+    },
   });
 
   const deleteReview = useMutation({
@@ -67,12 +106,37 @@ export default function ExamReviewDetailPage() {
     },
   });
 
-  const { scrap, unscrap } = useScrap();
-  const { toast } = useToast();
+  const handleReportOptionModalOptionClick = (event) => {
+    const reportCategory = event.currentTarget.dataset.value;
 
-  const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+    setIsReportModalOpen(false);
+
+    if (reportCategory === 'post-report') {
+      setIsPostReportModalOpen(true);
+    } else if (reportCategory === 'user-report') {
+      setIsUserReportModalOpen(true);
+    }
+  };
+
+  const handlePostReportOptionModalOptionClick = (event) => {
+    const reportType = event.currentTarget.dataset.value;
+
+    reportPostMutate({
+      reportType,
+    });
+    setIsPostReportModalOpen(false);
+  };
+
+  const handleUserReportOptionModalOptionClick = (event) => {
+    const reportType = event.currentTarget.dataset.value;
+
+    reportUserMutate({
+      // targetUserId,
+      reportType,
+    });
+
+    setIsUserReportModalOpen(false);
+  };
 
   const edit = () =>
     navigate(`/board/exam-review/${postId}/edit`, {
@@ -83,7 +147,7 @@ export default function ExamReviewDetailPage() {
   if (isLoading) {
     return (
       <>
-        <BackAppBar notFixed/>
+        <BackAppBar notFixed />
         <FetchLoading>게시글 불러오는 중...</FetchLoading>
       </>
     );
@@ -96,7 +160,7 @@ export default function ExamReviewDetailPage() {
   if (isError) {
     return (
       <>
-        <BackAppBar notFixed/>
+        <BackAppBar notFixed />
         <FetchLoading animation={false}>
           게시글을 불러오지 못했습니다.
         </FetchLoading>
@@ -172,11 +236,8 @@ export default function ExamReviewDetailPage() {
             value={`${String(lectureYear % 100).padStart(2, '0')}-${SEMESTER[semester]}`}
           />
           <ReviewContentItem tag='시험 종류' value={EXAM_TYPE[examType]} />
-          <ReviewContentItem tag='P/F 여부' value={isPF ? 'O' : 'X'} />
-          <ReviewContentItem
-            tag='온라인 수업 여부'
-            value={isOnline ? 'O' : 'X'}
-          />
+          <ReviewContentItem tag='P/F' value={isPF ? 'O' : 'X'} />
+          <ReviewContentItem tag='온라인 수업' value={isOnline ? 'O' : 'X'} />
           <ReviewContentItem
             tag='시험 유형 및 문항수'
             value={questionDetail}
@@ -239,7 +300,22 @@ export default function ExamReviewDetailPage() {
         id='report'
         isOpen={isReportModalOpen}
         setIsOpen={setIsReportModalOpen}
+        onOptionClick={handleReportOptionModalOptionClick}
         closeFn={() => setIsReportModalOpen(false)}
+      />
+      <OptionModal
+        id='post-report'
+        isOpen={isPostReportModalOpen}
+        setIsOpen={setIsPostReportModalOpen}
+        onOptionClick={handlePostReportOptionModalOptionClick}
+        closeFn={() => setIsPostReportModalOpen(false)}
+      />
+      <OptionModal
+        id='user-report'
+        isOpen={isUserReportModalOpen}
+        setIsOpen={setIsUserReportModalOpen}
+        onOptionClick={handleUserReportOptionModalOptionClick}
+        closeFn={() => setIsUserReportModalOpen(false)}
       />
     </main>
   );
