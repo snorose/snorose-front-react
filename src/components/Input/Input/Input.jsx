@@ -53,7 +53,7 @@ export default function Input({
             ...prev,
             [inputType]: e.target.value.trim(),
           }));
-          if (setClassName !== undefined) {
+          if (setClassName !== undefined && classNameCheck !== undefined) {
             const checkedClass = classNameCheck(e.target.value);
             checkedClass instanceof Promise
               ? checkedClass.then((res) => setClassName(res))

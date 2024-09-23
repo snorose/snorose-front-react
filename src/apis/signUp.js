@@ -25,7 +25,22 @@ export async function sendUser(email) {
 
   try {
     await defaultAxios.post(endpoint, data);
-  } catch (e) {
-    console.log(e);
+  } catch (e) {}
+}
+
+export async function certifyUser(data) {
+  if (data.authNum?.length === 0) {
+    return false;
+  } else {
+    try {
+      const response = await defaultAxios.post('/v1/users/certifyUser', data);
+      if (response.data.isSuccess) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
   }
 }
