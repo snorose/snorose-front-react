@@ -23,6 +23,30 @@ export function checkSpecialChar(input) {
     return 'wrong';
   }
 }
+export function checkMail(mail) {
+  mail = mail.trim();
+  let isDomain = true;
+  if (!mail?.length) {
+    return 'ready';
+  } else {
+    const [email, domain] = mail?.split('@');
+    if (!email || !domain) {
+      return 'wrong';
+    } else {
+      const domainArr = domain.split('.');
+      domainArr.map((element) => {
+        if (!element?.length) {
+          isDomain = false;
+        }
+      });
+      if (domainArr.length === 1 || !isDomain) {
+        return 'wrong';
+      } else {
+        return 'right';
+      }
+    }
+  }
+}
 
 export function checkSookmyungMail(mail) {
   mail = mail.trim();
