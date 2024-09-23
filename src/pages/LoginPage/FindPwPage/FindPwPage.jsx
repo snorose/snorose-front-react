@@ -7,10 +7,7 @@ import { Icon } from '@/components/Icon';
 import { Input } from '@/components/Input';
 import { Submit } from '@/components/Submit';
 
-import {
-  checkID,
-  checkSookmyungMail,
-} from '@/pages/LoginPage/FindIdPage/inputCheck.js';
+import { checkID, checkMail } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
 
 import styles from './FindPwPage.module.css';
 
@@ -33,13 +30,13 @@ export default function FindPwPage() {
       '아이디는 영어, 숫자만 가능합니다',
     ],
     [
-      '숙명 구글 메일',
-      '숙명 구글 메일을 입력하세요',
+      '메일',
+      '메일을 입력하세요',
       emailStyle,
       setEmailStyle,
-      checkSookmyungMail,
+      checkMail,
       'email',
-      '숙명 이메일만 입력 가능합니다',
+      '이메일만 입력 가능합니다',
     ],
   ];
   const submitState = () => {
