@@ -236,11 +236,8 @@ export default function ExamReviewDetailPage() {
             value={`${String(lectureYear % 100).padStart(2, '0')}-${SEMESTER[semester]}`}
           />
           <ReviewContentItem tag='시험 종류' value={EXAM_TYPE[examType]} />
-          <ReviewContentItem tag='P/F 여부' value={isPF ? 'O' : 'X'} />
-          <ReviewContentItem
-            tag='온라인 수업 여부'
-            value={isOnline ? 'O' : 'X'}
-          />
+          <ReviewContentItem tag='P/F' value={isPF ? 'O' : 'X'} />
+          <ReviewContentItem tag='온라인 수업' value={isOnline ? 'O' : 'X'} />
           <ReviewContentItem
             tag='시험 유형 및 문항수'
             value={questionDetail}
