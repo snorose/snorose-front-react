@@ -9,7 +9,7 @@ import { Submit } from '@/components/Submit';
 
 import {
   checkName,
-  checkSookmyungMail,
+  checkMail,
   checkStudentNum,
 } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
 
@@ -36,13 +36,13 @@ export default function FindIdPage() {
       '특수문자는 사용할 수 없습니다',
     ],
     [
-      '숙명 구글 메일',
-      '숙명 구글 메일을 입력하세요',
+      '메일',
+      '메일을 입력하세요',
       emailStyle,
       setEmailStyle,
-      checkSookmyungMail,
+      checkMail,
       'email',
-      '숙명 이메일만 입력 가능합니다',
+      '이메일만 입력 가능합니다',
     ],
     [
       '학번',

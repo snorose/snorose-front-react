@@ -26,7 +26,8 @@ export default function UserInfoPage({ setFormData, formData }) {
     if (
       nicknameStyle === 'right' &&
       stuNumStyle === 'right' &&
-      birthdayStyle === 'right'
+      birthdayStyle === 'right' &&
+      formData.name
     ) {
       return 'right';
     }
