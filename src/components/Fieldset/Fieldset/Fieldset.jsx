@@ -24,7 +24,7 @@ export default function Fieldset({
             <input
               className={styles.input}
               type='checkbox'
-              value={checked}
+              checked={checked}
               onChange={updateCheck}
             />
           </label>
