@@ -86,7 +86,7 @@ export default function PostPage() {
 
       if (response.status === 200) {
         toast(TOAST.POST.delete);
-        navigate(-1);
+        navigate(`/board/${currentBoard.textId}`);
       }
     } catch ({ response }) {
       toast(response.data.message);
@@ -270,7 +270,9 @@ export default function PostPage() {
       <DeleteModal
         id='post-delete'
         isOpen={isDeleteModalOpen}
-        closeFn={() => setIsDeleteModalOpen(false)}
+        closeFn={() => {
+          setIsDeleteModalOpen(false);
+        }}
         redBtnFunction={handleDelete}
       />
       <OptionModal

@@ -196,7 +196,7 @@ const Comment = forwardRef((props, ref) => {
             : 'comment-delete'
         }
         isOpen={isDeleteModalOpen}
-        closeFunction={() => {
+        closeFn={() => {
           resetCommentState();
           setContent('');
           setIsDeleteModalOpen(false);

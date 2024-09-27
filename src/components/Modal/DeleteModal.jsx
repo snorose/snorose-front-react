@@ -5,7 +5,7 @@ import styles from './Modal.module.css';
 export default function DeleteModal({
   id,
   isOpen,
-  closeFunction,
+  closeFn,
   redBtnFunction,
 }) {
   const modalOption = MODAL_OPTIONS.find((option) => option.id === id);
@@ -29,12 +29,12 @@ export default function DeleteModal({
             className={styles.redBtn}
             onClick={() => {
               redBtnFunction();
-              closeFunction();
+              closeFn();
             }}
           >
             {modalOption.bottom.redBtn}
           </div>
-          <div className={styles.greyBtn} onClick={closeFunction}>
+          <div className={styles.greyBtn} onClick={closeFn}>
             {modalOption.bottom.greyBtn}
           </div>
         </div>
