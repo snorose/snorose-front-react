@@ -35,7 +35,7 @@ export default function ScrapExamReviewPage() {
   return (
     <main className={styles.activityPage}>
       <header>
-        <BackAppBar stroke='#000' />
+        <BackAppBar stroke='#000' backNavTo={'/my-page?tab=activity'} />
       </header>
 
       <section className={styles.contentWrapper}>

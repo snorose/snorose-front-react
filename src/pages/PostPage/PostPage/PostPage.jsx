@@ -34,7 +34,8 @@ import styles from './PostPage.module.css';
 export default function PostPage() {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
   const { inputFocus } = useCommentContext();
   const { toast } = useToast();
   const currentBoard =
@@ -126,6 +127,18 @@ export default function PostPage() {
     setIsUserReportModalOpen(false);
   };
 
+  // BackAppBar 이동 path 설정
+  const handleNavigation = () => {
+    const previousPath = location.state?.from || '/default';
+    console.log('이전 경로: ', previousPath);
+
+    if (previousPath.startsWith('/my-page')) {
+      return previousPath;
+    } else {
+      return `/board/${currentBoard.textId}`;
+    }
+  };
+
   // 로딩과 에러 상태에 따라 조건부 렌더링
   if (isLoading) {
     return (
@@ -165,7 +178,11 @@ export default function PostPage() {
   return (
     <div className={styles.container}>
       <div className={styles.backAppBar}>
-        <BackAppBar backgroundColor={'#eaf5fd'} />
+        <BackAppBar
+          backgroundColor={'#eaf5fd'}
+          // backNavTo={`/board/${currentBoard.textId}`}
+          backNavTo={handleNavigation()}
+        />
       </div>
       <div className={styles.content}>
         <div className={styles.contentTop}>

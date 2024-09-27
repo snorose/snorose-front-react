@@ -97,7 +97,9 @@ export default function PostWritePage() {
           const newPostId = response.data.result.postId;
           currentBoard.id === 12 || isNotice
             ? navigate(`/board/${currentBoard.textId}/notice`)
-            : navigate(`/board/${currentBoard.textId}/post/${newPostId}`);
+            : navigate(
+                `/board/${BOARD_MENUS.find((menu) => menu.id === boardId).textId}/post/${newPostId}`
+              );
         }
       })
       .catch(({ response }) => {
