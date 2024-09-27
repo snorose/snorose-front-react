@@ -130,7 +130,6 @@ export default function PostPage() {
   // BackAppBar 이동 path 설정
   const handleNavigation = () => {
     const previousPath = location.state?.from || '/default';
-    console.log('이전 경로: ', previousPath);
 
     if (previousPath.startsWith('/my-page')) {
       return previousPath;

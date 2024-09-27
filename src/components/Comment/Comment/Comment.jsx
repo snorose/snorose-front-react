@@ -1,4 +1,5 @@
 import { forwardRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
@@ -16,6 +17,7 @@ import { useMutation } from '@tanstack/react-query';
 import { reportComment } from '@/apis';
 
 const Comment = forwardRef((props, ref) => {
+  const { pathname } = useLocation();
   const { data } = props;
   const {
     setIsEdit,
@@ -187,7 +189,12 @@ const Comment = forwardRef((props, ref) => {
         }}
       />
       <DeleteModal
-        id='comment-delete'
+        id={
+          pathname.startsWith('/board/permanent-snow') ||
+          pathname.startsWith('/board/exam-review')
+            ? 'comment-delete-no-points'
+            : 'comment-delete'
+        }
         isOpen={isDeleteModalOpen}
         closeFunction={() => {
           resetCommentState();
