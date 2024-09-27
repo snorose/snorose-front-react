@@ -28,7 +28,6 @@ export const useLogin = () => {
       } catch (e) {
         toast(e.response.data.message);
         setIsError(true);
-        console.log(e);
       }
     }
   };
