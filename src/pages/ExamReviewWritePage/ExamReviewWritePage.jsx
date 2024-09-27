@@ -25,6 +25,7 @@ import {
   FILE_MAX_SIZE,
   LECTURE_TYPES,
   MODAL_CONFIRM,
+  MUTATION_KEY,
   SEMESTERS,
   TOAST,
   YEARS,
@@ -36,6 +37,7 @@ export default function ExamReviewWritePage() {
   const { toast } = useToast();
 
   const createExamReview = useMutation({
+    mutationKey: [MUTATION_KEY.createExamReview],
     mutationFn: ({ data, file }) =>
       postExamReview({
         data,
@@ -229,13 +231,13 @@ export default function ExamReviewWritePage() {
       <CategoryFieldset
         title='P/F 수업입니다'
         hasCheckbox
-        value={isPF}
+        checked={isPF}
         setFn={setIsPF}
       />
       <CategoryFieldset
         title='온라인 수업입니다'
         hasCheckbox
-        value={isOnline}
+        checked={isOnline}
         setFn={setIsOnline}
       />
       <CategoryFieldset title='문항 수 및 시험 유형 설명' required>

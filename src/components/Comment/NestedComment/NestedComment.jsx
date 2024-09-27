@@ -6,6 +6,8 @@ import { Icon } from '@/components/Icon';
 
 import { timeAgo } from '@/utils';
 
+import { LIKE_TYPE } from '@/constants';
+
 import styles from '../Comment/Comment.module.css';
 
 export default function NestedComment({
@@ -15,7 +17,10 @@ export default function NestedComment({
   onCommentOptionClick,
 }) {
   const { commentId } = useCommentContext();
-  const { like, deleteLike } = useLike({ type: 'comments', typeId: data.id });
+  const { like, unlike } = useLike({
+    type: LIKE_TYPE.comment,
+    sourceId: data.id,
+  });
 
   const {
     userDisplay,
@@ -53,13 +58,7 @@ export default function NestedComment({
             {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
           </p>
         </div>
-        <p
-          className={styles.dot3}
-          onClick={(e) => {
-            e.stopPropagation();
-            onCommentOptionClick(data);
-          }}
-        >
+        <p className={styles.dot3} onClick={(e) => onCommentOptionClick(data)}>
           {!isDeleted && isVisible && (
             <Icon id='ellipsis-vertical' width='3' height='11' />
           )}
@@ -79,7 +78,7 @@ export default function NestedComment({
           <button
             className={styles.likedCount}
             type='button'
-            onClick={() => (isLiked ? deleteLike.mutate() : like.mutate())}
+            onClick={() => (isLiked ? unlike.mutate() : like.mutate())}
           >
             <Icon
               id='like'

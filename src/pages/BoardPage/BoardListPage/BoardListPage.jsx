@@ -17,6 +17,7 @@ import {
 } from '@/components';
 
 import { getBoard, timeAgo } from '@/utils';
+import { QUERY_KEY } from '@/constants';
 
 import styles from './BoardListPage.module.css';
 
@@ -26,12 +27,12 @@ export default function BoardListPage() {
   const currentBoard = getBoard(currentBoardTextId);
 
   const { data, ref, isLoading, status, isError, refetch } = usePagination({
-    queryKey: ['postList', currentBoard.id],
+    queryKey: [QUERY_KEY.posts, currentBoard.id],
     queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
   });
 
   const { data: noticeLineData } = useQuery({
-    queryKey: ['noticeLine', currentBoard.id],
+    queryKey: [QUERY_KEY.noticeLine, currentBoard.id],
     queryFn: () => getNoticeLine(currentBoard?.id),
   });
 

@@ -14,14 +14,14 @@ export const postComment = async ({ postId, parentId, content }) => {
     parentId,
     content,
   });
-  return response;
+  return response?.data.result;
 };
 
 export const deleteComment = async ({ postId, commentId }) => {
   const response = await authAxios.delete(
     `/v1/posts/${postId}/comments/${commentId}`
   );
-  return response;
+  return response?.data.result;
 };
 
 export const editComment = async ({ postId, commentId, content }) => {
@@ -31,7 +31,7 @@ export const editComment = async ({ postId, commentId, content }) => {
       content,
     }
   );
-  return response;
+  return response?.data.result;
 };
 
 export const reportComment = async (postId, commentId, body) => {

@@ -9,7 +9,7 @@ import { Icon } from '@/components/Icon';
 import styles from './InputBar.module.css';
 
 const InputBar = () => {
-  const { editComment, postComment } = useComment();
+  const { editComment, createComment } = useComment();
   const { toast } = useToast();
 
   const {
@@ -44,8 +44,7 @@ const InputBar = () => {
       setIsEdit(false);
       setCommentId(undefined);
     } else {
-      postComment.mutate({ parentId: commentId, content });
-      setCommentId(undefined);
+      createComment.mutate({ parentId: commentId, content });
     }
 
     setContent('');

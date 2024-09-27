@@ -9,7 +9,7 @@ import { useToast } from '@/hooks';
 import { DeleteModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 
-import { TOAST } from '@/constants';
+import { QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './ReviewDownload.module.css';
 
@@ -44,14 +44,14 @@ export default function ReviewDownload({
     try {
       await downloadExamReview();
 
-      const reviewDetail = queryClient.getQueryData(['reviewDetail', postId]);
+      const reviewDetail = queryClient.getQueryData([QUERY_KEY.post, postId]);
       const { isDownloaded } = reviewDetail ?? { isDownloaded: false };
 
-      queryClient.setQueryData(['reviewDetail', postId], (prev) => {
+      queryClient.setQueryData([QUERY_KEY.post, postId], (prev) => {
         return { ...prev, isDownloaded: true };
       });
 
-      queryClient.setQueryData(['myPageUserInfo'], (prev) => ({
+      queryClient.setQueryData([QUERY_KEY.userInfo], (prev) => ({
         ...prev,
         balance: isDownloaded ? prev.balance : prev.balance - 50,
       }));

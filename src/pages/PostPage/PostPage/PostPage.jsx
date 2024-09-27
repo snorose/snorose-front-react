@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -21,8 +21,13 @@ import {
 } from '@/components';
 
 import { timeAgo } from '@/utils';
-
-import { BOARD_MENUS, TOAST } from '@/constants';
+import {
+  BOARD_MENUS,
+  LIKE_TYPE,
+  MUTATION_KEY,
+  QUERY_KEY,
+  TOAST,
+} from '@/constants';
 
 import styles from './PostPage.module.css';
 
@@ -34,25 +39,26 @@ export default function PostPage() {
   const { toast } = useToast();
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === pathname.split('/')[2]) || {};
-  const [postData, setPostData] = useState(null);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
   const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
 
-  // 게시글 데이터 받아오기
   const { data, isLoading, error, isError } = useQuery({
-    queryKey: ['postContent', postId],
+    queryKey: [QUERY_KEY.post, postId],
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
   });
 
-  const { scrap, deleteScrap } = useScrap();
-  const { like, deleteLike } = useLike({ type: 'posts', typeId: postId });
+  const { scrap, unscrap } = useScrap();
+  const { like, unlike } = useLike({
+    type: LIKE_TYPE.post,
+    sourceId: postId,
+  });
 
   const { mutate: reportPostMutate } = useMutation({
-    mutationKey: 'reportPost',
+    mutationKey: [MUTATION_KEY.reportPost],
     mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
     onSuccess: ({ message }) => {
       toast(message);
@@ -63,7 +69,7 @@ export default function PostPage() {
   });
 
   const { mutate: reportUserMutate } = useMutation({
-    mutationKey: 'reportUser',
+    mutationKey: [MUTATION_KEY.reportUser],
     mutationFn: (body) => reportUser(body),
     onSuccess: ({ message }) => {
       toast(message);
@@ -73,14 +79,6 @@ export default function PostPage() {
     },
   });
 
-  // 데이터 화면 표시
-  useEffect(() => {
-    if (data) {
-      setPostData(data);
-    }
-  }, [data]);
-
-  // 게시글 삭제 핸들러
   const handleDelete = async () => {
     try {
       const response = await deletePost(currentBoard.id, postId);
@@ -132,7 +130,7 @@ export default function PostPage() {
   if (isLoading) {
     return (
       <>
-        <BackAppBar notFixed/>
+        <BackAppBar notFixed />
         <FetchLoading>게시글 불러오는 중...</FetchLoading>
       </>
     );
@@ -145,7 +143,7 @@ export default function PostPage() {
   if (isError) {
     return (
       <>
-        <BackAppBar notFixed/>
+        <BackAppBar notFixed />
         <FetchLoading animation={false}>
           게시글을 불러오지 못했습니다.
         </FetchLoading>
@@ -153,10 +151,10 @@ export default function PostPage() {
     );
   }
 
-  if (!postData) {
+  if (!data) {
     return (
       <>
-        <BackAppBar notFixed/>
+        <BackAppBar notFixed />
         <FetchLoading animation={false}>
           게시글을 찾을 수 없습니다.
         </FetchLoading>
@@ -173,22 +171,20 @@ export default function PostPage() {
         <div className={styles.contentTop}>
           <div className={styles.contentTopLeft}>
             <Icon id='cloud' width='25' height='16' />
-            <p>{postData.userDisplay || 'Unknown'}</p>
+            <p>{data.userDisplay || 'Unknown'}</p>
             <p className={styles.dot}>·</p>
             <p>
-              {timeAgo(postData.createdAt)}
-              {postData.isEdited && ' (수정됨)'}
+              {timeAgo(data.createdAt)}
+              {data.isEdited && ' (수정됨)'}
             </p>
           </div>
           <div
             style={{
-              display:
-                postData.isNotice && !postData.isWriter ? 'none' : 'block',
+              display: data.isNotice && !data.isWriter ? 'none' : 'block',
             }}
             className={styles.dot3}
             onClick={() => {
-              console.log(postData);
-              postData.isWriter
+              data.isWriter
                 ? setIsOptionsModalOpen(true)
                 : setIsReportModalOpen(true);
             }}
@@ -198,48 +194,48 @@ export default function PostPage() {
         </div>
         <div className={styles.title}>
           <p>
-            {postData.title}
+            {data.title}
             <span className={styles.views}>
-              &nbsp;&nbsp;{postData.viewCount.toLocaleString()} views
+              &nbsp;&nbsp;{data.viewCount.toLocaleString()} views
             </span>
           </p>
         </div>
-        <p className={styles.text}>{postData.content}</p>
+        <p className={styles.text}>{data.content}</p>
         <div className={styles.post_bottom}>
           <div className={styles.count} onClick={inputFocus}>
             <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
-            <p>{postData.commentCount.toLocaleString()}</p>
+            <p>{data.commentCount.toLocaleString()}</p>
           </div>
           <div
             className={styles.count}
-            onClick={() =>
-              postData.isLiked ? deleteLike.mutate() : like.mutate()
-            }
+            onClick={() => (data.isLiked ? unlike.mutate() : like.mutate())}
           >
             <Icon
               id='like'
               width='13'
               height='12'
-              fill={postData.isLiked ? '#5F86BF' : '#D9D9D9'}
+              fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
             />
-            <p>{postData.likeCount.toLocaleString()}</p>
+            <p>{data.likeCount.toLocaleString()}</p>
           </div>
           <div
             className={styles.count}
             onClick={() =>
-              postData.isScrapped ? deleteScrap.mutate() : scrap.mutate()
+              data.isScrapped ? unscrap.mutate() : scrap.mutate()
             }
           >
             <Icon
               id='bookmark-fill'
               width='10'
               height='13'
-              fill={postData.isScrapped ? '#5F86BF' : '#D9D9D9'}
+              fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
             />
-            <p>{postData.scrapCount}</p>
+            <p>{data.scrapCount.toLocaleString()}</p>
           </div>
         </div>
       </div>
+      <CommentList commentCount={data.commentCount} />
+      <InputBar />
       <OptionModal
         id='post-more-options'
         isOpen={isOptionsModalOpen}
@@ -282,8 +278,6 @@ export default function PostPage() {
         onOptionClick={handleUserReportOptionModalOptionClick}
         closeFn={() => setIsUserReportModalOpen(false)}
       />
-      <CommentList commentCount={postData.commentCount} />
-      <InputBar />
     </div>
   );
 }

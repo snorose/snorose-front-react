@@ -6,7 +6,7 @@ import { getMyPageUserInfo, withdrawAccount } from '@/apis';
 
 import { useToast } from '@/hooks';
 
-import { TOAST } from '@/constants';
+import { QUERY_KEY, TOAST } from '@/constants';
 
 const useAuth = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const useAuth = () => {
     isSuccess,
     refetch,
   } = useQuery({
-    queryKey: ['myPageUserInfo'],
+    queryKey: [QUERY_KEY.userInfo],
     queryFn: getMyPageUserInfo,
     enabled: hasToken,
     staleTime: 1000 * 60 * 60 * 7,
@@ -42,7 +42,7 @@ const useAuth = () => {
 
   const logout = () => {
     localStorage.removeItem('accessToken');
-    queryClient.removeQueries(['myPageUserInfo']);
+    queryClient.removeQueries([QUERY_KEY.userInfo]);
     navigate('/');
     refetch();
   };

@@ -6,13 +6,14 @@ import { usePagination } from '@/hooks';
 
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
+import { QUERY_KEY } from '@/constants';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './ActivityPage.module.css';
 
 export default function ScrapExamReviewPage() {
-  const { data, error, ref, isLoading, isError } = usePagination({
-    queryKey: ['getMyScrapReviewList'],
+  const { data, ref, isLoading, isError, error } = usePagination({
+    queryKey: [QUERY_KEY.myScrappedExamReviews],
     queryFn: ({ pageParam }) => getMyScrapReviewList({ page: pageParam }),
   });
 

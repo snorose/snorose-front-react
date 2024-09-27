@@ -9,22 +9,56 @@ import {
 
 import { useToast } from '@/hooks';
 
-import { flatPaginationCache, toPaginationCacheFormat } from '@/utils';
-import { TOAST } from '@/constants';
+import {
+  deleteIfTargetComment,
+  editIfTargetComment,
+  flatPaginationCache,
+  toPaginationCacheFormat,
+} from '@/utils';
+
+import {
+  COMMENT_ACTION_TYPE,
+  MUTATION_KEY,
+  QUERY_KEY,
+  TOAST,
+} from '@/constants';
 
 export default function useComment() {
   const { postId } = useParams();
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const postComment = useMutation({
+  const updateCommentCache = (actionIfTargetComment) => {
+    queryClient.setQueryData([QUERY_KEY.comments, postId], (prev) => {
+      const flattenComments = flatPaginationCache(prev);
+      const updatedComments = flattenComments.map(actionIfTargetComment);
+      return toPaginationCacheFormat(updatedComments);
+    });
+  };
+
+  const updateCommentCountCache = ({ type }) => {
+    queryClient.setQueryData([QUERY_KEY.post, postId], (prev) => ({
+      ...prev,
+      commentCount:
+        type === COMMENT_ACTION_TYPE.create
+          ? prev.commentCount + 1
+          : prev.commentCount - 1,
+    }));
+  };
+
+  const onError = ({ response }) => {
+    toast(response.data.message);
+  };
+
+  const createComment = useMutation({
+    mutationKey: [MUTATION_KEY.createComment],
     mutationFn: async ({ content, parentId }) => {
       return await post({ postId, parentId, content });
     },
-    onSuccess: ({ data }) => {
-      queryClient.setQueryData(['comments', postId], (prev) => {
-        const { result: newComment } = data;
-        const { parentId } = newComment;
+    onSuccess: (newComment) => {
+      const { parentId } = newComment;
+
+      queryClient.setQueryData([QUERY_KEY.comments, postId], (prev) => {
         const flattenComments = flatPaginationCache(prev);
 
         if (parentId) {
@@ -40,103 +74,56 @@ export default function useComment() {
         return toPaginationCacheFormat(newComments);
       });
 
+      updateCommentCountCache({ type: COMMENT_ACTION_TYPE.create });
       toast(TOAST.COMMENT.create);
     },
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
+    onError,
   });
 
-  const setAsDeleted = (comments, commentId) => {
-    return comments.map((comment) =>
-      comment.id === commentId ? { ...comment, isDeleted: true } : comment
-    );
-  };
-
   const deleteComment = useMutation({
+    mutationKey: [MUTATION_KEY.deleteComment],
     mutationFn: async ({ commentId }) => {
       return await remove({ postId, commentId });
     },
-    onSuccess: ({ data }) => {
-      queryClient.setQueryData(['comments', postId], (prev) => {
-        const { result: deletedComment } = data;
-        const { id, parentId } = deletedComment;
-        const flattenComments = flatPaginationCache(prev);
+    onSuccess: (deletedComment) => {
+      const { id } = deletedComment;
 
-        if (parentId) {
-          const updatedComments = flattenComments.map((comment) =>
-            comment.id === parentId
-              ? {
-                  ...comment,
-                  children: setAsDeleted(comment.children, id),
-                }
-              : comment
-          );
-          return toPaginationCacheFormat(updatedComments);
-        }
+      updateCommentCache((comment) =>
+        deleteIfTargetComment({
+          comment,
+          targetId: id,
+        })
+      );
 
-        const updatedComments = setAsDeleted(flattenComments, id);
-        return toPaginationCacheFormat(updatedComments);
-      });
-
+      updateCommentCountCache({ type: COMMENT_ACTION_TYPE.delete });
       toast(TOAST.COMMENT.delete);
     },
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
+    onError,
   });
 
-  const setAsUpdated = ({ comments, commentId, content }) => {
-    return comments.map((comment) =>
-      comment.id === commentId
-        ? { ...comment, content, isUpdated: true }
-        : comment
-    );
-  };
-
   const editComment = useMutation({
+    mutationKey: [MUTATION_KEY.editComment],
     mutationFn: async ({ commentId, content, parentId }) => {
       return await edit({ postId, commentId, content, parentId });
     },
-    onSuccess: ({ data }) => {
-      queryClient.setQueryData(['comments', postId], (prev) => {
-        const { result: editedComment } = data;
-        const { id, parentId, content } = editedComment;
-        const flattenComments = flatPaginationCache(prev);
+    onSuccess: (editedComment) => {
+      const { id, content } = editedComment;
 
-        if (parentId) {
-          const updatedComments = flattenComments.map((comment) =>
-            comment.id === parentId
-              ? {
-                  ...comment,
-                  children: setAsUpdated({
-                    comments: comment.children,
-                    commentId: id,
-                    content,
-                  }),
-                }
-              : comment
-          );
-          return toPaginationCacheFormat(updatedComments);
-        }
-
-        const updatedComments = setAsUpdated({
-          comments: flattenComments,
-          commentId: id,
+      updateCommentCache((comment) =>
+        editIfTargetComment({
+          comment,
+          targetId: id,
           content,
-        });
-        return toPaginationCacheFormat(updatedComments);
-      });
+        })
+      );
 
       toast(TOAST.COMMENT.edit);
     },
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
+    onError,
   });
 
   return {
-    postComment,
+    createComment,
     deleteComment,
     editComment,
   };

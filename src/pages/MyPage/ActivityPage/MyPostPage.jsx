@@ -8,13 +8,14 @@ import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
 import { getBoardTextId } from '@/utils';
 
+import { QUERY_KEY } from '@/constants';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './ActivityPage.module.css';
 
 export default function MyPostPage() {
-  const { data, error, ref, isLoading, isError } = usePagination({
-    queryKey: ['getMyPostList'],
+  const { data, ref, isLoading, isError, error } = usePagination({
+    queryKey: [QUERY_KEY.myPosts],
     queryFn: ({ pageParam }) => getMyPostList({ page: pageParam }),
   });
 

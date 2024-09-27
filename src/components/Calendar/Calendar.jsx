@@ -6,6 +6,8 @@ import { getMonthlyAttendanceHistory } from '@/apis';
 import { Icon } from '@/components/Icon';
 import { Tile } from '@/components/Calendar';
 
+import { QUERY_KEY } from '@/constants';
+
 import { StyledCalendar } from '@/components/Calendar/Calendar.style.jsx';
 
 export default function Calendar({ callback }) {
@@ -15,7 +17,7 @@ export default function Calendar({ callback }) {
   const [month, setMonth] = useState(today.getMonth() + 1);
 
   const { data } = useQuery({
-    queryKey: ['monthlyAttendanceHistory', year, month],
+    queryKey: [QUERY_KEY.attendance, year, month],
     queryFn: () => getMonthlyAttendanceHistory({ year, month }),
     staleTime: 1000 * 60 * 7,
   });
