@@ -138,6 +138,18 @@ export const MODAL_OPTIONS = [
     },
   },
   {
+    id: 'comment-delete-no-points',
+    title: '댓글을 삭제할까요?',
+    titleColor: '#000',
+    children: {
+      text: '',
+    },
+    bottom: {
+      redBtn: '삭제',
+      greyBtn: '취소',
+    },
+  },
+  {
     id: 'exam-review-report',
     title: '시험 후기 신고',
     titleColor: '#000',
