@@ -37,7 +37,7 @@ export default function MyPostPage() {
   return (
     <main className={styles.activityPage}>
       <header>
-        <BackAppBar stroke='#000' />
+        <BackAppBar stroke='#000' backNavTo={'/my-page?tab=activity'} />
       </header>
 
       <section className={styles.contentWrapper}>
@@ -52,6 +52,7 @@ export default function MyPostPage() {
                 ref={index === myPostList.length - 1 ? ref : undefined}
                 key={post.postId}
                 to={`/board/${getBoardTextId(post.boardId)}/post/${post.postId}`}
+                state={{ from: '/my-page/my-post' }}
               >
                 <PostBar data={post} />
               </Link>

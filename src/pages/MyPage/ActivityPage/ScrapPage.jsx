@@ -37,7 +37,7 @@ export default function ScrapPage() {
   return (
     <main className={styles.activityPage}>
       <header>
-        <BackAppBar stroke='#000' />
+        <BackAppBar stroke='#000' backNavTo={'/my-page?tab=activity'} />
       </header>
 
       <section className={styles.contentWrapper}>
@@ -52,6 +52,7 @@ export default function ScrapPage() {
                 key={post.postId}
                 ref={index === myScrapPostList.length - 2 ? ref : undefined}
                 to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
+                state={{ from: '/my-page/scrap' }}
               >
                 <PostBar data={post} />
               </Link>
