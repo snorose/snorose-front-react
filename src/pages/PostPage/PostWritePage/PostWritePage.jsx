@@ -214,7 +214,7 @@ export default function PostWritePage() {
       <DeleteModal
         id='post-write-exit-check'
         isOpen={isCheckModalOpen}
-        closeFunction={() => setIsCheckModalOpen(false)}
+        closeFn={() => setIsCheckModalOpen(false)}
         redBtnFunction={() => navigate(-1)}
       />
     </>
