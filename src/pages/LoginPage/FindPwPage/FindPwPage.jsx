@@ -49,6 +49,7 @@ export default function FindPwPage() {
     <div className={styles.pageFrame}>
       <form
         onSubmit={(e) => {
+          e.preventDefault();
           if (formData.loginId && formData.email) findPw(e, formData, navigate);
         }}
       >
