@@ -114,10 +114,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3.5625rem;
   height: 1.5rem;
   flex-shrink: 0;
   border-radius: 0.3125rem;
+  padding: 0 11px;
   background: var(--Blue-1, #ddebf6);
   color: var(--Blue-4, #00368e);
   font-size: 0.75rem;
