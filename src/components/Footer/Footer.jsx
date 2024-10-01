@@ -8,10 +8,11 @@ export default function Footer() {
     <footer className={styles.footer}>
       <Icon id='logo' width={109} height={20} />
       <div className={styles.info}>
-        <a href='mailto:smsnorose@gmail.com'>
-          <p className={styles.contact}>CONTACT US : smsnorose@gmail.com</p>
-        </a>
-        <p className={styles.give}>숙명여대 후원하기 : 신한 110-123-123123</p>
+        <p>
+          {'CONTACT US : '}
+          <a href='mailto:smsnorose@gmail.com'>smsnorose@gmail.com</a>
+        </p>
+        <p>숙명여대 후원하기 : 신한 110-123-123123</p>
         <div className={styles.menu}>
           <Link to='/my-page/service-policy'>
             <span>서비스 이용 약관</span>
