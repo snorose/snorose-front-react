@@ -37,18 +37,20 @@ export default function ChangePasswordPage() {
     });
 
   const validatePasswordStrength = (password) => {
+    const spaceRegex = /^\S*$/;
     const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
     const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
 
     if (
       password.length < 8 ||
+      !spaceRegex.test(password) ||
       !/[A-Za-z]/.test(password) ||
       !/\d/.test(password) ||
       !specialCharRegex.test(password) ||
       emojiRegex.test(password)
     ) {
       setNewPasswordError(
-        '영어, 숫자, 특수문자를 포함해 8자 이상으로 작성해주세요'
+        '띄어쓰기를 제외하고, 영어, 숫자, 특수문자를 포함한 8자 이상으로 작성해 주세요.'
       );
       setIsPasswordValid(false);
     } else {
