@@ -111,7 +111,7 @@ export default function PrivacyPolicyPage() {
     <main className={styles.policyPage}>
       <CloseAppBar alignRight={true} stroke='#000' />
       <section className={styles.contentWrapper}>
-        <h1 className={styles.title}>개인 정보 처리 방침</h1>
+        <h1 className={styles.title}>개인정보 처리방침</h1>
         <article className={styles.content}>{privacyPolicyContent}</article>
       </section>
     </main>
