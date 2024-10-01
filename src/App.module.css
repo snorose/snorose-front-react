@@ -1,6 +1,6 @@
 .app {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   max-width: var(--default-width);
   margin: 0 auto;
   position: relative;
