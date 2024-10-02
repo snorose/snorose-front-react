@@ -15,8 +15,6 @@ const authAxios = axios.create({
   },
 });
 
-authAxios.defaults.timeout = 1000 * 15;
-
 authAxios.interceptors.response.use(
   (response) => {
     return response;
