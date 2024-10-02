@@ -5,7 +5,7 @@ import { FetchLoading, PostBar, PTR } from '@/components';
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
 
 export default function ExamReviewList({ result }) {
-  const { data, ref, isLoading, isError, refetch } = result;
+  const { data, ref, isLoading, isFetching, isError, refetch } = result;
 
   if (isLoading) {
     return <FetchLoading>불러오는 중</FetchLoading>;
@@ -37,6 +37,7 @@ export default function ExamReviewList({ result }) {
             <PostBar data={post} hasLike={false} />
           </Link>
         ))}
+        {isFetching && <FetchLoading />}
       </ul>
     </PTR>
   );

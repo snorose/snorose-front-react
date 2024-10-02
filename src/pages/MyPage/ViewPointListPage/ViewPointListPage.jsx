@@ -15,7 +15,7 @@ export default function ViewPointListPage() {
     isRequiredAuth: true,
   });
 
-  const { data, ref, isLoading, isError } = usePagination({
+  const { data, ref, isLoading, isFetching, isError } = usePagination({
     queryKey: [QUERY_KEY.pointHistory],
     queryFn: ({ pageParam }) => getPointList({ page: pageParam }),
   });
@@ -89,6 +89,7 @@ export default function ViewPointListPage() {
                 </li>
               )
             )}
+            {isFetching && <FetchLoading />}
           </ul>
         ) : (
           <p>적립된 포인트 내역이 없습니다.</p>
