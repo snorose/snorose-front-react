@@ -51,14 +51,14 @@ export default function VerifyPage({ setStep }) {
     <section className={styles.content}>
       <div className={styles.verify}>
         <Input
-          label='아이디'
+          label='학번'
           type='text'
           value={studentId}
-          placeholder='숙명포털 아이디를 입력해주세요'
+          placeholder='학번을 입력해주세요'
           onChange={(event) => setStudentId(event.target.value)}
         />
         <InputPassword
-          title='비밀번호'
+          title='숙명포털 비밀번호'
           placeholder='숙명포털 비밀번호를 입력해주세요'
           value={password}
           onChange={(event) => setPassword(event.target.value)}
