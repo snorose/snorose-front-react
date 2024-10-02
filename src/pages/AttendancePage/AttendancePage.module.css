@@ -77,3 +77,18 @@
   font-size: 0.8125rem;
   color: #484848;
 }
+
+.loading {
+  max-width: var(--default-width);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #00000092;
+}
+
+.loading .text {
+  font-size: 1rem;
+  color: white;
+}
