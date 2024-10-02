@@ -40,7 +40,6 @@ const InputBar = () => {
         commentId,
         content,
       });
-      // setIsEdit(false);
     } else {
       createComment.mutate({ parentId: commentId, content });
     }
