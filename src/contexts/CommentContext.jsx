@@ -20,11 +20,9 @@ export function CommentContextProvider({ children }) {
   };
 
   const resetCommentState = (event) => {
-    if (event && inputRef.current && !inputRef.current.contains(event.target)) {
-      setCommentId(undefined);
-      setIsEdit(false);
-      // setContent('');
-    }
+    setCommentId(undefined);
+    setIsEdit(false);
+    setContent('');
   };
 
   const value = useMemo(
