@@ -26,10 +26,11 @@ export default function BoardListPage() {
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
 
-  const { data, ref, isLoading, status, isError, refetch } = usePagination({
-    queryKey: [QUERY_KEY.posts, currentBoard.id],
-    queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
-  });
+  const { data, ref, isLoading, isFetching, status, isError, refetch } =
+    usePagination({
+      queryKey: [QUERY_KEY.posts, currentBoard.id],
+      queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
+    });
 
   const { data: noticeLineData } = useQuery({
     queryKey: [QUERY_KEY.noticeLine, currentBoard.id],
@@ -42,7 +43,7 @@ export default function BoardListPage() {
   if (isLoading) {
     return (
       <>
-        <BackAppBar notFixed/>
+        <BackAppBar notFixed />
         <FetchLoading>게시글 불러오는 중...</FetchLoading>
       </>
     );
@@ -51,7 +52,7 @@ export default function BoardListPage() {
   if (isError) {
     return (
       <>
-        <BackAppBar notFixed/>
+        <BackAppBar notFixed />
         <FetchLoading animation={false}>
           게시글을 불러오지 못했습니다.
         </FetchLoading>
@@ -96,6 +97,7 @@ export default function BoardListPage() {
                 />
               </Link>
             ))}
+          {isFetching && <FetchLoading />}
         </div>
       </PTR>
       <OptionModal

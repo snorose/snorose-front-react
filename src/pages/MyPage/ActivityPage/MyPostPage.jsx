@@ -14,7 +14,7 @@ import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 import styles from './ActivityPage.module.css';
 
 export default function MyPostPage() {
-  const { data, ref, isLoading, isError, error } = usePagination({
+  const { data, ref, isLoading, isFetching, isError, error } = usePagination({
     queryKey: [QUERY_KEY.myPosts],
     queryFn: ({ pageParam }) => getMyPostList({ page: pageParam }),
   });
@@ -69,6 +69,7 @@ export default function MyPostPage() {
               </div>
             </div>
           )}
+          {isFetching && <FetchLoading />}
         </article>
       </section>
     </main>

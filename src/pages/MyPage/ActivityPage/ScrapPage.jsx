@@ -14,7 +14,7 @@ import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 import styles from './ActivityPage.module.css';
 
 export default function ScrapPage() {
-  const { data, ref, isLoading, isError, error } = usePagination({
+  const { data, ref, isLoading, isFetching, isError, error } = usePagination({
     queryKey: [QUERY_KEY.myScrappedPosts],
     queryFn: ({ pageParam }) => getMyScrapPostList({ page: pageParam }),
   });
@@ -71,6 +71,7 @@ export default function ScrapPage() {
               </div>
             </div>
           )}
+          {isFetching && <FetchLoading />}
         </article>
       </section>
     </main>

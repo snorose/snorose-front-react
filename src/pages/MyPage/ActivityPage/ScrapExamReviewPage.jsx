@@ -12,7 +12,7 @@ import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 import styles from './ActivityPage.module.css';
 
 export default function ScrapExamReviewPage() {
-  const { data, ref, isLoading, isError, error } = usePagination({
+  const { data, ref, isLoading, isFetching, isError, error } = usePagination({
     queryKey: [QUERY_KEY.myScrappedExamReviews],
     queryFn: ({ pageParam }) => getMyScrapReviewList({ page: pageParam }),
   });
@@ -68,6 +68,7 @@ export default function ScrapExamReviewPage() {
               </div>
             </div>
           )}
+          {isFetching && <FetchLoading />}
         </article>
       </section>
     </main>
