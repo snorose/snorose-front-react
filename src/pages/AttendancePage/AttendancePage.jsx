@@ -18,6 +18,7 @@ import {
 } from '@/constants';
 
 import styles from './AttendancePage.module.css';
+import { FetchLoading } from '@/components/index.js';
 
 export default function AttendancePage() {
   const queryClient = useQueryClient();
@@ -25,6 +26,7 @@ export default function AttendancePage() {
   const { toast } = useToast();
   const [attendanceHistoryByMonth, setAttendanceHistoryByMonth] = useState([]);
   const [disabled, setDisabled] = useState(false);
+  const [loading, setLoading] = useState();
   const { title, content } =
     attendanceHistoryByMonth?.length > 0
       ? ATTENDANCE_MESSAGE.CONSECUTIVE
@@ -43,6 +45,7 @@ export default function AttendancePage() {
           disabled={disabled}
           onClick={() => {
             setDisabled(true);
+            setLoading(true);
             updatePoint({
               userId: userInfo.userId,
               category: POINT_CATEGORY_ENUM.ATTENDANCE,
@@ -64,6 +67,7 @@ export default function AttendancePage() {
               })
               .finally(() => {
                 setDisabled(false);
+                setLoading(false);
               });
           }}
         >
@@ -88,6 +92,13 @@ export default function AttendancePage() {
           <Icon id='point-circle' width='32' height='32' />
         </div> */}
       </div>
+      {loading && (
+        <div className={styles.loading}>
+          <FetchLoading>
+            <span className={styles.text}>잠시만 기다려주세요</span>
+          </FetchLoading>
+        </div>
+      )}
     </main>
   );
 }
