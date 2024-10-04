@@ -38,7 +38,7 @@
   display: flex;
   flex-shrink: 0;
   position: relative;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .profileImg img {

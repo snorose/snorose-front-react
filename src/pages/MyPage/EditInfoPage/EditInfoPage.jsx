@@ -67,8 +67,8 @@ export default function EditInfoPage() {
         const { data } = response;
 
         toast(
-          data.userProfile ||
-            data.userName ||
+          // data.userProfile ||
+          data.userName ||
             data.birthday ||
             data.nickname ||
             data.major ||
@@ -213,7 +213,7 @@ export default function EditInfoPage() {
     <main className={styles.editInfoPage}>
       <header className={styles.topContainer}>
         <div>
-          <BackAppBar notFixed/>
+          <BackAppBar notFixed />
         </div>
         <div className={styles.submitBtn}>
           <ActionButton
@@ -230,27 +230,28 @@ export default function EditInfoPage() {
         <div className={styles.profileImgContainer}>
           <div
             className={styles.profileImg}
-            onClick={() => document.getElementById('profileImageInput').click()}
+            // onClick={() => document.getElementById('profileImageInput').click()}
           >
             <img
-              src={profileImage ?? defaultProfile}
+              // src={profileImage ?? defaultProfile}
+              src={defaultProfile}
               alt='프로필'
               className={styles.profilePreview}
             />
-            <Icon
+            {/* <Icon
               className={styles.blueCamera}
               id='blue-camera'
               width='24'
               height='24'
-            />
+            /> */}
           </div>
-          <input
+          {/* <input
             type='file'
             id='profileImageInput'
             style={{ display: 'none' }}
             accept='image/*'
             onChange={handleProfileImageChange}
-          />
+          /> */}
         </div>
 
         <div className={styles.contentContainer}>

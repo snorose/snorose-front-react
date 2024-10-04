@@ -55,7 +55,8 @@ export default function MyPage() {
 
       <div className={styles.profileImage}>
         <img
-          src={userInfo.userProfile ?? defaultProfile}
+          // src={userInfo.userProfile ?? defaultProfile}
+          src={defaultProfile}
           alt={`${userInfo.userName} 프로필`}
         />
       </div>
