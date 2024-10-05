@@ -519,13 +519,13 @@ export const routeList = [
       //     hideNav: true,
       //   },
       // },
-      // {
-      //   path: '*',
-      //   element: <NotFoundPage />,
-      //   meta: {
-      //     hideNav: true,
-      //   },
-      // },
+      {
+        path: '*',
+        element: <NotFoundPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
     ],
   },
 ];
