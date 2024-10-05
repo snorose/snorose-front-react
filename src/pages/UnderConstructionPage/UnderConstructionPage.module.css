@@ -63,3 +63,7 @@
 .icon {
   font-size: 1.6rem;
 }
+
+.icon:hover {
+  color: #82b5ff;
+}

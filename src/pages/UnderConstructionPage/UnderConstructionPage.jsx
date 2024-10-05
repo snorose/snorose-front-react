@@ -28,7 +28,6 @@ export default function UnderConstructionPage() {
         <a className={styles.icon} href='https://www.instagram.com/snorose1906'>
           <FaInstagram />
         </a>
-
         <a className={styles.icon} href='mailto:snorose1906@gmail.com'>
           <IoMail />
         </a>
