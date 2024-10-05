@@ -180,20 +180,6 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
       hideNav: true,
     },
   },
-  {
-    path: `/board/${boardPath}/search/:keyword?`,
-    element: (
-      <ProtectedRoute
-        roles={getRolesForReadBoard(boardPath)}
-        message={'게시판 접근 권한이 없습니다.'}
-      >
-        <PostSearchPage />
-      </ProtectedRoute>
-    ),
-    meta: {
-      hideNav: true,
-    },
-  },
 ]);
 
 export const routeList = [
@@ -215,7 +201,7 @@ export const routeList = [
       },
       ...boardRoutes,
       {
-        path: '/board/all/search/:keyword',
+        path: '/board/all/search',
         element: <PostSearchPage />,
         meta: {
           hideNav: true,
@@ -247,7 +233,7 @@ export const routeList = [
         },
       },
       {
-        path: '/board/exam-review/search/:keyword',
+        path: '/board/exam-review/search',
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
@@ -447,7 +433,7 @@ export const routeList = [
         path: '/verify',
         element: (
           <ProtectedRoute
-            // roles={[ROLE.preUser, ROLE.admin]}
+            roles={[ROLE.preUser, ROLE.admin]}
             message='이미 인증을 완료했거나 인증 대상이 아닙니다'
           >
             <SnoroseVerifyPage />

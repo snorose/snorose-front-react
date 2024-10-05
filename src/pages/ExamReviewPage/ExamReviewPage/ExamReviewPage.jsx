@@ -21,9 +21,9 @@ const EXAM_TYPE_LEBEL = convertToObject(EXAM_TYPES);
 
 export default function ExamReviewPage() {
   const navigate = useNavigate();
-  const { pathname, search } = useLocation();
-  const urlKeyword = decodeURIComponent(pathname.split('/')[4] || '');
+  const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
+  const urlKeyword = queryParams.get('query');
 
   const [isOpen, setIsOpen] = useState({
     year: false,
@@ -47,7 +47,7 @@ export default function ExamReviewPage() {
   const reviewResult = usePagination({
     queryKey: [QUERY_KEY.posts, 32],
     queryFn: ({ pageParam }) => getReviewList(pageParam),
-    enabled: urlKeyword === '',
+    enabled: urlKeyword === null,
   });
 
   const searchResult = useSearch({
@@ -83,7 +83,7 @@ export default function ExamReviewPage() {
     }
 
     navigate(
-      `/board/exam-review/search/${encodeURIComponent(keyword)}?${param}`,
+      `/board/exam-review/search?query=${encodeURIComponent(keyword)}${param}`,
       { replace: true }
     );
   }, [lectureYear, semester, examType]);
@@ -138,10 +138,10 @@ export default function ExamReviewPage() {
         />
       </div>
 
-      {urlKeyword !== '' ? (
-        <ExamReviewSearchList result={searchResult} />
-      ) : (
+      {urlKeyword === null ? (
         <ExamReviewList result={reviewResult} />
+      ) : (
+        <ExamReviewSearchList result={searchResult} />
       )}
 
       <WriteButton to='/board/exam-review-write' />

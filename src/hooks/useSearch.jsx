@@ -39,11 +39,13 @@ export default function useSearch({ urlKeyword, filterOption }) {
         );
 
         navigate(
-          `/board/${boardType}/search/${encodeURIComponent(keyword)}?${param}`
+          `/board/${boardType}/search?query=${encodeURIComponent(keyword)}${param}`
         );
         return;
       }
-      navigate(`/board/${boardType}/search/${encodeURIComponent(keyword)}`);
+      navigate(
+        `/board/${boardType}/search?query=${encodeURIComponent(keyword)}`
+      );
     }
   };
 

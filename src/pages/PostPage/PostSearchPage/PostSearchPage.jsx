@@ -11,10 +11,11 @@ import { PLACEHOLDER } from '@/constants';
 import styles from './PostSearchPage.module.css';
 
 export default function PostSearchPage() {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const current = pathname.split('/')[2];
 
-  const urlKeyword = decodeURIComponent(pathname.split('/')[4] || '');
+  const queryParams = new URLSearchParams(search);
+  const urlKeyword = queryParams.get('query');
 
   const searchResult = useSearch({
     urlKeyword,
