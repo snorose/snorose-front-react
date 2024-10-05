@@ -34,7 +34,8 @@ import styles from './PostPage.module.css';
 export default function PostPage() {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
   const { inputFocus } = useCommentContext();
   const { toast } = useToast();
   const currentBoard =
@@ -85,7 +86,7 @@ export default function PostPage() {
 
       if (response.status === 200) {
         toast(TOAST.POST.delete);
-        navigate(-1);
+        navigate(`/board/${currentBoard.textId}`);
       }
     } catch ({ response }) {
       toast(response.data.message);
@@ -124,6 +125,17 @@ export default function PostPage() {
     });
 
     setIsUserReportModalOpen(false);
+  };
+
+  // BackAppBar 이동 path 설정
+  const handleNavigation = () => {
+    const previousPath = location.state?.from || '/default';
+
+    if (previousPath.startsWith('/my-page')) {
+      return previousPath;
+    } else {
+      return `/board/${currentBoard.textId}`;
+    }
   };
 
   // 로딩과 에러 상태에 따라 조건부 렌더링
@@ -165,7 +177,11 @@ export default function PostPage() {
   return (
     <div className={styles.container}>
       <div className={styles.backAppBar}>
-        <BackAppBar backgroundColor={'#eaf5fd'} />
+        <BackAppBar
+          backgroundColor={'#eaf5fd'}
+          // backNavTo={`/board/${currentBoard.textId}`}
+          backNavTo={handleNavigation()}
+        />
       </div>
       <div className={styles.content}>
         <div className={styles.contentTop}>
@@ -254,7 +270,9 @@ export default function PostPage() {
       <DeleteModal
         id='post-delete'
         isOpen={isDeleteModalOpen}
-        closeFn={() => setIsDeleteModalOpen(false)}
+        closeFn={() => {
+          setIsDeleteModalOpen(false);
+        }}
         redBtnFunction={handleDelete}
       />
       <OptionModal

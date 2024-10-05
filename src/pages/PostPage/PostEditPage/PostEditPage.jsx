@@ -189,7 +189,7 @@ export default function PostEditPage() {
       <DeleteModal
         id='post-edit-exit-check'
         isOpen={isCheckModalOpen}
-        closeFunction={() => setIsCheckModalOpen(false)}
+        closeFn={() => setIsCheckModalOpen(false)}
         redBtnFunction={() => navigate(-1)}
       />
     </>

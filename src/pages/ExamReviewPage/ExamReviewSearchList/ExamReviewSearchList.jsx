@@ -6,7 +6,7 @@ import { PostBar } from '@/components/PostBar';
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
 
 export default function ExamReviewSearchList({ result }) {
-  const { data, ref, isLoading, isError, error } = result || {};
+  const { data, ref, isLoading, isFetching, isError, error } = result || {};
 
   if (isLoading) {
     return <FetchLoading>검색 중</FetchLoading>;
@@ -41,6 +41,7 @@ export default function ExamReviewSearchList({ result }) {
           <PostBar data={post} hasLike={false} />
         </Link>
       ))}
+      {isFetching && <FetchLoading />}
     </ul>
   );
 }

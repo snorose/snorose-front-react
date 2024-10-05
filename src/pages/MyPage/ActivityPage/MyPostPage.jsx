@@ -14,7 +14,7 @@ import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 import styles from './ActivityPage.module.css';
 
 export default function MyPostPage() {
-  const { data, ref, isLoading, isError, error } = usePagination({
+  const { data, ref, isLoading, isFetching, isError, error } = usePagination({
     queryKey: [QUERY_KEY.myPosts],
     queryFn: ({ pageParam }) => getMyPostList({ page: pageParam }),
   });
@@ -37,7 +37,7 @@ export default function MyPostPage() {
   return (
     <main className={styles.activityPage}>
       <header>
-        <BackAppBar stroke='#000' />
+        <BackAppBar stroke='#000' backNavTo={'/my-page?tab=activity'} />
       </header>
 
       <section className={styles.contentWrapper}>
@@ -52,6 +52,7 @@ export default function MyPostPage() {
                 ref={index === myPostList.length - 1 ? ref : undefined}
                 key={post.postId}
                 to={`/board/${getBoardTextId(post.boardId)}/post/${post.postId}`}
+                state={{ from: '/my-page/my-post' }}
               >
                 <PostBar data={post} />
               </Link>
@@ -68,6 +69,7 @@ export default function MyPostPage() {
               </div>
             </div>
           )}
+          {isFetching && <FetchLoading />}
         </article>
       </section>
     </main>

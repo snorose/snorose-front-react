@@ -13,7 +13,7 @@ const PolicyTab = () => {
     <>
       <div className={styles.infoWrapper}>
         {[
-          { label: '개인 정보 처리 방침', link: 'privacy-policy' },
+          { label: '개인정보 처리방침', link: 'privacy-policy' },
           { label: '서비스 이용 약관', link: 'service-policy' },
         ].map((item, index) => (
           <div className={styles.itemList} key={index}>

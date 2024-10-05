@@ -37,7 +37,7 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
       </div>
       <div className={styles.post_center}>
         <p className={styles.title}>{data.title}</p>
-        <p className={styles.text}>{data.content}</p>
+        <p className={styles.text}>{data.content ?? data.questionDetail}</p>
       </div>
       <div className={styles.post_bottom}>
         <span className={styles.board}>{data.boardName}</span>

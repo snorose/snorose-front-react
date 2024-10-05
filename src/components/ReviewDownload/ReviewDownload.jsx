@@ -80,12 +80,12 @@ export default function ReviewDownload({
         }}
       >
         <Icon id='file' width='10' height='14' />
-        <span>{fileName}</span>
+        <span className={styles.name}>{fileName}</span>
       </button>
       <DeleteModal
         id='exam-review-download'
         isOpen={isOpen}
-        closeFunction={() => setIsOpen(false)}
+        closeFn={() => setIsOpen(false)}
         redBtnFunction={handleDownload}
       />
     </>

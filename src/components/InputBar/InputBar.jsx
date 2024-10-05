@@ -14,11 +14,10 @@ const InputBar = () => {
 
   const {
     isEdit,
-    setIsEdit,
     commentId,
     content,
-    setCommentId,
     setContent,
+    resetCommentState,
     inputRef,
   } = useCommentContext();
 
@@ -41,13 +40,11 @@ const InputBar = () => {
         commentId,
         content,
       });
-      setIsEdit(false);
-      setCommentId(undefined);
     } else {
       createComment.mutate({ parentId: commentId, content });
     }
 
-    setContent('');
+    resetCommentState();
   };
 
   // command + enter 또는 ctrl + enter 입력 시 댓글 등록
@@ -63,7 +60,10 @@ const InputBar = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onClick={(event) => event.stopPropagation()}
+    >
       <div className={styles.input_bar}>
         <Icon id='cloud' width='25' height='16' />
         <TextareaAutosize

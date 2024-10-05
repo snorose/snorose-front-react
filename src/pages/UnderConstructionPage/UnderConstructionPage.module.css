@@ -1,0 +1,69 @@
+.main {
+  max-width: var(--default-width);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #eaf5fd;
+  /* background-color: black; */
+  background-image: url('/src/assets/images/symbolWhite50.png');
+  background-size: 350px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.title {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.description {
+  text-align: center;
+  line-height: 2rem;
+}
+
+.list {
+  width: 80%;
+  margin: 3rem 0;
+  font-size: 1rem;
+  word-break: keep-all;
+  color: red;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.list li {
+  margin-bottom: 1rem;
+}
+
+.thanks {
+  text-align: center;
+}
+
+/* bottom */
+.bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.links {
+  margin: 3rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon {
+  font-size: 1.6rem;
+}
+
+.icon:hover {
+  color: #82b5ff;
+}

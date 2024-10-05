@@ -28,7 +28,6 @@ export const useLogin = () => {
       } catch (e) {
         toast(e.response.data.message);
         setIsError(true);
-        console.log(e);
       }
     }
   };
@@ -40,15 +39,17 @@ export const findId = async (e, formData, navigate) => {
   e.preventDefault();
   const endpoint = '/v1/users/findid';
 
-  try {
-    const response = await defaultAxios.post(endpoint, formData);
+  if (formData.userName && formData.email && formData.studentNumber) {
+    try {
+      const response = await defaultAxios.post(endpoint, formData);
 
-    navigate('/found-id', {
-      state: { loginId: response?.data.result.loginId },
-    });
-  } catch (e) {
-    if (!e.response.data.isSuccess) {
-      navigate('/not-found-id', { state: { access: true } });
+      navigate('/found-id', {
+        state: { loginId: response?.data.result.loginId },
+      });
+    } catch (e) {
+      if (!e.response.data.isSuccess) {
+        navigate('/not-found-id', { state: { access: true } });
+      }
     }
   }
 };
@@ -57,15 +58,17 @@ export const findPw = async (e, formData, navigate) => {
   e.preventDefault();
   const endpoint = '/v1/users/findPW';
 
-  try {
-    await defaultAxios.post(endpoint, formData);
+  if (formData.loginId && formData.email) {
+    try {
+      await defaultAxios.post(endpoint, formData);
 
-    navigate('/found-pw', {
-      state: { email: formData.email },
-    });
-  } catch (e) {
-    if (!e.response.data.isSuccess) {
-      navigate('/not-found-pw', { state: { access: true } });
+      navigate('/found-pw', {
+        state: { email: formData.email },
+      });
+    } catch (e) {
+      if (!e.response.data.isSuccess) {
+        navigate('/not-found-pw', { state: { access: true } });
+      }
     }
   }
 };

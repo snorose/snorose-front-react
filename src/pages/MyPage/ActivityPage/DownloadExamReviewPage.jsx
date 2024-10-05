@@ -12,7 +12,7 @@ import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 import styles from './ActivityPage.module.css';
 
 export default function DownloadExamReviewPage() {
-  const { data, ref, isLoading, isError, error } = usePagination({
+  const { data, ref, isLoading, isFetching, isError, error } = usePagination({
     queryKey: [QUERY_KEY.myDownloadedExamReviews],
     queryFn: ({ pageParam }) => getMyReviewFileList({ page: pageParam }),
   });
@@ -35,7 +35,7 @@ export default function DownloadExamReviewPage() {
   return (
     <main className={styles.activityPage}>
       <header>
-        <BackAppBar stroke='#000' />
+        <BackAppBar stroke='#000' backNavTo={'/my-page?tab=activity'} />
       </header>
 
       <section className={styles.contentWrapper}>
@@ -68,6 +68,7 @@ export default function DownloadExamReviewPage() {
               </div>
             </div>
           )}
+          {isFetching && <FetchLoading />}
         </article>
       </section>
     </main>

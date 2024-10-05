@@ -16,7 +16,7 @@ export default function BoardPage() {
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && event.target.value.trim() !== '') {
       event.preventDefault();
-      navigate(`/board/all/search/${encodeURIComponent(keyword)}`);
+      navigate(`/board/all/search?query=${encodeURIComponent(keyword)}`);
     }
   };
 

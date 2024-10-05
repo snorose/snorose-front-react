@@ -74,7 +74,9 @@ export default function FindIdPage() {
     <div className={styles.pageFrame}>
       <form
         onSubmit={(e) => {
-          findId(e, formData, navigate);
+          e.preventDefault();
+          if (formData.userName && formData.email && formData.studentNumber)
+            findId(e, formData, navigate);
         }}
       >
         <div className={styles.findIdFrame}>

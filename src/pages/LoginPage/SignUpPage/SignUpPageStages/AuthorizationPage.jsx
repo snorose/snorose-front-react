@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 
-import { defaultAxios } from '@/axios';
-
 import { sendUser, certifyUser } from '@/apis';
 
 import { Input } from '@/components/Input';
@@ -17,26 +15,6 @@ export default function AuthorizationPage({ email, setStage }) {
     sendUser(email);
   }, [email]);
 
-  async function CertifyUserAPI(input) {
-    const data = { email: email, authNum: input };
-
-    if (input?.length === 0) {
-      return 'ready';
-    } else {
-      try {
-        const response = await defaultAxios.post('/v1/users/certifyUser', data);
-        if (response.data.isSuccess) {
-          return 'right';
-        } else {
-          return 'wrong';
-        }
-      } catch (e) {
-        console.log(e);
-        return 'wrong';
-      }
-    }
-  }
-
   return (
     <div className={styles.pageFrame}>
       <div>
@@ -50,10 +28,8 @@ export default function AuthorizationPage({ email, setStage }) {
             placeholder={'확인 코드를 입력하세요'}
             className={codeStyle}
             setClassName={setCodeStyle}
-            classNameCheck={CertifyUserAPI}
             inputType={'authNum'}
             inputData={setAuthNum}
-            data={authNum}
             errMsg={'코드를 다시 한 번 확인해주세요'}
           />
         </div>
@@ -61,11 +37,21 @@ export default function AuthorizationPage({ email, setStage }) {
       <div className={styles.submit}>
         <Submit
           btnName='다음으로'
-          className={codeStyle === 'right' ? 'right' : 'ready'}
+          className={'right'}
           onSubmit={(e) => {
             e.preventDefault();
           }}
-          onClick={() => setStage((prev) => prev + 1)}
+          onClick={(e) => {
+            certifyUser({ email: email, authNum: authNum.authNum }).then(
+              (res) => {
+                if (res) {
+                  setStage((prev) => prev + 1);
+                } else {
+                  setCodeStyle('wrong');
+                }
+              }
+            );
+          }}
         />
       </div>
     </div>
