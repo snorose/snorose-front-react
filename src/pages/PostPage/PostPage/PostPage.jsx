@@ -45,6 +45,7 @@ export default function PostPage() {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
   const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
+  const [deleteSubmitDisabled, setDeleteSubmitDisabled] = useState(false);
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
@@ -81,6 +82,8 @@ export default function PostPage() {
   });
 
   const handleDelete = async () => {
+    if (deleteSubmitDisabled) return;
+    setDeleteSubmitDisabled(true);
     try {
       const response = await deletePost(currentBoard.id, postId);
 
@@ -91,6 +94,7 @@ export default function PostPage() {
     } catch ({ response }) {
       toast(response.data.message);
     } finally {
+      setDeleteSubmitDisabled(false);
       setIsDeleteModalOpen(false);
     }
   };
