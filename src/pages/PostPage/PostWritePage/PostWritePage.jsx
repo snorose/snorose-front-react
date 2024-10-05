@@ -149,7 +149,7 @@ export default function PostWritePage() {
         <div className={styles.center}>
           {textId === 'notice' ? (
             <div className={styles.categorySelect}>
-              <div>
+              <div className={styles.categorySelectContainer}>
                 <Icon id='clip-board-list' width='18' height='19' />
                 <p className={styles.categorySelectText}>{boardTitle}</p>
               </div>
@@ -160,7 +160,7 @@ export default function PostWritePage() {
                 className={styles.categorySelect}
                 onClick={handleDropDownOpen}
               >
-                <div>
+                <div className={styles.categorySelectContainer}>
                   <Icon id='clip-board-list' width='18' height='19' />
                   <p className={styles.categorySelectText}>{boardTitle}</p>
                 </div>
