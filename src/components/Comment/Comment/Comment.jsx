@@ -47,9 +47,11 @@ const Comment = forwardRef((props, ref) => {
       setIsReportModalOpen(false);
       reportConfirmModal.closeModal();
       toast(message);
+      resetCommentState();
     },
     onError: () => {
       toast('댓글 신고에 실패했습니다.');
+      resetCommentState();
     },
   });
 

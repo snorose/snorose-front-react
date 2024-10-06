@@ -1,11 +1,8 @@
+import React from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-
 import { useComment, useToast } from '@/hooks';
-
 import { Icon } from '@/components/Icon';
-
 import styles from './InputBar.module.css';
 
 const InputBar = () => {
@@ -35,16 +32,20 @@ const InputBar = () => {
       return;
     }
 
-    if (isEdit) {
-      editComment.mutate({
-        commentId,
-        content,
-      });
-    } else {
-      createComment.mutate({ parentId: commentId, content });
-    }
+    const mutation = isEdit ? editComment : createComment;
 
-    resetCommentState();
+    mutation.mutate(
+      {
+        ...(isEdit ? { commentId } : { parentId: commentId }),
+        content,
+      },
+      {
+        onSuccess: () => {
+          resetCommentState();
+          inputRef.current.blur();
+        },
+      }
+    );
   };
 
   // command + enter 또는 ctrl + enter 입력 시 댓글 등록
