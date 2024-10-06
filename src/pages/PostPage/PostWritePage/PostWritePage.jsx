@@ -30,6 +30,7 @@ export default function PostWritePage() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
+  const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const textId = pathname.split('/')[2];
   const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
@@ -71,9 +72,10 @@ export default function PostWritePage() {
     content: text,
     isNotice,
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (submitDisabled) return;
 
     // 유효성 검사
     if (boardId === '') {
@@ -88,6 +90,8 @@ export default function PostWritePage() {
       toast(TOAST.POST.emptyContent);
       return;
     }
+
+    setSubmitDisabled(true);
 
     // 게시글 등록
     postPost(data)
@@ -104,6 +108,9 @@ export default function PostWritePage() {
       })
       .catch(({ response }) => {
         toast(response.data.message);
+      })
+      .finally(() => {
+        setSubmitDisabled(false);
       });
   };
 
@@ -142,7 +149,7 @@ export default function PostWritePage() {
         <div className={styles.center}>
           {textId === 'notice' ? (
             <div className={styles.categorySelect}>
-              <div>
+              <div className={styles.categorySelectContainer}>
                 <Icon id='clip-board-list' width='18' height='19' />
                 <p className={styles.categorySelectText}>{boardTitle}</p>
               </div>
@@ -153,7 +160,7 @@ export default function PostWritePage() {
                 className={styles.categorySelect}
                 onClick={handleDropDownOpen}
               >
-                <div>
+                <div className={styles.categorySelectContainer}>
                   <Icon id='clip-board-list' width='18' height='19' />
                   <p className={styles.categorySelectText}>{boardTitle}</p>
                 </div>

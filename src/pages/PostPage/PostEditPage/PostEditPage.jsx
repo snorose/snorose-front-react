@@ -16,7 +16,7 @@ import {
 } from '@/components';
 
 import { formattedNowTime } from '@/utils';
-import { BOARD_MENUS, TOAST, ROLE, MUTATION_KEY, QUERY_KEY, } from '@/constants';
+import { BOARD_MENUS, TOAST, ROLE, MUTATION_KEY, QUERY_KEY } from '@/constants';
 
 import styles from './PostEditPage.module.css';
 
@@ -37,6 +37,7 @@ export default function PostEditPage() {
   const [text, setText] = useState('');
   const [userDisplay, setUserDisplay] = useState('');
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
+  const [submitDisabled, setSubmitDisabled] = useState(false);
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
@@ -63,9 +64,11 @@ export default function PostEditPage() {
       queryClient.invalidateQueries([QUERY_KEY.post, postId]);
       navigate(-1);
       toast(TOAST.POST.edit);
+      setSubmitDisabled(false);
     },
     onError: ({ response }) => {
       toast(response.data.message);
+      setSubmitDisabled(false);
     },
   });
 
@@ -85,6 +88,9 @@ export default function PostEditPage() {
   // 게시글 수정 유효성 검사 및 제출
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (submitDisabled) return;
+
     if (!title.trim()) {
       toast(TOAST.POST.emptyTitle);
       return;
@@ -93,6 +99,8 @@ export default function PostEditPage() {
       toast(TOAST.POST.emptyContent);
       return;
     }
+
+    setSubmitDisabled(true);
     mutation.mutate({
       boardId: currentBoard?.id,
       postId,
@@ -105,7 +113,7 @@ export default function PostEditPage() {
   if (status === 'loading' || isLoading) {
     return (
       <>
-        <BackAppBar notFixed/>
+        <BackAppBar notFixed />
         <FetchLoading>로딩 중...</FetchLoading>
       </>
     );
@@ -114,7 +122,7 @@ export default function PostEditPage() {
   if (error) {
     return (
       <>
-        <BackAppBar animation={false} notFixed/>
+        <BackAppBar animation={false} notFixed />
         <FetchLoading>게시글 정보를 불러오지 못했습니다</FetchLoading>
       </>
     );
@@ -140,7 +148,7 @@ export default function PostEditPage() {
         </div>
         <div className={styles.center}>
           <div className={styles.categorySelect}>
-            <div>
+            <div className={styles.categorySelectContainer}>
               <Icon id='clip-board-list' width='18' height='19' />
               <p className={styles.categorySelectText}>{boardTitle}</p>
             </div>
