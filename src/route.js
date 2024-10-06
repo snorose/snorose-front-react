@@ -187,9 +187,6 @@ export const routeList = [
   {
     path: '/',
     element: <App />,
-    meta: {
-      hideNav: true,
-    },
     children: [
       {
         index: true,
