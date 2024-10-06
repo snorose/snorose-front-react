@@ -47,6 +47,7 @@ import {
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/constants';
+import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructionPage.jsx';
 
 const getRolesForReadBoard = (boardPath) => {
   switch (boardPath) {
@@ -186,6 +187,9 @@ export const routeList = [
   {
     path: '/',
     element: <App />,
+    meta: {
+      hideNav: true,
+    },
     children: [
       {
         index: true,
