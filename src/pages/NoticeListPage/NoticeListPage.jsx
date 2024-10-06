@@ -77,16 +77,23 @@ export default function NoticeListPage() {
         }
       />
       <div className={styles.content}>
-        {Array.isArray(noticeList) &&
+        {Array.isArray(noticeList) && noticeList.length > 0 ? (
           noticeList.map((post) => (
             <NoticeBar
               key={post.postId}
               data={post}
-              onClick={handleNavClick(
-                `/board/${currentBoardTextId}/post/${post.postId}`
-              )}
+              onClick={() =>
+                handleNavClick(
+                  `/board/${currentBoardTextId}/post/${post.postId}`
+                )
+              }
             />
-          ))}
+          ))
+        ) : (
+          <div className={styles.empty}>
+            <FetchLoading animation={false}>공지글이 없습니다.</FetchLoading>
+          </div>
+        )}
       </div>
       {userInfo.userRoleId === 4 && currentBoardTextId === 'notice' && (
         <WriteButton
