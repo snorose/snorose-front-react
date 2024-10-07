@@ -123,10 +123,15 @@ export default function PostPage() {
   };
 
   const handleUserReportOptionModalOptionClick = (event) => {
+    if (data === undefined) {
+      return;
+    }
+
     const reportType = event.currentTarget.dataset.value;
+    const { userId } = data;
 
     reportUserMutate({
-      // targetUserId,
+      encryptedTargetUserId: userId,
       reportType,
     });
 
