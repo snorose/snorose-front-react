@@ -187,333 +187,334 @@ export const routeList = [
   {
     path: '/',
     element: <App />,
+    meta: { hideNav: true },
     children: [
       {
         index: true,
-        element: <MainPage />,
-      },
-      {
-        path: '/home',
-        element: <MainPage />,
-      },
-      {
-        path: '/board',
-        element: <BoardPage />,
-      },
-      ...boardRoutes,
-      {
-        path: '/board/all/search',
-        element: <PostSearchPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/board/exam-review',
-        element: (
-          <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없습니다.'}
-          >
-            <ExamReviewPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: `/board/exam-review/notice`,
-        element: (
-          <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없습니다.'}
-          >
-            <NoticeListPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/board/exam-review/search',
-        element: (
-          <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없습니다.'}
-          >
-            <ExamReviewPage />
-          </ProtectedRoute>
-        ),
-      },
-
-      {
-        path: '/board/exam-review/post/:postId',
-        element: (
-          <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 접근 권한이 없습니다.'}
-          >
-            <ExamReviewDetailPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/board/exam-review/:postId/edit',
-        element: (
-          <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 수정 권한이 없습니다.'}
-          >
-            <ExamReviewEditPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/board/exam-review-write',
-        element: (
-          <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 작성 권한이 없습니다.'}
-          >
-            <ExamReviewWritePage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/attendance',
-        element: <AttendancePage />,
-        meta: {
-          hideNav: true,
-        },
+        element: <UnderConstructionPage />,
       },
       // {
-      //   path: '/alert',
-      //   element: <AlertPage />,
+      //   path: '/home',
+      //   element: <MainPage />,
+      // },
+      // {
+      //   path: '/board',
+      //   element: <BoardPage />,
+      // },
+      // ...boardRoutes,
+      // {
+      //   path: '/board/all/search',
+      //   element: <PostSearchPage />,
       //   meta: {
       //     hideNav: true,
       //   },
       // },
-      {
-        path: '/my-page',
-        element: (
-          <ProtectedRoute>
-            <MyPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: '/my-page/password',
-        element: (
-          <ProtectedRoute>
-            <ChangePasswordPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/my-page/edit-info',
-        element: (
-          <ProtectedRoute>
-            <EditInfoPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/my-page/view-point-list',
-        element: (
-          <ProtectedRoute>
-            <ViewPointListPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/my-page/delete-account',
-        element: (
-          <ProtectedRoute>
-            <DeleteAccountPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/my-page/privacy-policy',
-        element: <PrivacyPolicyPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/my-page/service-policy',
-        element: <ServicePolicyPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/my-page/my-post',
-        element: (
-          <ProtectedRoute>
-            <MyPostPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/my-page/comment',
-        element: (
-          <ProtectedRoute>
-            <CommentPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/my-page/download-exam-review',
-        element: (
-          <ProtectedRoute>
-            <DownloadExamReviewPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/my-page/scrap',
-        element: (
-          <ProtectedRoute>
-            <ScrapPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/my-page/scrap-exam-review',
-        element: (
-          <ProtectedRoute>
-            <ScrapExamReviewPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/about',
-        element: <AboutPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
+      // {
+      //   path: '/board/exam-review',
+      //   element: (
+      //     <ProtectedRoute
+      //       roles={[ROLE.user, ROLE.admin]}
+      //       message={'시험후기 게시판 접근 권한이 없습니다.'}
+      //     >
+      //       <ExamReviewPage />
+      //     </ProtectedRoute>
+      //   ),
+      // },
+      // {
+      //   path: `/board/exam-review/notice`,
+      //   element: (
+      //     <ProtectedRoute
+      //       roles={[ROLE.user, ROLE.admin]}
+      //       message={'시험후기 게시판 접근 권한이 없습니다.'}
+      //     >
+      //       <NoticeListPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/board/exam-review/search',
+      //   element: (
+      //     <ProtectedRoute
+      //       roles={[ROLE.user, ROLE.admin]}
+      //       message={'시험후기 게시판 접근 권한이 없습니다.'}
+      //     >
+      //       <ExamReviewPage />
+      //     </ProtectedRoute>
+      //   ),
+      // },
 
-      {
-        path: '/verify',
-        element: (
-          <ProtectedRoute
-            roles={[ROLE.preUser, ROLE.admin]}
-            message='이미 인증을 완료했거나 인증 대상이 아닙니다'
-          >
-            <SnoroseVerifyPage />
-          </ProtectedRoute>
-        ),
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/login',
-        element: <LoginPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/find-id',
-        element: <FindIdPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/find-pw',
-        element: <FindPwPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/found-id',
-        element: <FoundIdPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/found-pw',
-        element: <FoundPwPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/not-found-id',
-        element: <NotFoundIdPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/not-found-pw',
-        element: <NotFoundPwPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/signup',
-        element: <SignUpPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/signup/success',
-        element: <SignUpSuccessPage />,
-        meta: {
-          hideNav: true,
-        },
-      },
-      {
-        path: '/signup/failure',
-        element: <SignUpFailurePage />,
-        meta: {
-          hideNav: true,
-        },
-      },
+      // {
+      //   path: '/board/exam-review/post/:postId',
+      //   element: (
+      //     <ProtectedRoute
+      //       roles={[ROLE.user, ROLE.admin]}
+      //       message={'시험후기 접근 권한이 없습니다.'}
+      //     >
+      //       <ExamReviewDetailPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/board/exam-review/:postId/edit',
+      //   element: (
+      //     <ProtectedRoute
+      //       roles={[ROLE.user, ROLE.admin]}
+      //       message={'시험후기 수정 권한이 없습니다.'}
+      //     >
+      //       <ExamReviewEditPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/board/exam-review-write',
+      //   element: (
+      //     <ProtectedRoute
+      //       roles={[ROLE.user, ROLE.admin]}
+      //       message={'시험후기 작성 권한이 없습니다.'}
+      //     >
+      //       <ExamReviewWritePage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/attendance',
+      //   element: <AttendancePage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // // {
+      // //   path: '/alert',
+      // //   element: <AlertPage />,
+      // //   meta: {
+      // //     hideNav: true,
+      // //   },
+      // // },
+      // {
+      //   path: '/my-page',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <MyPage />
+      //     </ProtectedRoute>
+      //   ),
+      // },
+      // {
+      //   path: '/my-page/password',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <ChangePasswordPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/my-page/edit-info',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <EditInfoPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/my-page/view-point-list',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <ViewPointListPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/my-page/delete-account',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <DeleteAccountPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/my-page/privacy-policy',
+      //   element: <PrivacyPolicyPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/my-page/service-policy',
+      //   element: <ServicePolicyPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/my-page/my-post',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <MyPostPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/my-page/comment',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <CommentPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/my-page/download-exam-review',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <DownloadExamReviewPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/my-page/scrap',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <ScrapPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/my-page/scrap-exam-review',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <ScrapExamReviewPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/about',
+      //   element: <AboutPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+
+      // {
+      //   path: '/verify',
+      //   element: (
+      //     <ProtectedRoute
+      //       roles={[ROLE.preUser, ROLE.admin]}
+      //       message='이미 인증을 완료했거나 인증 대상이 아닙니다'
+      //     >
+      //       <SnoroseVerifyPage />
+      //     </ProtectedRoute>
+      //   ),
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/login',
+      //   element: <LoginPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/find-id',
+      //   element: <FindIdPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/find-pw',
+      //   element: <FindPwPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/found-id',
+      //   element: <FoundIdPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/found-pw',
+      //   element: <FoundPwPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/not-found-id',
+      //   element: <NotFoundIdPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/not-found-pw',
+      //   element: <NotFoundPwPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/signup',
+      //   element: <SignUpPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/signup/success',
+      //   element: <SignUpSuccessPage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
+      // {
+      //   path: '/signup/failure',
+      //   element: <SignUpFailurePage />,
+      //   meta: {
+      //     hideNav: true,
+      //   },
+      // },
       {
         path: '*',
         element: <NotFoundPage />,
