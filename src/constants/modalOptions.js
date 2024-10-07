@@ -17,13 +17,13 @@ export const MODAL_OPTIONS = [
         text: '게시글 신고',
         value: 'post-report',
       },
-      // {
-      //   iconId: 'user',
-      //   IconWidth: 19,
-      //   IconHeight: 21,
-      //   text: '이용자 신고',
-      //   value: 'user-report',
-      // },
+      {
+        iconId: 'user',
+        IconWidth: 19,
+        IconHeight: 21,
+        text: '이용자 신고',
+        value: 'user-report',
+      },
     ],
   },
   {
@@ -38,12 +38,12 @@ export const MODAL_OPTIONS = [
     titleColor: '#FF4B6C',
     children: COMMENT_REPORT_TYPE_MODAL_OPTION_CHILDREN,
   },
-  // {
-  //   id: 'user-report',
-  //   title: '이용자 신고',
-  //   titleColor: '#FF4B6C',
-  //   children: USER_REPORT_TYPE_MODAL_OPTION_CHILDREN,
-  // },
+  {
+    id: 'user-report',
+    title: '이용자 신고',
+    titleColor: '#FF4B6C',
+    children: USER_REPORT_TYPE_MODAL_OPTION_CHILDREN,
+  },
   {
     id: 'post-more-options',
     title: '내 게시글',

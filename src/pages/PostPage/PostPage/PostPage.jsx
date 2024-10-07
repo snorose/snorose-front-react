@@ -6,7 +6,7 @@ import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import { useLike, useScrap, useToast } from '@/hooks';
+import { useAuth, useLike, useScrap, useToast } from '@/hooks';
 
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
@@ -45,6 +45,8 @@ export default function PostPage() {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
   const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
+  const [deleteSubmitDisabled, setDeleteSubmitDisabled] = useState(false);
+  const { invalidUserInfoQuery } = useAuth();
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
@@ -81,16 +83,20 @@ export default function PostPage() {
   });
 
   const handleDelete = async () => {
+    if (deleteSubmitDisabled) return;
+    setDeleteSubmitDisabled(true);
     try {
       const response = await deletePost(currentBoard.id, postId);
 
       if (response.status === 200) {
         toast(TOAST.POST.delete);
         navigate(`/board/${currentBoard.textId}`);
+        invalidUserInfoQuery();
       }
     } catch ({ response }) {
       toast(response.data.message);
     } finally {
+      setDeleteSubmitDisabled(false);
       setIsDeleteModalOpen(false);
     }
   };
@@ -117,10 +123,15 @@ export default function PostPage() {
   };
 
   const handleUserReportOptionModalOptionClick = (event) => {
+    if (data === undefined) {
+      return;
+    }
+
     const reportType = event.currentTarget.dataset.value;
+    const { userId } = data;
 
     reportUserMutate({
-      // targetUserId,
+      encryptedTargetUserId: userId,
       reportType,
     });
 

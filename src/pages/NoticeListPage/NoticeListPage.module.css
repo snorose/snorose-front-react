@@ -26,6 +26,10 @@ body {
   row-gap: 0.5rem;
 }
 
+.empty {
+  height: 100vh;
+}
+
 .writeButton {
   bottom: 1.1875rem;
 }

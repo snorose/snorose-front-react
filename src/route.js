@@ -187,15 +187,10 @@ export const routeList = [
   {
     path: '/',
     element: <App />,
-    // 임시 페이지 때문에 추가했습니다.
-    // 사이트 런칭 후 삭제해야합니다.
-    meta: {
-      hideNav: true,
-    },
     children: [
       {
         index: true,
-        element: <UnderConstructionPage />, // 사이트 런칭 후 MainPage로 교체
+        element: <MainPage />,
       },
       // {
       //   path: '/home',

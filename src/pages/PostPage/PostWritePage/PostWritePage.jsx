@@ -30,6 +30,7 @@ export default function PostWritePage() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
+  const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const textId = pathname.split('/')[2];
   const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
@@ -37,6 +38,8 @@ export default function PostWritePage() {
     currentBoard?.title ?? '게시판을 선택해주세요'
   );
   const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
+
+  const { invalidUserInfoQuery } = useAuth();
 
   const boardTitles = BOARD_MENUS.filter((menu) =>
     [21, 22, 23].includes(menu.id)
@@ -71,9 +74,10 @@ export default function PostWritePage() {
     content: text,
     isNotice,
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (submitDisabled) return;
 
     // 유효성 검사
     if (boardId === '') {
@@ -89,12 +93,16 @@ export default function PostWritePage() {
       return;
     }
 
+    setSubmitDisabled(true);
+
     // 게시글 등록
     postPost(data)
       .then((response) => {
         if (response.status === 201) {
           toast(TOAST.POST.create);
           const newPostId = response.data.result.postId;
+
+          invalidUserInfoQuery();
           currentBoard.id === 12 || isNotice
             ? navigate(`/board/${currentBoard.textId}/notice`)
             : navigate(
@@ -104,6 +112,9 @@ export default function PostWritePage() {
       })
       .catch(({ response }) => {
         toast(response.data.message);
+      })
+      .finally(() => {
+        setSubmitDisabled(false);
       });
   };
 
@@ -142,7 +153,7 @@ export default function PostWritePage() {
         <div className={styles.center}>
           {textId === 'notice' ? (
             <div className={styles.categorySelect}>
-              <div>
+              <div className={styles.categorySelectContainer}>
                 <Icon id='clip-board-list' width='18' height='19' />
                 <p className={styles.categorySelectText}>{boardTitle}</p>
               </div>
@@ -153,7 +164,7 @@ export default function PostWritePage() {
                 className={styles.categorySelect}
                 onClick={handleDropDownOpen}
               >
-                <div>
+                <div className={styles.categorySelectContainer}>
                   <Icon id='clip-board-list' width='18' height='19' />
                   <p className={styles.categorySelectText}>{boardTitle}</p>
                 </div>

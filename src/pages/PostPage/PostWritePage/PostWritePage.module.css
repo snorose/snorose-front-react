@@ -22,12 +22,12 @@
   border-bottom: 0.5px solid #898989;
   stroke-width: 0.5px;
   cursor: pointer;
+}
 
-  div {
-    gap: 0.875rem;
-    display: flex;
-    align-items: center;
-  }
+.categorySelectContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
 }
 
 .categorySelectText {
