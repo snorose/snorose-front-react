@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import defaultBanner from '@/assets/images/bannerError.jpg';
+import defaultBanner from '@/assets/images/bannerError.svg';
 
 import styles from './Slide.module.css';
 
