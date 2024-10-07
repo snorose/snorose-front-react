@@ -67,11 +67,16 @@ const useAuth = () => {
     }
   };
 
+  const invalidUserInfoQuery = () => {
+    queryClient.invalidateQueries([QUERY_KEY.userInfo]);
+  };
+
   return {
     userInfo,
     status,
     logout,
     withdraw,
+    invalidUserInfoQuery,
   };
 };
 

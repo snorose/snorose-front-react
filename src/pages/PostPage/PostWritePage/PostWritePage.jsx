@@ -39,6 +39,8 @@ export default function PostWritePage() {
   );
   const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
 
+  const { invalidUserInfoQuery } = useAuth();
+
   const boardTitles = BOARD_MENUS.filter((menu) =>
     [21, 22, 23].includes(menu.id)
   ).map((menu) => menu.title);
@@ -99,6 +101,8 @@ export default function PostWritePage() {
         if (response.status === 201) {
           toast(TOAST.POST.create);
           const newPostId = response.data.result.postId;
+
+          invalidUserInfoQuery();
           currentBoard.id === 12 || isNotice
             ? navigate(`/board/${currentBoard.textId}/notice`)
             : navigate(

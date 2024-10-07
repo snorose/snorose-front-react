@@ -9,7 +9,7 @@ import {
   reportUser,
 } from '@/apis';
 
-import { useScrap, useToast } from '@/hooks';
+import { useAuth, useScrap, useToast } from '@/hooks';
 
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
@@ -53,6 +53,7 @@ export default function ExamReviewDetailPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { scrap, unscrap } = useScrap();
+  const { invalidUserInfoQuery } = useAuth();
   const { toast } = useToast();
   const currentBoard =
     BOARD_MENUS.find((menu) => menu.textId === pathname.split('/')[2]) || {};
@@ -90,7 +91,7 @@ export default function ExamReviewDetailPage() {
     mutationFn: () => deleteExamReview(postId),
     onSuccess: () => {
       queryClient.removeQueries([QUERY_KEY.post, postId]);
-
+      invalidUserInfoQuery();
       toast(TOAST.EXAM_REVIEW.delete);
       navigate('/board/exam-review', { replace: true });
     },

@@ -6,7 +6,7 @@ import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 
-import { useLike, useScrap, useToast } from '@/hooks';
+import { useAuth, useLike, useScrap, useToast } from '@/hooks';
 
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
@@ -46,6 +46,7 @@ export default function PostPage() {
   const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
   const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
   const [deleteSubmitDisabled, setDeleteSubmitDisabled] = useState(false);
+  const { invalidUserInfoQuery } = useAuth();
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
@@ -90,6 +91,7 @@ export default function PostPage() {
       if (response.status === 200) {
         toast(TOAST.POST.delete);
         navigate(`/board/${currentBoard.textId}`);
+        invalidUserInfoQuery();
       }
     } catch ({ response }) {
       toast(response.data.message);
