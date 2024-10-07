@@ -7,7 +7,7 @@ import {
   editComment as edit,
 } from '@/apis';
 
-import { useToast } from '@/hooks';
+import { useAuth, useToast } from '@/hooks';
 
 import {
   deleteIfTargetComment,
@@ -27,6 +27,7 @@ export default function useComment() {
   const { postId } = useParams();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { invalidUserInfoQuery } = useAuth();
 
   const updateCommentCache = (actionIfTargetComment) => {
     queryClient.setQueryData([QUERY_KEY.comments, postId], (prev) => {
@@ -58,6 +59,8 @@ export default function useComment() {
     onSuccess: (newComment) => {
       const { parentId } = newComment;
 
+      invalidUserInfoQuery();
+
       queryClient.setQueryData([QUERY_KEY.comments, postId], (prev) => {
         const flattenComments = flatPaginationCache(prev);
 
@@ -88,6 +91,7 @@ export default function useComment() {
     onSuccess: (deletedComment) => {
       const { id } = deletedComment;
 
+      invalidUserInfoQuery();
       updateCommentCache((comment) =>
         deleteIfTargetComment({
           comment,
