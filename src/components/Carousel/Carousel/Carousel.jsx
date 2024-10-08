@@ -46,8 +46,13 @@ export default function Carousel() {
   return (
     <div>
       <div ref={carouselRef} className={styles.carousel}>
-        {bannerList.map((banner, index) => (
-          <Slide key={index} src={banner} alt='banner' />
+        {bannerList.map(({ imageUrl, redirectUrl }, index) => (
+          <Slide
+            key={index}
+            src={imageUrl}
+            redirectUrl={redirectUrl}
+            alt='banner'
+          />
         ))}
       </div>
       <div className={styles.indicator}>
