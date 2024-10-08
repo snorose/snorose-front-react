@@ -16,12 +16,14 @@ import {
 
 import { formattedNowTime } from '@/utils';
 
-import { BOARD_MENUS, ROLE, TOAST } from '@/constants';
+import { BOARD_MENUS, ROLE, TOAST, QUERY_KEY } from '@/constants';
 
 import styles from './PostWritePage.module.css';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function PostWritePage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { pathname } = useLocation();
   const { toast } = useToast();
   const { userInfo, status } = useAuth();
@@ -102,6 +104,7 @@ export default function PostWritePage() {
           toast(TOAST.POST.create);
           const newPostId = response.data.result.postId;
 
+          queryClient.removeQueries([QUERY_KEY.post]);
           invalidUserInfoQuery();
           currentBoard.id === 12 || isNotice
             ? navigate(`/board/${currentBoard.textId}/notice`)
