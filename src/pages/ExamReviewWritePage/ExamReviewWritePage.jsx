@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postExamReview, checkExamReviewDuplication } from '@/apis';
 
@@ -29,6 +29,7 @@ import {
   SEMESTERS,
   TOAST,
   YEARS,
+  QUERY_KEY,
 } from '@/constants';
 
 import styles from './ExamReviewWritePage.module.css';
@@ -36,6 +37,7 @@ import styles from './ExamReviewWritePage.module.css';
 export default function ExamReviewWritePage() {
   const { toast } = useToast();
   const { invalidUserInfoQuery } = useAuth();
+  const queryClient = useQueryClient();
 
   const createExamReview = useMutation({
     mutationKey: [MUTATION_KEY.createExamReview],
@@ -45,9 +47,10 @@ export default function ExamReviewWritePage() {
         file,
       }),
     onSuccess: ({ data }) => {
+      queryClient.removeQueries([QUERY_KEY.post]);
+      invalidUserInfoQuery();
       toast(TOAST.EXAM_REVIEW.create);
       navigate('/board/exam-review', { replace: true });
-      invalidUserInfoQuery();
     },
     onError: ({ response }) => {
       const { status } = response;
