@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
 
@@ -33,6 +33,7 @@ import styles from './PostPage.module.css';
 
 export default function PostPage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { postId } = useParams();
   const location = useLocation();
   const { pathname } = location;
@@ -91,6 +92,7 @@ export default function PostPage() {
       if (response.status === 200) {
         toast(TOAST.POST.delete);
         navigate(`/board/${currentBoard.textId}`);
+        queryClient.removeQueries([QUERY_KEY.post, postId]);
         invalidUserInfoQuery();
       }
     } catch ({ response }) {
