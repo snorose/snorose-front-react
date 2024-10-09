@@ -14,7 +14,7 @@ import {
   TextField,
 } from '@/components/Fieldset';
 import { ConfirmModal } from '@/components/Modal';
-import { FetchLoading } from '@/components';
+import { FetchLoadingOverlay } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
@@ -119,7 +119,8 @@ export default function ExamReviewWritePage() {
         examType: examType?.id,
       });
     } catch (error) {
-      toast(TOAST.ERROR.SERVER);
+      toast('error');
+      setIsCalled(false);
       throw error;
     }
   };
@@ -280,23 +281,18 @@ export default function ExamReviewWritePage() {
         message={MODAL_CONFIRM.EXAM_REVIEW_DUPLICATION.message}
         primaryButtonText='확인'
         secondaryButtonText='취소'
-        onPrimaryButtonClick={() =>
+        onPrimaryButtonClick={() => {
+          setLoading(true);
           createExamReview.mutate({
             data: formBody,
             file,
-          })
-        }
+          });
+        }}
         onSecondaryButtonClick={() => {
           setIsConfirmModalOpen(false);
         }}
       />
-      {loading && (
-        <div className={styles.loading}>
-          <FetchLoading>
-            <span className={styles.text}>잠시만 기다려주세요</span>
-          </FetchLoading>
-        </div>
-      )}
+      {loading && <FetchLoadingOverlay />}
     </main>
   );
 }

@@ -7,9 +7,10 @@ import { getExamReview } from '@/apis';
 import { useToast } from '@/hooks';
 
 import { DeleteModal } from '@/components/Modal';
+import { FetchLoadingOverlay } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 
-import { QUERY_KEY, TOAST } from '@/constants';
+import { LOADING_MESSAGE, QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './ReviewDownload.module.css';
 
@@ -22,6 +23,7 @@ export default function ReviewDownload({
   const { postId } = useParams();
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState();
 
   const queryClient = useQueryClient();
 
@@ -41,6 +43,8 @@ export default function ReviewDownload({
   };
 
   const handleDownload = async () => {
+    setLoading(true);
+
     try {
       await downloadExamReview();
 
@@ -61,6 +65,8 @@ export default function ReviewDownload({
       const text = await response.data.text();
       const { message } = JSON.parse(text);
       toast(message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -88,6 +94,9 @@ export default function ReviewDownload({
         closeFn={() => setIsOpen(false)}
         redBtnFunction={handleDownload}
       />
+      {loading && (
+        <FetchLoadingOverlay text={LOADING_MESSAGE.downloadExamReview} />
+      )}
     </>
   );
 }

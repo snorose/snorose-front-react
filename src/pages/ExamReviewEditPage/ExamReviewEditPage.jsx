@@ -13,6 +13,7 @@ import {
   Dropdown,
   TextField,
 } from '@/components/Fieldset';
+import { FetchLoadingOverlay } from '@/components/Loading';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
 
@@ -29,7 +30,6 @@ import {
 } from '@/constants';
 
 import styles from './ExamReviewEditPage.module.css';
-import { FetchLoading } from '@/components/index.js';
 
 export default function ExamReviewEditPage() {
   const { postId } = useParams();
@@ -202,13 +202,7 @@ export default function ExamReviewEditPage() {
           maxRows='10'
         />
       </CategoryFieldset>
-      {loading && (
-        <div className={styles.loading}>
-          <FetchLoading>
-            <span className={styles.text}>잠시만 기다려주세요</span>
-          </FetchLoading>
-        </div>
-      )}
+      {loading && <FetchLoadingOverlay />}
     </main>
   );
 }

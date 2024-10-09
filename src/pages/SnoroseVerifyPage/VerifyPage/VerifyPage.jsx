@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/index.js';
 
 import { Button, Input } from '@/pages/SnoroseVerifyPage';
 
-import { InputPassword } from '@/components';
+import { FetchLoadingOverlay, InputPassword } from '@/components';
 
 import { isEmailValid } from '@/utils';
 
@@ -19,6 +19,7 @@ export default function VerifyPage({ setStep }) {
   const [studentId, setStudentId] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState();
 
   const isAllFieldsCompleted = studentId && password && email;
 
@@ -33,6 +34,8 @@ export default function VerifyPage({ setStep }) {
       return;
     }
 
+    setLoading(true);
+
     try {
       await verifySookmyungPortal({
         studentId,
@@ -44,6 +47,8 @@ export default function VerifyPage({ setStep }) {
     } catch ({ response }) {
       const { data } = response;
       toast(Object.values(data)[0]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -75,6 +80,7 @@ export default function VerifyPage({ setStep }) {
         />
       </div>
       <Button onClick={verify}>인증</Button>
+      {loading && <FetchLoadingOverlay />}
     </section>
   );
 }

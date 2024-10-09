@@ -12,7 +12,6 @@
   box-shadow: 0 -0.25rem 0.4375rem #ddebf6;
   position: fixed;
   bottom: 0;
-  z-index: 1;
 }
 
 .input_bar {
