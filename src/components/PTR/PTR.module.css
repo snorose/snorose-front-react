@@ -29,12 +29,14 @@
 
 @keyframes rotateAndPause {
   0% {
-    transform: rotate(0deg); /* 시작 상태 */
+    transform: rotate(180deg); /* 시작 상태 */
   }
+
   15% {
-    transform: rotate(180deg); /* 반 바퀴 회전 */
+    transform: rotate(360deg); /* 반 바퀴 회전 */
   }
+
   100% {
-    transform: rotate(180deg); /* 반 바퀴 회전 후 멈춤 */
+    transform: rotate(360deg); /* 반 바퀴 회전 후 멈춤 */
   }
 }

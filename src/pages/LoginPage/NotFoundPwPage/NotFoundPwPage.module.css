@@ -23,7 +23,7 @@
 .pageExplanation {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #484848;
+  color: var(--gray-4);
   margin-top: 0.875rem;
 }
 

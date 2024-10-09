@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 0.5px solid #d9d9d9;
+  border-bottom: 0.5px solid var(--gray-3);
 }
 
 .item:last-child {
@@ -14,12 +14,12 @@
   margin-right: 0.875rem;
   flex-shrink: 0;
   font-size: 0.75rem;
-  color: #898989;
+  color: var(--gray-3-1);
 }
 
 .value {
   font-size: 0.875rem;
-  color: #484848;
+  color: var(--gray-4);
 }
 
 .flexStart {

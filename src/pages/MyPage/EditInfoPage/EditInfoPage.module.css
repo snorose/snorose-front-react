@@ -67,7 +67,7 @@
 }
 
 .title {
-  color: var(--Grey-4, var(--grey-3, #484848));
+  color: var(--gray-4);
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -79,24 +79,24 @@
   border-radius: 0.3125rem;
   padding: 0 0.75rem;
   border: none;
-  background: #f5f5f5;
+  background: var(--gray-1-1);
   outline: none;
-  color: #000000;
+  color: var(--black);
   font-size: 0.75rem;
 
   &:disabled {
-    background: #d9d9d9;
+    background: var(--gray-3);
   }
 }
 
 .errorMessage {
   position: absolute;
-  color: var(--Pink-2, #ff4b6c);
+  color: var(--pink-3);
   font-size: 0.6875rem;
   top: 4.4375rem;
 }
 
 .errorInputText {
-  background: var(--Pink-1, #fee9eb);
+  background: var(--pink-1);
   border-radius: 0.3125rem;
 }

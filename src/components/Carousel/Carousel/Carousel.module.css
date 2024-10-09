@@ -15,11 +15,11 @@
   width: 0.375rem;
   height: 0.375rem;
   border-radius: 0.625rem;
-  background-color: #bfd7ec;
+  background-color: var(--blue-2);
 }
 
 .dot.current {
-  background-color: #00368e;
+  background-color: var(--blue-4);
 }
 
 .error {
@@ -27,6 +27,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #e5e5e5;
-  color: #6e6e6e;
+  background-color: var(--gray-2);
+  color: var(--gray-3-1);
 }
