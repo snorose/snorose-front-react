@@ -27,7 +27,6 @@
   border-radius: 0.3125rem;
   position: absolute;
   top: calc(100% + 0.625rem);
-  z-index: 1;
   overflow-y: auto;
 }
 
