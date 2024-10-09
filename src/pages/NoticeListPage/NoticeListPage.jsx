@@ -35,12 +35,6 @@ export default function NoticeListPage() {
     }
   }, [data]);
 
-  const handleNavClick = (to) => {
-    return () => {
-      navigate(to);
-    };
-  };
-
   if (isLoading) {
     return (
       <>
@@ -83,9 +77,7 @@ export default function NoticeListPage() {
               key={post.postId}
               data={post}
               onClick={() =>
-                handleNavClick(
-                  `/board/${currentBoardTextId}/post/${post.postId}`
-                )
+                navigate(`/board/${currentBoardTextId}/post/${post.postId}`)
               }
             />
           ))

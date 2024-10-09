@@ -15,7 +15,7 @@ import {
   ActionButton,
 } from '@/components';
 
-import { formattedNowTime } from '@/utils';
+import { formattedNowTime, getBoard } from '@/utils';
 
 import { BOARD_MENUS, ROLE, TOAST, QUERY_KEY } from '@/constants';
 
@@ -36,7 +36,7 @@ export default function PostWritePage() {
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const textId = pathname.split('/')[2];
-  const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
+  const currentBoard = getBoard(textId);
   const [boardTitle, setBoardTitle] = useState(
     currentBoard?.title ?? '게시판을 선택해주세요'
   );
@@ -77,7 +77,7 @@ export default function PostWritePage() {
     boardId,
     title,
     content: text,
-    isNotice,
+    isNotice: textId === 'notice' ? true : isNotice,
   };
 
   const handleSubmit = (e) => {
@@ -97,9 +97,12 @@ export default function PostWritePage() {
           queryClient.removeQueries([QUERY_KEY.post]);
           invalidUserInfoQuery();
           currentBoard.id === 12 || isNotice
-            ? navigate(`/board/${currentBoard.textId}/notice`)
+            ? navigate(`/board/${currentBoard.textId}/notice`, {
+                replace: true,
+              })
             : navigate(
-                `/board/${BOARD_MENUS.find((menu) => menu.id === boardId).textId}/post/${newPostId}`
+                `/board/${BOARD_MENUS.find((menu) => menu.id === boardId).textId}/post/${newPostId}`,
+                { replace: true }
               );
         }
       })
@@ -136,7 +139,7 @@ export default function PostWritePage() {
             onClose={() => {
               title.trim() || text.trim()
                 ? setIsCheckModalOpen(true)
-                : navigate(-1);
+                : navigate(-1, { replace: true });
             }}
           >
             <ActionButton onClick={handleSubmit} disabled={!pass}>
@@ -220,7 +223,7 @@ export default function PostWritePage() {
         id='post-write-exit-check'
         isOpen={isCheckModalOpen}
         closeFn={() => setIsCheckModalOpen(false)}
-        redBtnFunction={() => navigate(-1)}
+        redBtnFunction={() => navigate(-1, { replace: true })}
       />
     </>
   );
