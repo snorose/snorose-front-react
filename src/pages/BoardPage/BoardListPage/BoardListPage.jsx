@@ -19,6 +19,7 @@ export default function BoardListPage() {
   const { data: noticeLineData } = useQuery({
     queryKey: [QUERY_KEY.noticeLine, currentBoard.id],
     queryFn: () => getNoticeLine(currentBoard?.id),
+    staleTime: 1000 * 60 * 5,
   });
 
   return (
