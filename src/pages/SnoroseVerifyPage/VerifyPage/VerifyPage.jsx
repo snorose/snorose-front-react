@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/index.js';
 
 import { Button, Input } from '@/pages/SnoroseVerifyPage';
 
-import { FetchLoading, InputPassword } from '@/components';
+import { FetchLoadingOverlay, InputPassword } from '@/components';
 
 import { isEmailValid } from '@/utils';
 
@@ -80,13 +80,7 @@ export default function VerifyPage({ setStep }) {
         />
       </div>
       <Button onClick={verify}>인증</Button>
-      {loading && (
-        <div className={styles.loading}>
-          <FetchLoading>
-            <span className={styles.text}>잠시만 기다려주세요</span>
-          </FetchLoading>
-        </div>
-      )}
+      {loading && <FetchLoadingOverlay />}
     </section>
   );
 }

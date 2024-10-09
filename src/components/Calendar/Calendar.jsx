@@ -3,14 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getMonthlyAttendanceHistory } from '@/apis';
 
-import { FetchLoading } from '@/components/Loading';
+import { FetchLoadingOverlay } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 import { Tile } from '@/components/Calendar';
 
-import { QUERY_KEY } from '@/constants';
+import { LOADING_MESSAGE, QUERY_KEY } from '@/constants';
 
 import { StyledCalendar } from '@/components/Calendar/Calendar.style.jsx';
-import styles from './Calendar.module.css';
 
 export default function Calendar({ callback }) {
   const today = new Date();
@@ -64,11 +63,9 @@ export default function Calendar({ callback }) {
         }}
       />
       {loading && (
-        <div className={styles.loading}>
-          <FetchLoading>
-            <span className={styles.text}>출석 이력 불러오는 중...</span>
-          </FetchLoading>
-        </div>
+        <FetchLoadingOverlay
+          text={LOADING_MESSAGE.getMonthlyAttendanceHistory}
+        />
       )}
     </>
   );

@@ -7,10 +7,10 @@ import { getExamReview } from '@/apis';
 import { useToast } from '@/hooks';
 
 import { DeleteModal } from '@/components/Modal';
-import { FetchLoading } from '@/components/Loading';
+import { FetchLoadingOverlay } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 
-import { QUERY_KEY, TOAST } from '@/constants';
+import { LOADING_MESSAGE, QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './ReviewDownload.module.css';
 
@@ -95,11 +95,7 @@ export default function ReviewDownload({
         redBtnFunction={handleDownload}
       />
       {loading && (
-        <div className={styles.loading}>
-          <FetchLoading>
-            <span className={styles.text}>다운로드 중...</span>
-          </FetchLoading>
-        </div>
+        <FetchLoadingOverlay text={LOADING_MESSAGE.downloadExamReview} />
       )}
     </>
   );

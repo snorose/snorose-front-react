@@ -7,7 +7,7 @@ import { useAuth, useToast } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { Calendar } from '@/components/Calendar';
-import { FetchLoading } from '@/components/Loading';
+import { FetchLoadingOverlay } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 
 import {
@@ -92,13 +92,7 @@ export default function AttendancePage() {
           <Icon id='point-circle' width='32' height='32' />
         </div> */}
       </div>
-      {loading && (
-        <div className={styles.loading}>
-          <FetchLoading>
-            <span className={styles.text}>잠시만 기다려주세요</span>
-          </FetchLoading>
-        </div>
-      )}
+      {loading && <FetchLoadingOverlay />}
     </main>
   );
 }

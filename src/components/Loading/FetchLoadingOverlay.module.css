@@ -7,7 +7,7 @@
   left: 50%;
   transform: translateX(-50%);
   background-color: #00000092;
-  z-index: 2;
+  z-index: 1;
 }
 
 .loading .text {

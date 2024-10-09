@@ -16,7 +16,7 @@ import { NotFoundPage } from '@/pages/NotFoundPage';
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
 import { DeleteModal, OptionModal } from '@/components/Modal';
-import { FetchLoading } from '@/components/Loading';
+import { FetchLoading, FetchLoadingOverlay } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 import { InputBar } from '@/components/InputBar';
 import { ReviewContentItem } from '@/components/ReviewContentItem';
@@ -325,13 +325,7 @@ export default function ExamReviewDetailPage() {
         onOptionClick={handleUserReportOptionModalOptionClick}
         closeFn={() => setIsUserReportModalOpen(false)}
       />
-      {loading && (
-        <div className={styles.loading}>
-          <FetchLoading>
-            <span className={styles.text}>잠시만 기다려주세요</span>
-          </FetchLoading>
-        </div>
-      )}
+      {loading && <FetchLoadingOverlay />}
     </main>
   );
 }
