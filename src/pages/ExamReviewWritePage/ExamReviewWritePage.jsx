@@ -81,14 +81,14 @@ export default function ExamReviewWritePage() {
   const navigate = useNavigate();
 
   const pass =
-    lectureName &&
-    professor &&
+    lectureName.trim() &&
+    professor.trim() &&
     lectureType &&
     examType &&
     lectureYear &&
     semester &&
     classNumber &&
-    questionDetail &&
+    questionDetail.trim() &&
     file;
 
   const handleFile = (event) => {
@@ -139,11 +139,6 @@ export default function ExamReviewWritePage() {
       <CloseAppBar>
         <ActionButton
           onClick={async () => {
-            if (!pass) {
-              toast(TOAST.EXAM_REVIEW.validate);
-              return;
-            }
-
             try {
               const response = await checkDuplication();
 
@@ -160,6 +155,7 @@ export default function ExamReviewWritePage() {
               file,
             });
           }}
+          disabled={!pass}
         >
           게시
         </ActionButton>
