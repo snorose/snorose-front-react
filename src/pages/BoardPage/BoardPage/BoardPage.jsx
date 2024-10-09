@@ -39,7 +39,7 @@ export default function BoardPage() {
             {BOARD_MENUS.filter((board) =>
               [20, 21, 22, 23].includes(board.id)
             ).map((board, index) => (
-              <BoardBar key={index} data={board} />
+              <BoardBar key={board.id} data={board} />
             ))}
           </div>
         </div>
