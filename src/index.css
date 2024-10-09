@@ -4,6 +4,41 @@
 :root {
   --default-width: 600px;
   --default-margin: 1.25rem;
+
+  /* color */
+
+  /* blue */
+  --blue-0: #eaf5fd;
+  --blue-1: #ddebf6;
+  --blue-2: #bfd7ec;
+  --blue-3: #5f86bf;
+  --blue-4: #00368e;
+
+  /* pink */
+  --pink-1: #fee9eb;
+  --pink-2: #ff849a;
+  --pink-3: #ff4b6c;
+
+  /* Gray */
+  --gray-1: #f8f8f8;
+  --gray-1-1: #f4f4f4;
+  --gray-2: #f0f0f0;
+  --gray-3: #d9d9d9;
+  --gray-3-1: #898989;
+  --gray-4: #484848;
+  --black: #000000;
+
+  /* gradient */
+  --gradient-1: radial-gradient(
+    148.79% 155.78% at 31.85% 57.65%,
+    #00368e 0%,
+    #5f86bf 100%
+  );
+  --gradient-2: radial-gradient(
+    122.47% 119.54% at 77.84% 58.88%,
+    #c5d2ff 29.14%,
+    #82b5ff 100%
+  );
 }
 
 /* reset */
