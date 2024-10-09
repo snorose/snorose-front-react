@@ -267,6 +267,7 @@ export default function ExamReviewWritePage() {
         <div className={styles.left}>
           <Icon id='clip-board-list-blue' width={18} height={19} />
           <span className={styles.tag}>첨부파일</span>
+          <span className={styles.required}></span>
         </div>
         <div className={styles.right}>
           <label htmlFor='file'>{file?.name ?? '첨부된 파일이 없어요'}</label>

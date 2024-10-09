@@ -15,6 +15,18 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  position: relative;
+}
+
+.left .required {
+  width: 0.3125rem;
+  height: 0.3125rem;
+  display: inline-block;
+  position: absolute;
+  top: 0.125rem;
+  right: -0.625rem;
+  border-radius: 0.625rem;
+  background-color: #ff4b6c;
 }
 
 .tag {
@@ -34,6 +46,7 @@ label[for='file'] {
   border-radius: 0.3125rem;
   font-size: 0.8125rem;
   color: #898989;
+  cursor: pointer;
 }
 
 input[type='file'] {
