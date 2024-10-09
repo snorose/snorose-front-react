@@ -76,7 +76,7 @@ export default function MyPage() {
           <Link to='view-point-list'>
             <div className={styles.pointWrapper}>
               <div className={styles.point}>
-                <Icon id='point-circle' width='32' height='32' />
+                <Icon id='point-circle' width={32} height={32} />
                 {userInfo.balance.toLocaleString()}
               </div>
               <div className={styles.pointList}>
