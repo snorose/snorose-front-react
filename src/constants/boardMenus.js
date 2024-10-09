@@ -33,7 +33,7 @@ export const BOARD_MENUS = [
     to: '/board/permanent-snow',
     textId: 'permanent-snow',
     title: '만년설방',
-    desc: '졸업생 전용 게시판',
+    desc: '졸업생 전용 커뮤니티',
     image: permanentSnow,
   },
   // 2차 개발 시 추가 예정
