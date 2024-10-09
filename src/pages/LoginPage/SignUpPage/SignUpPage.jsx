@@ -22,8 +22,8 @@ export default function SignUpPage() {
         <div className={styles.navFrame}>
           <Icon
             id='arrow-left'
-            width='1.162rem'
-            height='1.048rem'
+            width={19}
+            height={17}
             onClick={() => {
               if (stage > 1) {
                 setStage((prev) => prev - 1);

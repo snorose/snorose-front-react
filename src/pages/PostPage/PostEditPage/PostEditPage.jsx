@@ -149,13 +149,13 @@ export default function PostEditPage() {
         <div className={styles.center}>
           <div className={styles.categorySelect}>
             <div className={styles.categorySelectContainer}>
-              <Icon id='clip-board-list' width='18' height='19' />
+              <Icon id='clip-board-list' width={18} height={19} />
               <p className={styles.categorySelectText}>{boardTitle}</p>
             </div>
           </div>
           <div className={styles.profileBox}>
             <div className={styles.profileBoxLeft}>
-              <Icon id='cloud' width='25' height='16' />
+              <Icon id='cloud' width={25} height={16} />
               <p>{userDisplay}</p>
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
@@ -172,8 +172,8 @@ export default function PostEditPage() {
                 <p>공지글</p>
                 <Icon
                   id={isNotice ? 'toggle-on' : 'toggle-off'}
-                  width='25'
-                  height='16'
+                  width={25}
+                  height={16}
                 />
               </div>
             )}

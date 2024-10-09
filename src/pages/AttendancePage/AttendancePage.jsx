@@ -80,7 +80,7 @@ export default function AttendancePage() {
             <span className={styles.label}>{title}</span>
             <p className={styles.description}>{content}</p>
           </div>
-          <Icon id='point-circle' width='32' height='32' />
+          <Icon id='point-circle' width={32} height={32} />
         </div>
         {/* <div className={styles.item}>
           <div className={styles.itemLeft}>
@@ -89,7 +89,7 @@ export default function AttendancePage() {
               매일 출석체크 알림을 보내드릴게요
             </p>
           </div>
-          <Icon id='point-circle' width='32' height='32' />
+          <Icon id='point-circle' width={32} height={32} />
         </div> */}
       </div>
       {loading && <FetchLoadingOverlay />}

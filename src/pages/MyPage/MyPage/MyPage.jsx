@@ -44,8 +44,8 @@ export default function MyPage() {
             <Icon
               className={styles.editIcon}
               id='pencil-underline'
-              width='20'
-              height='20'
+              width={20}
+              height={20}
               fill='#fff'
               stroke='#fff'
             />
@@ -68,7 +68,7 @@ export default function MyPage() {
             <div className={styles.studentId}>
               {userInfo.studentNumber.slice(0, 2)}학번
             </div>
-            <Icon id='middle-dot' width='5' height='5' />
+            <Icon id='middle-dot' width={5} height={5} />
             <div className={styles.memberType}>
               {ROLE_NAME[userInfo.userRoleId]}
             </div>
@@ -81,7 +81,7 @@ export default function MyPage() {
               </div>
               <div className={styles.pointList}>
                 포인트 내역 보기
-                <Icon id='angle-right' width='16' height='16' fill='#00368e' />
+                <Icon id='angle-right' width={16} height={16} fill='#00368e' />
               </div>
             </div>
           </Link>

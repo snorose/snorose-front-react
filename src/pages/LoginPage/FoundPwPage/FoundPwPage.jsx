@@ -7,6 +7,7 @@ import { Submit } from '@/components/Submit';
 import EnlightenedWoman from '@/assets/images/EnlightenedWoman.svg';
 
 import styles from './FoundPwPage.module.css';
+import { BackAppBar } from '@/components/index.js';
 
 export default function FoundPwPage() {
   const navigate = useNavigate();
@@ -22,12 +23,8 @@ export default function FoundPwPage() {
 
   return (
     <div className={styles.pageFrame}>
-      <div>
-        <div className={styles.navFrame}>
-          <Link to='/find-pw'>
-            <Icon id='arrow-left' width='1.162rem' height='1.048rem' />
-          </Link>
-        </div>
+      <BackAppBar />
+      <div className={styles.pageBottomFrame}>
         <p className={styles.pageTitle}>비밀번호 찾기</p>
         <p className={styles.pageSubtitle}>
           비밀번호 초기화 이메일이 발송되었어요
@@ -45,8 +42,8 @@ export default function FoundPwPage() {
             <p>{email}</p>
             <Icon
               id='pencil-underline'
-              width='24px'
-              height='24px'
+              width={24}
+              height={24}
               fillOpacity='0'
             />
           </div>

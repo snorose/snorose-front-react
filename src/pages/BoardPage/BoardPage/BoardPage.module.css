@@ -104,10 +104,7 @@
   font-size: 0.75rem;
 }
 
-.icon_logo {
-  display: flex;
-  width: 2rem;
-  height: 1.25rem;
+.iconLogo {
   margin-bottom: 0.625rem;
 }
 

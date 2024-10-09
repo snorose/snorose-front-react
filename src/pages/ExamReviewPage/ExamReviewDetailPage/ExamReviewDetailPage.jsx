@@ -205,8 +205,8 @@ export default function ExamReviewDetailPage() {
             <Icon
               className={styles.cloudIcon}
               id='cloud'
-              width='25'
-              height='16'
+              width={25}
+              height={16}
             />
             <span>{userDisplay}</span>
             <span className={styles.dot}></span>
@@ -216,8 +216,8 @@ export default function ExamReviewDetailPage() {
               <Icon
                 className={styles.checkCircleIcon}
                 id='check-circle'
-                width='15'
-                height='15'
+                width={15}
+                height={15}
               />
             )}
           </div>
@@ -227,8 +227,8 @@ export default function ExamReviewDetailPage() {
               isWriter ? setIsOptionModalOpen(true) : setIsReportModalOpen(true)
             }
             id='ellipsis-vertical'
-            width='3'
-            height='11'
+            width={3}
+            height={11}
           />
         </div>
         <div className={styles.title}>{title}</div>
@@ -260,8 +260,8 @@ export default function ExamReviewDetailPage() {
             <Icon
               className={styles.comment}
               id='comment'
-              width='15'
-              height='14'
+              width={15}
+              height={14}
               fill='#D9D9D9'
             />
             <span>{commentCount.toLocaleString()}</span>
@@ -272,8 +272,8 @@ export default function ExamReviewDetailPage() {
           >
             <Icon
               id='bookmark-fill'
-              width='10'
-              height='13'
+              width={10}
+              height={13}
               fill={isScrapped ? '#5F86BF' : '#D9D9D9'}
             />
             <span>{scrapCount.toLocaleString()}</span>

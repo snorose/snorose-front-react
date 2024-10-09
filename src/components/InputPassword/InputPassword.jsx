@@ -55,8 +55,8 @@ const InputPassword = ({
         />
         <Icon
           id={passwordType.visible ? 'closed-eye' : 'opened-eye'}
-          width='18'
-          height='13'
+          width={18}
+          height={13}
           fill={iconColor}
           onClick={handlePasswordType}
         />

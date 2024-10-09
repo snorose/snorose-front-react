@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { Icon } from '@/components/Icon';
 import { Submit } from '@/components/Submit';
 
 import frustratedWoman from '@/assets/images/frustratedWoman.svg';
 
 import styles from './SignUpFailurePage.module.css';
+import { BackAppBar } from '@/components/index.js';
 
 export default function SignUpFailurePage() {
   const navigate = useNavigate();
@@ -21,12 +21,8 @@ export default function SignUpFailurePage() {
 
   return (
     <div className={styles.pageFrame}>
-      <div>
-        <div className={styles.navFrame}>
-          <Link to='/signup'>
-            <Icon id='arrow-left' width='1.162rem' height='1.048rem' />
-          </Link>
-        </div>
+      <BackAppBar />
+      <div className={styles.pageTopFrame}>
         <p className={styles.pageTitle}>회원가입 실패</p>
         <p className={styles.pageExplanation}>{state?.message}</p>
       </div>

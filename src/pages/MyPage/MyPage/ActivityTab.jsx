@@ -34,7 +34,7 @@ const ActivityTab = () => {
             <Link to={item.link}>
               <div className={styles.item}>
                 <span>{item.label}</span>
-                <Icon id='angle-right' width='16' height='16' />
+                <Icon id='angle-right' width={16} height={16} />
               </div>
             </Link>
           </div>
