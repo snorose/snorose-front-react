@@ -77,7 +77,7 @@ export default function PostWritePage() {
     boardId,
     title,
     content: text,
-    isNotice,
+    isNotice: textId === 'notice' ? true : isNotice,
   };
 
   const handleSubmit = (e) => {
