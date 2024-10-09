@@ -1,37 +1,39 @@
 .loading {
   flex: 1;
   width: 100%;
-  height: calc(100% - 3.5rem - 5.375rem);
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .centerBox {
+  padding: 1.875rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 0.625rem;
   font-size: 0.8125rem;
-  padding: 1.875rem 0;
 }
 
 .icon {
-  animation: rotateAndPause 2s linear infinite;
+  animation: rotateAndPause 1s linear infinite;
 }
 
-.icon_static {
+.iconStatic {
   animation: none;
 }
 
 @keyframes rotateAndPause {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(180deg);
   }
+
   15% {
-    transform: rotate(180deg);
+    transform: rotate(360deg);
   }
+
   100% {
-    transform: rotate(180deg);
+    transform: rotate(360deg);
   }
 }

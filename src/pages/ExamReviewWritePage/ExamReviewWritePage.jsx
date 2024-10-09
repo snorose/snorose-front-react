@@ -14,6 +14,7 @@ import {
   TextField,
 } from '@/components/Fieldset';
 import { ConfirmModal } from '@/components/Modal';
+import { FetchLoading } from '@/components';
 import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
@@ -35,6 +36,7 @@ import {
 import styles from './ExamReviewWritePage.module.css';
 
 export default function ExamReviewWritePage() {
+  const navigate = useNavigate();
   const { toast } = useToast();
   const { invalidUserInfoQuery } = useAuth();
   const queryClient = useQueryClient();
@@ -62,6 +64,10 @@ export default function ExamReviewWritePage() {
 
       toast(response.data.message);
     },
+    onSettled: () => {
+      setLoading(false);
+      setIsCalled(false);
+    },
   });
 
   const [lectureName, setLectureName] = useState('');
@@ -76,19 +82,19 @@ export default function ExamReviewWritePage() {
   const [questionDetail, setQuestionDetail] = useState('');
   const [file, setFile] = useState();
 
+  const [isCalled, setIsCalled] = useState();
+  const [loading, setLoading] = useState();
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
-  const navigate = useNavigate();
-
   const pass =
-    lectureName &&
-    professor &&
+    lectureName.trim() &&
+    professor.trim() &&
     lectureType &&
     examType &&
     lectureYear &&
     semester &&
     classNumber &&
-    questionDetail &&
+    questionDetail.trim() &&
     file;
 
   const handleFile = (event) => {
@@ -139,10 +145,11 @@ export default function ExamReviewWritePage() {
       <CloseAppBar>
         <ActionButton
           onClick={async () => {
-            if (!pass) {
-              toast(TOAST.EXAM_REVIEW.validate);
+            if (isCalled) {
               return;
             }
+
+            setIsCalled(true);
 
             try {
               const response = await checkDuplication();
@@ -155,11 +162,13 @@ export default function ExamReviewWritePage() {
               return;
             }
 
+            setLoading(true);
             createExamReview.mutate({
               data: formBody,
               file,
             });
           }}
+          disabled={!pass}
         >
           게시
         </ActionButton>
@@ -258,6 +267,7 @@ export default function ExamReviewWritePage() {
         <div className={styles.left}>
           <Icon id='clip-board-list-blue' width={18} height={19} />
           <span className={styles.tag}>첨부파일</span>
+          <span className={styles.required}></span>
         </div>
         <div className={styles.right}>
           <label htmlFor='file'>{file?.name ?? '첨부된 파일이 없어요'}</label>
@@ -280,6 +290,13 @@ export default function ExamReviewWritePage() {
           setIsConfirmModalOpen(false);
         }}
       />
+      {loading && (
+        <div className={styles.loading}>
+          <FetchLoading>
+            <span className={styles.text}>잠시만 기다려주세요</span>
+          </FetchLoading>
+        </div>
+      )}
     </main>
   );
 }

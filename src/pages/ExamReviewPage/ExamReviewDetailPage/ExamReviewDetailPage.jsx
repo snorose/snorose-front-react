@@ -47,6 +47,7 @@ export default function ExamReviewDetailPage() {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
   const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
+  const [loading, setLoading] = useState();
 
   const { pathname } = useLocation();
   const { postId } = useParams();
@@ -104,6 +105,9 @@ export default function ExamReviewDetailPage() {
       }
 
       toast(response.data.message);
+    },
+    onSettled: () => {
+      setLoading(false);
     },
   });
 
@@ -295,7 +299,10 @@ export default function ExamReviewDetailPage() {
         id='exam-review-delete'
         isOpen={isDeleteModalOpen}
         closeFn={() => setIsDeleteModalOpen(false)}
-        redBtnFunction={() => deleteReview.mutate()}
+        redBtnFunction={() => {
+          setLoading(true);
+          deleteReview.mutate();
+        }}
       />
       <OptionModal
         id='report'
@@ -318,6 +325,13 @@ export default function ExamReviewDetailPage() {
         onOptionClick={handleUserReportOptionModalOptionClick}
         closeFn={() => setIsUserReportModalOpen(false)}
       />
+      {loading && (
+        <div className={styles.loading}>
+          <FetchLoading>
+            <span className={styles.text}>잠시만 기다려주세요</span>
+          </FetchLoading>
+        </div>
+      )}
     </main>
   );
 }

@@ -3,7 +3,6 @@ const TOAST = Object.freeze({
     attendance: '출석체크 완료',
   },
   EXAM_REVIEW: {
-    validate: '필수 입력을 모두 작성해주세요',
     create: '100P 적립되었어요',
     delete: '시험후기가 삭제되었어요',
     edit: '시험후기가 수정되었어요',
@@ -13,9 +12,6 @@ const TOAST = Object.freeze({
     create: '2P 적립되었어요',
     delete: '게시글이 삭제되었어요',
     edit: '게시글이 수정되었어요',
-    emptyTitle: '제목을 입력해주세요',
-    emptyContent: '내용을 입력해주세요',
-    emptyBoard: '게시판을 선택해주세요',
   },
   COMMENT: {
     create: '댓글을 등록했어요',

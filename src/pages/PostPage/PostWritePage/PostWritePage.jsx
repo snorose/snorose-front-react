@@ -12,6 +12,7 @@ import {
   DropDownMenu,
   DeleteModal,
   FetchLoading,
+  ActionButton,
 } from '@/components';
 
 import { formattedNowTime } from '@/utils';
@@ -42,6 +43,8 @@ export default function PostWritePage() {
   const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
 
   const { invalidUserInfoQuery } = useAuth();
+
+  const pass = boardId && title.trim() && text.trim();
 
   const boardTitles = BOARD_MENUS.filter((menu) =>
     [21, 22, 23].includes(menu.id)
@@ -76,24 +79,11 @@ export default function PostWritePage() {
     content: text,
     isNotice,
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (submitDisabled) return;
-
-    // 유효성 검사
-    if (boardId === '') {
-      toast(TOAST.POST.emptyBoard);
-      return;
-    }
-    if (!title.trim()) {
-      toast(TOAST.POST.emptyTitle);
-      return;
-    }
-    if (!text.trim()) {
-      toast(TOAST.POST.emptyContent);
-      return;
-    }
 
     setSubmitDisabled(true);
 
@@ -142,16 +132,17 @@ export default function PostWritePage() {
       <div className={styles.container}>
         <div className={styles.top}>
           <CloseAppBar
-            children='등록'
-            stroke='#000'
-            onClick={handleSubmit}
             backgroundColor={'#eaf5fd'}
-            xClick={() => {
+            onClose={() => {
               title.trim() || text.trim()
                 ? setIsCheckModalOpen(true)
                 : navigate(-1);
             }}
-          />
+          >
+            <ActionButton onClick={handleSubmit} disabled={!pass}>
+              등록
+            </ActionButton>
+          </CloseAppBar>
         </div>
         <div className={styles.center}>
           {textId === 'notice' ? (
