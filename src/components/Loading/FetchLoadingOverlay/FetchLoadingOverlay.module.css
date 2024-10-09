@@ -6,11 +6,11 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #00000092;
+  background-color: rgba(var(--black-rgb), 0.4);
   z-index: 1;
 }
 
 .loading .text {
   font-size: 1rem;
-  color: white;
+  color: var(--white);
 }

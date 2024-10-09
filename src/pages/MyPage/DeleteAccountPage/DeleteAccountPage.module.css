@@ -20,7 +20,7 @@
 }
 
 .title {
-  color: #000;
+  color: var(--black);
   font-size: 1.25rem;
   font-weight: 700;
 }
@@ -34,7 +34,7 @@
 }
 
 .desc {
-  color: var(--Grey-4, var(--grey-3, #484848));
+  color: var(--gray-4);
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -56,11 +56,11 @@
   width: 100%;
   height: 2.9375rem;
   border-radius: 0.3125rem;
-  background: var(--Blue-1, #ddebf6);
-  color: var(--Blue-3, #5f86bf);
+  background: var(--blue-1);
+  color: var(--blue-3);
   font-size: 0.875rem;
   font-weight: 500;
-  }
+}
 
 .deleteAccountButton {
   display: flex;
@@ -69,8 +69,8 @@
   width: 100%;
   height: 2.9375rem;
   border-radius: 0.3125rem;
-  background: var(--Blue-4, #00368e);
-  color: #fff;
+  background: var(--blue-4);
+  color: var(--white);
   text-align: center;
   font-size: 0.875rem;
   font-weight: 500;

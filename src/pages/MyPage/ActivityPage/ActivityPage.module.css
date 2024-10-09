@@ -54,7 +54,7 @@
 }
 
 .noContentMessage {
-  color: #484848;
+  color: var(--gray-4);
   font-size: 1rem;
   font-weight: 500;
 }

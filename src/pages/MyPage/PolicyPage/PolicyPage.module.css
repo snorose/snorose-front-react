@@ -20,8 +20,8 @@
 .content {
   padding: 1rem 0.8125rem;
   border-radius: 0.3125rem;
-  background: var(--Miscellaneous-_Kit-Section-Fill, #f5f5f5);
-  color: var(--Grey-4, var(--grey-3, #484848));
+  background: var(--gray-1-1);
+  color: var(--gray-4);
   font-size: 0.875rem;
   white-space: pre-line;
 }

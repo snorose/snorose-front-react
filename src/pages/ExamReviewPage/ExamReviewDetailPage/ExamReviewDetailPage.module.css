@@ -4,7 +4,7 @@
   padding-top: 2.813rem;
   display: flex;
   flex-direction: column;
-  background-color: #eaf5fd;
+  background-color: var(--blue-0);
   border-radius: 0 0 0.9375rem 0.9375rem;
 }
 
@@ -14,7 +14,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.75rem;
-  color: #898989;
+  color: var(--gray-3-1);
 }
 
 .displayBoxLeft {
@@ -34,7 +34,7 @@
   width: 0.1875rem;
   height: 0.1875rem;
   margin: 0 0.5rem;
-  background: #898989;
+  background: var(--gray-3-1);
   border-radius: 100%;
 }
 
@@ -52,7 +52,7 @@
 .content {
   padding: 0.125rem 0.8125rem;
   margin: 1.4375rem var(--default-margin);
-  background: #ffffff;
+  background: var(--white);
   border-radius: 0.3125rem;
 }
 
@@ -66,10 +66,10 @@
   justify-content: flex-end;
   align-items: center;
   font-size: 0.6875rem;
-  color: #898989;
+  color: var(--gray-3-1);
 
   div:nth-of-type(2):hover {
-    background-color: #ffffffcc;
+    background-color: rgba(var(--white-rgb), 0.8);
     cursor: pointer;
   }
 }

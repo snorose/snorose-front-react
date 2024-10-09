@@ -1,10 +1,10 @@
 .dropdown {
   padding: 0.6rem 0;
-  background: #f0f0f0;
+  background: var(--gray-2);
   border-radius: 0.3125rem;
   border: none;
   font-size: 0.8125rem;
-  color: #484848;
+  color: var(--gray-4);
 }
 
 .select {
@@ -19,11 +19,11 @@
 }
 
 .unselect {
-  color: #898989;
+  color: var(--gray-3-1);
 }
 
 .placeholder {
-  color: #898989;
+  color: var(--gray-3-1);
 }
 
 .list {
@@ -46,6 +46,6 @@
 }
 
 .option:hover {
-  background-color: #dbdbdb;
+  background-color: var(--gray-3);
   cursor: pointer;
 }
