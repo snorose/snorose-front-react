@@ -64,8 +64,8 @@ export default function ViewPointListPage() {
                   <div className={styles.pointIconContentWrapper}>
                     <Icon
                       id={difference > 0 ? 'heart-plus' : 'heart-minus'}
-                      width='27'
-                      height='24'
+                      width='28'
+                      height='28'
                     />
                     <div className={styles.pointContent}>
                       <h2
