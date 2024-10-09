@@ -3,7 +3,7 @@
 .top {
   display: flex;
   flex-direction: column;
-  background-color: #00368e;
+  background-color: var(--blue-4);
   border-radius: 0 0 0.9375rem 0.9375rem;
 }
 
@@ -12,7 +12,7 @@
   font-weight: 700;
   font-size: 1.25rem;
   text-align: center;
-  color: #ffffff;
+  color: var(--white);
   white-space: pre-line;
 }
 
@@ -24,12 +24,12 @@
 .attendanceButton {
   margin: 1.625rem var(--default-margin);
   padding: 0.8125rem 0;
-  background: #eaf5fd;
+  background: var(--blue-0);
   border-radius: 0.3125rem;
   font-weight: 500;
   font-size: 0.875rem;
   text-align: center;
-  color: #00368e;
+  color: var(--blue-4);
 }
 
 .attendanceButton:active {
@@ -56,7 +56,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #eaf5fd;
+  background: var(--blue-0);
   border-radius: 0.3125rem;
 }
 
@@ -69,10 +69,10 @@
 .label {
   font-weight: 500;
   font-size: 0.875rem;
-  color: #00368e;
+  color: var(--blue-4);
 }
 
 .description {
   font-size: 0.8125rem;
-  color: #484848;
+  color: var(--gray-4);
 }

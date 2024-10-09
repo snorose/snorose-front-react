@@ -1,13 +1,13 @@
 .button {
   width: 100%;
   padding: 0.5625rem 0;
-  background: #f0f0f0;
+  background: var(--gray-2);
   border-radius: 0.3125rem;
   font-size: 0.8125rem;
-  color: #484848;
+  color: var(--gray-4);
 }
 
 .select {
-  background: #00368e;
-  color: #ffffff;
+  background: var(--blue-4);
+  color: var(--white);
 }

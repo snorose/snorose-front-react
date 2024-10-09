@@ -5,20 +5,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #eaf5fd;
+  background: var(--blue-0);
   border-radius: 0.375rem;
   box-sizing: border-box;
-  color: #484848;
+  color: var(--gray-4);
   overflow: hidden;
 }
 
 .dark .card {
   background: radial-gradient(
     79.53% 146.8% at 31.85% 57.65%,
-    #00368e 0%,
-    #5f86bf 100%
+    var(--blue-4) 0%,
+    var(--blue-3) 100%
   );
-  color: #ffffff;
+  color: var(--white);
 }
 
 .text {
@@ -42,9 +42,9 @@
 
 .tag {
   font-size: 0.75rem;
-  color: #484848;
+  color: var(--gray-4);
 }
 
 .dark .tag {
-  color: #f4f4f4;
+  color: var(--gray-1-1);
 }

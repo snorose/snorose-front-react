@@ -27,10 +27,10 @@ body {
   align-items: center;
   gap: 0.861rem;
   border-radius: 0.3125rem;
-  background-color: #fee9eb;
+  background-color: var(--pink-1);
   /* font-size: 0.688rem; */
   font-size: 0.8125rem;
-  color: #ff4b6c;
+  color: var(--pink-3);
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -63,9 +63,9 @@ body {
   align-items: center;
   padding: 0.1875rem 0.875rem;
   border-radius: 1.25rem;
-  background: #eaf5fd;
+  background: var(--blue-0);
   margin-right: 0.3125rem;
-  color: #5f86bf;
+  color: var(--blue-3);
 
   p {
     font-size: 0.6875rem;

@@ -23,7 +23,7 @@
 .pageExplanation {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #484848;
+  color: var(--gray-4);
   margin-top: 0.875rem;
 }
 
@@ -50,7 +50,7 @@
 .result {
   font-size: 1.563rem;
   font-weight: 700;
-  color: #00368e;
+  color: var(--blue-4);
 }
 
 .dot {
@@ -62,15 +62,15 @@
 }
 
 .first {
-  background-color: #acbcd7;
+  background-color: var(--blue-2);
 }
 
 .second {
-  background-color: #7a95c1;
+  background-color: var(--blue-3);
 }
 
 .third {
-  background-color: #00368e;
+  background-color: var(--blue-4);
 }
 
 .img {
@@ -89,6 +89,6 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2.875rem;
-  color: #484848;
+  color: var(--gray-4);
   font-size: 0.75rem;
 }

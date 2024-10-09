@@ -15,18 +15,18 @@
   align-items: center;
   font-size: 1rem;
   text-align: center;
-  color: #ffffff;
+  color: var(--white);
 }
 
 .day.today {
   border-radius: 100%;
-  background: #ddebf6;
+  background: var(--blue-1);
   font-weight: 700;
-  color: #00368e;
+  color: var(--blue-4);
 }
 
 .difference {
   font-size: 0.75rem;
   text-align: center;
-  color: #ff849a;
+  color: var(--pink-2);
 }

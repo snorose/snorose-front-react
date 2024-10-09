@@ -36,7 +36,7 @@
 }
 
 .totalPoint {
-  color: var(--Blue-4, #00368e);
+  color: var(--blue-4);
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -53,7 +53,7 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 0.3125rem;
-  background: var(--Grey-1-1, #f4f4f4);
+  background: var(--gray-1-1);
   padding: 0.9375rem;
 }
 
@@ -75,27 +75,27 @@
 }
 
 .pointTitle {
-  color: var(--Blue-4, #00368e);
+  color: var(--blue-4);
   font-size: 0.75rem;
   font-weight: 500;
 }
 
 .pointDesc {
-  color: var(--grey-3, #484848);
+  color: var(--gray-4);
   font-size: 0.5625rem;
 }
 
 .pointDate {
-  color: var(--Grey-3-1, #898989);
+  color: var(--gray-3-1);
   font-size: 0.5625rem;
 }
 
 .chargePoint {
-  color: var(--Blue-4, #00368e);
+  color: var(--blue-4);
   font-size: 0.875rem;
   font-weight: 500;
 }
 
 .negative {
-  color: var(--Pink-2, #ff4b6c);
+  color: var(--pink-3);
 }
