@@ -7,7 +7,7 @@ export default function FetchLoading({ children, animation = true }) {
     <div className={styles.loading}>
       <div className={styles.centerBox}>
         <div className={animation ? styles.icon : styles.iconStatic}>
-          <Icon id='cloud' width='25' height='16' />
+          <Icon id='cloud' width={25} height={16} />
         </div>
         <p>{children}</p>
       </div>

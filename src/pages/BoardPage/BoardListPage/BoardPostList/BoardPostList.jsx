@@ -28,12 +28,9 @@ export default function BoardPostList() {
 
   if (isError) {
     return (
-      <>
-        <BackAppBar notFixed />
-        <FetchLoading animation={false}>
-          게시글을 불러오지 못했습니다.
-        </FetchLoading>
-      </>
+      <FetchLoading animation={false}>
+        게시글을 불러오지 못했습니다.
+      </FetchLoading>
     );
   }
 

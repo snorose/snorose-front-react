@@ -85,7 +85,7 @@ export default function ReviewDownload({
           setIsOpen(true);
         }}
       >
-        <Icon id='file' width='10' height='14' />
+        <Icon id='file' width={10} height={14} />
         <span className={styles.name}>{fileName}</span>
       </button>
       <DeleteModal

@@ -11,6 +11,7 @@ import styles from './SignUpSuccessPage.module.css';
 export default function SignUpSuccessPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
+
   useEffect(() => {
     try {
       const checkAccess = state.access;
@@ -18,15 +19,11 @@ export default function SignUpSuccessPage() {
       navigate('/login');
     }
   }, []);
+
   return (
     <div className={styles.pageFrame}>
       <div>
-        <Icon
-          id='check-thick'
-          width='1.5rem'
-          height='1.5rem'
-          className={styles.icon}
-        />
+        <Icon id='check-thick' width={24} height={24} className={styles.icon} />
         <p className={styles.title}>스노로즈 가입이 완료되었어요!</p>
         <p>
           별도의 인증 절차 후<br />

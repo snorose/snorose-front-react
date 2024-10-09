@@ -1,6 +1,5 @@
 .pageFrame {
   width: 100%;
-  padding: 0 1.25rem;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -34,6 +33,11 @@
 
 .inputFrame {
   margin-bottom: 1.5rem;
+  padding: 0 1.25rem;
+}
+
+.buttonFrame {
+  padding: 0 1.25rem;
 }
 
 .findIDButton {

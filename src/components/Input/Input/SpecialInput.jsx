@@ -50,8 +50,8 @@ export default function SpecialInput({
           <Icon
             id={isBtnClick ? id2 : id1}
             fill={checkColor(color1, color2, color3)}
-            width='1.5rem'
-            height='1.5rem'
+            width={24}
+            height={24}
             className={styles.icon}
             onClick={toggleBtn}
           />

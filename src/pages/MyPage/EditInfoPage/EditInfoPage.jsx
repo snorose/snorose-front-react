@@ -241,8 +241,8 @@ export default function EditInfoPage() {
             {/* <Icon
               className={styles.blueCamera}
               id='blue-camera'
-              width='24'
-              height='24'
+              width={24}
+              height={24}
             /> */}
           </div>
           {/* <input

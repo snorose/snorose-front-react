@@ -33,8 +33,8 @@ export default function DropDownBlue({
       >
         <Icon
           id={isOpen ? 'angle-up-blue' : 'angle-down-blue'}
-          width='8'
-          height='5'
+          width={8}
+          height={5}
         />
         <span className={styles.displayOption}>
           {select?.name ?? placeholder}

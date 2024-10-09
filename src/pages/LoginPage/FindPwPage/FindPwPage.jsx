@@ -10,6 +10,7 @@ import { Submit } from '@/components/Submit';
 import { checkID, checkMail } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
 
 import styles from './FindPwPage.module.css';
+import { BackAppBar } from '@/components/index.js';
 
 export default function FindPwPage() {
   const navigate = useNavigate();
@@ -55,39 +56,30 @@ export default function FindPwPage() {
       >
         <div className={styles.findIdFrame}>
           <div>
-            <Link to='/login'>
-              <Icon
-                id='arrow-left'
-                width='1.162rem'
-                height='1.048rem'
-                className={styles.arrowLeft}
-              />
-            </Link>
+            <BackAppBar />
             <h1 className={styles.pageTitle}>비밀번호 찾기</h1>
 
-            {inputProps.map((props, i) => {
-              return (
-                <div className={styles.inputFrame} key={i}>
-                  <Input
-                    title={props[0]}
-                    placeholder={props[1]}
-                    className={props[2]}
-                    setClassName={props[3]}
-                    classNameCheck={props[4]}
-                    inputType={props[5]}
-                    inputData={setFormData}
-                    errMsg={props[6]}
-                  />
-                </div>
-              );
-            })}
+            {inputProps.map((props, i) => (
+              <div className={styles.inputFrame} key={i}>
+                <Input
+                  title={props[0]}
+                  placeholder={props[1]}
+                  className={props[2]}
+                  setClassName={props[3]}
+                  classNameCheck={props[4]}
+                  inputType={props[5]}
+                  inputData={setFormData}
+                  errMsg={props[6]}
+                />
+              </div>
+            ))}
           </div>
           <div className={styles.buttonFrame}>
             <Submit btnName='완료' className={submitState()} />
             <Link to='/find-id'>
               <div className={styles.findIDButton}>
                 <p>아이디 찾기</p>
-                <Icon id='angle-right' width='24px' height='24px' />
+                <Icon id='angle-right' width={24} height={24} />
               </div>
             </Link>
           </div>
