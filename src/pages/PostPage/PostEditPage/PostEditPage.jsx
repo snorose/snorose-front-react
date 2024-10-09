@@ -62,7 +62,7 @@ export default function PostEditPage() {
     mutationFn: patchPost,
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_KEY.post, postId]);
-      navigate(-1);
+      navigate(-1, { replace: true });
       toast(TOAST.POST.edit);
       setSubmitDisabled(false);
     },
@@ -133,16 +133,15 @@ export default function PostEditPage() {
       <div className={styles.container}>
         <div className={styles.top}>
           <CloseAppBar
-            children='수정'
+            children={<p onClick={handleSubmit}>수정</p>}
             stroke='#000'
-            onClick={handleSubmit}
             backgroundColor={'#eaf5fd'}
-            xClick={() => {
+            onClose={() => {
               data.title !== title ||
               data.content !== text ||
               data.isNotice !== isNotice
                 ? setIsCheckModalOpen(true)
-                : navigate(-1);
+                : navigate(-1, { replace: true });
             }}
           />
         </div>
@@ -198,7 +197,7 @@ export default function PostEditPage() {
         id='post-edit-exit-check'
         isOpen={isCheckModalOpen}
         closeFn={() => setIsCheckModalOpen(false)}
-        redBtnFunction={() => navigate(-1)}
+        redBtnFunction={() => navigate(-1, { replace: true })}
       />
     </>
   );
