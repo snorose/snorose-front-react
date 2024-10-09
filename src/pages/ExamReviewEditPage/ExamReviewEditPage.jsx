@@ -29,6 +29,7 @@ import {
 } from '@/constants';
 
 import styles from './ExamReviewEditPage.module.css';
+import { FetchLoading } from '@/components/index.js';
 
 export default function ExamReviewEditPage() {
   const { postId } = useParams();
@@ -36,6 +37,7 @@ export default function ExamReviewEditPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const [loading, setLoading] = useState();
 
   const editReview = useMutation({
     mutationKey: [MUTATION_KEY.editExamReview],
@@ -47,6 +49,9 @@ export default function ExamReviewEditPage() {
     },
     onError: ({ response }) => {
       toast(response.data.message);
+    },
+    onSettled: () => {
+      setLoading(false);
     },
   });
 
@@ -100,9 +105,11 @@ export default function ExamReviewEditPage() {
           onClick={() => {
             if (!pass) {
               alert('필수입력을 모두 작성해주세요.');
-            } else {
-              editReview.mutate(data);
+              return;
             }
+
+            setLoading(true);
+            editReview.mutate(data);
           }}
         >
           수정
@@ -198,6 +205,13 @@ export default function ExamReviewEditPage() {
           maxRows='10'
         />
       </CategoryFieldset>
+      {loading && (
+        <div className={styles.loading}>
+          <FetchLoading>
+            <span className={styles.text}>잠시만 기다려주세요</span>
+          </FetchLoading>
+        </div>
+      )}
     </main>
   );
 }
