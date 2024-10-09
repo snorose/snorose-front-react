@@ -28,7 +28,7 @@ import styles from './EditInfoPage.module.css';
 
 const VALIDATIONS = Object.freeze({
   NAME: /^[a-zA-Z가-힣\s]*$/,
-  NICKNAME: /^[a-zA-Z가-힣0-9]*$/,
+  NICKNAME: /^[a-zA-Z가-힣ㄱ-ㅎ0-9]*$/,
   SPECIAL_CHAR: /[!@#\$%\^\&*\)\(+=._-]/,
   EMOJI: /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g,
 });
