@@ -13,6 +13,7 @@ import {
   Dropdown,
   TextField,
 } from '@/components/Fieldset';
+import { FetchLoading } from '@/components/Loading';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
 
@@ -29,7 +30,6 @@ import {
 } from '@/constants';
 
 import styles from './ExamReviewEditPage.module.css';
-import { FetchLoading } from '@/components/index.js';
 
 export default function ExamReviewEditPage() {
   const { postId } = useParams();

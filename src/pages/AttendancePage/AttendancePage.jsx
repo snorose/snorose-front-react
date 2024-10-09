@@ -7,6 +7,7 @@ import { useAuth, useToast } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { Calendar } from '@/components/Calendar';
+import { FetchLoading } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 
 import {
@@ -18,7 +19,6 @@ import {
 } from '@/constants';
 
 import styles from './AttendancePage.module.css';
-import { FetchLoading } from '@/components/index.js';
 
 export default function AttendancePage() {
   const queryClient = useQueryClient();
