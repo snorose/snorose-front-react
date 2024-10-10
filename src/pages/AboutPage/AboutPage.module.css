@@ -1,0 +1,42 @@
+.logo {
+  margin: 4rem var(--default-margin) 1.625rem var(--default-margin);
+}
+
+.container {
+  margin: 0 var(--default-margin) 100px var(--default-margin);
+  padding: 0 0.875rem;
+  background: var(--blue-0);
+  border-radius: 0.3125rem;
+}
+
+/* 스노로즈 소개 */
+
+.aboutUs {
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+/* 명예의 전당 */
+
+.hallOfFame {
+  background: var(--blue-1);
+  border-radius: 0.3125rem;
+}
+
+.hallOfFame img {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.hallOfFame .tags {
+  margin: 0 0.5rem;
+  padding-bottom: 1.28rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.apply {
+  margin-top: 10px;
+}
