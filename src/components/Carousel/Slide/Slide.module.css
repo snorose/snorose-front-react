@@ -1,6 +1,6 @@
 .slide {
   width: 100%;
-  height: 8.0625rem;
+  height: auto;
   flex-shrink: 0;
 }
 
