@@ -1,9 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
-
 import { getPostList } from '@/apis';
-
 import { usePagination } from '@/hooks';
+import { useLayoutEffect } from 'react';
 
+import React from 'react';
 import { BackAppBar, PostBar, PTR, FetchLoading } from '@/components';
 
 import { getBoard, timeAgo } from '@/utils';
@@ -16,11 +16,36 @@ export default function BoardPostList() {
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
 
-  const { data, ref, isLoading, isFetching, status, isError, refetch } =
-    usePagination({
-      queryKey: [QUERY_KEY.posts, currentBoard.id],
-      queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
-    });
+  // 페이지네이션 관련 hook
+  const {
+    data,
+    ref: paginationRef,
+    isLoading,
+    isFetching,
+    status,
+    isError,
+    refetch,
+  } = usePagination({
+    queryKey: [QUERY_KEY.posts, currentBoard.id],
+    queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
+  });
+
+  const scrollRef = React.useRef(null);
+
+  // 클릭 시 스크롤 위치를 세션 스토리지에 저장
+  const handleSaveScroll = () => {
+    if (scrollRef.current) {
+      sessionStorage.setItem('scrollY', scrollRef.current.scrollTop);
+    }
+  };
+
+  // 컴포넌트가 렌더링된 후 스크롤 위치를 복원
+  useLayoutEffect(() => {
+    if (scrollRef.current && sessionStorage.scrollY) {
+      const savedScrollY = parseInt(sessionStorage.scrollY, 10);
+      scrollRef.current.scrollTop = savedScrollY;
+    }
+  }, []);
 
   if (isLoading) {
     return <FetchLoading>게시글 불러오는 중...</FetchLoading>;
@@ -41,13 +66,18 @@ export default function BoardPostList() {
 
   return (
     <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
-      <div className={styles.postListContainer}>
+      <div
+        className={styles.postListContainer}
+        ref={scrollRef}
+        style={{ overflowY: 'auto', height: '100vh' }}
+      >
         {status !== 'error' &&
           postList.map((post, index) => (
             <Link
-              ref={index === postList.length - 1 ? ref : undefined}
               key={post.postId}
               to={`/board/${currentBoardTextId}/post/${post.postId}`}
+              ref={index === postList.length - 1 ? paginationRef : undefined}
+              onClick={handleSaveScroll}
             >
               <PostBar data={{ ...post, timeAgo: timeAgo(post.date) }} />
             </Link>
