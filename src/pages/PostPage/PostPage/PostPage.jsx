@@ -20,14 +20,8 @@ import {
   InputBar,
 } from '@/components';
 
-import { timeAgo } from '@/utils';
-import {
-  BOARD_MENUS,
-  LIKE_TYPE,
-  MUTATION_KEY,
-  QUERY_KEY,
-  TOAST,
-} from '@/constants';
+import { getBoard, timeAgo } from '@/utils';
+import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
 
@@ -39,8 +33,7 @@ export default function PostPage() {
   const { pathname } = location;
   const { inputFocus } = useCommentContext();
   const { toast } = useToast();
-  const currentBoard =
-    BOARD_MENUS.find((menu) => menu.textId === pathname.split('/')[2]) || {};
+  const currentBoard = getBoard(pathname.split('/')[2]);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -91,7 +84,9 @@ export default function PostPage() {
       const response = await deletePost(currentBoard.id, postId);
 
       if (response.status === 200) {
-        toast(TOAST.POST.delete);
+        currentBoard.id !== 23
+          ? toast(TOAST.POST.delete)
+          : toast(TOAST.POST.deleteNoPoints);
         navigate(-1);
         queryClient.removeQueries([QUERY_KEY.post, postId]);
         invalidUserInfoQuery();
@@ -267,7 +262,7 @@ export default function PostPage() {
         }}
       />
       <DeleteModal
-        id='post-delete'
+        id={currentBoard.id !== 23 ? 'post-delete' : 'post-delete-no-points'}
         isOpen={isDeleteModalOpen}
         closeFn={() => {
           setIsDeleteModalOpen(false);

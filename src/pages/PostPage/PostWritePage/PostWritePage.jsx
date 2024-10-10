@@ -91,7 +91,10 @@ export default function PostWritePage() {
     postPost(data)
       .then((response) => {
         if (response.status === 201) {
-          toast(TOAST.POST.create);
+          console.log(response.data.result.pointDifference);
+          !response.data.result.pointDifference
+            ? toast(TOAST.POST.createNoPoints)
+            : toast(TOAST.POST.create);
           const newPostId = response.data.result.postId;
 
           queryClient.removeQueries([QUERY_KEY.post]);
@@ -114,10 +117,10 @@ export default function PostWritePage() {
       });
   };
 
-  // 제목 40자 제한
+  // 제목 127자 제한
   const handleTitleChange = (e) => {
     const newValue = e.target.value;
-    if (newValue.length <= 40) {
+    if (newValue.length <= 127) {
       setTitle(newValue);
     }
   };
