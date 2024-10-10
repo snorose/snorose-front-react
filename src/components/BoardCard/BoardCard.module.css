@@ -16,7 +16,7 @@
 }
 
 .name {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 500;
 }
 
@@ -25,8 +25,8 @@
 }
 
 .desc {
-  width: 4.5rem;
-  font-size: 0.5625rem;
+  width: 5rem;
+  font-size: 0.6875rem;
   color: var(--gray-3-1);
   word-break: keep-all;
 }
