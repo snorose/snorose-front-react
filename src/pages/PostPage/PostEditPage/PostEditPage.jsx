@@ -77,10 +77,10 @@ export default function PostEditPage() {
     setIsNotice((prev) => !prev);
   };
 
-  // 제목 40자 제한
+  // 제목 127자 제한
   const handleTitleChange = (e) => {
     const newValue = e.target.value;
-    if (newValue.length <= 40) {
+    if (newValue.length <= 127) {
       setTitle(newValue);
     }
   };

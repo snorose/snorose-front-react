@@ -9,13 +9,17 @@ const TOAST = Object.freeze({
     download: '다운로드가 완료되었어요',
   },
   POST: {
-    create: '2P 적립되었어요',
-    delete: '게시글이 삭제되었어요',
+    create: '게시글을 등록했어요 (+2P)',
+    createNoPoints: '게시글을 등록했어요',
+    delete: '게시글이 삭제되었어요 (-2P)',
+    deleteNoPoints: '게시글이 삭제되었어요',
     edit: '게시글이 수정되었어요',
   },
   COMMENT: {
-    create: '댓글을 등록했어요',
-    delete: '댓글이 삭제되었어요',
+    create: '댓글을 등록했어요 (+1P)',
+    createNoPoints: '댓글을 등록했어요',
+    delete: '댓글이 삭제되었어요 (-1P)',
+    deleteNoPoints: '댓글이 삭제되었어요',
     edit: '댓글이 수정되었어요',
   },
   USER: {

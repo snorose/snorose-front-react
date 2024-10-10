@@ -57,7 +57,7 @@ export default function useComment() {
       return await post({ postId, parentId, content });
     },
     onSuccess: (newComment) => {
-      const { parentId } = newComment;
+      const { parentId, pointDifference } = newComment;
 
       invalidUserInfoQuery();
 
@@ -78,7 +78,9 @@ export default function useComment() {
       });
 
       updateCommentCountCache({ type: COMMENT_ACTION_TYPE.create });
-      toast(TOAST.COMMENT.create);
+      !pointDifference
+        ? toast(TOAST.COMMENT.createNoPoints)
+        : toast(TOAST.COMMENT.create);
     },
     onError,
   });
@@ -89,7 +91,7 @@ export default function useComment() {
       return await remove({ postId, commentId });
     },
     onSuccess: (deletedComment) => {
-      const { id } = deletedComment;
+      const { id, pointDifference } = deletedComment;
 
       invalidUserInfoQuery();
       updateCommentCache((comment) =>
@@ -100,7 +102,9 @@ export default function useComment() {
       );
 
       updateCommentCountCache({ type: COMMENT_ACTION_TYPE.delete });
-      toast(TOAST.COMMENT.delete);
+      !pointDifference
+        ? toast(TOAST.COMMENT.deleteNoPoints)
+        : toast(TOAST.COMMENT.delete);
     },
     onError,
   });
