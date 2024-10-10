@@ -287,6 +287,7 @@ export default function ExamReviewWritePage() {
             data: formBody,
             file,
           });
+          setIsConfirmModalOpen(false);
         }}
         onSecondaryButtonClick={() => {
           setIsConfirmModalOpen(false);
