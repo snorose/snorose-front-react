@@ -180,7 +180,7 @@ export default function PostPage() {
       <div className={styles.content}>
         <div className={styles.contentTop}>
           <div className={styles.contentTopLeft}>
-            <Icon id='cloud' width='25' height='16' />
+            <Icon id='cloud' width={25} height={16} />
             <p>{data.userDisplay || 'Unknown'}</p>
             <p className={styles.dot}>·</p>
             <p>
@@ -199,7 +199,7 @@ export default function PostPage() {
                 : setIsReportModalOpen(true);
             }}
           >
-            <Icon id='ellipsis-vertical' width='3' height='11' />
+            <Icon id='ellipsis-vertical' width={3} height={11} />
           </div>
         </div>
         <div className={styles.title}>
@@ -213,7 +213,7 @@ export default function PostPage() {
         <p className={styles.text}>{data.content}</p>
         <div className={styles.post_bottom}>
           <div className={styles.count} onClick={inputFocus}>
-            <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
+            <Icon id='comment' width={15} height={13} fill='#D9D9D9' />
             <p>{data.commentCount.toLocaleString()}</p>
           </div>
           <div
@@ -222,8 +222,8 @@ export default function PostPage() {
           >
             <Icon
               id='like'
-              width='13'
-              height='12'
+              width={13}
+              height={12}
               fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
             />
             <p>{data.likeCount.toLocaleString()}</p>
@@ -236,8 +236,8 @@ export default function PostPage() {
           >
             <Icon
               id='bookmark-fill'
-              width='10'
-              height='13'
+              width={10}
+              height={13}
               fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
             />
             <p>{data.scrapCount.toLocaleString()}</p>

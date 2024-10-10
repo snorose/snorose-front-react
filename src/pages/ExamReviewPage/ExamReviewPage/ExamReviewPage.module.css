@@ -11,9 +11,9 @@
   align-items: center;
   gap: 0.861rem;
   border-radius: 0.3125rem;
-  background-color: #fee9eb;
+  background-color: var(--pink-1);
   font-size: 0.688rem;
-  color: #ff4b6c;
+  color: var(--pink-3);
   box-sizing: border-box;
   cursor: pointer;
 }

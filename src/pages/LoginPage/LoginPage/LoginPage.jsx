@@ -10,6 +10,7 @@ import { Submit } from '@/components/Submit';
 import snoroseLogo from '@/assets/images/snoroseLogo.svg';
 
 import styles from './LoginPage.module.css';
+import { BackAppBar } from '@/components/index.js';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -23,13 +24,9 @@ export default function Login() {
 
   return (
     <div className={styles.loginframe}>
+      <BackAppBar />
       <form onSubmit={(e) => login(e, setIsError, formData, navigate)}>
-        <div className={styles.prev}>
-          <Link to='/'>
-            <Icon id='arrow-left' width='1.162rem' height='1.048rem' />
-          </Link>
-        </div>
-        <div className={styles.loginbody}>
+        <div className={styles.loginBody}>
           <img src={snoroseLogo} alt='스노로즈 로고' className={styles.logo} />
           <p className={styles.title}>
             숙명인을 위한 커뮤니티,
@@ -69,8 +66,8 @@ export default function Login() {
                 <Icon
                   id={visBtnClick ? 'closed-eye' : 'opened-eye'}
                   fill={isError ? '#ff4b6c' : '#898989'}
-                  width='1.5rem'
-                  height='1.5rem'
+                  width={18}
+                  height={13}
                   className={styles.visibility}
                   onClick={toggleVisBtn}
                 />
@@ -83,9 +80,9 @@ export default function Login() {
             <p className={styles.divider}>|</p>
             <Link to='/find-pw'>비밀번호 찾기</Link>
           </div>
-          <div className={styles.signup}>
+          <div className={styles.signUp}>
             <Link to='/signup'>아직 회원이 아니신가요?</Link>
-            <Icon id='angle-right' width='1.5rem' height='1.5rem' />
+            <Icon id='angle-right' width={16} height={16} />
           </div>
         </div>
       </form>

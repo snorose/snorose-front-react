@@ -93,7 +93,7 @@ export default function PTR({ children, onRefresh }) {
       {refreshing ? (
         <div className={styles.refreshBox}>
           <div className={styles.refreshIcon}>
-            <Icon id='cloud' width='34' height='21' />
+            <Icon id='cloud' width={34} height={21} />
           </div>
         </div>
       ) : (

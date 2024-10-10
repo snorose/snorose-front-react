@@ -1,6 +1,5 @@
 .pageFrame {
   width: 100%;
-  padding: 0 1.25rem;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,10 +7,8 @@
   margin: 0 auto;
 }
 
-.navFrame {
-  height: 2.75rem;
-  display: flex;
-  align-items: center;
+.pageBottomFrame {
+  padding: 0 1.25rem;
 }
 
 .pageTitle {
@@ -23,17 +20,18 @@
 .pageSubtitle {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #484848;
+  color: var(--gray-4);
   margin-bottom: 0.813rem;
 }
 
 .pageExplanation {
   font-size: 0.75rem;
-  color: #898989;
+  color: var(--gray-3-1);
   margin-bottom: 1rem;
 }
 
 .pageBottomFrame {
+  padding: 0 1.25rem;
   display: flex;
   flex-direction: column;
 }
@@ -55,7 +53,7 @@
   align-items: center;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #00368e;
+  color: var(--blue-4);
   margin-top: 0.5rem;
 }
 
@@ -72,15 +70,15 @@
 }
 
 .first {
-  background-color: #acbcd7;
+  background-color: var(--blue-2);
 }
 
 .second {
-  background-color: #7a95c1;
+  background-color: var(--blue-3);
 }
 
 .third {
-  background-color: #00368e;
+  background-color: var(--blue-4);
 }
 
 .img {
@@ -99,6 +97,6 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2.875rem;
-  color: #484848;
+  color: var(--gray-4);
   font-size: 0.75rem;
 }

@@ -30,8 +30,8 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
           <Icon
             className={styles.checkCircleIcon}
             id='check-circle'
-            width='12'
-            height='12'
+            width={12}
+            height={12}
           />
         )}
       </div>
@@ -48,8 +48,8 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
               <Icon
                 className={styles.comment}
                 id='comment'
-                width='13'
-                height='11'
+                width={13}
+                height={11}
                 fill='#D9D9D9'
               />
               <span>{data.commentCount.toLocaleString()}</span>
@@ -59,8 +59,8 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
             <>
               <Icon
                 id='like'
-                width='12'
-                height='11'
+                width={12}
+                height={11}
                 fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
               />
               <span>{data.likeCount.toLocaleString()}</span>
@@ -71,8 +71,8 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
             <>
               <Icon
                 id='bookmark-fill'
-                width='9'
-                height='11'
+                width={9}
+                height={11}
                 fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
               />
               <span>{data.scrapCount.toLocaleString()}</span>

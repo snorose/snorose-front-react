@@ -47,8 +47,8 @@ export default function Calendar({ callback }) {
             .format(date)
             .slice(0, -1) + '월'
         }
-        nextLabel={<Icon id='calendar-next' width='11' height='18' />}
-        prevLabel={<Icon id='calendar-prev' width='11' height='18' />}
+        nextLabel={<Icon id='calendar-next' width={11} height={18} />}
+        prevLabel={<Icon id='calendar-prev' width={11} height={18} />}
         next2Label={null}
         prev2Label={null}
         showNeighboringMonth={false}

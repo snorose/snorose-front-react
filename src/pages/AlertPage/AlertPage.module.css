@@ -35,8 +35,8 @@
   width: 3.25rem;
   height: 1.125rem;
   border-radius: 0.1875rem;
-  background: var(--blue-0, #eaf5fd);
-  color: var(--Blue-3, #5f86bf);
+  background: var(--blue-0);
+  color: var(--blue-3);
   font-size: 0.5625rem;
 }
 
@@ -51,16 +51,16 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 0.3125rem;
-  background: var(--Grey-1-1, #f4f4f4);
+  background: var(--gray-1-1);
   padding: 0.9375rem;
 }
 
 .alertBox.unread {
-  background: var(--blue-0, #eaf5fd);
+  background: var(--blue-0);
 }
 
 .alertBox.unreadWarning {
-  background: var(--Pink-1, #fee9eb);
+  background: var(--pink-1);
 }
 
 .alertIconContentWrapper {
@@ -81,25 +81,25 @@
 }
 
 .alertTitle {
-  color: var(--Grey-4, var(--grey-3, #484848));
+  color: var(--gray-4);
   font-size: 0.75rem;
   font-weight: 500;
 }
 .alertTitle.unreadTitle {
-  color: var(--Blue-4, #00368e);
+  color: var(--blue-4);
 }
 .alertTitle.unreadWarningTitle {
-  color: var(--Pink-2, #ff4b6c);
+  color: var(--pink-3);
 }
 
 .alertDesc {
-  color: var(--grey-3, #484848);
+  color: var(--gray-4);
   font-size: 0.6875rem;
   white-space: pre-line;
 }
 .alertDesc.unreadDesc {
-  color: var(--Blue-3, #5f86bf);
+  color: var(--blue-3);
 }
 .alertDesc.unreadWarningDesc {
-  color: var(--Pink-3, #ff849a);
+  color: var(--pink-2);
 }

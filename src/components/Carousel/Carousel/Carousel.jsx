@@ -40,7 +40,7 @@ export default function Carousel() {
   }, [bannerList.length, currentIndex, isError]);
 
   if (isError || !bannerList) {
-    return <div className={styles.error}>이미지를 불러올 수 없습니다</div>;
+    return <div className={styles.error}>배너를 불러올 수 없습니다</div>;
   }
 
   return (

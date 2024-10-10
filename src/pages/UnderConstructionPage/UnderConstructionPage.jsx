@@ -21,7 +21,7 @@ export default function UnderConstructionPage() {
         <li>■ 문의 창구: snorose1906@gmail.com</li>
       </ul>
       <div className={styles.bottom}>
-        <Icon id='cloud' width='30px' height='18px' />
+        <Icon id='cloud' width={30} height={18} />
         <p className={styles.thanks}>감사합니다.</p>
       </div>
       <div className={styles.links}>

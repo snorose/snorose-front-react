@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { findId } from '@/apis';
 
-import { Icon } from '@/components/Icon';
 import { Input } from '@/components/Input';
 import { Submit } from '@/components/Submit';
 
@@ -14,6 +13,7 @@ import {
 } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
 
 import styles from './FindIdPage.module.css';
+import { BackAppBar } from '@/components/index.js';
 
 export default function FindIdPage() {
   const navigate = useNavigate();
@@ -81,32 +81,23 @@ export default function FindIdPage() {
       >
         <div className={styles.findIdFrame}>
           <div>
-            <Link to='/login'>
-              <Icon
-                id='arrow-left'
-                width='1.162rem'
-                height='1.048rem'
-                className={styles.arrowLeft}
-              />
-            </Link>
+            <BackAppBar />
             <h1 className={styles.pageTitle}>아이디 찾기</h1>
 
-            {inputProps.map((props, i) => {
-              return (
-                <div className={styles.inputFrame} key={i}>
-                  <Input
-                    title={props[0]}
-                    placeholder={props[1]}
-                    className={props[2]}
-                    setClassName={props[3]}
-                    classNameCheck={props[4]}
-                    inputType={props[5]}
-                    inputData={setFormData}
-                    errMsg={props[6]}
-                  />
-                </div>
-              );
-            })}
+            {inputProps.map((props, i) => (
+              <div className={styles.inputFrame} key={i}>
+                <Input
+                  title={props[0]}
+                  placeholder={props[1]}
+                  className={props[2]}
+                  setClassName={props[3]}
+                  classNameCheck={props[4]}
+                  inputType={props[5]}
+                  inputData={setFormData}
+                  errMsg={props[6]}
+                />
+              </div>
+            ))}
           </div>
           <div className={styles.buttonFrame}>
             <Submit btnName='다음으로' className={submitState()} />

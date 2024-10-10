@@ -26,20 +26,20 @@
 }
 
 .ready {
-  background-color: #f5f5f5;
+  background-color: var(--gray-1-1);
 }
 
 .right {
-  background-color: #eaf5fd;
+  background-color: var(--blue-0);
 }
 
 .wrong {
-  background-color: #fee9eb;
+  background-color: var(--pink-1);
 }
 
 .pwInput {
   width: 80%;
-  background-color: blue;
+  background-color: var(--blue-4);
   display: inline-block;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .error {
-  color: #ff4b6c;
+  color: var(--pink-3);
   font-size: 0.688rem;
   margin-top: 0.188rem;
 }

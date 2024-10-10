@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { Icon } from '@/components/Icon';
 import { Submit } from '@/components/Submit';
 
 import frustratedWoman from '@/assets/images/frustratedWoman.svg';
 
 import styles from './NotFoundIdPage.module.css';
+import { BackAppBar } from '@/components/index.js';
 
 export default function NotFoundIdPage() {
   const navigate = useNavigate();
@@ -21,12 +21,8 @@ export default function NotFoundIdPage() {
 
   return (
     <div className={styles.pageFrame}>
-      <div>
-        <div className={styles.navFrame}>
-          <Link to='/find-id'>
-            <Icon id='arrow-left' width='1.162rem' height='1.048rem' />
-          </Link>
-        </div>
+      <BackAppBar />
+      <div className={styles.pageTopFrame}>
         <p className={styles.pageTitle}>아이디 찾기</p>
         <p className={styles.pageExplanation}>
           입력하신 정보와 일치하는 정보가 없어요

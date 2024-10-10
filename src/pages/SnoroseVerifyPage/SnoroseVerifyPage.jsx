@@ -20,8 +20,8 @@ export default function SnoroseVerifyPage() {
         <Icon
           className={styles.check}
           id='check-thick'
-          width='24'
-          height='24'
+          width={24}
+          height={24}
         />
       ) : (
         <div className={styles.indicator}>

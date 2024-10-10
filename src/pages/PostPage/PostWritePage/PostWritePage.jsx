@@ -154,7 +154,7 @@ export default function PostWritePage() {
           {textId === 'notice' ? (
             <div className={styles.categorySelect}>
               <div className={styles.categorySelectContainer}>
-                <Icon id='clip-board-list' width='18' height='19' />
+                <Icon id='clip-board-list' width={18} height={19} />
                 <p className={styles.categorySelectText}>{boardTitle}</p>
               </div>
             </div>
@@ -165,10 +165,10 @@ export default function PostWritePage() {
                 onClick={handleDropDownOpen}
               >
                 <div className={styles.categorySelectContainer}>
-                  <Icon id='clip-board-list' width='18' height='19' />
+                  <Icon id='clip-board-list' width={18} height={19} />
                   <p className={styles.categorySelectText}>{boardTitle}</p>
                 </div>
-                <Icon id='angle-down' width='14' height='7' />
+                <Icon id='angle-down' width={14} height={7} />
               </div>
               <DropDownMenu
                 options={boardTitles}
@@ -183,7 +183,7 @@ export default function PostWritePage() {
 
           <div className={styles.profileBox}>
             <div className={styles.profileBoxLeft}>
-              <Icon id='cloud' width='25' height='16' />
+              <Icon id='cloud' width={25} height={16} />
               <p>{userInfo.nickname}</p>
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
@@ -200,8 +200,8 @@ export default function PostWritePage() {
                 <p>공지글</p>
                 <Icon
                   id={isNotice ? 'toggle-on' : 'toggle-off'}
-                  width='25'
-                  height='16'
+                  width={25}
+                  height={16}
                 />
               </div>
             )}

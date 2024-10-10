@@ -5,7 +5,7 @@
   opacity: 0.8;
   background: radial-gradient(
     200.19% 208.16% at -25.32% 33.26%,
-    #00368e 0%,
+    var(--blue-4) 0%,
     #1270fa 100%
   );
   width: 100%;
@@ -54,7 +54,7 @@
   transform: translateX(-50%);
   z-index: 2;
   overflow: hidden;
-  filter: drop-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 0.25rem 0.25rem rgba(var(--black-rgb), 0.15));
 }
 
 .profileImage img {
@@ -68,7 +68,7 @@
   width: 100%;
   flex-shrink: 0;
   border-radius: 0.9375rem 0.9375rem 0 0;
-  background: #fff;
+  background: var(--white);
   z-index: 1;
   padding-bottom: 6.25rem;
 }
@@ -81,7 +81,7 @@
 }
 
 .name {
-  color: #000;
+  color: var(--black);
   font-size: 1.125rem;
   font-weight: 700;
   margin-bottom: 0.3125rem;
@@ -91,7 +91,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--Grey-4, var(--grey-3, #484848));
+  color: var(--gray-4);
   font-size: 0.875rem;
   font-weight: 500;
   margin-bottom: 0.4375rem;
@@ -118,8 +118,8 @@
   flex-shrink: 0;
   border-radius: 0.3125rem;
   padding: 0 11px;
-  background: var(--Blue-1, #ddebf6);
-  color: var(--Blue-4, #00368e);
+  background: var(--blue-1);
+  color: var(--blue-4);
   font-size: 0.75rem;
   gap: 0.25rem;
 
@@ -137,7 +137,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--Blue-4, #00368e);
+  color: var(--blue-4);
   font-size: 0.75rem;
   gap: 0.1875rem;
 
@@ -151,13 +151,13 @@
 .tabMenu {
   display: flex;
   margin: 1.8125rem 1.25rem 0.875rem;
-  border-top: 1px solid var(--Grey-3, #d9d9d9);
+  border-top: 1px solid var(--gray-3);
 }
 
 .tab {
   width: 100%;
   padding: 0.9375rem;
-  color: var(--Grey-3-1, #898989);
+  color: var(--gray-3-1);
   text-align: center;
   font-size: 0.875rem;
   font-weight: 500;
@@ -167,7 +167,7 @@
 .tab.active {
   font-size: 0.875rem;
   font-weight: 500;
-  border-top: 2px solid var(--Blue-4, #00368e);
+  border-top: 2px solid var(--blue-4);
 }
 
 /* 계정 정보 */
@@ -177,14 +177,14 @@
   padding: 0.25rem 13px;
   margin: 0 1.25rem;
   border-radius: 0.3125rem;
-  background: var(--Grey-1, #f8f8f8);
+  background: var(--gray-1);
 }
 
 .info {
   display: flex;
   flex-direction: column;
   padding: 0.625rem 0;
-  border-bottom: 1px solid var(--Grey-3, #d9d9d9);
+  border-bottom: 1px solid var(--gray-3);
 
   &:last-child {
     border-bottom: none;
@@ -192,12 +192,12 @@
 }
 
 .label {
-  color: var(--Grey-3-1, #898989);
+  color: var(--gray-3-1);
   font-size: 0.6875rem;
 }
 
 .value {
-  color: var(--Grey-4, var(--grey-3, #484848));
+  color: var(--gray-4);
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -217,8 +217,8 @@
   width: 5.625rem;
   height: 1.75rem;
   border-radius: 0.3125rem;
-  background: var(--Blue-4, #00368e);
-  color: #fff;
+  background: var(--blue-4);
+  color: var(--white);
   font-size: 0.75rem;
 }
 
@@ -229,14 +229,14 @@
   width: 5.9375rem;
   height: 1.75rem;
   border-radius: 0.3125rem;
-  background: var(--Blue-1, #ddebf6);
-  color: var(--Blue-4, #00368e);
+  background: var(--blue-1);
+  color: var(--blue-4);
   font-size: 0.75rem;
 }
 
 /* 내 활동, 이용안내 */
 .itemList {
-  border-bottom: 1px solid var(--Grey-3, #d9d9d9);
+  border-bottom: 1px solid var(--gray-3);
 
   &:last-child {
     border-bottom: none;
@@ -248,7 +248,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 0;
-  color: var(--Grey-4, var(--grey-3, #484848));
+  color: var(--gray-4);
   font-size: 0.875rem;
   font-weight: 500;
 

@@ -4,10 +4,10 @@
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
-  background: #bfd7ec;
+  background: var(--blue-2);
   border-radius: 0.3125rem;
   font-size: 0.75rem;
-  color: #00368e;
+  color: var(--blue-4);
   word-break: keep-all;
 }
 

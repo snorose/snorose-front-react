@@ -23,7 +23,7 @@
   width: 18rem;
   padding: 1.25rem 0.625rem 0.625rem;
   border-radius: 0.625rem;
-  background: #ffffff;
+  background: var(--white);
 }
 
 .buttonGroup {
@@ -35,14 +35,14 @@
   text-align: center;
   font-size: 1rem;
   font-weight: 500;
-  color: var(--Black);
+  color: var(--black);
   white-space: pre-line;
 }
 
 .deleteCenter {
   width: 80%;
   text-align: center;
-  color: #484848;
+  color: var(--gray-4);
   font-size: 0.75rem;
   white-space: pre-line;
 }
@@ -52,7 +52,7 @@
   padding: 0.625rem 0.75rem;
   background-color: transparent;
   font-weight: 500;
-  color: #ff4b6c;
+  color: var(--pink-3);
 }
 
 .secondaryButton {
@@ -60,5 +60,5 @@
   padding: 0.625rem 0.75rem;
   background-color: transparent;
   font-weight: 500;
-  color: #898989;
+  color: var(--gray-3-1);
 }
