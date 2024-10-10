@@ -39,7 +39,7 @@ export default function AboutPage() {
             <img src={HALL_OF_FAME} alt='hallOfFame' />
             <div className={styles.tags}>
               {HALL_OF_FAME_ADMINS.map((admin) => (
-                <AccordionTag admin={admin} />
+                <AccordionTag key={admin.id} admin={admin} />
               ))}
             </div>
           </section>

@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { ADMIN_POSITION, ADMIN_ROLE, ADMIN_TEAM } from './admin.js';
 
 export const ABOUT_SNOROSE = `스노로즈는 숙명인이 직접 운영하는 숙명인만을 위한 커뮤니티입니다.
@@ -29,6 +31,7 @@ export const SNOROSE_MEMBERSHIP_LEVEL = Object.freeze([
 
 export const HALL_OF_FAME_ADMINS = Object.freeze([
   {
+    id: uuidv4(),
     nickname: '원조리자',
     role: undefined,
     team: undefined,
@@ -36,6 +39,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '까만눈송이',
     role: undefined,
     team: undefined,
@@ -43,6 +47,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '닷닷',
     role: undefined,
     team: undefined,
@@ -50,6 +55,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '가필드',
     role: undefined,
     team: undefined,
@@ -57,6 +63,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '잉여잉여',
     role: undefined,
     team: undefined,
@@ -64,6 +71,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '삶은계란',
     role: undefined,
     team: undefined,
@@ -71,6 +79,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '돌핀포스',
     role: undefined,
     team: undefined,
@@ -78,6 +87,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '아카리☆',
     role: undefined,
     team: undefined,
@@ -85,6 +95,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: 'nodame',
     role: undefined,
     team: undefined,
@@ -92,6 +103,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '샤인',
     role: undefined,
     team: undefined,
@@ -99,6 +111,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: 'ringo89',
     role: undefined,
     team: undefined,
@@ -106,6 +119,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '박죠신',
     role: undefined,
     team: undefined,
@@ -113,6 +127,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: 'cym_',
     role: undefined,
     team: undefined,
@@ -120,6 +135,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '부러운11학번',
     role: undefined,
     team: undefined,
@@ -127,6 +143,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '풀순이',
     role: undefined,
     team: undefined,
@@ -134,6 +151,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '꺼삐딴리',
     role: undefined,
     team: undefined,
@@ -141,6 +159,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '순두부',
     role: undefined,
     team: undefined,
@@ -148,6 +167,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '로즈',
     role: undefined,
     team: undefined,
@@ -155,6 +175,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '숙대유나킴',
     role: undefined,
     team: undefined,
@@ -162,6 +183,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '술이들어간다',
     role: undefined,
     team: undefined,
@@ -169,6 +191,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '제왕타마마',
     role: undefined,
     team: undefined,
@@ -176,6 +199,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '토갱이',
     role: undefined,
     team: undefined,
@@ -183,6 +207,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '한화가을야구',
     role: undefined,
     team: undefined,
@@ -190,6 +215,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '빵수니',
     role: undefined,
     team: undefined,
@@ -197,6 +223,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '홍삼이',
     role: undefined,
     team: undefined,
@@ -204,6 +231,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '로즈세스코',
     role: undefined,
     team: undefined,
@@ -211,6 +239,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '후다닥',
     role: undefined,
     team: undefined,
@@ -218,6 +247,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '김종현',
     role: undefined,
     team: undefined,
@@ -225,6 +255,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '달물결',
     role: undefined,
     team: undefined,
@@ -232,6 +263,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '꾸꾸까까깍',
     role: undefined,
     team: undefined,
@@ -239,6 +271,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '법도지박령',
     role: undefined,
     team: undefined,
@@ -246,6 +279,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '난나나나',
     role: undefined,
     team: undefined,
@@ -253,6 +287,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '규루루',
     role: undefined,
     team: undefined,
@@ -260,6 +295,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '숙대화석',
     role: undefined,
     team: undefined,
@@ -267,6 +303,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '숙대미피',
     role: undefined,
     team: undefined,
@@ -274,6 +311,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '눈송이',
     role: undefined,
     team: undefined,
@@ -281,6 +319,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: 'Q__',
     role: undefined,
     team: undefined,
@@ -288,6 +327,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '숙램덩크',
     role: undefined,
     team: undefined,
@@ -295,6 +335,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '눈송더쿠',
     role: undefined,
     team: undefined,
@@ -302,6 +343,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '분홍스트라이프',
     role: undefined,
     team: undefined,
@@ -309,6 +351,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '눈뚱이',
     role: ADMIN_ROLE.president,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -316,6 +359,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '가을',
     role: undefined,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -324,6 +368,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
   },
 
   {
+    id: uuidv4(),
     nickname: '퀴디치',
     role: undefined,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -331,6 +376,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '마그네슘',
     role: ADMIN_ROLE.treasurer,
     team: undefined,
@@ -338,6 +384,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '온니유',
     role: ADMIN_ROLE.vicePresident,
     team: [ADMIN_TEAM.design],
@@ -345,6 +392,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '퀸송이',
     role: ADMIN_ROLE.president,
     team: [ADMIN_TEAM.design],
@@ -352,6 +400,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '마라탕',
     role: undefined,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -359,6 +408,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: 'HEE',
     role: undefined,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -366,6 +416,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '숙프로',
     role: undefined,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -373,6 +424,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '010',
     role: undefined,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -380,6 +432,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '니니',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -387,6 +440,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '빙글빙글',
     role: ADMIN_ROLE.treasurer,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -394,6 +448,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: 'apoptoxis',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -401,6 +456,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '빨간무당벌레',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -408,6 +464,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: 'f1re7h',
     role: undefined,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -415,6 +472,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '나루미',
     role: undefined,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -422,6 +480,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '눈떠',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -429,6 +488,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '코코송이',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -436,6 +496,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '지선',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -443,6 +504,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '새송송',
     role: undefined,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -450,6 +512,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: undefined,
   },
   {
+    id: uuidv4(),
     nickname: '숙명의길',
     role: ADMIN_ROLE.president,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -457,6 +520,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(경영학부 14 김아란)',
   },
   {
+    id: uuidv4(),
     nickname: 'silver',
     role: ADMIN_ROLE.vicePresident,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -464,6 +528,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(영어영문학부 16 은선민)',
   },
   {
+    id: uuidv4(),
     nickname: '파이',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -471,6 +536,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(시각영상디자인과 17 이지수)',
   },
   {
+    id: uuidv4(),
     nickname: 'milkyway',
     role: ADMIN_ROLE.treasurer,
     team: [ADMIN_TEAM.development],
@@ -478,6 +544,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(IT공학전공 19 김민지)',
   },
   {
+    id: uuidv4(),
     nickname: 'Alicey',
     role: undefined,
     team: [ADMIN_TEAM.operationsPlanning, ADMIN_TEAM.development],
@@ -485,6 +552,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(생명시스템학부 18 윤종화)',
   },
   {
+    id: uuidv4(),
     nickname: '과제가날죽여',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -492,6 +560,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(컴퓨터과학전공 17 김민정)',
   },
   {
+    id: uuidv4(),
     nickname: '눈송이',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -499,6 +568,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(컴퓨터과학전공 20 조세영)',
   },
   {
+    id: uuidv4(),
     nickname: '치아바타',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -506,6 +576,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(컴퓨터과학전공 22 문채일)',
   },
   {
+    id: uuidv4(),
     nickname: '조욘',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -513,6 +584,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(IT공학전공 20 조용은)',
   },
   {
+    id: uuidv4(),
     nickname: '수야',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -520,6 +592,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(컴퓨터과학전공 20 홍희수)',
   },
   {
+    id: uuidv4(),
     nickname: 'draud',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -527,6 +600,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(IT공학전공 20 김민지)',
   },
   {
+    id: uuidv4(),
     nickname: '따꿍',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -534,6 +608,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(컴퓨터과학전공 22 정민주)',
   },
   {
+    id: uuidv4(),
     nickname: '돌굴러가용',
     role: undefined,
     team: [ADMIN_TEAM.operationsPlanning],
@@ -541,6 +616,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(경영학부 23 채현지)',
   },
   {
+    id: uuidv4(),
     nickname: '부메랑',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -548,6 +624,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(컴퓨터과학전공 20 송희원)',
   },
   {
+    id: uuidv4(),
     nickname: '뇽구',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -555,6 +632,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(컴퓨터과학전공 22 김준희)',
   },
   {
+    id: uuidv4(),
     nickname: '칙촉',
     role: undefined,
     team: [ADMIN_TEAM.development],
@@ -562,6 +640,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(컴퓨터과학전공 21 류미성)',
   },
   {
+    id: uuidv4(),
     nickname: '보라송이',
     role: undefined,
     team: [ADMIN_TEAM.design],
@@ -569,6 +648,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     studentInformation: '(공예과 21 김수진)',
   },
   {
+    id: uuidv4(),
     nickname: '더엉',
     role: undefined,
     team: [ADMIN_TEAM.design],
