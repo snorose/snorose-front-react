@@ -15,7 +15,7 @@ import styles from './CommentList.module.css';
 export default function CommentList({ commentCount }) {
   const { postId } = useParams();
 
-  const { data, isLoading, isError, ref } = usePagination({
+  const { data, isLoading, isFetching, isError, ref } = usePagination({
     queryKey: [QUERY_KEY.comments, postId],
     queryFn: ({ pageParam }) => getCommentList({ postId, page: pageParam }),
   });
@@ -45,6 +45,7 @@ export default function CommentList({ commentCount }) {
           data={comment}
         />
       ))}
+      {isFetching && <FetchLoading />}
     </div>
   );
 }
