@@ -25,7 +25,7 @@ export default function AuthorizationPage({ email, setStage }) {
           </p>
           <Input
             title={'확인 코드'}
-            placeholder={'확인 코드를 입력하세요'}
+            placeholder={'확인 코드를 입력해주세요'}
             className={codeStyle}
             setClassName={setCodeStyle}
             inputType={'authNum'}
