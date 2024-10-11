@@ -49,6 +49,8 @@ import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 import { ROLE } from '@/constants';
 import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructionPage.jsx';
 
+import { CheckExamPeriodRoute } from '@/components/Route/CheckExamPeriodRoute.jsx';
+
 const getRolesForReadBoard = (boardPath) => {
   switch (boardPath) {
     case 'first-snow':
@@ -276,12 +278,14 @@ export const routeList = [
       {
         path: '/board/exam-review-write',
         element: (
-          <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 작성 권한이 없습니다.'}
-          >
-            <ExamReviewWritePage />
-          </ProtectedRoute>
+          <CheckExamPeriodRoute>
+            <ProtectedRoute
+              roles={[ROLE.user, ROLE.admin]}
+              message={'시험후기 작성 권한이 없습니다.'}
+            >
+              <ExamReviewWritePage />
+            </ProtectedRoute>
+          </CheckExamPeriodRoute>
         ),
         meta: {
           hideNav: true,
