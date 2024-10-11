@@ -266,7 +266,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 접근 권한이 없습니다.'}
+            message={'공지글 접근 권한이 없습니다.'}
           >
             <PostPage />
           </ProtectedRoute>
@@ -276,13 +276,13 @@ export const routeList = [
         },
       },
       {
-        path: '/board/exam-review-notice/:postId/edit',
+        path: '/board/exam-review-notice/post/:postId/edit',
         element: (
           <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 수정 권한이 없습니다.'}
+            roles={[ROLE.admin]}
+            message={'공지글 수정 권한이 없습니다.'}
           >
-            <ExamReviewEditPage />
+            <PostEditPage />
           </ProtectedRoute>
         ),
         meta: {
