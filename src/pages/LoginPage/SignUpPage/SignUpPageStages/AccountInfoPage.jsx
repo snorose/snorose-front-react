@@ -52,7 +52,7 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
         </div>
         <div className={styles.inputFrame}>
           <Input
-            title={'숙명 구글 메일'}
+            title={'숙명 구글 이메일'}
             placeholder={'sample@sookmyung.ac.kr'}
             className={emailStyle}
             setClassName={setEmailStyle}

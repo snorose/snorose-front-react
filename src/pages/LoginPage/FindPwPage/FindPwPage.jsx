@@ -38,8 +38,8 @@ export default function FindPwPage() {
       '아이디는 영어, 숫자만 가능합니다',
     ],
     [
-      '메일',
-      '메일을 입력해주세요',
+      '이메일',
+      '이메일을 입력해주세요',
       emailStyle,
       setEmailStyle,
       checkMail,
