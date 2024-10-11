@@ -10,7 +10,6 @@ import { Submit } from '@/components/Submit';
 import snoroseLogo from '@/assets/images/snoroseLogo.svg';
 
 import styles from './LoginPage.module.css';
-import { BackAppBar } from '@/components/index.js';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -24,9 +23,18 @@ export default function Login() {
 
   return (
     <div className={styles.loginframe}>
-      <BackAppBar />
       <form onSubmit={(e) => login(e, setIsError, formData, navigate)}>
         <div className={styles.loginBody}>
+          <Icon
+            className={styles.back}
+            id='arrow-left'
+            width={19}
+            height={17}
+            onClick={() => {
+              //BackAppBar 사용 불가 -> 로그인페이지에서 findId/findPw했다가 다시 돌아오면 다시는 main으로 못 돌아가는 루프구조가 되어버림
+              navigate('/');
+            }}
+          />
           <img src={snoroseLogo} alt='스노로즈 로고' className={styles.logo} />
           <p className={styles.title}>
             숙명인을 위한 커뮤니티,

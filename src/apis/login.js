@@ -35,18 +35,21 @@ export const useLogin = () => {
   return login;
 };
 
-export const findId = async (e, formData, navigate) => {
+export const findId = async (e, formData, navigate, setLoading) => {
   e.preventDefault();
   const endpoint = '/v1/users/findid';
 
   if (formData.userName && formData.email && formData.studentNumber) {
     try {
+      //로딩중인지 아닌지 확인하는 setLoading
+      setLoading(true);
       const response = await defaultAxios.post(endpoint, formData);
-
+      setLoading(false);
       navigate('/found-id', {
         state: { email: formData.email },
       });
     } catch (e) {
+      setLoading(false);
       if (!e.response.data.isSuccess) {
         navigate('/not-found-id', { state: { access: true } });
       }
@@ -54,18 +57,21 @@ export const findId = async (e, formData, navigate) => {
   }
 };
 
-export const findPw = async (e, formData, navigate) => {
+export const findPw = async (e, formData, navigate, setLoading) => {
   e.preventDefault();
   const endpoint = '/v1/users/findPW';
 
   if (formData.loginId && formData.email) {
     try {
+      setLoading(true);
       await defaultAxios.post(endpoint, formData);
+      setLoading(false);
 
       navigate('/found-pw', {
         state: { email: formData.email },
       });
     } catch (e) {
+      setLoading(false);
       if (!e.response.data.isSuccess) {
         navigate('/not-found-pw', { state: { access: true } });
       }

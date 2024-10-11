@@ -14,11 +14,15 @@ import {
 
 import styles from './FindPwPage.module.css';
 import { BackAppBar } from '@/components/index.js';
+import { FetchLoadingOverlay } from '@/components/Loading';
+import { LOADING_MESSAGE } from '@/constants';
 
 export default function FindPwPage() {
   const navigate = useNavigate();
   const [idStyle, setIdStyle] = useState('ready');
   const [emailStyle, setEmailStyle] = useState('ready');
+  const [allowSubmit, setAllowSubmit] = useState(true);
+  const [loading, setLoading] = useState();
   const [formData, setFormData] = useState({
     loginId: '',
     email: '',
@@ -54,7 +58,11 @@ export default function FindPwPage() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (formData.loginId && formData.email) findPw(e, formData, navigate);
+          if (formData.loginId && formData.email && allowSubmit) {
+            findPw(e, formData, navigate, setLoading);
+            //버튼 한번만 누를 수 있게 제한하는 코드
+            setAllowSubmit(false);
+          }
         }}
       >
         <div className={styles.findIdFrame}>
@@ -88,6 +96,7 @@ export default function FindPwPage() {
           </div>
         </div>
       </form>
+      {loading && <FetchLoadingOverlay text={LOADING_MESSAGE.default} />}
     </div>
   );
 }
