@@ -135,6 +135,7 @@ html {
 }
 
 body {
+  padding: 0 !important;
   margin: 0;
   font-family:
     'Spoqa Han Sans Neo',
