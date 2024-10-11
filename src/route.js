@@ -276,6 +276,20 @@ export const routeList = [
         },
       },
       {
+        path: '/board/exam-review-notice/:postId/edit',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            message={'시험후기 수정 권한이 없습니다.'}
+          >
+            <ExamReviewEditPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
         path: '/board/exam-review/:postId/edit',
         element: (
           <ProtectedRoute

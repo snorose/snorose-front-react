@@ -157,17 +157,16 @@ body {
 
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-::-webkit-scrollbar {
-  display: none;
-}
 
-body{
+  /* 드래그 막기 */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-use-select: none;
   user-select: none;
- }
+}
+::-webkit-scrollbar {
+  display: none;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
