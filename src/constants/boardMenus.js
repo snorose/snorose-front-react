@@ -53,4 +53,12 @@ export const BOARD_MENUS = [
     desc: '시험 정보를 조회할 수\n있는 게시판입니다.',
     image: besookt,
   },
+  {
+    id: 32,
+    to: '/board/exam-review-notice',
+    textId: 'exam-review-notice',
+    title: '시험후기',
+    desc: '시험후기 공지글 게시판',
+    image: besookt,
+  },
 ];
