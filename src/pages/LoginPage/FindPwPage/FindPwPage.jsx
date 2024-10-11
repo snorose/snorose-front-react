@@ -7,7 +7,10 @@ import { Icon } from '@/components/Icon';
 import { Input } from '@/components/Input';
 import { Submit } from '@/components/Submit';
 
-import { checkID, checkMail } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
+import {
+  checkIfEntered,
+  checkMail,
+} from '@/pages/LoginPage/FindIdPage/inputCheck.js';
 
 import styles from './FindPwPage.module.css';
 import { BackAppBar } from '@/components/index.js';
@@ -26,13 +29,13 @@ export default function FindPwPage() {
       '아이디를 입력해주세요',
       idStyle,
       setIdStyle,
-      checkID,
+      checkIfEntered,
       'loginId',
       '아이디는 영어, 숫자만 가능합니다',
     ],
     [
       '메일',
-      '메일을 입력하세요',
+      '메일을 입력해주세요',
       emailStyle,
       setEmailStyle,
       checkMail,

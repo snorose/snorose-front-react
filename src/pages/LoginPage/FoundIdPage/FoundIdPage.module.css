@@ -40,9 +40,7 @@
 .resultFrame {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 1.875rem;
+  margin-top: 1rem;
 }
 
 .result {

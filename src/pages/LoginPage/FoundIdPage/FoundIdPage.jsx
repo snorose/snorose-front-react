@@ -12,10 +12,10 @@ import { BackAppBar } from '@/components/index.js';
 export default function FoundIdPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const [foundId, setFoundId] = useState('');
+  const [email, setEmail] = useState('');
   useEffect(() => {
     try {
-      setFoundId(state.loginId);
+      setEmail(state.email);
     } catch (e) {
       navigate('/login');
     }
@@ -27,17 +27,17 @@ export default function FoundIdPage() {
       <div className={styles.pageTopFrame}>
         <p className={styles.pageTitle}>아이디 찾기</p>
         <p className={styles.pageExplanation}>
-          입력하신 정보와 일치하는 아이디는 다음과 같아요
+          다음 이메일로 아이디를 전달했습니다.
         </p>
+        <p className={styles.result}>{email}</p>
+        <div className={styles.resultFrame}>
+          <span className={`${styles.dot} ${styles.first}`}></span>
+          <span className={`${styles.dot} ${styles.second}`}></span>
+          <span className={`${styles.dot} ${styles.third}`}></span>
+        </div>
       </div>
       <div className={styles.pageBottomFrame}>
         <div className={styles.bodyFrame}>
-          <div className={styles.resultFrame}>
-            <span className={`${styles.dot} ${styles.first}`}></span>
-            <span className={`${styles.dot} ${styles.second}`}></span>
-            <span className={`${styles.dot} ${styles.third}`}></span>
-            <p className={styles.result}>{foundId}</p>
-          </div>
           <img
             src={excitedWoman}
             alt='frustrated woman image'

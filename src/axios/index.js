@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const defaultAxios = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_DOMAIN,
+  baseURL: 'https://prod.snorose.com',
   headers: {
     'Content-Type': 'application/json',
   },

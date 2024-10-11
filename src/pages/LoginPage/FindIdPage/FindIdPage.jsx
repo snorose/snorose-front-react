@@ -37,7 +37,7 @@ export default function FindIdPage() {
     ],
     [
       '메일',
-      '메일을 입력하세요',
+      '메일을 입력해주세요',
       emailStyle,
       setEmailStyle,
       checkMail,
@@ -46,7 +46,7 @@ export default function FindIdPage() {
     ],
     [
       '학번',
-      '학번을 입력하세요',
+      '학번을 입력해주세요',
       numberStyle,
       setNumberStyle,
       checkStudentNum,

@@ -44,7 +44,7 @@ export const findId = async (e, formData, navigate) => {
       const response = await defaultAxios.post(endpoint, formData);
 
       navigate('/found-id', {
-        state: { loginId: response?.data.result.loginId },
+        state: { email: formData.email },
       });
     } catch (e) {
       if (!e.response.data.isSuccess) {
