@@ -12,12 +12,14 @@ export default function Footer() {
           {'CONTACT US : '}
           <a href='mailto:smsnorose@gmail.com'>smsnorose@gmail.com</a>
         </p>
-        <p>숙명여대 후원하기 : 신한 110-123-123123</p>
+        <p>숙명여대 후원하기 : 카카오뱅크 3333-31-8162062</p>
         <div className={styles.menu}>
           <Link to='/my-page/service-policy'>
             <span>서비스 이용 약관</span>
           </Link>
-          |<span>배너 및 광고 문의</span>|
+          <Link to='https://www.notion.so/snorose/1147ef0aa3bf8039add2e00a4edd0eb4'>
+            <span>| 배너 및 광고 문의 |</span>
+          </Link>
           <Link to='/my-page/privacy-policy'>
             <span>개인정보 처리방침</span>
           </Link>
