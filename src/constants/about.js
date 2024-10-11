@@ -10,7 +10,7 @@ export const ABOUT_SNOROSE = `스노로즈는 숙명인이 직접 운영하는 �
 숙명여대 유일 커뮤니티, 스노로즈의 문을 두드려주세요.
 
 문의메일 : snorose1906@gmail.com
-카카오톡 문의 창구: (https://open.kakao.com/o/s5oKw7Kg)`;
+카카오톡 문의 창구: (http://pf.kakao.com/_Xmhxhn)`;
 
 export const SNOROSE_HISTORY = Object.freeze([
   '스노로즈 1.0(블랙로즈) - 07.08.15 오픈',
