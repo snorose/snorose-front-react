@@ -137,6 +137,7 @@ html {
 body {
   padding: 0 !important;
   margin: 0;
+  overflow: hidden;
   font-family:
     'Spoqa Han Sans Neo',
     'Noto Sans KR',
