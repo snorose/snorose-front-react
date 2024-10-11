@@ -39,14 +39,15 @@ export const findId = async (e, formData, navigate, setLoading) => {
   e.preventDefault();
   const endpoint = '/v1/users/findid';
 
-  if (formData.userName && formData.email && formData.studentNumber) {
+  if (formData.userName && formData.studentNumber) {
     try {
       //로딩중인지 아닌지 확인하는 setLoading
       setLoading(true);
       const response = await defaultAxios.post(endpoint, formData);
       setLoading(false);
+      console.log(response.data.result);
       navigate('/found-id', {
-        state: { email: formData.email },
+        state: { email: response.data.result },
       });
     } catch (e) {
       setLoading(false);
