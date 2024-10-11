@@ -23,7 +23,7 @@ export default function FoundIdPage() {
 
   return (
     <div className={styles.pageFrame}>
-      <BackAppBar />
+      <BackAppBar backNavTo='/login' />
       <div className={styles.pageTopFrame}>
         <p className={styles.pageTitle}>아이디 찾기</p>
         <p className={styles.pageExplanation}>
