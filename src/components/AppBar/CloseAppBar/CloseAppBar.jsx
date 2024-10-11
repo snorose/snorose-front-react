@@ -8,8 +8,7 @@ export default function CloseAppBar({
   alignRight,
   children,
   stroke = 'black',
-  xClick,
-  onClick,
+  onClose,
   notFixed,
   backgroundColor,
 }) {
@@ -27,14 +26,12 @@ export default function CloseAppBar({
       <Icon
         className={styles.close}
         id='x'
-        width='22'
-        height='22'
-        onClick={xClick ? xClick : () => navigate(-1)}
+        width={22}
+        height={22}
+        onClick={onClose ? onClose : () => navigate(-1)}
         stroke={stroke}
       />
-      <div className={styles.actions} onClick={onClick}>
-        {children}
-      </div>
+      <div className={styles.actions}>{children}</div>
     </div>
   );
 }

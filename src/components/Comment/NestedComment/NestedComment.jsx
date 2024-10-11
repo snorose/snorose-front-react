@@ -45,10 +45,10 @@ export default function NestedComment({
       <div className={styles.nestedCommentTop}>
         <div className={styles.commentTopLeft}>
           <div className={styles.nestedIcon}>
-            {isFirst && <Icon id='nested-arrow' width='15' height='15' />}
+            {isFirst && <Icon id='nested-arrow' width={15} height={15} />}
           </div>
           <div className={styles.cloud}>
-            <Icon id='cloud' width='19' heigth='13' />
+            <Icon id='cloud' width={19} heigth={13} />
           </div>
           <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
             {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
@@ -60,7 +60,7 @@ export default function NestedComment({
         </div>
         <p className={styles.dot3} onClick={(e) => onCommentOptionClick(data)}>
           {!isDeleted && isVisible && (
-            <Icon id='ellipsis-vertical' width='3' height='11' />
+            <Icon id='ellipsis-vertical' width={3} height={11} />
           )}
         </p>
       </div>
@@ -82,8 +82,8 @@ export default function NestedComment({
           >
             <Icon
               id='like'
-              width='13'
-              height='12'
+              width={13}
+              height={12}
               fill={isLiked ? '#5F86BF' : '#D9D9D9'}
             />
             <span>{likeCount.toLocaleString()}</span>

@@ -19,7 +19,7 @@
   position: absolute;
   right: 0;
   border-radius: 1rem 0 0 0;
-  background-color: #ffffff;
+  background-color: var(--white);
 }
 
 .logo {
@@ -31,10 +31,10 @@
   margin: 1rem 0;
   font-weight: 700;
   font-size: 1rem;
-  color: #484848;
+  color: var(--gray-4);
 }
 
 .item {
   font-size: 0.875rem;
-  color: #484848;
+  color: var(--gray-4);
 }

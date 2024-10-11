@@ -1,6 +1,5 @@
 .pageFrame {
   width: 100%;
-  padding: 0 1.25rem;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -34,13 +33,28 @@
 
 .inputFrame {
   margin-bottom: 1.5rem;
+  padding: 0 1.25rem;
+}
+
+.buttonFrame {
+  padding: 0 1.25rem;
+}
+
+.alert {
+  font-size: 10px;
+  color: grey;
+  padding: 0 3rem;
+  margin-top: 3rem;
+}
+.alert a {
+  color: lightblue;
 }
 
 .findIDButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #484848;
+  color: var(--gray-4);
   font-size: 0.75rem;
   margin: 1.313rem 0;
 }

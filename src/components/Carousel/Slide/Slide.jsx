@@ -1,18 +1,15 @@
 import { useState } from 'react';
 
-import defaultBanner from '@/assets/images/bannerError.jpg';
+import defaultBanner from '@/assets/images/bannerError.svg';
 
 import styles from './Slide.module.css';
 
-export default function Slide({ src, alt }) {
+export default function Slide({ src, redirectUrl, alt }) {
   const [imgSrc, setImgSrc] = useState(src);
 
   return (
-    <img
-      className={styles.slide}
-      src={imgSrc}
-      alt={alt}
-      onError={() => setImgSrc(defaultBanner)}
-    />
+    <a className={styles.slide} href={redirectUrl}>
+      <img src={imgSrc} alt={alt} onError={() => setImgSrc(defaultBanner)} />
+    </a>
   );
 }

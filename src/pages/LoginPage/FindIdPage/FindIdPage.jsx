@@ -1,28 +1,29 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { findId } from '@/apis';
 
-import { Icon } from '@/components/Icon';
 import { Input } from '@/components/Input';
 import { Submit } from '@/components/Submit';
+import { FetchLoadingOverlay } from '@/components/Loading';
+import { LOADING_MESSAGE } from '@/constants';
 
 import {
   checkName,
-  checkMail,
   checkStudentNum,
 } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
 
 import styles from './FindIdPage.module.css';
+import { BackAppBar } from '@/components/index.js';
 
 export default function FindIdPage() {
   const navigate = useNavigate();
   const [nameStyle, setNameStyle] = useState('ready');
-  const [emailStyle, setEmailStyle] = useState('ready');
   const [numberStyle, setNumberStyle] = useState('ready');
+  const [allowSubmit, setAllowSubmit] = useState(true);
+  const [loading, setLoading] = useState();
   const [formData, setFormData] = useState({
     userName: '',
-    email: '',
     studentNumber: '',
   });
   const inputProps = [
@@ -36,17 +37,8 @@ export default function FindIdPage() {
       '특수문자는 사용할 수 없습니다',
     ],
     [
-      '메일',
-      '메일을 입력하세요',
-      emailStyle,
-      setEmailStyle,
-      checkMail,
-      'email',
-      '이메일만 입력 가능합니다',
-    ],
-    [
       '학번',
-      '학번을 입력하세요',
+      '학번을 입력해주세요',
       numberStyle,
       setNumberStyle,
       checkStudentNum,
@@ -55,18 +47,8 @@ export default function FindIdPage() {
     ],
   ];
   const submitState = () => {
-    if (
-      nameStyle === 'right' &&
-      emailStyle === 'right' &&
-      numberStyle === 'right'
-    )
-      return 'right';
-    else if (
-      nameStyle === 'wrong' ||
-      emailStyle === 'wrong' ||
-      numberStyle === 'wrong'
-    )
-      return 'wrong';
+    if (nameStyle === 'right' && numberStyle === 'right') return 'right';
+    else if (nameStyle === 'wrong' || numberStyle === 'wrong') return 'wrong';
     else return 'ready';
   };
 
@@ -75,44 +57,39 @@ export default function FindIdPage() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (formData.userName && formData.email && formData.studentNumber)
-            findId(e, formData, navigate);
+          if (formData.userName && formData.studentNumber && allowSubmit) {
+            findId(e, formData, navigate, setLoading);
+            //버튼 한번만 누를 수 있게 제한하는 코드
+            setAllowSubmit(false);
+          }
         }}
       >
         <div className={styles.findIdFrame}>
           <div>
-            <Link to='/login'>
-              <Icon
-                id='arrow-left'
-                width='1.162rem'
-                height='1.048rem'
-                className={styles.arrowLeft}
-              />
-            </Link>
+            <BackAppBar />
             <h1 className={styles.pageTitle}>아이디 찾기</h1>
 
-            {inputProps.map((props, i) => {
-              return (
-                <div className={styles.inputFrame} key={i}>
-                  <Input
-                    title={props[0]}
-                    placeholder={props[1]}
-                    className={props[2]}
-                    setClassName={props[3]}
-                    classNameCheck={props[4]}
-                    inputType={props[5]}
-                    inputData={setFormData}
-                    errMsg={props[6]}
-                  />
-                </div>
-              );
-            })}
+            {inputProps.map((props, i) => (
+              <div className={styles.inputFrame} key={i}>
+                <Input
+                  title={props[0]}
+                  placeholder={props[1]}
+                  className={props[2]}
+                  setClassName={props[3]}
+                  classNameCheck={props[4]}
+                  inputType={props[5]}
+                  inputData={setFormData}
+                  errMsg={props[6]}
+                />
+              </div>
+            ))}
           </div>
           <div className={styles.buttonFrame}>
             <Submit btnName='다음으로' className={submitState()} />
           </div>
         </div>
       </form>
+      {loading && <FetchLoadingOverlay text={LOADING_MESSAGE.default} />}
     </div>
   );
 }

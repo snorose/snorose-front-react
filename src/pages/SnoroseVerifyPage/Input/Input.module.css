@@ -3,13 +3,13 @@
   display: inline-block;
   font-weight: 500;
   font-size: 0.875rem;
-  color: #484848;
+  color: var(--gray-4);
 }
 
 .input {
   width: 100%;
   padding: 0.75rem 0 0.6875rem 0.8125rem;
-  background: #f5f5f5;
+  background: var(--gray-1-1);
   border-radius: 0.3125rem;
   border: none;
   outline: none;
@@ -17,16 +17,16 @@
 }
 
 .input::placeholder {
-  color: #898989;
+  color: var(--gray-3-1);
 }
 
 .input.isInvalid {
-  background: #fee9eb;
-  color: #ff4b6c;
+  background: var(--pink-1);
+  color: var(--pink-3);
 }
 
 .errorMessage {
   margin-top: 3px;
   font-size: 0.6875rem;
-  color: #ff4b6c;
+  color: var(--pink-3);
 }

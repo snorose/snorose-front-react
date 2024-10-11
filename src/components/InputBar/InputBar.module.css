@@ -7,16 +7,15 @@
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
-  background: #fff;
+  background: var(--white);
   border-radius: 0.625rem 0.625rem 0 0;
-  box-shadow: 0 -0.25rem 0.4375rem #ddebf6;
+  box-shadow: 0 -0.25rem 0.4375rem var(--blue-1);
   position: fixed;
   bottom: 0;
-  z-index: 1;
 }
 
 .input_bar {
-  background-color: #f4f4f4;
+  background-color: var(--gray-1-1);
   width: 100%;
   min-height: 2.5rem;
   display: flex;
@@ -37,7 +36,7 @@
 }
 
 .input_zone::placeholder {
-  color: #898989;
+  color: var(--gray-3-1);
 }
 
 .profile_icon {

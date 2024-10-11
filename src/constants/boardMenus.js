@@ -33,7 +33,7 @@ export const BOARD_MENUS = [
     to: '/board/permanent-snow',
     textId: 'permanent-snow',
     title: '만년설방',
-    desc: '졸업생 전용 게시판',
+    desc: '졸업생 전용 커뮤니티',
     image: permanentSnow,
   },
   // 2차 개발 시 추가 예정
@@ -51,6 +51,14 @@ export const BOARD_MENUS = [
     textId: 'exam-review',
     title: '시험후기',
     desc: '시험 정보를 조회할 수\n있는 게시판입니다.',
+    image: besookt,
+  },
+  {
+    id: 32,
+    to: '/board/exam-review-notice',
+    textId: 'exam-review-notice',
+    title: '시험후기',
+    desc: '시험후기 공지글 게시판',
     image: besookt,
   },
 ];

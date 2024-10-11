@@ -1,6 +1,5 @@
 .pageFrame {
   width: 100%;
-  padding: 0 1.25rem;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,10 +7,8 @@
   margin: 0 auto;
 }
 
-.navFrame {
-  height: 2.75rem;
-  display: flex;
-  align-items: center;
+.pageTopFrame {
+  padding: 0 1.25rem;
 }
 
 .pageTitle {
@@ -23,11 +20,12 @@
 .pageExplanation {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #484848;
+  color: var(--gray-4);
   margin-top: 0.875rem;
 }
 
 .pageBottomFrame {
+  padding: 0 1.25rem;
   display: flex;
   flex-direction: column;
 }
@@ -42,15 +40,14 @@
 .resultFrame {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 1.875rem;
+  margin-top: 1rem;
 }
 
 .result {
+  margin-top: 0.6rem;
   font-size: 1.563rem;
   font-weight: 700;
-  color: #00368e;
+  color: var(--blue-4);
 }
 
 .dot {
@@ -62,15 +59,15 @@
 }
 
 .first {
-  background-color: #acbcd7;
+  background-color: var(--blue-2);
 }
 
 .second {
-  background-color: #7a95c1;
+  background-color: var(--blue-3);
 }
 
 .third {
-  background-color: #00368e;
+  background-color: var(--blue-4);
 }
 
 .img {
@@ -89,6 +86,6 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2.875rem;
-  color: #484848;
+  color: var(--gray-4);
   font-size: 0.75rem;
 }

@@ -1,10 +1,11 @@
 import { Icon } from '@/components/Icon';
 
+import { dateFormat } from '@/utils';
+
 import styles from './NoticeBar.module.css';
 
 export default function NoticeBar({ data, onClick }) {
-  const date = new Date(data.createdAt);
-  const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, ' .');
+  const formattedDate = dateFormat(data.createdAt);
 
   return (
     <div className={styles.post} onClick={onClick}>

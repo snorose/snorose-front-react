@@ -109,7 +109,7 @@ const Comment = forwardRef((props, ref) => {
         <div className={styles.commentTop}>
           <div className={styles.commentTopLeft}>
             <div className={styles.cloud}>
-              <Icon id='cloud' width='19' height='13' />
+              <Icon id='cloud' width={19} height={13} />
             </div>
             <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
               {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
@@ -124,7 +124,7 @@ const Comment = forwardRef((props, ref) => {
             onClick={(e) => onCommentOptionClick(data)}
           >
             {!isDeleted && isVisible && (
-              <Icon id='ellipsis-vertical' width='3' height='11' />
+              <Icon id='ellipsis-vertical' width={3} height={11} />
             )}
           </p>
         </div>
@@ -143,7 +143,7 @@ const Comment = forwardRef((props, ref) => {
                 type='button'
                 onClick={handleReply}
               >
-                <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
+                <Icon id='comment' width={15} height={13} fill='#D9D9D9' />
                 <p>{children.length}</p>
               </button>
               <button
@@ -153,8 +153,8 @@ const Comment = forwardRef((props, ref) => {
               >
                 <Icon
                   id='like'
-                  width='13'
-                  height='12'
+                  width={13}
+                  height={12}
                   fill={isLiked ? '#5F86BF' : '#D9D9D9'}
                 />
                 <span>{likeCount.toLocaleString()}</span>

@@ -2,7 +2,7 @@
   height: 8.25rem;
   padding: 0.9rem 1rem;
   grid-column: span 2;
-  background: #f0f0f0;
+  background: var(--gray-2);
   border-radius: 0.3125rem;
   border: none;
   outline: none;
@@ -11,5 +11,5 @@
 }
 
 .textarea::placeholder {
-  color: #898989;
+  color: var(--gray-3-1);
 }

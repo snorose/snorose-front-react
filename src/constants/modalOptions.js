@@ -79,6 +79,18 @@ export const MODAL_OPTIONS = [
     },
   },
   {
+    id: 'post-delete-no-points',
+    title: '게시글을 삭제할까요?',
+    titleColor: '#000',
+    children: {
+      text: '',
+    },
+    bottom: {
+      redBtn: '삭제',
+      greyBtn: '취소',
+    },
+  },
+  {
     id: 'post-write-exit-check',
     title: '작성 중인 글이 있습니다.',
     titleColor: '#000',

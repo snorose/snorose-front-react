@@ -15,5 +15,5 @@
   gap: 1px;
   font-weight: 500;
   font-size: 0.75rem;
-  color: #484848;
+  color: var(--gray-4);
 }

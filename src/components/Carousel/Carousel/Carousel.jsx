@@ -40,14 +40,19 @@ export default function Carousel() {
   }, [bannerList.length, currentIndex, isError]);
 
   if (isError || !bannerList) {
-    return <div className={styles.error}>이미지를 불러올 수 없습니다</div>;
+    return <div className={styles.error}>배너를 불러올 수 없습니다</div>;
   }
 
   return (
     <div>
       <div ref={carouselRef} className={styles.carousel}>
-        {bannerList.map((banner, index) => (
-          <Slide key={index} src={banner} alt='banner' />
+        {bannerList.map(({ imageUrl, redirectUrl }, index) => (
+          <Slide
+            key={index}
+            src={imageUrl}
+            redirectUrl={redirectUrl}
+            alt='banner'
+          />
         ))}
       </div>
       <div className={styles.indicator}>

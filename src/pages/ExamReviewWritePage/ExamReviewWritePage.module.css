@@ -15,12 +15,24 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  position: relative;
+}
+
+.left .required {
+  width: 0.3125rem;
+  height: 0.3125rem;
+  display: inline-block;
+  position: absolute;
+  top: 0.125rem;
+  right: -0.625rem;
+  border-radius: 0.625rem;
+  background-color: var(--pink-3);
 }
 
 .tag {
   font-weight: 500;
   font-size: 0.875rem;
-  color: #484848;
+  color: var(--gray-4);
 }
 
 .right {
@@ -30,10 +42,11 @@
 label[for='file'] {
   padding: 0.5rem 1rem;
   display: block;
-  background: #f0f0f0;
+  background: var(--gray-2);
   border-radius: 0.3125rem;
   font-size: 0.8125rem;
-  color: #898989;
+  color: var(--gray-3-1);
+  cursor: pointer;
 }
 
 input[type='file'] {

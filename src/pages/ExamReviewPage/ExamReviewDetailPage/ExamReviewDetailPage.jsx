@@ -16,7 +16,7 @@ import { NotFoundPage } from '@/pages/NotFoundPage';
 import { BackAppBar } from '@/components/AppBar';
 import { CommentList } from '@/components/Comment';
 import { DeleteModal, OptionModal } from '@/components/Modal';
-import { FetchLoading } from '@/components/Loading';
+import { FetchLoading, FetchLoadingOverlay } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 import { InputBar } from '@/components/InputBar';
 import { ReviewContentItem } from '@/components/ReviewContentItem';
@@ -47,6 +47,7 @@ export default function ExamReviewDetailPage() {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
   const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
+  const [loading, setLoading] = useState();
 
   const { pathname } = useLocation();
   const { postId } = useParams();
@@ -104,6 +105,9 @@ export default function ExamReviewDetailPage() {
       }
 
       toast(response.data.message);
+    },
+    onSettled: () => {
+      setLoading(false);
     },
   });
 
@@ -170,6 +174,7 @@ export default function ExamReviewDetailPage() {
   }
 
   const {
+    content,
     commentCount,
     createdAt,
     examType,
@@ -201,8 +206,8 @@ export default function ExamReviewDetailPage() {
             <Icon
               className={styles.cloudIcon}
               id='cloud'
-              width='25'
-              height='16'
+              width={25}
+              height={16}
             />
             <span>{userDisplay}</span>
             <span className={styles.dot}></span>
@@ -212,8 +217,8 @@ export default function ExamReviewDetailPage() {
               <Icon
                 className={styles.checkCircleIcon}
                 id='check-circle'
-                width='15'
-                height='15'
+                width={15}
+                height={15}
               />
             )}
           </div>
@@ -223,12 +228,12 @@ export default function ExamReviewDetailPage() {
               isWriter ? setIsOptionModalOpen(true) : setIsReportModalOpen(true)
             }
             id='ellipsis-vertical'
-            width='3'
-            height='11'
+            width={3}
+            height={11}
           />
         </div>
         <div className={styles.title}>{title}</div>
-        <div className={styles.content}>
+        <div className={styles.info}>
           <ReviewContentItem tag='강의명' value={lectureName} />
           <ReviewContentItem tag='교수' value={professor} />
           <ReviewContentItem tag='강의 종류' value={COURSE_TYPE[lectureType]} />
@@ -245,6 +250,7 @@ export default function ExamReviewDetailPage() {
             align={FLEX_ALIGN.flexStart}
           />
         </div>
+        {content && <div className={styles.content}>{content}</div>}
         <ReviewDownload
           className={styles.fileDownload}
           fileName={fileName}
@@ -256,8 +262,8 @@ export default function ExamReviewDetailPage() {
             <Icon
               className={styles.comment}
               id='comment'
-              width='15'
-              height='14'
+              width={15}
+              height={14}
               fill='#D9D9D9'
             />
             <span>{commentCount.toLocaleString()}</span>
@@ -268,8 +274,8 @@ export default function ExamReviewDetailPage() {
           >
             <Icon
               id='bookmark-fill'
-              width='10'
-              height='13'
+              width={10}
+              height={13}
               fill={isScrapped ? '#5F86BF' : '#D9D9D9'}
             />
             <span>{scrapCount.toLocaleString()}</span>
@@ -295,7 +301,10 @@ export default function ExamReviewDetailPage() {
         id='exam-review-delete'
         isOpen={isDeleteModalOpen}
         closeFn={() => setIsDeleteModalOpen(false)}
-        redBtnFunction={() => deleteReview.mutate()}
+        redBtnFunction={() => {
+          setLoading(true);
+          deleteReview.mutate();
+        }}
       />
       <OptionModal
         id='report'
@@ -318,6 +327,7 @@ export default function ExamReviewDetailPage() {
         onOptionClick={handleUserReportOptionModalOptionClick}
         closeFn={() => setIsUserReportModalOpen(false)}
       />
+      {loading && <FetchLoadingOverlay />}
     </main>
   );
 }

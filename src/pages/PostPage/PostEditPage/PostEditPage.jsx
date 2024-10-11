@@ -62,7 +62,7 @@ export default function PostEditPage() {
     mutationFn: patchPost,
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_KEY.post, postId]);
-      navigate(-1);
+      navigate(-1, { replace: true });
       toast(TOAST.POST.edit);
       setSubmitDisabled(false);
     },
@@ -77,10 +77,10 @@ export default function PostEditPage() {
     setIsNotice((prev) => !prev);
   };
 
-  // 제목 40자 제한
+  // 제목 127자 제한
   const handleTitleChange = (e) => {
     const newValue = e.target.value;
-    if (newValue.length <= 40) {
+    if (newValue.length <= 127) {
       setTitle(newValue);
     }
   };
@@ -133,29 +133,28 @@ export default function PostEditPage() {
       <div className={styles.container}>
         <div className={styles.top}>
           <CloseAppBar
-            children='수정'
+            children={<p onClick={handleSubmit}>수정</p>}
             stroke='#000'
-            onClick={handleSubmit}
             backgroundColor={'#eaf5fd'}
-            xClick={() => {
+            onClose={() => {
               data.title !== title ||
               data.content !== text ||
               data.isNotice !== isNotice
                 ? setIsCheckModalOpen(true)
-                : navigate(-1);
+                : navigate(-1, { replace: true });
             }}
           />
         </div>
         <div className={styles.center}>
           <div className={styles.categorySelect}>
             <div className={styles.categorySelectContainer}>
-              <Icon id='clip-board-list' width='18' height='19' />
+              <Icon id='clip-board-list' width={18} height={19} />
               <p className={styles.categorySelectText}>{boardTitle}</p>
             </div>
           </div>
           <div className={styles.profileBox}>
             <div className={styles.profileBoxLeft}>
-              <Icon id='cloud' width='25' height='16' />
+              <Icon id='cloud' width={25} height={16} />
               <p>{userDisplay}</p>
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
@@ -172,8 +171,8 @@ export default function PostEditPage() {
                 <p>공지글</p>
                 <Icon
                   id={isNotice ? 'toggle-on' : 'toggle-off'}
-                  width='25'
-                  height='16'
+                  width={25}
+                  height={16}
                 />
               </div>
             )}
@@ -198,7 +197,7 @@ export default function PostEditPage() {
         id='post-edit-exit-check'
         isOpen={isCheckModalOpen}
         closeFn={() => setIsCheckModalOpen(false)}
-        redBtnFunction={() => navigate(-1)}
+        redBtnFunction={() => navigate(-1, { replace: true })}
       />
     </>
   );

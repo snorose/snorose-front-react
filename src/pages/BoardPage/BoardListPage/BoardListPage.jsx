@@ -1,69 +1,26 @@
-import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { getNoticeLine, getPostList } from '@/apis';
+import { getNoticeLine } from '@/apis';
 
-import { usePagination } from '@/hooks';
+import { BackAppBar, Icon, WriteButton } from '@/components';
 
-import {
-  BackAppBar,
-  Icon,
-  OptionModal,
-  PostBar,
-  PTR,
-  WriteButton,
-  FetchLoading,
-} from '@/components';
-
-import { getBoard, timeAgo } from '@/utils';
+import { getBoard } from '@/utils';
 import { QUERY_KEY } from '@/constants';
 
 import styles from './BoardListPage.module.css';
+import BoardPostList from './BoardPostList/BoardPostList.jsx';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
 
-  const { data, ref, isLoading, isFetching, status, isError, refetch } =
-    usePagination({
-      queryKey: [QUERY_KEY.posts, currentBoard.id],
-      queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
-    });
-
   const { data: noticeLineData } = useQuery({
     queryKey: [QUERY_KEY.noticeLine, currentBoard.id],
     queryFn: () => getNoticeLine(currentBoard?.id),
+    staleTime: 1000 * 60 * 5,
   });
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
-
-  if (isLoading) {
-    return (
-      <>
-        <BackAppBar notFixed />
-        <FetchLoading>게시글 불러오는 중...</FetchLoading>
-      </>
-    );
-  }
-
-  if (isError) {
-    return (
-      <>
-        <BackAppBar notFixed />
-        <FetchLoading animation={false}>
-          게시글을 불러오지 못했습니다.
-        </FetchLoading>
-      </>
-    );
-  }
-
-  const postList =
-    data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page.data)
-      : [];
 
   return (
     <div className={styles.container}>
@@ -82,29 +39,7 @@ export default function BoardListPage() {
           <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
         </Link>
       </div>
-      <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
-        <div className={styles.postListContainer}>
-          {status !== 'error' &&
-            postList.map((post, index) => (
-              <Link
-                ref={index === postList.length - 1 ? ref : undefined}
-                key={post.postId}
-                to={`/board/${currentBoardTextId}/post/${post.postId}`}
-              >
-                <PostBar
-                  data={{ ...post, timeAgo: timeAgo(post.date) }}
-                  optionClick={openModal}
-                />
-              </Link>
-            ))}
-          {isFetching && <FetchLoading />}
-        </div>
-      </PTR>
-      <OptionModal
-        id='post-report'
-        isOpen={isModalOpen}
-        setIsOpen={setIsModalOpen}
-      />
+      <BoardPostList />
       <WriteButton
         to={`/board/${currentBoardTextId}/post-write`}
         className={styles.writeButton}

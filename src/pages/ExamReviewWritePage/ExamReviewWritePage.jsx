@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postExamReview, checkExamReviewDuplication } from '@/apis';
 
@@ -14,6 +14,7 @@ import {
   TextField,
 } from '@/components/Fieldset';
 import { ConfirmModal } from '@/components/Modal';
+import { FetchLoadingOverlay } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
@@ -29,13 +30,16 @@ import {
   SEMESTERS,
   TOAST,
   YEARS,
+  QUERY_KEY,
 } from '@/constants';
 
 import styles from './ExamReviewWritePage.module.css';
 
 export default function ExamReviewWritePage() {
+  const navigate = useNavigate();
   const { toast } = useToast();
   const { invalidUserInfoQuery } = useAuth();
+  const queryClient = useQueryClient();
 
   const createExamReview = useMutation({
     mutationKey: [MUTATION_KEY.createExamReview],
@@ -45,9 +49,14 @@ export default function ExamReviewWritePage() {
         file,
       }),
     onSuccess: ({ data }) => {
-      toast(TOAST.EXAM_REVIEW.create);
-      navigate('/board/exam-review', { replace: true });
+      const {
+        result: { postId },
+      } = data;
+
+      queryClient.removeQueries([QUERY_KEY.post]);
       invalidUserInfoQuery();
+      toast(TOAST.EXAM_REVIEW.create);
+      navigate(`/board/exam-review/post/${postId}`, { replace: true });
     },
     onError: ({ response }) => {
       const { status } = response;
@@ -58,6 +67,10 @@ export default function ExamReviewWritePage() {
       }
 
       toast(response.data.message);
+    },
+    onSettled: () => {
+      setLoading(false);
+      setIsCalled(false);
     },
   });
 
@@ -73,19 +86,19 @@ export default function ExamReviewWritePage() {
   const [questionDetail, setQuestionDetail] = useState('');
   const [file, setFile] = useState();
 
+  const [isCalled, setIsCalled] = useState();
+  const [loading, setLoading] = useState();
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
-  const navigate = useNavigate();
-
   const pass =
-    lectureName &&
-    professor &&
+    lectureName.trim() &&
+    professor.trim() &&
     lectureType &&
     examType &&
     lectureYear &&
     semester &&
     classNumber &&
-    questionDetail &&
+    questionDetail.trim() &&
     file;
 
   const handleFile = (event) => {
@@ -110,7 +123,8 @@ export default function ExamReviewWritePage() {
         examType: examType?.id,
       });
     } catch (error) {
-      toast(TOAST.ERROR.SERVER);
+      toast('error');
+      setIsCalled(false);
       throw error;
     }
   };
@@ -136,10 +150,11 @@ export default function ExamReviewWritePage() {
       <CloseAppBar>
         <ActionButton
           onClick={async () => {
-            if (!pass) {
-              toast(TOAST.EXAM_REVIEW.validate);
+            if (isCalled) {
               return;
             }
+
+            setIsCalled(true);
 
             try {
               const response = await checkDuplication();
@@ -152,11 +167,13 @@ export default function ExamReviewWritePage() {
               return;
             }
 
+            setLoading(true);
             createExamReview.mutate({
               data: formBody,
               file,
             });
           }}
+          disabled={!pass}
         >
           게시
         </ActionButton>
@@ -255,6 +272,7 @@ export default function ExamReviewWritePage() {
         <div className={styles.left}>
           <Icon id='clip-board-list-blue' width={18} height={19} />
           <span className={styles.tag}>첨부파일</span>
+          <span className={styles.required}></span>
         </div>
         <div className={styles.right}>
           <label htmlFor='file'>{file?.name ?? '첨부된 파일이 없어요'}</label>
@@ -267,16 +285,19 @@ export default function ExamReviewWritePage() {
         message={MODAL_CONFIRM.EXAM_REVIEW_DUPLICATION.message}
         primaryButtonText='확인'
         secondaryButtonText='취소'
-        onPrimaryButtonClick={() =>
+        onPrimaryButtonClick={() => {
+          setLoading(true);
           createExamReview.mutate({
             data: formBody,
             file,
-          })
-        }
+          });
+          setIsConfirmModalOpen(false);
+        }}
         onSecondaryButtonClick={() => {
           setIsConfirmModalOpen(false);
         }}
       />
+      {loading && <FetchLoadingOverlay />}
     </main>
   );
 }

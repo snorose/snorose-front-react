@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
 
@@ -20,26 +20,20 @@ import {
   InputBar,
 } from '@/components';
 
-import { timeAgo } from '@/utils';
-import {
-  BOARD_MENUS,
-  LIKE_TYPE,
-  MUTATION_KEY,
-  QUERY_KEY,
-  TOAST,
-} from '@/constants';
+import { getBoard, timeAgo } from '@/utils';
+import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
 
 export default function PostPage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { postId } = useParams();
   const location = useLocation();
   const { pathname } = location;
   const { inputFocus } = useCommentContext();
   const { toast } = useToast();
-  const currentBoard =
-    BOARD_MENUS.find((menu) => menu.textId === pathname.split('/')[2]) || {};
+  const currentBoard = getBoard(pathname.split('/')[2]);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -51,6 +45,7 @@ export default function PostPage() {
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
     queryFn: () => getPostContent(currentBoard?.id, postId),
+    staleTime: 1000 * 60 * 5,
     enabled: !!currentBoard?.id && !!postId,
   });
 
@@ -89,8 +84,11 @@ export default function PostPage() {
       const response = await deletePost(currentBoard.id, postId);
 
       if (response.status === 200) {
-        toast(TOAST.POST.delete);
-        navigate(`/board/${currentBoard.textId}`);
+        currentBoard.id !== 23
+          ? toast(TOAST.POST.delete)
+          : toast(TOAST.POST.deleteNoPoints);
+        navigate(-1);
+        queryClient.removeQueries([QUERY_KEY.post, postId]);
         invalidUserInfoQuery();
       }
     } catch ({ response }) {
@@ -138,17 +136,6 @@ export default function PostPage() {
     setIsUserReportModalOpen(false);
   };
 
-  // BackAppBar 이동 path 설정
-  const handleNavigation = () => {
-    const previousPath = location.state?.from || '/default';
-
-    if (previousPath.startsWith('/my-page')) {
-      return previousPath;
-    } else {
-      return `/board/${currentBoard.textId}`;
-    }
-  };
-
   // 로딩과 에러 상태에 따라 조건부 렌더링
   if (isLoading) {
     return (
@@ -188,16 +175,12 @@ export default function PostPage() {
   return (
     <div className={styles.container}>
       <div className={styles.backAppBar}>
-        <BackAppBar
-          backgroundColor={'#eaf5fd'}
-          // backNavTo={`/board/${currentBoard.textId}`}
-          backNavTo={handleNavigation()}
-        />
+        <BackAppBar backgroundColor={'#eaf5fd'} />
       </div>
       <div className={styles.content}>
         <div className={styles.contentTop}>
           <div className={styles.contentTopLeft}>
-            <Icon id='cloud' width='25' height='16' />
+            <Icon id='cloud' width={25} height={16} />
             <p>{data.userDisplay || 'Unknown'}</p>
             <p className={styles.dot}>·</p>
             <p>
@@ -216,7 +199,7 @@ export default function PostPage() {
                 : setIsReportModalOpen(true);
             }}
           >
-            <Icon id='ellipsis-vertical' width='3' height='11' />
+            <Icon id='ellipsis-vertical' width={3} height={11} />
           </div>
         </div>
         <div className={styles.title}>
@@ -230,7 +213,7 @@ export default function PostPage() {
         <p className={styles.text}>{data.content}</p>
         <div className={styles.post_bottom}>
           <div className={styles.count} onClick={inputFocus}>
-            <Icon id='comment' width='15' height='13' fill='#D9D9D9' />
+            <Icon id='comment' width={15} height={13} fill='#D9D9D9' />
             <p>{data.commentCount.toLocaleString()}</p>
           </div>
           <div
@@ -239,8 +222,8 @@ export default function PostPage() {
           >
             <Icon
               id='like'
-              width='13'
-              height='12'
+              width={13}
+              height={12}
               fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
             />
             <p>{data.likeCount.toLocaleString()}</p>
@@ -253,8 +236,8 @@ export default function PostPage() {
           >
             <Icon
               id='bookmark-fill'
-              width='10'
-              height='13'
+              width={10}
+              height={13}
               fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
             />
             <p>{data.scrapCount.toLocaleString()}</p>
@@ -279,7 +262,7 @@ export default function PostPage() {
         }}
       />
       <DeleteModal
-        id='post-delete'
+        id={currentBoard.id !== 23 ? 'post-delete' : 'post-delete-no-points'}
         isOpen={isDeleteModalOpen}
         closeFn={() => {
           setIsDeleteModalOpen(false);

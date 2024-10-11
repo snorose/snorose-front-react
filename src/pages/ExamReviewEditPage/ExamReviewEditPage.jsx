@@ -13,6 +13,7 @@ import {
   Dropdown,
   TextField,
 } from '@/components/Fieldset';
+import { FetchLoadingOverlay } from '@/components/Loading';
 import { InputItem, InputList } from '@/components/Input';
 import { Textarea } from '@/components/Fieldset';
 
@@ -36,6 +37,7 @@ export default function ExamReviewEditPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const [loading, setLoading] = useState();
 
   const editReview = useMutation({
     mutationKey: [MUTATION_KEY.editExamReview],
@@ -47,6 +49,9 @@ export default function ExamReviewEditPage() {
     },
     onError: ({ response }) => {
       toast(response.data.message);
+    },
+    onSettled: () => {
+      setLoading(false);
     },
   });
 
@@ -70,13 +75,14 @@ export default function ExamReviewEditPage() {
   const [questionDetail, setQuestionDetail] = useState(state.questionDetail);
 
   const pass =
-    lectureName &&
-    professor &&
+    lectureName.trim() &&
+    professor.trim() &&
     lectureType &&
     examType &&
     lectureYear &&
     semester &&
-    classNumber;
+    classNumber &&
+    questionDetail.trim();
 
   const data = {
     isPF,
@@ -98,12 +104,10 @@ export default function ExamReviewEditPage() {
       <CloseAppBar>
         <ActionButton
           onClick={() => {
-            if (!pass) {
-              alert('필수입력을 모두 작성해주세요.');
-            } else {
-              editReview.mutate(data);
-            }
+            setLoading(true);
+            editReview.mutate(data);
           }}
+          disabled={!pass}
         >
           수정
         </ActionButton>
@@ -198,6 +202,7 @@ export default function ExamReviewEditPage() {
           maxRows='10'
         />
       </CategoryFieldset>
+      {loading && <FetchLoadingOverlay />}
     </main>
   );
 }

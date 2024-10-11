@@ -1,3 +1,5 @@
+export * from './about.js';
+export * from './admin.js';
 export * from './align.js';
 export * from './attendance.js';
 export * from './board.js';
@@ -5,6 +7,7 @@ export * from './boardMenus.js';
 export * from './dropDown.js';
 export * from './errors.js';
 export * from './examReview.js';
+export * from './loading.js';
 export * from './majors.js';
 export * from './menus.js';
 export * from './modalOptions.js';

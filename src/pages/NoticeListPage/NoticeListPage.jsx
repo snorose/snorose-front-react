@@ -35,12 +35,6 @@ export default function NoticeListPage() {
     }
   }, [data]);
 
-  const handleNavClick = (to) => {
-    return () => {
-      navigate(to);
-    };
-  };
-
   if (isLoading) {
     return (
       <>
@@ -82,11 +76,13 @@ export default function NoticeListPage() {
             <NoticeBar
               key={post.postId}
               data={post}
-              onClick={() =>
-                handleNavClick(
-                  `/board/${currentBoardTextId}/post/${post.postId}`
-                )
-              }
+              onClick={() => {
+                if (currentBoardTextId === 'exam-review') {
+                  navigate(`/board/exam-review-notice/post/${post.postId}`);
+                } else {
+                  navigate(`/board/${currentBoardTextId}/post/${post.postId}`);
+                }
+              }}
             />
           ))
         ) : (

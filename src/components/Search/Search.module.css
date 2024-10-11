@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: #f4f4f4;
+  background: var(--gray-1-1);
   border-radius: 0.3125rem;
 }
 
@@ -14,10 +14,10 @@
   border: none;
   background-color: transparent;
   font-size: 0.75rem;
-  color: #000;
+  color: var(--black);
 }
 
 .search::placeholder {
   font-size: 0.75rem;
-  color: #898989;
+  color: var(--gray-3-1);
 }

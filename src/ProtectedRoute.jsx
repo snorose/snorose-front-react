@@ -11,7 +11,7 @@ export default function ProtectedRoute({ roles, message, children }) {
   const { status, userInfo } = useAuth();
 
   useEffect(() => {
-    if (status === USER_STATUS.loading) {
+    if (status === USER_STATUS.loading || userInfo === undefined) {
       return;
     }
 

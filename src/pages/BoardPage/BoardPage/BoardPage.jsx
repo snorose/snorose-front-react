@@ -39,16 +39,14 @@ export default function BoardPage() {
             {BOARD_MENUS.filter((board) =>
               [20, 21, 22, 23].includes(board.id)
             ).map((board, index) => (
-              <BoardBar key={index} data={board} />
+              <BoardBar key={board.id} data={board} />
             ))}
           </div>
         </div>
       </div>
 
       <div className={styles.more_board_box}>
-        <div className={styles.icon_logo}>
-          <Icon id='cloud' />
-        </div>
+        <Icon className={styles.iconLogo} id='cloud' width={31} height={19} />
         <p>스노로즈에서 더 다양한 게시판을 준비하고 있어요</p>
       </div>
       {isSidebarOpen && <Sidebar closeSidebar={closeSidebar} />}

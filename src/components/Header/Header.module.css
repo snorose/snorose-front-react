@@ -13,9 +13,9 @@
 }
 
 .button {
-  background-color: white;
+  background-color: var(--white);
   font-weight: bold;
   font-weight: 500;
   font-size: 0.8125rem;
-  color: #00368e;
+  color: var(--blue-4);
 }

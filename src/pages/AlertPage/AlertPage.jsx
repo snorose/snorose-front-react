@@ -115,7 +115,12 @@ export default function AlertPage() {
               }`}
             >
               <div className={styles.alertIconContentWrapper}>
-                <Icon id={getIconId(item.type, item.isRead)} fill='none' />
+                <Icon
+                  id={getIconId(item.type, item.isRead)}
+                  width={32}
+                  height={32}
+                  fill='none'
+                />
                 <div className={styles.alertContent}>
                   <h2
                     className={`${styles.alertTitle} ${

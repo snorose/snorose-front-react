@@ -1,6 +1,6 @@
 .pageFrame {
   width: 100%;
-  padding: 0 1.25rem;
+
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,10 +8,8 @@
   margin: 0 auto;
 }
 
-.navFrame {
-  height: 2.75rem;
-  display: flex;
-  align-items: center;
+.pageTopFrame {
+  padding: 0 1.25rem;
 }
 
 .pageTitle {
@@ -23,11 +21,12 @@
 .pageExplanation {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #484848;
+  color: var(--gray-4);
   margin-top: 0.875rem;
 }
 
 .pageBottomFrame {
+  padding: 0 1.25rem;
   display: flex;
   flex-direction: column;
 }

@@ -12,16 +12,19 @@ import {
   DropDownMenu,
   DeleteModal,
   FetchLoading,
+  ActionButton,
 } from '@/components';
 
-import { formattedNowTime } from '@/utils';
+import { formattedNowTime, getBoard } from '@/utils';
 
-import { BOARD_MENUS, ROLE, TOAST } from '@/constants';
+import { BOARD_MENUS, ROLE, TOAST, QUERY_KEY } from '@/constants';
 
 import styles from './PostWritePage.module.css';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function PostWritePage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { pathname } = useLocation();
   const { toast } = useToast();
   const { userInfo, status } = useAuth();
@@ -33,13 +36,15 @@ export default function PostWritePage() {
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const textId = pathname.split('/')[2];
-  const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
+  const currentBoard = getBoard(textId);
   const [boardTitle, setBoardTitle] = useState(
     currentBoard?.title ?? '게시판을 선택해주세요'
   );
   const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
 
   const { invalidUserInfoQuery } = useAuth();
+
+  const pass = boardId && title.trim() && text.trim();
 
   const boardTitles = BOARD_MENUS.filter((menu) =>
     [21, 22, 23].includes(menu.id)
@@ -72,26 +77,13 @@ export default function PostWritePage() {
     boardId,
     title,
     content: text,
-    isNotice,
+    isNotice: textId === 'notice' ? true : isNotice,
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (submitDisabled) return;
-
-    // 유효성 검사
-    if (boardId === '') {
-      toast(TOAST.POST.emptyBoard);
-      return;
-    }
-    if (!title.trim()) {
-      toast(TOAST.POST.emptyTitle);
-      return;
-    }
-    if (!text.trim()) {
-      toast(TOAST.POST.emptyContent);
-      return;
-    }
 
     setSubmitDisabled(true);
 
@@ -99,14 +91,21 @@ export default function PostWritePage() {
     postPost(data)
       .then((response) => {
         if (response.status === 201) {
-          toast(TOAST.POST.create);
+          console.log(response.data.result.pointDifference);
+          !response.data.result.pointDifference
+            ? toast(TOAST.POST.createNoPoints)
+            : toast(TOAST.POST.create);
           const newPostId = response.data.result.postId;
 
+          queryClient.removeQueries([QUERY_KEY.post]);
           invalidUserInfoQuery();
           currentBoard.id === 12 || isNotice
-            ? navigate(`/board/${currentBoard.textId}/notice`)
+            ? navigate(`/board/${currentBoard.textId}/notice`, {
+                replace: true,
+              })
             : navigate(
-                `/board/${BOARD_MENUS.find((menu) => menu.id === boardId).textId}/post/${newPostId}`
+                `/board/${BOARD_MENUS.find((menu) => menu.id === boardId).textId}/post/${newPostId}`,
+                { replace: true }
               );
         }
       })
@@ -118,10 +117,10 @@ export default function PostWritePage() {
       });
   };
 
-  // 제목 40자 제한
+  // 제목 127자 제한
   const handleTitleChange = (e) => {
     const newValue = e.target.value;
-    if (newValue.length <= 40) {
+    if (newValue.length <= 127) {
       setTitle(newValue);
     }
   };
@@ -139,22 +138,23 @@ export default function PostWritePage() {
       <div className={styles.container}>
         <div className={styles.top}>
           <CloseAppBar
-            children='등록'
-            stroke='#000'
-            onClick={handleSubmit}
             backgroundColor={'#eaf5fd'}
-            xClick={() => {
+            onClose={() => {
               title.trim() || text.trim()
                 ? setIsCheckModalOpen(true)
-                : navigate(-1);
+                : navigate(-1, { replace: true });
             }}
-          />
+          >
+            <ActionButton onClick={handleSubmit} disabled={!pass}>
+              등록
+            </ActionButton>
+          </CloseAppBar>
         </div>
         <div className={styles.center}>
           {textId === 'notice' ? (
             <div className={styles.categorySelect}>
               <div className={styles.categorySelectContainer}>
-                <Icon id='clip-board-list' width='18' height='19' />
+                <Icon id='clip-board-list' width={18} height={19} />
                 <p className={styles.categorySelectText}>{boardTitle}</p>
               </div>
             </div>
@@ -165,10 +165,10 @@ export default function PostWritePage() {
                 onClick={handleDropDownOpen}
               >
                 <div className={styles.categorySelectContainer}>
-                  <Icon id='clip-board-list' width='18' height='19' />
+                  <Icon id='clip-board-list' width={18} height={19} />
                   <p className={styles.categorySelectText}>{boardTitle}</p>
                 </div>
-                <Icon id='angle-down' width='14' height='7' />
+                <Icon id='angle-down' width={14} height={7} />
               </div>
               <DropDownMenu
                 options={boardTitles}
@@ -183,7 +183,7 @@ export default function PostWritePage() {
 
           <div className={styles.profileBox}>
             <div className={styles.profileBoxLeft}>
-              <Icon id='cloud' width='25' height='16' />
+              <Icon id='cloud' width={25} height={16} />
               <p>{userInfo.nickname}</p>
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
@@ -200,8 +200,8 @@ export default function PostWritePage() {
                 <p>공지글</p>
                 <Icon
                   id={isNotice ? 'toggle-on' : 'toggle-off'}
-                  width='25'
-                  height='16'
+                  width={25}
+                  height={16}
                 />
               </div>
             )}
@@ -226,7 +226,7 @@ export default function PostWritePage() {
         id='post-write-exit-check'
         isOpen={isCheckModalOpen}
         closeFn={() => setIsCheckModalOpen(false)}
-        redBtnFunction={() => navigate(-1)}
+        redBtnFunction={() => navigate(-1, { replace: true })}
       />
     </>
   );

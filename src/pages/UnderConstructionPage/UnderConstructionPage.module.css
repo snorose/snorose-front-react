@@ -7,8 +7,7 @@
   justify-content: center;
   align-items: center;
 
-  background-color: #eaf5fd;
-  /* background-color: black; */
+  background-color: var(--blue-0);
   background-image: url('/src/assets/images/symbolWhite50.png');
   background-size: 350px;
   background-repeat: no-repeat;
@@ -65,5 +64,5 @@
 }
 
 .icon:hover {
-  color: #82b5ff;
+  color: var(--blue-3);
 }

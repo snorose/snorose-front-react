@@ -1,4 +1,3 @@
-import React from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import { useComment, useToast } from '@/hooks';
@@ -66,7 +65,7 @@ const InputBar = () => {
       onClick={(event) => event.stopPropagation()}
     >
       <div className={styles.input_bar}>
-        <Icon id='cloud' width='25' height='16' />
+        <Icon id='cloud' width={25} height={16} />
         <TextareaAutosize
           ref={inputRef}
           className={styles.input_zone}
@@ -80,8 +79,8 @@ const InputBar = () => {
       <Icon
         className={styles.enter}
         id='arrow-up-right'
-        width='32'
-        height='32'
+        width={32}
+        height={32}
         onClick={submitComment}
       />
     </div>
