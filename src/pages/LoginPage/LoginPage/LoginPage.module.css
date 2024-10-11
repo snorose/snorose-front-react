@@ -17,6 +17,13 @@ a:hover {
   margin: 0 auto;
 }
 
+.back {
+  margin-top: 0.875rem;
+}
+.back:hover {
+  cursor: pointer;
+}
+
 .loginBody {
   padding: 0 1.25rem;
   font-size: 0.5625rem;
