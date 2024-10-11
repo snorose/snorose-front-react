@@ -44,6 +44,7 @@
 }
 
 .result {
+  margin-top: 0.6rem;
   font-size: 1.563rem;
   font-weight: 700;
   color: var(--blue-4);
