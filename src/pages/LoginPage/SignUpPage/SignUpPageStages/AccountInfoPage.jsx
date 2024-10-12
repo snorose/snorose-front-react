@@ -96,7 +96,7 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
             state1={'text'}
             state2={'password'}
             errMsg={
-              '영어, 숫자, 특수문자(!@#%^&*)만 사용하여 8자 이상 16자 이하로 작성해주세요.'
+              '영어, 숫자, 특수문자(!@#%^&*)만 사용하여 8자 이상 16자 이하로 작성해주세요'
             }
           />
         </div>
