@@ -9,6 +9,8 @@
   align-items: center;
   font-size: 0.5rem;
   padding-top: 4.25rem;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .posts {

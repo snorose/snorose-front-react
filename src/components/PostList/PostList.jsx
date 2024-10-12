@@ -7,7 +7,7 @@ import { getBoardTitleToTextId } from '@/utils';
 
 import styles from './PostList.module.css';
 
-export default function PostList({ result }) {
+export default function PostList({ result, saveScrollPosition }) {
   const { data, ref, isLoading, isError, error } = result;
 
   if (isLoading) {
@@ -39,6 +39,7 @@ export default function PostList({ result }) {
           ref={index === postList.length - 1 ? ref : undefined}
           key={post.postId}
           to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
+          onClick={saveScrollPosition}
         >
           <PostBar data={post} hasComment={false} />
         </Link>
