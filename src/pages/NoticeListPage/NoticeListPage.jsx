@@ -47,7 +47,7 @@ export default function NoticeListPage() {
   if (isError) {
     return (
       <>
-        <BackAppBar notFixed />;
+        <BackAppBar notFixed />
         <FetchLoading animation={false}>
           게시글을 불러오지 못했습니다.
         </FetchLoading>
