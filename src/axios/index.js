@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 const defaultAxios = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_DOMAIN,
+  baseURL: process.env.REACT_APP_TEST_SERVER_DOMAIN,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 const authAxios = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_DOMAIN,
+  baseURL: process.env.REACT_APP_TEST_SERVER_DOMAIN,
   headers: {
     'Content-Type': 'application/json',
     withCredentials: true,
