@@ -242,6 +242,9 @@
     border-bottom: none;
   }
 }
+.itemList:last-child {
+  border-bottom: none;
+}
 
 .item {
   display: flex;
