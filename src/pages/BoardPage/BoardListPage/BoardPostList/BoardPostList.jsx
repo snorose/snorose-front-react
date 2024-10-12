@@ -10,13 +10,10 @@ import { QUERY_KEY } from '@/constants';
 
 import styles from './BoardPostList.module.css';
 
-export default function BoardPostList() {
+export default function BoardPostList({ saveScrollPosition }) {
   const { pathname } = useLocation();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
-
-  // 스크롤 위치 저장 및 복원
-  const { scrollRef, saveScrollPosition } = useScrollRestoration();
 
   // 페이지네이션 관련 hook
   const { data, ref, isLoading, isFetching, status, isError, refetch } =
@@ -44,11 +41,7 @@ export default function BoardPostList() {
 
   return (
     <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
-      <div
-        className={styles.postListContainer}
-        ref={scrollRef}
-        style={{ overflowY: 'auto', height: '100vh' }}
-      >
+      <div className={styles.postListContainer}>
         {status !== 'error' &&
           postList.map((post, index) => (
             <Link
