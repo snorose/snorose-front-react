@@ -6,11 +6,12 @@ import { getNoticeList } from '@/apis/notice';
 
 import { BackAppBar, NoticeBar, FetchLoading, WriteButton } from '@/components';
 
-import { BOARD_MENUS, QUERY_KEY } from '@/constants';
+import { QUERY_KEY } from '@/constants';
 
-import { useAuth } from '@/hooks';
+import { useAuth, useScrollRestoration } from '@/hooks';
 
 import styles from './NoticeListPage.module.css';
+import { getBoard } from '@/utils';
 
 export default function NoticeListPage() {
   const navigate = useNavigate();
@@ -18,15 +19,15 @@ export default function NoticeListPage() {
   const { pathname } = useLocation();
   const [noticeList, setNoticeList] = useState([]);
   const currentBoardTextId = pathname.split('/')[2];
-  const currentBoard =
-    BOARD_MENUS.find((menu) => menu.textId === currentBoardTextId) || {};
-
+  const currentBoard = getBoard(currentBoardTextId);
   // 게시글 데이터 받아오기
   const { data, isLoading, isError } = useQuery({
     queryKey: [QUERY_KEY.notices, currentBoard?.id],
     queryFn: () => getNoticeList(currentBoard?.id),
     enabled: !!currentBoard?.id,
   });
+
+  const { scrollRef, saveScrollPosition } = useScrollRestoration();
 
   // 데이터 화면 표시
   useEffect(() => {
@@ -56,7 +57,7 @@ export default function NoticeListPage() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={scrollRef}>
       <BackAppBar
         title={
           currentBoardTextId === 'notice'
@@ -76,9 +77,10 @@ export default function NoticeListPage() {
             <NoticeBar
               key={post.postId}
               data={post}
-              onClick={() =>
-                navigate(`/board/${currentBoardTextId}/post/${post.postId}`)
-              }
+              onClick={() => {
+                saveScrollPosition();
+                navigate(`/board/${currentBoardTextId}/post/${post.postId}`);
+              }}
             />
           ))
         ) : (
