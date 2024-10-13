@@ -35,3 +35,9 @@ export const MUTATION_KEY = Object.freeze({
   updateUserInfo: 'updateUserInfo',
   updatePassword: 'updatePassword',
 });
+
+export const STALE_TIME = Object.freeze({
+  examReview: 1000 * 60 * 5,
+  boardPostList: 1000 * 60 * 1,
+  mypageActivity: 1000 * 60 * 5,
+});

@@ -6,7 +6,7 @@ import { usePagination, useScrollRestoration } from '@/hooks';
 
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
-import { QUERY_KEY } from '@/constants';
+import { QUERY_KEY, STALE_TIME } from '@/constants';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './ActivityPage.module.css';
@@ -15,6 +15,7 @@ export default function DownloadExamReviewPage() {
   const { data, ref, isLoading, isFetching, isError, error } = usePagination({
     queryKey: [QUERY_KEY.myDownloadedExamReviews],
     queryFn: ({ pageParam }) => getMyReviewFileList({ page: pageParam }),
+    staleTime: STALE_TIME.mypageActivity,
   });
 
   const { scrollRef, saveScrollPosition } = useScrollRestoration();

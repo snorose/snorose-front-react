@@ -2,7 +2,12 @@ import { useEffect, useCallback } from 'react';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 
-export default function usePagination({ queryKey, queryFn, enabled }) {
+export default function usePagination({
+  queryKey,
+  queryFn,
+  staleTime = 0,
+  enabled,
+}) {
   const queryClient = useQueryClient();
 
   const {
@@ -25,6 +30,7 @@ export default function usePagination({ queryKey, queryFn, enabled }) {
       }
       return lastPageParam + 1;
     },
+    staleTime,
     enabled,
   });
 

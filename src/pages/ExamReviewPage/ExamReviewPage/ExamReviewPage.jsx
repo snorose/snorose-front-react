@@ -11,7 +11,13 @@ import { ExamReviewList, ExamReviewSearchList } from '@/pages/ExamReviewPage';
 import { AppBar, DropDownBlue, Search, WriteButton, Icon } from '@/components';
 
 import { convertToObject } from '@/utils';
-import { YEARS, SEMESTERS, EXAM_TYPES, QUERY_KEY } from '@/constants';
+import {
+  YEARS,
+  SEMESTERS,
+  EXAM_TYPES,
+  QUERY_KEY,
+  STALE_TIME,
+} from '@/constants';
 
 import styles from './ExamReviewPage.module.css';
 
@@ -48,6 +54,7 @@ export default function ExamReviewPage() {
   const reviewResult = usePagination({
     queryKey: [QUERY_KEY.posts, 32],
     queryFn: ({ pageParam }) => getReviewList(pageParam),
+    staleTime: STALE_TIME.examReview,
     enabled: urlKeyword === null,
   });
 

@@ -1,12 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import { getPostList } from '@/apis';
-import { usePagination, useScrollRestoration } from '@/hooks';
 
-import React from 'react';
+import { getPostList } from '@/apis';
+
+import { usePagination } from '@/hooks';
+
 import { PostBar, PTR, FetchLoading } from '@/components';
 
 import { getBoard, timeAgo } from '@/utils';
-import { QUERY_KEY } from '@/constants';
+import { QUERY_KEY, STALE_TIME } from '@/constants';
 
 import styles from './BoardPostList.module.css';
 
@@ -20,6 +21,7 @@ export default function BoardPostList({ saveScrollPosition }) {
     usePagination({
       queryKey: [QUERY_KEY.posts, currentBoard.id],
       queryFn: ({ pageParam }) => getPostList(currentBoard.id, pageParam),
+      staleTime: STALE_TIME.boardPostList,
     });
 
   if (isLoading) {
