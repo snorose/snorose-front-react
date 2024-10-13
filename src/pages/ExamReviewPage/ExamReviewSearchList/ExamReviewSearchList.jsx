@@ -5,7 +5,7 @@ import { PostBar } from '@/components/PostBar';
 
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
 
-export default function ExamReviewSearchList({ result }) {
+export default function ExamReviewSearchList({ result, saveScrollPosition }) {
   const { data, ref, isLoading, isFetching, isError, error } = result || {};
 
   if (isLoading) {
@@ -37,6 +37,7 @@ export default function ExamReviewSearchList({ result }) {
           ref={index === searchList.length - 1 ? ref : undefined}
           key={post.postId}
           to={`/board/exam-review/post/${post.postId}`}
+          onClick={saveScrollPosition}
         >
           <PostBar data={post} hasLike={false} />
         </Link>
