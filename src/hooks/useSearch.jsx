@@ -49,7 +49,7 @@ export default function useSearch({ urlKeyword, filterOption }) {
     }
   };
 
-  const { data, ref, isLoading, isFetching, status, isError, error } =
+  const { data, ref, isLoading, isFetching, status, isError, error, refetch } =
     usePagination({
       queryKey: [QUERY_KEY.search, newUrlKeyword, boardType, filterOption],
       queryFn: ({ pageParam }) =>
@@ -60,7 +60,7 @@ export default function useSearch({ urlKeyword, filterOption }) {
           keyword,
           ...filterOption,
         }),
-      staleTime: STALE_TIME.examReview,
+      staleTime: STALE_TIME.searchList,
     });
 
   return {
@@ -73,6 +73,7 @@ export default function useSearch({ urlKeyword, filterOption }) {
     error,
     keyword,
     urlKeyword,
+    refetch,
     handleChange,
     handleOnKeyDown,
   };
