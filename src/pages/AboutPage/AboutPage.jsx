@@ -20,6 +20,11 @@ import HALL_OF_FAME from '@/assets/images/hallOfFame.svg';
 import styles from './AboutPage.module.css';
 
 export default function AboutPage() {
+  const goApply = () => {
+    window.location.href =
+      'https://www.notion.so/snorose/2024-2-10c7ef0aa3bf8027a04ee35b7c521e12';
+  };
+
   return (
     <main>
       <BackAppBar hasMenu />
@@ -45,7 +50,8 @@ export default function AboutPage() {
           </section>
           <Button
             className={styles.apply}
-            onClick={() => alert('지원 기간이 아닙니다!')}
+            // onClick={() => alert('지원 기간이 아닙니다!')}
+            onClick={goApply}
           >
             리자 지원하기
           </Button>

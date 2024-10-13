@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { getMyScrapPostList } from '@/apis';
 
-import { usePagination } from '@/hooks';
+import { usePagination, useScrollRestoration } from '@/hooks';
 
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
@@ -18,6 +18,8 @@ export default function ScrapPage() {
     queryKey: [QUERY_KEY.myScrappedPosts],
     queryFn: ({ pageParam }) => getMyScrapPostList({ page: pageParam }),
   });
+
+  const { scrollRef, saveScrollPosition } = useScrollRestoration();
 
   if (isLoading) {
     return <FetchLoading>불러오는 중</FetchLoading>;
@@ -35,7 +37,7 @@ export default function ScrapPage() {
       : [];
 
   return (
-    <main className={styles.activityPage}>
+    <main className={styles.activityPage} ref={scrollRef}>
       <header>
         <BackAppBar stroke='#000' backNavTo={'/my-page?tab=activity'} />
       </header>
@@ -53,6 +55,7 @@ export default function ScrapPage() {
                 ref={index === myScrapPostList.length - 2 ? ref : undefined}
                 to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
                 state={{ from: '/my-page/scrap' }}
+                onClick={saveScrollPosition}
               >
                 <PostBar data={post} />
               </Link>
