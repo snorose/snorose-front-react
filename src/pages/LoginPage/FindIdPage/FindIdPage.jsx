@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { findId } from '@/apis';
+import { useFindId } from '@/apis';
 
 import { Input } from '@/components/Input';
 import { Submit } from '@/components/Submit';
@@ -17,6 +17,7 @@ import styles from './FindIdPage.module.css';
 import { BackAppBar } from '@/components/index.js';
 
 export default function FindIdPage() {
+  const findId = useFindId();
   const navigate = useNavigate();
   const [nameStyle, setNameStyle] = useState('ready');
   const [numberStyle, setNumberStyle] = useState('ready');

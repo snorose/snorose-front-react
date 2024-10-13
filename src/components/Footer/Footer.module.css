@@ -18,6 +18,10 @@
   color: #6a6a6a;
 }
 
+.email {
+  font-size: 11px;
+}
+
 .menu {
   display: flex;
   justify-content: center;
@@ -26,9 +30,5 @@
 
 .link {
   display: flex;
-  padding: 0 8px;
-  border-right: 1px solid #6a6a6a;
-}
-.link:last-child {
-  border-right: none;
+  padding: 0 6px;
 }
