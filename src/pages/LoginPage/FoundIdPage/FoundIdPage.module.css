@@ -40,12 +40,11 @@
 .resultFrame {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 1.875rem;
+  margin-top: 1rem;
 }
 
 .result {
+  margin-top: 0.6rem;
   font-size: 1.563rem;
   font-weight: 700;
   color: var(--blue-4);

@@ -1,6 +1,15 @@
+export function checkIfEntered(input) {
+  input = input?.trim();
+  if (!input?.length) {
+    return 'ready';
+  } else {
+    return 'right';
+  }
+}
+
 export function checkName(input) {
   input = input?.trim();
-  const format = /^[A-Za-z가-힣]+$/;
+  const format = /^[A-Za-z가-힣ㄱ-ㅎ]+$/;
   if (!input?.length) {
     return 'ready';
   }
@@ -97,7 +106,7 @@ export function checkPW(pw) {
       isAlphabet = true;
     } else if (/^[0-9]+$/.test(char)) {
       isNumber = true;
-    } else if (/^[$&+,:;=?@#|'<>.^*()%!-]+$/.test(char)) {
+    } else if (/^[!@#%^&*]+$/.test(char)) {
       isSpecialChar = true;
     }
   });

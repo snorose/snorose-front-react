@@ -22,7 +22,7 @@ export default function NotFoundPwPage() {
 
   return (
     <div className={styles.pageFrame}>
-      <BackAppBar />
+      <BackAppBar backNavTo='/login' />
       <div className={styles.pageTopFrame}>
         <p className={styles.pageTitle}>비밀번호 찾기</p>
         <p className={styles.pageExplanation}>

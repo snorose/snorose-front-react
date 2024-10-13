@@ -79,7 +79,11 @@ export default function NoticeListPage() {
               data={post}
               onClick={() => {
                 saveScrollPosition();
-                navigate(`/board/${currentBoardTextId}/post/${post.postId}`);
+                if (currentBoardTextId === 'exam-review') {
+                  navigate(`/board/exam-review-notice/post/${post.postId}`);
+                } else {
+                  navigate(`/board/${currentBoardTextId}/post/${post.postId}`);
+                }
               }}
             />
           ))

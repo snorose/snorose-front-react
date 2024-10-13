@@ -40,6 +40,16 @@
   padding: 0 1.25rem;
 }
 
+.alert {
+  font-size: 10px;
+  color: grey;
+  padding: 0 3rem;
+  margin-top: 3rem;
+}
+.alert a {
+  color: lightblue;
+}
+
 .findIDButton {
   display: flex;
   justify-content: center;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { register } from '@/apis';
+import { useRegister } from '@/apis';
 
 import { Dropdown } from '@/components/Fieldset';
 import { Input } from '@/components/Input';
@@ -18,6 +18,7 @@ import { MAJORS } from '@/constants';
 import styles from './UserInfoPage.module.css';
 
 export default function UserInfoPage({ setFormData, formData }) {
+  const register = useRegister();
   const [nicknameStyle, setNicknameStyle] = useState('ready');
   const [stuNumStyle, setStuNumStyle] = useState('ready');
   const [birthdayStyle, setBirthdayStyle] = useState('ready');
@@ -41,7 +42,7 @@ export default function UserInfoPage({ setFormData, formData }) {
         <div className={styles.inputFrame}>
           <Input
             title={'닉네임'}
-            placeholder={'닉네임을 입력하세요'}
+            placeholder={'닉네임을 입력해주세요'}
             className={nicknameStyle}
             setClassName={setNicknameStyle}
             classNameCheck={checkSpecialChar}
@@ -54,7 +55,7 @@ export default function UserInfoPage({ setFormData, formData }) {
         <div className={styles.inputFrame}>
           <Input
             title={'학번'}
-            placeholder={'학번을 입력하세요'}
+            placeholder={'학번을 입력해주세요'}
             className={stuNumStyle}
             setClassName={setStuNumStyle}
             classNameCheck={checkStudentNum}
@@ -70,7 +71,7 @@ export default function UserInfoPage({ setFormData, formData }) {
             options={MAJORS}
             select={formData}
             setFn={setFormData}
-            placeholder='전공을 선택하세요'
+            placeholder='전공을 선택해주세요'
             backgroundColor='#EAF5FD'
             color='#00368E'
           />

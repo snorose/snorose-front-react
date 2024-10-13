@@ -174,6 +174,7 @@ export default function ExamReviewDetailPage() {
   }
 
   const {
+    content,
     commentCount,
     createdAt,
     examType,
@@ -232,7 +233,7 @@ export default function ExamReviewDetailPage() {
           />
         </div>
         <div className={styles.title}>{title}</div>
-        <div className={styles.content}>
+        <div className={styles.info}>
           <ReviewContentItem tag='강의명' value={lectureName} />
           <ReviewContentItem tag='교수' value={professor} />
           <ReviewContentItem tag='강의 종류' value={COURSE_TYPE[lectureType]} />
@@ -249,6 +250,7 @@ export default function ExamReviewDetailPage() {
             align={FLEX_ALIGN.flexStart}
           />
         </div>
+        {content && <div className={styles.content}>{content}</div>}
         <ReviewDownload
           className={styles.fileDownload}
           fileName={fileName}

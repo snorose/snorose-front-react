@@ -1,21 +1,29 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { findPw } from '@/apis';
+import { useFindPw } from '@/apis';
 
 import { Icon } from '@/components/Icon';
 import { Input } from '@/components/Input';
 import { Submit } from '@/components/Submit';
 
-import { checkID, checkMail } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
+import {
+  checkIfEntered,
+  checkMail,
+} from '@/pages/LoginPage/FindIdPage/inputCheck.js';
 
 import styles from './FindPwPage.module.css';
 import { BackAppBar } from '@/components/index.js';
+import { FetchLoadingOverlay } from '@/components/Loading';
+import { LOADING_MESSAGE } from '@/constants';
 
 export default function FindPwPage() {
+  const findPw = useFindPw();
   const navigate = useNavigate();
   const [idStyle, setIdStyle] = useState('ready');
   const [emailStyle, setEmailStyle] = useState('ready');
+  const [allowSubmit, setAllowSubmit] = useState(true);
+  const [loading, setLoading] = useState();
   const [formData, setFormData] = useState({
     loginId: '',
     email: '',
@@ -26,13 +34,13 @@ export default function FindPwPage() {
       '아이디를 입력해주세요',
       idStyle,
       setIdStyle,
-      checkID,
+      checkIfEntered,
       'loginId',
       '아이디는 영어, 숫자만 가능합니다',
     ],
     [
-      '메일',
-      '메일을 입력하세요',
+      '이메일',
+      '이메일을 입력해주세요',
       emailStyle,
       setEmailStyle,
       checkMail,
@@ -51,7 +59,11 @@ export default function FindPwPage() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (formData.loginId && formData.email) findPw(e, formData, navigate);
+          if (formData.loginId && formData.email && allowSubmit) {
+            findPw(e, formData, navigate, setLoading);
+            //버튼 한번만 누를 수 있게 제한하는 코드
+            setAllowSubmit(false);
+          }
         }}
       >
         <div className={styles.findIdFrame}>
@@ -73,6 +85,26 @@ export default function FindPwPage() {
                 />
               </div>
             ))}
+            <div className={styles.alert}>
+              <ul style={{ listStyleType: 'circle' }}>
+                <li>
+                  기존 이메일을 알 수 없는 경우, "아이디 찾기" 기능을 통해
+                  확인할 수 있습니다.
+                </li>
+                <li>
+                  "아이디 찾기"에서 이름과 학번을 입력하면, “다음 이메일로
+                  아이디를 전달했습니다.
+                  [snorose@snorose.com](mailto:snorose@snorose.com)”라는 안내를
+                  통해 이메일 주소를 확인할 수 있습니다.
+                </li>
+                <li>
+                  만약 이메일이 존재하지 않거나 유효하지 않을 경우, 아래의 폼을
+                  작성해주시기 바랍니다.
+                  <br />
+                  <a href='https://forms.gle/PDmKuPUuUzKXTh8BA'>구글폼 링크</a>
+                </li>
+              </ul>
+            </div>
           </div>
           <div className={styles.buttonFrame}>
             <Submit btnName='완료' className={submitState()} />
@@ -85,6 +117,7 @@ export default function FindPwPage() {
           </div>
         </div>
       </form>
+      {loading && <FetchLoadingOverlay text={LOADING_MESSAGE.default} />}
     </div>
   );
 }

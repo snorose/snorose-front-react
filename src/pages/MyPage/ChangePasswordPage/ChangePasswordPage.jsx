@@ -38,7 +38,7 @@ export default function ChangePasswordPage() {
 
   const validatePasswordStrength = (password) => {
     const spaceRegex = /^\S*$/;
-    const specialCharRegex = /[!@#\$%\^\&*\)\(+=._-]/;
+    const specialCharRegex = /[!@#%^&*]/;
     const emojiRegex = /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g;
 
     if (
@@ -50,7 +50,7 @@ export default function ChangePasswordPage() {
       emojiRegex.test(password)
     ) {
       setNewPasswordError(
-        '띄어쓰기를 제외하고, 영어, 숫자, 특수문자를 포함한 8자 이상으로 작성해 주세요.'
+        '영어, 숫자, 특수문자(!@#%^&*)만 사용하여 8자 이상 16자 이하로 작성해주세요.'
       );
       setIsPasswordValid(false);
     } else {

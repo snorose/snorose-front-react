@@ -49,10 +49,14 @@ export default function ExamReviewWritePage() {
         file,
       }),
     onSuccess: ({ data }) => {
+      const {
+        result: { postId },
+      } = data;
+
       queryClient.removeQueries([QUERY_KEY.post]);
       invalidUserInfoQuery();
       toast(TOAST.EXAM_REVIEW.create);
-      navigate('/board/exam-review', { replace: true });
+      navigate(`/board/exam-review/post/${postId}`, { replace: true });
     },
     onError: ({ response }) => {
       const { status } = response;

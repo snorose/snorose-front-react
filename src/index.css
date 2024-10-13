@@ -135,7 +135,9 @@ html {
 }
 
 body {
+  padding: 0 !important;
   margin: 0;
+  overflow: hidden;
   font-family:
     'Spoqa Han Sans Neo',
     'Noto Sans KR',
@@ -157,6 +159,12 @@ body {
 
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  /* 드래그 막기 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
 }
 ::-webkit-scrollbar {
   display: none;

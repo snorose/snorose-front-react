@@ -49,6 +49,8 @@ import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 import { ROLE } from '@/constants';
 import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructionPage.jsx';
 
+import { CheckExamPeriodRoute } from '@/components/Route/CheckExamPeriodRoute.jsx';
+
 const getRolesForReadBoard = (boardPath) => {
   switch (boardPath) {
     case 'first-snow':
@@ -260,6 +262,34 @@ export const routeList = [
         },
       },
       {
+        path: '/board/exam-review-notice/post/:postId',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            message={'공지글 접근 권한이 없습니다.'}
+          >
+            <PostPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/board/exam-review-notice/post/:postId/edit',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.admin]}
+            message={'공지글 수정 권한이 없습니다.'}
+          >
+            <PostEditPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
         path: '/board/exam-review/:postId/edit',
         element: (
           <ProtectedRoute
@@ -276,12 +306,14 @@ export const routeList = [
       {
         path: '/board/exam-review-write',
         element: (
-          <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 작성 권한이 없습니다.'}
-          >
-            <ExamReviewWritePage />
-          </ProtectedRoute>
+          <CheckExamPeriodRoute>
+            <ProtectedRoute
+              roles={[ROLE.user, ROLE.admin]}
+              message={'시험후기 작성 권한이 없습니다.'}
+            >
+              <ExamReviewWritePage />
+            </ProtectedRoute>
+          </CheckExamPeriodRoute>
         ),
         meta: {
           hideNav: true,

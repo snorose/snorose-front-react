@@ -49,11 +49,17 @@
   font-size: 1rem;
 }
 
-.content {
+.info {
   padding: 0.125rem 0.8125rem;
   margin: 1.4375rem var(--default-margin);
   background: var(--white);
   border-radius: 0.3125rem;
+}
+
+.content {
+  margin: 0 var(--default-margin) 1.4375rem var(--default-margin);
+  font-size: 0.875rem;
+  word-break: keep-all;
 }
 
 .fileDownload {

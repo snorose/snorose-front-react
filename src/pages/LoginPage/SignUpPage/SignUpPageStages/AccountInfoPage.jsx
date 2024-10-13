@@ -40,19 +40,21 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
         <div className={styles.inputFrame}>
           <Input
             title={'이름'}
-            placeholder={'이름을 입력하세요'}
+            placeholder={'이름을 입력해주세요'}
             className={nameStyle}
             setClassName={setNameStyle}
             classNameCheck={checkName}
             inputType={'userName'}
             inputData={setFormData}
             data={formData}
-            errMsg={'한글 또는 영어 대소문자로 2자 이상 30자 이하로 입력하세요'}
+            errMsg={
+              '한글 또는 영어 대소문자로 2자 이상 30자 이하로 입력해주세요'
+            }
           />
         </div>
         <div className={styles.inputFrame}>
           <Input
-            title={'숙명 구글 메일'}
+            title={'숙명 구글 이메일'}
             placeholder={'sample@sookmyung.ac.kr'}
             className={emailStyle}
             setClassName={setEmailStyle}
@@ -66,20 +68,20 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
         <div className={styles.inputFrame}>
           <Input
             title={'아이디'}
-            placeholder={'사용할 아이디를 입력하세요'}
+            placeholder={'사용할 아이디를 입력해주세요'}
             className={idStyle}
             setClassName={setIdStyle}
             classNameCheck={checkID}
             inputType={'loginId'}
             inputData={setFormData}
             data={formData}
-            errMsg={'특수문자를 제외한 5자 이상 30자 이하로 입력하세요'}
+            errMsg={'특수문자를 제외한 5자 이상 30자 이하로 입력해주세요'}
           />
         </div>
         <div className={styles.inputFrame}>
           <SpecialInput
             title={'비밀번호'}
-            placeholder={'비밀번호를 입력하세요'}
+            placeholder={'비밀번호를 입력해주세요'}
             className={pwStyle}
             setClassName={setPwStyle}
             classNameCheck={checkPW}
@@ -94,14 +96,14 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
             state1={'text'}
             state2={'password'}
             errMsg={
-              '영어, 숫자, 특수문자를 포함해 8자 이상 16자 이하로 작성해주세요'
+              '영어, 숫자, 특수문자(!@#%^&*)만 사용하여 8자 이상 16자 이하로 작성해주세요'
             }
           />
         </div>
         <div className={styles.inputFrame}>
           <SpecialInput
             title={'비밀번호 확인'}
-            placeholder={'비밀번호를 다시 입력하세요'}
+            placeholder={'비밀번호를 다시 입력해주세요'}
             className={pw2Style}
             setClassName={setPw2Style}
             classNameCheck={() =>
