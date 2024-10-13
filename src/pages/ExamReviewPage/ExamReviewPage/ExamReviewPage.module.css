@@ -56,3 +56,7 @@
 .to {
   width: 100%;
 }
+
+.loading {
+  padding-bottom: 7rem;
+}
