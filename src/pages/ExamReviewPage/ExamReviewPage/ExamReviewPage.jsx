@@ -51,11 +51,23 @@ export default function ExamReviewPage() {
     name: EXAM_TYPE_LEBEL[queryParams.get('examType')],
   });
 
+  const { data: noticeLineData } = useQuery({
+    queryKey: [QUERY_KEY.noticeLine, 32],
+    queryFn: () => getNoticeLine(32),
+  });
+
+  const isSearchCondition = !!(
+    urlKeyword ||
+    lectureYear?.id ||
+    semester?.id ||
+    examType?.id
+  );
+
   const reviewResult = usePagination({
     queryKey: [QUERY_KEY.posts, 32],
     queryFn: ({ pageParam }) => getReviewList(pageParam),
     staleTime: STALE_TIME.examReview,
-    enabled: urlKeyword === null,
+    enabled: !isSearchCondition,
   });
 
   const searchResult = useSearch({
@@ -65,14 +77,10 @@ export default function ExamReviewPage() {
       semester: semester?.id,
       examType: examType?.id,
     },
+    enabled: isSearchCondition,
   });
 
   const { handleChange, handleOnKeyDown, keyword } = searchResult;
-
-  const { data: noticeLineData } = useQuery({
-    queryKey: [QUERY_KEY.noticeLine, 32],
-    queryFn: () => getNoticeLine(32),
-  });
 
   useEffect(() => {
     const filterOption = {
@@ -85,7 +93,7 @@ export default function ExamReviewPage() {
       ''
     );
 
-    if (keyword === '') {
+    if (!isSearchCondition) {
       navigate(`/board/exam-review`, { replace: true });
       return;
     }
@@ -145,14 +153,14 @@ export default function ExamReviewPage() {
           setIsOpen={setIsOpen}
         />
       </div>
-      {urlKeyword === null ? (
-        <ExamReviewList
-          result={reviewResult}
+      {isSearchCondition ? (
+        <ExamReviewSearchList
+          result={searchResult}
           saveScrollPosition={saveScrollPosition}
         />
       ) : (
-        <ExamReviewSearchList
-          result={searchResult}
+        <ExamReviewList
+          result={reviewResult}
           saveScrollPosition={saveScrollPosition}
         />
       )}

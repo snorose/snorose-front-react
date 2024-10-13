@@ -10,7 +10,7 @@ export default function ExamReviewSearchList({ result, saveScrollPosition }) {
   const { data, ref, isLoading, isFetching, isError, error, refetch } = result;
 
   if (isLoading) {
-    return <FetchLoading>검색 중</FetchLoading>;
+    return <FetchLoading className={styles.loading}>검색 중</FetchLoading>;
   }
 
   if (isError) {

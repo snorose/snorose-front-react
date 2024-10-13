@@ -8,7 +8,7 @@ export default function ExamReviewList({ result, saveScrollPosition }) {
   const { data, ref, isLoading, isFetching, isError, refetch } = result;
 
   if (isLoading) {
-    return <FetchLoading>불러오는 중</FetchLoading>;
+    return <FetchLoading className={styles.loading}>불러오는 중</FetchLoading>;
   }
 
   if (isError) {
