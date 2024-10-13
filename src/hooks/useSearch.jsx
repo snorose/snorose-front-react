@@ -7,7 +7,11 @@ import { usePagination } from '@/hooks';
 
 import { BOARD_ID, QUERY_KEY, STALE_TIME } from '@/constants';
 
-export default function useSearch({ urlKeyword, filterOption }) {
+export default function useSearch({
+  urlKeyword,
+  filterOption,
+  enabled = true,
+}) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const boardType = pathname.split('/')[2];
@@ -43,6 +47,7 @@ export default function useSearch({ urlKeyword, filterOption }) {
         );
         return;
       }
+
       navigate(
         `/board/${boardType}/search?query=${encodeURIComponent(keyword)}`
       );
@@ -61,6 +66,7 @@ export default function useSearch({ urlKeyword, filterOption }) {
           ...filterOption,
         }),
       staleTime: STALE_TIME.searchList,
+      enabled,
     });
 
   return {
