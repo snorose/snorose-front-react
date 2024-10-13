@@ -5,13 +5,13 @@ import { getNoticeLine } from '@/apis';
 
 import { useScrollRestoration } from '@/hooks';
 
+import { BoardPostList } from '@/pages/BoardPage';
 import { BackAppBar, Icon, WriteButton } from '@/components';
 
 import { getBoard } from '@/utils';
 import { QUERY_KEY } from '@/constants';
 
 import styles from './BoardListPage.module.css';
-import BoardPostList from './BoardPostList/BoardPostList.jsx';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();

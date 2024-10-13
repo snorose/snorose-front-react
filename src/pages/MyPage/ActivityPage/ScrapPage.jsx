@@ -8,7 +8,7 @@ import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
 import { getBoardTitleToTextId } from '@/utils';
 
-import { QUERY_KEY } from '@/constants';
+import { QUERY_KEY, STALE_TIME } from '@/constants';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './ActivityPage.module.css';
@@ -17,6 +17,7 @@ export default function ScrapPage() {
   const { data, ref, isLoading, isFetching, isError, error } = usePagination({
     queryKey: [QUERY_KEY.myScrappedPosts],
     queryFn: ({ pageParam }) => getMyScrapPostList({ page: pageParam }),
+    staleTime: STALE_TIME.mypageActivity,
   });
 
   const { scrollRef, saveScrollPosition } = useScrollRestoration();

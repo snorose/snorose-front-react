@@ -5,7 +5,7 @@ import { searchByBoard } from '@/apis';
 
 import { usePagination } from '@/hooks';
 
-import { BOARD_ID, QUERY_KEY } from '@/constants';
+import { BOARD_ID, QUERY_KEY, STALE_TIME } from '@/constants';
 
 export default function useSearch({ urlKeyword, filterOption }) {
   const { pathname } = useLocation();
@@ -60,6 +60,7 @@ export default function useSearch({ urlKeyword, filterOption }) {
           keyword,
           ...filterOption,
         }),
+      staleTime: STALE_TIME.examReview,
     });
 
   return {
