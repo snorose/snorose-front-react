@@ -26,25 +26,23 @@ export default function BoardListPage() {
   });
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={scrollRef}>
       <BackAppBar
         title={currentBoard.title}
         hasMenu
         hasSearch
         backNavTo={'/board'}
       />
-      <div className={styles.scrollContainer} ref={scrollRef}>
-        <div className={styles.top}>
-          <Link
-            className={styles.notification_bar}
-            to={`/board/${currentBoardTextId}/notice`}
-          >
-            <Icon id='notice-bell' width={11} height={13} />
-            <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
-          </Link>
-        </div>
-        <BoardPostList saveScrollPosition={saveScrollPosition} />
+      <div className={styles.top}>
+        <Link
+          className={styles.notification_bar}
+          to={`/board/${currentBoardTextId}/notice`}
+        >
+          <Icon id='notice-bell' width={11} height={13} />
+          <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
+        </Link>
       </div>
+      <BoardPostList saveScrollPosition={saveScrollPosition} />
       <WriteButton
         to={`/board/${currentBoardTextId}/post-write`}
         className={styles.writeButton}

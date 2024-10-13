@@ -40,4 +40,6 @@ export const STALE_TIME = Object.freeze({
   examReview: 1000 * 60 * 5,
   boardPostList: 1000 * 60 * 1,
   mypageActivity: 1000 * 60 * 5,
+  noticeList: 1000 * 60 * 10,
+  searchList: 1000 * 60 * 10,
 });

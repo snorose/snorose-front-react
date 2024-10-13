@@ -6,7 +6,7 @@ import { getNoticeList } from '@/apis/notice';
 
 import { BackAppBar, NoticeBar, FetchLoading, WriteButton } from '@/components';
 
-import { QUERY_KEY } from '@/constants';
+import { QUERY_KEY, STALE_TIME } from '@/constants';
 
 import { useAuth, useScrollRestoration } from '@/hooks';
 
@@ -24,6 +24,7 @@ export default function NoticeListPage() {
   const { data, isLoading, isError } = useQuery({
     queryKey: [QUERY_KEY.notices, currentBoard?.id],
     queryFn: () => getNoticeList(currentBoard?.id),
+    staleTime: STALE_TIME.noticeList,
     enabled: !!currentBoard?.id,
   });
 

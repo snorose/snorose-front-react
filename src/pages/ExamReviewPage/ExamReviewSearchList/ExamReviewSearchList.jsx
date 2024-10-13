@@ -4,9 +4,10 @@ import { FetchLoading } from '@/components/Loading';
 import { PostBar } from '@/components/PostBar';
 
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
+import { PTR } from '@/components/index.js';
 
 export default function ExamReviewSearchList({ result, saveScrollPosition }) {
-  const { data, ref, isLoading, isFetching, isError, error } = result || {};
+  const { data, ref, isLoading, isFetching, isError, error, refetch } = result;
 
   if (isLoading) {
     return <FetchLoading>검색 중</FetchLoading>;
@@ -30,19 +31,21 @@ export default function ExamReviewSearchList({ result, saveScrollPosition }) {
       : [];
 
   return (
-    <ul className={styles.list}>
-      {searchList.map((post, index) => (
-        <Link
-          className={styles.to}
-          ref={index === searchList.length - 1 ? ref : undefined}
-          key={post.postId}
-          to={`/board/exam-review/post/${post.postId}`}
-          onClick={saveScrollPosition}
-        >
-          <PostBar data={post} hasLike={false} />
-        </Link>
-      ))}
-      {isFetching && <FetchLoading />}
-    </ul>
+    <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
+      <ul className={styles.list}>
+        {searchList.map((post, index) => (
+          <Link
+            className={styles.to}
+            ref={index === searchList.length - 1 ? ref : undefined}
+            key={post.postId}
+            to={`/board/exam-review/post/${post.postId}`}
+            onClick={saveScrollPosition}
+          >
+            <PostBar data={post} hasLike={false} />
+          </Link>
+        ))}
+        {isFetching && <FetchLoading />}
+      </ul>
+    </PTR>
   );
 }
