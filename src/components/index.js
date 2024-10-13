@@ -1,10 +1,8 @@
 export * from './AppBar';
 export * from './BoardBar';
 export * from './BoardCard';
-// export * from './BoardHeader';
 export * from './Card';
 export * from './Carousel';
-// export * from './CategoryBoard';
 export * from './Comment';
 export * from './DropDownBlue';
 export * from './DropDownMenu';
@@ -22,7 +20,6 @@ export * from './MainPageListItem';
 export * from './Margin';
 export * from './MenuIcon';
 export * from './Modal';
-export * from './Navbar';
 export * from './Portal';
 export * from './NoticeBar';
 export * from './PostBar';
