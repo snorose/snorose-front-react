@@ -106,7 +106,7 @@ export function checkPW(pw) {
       isAlphabet = true;
     } else if (/^[0-9]+$/.test(char)) {
       isNumber = true;
-    } else if (/^[$&+,:;=?@#|'<>.^*()%!-]+$/.test(char)) {
+    } else if (/^[!@#%^&*]+$/.test(char)) {
       isSpecialChar = true;
     }
   });

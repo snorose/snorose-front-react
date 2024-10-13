@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { findPw } from '@/apis';
+import { useFindPw } from '@/apis';
 
 import { Icon } from '@/components/Icon';
 import { Input } from '@/components/Input';
@@ -18,6 +18,7 @@ import { FetchLoadingOverlay } from '@/components/Loading';
 import { LOADING_MESSAGE } from '@/constants';
 
 export default function FindPwPage() {
+  const findPw = useFindPw();
   const navigate = useNavigate();
   const [idStyle, setIdStyle] = useState('ready');
   const [emailStyle, setEmailStyle] = useState('ready');
