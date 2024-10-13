@@ -108,7 +108,7 @@ export default function useComment() {
 
       updateCommentCountCache({ type: COMMENT_ACTION_TYPE.delete });
       // !pointDifference; // pointDifference값 백엔 수정 되면 이 코드로 다시 변경
-      currentBoard.id === 23
+      currentBoard.id === 23 || currentBoard.id === 32
         ? toast(TOAST.COMMENT.deleteNoPoints)
         : toast(TOAST.COMMENT.delete);
     },
