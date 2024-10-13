@@ -45,8 +45,7 @@ export default function VerifyPage({ setStep }) {
 
       setStep('complete');
     } catch ({ response }) {
-      const { data } = response;
-      toast(Object.values(data)[0]);
+      toast(response.data.message);
     } finally {
       setLoading(false);
     }
