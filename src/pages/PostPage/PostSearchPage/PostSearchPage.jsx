@@ -26,7 +26,7 @@ export default function PostSearchPage() {
   const { handleChange, handleOnKeyDown, keyword } = searchResult;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={scrollRef}>
       <BackAppBar
         children={
           <Search
@@ -39,14 +39,7 @@ export default function PostSearchPage() {
         hasSearchInput={true}
         backNavTo={current !== 'all' ? `/board/${current}` : `/board`}
       />
-      <div className={styles.content} ref={scrollRef}>
-        <div className={styles.posts}>
-          <PostList
-            result={searchResult}
-            saveScrollPosition={saveScrollPosition}
-          />
-        </div>
-      </div>
+      <PostList result={searchResult} saveScrollPosition={saveScrollPosition} />
     </div>
   );
 }
