@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { useLocation } from 'react-router-dom';
 
 import {
   deleteComment as remove,
@@ -14,6 +15,7 @@ import {
   editIfTargetComment,
   flatPaginationCache,
   toPaginationCacheFormat,
+  getBoard,
 } from '@/utils';
 
 import {
@@ -26,8 +28,10 @@ import {
 export default function useComment() {
   const { postId } = useParams();
   const { toast } = useToast();
+  const { pathname } = useLocation();
   const queryClient = useQueryClient();
   const { invalidUserInfoQuery } = useAuth();
+  const currentBoard = getBoard(pathname.split('/')[2]);
 
   const updateCommentCache = (actionIfTargetComment) => {
     queryClient.setQueryData([QUERY_KEY.comments, postId], (prev) => {
@@ -91,7 +95,8 @@ export default function useComment() {
       return await remove({ postId, commentId });
     },
     onSuccess: (deletedComment) => {
-      const { id, pointDifference } = deletedComment;
+      // const { id, pointDifference } = deletedComment;
+      const { id } = deletedComment;
 
       invalidUserInfoQuery();
       updateCommentCache((comment) =>
@@ -102,7 +107,8 @@ export default function useComment() {
       );
 
       updateCommentCountCache({ type: COMMENT_ACTION_TYPE.delete });
-      !pointDifference
+      // !pointDifference; // pointDifference값 백엔 수정 되면 이 코드로 다시 변경
+      currentBoard.id === 23 || currentBoard.id === 32
         ? toast(TOAST.COMMENT.deleteNoPoints)
         : toast(TOAST.COMMENT.delete);
     },
