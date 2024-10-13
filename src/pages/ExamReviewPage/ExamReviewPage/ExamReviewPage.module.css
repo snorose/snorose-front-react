@@ -1,6 +1,8 @@
-.scrollContainer {
+.container {
   width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
 }
 
@@ -53,4 +55,8 @@
 
 .to {
   width: 100%;
+}
+
+.loading {
+  padding-bottom: 7rem;
 }
