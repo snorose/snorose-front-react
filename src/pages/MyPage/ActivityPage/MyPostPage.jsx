@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { getMyPostList } from '@/apis';
 
-import { usePagination } from '@/hooks';
+import { usePagination, useScrollRestoration } from '@/hooks';
 
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
@@ -18,6 +18,8 @@ export default function MyPostPage() {
     queryKey: [QUERY_KEY.myPosts],
     queryFn: ({ pageParam }) => getMyPostList({ page: pageParam }),
   });
+
+  const { scrollRef, saveScrollPosition } = useScrollRestoration();
 
   if (isLoading) {
     return <FetchLoading>불러오는 중</FetchLoading>;
@@ -35,7 +37,7 @@ export default function MyPostPage() {
       : [];
 
   return (
-    <main className={styles.activityPage}>
+    <main className={styles.activityPage} ref={scrollRef}>
       <header>
         <BackAppBar stroke='#000' backNavTo={'/my-page?tab=activity'} />
       </header>
@@ -53,6 +55,7 @@ export default function MyPostPage() {
                 key={post.postId}
                 to={`/board/${getBoardTextId(post.boardId)}/post/${post.postId}`}
                 state={{ from: '/my-page/my-post' }}
+                onClick={saveScrollPosition}
               >
                 <PostBar data={post} />
               </Link>

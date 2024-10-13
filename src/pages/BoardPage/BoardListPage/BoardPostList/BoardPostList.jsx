@@ -1,21 +1,21 @@
 import { Link, useLocation } from 'react-router-dom';
-
 import { getPostList } from '@/apis';
+import { usePagination, useScrollRestoration } from '@/hooks';
 
-import { usePagination } from '@/hooks';
-
-import { BackAppBar, PostBar, PTR, FetchLoading } from '@/components';
+import React from 'react';
+import { PostBar, PTR, FetchLoading } from '@/components';
 
 import { getBoard, timeAgo } from '@/utils';
 import { QUERY_KEY } from '@/constants';
 
 import styles from './BoardPostList.module.css';
 
-export default function BoardPostList() {
+export default function BoardPostList({ saveScrollPosition }) {
   const { pathname } = useLocation();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
 
+  // 페이지네이션 관련 hook
   const { data, ref, isLoading, isFetching, status, isError, refetch } =
     usePagination({
       queryKey: [QUERY_KEY.posts, currentBoard.id],
@@ -45,9 +45,10 @@ export default function BoardPostList() {
         {status !== 'error' &&
           postList.map((post, index) => (
             <Link
-              ref={index === postList.length - 1 ? ref : undefined}
               key={post.postId}
               to={`/board/${currentBoardTextId}/post/${post.postId}`}
+              ref={index === postList.length - 1 ? ref : undefined}
+              onClick={saveScrollPosition}
             >
               <PostBar data={{ ...post, timeAgo: timeAgo(post.date) }} />
             </Link>
