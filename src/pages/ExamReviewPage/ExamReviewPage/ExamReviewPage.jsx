@@ -97,67 +97,65 @@ export default function ExamReviewPage() {
   }, [lectureYear, semester, examType]);
 
   return (
-    <main>
-      <div className={styles.scrollContainer} ref={scrollRef}>
-        <AppBar title='시험후기' />
-        <div className={styles.notification}>
-          <Link
-            className={styles.notification_bar}
-            to={`/board/exam-review/notice`}
-          >
-            <Icon id='notice-bell' width={11} height={13} />
-            <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
-          </Link>
-        </div>
-
-        <Search
-          className={styles.search}
-          placeholder='시험후기 검색'
-          keyword={keyword}
-          handleKeyDown={handleOnKeyDown}
-          onChange={handleChange}
-        />
-        <div className={styles.filters}>
-          <DropDownBlue
-            options={YEARS}
-            placeholder='연도'
-            name='year'
-            select={lectureYear}
-            setFn={setLectureYear}
-            isOpen={isOpen['year']}
-            setIsOpen={setIsOpen}
-          />
-          <DropDownBlue
-            options={SEMESTERS}
-            placeholder='학기'
-            name='semester'
-            select={semester}
-            setFn={setSemester}
-            isOpen={isOpen['semester']}
-            setIsOpen={setIsOpen}
-          />
-          <DropDownBlue
-            options={EXAM_TYPES}
-            placeholder='시험 종류'
-            name='examType'
-            select={examType}
-            setFn={setExamType}
-            isOpen={isOpen['examType']}
-            setIsOpen={setIsOpen}
-          />
-        </div>
-        {urlKeyword === null ? (
-          <ExamReviewList
-            result={reviewResult}
-            saveScrollPosition={saveScrollPosition}
-          />
-        ) : (
-          <ExamReviewSearchList
-            result={searchResult}
-            saveScrollPosition={saveScrollPosition}
-          />
-        )}
+    <main className={styles.container} ref={scrollRef}>
+      <AppBar title='시험후기' />
+      <div className={styles.notification}>
+        <Link
+          className={styles.notification_bar}
+          to={`/board/exam-review/notice`}
+        >
+          <Icon id='notice-bell' width={11} height={13} />
+          <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
+        </Link>
       </div>
+
+      <Search
+        className={styles.search}
+        placeholder='시험후기 검색'
+        keyword={keyword}
+        handleKeyDown={handleOnKeyDown}
+        onChange={handleChange}
+      />
+      <div className={styles.filters}>
+        <DropDownBlue
+          options={YEARS}
+          placeholder='연도'
+          name='year'
+          select={lectureYear}
+          setFn={setLectureYear}
+          isOpen={isOpen['year']}
+          setIsOpen={setIsOpen}
+        />
+        <DropDownBlue
+          options={SEMESTERS}
+          placeholder='학기'
+          name='semester'
+          select={semester}
+          setFn={setSemester}
+          isOpen={isOpen['semester']}
+          setIsOpen={setIsOpen}
+        />
+        <DropDownBlue
+          options={EXAM_TYPES}
+          placeholder='시험 종류'
+          name='examType'
+          select={examType}
+          setFn={setExamType}
+          isOpen={isOpen['examType']}
+          setIsOpen={setIsOpen}
+        />
+      </div>
+      {urlKeyword === null ? (
+        <ExamReviewList
+          result={reviewResult}
+          saveScrollPosition={saveScrollPosition}
+        />
+      ) : (
+        <ExamReviewSearchList
+          result={searchResult}
+          saveScrollPosition={saveScrollPosition}
+        />
+      )}
 
       <WriteButton to='/board/exam-review-write' />
     </main>
