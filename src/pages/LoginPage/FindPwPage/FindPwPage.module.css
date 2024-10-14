@@ -4,12 +4,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  padding: 0 1.25rem;
 }
 
 .pageFrame form {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .findIdFrame {
@@ -20,30 +24,32 @@
   justify-content: space-between;
 }
 
-.arrowLeft {
+.back {
   margin-top: 0.875rem;
-  margin-bottom: 1.703rem;
+  margin-bottom: 0.875rem;
+}
+.back:hover {
+  cursor: pointer;
 }
 
 .pageTitle {
   font-size: 1.25rem;
   font-weight: 700;
+  margin-top: 0.875rem;
   margin-bottom: 3.5rem;
 }
 
 .inputFrame {
   margin-bottom: 1.5rem;
-  padding: 0 1.25rem;
 }
 
 .buttonFrame {
-  padding: 0 1.25rem;
 }
 
 .alert {
   font-size: 12px;
   color: grey;
-  padding: 0 3rem;
+  padding: 0 2rem;
   margin-top: 3rem;
   line-height: 1.7;
   word-break: keep-all;
