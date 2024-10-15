@@ -54,11 +54,6 @@
   font-size: 1rem;
 }
 
-.image {
-  width: 100%;
-  border-radius: 5px 5px 0 0;
-}
-
 /* bottom */
 .bottom {
   padding: 0.5rem 0.8rem;
@@ -84,4 +79,21 @@
 .bottom button:hover {
   border-radius: 5px;
   background-color: var(--gray-3-1);
+}
+
+.hello {
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.title {
+  font-size: 1.1rem;
+}
+
+.content {
+  margin: 1rem 0;
+}
+
+.link {
+  color: var(--blue-3);
 }
