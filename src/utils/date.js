@@ -16,3 +16,13 @@ export const isToday = (date) => {
     target.getDate() === today.getDate()
   );
 };
+
+export const isDayOver = (date) => {
+  const target = new Date(date);
+  const today = new Date();
+
+  target.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  return target < today;
+};

@@ -6,3 +6,4 @@ export { default as usePagination } from './usePagination';
 export { default as useScrap } from './useScrap';
 export { default as useSearch } from './useSearch';
 export { default as useToast } from './useToast';
+export { default as useScrollRestoration } from './useScrollRestoration';

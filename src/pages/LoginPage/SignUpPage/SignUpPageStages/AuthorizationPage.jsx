@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { sendUser, certifyUser } from '@/apis';
+import { useSendUser, useCertifyUser } from '@/apis';
 
 import { Input } from '@/components/Input';
 import { Submit } from '@/components/Submit';
@@ -8,6 +8,8 @@ import { Submit } from '@/components/Submit';
 import styles from './AuthorizationPage.module.css';
 
 export default function AuthorizationPage({ email, setStage }) {
+  const sendUser = useSendUser();
+  const certifyUser = useCertifyUser();
   const [authNum, setAuthNum] = useState('');
   const [codeStyle, setCodeStyle] = useState('ready');
 

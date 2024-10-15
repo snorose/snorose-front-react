@@ -4,14 +4,20 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getReviewList, getNoticeLine } from '@/apis';
 
-import { usePagination, useSearch } from '@/hooks';
+import { usePagination, useSearch, useScrollRestoration } from '@/hooks';
 
 import { ExamReviewList, ExamReviewSearchList } from '@/pages/ExamReviewPage';
 
 import { AppBar, DropDownBlue, Search, WriteButton, Icon } from '@/components';
 
 import { convertToObject } from '@/utils';
-import { YEARS, SEMESTERS, EXAM_TYPES, QUERY_KEY } from '@/constants';
+import {
+  YEARS,
+  SEMESTERS,
+  EXAM_TYPES,
+  QUERY_KEY,
+  STALE_TIME,
+} from '@/constants';
 
 import styles from './ExamReviewPage.module.css';
 
@@ -20,6 +26,7 @@ const SEMESTER_LEBEL = convertToObject(SEMESTERS);
 const EXAM_TYPE_LEBEL = convertToObject(EXAM_TYPES);
 
 export default function ExamReviewPage() {
+  const { scrollRef, saveScrollPosition } = useScrollRestoration();
   const navigate = useNavigate();
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
@@ -44,10 +51,23 @@ export default function ExamReviewPage() {
     name: EXAM_TYPE_LEBEL[queryParams.get('examType')],
   });
 
+  const { data: noticeLineData } = useQuery({
+    queryKey: [QUERY_KEY.noticeLine, 32],
+    queryFn: () => getNoticeLine(32),
+  });
+
+  const isSearchCondition = !!(
+    urlKeyword ||
+    lectureYear?.id ||
+    semester?.id ||
+    examType?.id
+  );
+
   const reviewResult = usePagination({
     queryKey: [QUERY_KEY.posts, 32],
     queryFn: ({ pageParam }) => getReviewList(pageParam),
-    enabled: urlKeyword === null,
+    staleTime: STALE_TIME.examReview,
+    enabled: !isSearchCondition,
   });
 
   const searchResult = useSearch({
@@ -57,14 +77,10 @@ export default function ExamReviewPage() {
       semester: semester?.id,
       examType: examType?.id,
     },
+    enabled: isSearchCondition,
   });
 
   const { handleChange, handleOnKeyDown, keyword } = searchResult;
-
-  const { data: noticeLineData } = useQuery({
-    queryKey: [QUERY_KEY.noticeLine, 32],
-    queryFn: () => getNoticeLine(32),
-  });
 
   useEffect(() => {
     const filterOption = {
@@ -77,7 +93,7 @@ export default function ExamReviewPage() {
       ''
     );
 
-    if (keyword === '') {
+    if (!isSearchCondition) {
       navigate(`/board/exam-review`, { replace: true });
       return;
     }
@@ -89,7 +105,7 @@ export default function ExamReviewPage() {
   }, [lectureYear, semester, examType]);
 
   return (
-    <main>
+    <main className={styles.container} ref={scrollRef}>
       <AppBar title='시험후기' />
       <div className={styles.notification}>
         <Link
@@ -137,11 +153,16 @@ export default function ExamReviewPage() {
           setIsOpen={setIsOpen}
         />
       </div>
-
-      {urlKeyword === null ? (
-        <ExamReviewList result={reviewResult} />
+      {isSearchCondition ? (
+        <ExamReviewSearchList
+          result={searchResult}
+          saveScrollPosition={saveScrollPosition}
+        />
       ) : (
-        <ExamReviewSearchList result={searchResult} />
+        <ExamReviewList
+          result={reviewResult}
+          saveScrollPosition={saveScrollPosition}
+        />
       )}
 
       <WriteButton to='/board/exam-review-write' />

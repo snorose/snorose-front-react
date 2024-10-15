@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import { useSearch } from '@/hooks';
+import { useSearch, useScrollRestoration } from '@/hooks';
 
 import { BackAppBar } from '@/components/AppBar';
 import { PostList } from '@/components/PostList';
@@ -14,6 +14,8 @@ export default function PostSearchPage() {
   const { pathname, search } = useLocation();
   const current = pathname.split('/')[2];
 
+  const { scrollRef, saveScrollPosition } = useScrollRestoration();
+
   const queryParams = new URLSearchParams(search);
   const urlKeyword = queryParams.get('query');
 
@@ -24,7 +26,7 @@ export default function PostSearchPage() {
   const { handleChange, handleOnKeyDown, keyword } = searchResult;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={scrollRef}>
       <BackAppBar
         children={
           <Search
@@ -37,11 +39,7 @@ export default function PostSearchPage() {
         hasSearchInput={true}
         backNavTo={current !== 'all' ? `/board/${current}` : `/board`}
       />
-      <div className={styles.content}>
-        <div className={styles.posts}>
-          <PostList result={searchResult} />
-        </div>
-      </div>
+      <PostList result={searchResult} saveScrollPosition={saveScrollPosition} />
     </div>
   );
 }

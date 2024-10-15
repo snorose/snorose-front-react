@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { register } from '@/apis';
+import { useRegister } from '@/apis';
 
 import { Dropdown } from '@/components/Fieldset';
 import { Input } from '@/components/Input';
@@ -18,6 +18,7 @@ import { MAJORS } from '@/constants';
 import styles from './UserInfoPage.module.css';
 
 export default function UserInfoPage({ setFormData, formData }) {
+  const register = useRegister();
   const [nicknameStyle, setNicknameStyle] = useState('ready');
   const [stuNumStyle, setStuNumStyle] = useState('ready');
   const [birthdayStyle, setBirthdayStyle] = useState('ready');

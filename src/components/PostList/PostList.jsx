@@ -7,8 +7,8 @@ import { getBoardTitleToTextId } from '@/utils';
 
 import styles from './PostList.module.css';
 
-export default function PostList({ result }) {
-  const { data, ref, isLoading, isError, error } = result;
+export default function PostList({ result, saveScrollPosition }) {
+  const { data, ref, isLoading, isFetching, isError, error } = result;
 
   if (isLoading) {
     return <FetchLoading>검색 중</FetchLoading>;
@@ -32,17 +32,19 @@ export default function PostList({ result }) {
       : [];
 
   return (
-    <>
+    <div className={styles.posts}>
       {postList.map((post, index) => (
         <Link
           className={styles.to}
           ref={index === postList.length - 1 ? ref : undefined}
           key={post.postId}
           to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
+          onClick={saveScrollPosition}
         >
           <PostBar data={post} hasComment={false} />
         </Link>
       ))}
-    </>
+      {isFetching && <FetchLoading />}
+    </div>
   );
 }

@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 
 import { getMyReviewFileList } from '@/apis';
 
-import { usePagination } from '@/hooks';
+import { usePagination, useScrollRestoration } from '@/hooks';
 
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
-import { QUERY_KEY } from '@/constants';
+import { QUERY_KEY, STALE_TIME } from '@/constants';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './ActivityPage.module.css';
@@ -15,7 +15,10 @@ export default function DownloadExamReviewPage() {
   const { data, ref, isLoading, isFetching, isError, error } = usePagination({
     queryKey: [QUERY_KEY.myDownloadedExamReviews],
     queryFn: ({ pageParam }) => getMyReviewFileList({ page: pageParam }),
+    staleTime: STALE_TIME.mypageActivity,
   });
+
+  const { scrollRef, saveScrollPosition } = useScrollRestoration();
 
   if (isLoading) {
     return <FetchLoading>불러오는 중</FetchLoading>;
@@ -33,7 +36,7 @@ export default function DownloadExamReviewPage() {
       : [];
 
   return (
-    <main className={styles.activityPage}>
+    <main className={styles.activityPage} ref={scrollRef}>
       <header>
         <BackAppBar stroke='#000' backNavTo={'/my-page?tab=activity'} />
       </header>
@@ -50,6 +53,7 @@ export default function DownloadExamReviewPage() {
                 key={post.postId}
                 ref={index === myReviewFileList.length - 1 ? ref : undefined}
                 to={`/board/exam-review/post/${post.postId}`}
+                onClick={saveScrollPosition}
               >
                 <PostBar data={post} hasLike={false} />
               </Link>

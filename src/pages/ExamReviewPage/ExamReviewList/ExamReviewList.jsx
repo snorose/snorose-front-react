@@ -4,11 +4,11 @@ import { FetchLoading, PostBar, PTR } from '@/components';
 
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
 
-export default function ExamReviewList({ result }) {
+export default function ExamReviewList({ result, saveScrollPosition }) {
   const { data, ref, isLoading, isFetching, isError, refetch } = result;
 
   if (isLoading) {
-    return <FetchLoading>불러오는 중</FetchLoading>;
+    return <FetchLoading className={styles.loading}>불러오는 중</FetchLoading>;
   }
 
   if (isError) {
@@ -33,6 +33,7 @@ export default function ExamReviewList({ result }) {
             ref={index === reviewList.length - 1 ? ref : undefined}
             key={post.postId}
             to={`/board/exam-review/post/${post.postId}`}
+            onClick={saveScrollPosition}
           >
             <PostBar data={post} hasLike={false} />
           </Link>

@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 
 import { getMyCommentList } from '@/apis';
 
-import { usePagination } from '@/hooks';
+import { usePagination, useScrollRestoration } from '@/hooks';
 
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
 import { getBoardTextId } from '@/utils';
-import { QUERY_KEY } from '@/constants';
+import { QUERY_KEY, STALE_TIME } from '@/constants';
 
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
@@ -17,7 +17,10 @@ export default function CommentPage() {
   const { data, ref, isLoading, isFetching, isError, error } = usePagination({
     queryKey: [QUERY_KEY.myCommentedPosts],
     queryFn: ({ pageParam }) => getMyCommentList({ page: pageParam }),
+    staleTime: STALE_TIME.mypageActivity,
   });
+
+  const { scrollRef, saveScrollPosition } = useScrollRestoration();
 
   if (isLoading) {
     return <FetchLoading>불러오는 중</FetchLoading>;
@@ -35,7 +38,7 @@ export default function CommentPage() {
       : [];
 
   return (
-    <main className={styles.activityPage}>
+    <main className={styles.activityPage} ref={scrollRef}>
       <header>
         <BackAppBar stroke='#000' backNavTo={'/my-page?tab=activity'} />
       </header>
@@ -53,6 +56,7 @@ export default function CommentPage() {
                 key={post.postId}
                 to={`/board/${getBoardTextId(post.boardId)}/post/${post.postId}`}
                 state={{ from: '/my-page/comment' }}
+                onClick={saveScrollPosition}
               >
                 <PostBar data={post} />
               </Link>

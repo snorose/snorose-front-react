@@ -3,18 +3,21 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getNoticeLine } from '@/apis';
 
+import { useScrollRestoration } from '@/hooks';
+
+import { BoardPostList } from '@/pages/BoardPage';
 import { BackAppBar, Icon, WriteButton } from '@/components';
 
 import { getBoard } from '@/utils';
 import { QUERY_KEY } from '@/constants';
 
 import styles from './BoardListPage.module.css';
-import BoardPostList from './BoardPostList/BoardPostList.jsx';
 
 export default function BoardListPage() {
   const { pathname } = useLocation();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
+  const { scrollRef, saveScrollPosition } = useScrollRestoration();
 
   const { data: noticeLineData } = useQuery({
     queryKey: [QUERY_KEY.noticeLine, currentBoard.id],
@@ -23,7 +26,7 @@ export default function BoardListPage() {
   });
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={scrollRef}>
       <BackAppBar
         title={currentBoard.title}
         hasMenu
@@ -39,7 +42,7 @@ export default function BoardListPage() {
           <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
         </Link>
       </div>
-      <BoardPostList />
+      <BoardPostList saveScrollPosition={saveScrollPosition} />
       <WriteButton
         to={`/board/${currentBoardTextId}/post-write`}
         className={styles.writeButton}
