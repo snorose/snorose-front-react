@@ -2,26 +2,25 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getHomeNotice } from '@/apis';
 
-import { useAuth } from '@/hooks';
+import { useAuth, usePopUp } from '@/hooks';
 
 import {
   BoardCard,
   Card,
   Carousel,
+  Flex,
   Footer,
   Header,
   ListHeader,
   MainPageListItem,
   Margin,
-  Flex,
+  PopUp,
 } from '@/components';
 
 import { BOARD_MENUS, QUERY_KEY, ROLE } from '@/constants';
 import { BESOOKTS } from '@/dummy/data';
 
 import styles from './MainPage.module.css';
-import usePopUp from '@/hooks/usePopUp.jsx';
-import PopUp from '@/components/PopUp/PopUp.jsx';
 
 const BOARDS = BOARD_MENUS.filter((board) => [21, 22, 23].includes(board.id));
 
