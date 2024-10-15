@@ -20,11 +20,14 @@ import { BOARD_MENUS, QUERY_KEY, ROLE } from '@/constants';
 import { BESOOKTS } from '@/dummy/data';
 
 import styles from './MainPage.module.css';
+import usePopUp from '@/hooks/usePopUp.jsx';
+import PopUp from '@/components/PopUp/PopUp.jsx';
 
 const BOARDS = BOARD_MENUS.filter((board) => [21, 22, 23].includes(board.id));
 
 export default function MainPage() {
   const { status } = useAuth();
+  const { isPopUpOpend, closePopUp } = usePopUp();
   const isLogin = status === 'authenticated';
 
   const { data, isError } = useQuery({
@@ -84,35 +87,36 @@ export default function MainPage() {
       </Margin>
       {/* {BESOOKTS.length > 0 && (
         <Margin className={styles.besookt}>
-          <ListHeader to='/board/besookt' title='베숙트' />
-          <Flex direction='column' gap='0.375rem'>
-            {BESOOKTS.map(
-              ({
-                postId,
-                nickname,
-                title,
-                overview,
-                boardName,
-                timeAgo,
-                image,
-              }) => (
-                <MainPageListItem
-                  key={postId}
-                  postId={postId}
-                  displayName={nickname}
-                  title={title}
-                  overview={overview}
-                  boardName={boardName}
-                  createdAt={timeAgo}
-                  image={image}
-                  roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
-                />
+        <ListHeader to='/board/besookt' title='베숙트' />
+        <Flex direction='column' gap='0.375rem'>
+        {BESOOKTS.map(
+          ({
+            postId,
+            nickname,
+            title,
+            overview,
+            boardName,
+            timeAgo,
+            image,
+            }) => (
+              <MainPageListItem
+              key={postId}
+              postId={postId}
+              displayName={nickname}
+              title={title}
+              overview={overview}
+              boardName={boardName}
+              createdAt={timeAgo}
+              image={image}
+              roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
+              />
               )
-            )}
-          </Flex>
-        </Margin>
-      )} */}
+              )}
+              </Flex>
+              </Margin>
+              )} */}
       <Footer />
+      {isPopUpOpend && <PopUp close={closePopUp} />}
     </main>
   );
 }
