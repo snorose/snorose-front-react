@@ -23,14 +23,17 @@
 /* top */
 .top {
   flex: 1;
+  padding: 1rem;
   width: 100%;
   height: 100%;
-  background-color: pink;
+  background-color: var(--blue-1);
   border-radius: 5px 5px 0 0;
 }
 
-.top p {
-  width: 100%;
+.top pre {
+  text-wrap: wrap;
+  word-break: keep-all;
+  font-size: 1rem;
 }
 
 .image {

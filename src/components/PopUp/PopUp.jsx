@@ -1,8 +1,17 @@
 import { useState } from 'react';
 
-import TEST from '@/assets/images/bannerError.svg';
-
 import styles from './PopUp.module.css';
+
+const CONTENT = `공지 내용입니다.
+공지 내용입니다.
+공지 내용입니다.
+공지 내용입니다.
+공지 내용입니다.
+공지 내용입니다.
+공지 내용입니다.
+공지 내용입니다.
+공지 내용입니다.
+`;
 
 export default function PopUp({ close }) {
   const [closeForToday, setCloseForToday] = useState(false);
@@ -13,7 +22,7 @@ export default function PopUp({ close }) {
     <section className={styles.container}>
       <div className={styles.popUp}>
         <div className={styles.top}>
-          {/* <img className={styles.image} src={TEST} alt='popup' /> */}
+          <pre>{CONTENT}</pre>
         </div>
         <div className={styles.bottom}>
           <label className={styles.checkBox}>
