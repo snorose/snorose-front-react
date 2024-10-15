@@ -23,6 +23,7 @@ export * from './Modal';
 export * from './Portal';
 export * from './NoticeBar';
 export * from './PostBar';
+export * from './PopUp';
 export * from './PTR';
 export * from './ReviewContentItem';
 export * from './ReviewDownload';
