@@ -6,7 +6,7 @@ import { usePagination } from '@/hooks';
 
 import { PostBar, PTR, FetchLoading } from '@/components';
 
-import { getBoard, timeAgo } from '@/utils';
+import { deduplicatePaginatedData, getBoard, timeAgo } from '@/utils';
 import { QUERY_KEY, STALE_TIME } from '@/constants';
 
 import styles from './BoardPostList.module.css';
@@ -38,7 +38,7 @@ export default function BoardPostList({ saveScrollPosition }) {
 
   const postList =
     data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page.data)
+      ? deduplicatePaginatedData(data.pages.flatMap((page) => page.data))
       : [];
 
   return (
