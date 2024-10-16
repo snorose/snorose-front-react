@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 
 import { FetchLoading, PostBar, PTR } from '@/components';
 
+import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
+
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
 
 export default function ExamReviewList({ result, saveScrollPosition }) {
@@ -19,10 +21,7 @@ export default function ExamReviewList({ result, saveScrollPosition }) {
     );
   }
 
-  const reviewList =
-    data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page.data)
-      : [];
+  const reviewList = deduplicatePaginatedData(flatPaginationCache(data));
 
   return (
     <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>

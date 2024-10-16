@@ -6,9 +6,12 @@ import { usePagination, useScrollRestoration } from '@/hooks';
 
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
-import { getBoardTextId } from '@/utils';
+import {
+  deduplicatePaginatedData,
+  flatPaginationCache,
+  getBoardTextId,
+} from '@/utils';
 import { QUERY_KEY, STALE_TIME } from '@/constants';
-
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './ActivityPage.module.css';
@@ -32,10 +35,7 @@ export default function CommentPage() {
     return <FetchLoading animation={false}>{message}</FetchLoading>;
   }
 
-  const myCommentList =
-    data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page.data)
-      : [];
+  const myCommentList = deduplicatePaginatedData(flatPaginationCache(data));
 
   return (
     <main className={styles.activityPage} ref={scrollRef}>
