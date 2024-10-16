@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
@@ -26,10 +27,11 @@ import {
 } from '@/constants';
 
 export default function useComment() {
+  const [loading, setLoading] = useState();
   const { postId } = useParams();
-  const { toast } = useToast();
   const { pathname } = useLocation();
   const queryClient = useQueryClient();
+  const { toast } = useToast();
   const { invalidUserInfoQuery } = useAuth();
   const currentBoard = getBoard(pathname.split('/')[2]);
 
@@ -53,6 +55,10 @@ export default function useComment() {
 
   const onError = ({ response }) => {
     toast(response.data.message);
+  };
+
+  const onSettled = () => {
+    setLoading(false);
   };
 
   const createComment = useMutation({
@@ -87,6 +93,7 @@ export default function useComment() {
         : toast(TOAST.COMMENT.create);
     },
     onError,
+    onSettled,
   });
 
   const deleteComment = useMutation({
@@ -113,6 +120,7 @@ export default function useComment() {
         : toast(TOAST.COMMENT.delete);
     },
     onError,
+    onSettled,
   });
 
   const editComment = useMutation({
@@ -134,11 +142,14 @@ export default function useComment() {
       toast(TOAST.COMMENT.edit);
     },
     onError,
+    onSettled,
   });
 
   return {
     createComment,
     deleteComment,
     editComment,
+    loading,
+    setLoading,
   };
 }

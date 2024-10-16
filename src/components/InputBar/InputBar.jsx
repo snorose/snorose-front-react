@@ -5,7 +5,7 @@ import { Icon } from '@/components/Icon';
 import styles from './InputBar.module.css';
 
 const InputBar = () => {
-  const { editComment, createComment } = useComment();
+  const { editComment, createComment, loading, setLoading } = useComment();
   const { toast } = useToast();
 
   const {
@@ -21,6 +21,10 @@ const InputBar = () => {
 
   // 댓글 등록 or 수정
   const submitComment = () => {
+    if (loading) {
+      return;
+    }
+
     if (!content.trim()) {
       toast('댓글 내용을 입력하세요.');
       return;
@@ -33,6 +37,7 @@ const InputBar = () => {
 
     const mutation = isEdit ? editComment : createComment;
 
+    setLoading(true);
     mutation.mutate(
       {
         ...(isEdit ? { commentId } : { parentId: commentId }),
