@@ -14,6 +14,10 @@ import { LOADING_MESSAGE, QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './ReviewDownload.module.css';
 
+const appendTimestampToFileName = (fileName) => {
+  return fileName.replace('.pdf', `_${Date.now()}.pdf`);
+};
+
 export default function ReviewDownload({
   className,
   fileName,
@@ -34,10 +38,9 @@ export default function ReviewDownload({
       type: 'application/pdf',
     });
     const fileUrl = window.URL.createObjectURL(blob);
-    const downloadedFileName = `${fileName.split('.')[0]}_${Date.now()}.pdf`;
     const link = document.createElement('a');
     link.setAttribute('href', fileUrl);
-    link.setAttribute('download', downloadedFileName);
+    link.setAttribute('download', appendTimestampToFileName(fileName));
     link.click();
     window.URL.revokeObjectURL(fileUrl);
   };
