@@ -48,10 +48,10 @@ export default function usePagination({
   });
 
   useEffect(() => {
-    if (inView && hasNextPage && !isFetching) {
+    if (inView) {
       fetchNextPage();
     }
-  }, [inView, hasNextPage, isFetching, fetchNextPage]);
+  }, [inView, fetchNextPage]);
 
   return {
     data,
