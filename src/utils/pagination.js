@@ -1,5 +1,15 @@
 const PAGE_SIZE = 10;
 
+export const deduplicatePaginatedData = (array) => {
+  const seen = new Set();
+  const uniquePages = array.filter(({ postId }) => {
+    const duplicate = seen.has(postId);
+    seen.add(postId);
+    return !duplicate;
+  });
+  return uniquePages;
+};
+
 export const flatPaginationCache = (data) => {
   return data && !data.pages.includes(undefined)
     ? data.pages.flatMap((page) => page.data)

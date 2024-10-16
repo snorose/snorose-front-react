@@ -6,7 +6,7 @@ import { usePagination, useScrollRestoration } from '@/hooks';
 
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
-import { getBoardTitleToTextId } from '@/utils';
+import { deduplicatePaginatedData, getBoardTitleToTextId } from '@/utils';
 
 import { QUERY_KEY, STALE_TIME } from '@/constants';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
@@ -34,7 +34,7 @@ export default function ScrapPage() {
 
   const myScrapPostList =
     data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page.data)
+      ? deduplicatePaginatedData(data.pages.flatMap((page) => page.data))
       : [];
 
   return (

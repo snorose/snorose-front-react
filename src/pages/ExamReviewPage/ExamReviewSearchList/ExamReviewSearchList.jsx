@@ -5,6 +5,7 @@ import { PostBar } from '@/components/PostBar';
 
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
 import { PTR } from '@/components/index.js';
+import { deduplicatePaginatedData } from '@/utils/pagination.js';
 
 export default function ExamReviewSearchList({ result, saveScrollPosition }) {
   const { data, ref, isLoading, isFetching, isError, error, refetch } = result;
@@ -27,7 +28,7 @@ export default function ExamReviewSearchList({ result, saveScrollPosition }) {
 
   const searchList =
     data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page.data)
+      ? deduplicatePaginatedData(data.pages.flatMap((page) => page.data))
       : [];
 
   return (
