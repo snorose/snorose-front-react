@@ -5,19 +5,8 @@ import styled from 'styled-components';
 import 'react-calendar/dist/Calendar.css';
 
 export const StyledCalendar = styled(Calendar)`
-  // calendar
-  .react-calendar {
-    margin: 0 1.25rem;
-    background-color: rgba(95, 133, 191, 0.4);
-    border-radius: 0.3125rem;
-    border: none;
-  }
-
-  // navigation
   .react-calendar__navigation {
-    margin: 0; // 배경색 해결되면 삭제
-    /* background-color: rgba(95, 133, 191, 0.4); */
-    background-color: #2556a2;
+    margin: 0;
     border-radius: 0.3125rem 0.3125rem 0 0;
   }
 
@@ -52,9 +41,7 @@ export const StyledCalendar = styled(Calendar)`
   }
 
   .react-calendar__viewContainer {
-    padding-top: 1rem; // 배경색 해결되면 삭제
-    /* background-color: rgba(95, 133, 191, 0.4); */
-    background-color: #2556a2;
+    padding-top: 1rem;
     border-radius: 0 0 0.3125rem 0.3125rem;
   }
 
