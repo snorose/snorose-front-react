@@ -5,7 +5,6 @@ import { FetchLoading, PostBar, PTR } from '@/components';
 import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
 
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
-import { deduplicatePaginatedData } from '@/utils/pagination.js';
 
 export default function ExamReviewList({ result, saveScrollPosition }) {
   const { data, ref, isLoading, isFetching, isError, refetch } = result;
