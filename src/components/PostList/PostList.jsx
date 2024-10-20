@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FetchLoading } from '@/components/Loading';
 import { PostBar } from '@/components/PostBar';
 
-import { getBoardTitleToTextId } from '@/utils';
+import { deduplicatePaginatedData, getBoardTitleToTextId } from '@/utils';
 
 import styles from './PostList.module.css';
 
@@ -28,7 +28,7 @@ export default function PostList({ result, saveScrollPosition }) {
 
   const postList =
     data && !data.pages.includes(undefined)
-      ? data.pages.flatMap((page) => page.data)
+      ? deduplicatePaginatedData(data.pages.flatMap((page) => page.data))
       : [];
 
   return (
