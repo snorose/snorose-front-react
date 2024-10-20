@@ -12,6 +12,7 @@ import {
   getBoard,
   timeAgo,
 } from '@/utils';
+
 import { QUERY_KEY, STALE_TIME } from '@/constants';
 
 import styles from './BoardPostList.module.css';

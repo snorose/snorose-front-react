@@ -11,6 +11,7 @@ import { QUERY_KEY, STALE_TIME } from '@/constants';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './ActivityPage.module.css';
+import { deduplicatePaginatedData } from '@/utils/pagination.js';
 
 export default function DownloadExamReviewPage() {
   const { data, ref, isLoading, isFetching, isError, error } = usePagination({
