@@ -6,8 +6,11 @@ import { usePagination, useScrollRestoration } from '@/hooks';
 
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
-import { deduplicatePaginatedData, getBoardTextId } from '@/utils';
-
+import {
+  deduplicatePaginatedData,
+  flatPaginationCache,
+  getBoardTextId,
+} from '@/utils';
 import { QUERY_KEY, STALE_TIME } from '@/constants';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
@@ -32,10 +35,7 @@ export default function MyPostPage() {
     return <FetchLoading animation={false}>{message}</FetchLoading>;
   }
 
-  const myPostList =
-    data && !data.pages.includes(undefined)
-      ? deduplicatePaginatedData(data.pages.flatMap((page) => page.data))
-      : [];
+  const myPostList = deduplicatePaginatedData(flatPaginationCache(data));
 
   return (
     <main className={styles.activityPage} ref={scrollRef}>

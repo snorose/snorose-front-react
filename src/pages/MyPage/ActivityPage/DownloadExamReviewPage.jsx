@@ -6,6 +6,7 @@ import { usePagination, useScrollRestoration } from '@/hooks';
 
 import { BackAppBar, FetchLoading, PostBar } from '@/components';
 
+import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
 import { QUERY_KEY, STALE_TIME } from '@/constants';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
@@ -31,10 +32,7 @@ export default function DownloadExamReviewPage() {
     return <FetchLoading animation={false}>{message}</FetchLoading>;
   }
 
-  const myReviewFileList =
-    data && !data.pages.includes(undefined)
-      ? deduplicatePaginatedData(data.pages.flatMap((page) => page.data))
-      : [];
+  const myReviewFileList = deduplicatePaginatedData(flatPaginationCache(data));
 
   return (
     <main className={styles.activityPage} ref={scrollRef}>
