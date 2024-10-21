@@ -17,7 +17,7 @@ export default function ProtectedRoute({ roles, message, children }) {
       return;
     }
 
-    if (status === USER_STATUS.loading || userInfo === undefined) {
+    if (status === USER_STATUS.loading) {
       return;
     }
 

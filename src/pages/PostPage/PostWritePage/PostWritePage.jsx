@@ -184,14 +184,14 @@ export default function PostWritePage() {
           <div className={styles.profileBox}>
             <div className={styles.profileBoxLeft}>
               <Icon id='cloud' width={25} height={16} />
-              <p>{userInfo.nickname}</p>
+              <p>{userInfo?.nickname}</p>
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
             </div>
             {textId !== 'notice' && (
               <div
                 className={
-                  userInfo.userRoleId === ROLE.admin
+                  userInfo?.userRoleId === ROLE.admin
                     ? styles.profileBoxRight
                     : styles.profileBoxRightInvisible
                 }

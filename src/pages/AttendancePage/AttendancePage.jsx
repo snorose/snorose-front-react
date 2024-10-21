@@ -47,7 +47,7 @@ export default function AttendancePage() {
             setDisabled(true);
             setLoading(true);
             updatePoint({
-              userId: userInfo.userId,
+              userId: userInfo?.userId,
               category: POINT_CATEGORY_ENUM.ATTENDANCE,
               source: POINT_SOURCE_ENUM.ATTENDANCE,
             })
