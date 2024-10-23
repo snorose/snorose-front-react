@@ -28,7 +28,7 @@ export default function MainPageListItem({
     );
   }
 
-  if (!roles.includes(userInfo.userRoleId)) {
+  if (!roles.includes(userInfo?.userRoleId)) {
     return (
       <li className={`${styles.item} ${styles.denied}`}>
         등업 완료 후 이용 가능합니다.

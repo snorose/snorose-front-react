@@ -47,7 +47,7 @@ export default function ViewPointListPage() {
           <div className={styles.totalPointWrapper}>
             <Icon id='point-circle' width={32} height={32} />
             <span className={styles.totalPoint}>
-              {userInfo.balance.toLocaleString()}
+              {userInfo?.balance.toLocaleString()}
             </span>
           </div>
         </div>
