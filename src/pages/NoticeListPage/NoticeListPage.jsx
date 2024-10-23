@@ -94,7 +94,7 @@ export default function NoticeListPage() {
           </div>
         )}
       </div>
-      {userInfo.userRoleId === 4 && currentBoardTextId === 'notice' && (
+      {userInfo?.userRoleId === 4 && currentBoardTextId === 'notice' && (
         <WriteButton
           to={`/board/${currentBoardTextId}/post-write`}
           className={styles.writeButton}

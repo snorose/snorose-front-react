@@ -162,7 +162,7 @@ export default function PostEditPage() {
             {textId !== 'notice' && (
               <div
                 className={
-                  userInfo.userRoleId === ROLE.admin
+                  userInfo?.userRoleId === ROLE.admin
                     ? styles.profileBoxRight
                     : styles.profileBoxRightInvisible
                 }
