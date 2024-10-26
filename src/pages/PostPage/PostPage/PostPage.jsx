@@ -9,6 +9,7 @@ import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import { useAuth, useLike, useScrap, useToast } from '@/hooks';
 
 import { NotFoundPage } from '@/pages/NotFoundPage';
+import { PostContent } from '@/pages/PostPage';
 
 import {
   BackAppBar,
@@ -210,7 +211,7 @@ export default function PostPage() {
             </span>
           </p>
         </div>
-        <p className={styles.text}>{data.content}</p>
+        <PostContent content={data.content} />
         <div className={styles.post_bottom}>
           <div className={styles.count} onClick={inputFocus}>
             <Icon id='comment' width={15} height={13} fill='#D9D9D9' />
