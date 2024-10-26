@@ -62,14 +62,6 @@
   font-weight: 400;
 }
 
-.text {
-  font-size: 0.75rem;
-  color: var(--gray-4);
-  font-size: 0.875rem;
-  padding: 0 0.8125rem 0.9375rem 0;
-  white-space: pre-wrap; /* 줄바꿈과 공백을 유지 */
-}
-
 .post_bottom {
   display: flex;
   justify-content: end;
