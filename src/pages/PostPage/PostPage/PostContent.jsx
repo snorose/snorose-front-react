@@ -1,6 +1,6 @@
 import styles from './PostContent.module.css';
 
-const urlPattern = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
+const urlPattern = /(https?:\/\/[a-zA-Z0-9._/]+|www\.[a-zA-Z0-9._/]+)/g;
 
 export default function PostContent({ content }) {
   const linkedCountent = content.split(urlPattern).map((part, index) => {
