@@ -35,6 +35,7 @@ export default function PostPage() {
   const { inputFocus } = useCommentContext();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
+  const isCommunity = [21, 22, 23].includes(currentBoard.id);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -245,8 +246,13 @@ export default function PostPage() {
           </div>
         </div>
       </div>
-      <CommentList commentCount={data.commentCount} />
-      <InputBar />
+      {(!data.isNotice || !isCommunity) && (
+        <>
+          <CommentList commentCount={data.commentCount} />
+          <InputBar />
+        </>
+      )}
+
       <OptionModal
         id='post-more-options'
         isOpen={isOptionsModalOpen}
