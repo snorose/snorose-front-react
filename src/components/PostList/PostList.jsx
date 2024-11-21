@@ -42,7 +42,7 @@ export default function PostList({ result, saveScrollPosition }) {
           to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
           onClick={saveScrollPosition}
         >
-          <PostBar data={post} hasComment={false} />
+          <PostBar data={post} />
         </Link>
       ))}
       {isFetching && <FetchLoading />}
