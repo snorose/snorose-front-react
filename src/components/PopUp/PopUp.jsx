@@ -5,34 +5,56 @@ import styles from './PopUp.module.css';
 const CONTENT = (
   <>
     <p className={styles.hello}>
-      안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다.
+      ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
     </p>
-    <h3 className={styles.title}>
-      1. 이메일/학번 변경 완료 안내(10/14일까지 신청자)
-    </h3>
+
+    <h2 className={styles.title}>1. 24-2 기말고사 포인트 미지급 기간</h2>
+    <p className={styles.content}>12.02(월) 00:00 ~ 12.20(금) 23:59</p>
+
+    <h2 className={styles.title}>2. 시험후기 게시판 운영 기간</h2>
+    <p className={styles.content}>12.21(토) 00:00 ~ 2025.01.20(월) 23:59</p>
+
+    <h2 className={styles.title}>3. 24-2 신입 리자 모집 연장 안내</h2>
     <p className={styles.content}>
-      10월 14일까지 신청하신 분들에 한해 이메일/학번 변경 구글 폼 작업이
-      완료되어 결과를 이메일로 발송했습니다. 이메일을 못 받았거나 변경이
-      이루어지지 않은 분은 공식 창구로 문의 남겨주세요.
+      <li>
+        모집 분야: 운영기획팀(운영 기획, 이벤트 기획), 개발팀(프론트엔드,
+        인프라)
+      </li>
+      <li>
+        모집 공고:{' '}
+        <a
+          className={styles.link}
+          href='https://www.notion.so/snorose/2024-2-10c7ef0aa3bf8027a04ee35b7c521e12'
+        >
+          https://www.notion.so/snorose/2024-2-10c7ef0aa3bf8027a04ee35b7c521e12
+        </a>
+      </li>
+      <li>
+        관련 게시글:{' '}
+        <a
+          className={styles.link}
+          href='https://www.snorose.com/board/notice/post/1753363'
+        >
+          https://www.snorose.com/board/notice/post/1753363
+        </a>
+      </li>
     </p>
-    <h3 className={styles.title}>2. 인증 및 메일 전송 오류 안내</h3>
+
+    <h2 className={styles.title}>4. 리뉴얼 사이트 만족도 조사 안내</h2>
     <p className={styles.content}>
-      회원가입 이메일 인증 메일, 로그인 및 아이디/비번 찾기 시 입력한 이메일에
-      오타는 없는지 다시 한번 확인 바랍니다. 존재하지 않는 이메일의 경우 메일이
-      발송되지 않을 수 있습니다.
+      {`리뉴얼 오픈 1개월을 맞이하여 스노로즈 이용자를 대상으로 종합적인 만족도 조사를 진행하고자 합니다. 스노로즈의 발전을 위한 숙명인 여러분의 소중한 의견을 기다리고 있겠습니다.\n\n`}
+      <li>
+        설문지 링크:{' '}
+        <a className={styles.link} href='https://forms.gle/x6j8SRujTdKbXhk88'>
+          https://forms.gle/x6j8SRujTdKbXhk88
+        </a>
+      </li>
+      <li>설문 기간: 2024.11.12(화) ~ 2024.12.12(목)</li>
     </p>
-    <h3 className={styles.title}>3. 최초 로그인 시 비밀번호 재설정 안내</h3>
+
+    <hr />
     <p className={styles.content}>
-      접속 후 반드시 비밀번호를 재설정한 후 로그인을 진행해주시기 바랍니다. 가입
-      당시 사용한 이메일은 아이디 찾기를 통해 찾을 수 있습니다. 만일 이메일 및
-      학번이 오기재 되었거나 탈퇴된 경우에는 구글 폼(
-      <a className={styles.link} href='https://forms.gle/PDmKuPUuUzKXTh8BA'>
-        https://forms.gle/PDmKuPUuUzKXTh8BA
-      </a>
-      )으로 변경 신청 부탁드립니다.
-    </p>
-    <p className={styles.content}>
-      ※공식 문의창구 (이메일(snorose1906@gmail.com), 카카오톡 1:1 문의) 이외의
+      ※공식 문의 창구 (이메일(snorose1906@gmail.com), 카카오톡 1:1 문의) 이외의
       문의는 받고 있지 않습니다. 공식 문의 창구 이외의 문의 글은 답변 없이
       삭제될 수 있음을 알려드립니다.
     </p>

@@ -88,12 +88,23 @@
 
 .title {
   font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .content {
-  margin: 1rem 0;
+  margin: 0.5rem 0 2rem 0;
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+.content > li {
+  word-break: break-all;
 }
 
 .link {
   color: var(--blue-3);
+}
+
+.link:hover {
+  text-decoration: underline;
 }
