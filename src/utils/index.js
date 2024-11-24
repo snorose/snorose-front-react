@@ -10,3 +10,4 @@ export * from './link.js';
 export * from './pagination.js';
 export * from './timeAgo.js';
 export * from './validate.js';
+export * from './getBoardCategory.js';

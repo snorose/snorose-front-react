@@ -21,7 +21,7 @@ import {
   InputBar,
 } from '@/components';
 
-import { getBoard, timeAgo } from '@/utils';
+import { getBoard, isCommunityBoard, timeAgo } from '@/utils';
 import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
@@ -35,7 +35,6 @@ export default function PostPage() {
   const { inputFocus } = useCommentContext();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
-  const isCommunity = [21, 22, 23].includes(currentBoard.id);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -246,7 +245,7 @@ export default function PostPage() {
           </div>
         </div>
       </div>
-      {(!data.isNotice || !isCommunity) && (
+      {(!data.isNotice || !isCommunityBoard(currentBoard.textId)) && (
         <>
           <CommentList commentCount={data.commentCount} />
           <InputBar />
