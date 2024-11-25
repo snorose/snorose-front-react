@@ -21,7 +21,7 @@ import {
   InputBar,
 } from '@/components';
 
-import { getBoard, isCommunityBoard, timeAgo } from '@/utils';
+import { getBoard, timeAgo } from '@/utils';
 import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
@@ -245,7 +245,9 @@ export default function PostPage() {
           </div>
         </div>
       </div>
-      {(!data.isNotice || !isCommunityBoard(currentBoard.textId)) && (
+      {data.isNotice ? (
+        <div className={styles.whiteBox} />
+      ) : (
         <>
           <CommentList commentCount={data.commentCount} />
           <InputBar />
