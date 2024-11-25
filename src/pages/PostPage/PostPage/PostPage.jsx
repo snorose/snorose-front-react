@@ -245,8 +245,15 @@ export default function PostPage() {
           </div>
         </div>
       </div>
-      <CommentList commentCount={data.commentCount} />
-      <InputBar />
+      {data.isNotice ? (
+        <div className={styles.whiteBox} />
+      ) : (
+        <>
+          <CommentList commentCount={data.commentCount} />
+          <InputBar />
+        </>
+      )}
+
       <OptionModal
         id='post-more-options'
         isOpen={isOptionsModalOpen}
