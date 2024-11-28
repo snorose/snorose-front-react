@@ -49,7 +49,9 @@ export default function MainPage() {
   return (
     <main>
       <Header className={styles.header} />
-      <Carousel slides={slides ?? []} delay={3000} />
+      <div className={styles.carousel}>
+        <Carousel slides={slides ?? []} delay={3000} />
+      </div>
       <Margin className={styles.cards}>
         <Flex gap='0.45rem'>
           <Card
