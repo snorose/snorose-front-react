@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getHomeNotice } from '@/apis';
+import { getBannerImage, getHomeNotice } from '@/apis';
 
 import { useAuth, usePopUp } from '@/hooks';
 
@@ -29,26 +29,33 @@ export default function MainPage() {
   const { isPopUpOpend, closePopUp } = usePopUp();
   const isLogin = status === 'authenticated';
 
-  const { data, isError } = useQuery({
+  const { data: slides, isError: slidesIsError } = useQuery({
+    queryKey: [QUERY_KEY.banner],
+    queryFn: () => getBannerImage(),
+    gcTime: Infinity,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const { data: notice, isError: noticeIsError } = useQuery({
     queryKey: [QUERY_KEY.homeNotice],
     queryFn: () => getHomeNotice(),
     staleTime: 1000 * 60 * 5,
   });
 
-  if (isError || !data) {
+  if (!slides || slidesIsError || !notice || noticeIsError) {
     return null;
   }
 
   return (
     <main>
       <Header className={styles.header} />
-      <Carousel />
+      <Carousel slides={slides ?? []} delay={3000} />
       <Margin className={styles.cards}>
         <Flex gap='0.45rem'>
           <Card
             className={styles.notice}
             to='/board/notice'
-            title={data.title}
+            title={notice.title}
             tag='공지'
             icon={{
               id: isLogin ? 'blueMegaphone' : 'megaphone',
