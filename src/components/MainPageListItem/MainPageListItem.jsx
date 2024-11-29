@@ -1,8 +1,11 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/hooks';
 
 import { Icon } from '@/components/Icon';
+
+import { timeAgo, getBoardTextId } from '@/utils';
 
 import { USER_STATUS } from '@/constants';
 
@@ -14,11 +17,22 @@ export default function MainPageListItem({
   createdAt,
   title,
   overview,
+  boardId,
   boardName,
   image,
   roles,
 }) {
   const { status, userInfo } = useAuth();
+  const [agoTime, setAgoTime] = useState(timeAgo(createdAt));
+
+  // timeAgo를 1분마다 업데이트
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setAgoTime(timeAgo(createdAt));
+    }, 60000);
+
+    return () => clearInterval(intervalId);
+  }, [createdAt]);
 
   if (status === USER_STATUS.isLogout) {
     return (
@@ -39,7 +53,10 @@ export default function MainPageListItem({
   const imgSrc = image ? require(`../../dummy/images/${image}`) : '';
 
   return (
-    <Link className={styles.link} to={`/board/besookt/${postId}`}>
+    <Link
+      className={styles.link}
+      to={`/board/${getBoardTextId(boardId)}/post/${postId}`}
+    >
       <li className={styles.item}>
         <div className={styles.left}>
           <div className={styles.top}>
@@ -47,7 +64,7 @@ export default function MainPageListItem({
             <p className={styles.meta}>
               <span>{displayName}</span>
               <span className={styles.dot}></span>
-              <span>{createdAt}</span>
+              <span>{agoTime}</span>
             </p>
           </div>
           <div className={styles.bottom}>

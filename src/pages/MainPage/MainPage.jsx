@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getHomeNotice } from '@/apis';
+import { getHomeNotice, getBest3 } from '@/apis';
 
 import { useAuth, usePopUp } from '@/hooks';
 
@@ -18,7 +18,6 @@ import {
 } from '@/components';
 
 import { BOARD_MENUS, QUERY_KEY, ROLE } from '@/constants';
-import { BESOOKTS } from '@/dummy/data';
 
 import styles from './MainPage.module.css';
 
@@ -35,7 +34,17 @@ export default function MainPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  if (isError || !data) {
+  const {
+    data: best3Data,
+    isError: isBest3Error,
+    isLoading: isBest3Loading,
+  } = useQuery({
+    queryKey: [QUERY_KEY.best3],
+    queryFn: () => getBest3(),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  if (isError || !data || isBest3Loading || isBest3Error || !best3Data) {
     return null;
   }
 
@@ -84,36 +93,37 @@ export default function MainPage() {
           ))}
         </Flex>
       </Margin>
-      {/* {BESOOKTS.length > 0 && (
+      {best3Data.length > 0 && (
         <Margin className={styles.besookt}>
-        <ListHeader to='/board/besookt' title='베숙트' />
-        <Flex direction='column' gap='0.375rem'>
-        {BESOOKTS.map(
-          ({
-            postId,
-            nickname,
-            title,
-            overview,
-            boardName,
-            timeAgo,
-            image,
-            }) => (
-              <MainPageListItem
-              key={postId}
-              postId={postId}
-              displayName={nickname}
-              title={title}
-              overview={overview}
-              boardName={boardName}
-              createdAt={timeAgo}
-              image={image}
-              roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
-              />
+          <ListHeader to='/board/besookt' title='베숙트' />
+          <Flex direction='column' gap='0.375rem'>
+            {best3Data.map(
+              ({
+                boardId,
+                postId,
+                userDisplay,
+                title,
+                content,
+                boardName,
+                createdAt,
+              }) => (
+                <MainPageListItem
+                  key={postId}
+                  postId={postId}
+                  displayName={userDisplay}
+                  title={title}
+                  overview={content}
+                  boardId={boardId}
+                  boardName={boardName}
+                  createdAt={createdAt}
+                  //image={image}
+                  roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
+                />
               )
-              )}
-              </Flex>
-              </Margin>
-              )} */}
+            )}
+          </Flex>
+        </Margin>
+      )}
       <Footer />
       {isPopUpOpend && <PopUp close={closePopUp} />}
     </main>

@@ -10,6 +10,7 @@ import {
   deduplicatePaginatedData,
   flatPaginationCache,
   getBoard,
+  getBoardTitleToTextId,
   timeAgo,
 } from '@/utils';
 
@@ -21,6 +22,7 @@ export default function BoardPostList({ saveScrollPosition }) {
   const { pathname } = useLocation();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
+  const isBesookt = currentBoardTextId === 'besookt' ? true : false;
 
   // 페이지네이션 관련 hook
   const { data, ref, isLoading, isFetching, status, isError, refetch } =
@@ -51,9 +53,16 @@ export default function BoardPostList({ saveScrollPosition }) {
           postList.map((post, index) => (
             <Link
               key={post.postId}
-              to={`/board/${currentBoardTextId}/post/${post.postId}`}
+              to={
+                isBesookt
+                  ? `/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`
+                  : `/board/${currentBoardTextId}/post/${post.postId}`
+              }
               ref={index === postList.length - 1 ? ref : undefined}
-              onClick={saveScrollPosition}
+              onClick={() => {
+                saveScrollPosition();
+                console.log(post);
+              }}
             >
               <PostBar data={{ ...post, timeAgo: timeAgo(post.date) }} />
             </Link>

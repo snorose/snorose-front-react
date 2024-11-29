@@ -2,9 +2,17 @@ import { authAxios } from '@/axios';
 
 // 게시글 리스트 가져오기
 export const getPostList = async (boardId, page = 0) => {
-  const response = await authAxios.get(
-    `/v1/boards/${boardId}/posts/postlist?page=${page}`
-  );
+  let response;
+  switch (boardId) {
+    case 20: //베숙트
+      response = await authAxios.get(`/v1/best-posts?page=${page}`);
+      break;
+    default: //나머지 게시판
+      response = await authAxios.get(
+        `/v1/boards/${boardId}/posts/postlist?page=${page}`
+      );
+      break;
+  }
   return response?.data.result;
 };
 

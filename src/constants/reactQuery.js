@@ -15,6 +15,7 @@ export const QUERY_KEY = Object.freeze({
   myDownloadedExamReviews: 'myDownloadedExamReviews',
   myScrappedPosts: 'myScrappedPosts',
   myScrappedExamReviews: 'myScrappedExamReviews',
+  best3: 'best3',
 });
 
 export const MUTATION_KEY = Object.freeze({

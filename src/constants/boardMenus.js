@@ -36,15 +36,14 @@ export const BOARD_MENUS = [
     desc: '졸업생 전용 커뮤니티',
     image: permanentSnow,
   },
-  // 2차 개발 시 추가 예정
-  // {
-  //   id: 20,
-  //   to: '/board/besookt',
-  //   textId: 'besookt',
-  //   title: '베숙트',
-  //   desc: '추천을 가장 많이\n받은 게시물 모아보기',
-  //   image: besookt,
-  // },
+  {
+    id: 20,
+    to: '/board/besookt',
+    textId: 'besookt',
+    title: '베숙트',
+    desc: '추천을 가장 많이\n받은 게시물 모아보기',
+    image: besookt,
+  },
   {
     id: 32,
     to: '/board/exam-review',
