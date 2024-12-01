@@ -23,34 +23,50 @@ import styles from './MainPage.module.css';
 
 const BOARDS = BOARD_MENUS.filter((board) => [21, 22, 23].includes(board.id));
 const BESOOKT_ROLES = [ROLE.user, ROLE.admin, ROLE.official];
-const DEFAULT_BESOOKTS = Array.from({ length: 3 }, (_, i) => i);
+const DEFAULT_BESOOKTS = Array.from({ length: 3 }, (_, i) => ({ postId: i }));
 
 export default function MainPage() {
   const { status, userInfo } = useAuth();
   const { isPopUpOpend, closePopUp } = usePopUp();
   const isLogin = status === 'authenticated';
 
-  const { data: slides, isError: slidesIsError } = useQuery({
+  const {
+    data: slides,
+    isLoading: slidesIsLoading,
+    isError: slidesIsError,
+  } = useQuery({
     queryKey: [QUERY_KEY.banner],
     queryFn: () => getBannerImage(),
     gcTime: Infinity,
     staleTime: 1000 * 60 * 5,
   });
 
-  const { data: notice, isError: noticeIsError } = useQuery({
+  const {
+    data: notice,
+    isLoading: noticeIsLoading,
+    isError: noticeIsError,
+  } = useQuery({
     queryKey: [QUERY_KEY.homeNotice],
     queryFn: () => getHomeNotice(),
     staleTime: 1000 * 60 * 5,
   });
 
-  const { data: besookt3, isError: isBesookt3Error } = useQuery({
+  const {
+    data: besookt3,
+    isLoading: besookt3IsLoading,
+    isError: isBesookt3Error,
+  } = useQuery({
     queryKey: [QUERY_KEY.best3],
     queryFn: () => getBest3(),
     staleTime: 1000 * 60 * 5,
     enabled: BESOOKT_ROLES.includes(userInfo?.userRoleId),
   });
 
-  if (!slides || slidesIsError || !notice || noticeIsError || isBesookt3Error) {
+  if (slidesIsLoading || noticeIsLoading || besookt3IsLoading) {
+    return null;
+  }
+
+  if (slidesIsError || noticeIsError || isBesookt3Error) {
     return null;
   }
 
