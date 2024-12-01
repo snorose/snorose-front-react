@@ -43,10 +43,7 @@ export default function MainPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const {
-    data: besookt3,
-    isError: isBesookt3Error,
-  } = useQuery({
+  const { data: besookt3, isError: isBesookt3Error } = useQuery({
     queryKey: [QUERY_KEY.best3],
     queryFn: () => getBest3(),
     staleTime: 1000 * 60 * 5,
@@ -58,7 +55,7 @@ export default function MainPage() {
   }
 
   const besookts = BESOOKT_ROLES.includes(userInfo?.userRoleId)
-    ? best3Data
+    ? besookt3
     : DEFAULT_BESOOKTS;
 
   return (
