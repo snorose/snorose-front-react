@@ -2,6 +2,10 @@
   margin-bottom: 1.25rem;
 }
 
+.carousel {
+  margin-bottom: 2.5625rem;
+}
+
 .cards {
   margin: 1.5rem var(--default-margin) 1.75rem var(--default-margin);
 }
