@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/hooks';
@@ -23,16 +22,6 @@ export default function MainPageListItem({
   roles,
 }) {
   const { status, userInfo } = useAuth();
-  const [agoTime, setAgoTime] = useState(timeAgo(createdAt));
-
-  // timeAgo를 1분마다 업데이트
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setAgoTime(timeAgo(createdAt));
-    }, 60000);
-
-    return () => clearInterval(intervalId);
-  }, [createdAt]);
 
   if (status === USER_STATUS.isLogout) {
     return (
@@ -64,7 +53,7 @@ export default function MainPageListItem({
             <p className={styles.meta}>
               <span>{displayName}</span>
               <span className={styles.dot}></span>
-              <span>{agoTime}</span>
+              <span>{timeAgo(createdAt)}</span>
             </p>
           </div>
           <div className={styles.bottom}>

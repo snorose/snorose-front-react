@@ -22,9 +22,11 @@ import { BOARD_MENUS, QUERY_KEY, ROLE } from '@/constants';
 import styles from './MainPage.module.css';
 
 const BOARDS = BOARD_MENUS.filter((board) => [21, 22, 23].includes(board.id));
+const BESOOKT_ROLES = [ROLE.user, ROLE.admin, ROLE.official];
+const DEFAULT_BESOOKTS = Array.from({ length: 3 }, (_, i) => i);
 
 export default function MainPage() {
-  const { status } = useAuth();
+  const { status, userInfo } = useAuth();
   const { isPopUpOpend, closePopUp } = usePopUp();
   const isLogin = status === 'authenticated';
 
@@ -42,11 +44,20 @@ export default function MainPage() {
     queryKey: [QUERY_KEY.best3],
     queryFn: () => getBest3(),
     staleTime: 1000 * 60 * 5,
+    enabled: BESOOKT_ROLES.includes(userInfo?.userRoleId),
   });
 
-  if (isError || !data || isBest3Loading || isBest3Error || !best3Data) {
+  if (isError || !data) {
     return null;
   }
+
+  if (isError || !data || isBest3Loading || isBest3Error) {
+    return null;
+  }
+
+  const besookts = BESOOKT_ROLES.includes(userInfo?.userRoleId)
+    ? best3Data
+    : DEFAULT_BESOOKTS;
 
   return (
     <main>
@@ -93,11 +104,11 @@ export default function MainPage() {
           ))}
         </Flex>
       </Margin>
-      {best3Data.length > 0 && (
+      {besookts.length > 0 && (
         <Margin className={styles.besookt}>
           <ListHeader to='/board/besookt' title='베숙트' />
           <Flex direction='column' gap='0.375rem'>
-            {best3Data.map(
+            {besookts.map(
               ({
                 boardId,
                 postId,
@@ -117,7 +128,7 @@ export default function MainPage() {
                   boardName={boardName}
                   createdAt={createdAt}
                   //image={image}
-                  roles={[ROLE.user, ROLE.user2, ROLE.admin, ROLE.official]}
+                  roles={BESOOKT_ROLES}
                 />
               )
             )}
