@@ -59,10 +59,7 @@ export default function BoardPostList({ saveScrollPosition }) {
                   : `/board/${currentBoardTextId}/post/${post.postId}`
               }
               ref={index === postList.length - 1 ? ref : undefined}
-              onClick={() => {
-                saveScrollPosition();
-                console.log(post);
-              }}
+              onClick={() => saveScrollPosition()}
             >
               <PostBar data={{ ...post, timeAgo: timeAgo(post.date) }} />
             </Link>
