@@ -59,6 +59,8 @@ const getRolesForReadBoard = (boardPath) => {
       return [ROLE.user, ROLE.admin, ROLE.official];
     case 'permanent-snow':
       return [ROLE.user, ROLE.admin, ROLE.official];
+    case 'besookt':
+      return [ROLE.user, ROLE.admin, ROLE.official];
     case 'all':
       return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
     case 'notice':

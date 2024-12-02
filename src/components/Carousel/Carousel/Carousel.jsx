@@ -24,13 +24,8 @@ export default function Carousel({ slides = [], delay }) {
       allowTouchMove={false}
     >
       {slides.map(({ imageUrl, redirectUrl }, index) => (
-        <SwiperSlide>
-          <Slide
-            key={index}
-            src={imageUrl}
-            redirectUrl={redirectUrl}
-            alt='banner'
-          />
+        <SwiperSlide key={index}>
+          <Slide src={imageUrl} redirectUrl={redirectUrl} alt='banner' />
         </SwiperSlide>
       ))}
     </Swiper>

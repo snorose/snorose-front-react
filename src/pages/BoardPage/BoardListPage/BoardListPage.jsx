@@ -18,6 +18,7 @@ export default function BoardListPage() {
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
   const { scrollRef, saveScrollPosition } = useScrollRestoration();
+  const isBesookt = currentBoardTextId === 'besookt' ? true : false;
 
   const { data: noticeLineData } = useQuery({
     queryKey: [QUERY_KEY.noticeLine, currentBoard.id],
@@ -33,20 +34,24 @@ export default function BoardListPage() {
         hasSearch
         backNavTo={'/board'}
       />
-      <div className={styles.top}>
-        <Link
-          className={styles.notification_bar}
-          to={`/board/${currentBoardTextId}/notice`}
-        >
-          <Icon id='notice-bell' width={11} height={13} />
-          <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
-        </Link>
-      </div>
+      {!isBesookt && (
+        <div className={styles.top}>
+          <Link
+            className={styles.notification_bar}
+            to={`/board/${currentBoardTextId}/notice`}
+          >
+            <Icon id='notice-bell' width={11} height={13} />
+            <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
+          </Link>
+        </div>
+      )}
       <BoardPostList saveScrollPosition={saveScrollPosition} />
-      <WriteButton
-        to={`/board/${currentBoardTextId}/post-write`}
-        className={styles.writeButton}
-      />
+      {!isBesookt && (
+        <WriteButton
+          to={`/board/${currentBoardTextId}/post-write`}
+          className={styles.writeButton}
+        />
+      )}
     </div>
   );
 }
