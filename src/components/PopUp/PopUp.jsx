@@ -14,33 +14,7 @@ const CONTENT = (
     <h2 className={styles.title}>2. 시험후기 게시판 운영 기간</h2>
     <p className={styles.content}>12.21(토) 00:00 ~ 2025.01.20(월) 23:59</p>
 
-    <h2 className={styles.title}>3. 24-2 신입 리자 모집 연장 안내</h2>
-    <p className={styles.content}>
-      <li>
-        모집 분야: 운영기획팀(운영 기획, 이벤트 기획), 개발팀(프론트엔드,
-        인프라)
-      </li>
-      <li>
-        모집 공고:{' '}
-        <a
-          className={styles.link}
-          href='https://www.notion.so/snorose/2024-2-10c7ef0aa3bf8027a04ee35b7c521e12'
-        >
-          https://www.notion.so/snorose/2024-2-10c7ef0aa3bf8027a04ee35b7c521e12
-        </a>
-      </li>
-      <li>
-        관련 게시글:{' '}
-        <a
-          className={styles.link}
-          href='https://www.snorose.com/board/notice/post/1753363'
-        >
-          https://www.snorose.com/board/notice/post/1753363
-        </a>
-      </li>
-    </p>
-
-    <h2 className={styles.title}>4. 리뉴얼 사이트 만족도 조사 안내</h2>
+    <h2 className={styles.title}>3. 리뉴얼 사이트 만족도 조사 안내</h2>
     <p className={styles.content}>
       {`리뉴얼 오픈 1개월을 맞이하여 스노로즈 이용자를 대상으로 종합적인 만족도 조사를 진행하고자 합니다. 스노로즈의 발전을 위한 숙명인 여러분의 소중한 의견을 기다리고 있겠습니다.\n\n`}
       <li>
