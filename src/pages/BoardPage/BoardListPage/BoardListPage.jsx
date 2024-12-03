@@ -31,7 +31,7 @@ export default function BoardListPage() {
       <BackAppBar
         title={currentBoard.title}
         hasMenu
-        hasSearch
+        {...(!isBesookt && { hasSearch: true })}
         backNavTo={'/board'}
       />
       {!isBesookt && (
