@@ -5,7 +5,8 @@ import styles from './PopUp.module.css';
 const CONTENT = (
   <>
     <p className={styles.hello}>
-      ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
+      ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️ ❄️ 안녕하세요.
+      숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
     </p>
 
     <h2 className={styles.title}>1. 24-2 기말고사 포인트 미지급 기간</h2>
@@ -27,7 +28,10 @@ const CONTENT = (
     </p>
 
     <hr />
+
+    <hr />
     <p className={styles.content}>
+      ※공식 문의 창구 (이메일(snorose1906@gmail.com), 카카오톡 1:1 문의) 이외의
       ※공식 문의 창구 (이메일(snorose1906@gmail.com), 카카오톡 1:1 문의) 이외의
       문의는 받고 있지 않습니다. 공식 문의 창구 이외의 문의 글은 답변 없이
       삭제될 수 있음을 알려드립니다.
