@@ -47,7 +47,6 @@ import {
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/constants';
-import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructionPage.jsx';
 
 import { CheckExamPeriodRoute } from '@/components/Route/CheckExamPeriodRoute.jsx';
 
