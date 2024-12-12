@@ -1,12 +1,17 @@
-import { useAuth } from '@/hooks';
+import { useQuery } from '@tanstack/react-query';
 
 import { Card } from '@/components';
+import { QUERY_KEY } from '@/constants';
 
 import styles from './HomeCard.module.css';
 
-export default function HomeCard({ notice }) {
-  const { status } = useAuth();
-  const isLogin = status === 'authenticated';
+export default function HomeCard({ callback, isLogin = true }) {
+  const { data: notice } = useQuery({
+    queryKey: [QUERY_KEY.homeNotice],
+    queryFn: callback,
+    staleTime: 1000 * 60 * 5,
+    suspense: true,
+  });
 
   return (
     <div className={styles.layout}>

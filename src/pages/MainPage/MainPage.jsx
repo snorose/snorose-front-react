@@ -15,6 +15,7 @@ import {
 import {
   HomeBesookt,
   HomeCard,
+  HomeCardSkeleton,
   HomeCommunity,
 } from '@/pages/MainPage/components';
 
@@ -26,18 +27,9 @@ const BESOOKT_ROLES = [ROLE.user, ROLE.admin, ROLE.official];
 const DEFAULT_BESOOKTS = Array.from({ length: 3 }, (_, i) => ({ postId: i }));
 
 export default function MainPage() {
-  const { userInfo } = useAuth();
   const { isPopUpOpend, closePopUp } = usePopUp();
-
-  const {
-    data: notice,
-    isLoading: noticeIsLoading,
-    isError: noticeIsError,
-  } = useQuery({
-    queryKey: [QUERY_KEY.homeNotice],
-    queryFn: () => getHomeNotice(),
-    staleTime: 1000 * 60 * 5,
-  });
+  const { status, userInfo } = useAuth();
+  const isLogin = status === 'authenticated';
 
   const {
     data: besookt3,
@@ -50,11 +42,11 @@ export default function MainPage() {
     enabled: BESOOKT_ROLES.includes(userInfo?.userRoleId),
   });
 
-  if (noticeIsLoading || besookt3IsLoading) {
+  if (besookt3IsLoading) {
     return null;
   }
 
-  if (noticeIsError || isBesookt3Error) {
+  if (isBesookt3Error) {
     return null;
   }
 
@@ -70,7 +62,9 @@ export default function MainPage() {
         <Carousel className={styles.carousel} callback={getBannerImage} />
       </Suspense>
 
-      <HomeCard notice={notice} />
+      <Suspense fallback={<HomeCardSkeleton />}>
+        <HomeCard callback={getHomeNotice} isLogin={isLogin} />
+      </Suspense>
 
       <HomeCommunity className={styles.community} />
       <HomeBesookt besookts={besookts} />
