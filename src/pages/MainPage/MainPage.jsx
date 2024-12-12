@@ -10,6 +10,7 @@ import {
   CarouselSkeleton,
   Footer,
   Header,
+  ListHeader,
   PopUp,
 } from '@/components';
 
@@ -58,8 +59,10 @@ export default function MainPage() {
         )}
       </QueryErrorResetBoundary>
 
+      <ListHeader to='/board' title='커뮤니티' />
       <HomeCommunity className={styles.community} />
 
+      <ListHeader to='/board/besookt' title='베숙트' />
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary

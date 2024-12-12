@@ -1,8 +1,5 @@
-.layout {
-  margin: 0 var(--default-margin);
-}
-
 .list {
+  margin: 0 var(--default-margin);
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
@@ -10,7 +7,7 @@
 
 .item {
   width: 100%;
-  aspect-ratio: 160 / 33;
+  height: 115.5px;
   border-radius: 0.3125rem;
   background: linear-gradient(
     45deg,
