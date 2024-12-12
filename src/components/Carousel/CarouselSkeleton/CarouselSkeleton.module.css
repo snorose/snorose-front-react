@@ -1,6 +1,7 @@
 .layout {
+  margin-bottom: 2.5625rem;
   width: 100%;
-  aspect-ratio: 30000 / 9293;
+  aspect-ratio: 3;
   background: linear-gradient(
     45deg,
     var(--gray-2) 25%,
