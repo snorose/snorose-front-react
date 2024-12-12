@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
+import { getBannerImage } from '@/apis';
+
 import { Slide } from '@/components';
 import { QUERY_KEY } from '@/constants';
 
@@ -11,10 +13,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './Carousel.css';
 
-export default function Carousel({ callback, delay = 3000, className }) {
+export default function Carousel({ delay = 3000, className }) {
   const { data: slides } = useQuery({
     queryKey: [QUERY_KEY.banner],
-    queryFn: callback,
+    queryFn: getBannerImage,
     gcTime: Infinity,
     staleTime: 1000 * 60 * 5,
     suspense: true,
