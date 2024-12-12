@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { usePopUp } from '@/hooks';
 
@@ -12,6 +13,7 @@ import {
 
 import {
   HomeBesookt,
+  HomeBesooktErrorFallback,
   HomeBesooktSkeleton,
   HomeCard,
   HomeCardSkeleton,
@@ -36,9 +38,12 @@ export default function MainPage() {
       </Suspense>
 
       <HomeCommunity className={styles.community} />
-      <Suspense fallback={<HomeBesooktSkeleton />}>
-        <HomeBesookt />
-      </Suspense>
+
+      <ErrorBoundary FallbackComponent={HomeBesooktErrorFallback}>
+        <Suspense fallback={<HomeBesooktSkeleton />}>
+          <HomeBesookt />
+        </Suspense>
+      </ErrorBoundary>
 
       <Footer />
       {isPopUpOpend && <PopUp close={closePopUp} />}
