@@ -1,0 +1,13 @@
+.layout {
+  margin: 1.5rem var(--default-margin) 1.75rem var(--default-margin);
+  display: flex;
+  gap: 0.45rem;
+}
+
+.left {
+  flex: 2;
+}
+
+.right {
+  flex: 3;
+}
