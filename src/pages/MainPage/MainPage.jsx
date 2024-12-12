@@ -5,6 +5,7 @@ import { usePopUp } from '@/hooks';
 
 import {
   Carousel,
+  CarouselErrorFallback,
   CarouselSkeleton,
   Footer,
   Header,
@@ -30,9 +31,11 @@ export default function MainPage() {
     <main>
       <Header className={styles.header} />
 
-      <Suspense fallback={<CarouselSkeleton />}>
-        <Carousel className={styles.carousel} />
-      </Suspense>
+      <ErrorBoundary FallbackComponent={CarouselErrorFallback}>
+        <Suspense fallback={<CarouselSkeleton />}>
+          <Carousel className={styles.carousel} />
+        </Suspense>
+      </ErrorBoundary>
 
       <ErrorBoundary FallbackComponent={HomeCardErrorFallback}>
         <Suspense fallback={<HomeCardSkeleton />}>
