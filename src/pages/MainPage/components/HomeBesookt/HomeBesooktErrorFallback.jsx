@@ -10,7 +10,7 @@ export default function HomeBesooktErrorFallback({
   let text = '';
 
   if (status === 500) {
-    <ServerErrorFallback reset={resetErrorBoundary} />;
+    return <ServerErrorFallback reset={resetErrorBoundary} />;
   }
 
   if (status === 401) {
