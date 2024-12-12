@@ -28,6 +28,7 @@ export * from './PTR';
 export * from './ReviewContentItem';
 export * from './ReviewDownload';
 export * from './Search';
+export * from './ShimmerEffect';
 export * from './Sidebar';
 export * from './StageDots';
 export * from './Submit';

@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { getBannerImage, getHomeNotice, getBest3 } from '@/apis';
@@ -8,6 +9,7 @@ import {
   BoardCard,
   Card,
   Carousel,
+  CarouselSkeleton,
   Flex,
   Footer,
   Header,
@@ -31,17 +33,6 @@ export default function MainPage() {
   const isLogin = status === 'authenticated';
 
   const {
-    data: slides,
-    isLoading: slidesIsLoading,
-    isError: slidesIsError,
-  } = useQuery({
-    queryKey: [QUERY_KEY.banner],
-    queryFn: () => getBannerImage(),
-    gcTime: Infinity,
-    staleTime: 1000 * 60 * 5,
-  });
-
-  const {
     data: notice,
     isLoading: noticeIsLoading,
     isError: noticeIsError,
@@ -62,11 +53,11 @@ export default function MainPage() {
     enabled: BESOOKT_ROLES.includes(userInfo?.userRoleId),
   });
 
-  if (slidesIsLoading || noticeIsLoading || besookt3IsLoading) {
+  if (noticeIsLoading || besookt3IsLoading) {
     return null;
   }
 
-  if (slidesIsError || noticeIsError || isBesookt3Error) {
+  if (noticeIsError || isBesookt3Error) {
     return null;
   }
 
@@ -77,9 +68,11 @@ export default function MainPage() {
   return (
     <main>
       <Header className={styles.header} />
-      <div className={styles.carousel}>
-        <Carousel slides={slides ?? []} delay={3000} />
-      </div>
+
+      <Suspense fallback={<CarouselSkeleton />}>
+        <Carousel className={styles.carousel} callback={getBannerImage} />
+      </Suspense>
+
       <Margin className={styles.cards}>
         <Flex gap='0.45rem'>
           <Card
