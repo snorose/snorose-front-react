@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { usePopUp } from '@/hooks';
@@ -31,25 +32,46 @@ export default function MainPage() {
     <main>
       <Header className={styles.header} />
 
-      <ErrorBoundary FallbackComponent={CarouselErrorFallback}>
-        <Suspense fallback={<CarouselSkeleton />}>
-          <Carousel className={styles.carousel} />
-        </Suspense>
-      </ErrorBoundary>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary
+            onReset={reset}
+            FallbackComponent={CarouselErrorFallback}
+          >
+            <Suspense fallback={<CarouselSkeleton />}>
+              <Carousel className={styles.carousel} />
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
 
-      <ErrorBoundary FallbackComponent={HomeCardErrorFallback}>
-        <Suspense fallback={<HomeCardSkeleton />}>
-          <HomeCard />
-        </Suspense>
-      </ErrorBoundary>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary
+            onReset={reset}
+            FallbackComponent={HomeCardErrorFallback}
+          >
+            <Suspense fallback={<HomeCardSkeleton />}>
+              <HomeCard />
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
 
       <HomeCommunity className={styles.community} />
 
-      <ErrorBoundary FallbackComponent={HomeBesooktErrorFallback}>
-        <Suspense fallback={<HomeBesooktSkeleton />}>
-          <HomeBesookt />
-        </Suspense>
-      </ErrorBoundary>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary
+            onReset={reset}
+            FallbackComponent={HomeBesooktErrorFallback}
+          >
+            <Suspense fallback={<HomeBesooktSkeleton />}>
+              <HomeBesookt />
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
 
       <Footer />
       {isPopUpOpend && <PopUp close={closePopUp} />}

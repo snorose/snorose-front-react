@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getHomeNotice } from '@/apis';
 
@@ -10,11 +10,10 @@ import { QUERY_KEY } from '@/constants';
 import styles from './HomeCard.module.css';
 
 export default function HomeCard() {
-  const { data: notice } = useQuery({
+  const { data: notice } = useSuspenseQuery({
     queryKey: [QUERY_KEY.homeNotice],
     queryFn: getHomeNotice,
     staleTime: 1000 * 60 * 5,
-    suspense: true,
   });
 
   const { status } = useAuth();
