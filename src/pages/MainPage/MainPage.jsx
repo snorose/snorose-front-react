@@ -16,6 +16,7 @@ import {
   HomeBesooktErrorFallback,
   HomeBesooktSkeleton,
   HomeCard,
+  HomeCardErrorFallback,
   HomeCardSkeleton,
   HomeCommunity,
 } from '@/pages/MainPage/components';
@@ -33,9 +34,11 @@ export default function MainPage() {
         <Carousel className={styles.carousel} />
       </Suspense>
 
-      <Suspense fallback={<HomeCardSkeleton />}>
-        <HomeCard />
-      </Suspense>
+      <ErrorBoundary FallbackComponent={HomeCardErrorFallback}>
+        <Suspense fallback={<HomeCardSkeleton />}>
+          <HomeCard />
+        </Suspense>
+      </ErrorBoundary>
 
       <HomeCommunity className={styles.community} />
 
