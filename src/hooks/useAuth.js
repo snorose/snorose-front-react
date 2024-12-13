@@ -2,7 +2,11 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { getMyPageUserInfo, withdrawAccount } from '@/apis';
+import {
+  getMyPageUserInfo,
+  withdrawAccount,
+  logout as logoutApi,
+} from '@/apis';
 
 import { useToast } from '@/hooks';
 
@@ -40,9 +44,13 @@ const useAuth = () => {
     return 'unauthenticated';
   }, [isFetching, isSuccess]);
 
-  const logout = () => {
+  const logout = async () => {
+    await logoutApi();
+
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     queryClient.removeQueries([QUERY_KEY.userInfo]);
+
     navigate('/');
     refetch();
   };
