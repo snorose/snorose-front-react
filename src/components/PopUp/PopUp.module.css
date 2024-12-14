@@ -16,7 +16,7 @@
   width: 80%;
   max-width: 500px;
   max-height: 80%;
-  min-height: 30%;
+  min-height: 60%;
   display: flex;
   flex-direction: column;
 }
@@ -27,6 +27,7 @@
   padding: 1rem;
   width: 100%;
   height: 100%;
+  display: flex;
   background-color: var(--blue-1);
   border-radius: 5px 5px 0 0;
   overflow: auto;
@@ -52,6 +53,13 @@
   text-wrap: wrap;
   word-break: keep-all;
   font-size: 1rem;
+}
+
+.notice {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* bottom */
@@ -84,17 +92,6 @@
 .hello {
   margin-bottom: 1rem;
   display: block;
-}
-
-.title {
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-.content {
-  margin: 0.5rem 0 2rem 0;
-  white-space: pre-wrap;
-  word-break: keep-all;
 }
 
 .content > li {
