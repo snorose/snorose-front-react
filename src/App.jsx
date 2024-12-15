@@ -1,7 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { RecoilRoot } from 'recoil';
-
 import { Navbar } from '@/components/Navbar';
 
 import { findRouteByPath } from '@/utils';
@@ -16,12 +14,10 @@ function App() {
   const hideNav = currentRoute?.meta?.hideNav ?? false;
 
   return (
-    <RecoilRoot>
-      <div className={styles.app}>
-        <Outlet />
-        {!hideNav && <Navbar />}
-      </div>
-    </RecoilRoot>
+    <div className={styles.app}>
+      <Outlet />
+      {!hideNav && <Navbar />}
+    </div>
   );
 }
 

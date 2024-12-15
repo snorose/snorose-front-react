@@ -9,7 +9,12 @@ export default function Slide({ src, redirectUrl, alt }) {
 
   return (
     <a className={styles.slide} href={redirectUrl}>
-      <img src={imgSrc} alt={alt} onError={() => setImgSrc(defaultBanner)} />
+      <img
+        src={imgSrc}
+        loading='lazy'
+        alt={alt}
+        onError={() => setImgSrc(defaultBanner)}
+      />
     </a>
   );
 }
