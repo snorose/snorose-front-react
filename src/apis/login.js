@@ -25,6 +25,7 @@ export const useLogin = () => {
 
         setIsError(false);
         navigate('/');
+        window.location.reload();
       } catch (e) {
         if (e.response.status === 500) {
           toast(TOAST.ERROR.SERVER);
