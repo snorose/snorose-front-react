@@ -48,3 +48,8 @@
 .dark .tag {
   color: var(--gray-1-1);
 }
+
+.image {
+  width: 4.5rem;
+  height: auto;
+}

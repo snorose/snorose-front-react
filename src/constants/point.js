@@ -63,7 +63,7 @@ export const POINT_CATEGORY_KOREAN_ENUM = Object.freeze({
   POINT_REWARD_ETC: '포인트 보상 - 기타 사유',
   POINT_DEDUCTION_ETC: '포인트 차감 - 기타 사유',
 
-  POINT_DEDUCTION_FlOODING: '포인트 차감 - 도배',
+  POINT_DEDUCTION_FLOODING: '포인트 차감 - 도배',
 
   EVENT: '이벤트',
   ETC: '기타',
