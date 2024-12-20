@@ -13,8 +13,27 @@ const content = (
       <Heading>1. 24-2 기말고사 포인트 미지급 기간</Heading>
       <Content>12.02(월) 00:00 ~ 12.20(금) 23:59</Content>
 
-      <Heading>2. 시험후기 게시판 운영 기간</Heading>
-      <Content>12.21(토) 00:00 ~ 2025.01.20(월) 23:59</Content>
+      <Heading>2. 시험후기 게시판 글 작성 가능 기간</Heading>
+      <Content>
+        2024.12.21(토) 00:00 ~ 2025.01.20(월) 23:59
+        <br />
+        <Content>
+          <span className={styles.strong}>
+            * 시험후기 게시 전{' '}
+            <span className={styles.underline}>공지사항</span> 꼭!
+            확인부탁드립니다.
+          </span>
+          <Content>
+            시험후기 공지사항:{' '}
+            <a
+              className={styles.link}
+              href='https://www.snorose.com/board/exam-review-notice/post/1722602'
+            >
+              https://www.snorose.com/board/exam-review-notice/post/1722602
+            </a>
+          </Content>
+        </Content>
+      </Content>
     </div>
     <div>
       <hr />
