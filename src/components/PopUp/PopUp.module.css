@@ -94,14 +94,19 @@
   display: block;
 }
 
-.content > li {
-  word-break: break-all;
-}
-
 .link {
   color: var(--blue-3);
 }
 
 .link:hover {
+  text-decoration: underline;
+}
+
+.strong {
+  color: red;
+  font-weight: 500;
+}
+
+.underline {
   text-decoration: underline;
 }
