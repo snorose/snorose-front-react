@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useSidebarStore } from '@/stores';
 import { useAuth } from '@/hooks';
-
 import { List } from '@/components/Sidebar';
 import { Icon } from '@/components/Icon';
-
 import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '@/constants';
 
 import styles from './Sidebar.module.css';
 
-export default function Sidebar({ isOpen, setIsOpen }) {
+export default function Sidebar() {
+  const isOpen = useSidebarStore((state) => state.isOpen);
+  const close = useSidebarStore((state) => state.close);
   const { status } = useAuth();
 
   const MENUS =
@@ -21,13 +22,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
     event.stopPropagation();
   };
 
-  const handleLinkClick = () => {
-    setIsOpen(false);
-  };
-
   useEffect(() => {
-    const close = () => setIsOpen(false);
-
     if (isOpen) {
       document.addEventListener('click', close);
     }
@@ -47,19 +42,14 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         <Link className={styles.logo} to='/'>
           <Icon id='logo' width={129} height={23} margin={10} />
         </Link>
-        {MENUS &&
-          MENUS.map(({ to, title, items }) => (
-            <div key={title}>
-              <Link to={to}>
-                <h3 className={styles.title}>{title}</h3>
-              </Link>
-              <List
-                className={styles.item}
-                items={items}
-                onItemClick={handleLinkClick}
-              />
-            </div>
-          ))}
+        {MENUS.map(({ to, title, items }) => (
+          <div key={title} onClick={close}>
+            <Link to={to}>
+              <h3 className={styles.title}>{title}</h3>
+            </Link>
+            <List className={styles.item} items={items} />
+          </div>
+        ))}
       </aside>
     </div>
   );
