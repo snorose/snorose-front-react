@@ -1,0 +1,20 @@
+.list {
+  margin: 0 var(--default-margin);
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.item {
+  width: 100%;
+  padding: 0.8125rem 0.9375rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: var(--gray-1);
+  border-radius: 0.3125rem;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: var(--gray-3-1);
+}

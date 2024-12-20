@@ -52,6 +52,7 @@ const useAuth = () => {
     queryClient.removeQueries([QUERY_KEY.userInfo]);
 
     navigate('/');
+    window.location.reload();
     refetch();
   };
 
