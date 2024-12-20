@@ -6,7 +6,7 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 1;
   background: rgba(228, 228, 228, 0.6);
   backdrop-filter: blur(0.625rem);
   /* Note: backdrop-filter has minimal browser support */
