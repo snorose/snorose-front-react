@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const now = new Date();
-const examStart = new Date(2025, 1, 1); // 10월 20일
-const examEnd = new Date(2025, 1, 1); // 10월 30일
+const examStart = new Date(2024, 11, 21, 0, 0, 0);
+const examEnd = new Date(2025, 0, 20, 23, 59, 59);
 
 export function CheckExamPeriodRoute({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const now = new Date();
+
     if (now >= examStart && now <= examEnd) {
       return;
     }
