@@ -18,6 +18,7 @@ export default function Sidebar() {
     status === 'authenticated'
       ? SIDEBAR_MENUS
       : SIDEBAR_MENUS.filter((menu) => NOT_LOGIN_MENUS.includes(menu.title));
+
   const handleEventPropagation = (event) => {
     event.stopPropagation();
   };
