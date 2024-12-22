@@ -5,7 +5,7 @@ import {
 } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 
-export default function usePaginationSuspense({
+export default function useSuspensePagination({
   queryKey,
   queryFn,
   staleTime = 0,
