@@ -19,9 +19,7 @@ export const getReviewDetail = async (postId) => {
 };
 
 export const editReviewDetail = async (postId, edit) => {
-  const response = await authAxios.patch(`/v1/reviews/${postId}`, null, {
-    params: edit,
-  });
+  const response = await authAxios.patch(`/v1/reviews/${postId}`, edit);
   return response;
 };
 
