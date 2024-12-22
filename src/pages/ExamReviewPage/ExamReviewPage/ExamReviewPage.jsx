@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { getReviewList, getNoticeLine } from '@/apis';
+import { getReviews, getNoticeLine } from '@/apis';
 
 import { usePagination, useSearch, useScrollRestoration } from '@/hooks';
 
-import { ExamReviewList, ExamReviewSearchList } from '@/pages/ExamReviewPage';
+import { ExamReviews, ExamReviewSearchList } from '@/pages/ExamReviewPage';
 
 import { AppBar, DropDownBlue, Search, WriteButton, Icon } from '@/components';
 
@@ -65,7 +65,7 @@ export default function ExamReviewPage() {
 
   const reviewResult = usePagination({
     queryKey: [QUERY_KEY.posts, 32],
-    queryFn: ({ pageParam }) => getReviewList(pageParam),
+    queryFn: ({ pageParam }) => getReviews(pageParam),
     staleTime: STALE_TIME.examReview,
     enabled: !isSearchCondition,
   });
@@ -159,7 +159,7 @@ export default function ExamReviewPage() {
           saveScrollPosition={saveScrollPosition}
         />
       ) : (
-        <ExamReviewList
+        <ExamReviews
           result={reviewResult}
           saveScrollPosition={saveScrollPosition}
         />

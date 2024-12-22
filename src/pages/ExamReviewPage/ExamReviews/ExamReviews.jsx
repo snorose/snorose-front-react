@@ -6,7 +6,7 @@ import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
 
 import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
 
-export default function ExamReviewList({ result, saveScrollPosition }) {
+export default function ExamReviews({ result, saveScrollPosition }) {
   const { data, ref, isLoading, isFetching, isError, refetch } = result;
 
   if (isLoading) {
