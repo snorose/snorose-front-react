@@ -8,22 +8,21 @@ import {
   reportPost,
   reportUser,
 } from '@/apis';
-
 import { useAuth, useScrap, useToast } from '@/hooks';
-
+import {
+  BackAppBar,
+  CommentsSuspense,
+  DeleteModal,
+  OptionModal,
+  FetchLoading,
+  FetchLoadingOverlay,
+  Icon,
+  InputBar,
+  ReviewContentItem,
+  ReviewDownload,
+} from '@/components';
 import { NotFoundPage } from '@/pages/NotFoundPage';
-
-import { BackAppBar } from '@/components/AppBar';
-import { CommentList } from '@/components/Comment';
-import { DeleteModal, OptionModal } from '@/components/Modal';
-import { FetchLoading, FetchLoadingOverlay } from '@/components/Loading';
-import { Icon } from '@/components/Icon';
-import { InputBar } from '@/components/InputBar';
-import { ReviewContentItem } from '@/components/ReviewContentItem';
-import { ReviewDownload } from '@/components/ReviewDownload';
-
 import { dateFormat, convertToObject } from '@/utils';
-
 import {
   BOARD_MENUS,
   LECTURE_TYPES,
@@ -282,7 +281,7 @@ export default function ExamReviewPage() {
           </div>
         </div>
       </div>
-      <CommentList commentCount={commentCount} />
+      <CommentsSuspense commentCount={commentCount} />
       <InputBar />
       <OptionModal
         id={isConfirmed ? 'confirmed-exam-review-option' : 'exam-review-option'}

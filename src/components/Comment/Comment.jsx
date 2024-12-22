@@ -1,20 +1,21 @@
 import { forwardRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 
+import { reportComment } from '@/apis';
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-
 import { useLike, useComment, useToast, useModal } from '@/hooks';
-import { DeleteModal, OptionModal, ConfirmModal } from '@/components/Modal';
-import { Icon } from '@/components/Icon';
-import { NestedComment } from '@/components/Comment';
-
+import {
+  NestedComment,
+  DeleteModal,
+  OptionModal,
+  ConfirmModal,
+  Icon,
+} from '@/components';
 import { timeAgo } from '@/utils';
-
 import { LIKE_TYPE, MUTATION_KEY } from '@/constants';
 
 import styles from './Comment.module.css';
-import { useMutation } from '@tanstack/react-query';
-import { reportComment } from '@/apis';
 
 const Comment = forwardRef((props, ref) => {
   const { pathname } = useLocation();

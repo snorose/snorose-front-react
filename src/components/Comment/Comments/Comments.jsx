@@ -1,34 +1,20 @@
 import { useParams } from 'react-router-dom';
 
-import { getCommentList } from '@/apis';
-
-import { usePagination } from '@/hooks';
-
-import { Comment } from '@/components/Comment';
-import { FetchLoading } from '@/components/Loading';
-
+import { getComments } from '@/apis';
+import { useSuspensePagination } from '@/hooks';
+import { Comment, FetchLoading } from '@/components';
 import { filterVisibleComments, flatPaginationCache } from '@/utils';
 import { QUERY_KEY } from '@/constants';
 
-import styles from './CommentList.module.css';
+import styles from './Comments.module.css';
 
-export default function CommentList({ commentCount }) {
+export default function Comments({ commentCount }) {
   const { postId } = useParams();
 
-  const { data, isLoading, isFetching, isError, ref } = usePagination({
+  const { data, isFetching, ref } = useSuspensePagination({
     queryKey: [QUERY_KEY.comments, postId],
-    queryFn: ({ pageParam }) => getCommentList({ postId, page: pageParam }),
+    queryFn: ({ pageParam }) => getComments({ postId, page: pageParam }),
   });
-
-  if (isLoading) {
-    return <FetchLoading>댓글을 불러오는 중...</FetchLoading>;
-  }
-
-  if (isError) {
-    return (
-      <FetchLoading animation={false}>댓글을 불러올 수 없습니다.</FetchLoading>
-    );
-  }
 
   const commentList = flatPaginationCache(data);
   const visibledCommentList = filterVisibleComments(commentList);
