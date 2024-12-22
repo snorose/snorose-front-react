@@ -2,18 +2,15 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { getReviews, getNoticeLine } from '@/apis';
-import { usePagination, useSearch, useScrollRestoration } from '@/hooks';
-import { ExamReviews, ExamReviewSearchList } from '@/pages/ExamReviewsPage';
+import { getNoticeLine } from '@/apis';
+import { useSearch, useScrollRestoration } from '@/hooks';
+import {
+  ExamReviewsSuspense,
+  ExamReviewSearchList,
+} from '@/pages/ExamReviewsPage';
 import { AppBar, DropDownBlue, Search, WriteButton, Icon } from '@/components';
 import { convertToObject } from '@/utils';
-import {
-  YEARS,
-  SEMESTERS,
-  EXAM_TYPES,
-  QUERY_KEY,
-  STALE_TIME,
-} from '@/constants';
+import { YEARS, SEMESTERS, EXAM_TYPES, QUERY_KEY } from '@/constants';
 
 import styles from './ExamReviewsPage.module.css';
 
@@ -58,13 +55,6 @@ export default function ExamReviewsPage() {
     semester?.id ||
     examType?.id
   );
-
-  const reviewResult = usePagination({
-    queryKey: [QUERY_KEY.posts, 32],
-    queryFn: ({ pageParam }) => getReviews(pageParam),
-    staleTime: STALE_TIME.examReview,
-    enabled: !isSearchCondition,
-  });
 
   const searchResult = useSearch({
     urlKeyword,
@@ -155,10 +145,7 @@ export default function ExamReviewsPage() {
           saveScrollPosition={saveScrollPosition}
         />
       ) : (
-        <ExamReviews
-          result={reviewResult}
-          saveScrollPosition={saveScrollPosition}
-        />
+        <ExamReviewsSuspense saveScrollPosition={saveScrollPosition} />
       )}
 
       <WriteButton to='/board/exam-review-write' />

@@ -1,24 +1,19 @@
 import { Link } from 'react-router-dom';
 
+import { getReviews } from '@/apis';
+import { useSuspensePagination } from '@/hooks';
 import { FetchLoading, PostBar, PTR } from '@/components';
 import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
+import { QUERY_KEY, STALE_TIME } from '@/constants';
 
 import styles from './ExamReviews.module.css';
 
-export default function ExamReviews({ result, saveScrollPosition }) {
-  const { data, ref, isLoading, isFetching, isError, refetch } = result;
-
-  if (isLoading) {
-    return <FetchLoading className={styles.loading}>불러오는 중</FetchLoading>;
-  }
-
-  if (isError) {
-    return (
-      <FetchLoading animation={false}>
-        시험후기를 불러오지 못했습니다.
-      </FetchLoading>
-    );
-  }
+export default function ExamReviews({ saveScrollPosition }) {
+  const { data, ref, isFetching, refetch } = useSuspensePagination({
+    queryKey: [QUERY_KEY.posts, 32],
+    queryFn: ({ pageParam }) => getReviews(pageParam),
+    staleTime: STALE_TIME.examReview,
+  });
 
   const reviewList = deduplicatePaginatedData(flatPaginationCache(data));
 
