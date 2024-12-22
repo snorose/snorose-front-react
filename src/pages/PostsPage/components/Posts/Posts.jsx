@@ -1,11 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
 
 import { getPostList } from '@/apis';
-
 import { usePagination } from '@/hooks';
-
 import { PostBar, PTR, FetchLoading } from '@/components';
-
 import {
   deduplicatePaginatedData,
   flatPaginationCache,
@@ -13,12 +10,11 @@ import {
   getBoardTitleToTextId,
   timeAgo,
 } from '@/utils';
-
 import { QUERY_KEY, STALE_TIME } from '@/constants';
 
-import styles from './BoardPostList.module.css';
+import styles from './Posts.module.css';
 
-export default function BoardPostList({ saveScrollPosition }) {
+export default function Posts({ saveScrollPosition }) {
   const { pathname } = useLocation();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { BoardBar, Header, Icon, Sidebar, Search } from '@/components';
-
 import { BOARD_MENUS } from '@/constants';
 
 import styles from './BoardPage.module.css';

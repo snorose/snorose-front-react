@@ -2,18 +2,15 @@ import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { getNoticeLine } from '@/apis';
-
 import { useScrollRestoration } from '@/hooks';
-
-import { BoardPostList } from '@/pages/BoardPage';
 import { BackAppBar, Icon, WriteButton } from '@/components';
-
+import { Posts } from '@/pages/PostsPage';
 import { getBoard } from '@/utils';
 import { QUERY_KEY } from '@/constants';
 
-import styles from './BoardListPage.module.css';
+import styles from './PostsPage.module.css';
 
-export default function BoardListPage() {
+export default function PostsPage() {
   const { pathname } = useLocation();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
@@ -45,7 +42,7 @@ export default function BoardListPage() {
           </Link>
         </div>
       )}
-      <BoardPostList saveScrollPosition={saveScrollPosition} />
+      <Posts saveScrollPosition={saveScrollPosition} />
       {!isBesookt && (
         <WriteButton
           to={`/board/${currentBoardTextId}/post-write`}
