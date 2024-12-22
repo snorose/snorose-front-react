@@ -3,7 +3,7 @@ import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
 // import { AlertPage } from '@/pages/AlertPage';
 import { AttendancePage } from '@/pages/AttendancePage';
-import { BoardListPage, BoardPage } from '@/pages/BoardPage';
+import { BoardPage } from '@/pages/BoardPage';
 import {
   ChangePasswordPage,
   DeleteAccountPage,
@@ -45,6 +45,7 @@ import {
   PostWritePage,
   PostEditPage,
 } from '@/pages/PostPage';
+import { PostsPage } from '@/pages/PostsPage';
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/constants';
@@ -108,7 +109,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         roles={getRolesForReadBoard(boardPath)}
         message={'게시판 접근 권한이 없습니다.'}
       >
-        {boardPath === 'notice' ? <NoticeListPage /> : <BoardListPage />}
+        {boardPath === 'notice' ? <NoticeListPage /> : <PostsPage />}
       </ProtectedRoute>
     ),
     meta: {

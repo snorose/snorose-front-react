@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getNoticeLine } from '@/apis';
 import { useScrollRestoration } from '@/hooks';
 import { BackAppBar, Icon, WriteButton } from '@/components';
-import { Posts } from '@/pages/PostsPage';
+import { PostsSuspense } from '@/pages/PostsPage';
 import { getBoard } from '@/utils';
 import { QUERY_KEY } from '@/constants';
 
@@ -42,7 +42,7 @@ export default function PostsPage() {
           </Link>
         </div>
       )}
-      <Posts saveScrollPosition={saveScrollPosition} />
+      <PostsSuspense saveScrollPosition={saveScrollPosition} />
       {!isBesookt && (
         <WriteButton
           to={`/board/${currentBoardTextId}/post-write`}
