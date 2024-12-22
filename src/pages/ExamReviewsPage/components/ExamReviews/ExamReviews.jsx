@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 
 import { FetchLoading, PostBar, PTR } from '@/components';
-
 import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
 
-import styles from '@/pages/ExamReviewPage/ExamReviewPage/ExamReviewPage.module.css';
+import styles from './ExamReviews.module.css';
 
 export default function ExamReviews({ result, saveScrollPosition }) {
   const { data, ref, isLoading, isFetching, isError, refetch } = result;

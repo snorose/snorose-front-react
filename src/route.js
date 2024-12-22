@@ -18,7 +18,8 @@ import {
   ScrapPage,
   ScrapExamReviewPage,
 } from '@/pages/MyPage';
-import { ExamReviewDetailPage, ExamReviewPage } from '@/pages/ExamReviewPage';
+import { ExamReviewPage } from '@/pages/ExamReviewPage';
+import { ExamReviewsPage } from '@/pages/ExamReviewsPage';
 import { ExamReviewEditPage } from '@/pages/ExamReviewEditPage';
 import { ExamReviewWritePage } from '@/pages/ExamReviewWritePage';
 import {
@@ -218,7 +219,7 @@ export const routeList = [
             roles={[ROLE.user, ROLE.admin]}
             message={'시험후기 게시판 접근 권한이 없습니다.'}
           >
-            <ExamReviewPage />
+            <ExamReviewsPage />
           </ProtectedRoute>
         ),
       },
@@ -243,7 +244,7 @@ export const routeList = [
             roles={[ROLE.user, ROLE.admin]}
             message={'시험후기 게시판 접근 권한이 없습니다.'}
           >
-            <ExamReviewPage />
+            <ExamReviewsPage />
           </ProtectedRoute>
         ),
       },
@@ -255,7 +256,7 @@ export const routeList = [
             roles={[ROLE.user, ROLE.admin]}
             message={'시험후기 접근 권한이 없습니다.'}
           >
-            <ExamReviewDetailPage />
+            <ExamReviewPage />
           </ProtectedRoute>
         ),
         meta: {

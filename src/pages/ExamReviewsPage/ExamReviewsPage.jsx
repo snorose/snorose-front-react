@@ -3,13 +3,9 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { getReviews, getNoticeLine } from '@/apis';
-
 import { usePagination, useSearch, useScrollRestoration } from '@/hooks';
-
-import { ExamReviews, ExamReviewSearchList } from '@/pages/ExamReviewPage';
-
+import { ExamReviews, ExamReviewSearchList } from '@/pages/ExamReviewsPage';
 import { AppBar, DropDownBlue, Search, WriteButton, Icon } from '@/components';
-
 import { convertToObject } from '@/utils';
 import {
   YEARS,
@@ -19,13 +15,13 @@ import {
   STALE_TIME,
 } from '@/constants';
 
-import styles from './ExamReviewPage.module.css';
+import styles from './ExamReviewsPage.module.css';
 
 const LECTURE_YEAR_LEBEL = convertToObject(YEARS);
 const SEMESTER_LEBEL = convertToObject(SEMESTERS);
 const EXAM_TYPE_LEBEL = convertToObject(EXAM_TYPES);
 
-export default function ExamReviewPage() {
+export default function ExamReviewsPage() {
   const { scrollRef, saveScrollPosition } = useScrollRestoration();
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -109,7 +105,7 @@ export default function ExamReviewPage() {
       <AppBar title='시험후기' />
       <div className={styles.notification}>
         <Link
-          className={styles.notification_bar}
+          className={styles.notificationBar}
           to={`/board/exam-review/notice`}
         >
           <Icon id='notice-bell' width={11} height={13} />

@@ -12,7 +12,7 @@
   padding-top: 4rem;
 }
 
-.notification_bar {
+.notificationBar {
   width: 100%;
   padding: 0.688rem 0.938rem;
   display: flex;
@@ -26,12 +26,6 @@
   cursor: pointer;
 }
 
-.notification_icon {
-  width: 0.663rem;
-  height: 0.791rem;
-  display: flex;
-}
-
 .search {
   width: calc(100% - 1.25rem * 2);
   margin: 0 1.25rem 0.625rem 1.25rem;
@@ -42,21 +36,4 @@
   display: flex;
   align-items: center;
   gap: 0.3125rem;
-}
-
-.list {
-  padding: 0.25rem 1rem 6rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  overflow: hidden;
-}
-
-.to {
-  width: 100%;
-}
-
-.loading {
-  padding-bottom: 7rem;
 }

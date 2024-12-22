@@ -35,13 +35,13 @@ import {
   MUTATION_KEY,
 } from '@/constants';
 
-import styles from './ExamReviewDetailPage.module.css';
+import styles from './ExamReviewPage.module.css';
 
 const COURSE_TYPE = convertToObject(LECTURE_TYPES);
 const SEMESTER = convertToObject(SEMESTERS);
 const EXAM_TYPE = convertToObject(EXAM_TYPES);
 
-export default function ExamReviewDetailPage() {
+export default function ExamReviewPage() {
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
