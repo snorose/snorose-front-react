@@ -13,7 +13,13 @@ import {
   Filters,
 } from '@/components';
 
-import { YEARS, SEMESTERS, EXAM_TYPES, QUERY_KEY } from '@/constants';
+import {
+  YEARS,
+  SEMESTERS,
+  EXAM_TYPES,
+  QUERY_KEY,
+  STALE_TIME,
+} from '@/constants';
 
 import styles from './ExamReviewsPage.module.css';
 
@@ -21,6 +27,7 @@ export default function ExamReviewsPage() {
   const { data: noticeLineData } = useQuery({
     queryKey: [QUERY_KEY.noticeLine, 32],
     queryFn: () => getNoticeLine(32),
+    staleTime: STALE_TIME.noticeLine,
   });
 
   const { scrollRef, saveScrollPosition } = useScrollRestoration();

@@ -10,13 +10,9 @@ import {
   ChangePasswordPage,
   EditInfoPage,
   DeleteAccountPage,
-  MyPostPage,
-  CommentPage,
-  DownloadExamReviewPage,
+  ActivityPage,
   PrivacyPolicyPage,
   ServicePolicyPage,
-  ScrapPage,
-  ScrapExamReviewPage,
 } from '@/pages/MyPage';
 import { ExamReviewPage } from '@/pages/ExamReviewPage';
 import { ExamReviewsPage } from '@/pages/ExamReviewsPage';
@@ -402,7 +398,7 @@ export const routeList = [
         path: '/my-page/my-post',
         element: (
           <ProtectedRoute>
-            <MyPostPage />
+            <ActivityPage />
           </ProtectedRoute>
         ),
         meta: {
@@ -413,7 +409,7 @@ export const routeList = [
         path: '/my-page/comment',
         element: (
           <ProtectedRoute>
-            <CommentPage />
+            <ActivityPage />
           </ProtectedRoute>
         ),
         meta: {
@@ -424,7 +420,7 @@ export const routeList = [
         path: '/my-page/download-exam-review',
         element: (
           <ProtectedRoute>
-            <DownloadExamReviewPage />
+            <ActivityPage />
           </ProtectedRoute>
         ),
         meta: {
@@ -435,7 +431,7 @@ export const routeList = [
         path: '/my-page/scrap',
         element: (
           <ProtectedRoute>
-            <ScrapPage />
+            <ActivityPage />
           </ProtectedRoute>
         ),
         meta: {
@@ -446,7 +442,7 @@ export const routeList = [
         path: '/my-page/scrap-exam-review',
         element: (
           <ProtectedRoute>
-            <ScrapExamReviewPage />
+            <ActivityPage />
           </ProtectedRoute>
         ),
         meta: {

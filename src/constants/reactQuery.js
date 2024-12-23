@@ -13,8 +13,8 @@ export const QUERY_KEY = Object.freeze({
   myPosts: 'myPosts',
   myCommentedPosts: 'myCommentedPosts',
   myDownloadedExamReviews: 'myDownloadedExamReviews',
-  myScrappedPosts: 'myScrappedPosts',
-  myScrappedExamReviews: 'myScrappedExamReviews',
+  myScrapedPosts: 'myScrapedPosts',
+  myScrapedExamReviews: 'myScrapedExamReviews',
   best3: 'best3',
 });
 
@@ -43,4 +43,5 @@ export const STALE_TIME = Object.freeze({
   mypageActivity: 1000 * 60 * 5,
   noticeList: 1000 * 60 * 10,
   searchList: 1000 * 60 * 10,
+  noticeLine: 1000 * 60 * 10,
 });

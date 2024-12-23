@@ -26,7 +26,7 @@ export const updatePassword = async (body) => {
   return response?.data;
 };
 
-export const getMyPostList = async (params = {}) => {
+export const getMyPosts = async (params = {}) => {
   const response = await authAxios.get('/v1/users/mypage/posts', {
     params,
   });
@@ -34,7 +34,7 @@ export const getMyPostList = async (params = {}) => {
   return response?.data.result;
 };
 
-export const getMyCommentList = async (params = {}) => {
+export const getMyComments = async (params = {}) => {
   const response = await authAxios.get('/v1/users/mypage/comments', {
     params,
   });
@@ -42,7 +42,7 @@ export const getMyCommentList = async (params = {}) => {
   return response?.data.result;
 };
 
-export const getMyReviewFileList = async (params = {}) => {
+export const getDonwloadedExamReviews = async (params = {}) => {
   const response = await authAxios.get('/v1/users/mypage/reviewFileList', {
     params,
   });
@@ -50,7 +50,7 @@ export const getMyReviewFileList = async (params = {}) => {
   return response?.data.result;
 };
 
-export const getMyScrapReviewList = async (params) => {
+export const getScrapedExamReviews = async (params) => {
   const response = await authAxios.get('/v1/scraps/reviews', {
     params,
   });
@@ -58,7 +58,7 @@ export const getMyScrapReviewList = async (params) => {
   return response?.data.result;
 };
 
-export const getMyScrapPostList = async (params) => {
+export const getScrapedPosts = async (params) => {
   const response = await authAxios.get('/v1/scraps/posts', {
     params,
   });
