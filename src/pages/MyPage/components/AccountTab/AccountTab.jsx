@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/hooks';
 
-import styles from './MyPage.module.css';
+import styles from './AccountTab.module.css';
 
 const USER_INFO_ITEM_LABEL = Object.freeze({
   loginId: '아이디',

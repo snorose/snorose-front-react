@@ -5,11 +5,11 @@ import { AboutPage } from '@/pages/AboutPage';
 import { AttendancePage } from '@/pages/AttendancePage';
 import { BoardPage } from '@/pages/BoardPage';
 import {
+  MyPage,
   PointLogsPage,
   ChangePasswordPage,
-  DeleteAccountPage,
   EditInfoPage,
-  MyPage,
+  DeleteAccountPage,
   MyPostPage,
   CommentPage,
   DownloadExamReviewPage,

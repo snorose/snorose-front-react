@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks';
 
 import { Icon } from '@/components/Icon';
 
-import styles from './MyPage.module.css';
+import styles from './PolicyTab.module.css';
 
 const PolicyTab = () => {
   const { logout } = useAuth();

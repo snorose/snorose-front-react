@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { Icon } from '@/components/Icon';
 
-import styles from './MyPage.module.css';
+import styles from './ActivityTab.module.css';
 
 const ActivityTab = () => {
   return (
