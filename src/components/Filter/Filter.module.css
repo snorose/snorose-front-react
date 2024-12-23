@@ -1,8 +1,8 @@
-.dropdown {
+.filter {
   position: relative;
 }
 
-.select {
+.display {
   padding: 0.1875rem 0.875rem;
   display: flex;
   align-items: center;

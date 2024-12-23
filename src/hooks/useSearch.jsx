@@ -1,72 +1,25 @@
-import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import { searchByBoard } from '@/apis';
-
 import { usePagination } from '@/hooks';
+import { QUERY_KEY, STALE_TIME } from '@/constants';
 
-import { BOARD_ID, QUERY_KEY, STALE_TIME } from '@/constants';
-
-export default function useSearch({
-  urlKeyword,
-  filterOption,
-  enabled = true,
-}) {
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-  const boardType = pathname.split('/')[2];
-
-  const [keyword, setKeyword] = useState(urlKeyword ?? '');
-  const [newUrlKeyword, setNewUrlKeyword] = useState(keyword ?? '');
-
-  const handleChange = (event) => {
-    setKeyword(event.target.value);
-  };
-
-  const handleOnKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      if (event.target.value.trim() === '') {
-        setNewUrlKeyword(encodeURIComponent(keyword));
-        boardType === 'exam-review'
-          ? navigate(`/board/${boardType}`)
-          : navigate(`/board/${boardType}/search`);
-        return;
-      }
-
-      setNewUrlKeyword(encodeURIComponent(keyword));
-
-      if (boardType === 'exam-review') {
-        const param = Object.entries(filterOption).reduce(
-          (result, [key, value]) =>
-            value ? `${result}&${key}=${value}` : result,
-          ''
-        );
-
-        navigate(
-          `/board/${boardType}/search?query=${encodeURIComponent(keyword)}${param}`
-        );
-        return;
-      }
-
-      navigate(
-        `/board/${boardType}/search?query=${encodeURIComponent(keyword)}`
-      );
-    }
-  };
+export default function useSearch({ boardId }) {
+  const [searchParams] = useSearchParams();
+  const params = Object.fromEntries(searchParams.entries());
+  const paramsLength = Object.keys(params).length;
 
   const { data, ref, isLoading, isFetching, status, isError, error, refetch } =
     usePagination({
-      queryKey: [QUERY_KEY.search, newUrlKeyword, boardType, filterOption],
+      queryKey: [QUERY_KEY.search, boardId, params],
       queryFn: ({ pageParam }) =>
         searchByBoard({
-          boardId: BOARD_ID[boardType],
-          boardType,
+          boardId,
           page: pageParam,
-          keyword,
-          ...filterOption,
+          params,
         }),
       staleTime: STALE_TIME.searchList,
-      enabled,
+      enabled: paramsLength > 0,
     });
 
   return {
@@ -77,10 +30,6 @@ export default function useSearch({
     status,
     isError,
     error,
-    keyword,
-    urlKeyword,
     refetch,
-    handleChange,
-    handleOnKeyDown,
   };
 }

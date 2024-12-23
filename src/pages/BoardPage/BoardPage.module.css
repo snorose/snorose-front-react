@@ -3,20 +3,12 @@
   height: 100%;
 }
 
-.padding_container {
+.paddingContainer {
   padding: 0 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: baseline;
   font-size: 0.5rem;
-}
-
-.status_bar {
-  height: 3.375rem;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  /* border: 1px solid gray; */
 }
 
 .header {
@@ -27,21 +19,7 @@
   width: 100%;
 }
 
-.text_logo {
-  display: flex;
-  justify-content: baseline;
-  width: 9.5rem;
-  height: 1.875rem;
-}
-
-.side_menu_btn {
-  width: 1.25rem;
-  height: 0.9375rem;
-  margin-left: 0.625rem;
-  display: flex;
-}
-
-.searchbar_box {
+.searchbarBox {
   width: 100%;
   /* 양옆 여백 */
   padding: 0.625rem 0 0 0;
@@ -72,19 +50,19 @@
   }
 }
 
-.board_box {
+.boardBox {
   padding: 1.625rem 0;
   width: 100%;
 }
 
-.board_title {
+.boardTitle {
   box-sizing: border-box;
   padding: 0 0 0.5rem 0;
   font-size: 1rem;
   font-weight: 700;
 }
 
-.board_list_box {
+.boardListBox {
   display: grid;
   grid-template-columns: repeat(2, 2fr);
   grid-row: auto auto;
@@ -92,7 +70,7 @@
   grid-row-gap: 0.625rem;
 }
 
-.more_board_box {
+.moreBoardBox {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -105,14 +83,4 @@
 
 .iconLogo {
   margin-bottom: 0.625rem;
-}
-
-.sponsor {
-  width: 100%;
-  border-radius: 0.3125rem;
-  font-size: 0.75rem;
-  background-size: contain;
-  background: no-repeat;
-  display: flex;
-  justify-content: center;
 }

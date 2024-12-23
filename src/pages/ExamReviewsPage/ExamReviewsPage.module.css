@@ -30,10 +30,3 @@
   width: calc(100% - 1.25rem * 2);
   margin: 0 1.25rem 0.625rem 1.25rem;
 }
-
-.filters {
-  margin: 0 var(--default-margin) 0.875rem var(--default-margin);
-  display: flex;
-  align-items: center;
-  gap: 0.3125rem;
-}
