@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { getPosts } from '@/apis';
 import { useSuspensePagination } from '@/hooks';
-import { PostBar, PTR, FetchLoading } from '@/components';
+import { List, PostBar, PTR, FetchLoading } from '@/components';
 import {
   deduplicatePaginatedData,
   flatPaginationCache,
@@ -31,9 +31,10 @@ export default function Posts({ saveScrollPosition }) {
 
   return (
     <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
-      <div className={styles.postListContainer}>
+      <List>
         {postList.map((post, index) => (
           <Link
+            className={styles.to}
             key={post.postId}
             to={
               isBesookt
@@ -47,7 +48,7 @@ export default function Posts({ saveScrollPosition }) {
           </Link>
         ))}
         {isFetching && <FetchLoading />}
-      </div>
+      </List>
     </PTR>
   );
 }

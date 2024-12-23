@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import styles from './List.module.css';
+import styles from './MenuList.module.css';
 
-export default function List({ className, items, onItemClick }) {
+export default function MenuList({ className, items, onItemClick }) {
   if (!items) return null;
 
   return (

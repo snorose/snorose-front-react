@@ -1,12 +1,9 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { getNoticeLine } from '@/apis';
-import { useSearch, useScrollRestoration } from '@/hooks';
-import {
-  ExamReviewsSuspense,
-  ExamReviewSearchList,
-} from '@/pages/ExamReviewsPage';
+import { useScrollRestoration } from '@/hooks';
+import { SearchExamReviewsSuspense } from '@/pages/ExamReviewsPage';
 import {
   AppBar,
   Search,
@@ -21,16 +18,11 @@ import { YEARS, SEMESTERS, EXAM_TYPES, QUERY_KEY } from '@/constants';
 import styles from './ExamReviewsPage.module.css';
 
 export default function ExamReviewsPage() {
-  const [searchParams] = useSearchParams();
-  const params = Object.fromEntries(searchParams.entries());
-  const paramsLength = Object.keys(params).length;
-
   const { data: noticeLineData } = useQuery({
     queryKey: [QUERY_KEY.noticeLine, 32],
     queryFn: () => getNoticeLine(32),
   });
 
-  const searchResult = useSearch({ boardId: 32 });
   const { scrollRef, saveScrollPosition } = useScrollRestoration();
 
   return (
@@ -45,6 +37,7 @@ export default function ExamReviewsPage() {
           <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
         </Link>
       </div>
+
       <Search className={styles.search} placeholder='시험후기 검색' />
       <Filters>
         <Filter filterKey='lectureYear' options={YEARS} placeholder='연도' />
@@ -55,14 +48,8 @@ export default function ExamReviewsPage() {
           placeholder='시험 종류'
         />
       </Filters>
-      {paramsLength > 0 ? (
-        <ExamReviewSearchList
-          result={searchResult}
-          saveScrollPosition={saveScrollPosition}
-        />
-      ) : (
-        <ExamReviewsSuspense saveScrollPosition={saveScrollPosition} />
-      )}
+      <SearchExamReviewsSuspense saveScrollPosition={saveScrollPosition} />
+
       <WriteButton to='/board/exam-review-write' />
     </section>
   );

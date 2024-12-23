@@ -39,13 +39,9 @@ import {
 } from '@/pages/LoginPage';
 import { NoticeListPage } from '@/pages/NoticeListPage';
 import { MainPage } from '@/pages/MainPage';
-import {
-  PostPage,
-  PostSearchPage,
-  PostWritePage,
-  PostEditPage,
-} from '@/pages/PostPage';
+import { PostPage, PostWritePage, PostEditPage } from '@/pages/PostPage';
 import { PostsPage } from '@/pages/PostsPage';
+import { SearchPage } from '@/pages/SearchPage';
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/constants';
@@ -179,7 +175,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         roles={getRolesForReadBoard(boardPath)}
         message={'게시판 접근 권한이 없습니다.'}
       >
-        <PostSearchPage />
+        <SearchPage />
       </ProtectedRoute>
     ),
     meta: {
@@ -208,7 +204,7 @@ export const routeList = [
       ...boardRoutes,
       {
         path: '/board/all/search',
-        element: <PostSearchPage />,
+        element: <SearchPage />,
         meta: {
           hideNav: true,
         },

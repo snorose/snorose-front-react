@@ -15,6 +15,7 @@ export * from './Icon';
 export * from './Input';
 export * from './InputBar';
 export * from './InputPassword';
+export * from './List';
 export * from './ListHeader';
 export * from './Loading';
 export * from './MainPageListItem';

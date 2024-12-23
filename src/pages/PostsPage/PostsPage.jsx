@@ -24,7 +24,7 @@ export default function PostsPage() {
   });
 
   return (
-    <div className={styles.container} ref={scrollRef}>
+    <section className={styles.container} ref={scrollRef}>
       <BackAppBar
         title={currentBoard.title}
         hasMenu
@@ -34,7 +34,7 @@ export default function PostsPage() {
       {!isBesookt && (
         <div className={styles.top}>
           <Link
-            className={styles.notification_bar}
+            className={styles.notificationBar}
             to={`/board/${currentBoardTextId}/notice`}
           >
             <Icon id='notice-bell' width={11} height={13} />
@@ -49,6 +49,6 @@ export default function PostsPage() {
           className={styles.writeButton}
         />
       )}
-    </div>
+    </section>
   );
 }

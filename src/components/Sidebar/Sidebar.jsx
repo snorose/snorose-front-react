@@ -2,10 +2,8 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/hooks';
-
-import { List } from '@/components/Sidebar';
 import { Icon } from '@/components/Icon';
-
+import { MenuList } from '@/components/Sidebar';
 import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '@/constants';
 
 import styles from './Sidebar.module.css';
@@ -53,7 +51,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
               <Link to={to}>
                 <h3 className={styles.title}>{title}</h3>
               </Link>
-              <List
+              <MenuList
                 className={styles.item}
                 items={items}
                 onItemClick={handleLinkClick}

@@ -1,1 +1,2 @@
-export { default as ServerErrorFallback } from './ServerErrorFallback.jsx';
+export { default as ServerErrorFallback } from './ServerErrorFallback';
+export { default as ResetButton } from './ResetButton/ResetButton';
