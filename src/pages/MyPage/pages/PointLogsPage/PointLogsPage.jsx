@@ -4,7 +4,10 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { useAuth } from '@/hooks';
 import { BackAppBar, FetchLoading, Icon } from '@/components';
-import { PointLogs, PointLogsErrorFallback } from '@/pages/PointLogsPage';
+import {
+  PointLogs,
+  PointLogsErrorFallback,
+} from '@/pages/MyPage/pages/PointLogsPage';
 
 import styles from './PointLogsPage.module.css';
 

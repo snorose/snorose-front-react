@@ -1,7 +1,7 @@
 import { getPointLogs } from '@/apis';
 import { useSuspensePagination } from '@/hooks';
 import { FetchLoading } from '@/components';
-import { PointLog } from '@/pages/PointLogsPage';
+import { PointLog } from '@/pages/MyPage/pages/PointLogsPage';
 import { flatPaginationCache } from '@/utils';
 import { QUERY_KEY } from '@/constants';
 

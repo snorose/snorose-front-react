@@ -5,6 +5,7 @@ import { AboutPage } from '@/pages/AboutPage';
 import { AttendancePage } from '@/pages/AttendancePage';
 import { BoardPage } from '@/pages/BoardPage';
 import {
+  PointLogsPage,
   ChangePasswordPage,
   DeleteAccountPage,
   EditInfoPage,
@@ -17,7 +18,6 @@ import {
   ScrapPage,
   ScrapExamReviewPage,
 } from '@/pages/MyPage';
-import { PointLogsPage } from '@/pages/PointLogsPage';
 import { ExamReviewPage } from '@/pages/ExamReviewPage';
 import { ExamReviewsPage } from '@/pages/ExamReviewsPage';
 import { ExamReviewEditPage } from '@/pages/ExamReviewEditPage';

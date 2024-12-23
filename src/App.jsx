@@ -4,7 +4,7 @@ import { Navbar } from '@/components/Navbar';
 
 import { findRouteByPath } from '@/utils';
 
-import { routeList } from '@/route.js';
+import { routeList } from '@/router.js';
 
 import styles from './App.module.css';
 
