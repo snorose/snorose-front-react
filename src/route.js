@@ -9,7 +9,6 @@ import {
   DeleteAccountPage,
   EditInfoPage,
   MyPage,
-  ViewPointListPage,
   MyPostPage,
   CommentPage,
   DownloadExamReviewPage,
@@ -18,6 +17,7 @@ import {
   ScrapPage,
   ScrapExamReviewPage,
 } from '@/pages/MyPage';
+import { PointLogsPage } from '@/pages/PointLogsPage';
 import { ExamReviewPage } from '@/pages/ExamReviewPage';
 import { ExamReviewsPage } from '@/pages/ExamReviewsPage';
 import { ExamReviewEditPage } from '@/pages/ExamReviewEditPage';
@@ -366,7 +366,7 @@ export const routeList = [
         path: '/my-page/view-point-list',
         element: (
           <ProtectedRoute>
-            <ViewPointListPage />
+            <PointLogsPage />
           </ProtectedRoute>
         ),
         meta: {
