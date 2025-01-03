@@ -4,7 +4,7 @@ import {
   getDonwloadedExamReviews,
   getScrapedExamReviews,
   getScrapedPosts,
-} from '@/apis';
+} from '@/apis/userInfo.js';
 import { ROUTE } from '@/constants/route.js';
 import { QUERY_KEY } from '@/constants/reactQuery.js';
 
