@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getBannerImage, getHomeNotice, getBest3 } from '@/apis';
 
-import { useAuth, usePopUp } from '@/hooks';
+import { useAuth } from '@/hooks';
 
 import {
   BoardCard,
@@ -27,7 +27,6 @@ const DEFAULT_BESOOKTS = Array.from({ length: 3 }, (_, i) => ({ postId: i }));
 
 export default function MainPage() {
   const { status, userInfo } = useAuth();
-  const { isPopUpOpend, closePopUp } = usePopUp();
   const isLogin = status === 'authenticated';
 
   const {
@@ -153,7 +152,7 @@ export default function MainPage() {
         </Margin>
       )}
       <Footer />
-      {isPopUpOpend && <PopUp close={closePopUp} />}
+      <PopUp />
     </main>
   );
 }

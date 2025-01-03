@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { usePopUp } from '@/hooks/index.js';
 import { Heading, Content } from '@/components/PopUp/Component.jsx';
 
 import styles from './PopUp.module.css';
@@ -46,10 +47,19 @@ const content = (
   </div>
 );
 
-export default function PopUp({ close }) {
-  const [closeForToday, setCloseForToday] = useState(false);
-  const toggleCloseForToday = (event) => setCloseForToday(event.target.checked);
-  const closePopUp = () => close({ closeForToday });
+export default function PopUp() {
+  const [popupHideDuration, setPopupHideDuration] = useState();
+  const updatePopupHideDuration = (event) => {
+    const { value } = event.target;
+    setPopupHideDuration(Number(value));
+  };
+
+  const { isPopUpOpend, closePopUp } = usePopUp();
+  const close = () => closePopUp({ popupHideDuration });
+
+  if (!isPopUpOpend) {
+    return null;
+  }
 
   return (
     <section className={styles.container}>
@@ -58,15 +68,17 @@ export default function PopUp({ close }) {
           <pre>{content}</pre>
         </div>
         <div className={styles.bottom}>
-          <label className={styles.checkBox}>
-            <input
-              type='checkbox'
-              checked={closeForToday}
-              onChange={toggleCloseForToday}
-            />
-            <span>오늘 하루 보지 않기</span>
-          </label>
-          <button onClick={closePopUp}>닫기</button>
+          <div className={styles.radios} onChange={updatePopupHideDuration}>
+            <label className={styles.radio}>
+              <input type='radio' value={0} name='hideDuration' />
+              <span>오늘 하루 보지 않기</span>
+            </label>
+            <label className={styles.radio}>
+              <input type='radio' value={2} name='hideDuration' />
+              <span>3일간 보지 않기</span>
+            </label>
+          </div>
+          <button onClick={close}>닫기</button>
         </div>
       </div>
     </section>
