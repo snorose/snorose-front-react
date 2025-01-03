@@ -22,6 +22,7 @@ export * from './MainPageListItem';
 export * from './Margin';
 export * from './MenuIcon';
 export * from './Modal';
+export * from './Navbar';
 export * from './Portal';
 export * from './NoticeBar';
 export * from './PostBar';

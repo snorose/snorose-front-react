@@ -1,9 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { Navbar } from '@/components/Navbar';
-
+import { Navbar, Sidebar } from '@/components';
 import { findRouteByPath } from '@/utils';
-
 import { routeList } from '@/router.js';
 
 import styles from './App.module.css';
@@ -17,6 +15,7 @@ function App() {
     <div className={styles.app}>
       <Outlet />
       {!hideNav && <Navbar />}
+      <Sidebar />
     </div>
   );
 }
