@@ -8,7 +8,7 @@ import { DeleteModal, OptionModal, ConfirmModal } from '@/components/Modal';
 import { Icon } from '@/components/Icon';
 import { NestedComment } from '@/components/Comment';
 
-import { timeAgo } from '@/utils';
+import { convertHyperlink, timeAgo } from '@/utils';
 
 import { LIKE_TYPE, MUTATION_KEY } from '@/constants';
 
@@ -132,7 +132,14 @@ const Comment = forwardRef((props, ref) => {
           className={`${styles.commentCenter} ${(isDeleted || !isVisible) && styles.hide}`}
         >
           {!isDeleted &&
-            (isVisible ? content : '(관리자에 의해 차단된 댓글입니다)')}
+            (isVisible ? (
+              <p
+                className={styles.content}
+                dangerouslySetInnerHTML={convertHyperlink(content)}
+              ></p>
+            ) : (
+              '(관리자에 의해 차단된 댓글입니다)'
+            ))}
           {isDeleted && '(삭제된 댓글입니다)'}
         </div>
         <div className={styles.commentBottom}>

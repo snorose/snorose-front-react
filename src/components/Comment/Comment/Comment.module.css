@@ -55,6 +55,14 @@
   color: var(--gray-3-1);
 }
 
+.content a {
+  color: var(--blue-3);
+}
+
+.content a:hover {
+  text-decoration: underline;
+}
+
 .commentBottom {
   min-height: 2.5rem;
   margin-right: 0.5rem;
