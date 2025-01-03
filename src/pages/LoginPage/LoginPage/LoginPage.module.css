@@ -1,7 +1,3 @@
-a {
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
 a:hover {
   cursor: pointer;
 }
@@ -40,7 +36,6 @@ a:hover {
 
 .title {
   font-size: 0.875rem;
-  font-family: 'Black Han Sans', sans-serif;
   font-style: normal;
   margin-bottom: 3.577rem;
 }

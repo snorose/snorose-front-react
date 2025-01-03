@@ -14,6 +14,7 @@ export default function Card({ className, to, title, tag, icon, isDark }) {
           <span className={styles.tag}>[{tag}]</span>
         </div>
         <img
+          className={styles.image}
           style={{ mixBlendMode, transform: `rotateZ(${rotate ?? 0}deg)` }}
           src={imgSrc}
           alt={icon.id}

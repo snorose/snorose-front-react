@@ -2,8 +2,8 @@ import { Suspense } from 'react';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { usePopUp } from '@/hooks';
-
+import { getBannerImage, getHomeNotice, getBest3 } from '@/apis';
+import { useAuth } from '@/hooks';
 import {
   Carousel,
   CarouselErrorFallback,
@@ -13,7 +13,6 @@ import {
   ListHeader,
   PopUp,
 } from '@/components';
-
 import {
   HomeBesookt,
   HomeBesooktErrorFallback,
@@ -27,7 +26,8 @@ import {
 import styles from './MainPage.module.css';
 
 export default function MainPage() {
-  const { isPopUpOpend, closePopUp } = usePopUp();
+  const { status, userInfo } = useAuth();
+  const isLogin = status === 'authenticated';
 
   return (
     <main>
@@ -77,7 +77,7 @@ export default function MainPage() {
       </QueryErrorResetBoundary>
 
       <Footer />
-      {isPopUpOpend && <PopUp close={closePopUp} />}
+      <PopUp />
     </main>
   );
 }

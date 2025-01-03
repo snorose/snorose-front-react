@@ -6,3 +6,11 @@
   white-space: pre-wrap;
   word-break: keep-all;
 }
+
+.content a {
+  color: var(--blue-3);
+}
+
+.content a:hover {
+  text-decoration: underline;
+}
