@@ -1,0 +1,36 @@
+import {
+  Meta,
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Controls,
+  IconGallery,
+  IconItem,
+} from '@storybook/blocks';
+
+import * as IconStories from './Icon.stories';
+import Icon from './Icon';
+import { ICON_ID_LIST } from '@/constants';
+
+<Meta of={IconStories} />
+
+<Title>Icon</Title>
+
+<Subtitle />
+
+<Description />
+
+<Primary />
+
+<Controls />
+
+<Subtitle>Iconography</Subtitle>
+
+<IconGallery>
+  {Object.values(ICON_ID_LIST).map((icon) => (
+    <IconItem name={icon}>
+      <Icon id={icon} />
+    </IconItem>
+  ))}
+</IconGallery>
