@@ -1,12 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { useAuth } from '@/hooks';
-
 import { Icon } from '@/components/Icon';
 
 import { timeAgo, getBoardTextId } from '@/utils';
-
-import { USER_STATUS } from '@/constants';
 
 import styles from './MainPageListItem.module.css';
 
@@ -19,26 +15,7 @@ export default function MainPageListItem({
   boardId,
   boardName,
   image,
-  roles,
 }) {
-  const { status, userInfo } = useAuth();
-
-  if (status === USER_STATUS.isLogout) {
-    return (
-      <li className={`${styles.item} ${styles.denied}`}>
-        로그인 후 이용 가능합니다.
-      </li>
-    );
-  }
-
-  if (!roles.includes(userInfo?.userRoleId)) {
-    return (
-      <li className={`${styles.item} ${styles.denied}`}>
-        등업 완료 후 이용 가능합니다.
-      </li>
-    );
-  }
-
   const imgSrc = image ? require(`../../dummy/images/${image}`) : '';
 
   return (
