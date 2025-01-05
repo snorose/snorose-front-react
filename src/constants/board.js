@@ -1,10 +1,33 @@
 export const BOARD_ID = Object.freeze({
+  all: 0, // 프론트에서만 사용하는 보드 ID
   besookt: 20,
   'first-snow': 21,
   'large-snow': 22,
   'permanent-snow': 23,
   'exam-review': 32,
 });
+
+export const BOARDS = Object.freeze([
+  {
+    id: 0,
+    path: '/board/all',
+  },
+  {
+    id: 21,
+    name: '첫눈온방',
+    path: '/board/first-snow',
+  },
+  {
+    id: 22,
+    name: '함박눈방',
+    path: '/board/large-snow',
+  },
+  {
+    id: 23,
+    name: '만년설방',
+    path: '/board/permanent-snow',
+  },
+]);
 
 // 게시글 신고
 export const POST_REPORT_TYPE_ENUM = Object.freeze({

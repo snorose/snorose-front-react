@@ -11,6 +11,7 @@ export * from './loading.js';
 export * from './majors.js';
 export * from './menus.js';
 export * from './modalOptions.js';
+export * from './mypage.js';
 export * from './point.js';
 export * from './postCategories.js';
 export * from './reactQuery.js';

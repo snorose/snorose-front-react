@@ -1,20 +1,22 @@
 .appBar {
   padding: 0.875rem 1.25rem;
   width: 100%;
+  max-width: 600px;
   display: flex;
   justify-content: space-between;
-  max-width: 600px;
+  align-items: center;
+  background-color: var(--white);
   position: fixed;
   top: 0;
   z-index: 1;
 }
 
 .hasGap {
-  padding: 0.875rem 1.25rem;
+  /* padding: 0.875rem 1.25rem;
   width: 100%;
   max-width: 600px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; */
   gap: 0.75rem;
 }
 

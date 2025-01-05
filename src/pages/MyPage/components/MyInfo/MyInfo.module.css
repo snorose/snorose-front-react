@@ -1,0 +1,73 @@
+.myInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 72px;
+}
+
+.name {
+  color: var(--black);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.studentIdMemberType {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray-4);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 7px;
+  gap: 8px;
+
+  svg {
+    width: 3px;
+    height: 3px;
+  }
+}
+
+.pointWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.point {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  padding: 0 11px;
+  background: var(--blue-1);
+  color: var(--blue-4);
+  font-size: 12px;
+  gap: 4px;
+
+  svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    padding: 1px;
+  }
+}
+
+.pointList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--blue-4);
+  font-size: 12px;
+  gap: 3px;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}

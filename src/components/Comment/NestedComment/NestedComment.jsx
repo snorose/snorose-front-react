@@ -1,14 +1,10 @@
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-
 import { useLike } from '@/hooks';
-
-import { Icon } from '@/components/Icon';
-
+import { Icon } from '@/components';
 import { convertHyperlink, timeAgo } from '@/utils';
-
 import { LIKE_TYPE } from '@/constants';
 
-import styles from '../Comment/Comment.module.css';
+import styles from '../Comment.module.css';
 
 export default function NestedComment({
   data,

@@ -1,0 +1,11 @@
+.retry {
+  padding: 10px;
+  font-size: 20px;
+  transition: 400ms all ease;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.retry:hover {
+  transform: rotateZ(-360deg);
+}

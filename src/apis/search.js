@@ -1,26 +1,15 @@
 import { authAxios } from '@/axios';
 
-export const searchByBoard = async ({
-  boardId,
-  boardType,
-  page,
-  keyword,
-  lectureYear,
-  semester,
-  examType,
-}) => {
+import { BOARD_ID } from '@/constants';
+
+export const searchByBoard = async ({ boardId, page, params }) => {
   const endpoint =
-    boardType === 'all'
+    boardId === BOARD_ID.all
       ? `/v1/search/post/${page}`
       : `/v1/search/boards/${boardId}/${page}`;
 
   const response = await authAxios.get(endpoint, {
-    params: {
-      ...(keyword && { keyword }),
-      ...(lectureYear && { lectureYear }),
-      ...(semester && { semester }),
-      ...(examType && { examType }),
-    },
+    params,
   });
   return response?.data.result;
 };

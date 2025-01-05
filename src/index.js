@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { CommentContextProvider } from '@/contexts/CommentContext.jsx';
 import { ToastProvider } from '@/contexts/ToastContext.jsx';
 
-import { routeList } from '@/route.js';
+import { routeList } from '@/router.js';
 
 import '@/index.css';
 import reportWebVitals from '@/reportWebVitals';

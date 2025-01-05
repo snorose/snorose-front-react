@@ -2,7 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import { Navbar, Sidebar } from '@/components';
 import { findRouteByPath } from '@/utils';
-import { routeList } from '@/route.js';
+import { routeList } from '@/router.js';
 
 import styles from './App.module.css';
 

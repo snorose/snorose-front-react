@@ -1,4 +1,5 @@
 .serverError {
+  flex: 1;
   margin: 0 var(--default-margin);
   padding: 2rem;
   aspect-ratio: 3.5;
@@ -8,7 +9,6 @@
   align-items: center;
   gap: 1rem;
   border-radius: 0.3125rem;
-  background-color: var(--gray-1);
   font-size: 1rem;
   color: var(--gray-4);
 }
@@ -27,17 +27,4 @@
 
 .errorMessage > span:nth-child(2) {
   font-size: 0.75rem;
-}
-
-.retry {
-  padding: 10px;
-  font-size: 20px;
-  transition: 400ms all ease;
-  background-color: var(--gray-2);
-  border-radius: 100%;
-  cursor: pointer;
-}
-
-.retry:hover {
-  transform: rotateZ(-360deg);
 }

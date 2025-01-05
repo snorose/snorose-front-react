@@ -29,7 +29,7 @@ export default function BackAppBar({
 
   return (
     <div
-      className={hasSearchInput ? styles.hasGap : styles.appBar}
+      className={`${styles.appBar} ${hasSearchInput && styles.hasGap}`}
       style={{
         backgroundColor: backgroundColor ? backgroundColor : '#fff',
         position: notFixed ? 'relative' : 'fixed',
