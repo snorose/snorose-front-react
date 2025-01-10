@@ -1,29 +1,15 @@
-import { useEffect, useState } from 'react';
 import { Icon } from '@/components/Icon';
 import { postBarDateFormat } from '@/utils';
 import styles from './PostBar.module.css';
 
 export default function PostBar({ data, hasComment = true, hasLike = true }) {
-  const [formattedTime, setFormattedTime] = useState(
-    postBarDateFormat(data.createdAt)
-  );
-
-  // postBarDateFormat을 1분마다 업데이트
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setFormattedTime(postBarDateFormat(data.createdAt));
-    }, 60000);
-
-    return () => clearInterval(intervalId);
-  }, [data.createdAt]);
-
   return (
     <div className={styles.post}>
       <div className={styles.post_top}>
         <Icon id='cloud' width={18} height={11} />
         <p className={styles.name}>{data.userDisplay}</p>
         <p className={styles.dot}>·</p>
-        <p>{formattedTime}</p>
+        <p>{postBarDateFormat(data.createdAt)}</p>
         {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
         {data.isConfirmed && (
           <Icon
