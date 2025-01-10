@@ -18,7 +18,7 @@ import {
   InputBar,
 } from '@/components';
 
-import { getBoard, timeAgo } from '@/utils';
+import { fullDateTimeFormat, getBoard } from '@/utils';
 import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
@@ -182,7 +182,7 @@ export default function PostPage() {
             <p>{data.userDisplay || 'Unknown'}</p>
             <p className={styles.dot}>·</p>
             <p>
-              {timeAgo(data.createdAt)}
+              {fullDateTimeFormat(data.createdAt)}
               {data.isEdited && ' (수정됨)'}
             </p>
           </div>
