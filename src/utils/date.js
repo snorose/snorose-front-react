@@ -1,5 +1,4 @@
 import { timeAgo } from './timeAgo';
-import { HOUR_SECONDS } from '@/constants';
 
 export const dateFormat = (date) => {
   const dateObj = new Date(date);
@@ -26,31 +25,14 @@ export const postBarDateFormat = (date) => {
   const now = new Date();
   const diffInSeconds = Math.floor((now - targetDate) / 1000);
 
-  const formatTime = (date) =>
-    `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-
-  const formatDateTime = (date, includeYear = false) => {
-    const year = includeYear
-      ? `${date.getFullYear().toString().slice(-2)}/`
-      : '';
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}${month}/${day} ${formatTime(date)}`;
-  };
-
-  // 1시간 이내: '00분 전' 또는 '00초 전'
-  if (diffInSeconds < HOUR_SECONDS) {
-    return timeAgo(date);
-  }
-
-  // 오늘 날짜인 경우: '16:24'
   if (isToday(targetDate)) {
-    return formatTime(targetDate);
+    if (diffInSeconds < 60 * 59) {
+      return timeAgo(date); // 1시간 이내: '00분 전' 또는 '00초 전'
+    }
+    return fullDateTimeFormat(date).split(' ')[1]; // 오늘 날짜인 경우: '16:24'
   }
-
-  // 1년 이내: '12/28 16:24', 1년 이후: '23/12/28 16:24'
-  const isCurrentYear = targetDate.getFullYear() === now.getFullYear();
-  return formatDateTime(targetDate, !isCurrentYear);
+  const isCurrentYear = targetDate.getFullYear() === now.getFullYear(); // 1년 이내: '12/28 16:24'
+  return fullDateTimeFormat(date).slice(isCurrentYear ? 5 : 2); // 1년 이후: '23/12/28 16:24'
 };
 
 export const isToday = (date) => {
