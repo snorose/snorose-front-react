@@ -1,4 +1,5 @@
 import { timeAgo } from './timeAgo';
+import { HOUR_SECONDS } from '@/constants';
 
 export const dateFormat = (date) => {
   const dateObj = new Date(date);
@@ -8,7 +9,6 @@ export const dateFormat = (date) => {
   return `${year}.${month}.${day}`;
 };
 
-// 게시글 상세 조회: 절대 시각 (연도/월/일 시간)
 export const fullDateTimeFormat = (date) => {
   const dateObj = new Date(date);
   const year = dateObj.getFullYear();
@@ -19,20 +19,26 @@ export const fullDateTimeFormat = (date) => {
   return `${year}/${month}/${day} ${hours}:${minutes}`;
 };
 
-// 게시글 목록 날짜 시간 표현
 export const postBarDateFormat = (date) => {
-  const targetDate = new Date(date);
   const now = new Date();
+  const targetDate = new Date(date);
   const diffInSeconds = Math.floor((now - targetDate) / 1000);
 
+  const year = targetDate.getFullYear();
+  const month = `${targetDate.getMonth() + 1}`.padStart(2, '0');
+  const day = `${targetDate.getDate()}`.padStart(2, '0');
+  const hours = `${targetDate.getHours()}`.padStart(2, '0');
+  const minutes = `${targetDate.getMinutes()}`.padStart(2, '0');
+
   if (isToday(targetDate)) {
-    if (diffInSeconds < 60 * 59) {
-      return timeAgo(date); // 1시간 이내: '00분 전' 또는 '00초 전'
-    }
-    return fullDateTimeFormat(date).split(' ')[1]; // 오늘 날짜인 경우: '16:24'
+    return diffInSeconds < HOUR_SECONDS - 60
+      ? timeAgo(date)
+      : `${hours}:${minutes}`;
   }
-  const isCurrentYear = targetDate.getFullYear() === now.getFullYear(); // 1년 이내: '12/28 16:24'
-  return fullDateTimeFormat(date).slice(isCurrentYear ? 5 : 2); // 1년 이후: '23/12/28 16:24'
+
+  return isSameYear(targetDate, now)
+    ? `${month}/${day} ${hours}:${minutes}`
+    : `${year}/${month}/${day} ${hours}:${minutes}`;
 };
 
 export const isToday = (date) => {
@@ -54,6 +60,13 @@ export const isDayOver = (date) => {
   today.setHours(0, 0, 0, 0);
 
   return target < today;
+};
+
+export const isSameYear = (date1, date2) => {
+  const target1 = new Date(date1);
+  const target2 = new Date(date2);
+
+  return target1.getFullYear() === target2.getFullYear();
 };
 
 export const addDays = (date, days) => {
