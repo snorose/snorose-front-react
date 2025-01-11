@@ -1,6 +1,5 @@
 import { Icon } from '@/components/Icon';
-import { timeAgo } from '@/utils';
-
+import { postBarDateFormat } from '@/utils';
 import styles from './PostBar.module.css';
 
 export default function PostBar({ data, hasComment = true, hasLike = true }) {
@@ -10,7 +9,7 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
         <Icon id='cloud' width={18} height={11} />
         <p className={styles.name}>{data.userDisplay}</p>
         <p className={styles.dot}>·</p>
-        <p>{timeAgo(data.createdAt)}</p>
+        <p>{postBarDateFormat(data.createdAt)}</p>
         {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
         {data.isConfirmed && (
           <Icon
