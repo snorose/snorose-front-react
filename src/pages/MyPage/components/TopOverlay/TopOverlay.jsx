@@ -14,7 +14,6 @@ export default function TopOverlay() {
             id='pencil-underline'
             width={20}
             height={20}
-            fill='#fff'
             stroke='#fff'
           />
         </Link>
