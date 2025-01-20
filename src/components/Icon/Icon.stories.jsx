@@ -1,5 +1,10 @@
 import Icon from './Icon.jsx';
-import { ICON_ID_LIST } from '@/constants';
+import {
+  STATIC_ICON_LIST,
+  FILL_ICON_LIST,
+  STROKE_ICON_LIST,
+  ILLUSTRATION_ICON_LIST,
+} from '@/constants';
 
 export default {
   title: 'components/Icon',
@@ -7,12 +12,10 @@ export default {
   parameters: {
     layout: 'centered',
     controls: { sort: 'requiredFirst' },
-    docs: {
-      description: {
-        component: `Primary UI component for user interaction`,
-      },
-    },
   },
+};
+
+export const Static = {
   argTypes: {
     id: {
       table: {
@@ -20,23 +23,22 @@ export default {
         order: 1,
       },
       control: 'select',
-      options: Object.values(ICON_ID_LIST),
+      options: Object.values(STATIC_ICON_LIST),
     },
-    width: {
-      control: {
-        type: 'number',
-        min: 10,
-        max: 500,
-        step: 1,
+    fill: { table: { disable: true } },
+    stroke: { table: { disable: true } },
+  },
+};
+
+export const Fill = {
+  argTypes: {
+    id: {
+      table: {
+        type: { summary: 'string' },
+        order: 1,
       },
-    },
-    height: {
-      control: {
-        type: 'number',
-        min: 10,
-        max: 500,
-        step: 1,
-      },
+      control: 'select',
+      options: Object.values(FILL_ICON_LIST),
     },
     fill: {
       table: {
@@ -46,6 +48,20 @@ export default {
         type: 'color',
       },
     },
+    stroke: { table: { disable: true } },
+  },
+};
+
+export const Stroke = {
+  argTypes: {
+    id: {
+      table: {
+        type: { summary: 'string' },
+        order: 1,
+      },
+      control: 'select',
+      options: Object.values(STROKE_ICON_LIST),
+    },
     stroke: {
       table: {
         defaultValue: { summary: 'none' },
@@ -54,15 +70,21 @@ export default {
         type: 'color',
       },
     },
+    fill: { table: { disable: true } },
   },
 };
 
-export const IconComponent = {
-  args: {
-    id: 'cloud',
-    width: 100,
-    height: 100,
-    fill: 'none',
-    stroke: 'none',
+export const Illustration = {
+  argTypes: {
+    id: {
+      table: {
+        type: { summary: 'string' },
+        order: 1,
+      },
+      control: 'select',
+      options: Object.values(ILLUSTRATION_ICON_LIST),
+    },
+    fill: { table: { disable: true } },
+    stroke: { table: { disable: true } },
   },
 };

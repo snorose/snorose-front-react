@@ -134,7 +134,6 @@ export default function PostEditPage() {
         <div className={styles.top}>
           <CloseAppBar
             children={<p onClick={handleSubmit}>수정</p>}
-            stroke='#000'
             backgroundColor={'#eaf5fd'}
             onClose={() => {
               data.title !== title ||

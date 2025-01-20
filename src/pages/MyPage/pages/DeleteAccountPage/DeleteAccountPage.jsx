@@ -31,7 +31,7 @@ export default function DeleteAccountPage() {
 
   return (
     <main className={styles.deleteAccountPage}>
-      <CloseAppBar alignRight={true} stroke='#000' notFixed />
+      <CloseAppBar alignRight={true} notFixed />
 
       <section className={styles.contentContainer}>
         <div className={styles.titleDescWrapper}>

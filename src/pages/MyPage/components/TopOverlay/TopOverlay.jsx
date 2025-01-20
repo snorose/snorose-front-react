@@ -12,9 +12,9 @@ export default function TopOverlay() {
           <Icon
             className={styles.editIcon}
             id='pencil-underline'
+            stroke='white'
             width={20}
             height={20}
-            stroke='#fff'
           />
         </Link>
       </div>
