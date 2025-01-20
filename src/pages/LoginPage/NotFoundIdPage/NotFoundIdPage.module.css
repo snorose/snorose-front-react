@@ -7,14 +7,29 @@
   margin: 0 auto;
 }
 
+.backAppBar {
+  display: block;
+}
+
 .pageTopFrame {
+}
+
+.pageMiddleFrame {
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.explanation {
+  height: fit-content;
   padding: 0 1.25rem;
 }
 
 .pageTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  margin-top: 0.875rem;
+  margin-top: 3.2rem;
 }
 
 .pageExplanation {
@@ -28,13 +43,6 @@
   padding: 0 1.25rem;
   display: flex;
   flex-direction: column;
-}
-
-.img {
-  width: 13.25rem;
-  height: 14.5rem;
-  margin-bottom: 1.875rem;
-  margin-left: auto;
 }
 
 .goBackButton {

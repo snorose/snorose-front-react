@@ -36,15 +36,10 @@ export default function FoundIdPage() {
           <span className={`${styles.dot} ${styles.third}`}></span>
         </div>
       </div>
+      <div className={styles.pageMiddleFrame}>
+        <Icon id='star-mail' width={231} height={217} />
+      </div>
       <div className={styles.pageBottomFrame}>
-        <div className={styles.bodyFrame}>
-          <img
-            src={excitedWoman}
-            alt='frustrated woman image'
-            className={styles.img}
-          />
-        </div>
-
         <Link to='/login'>
           <div className={styles.loginButton}>
             <Submit btnName='로그인하기' className='right' />

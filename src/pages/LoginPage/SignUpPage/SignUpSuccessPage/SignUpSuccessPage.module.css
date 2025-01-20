@@ -19,9 +19,10 @@
 
 .img {
   width: 100%;
+  height: fit-content;
   display: flex;
-  justify-content: flex-end;
-  padding-right: 0.813rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .submit {

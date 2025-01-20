@@ -24,7 +24,7 @@ export default function FoundPwPage() {
   return (
     <div className={styles.pageFrame}>
       <BackAppBar backNavTo='/login' />
-      <div className={styles.pageBottomFrame}>
+      <div className={styles.pageTopFrame}>
         <p className={styles.pageTitle}>비밀번호 찾기</p>
         <p className={styles.pageSubtitle}>
           비밀번호 초기화 이메일이 발송되었어요
@@ -49,14 +49,10 @@ export default function FoundPwPage() {
           </div>
         </div>
       </div>
+      <div className={styles.pageMiddleFrame}>
+        <Icon id='star-mail' width={231} height={217} />
+      </div>
       <div className={styles.pageBottomFrame}>
-        <div className={styles.bodyFrame}>
-          <img
-            src={EnlightenedWoman}
-            alt='frustrated woman image'
-            className={styles.img}
-          />
-        </div>
         <Link to='/find-pw'>
           <div className={styles.loginButton}>
             <Submit btnName='뒤로가기' className='right' />

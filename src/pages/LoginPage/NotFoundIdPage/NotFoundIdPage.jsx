@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { Submit } from '@/components/Submit';
+import { Icon } from '@/components/Icon';
 
 import frustratedWoman from '@/assets/images/frustratedWoman.svg';
 
@@ -21,19 +22,24 @@ export default function NotFoundIdPage() {
 
   return (
     <div className={styles.pageFrame}>
-      <BackAppBar backNavTo='/login' />
+      <BackAppBar backNavTo='/login' classname={styles.backAppBar} />
       <div className={styles.pageTopFrame}>
-        <p className={styles.pageTitle}>아이디 찾기</p>
-        <p className={styles.pageExplanation}>
-          입력하신 정보와 일치하는 정보가 없어요
-        </p>
+        <div className={styles.explanation}>
+          <p className={styles.pageTitle}>아이디 찾기</p>
+          <p className={styles.pageExplanation}>
+            입력하신 정보와 일치하는 정보가 없어요
+          </p>
+        </div>
+      </div>
+      <div className={styles.pageMiddleFrame}>
+        <Icon
+          id='star-alert'
+          className={styles.starAlert}
+          width={231}
+          height={217}
+        />
       </div>
       <div className={styles.pageBottomFrame}>
-        <img
-          src={frustratedWoman}
-          alt='frustrated woman image'
-          className={styles.img}
-        />
         <Link to='/find-id'>
           <div className={styles.goBackButton}>
             <Submit btnName='뒤로가기' className='wrong' />
