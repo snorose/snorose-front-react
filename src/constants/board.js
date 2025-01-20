@@ -224,7 +224,7 @@ export const COMMENT_REPORT_TYPE_MODAL_OPTION_CHILDREN = [
     value: COMMENT_REPORT_TYPE_ENUM.COMMENT_ADULT_CONTENT,
   },
   {
-    iconId: 'comment-gray',
+    iconId: 'comment',
     IconWidth: 18,
     IconHeight: 18,
     text: COMMENT_REPORT_TYPE_KOREAN_ENUM.COMMENT_SPAM,
