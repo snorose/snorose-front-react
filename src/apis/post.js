@@ -1,7 +1,7 @@
 import { authAxios } from '@/axios';
 
 // 게시글 리스트 가져오기
-export const getPostList = async (boardId, page = 0) => {
+export const getPosts = async (boardId, page = 0) => {
   const url =
     boardId === 20
       ? `/v1/best-posts?page=${page}`

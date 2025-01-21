@@ -134,7 +134,6 @@ export default function PostEditPage() {
         <div className={styles.top}>
           <CloseAppBar
             children={<p onClick={handleSubmit}>수정</p>}
-            stroke='#000'
             backgroundColor={'#eaf5fd'}
             onClose={() => {
               data.title !== title ||
@@ -148,7 +147,7 @@ export default function PostEditPage() {
         <div className={styles.center}>
           <div className={styles.categorySelect}>
             <div className={styles.categorySelectContainer}>
-              <Icon id='clip-board-list' width={18} height={19} />
+              <Icon id='clip-board-list' width={18} height={19} fill='white' />
               <p className={styles.categorySelectText}>{boardTitle}</p>
             </div>
           </div>

@@ -1,30 +1,15 @@
-import { useState, useEffect } from 'react';
-
 import { Icon } from '@/components/Icon';
-
-import { timeAgo } from '@/utils';
-
+import { postBarDateFormat } from '@/utils';
 import styles from './PostBar.module.css';
 
 export default function PostBar({ data, hasComment = true, hasLike = true }) {
-  const [agoTime, setAgoTime] = useState(timeAgo(data.createdAt));
-
-  // timeAgo를 1분마다 업데이트
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setAgoTime(timeAgo(data.createdAt));
-    }, 60000);
-
-    return () => clearInterval(intervalId);
-  }, [data.createdAt]);
-
   return (
     <div className={styles.post}>
       <div className={styles.post_top}>
         <Icon id='cloud' width={18} height={11} />
         <p className={styles.name}>{data.userDisplay}</p>
         <p className={styles.dot}>·</p>
-        <p>{agoTime}</p>
+        <p>{postBarDateFormat(data.createdAt)}</p>
         {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
         {data.isConfirmed && (
           <Icon
@@ -43,14 +28,13 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
         <span className={styles.board}>{data.boardName}</span>
         <div className={styles.iconContainer}>
           {/* 서버 수정 후 조건문 제거 처리 필요 */}
-          {hasComment && data.commentCount !== undefined && (
+          {hasComment && (
             <>
               <Icon
                 className={styles.comment}
                 id='comment'
                 width={13}
                 height={11}
-                fill='#D9D9D9'
               />
               <span>{data.commentCount.toLocaleString()}</span>
             </>
@@ -67,17 +51,15 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
             </>
           )}
           {/* 서버 수정 후 조건문 제거 처리 필요 */}
-          {data.scrapCount !== undefined && (
-            <>
-              <Icon
-                id='bookmark-fill'
-                width={9}
-                height={11}
-                fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
-              />
-              <span>{data.scrapCount.toLocaleString()}</span>
-            </>
-          )}
+          <>
+            <Icon
+              id='bookmark-fill'
+              width={9}
+              height={11}
+              fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
+            />
+            <span>{data?.scrapCount.toLocaleString()}</span>
+          </>
         </div>
       </div>
     </div>

@@ -1,0 +1,45 @@
+.myPage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.8;
+  background: radial-gradient(
+    200.19% 208.16% at -25.32% 33.26%,
+    var(--blue-4) 0%,
+    #1270fa 100%
+  );
+  width: 100%;
+}
+
+/* 컨텐츠 내용 */
+.myPageLower {
+  width: 100%;
+  flex-shrink: 0;
+  border-radius: 15px 15px 0 0;
+  background: var(--white);
+  z-index: 1;
+  padding-bottom: 100px;
+}
+
+/* 탭 메뉴 */
+.tabMenu {
+  display: flex;
+  margin: 29px 20px 14px;
+  border-top: 1px solid var(--gray-3);
+}
+
+.tab {
+  width: 100%;
+  padding: 15px;
+  color: var(--gray-3-1);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tab.active {
+  font-size: 14px;
+  font-weight: 500;
+  border-top: 2px solid var(--blue-4);
+}

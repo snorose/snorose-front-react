@@ -1,0 +1,26 @@
+.list {
+  padding-left: 1rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  font-weight: 500;
+}
+
+.item li {
+  padding: 0.375rem 0;
+}
+
+.item > li:hover {
+  color: var(--blue-3);
+}
+
+.item:first-child > li {
+  padding-top: 0;
+}
+
+.item:last-child > li {
+  padding-bottom: 0;
+}

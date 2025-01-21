@@ -1,0 +1,25 @@
+.layout {
+  margin: 1.5rem var(--default-margin) 1.75rem var(--default-margin);
+  display: flex;
+  gap: 0.45rem;
+}
+
+.layout div {
+  height: 112px;
+  border-radius: 0.375rem;
+  background: linear-gradient(
+    45deg,
+    var(--gray-2) 25%,
+    var(--gray-3) 50%,
+    var(--gray-2) 75%
+  );
+  background-size: 200% 100%;
+}
+
+.left {
+  flex: 2;
+}
+
+.right {
+  flex: 3;
+}

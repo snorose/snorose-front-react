@@ -1,0 +1,63 @@
+/* 계정 정보 */
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 13px;
+  margin: 0 20px;
+  border-radius: 5px;
+  background: var(--gray-1);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-3);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.label {
+  color: var(--gray-3-1);
+  font-size: 11px;
+}
+
+.value {
+  color: var(--gray-4);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 버튼 */
+.buttonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin: 20px;
+}
+
+.editButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 28px;
+  border-radius: 5px;
+  background: var(--blue-4);
+  color: var(--white);
+  font-size: 12px;
+}
+
+.passwordButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95px;
+  height: 28px;
+  border-radius: 5px;
+  background: var(--blue-1);
+  color: var(--blue-4);
+  font-size: 12px;
+}

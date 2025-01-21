@@ -1,0 +1,51 @@
+.pointBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.3125rem;
+  background: var(--gray-1-1);
+  padding: 0.9375rem;
+}
+
+.pointIconContentWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.9375rem;
+
+  svg {
+    width: 1.625rem;
+    height: 1.4375rem;
+  }
+}
+
+.pointContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1875rem;
+}
+
+.pointTitle {
+  color: var(--blue-4);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.pointDesc {
+  color: var(--gray-4);
+  font-size: 0.5625rem;
+}
+
+.pointDate {
+  color: var(--gray-3-1);
+  font-size: 0.5625rem;
+}
+
+.chargePoint {
+  color: var(--blue-4);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.negative {
+  color: var(--pink-3);
+}

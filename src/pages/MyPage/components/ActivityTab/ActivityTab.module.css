@@ -1,0 +1,36 @@
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 13px;
+  margin: 0 20px;
+  border-radius: 5px;
+  background: var(--gray-1);
+}
+
+/* 내 활동, 이용안내 */
+.itemList {
+  border-bottom: 1px solid var(--gray-3);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.itemList:last-child {
+  border-bottom: none;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  color: var(--gray-4);
+  font-size: 14px;
+  font-weight: 500;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}

@@ -1,24 +1,21 @@
-import { useState } from 'react';
-
+import { useSidebarStore } from '@/stores';
 import { Icon } from '@/components/Icon';
-import { Sidebar } from '@/components/Sidebar';
 
 export default function MenuIcon() {
-  const [isOpen, setIsOpen] = useState(false);
+  const open = useSidebarStore((state) => state.open);
 
   return (
     <>
       <Icon
-        id='hamburger-menu'
+        id='hamburger'
         width={23}
         height={16}
         onClick={(event) => {
           event.stopPropagation();
-          setIsOpen((prev) => !prev);
+          open();
         }}
         style={{ cursor: 'pointer' }}
       />
-      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 }

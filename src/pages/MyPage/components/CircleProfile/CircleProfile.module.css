@@ -1,0 +1,21 @@
+.profileImage {
+  width: 135px;
+  height: 135px;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 125px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  overflow: hidden;
+  filter: drop-shadow(0 4px 4px rgba(var(--black-rgb), 0.15));
+}
+
+.profileImage img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+}

@@ -1,14 +1,10 @@
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-
 import { useLike } from '@/hooks';
-
-import { Icon } from '@/components/Icon';
-
-import { timeAgo } from '@/utils';
-
+import { Icon } from '@/components';
+import { convertHyperlink, timeAgo } from '@/utils';
 import { LIKE_TYPE } from '@/constants';
 
-import styles from '../Comment/Comment.module.css';
+import styles from '../Comment.module.css';
 
 export default function NestedComment({
   data,
@@ -69,7 +65,14 @@ export default function NestedComment({
           className={`${styles.nestedPadding} ${(isDeleted || !isVisible) && styles.hide}`}
         >
           {!isDeleted &&
-            (isVisible ? content : '(관리자에 의해 차단된 댓글입니다)')}
+            (isVisible ? (
+              <p
+                className={styles.content}
+                dangerouslySetInnerHTML={convertHyperlink(content)}
+              ></p>
+            ) : (
+              '(관리자에 의해 차단된 댓글입니다)'
+            ))}
           {isDeleted && '(삭제된 댓글입니다)'}
         </div>
       </div>

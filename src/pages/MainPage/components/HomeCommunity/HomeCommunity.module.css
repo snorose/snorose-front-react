@@ -1,0 +1,5 @@
+.list {
+  margin: 0 var(--default-margin);
+  display: flex;
+  gap: 0.625rem;
+}

@@ -1,5 +1,6 @@
 .swiper {
   width: 100%;
+  aspect-ratio: 3;
   display: flex;
   position: relative;
   overflow: visible;

@@ -5,13 +5,13 @@
   flex-direction: column;
   align-items: center;
   font-size: 0.5rem;
-  padding-top: 3.375rem;
+  padding-top: 4rem;
   overflow-y: auto;
 }
 
 .top {
   width: 100%;
-  padding: 0.625rem var(--default-margin);
+  padding: 0 var(--default-margin) 0.625rem var(--default-margin);
 }
 
 .notification_bar {

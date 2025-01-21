@@ -1,2 +1,3 @@
-export { default as List } from './List/List';
-export { default as Sidebar } from './Sidebar/Sidebar';
+export { default as Sidebar } from './Sidebar';
+
+export { default as MenuList } from './MenuList/MenuList';
