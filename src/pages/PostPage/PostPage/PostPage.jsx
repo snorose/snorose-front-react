@@ -211,7 +211,7 @@ export default function PostPage() {
         <PostContent content={data.content} />
         <div className={styles.post_bottom}>
           <div className={styles.count} onClick={inputFocus}>
-            <Icon id='comment' width={15} height={13} fill='#D9D9D9' />
+            <Icon id='comment' width={15} height={13} />
             <p>{data.commentCount.toLocaleString()}</p>
           </div>
           <div

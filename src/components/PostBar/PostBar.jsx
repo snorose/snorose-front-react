@@ -35,7 +35,6 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
                 id='comment'
                 width={13}
                 height={11}
-                fill='#D9D9D9'
               />
               <span>{data.commentCount.toLocaleString()}</span>
             </>

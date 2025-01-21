@@ -18,7 +18,7 @@ export default function NoticeBar({ data, onClick }) {
       <div className={styles.postBottom}>
         <span>{formattedDate}</span>
         <div className={styles.postBottomRight}>
-          <Icon id='comment' width={13} height={11} fill='#D9D9D9' />
+          <Icon id='comment' width={13} height={11} />
           <span className={styles.comment_cnt}>
             {data.commentCount.toLocaleString()}
           </span>

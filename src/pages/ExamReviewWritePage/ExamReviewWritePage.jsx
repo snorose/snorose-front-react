@@ -270,7 +270,7 @@ export default function ExamReviewWritePage() {
       </CategoryFieldset>
       <div className={styles.file}>
         <div className={styles.left}>
-          <Icon id='clip-board-list-blue' width={18} height={19} />
+          <Icon id='clip-board-list' width={18} height={19} fill='#BFD7EC' />
           <span className={styles.tag}>첨부파일</span>
           <span className={styles.required}></span>
         </div>

@@ -263,7 +263,6 @@ export default function ExamReviewPage() {
               id='comment'
               width={15}
               height={14}
-              fill='#D9D9D9'
             />
             <span>{commentCount.toLocaleString()}</span>
           </div>

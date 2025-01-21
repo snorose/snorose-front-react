@@ -151,7 +151,7 @@ const Comment = forwardRef((props, ref) => {
                 type='button'
                 onClick={handleReply}
               >
-                <Icon id='comment' width={15} height={13} fill='#D9D9D9' />
+                <Icon id='comment' width={15} height={13} />
                 <p>{children.length}</p>
               </button>
               <button
