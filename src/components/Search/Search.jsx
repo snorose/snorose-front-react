@@ -27,7 +27,7 @@ export default function Search({ className, placeholder, onKeyDown }) {
 
   return (
     <div className={`${styles.container} ${className}`}>
-      <Icon id='search' width={14} height={14} stroke='#898989' />
+      <Icon id='search' width={14} height={14} />
       <input
         ref={ref}
         className={styles.search}

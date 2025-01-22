@@ -30,3 +30,4 @@ yarn.lock
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+*storybook.log

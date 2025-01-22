@@ -7,6 +7,7 @@ export * from './boardMenus.js';
 export * from './dropDown.js';
 export * from './errors.js';
 export * from './examReview.js';
+export * from './icon.js';
 export * from './loading.js';
 export * from './majors.js';
 export * from './menus.js';
