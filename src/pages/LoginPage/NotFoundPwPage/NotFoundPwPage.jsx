@@ -4,8 +4,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Submit } from '@/components/Submit';
 import { Icon } from '@/components/Icon';
 
-import frustratedWoman from '@/assets/images/frustratedWoman.svg';
-
 import styles from './NotFoundPwPage.module.css';
 import { BackAppBar } from '@/components/index.js';
 
