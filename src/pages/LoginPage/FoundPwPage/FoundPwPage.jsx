@@ -38,12 +38,6 @@ export default function FoundPwPage() {
           <span className={`${styles.dot} ${styles.third}`}></span>
           <div className={styles.result}>
             <p>{email}</p>
-            <Icon
-              id='pencil-underline'
-              width={24}
-              height={24}
-              fillOpacity='0'
-            />
           </div>
         </div>
       </div>
