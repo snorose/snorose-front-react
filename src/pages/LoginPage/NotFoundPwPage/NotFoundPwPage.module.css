@@ -8,6 +8,12 @@
   margin: 0 auto;
 }
 
+.pageMiddleFrame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .pageTopFrame {
   padding: 0 1.25rem;
 }
@@ -15,7 +21,7 @@
 .pageTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  margin-top: 0.875rem;
+  margin-top: 3.2rem;
 }
 
 .pageExplanation {

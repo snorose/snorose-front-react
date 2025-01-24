@@ -15,7 +15,7 @@
 .pageTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  margin-top: 0.875rem;
+  margin-top: 3.2rem;
 }
 
 .pageExplanation {
@@ -23,6 +23,12 @@
   font-weight: 500;
   color: var(--gray-4);
   margin-top: 0.875rem;
+}
+
+.pageMiddleFrame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pageBottomFrame {
