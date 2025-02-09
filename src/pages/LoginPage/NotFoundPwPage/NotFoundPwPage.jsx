@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { Submit } from '@/components/Submit';
-
-import frustratedWoman from '@/assets/images/frustratedWoman.svg';
+import { Icon } from '@/components/Icon';
 
 import styles from './NotFoundPwPage.module.css';
 import { BackAppBar } from '@/components/index.js';
@@ -29,12 +28,10 @@ export default function NotFoundPwPage() {
           입력하신 정보와 일치하는 정보가 없어요
         </p>
       </div>
+      <div className={styles.pageMiddleFrame}>
+        <Icon id='star-alert' width={231} height={217} />
+      </div>
       <div className={styles.pageBottomFrame}>
-        <img
-          src={frustratedWoman}
-          alt='frustrated woman image'
-          className={styles.img}
-        />
         <Link to='/find-pw'>
           <div className={styles.goBackButton}>
             <Submit btnName='뒤로가기' className='ready' />

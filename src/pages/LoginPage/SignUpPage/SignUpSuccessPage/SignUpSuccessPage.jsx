@@ -4,8 +4,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
 import { Submit } from '@/components/Submit';
 
-import excitedWoman from '@/assets/images/excitedWoman.svg';
-
 import styles from './SignUpSuccessPage.module.css';
 
 export default function SignUpSuccessPage() {
@@ -30,11 +28,11 @@ export default function SignUpSuccessPage() {
           스노로즈 전체 서비스를 이용하실 수 있어요
         </p>
       </div>
-      <div>
-        <div className={styles.img}>
-          <img src={excitedWoman} alt='excitedWoman' />
-        </div>
+      <div className={styles.img}>
+        <Icon id='star-check' width={231} height={217} />
+      </div>
 
+      <div>
         <div className={styles.submit}>
           <Submit
             btnName='로그인하기'

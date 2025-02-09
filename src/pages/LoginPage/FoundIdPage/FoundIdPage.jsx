@@ -4,8 +4,6 @@ import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
 import { Submit } from '@/components/Submit';
 
-import excitedWoman from '@/assets/images/excitedWoman.svg';
-
 import styles from './FoundIdPage.module.css';
 import { BackAppBar } from '@/components/index.js';
 
@@ -36,15 +34,10 @@ export default function FoundIdPage() {
           <span className={`${styles.dot} ${styles.third}`}></span>
         </div>
       </div>
+      <div className={styles.pageMiddleFrame}>
+        <Icon id='star-mail' width={231} height={217} />
+      </div>
       <div className={styles.pageBottomFrame}>
-        <div className={styles.bodyFrame}>
-          <img
-            src={excitedWoman}
-            alt='frustrated woman image'
-            className={styles.img}
-          />
-        </div>
-
         <Link to='/login'>
           <div className={styles.loginButton}>
             <Submit btnName='로그인하기' className='right' />
