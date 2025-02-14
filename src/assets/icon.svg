@@ -276,7 +276,14 @@
   <symbol id="blue-triangle" viewBox="0 0 20 20" fill="none" stroke="none">
     <path d="M10 16L3.93782 5.5L16.0622 5.5L10 16Z" fill="#00368E"/>
   </symbol>
-
+  <symbol id="toggle-on" viewBox="0 0 21 21" fill="none" stroke="none">
+    <rect width="21" height="21" rx="10.5" fill="#D9D9D9"/>
+    <circle cx="10.5365" cy="10.4994" r="6.53655" fill="#00368E"/>
+  </symbol>
+  <symbol id="toggle-off" viewBox="0 0 22 21" fill="none" stroke="none">
+    <rect width="21.0731" height="21" rx="10.5" fill="#D9D9D9"/>
+    <circle cx="10.5365" cy="10.4994" r="6.53655" fill="white"/>
+  </symbol>
 
   <!-- fill icon -->
   <symbol id="like" viewBox="0 0 12 10" fill="current" stroke="none">
