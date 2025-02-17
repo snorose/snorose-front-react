@@ -27,7 +27,6 @@ export default function MainPage() {
   return (
     <main>
       <Header className={styles.header} />
-
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
@@ -72,7 +71,7 @@ export default function MainPage() {
       </QueryErrorResetBoundary>
 
       <Footer />
-      {/* <PopUp /> */}
+      <PopUp />
     </main>
   );
 }
