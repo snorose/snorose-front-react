@@ -55,10 +55,12 @@
   align-items: center;
   gap: 0.125rem;
   color: var(--black);
+  cursor: pointer;
 }
 
 .profileBoxRightInvisible {
   display: none;
+  cursor: pointer;
 }
 
 .dot {
