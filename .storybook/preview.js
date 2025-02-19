@@ -16,6 +16,7 @@ const queryClient = new QueryClient({
 
 const preview = {
   parameters: {
+    layout: 'centered',
     controls: {
       sort: 'requiredFirst',
       matchers: {
@@ -24,6 +25,7 @@ const preview = {
       },
     },
   },
+  tags: ['autodocs'],
   // 모든 스토리에 필요한 Provider 적용
   decorators: [
     (Story) => (
