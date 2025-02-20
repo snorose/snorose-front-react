@@ -6,7 +6,7 @@ import {
   ILLUSTRATION_ICON_LIST,
 } from '@/constants';
 
-export default {
+const iconStoryConfig = {
   title: 'components/Icon',
   component: Icon,
   parameters: {
@@ -14,6 +14,8 @@ export default {
     controls: { sort: 'requiredFirst' },
   },
 };
+
+export default iconStoryConfig;
 
 export const Static = {
   argTypes: {
