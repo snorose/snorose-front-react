@@ -2,6 +2,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastProvider } from '@/contexts/ToastContext';
 
+import './index.css';
+
 /** @type { import('@storybook/react').Preview } */
 
 // Storybook 세션에서 공유하도록 전역 생성
@@ -32,7 +34,9 @@ const preview = {
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
           <ToastProvider>
-            <Story />
+            <div style={{ width: '600px' }}>
+              <Story />
+            </div>
           </ToastProvider>
         </QueryClientProvider>
       </BrowserRouter>

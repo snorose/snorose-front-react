@@ -10,13 +10,6 @@ const headerStoryConfig = {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <div style={{ width: '600px' }}>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default headerStoryConfig;
