@@ -54,10 +54,10 @@ export default function PopUp() {
     setPopupHideDuration(Number(value));
   };
 
-  const { isPopUpOpend, closePopUp } = usePopUp();
+  const { isPopUpOpened, closePopUp } = usePopUp();
   const close = () => closePopUp({ popupHideDuration });
 
-  if (!isPopUpOpend) {
+  if (!isPopUpOpened) {
     return null;
   }
 
