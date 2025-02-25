@@ -28,3 +28,7 @@ export { default as FetchLoadingOverlay } from './loading/FetchLoadingOverlay/Fe
 export { default as ConfirmModal } from './modal/ConfirmModal/ConfirmModal';
 export { default as DeleteModal } from './modal/DeleteModal';
 export { default as OptionModal } from './modal/OptionModal/OptionModal';
+
+// suspense
+export { default as ServerErrorFallback } from './suspense/ServerErrorFallback/ServerErrorFallback';
+export { default as ShimmerEffect } from './suspense/ShimmerEffect/ShimmerEffect';

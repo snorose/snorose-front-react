@@ -1,4 +1,4 @@
-import { ServerErrorFallback } from '@/components';
+import { ServerErrorFallback } from '@/shared/component';
 
 export default function PointLogsErrorFallback({ error, resetErrorBoundary }) {
   const { status } = error;

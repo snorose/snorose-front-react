@@ -24,7 +24,5 @@ export * from './PTR';
 export * from './ReviewContentItem';
 export * from './ReviewDownload';
 export * from './Search';
-export * from './ServerErrorFallback';
-export * from './ShimmerEffect';
 export * from './StageDots';
 export * from './Toast';

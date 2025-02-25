@@ -1,4 +1,4 @@
-import { ServerErrorFallback } from '@/components';
+import { ServerErrorFallback } from '@/shared/component';
 
 export default function ActivityPostsErrorFallback({
   error,

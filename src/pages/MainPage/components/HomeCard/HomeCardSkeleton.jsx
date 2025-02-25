@@ -1,4 +1,4 @@
-import { ShimmerEffect } from '@/components';
+import { ShimmerEffect } from '@/shared/component';
 
 import styles from './HomeCardSkeleton.module.css';
 
