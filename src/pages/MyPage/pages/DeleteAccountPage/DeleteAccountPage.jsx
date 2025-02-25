@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { useAuth, useModal } from '@/hooks';
 
-import { CloseAppBar, ConfirmModal, InputPassword } from '@/components';
+import { InputPassword } from '@/shared/component';
+import { CloseAppBar, ConfirmModal } from '@/components';
 
 import styles from './DeleteAccountPage.module.css';
 

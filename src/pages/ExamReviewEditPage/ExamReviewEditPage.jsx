@@ -6,7 +6,7 @@ import { editReviewDetail } from '@/apis';
 
 import { useToast } from '@/hooks';
 
-import { ActionButton } from '@/shared/component';
+import { ActionButton, Textarea } from '@/shared/component';
 import { CloseAppBar } from '@/components/AppBar';
 import {
   CategoryButton,
@@ -16,7 +16,6 @@ import {
 } from '@/components/Fieldset';
 import { FetchLoadingOverlay } from '@/components/Loading';
 import { InputItem, InputList } from '@/components/Input';
-import { Textarea } from '@/components/Fieldset';
 
 import { validClassNumber } from '@/utils';
 import {

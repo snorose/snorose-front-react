@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { useRegister } from '@/apis';
 
+import { Input, Submit } from '@/shared/component';
 import { Dropdown } from '@/components/Fieldset';
-import { Input } from '@/components/Input';
-import { Submit } from '@/shared/component';
 
 import {
   checkSpecialChar,

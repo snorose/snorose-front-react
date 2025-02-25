@@ -6,7 +6,8 @@ import { useToast } from '@/hooks/index.js';
 
 import { Button, Input } from '@/pages/SnoroseVerifyPage';
 
-import { FetchLoadingOverlay, InputPassword } from '@/components';
+import { InputPassword } from '@/shared/component';
+import { FetchLoadingOverlay } from '@/components';
 
 import { isEmailValid } from '@/utils';
 

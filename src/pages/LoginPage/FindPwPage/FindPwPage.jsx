@@ -3,9 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useFindPw } from '@/apis';
 
+import { Input, Submit } from '@/shared/component';
 import { Icon } from '@/components/Icon';
-import { Input } from '@/components/Input';
-import { Submit } from '@/shared/component';
 
 import {
   checkIfEntered,
@@ -13,7 +12,7 @@ import {
 } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
 
 import styles from './FindPwPage.module.css';
-import { BackAppBar } from '@/components/index.js';
+
 import { FetchLoadingOverlay } from '@/components/Loading';
 import { LOADING_MESSAGE } from '@/constants';
 

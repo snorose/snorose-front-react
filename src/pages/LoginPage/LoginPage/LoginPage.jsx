@@ -3,9 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useLogin } from '@/apis';
 
+import { Input, Submit } from '@/shared/component';
 import { Icon } from '@/components/Icon';
-import { Input } from '@/components/Input';
-import { Submit } from '@/shared/component';
 
 import snoroseLogo from '@/assets/images/snoroseLogo.svg';
 

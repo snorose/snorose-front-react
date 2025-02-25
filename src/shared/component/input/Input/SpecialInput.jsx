@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
+import { Input } from '@/shared/component';
 import { Icon } from '@/components/Icon';
-import { Input } from '@/components/Input';
 
 import styles from './SpecialInput.module.css';
 

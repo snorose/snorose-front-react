@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import { Input, SpecialInput } from '@/components/Input';
-import { Submit } from '@/shared/component';
+import { Input, SpecialInput, Submit } from '@/shared/component';
 
 import {
   checkName,
