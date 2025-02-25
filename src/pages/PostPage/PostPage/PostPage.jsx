@@ -8,12 +8,11 @@ import { useAuth, useLike, useScrap, useToast } from '@/hooks';
 import { PostContent } from '@/pages/PostPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
-import { BackAppBar } from '@/shared/component';
+import { BackAppBar, FetchLoading } from '@/shared/component';
 import {
   CommentsSuspense,
   DeleteModal,
   OptionModal,
-  FetchLoading,
   Icon,
   InputBar,
 } from '@/components';

@@ -4,8 +4,8 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { useScrollRestoration } from '@/hooks';
-import { BackAppBar } from '@/shared/component';
-import { FetchLoading } from '@/components';
+import { BackAppBar, FetchLoading } from '@/shared/component';
+
 import { Posts, PostsErrorFallback } from '@/pages/MyPage/pages/ActivityPage';
 import { ACTIVITIES } from '@/constants';
 

@@ -19,3 +19,7 @@ export { default as Header } from './layout/Header/Header';
 export { default as MenuList } from './layout/Sidebar/MenuList/MenuList';
 export { default as Navbar } from './layout/Navbar/Navbar';
 export { default as Sidebar } from './layout/Sidebar/Sidebar';
+
+// loading
+export { default as FetchLoading } from './loading/FetchLoading/FetchLoading';
+export { default as FetchLoadingOverlay } from './loading/FetchLoadingOverlay/FetchLoadingOverlay';

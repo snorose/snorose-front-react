@@ -2,7 +2,8 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
-import { Comments, CommentsErrorFallback, FetchLoading } from '@/components';
+import { FetchLoading } from '@/shared/component';
+import { Comments, CommentsErrorFallback } from '@/components';
 
 export default function CommentsSuspense({ commentCount }) {
   return (

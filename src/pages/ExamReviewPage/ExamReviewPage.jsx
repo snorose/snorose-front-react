@@ -9,13 +9,16 @@ import {
   reportUser,
 } from '@/apis';
 import { useAuth, useScrap, useToast } from '@/hooks';
-import { BackAppBar } from '@/shared/component';
+
+import {
+  BackAppBar,
+  FetchLoading,
+  FetchLoadingOverlay,
+} from '@/shared/component';
 import {
   CommentsSuspense,
   DeleteModal,
   OptionModal,
-  FetchLoading,
-  FetchLoadingOverlay,
   Icon,
   InputBar,
   ReviewContentItem,

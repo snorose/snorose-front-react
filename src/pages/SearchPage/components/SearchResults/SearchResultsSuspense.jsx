@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
-import { FetchLoading } from '@/components';
+import { FetchLoading } from '@/shared/component';
 import { SearchResults, SearchResultsErrorFallback } from '@/pages/SearchPage';
 
 export default function SearchResultsSuspense({ saveScrollPosition }) {

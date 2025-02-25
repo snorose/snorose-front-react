@@ -6,15 +6,19 @@ import { editReviewDetail } from '@/apis';
 
 import { useToast } from '@/hooks';
 
-import { ActionButton, CloseAppBar, Textarea } from '@/shared/component';
-
+import {
+  ActionButton,
+  CloseAppBar,
+  FetchLoadingOverlay,
+  Textarea,
+} from '@/shared/component';
 import {
   CategoryButton,
   CategoryFieldset,
   Dropdown,
   TextField,
 } from '@/components/Fieldset';
-import { FetchLoadingOverlay } from '@/components/Loading';
+
 import { InputItem, InputList } from '@/components/Input';
 
 import { validClassNumber } from '@/utils';

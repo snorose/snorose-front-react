@@ -1,4 +1,5 @@
-import { FetchLoading, ServerErrorFallback } from '@/components';
+import { FetchLoading } from '@/shared/component';
+import { ServerErrorFallback } from '@/components';
 
 export default function SearchResultsErrorFallback({
   error,

@@ -13,7 +13,6 @@ export * from './Input';
 export * from './InputBar';
 export * from './List';
 export * from './ListHeader';
-export * from './Loading';
 export * from './MainPageListItem';
 export * from './Margin';
 export * from './MenuIcon';

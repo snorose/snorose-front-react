@@ -1,4 +1,4 @@
-import { FetchLoading } from '@/components/Loading';
+import { FetchLoading } from '@/shared/component';
 
 import { LOADING_MESSAGE } from '@/constants';
 

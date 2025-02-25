@@ -5,9 +5,8 @@ import { updatePoint } from '@/apis';
 
 import { useAuth, useToast } from '@/hooks';
 
-import { BackAppBar } from '@/shared/component';
+import { BackAppBar, FetchLoadingOverlay } from '@/shared/component';
 import { Calendar } from '@/components/Calendar';
-import { FetchLoadingOverlay } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 
 import {

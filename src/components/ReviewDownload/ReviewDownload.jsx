@@ -6,8 +6,8 @@ import { getExamReview } from '@/apis';
 
 import { useToast } from '@/hooks';
 
+import { FetchLoadingOverlay } from '@/shared/component';
 import { DeleteModal } from '@/components/Modal';
-import { FetchLoadingOverlay } from '@/components/Loading';
 import { Icon } from '@/components/Icon';
 
 import { LOADING_MESSAGE, QUERY_KEY, TOAST } from '@/constants';

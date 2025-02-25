@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useFindPw } from '@/apis';
 
-import { Input, Submit } from '@/shared/component';
+import { FetchLoadingOverlay, Input, Submit } from '@/shared/component';
 import { Icon } from '@/components/Icon';
 
 import {
@@ -13,7 +13,6 @@ import {
 
 import styles from './FindPwPage.module.css';
 
-import { FetchLoadingOverlay } from '@/components/Loading';
 import { LOADING_MESSAGE } from '@/constants';
 
 export default function FindPwPage() {

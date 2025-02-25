@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getMonthlyAttendanceHistory } from '@/apis';
 
-import { FetchLoadingOverlay } from '@/components/Loading';
+import { FetchLoadingOverlay } from '@/shared/component';
 import { Icon } from '@/components/Icon';
 import { Tile } from '@/components/Calendar';
 

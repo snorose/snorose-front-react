@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 
 import { useSearch } from '@/hooks';
-import { FetchLoading, List, PostBar, PTR } from '@/components';
+
+import { FetchLoading } from '@/shared/component';
+import { List, PostBar, PTR } from '@/components';
 import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
 
 import styles from './SearchExamReviews.module.css';

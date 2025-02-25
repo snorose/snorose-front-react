@@ -7,8 +7,8 @@ import { getPostContent, patchPost } from '@/apis';
 
 import { useToast, useAuth } from '@/hooks';
 
-import { BackAppBar, CloseAppBar } from '@/shared/component';
-import { FetchLoading, Icon, DeleteModal } from '@/components';
+import { BackAppBar, CloseAppBar, FetchLoading } from '@/shared/component';
+import { Icon, DeleteModal } from '@/components';
 
 import { formattedNowTime } from '@/utils';
 import { BOARD_MENUS, TOAST, ROLE, MUTATION_KEY, QUERY_KEY } from '@/constants';

@@ -6,8 +6,12 @@ import { postExamReview, checkExamReviewDuplication } from '@/apis';
 
 import { useAuth, useToast } from '@/hooks';
 
-import { ActionButton, CloseAppBar, Textarea } from '@/shared/component';
-
+import {
+  ActionButton,
+  CloseAppBar,
+  FetchLoadingOverlay,
+  Textarea,
+} from '@/shared/component';
 import {
   CategoryButton,
   CategoryFieldset,
@@ -15,7 +19,7 @@ import {
   TextField,
 } from '@/components/Fieldset';
 import { ConfirmModal } from '@/components/Modal';
-import { FetchLoadingOverlay } from '@/components/Loading';
+
 import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';
 
