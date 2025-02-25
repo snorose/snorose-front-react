@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 import { timeAgo, getBoardTextId } from '@/utils';
 

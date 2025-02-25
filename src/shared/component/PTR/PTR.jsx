@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Icon } from '@/components';
+import { Icon } from '@/shared/component';
 import styles from './PTR.module.css';
 
 export default function PTR({ children, onRefresh }) {

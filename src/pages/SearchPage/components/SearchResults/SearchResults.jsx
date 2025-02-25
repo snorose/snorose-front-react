@@ -2,8 +2,8 @@ import { useLocation, Link } from 'react-router-dom';
 
 import { useSearch } from '@/hooks';
 
-import { FetchLoading } from '@/shared/component';
-import { List, PostBar, PTR } from '@/components';
+import { FetchLoading, List, PTR } from '@/shared/component';
+import { PostBar } from '@/components';
 import {
   deduplicatePaginatedData,
   flatPaginationCache,

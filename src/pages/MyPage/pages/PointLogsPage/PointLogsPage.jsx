@@ -4,7 +4,7 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { useAuth } from '@/hooks';
 import { BackAppBar, FetchLoading } from '@/shared/component';
-import { Icon } from '@/components';
+import { Icon } from '@/shared/component';
 import {
   PointLogs,
   PointLogsErrorFallback,

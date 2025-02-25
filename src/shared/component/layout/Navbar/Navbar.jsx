@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 import { NAVBAR_MENUS } from '@/constants';
 

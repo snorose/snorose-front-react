@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 import styles from './Accordion.module.css';
 

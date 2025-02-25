@@ -1,6 +1,7 @@
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import { useLike } from '@/hooks';
-import { Icon } from '@/components';
+
+import { Icon } from '@/shared/component';
 import { convertHyperlink, timeAgo } from '@/utils';
 import { LIKE_TYPE } from '@/constants';
 

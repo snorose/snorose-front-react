@@ -10,17 +10,17 @@ import {
   ActionButton,
   CloseAppBar,
   ConfirmModal,
+  Dropdown,
   FetchLoadingOverlay,
   Textarea,
 } from '@/shared/component';
 import {
   CategoryButton,
   CategoryFieldset,
-  Dropdown,
   TextField,
 } from '@/components/Fieldset';
 
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 import { InputItem, InputList } from '@/components/Input';
 
 import { validClassNumber } from '@/utils';

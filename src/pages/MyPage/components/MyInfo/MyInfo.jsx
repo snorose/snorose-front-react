@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { Icon } from '@/components';
+import { Icon } from '@/shared/component';
 import { ROLE_NAME } from '@/constants';
 
 import styles from './MyInfo.module.css';

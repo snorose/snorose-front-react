@@ -10,9 +10,10 @@ import {
   ActionButton,
   CloseAppBar,
   DeleteModal,
+  Icon,
   FetchLoading,
 } from '@/shared/component';
-import { Icon, DropDownMenu } from '@/components';
+import { DropDownMenu } from '@/components';
 
 import { formattedNowTime, getBoard } from '@/utils';
 

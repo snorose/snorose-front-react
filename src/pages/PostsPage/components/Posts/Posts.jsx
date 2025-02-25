@@ -3,8 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { getPosts } from '@/apis';
 import { useSuspensePagination } from '@/hooks';
 
-import { FetchLoading } from '@/shared/component';
-import { List, PostBar, PTR } from '@/components';
+import { FetchLoading, List, PTR } from '@/shared/component';
+import { PostBar } from '@/components';
 import {
   deduplicatePaginatedData,
   flatPaginationCache,

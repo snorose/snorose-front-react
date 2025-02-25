@@ -1,4 +1,4 @@
-import { Portal } from '@/components';
+import { Portal } from '@/shared/component';
 
 import styles from './ConfirmModal.module.css';
 

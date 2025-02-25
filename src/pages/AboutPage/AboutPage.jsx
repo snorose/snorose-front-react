@@ -6,7 +6,7 @@ import {
   AccordionListItem,
   AccordionTag,
 } from '@/components/Accordion';
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 import {
   ABOUT_SNOROSE,

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFindId } from '@/apis';
 
 import { FetchLoadingOverlay, Input, Submit } from '@/shared/component';
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 import { LOADING_MESSAGE } from '@/constants';
 

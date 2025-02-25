@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { Icon } from '@/components';
+import { Icon } from '@/shared/component';
 
 import styles from './Search.module.css';
 

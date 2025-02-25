@@ -15,11 +15,11 @@ import {
   DeleteModal,
   FetchLoading,
   FetchLoadingOverlay,
+  Icon,
   OptionModal,
 } from '@/shared/component';
 import {
   CommentsSuspense,
-  Icon,
   InputBar,
   ReviewContentItem,
   ReviewDownload,

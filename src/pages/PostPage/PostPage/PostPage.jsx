@@ -12,9 +12,10 @@ import {
   BackAppBar,
   DeleteModal,
   FetchLoading,
+  Icon,
   OptionModal,
 } from '@/shared/component';
-import { CommentsSuspense, Icon, InputBar } from '@/components';
+import { CommentsSuspense, InputBar } from '@/components';
 
 import { fullDateTimeFormat, getBoard } from '@/utils';
 import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY, TOAST } from '@/constants';

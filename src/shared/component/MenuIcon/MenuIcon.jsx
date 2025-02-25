@@ -1,5 +1,5 @@
 import { useSidebarStore } from '@/stores';
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 export default function MenuIcon() {
   const open = useSidebarStore((state) => state.open);

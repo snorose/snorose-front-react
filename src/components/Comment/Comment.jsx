@@ -6,8 +6,13 @@ import { reportComment } from '@/apis';
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import { useLike, useComment, useToast, useModal } from '@/hooks';
 
-import { ConfirmModal, DeleteModal, OptionModal } from '@/shared/component';
-import { NestedComment, Icon } from '@/components';
+import {
+  ConfirmModal,
+  DeleteModal,
+  Icon,
+  OptionModal,
+} from '@/shared/component';
+import { NestedComment } from '@/components';
 import { convertHyperlink, timeAgo } from '@/utils';
 import { LIKE_TYPE, MUTATION_KEY } from '@/constants';
 

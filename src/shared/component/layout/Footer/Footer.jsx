@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 import styles from './Footer.module.css';
 import { Link } from 'react-router-dom';

@@ -6,7 +6,7 @@ import { useSidebarStore } from '@/stores';
 import { useAuth } from '@/hooks';
 
 import { MenuList } from '@/shared/component';
-import { Icon } from '@/components';
+import { Icon } from '@/shared/component';
 import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '@/constants';
 
 import styles from './Sidebar.module.css';

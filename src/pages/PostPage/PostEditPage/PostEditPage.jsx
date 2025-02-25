@@ -13,7 +13,7 @@ import {
   DeleteModal,
   FetchLoading,
 } from '@/shared/component';
-import { Icon } from '@/components';
+import { Icon } from '@/shared/component';
 
 import { formattedNowTime } from '@/utils';
 import { BOARD_MENUS, TOAST, ROLE, MUTATION_KEY, QUERY_KEY } from '@/constants';

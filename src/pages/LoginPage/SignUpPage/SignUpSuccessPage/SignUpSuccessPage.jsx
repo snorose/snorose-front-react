@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 import { Submit } from '@/shared/component';
 
 import styles from './SignUpSuccessPage.module.css';

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 import styles from './CloseAppBar.module.css';
 

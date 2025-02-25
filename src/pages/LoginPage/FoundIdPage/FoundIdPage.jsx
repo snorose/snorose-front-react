@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 
 import { BackAppBar, Submit } from '@/shared/component';
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 import styles from './FoundIdPage.module.css';
 

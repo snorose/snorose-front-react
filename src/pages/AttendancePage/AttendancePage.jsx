@@ -7,7 +7,7 @@ import { useAuth, useToast } from '@/hooks';
 
 import { BackAppBar, FetchLoadingOverlay } from '@/shared/component';
 import { Calendar } from '@/components/Calendar';
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 import {
   ATTENDANCE_MESSAGE,

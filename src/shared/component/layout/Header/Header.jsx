@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/hooks';
 
-import { Icon } from '@/components/Icon';
-import { MenuIcon } from '@/components/MenuIcon';
+import { Icon, MenuIcon } from '@/shared/component';
 
 import styles from './Header.module.css';
 

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/hooks';
 
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 import styles from './PolicyTab.module.css';
 

@@ -1,4 +1,4 @@
-import { Icon } from '@/components';
+import { Icon } from '@/shared/component';
 
 import styles from '@/shared/component/modal/Modal.module.css';
 

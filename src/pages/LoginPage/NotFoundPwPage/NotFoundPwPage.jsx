@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { BackAppBar, Submit } from '@/shared/component';
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/shared/component';
 
 import styles from './NotFoundPwPage.module.css';
 
