@@ -8,14 +8,13 @@ import { useAuth, useLike, useScrap, useToast } from '@/hooks';
 import { PostContent } from '@/pages/PostPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
-import { BackAppBar, FetchLoading } from '@/shared/component';
 import {
-  CommentsSuspense,
+  BackAppBar,
   DeleteModal,
+  FetchLoading,
   OptionModal,
-  Icon,
-  InputBar,
-} from '@/components';
+} from '@/shared/component';
+import { CommentsSuspense, Icon, InputBar } from '@/components';
 
 import { fullDateTimeFormat, getBoard } from '@/utils';
 import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY, TOAST } from '@/constants';

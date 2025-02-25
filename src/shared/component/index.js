@@ -23,3 +23,8 @@ export { default as Sidebar } from './layout/Sidebar/Sidebar';
 // loading
 export { default as FetchLoading } from './loading/FetchLoading/FetchLoading';
 export { default as FetchLoadingOverlay } from './loading/FetchLoadingOverlay/FetchLoadingOverlay';
+
+// modal
+export { default as ConfirmModal } from './modal/ConfirmModal/ConfirmModal';
+export { default as DeleteModal } from './modal/DeleteModal';
+export { default as OptionModal } from './modal/OptionModal/OptionModal';

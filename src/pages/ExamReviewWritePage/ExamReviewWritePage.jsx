@@ -9,6 +9,7 @@ import { useAuth, useToast } from '@/hooks';
 import {
   ActionButton,
   CloseAppBar,
+  ConfirmModal,
   FetchLoadingOverlay,
   Textarea,
 } from '@/shared/component';
@@ -18,7 +19,6 @@ import {
   Dropdown,
   TextField,
 } from '@/components/Fieldset';
-import { ConfirmModal } from '@/components/Modal';
 
 import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';

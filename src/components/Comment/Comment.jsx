@@ -5,13 +5,9 @@ import { useMutation } from '@tanstack/react-query';
 import { reportComment } from '@/apis';
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import { useLike, useComment, useToast, useModal } from '@/hooks';
-import {
-  NestedComment,
-  DeleteModal,
-  OptionModal,
-  ConfirmModal,
-  Icon,
-} from '@/components';
+
+import { ConfirmModal, DeleteModal, OptionModal } from '@/shared/component';
+import { NestedComment, Icon } from '@/components';
 import { convertHyperlink, timeAgo } from '@/utils';
 import { LIKE_TYPE, MUTATION_KEY } from '@/constants';
 
