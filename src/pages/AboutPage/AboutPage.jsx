@@ -1,12 +1,11 @@
 import { Button } from '@/pages/SnoroseVerifyPage';
 
-import { BackAppBar } from '@/shared/component';
+import { BackAppBar, Icon } from '@/shared/component';
 import {
   Accordion,
   AccordionListItem,
   AccordionTag,
 } from '@/components/Accordion';
-import { Icon } from '@/shared/component';
 
 import {
   ABOUT_SNOROSE,

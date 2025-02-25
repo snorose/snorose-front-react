@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useFindPw } from '@/apis';
 
-import { FetchLoadingOverlay, Input, Submit } from '@/shared/component';
-import { Icon } from '@/shared/component';
+import { Button, FetchLoadingOverlay, Icon, Input } from '@/shared/component';
 
 import {
   checkIfEntered,
@@ -117,7 +116,7 @@ export default function FindPwPage() {
         </div>
 
         <div className={styles.buttonFrame}>
-          <Submit btnName='완료' className={submitState()} />
+          <Button btnName='완료' className={submitState()} />
           <Link to='/find-id'>
             <div className={styles.findIDButton}>
               <p>아이디 찾기</p>

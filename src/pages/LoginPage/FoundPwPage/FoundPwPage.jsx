@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 
-import { BackAppBar, Submit } from '@/shared/component';
-import { Icon } from '@/shared/component';
+import { BackAppBar, Button, Icon } from '@/shared/component';
 
 import styles from './FoundPwPage.module.css';
 
@@ -46,7 +45,7 @@ export default function FoundPwPage() {
       <div className={styles.pageBottomFrame}>
         <Link to='/find-pw'>
           <div className={styles.loginButton}>
-            <Submit btnName='뒤로가기' className='right' />
+            <Button btnName='뒤로가기' className='right' />
           </div>
         </Link>
       </div>

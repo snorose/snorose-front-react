@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useLogin } from '@/apis';
 
-import { Input, Submit } from '@/shared/component';
-import { Icon } from '@/shared/component';
+import { Button, Icon, Input } from '@/shared/component';
 
 import snoroseLogo from '@/assets/images/snoroseLogo.svg';
 
@@ -81,7 +80,7 @@ export default function Login() {
               )}
             </div>
           </div>
-          <Submit btnName='로그인하기' className='right' />
+          <Button btnName='로그인하기' className='right' />
           <div className={styles.find}>
             <Link to='/find-id'>아이디 찾기</Link>
             <p className={styles.divider}>|</p>

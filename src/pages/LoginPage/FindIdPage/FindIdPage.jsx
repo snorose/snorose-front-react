@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useFindId } from '@/apis';
 
-import { FetchLoadingOverlay, Input, Submit } from '@/shared/component';
-import { Icon } from '@/shared/component';
+import { FetchLoadingOverlay, Icon, Input, Button } from '@/shared/component';
 
 import { LOADING_MESSAGE } from '@/constants';
 
@@ -137,7 +136,7 @@ export default function FindIdPage() {
           </div>
 
           <div className={styles.buttonFrame}>
-            <Submit btnName='다음으로' className={submitState()} />
+            <Button btnName='다음으로' className={submitState()} />
           </div>
         </div>
       </form>

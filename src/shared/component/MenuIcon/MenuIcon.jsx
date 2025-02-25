@@ -1,4 +1,5 @@
 import { useSidebarStore } from '@/stores';
+
 import { Icon } from '@/shared/component';
 
 export default function MenuIcon() {

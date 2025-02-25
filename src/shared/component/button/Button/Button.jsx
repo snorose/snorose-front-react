@@ -1,4 +1,4 @@
-import styles from './Submit.module.css';
+import styles from './Button.module.css';
 
 export default function Submit({ btnName, className, ...props }) {
   return (

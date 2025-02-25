@@ -12,8 +12,8 @@ import {
   CloseAppBar,
   DeleteModal,
   FetchLoading,
+  Icon,
 } from '@/shared/component';
-import { Icon } from '@/shared/component';
 
 import { formattedNowTime } from '@/utils';
 import { BOARD_MENUS, TOAST, ROLE, MUTATION_KEY, QUERY_KEY } from '@/constants';

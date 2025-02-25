@@ -1,5 +1,6 @@
 import { Icon } from '@/shared/component';
 import { postBarDateFormat } from '@/utils';
+
 import styles from './PostBar.module.css';
 
 export default function PostBar({ data, hasComment = true, hasLike = true }) {

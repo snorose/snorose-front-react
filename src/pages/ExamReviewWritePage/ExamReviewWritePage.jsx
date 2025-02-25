@@ -12,6 +12,7 @@ import {
   ConfirmModal,
   Dropdown,
   FetchLoadingOverlay,
+  Icon,
   Textarea,
 } from '@/shared/component';
 import {
@@ -19,8 +20,6 @@ import {
   CategoryFieldset,
   TextField,
 } from '@/components/Fieldset';
-
-import { Icon } from '@/shared/component';
 import { InputItem, InputList } from '@/components/Input';
 
 import { validClassNumber } from '@/utils';

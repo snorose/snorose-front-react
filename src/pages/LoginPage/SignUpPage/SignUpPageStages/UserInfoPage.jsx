@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useRegister } from '@/apis';
 
-import { Dropdown, Input, Submit } from '@/shared/component';
+import { Dropdown, Input, Button } from '@/shared/component';
 
 import {
   checkSpecialChar,
@@ -90,7 +90,7 @@ export default function UserInfoPage({ setFormData, formData }) {
       </div>
 
       <div className={styles.submit}>
-        <Submit
+        <Button
           btnName='다음으로'
           className={checkDone()}
           onClick={() => register(formData, navigate)}

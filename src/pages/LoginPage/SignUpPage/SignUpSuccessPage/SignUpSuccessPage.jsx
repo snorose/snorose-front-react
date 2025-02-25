@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { Icon } from '@/shared/component';
-import { Submit } from '@/shared/component';
+import { Button, Icon } from '@/shared/component';
 
 import styles from './SignUpSuccessPage.module.css';
 
@@ -34,7 +33,7 @@ export default function SignUpSuccessPage() {
 
       <div>
         <div className={styles.submit}>
-          <Submit
+          <Button
             btnName='로그인하기'
             className={'right'}
             onClick={() => navigate('/login')}

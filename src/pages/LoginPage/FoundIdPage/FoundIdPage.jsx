@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 
-import { BackAppBar, Submit } from '@/shared/component';
-import { Icon } from '@/shared/component';
+import { BackAppBar, Button, Icon } from '@/shared/component';
 
 import styles from './FoundIdPage.module.css';
 
@@ -39,7 +38,7 @@ export default function FoundIdPage() {
       <div className={styles.pageBottomFrame}>
         <Link to='/login'>
           <div className={styles.loginButton}>
-            <Submit btnName='로그인하기' className='right' />
+            <Button btnName='로그인하기' className='right' />
           </div>
         </Link>
         <Link to='/find-pw'>

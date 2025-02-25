@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { BackAppBar, Submit } from '@/shared/component';
-import { Icon } from '@/shared/component';
+import { BackAppBar, Button, Icon } from '@/shared/component';
 
 import styles from './NotFoundPwPage.module.css';
 
@@ -33,12 +32,12 @@ export default function NotFoundPwPage() {
       <div className={styles.pageBottomFrame}>
         <Link to='/find-pw'>
           <div className={styles.goBackButton}>
-            <Submit btnName='뒤로가기' className='ready' />
+            <Button btnName='뒤로가기' className='ready' />
           </div>
         </Link>
         <Link to='/login'>
           <div className={styles.loginButton}>
-            <Submit btnName='로그인하기' className='right' />
+            <Button btnName='로그인하기' className='right' />
           </div>
         </Link>
       </div>
