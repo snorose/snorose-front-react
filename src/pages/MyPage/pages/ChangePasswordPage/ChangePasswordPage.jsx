@@ -6,8 +6,7 @@ import { updatePassword } from '@/apis';
 
 import { useToast } from '@/hooks';
 
-import { ActionButton, InputPassword } from '@/shared/component';
-import { BackAppBar } from '@/components';
+import { ActionButton, BackAppBar, InputPassword } from '@/shared/component';
 
 import { MUTATION_KEY, TOAST } from '@/constants';
 

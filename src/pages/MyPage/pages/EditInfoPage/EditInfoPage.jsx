@@ -6,8 +6,8 @@ import { updateUserInfo } from '@/apis';
 
 import { useAuth, useToast } from '@/hooks';
 
-import { ActionButton } from '@/shared/component';
-import { BackAppBar, CategoryFieldset, Dropdown } from '@/components';
+import { ActionButton, BackAppBar } from '@/shared/component';
+import { CategoryFieldset, Dropdown } from '@/components';
 
 import {
   MAJORS,

@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { Submit } from '@/shared/component';
+import { BackAppBar, Submit } from '@/shared/component';
 import { Icon } from '@/components/Icon';
 
 import styles from './SignUpFailurePage.module.css';
-import { BackAppBar } from '@/components/index.js';
 
 export default function SignUpFailurePage() {
   const navigate = useNavigate();

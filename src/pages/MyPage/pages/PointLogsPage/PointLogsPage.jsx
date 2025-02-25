@@ -3,7 +3,8 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { useAuth } from '@/hooks';
-import { BackAppBar, FetchLoading, Icon } from '@/components';
+import { BackAppBar } from '@/shared/component';
+import { FetchLoading, Icon } from '@/components';
 import {
   PointLogs,
   PointLogsErrorFallback,

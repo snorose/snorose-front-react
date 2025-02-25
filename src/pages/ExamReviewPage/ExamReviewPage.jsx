@@ -9,8 +9,8 @@ import {
   reportUser,
 } from '@/apis';
 import { useAuth, useScrap, useToast } from '@/hooks';
+import { BackAppBar } from '@/shared/component';
 import {
-  BackAppBar,
   CommentsSuspense,
   DeleteModal,
   OptionModal,

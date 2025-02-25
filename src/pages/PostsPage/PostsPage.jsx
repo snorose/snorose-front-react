@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { getNoticeLine } from '@/apis';
 import { useScrollRestoration } from '@/hooks';
 
-import { WriteButton } from '@/shared/component';
-import { BackAppBar, Icon } from '@/components';
+import { BackAppBar, WriteButton } from '@/shared/component';
+import { Icon } from '@/components';
 import { PostsSuspense } from '@/pages/PostsPage';
 import { getBoard } from '@/utils';
 import { QUERY_KEY } from '@/constants';

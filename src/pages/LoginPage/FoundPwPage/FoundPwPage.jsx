@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 
+import { BackAppBar, Submit } from '@/shared/component';
 import { Icon } from '@/components/Icon';
-import { Submit } from '@/shared/component';
 
 import styles from './FoundPwPage.module.css';
-import { BackAppBar } from '@/components/index.js';
 
 export default function FoundPwPage() {
   const navigate = useNavigate();

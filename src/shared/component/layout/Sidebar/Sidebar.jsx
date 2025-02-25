@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import { useSidebarStore } from '@/stores';
 
 import { useAuth } from '@/hooks';
-import { MenuList, Icon } from '@/components';
+
+import { MenuList } from '@/shared/component';
+import { Icon } from '@/components';
 import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '@/constants';
 
 import styles from './Sidebar.module.css';

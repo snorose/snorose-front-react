@@ -6,15 +6,8 @@ import { postPost } from '@/apis';
 
 import { useToast, useAuth } from '@/hooks';
 
-import { ActionButton } from '@/shared/component';
-
-import {
-  Icon,
-  CloseAppBar,
-  DropDownMenu,
-  DeleteModal,
-  FetchLoading,
-} from '@/components';
+import { ActionButton, CloseAppBar } from '@/shared/component';
+import { Icon, DropDownMenu, DeleteModal, FetchLoading } from '@/components';
 
 import { formattedNowTime, getBoard } from '@/utils';
 

@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { Navbar, Sidebar } from '@/components';
+import { Navbar, Sidebar } from '@/shared/component';
 import { findRouteByPath } from '@/utils';
 import { routeList } from '@/router.js';
 

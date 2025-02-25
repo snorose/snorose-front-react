@@ -6,8 +6,8 @@ import { postExamReview, checkExamReviewDuplication } from '@/apis';
 
 import { useAuth, useToast } from '@/hooks';
 
-import { ActionButton, Textarea } from '@/shared/component';
-import { CloseAppBar } from '@/components/AppBar';
+import { ActionButton, CloseAppBar, Textarea } from '@/shared/component';
+
 import {
   CategoryButton,
   CategoryFieldset,
