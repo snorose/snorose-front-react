@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { Submit } from '@/components/Submit';
+import { Submit } from '@/shared/component';
 import { Icon } from '@/components/Icon';
 
 import styles from './NotFoundPwPage.module.css';

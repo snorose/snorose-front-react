@@ -5,7 +5,7 @@ import { useFindPw } from '@/apis';
 
 import { Icon } from '@/components/Icon';
 import { Input } from '@/components/Input';
-import { Submit } from '@/components/Submit';
+import { Submit } from '@/shared/component';
 
 import {
   checkIfEntered,

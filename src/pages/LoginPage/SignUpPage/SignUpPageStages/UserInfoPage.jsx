@@ -5,7 +5,7 @@ import { useRegister } from '@/apis';
 
 import { Dropdown } from '@/components/Fieldset';
 import { Input } from '@/components/Input';
-import { Submit } from '@/components/Submit';
+import { Submit } from '@/shared/component';
 
 import {
   checkSpecialChar,

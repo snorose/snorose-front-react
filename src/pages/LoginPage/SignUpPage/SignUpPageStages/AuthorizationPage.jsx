@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSendUser, useCertifyUser } from '@/apis';
 
 import { Input } from '@/components/Input';
-import { Submit } from '@/components/Submit';
+import { Submit } from '@/shared/component';
 
 import styles from './AuthorizationPage.module.css';
 

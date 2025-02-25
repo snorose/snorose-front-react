@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Icon } from '@/components/Icon';
-import { Submit } from '@/components/Submit';
+import { Submit } from '@/shared/component';
 
 import styles from './SignUpSuccessPage.module.css';
 

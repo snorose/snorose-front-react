@@ -5,7 +5,8 @@ import { useFindId } from '@/apis';
 
 import { Icon } from '@/components/Icon';
 import { Input } from '@/components/Input';
-import { Submit } from '@/components/Submit';
+import { Submit } from '@/shared/component';
+
 import { FetchLoadingOverlay } from '@/components/Loading';
 import { LOADING_MESSAGE } from '@/constants';
 

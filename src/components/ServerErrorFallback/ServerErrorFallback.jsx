@@ -1,4 +1,4 @@
-import { ResetButton } from '@/components/ServerErrorFallback';
+import { ResetButton } from '@/shared/component';
 
 import styles from './ServerErrorFallback.module.css';
 

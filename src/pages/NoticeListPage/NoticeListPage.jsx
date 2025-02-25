@@ -4,7 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getNoticeList } from '@/apis/notice';
 
-import { BackAppBar, NoticeBar, FetchLoading, WriteButton } from '@/components';
+import { WriteButton } from '@/shared/component';
+import { BackAppBar, NoticeBar, FetchLoading } from '@/components';
 
 import { QUERY_KEY, STALE_TIME } from '@/constants';
 
