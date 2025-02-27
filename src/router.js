@@ -1,3 +1,5 @@
+import { ROLE } from '@/shared/constant';
+
 import App from '@/App';
 import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
@@ -39,8 +41,6 @@ import { PostPage, PostWritePage, PostEditPage } from '@/pages/PostPage';
 import { PostsPage } from '@/pages/PostsPage';
 import { SearchPage } from '@/pages/SearchPage';
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
-
-import { ROLE } from '@/constants';
 
 import { CheckExamPeriodRoute } from '@/components/Route/CheckExamPeriodRoute.jsx';
 

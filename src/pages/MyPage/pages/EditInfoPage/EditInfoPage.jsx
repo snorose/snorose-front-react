@@ -3,15 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { ActionButton, BackAppBar, Dropdown } from '@/shared/component';
-import { MAJORS, MUTATION_KEY, QUERY_KEY } from '@/shared/constant';
+import {
+  MAJORS,
+  MUTATION_KEY,
+  QUERY_KEY,
+  PRIVATE_USER_INFO_UPDATE_PERMISSION_ROLE_ID_LIST,
+} from '@/shared/constant';
 
 import { updateUserInfo } from '@/apis';
 import { useAuth, useToast } from '@/hooks';
 import { CategoryFieldset } from '@/components';
-import {
-  TOAST,
-  PRIVATE_USER_INFO_UPDATE_PERMISSION_ROLE_ID_LIST,
-} from '@/constants';
+import { TOAST } from '@/constants';
 
 import defaultProfile from '@/assets/images/defaultProfile.svg';
 

@@ -10,12 +10,12 @@ import {
   FetchLoading,
   Icon,
 } from '@/shared/component';
-import { BOARD_MENUS, MUTATION_KEY, QUERY_KEY } from '@/shared/constant';
+import { BOARD_MENUS, MUTATION_KEY, QUERY_KEY, ROLE } from '@/shared/constant';
 
 import { getPostContent, patchPost } from '@/apis';
 import { useToast, useAuth } from '@/hooks';
 import { formattedNowTime } from '@/utils';
-import { TOAST, ROLE } from '@/constants';
+import { TOAST } from '@/constants';
 
 import styles from './PostEditPage.module.css';
 

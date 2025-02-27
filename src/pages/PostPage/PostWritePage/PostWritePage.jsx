@@ -10,13 +10,13 @@ import {
   Icon,
   FetchLoading,
 } from '@/shared/component';
-import { BOARD_MENUS, QUERY_KEY } from '@/shared/constant';
+import { BOARD_MENUS, QUERY_KEY, ROLE } from '@/shared/constant';
 
 import { postPost } from '@/apis';
 import { useToast, useAuth } from '@/hooks';
 import { DropDownMenu } from '@/components';
 import { formattedNowTime, getBoard } from '@/utils';
-import { ROLE, TOAST } from '@/constants';
+import { TOAST } from '@/constants';
 
 import styles from './PostWritePage.module.css';
 
