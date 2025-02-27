@@ -4,9 +4,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import { CommentContextProvider } from '@/contexts/CommentContext.jsx';
-import { ToastProvider } from '@/contexts/ToastContext.jsx';
+import { ToastProvider } from '@/shared/context/ToastContext';
 
+import { CommentContextProvider } from '@/contexts/CommentContext.jsx';
 import { routeList } from '@/router.js';
 
 import '@/index.css';

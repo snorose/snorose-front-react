@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useToastContext } from '@/contexts/ToastContext.jsx';
+import { useToastContext } from '@/shared/context/ToastContext';
 
 import styles from './Toast.module.css';
 

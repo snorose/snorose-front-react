@@ -1,4 +1,4 @@
-import { useToastContext } from '@/contexts/ToastContext.jsx';
+import { useToastContext } from '@/shared/context/ToastContext';
 
 export default function useToast() {
   const { addToast } = useToastContext();
