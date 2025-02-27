@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/index.js';
 
 import { Button, Input } from '@/pages/SnoroseVerifyPage';
 
-import { FetchLoadingOverlay, InputPassword } from '@/shared/component';
+import { FetchLoadingOverlay, PwInput } from '@/shared/component';
 
 import { isEmailValid } from '@/utils';
 
@@ -61,7 +61,7 @@ export default function VerifyPage({ setStep }) {
           placeholder='학번을 입력해주세요'
           onChange={(event) => setStudentId(event.target.value)}
         />
-        <InputPassword
+        <PwInput
           title='숙명포털 비밀번호'
           placeholder='숙명포털 비밀번호를 입력해주세요'
           value={password}

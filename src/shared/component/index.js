@@ -6,7 +6,7 @@ export { default as WriteButton } from './button/WriteButton/WriteButton';
 
 // input
 export { default as Input } from './input/Input/Input';
-export { default as InputPassword } from './input/InputPassword/InputPassword';
+export { default as PwInput } from './input/PwInput/PwInput';
 export { default as Textarea } from './input/Textarea/Textarea';
 export { default as SpecialInput } from './input/Input/SpecialInput';
 

@@ -6,7 +6,7 @@ import { updatePassword } from '@/apis';
 
 import { useToast } from '@/hooks';
 
-import { ActionButton, BackAppBar, InputPassword } from '@/shared/component';
+import { ActionButton, BackAppBar, PwInput } from '@/shared/component';
 
 import { MUTATION_KEY, TOAST } from '@/constants';
 
@@ -129,7 +129,7 @@ export default function ChangePasswordPage() {
       </header>
 
       <section className={styles.contentContainer}>
-        <InputPassword
+        <PwInput
           title='현재 비밀번호'
           placeholder='기존 비밀번호를 입력하세요'
           value={currentPassword}
@@ -137,7 +137,7 @@ export default function ChangePasswordPage() {
           onChange={handleCurrentPasswordInputChange}
         />
 
-        <InputPassword
+        <PwInput
           title='새 비밀번호'
           placeholder='새로운 비밀번호를 입력하세요'
           value={newPassword}
@@ -145,7 +145,7 @@ export default function ChangePasswordPage() {
           onChange={handleNewPasswordInputChange}
         />
 
-        <InputPassword
+        <PwInput
           title='새 비밀번호 확인'
           placeholder='새 비밀번호를 다시 입력하세요'
           value={newPasswordCheck}

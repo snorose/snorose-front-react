@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { Icon } from '@/shared/component';
 
-import styles from './InputPassword.module.css';
+import styles from './PwInput.module.css';
 
-const InputPassword = ({
+const PwInput = ({
   title = '',
   placeholder = '',
   value = '',
@@ -66,4 +66,4 @@ const InputPassword = ({
   );
 };
 
-export default InputPassword;
+export default PwInput;
