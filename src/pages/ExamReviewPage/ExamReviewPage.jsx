@@ -3,14 +3,6 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
 import {
-  deleteExamReview,
-  getReviewDetail,
-  reportPost,
-  reportUser,
-} from '@/apis';
-import { useAuth, useScrap, useToast } from '@/hooks';
-
-import {
   BackAppBar,
   DeleteModal,
   FetchLoading,
@@ -18,8 +10,15 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
-import { BOARD_MENUS } from '@/shared/constant';
+import { BOARD_MENUS, QUERY_KEY, MUTATION_KEY } from '@/shared/constant';
 
+import {
+  deleteExamReview,
+  getReviewDetail,
+  reportPost,
+  reportUser,
+} from '@/apis';
+import { useAuth, useScrap, useToast } from '@/hooks';
 import {
   CommentsSuspense,
   InputBar,
@@ -34,8 +33,6 @@ import {
   EXAM_TYPES,
   TOAST,
   FLEX_ALIGN,
-  QUERY_KEY,
-  MUTATION_KEY,
 } from '@/constants';
 
 import styles from './ExamReviewPage.module.css';

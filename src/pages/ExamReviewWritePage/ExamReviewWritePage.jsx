@@ -2,10 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { postExamReview, checkExamReviewDuplication } from '@/apis';
-
-import { useAuth, useToast } from '@/hooks';
-
 import {
   ActionButton,
   CloseAppBar,
@@ -15,8 +11,15 @@ import {
   Icon,
   Textarea,
 } from '@/shared/component';
-import { BOARD_ID, MODAL_CONFIRM } from '@/shared/constant';
+import {
+  BOARD_ID,
+  MODAL_CONFIRM,
+  MUTATION_KEY,
+  QUERY_KEY,
+} from '@/shared/constant';
 
+import { postExamReview, checkExamReviewDuplication } from '@/apis';
+import { useAuth, useToast } from '@/hooks';
 import {
   CategoryButton,
   CategoryFieldset,
@@ -28,11 +31,9 @@ import {
   EXAM_TYPES,
   FILE_MAX_SIZE,
   LECTURE_TYPES,
-  MUTATION_KEY,
   SEMESTERS,
   TOAST,
   YEARS,
-  QUERY_KEY,
 } from '@/constants';
 
 import styles from './ExamReviewWritePage.module.css';

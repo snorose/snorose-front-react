@@ -1,18 +1,16 @@
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { updatePoint } from '@/apis';
-
-import { useAuth, useToast } from '@/hooks';
-
 import { BackAppBar, FetchLoadingOverlay, Icon } from '@/shared/component';
-import { Calendar } from '@/components/Calendar';
+import { QUERY_KEY } from '@/shared/constant';
 
+import { updatePoint } from '@/apis';
+import { useAuth, useToast } from '@/hooks';
+import { Calendar } from '@/components/Calendar';
 import {
   ATTENDANCE_MESSAGE,
   POINT_CATEGORY_ENUM,
   POINT_SOURCE_ENUM,
-  QUERY_KEY,
   TOAST,
 } from '@/constants';
 

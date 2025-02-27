@@ -3,10 +3,10 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
-import { getBannerImage } from '@/apis';
+import { QUERY_KEY } from '@/shared/constant';
 
+import { getBannerImage } from '@/apis';
 import { Slide } from '@/components';
-import { QUERY_KEY } from '@/constants';
 
 import 'swiper/css';
 import 'swiper/css/navigation';

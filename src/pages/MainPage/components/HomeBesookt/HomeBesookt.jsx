@@ -1,9 +1,9 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { getBest3 } from '@/apis';
+import { QUERY_KEY } from '@/shared/constant';
 
+import { getBest3 } from '@/apis';
 import { MainPageListItem } from '@/components';
-import { QUERY_KEY } from '@/constants';
 
 import styles from './HomeBesookt.module.css';
 

@@ -4,10 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import { getMonthlyAttendanceHistory } from '@/apis';
 
 import { FetchLoadingOverlay, Icon } from '@/shared/component';
-import { LOADING_MESSAGE } from '@/shared/constant';
+import { LOADING_MESSAGE, QUERY_KEY } from '@/shared/constant';
 
 import { Tile } from '@/components/Calendar';
-import { QUERY_KEY } from '@/constants';
 import { StyledCalendar } from '@/components/Calendar/Calendar.style.jsx';
 
 export default function Calendar({ callback }) {

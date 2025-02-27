@@ -12,9 +12,11 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
+import { MUTATION_KEY } from '@/shared/constant';
+
 import { NestedComment } from '@/components';
 import { convertHyperlink, timeAgo } from '@/utils';
-import { LIKE_TYPE, MUTATION_KEY } from '@/constants';
+import { LIKE_TYPE } from '@/constants';
 
 import styles from './Comment.module.css';
 

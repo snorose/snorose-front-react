@@ -2,12 +2,6 @@ import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
-import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import { useAuth, useLike, useScrap, useToast } from '@/hooks';
-import { PostContent } from '@/pages/PostPage';
-import { NotFoundPage } from '@/pages/NotFoundPage';
-
 import {
   BackAppBar,
   DeleteModal,
@@ -15,10 +9,16 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
-import { CommentsSuspense, InputBar } from '@/components';
+import { MUTATION_KEY, QUERY_KEY } from '@/shared/constant';
 
+import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
+import { useCommentContext } from '@/contexts/CommentContext.jsx';
+import { useAuth, useLike, useScrap, useToast } from '@/hooks';
+import { PostContent } from '@/pages/PostPage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
+import { CommentsSuspense, InputBar } from '@/components';
 import { fullDateTimeFormat, getBoard } from '@/utils';
-import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY, TOAST } from '@/constants';
+import { LIKE_TYPE, TOAST } from '@/constants';
 
 import styles from './PostPage.module.css';
 

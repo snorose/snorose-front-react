@@ -7,7 +7,6 @@ export * from './examReview.js';
 export * from './mypage.js';
 export * from './point.js';
 export * from './postCategories.js';
-export * from './reactQuery.js';
 export * from './role.js';
 export * from './route.js';
 export * from './search.js';

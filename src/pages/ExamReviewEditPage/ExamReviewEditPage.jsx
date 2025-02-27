@@ -2,10 +2,6 @@ import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-import { editReviewDetail } from '@/apis';
-
-import { useToast } from '@/hooks';
-
 import {
   ActionButton,
   CloseAppBar,
@@ -13,20 +9,20 @@ import {
   FetchLoadingOverlay,
   Textarea,
 } from '@/shared/component';
+import { MUTATION_KEY, QUERY_KEY } from '@/shared/constant';
+
+import { editReviewDetail } from '@/apis';
+import { useToast } from '@/hooks';
 import {
   CategoryButton,
   CategoryFieldset,
   TextField,
 } from '@/components/Fieldset';
-
 import { InputItem, InputList } from '@/components/Input';
-
 import { validClassNumber } from '@/utils';
 import {
   EXAM_TYPES,
   LECTURE_TYPES,
-  MUTATION_KEY,
-  QUERY_KEY,
   ROUTE,
   SEMESTERS,
   TOAST,

@@ -1,12 +1,13 @@
 import { useParams } from 'react-router-dom';
 
+import { FetchLoading } from '@/shared/component';
+import { QUERY_KEY } from '@/shared/constant';
+
 import { getComments } from '@/apis';
 import { useSuspensePagination } from '@/hooks';
 
-import { FetchLoading } from '@/shared/component';
 import { Comment } from '@/components';
 import { filterVisibleComments, flatPaginationCache } from '@/utils';
-import { QUERY_KEY } from '@/constants';
 
 import styles from './Comments.module.css';
 

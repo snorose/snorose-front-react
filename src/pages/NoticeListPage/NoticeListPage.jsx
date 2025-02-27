@@ -2,17 +2,15 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { getNoticeList } from '@/apis/notice';
-
 import { BackAppBar, FetchLoading, WriteButton } from '@/shared/component';
-import { NoticeBar } from '@/components';
+import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
-import { QUERY_KEY, STALE_TIME } from '@/constants';
-
+import { getNoticeList } from '@/apis/notice';
 import { useAuth, useScrollRestoration } from '@/hooks';
+import { NoticeBar } from '@/components';
+import { getBoard } from '@/utils';
 
 import styles from './NoticeListPage.module.css';
-import { getBoard } from '@/utils';
 
 export default function NoticeListPage() {
   const navigate = useNavigate();

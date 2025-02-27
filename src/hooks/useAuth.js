@@ -2,15 +2,15 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { QUERY_KEY } from '@/shared/constant';
+
 import {
   getMyPageUserInfo,
   withdrawAccount,
   logout as logoutApi,
 } from '@/apis';
-
 import { useToast } from '@/hooks';
-
-import { QUERY_KEY, TOAST } from '@/constants';
+import { TOAST } from '@/constants';
 
 const useAuth = () => {
   const navigate = useNavigate();

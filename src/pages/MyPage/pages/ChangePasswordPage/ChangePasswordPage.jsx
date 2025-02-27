@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
-import { updatePassword } from '@/apis';
-
-import { useToast } from '@/hooks';
-
 import { ActionButton, BackAppBar, PwInput } from '@/shared/component';
+import { MUTATION_KEY } from '@/shared/constant';
 
-import { MUTATION_KEY, TOAST } from '@/constants';
+import { updatePassword } from '@/apis';
+import { useToast } from '@/hooks';
+import { TOAST } from '@/constants';
 
 import styles from './ChangePasswordPage.module.css';
 
