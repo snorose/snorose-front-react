@@ -1,4 +1,4 @@
-import { QUERY_KEY } from '@/shared/constant';
+import { QUERY_KEY, ROUTE } from '@/shared/constant';
 
 import {
   getMyPosts,
@@ -7,7 +7,6 @@ import {
   getScrapedExamReviews,
   getScrapedPosts,
 } from '@/apis/userInfo.js';
-import { ROUTE } from '@/constants/route.js';
 
 export const ACTIVITIES = [
   {

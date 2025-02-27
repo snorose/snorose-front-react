@@ -6,3 +6,4 @@ export * from './menus.js';
 export * from './modalOptions.js';
 export * from './reactQuery.js';
 export * from './role.js';
+export * from './route.js';

@@ -9,7 +9,7 @@ import {
   FetchLoadingOverlay,
   Textarea,
 } from '@/shared/component';
-import { MUTATION_KEY, QUERY_KEY } from '@/shared/constant';
+import { MUTATION_KEY, QUERY_KEY, ROUTE } from '@/shared/constant';
 
 import { editReviewDetail } from '@/apis';
 import { useToast } from '@/hooks';
@@ -23,7 +23,6 @@ import { validClassNumber } from '@/utils';
 import {
   EXAM_TYPES,
   LECTURE_TYPES,
-  ROUTE,
   SEMESTERS,
   TOAST,
   YEARS,
