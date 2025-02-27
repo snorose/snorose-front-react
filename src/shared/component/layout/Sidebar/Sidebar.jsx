@@ -5,7 +5,7 @@ import { useSidebarStore } from '@/stores';
 
 import { useAuth } from '@/hooks';
 
-import { Icon, MenuList } from '@/shared/component';
+import { Icon } from '@/shared/component';
 import { NOT_LOGIN_MENUS, SIDEBAR_MENUS } from '@/constants';
 
 import styles from './Sidebar.module.css';
@@ -49,10 +49,24 @@ export default function Sidebar() {
             <Link to={to}>
               <h3 className={styles.title}>{title}</h3>
             </Link>
-            <MenuList className={styles.item} items={items} />
+            <MenuList className={styles.menuList} items={items} />
           </div>
         ))}
       </aside>
     </div>
+  );
+}
+
+function MenuList({ className, items }) {
+  if (!items) return null;
+
+  return (
+    <ul className={styles.list}>
+      {items.map(({ to, name }) => (
+        <Link to={to} key={name} className={styles.item}>
+          <li className={className}>{name}</li>
+        </Link>
+      ))}
+    </ul>
   );
 }
