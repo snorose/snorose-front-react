@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useRegister } from '@/apis';
-
 import { Dropdown, Input, Button } from '@/shared/component';
+import { MAJORS } from '@/shared/constant';
+
+import { useRegister } from '@/apis';
 
 import {
   checkSpecialChar,
   checkStudentNum,
   checkBirthday,
 } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
-
-import { MAJORS } from '@/constants';
 
 import styles from './UserInfoPage.module.css';
 

@@ -2,15 +2,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { updateUserInfo } from '@/apis';
-
-import { useAuth, useToast } from '@/hooks';
-
 import { ActionButton, BackAppBar, Dropdown } from '@/shared/component';
-import { CategoryFieldset } from '@/components';
+import { MAJORS } from '@/shared/constant';
 
+import { updateUserInfo } from '@/apis';
+import { useAuth, useToast } from '@/hooks';
+import { CategoryFieldset } from '@/components';
 import {
-  MAJORS,
   TOAST,
   PRIVATE_USER_INFO_UPDATE_PERMISSION_ROLE_ID_LIST,
   MUTATION_KEY,
