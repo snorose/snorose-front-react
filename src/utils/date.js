@@ -1,5 +1,10 @@
-import { timeAgo } from './timeAgo';
-import { HOUR_SECONDS } from '@/constants';
+import {
+  MINUTE_SECONDS,
+  HOUR_SECONDS,
+  DAY_SECONDS,
+  MONTH_SECONDS,
+  YEAR_SECONDS,
+} from '@/constants';
 
 export const dateFormat = (date) => {
   const dateObj = new Date(date);
@@ -74,3 +79,42 @@ export const addDays = (date, days) => {
   newDate.setDate(newDate.getDate() + days);
   return newDate;
 };
+
+export function timeAgo(date) {
+  const currentDate = new Date();
+  const givenDate = new Date(date);
+  const seconds = Math.floor((currentDate - givenDate) / 1000);
+
+  if (seconds < MINUTE_SECONDS) {
+    return seconds + '초 전';
+  } else if (seconds < HOUR_SECONDS) {
+    const minutes = Math.floor(seconds / MINUTE_SECONDS);
+    return minutes + '분 전';
+  } else if (seconds < DAY_SECONDS) {
+    const hours = Math.floor(seconds / HOUR_SECONDS);
+    return hours + '시간 전';
+  } else if (seconds < MONTH_SECONDS) {
+    const days = Math.floor(seconds / DAY_SECONDS);
+    return days + '일 전';
+  } else if (seconds < YEAR_SECONDS) {
+    const months = Math.floor(seconds / MONTH_SECONDS);
+    return months + '달 전';
+  } else {
+    const years = Math.floor(seconds / YEAR_SECONDS);
+    return years + '년 전';
+  }
+}
+
+export function formattedNowTime() {
+  const formattedNowTime = new Date()
+    .toLocaleString('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    })
+    .replace(',', '');
+
+  return formattedNowTime;
+}
