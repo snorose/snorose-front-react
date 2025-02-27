@@ -1,4 +1,4 @@
-import { MODAL_OPTIONS } from '@/constants';
+import { MODAL_OPTIONS } from '@/shared/constant';
 
 import styles from './Modal.module.css';
 

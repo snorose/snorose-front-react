@@ -15,7 +15,7 @@ import {
   Icon,
   Textarea,
 } from '@/shared/component';
-import { BOARD_ID } from '@/shared/constant';
+import { BOARD_ID, MODAL_CONFIRM } from '@/shared/constant';
 
 import {
   CategoryButton,
@@ -28,7 +28,6 @@ import {
   EXAM_TYPES,
   FILE_MAX_SIZE,
   LECTURE_TYPES,
-  MODAL_CONFIRM,
   MUTATION_KEY,
   SEMESTERS,
   TOAST,

@@ -4,7 +4,6 @@ export * from './align.js';
 export * from './attendance.js';
 export * from './dropDown.js';
 export * from './examReview.js';
-export * from './modalOptions.js';
 export * from './mypage.js';
 export * from './point.js';
 export * from './postCategories.js';

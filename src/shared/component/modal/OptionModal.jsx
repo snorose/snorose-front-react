@@ -1,5 +1,5 @@
 import { Icon } from '@/shared/component';
-import { MODAL_OPTIONS } from '@/constants';
+import { MODAL_OPTIONS } from '@/shared/constant';
 
 import styles from '@/shared/component/modal/Modal.module.css';
 
