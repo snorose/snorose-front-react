@@ -1,9 +1,9 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
+import { useAuth } from '@/shared/hook';
 import { QUERY_KEY } from '@/shared/constant';
 
 import { getHomeNotice } from '@/apis';
-import { useAuth } from '@/hooks';
 import { Card } from '@/components';
 
 import styles from './HomeCard.module.css';

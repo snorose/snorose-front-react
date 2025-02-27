@@ -1,4 +1,3 @@
-export { default as useAuth } from './useAuth';
 export { default as useComment } from './useComment';
 export { default as useLike } from './useLike';
 export { default as useModal } from './useModal';

@@ -2,8 +2,9 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
-import { useAuth } from '@/hooks';
+import { useAuth } from '@/shared/hook';
 import { BackAppBar, FetchLoading, Icon } from '@/shared/component';
+
 import {
   PointLogs,
   PointLogsErrorFallback,

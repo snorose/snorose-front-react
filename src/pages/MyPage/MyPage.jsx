@@ -1,4 +1,6 @@
-import { useAuth, useTabView } from '@/hooks';
+import { useAuth } from '@/shared/hook';
+
+import { useTabView } from '@/hooks';
 import {
   TopOverlay,
   CircleProfile,

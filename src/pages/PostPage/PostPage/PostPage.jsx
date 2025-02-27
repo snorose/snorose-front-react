@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { useAuth } from '@/shared/hook';
 import {
   BackAppBar,
   DeleteModal,
@@ -13,7 +14,7 @@ import { MUTATION_KEY, QUERY_KEY, TOAST, LIKE_TYPE } from '@/shared/constant';
 
 import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import { useAuth, useLike, useScrap, useToast } from '@/hooks';
+import { useLike, useScrap, useToast } from '@/hooks';
 import { PostContent } from '@/pages/PostPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { CommentsSuspense, InputBar } from '@/components';

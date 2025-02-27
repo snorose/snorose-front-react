@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { useAuth } from '@/hooks';
-
+import { useAuth } from '@/shared/hook';
 import { Icon, MenuIcon } from '@/shared/component';
 
 import styles from './Header.module.css';
