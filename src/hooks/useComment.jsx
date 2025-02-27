@@ -4,7 +4,11 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 
 import { useAuth, useToast } from '@/shared/hook';
-import { getBoard } from '@/shared/lib';
+import {
+  getBoard,
+  flatPaginationCache,
+  toPaginationCacheFormat,
+} from '@/shared/lib';
 import {
   MUTATION_KEY,
   QUERY_KEY,
@@ -17,12 +21,7 @@ import {
   postComment as post,
   editComment as edit,
 } from '@/apis';
-import {
-  deleteIfTargetComment,
-  editIfTargetComment,
-  flatPaginationCache,
-  toPaginationCacheFormat,
-} from '@/utils';
+import { deleteIfTargetComment, editIfTargetComment } from '@/utils';
 
 export default function useComment() {
   const [loading, setLoading] = useState();

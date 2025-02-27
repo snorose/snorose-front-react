@@ -2,12 +2,17 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { useSuspensePagination } from '@/shared/hook';
 import { FetchLoading, List, PullToRefresh } from '@/shared/component';
-import { timeAgo, getBoard, getBoardTitleToTextId } from '@/shared/lib';
+import {
+  timeAgo,
+  getBoard,
+  getBoardTitleToTextId,
+  deduplicatePaginatedData,
+  flatPaginationCache,
+} from '@/shared/lib';
 import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
 import { getPosts } from '@/apis';
 import { PostBar } from '@/components';
-import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
 
 import styles from './Posts.module.css';
 
