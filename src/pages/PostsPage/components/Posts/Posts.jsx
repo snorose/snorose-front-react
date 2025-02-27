@@ -1,10 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
 
+import { useSuspensePagination } from '@/shared/hook';
 import { FetchLoading, List, PullToRefresh } from '@/shared/component';
 import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
 import { getPosts } from '@/apis';
-import { useSuspensePagination } from '@/hooks';
 import { PostBar } from '@/components';
 import {
   deduplicatePaginatedData,

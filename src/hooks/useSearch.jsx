@@ -1,9 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
 
+import { useSuspensePagination } from '@/shared/hook';
 import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
 import { searchByBoard } from '@/apis';
-import { useSuspensePagination } from '@/hooks';
 
 export default function useSearch({ boardId }) {
   const [searchParams] = useSearchParams();

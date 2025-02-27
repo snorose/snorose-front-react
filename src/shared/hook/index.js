@@ -1,3 +1,4 @@
 export { default as useAuth } from './useAuth';
-export { default as useModal } from './useModal.js';
-export { default as useScrollRestoration } from './useScrollRestoration.js';
+export { default as useModal } from './useModal';
+export { default as useScrollRestoration } from './useScrollRestoration';
+export { default as useSuspensePagination } from './useSuspensePagination';

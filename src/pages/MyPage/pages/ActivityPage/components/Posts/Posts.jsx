@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
+import { useSuspensePagination } from '@/shared/hook';
 import { FetchLoading } from '@/shared/component';
 import { STALE_TIME } from '@/shared/constant';
 
-import { useSuspensePagination } from '@/hooks';
 import { PostBar } from '@/components';
 import {
   deduplicatePaginatedData,
