@@ -1,7 +1,6 @@
 import { useSearchParams, useLocation } from 'react-router-dom';
 
-import { useScrollRestoration } from '@/hooks';
-
+import { useScrollRestoration } from '@/shared/hook';
 import { BackAppBar } from '@/shared/component';
 
 import { SearchResultsSuspense } from '@/pages/SearchPage';

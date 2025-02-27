@@ -1,11 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
+import { useScrollRestoration } from '@/shared/hook';
 import { BackAppBar, Icon, WriteButton } from '@/shared/component';
 import { QUERY_KEY } from '@/shared/constant';
 
 import { getNoticeLine } from '@/apis';
-import { useScrollRestoration } from '@/hooks';
 import { PostsSuspense } from '@/pages/PostsPage';
 import { getBoard } from '@/utils';
 
