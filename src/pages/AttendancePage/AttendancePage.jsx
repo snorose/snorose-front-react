@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { BackAppBar, FetchLoadingOverlay, Icon } from '@/shared/component';
-import { QUERY_KEY } from '@/shared/constant';
+import { QUERY_KEY, TOAST } from '@/shared/constant';
 
 import { updatePoint } from '@/apis';
 import { useAuth, useToast } from '@/hooks';
@@ -11,7 +11,6 @@ import {
   ATTENDANCE_MESSAGE,
   POINT_CATEGORY_ENUM,
   POINT_SOURCE_ENUM,
-  TOAST,
 } from '@/constants';
 
 import styles from './AttendancePage.module.css';

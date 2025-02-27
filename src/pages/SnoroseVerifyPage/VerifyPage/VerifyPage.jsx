@@ -1,16 +1,12 @@
 import { useState } from 'react';
 
-import { verifySookmyungPortal } from '@/apis';
-
-import { useToast } from '@/hooks/index.js';
-
-import { Button, Input } from '@/pages/SnoroseVerifyPage';
-
 import { FetchLoadingOverlay, PwInput } from '@/shared/component';
+import { TOAST } from '@/shared/constant';
 
+import { verifySookmyungPortal } from '@/apis';
+import { useToast } from '@/hooks';
+import { Button, Input } from '@/pages/SnoroseVerifyPage';
 import { isEmailValid } from '@/utils';
-
-import { TOAST } from '@/constants';
 
 import styles from './VerifyPage.module.css';
 

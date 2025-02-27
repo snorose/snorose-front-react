@@ -16,6 +16,7 @@ import {
   MODAL_CONFIRM,
   MUTATION_KEY,
   QUERY_KEY,
+  TOAST,
 } from '@/shared/constant';
 
 import { postExamReview, checkExamReviewDuplication } from '@/apis';
@@ -32,7 +33,6 @@ import {
   FILE_MAX_SIZE,
   LECTURE_TYPES,
   SEMESTERS,
-  TOAST,
   YEARS,
 } from '@/constants';
 

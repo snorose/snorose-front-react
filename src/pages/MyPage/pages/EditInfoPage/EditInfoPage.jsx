@@ -8,12 +8,12 @@ import {
   MUTATION_KEY,
   QUERY_KEY,
   PRIVATE_USER_INFO_UPDATE_PERMISSION_ROLE_ID_LIST,
+  TOAST,
 } from '@/shared/constant';
 
 import { updateUserInfo } from '@/apis';
 import { useAuth, useToast } from '@/hooks';
 import { CategoryFieldset } from '@/components';
-import { TOAST } from '@/constants';
 
 import defaultProfile from '@/assets/images/defaultProfile.svg';
 

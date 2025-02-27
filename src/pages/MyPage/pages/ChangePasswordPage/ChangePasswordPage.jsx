@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
 import { ActionButton, BackAppBar, PwInput } from '@/shared/component';
-import { MUTATION_KEY } from '@/shared/constant';
+import { MUTATION_KEY, TOAST } from '@/shared/constant';
 
 import { updatePassword } from '@/apis';
 import { useToast } from '@/hooks';
-import { TOAST } from '@/constants';
 
 import styles from './ChangePasswordPage.module.css';
 

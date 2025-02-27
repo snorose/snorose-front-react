@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 
-import { MUTATION_KEY, QUERY_KEY } from '@/shared/constant';
+import { MUTATION_KEY, QUERY_KEY, TOAST } from '@/shared/constant';
 
 import {
   deleteComment as remove,
@@ -18,7 +18,7 @@ import {
   toPaginationCacheFormat,
   getBoard,
 } from '@/utils';
-import { COMMENT_ACTION_TYPE, TOAST } from '@/constants';
+import { COMMENT_ACTION_TYPE } from '@/constants';
 
 export default function useComment() {
   const [loading, setLoading] = useState();

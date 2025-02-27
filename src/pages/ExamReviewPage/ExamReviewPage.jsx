@@ -10,7 +10,7 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
-import { BOARD_MENUS, QUERY_KEY, MUTATION_KEY } from '@/shared/constant';
+import { BOARD_MENUS, QUERY_KEY, MUTATION_KEY, TOAST } from '@/shared/constant';
 
 import {
   deleteExamReview,
@@ -27,13 +27,7 @@ import {
 } from '@/components';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { dateFormat, convertToObject } from '@/utils';
-import {
-  LECTURE_TYPES,
-  SEMESTERS,
-  EXAM_TYPES,
-  TOAST,
-  FLEX_ALIGN,
-} from '@/constants';
+import { LECTURE_TYPES, SEMESTERS, EXAM_TYPES, FLEX_ALIGN } from '@/constants';
 
 import styles from './ExamReviewPage.module.css';
 

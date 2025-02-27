@@ -9,7 +9,7 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
-import { MUTATION_KEY, QUERY_KEY } from '@/shared/constant';
+import { MUTATION_KEY, QUERY_KEY, TOAST } from '@/shared/constant';
 
 import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
@@ -18,7 +18,7 @@ import { PostContent } from '@/pages/PostPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { CommentsSuspense, InputBar } from '@/components';
 import { fullDateTimeFormat, getBoard } from '@/utils';
-import { LIKE_TYPE, TOAST } from '@/constants';
+import { LIKE_TYPE } from '@/constants';
 
 import styles from './PostPage.module.css';
 
