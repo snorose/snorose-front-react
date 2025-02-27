@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Icon } from '@/shared/component';
 
-import styles from './PTR.module.css';
+import styles from './PullToRefresh.module.css';
 
-export default function PTR({ children, onRefresh }) {
+export default function PullToRefresh({ children, onRefresh }) {
   const [refreshing, setRefreshing] = useState(false);
   const [startY, setStartY] = useState(undefined);
   const containerRef = useRef(null);

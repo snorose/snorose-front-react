@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { useSearch } from '@/hooks';
 
-import { FetchLoading, List, PTR } from '@/shared/component';
+import { FetchLoading, List, PullToRefresh } from '@/shared/component';
 import { PostBar } from '@/components';
 import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
 
@@ -13,7 +13,9 @@ export default function SearchExamReviews({ saveScrollPosition }) {
   const searchList = deduplicatePaginatedData(flatPaginationCache(data));
 
   return (
-    <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
+    <PullToRefresh
+      onRefresh={() => refetch().then(() => console.log('Refreshed!'))}
+    >
       <List>
         {searchList.map((post, index) => (
           <Link
@@ -28,6 +30,6 @@ export default function SearchExamReviews({ saveScrollPosition }) {
         ))}
         {isFetching && <FetchLoading />}
       </List>
-    </PTR>
+    </PullToRefresh>
   );
 }

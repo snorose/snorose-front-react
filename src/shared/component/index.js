@@ -36,7 +36,7 @@ export { default as ShimmerEffect } from './suspense/ShimmerEffect/ShimmerEffect
 export { default as Dropdown } from './Dropdown/Dropdown';
 export { default as Icon } from './Icon/Icon';
 export { default as Portal } from './Portal/Portal';
-export { default as PTR } from './PTR/PTR';
+export { default as PullToRefresh } from './PullToRefresh/PullToRefresh';
 export { default as Toast } from './Toast/Toast';
 export { default as List } from './List/List';
 export { default as MenuIcon } from './MenuIcon/MenuIcon';

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { getPosts } from '@/apis';
 import { useSuspensePagination } from '@/hooks';
 
-import { FetchLoading, List, PTR } from '@/shared/component';
+import { FetchLoading, List, PullToRefresh } from '@/shared/component';
 import { PostBar } from '@/components';
 import {
   deduplicatePaginatedData,
@@ -32,7 +32,9 @@ export default function Posts({ saveScrollPosition }) {
   const postList = deduplicatePaginatedData(flatPaginationCache(data));
 
   return (
-    <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
+    <PullToRefresh
+      onRefresh={() => refetch().then(() => console.log('Refreshed!'))}
+    >
       <List>
         {postList.map((post, index) => (
           <Link
@@ -51,6 +53,6 @@ export default function Posts({ saveScrollPosition }) {
         ))}
         {isFetching && <FetchLoading />}
       </List>
-    </PTR>
+    </PullToRefresh>
   );
 }
