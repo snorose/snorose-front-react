@@ -9,14 +9,13 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
-import { timeAgo } from '@/shared/lib';
+import { timeAgo, convertHyperlink } from '@/shared/lib';
 import { MUTATION_KEY, LIKE_TYPE } from '@/shared/constant';
 
 import { reportComment } from '@/apis';
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import { useLike, useComment } from '@/hooks';
 import { NestedComment } from '@/components';
-import { convertHyperlink } from '@/utils';
 
 import styles from './Comment.module.css';
 
