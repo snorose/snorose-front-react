@@ -4,6 +4,7 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 
 import { useAuth, useToast } from '@/shared/hook';
+import { getBoard } from '@/shared/lib';
 import {
   MUTATION_KEY,
   QUERY_KEY,
@@ -21,7 +22,6 @@ import {
   editIfTargetComment,
   flatPaginationCache,
   toPaginationCacheFormat,
-  getBoard,
 } from '@/utils';
 
 export default function useComment() {

@@ -4,11 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import { useAuth, useScrollRestoration } from '@/shared/hook';
 import { BackAppBar, FetchLoading, WriteButton } from '@/shared/component';
+import { getBoard } from '@/shared/lib';
 import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
 import { getNoticeList } from '@/apis/notice';
 import { NoticeBar } from '@/components';
-import { getBoard } from '@/utils';
 
 import styles from './NoticeListPage.module.css';
 

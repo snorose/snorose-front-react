@@ -10,7 +10,7 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
-import { fullDateTimeFormat } from '@/shared/lib';
+import { fullDateTimeFormat, getBoard } from '@/shared/lib';
 import { MUTATION_KEY, QUERY_KEY, TOAST, LIKE_TYPE } from '@/shared/constant';
 
 import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
@@ -19,7 +19,6 @@ import { useLike, useScrap } from '@/hooks';
 import { PostContent } from '@/pages/PostPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { CommentsSuspense, InputBar } from '@/components';
-import { getBoard } from '@/utils';
 
 import styles from './PostPage.module.css';
 

@@ -2,14 +2,11 @@ import { Link } from 'react-router-dom';
 
 import { useSuspensePagination } from '@/shared/hook';
 import { FetchLoading } from '@/shared/component';
+import { getBoardTextId } from '@/shared/lib';
 import { STALE_TIME } from '@/shared/constant';
 
 import { PostBar } from '@/components';
-import {
-  deduplicatePaginatedData,
-  flatPaginationCache,
-  getBoardTextId,
-} from '@/utils';
+import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './Posts.module.css';
