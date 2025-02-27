@@ -3,7 +3,6 @@ export * from './admin.js';
 export * from './align.js';
 export * from './attendance.js';
 export * from './dropDown.js';
-export * from './errors.js';
 export * from './examReview.js';
 export * from './icon.js';
 export * from './loading.js';
