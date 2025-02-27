@@ -15,16 +15,16 @@ import {
   Icon,
   Textarea,
 } from '@/shared/component';
+import { BOARD_ID } from '@/shared/constant';
+
 import {
   CategoryButton,
   CategoryFieldset,
   TextField,
 } from '@/components/Fieldset';
 import { InputItem, InputList } from '@/components/Input';
-
 import { validClassNumber } from '@/utils';
 import {
-  BOARD_ID,
   EXAM_TYPES,
   FILE_MAX_SIZE,
   LECTURE_TYPES,

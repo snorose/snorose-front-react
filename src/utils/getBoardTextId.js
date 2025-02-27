@@ -1,4 +1,4 @@
-import { BOARD_MENUS } from '@/constants';
+import { BOARD_MENUS } from '@/shared/constant';
 
 export const getBoardTextId = (boardId) => {
   return BOARD_MENUS.find(({ id }) => id === boardId)?.textId;

@@ -18,6 +18,8 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
+import { BOARD_MENUS } from '@/shared/constant';
+
 import {
   CommentsSuspense,
   InputBar,
@@ -27,7 +29,6 @@ import {
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { dateFormat, convertToObject } from '@/utils';
 import {
-  BOARD_MENUS,
   LECTURE_TYPES,
   SEMESTERS,
   EXAM_TYPES,

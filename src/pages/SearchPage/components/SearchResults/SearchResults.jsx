@@ -3,13 +3,14 @@ import { useLocation, Link } from 'react-router-dom';
 import { useSearch } from '@/hooks';
 
 import { FetchLoading, List, PullToRefresh } from '@/shared/component';
+import { BOARDS } from '@/shared/constant';
+
 import { PostBar } from '@/components';
 import {
   deduplicatePaginatedData,
   flatPaginationCache,
   getBoardTitleToTextId,
 } from '@/utils';
-import { BOARDS } from '@/constants';
 
 import styles from './SearchResults.module.css';
 

@@ -14,9 +14,10 @@ import {
   FetchLoading,
   Icon,
 } from '@/shared/component';
+import { BOARD_MENUS } from '@/shared/constant';
 
 import { formattedNowTime } from '@/utils';
-import { BOARD_MENUS, TOAST, ROLE, MUTATION_KEY, QUERY_KEY } from '@/constants';
+import { TOAST, ROLE, MUTATION_KEY, QUERY_KEY } from '@/constants';
 
 import styles from './PostEditPage.module.css';
 

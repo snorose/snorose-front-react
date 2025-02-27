@@ -2,7 +2,7 @@ import {
   COMMENT_REPORT_TYPE_MODAL_OPTION_CHILDREN,
   POST_REPORT_TYPE_MODAL_OPTION_CHILDREN,
   USER_REPORT_TYPE_MODAL_OPTION_CHILDREN,
-} from './board';
+} from '../shared/constant/board';
 
 export const MODAL_OPTIONS = [
   {
