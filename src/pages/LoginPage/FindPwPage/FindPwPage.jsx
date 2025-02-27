@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useFindPw } from '@/apis';
-
 import { Button, FetchLoadingOverlay, Icon, Input } from '@/shared/component';
+import { LOADING_MESSAGE } from '@/shared/constant';
+
+import { useFindPw } from '@/apis';
 
 import {
   checkIfEntered,
@@ -11,8 +12,6 @@ import {
 } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
 
 import styles from './FindPwPage.module.css';
-
-import { LOADING_MESSAGE } from '@/constants';
 
 export default function FindPwPage() {
   const findPw = useFindPw();

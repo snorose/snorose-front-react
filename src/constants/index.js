@@ -4,7 +4,6 @@ export * from './align.js';
 export * from './attendance.js';
 export * from './dropDown.js';
 export * from './examReview.js';
-export * from './loading.js';
 export * from './majors.js';
 export * from './menus.js';
 export * from './modalOptions.js';

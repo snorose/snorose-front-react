@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { getExamReview } from '@/apis';
+import { DeleteModal, FetchLoadingOverlay, Icon } from '@/shared/component';
+import { LOADING_MESSAGE } from '@/shared/constant';
 
+import { getExamReview } from '@/apis';
 import { useToast } from '@/hooks';
 
-import { DeleteModal, FetchLoadingOverlay, Icon } from '@/shared/component';
-
-import { LOADING_MESSAGE, QUERY_KEY, TOAST } from '@/constants';
+import { QUERY_KEY, TOAST } from '@/constants';
 
 import styles from './ReviewDownload.module.css';
 

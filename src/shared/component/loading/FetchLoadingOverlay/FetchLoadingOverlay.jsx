@@ -1,6 +1,5 @@
 import { FetchLoading } from '@/shared/component';
-
-import { LOADING_MESSAGE } from '@/constants';
+import { LOADING_MESSAGE } from '@/shared/constant';
 
 import styles from './FetchLoadingOverlay.module.css';
 
