@@ -4,7 +4,7 @@ import {
   FILL_ICON_LIST,
   STROKE_ICON_LIST,
   ILLUSTRATION_ICON_LIST,
-} from '@/constants';
+} from '@/shared/constant';
 
 export default {
   title: 'components/Icon',
