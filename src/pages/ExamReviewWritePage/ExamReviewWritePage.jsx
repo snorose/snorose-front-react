@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useAuth } from '@/shared/hook';
+import { useAuth, useToast } from '@/shared/hook';
 import {
   ActionButton,
   CloseAppBar,
@@ -21,7 +21,6 @@ import {
 } from '@/shared/constant';
 
 import { postExamReview, checkExamReviewDuplication } from '@/apis';
-import { useToast } from '@/hooks';
 import {
   CategoryButton,
   CategoryFieldset,

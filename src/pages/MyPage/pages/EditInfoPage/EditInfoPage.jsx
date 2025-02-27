@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useAuth } from '@/shared/hook';
+import { useAuth, useToast } from '@/shared/hook';
 import { ActionButton, BackAppBar, Dropdown } from '@/shared/component';
 import {
   MAJORS,
@@ -13,7 +13,6 @@ import {
 } from '@/shared/constant';
 
 import { updateUserInfo } from '@/apis';
-import { useToast } from '@/hooks';
 import { CategoryFieldset } from '@/components';
 
 import defaultProfile from '@/assets/images/defaultProfile.svg';

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 
-import { useAuth } from '@/shared/hook';
+import { useAuth, useToast } from '@/shared/hook';
 import {
   MUTATION_KEY,
   QUERY_KEY,
@@ -16,7 +16,6 @@ import {
   postComment as post,
   editComment as edit,
 } from '@/apis';
-import { useToast } from '@/hooks';
 import {
   deleteIfTargetComment,
   editIfTargetComment,

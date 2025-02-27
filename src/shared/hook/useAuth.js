@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { useToast } from '@/shared/hook';
 import { QUERY_KEY, TOAST } from '@/shared/constant';
 
 import {
@@ -9,7 +10,6 @@ import {
   withdrawAccount,
   logout as logoutApi,
 } from '@/apis';
-import { useToast } from '@/hooks';
 
 const useAuth = () => {
   const navigate = useNavigate();

@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuth } from '@/shared/hook';
+import { useAuth, useToast } from '@/shared/hook';
 import {
   ActionButton,
   CloseAppBar,
@@ -14,7 +14,6 @@ import {
 import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
 
 import { postPost } from '@/apis';
-import { useToast } from '@/hooks';
 import { DropDownMenu } from '@/components';
 import { formattedNowTime, getBoard } from '@/utils';
 

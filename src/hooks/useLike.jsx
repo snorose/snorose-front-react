@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
+import { useToast } from '@/shared/hook';
 import { MUTATION_KEY, QUERY_KEY, LIKE_TYPE } from '@/shared/constant';
 
 import { like as likeApi, unlike as unlikeApi } from '@/apis';
-import { useToast } from '@/hooks';
 import {
   flatPaginationCache,
   toPaginationCacheFormat,

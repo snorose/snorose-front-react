@@ -3,7 +3,7 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuth } from '@/shared/hook';
+import { useAuth, useToast } from '@/shared/hook';
 import {
   BackAppBar,
   CloseAppBar,
@@ -20,7 +20,6 @@ import {
 } from '@/shared/constant';
 
 import { getPostContent, patchPost } from '@/apis';
-import { useToast } from '@/hooks';
 import { formattedNowTime } from '@/utils';
 
 import styles from './PostEditPage.module.css';

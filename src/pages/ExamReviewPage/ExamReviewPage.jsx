@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
-import { useAuth } from '@/shared/hook';
+import { useAuth, useToast } from '@/shared/hook';
 import {
   BackAppBar,
   DeleteModal,
@@ -19,7 +19,7 @@ import {
   reportPost,
   reportUser,
 } from '@/apis';
-import { useScrap, useToast } from '@/hooks';
+import { useScrap } from '@/hooks';
 import {
   CommentsSuspense,
   InputBar,
