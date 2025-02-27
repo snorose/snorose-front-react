@@ -11,11 +11,12 @@ import {
   Icon,
   FetchLoading,
 } from '@/shared/component';
+import { formattedNowTime } from '@/shared/lib';
 import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
 
 import { postPost } from '@/apis';
 import { DropDownMenu } from '@/components';
-import { formattedNowTime, getBoard } from '@/utils';
+import { getBoard } from '@/utils';
 
 import styles from './PostWritePage.module.css';
 

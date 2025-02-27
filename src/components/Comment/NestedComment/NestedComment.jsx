@@ -1,9 +1,10 @@
 import { Icon } from '@/shared/component';
+import { timeAgo } from '@/shared/lib';
 import { LIKE_TYPE } from '@/shared/constant';
 
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import { useLike } from '@/hooks';
-import { convertHyperlink, timeAgo } from '@/utils';
+import { convertHyperlink } from '@/utils';
 
 import styles from '../Comment.module.css';
 

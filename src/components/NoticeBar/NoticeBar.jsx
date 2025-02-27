@@ -1,6 +1,5 @@
 import { Icon } from '@/shared/component';
-
-import { dateFormat } from '@/utils';
+import { dateFormat } from '@/shared/lib';
 
 import styles from './NoticeBar.module.css';
 

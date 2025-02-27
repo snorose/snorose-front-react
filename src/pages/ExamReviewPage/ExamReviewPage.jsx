@@ -11,6 +11,7 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
+import { dateFormat } from '@/shared/lib';
 import { BOARD_MENUS, QUERY_KEY, MUTATION_KEY, TOAST } from '@/shared/constant';
 
 import {
@@ -27,7 +28,7 @@ import {
   ReviewDownload,
 } from '@/components';
 import { NotFoundPage } from '@/pages/NotFoundPage';
-import { dateFormat, convertToObject } from '@/utils';
+import { convertToObject } from '@/utils';
 import { LECTURE_TYPES, SEMESTERS, EXAM_TYPES, FLEX_ALIGN } from '@/constants';
 
 import styles from './ExamReviewPage.module.css';

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { addDays } from 'date-fns';
 
-import { isDayOver } from '@/utils';
+import { isDayOver } from '@/shared/lib';
 
 const POP_UP_STATE_LOCAL_STORAGE_KEY = 'popUpState';
 const POP_UP_DATE_LOCAL_STORAGE_KEY = 'popUpDate';

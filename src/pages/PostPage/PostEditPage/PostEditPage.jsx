@@ -11,6 +11,7 @@ import {
   FetchLoading,
   Icon,
 } from '@/shared/component';
+import { formattedNowTime } from '@/shared/lib';
 import {
   BOARD_MENUS,
   MUTATION_KEY,
@@ -20,7 +21,6 @@ import {
 } from '@/shared/constant';
 
 import { getPostContent, patchPost } from '@/apis';
-import { formattedNowTime } from '@/utils';
 
 import styles from './PostEditPage.module.css';
 
