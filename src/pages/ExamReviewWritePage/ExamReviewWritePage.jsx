@@ -12,6 +12,7 @@ import {
   Icon,
   Textarea,
 } from '@/shared/component';
+import { validClassNumber } from '@/shared/lib';
 import {
   BOARD_ID,
   MODAL_CONFIRM,
@@ -27,7 +28,6 @@ import {
   TextField,
 } from '@/components/Fieldset';
 import { InputItem, InputList } from '@/components/Input';
-import { validClassNumber } from '@/utils';
 import {
   EXAM_TYPES,
   FILE_MAX_SIZE,

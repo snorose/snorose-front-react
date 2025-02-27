@@ -10,6 +10,7 @@ import {
   FetchLoadingOverlay,
   Textarea,
 } from '@/shared/component';
+import { validClassNumber } from '@/shared/lib';
 import { MUTATION_KEY, QUERY_KEY, ROUTE, TOAST } from '@/shared/constant';
 
 import { editReviewDetail } from '@/apis';
@@ -19,7 +20,6 @@ import {
   TextField,
 } from '@/components/Fieldset';
 import { InputItem, InputList } from '@/components/Input';
-import { validClassNumber } from '@/utils';
 import { EXAM_TYPES, LECTURE_TYPES, SEMESTERS, YEARS } from '@/constants';
 
 import styles from './ExamReviewEditPage.module.css';

@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 import { useToast } from '@/shared/hook';
 import { FetchLoadingOverlay, PwInput } from '@/shared/component';
+import { isEmailValid } from '@/shared/lib';
 import { TOAST } from '@/shared/constant';
 
 import { verifySookmyungPortal } from '@/apis';
 import { Button, Input } from '@/pages/SnoroseVerifyPage';
-import { isEmailValid } from '@/utils';
 
 import styles from './VerifyPage.module.css';
 
