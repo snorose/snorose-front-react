@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useAuth } from '@/shared/hook';
+import { useAuth, useModal } from '@/shared/hook';
 import { CloseAppBar, ConfirmModal, PwInput } from '@/shared/component';
-
-import { useModal } from '@/hooks';
 
 import styles from './DeleteAccountPage.module.css';
 

@@ -2,6 +2,7 @@ import { forwardRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
+import { useModal } from '@/shared/hook';
 import {
   ConfirmModal,
   DeleteModal,
@@ -12,7 +13,7 @@ import { MUTATION_KEY, LIKE_TYPE } from '@/shared/constant';
 
 import { reportComment } from '@/apis';
 import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import { useLike, useComment, useToast, useModal } from '@/hooks';
+import { useLike, useComment, useToast } from '@/hooks';
 import { NestedComment } from '@/components';
 import { convertHyperlink, timeAgo } from '@/utils';
 
