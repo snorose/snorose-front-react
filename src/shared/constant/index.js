@@ -8,3 +8,4 @@ export * from './reactQuery.js';
 export * from './role.js';
 export * from './route.js';
 export * from './toast.js';
+export * from './type.js';
