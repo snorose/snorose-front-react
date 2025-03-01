@@ -18,7 +18,7 @@ export default function Search({ className, placeholder, onKeyDown }) {
     }
 
     searchParams.set('keyword', keyword);
-    setSearchParams(searchParams);
+    setSearchParams(searchParams, { replace: true });
   };
 
   useEffect(() => {
