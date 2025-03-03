@@ -14,4 +14,7 @@ const footerStoryConfig = {
 
 export default footerStoryConfig;
 
-export const Default = () => <Footer />;
+const DefaultTemplate = (args) => <Footer {...args} />;
+
+export const Default = DefaultTemplate.bind({});
+Default.args = {};
