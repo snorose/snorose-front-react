@@ -20,10 +20,7 @@ export default function SearchPage() {
 
   return (
     <div className={styles.container} ref={scrollRef}>
-      <BackAppBar
-        hasSearchInput={true}
-        backNavTo={current !== 'all' ? `/board/${current}` : `/board`}
-      >
+      <BackAppBar hasSearchInput={true}>
         <Search placeholder={PLACEHOLDER[current]} />
       </BackAppBar>
 
