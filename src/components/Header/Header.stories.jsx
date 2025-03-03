@@ -14,4 +14,7 @@ const headerStoryConfig = {
 
 export default headerStoryConfig;
 
-export const LoggedOut = () => <Header />;
+const DefaultTemplate = (args) => <Header {...args} />;
+
+export const LoggedOut = DefaultTemplate.bind({});
+LoggedOut.args = {};
