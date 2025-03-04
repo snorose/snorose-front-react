@@ -538,7 +538,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
   {
     id: uuidv4(),
     nickname: 'milkyway',
-    role: ADMIN_ROLE.treasurer,
+    role: ADMIN_ROLE.vicePresident,
     team: [ADMIN_TEAM.development],
     position: [ADMIN_POSITION.backEnd],
     studentInformation: '(IT공학전공 19 김민지)',
@@ -546,7 +546,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
   {
     id: uuidv4(),
     nickname: 'Alicey',
-    role: undefined,
+    role: ADMIN_ROLE.president,
     team: [ADMIN_TEAM.operationsPlanning, ADMIN_TEAM.development],
     position: [ADMIN_POSITION.backEnd],
     studentInformation: '(생명시스템학부 18 윤종화)',
@@ -635,7 +635,7 @@ export const HALL_OF_FAME_ADMINS = Object.freeze([
     id: uuidv4(),
     nickname: '칙촉',
     role: undefined,
-    team: [ADMIN_TEAM.development],
+    team: [ADMIN_TEAM.operationsPlanning, ADMIN_TEAM.development],
     position: [ADMIN_POSITION.frontEnd],
     studentInformation: '(컴퓨터과학전공 21 류미성)',
   },
