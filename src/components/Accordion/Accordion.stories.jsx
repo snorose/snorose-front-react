@@ -3,27 +3,28 @@ import Accordion from './Accordion';
 import AccordionListItem from './AccordionListItem';
 import AccordionTag from './AccordionTag';
 
-const accordionStoryConfig = {
+const meta = {
   component: Accordion,
   parameters: {
     docs: {
       description: {
-        component: `
-Accordion 컴포넌트는 클릭하면 내용을 확장/축소할 수 있는 인터랙티브 UI입니다.
-
-기본적으로 텍스트, 리스트, 태그 등 다양한 내용을 포함할 수 있으며, 스타일링이 적용되지 않은 기본형과 부모 컨테이너에 스타일이 적용된 형태로 사용할 수 있습니다.
-`,
+        component:
+          'Accordion 컴포넌트는 클릭하면 내용을 확장 및 축소할 수 있는 인터랙티브 UI입니다.\n\n' +
+          '기본적으로 텍스트, 리스트, 태그 등 다양한 내용을 포함할 수 있으며, 스타일링이 적용되지 않은 기본형과 부모 컨테이너에 스타일이 적용된 형태로 사용할 수 있습니다.',
       },
     },
   },
   argTypes: {
-    title: { control: 'text' },
+    title: {
+      control: 'text',
+      description: '아코디언 헤더 부분의 제목을 설정합니다.',
+    },
   },
 };
 
-export default accordionStoryConfig;
+export default meta;
 
-const PlainTemplate = (args) => <Accordion {...args} />;
+const Template = (args) => <Accordion {...args} />;
 
 const StyledTemplate = (args) => (
   <div
@@ -37,7 +38,7 @@ const StyledTemplate = (args) => (
   </div>
 );
 
-export const WithoutStyledContainer = PlainTemplate.bind({});
+export const WithoutStyledContainer = Template.bind({});
 WithoutStyledContainer.args = {
   title: '기본 아코디언 (스타일 없음)',
   children: <p>기본 아코디언입니다.</p>,

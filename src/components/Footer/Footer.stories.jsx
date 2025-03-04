@@ -1,6 +1,6 @@
 import Footer from './Footer';
 
-const footerStoryConfig = {
+const meta = {
   component: Footer,
   parameters: {
     docs: {
@@ -12,9 +12,9 @@ const footerStoryConfig = {
   },
 };
 
-export default footerStoryConfig;
+export default meta;
 
-const DefaultTemplate = (args) => <Footer {...args} />;
+const Template = (args) => <Footer {...args} />;
 
-export const Default = DefaultTemplate.bind({});
+export const Default = Template.bind({});
 Default.args = {};

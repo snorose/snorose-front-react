@@ -1,6 +1,6 @@
 import PopUp from './PopUp';
 
-const popUpStoryConfig = {
+const meta = {
   component: PopUp,
   parameters: {
     docs: {
@@ -20,13 +20,13 @@ const popUpStoryConfig = {
   },
 };
 
-export default popUpStoryConfig;
+export default meta;
 
-const DefaultTemplate = (args) => (
+const Template = (args) => (
   <div style={{ height: '1000px' }}>
     <PopUp {...args} />
   </div>
 );
 
-export const Default = DefaultTemplate.bind({});
+export const Default = Template.bind({});
 Default.args = {};

@@ -1,6 +1,6 @@
 import Header from './Header';
 
-const headerStoryConfig = {
+const meta = {
   component: Header,
   parameters: {
     docs: {
@@ -12,9 +12,9 @@ const headerStoryConfig = {
   },
 };
 
-export default headerStoryConfig;
+export default meta;
 
-const DefaultTemplate = (args) => <Header {...args} />;
+const Template = (args) => <Header {...args} />;
 
-export const LoggedOut = DefaultTemplate.bind({});
+export const LoggedOut = Template.bind({});
 LoggedOut.args = {};
