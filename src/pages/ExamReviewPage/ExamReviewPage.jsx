@@ -30,8 +30,8 @@ import {
   EXAM_TYPES,
   FLEX_ALIGN,
 } from '@/feature/exam/constant';
+import { useScrap } from '@/feature/scrap/hook';
 
-import { useScrap } from '@/hooks';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
 import styles from './ExamReviewPage.module.css';

@@ -18,7 +18,7 @@ import { MUTATION_KEY, QUERY_KEY, TOAST, LIKE_TYPE } from '@/shared/constant';
 import { useCommentContext } from '@/feature/comment/context';
 import { CommentInput, CommentsSuspense } from '@/feature/comment/component';
 import { useLike } from '@/feature/like/hook';
-import { useScrap } from '@/hooks';
+import { useScrap } from '@/feature/scrap/hook';
 
 import { PostContent } from '@/pages/PostPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
