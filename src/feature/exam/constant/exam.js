@@ -1,3 +1,5 @@
+export const FILE_MAX_SIZE = 1024 * 1024 * 10;
+
 export const EXAM_TYPES = Object.freeze([
   { id: 'MIDTERM', name: '중간고사' },
   { id: 'FINALTERM', name: '기말고사' },

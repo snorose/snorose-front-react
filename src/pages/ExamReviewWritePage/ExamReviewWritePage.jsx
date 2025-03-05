@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { postExamReview, checkExamReviewDuplication } from '@/apis';
+
 import { useAuth, useToast } from '@/shared/hook';
 import {
   ActionButton,
@@ -21,20 +23,20 @@ import {
   TOAST,
 } from '@/shared/constant';
 
-import { postExamReview, checkExamReviewDuplication } from '@/apis';
 import {
   CategoryButton,
   CategoryFieldset,
+  InputItem,
+  InputList,
   TextField,
-} from '@/components/Fieldset';
-import { InputItem, InputList } from '@/components/Input';
+} from '@/feature/exam/component';
 import {
   EXAM_TYPES,
   FILE_MAX_SIZE,
   LECTURE_TYPES,
   SEMESTERS,
   YEARS,
-} from '@/constants';
+} from '@/feature/exam/constant';
 
 import styles from './ExamReviewWritePage.module.css';
 

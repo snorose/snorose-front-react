@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { updateUserInfo } from '@/apis';
+
 import { useAuth, useToast } from '@/shared/hook';
 import { ActionButton, BackAppBar, Dropdown } from '@/shared/component';
 import {
@@ -12,9 +14,7 @@ import {
   TOAST,
 } from '@/shared/constant';
 
-import { updateUserInfo } from '@/apis';
-import { CategoryFieldset } from '@/components';
-
+import { CategoryFieldset } from '@/feature/exam/component';
 import defaultProfile from '@/assets/images/defaultProfile.svg';
 
 import styles from './EditInfoPage.module.css';

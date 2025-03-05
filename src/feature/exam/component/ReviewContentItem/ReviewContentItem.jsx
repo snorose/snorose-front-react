@@ -1,4 +1,4 @@
-import { FLEX_ALIGN } from '@/constants';
+import { FLEX_ALIGN } from '@/feature/exam/constant';
 
 import styles from './ReviewContentItem.module.css';
 

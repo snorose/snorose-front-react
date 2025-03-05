@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const examStart = new Date(2024, 11, 21, 0, 0, 0);
 const examEnd = new Date(2024, 11, 21, 23, 59, 59);
 
-export function CheckExamPeriodRoute({ children }) {
+export default function CheckExamPeriodRoute({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {

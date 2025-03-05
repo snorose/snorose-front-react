@@ -2,6 +2,13 @@ import { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
+import {
+  deleteExamReview,
+  getReviewDetail,
+  reportPost,
+  reportUser,
+} from '@/apis';
+
 import { useAuth, useToast } from '@/shared/hook';
 import {
   BackAppBar,
@@ -15,18 +22,17 @@ import { dateFormat } from '@/shared/lib';
 import { BOARD_MENUS, QUERY_KEY, MUTATION_KEY, TOAST } from '@/shared/constant';
 
 import { CommentInput, CommentsSuspense } from '@/feature/comment/component';
-
+import { ReviewContentItem, ReviewDownload } from '@/feature/exam/component';
+import { convertToObject } from '@/feature/exam/lib';
 import {
-  deleteExamReview,
-  getReviewDetail,
-  reportPost,
-  reportUser,
-} from '@/apis';
+  LECTURE_TYPES,
+  SEMESTERS,
+  EXAM_TYPES,
+  FLEX_ALIGN,
+} from '@/feature/exam/constant';
+
 import { useScrap } from '@/hooks';
-import { ReviewContentItem, ReviewDownload } from '@/components';
 import { NotFoundPage } from '@/pages/NotFoundPage';
-import { convertToObject } from '@/utils';
-import { LECTURE_TYPES, SEMESTERS, EXAM_TYPES, FLEX_ALIGN } from '@/constants';
 
 import styles from './ExamReviewPage.module.css';
 
