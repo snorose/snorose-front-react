@@ -3,7 +3,7 @@ import { timeAgo, convertHyperlink } from '@/shared/lib';
 import { LIKE_TYPE } from '@/shared/constant';
 
 import { useCommentContext } from '@/feature/comment/context';
-import { useLike } from '@/hooks';
+import { useLike } from '@/feature/like/hook';
 
 import styles from '@/feature/comment/component/Comment/Comment.module.css';
 

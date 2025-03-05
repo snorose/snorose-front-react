@@ -2,6 +2,8 @@ import { forwardRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
+import { reportComment } from '@/apis';
+
 import { useModal, useToast } from '@/shared/hook';
 import {
   ConfirmModal,
@@ -15,9 +17,7 @@ import { MUTATION_KEY, LIKE_TYPE } from '@/shared/constant';
 import { useCommentContext } from '@/feature/comment/context';
 import { useComment } from '@/feature/comment/hook';
 import { NestedComment } from '@/feature/comment/component';
-
-import { reportComment } from '@/apis';
-import { useLike } from '@/hooks';
+import { useLike } from '@/feature/like/hook';
 
 import styles from './Comment.module.css';
 
