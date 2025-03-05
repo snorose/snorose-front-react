@@ -12,7 +12,7 @@ import {
 import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
 import { getPosts } from '@/apis';
-import { PostBar } from '@/components';
+import { PostBar } from '@/feature/board/component';
 
 import styles from './Posts.module.css';
 

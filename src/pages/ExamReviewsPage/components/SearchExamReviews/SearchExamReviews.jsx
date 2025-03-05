@@ -4,7 +4,7 @@ import { FetchLoading, List, PullToRefresh } from '@/shared/component';
 import { deduplicatePaginatedData, flatPaginationCache } from '@/shared/lib';
 
 import { useSearch } from '@/hooks';
-import { PostBar } from '@/components';
+import { PostBar } from '@/feature/board/component';
 
 import styles from './SearchExamReviews.module.css';
 
