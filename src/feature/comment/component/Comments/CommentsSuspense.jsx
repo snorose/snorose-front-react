@@ -3,7 +3,8 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { FetchLoading } from '@/shared/component';
-import { Comments, CommentsErrorFallback } from '@/components';
+
+import { Comments, CommentsErrorFallback } from '@/feature/comment/component';
 
 export default function CommentsSuspense({ commentCount }) {
   return (

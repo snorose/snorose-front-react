@@ -3,12 +3,12 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { useToast } from '@/shared/hook';
 import { Icon } from '@/shared/component';
 
-import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import { useComment } from '@/hooks';
+import { useCommentContext } from '@/feature/comment/context';
+import { useComment } from '@/feature/comment/hook';
 
-import styles from './InputBar.module.css';
+import styles from './CommentInput.module.css';
 
-const InputBar = () => {
+const CommentInput = () => {
   const { editComment, createComment, loading, setLoading } = useComment();
   const { toast } = useToast();
 
@@ -96,4 +96,4 @@ const InputBar = () => {
   );
 };
 
-export default InputBar;
+export default CommentInput;

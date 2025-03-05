@@ -14,6 +14,8 @@ import {
 import { dateFormat } from '@/shared/lib';
 import { BOARD_MENUS, QUERY_KEY, MUTATION_KEY, TOAST } from '@/shared/constant';
 
+import { CommentInput, CommentsSuspense } from '@/feature/comment/component';
+
 import {
   deleteExamReview,
   getReviewDetail,
@@ -21,12 +23,7 @@ import {
   reportUser,
 } from '@/apis';
 import { useScrap } from '@/hooks';
-import {
-  CommentsSuspense,
-  InputBar,
-  ReviewContentItem,
-  ReviewDownload,
-} from '@/components';
+import { ReviewContentItem, ReviewDownload } from '@/components';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { convertToObject } from '@/utils';
 import { LECTURE_TYPES, SEMESTERS, EXAM_TYPES, FLEX_ALIGN } from '@/constants';
@@ -278,7 +275,7 @@ export default function ExamReviewPage() {
         </div>
       </div>
       <CommentsSuspense commentCount={commentCount} />
-      <InputBar />
+      <CommentInput />
       <OptionModal
         id={isConfirmed ? 'confirmed-exam-review-option' : 'exam-review-option'}
         isOpen={isOptionModalOpen}

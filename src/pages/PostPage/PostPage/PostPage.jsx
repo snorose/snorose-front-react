@@ -13,12 +13,13 @@ import {
 import { fullDateTimeFormat, getBoard } from '@/shared/lib';
 import { MUTATION_KEY, QUERY_KEY, TOAST, LIKE_TYPE } from '@/shared/constant';
 
+import { useCommentContext } from '@/feature/comment/context';
+import { CommentInput, CommentsSuspense } from '@/feature/comment/component';
+
 import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
-import { useCommentContext } from '@/contexts/CommentContext.jsx';
 import { useLike, useScrap } from '@/hooks';
 import { PostContent } from '@/pages/PostPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
-import { CommentsSuspense, InputBar } from '@/components';
 
 import styles from './PostPage.module.css';
 
@@ -246,7 +247,7 @@ export default function PostPage() {
       ) : (
         <>
           <CommentsSuspense commentCount={data.commentCount} />
-          <InputBar />
+          <CommentInput />
         </>
       )}
 

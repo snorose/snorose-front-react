@@ -12,10 +12,12 @@ import {
 import { timeAgo, convertHyperlink } from '@/shared/lib';
 import { MUTATION_KEY, LIKE_TYPE } from '@/shared/constant';
 
+import { useCommentContext } from '@/feature/comment/context';
+import { useComment } from '@/feature/comment/hook';
+import { NestedComment } from '@/feature/comment/component';
+
 import { reportComment } from '@/apis';
-import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import { useLike, useComment } from '@/hooks';
-import { NestedComment } from '@/components';
+import { useLike } from '@/hooks';
 
 import styles from './Comment.module.css';
 

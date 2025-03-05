@@ -3,6 +3,12 @@ import { useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 
+import {
+  deleteComment as remove,
+  postComment as post,
+  editComment as edit,
+} from '@/apis';
+
 import { useAuth, useToast } from '@/shared/hook';
 import {
   getBoard,
@@ -17,11 +23,9 @@ import {
 } from '@/shared/constant';
 
 import {
-  deleteComment as remove,
-  postComment as post,
-  editComment as edit,
-} from '@/apis';
-import { deleteIfTargetComment, editIfTargetComment } from '@/utils';
+  deleteIfTargetComment,
+  editIfTargetComment,
+} from '@/feature/comment/lib';
 
 export default function useComment() {
   const [loading, setLoading] = useState();

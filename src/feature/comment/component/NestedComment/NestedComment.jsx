@@ -2,10 +2,10 @@ import { Icon } from '@/shared/component';
 import { timeAgo, convertHyperlink } from '@/shared/lib';
 import { LIKE_TYPE } from '@/shared/constant';
 
-import { useCommentContext } from '@/contexts/CommentContext.jsx';
+import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/hooks';
 
-import styles from '../Comment.module.css';
+import styles from '@/feature/comment/component/Comment/Comment.module.css';
 
 export default function NestedComment({
   data,
