@@ -9,8 +9,6 @@ import {
   CarouselSkeleton,
   ListHeader,
   PopUp,
-} from '@/components';
-import {
   HomeBesookt,
   HomeBesooktErrorFallback,
   HomeBesooktSkeleton,
@@ -18,7 +16,7 @@ import {
   HomeCardErrorFallback,
   HomeCardSkeleton,
   HomeCommunity,
-} from '@/pages/MainPage/components';
+} from '@/feature/home/component';
 
 import styles from './MainPage.module.css';
 
