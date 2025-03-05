@@ -9,4 +9,3 @@ export * from './point.js';
 export * from './postCategories.js';
 export * from './search.js';
 export * from './seconds.js';
-export * from './verify.js';

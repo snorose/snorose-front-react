@@ -17,4 +17,3 @@ export * from './PopUp';
 export * from './ReviewContentItem';
 export * from './ReviewDownload';
 export * from './Search';
-export * from './StageDots';

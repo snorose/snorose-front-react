@@ -1,10 +1,8 @@
 import { useState } from 'react';
 
-import { TermsPage, VerifyPage, CompletePage } from '@/pages/SnoroseVerifyPage';
-
 import { BackAppBar, Icon } from '@/shared/component';
-
-import { TITLE_DES } from '@/constants';
+import { TITLE_DES } from '@/feature/account/constant';
+import { TermsPage, VerifyPage, CompletePage } from '@/pages/SnoroseVerifyPage';
 
 import styles from './SnoroseVerifyPage.module.css';
 
