@@ -15,7 +15,7 @@ const initializePopupStorage = () => {
 };
 
 export default function usePopUp() {
-  const [isPopUpOpend, setIsPopUpOpend] = useState();
+  const [isPopUpOpened, setIsPopUpOpened] = useState();
 
   useEffect(() => {
     const popUpState = localStorage.getItem(POP_UP_STATE_LOCAL_STORAGE_KEY);
@@ -25,17 +25,17 @@ export default function usePopUp() {
 
     if (initialStatus || isDayOver(popUpDate)) {
       initializePopupStorage();
-      setIsPopUpOpend(true);
+      setIsPopUpOpened(true);
       return;
     }
 
     if (popUpState === POP_UP_DISPLAY) {
-      setIsPopUpOpend(true);
+      setIsPopUpOpened(true);
     }
   }, []);
 
   const closePopUp = ({ popupHideDuration }) => {
-    setIsPopUpOpend(false);
+    setIsPopUpOpened(false);
 
     if (popupHideDuration !== undefined) {
       const popupHideUntilDate = addDays(new Date(), popupHideDuration);
@@ -45,5 +45,5 @@ export default function usePopUp() {
     }
   };
 
-  return { isPopUpOpend, closePopUp };
+  return { isPopUpOpened, closePopUp };
 }

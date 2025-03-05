@@ -30,7 +30,6 @@ export default function PostsPage() {
         title={currentBoard.title}
         hasMenu
         {...(!isBesookt && { hasSearch: true })}
-        backNavTo={'/board'}
       />
       {!isBesookt && (
         <div className={styles.top}>

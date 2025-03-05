@@ -65,11 +65,6 @@ export default function NoticeListPage() {
             : `${currentBoard.title} 공지`
         }
         hasNotice={true}
-        backNavTo={
-          currentBoardTextId === 'notice'
-            ? '/home'
-            : `/board/${currentBoardTextId}`
-        }
       />
       <div className={styles.content}>
         {Array.isArray(noticeList) && noticeList.length > 0 ? (
