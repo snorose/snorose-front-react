@@ -1,16 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
 
-import { getPosts } from '@/apis';
-import { useSuspensePagination } from '@/hooks';
-import { List, PostBar, PTR, FetchLoading } from '@/components';
+import { useSuspensePagination } from '@/shared/hook';
+import { FetchLoading, List, PullToRefresh } from '@/shared/component';
 import {
-  deduplicatePaginatedData,
-  flatPaginationCache,
+  timeAgo,
   getBoard,
   getBoardTitleToTextId,
-  timeAgo,
-} from '@/utils';
-import { QUERY_KEY, STALE_TIME } from '@/constants';
+  deduplicatePaginatedData,
+  flatPaginationCache,
+} from '@/shared/lib';
+import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
+
+import { getPosts } from '@/apis';
+import { PostBar } from '@/components';
 
 import styles from './Posts.module.css';
 
@@ -30,7 +32,9 @@ export default function Posts({ saveScrollPosition }) {
   const postList = deduplicatePaginatedData(flatPaginationCache(data));
 
   return (
-    <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
+    <PullToRefresh
+      onRefresh={() => refetch().then(() => console.log('Refreshed!'))}
+    >
       <List>
         {postList.map((post, index) => (
           <Link
@@ -49,6 +53,6 @@ export default function Posts({ saveScrollPosition }) {
         ))}
         {isFetching && <FetchLoading />}
       </List>
-    </PTR>
+    </PullToRefresh>
   );
 }

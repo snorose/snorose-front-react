@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 
+import { FetchLoading, List, PullToRefresh } from '@/shared/component';
+import { deduplicatePaginatedData, flatPaginationCache } from '@/shared/lib';
+
 import { useSearch } from '@/hooks';
-import { FetchLoading, List, PostBar, PTR } from '@/components';
-import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
+import { PostBar } from '@/components';
 
 import styles from './SearchExamReviews.module.css';
 
@@ -11,7 +13,9 @@ export default function SearchExamReviews({ saveScrollPosition }) {
   const searchList = deduplicatePaginatedData(flatPaginationCache(data));
 
   return (
-    <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
+    <PullToRefresh
+      onRefresh={() => refetch().then(() => console.log('Refreshed!'))}
+    >
       <List>
         {searchList.map((post, index) => (
           <Link
@@ -26,6 +30,6 @@ export default function SearchExamReviews({ saveScrollPosition }) {
         ))}
         {isFetching && <FetchLoading />}
       </List>
-    </PTR>
+    </PullToRefresh>
   );
 }

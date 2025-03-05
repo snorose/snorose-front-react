@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import { useAuth } from '@/hooks';
-
-import { USER_STATUS } from '@/constants';
+import { useAuth } from '@/shared/hook';
+import { USER_STATUS } from '@/shared/constant';
 
 import styles from './BoardCard.module.css';
 

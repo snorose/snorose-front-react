@@ -1,11 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
+import { useToast } from '@/shared/hook';
+import { MUTATION_KEY, QUERY_KEY } from '@/shared/constant';
+
 import { scrap as scrapApi, unscrap as unscrapApi } from '@/apis';
-
-import { useToast } from '@/hooks';
-
-import { MUTATION_KEY, QUERY_KEY } from '@/constants';
 
 export default function useScrap() {
   const { toast } = useToast();

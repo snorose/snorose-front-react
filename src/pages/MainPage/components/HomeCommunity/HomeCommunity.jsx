@@ -1,5 +1,6 @@
+import { BOARD_MENUS } from '@/shared/constant';
+
 import { BoardCard } from '@/components';
-import { BOARD_MENUS } from '@/constants';
 
 import styles from './HomeCommunity.module.css';
 

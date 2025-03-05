@@ -1,13 +1,16 @@
 import { useLocation, Link } from 'react-router-dom';
 
 import { useSearch } from '@/hooks';
-import { List, FetchLoading, PostBar, PTR } from '@/components';
+
+import { FetchLoading, List, PullToRefresh } from '@/shared/component';
 import {
+  getBoardTitleToTextId,
   deduplicatePaginatedData,
   flatPaginationCache,
-  getBoardTitleToTextId,
-} from '@/utils';
-import { BOARDS } from '@/constants';
+} from '@/shared/lib';
+import { BOARDS } from '@/shared/constant';
+
+import { PostBar } from '@/components';
 
 import styles from './SearchResults.module.css';
 
@@ -19,7 +22,9 @@ export default function SearchResults({ saveScrollPosition }) {
   const postList = deduplicatePaginatedData(flatPaginationCache(data));
 
   return (
-    <PTR onRefresh={() => refetch().then(() => console.log('Refreshed!'))}>
+    <PullToRefresh
+      onRefresh={() => refetch().then(() => console.log('Refreshed!'))}
+    >
       <List>
         {postList.map((post, index) => (
           <Link
@@ -34,6 +39,6 @@ export default function SearchResults({ saveScrollPosition }) {
         ))}
         {isFetching && <FetchLoading />}
       </List>
-    </PTR>
+    </PullToRefresh>
   );
 }

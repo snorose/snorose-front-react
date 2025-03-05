@@ -1,19 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useRegister } from '@/apis';
+import { Dropdown, Input, Button } from '@/shared/component';
+import { MAJORS } from '@/shared/constant';
 
-import { Dropdown } from '@/components/Fieldset';
-import { Input } from '@/components/Input';
-import { Submit } from '@/components/Submit';
+import { useRegister } from '@/apis';
 
 import {
   checkSpecialChar,
   checkStudentNum,
   checkBirthday,
 } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
-
-import { MAJORS } from '@/constants';
 
 import styles from './UserInfoPage.module.css';
 
@@ -92,7 +89,7 @@ export default function UserInfoPage({ setFormData, formData }) {
       </div>
 
       <div className={styles.submit}>
-        <Submit
+        <Button
           btnName='다음으로'
           className={checkDone()}
           onClick={() => register(formData, navigate)}

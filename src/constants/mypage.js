@@ -1,3 +1,5 @@
+import { QUERY_KEY, ROUTE } from '@/shared/constant';
+
 import {
   getMyPosts,
   getMyComments,
@@ -5,8 +7,6 @@ import {
   getScrapedExamReviews,
   getScrapedPosts,
 } from '@/apis/userInfo.js';
-import { ROUTE } from '@/constants/route.js';
-import { QUERY_KEY } from '@/constants/reactQuery.js';
 
 export const ACTIVITIES = [
   {

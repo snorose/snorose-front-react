@@ -1,16 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
+import { useToast } from '@/shared/hook';
+import { flatPaginationCache, toPaginationCacheFormat } from '@/shared/lib';
+import { MUTATION_KEY, QUERY_KEY, LIKE_TYPE } from '@/shared/constant';
+
 import { like as likeApi, unlike as unlikeApi } from '@/apis';
-
-import { useToast } from '@/hooks';
-import {
-  flatPaginationCache,
-  toPaginationCacheFormat,
-  updateLikeIfTargetComment,
-} from '@/utils';
-
-import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY } from '@/constants';
+import { updateLikeIfTargetComment } from '@/utils';
 
 export default function useLike({ type, sourceId }) {
   const queryClient = useQueryClient();

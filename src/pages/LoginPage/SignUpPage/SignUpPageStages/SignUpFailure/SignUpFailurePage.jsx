@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { Submit } from '@/components/Submit';
-import { Icon } from '@/components/Icon';
+import { BackAppBar, Button, Icon } from '@/shared/component';
 
 import styles from './SignUpFailurePage.module.css';
-import { BackAppBar } from '@/components/index.js';
 
 export default function SignUpFailurePage() {
   const navigate = useNavigate();
@@ -31,7 +29,7 @@ export default function SignUpFailurePage() {
       <div className={styles.pageBottomFrame}>
         <Link to='/signup'>
           <div className={styles.loginButton}>
-            <Submit btnName='뒤로가기' className='right' />
+            <Button btnName='뒤로가기' className='right' />
           </div>
         </Link>
       </div>

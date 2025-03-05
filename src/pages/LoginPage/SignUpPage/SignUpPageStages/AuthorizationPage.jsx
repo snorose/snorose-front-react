@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { useSendUser, useCertifyUser } from '@/apis';
 
-import { Input } from '@/components/Input';
-import { Submit } from '@/components/Submit';
+import { Input, Button } from '@/shared/component';
 
 import styles from './AuthorizationPage.module.css';
 
@@ -37,7 +36,7 @@ export default function AuthorizationPage({ email, setStage }) {
         </div>
       </div>
       <div className={styles.submit}>
-        <Submit
+        <Button
           btnName='다음으로'
           className={'right'}
           onSubmit={(e) => {

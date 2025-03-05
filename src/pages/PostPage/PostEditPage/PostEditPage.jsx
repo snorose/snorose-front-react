@@ -3,20 +3,24 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { getPostContent, patchPost } from '@/apis';
-
-import { useToast, useAuth } from '@/hooks';
-
+import { useAuth, useToast } from '@/shared/hook';
 import {
-  FetchLoading,
   BackAppBar,
   CloseAppBar,
-  Icon,
   DeleteModal,
-} from '@/components';
+  FetchLoading,
+  Icon,
+} from '@/shared/component';
+import { formattedNowTime } from '@/shared/lib';
+import {
+  BOARD_MENUS,
+  MUTATION_KEY,
+  QUERY_KEY,
+  ROLE,
+  TOAST,
+} from '@/shared/constant';
 
-import { formattedNowTime } from '@/utils';
-import { BOARD_MENUS, TOAST, ROLE, MUTATION_KEY, QUERY_KEY } from '@/constants';
+import { getPostContent, patchPost } from '@/apis';
 
 import styles from './PostEditPage.module.css';
 

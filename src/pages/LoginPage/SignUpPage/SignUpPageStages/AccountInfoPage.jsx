@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import { Input, SpecialInput } from '@/components/Input';
-import { Submit } from '@/components/Submit';
+import { Button, Input, SpecialInput } from '@/shared/component';
 
 import {
   checkName,
@@ -124,7 +123,7 @@ export default function AccountInfoPage({ formData, setFormData, setStage }) {
         </div>
       </div>
       <div className={styles.submit}>
-        <Submit
+        <Button
           btnName='다음으로'
           className={setDoneState()}
           onClick={() => setStage((prev) => prev + 1)}

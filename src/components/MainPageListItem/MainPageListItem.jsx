@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import { Icon } from '@/components/Icon';
-
-import { timeAgo, getBoardTextId } from '@/utils';
+import { Icon } from '@/shared/component';
+import { timeAgo, getBoardTextId } from '@/shared/lib';
 
 import styles from './MainPageListItem.module.css';
 

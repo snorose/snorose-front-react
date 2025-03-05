@@ -1,6 +1,5 @@
-import { Icon } from '@/components/Icon';
-
-import { isToday } from '@/utils';
+import { Icon } from '@/shared/component';
+import { isToday } from '@/shared/lib';
 
 import styles from './Tile.module.css';
 

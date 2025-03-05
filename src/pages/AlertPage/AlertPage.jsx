@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import { Icon } from '@/components/Icon';
-import { MenuIcon } from '@/components/MenuIcon';
+import { MenuIcon, Icon } from '@/shared/component';
 
 import styles from './AlertPage.module.css';
 

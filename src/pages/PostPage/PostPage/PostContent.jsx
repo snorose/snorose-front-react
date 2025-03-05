@@ -1,4 +1,4 @@
-import { convertHyperlink } from '@/utils';
+import { convertHyperlink } from '@/shared/lib';
 
 import styles from './PostContent.module.css';
 

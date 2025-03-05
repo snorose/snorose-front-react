@@ -1,26 +1,23 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { postPost } from '@/apis';
-
-import { useToast, useAuth } from '@/hooks';
-
+import { useAuth, useToast } from '@/shared/hook';
 import {
-  Icon,
-  CloseAppBar,
-  DropDownMenu,
-  DeleteModal,
-  FetchLoading,
   ActionButton,
-} from '@/components';
+  CloseAppBar,
+  DeleteModal,
+  Icon,
+  FetchLoading,
+} from '@/shared/component';
+import { formattedNowTime, getBoard } from '@/shared/lib';
+import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
 
-import { formattedNowTime, getBoard } from '@/utils';
-
-import { BOARD_MENUS, ROLE, TOAST, QUERY_KEY } from '@/constants';
+import { postPost } from '@/apis';
+import { DropDownMenu } from '@/components';
 
 import styles from './PostWritePage.module.css';
-import { useQueryClient } from '@tanstack/react-query';
 
 export default function PostWritePage() {
   const navigate = useNavigate();

@@ -2,35 +2,38 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { useAuth, useToast } from '@/shared/hook';
+import {
+  ActionButton,
+  CloseAppBar,
+  ConfirmModal,
+  Dropdown,
+  FetchLoadingOverlay,
+  Icon,
+  Textarea,
+} from '@/shared/component';
+import { validClassNumber } from '@/shared/lib';
+import {
+  BOARD_ID,
+  MODAL_CONFIRM,
+  MUTATION_KEY,
+  QUERY_KEY,
+  TOAST,
+} from '@/shared/constant';
+
 import { postExamReview, checkExamReviewDuplication } from '@/apis';
-
-import { useAuth, useToast } from '@/hooks';
-
-import { ActionButton, CloseAppBar } from '@/components/AppBar';
 import {
   CategoryButton,
   CategoryFieldset,
-  Dropdown,
   TextField,
 } from '@/components/Fieldset';
-import { ConfirmModal } from '@/components/Modal';
-import { FetchLoadingOverlay } from '@/components/Loading';
-import { Icon } from '@/components/Icon';
 import { InputItem, InputList } from '@/components/Input';
-import { Textarea } from '@/components/Fieldset';
-
-import { validClassNumber } from '@/utils';
 import {
-  BOARD_ID,
   EXAM_TYPES,
   FILE_MAX_SIZE,
   LECTURE_TYPES,
-  MODAL_CONFIRM,
-  MUTATION_KEY,
   SEMESTERS,
-  TOAST,
   YEARS,
-  QUERY_KEY,
 } from '@/constants';
 
 import styles from './ExamReviewWritePage.module.css';

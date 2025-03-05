@@ -1,16 +1,12 @@
 import { useState } from 'react';
 
+import { useToast } from '@/shared/hook';
+import { FetchLoadingOverlay, PwInput } from '@/shared/component';
+import { isEmailValid } from '@/shared/lib';
+import { TOAST } from '@/shared/constant';
+
 import { verifySookmyungPortal } from '@/apis';
-
-import { useToast } from '@/hooks/index.js';
-
 import { Button, Input } from '@/pages/SnoroseVerifyPage';
-
-import { FetchLoadingOverlay, InputPassword } from '@/components';
-
-import { isEmailValid } from '@/utils';
-
-import { TOAST } from '@/constants';
 
 import styles from './VerifyPage.module.css';
 
@@ -61,7 +57,7 @@ export default function VerifyPage({ setStep }) {
           placeholder='학번을 입력해주세요'
           onChange={(event) => setStudentId(event.target.value)}
         />
-        <InputPassword
+        <PwInput
           title='숙명포털 비밀번호'
           placeholder='숙명포털 비밀번호를 입력해주세요'
           value={password}

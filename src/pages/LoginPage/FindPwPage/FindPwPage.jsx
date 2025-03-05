@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useFindPw } from '@/apis';
+import { Button, FetchLoadingOverlay, Icon, Input } from '@/shared/component';
+import { LOADING_MESSAGE } from '@/shared/constant';
 
-import { Icon } from '@/components/Icon';
-import { Input } from '@/components/Input';
-import { Submit } from '@/components/Submit';
+import { useFindPw } from '@/apis';
 
 import {
   checkIfEntered,
@@ -13,9 +12,6 @@ import {
 } from '@/pages/LoginPage/FindIdPage/inputCheck.js';
 
 import styles from './FindPwPage.module.css';
-import { BackAppBar } from '@/components/index.js';
-import { FetchLoadingOverlay } from '@/components/Loading';
-import { LOADING_MESSAGE } from '@/constants';
 
 export default function FindPwPage() {
   const findPw = useFindPw();
@@ -119,7 +115,7 @@ export default function FindPwPage() {
         </div>
 
         <div className={styles.buttonFrame}>
-          <Submit btnName='완료' className={submitState()} />
+          <Button btnName='완료' className={submitState()} />
           <Link to='/find-id'>
             <div className={styles.findIDButton}>
               <p>아이디 찾기</p>

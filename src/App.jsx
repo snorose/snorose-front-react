@@ -1,7 +1,8 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { Navbar, Sidebar } from '@/components';
-import { findRouteByPath } from '@/utils';
+import { Navbar, Sidebar } from '@/shared/component';
+import { findRouteByPath } from '@/shared/lib';
+
 import { routeList } from '@/router.js';
 
 import styles from './App.module.css';

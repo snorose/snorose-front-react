@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 
 import { format } from 'date-fns';
 
-import { Icon } from '@/components';
+import { Icon } from '@/shared/component';
 import { POINT_CATEGORY_KOREAN_ENUM } from '@/constants';
 
 import styles from './PointLog.module.css';

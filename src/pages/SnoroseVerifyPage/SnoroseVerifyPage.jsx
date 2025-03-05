@@ -2,8 +2,7 @@ import { useState } from 'react';
 
 import { TermsPage, VerifyPage, CompletePage } from '@/pages/SnoroseVerifyPage';
 
-import { BackAppBar } from '@/components/AppBar';
-import { Icon } from '@/components/Icon';
+import { BackAppBar, Icon } from '@/shared/component';
 
 import { TITLE_DES } from '@/constants';
 

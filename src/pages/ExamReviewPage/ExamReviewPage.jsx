@@ -2,37 +2,34 @@ import { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
+import { useAuth, useToast } from '@/shared/hook';
+import {
+  BackAppBar,
+  DeleteModal,
+  FetchLoading,
+  FetchLoadingOverlay,
+  Icon,
+  OptionModal,
+} from '@/shared/component';
+import { dateFormat } from '@/shared/lib';
+import { BOARD_MENUS, QUERY_KEY, MUTATION_KEY, TOAST } from '@/shared/constant';
+
 import {
   deleteExamReview,
   getReviewDetail,
   reportPost,
   reportUser,
 } from '@/apis';
-import { useAuth, useScrap, useToast } from '@/hooks';
+import { useScrap } from '@/hooks';
 import {
-  BackAppBar,
   CommentsSuspense,
-  DeleteModal,
-  OptionModal,
-  FetchLoading,
-  FetchLoadingOverlay,
-  Icon,
   InputBar,
   ReviewContentItem,
   ReviewDownload,
 } from '@/components';
 import { NotFoundPage } from '@/pages/NotFoundPage';
-import { dateFormat, convertToObject } from '@/utils';
-import {
-  BOARD_MENUS,
-  LECTURE_TYPES,
-  SEMESTERS,
-  EXAM_TYPES,
-  TOAST,
-  FLEX_ALIGN,
-  QUERY_KEY,
-  MUTATION_KEY,
-} from '@/constants';
+import { convertToObject } from '@/utils';
+import { LECTURE_TYPES, SEMESTERS, EXAM_TYPES, FLEX_ALIGN } from '@/constants';
 
 import styles from './ExamReviewPage.module.css';
 

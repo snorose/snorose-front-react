@@ -1,4 +1,4 @@
-import { CloseAppBar } from '@/components/AppBar';
+import { CloseAppBar } from '@/shared/component';
 
 import styles from './PolicyPage.module.css';
 

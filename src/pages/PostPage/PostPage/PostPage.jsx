@@ -2,24 +2,23 @@ import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
-import { useCommentContext } from '@/contexts/CommentContext.jsx';
-import { useAuth, useLike, useScrap, useToast } from '@/hooks';
-import { PostContent } from '@/pages/PostPage';
-import { NotFoundPage } from '@/pages/NotFoundPage';
-
+import { useAuth, useToast } from '@/shared/hook';
 import {
   BackAppBar,
-  CommentsSuspense,
   DeleteModal,
-  OptionModal,
   FetchLoading,
   Icon,
-  InputBar,
-} from '@/components';
+  OptionModal,
+} from '@/shared/component';
+import { fullDateTimeFormat, getBoard } from '@/shared/lib';
+import { MUTATION_KEY, QUERY_KEY, TOAST, LIKE_TYPE } from '@/shared/constant';
 
-import { fullDateTimeFormat, getBoard } from '@/utils';
-import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY, TOAST } from '@/constants';
+import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
+import { useCommentContext } from '@/contexts/CommentContext.jsx';
+import { useLike, useScrap } from '@/hooks';
+import { PostContent } from '@/pages/PostPage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
+import { CommentsSuspense, InputBar } from '@/components';
 
 import styles from './PostPage.module.css';
 

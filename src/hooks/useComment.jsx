@@ -3,28 +3,25 @@ import { useParams } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 
+import { useAuth, useToast } from '@/shared/hook';
+import {
+  getBoard,
+  flatPaginationCache,
+  toPaginationCacheFormat,
+} from '@/shared/lib';
+import {
+  MUTATION_KEY,
+  QUERY_KEY,
+  TOAST,
+  COMMENT_ACTION_TYPE,
+} from '@/shared/constant';
+
 import {
   deleteComment as remove,
   postComment as post,
   editComment as edit,
 } from '@/apis';
-
-import { useAuth, useToast } from '@/hooks';
-
-import {
-  deleteIfTargetComment,
-  editIfTargetComment,
-  flatPaginationCache,
-  toPaginationCacheFormat,
-  getBoard,
-} from '@/utils';
-
-import {
-  COMMENT_ACTION_TYPE,
-  MUTATION_KEY,
-  QUERY_KEY,
-  TOAST,
-} from '@/constants';
+import { deleteIfTargetComment, editIfTargetComment } from '@/utils';
 
 export default function useComment() {
   const [loading, setLoading] = useState();

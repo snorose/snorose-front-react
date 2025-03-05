@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
-import { BoardBar, Header, Icon, Search } from '@/components';
-import { BOARD_MENUS } from '@/constants';
+import { Header, Icon } from '@/shared/component';
+import { BOARD_MENUS } from '@/shared/constant';
+
+import { BoardBar, Search } from '@/components';
 
 import styles from './BoardPage.module.css';
 

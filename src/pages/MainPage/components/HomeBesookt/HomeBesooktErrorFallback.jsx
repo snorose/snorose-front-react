@@ -1,4 +1,4 @@
-import { ServerErrorFallback } from '@/components';
+import { ServerErrorFallback } from '@/shared/component';
 
 import styles from './HomeBesooktErrorFallback.module.css';
 

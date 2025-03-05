@@ -2,32 +2,25 @@ import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
+import { useToast } from '@/shared/hook';
+import {
+  ActionButton,
+  CloseAppBar,
+  Dropdown,
+  FetchLoadingOverlay,
+  Textarea,
+} from '@/shared/component';
+import { validClassNumber } from '@/shared/lib';
+import { MUTATION_KEY, QUERY_KEY, ROUTE, TOAST } from '@/shared/constant';
+
 import { editReviewDetail } from '@/apis';
-
-import { useToast } from '@/hooks';
-
-import { ActionButton, CloseAppBar } from '@/components/AppBar';
 import {
   CategoryButton,
   CategoryFieldset,
-  Dropdown,
   TextField,
 } from '@/components/Fieldset';
-import { FetchLoadingOverlay } from '@/components/Loading';
 import { InputItem, InputList } from '@/components/Input';
-import { Textarea } from '@/components/Fieldset';
-
-import { validClassNumber } from '@/utils';
-import {
-  EXAM_TYPES,
-  LECTURE_TYPES,
-  MUTATION_KEY,
-  QUERY_KEY,
-  ROUTE,
-  SEMESTERS,
-  TOAST,
-  YEARS,
-} from '@/constants';
+import { EXAM_TYPES, LECTURE_TYPES, SEMESTERS, YEARS } from '@/constants';
 
 import styles from './ExamReviewEditPage.module.css';
 

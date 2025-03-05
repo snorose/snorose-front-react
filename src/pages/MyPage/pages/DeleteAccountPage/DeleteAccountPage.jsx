@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useAuth, useModal } from '@/hooks';
-
-import { CloseAppBar, ConfirmModal, InputPassword } from '@/components';
+import { useAuth, useModal } from '@/shared/hook';
+import { CloseAppBar, ConfirmModal, PwInput } from '@/shared/component';
 
 import styles from './DeleteAccountPage.module.css';
 
@@ -44,7 +43,7 @@ export default function DeleteAccountPage() {
             ))}
           </div>
 
-          <InputPassword
+          <PwInput
             title='비밀번호'
             placeholder='비밀번호를 입력하세요'
             value={password}

@@ -2,12 +2,11 @@ import { Suspense } from 'react';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 
+import { Footer, Header } from '@/shared/component';
 import {
   Carousel,
   CarouselErrorFallback,
   CarouselSkeleton,
-  Footer,
-  Header,
   ListHeader,
   PopUp,
 } from '@/components';

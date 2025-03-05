@@ -1,25 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { getNoticeLine } from '@/apis';
-import { useScrollRestoration } from '@/hooks';
-import { SearchExamReviewsSuspense } from '@/pages/ExamReviewsPage';
-import {
-  AppBar,
-  Search,
-  WriteButton,
-  Icon,
-  Filter,
-  Filters,
-} from '@/components';
+import { useScrollRestoration } from '@/shared/hook';
+import { AppBar, Icon, WriteButton } from '@/shared/component';
+import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
-import {
-  YEARS,
-  SEMESTERS,
-  EXAM_TYPES,
-  QUERY_KEY,
-  STALE_TIME,
-} from '@/constants';
+import { getNoticeLine } from '@/apis';
+import { SearchExamReviewsSuspense } from '@/pages/ExamReviewsPage';
+import { Search, Filter, Filters } from '@/components';
+import { YEARS, SEMESTERS, EXAM_TYPES } from '@/constants';
 
 import styles from './ExamReviewsPage.module.css';
 
