@@ -3,9 +3,10 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import { useScrollRestoration } from '@/shared/hook';
 import { BackAppBar } from '@/shared/component';
 
+import { Search } from '@/feature/search/component';
+import { PLACEHOLDER } from '@/feature/search/constant';
+
 import { SearchResultsSuspense } from '@/pages/SearchPage';
-import { Search } from '@/components/Search';
-import { PLACEHOLDER } from '@/constants';
 
 import styles from './SearchPage.module.css';
 

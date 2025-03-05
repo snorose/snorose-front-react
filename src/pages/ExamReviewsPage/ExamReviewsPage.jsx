@@ -9,9 +9,9 @@ import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
 import { Filter, Filters } from '@/feature/exam/component';
 import { YEARS, SEMESTERS, EXAM_TYPES } from '@/feature/exam/constant';
+import { Search } from '@/feature/search/component';
 
 import { SearchExamReviewsSuspense } from '@/pages/ExamReviewsPage';
-import { Search } from '@/components';
 
 import styles from './ExamReviewsPage.module.css';
 

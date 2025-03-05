@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { FetchLoading, List, PullToRefresh } from '@/shared/component';
 import { deduplicatePaginatedData, flatPaginationCache } from '@/shared/lib';
 
-import { useSearch } from '@/hooks';
 import { PostBar } from '@/feature/board/component';
+import { useSearch } from '@/feature/search/hook';
 
 import styles from './SearchExamReviews.module.css';
 
