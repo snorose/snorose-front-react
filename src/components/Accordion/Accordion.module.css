@@ -43,5 +43,6 @@
 
 .opend .panelBody {
   padding: 1rem 0 0.625rem 0;
-  max-height: 900px;
+  max-height: 2500px;
+  overflow-y: auto;
 }
