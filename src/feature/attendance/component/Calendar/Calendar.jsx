@@ -4,10 +4,12 @@ import { useQuery } from '@tanstack/react-query';
 import { getMonthlyAttendanceHistory } from '@/apis';
 
 import { FetchLoadingOverlay, Icon } from '@/shared/component';
+import { isToday } from '@/shared/lib';
 import { LOADING_MESSAGE, QUERY_KEY } from '@/shared/constant';
 
-import { Tile } from '@/components/Calendar';
-import { StyledCalendar } from '@/components/Calendar/Calendar.style.jsx';
+import { StyledCalendar } from '@/feature/attendance/component/Calendar/Calendar.style.jsx';
+
+import styles from './Calendar.module.css';
 
 export default function Calendar({ callback }) {
   const today = new Date();
@@ -66,5 +68,36 @@ export default function Calendar({ callback }) {
         />
       )}
     </>
+  );
+}
+
+function Tile({ date, data = [] }) {
+  const currentDate = new Date(date);
+  const checked = data.find(({ createdAt }) => {
+    const checkedDate = new Date(createdAt);
+    return (
+      currentDate.getFullYear() === checkedDate.getFullYear() &&
+      currentDate.getMonth() === checkedDate.getMonth() &&
+      currentDate.getDate() === checkedDate.getDate()
+    );
+  });
+
+  const difference = checked?.difference;
+
+  return (
+    <div className={styles.tile}>
+      {checked ? (
+        <Icon id='check-circle-fill' width={33} height={33} />
+      ) : (
+        <div className={`${styles.day} ${isToday(date) && styles.today}`}>
+          {new Intl.DateTimeFormat('ko-KR', {
+            day: 'numeric',
+          })
+            .format(date)
+            .slice(0, -1)}
+        </div>
+      )}
+      {difference && <span className={styles.difference}>+{difference}</span>}
+    </div>
   );
 }
