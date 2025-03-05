@@ -1,14 +1,13 @@
 import { useAuth } from '@/shared/hook';
-
-import { useTabView } from '@/hooks';
+import { useTabView } from '@/feature/my/hook';
 import {
-  TopOverlay,
-  CircleProfile,
-  MyInfo,
   AccountTab,
   ActivityTab,
+  CircleProfile,
+  MyInfo,
   PolicyTab,
-} from '@/pages/MyPage';
+  TopOverlay,
+} from '@/feature/my/component';
 
 import styles from './MyPage.module.css';
 

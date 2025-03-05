@@ -5,9 +5,9 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { useScrollRestoration } from '@/shared/hook';
 import { BackAppBar, FetchLoading } from '@/shared/component';
+import { ACTIVITIES } from '@/feature/my/constant';
 
 import { Posts, PostsErrorFallback } from '@/pages/MyPage/pages/ActivityPage';
-import { ACTIVITIES } from '@/constants';
 
 import styles from './ActivityPage.module.css';
 
