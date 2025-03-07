@@ -28,6 +28,11 @@ import {
 } from '@/page/exam';
 import { SearchPage } from '@/page/search';
 import {
+  AboutPage,
+  PrivacyPolicyPage,
+  ServicePolicyPage,
+} from '@/page/snorose';
+import {
   ActivityPage,
   ChangePwPage,
   DeleteAccountPage,
@@ -36,9 +41,7 @@ import {
   PointLogListPage,
 } from '@/page/user';
 
-import { PrivacyPolicyPage, ServicePolicyPage } from '@/pages/MyPage';
 import ProtectedRoute from '@/ProtectedRoute';
-import { AboutPage } from '@/pages/AboutPage';
 // import { AlertPage } from '@/pages/AlertPage';
 import { AttendancePage } from '@/pages/AttendancePage';
 

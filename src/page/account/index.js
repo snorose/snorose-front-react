@@ -6,11 +6,6 @@ export { default as SignUpPage } from './SignUpPage/SignUpPage';
 export { default as SignUpSuccessPage } from './SignUpSuccessPage/SignUpSuccessPage';
 export { default as SignUpFailurePage } from './SignUpFailure/SignUpFailurePage';
 
-// 회원가입 단계
-export { default as AccountInfoStep } from './SignUpPage/signUpStep/AccountInfoStep/AccountInfoStep';
-export { default as AuthorizationStep } from './SignUpPage/signUpStep/AuthorizationStep/AuthorizationStep';
-export { default as UserInfoStep } from './/SignUpPage/signUpStep/UserInfoStep/UserInfoStep';
-
 // 계정 찾기
 export { default as FindIdPage } from './FindIdPage/FindIdPage';
 export { default as FindPwPage } from './FindPwPage/FindPwPage';

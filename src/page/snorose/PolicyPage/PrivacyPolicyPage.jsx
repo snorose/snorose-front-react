@@ -1,4 +1,5 @@
 import { CloseAppBar } from '@/shared/component';
+
 import styles from './PolicyPage.module.css';
 
 const privacyPolicyContent = (

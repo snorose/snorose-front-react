@@ -8,7 +8,7 @@ import {
   AccountInfoStep,
   AuthorizationStep,
   UserInfoStep,
-} from '@/page/account';
+} from '@/feature/account/component';
 
 import styles from './SignUpPage.module.css';
 
