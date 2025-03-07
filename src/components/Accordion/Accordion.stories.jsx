@@ -17,7 +17,7 @@ const meta = {
   argTypes: {
     title: {
       control: 'text',
-      description: '아코디언 헤더 부분의 제목을 설정합니다.',
+      description: '컴포넌트 헤더 부분의 제목 설정',
     },
   },
 };

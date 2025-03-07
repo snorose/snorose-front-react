@@ -1,7 +1,5 @@
-import { userEvent, within } from '@storybook/testing-library';
 import Search from '../../Search/Search';
 import BackAppBar from './BackAppBar';
-import { useState } from 'react';
 
 const meta = {
   component: 'AppBar/BackAppBar',
