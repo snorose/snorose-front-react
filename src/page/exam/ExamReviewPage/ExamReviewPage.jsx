@@ -21,6 +21,8 @@ import {
 import { dateFormat } from '@/shared/lib';
 import { BOARD_MENUS, QUERY_KEY, MUTATION_KEY, TOAST } from '@/shared/constant';
 
+import { NotFoundPage } from '@/page/etc';
+
 import { CommentInput, CommentsSuspense } from '@/feature/comment/component';
 import { ReviewContentItem, ReviewDownload } from '@/feature/exam/component';
 import { convertToObject } from '@/feature/exam/lib';
@@ -31,8 +33,6 @@ import {
   FLEX_ALIGN,
 } from '@/feature/exam/constant';
 import { useScrap } from '@/feature/scrap/hook';
-
-import { NotFoundPage } from '@/pages/NotFoundPage';
 
 import styles from './ExamReviewPage.module.css';
 

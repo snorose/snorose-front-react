@@ -20,6 +20,7 @@ import {
   PostPage,
   WritePostPage,
 } from '@/page/board';
+import { NotFoundPage } from '@/page/etc';
 import {
   EditExamReviewPage,
   ExamReviewListPage,
@@ -44,8 +45,6 @@ import {
 
 import ProtectedRoute from '@/ProtectedRoute';
 // import { AlertPage } from '@/pages/AlertPage';
-
-import { NotFoundPage } from '@/pages/NotFoundPage';
 
 import { ROLE } from '@/shared/constant';
 

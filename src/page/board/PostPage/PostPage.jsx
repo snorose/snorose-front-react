@@ -15,12 +15,12 @@ import {
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 import { MUTATION_KEY, QUERY_KEY, TOAST, LIKE_TYPE } from '@/shared/constant';
 
+import { NotFoundPage } from '@/page/etc';
+
 import { useCommentContext } from '@/feature/comment/context';
 import { CommentInput, CommentsSuspense } from '@/feature/comment/component';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
-
-import { NotFoundPage } from '@/pages/NotFoundPage';
 
 import styles from './PostPage.module.css';
 
