@@ -8,11 +8,11 @@ import {
   checkID,
   checkPW,
   checkIfSame,
-} from '@/pages/LoginPage/FindIdPage/inputCheck.js';
+} from '@/feature/account/lib';
 
-import styles from './AccountInfoPage.module.css';
+import styles from './AccountInfoStep.module.css';
 
-export default function AccountInfoPage({ formData, setFormData, setStage }) {
+export default function AccountInfoStep({ formData, setFormData, setStage }) {
   const [nameStyle, setNameStyle] = useState('ready');
   const [emailStyle, setEmailStyle] = useState('ready');
   const [idStyle, setIdStyle] = useState('ready');

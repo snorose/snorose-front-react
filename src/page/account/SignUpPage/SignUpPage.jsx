@@ -5,10 +5,10 @@ import { Icon } from '@/shared/component';
 import { StageDots } from '@/feature/account/component';
 
 import {
-  AccountInfoPage,
-  AuthorizationPage,
-  UserInfoPage,
-} from '@/pages/LoginPage/SignUpPage/SignUpPageStages';
+  AccountInfoStep,
+  AuthorizationStep,
+  UserInfoStep,
+} from '@/page/account';
 
 import styles from './SignUpPage.module.css';
 
@@ -41,15 +41,15 @@ export default function SignUpPage() {
           />
         </div>
         {stage === 1 ? (
-          <AccountInfoPage
+          <AccountInfoStep
             setFormData={setFormData}
             formData={formData}
             setStage={setStage}
           />
         ) : stage === 2 ? (
-          <AuthorizationPage email={formData.email} setStage={setStage} />
+          <AuthorizationStep email={formData.email} setStage={setStage} />
         ) : (
-          <UserInfoPage
+          <UserInfoStep
             setFormData={setFormData}
             formData={formData}
             setStage={setStage}

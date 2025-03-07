@@ -6,10 +6,7 @@ import { useFindId } from '@/apis';
 import { FetchLoadingOverlay, Icon, Input, Button } from '@/shared/component';
 import { LOADING_MESSAGE } from '@/shared/constant';
 
-import {
-  checkName,
-  checkStudentNum,
-} from '@/pages/LoginPage/FindIdPage/inputCheck.js';
+import { checkName, checkStudentNum } from '@/feature/account/lib';
 
 import styles from './FindIdPage.module.css';
 

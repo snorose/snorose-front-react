@@ -4,9 +4,9 @@ import { useSendUser, useCertifyUser } from '@/apis';
 
 import { Input, Button } from '@/shared/component';
 
-import styles from './AuthorizationPage.module.css';
+import styles from './AuthorizationStep.module.css';
 
-export default function AuthorizationPage({ email, setStage }) {
+export default function AuthorizationStep({ email, setStage }) {
   const sendUser = useSendUser();
   const certifyUser = useCertifyUser();
   const [authNum, setAuthNum] = useState('');

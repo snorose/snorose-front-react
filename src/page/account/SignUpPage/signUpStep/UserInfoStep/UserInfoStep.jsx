@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useRegister } from '@/apis';
+
 import { Dropdown, Input, Button } from '@/shared/component';
 import { MAJORS } from '@/shared/constant';
-
-import { useRegister } from '@/apis';
 
 import {
   checkSpecialChar,
   checkStudentNum,
   checkBirthday,
-} from '@/pages/LoginPage/FindIdPage/inputCheck.js';
+} from '@/feature/account/lib';
 
-import styles from './UserInfoPage.module.css';
+import styles from './UserInfoStep.module.css';
 
-export default function UserInfoPage({ setFormData, formData }) {
+export default function UserInfoStep({ setFormData, formData }) {
   const register = useRegister();
   const [nicknameStyle, setNicknameStyle] = useState('ready');
   const [stuNumStyle, setStuNumStyle] = useState('ready');

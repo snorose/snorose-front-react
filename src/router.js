@@ -14,6 +14,18 @@ import {
   ExamReviewPage,
   WriteExamReviewPage,
 } from '@/page/exam';
+import {
+  LoginPage,
+  FindIdPage,
+  FindPwPage,
+  FoundIdPage,
+  FoundPwPage,
+  NotFoundIdPage,
+  NotFoundPwPage,
+  SignUpPage,
+  SignUpSuccessPage,
+  SignUpFailurePage,
+} from '@/page/account';
 
 import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
@@ -31,21 +43,7 @@ import {
   ServicePolicyPage,
 } from '@/pages/MyPage';
 
-import {
-  LoginPage,
-  FindIdPage,
-  FindPwPage,
-  FoundIdPage,
-  FoundPwPage,
-  NotFoundIdPage,
-  NotFoundPwPage,
-} from '@/pages/LoginPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
-import {
-  SignUpPage,
-  SignUpSuccessPage,
-  SignUpFailurePage,
-} from '@/pages/LoginPage';
 
 import { MainPage } from '@/pages/MainPage';
 
