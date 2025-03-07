@@ -11,6 +11,7 @@ import { routeList } from '@/router.js';
 
 import '@/index.css';
 import reportWebVitals from '@/reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const router = createBrowserRouter(routeList);
 
@@ -38,3 +39,5 @@ root.render(
 );
 
 reportWebVitals();
+// PWA 서비스 워커 등록
+serviceWorkerRegistration.register();
