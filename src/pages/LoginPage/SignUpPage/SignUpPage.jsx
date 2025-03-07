@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Icon } from '@/shared/component';
-import { StageDots } from '@/components/StageDots';
+import { StageDots } from '@/feature/account/component';
 
 import {
   AccountInfoPage,

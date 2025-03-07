@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Header, Icon } from '@/shared/component';
 import { BOARD_MENUS } from '@/shared/constant';
 
-import { BoardBar, Search } from '@/components';
+import { BoardBar } from '@/feature/board/component';
+import { Search } from '@/feature/search/component';
 
 import styles from './BoardPage.module.css';
 

@@ -42,7 +42,7 @@ import { PostsPage } from '@/pages/PostsPage';
 import { SearchPage } from '@/pages/SearchPage';
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
-import { CheckExamPeriodRoute } from '@/components/Route/CheckExamPeriodRoute.jsx';
+import { CheckExamPeriodRoute } from '@/feature/exam/lib';
 
 const getRolesForReadBoard = (boardPath) => {
   switch (boardPath) {

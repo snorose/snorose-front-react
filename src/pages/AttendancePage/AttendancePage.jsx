@@ -6,12 +6,12 @@ import { BackAppBar, FetchLoadingOverlay, Icon } from '@/shared/component';
 import { QUERY_KEY, TOAST } from '@/shared/constant';
 
 import { updatePoint } from '@/apis';
-import { Calendar } from '@/components/Calendar';
+import { Calendar } from '@/feature/attendance/component';
 import {
   ATTENDANCE_MESSAGE,
   POINT_CATEGORY_ENUM,
   POINT_SOURCE_ENUM,
-} from '@/constants';
+} from '@/feature/attendance/constant';
 
 import styles from './AttendancePage.module.css';
 

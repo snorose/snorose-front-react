@@ -1,18 +1,18 @@
 import { Button } from '@/pages/SnoroseVerifyPage';
 
 import { BackAppBar, Icon } from '@/shared/component';
+
 import {
   Accordion,
   AccordionListItem,
   AccordionTag,
-} from '@/components/Accordion';
-
+} from '@/feature/home/component';
 import {
   ABOUT_SNOROSE,
   SNOROSE_HISTORY,
   SNOROSE_MEMBERSHIP_LEVEL,
   HALL_OF_FAME_ADMINS,
-} from '@/constants';
+} from '@/feature/home/constant';
 
 import HALL_OF_FAME from '@/assets/images/hallOfFame.svg';
 

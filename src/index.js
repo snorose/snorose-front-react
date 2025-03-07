@@ -6,7 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { ToastProvider } from '@/shared/context/ToastContext';
 
-import { CommentContextProvider } from '@/contexts/CommentContext.jsx';
+import { CommentContextProvider } from '@/feature/comment/context';
 import { routeList } from '@/router.js';
 
 import '@/index.css';

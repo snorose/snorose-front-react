@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
+import { editReviewDetail } from '@/apis';
+
 import { useToast } from '@/shared/hook';
 import {
   ActionButton,
@@ -13,14 +15,19 @@ import {
 import { validClassNumber } from '@/shared/lib';
 import { MUTATION_KEY, QUERY_KEY, ROUTE, TOAST } from '@/shared/constant';
 
-import { editReviewDetail } from '@/apis';
 import {
   CategoryButton,
   CategoryFieldset,
+  InputItem,
+  InputList,
   TextField,
-} from '@/components/Fieldset';
-import { InputItem, InputList } from '@/components/Input';
-import { EXAM_TYPES, LECTURE_TYPES, SEMESTERS, YEARS } from '@/constants';
+} from '@/feature/exam/component';
+import {
+  EXAM_TYPES,
+  LECTURE_TYPES,
+  SEMESTERS,
+  YEARS,
+} from '@/feature/exam/constant';
 
 import styles from './ExamReviewEditPage.module.css';
 

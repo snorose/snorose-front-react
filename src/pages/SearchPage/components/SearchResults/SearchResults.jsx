@@ -1,7 +1,5 @@
 import { useLocation, Link } from 'react-router-dom';
 
-import { useSearch } from '@/hooks';
-
 import { FetchLoading, List, PullToRefresh } from '@/shared/component';
 import {
   getBoardTitleToTextId,
@@ -10,7 +8,8 @@ import {
 } from '@/shared/lib';
 import { BOARDS } from '@/shared/constant';
 
-import { PostBar } from '@/components';
+import { PostBar } from '@/feature/board/component';
+import { useSearch } from '@/feature/search/hook';
 
 import styles from './SearchResults.module.css';
 

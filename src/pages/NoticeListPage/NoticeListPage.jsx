@@ -8,7 +8,7 @@ import { getBoard } from '@/shared/lib';
 import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
 import { getNoticeList } from '@/apis/notice';
-import { NoticeBar } from '@/components';
+import { NoticeBar } from '@/feature/board/component';
 
 import styles from './NoticeListPage.module.css';
 
