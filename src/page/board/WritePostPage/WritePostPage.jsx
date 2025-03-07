@@ -17,9 +17,9 @@ import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
 import { postPost } from '@/apis';
 import { DropDownMenu } from '@/feature/board/component';
 
-import styles from './PostWritePage.module.css';
+import styles from './WritePostPage.module.css';
 
-export default function PostWritePage() {
+export default function WritePostPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { pathname } = useLocation();

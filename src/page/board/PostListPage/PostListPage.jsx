@@ -1,17 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
+import { getNoticeLine } from '@/apis';
+
 import { useScrollRestoration } from '@/shared/hook';
 import { BackAppBar, Icon, WriteButton } from '@/shared/component';
 import { getBoard } from '@/shared/lib';
 import { QUERY_KEY } from '@/shared/constant';
 
-import { getNoticeLine } from '@/apis';
-import { PostsSuspense } from '@/pages/PostsPage';
+import { PostListSuspense } from '@/feature/board/component';
 
-import styles from './PostsPage.module.css';
+import styles from './PostListPage.module.css';
 
-export default function PostsPage() {
+export default function PostListPage() {
   const { pathname } = useLocation();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
@@ -42,7 +43,7 @@ export default function PostsPage() {
           </Link>
         </div>
       )}
-      <PostsSuspense saveScrollPosition={saveScrollPosition} />
+      <PostListSuspense saveScrollPosition={saveScrollPosition} />
       {!isBesookt && (
         <WriteButton
           to={`/board/${currentBoardTextId}/post-write`}

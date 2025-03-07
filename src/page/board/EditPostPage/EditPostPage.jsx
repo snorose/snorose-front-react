@@ -22,9 +22,9 @@ import {
 
 import { getPostContent, patchPost } from '@/apis';
 
-import styles from './PostEditPage.module.css';
+import styles from './EditPostPage.module.css';
 
-export default function PostEditPage() {
+export default function EditPostPage() {
   const { postId } = useParams();
   const { pathname } = useLocation();
   const { userInfo, status } = useAuth();

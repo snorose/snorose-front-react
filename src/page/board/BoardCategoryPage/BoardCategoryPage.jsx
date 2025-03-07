@@ -6,9 +6,9 @@ import { BOARD_MENUS } from '@/shared/constant';
 import { BoardBar } from '@/feature/board/component';
 import { Search } from '@/feature/search/component';
 
-import styles from './BoardPage.module.css';
+import styles from './BoardCategoryPage.module.css';
 
-export default function BoardPage() {
+export default function BoardCategoryPage() {
   const navigate = useNavigate();
   const handleKeyDown = (event) => {
     if (event.target.value.trim() === '') {

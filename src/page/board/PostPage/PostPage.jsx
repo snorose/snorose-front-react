@@ -12,7 +12,7 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
-import { fullDateTimeFormat, getBoard } from '@/shared/lib';
+import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 import { MUTATION_KEY, QUERY_KEY, TOAST, LIKE_TYPE } from '@/shared/constant';
 
 import { useCommentContext } from '@/feature/comment/context';
@@ -20,7 +20,6 @@ import { CommentInput, CommentsSuspense } from '@/feature/comment/component';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
-import { PostContent } from '@/pages/PostPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
 import styles from './PostPage.module.css';
@@ -210,7 +209,10 @@ export default function PostPage() {
             </span>
           </p>
         </div>
-        <PostContent content={data.content} />
+        <p
+          className={styles.content}
+          dangerouslySetInnerHTML={convertHyperlink(data.content)}
+        ></p>
         <div className={styles.post_bottom}>
           <div className={styles.count} onClick={inputFocus}>
             <Icon id='comment' width={15} height={13} />

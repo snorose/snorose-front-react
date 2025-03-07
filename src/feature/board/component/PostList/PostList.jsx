@@ -14,9 +14,9 @@ import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 import { getPosts } from '@/apis';
 import { PostBar } from '@/feature/board/component';
 
-import styles from './Posts.module.css';
+import styles from './PostList.module.css';
 
-export default function Posts({ saveScrollPosition }) {
+export default function PostList({ saveScrollPosition }) {
   const { pathname } = useLocation();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);

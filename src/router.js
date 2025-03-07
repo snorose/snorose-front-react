@@ -1,11 +1,18 @@
-import { ROLE } from '@/shared/constant';
-
 import App from '@/App';
+import {
+  BoardCategoryPage,
+  EditPostPage,
+  NoticeListPage,
+  PostListPage,
+  PostPage,
+  WritePostPage,
+} from '@/page/board';
+
 import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
 // import { AlertPage } from '@/pages/AlertPage';
 import { AttendancePage } from '@/pages/AttendancePage';
-import { BoardPage } from '@/pages/BoardPage';
+
 import {
   MyPage,
   PointLogsPage,
@@ -35,12 +42,13 @@ import {
   SignUpSuccessPage,
   SignUpFailurePage,
 } from '@/pages/LoginPage';
-import { NoticeListPage } from '@/pages/NoticeListPage';
+
 import { MainPage } from '@/pages/MainPage';
-import { PostPage, PostWritePage, PostEditPage } from '@/pages/PostPage';
-import { PostsPage } from '@/pages/PostsPage';
+
 import { SearchPage } from '@/pages/SearchPage';
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
+
+import { ROLE } from '@/shared/constant';
 
 import { CheckExamPeriodRoute } from '@/feature/exam/lib';
 
@@ -101,7 +109,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         roles={getRolesForReadBoard(boardPath)}
         message={'게시판 접근 권한이 없습니다.'}
       >
-        {boardPath === 'notice' ? <NoticeListPage /> : <PostsPage />}
+        {boardPath === 'notice' ? <NoticeListPage /> : <PostListPage />}
       </ProtectedRoute>
     ),
     meta: {
@@ -143,7 +151,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         roles={getRolesForWriteBoard(boardPath)}
         message={'게시글 작성 권한이 없습니다.'}
       >
-        <PostWritePage />
+        <WritePostPage />
       </ProtectedRoute>
     ),
     meta: {
@@ -157,7 +165,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
         roles={getRolesForWriteBoard(boardPath)}
         message={'게시글 편집 권한이 없습니다.'}
       >
-        <PostEditPage />
+        <EditPostPage />
       </ProtectedRoute>
     ),
     meta: {
@@ -195,7 +203,7 @@ export const routeList = [
       },
       {
         path: '/board',
-        element: <BoardPage />,
+        element: <BoardCategoryPage />,
       },
       ...boardRoutes,
       {
@@ -277,7 +285,7 @@ export const routeList = [
             roles={[ROLE.admin]}
             message={'공지글 수정 권한이 없습니다.'}
           >
-            <PostEditPage />
+            <EditPostPage />
           </ProtectedRoute>
         ),
         meta: {

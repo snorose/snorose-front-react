@@ -90,3 +90,22 @@
   width: 100%;
   height: 50px;
 }
+
+/* post content */
+
+.contentText {
+  font-size: 0.75rem;
+  color: var(--gray-4);
+  font-size: 0.875rem;
+  padding: 0 0.8125rem 0.9375rem 0;
+  white-space: pre-wrap;
+  word-break: keep-all;
+
+  a {
+    color: var(--blue-3);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
