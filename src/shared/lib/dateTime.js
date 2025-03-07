@@ -1,10 +1,8 @@
-import {
-  MINUTE_SECONDS,
-  HOUR_SECONDS,
-  DAY_SECONDS,
-  MONTH_SECONDS,
-  YEAR_SECONDS,
-} from '@/constants';
+const MINUTE_SECONDS = 60;
+const HOUR_SECONDS = 60 * 60;
+const DAY_SECONDS = 60 * 60 * 24;
+const MONTH_SECONDS = 60 * 60 * 24 * 30;
+const YEAR_SECONDS = 60 * 60 * 24 * 30 * 12;
 
 export const dateFormat = (date) => {
   const dateObj = new Date(date);
