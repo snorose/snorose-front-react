@@ -26,6 +26,7 @@ import {
   ExamReviewPage,
   WriteExamReviewPage,
 } from '@/page/exam';
+import { AttendancePage, MainPage } from '@/page/home';
 import { SearchPage } from '@/page/search';
 import {
   AboutPage,
@@ -43,11 +44,8 @@ import {
 
 import ProtectedRoute from '@/ProtectedRoute';
 // import { AlertPage } from '@/pages/AlertPage';
-import { AttendancePage } from '@/pages/AttendancePage';
 
 import { NotFoundPage } from '@/pages/NotFoundPage';
-
-import { MainPage } from '@/pages/MainPage';
 
 import { ROLE } from '@/shared/constant';
 
