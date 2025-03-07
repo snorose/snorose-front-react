@@ -7,9 +7,9 @@ import { QUERY_KEY } from '@/shared/constant';
 
 import { PointLog } from '@/feature/my/component';
 
-import styles from './PointLogs.module.css';
+import styles from './PointLogList.module.css';
 
-export default function PointLogs() {
+export default function PointLogList() {
   const { data, ref, isFetching } = useSuspensePagination({
     queryKey: [QUERY_KEY.pointHistory],
     queryFn: ({ pageParam }) => getPointLogs({ page: pageParam }),

@@ -1,6 +1,6 @@
 import { FetchLoading, ServerErrorFallback } from '@/shared/component';
 
-export default function SearchResultsErrorFallback({
+export default function SearchExamReviewListErrorFallback({
   error,
   resetErrorBoundary,
 }) {

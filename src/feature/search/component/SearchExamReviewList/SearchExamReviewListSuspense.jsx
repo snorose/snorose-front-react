@@ -6,11 +6,11 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { FetchLoading } from '@/shared/component';
 
 import {
-  SearchExamReviews,
-  SearchExamReviewsErrorFallback,
+  SearchExamReviewList,
+  SearchExamReviewListErrorFallback,
 } from '@/feature/search/component';
 
-export default function SearchExamReviewsSuspense({ saveScrollPosition }) {
+export default function SearchExamReviewListSuspense({ saveScrollPosition }) {
   const [searchParams] = useSearchParams();
   const params = Object.fromEntries(searchParams.entries());
 
@@ -19,11 +19,11 @@ export default function SearchExamReviewsSuspense({ saveScrollPosition }) {
       {({ reset }) => (
         <ErrorBoundary
           onReset={reset}
-          fallbackRender={SearchExamReviewsErrorFallback}
+          fallbackRender={SearchExamReviewListErrorFallback}
           resetKeys={[params]}
         >
           <Suspense fallback={<FetchLoading>검색 중</FetchLoading>}>
-            <SearchExamReviews saveScrollPosition={saveScrollPosition} />
+            <SearchExamReviewList saveScrollPosition={saveScrollPosition} />
           </Suspense>
         </ErrorBoundary>
       )}

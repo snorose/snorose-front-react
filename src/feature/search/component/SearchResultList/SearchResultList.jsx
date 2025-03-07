@@ -11,9 +11,9 @@ import { BOARDS } from '@/shared/constant';
 import { PostBar } from '@/feature/board/component';
 import { useSearch } from '@/feature/search/hook';
 
-import styles from './SearchResults.module.css';
+import styles from './SearchResultList.module.css';
 
-export default function SearchResults({ saveScrollPosition }) {
+export default function SearchResultList({ saveScrollPosition }) {
   const { pathname } = useLocation();
   const boardId = BOARDS.find(({ path }) => pathname.includes(path)).id;
 

@@ -5,7 +5,10 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { useAuth } from '@/shared/hook';
 import { BackAppBar, FetchLoading, Icon } from '@/shared/component';
 
-import { PointLogs, PointLogsErrorFallback } from '@/feature/my/component';
+import {
+  PointLogList,
+  PointLogListErrorFallback,
+} from '@/feature/my/component';
 
 import styles from './PointLogListPage.module.css';
 
@@ -34,10 +37,10 @@ export default function PointLogListPage() {
           {({ reset }) => (
             <ErrorBoundary
               onReset={reset}
-              FallbackComponent={PointLogsErrorFallback}
+              FallbackComponent={PointLogListErrorFallback}
             >
               <Suspense fallback={<FetchLoading>불러오는 중</FetchLoading>}>
-                <PointLogs />
+                <PointLogList />
               </Suspense>
             </ErrorBoundary>
           )}

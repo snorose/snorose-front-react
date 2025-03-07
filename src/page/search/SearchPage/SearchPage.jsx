@@ -3,7 +3,7 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import { useScrollRestoration } from '@/shared/hook';
 import { BackAppBar } from '@/shared/component';
 
-import { Search, SearchResultsSuspense } from '@/feature/search/component';
+import { Search, SearchResultListSuspense } from '@/feature/search/component';
 import { PLACEHOLDER } from '@/feature/search/constant';
 
 import styles from './SearchPage.module.css';
@@ -25,7 +25,7 @@ export default function SearchPage() {
       </BackAppBar>
 
       {paramsLength > 0 && (
-        <SearchResultsSuspense saveScrollPosition={saveScrollPosition} />
+        <SearchResultListSuspense saveScrollPosition={saveScrollPosition} />
       )}
     </div>
   );

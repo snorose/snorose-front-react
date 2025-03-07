@@ -7,9 +7,12 @@ import { useScrollRestoration } from '@/shared/hook';
 import { AppBar, Icon, WriteButton } from '@/shared/component';
 import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
-import { Filter, Filters } from '@/feature/exam/component';
+import { Filter, FilterList } from '@/feature/exam/component';
 import { YEARS, SEMESTERS, EXAM_TYPES } from '@/feature/exam/constant';
-import { Search, SearchExamReviewsSuspense } from '@/feature/search/component';
+import {
+  Search,
+  SearchExamReviewListSuspense,
+} from '@/feature/search/component';
 
 import styles from './ExamReviewListPage.module.css';
 
@@ -36,7 +39,7 @@ export default function ExamReviewListPage() {
       </div>
 
       <Search className={styles.search} placeholder='시험후기 검색' />
-      <Filters>
+      <FilterList>
         <Filter filterKey='lectureYear' options={YEARS} placeholder='연도' />
         <Filter filterKey='semester' options={SEMESTERS} placeholder='학기' />
         <Filter
@@ -44,8 +47,8 @@ export default function ExamReviewListPage() {
           options={EXAM_TYPES}
           placeholder='시험 종류'
         />
-      </Filters>
-      <SearchExamReviewsSuspense saveScrollPosition={saveScrollPosition} />
+      </FilterList>
+      <SearchExamReviewListSuspense saveScrollPosition={saveScrollPosition} />
 
       <WriteButton to='/board/exam-review-write' />
     </section>

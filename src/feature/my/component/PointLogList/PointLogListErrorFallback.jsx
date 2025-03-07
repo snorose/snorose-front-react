@@ -1,6 +1,9 @@
 import { ServerErrorFallback } from '@/shared/component';
 
-export default function PointLogsErrorFallback({ error, resetErrorBoundary }) {
+export default function PointLogListErrorFallback({
+  error,
+  resetErrorBoundary,
+}) {
   const { status } = error;
 
   if (status === 404) {

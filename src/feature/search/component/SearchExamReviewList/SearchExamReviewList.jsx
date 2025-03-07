@@ -6,9 +6,9 @@ import { deduplicatePaginatedData, flatPaginationCache } from '@/shared/lib';
 import { PostBar } from '@/feature/board/component';
 import { useSearch } from '@/feature/search/hook';
 
-import styles from './SearchExamReviews.module.css';
+import styles from './SearchExamReviewList.module.css';
 
-export default function SearchExamReviews({ saveScrollPosition }) {
+export default function SearchExamReviewList({ saveScrollPosition }) {
   const { data, ref, isFetching, refetch } = useSearch({ boardId: 32 });
   const searchList = deduplicatePaginatedData(flatPaginationCache(data));
 

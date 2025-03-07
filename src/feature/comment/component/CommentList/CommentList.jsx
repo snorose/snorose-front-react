@@ -10,9 +10,9 @@ import { QUERY_KEY } from '@/shared/constant';
 import { Comment } from '@/feature/comment/component';
 import { filterVisibleComments } from '@/feature/comment/lib';
 
-import styles from './Comments.module.css';
+import styles from './CommentList.module.css';
 
-export default function Comments({ commentCount }) {
+export default function CommentList({ commentCount }) {
   const { postId } = useParams();
 
   const { data, isFetching, ref } = useSuspensePagination({

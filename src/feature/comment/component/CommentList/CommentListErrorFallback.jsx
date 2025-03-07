@@ -1,5 +1,8 @@
 import { ServerErrorFallback } from '@/shared/component';
 
-export default function CommentsErrorFallback({ error, resetErrorBoundary }) {
+export default function CommentListErrorFallback({
+  error,
+  resetErrorBoundary,
+}) {
   return <ServerErrorFallback reset={resetErrorBoundary} />;
 }

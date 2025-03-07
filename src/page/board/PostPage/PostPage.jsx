@@ -18,7 +18,7 @@ import { MUTATION_KEY, QUERY_KEY, TOAST, LIKE_TYPE } from '@/shared/constant';
 import { NotFoundPage } from '@/page/etc';
 
 import { useCommentContext } from '@/feature/comment/context';
-import { CommentInput, CommentsSuspense } from '@/feature/comment/component';
+import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
@@ -250,7 +250,7 @@ export default function PostPage() {
         <div className={styles.whiteBox} />
       ) : (
         <>
-          <CommentsSuspense commentCount={data.commentCount} />
+          <CommentListSuspense commentCount={data.commentCount} />
           <CommentInput />
         </>
       )}

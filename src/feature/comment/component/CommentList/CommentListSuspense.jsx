@@ -4,20 +4,23 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { FetchLoading } from '@/shared/component';
 
-import { Comments, CommentsErrorFallback } from '@/feature/comment/component';
+import {
+  CommentList,
+  CommentListErrorFallback,
+} from '@/feature/comment/component';
 
-export default function CommentsSuspense({ commentCount }) {
+export default function CommentListSuspense({ commentCount }) {
   return (
     <QueryErrorResetBoundary>
       {({ reset }) => (
         <ErrorBoundary
           onReset={reset}
-          FallbackComponent={CommentsErrorFallback}
+          FallbackComponent={CommentListErrorFallback}
         >
           <Suspense
             fallback={<FetchLoading>댓글을 불러오는 중...</FetchLoading>}
           >
-            <Comments commentCount={commentCount} />
+            <CommentList commentCount={commentCount} />
           </Suspense>
         </ErrorBoundary>
       )}

@@ -23,7 +23,7 @@ import { BOARD_MENUS, QUERY_KEY, MUTATION_KEY, TOAST } from '@/shared/constant';
 
 import { NotFoundPage } from '@/page/etc';
 
-import { CommentInput, CommentsSuspense } from '@/feature/comment/component';
+import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 import { ReviewContentItem, ReviewDownload } from '@/feature/exam/component';
 import { convertToObject } from '@/feature/exam/lib';
 import {
@@ -280,7 +280,7 @@ export default function ExamReviewPage() {
           </div>
         </div>
       </div>
-      <CommentsSuspense commentCount={commentCount} />
+      <CommentListSuspense commentCount={commentCount} />
       <CommentInput />
       <OptionModal
         id={isConfirmed ? 'confirmed-exam-review-option' : 'exam-review-option'}
