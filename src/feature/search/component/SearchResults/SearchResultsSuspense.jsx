@@ -4,7 +4,11 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { FetchLoading } from '@/shared/component';
-import { SearchResults, SearchResultsErrorFallback } from '@/pages/SearchPage';
+
+import {
+  SearchResults,
+  SearchResultsErrorFallback,
+} from '@/feature/search/component';
 
 export default function SearchResultsSuspense({ saveScrollPosition }) {
   const [searchParams] = useSearchParams();

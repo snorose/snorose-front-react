@@ -7,6 +7,7 @@ import {
   PostPage,
   WritePostPage,
 } from '@/page/board';
+import { SearchPage } from '@/page/search';
 
 import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
@@ -45,7 +46,6 @@ import {
 
 import { MainPage } from '@/pages/MainPage';
 
-import { SearchPage } from '@/pages/SearchPage';
 import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/shared/constant';
