@@ -8,9 +8,9 @@ import { MUTATION_KEY, TOAST } from '@/shared/constant';
 
 import { updatePassword } from '@/apis';
 
-import styles from './ChangePasswordPage.module.css';
+import styles from './ChangePwPage.module.css';
 
-export default function ChangePasswordPage() {
+export default function ChangePwPage() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordCheck, setNewPasswordCheck] = useState('');

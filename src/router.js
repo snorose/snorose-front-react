@@ -1,20 +1,5 @@
 import App from '@/App';
 import {
-  BoardCategoryPage,
-  EditPostPage,
-  NoticeListPage,
-  PostListPage,
-  PostPage,
-  WritePostPage,
-} from '@/page/board';
-import { SearchPage } from '@/page/search';
-import {
-  EditExamReviewPage,
-  ExamReviewListPage,
-  ExamReviewPage,
-  WriteExamReviewPage,
-} from '@/page/exam';
-import {
   LoginPage,
   FindIdPage,
   FindPwPage,
@@ -26,22 +11,35 @@ import {
   SignUpSuccessPage,
   SignUpFailurePage,
 } from '@/page/account';
+import {
+  BoardCategoryPage,
+  EditPostPage,
+  NoticeListPage,
+  PostListPage,
+  PostPage,
+  WritePostPage,
+} from '@/page/board';
+import {
+  EditExamReviewPage,
+  ExamReviewListPage,
+  ExamReviewPage,
+  WriteExamReviewPage,
+} from '@/page/exam';
+import { SearchPage } from '@/page/search';
+import {
+  ActivityPage,
+  ChangePwPage,
+  DeleteAccountPage,
+  EditProfilePage,
+  MyPage,
+  PointLogListPage,
+} from '@/page/user';
 
+import { PrivacyPolicyPage, ServicePolicyPage } from '@/pages/MyPage';
 import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
 // import { AlertPage } from '@/pages/AlertPage';
 import { AttendancePage } from '@/pages/AttendancePage';
-
-import {
-  MyPage,
-  PointLogsPage,
-  ChangePasswordPage,
-  EditInfoPage,
-  DeleteAccountPage,
-  ActivityPage,
-  PrivacyPolicyPage,
-  ServicePolicyPage,
-} from '@/pages/MyPage';
 
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
@@ -349,7 +347,7 @@ export const routeList = [
         path: '/my-page/password',
         element: (
           <ProtectedRoute>
-            <ChangePasswordPage />
+            <ChangePwPage />
           </ProtectedRoute>
         ),
         meta: {
@@ -360,7 +358,7 @@ export const routeList = [
         path: '/my-page/edit-info',
         element: (
           <ProtectedRoute>
-            <EditInfoPage />
+            <EditProfilePage />
           </ProtectedRoute>
         ),
         meta: {
@@ -371,7 +369,7 @@ export const routeList = [
         path: '/my-page/view-point-list',
         element: (
           <ProtectedRoute>
-            <PointLogsPage />
+            <PointLogListPage />
           </ProtectedRoute>
         ),
         meta: {

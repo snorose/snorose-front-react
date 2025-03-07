@@ -5,9 +5,9 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { useScrollRestoration } from '@/shared/hook';
 import { BackAppBar, FetchLoading } from '@/shared/component';
-import { ACTIVITIES } from '@/feature/my/constant';
 
-import { Posts, PostsErrorFallback } from '@/pages/MyPage/pages/ActivityPage';
+import { MyPostList, MyPostListErrorFallback } from '@/feature/my/component';
+import { ACTIVITIES } from '@/feature/my/constant';
 
 import styles from './ActivityPage.module.css';
 
@@ -32,10 +32,10 @@ export default function ActivityPage() {
           {({ reset }) => (
             <ErrorBoundary
               onReset={reset}
-              FallbackComponent={PostsErrorFallback}
+              FallbackComponent={MyPostListErrorFallback}
             >
               <Suspense fallback={<FetchLoading>불러오는 중</FetchLoading>}>
-                <Posts
+                <MyPostList
                   queryKey={queryKey}
                   queryFn={queryFn}
                   hasLike={hasLike}

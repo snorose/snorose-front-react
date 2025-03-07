@@ -1,10 +1,11 @@
+import { getPointLogs } from '@/apis';
+
 import { useSuspensePagination } from '@/shared/hook';
 import { FetchLoading } from '@/shared/component';
 import { flatPaginationCache } from '@/shared/lib';
 import { QUERY_KEY } from '@/shared/constant';
 
-import { getPointLogs } from '@/apis';
-import { PointLog } from '@/pages/MyPage/pages/PointLogsPage';
+import { PointLog } from '@/feature/my/component';
 
 import styles from './PointLogs.module.css';
 

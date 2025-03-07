@@ -5,14 +5,11 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { useAuth } from '@/shared/hook';
 import { BackAppBar, FetchLoading, Icon } from '@/shared/component';
 
-import {
-  PointLogs,
-  PointLogsErrorFallback,
-} from '@/pages/MyPage/pages/PointLogsPage';
+import { PointLogs, PointLogsErrorFallback } from '@/feature/my/component';
 
-import styles from './PointLogsPage.module.css';
+import styles from './PointLogListPage.module.css';
 
-export default function PointLogsPage() {
+export default function PointLogListPage() {
   const { userInfo } = useAuth({
     isRequiredAuth: true,
   });

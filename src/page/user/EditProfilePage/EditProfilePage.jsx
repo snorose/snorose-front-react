@@ -17,7 +17,7 @@ import {
 import { CategoryFieldset } from '@/feature/exam/component';
 import defaultProfile from '@/assets/images/defaultProfile.svg';
 
-import styles from './EditInfoPage.module.css';
+import styles from './EditProfilePage.module.css';
 
 const VALIDATIONS = Object.freeze({
   NAME: /^[a-zA-Z가-힣\s]*$/,
@@ -26,7 +26,7 @@ const VALIDATIONS = Object.freeze({
   EMOJI: /[\uD83C-\uDBFF\uDC00-\uDFFF]+/g,
 });
 
-export default function EditInfoPage() {
+export default function EditProfilePage() {
   const { userInfo, status } = useAuth({
     isRequiredAuth: true,
   });

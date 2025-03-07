@@ -12,9 +12,9 @@ import { STALE_TIME } from '@/shared/constant';
 import { PostBar } from '@/feature/board/component';
 import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
-import styles from './Posts.module.css';
+import styles from './MyPostList.module.css';
 
-export default function Posts({
+export default function MyPostList({
   queryKey,
   queryFn,
   hasLike = true,
