@@ -9,13 +9,11 @@ import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
 import { Filter, Filters } from '@/feature/exam/component';
 import { YEARS, SEMESTERS, EXAM_TYPES } from '@/feature/exam/constant';
-import { Search } from '@/feature/search/component';
+import { Search, SearchExamReviewsSuspense } from '@/feature/search/component';
 
-import { SearchExamReviewsSuspense } from '@/pages/ExamReviewsPage';
+import styles from './ExamReviewListPage.module.css';
 
-import styles from './ExamReviewsPage.module.css';
-
-export default function ExamReviewsPage() {
+export default function ExamReviewListPage() {
   const { data: noticeLineData } = useQuery({
     queryKey: [QUERY_KEY.noticeLine, 32],
     queryFn: () => getNoticeLine(32),

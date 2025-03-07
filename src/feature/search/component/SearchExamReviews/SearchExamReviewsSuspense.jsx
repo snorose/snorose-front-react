@@ -8,7 +8,7 @@ import { FetchLoading } from '@/shared/component';
 import {
   SearchExamReviews,
   SearchExamReviewsErrorFallback,
-} from '@/pages/ExamReviewsPage';
+} from '@/feature/search/component';
 
 export default function SearchExamReviewsSuspense({ saveScrollPosition }) {
   const [searchParams] = useSearchParams();

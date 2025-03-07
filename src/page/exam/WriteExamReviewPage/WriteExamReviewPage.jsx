@@ -38,9 +38,9 @@ import {
   YEARS,
 } from '@/feature/exam/constant';
 
-import styles from './ExamReviewWritePage.module.css';
+import styles from './WriteExamReviewPage.module.css';
 
-export default function ExamReviewWritePage() {
+export default function WriteExamReviewPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { invalidUserInfoQuery } = useAuth();

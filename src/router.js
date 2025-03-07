@@ -8,6 +8,12 @@ import {
   WritePostPage,
 } from '@/page/board';
 import { SearchPage } from '@/page/search';
+import {
+  EditExamReviewPage,
+  ExamReviewListPage,
+  ExamReviewPage,
+  WriteExamReviewPage,
+} from '@/page/exam';
 
 import ProtectedRoute from '@/ProtectedRoute';
 import { AboutPage } from '@/pages/AboutPage';
@@ -24,10 +30,7 @@ import {
   PrivacyPolicyPage,
   ServicePolicyPage,
 } from '@/pages/MyPage';
-import { ExamReviewPage } from '@/pages/ExamReviewPage';
-import { ExamReviewsPage } from '@/pages/ExamReviewsPage';
-import { ExamReviewEditPage } from '@/pages/ExamReviewEditPage';
-import { ExamReviewWritePage } from '@/pages/ExamReviewWritePage';
+
 import {
   LoginPage,
   FindIdPage,
@@ -220,7 +223,7 @@ export const routeList = [
             roles={[ROLE.user, ROLE.admin]}
             message={'시험후기 게시판 접근 권한이 없습니다.'}
           >
-            <ExamReviewsPage />
+            <ExamReviewListPage />
           </ProtectedRoute>
         ),
       },
@@ -245,7 +248,7 @@ export const routeList = [
             roles={[ROLE.user, ROLE.admin]}
             message={'시험후기 게시판 접근 권한이 없습니다.'}
           >
-            <ExamReviewsPage />
+            <ExamReviewListPage />
           </ProtectedRoute>
         ),
       },
@@ -299,7 +302,7 @@ export const routeList = [
             roles={[ROLE.user, ROLE.admin]}
             message={'시험후기 수정 권한이 없습니다.'}
           >
-            <ExamReviewEditPage />
+            <EditExamReviewPage />
           </ProtectedRoute>
         ),
         meta: {
@@ -314,7 +317,7 @@ export const routeList = [
               roles={[ROLE.user, ROLE.admin]}
               message={'시험후기 작성 권한이 없습니다.'}
             >
-              <ExamReviewWritePage />
+              <WriteExamReviewPage />
             </ProtectedRoute>
           </CheckExamPeriodRoute>
         ),

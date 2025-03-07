@@ -29,9 +29,9 @@ import {
   YEARS,
 } from '@/feature/exam/constant';
 
-import styles from './ExamReviewEditPage.module.css';
+import styles from './EditExamReviewPage.module.css';
 
-export default function ExamReviewEditPage() {
+export default function EditExamReviewPage() {
   const { postId } = useParams();
   const { state } = useLocation();
   const navigate = useNavigate();
