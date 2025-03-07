@@ -1,9 +1,10 @@
+import { PrimaryButton } from '@/shared/component';
+
 import { TERMS } from '@/feature/account/constant';
-import { Button } from '@/pages/SnoroseVerifyPage';
 
-import styles from './TermsPage.module.css';
+import styles from './TermsStep.module.css';
 
-export default function TermsPage({ setStep }) {
+export default function TermsStep({ setStep }) {
   const { text, list } = TERMS;
   const [startTerms, endTerms] = text;
 
@@ -21,7 +22,7 @@ export default function TermsPage({ setStep }) {
           {endTerms}
         </pre>
       </div>
-      <Button onClick={() => setStep('verify')}>동의</Button>
+      <PrimaryButton onClick={() => setStep('verify')}>동의</PrimaryButton>
     </section>
   );
 }

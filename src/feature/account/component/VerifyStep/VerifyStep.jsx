@@ -1,16 +1,21 @@
 import { useState } from 'react';
 
+import { verifySookmyungPortal } from '@/apis';
+
 import { useToast } from '@/shared/hook';
-import { FetchLoadingOverlay, PwInput } from '@/shared/component';
+import {
+  FetchLoadingOverlay,
+  PrimaryButton,
+  PwInput,
+} from '@/shared/component';
 import { isEmailValid } from '@/shared/lib';
 import { TOAST } from '@/shared/constant';
 
-import { verifySookmyungPortal } from '@/apis';
-import { Button, Input } from '@/pages/SnoroseVerifyPage';
+import { AuthInput } from '@/feature/account/component';
 
-import styles from './VerifyPage.module.css';
+import styles from './VerifyStep.module.css';
 
-export default function VerifyPage({ setStep }) {
+export default function VerifyStep({ setStep }) {
   const { toast } = useToast();
   const [studentId, setStudentId] = useState('');
   const [password, setPassword] = useState('');
@@ -50,7 +55,7 @@ export default function VerifyPage({ setStep }) {
   return (
     <section className={styles.content}>
       <div className={styles.verify}>
-        <Input
+        <AuthInput
           label='학번'
           type='text'
           value={studentId}
@@ -64,7 +69,7 @@ export default function VerifyPage({ setStep }) {
           onChange={(event) => setPassword(event.target.value)}
           isStatic
         />
-        <Input
+        <AuthInput
           label='이메일'
           type='text'
           value={email}
@@ -74,7 +79,7 @@ export default function VerifyPage({ setStep }) {
           errorMessage='올바른 이메일을 입력해주세요'
         />
       </div>
-      <Button onClick={verify}>인증</Button>
+      <PrimaryButton onClick={verify}>인증</PrimaryButton>
       {loading && <FetchLoadingOverlay />}
     </section>
   );

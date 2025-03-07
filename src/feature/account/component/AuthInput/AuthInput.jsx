@@ -1,6 +1,6 @@
-import styles from './Input.module.css';
+import styles from './AuthInput.module.css';
 
-export default function Input({
+export default function AuthInput({
   label,
   type,
   value,

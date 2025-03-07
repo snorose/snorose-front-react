@@ -18,3 +18,6 @@ export { default as FoundIdPage } from './FoundIdPage/FoundIdPage';
 export { default as FoundPwPage } from './FoundPwPage/FoundPwPage';
 export { default as NotFoundIdPage } from './NotFoundIdPage/NotFoundIdPage';
 export { default as NotFoundPwPage } from './NotFoundPwPage/NotFoundPwPage';
+
+// 숙명인 인증
+export { default as SnoroseVerifyPage } from './SnoroseVerifyPage/SnoroseVerifyPage';

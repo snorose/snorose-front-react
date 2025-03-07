@@ -1,6 +1,6 @@
-import styles from './Button.module.css';
+import styles from './PrimaryButton.module.css';
 
-export default function Button({ className, onClick, children }) {
+export default function PrimaryButton({ className, onClick, children }) {
   return (
     <button className={`${styles.button} ${className}`} onClick={onClick}>
       {children}

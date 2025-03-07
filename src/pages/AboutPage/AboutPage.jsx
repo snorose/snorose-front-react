@@ -1,6 +1,4 @@
-import { Button } from '@/pages/SnoroseVerifyPage';
-
-import { BackAppBar, Icon } from '@/shared/component';
+import { BackAppBar, Icon, PrimaryButton } from '@/shared/component';
 
 import {
   Accordion,
@@ -47,13 +45,13 @@ export default function AboutPage() {
               ))}
             </div>
           </section>
-          <Button
+          <PrimaryButton
             className={styles.apply}
             // onClick={() => alert('지원 기간이 아닙니다!')}
             onClick={goApply}
           >
             리자 지원하기
-          </Button>
+          </PrimaryButton>
         </Accordion>
       </div>
     </main>

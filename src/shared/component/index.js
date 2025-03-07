@@ -1,6 +1,7 @@
 // button
 export { default as ActionButton } from './button/ActionButton/ActionButton';
 export { default as Button } from './button/Button/Button';
+export { default as PrimaryButton } from './button/PrimaryButton/PrimaryButton';
 export { default as ResetButton } from './button/ResetButton/ResetButton';
 export { default as WriteButton } from './button/WriteButton/WriteButton';
 

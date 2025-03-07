@@ -10,6 +10,7 @@ import {
   SignUpPage,
   SignUpSuccessPage,
   SignUpFailurePage,
+  SnoroseVerifyPage,
 } from '@/page/account';
 import {
   BoardCategoryPage,
@@ -44,8 +45,6 @@ import { AttendancePage } from '@/pages/AttendancePage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
 import { MainPage } from '@/pages/MainPage';
-
-import { SnoroseVerifyPage } from '@/pages/SnoroseVerifyPage';
 
 import { ROLE } from '@/shared/constant';
 

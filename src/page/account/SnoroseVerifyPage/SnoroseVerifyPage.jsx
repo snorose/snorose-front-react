@@ -2,7 +2,12 @@ import { useState } from 'react';
 
 import { BackAppBar, Icon } from '@/shared/component';
 import { TITLE_DES } from '@/feature/account/constant';
-import { TermsPage, VerifyPage, CompletePage } from '@/pages/SnoroseVerifyPage';
+
+import {
+  TermsStep,
+  VerifyStep,
+  CompleteStep,
+} from '@/feature/account/component';
 
 import styles from './SnoroseVerifyPage.module.css';
 
@@ -32,9 +37,9 @@ export default function SnoroseVerifyPage() {
       )}
       <div className={styles.title}>{title}</div>
       {description && <div className={styles.description}>{description}</div>}
-      {step === 'terms' && <TermsPage setStep={setStep} />}
-      {step === 'verify' && <VerifyPage setStep={setStep} />}
-      {step === 'complete' && <CompletePage />}
+      {step === 'terms' && <TermsStep setStep={setStep} />}
+      {step === 'verify' && <VerifyStep setStep={setStep} />}
+      {step === 'complete' && <CompleteStep />}
     </main>
   );
 }
