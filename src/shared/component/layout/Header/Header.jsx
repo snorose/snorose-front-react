@@ -11,7 +11,9 @@ export default function Header({ className }) {
   return (
     <>
       <header className={`${styles.header} ${className}`}>
-        <Icon id='logo' width={151} height={27} />
+        <Link to='/home'>
+          <Icon id='logo' width={151} height={27} />
+        </Link>
         <div className={styles.action}>
           {status === 'authenticated' ? (
             <button className={styles.button} onClick={logout}>
