@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom';
 
 import { useSuspensePagination } from '@/hooks';
-import { FetchLoading, PostBar } from '@/components';
+import { FetchLoading, Icon, PostBar } from '@/components';
 import {
   deduplicatePaginatedData,
   flatPaginationCache,
   getBoardTextId,
 } from '@/utils';
 import { STALE_TIME } from '@/constants';
-import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './Posts.module.css';
 
@@ -32,11 +31,7 @@ export default function Posts({
       <div className={styles.noContentWrapper}>
         <p className={styles.noContentMessage}>{errorMessage}</p>
         <div className={styles.imageWrapper}>
-          <img
-            src={frustratedWomanIllustration}
-            alt='frustrated woman'
-            className={styles.image}
-          />
+          <Icon id='star-no-post' width={220} height={182} />
         </div>
       </div>
     );
