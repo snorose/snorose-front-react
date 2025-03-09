@@ -38,6 +38,5 @@ root.render(
   </React.StrictMode>
 );
 
-reportWebVitals();
-// PWA 서비스 워커 등록
 serviceWorkerRegistration.register();
+reportWebVitals();

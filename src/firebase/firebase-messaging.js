@@ -1,6 +1,5 @@
-// src/firebase/firebase-messaging.js
-import { messaging } from './firebase-config';
 import { getToken, onMessage } from 'firebase/messaging';
+import { messaging } from './firebase-config';
 
 export const requestPermission = async () => {
   console.log('푸시 알림 권한 요청 중...');
@@ -8,12 +7,9 @@ export const requestPermission = async () => {
 
   if (permission === 'granted') {
     console.log('알림 권한이 허용됨');
+
     try {
-      const token = await getToken(messaging, {
-        vapidKey: process.env.REACT_APP_VAPID_KEY,
-      });
-      console.log('FCM 토큰:', token);
-      return token;
+      await getFCMToken();
     } catch (error) {
       console.error('FCM 토큰 가져오기 실패:', error);
     }
@@ -22,10 +18,23 @@ export const requestPermission = async () => {
   }
 };
 
+const getFCMToken = async () => {
+  const token = await getToken(messaging, {
+    vapidKey: process.env.REACT_APP_VAPID_KEY,
+  });
+
+  console.log('FCM 토큰:', token);
+
+  // await fetch('/api/register-token', {
+  //   method: 'POST',
+  //   body: JSON.stringify({ token }),
+  //   headers: { 'Content-Type': 'application/json' },
+  // });
+};
+
 export const onMessageListener = () =>
   new Promise((resolve) => {
     onMessage(messaging, (payload) => {
-      console.log('포그라운드 메시지 수신', payload);
       resolve(payload);
     });
   });

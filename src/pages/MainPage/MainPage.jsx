@@ -1,10 +1,4 @@
-import {
-  requestPermission,
-  onMessageListener,
-} from '@/firebase/firebase-messaging';
-import NotificationCard from '@/components/NotificationCard';
-
-import { Suspense, useState, useEffect } from 'react';
+import { Suspense } from 'react';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -27,26 +21,9 @@ import {
 import styles from './MainPage.module.css';
 
 export default function MainPage() {
-  const [notification, setNotification] = useState(null);
-
-  useEffect(() => {
-    requestPermission(); // 앱 실행 시 푸시 알림 권한 요청
-
-    // 포그라운드 메시지 수신 이벤트 리스너 등록
-    onMessageListener()
-      .then((payload) => {
-        setNotification(payload.notification);
-      })
-      .catch((err) => console.log('메시지 수신 오류:', err));
-  }, []);
-
   return (
     <main>
       <Header className={styles.header} />
-
-      {notification && (
-        <NotificationCard title={notification.title} body={notification.body} />
-      )}
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
