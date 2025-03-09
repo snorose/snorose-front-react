@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { useSuspensePagination } from '@/shared/hook';
-import { FetchLoading } from '@/shared/component';
+import { FetchLoading, Icon } from '@/shared/component';
 import {
   getBoardTextId,
   deduplicatePaginatedData,
@@ -10,9 +10,9 @@ import {
 import { STALE_TIME } from '@/shared/constant';
 
 import { PostBar } from '@/feature/board/component';
-import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './MyPostList.module.css';
+import { ACTIVITIES } from '../../constant/activity';
 
 export default function MyPostList({
   queryKey,
@@ -29,16 +29,18 @@ export default function MyPostList({
 
   const list = deduplicatePaginatedData(flatPaginationCache(data));
 
+  const activity = ACTIVITIES.find(
+    (activity) => activity.queryKey === queryKey
+  );
+  const emptyStateIllustrationId =
+    activity?.emptyStateIllustrationId || 'star-no-post';
+
   if (list.length === 0) {
     return (
       <div className={styles.noContentWrapper}>
         <p className={styles.noContentMessage}>{errorMessage}</p>
         <div className={styles.imageWrapper}>
-          <img
-            src={frustratedWomanIllustration}
-            alt='frustrated woman'
-            className={styles.image}
-          />
+          <Icon id={emptyStateIllustrationId} width={220} height={182} />
         </div>
       </div>
     );
