@@ -7,7 +7,7 @@ import {
   flatPaginationCache,
   getBoardTextId,
 } from '@/utils';
-import { STALE_TIME } from '@/constants';
+import { ACTIVITIES, STALE_TIME } from '@/constants';
 
 import styles from './Posts.module.css';
 
@@ -26,13 +26,20 @@ export default function Posts({
 
   const list = deduplicatePaginatedData(flatPaginationCache(data));
 
+  const activity = ACTIVITIES.find(
+    (activity) => activity.queryKey === queryKey
+  );
+  const emptyStateIllustrationId =
+    activity?.emptyStateIllustrationId || 'star-no-post';
+
   if (list.length === 0) {
     return (
       <div className={styles.noContentWrapper}>
         <p className={styles.noContentMessage}>{errorMessage}</p>
         <div className={styles.imageWrapper}>
-          <Icon id='star-no-post' width={220} height={182} />
+          <Icon id={emptyStateIllustrationId} width={220} height={182} />
         </div>
+        ;
       </div>
     );
   }
