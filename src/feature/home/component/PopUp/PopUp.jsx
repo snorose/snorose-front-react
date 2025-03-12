@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
-
+import CalendarMarchImage from '@/feature/home/component/PopUp/calendar-march.png';
 import styles from './PopUp.module.css';
 
 const content = (
@@ -10,7 +10,13 @@ const content = (
       <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
-      <Heading>1. 새내기 웰컴 이벤트</Heading>
+      <Heading>1. 3월 스노로즈 일정</Heading>
+
+      <Content>
+        <img src={CalendarMarchImage} alt='3월 일정' />
+      </Content>
+
+      <Heading>2. 새내기 웰컴 이벤트</Heading>
 
       <SubHeading>event 1) 새송이 웰컴 미션 챌린지</SubHeading>
       <Content>
@@ -48,7 +54,7 @@ const content = (
         </a>
       </Content>
 
-      <Heading>2. 재학생 꿀팁 이벤트</Heading>
+      <Heading>3. 재학생 꿀팁 이벤트</Heading>
 
       <SubHeading>event 1) 선배송이 꿀팁 전수 이벤트</SubHeading>
       <Content>
