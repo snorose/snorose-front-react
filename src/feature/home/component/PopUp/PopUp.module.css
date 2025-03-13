@@ -136,3 +136,9 @@
   white-space: pre-wrap;
   word-break: keep-all;
 }
+
+.content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
