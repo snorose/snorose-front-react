@@ -134,11 +134,5 @@
 .content {
   margin: 0.5rem 0 2rem 0;
   white-space: pre-wrap;
-  word-break: keep-all;
-}
-
-.content img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  word-break: break-all;
 }
