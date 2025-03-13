@@ -134,5 +134,5 @@
 .content {
   margin: 0.5rem 0 2rem 0;
   white-space: pre-wrap;
-  word-break: keep-all;
+  word-break: break-all;
 }
