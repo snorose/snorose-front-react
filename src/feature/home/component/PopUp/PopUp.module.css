@@ -1,0 +1,138 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.popUp {
+  width: 80%;
+  max-width: 500px;
+  max-height: 80%;
+  min-height: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* top */
+.top {
+  flex: 1;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: var(--blue-1);
+  border-radius: 5px 5px 0 0;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+
+.top::-webkit-scrollbar {
+  width: 10px;
+  display: block;
+}
+
+.top::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* 스크롤바 색상 */
+  border-radius: 5px;
+  border: 2px solid var(--blue-1);
+}
+
+.top::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.top pre {
+  text-wrap: wrap;
+  word-break: keep-all;
+  font-size: 1rem;
+}
+
+.notice {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* bottom */
+.bottom {
+  padding: 0.5rem 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 5px 5px;
+  background-color: var(--gray-4);
+  color: var(--white);
+}
+
+.radios {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bottom button {
+  padding: 0.2rem 0.5rem;
+  color: var(--white);
+}
+
+.bottom button:hover {
+  border-radius: 5px;
+  background-color: var(--gray-3-1);
+}
+
+.hello {
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.link {
+  color: var(--blue-3);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.strong {
+  color: red;
+  font-weight: 500;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+/* component */
+
+.title {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.subTitle {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.content {
+  margin: 0.5rem 0 2rem 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}

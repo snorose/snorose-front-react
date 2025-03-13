@@ -1,0 +1,42 @@
+/* PullToRefresh.module.css */
+.ptrContainer {
+  width: 100%;
+}
+.refreshBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 1.875rem;
+}
+
+.refreshIcon {
+  animation: rotateAndPause 1s linear infinite;
+}
+
+.ptrTouchZone {
+  width: 100%;
+  height: 18.75rem;
+  position: absolute;
+  z-index: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+.content {
+  width: 100%;
+  z-index: 0;
+}
+
+@keyframes rotateAndPause {
+  0% {
+    transform: rotate(180deg); /* 시작 상태 */
+  }
+
+  15% {
+    transform: rotate(360deg); /* 반 바퀴 회전 */
+  }
+
+  100% {
+    transform: rotate(360deg); /* 반 바퀴 회전 후 멈춤 */
+  }
+}
