@@ -1,0 +1,72 @@
+.dim {
+  width: 100vw;
+  max-width: var(--default-width);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  background: rgba(228, 228, 228, 0.6);
+  backdrop-filter: blur(0.625rem);
+  /* Note: backdrop-filter has minimal browser support */
+}
+
+.sidebar {
+  width: 80%;
+  height: 100%;
+  padding: 1.25rem 0 0 1.875rem;
+  position: absolute;
+  right: 0;
+  border-radius: 1rem 0 0 0;
+  background-color: var(--white);
+}
+
+.logo {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  margin: 1rem 0;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gray-4);
+}
+
+.title:hover {
+  color: var(--blue-3);
+}
+
+.menuList {
+  font-size: 0.875rem;
+  color: var(--gray-4);
+}
+
+/* menu list */
+.list {
+  padding-left: 1rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  font-weight: 500;
+}
+
+.item li {
+  padding: 0.375rem 0;
+}
+
+.item > li:hover {
+  color: var(--blue-3);
+}
+
+.item:first-child > li {
+  padding-top: 0;
+}
+
+.item:last-child > li {
+  padding-bottom: 0;
+}
