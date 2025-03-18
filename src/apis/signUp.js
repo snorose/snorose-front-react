@@ -1,8 +1,7 @@
 import { defaultAxios } from '@/axios';
 
-import { useToast } from '@/hooks';
-
-import { TOAST } from '@/constants';
+import { useToast } from '@/shared/hook';
+import { TOAST } from '@/shared/constant';
 
 export const useRegister = () => {
   const { toast } = useToast();

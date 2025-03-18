@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth } from '@/hooks';
-
-import { USER_STATUS } from './constants';
+import { useAuth } from '@/shared/hook';
+import { USER_STATUS } from '@/shared/constant';
 
 // 토큰이 유효한지 확인하는 로직 필요
 export default function ProtectedRoute({ roles, message, children }) {
