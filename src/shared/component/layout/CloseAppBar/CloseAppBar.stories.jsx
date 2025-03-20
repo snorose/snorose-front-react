@@ -1,5 +1,4 @@
-import CloseAppBar from './CloseAppBar';
-import ActionButton from '../ActionButton/ActionButton';
+import { ActionButton, CloseAppBar } from '@/shared/component';
 
 const meta = {
   title: 'Components/AppBar/CloseAppBar',

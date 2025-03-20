@@ -1,5 +1,5 @@
-import Search from '../../Search/Search';
-import BackAppBar from './BackAppBar';
+import BackAppBar from '@/shared/component';
+import Search from '@/feature/search/component';
 
 const meta = {
   component: 'AppBar/BackAppBar',

@@ -1,9 +1,13 @@
-import { ABOUT_SNOROSE, SNOROSE_HISTORY } from '../../constants/about';
-import Accordion from './Accordion';
-import AccordionListItem from './AccordionListItem';
-import AccordionTag from './AccordionTag';
+import {
+  Accordion,
+  AccordionListItem,
+  AccordionTag,
+} from '@/feature/home/component';
+
+import { ABOUT_SNOROSE, SNOROSE_HISTORY } from '@/feature/home/constant';
 
 const meta = {
+  title: 'Components/Accordion',
   component: Accordion,
   parameters: {
     docs: {
