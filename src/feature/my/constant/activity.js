@@ -3,7 +3,7 @@ import { QUERY_KEY, ROUTE } from '@/shared/constant';
 import {
   getMyPosts,
   getMyComments,
-  getDonwloadedExamReviews,
+  getDownloadedExamReviews,
   getScrapedExamReviews,
   getScrapedPosts,
 } from '@/apis/userInfo.js';
@@ -29,7 +29,7 @@ export const ACTIVITIES = [
     path: ROUTE.mypageDownloadExamReview,
     title: '다운받은 시험후기',
     queryKey: QUERY_KEY.myDownloadedExamReviews,
-    queryFn: getDonwloadedExamReviews,
+    queryFn: getDownloadedExamReviews,
     hasLike: false,
     errorMessage: '아직 다운받은 후기가 없어요',
     emptyStateIllustrationId: 'star-no-review',
