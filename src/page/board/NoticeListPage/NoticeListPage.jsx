@@ -29,6 +29,12 @@ export default function NoticeListPage() {
 
   const { scrollRef, saveScrollPosition } = useScrollRestoration();
 
+  const officialBoardId = [
+    'student-council',
+    'graduation-preparation',
+    'finance-audit',
+  ];
+
   // 데이터 화면 표시
   useEffect(() => {
     if (data) {
@@ -94,6 +100,14 @@ export default function NoticeListPage() {
           className={styles.writeButton}
         />
       )}
+      {/* 공식 게시판 글쓰기 */}
+      {(userInfo?.userRoleId === 4 || userInfo?.userRoleId === 5) &&
+        officialBoardId.includes(currentBoardTextId) && (
+          <WriteButton
+            to={`/board/${currentBoardTextId}/post-write`}
+            className={styles.writeButton}
+          />
+        )}
     </div>
   );
 }
