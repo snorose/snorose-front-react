@@ -21,11 +21,17 @@
   font-weight: 500;
   margin-bottom: 7px;
   gap: 8px;
+}
 
-  svg {
-    width: 3px;
-    height: 3px;
-  }
+.middleDot {
+  width: 3px;
+  height: 3px;
+}
+
+.officialBadge {
+  width: 24px;
+  height: 24px;
+  margin-left: -4px;
 }
 
 .pointWrapper {
