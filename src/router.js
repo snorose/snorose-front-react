@@ -70,6 +70,12 @@ const getRolesForReadBoard = (boardPath) => {
         ROLE.official,
         ROLE.blacklist,
       ];
+    case 'student-council':
+      return [ROLE.user, ROLE.admin, ROLE.official];
+    case 'graduation-preparation':
+      return [ROLE.user, ROLE.admin, ROLE.official];
+    case 'finance-audit':
+      return [ROLE.user, ROLE.admin, ROLE.official];
     default:
       return [];
   }
@@ -85,6 +91,10 @@ const getRolesForWriteBoard = (boardPath) => {
       return [ROLE.user, ROLE.admin];
     case 'notice':
       return [ROLE.admin];
+    case 'student-council':
+    case 'finance-audit':
+    case 'graduation-preparation':
+      return [ROLE.admin, ROLE.official];
     default:
       return [];
   }
@@ -97,6 +107,9 @@ const boardPaths = [
   'besookt',
   'all',
   'notice',
+  'student-council',
+  'graduation-preparation',
+  'finance-audit',
 ];
 
 const boardRoutes = boardPaths.flatMap((boardPath) => [
