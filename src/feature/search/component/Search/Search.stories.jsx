@@ -27,7 +27,7 @@ const searchStoryConfig = {
       description: {
         component:
           'Search 컴포넌트는 게시판에서 검색 기능을 담당합니다.\n\n' +
-          '엔터키를 누르면 search함수가 실행되어 input내의 입력이 setSearchParams를 통해서.\n' +
+          '엔터키를 누르면 search함수가 실행되어 input내의 입력이 setSearchParams를 통해 \n' +
           'url에다가 입력 내용에 따라 "keyword" query string이 추가됩니다.\n' +
           '이 query string을 가지고 useSearch util이 입력 내용을 search해줍니다.  (useSuspensePagination안에 searchByBoard apis넣어줘서)\n\n' +
           '**참고를 위해 쓰이는 파일 목록**\n' +

@@ -8,7 +8,7 @@ const serverErrorFallbackStoryConfig = {
         component:
           'ServerErrorFallback 컴포넌트는 ErrorBoundary의 자식 컴포넌트가 렌더링 실패할 시 대신 렌더링되는 FallbackComponent입니다.\n\n' +
           '**참고를 위해 쓰이는 파일 목록**\n' +
-          '- `CarouselErrorFallback.jsx`: Carousel이 서버 에러로 렌더링 될 수가 없을 떄, ServerErrorFallback을 대신 띄워줍니다.\n\n' +
+          '- `CarouselErrorFallback.jsx`: Carousel이 서버 에러로 렌더링 될 수가 없을 때, ServerErrorFallback을 대신 띄워줍니다.\n\n' +
           '- `CommentsErrorFallback.jsx`: 아래의 모든 코드에서 ServerErrorFallback은 모두 비슷하게 작동하니 이하 생략하겠습니다.\n\n' +
           '- `SearchExamReviewsErrorFallback.jsx`\n\n' +
           '- `HomeBesooktErrorFallback.jsx`\n\n' +

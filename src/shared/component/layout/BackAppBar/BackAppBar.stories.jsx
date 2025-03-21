@@ -1,4 +1,4 @@
-import Search from '../../Search/Search';
+import Search from '../../../../feature/search/component/Search/Search';
 import BackAppBar from './BackAppBar';
 
 const meta = {

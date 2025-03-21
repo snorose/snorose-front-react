@@ -1,5 +1,5 @@
 import WriteButton from './WriteButton';
-import styles from '../../pages/NoticeListPage/NoticeListPage.module.css';
+import styles from '../../../../page/board/NoticeListPage/NoticeListPage.module.css';
 
 const writeButtonStoryConfig = {
   component: WriteButton,
