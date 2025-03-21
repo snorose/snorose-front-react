@@ -159,13 +159,22 @@ export default function EditPostPage() {
             <div className={styles.profileBoxLeft}>
               <Icon id='cloud' width={25} height={16} />
               <p>{userDisplay}</p>
+              {userInfo?.userRoleId === ROLE.official && (
+                <Icon
+                  className={styles.officialBadge}
+                  id='official-badge'
+                  width={18}
+                  height={18}
+                />
+              )}
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
             </div>
             {textId !== 'notice' && (
               <div
                 className={
-                  userInfo?.userRoleId === ROLE.admin
+                  userInfo?.userRoleId === ROLE.admin ||
+                  userInfo?.userRoleId === ROLE.official
                     ? styles.profileBoxRight
                     : styles.profileBoxRightInvisible
                 }
