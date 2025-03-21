@@ -50,6 +50,10 @@
   gap: 0.4375rem;
 }
 
+.officialBadge {
+  margin-left: -0.313rem;
+}
+
 .profileBoxRight {
   display: flex;
   align-items: center;
