@@ -36,6 +36,10 @@
   gap: 0.4375rem;
 }
 
+.officialBadge {
+  margin-left: -0.313rem;
+}
+
 .dot {
   font-weight: 800;
 }
