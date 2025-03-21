@@ -1,5 +1,6 @@
 import { Icon } from '@/shared/component';
 import { postBarDateFormat } from '@/shared/lib';
+import { ROLE } from '@/shared/constant';
 
 import styles from './PostBar.module.css';
 
@@ -9,6 +10,14 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
       <div className={styles.post_top}>
         <Icon id='cloud' width={18} height={11} />
         <p className={styles.name}>{data.userDisplay}</p>
+        {data.userRoleId === ROLE.official && (
+          <Icon
+            className={styles.officialBadge}
+            id='official-badge'
+            width={16}
+            height={16}
+          />
+        )}
         <p className={styles.dot}>·</p>
         <p>{postBarDateFormat(data.createdAt)}</p>
         {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
