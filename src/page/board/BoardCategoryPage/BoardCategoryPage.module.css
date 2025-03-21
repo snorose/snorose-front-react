@@ -22,7 +22,7 @@
 .searchbarBox {
   width: 100%;
   /* 양옆 여백 */
-  padding: 0.625rem 0 0 0;
+  padding: 0.625rem 0 1.625rem 0;
 }
 
 .searchbar {
@@ -51,7 +51,7 @@
 }
 
 .boardBox {
-  padding: 1.625rem 0;
+  padding: 0 0 1.625rem 0;
   width: 100%;
 }
 
