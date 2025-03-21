@@ -24,6 +24,10 @@
   padding-left: 0.375rem;
 }
 
+.officialBadge {
+  padding-left: 0.125rem;
+}
+
 .dot {
   font-weight: 800;
   padding: 0 0.1875rem;
