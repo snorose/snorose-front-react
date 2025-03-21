@@ -12,7 +12,7 @@ import {
   OptionModal,
 } from '@/shared/component';
 import { timeAgo, convertHyperlink } from '@/shared/lib';
-import { MUTATION_KEY, LIKE_TYPE } from '@/shared/constant';
+import { MUTATION_KEY, LIKE_TYPE, ROLE } from '@/shared/constant';
 
 import { useCommentContext } from '@/feature/comment/context';
 import { useComment } from '@/feature/comment/hook';
@@ -89,6 +89,7 @@ const Comment = forwardRef((props, ref) => {
   };
 
   const {
+    userRoleId,
     userDisplay,
     isWriterWithdrawn,
     content,
@@ -119,6 +120,14 @@ const Comment = forwardRef((props, ref) => {
             <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
               {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
             </p>
+            {userRoleId === ROLE.official && (
+              <Icon
+                className={styles.officialBadge}
+                id='official-badge'
+                width={18}
+                height={18}
+              />
+            )}
             <p className={styles.dot}>·</p>
             <p>
               {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}

@@ -1,6 +1,6 @@
 import { Icon } from '@/shared/component';
 import { timeAgo, convertHyperlink } from '@/shared/lib';
-import { LIKE_TYPE } from '@/shared/constant';
+import { LIKE_TYPE, ROLE } from '@/shared/constant';
 
 import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
@@ -20,6 +20,7 @@ export default function NestedComment({
   });
 
   const {
+    userRoleId,
     userDisplay,
     isWriterWithdrawn,
     content,
@@ -50,6 +51,14 @@ export default function NestedComment({
           <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
             {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
           </p>
+          {userRoleId === ROLE.official && (
+            <Icon
+              className={styles.officialBadge}
+              id='official-badge'
+              width={18}
+              height={18}
+            />
+          )}
           <p className={styles.dot}>·</p>
           <p>
             {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
