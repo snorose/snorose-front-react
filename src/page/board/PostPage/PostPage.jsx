@@ -13,7 +13,13 @@ import {
   OptionModal,
 } from '@/shared/component';
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
-import { MUTATION_KEY, QUERY_KEY, TOAST, LIKE_TYPE } from '@/shared/constant';
+import {
+  MUTATION_KEY,
+  QUERY_KEY,
+  TOAST,
+  LIKE_TYPE,
+  ROLE,
+} from '@/shared/constant';
 
 import { NotFoundPage } from '@/page/etc';
 
@@ -181,6 +187,14 @@ export default function PostPage() {
           <div className={styles.contentTopLeft}>
             <Icon id='cloud' width={25} height={16} />
             <p>{data.userDisplay || 'Unknown'}</p>
+            {data.userRoleId === ROLE.official && (
+              <Icon
+                className={styles.officialBadge}
+                id='official-badge'
+                width={18}
+                height={18}
+              />
+            )}
             <p className={styles.dot}>·</p>
             <p>
               {fullDateTimeFormat(data.createdAt)}
