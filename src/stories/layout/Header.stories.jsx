@@ -1,6 +1,7 @@
-import Header from './Header';
+import { Header } from '@/shared/component';
 
 const meta = {
+  title: 'Layout/Header',
   component: Header,
   parameters: {
     docs: {

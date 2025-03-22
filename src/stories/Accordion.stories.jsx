@@ -7,7 +7,7 @@ import {
 import { ABOUT_SNOROSE, SNOROSE_HISTORY } from '@/feature/home/constant';
 
 const meta = {
-  title: 'Components/Accordion',
+  title: 'Component/Accordion',
   component: Accordion,
   parameters: {
     docs: {

@@ -1,7 +1,8 @@
-import AppBar from './AppBar';
+import { AppBar } from '@/shared/component';
 
 const meta = {
-  component: 'AppBar/AppBar',
+  title: 'Layout/AppBar',
+  component: AppBar,
   parameters: {
     docs: {
       description: {

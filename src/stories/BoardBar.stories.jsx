@@ -1,8 +1,8 @@
-import BoardBar from './BoardBar';
+import { BoardBar } from '@/feature/board/component';
 import firstSnow from '@/assets/images/firstSnow-board-page.svg';
 
 const meta = {
-  title: 'Components/BoardBar',
+  title: 'Component/BoardBar',
   component: BoardBar,
   parameters: {
     docs: {

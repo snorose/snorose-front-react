@@ -1,6 +1,7 @@
-import Footer from './Footer';
+import { Footer } from '@/shared/component';
 
 const meta = {
+  title: 'Layout/Footer',
   component: Footer,
   parameters: {
     docs: {

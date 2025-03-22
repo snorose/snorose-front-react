@@ -1,8 +1,9 @@
-import BackAppBar from '@/shared/component';
-import Search from '@/feature/search/component';
+import { BackAppBar } from '@/shared/component';
+import { Search } from '@/feature/search/component';
 
 const meta = {
-  component: 'AppBar/BackAppBar',
+  title: 'Layout/BackAppBar',
+  component: BackAppBar,
   parameters: {
     docs: {
       description: {

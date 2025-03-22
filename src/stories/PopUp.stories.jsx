@@ -1,6 +1,7 @@
-import PopUp from './PopUp';
+import { PopUp } from '@/feature/home/component';
 
 const meta = {
+  title: 'Component/PopUp',
   component: PopUp,
   parameters: {
     docs: {

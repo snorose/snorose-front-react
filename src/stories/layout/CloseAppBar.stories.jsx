@@ -1,7 +1,7 @@
 import { ActionButton, CloseAppBar } from '@/shared/component';
 
 const meta = {
-  title: 'Components/AppBar/CloseAppBar',
+  title: 'Layout/CloseAppBar',
   component: CloseAppBar,
   parameters: {
     docs: {
