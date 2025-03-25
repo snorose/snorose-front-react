@@ -1,4 +1,5 @@
-import Icon from './Icon.jsx';
+import Icon from '@/shared/component';
+
 import {
   STATIC_ICON_LIST,
   FILL_ICON_LIST,
@@ -7,7 +8,7 @@ import {
 } from '@/shared/constant';
 
 const iconStoryConfig = {
-  title: 'components/Icon',
+  title: 'Component/Icon',
   component: Icon,
   parameters: {
     layout: 'centered',
