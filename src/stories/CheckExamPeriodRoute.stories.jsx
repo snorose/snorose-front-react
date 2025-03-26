@@ -1,4 +1,4 @@
-import CheckExamPeriodRoute from './CheckExamPeriodRoute';
+import CheckExamPeriodRoute from '@/feature/exam/lib/CheckExamPeriodRoute';
 
 const checkExamPeriodRouteStoryConfig = {
   component: CheckExamPeriodRoute,

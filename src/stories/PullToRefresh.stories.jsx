@@ -1,10 +1,10 @@
-import PTR from './PullToRefresh';
+import PTR from '../shared/component/PullToRefresh/PullToRefresh';
 import { useSearch } from '@/feature/search/hook';
 import { FetchLoading, List } from '@/shared/component';
 import { PostBar } from '@/feature/board/component';
 import { deduplicatePaginatedData, flatPaginationCache } from '@/shared/lib';
-import { provideFullMemberAccessToken } from '../../../../.storybook/provideAccessToken';
-import PullToRefresh from './PullToRefresh';
+import { provideFullMemberAccessToken } from '../../.storybook/provideAccessToken';
+import PullToRefresh from '../shared/component/PullToRefresh/PullToRefresh';
 provideFullMemberAccessToken();
 
 const PTRWrapper = (props) => {

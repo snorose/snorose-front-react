@@ -1,4 +1,4 @@
-import ServerErrorFallback from './ServerErrorFallback';
+import ServerErrorFallback from '@/shared/component/suspense/ServerErrorFallback/ServerErrorFallback';
 
 const serverErrorFallbackStoryConfig = {
   component: ServerErrorFallback,

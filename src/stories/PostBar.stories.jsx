@@ -1,4 +1,4 @@
-import PostBar from './PostBar';
+import PostBar from '@/feature/board/component/PostBar/PostBar';
 const now = new Date();
 
 const postBarStoryConfig = {

@@ -1,4 +1,4 @@
-import StageDots from './StageDots';
+import StageDots from '@/feature/account/component/StageDots/StageDots';
 
 const stageDotsStoryConfig = {
   component: StageDots,

@@ -1,4 +1,4 @@
-import ShimmerEffect from './ShimmerEffect';
+import ShimmerEffect from '@/shared/component/suspense/ShimmerEffect/ShimmerEffect';
 
 const shimmerEffectStoryConfig = {
   component: ShimmerEffect,

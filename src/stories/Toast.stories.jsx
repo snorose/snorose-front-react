@@ -1,4 +1,4 @@
-import Toast from './Toast';
+import Toast from '@/shared/component/Toast/Toast';
 import { v4 as uuidv4 } from 'uuid';
 
 const toastStoryConfig = {

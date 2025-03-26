@@ -1,5 +1,5 @@
-import ReviewDownload from './ReviewDownload';
-import styles from '../../../../page/exam/ExamReviewPage/ExamReviewPage.module.css';
+import ReviewDownload from '@/feature/exam/component/ReviewDownload/ReviewDownload';
+import styles from '@/page/exam/ExamReviewPage/ExamReviewPage.module.css';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEY } from '@/shared/constant';

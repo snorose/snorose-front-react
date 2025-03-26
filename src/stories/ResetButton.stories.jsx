@@ -1,4 +1,4 @@
-import ResetButton from './ResetButton';
+import ResetButton from '@/shared/component/button/ResetButton/ResetButton';
 
 const resetButtonStoryConfig = {
   component: ResetButton,
