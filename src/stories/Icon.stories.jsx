@@ -1,4 +1,5 @@
-import Icon from './Icon.jsx';
+import Icon from '@/shared/component';
+
 import {
   STATIC_ICON_LIST,
   FILL_ICON_LIST,
@@ -6,14 +7,16 @@ import {
   ILLUSTRATION_ICON_LIST,
 } from '@/shared/constant';
 
-export default {
-  title: 'components/Icon',
+const iconStoryConfig = {
+  title: 'Component/Icon',
   component: Icon,
   parameters: {
     layout: 'centered',
     controls: { sort: 'requiredFirst' },
   },
 };
+
+export default iconStoryConfig;
 
 export const Static = {
   argTypes: {
