@@ -22,7 +22,7 @@ export default function ProtectedRoute({ roles, message, children }) {
 
     if (roles && !roles.includes(userInfo?.userRoleId)) {
       alert(message);
-      navigate('/verify');
+      navigate('/verify', { replace: true });
       return;
     }
   }, [status, roles, userInfo, navigate, message]);
