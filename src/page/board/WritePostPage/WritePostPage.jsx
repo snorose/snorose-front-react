@@ -16,6 +16,7 @@ import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
 
 import { postPost } from '@/apis';
 import { DropDownMenu } from '@/feature/board/component';
+import AttatchmentBar from '@/feature/board/component/AttatchmentBar/AttatchmentBar';
 
 import styles from './WritePostPage.module.css';
 
@@ -133,39 +134,24 @@ export default function WritePostPage() {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.top}>
-          <CloseAppBar
-            backgroundColor={'#eaf5fd'}
-            onClose={() => {
-              title.trim() || text.trim()
-                ? setIsCheckModalOpen(true)
-                : navigate(-1, { replace: true });
-            }}
-          >
-            <ActionButton onClick={handleSubmit} disabled={!pass}>
-              등록
-            </ActionButton>
-          </CloseAppBar>
-        </div>
-        <div className={styles.center}>
-          {textId === 'notice' ? (
-            <div className={styles.categorySelect}>
-              <div className={styles.categorySelectContainer}>
-                <Icon
-                  id='clip-board-list'
-                  width={18}
-                  height={19}
-                  fill='white'
-                />
-                <p className={styles.categorySelectText}>{boardTitle}</p>
-              </div>
-            </div>
-          ) : (
-            <>
-              <div
-                className={styles.categorySelect}
-                onClick={handleDropDownOpen}
-              >
+        <div>
+          <div className={styles.top}>
+            <CloseAppBar
+              backgroundColor={'#eaf5fd'}
+              onClose={() => {
+                title.trim() || text.trim()
+                  ? setIsCheckModalOpen(true)
+                  : navigate(-1, { replace: true });
+              }}
+            >
+              <ActionButton onClick={handleSubmit} disabled={!pass}>
+                등록
+              </ActionButton>
+            </CloseAppBar>
+          </div>
+          <div className={styles.center}>
+            {textId === 'notice' ? (
+              <div className={styles.categorySelect}>
                 <div className={styles.categorySelectContainer}>
                   <Icon
                     id='clip-board-list'
@@ -175,59 +161,77 @@ export default function WritePostPage() {
                   />
                   <p className={styles.categorySelectText}>{boardTitle}</p>
                 </div>
-                <Icon id='angle-down' width={14} height={7} />
               </div>
-              <DropDownMenu
-                options={boardTitles}
-                item={boardTitle}
-                setItem={handleBoardTitleChange}
-                dropDownOpen={dropDownOpen}
-                setDropDownOpen={setDropDownOpen}
-                backgroundColor={'#fff'}
-              />
-            </>
-          )}
-
-          <div className={styles.profileBox}>
-            <div className={styles.profileBoxLeft}>
-              <Icon id='cloud' width={25} height={16} />
-              <p>{userInfo?.nickname}</p>
-              <p className={styles.dot}></p>
-              <p>{formattedNowTime()}</p>
-            </div>
-            {textId !== 'notice' && (
-              <div
-                className={
-                  userInfo?.userRoleId === ROLE.admin
-                    ? styles.profileBoxRight
-                    : styles.profileBoxRightInvisible
-                }
-                onClick={handleIsNotice}
-              >
-                <p>공지글</p>
-                <Icon
-                  id={isNotice ? 'toggle-on' : 'toggle-off'}
-                  width={25}
-                  height={16}
+            ) : (
+              <>
+                <div
+                  className={styles.categorySelect}
+                  onClick={handleDropDownOpen}
+                >
+                  <div className={styles.categorySelectContainer}>
+                    <Icon
+                      id='clip-board-list'
+                      width={18}
+                      height={19}
+                      fill='white'
+                    />
+                    <p className={styles.categorySelectText}>{boardTitle}</p>
+                  </div>
+                  <Icon id='angle-down' width={14} height={7} />
+                </div>
+                <DropDownMenu
+                  options={boardTitles}
+                  item={boardTitle}
+                  setItem={handleBoardTitleChange}
+                  dropDownOpen={dropDownOpen}
+                  setDropDownOpen={setDropDownOpen}
+                  backgroundColor={'#fff'}
                 />
-              </div>
+              </>
             )}
-          </div>
-          <div className={styles.content}>
-            <TextareaAutosize
-              className={styles.title}
-              placeholder='제목'
-              value={title}
-              onChange={handleTitleChange}
-            />
-            <TextareaAutosize
-              className={styles.text}
-              placeholder='내용'
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
+
+            <div className={styles.profileBox}>
+              <div className={styles.profileBoxLeft}>
+                <Icon id='cloud' width={25} height={16} />
+                <p>{userInfo?.nickname}</p>
+                <p className={styles.dot}></p>
+                <p>{formattedNowTime()}</p>
+              </div>
+              {textId !== 'notice' && (
+                <div
+                  className={
+                    userInfo?.userRoleId === ROLE.admin
+                      ? styles.profileBoxRight
+                      : styles.profileBoxRightInvisible
+                  }
+                  onClick={handleIsNotice}
+                >
+                  <p>공지글</p>
+                  <Icon
+                    id={isNotice ? 'toggle-on' : 'toggle-off'}
+                    width={25}
+                    height={16}
+                  />
+                </div>
+              )}
+            </div>
+            <div className={styles.content}>
+              <TextareaAutosize
+                className={styles.title}
+                placeholder='제목'
+                value={title}
+                onChange={handleTitleChange}
+              />
+              <TextareaAutosize
+                className={styles.text}
+                placeholder='내용'
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+            </div>
           </div>
         </div>
+        <AttatchmentBar />
       </div>
       <DeleteModal
         id='post-write-exit-check'
