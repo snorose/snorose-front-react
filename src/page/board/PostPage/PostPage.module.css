@@ -43,29 +43,23 @@
   gap: 0.4375rem;
 }
 
-.contentTopRight {
-  display: flex;
-  align-items: center;
-
-  svg {
-    padding: 0.625rem;
-  }
-}
-
 .dot {
   font-weight: 800;
 }
 
 .dot3 {
-  cursor: pointer;
   flex-shrink: 0;
+
+  padding: 0.625rem;
+
+  cursor: pointer;
 }
 
 .title {
   display: flex;
   align-items: end;
 
-  padding: 0.5rem 0.625rem 1.625rem 0;
+  padding: 0 0.625rem 1.625rem 0;
 
   font-size: 1.25rem;
   font-weight: 700;

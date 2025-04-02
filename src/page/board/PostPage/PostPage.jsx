@@ -187,11 +187,6 @@ export default function PostPage() {
             </p>
           </div>
           <div className={styles.contentTopRight}>
-            {data.isScrapped ? (
-              <Icon id='bookmark-fill' width={14} height={18} fill='#5F86BF' />
-            ) : (
-              <Icon id='bookmark' width={14} height={18} />
-            )}
             <div
               style={{
                 display: data.isNotice && !data.isWriter ? 'none' : 'block',
@@ -203,7 +198,7 @@ export default function PostPage() {
                   : setIsReportModalOpen(true);
               }}
             >
-              <Icon id='ellipsis-vertical' width={4} height={17} />
+              <Icon id='ellipsis-vertical' width={3} height={11} />
             </div>
           </div>
         </div>
