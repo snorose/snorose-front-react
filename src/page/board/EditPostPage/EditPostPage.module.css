@@ -6,11 +6,11 @@
 
 .top {
   width: 100%;
-  padding-top: 3.25rem;
+  padding-top: 52px;
 }
 
 .center {
-  padding: 0 1.25rem 2.5rem 1.25rem;
+  padding: 0 20px 40px 20px;
   background-color: var(--blue-0);
 }
 
@@ -18,19 +18,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.625rem 0 0.9375rem 0;
-  border-bottom: 0.0313rem solid var(--gray-3-1);
-  stroke-width: 0.0313rem;
+  padding: 10px 0 15px 0;
+  border-bottom: 0.5008px solid var(--gray-3-1);
+  stroke-width: 0.5008px;
 }
 
 .categorySelectContainer {
   display: flex;
   align-items: center;
-  gap: 0.875rem;
+  gap: 14px;
 }
 
 .categorySelectText {
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -38,21 +38,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.375rem 0 1.125rem 0;
+  padding: 22px 0 18px 0;
   color: var(--gray-3-1);
-  font-size: 0.75rem;
+  font-size: 12px;
 }
 
 .profileBoxLeft {
   display: flex;
   align-items: center;
-  gap: 0.4375rem;
+  gap: 7px;
 }
 
 .profileBoxRight {
   display: flex;
   align-items: center;
-  gap: 0.125rem;
+  gap: 2px;
   color: var(--black);
 }
 
@@ -61,8 +61,8 @@
 }
 
 .dot {
-  width: 0.1875rem;
-  height: 0.1875rem;
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
   background-color: var(--gray-3-1);
 }
@@ -70,12 +70,12 @@
 .content {
   display: flex;
   flex-direction: column;
-  row-gap: 2.25rem;
+  row-gap: 36px;
 }
 
 .title {
   color: var(--gray-4);
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 700;
   outline: none;
   border: none;
@@ -87,13 +87,13 @@
 
 .text {
   color: var(--gray-4);
-  font-size: 0.875rem;
+  font-size: 14px;
   outline: none;
   border: none;
   background-color: transparent;
   display: block;
   width: 100%;
-  min-height: 6.25rem;
+  min-height: 100px;
   resize: none;
   white-space: pre-wrap; /* 줄바꿈과 공백을 유지 */
 }

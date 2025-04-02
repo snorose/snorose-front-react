@@ -1,9 +1,9 @@
 .input {
-  padding: 0.4rem 0;
+  padding: 6.4px 0;
   outline: none;
   border: none;
-  border-bottom: 0.0313rem solid rgba(137, 137, 137, 0.7);
+  border-bottom: 0.5008px solid rgba(137, 137, 137, 0.7);
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 14px;
   color: var(--gray-4);
 }

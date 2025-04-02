@@ -7,12 +7,12 @@ import 'react-calendar/dist/Calendar.css';
 export const StyledCalendar = styled(Calendar)`
   .react-calendar__navigation {
     margin: 0;
-    border-radius: 0.3125rem 0.3125rem 0 0;
+    border-radius: 5px 5px 0 0;
   }
 
   .react-calendar__navigation__label {
     font-weight: 700;
-    font-size: 1.125rem;
+    font-size: 18px;
     color: #ffffff;
     cursor: auto;
   }
@@ -41,19 +41,19 @@ export const StyledCalendar = styled(Calendar)`
   }
 
   .react-calendar__viewContainer {
-    padding-top: 1rem;
-    border-radius: 0 0 0.3125rem 0.3125rem;
+    padding-top: 16px;
+    border-radius: 0 0 5px 5px;
   }
 
   // weekday
   .react-calendar__month-view__weekdays__weekday {
-    font-size: 1rem;
+    font-size: 16px;
     color: #ffffff;
   }
 
   // tile
   .react-calendar__tile {
-    padding: 0.125rem 0;
+    padding: 2px 0;
     display: flex;
     justify-content: center;
     cursor: normal;

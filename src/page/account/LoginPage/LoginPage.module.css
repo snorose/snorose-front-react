@@ -14,15 +14,15 @@ a:hover {
 }
 
 .back {
-  margin-top: 0.875rem;
+  margin-top: 14px;
 }
 .back:hover {
   cursor: pointer;
 }
 
 .loginBody {
-  padding: 0 1.25rem;
-  font-size: 0.5625rem;
+  padding: 0 20px;
+  font-size: 9px;
   text-align: center;
   font-family: 'Noto Sans KR', sans-serif;
 }
@@ -30,30 +30,30 @@ a:hover {
 .logo {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 6.417rem;
-  margin-bottom: 1.538rem;
+  margin-top: 102.672px;
+  margin-bottom: 24.608px;
 }
 
 .title {
-  font-size: 0.875rem;
+  font-size: 14px;
   font-style: normal;
-  margin-bottom: 3.577rem;
+  margin-bottom: 57.232px;
 }
 
 .input {
-  margin-bottom: 1.063rem;
+  margin-bottom: 17.008px;
 }
 
 .pwFrame {
   width: 100%;
   display: flex;
   align-items: center;
-  height: 2.563rem;
-  border-radius: 0.375rem;
-  border-top-right-radius: 0.375rem;
-  border-bottom-right-radius: 0.375rem;
-  padding-right: 0.625rem;
-  margin-bottom: 1rem;
+  height: 41.008px;
+  border-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  padding-right: 10px;
+  margin-bottom: 16px;
 }
 
 .ready {
@@ -80,31 +80,31 @@ a:hover {
 
 .button {
   display: block;
-  width: 11.25rem;
-  height: 2rem;
+  width: 180px;
+  height: 32px;
   background-color: var(--blue-4);
   color: var(--white);
-  margin: 1.125rem auto;
-  border-radius: 0.4375rem;
+  margin: 18px auto;
+  border-radius: 7px;
 }
 
 .find {
   display: flex;
   justify-content: center;
   color: var(--gray-3-1);
-  font-size: 0.75rem;
-  margin-top: 2.313rem;
-  margin-bottom: 0.75rem;
+  font-size: 12px;
+  margin-top: 37.008px;
+  margin-bottom: 12px;
 }
 
 .divider {
-  margin: 0 0.688rem;
+  margin: 0 11.008px;
 }
 
 .signUp {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.25rem;
-  font-size: 0.875rem;
+  gap: 4px;
+  font-size: 14px;
 }

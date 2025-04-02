@@ -8,19 +8,19 @@
 
 .terms {
   flex: 1;
-  margin-bottom: 0.875rem;
-  padding: 0.875rem;
+  margin-bottom: 14px;
+  padding: 14px;
   background: var(--gray-1-1);
-  border-radius: 0.3125rem;
+  border-radius: 5px;
 }
 
 .text {
   word-break: keep-all;
   text-wrap: wrap;
-  font-size: 0.875rem;
+  font-size: 14px;
   color: var(--gray-4);
 }
 
 .item {
-  margin-left: 0.625rem;
+  margin-left: 10px;
 }

@@ -39,7 +39,7 @@ export default function PullToRefresh({ children, onRefresh }) {
           if (pullDistance > 80) {
             ptrTouchZone.style.pointerEvents = 'none'; // 클릭 이벤트 차단
             event.preventDefault(); // 스크롤을 막습니다.
-            containerRef.current.style.transform = 'translate(0, 1.875rem)';
+            containerRef.current.style.transform = 'translate(0, 30px)';
             containerRef.current.style.transition = '0.3s';
             setRefreshing(true);
           }

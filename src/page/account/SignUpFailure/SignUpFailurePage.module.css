@@ -9,20 +9,20 @@
 }
 
 .pageTopFrame {
-  padding: 0 1.25rem;
+  padding: 0 20px;
 }
 
 .pageTitle {
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 700;
-  margin-top: 3.2rem;
+  margin-top: 51.2px;
 }
 
 .pageExplanation {
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 500;
   color: var(--gray-4);
-  margin-top: 0.875rem;
+  margin-top: 14px;
 }
 
 .pageMiddleFrame {
@@ -32,18 +32,18 @@
 }
 
 .pageBottomFrame {
-  padding: 0 1.25rem;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
 }
 
 .img {
-  width: 13.25rem;
-  height: 14.5rem;
-  margin-bottom: 1.875rem;
+  width: 212px;
+  height: 232px;
+  margin-bottom: 30px;
   margin-left: auto;
 }
 
 .loginButton {
-  margin-bottom: 2.063rem;
+  margin-bottom: 33.008px;
 }
