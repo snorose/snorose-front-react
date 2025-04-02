@@ -1,5 +1,5 @@
 :root {
-  --default-width: 600px;
+  --default-width: 37.5rem;
   --default-margin: 1.25rem;
 
   /* Color */
@@ -90,7 +90,7 @@ pre {
   box-sizing: border-box;
   font: inherit;
   vertical-align: baseline;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.0313rem;
 }
 
 p,
@@ -131,6 +131,7 @@ button {
 
 html {
   background-color: #dfdfdf;
+  /* font-size: 62.5%; */
 }
 
 body {
@@ -179,7 +180,7 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 0.25rem;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -194,8 +195,8 @@ code {
   border: none;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 25rem) {
   html {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 }

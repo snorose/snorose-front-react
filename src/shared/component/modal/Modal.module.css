@@ -26,7 +26,7 @@
   display: flex;
   justify-content: center;
   padding: 1rem 0;
-  border-bottom: 0.5px solid var(--gray-2);
+  border-bottom: 0.0313rem solid var(--gray-2);
 }
 
 /* OptionModal: 옵션이 있는 모달 스타일 */
