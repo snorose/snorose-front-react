@@ -19,3 +19,9 @@
 .image {
   margin-right: 1.563rem;
 }
+.imageInput {
+  display: none;
+}
+.videoInput {
+  display: none;
+}
