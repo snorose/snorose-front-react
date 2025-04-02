@@ -94,10 +94,9 @@
 /* post content */
 
 .contentText {
-  font-size: 0.75rem;
+  font-size: 1.4rem;
   color: var(--gray-4);
-  font-size: 0.875rem;
-  padding: 0 0.8125rem 0.9375rem 0;
+  padding: 0 1.3rem 1.5rem 0;
   white-space: pre-wrap;
   word-break: keep-all;
 
