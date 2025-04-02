@@ -14,9 +14,8 @@
   z-index: 1;
 }
 
-@media only screen and (min-width: 600px) {
-  /* (100vw  - 600px) / 2 - 0.9375rem */
+@media only screen and (min-width: 37.5rem) {
   .button {
-    right: calc(100vw / 2 - 600px / 2 + 0.9375rem);
+    right: calc(100vw / 2 - 37.5rem / 2 + 0.9375rem);
   }
 }

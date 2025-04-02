@@ -30,7 +30,7 @@
 
 .cagetories {
   display: grid;
-  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  grid-template-columns: repeat(2, minmax(6.25rem, 1fr));
   row-gap: 0.5625rem;
   column-gap: 0.8125rem;
 }

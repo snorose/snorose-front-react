@@ -1,7 +1,7 @@
 /* 상단 배경 */
 .myPageUpper {
   width: 100%;
-  height: 197px;
+  height: 12.3125rem;
   opacity: 0.8;
   z-index: 1;
 }
@@ -11,7 +11,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 434px;
+  height: 27.125rem;
   opacity: 0.8;
   background-image: url('/src/assets/images/symbol_White.png');
   background-size: cover;
@@ -21,9 +21,9 @@
 
 .editIcon {
   position: absolute;
-  top: 6px;
-  right: 6px;
-  padding: 20px;
-  width: 20px;
-  height: 20px;
+  top: 0.375rem;
+  right: 0.375rem;
+  padding: 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }

@@ -5,7 +5,7 @@
 }
 
 .indicator {
-  margin: 0.5625rem var(--default-margin) 28px var(--default-margin);
+  margin: 0.5625rem var(--default-margin) 1.75rem var(--default-margin);
   display: flex;
   gap: 0.6875rem;
 }

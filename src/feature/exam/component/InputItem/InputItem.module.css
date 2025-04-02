@@ -2,7 +2,7 @@
   padding: 0.625rem 0;
   display: flex;
   flex-direction: column;
-  border-bottom: 0.5px solid var(--gray-3);
+  border-bottom: 0.0313rem solid var(--gray-3);
 }
 
 .tag {

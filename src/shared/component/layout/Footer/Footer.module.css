@@ -11,15 +11,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 0.375rem;
   margin-top: 0.875rem;
-  font-size: 10px;
+  font-size: 0.625rem;
   text-align: center;
   color: #6a6a6a;
 }
 
 .email {
-  font-size: 11px;
+  font-size: 0.6875rem;
 }
 
 .menu {
@@ -30,5 +30,5 @@
 
 .link {
   display: flex;
-  padding: 0 6px;
+  padding: 0 0.375rem;
 }

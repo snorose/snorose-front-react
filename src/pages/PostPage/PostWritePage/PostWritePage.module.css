@@ -19,8 +19,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.625rem 0 0.9375rem 0;
-  border-bottom: 0.5px solid var(--gray-3-1);
-  stroke-width: 0.5px;
+  border-bottom: 0.0313rem solid var(--gray-3-1);
+  stroke-width: 0.0313rem;
   cursor: pointer;
 }
 
