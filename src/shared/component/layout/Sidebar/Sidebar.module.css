@@ -8,29 +8,29 @@
   transform: translateX(-50%);
   z-index: 1;
   background: rgba(228, 228, 228, 0.6);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(1rem);
   /* Note: backdrop-filter has minimal browser support */
 }
 
 .sidebar {
   width: 80%;
   height: 100%;
-  padding: 20px 0 0 30px;
+  padding: 2rem 0 0 3rem;
   position: absolute;
   right: 0;
-  border-radius: 16px 0 0 0;
+  border-radius: 1.6rem 0 0 0;
   background-color: var(--white);
 }
 
 .logo {
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
 .title {
-  margin: 16px 0;
+  margin: 1.6rem 0;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1.6rem;
   color: var(--gray-4);
 }
 
@@ -39,14 +39,14 @@
 }
 
 .menuList {
-  font-size: 14px;
+  font-size: 1.4rem;
   color: var(--gray-4);
 }
 
 /* menu list */
 .list {
-  padding-left: 16px;
-  margin-bottom: 12px;
+  padding-left: 1.6rem;
+  margin-bottom: 1.2rem;
   display: flex;
   flex-direction: column;
 }
@@ -56,7 +56,7 @@
 }
 
 .item li {
-  padding: 6px 0;
+  padding: 0.6rem 0;
 }
 
 .item > li:hover {

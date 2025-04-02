@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  padding: 8px 20px;
+  padding: 0.8rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,13 +9,13 @@
 .action {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 1.6rem;
 }
 
 .button {
   background-color: var(--white);
   font-weight: bold;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 1.3rem;
   color: var(--blue-4);
 }
