@@ -14,17 +14,13 @@
 
 .imageWrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: auto;
   height: auto;
   min-height: 36.25rem;
-}
-
-.image {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  flex: 1;
 }
 
 .posts {
