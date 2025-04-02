@@ -1,14 +1,14 @@
 .infoWrapper {
   display: flex;
   flex-direction: column;
-  padding: 0.25rem 0.8125rem;
-  margin: 0 1.25rem;
-  border-radius: 0.3125rem;
+  padding: 4px 13px;
+  margin: 0 20px;
+  border-radius: 5px;
   background: var(--gray-1);
 }
 
 .itemList {
-  border-bottom: 0.0625rem solid var(--gray-3);
+  border-bottom: 1px solid var(--gray-3);
 
   &:last-child {
     border-bottom: none;
@@ -23,14 +23,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 0;
+  padding: 12px 0;
   color: var(--gray-4);
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 500;
 
   svg {
-    width: 1rem;
-    height: 1rem;
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -38,30 +38,30 @@
 .buttonWrapper {
   display: flex;
   justify-content: flex-end;
-  gap: 0.9375rem;
-  margin: 1.25rem;
+  gap: 15px;
+  margin: 20px;
 }
 
 .editButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 5.625rem;
-  height: 1.75rem;
-  border-radius: 0.3125rem;
+  width: 90px;
+  height: 28px;
+  border-radius: 5px;
   background: var(--blue-4);
   color: var(--white);
-  font-size: 0.75rem;
+  font-size: 12px;
 }
 
 .passwordButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 5.9375rem;
-  height: 1.75rem;
-  border-radius: 0.3125rem;
+  width: 95px;
+  height: 28px;
+  border-radius: 5px;
   background: var(--blue-1);
   color: var(--blue-4);
-  font-size: 0.75rem;
+  font-size: 12px;
 }

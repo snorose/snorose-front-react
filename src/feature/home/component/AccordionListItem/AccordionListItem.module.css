@@ -1,17 +1,17 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .item {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: 12px;
 }
 
 .icon {
-  margin-top: 0.125rem;
+  margin-top: 2px;
 }
 
 .description {

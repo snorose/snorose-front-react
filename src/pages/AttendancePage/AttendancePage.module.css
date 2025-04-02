@@ -4,13 +4,13 @@
   display: flex;
   flex-direction: column;
   background-color: var(--blue-4);
-  border-radius: 0 0 0.9375rem 0.9375rem;
+  border-radius: 0 0 15px 15px;
 }
 
 .title {
-  margin-bottom: 1.875rem;
+  margin-bottom: 30px;
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 20px;
   text-align: center;
   color: var(--white);
   white-space: pre-line;
@@ -22,12 +22,12 @@
 }
 
 .attendanceButton {
-  margin: 1.625rem var(--default-margin);
-  padding: 0.8125rem 0;
+  margin: 26px var(--default-margin);
+  padding: 13px 0;
   background: var(--blue-0);
-  border-radius: 0.3125rem;
+  border-radius: 5px;
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 14px;
   text-align: center;
   color: var(--blue-4);
 }
@@ -44,35 +44,35 @@
 /* bottom */
 
 .bottom {
-  margin: 1.0625rem 0 3.125rem 0;
+  margin: 17px 0 50px 0;
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 10px;
 }
 
 .item {
   margin: 0 var(--default-margin);
-  padding: 0.875rem 1.25rem;
+  padding: 14px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: var(--blue-0);
-  border-radius: 0.3125rem;
+  border-radius: 5px;
 }
 
 .itemLeft {
   display: flex;
   flex-direction: column;
-  gap: 0.0625rem;
+  gap: 1px;
 }
 
 .label {
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 14px;
   color: var(--blue-4);
 }
 
 .description {
-  font-size: 0.8125rem;
+  font-size: 13px;
   color: var(--gray-4);
 }

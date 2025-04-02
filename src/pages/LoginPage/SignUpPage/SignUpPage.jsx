@@ -35,9 +35,9 @@ export default function SignUpPage() {
           <StageDots
             quantity={3}
             current={stage}
-            width='3.125rem'
-            size='0.625rem'
-            gap='0.688rem'
+            width='50px'
+            size='10px'
+            gap='11.008px'
           />
         </div>
         {stage === 1 ? (

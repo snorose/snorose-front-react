@@ -8,7 +8,7 @@
 
 .noContentMessage {
   color: var(--gray-4);
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -18,7 +18,7 @@
   position: relative;
   width: auto;
   height: auto;
-  min-height: 36.25rem;
+  min-height: 580px;
 }
 
 .image {
@@ -30,7 +30,7 @@
 .posts {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .to {
