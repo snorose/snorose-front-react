@@ -1,14 +1,14 @@
 .dropdown {
-  padding: 9.6px 0;
+  padding: 1rem 0;
   background: var(--gray-2);
-  border-radius: 5px;
+  border-radius: 0.5rem;
   border: none;
-  font-size: 13px;
+  font-size: 1.3rem;
   color: var(--gray-4);
 }
 
 .select {
-  padding: 0 16px;
+  padding: 0 1.6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,15 +34,15 @@
 }
 
 .open .list {
-  max-height: 256px;
-  margin-top: 6px;
+  max-height: 26rem;
+  margin-top: 0.6rem;
   overflow: auto;
 }
 
 .option {
-  padding: 8px 10px;
-  margin: 0 6px;
-  border-radius: 4px;
+  padding: 0.8rem 1rem;
+  margin: 0 0.6rem;
+  border-radius: 0.4rem;
 }
 
 .option:hover {

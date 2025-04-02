@@ -1,15 +1,15 @@
 .container {
   max-width: var(--default-width);
   width: 100%;
-  min-height: 84px;
-  padding: 15px 15px 30px 15px;
+  min-height: 8.4rem;
+  padding: 1.5rem 1.5rem 3rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
   background: var(--white);
-  border-radius: 10px 10px 0 0;
-  box-shadow: 0 -4px 7px var(--blue-1);
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0 -0.4rem 0.7rem var(--blue-1);
   position: fixed;
   bottom: 0;
 }
@@ -17,21 +17,21 @@
 .input_bar {
   background-color: var(--gray-1-1);
   width: 100%;
-  min-height: 40px;
+  min-height: 4rem;
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 9px 12px;
-  border-radius: 5px;
+  gap: 0.7rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 0.5rem;
 }
 
 .input_zone {
   width: 100%;
-  min-height: 20px;
+  min-height: 2rem;
   outline: none;
   border: none;
   background-color: transparent;
-  font-size: 12px;
+  font-size: 1.2rem;
   resize: none;
 }
 
@@ -41,8 +41,8 @@
 
 .profile_icon {
   display: flex;
-  width: 20px;
-  height: 20px;
+  width: 2rem;
+  height: 2rem;
 }
 
 .enter {

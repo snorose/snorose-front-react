@@ -23,33 +23,33 @@
 
 .explanation {
   height: fit-content;
-  padding: 0 20px;
+  padding: 0 2rem;
 }
 
 .pageTitle {
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
-  margin-top: 51.2px;
+  margin-top: 5.1rem;
 }
 
 .pageExplanation {
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
   color: var(--gray-4);
-  margin-top: 14px;
+  margin-top: 1.4rem;
 }
 
 .pageBottomFrame {
-  padding: 0 20px;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
 }
 
 .goBackButton {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
 }
 
 .loginButton {
-  margin-bottom: 33.008px;
+  margin-bottom: 3.3rem;
 }

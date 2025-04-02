@@ -1,11 +1,11 @@
 .container {
   width: 100%;
-  padding: 11px 12px;
+  padding: 1.1rem 1.2rem;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
   background: var(--gray-1-1);
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
 .search {
@@ -13,11 +13,11 @@
   outline: none;
   border: none;
   background-color: transparent;
-  font-size: 12px;
+  font-size: 1.2rem;
   color: var(--black);
 }
 
 .search::placeholder {
-  font-size: 12px;
+  font-size: 1.2rem;
   color: var(--gray-3-1);
 }

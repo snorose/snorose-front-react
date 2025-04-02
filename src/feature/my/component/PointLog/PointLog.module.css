@@ -2,47 +2,47 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   background: var(--gray-1-1);
-  padding: 15px;
+  padding: 1.5rem;
 }
 
 .pointIconContentWrapper {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 1.5rem;
 
   svg {
-    width: 26px;
-    height: 23px;
+    width: 2.6rem;
+    height: 2.3rem;
   }
 }
 
 .pointContent {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 0.3rem;
 }
 
 .pointTitle {
   color: var(--blue-4);
-  font-size: 12px;
+  font-size: 1.2rem;
   font-weight: 500;
 }
 
 .pointDesc {
   color: var(--gray-4);
-  font-size: 9px;
+  font-size: 0.9rem;
 }
 
 .pointDate {
   color: var(--gray-3-1);
-  font-size: 9px;
+  font-size: 0.9rem;
 }
 
 .chargePoint {
   color: var(--blue-4);
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
 }
 
