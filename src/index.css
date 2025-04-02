@@ -195,8 +195,8 @@ code {
   border: none;
 }
 
-@media screen and (max-width: 40rem) {
+/* @media screen and (max-width: 400px) {
   html {
-    font-size: 1.4rem;
+    font-size: 55%
   }
-}
+} */
