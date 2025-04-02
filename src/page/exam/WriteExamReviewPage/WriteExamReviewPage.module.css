@@ -1,37 +1,37 @@
 .main {
-  margin-bottom: 50px;
-  padding-top: 62px;
+  margin-bottom: 5rem;
+  padding-top: 6.2rem;
 }
 
 .file {
-  margin: 0 20px;
+  margin: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 1.6rem;
 }
 
 .left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
   position: relative;
 }
 
 .left .required {
-  width: 5px;
-  height: 5px;
+  width: 0.5rem;
+  height: 0.5rem;
   display: inline-block;
   position: absolute;
-  top: 2px;
-  right: -10px;
-  border-radius: 10px;
+  top: 0.2rem;
+  right: -1rem;
+  border-radius: 1rem;
   background-color: var(--pink-3);
 }
 
 .tag {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 1.4rem;
   color: var(--gray-4);
 }
 
@@ -40,11 +40,11 @@
 }
 
 label[for='file'] {
-  padding: 8px 16px;
+  padding: 0.8rem 1.6rem;
   display: block;
   background: var(--gray-2);
-  border-radius: 5px;
-  font-size: 13px;
+  border-radius: 0.5rem;
+  font-size: 1.3rem;
   color: var(--gray-3-1);
   cursor: pointer;
 }

@@ -12,45 +12,45 @@
   justify-content: center;
   transform: translateX(-50%);
   background: rgba(228, 228, 228, 0.6);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(1rem);
   /* Note: backdrop-filter has minimal browser support */
 }
 
 .container {
-  width: 288px;
-  border-radius: 10px;
+  width: 29rem;
+  border-radius: 1rem;
   background: var(--white);
 }
 
 .top {
   display: flex;
   justify-content: center;
-  padding: 16px 0;
-  border-bottom: 0.5008px solid var(--gray-2);
+  padding: 1.6rem 0;
+  border-bottom: 0.05rem solid var(--gray-2);
 }
 
 /* OptionModal: 옵션이 있는 모달 스타일 */
 
 .title {
   color: var(--pink-3);
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 500;
 }
 
 .center {
-  padding-top: 24px;
+  padding-top: 2.4rem;
 }
 
 .bottom {
   display: flex;
   justify-content: end;
-  padding: 6px 28px 10px 28px;
+  padding: 0.6rem 2.8rem 1rem 2.8rem;
 }
 
 .leftCloseBtn {
-  padding: 10px;
+  padding: 1rem;
   color: var(--gray-3-1);
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
   cursor: pointer;
 }
@@ -58,14 +58,14 @@
 .options {
   display: flex;
   flex-direction: column;
-  row-gap: 8px;
-  padding: 0 30px;
+  row-gap: 0.8rem;
+  padding: 0 3rem;
 }
 
 .optionBar {
   display: flex;
-  gap: 15px;
-  padding: 4px 0;
+  gap: 1.5rem;
+  padding: 0.4rem 0;
   cursor: pointer;
 }
 
@@ -73,12 +73,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
+  width: 3rem;
 }
 
 .optionText {
   color: var(--gray-4);
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 
 /* DeleteModal: 삭제 모달 스타일 */
@@ -86,7 +86,7 @@
 .noBottomLineTop {
   display: flex;
   justify-content: center;
-  padding: 16px 0 0 0;
+  padding: 1.6rem 0 0 0;
 }
 
 .deleteCenter {
@@ -94,8 +94,8 @@
   color: var(--gray-4);
   justify-content: center;
   color: var(--gray-4);
-  font-size: 13px;
-  padding-bottom: 10px;
+  font-size: 1.3rem;
+  padding-bottom: 1rem;
 }
 
 .deleteOrBack {
@@ -103,19 +103,19 @@
   align-items: center;
   justify-content: center;
   color: var(--gray-3-1);
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
-  gap: 80px;
-  padding: 2px 0 10px 0;
+  gap: 8rem;
+  padding: 0.2rem 0 1rem 0;
 }
 
 .redBtn {
   color: var(--pink-3);
-  padding: 10px;
+  padding: 1rem;
   cursor: pointer;
 }
 
 .greyBtn {
-  padding: 10px;
+  padding: 1rem;
   cursor: pointer;
 }

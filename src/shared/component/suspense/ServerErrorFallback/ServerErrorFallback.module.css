@@ -1,15 +1,15 @@
 .serverError {
   flex: 1;
   margin: 0 var(--default-margin);
-  padding: 32px;
+  padding: 3.2rem;
   aspect-ratio: 3.5;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 16px;
-  border-radius: 5px;
-  font-size: 16px;
+  gap: 1.6rem;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
   color: var(--gray-4);
 }
 
@@ -17,14 +17,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 0.4rem;
 }
 
 .errorMessage > span:nth-child(1) {
-  font-size: 17.6px;
+  font-size: 1.8rem;
   font-weight: 500;
 }
 
 .errorMessage > span:nth-child(2) {
-  font-size: 12px;
+  font-size: 1.2rem;
 }

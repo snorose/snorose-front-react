@@ -1,15 +1,15 @@
 .title {
   font-weight: 500;
-  font-size: 14px;
-  margin-bottom: 5.584px;
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
 }
 
 .input {
   width: 100%;
-  height: 41.008px;
-  border-radius: 6px;
-  padding-left: 16px;
-  font-size: 12px;
+  height: 4.1rem;
+  border-radius: 0.6rem;
+  padding-left: 1.6rem;
+  font-size: 1.2rem;
   outline: 0;
   border: 0;
 }
@@ -18,11 +18,11 @@
   width: 100%;
   display: flex;
   align-items: center;
-  height: 41.008px;
-  border-radius: 6px;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  padding-right: 10px;
+  height: 4.1rem;
+  border-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
+  border-bottom-right-radius: 0.6rem;
+  padding-right: 1rem;
 }
 
 .ready {
@@ -53,6 +53,6 @@
 
 .error {
   color: var(--pink-3);
-  font-size: 11.008px;
-  margin-top: 3.008px;
+  font-size: 1.1rem;
+  margin-top: 0.3rem;
 }

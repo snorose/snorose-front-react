@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   overflow-y: scroll;
-  padding: 0 20px;
+  padding: 0 2rem;
 }
 
 .pageFrame form {
@@ -25,32 +25,32 @@
 }
 
 .back {
-  margin-top: 14px;
-  margin-bottom: 14px;
+  margin-top: 1.4rem;
+  margin-bottom: 1.4rem;
 }
 .back:hover {
   cursor: pointer;
 }
 
 .pageTitle {
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
-  margin-top: 14px;
-  margin-bottom: 56px;
+  margin-top: 1.4rem;
+  margin-bottom: 5.6rem;
 }
 
 .inputFrame {
-  margin-bottom: 24px;
+  margin-bottom: 2.4rem;
 }
 
 .buttonFrame {
 }
 
 .alert {
-  font-size: 12px;
+  font-size: 1.2rem;
   color: grey;
-  padding: 0 32px;
-  margin-top: 48px;
+  padding: 0 3.2rem;
+  margin-top: 4.8rem;
   line-height: 1.7;
   word-break: keep-all;
 }
@@ -66,6 +66,6 @@
   justify-content: center;
   align-items: center;
   color: var(--gray-4);
-  font-size: 12px;
-  margin: 21.008px 0;
+  font-size: 1.2rem;
+  margin: 2.1rem 0;
 }

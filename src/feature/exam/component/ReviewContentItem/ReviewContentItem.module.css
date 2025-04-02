@@ -1,9 +1,9 @@
 .item {
-  padding: 12px 0;
+  padding: 1.2rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 0.5008px solid var(--gray-3);
+  border-bottom: 0.05rem solid var(--gray-3);
 }
 
 .item:last-child {
@@ -11,14 +11,14 @@
 }
 
 .tag {
-  margin-right: 14px;
+  margin-right: 1.4rem;
   flex-shrink: 0;
-  font-size: 12px;
+  font-size: 1.2rem;
   color: var(--gray-3-1);
 }
 
 .value {
-  font-size: 14px;
+  font-size: 1.4rem;
   color: var(--gray-4);
 }
 

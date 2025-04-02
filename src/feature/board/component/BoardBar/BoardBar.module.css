@@ -1,7 +1,7 @@
 .container {
   width: 100%;
-  height: 84px;
-  border-radius: 6px;
+  height: 8.4rem;
+  border-radius: 0.6rem;
   background: var(--gray-1-1);
   background-repeat: no-repeat;
   background-position: right bottom;
@@ -12,15 +12,15 @@
   flex-direction: column;
   position: absolute;
   white-space: pre-wrap;
-  margin: 14px;
+  margin: 1.4rem;
 }
 
 .title {
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
 }
 
 .description {
-  font-size: 11px;
+  font-size: 1.1rem;
   color: var(--gray-3-1);
 }

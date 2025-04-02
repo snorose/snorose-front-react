@@ -1,7 +1,7 @@
 .toast {
-  padding: 13px 32px;
+  padding: 1.3rem 3.2rem;
   background: rgba(var(--gray-4-rgb), 0.8);
-  border-radius: 6px;
+  border-radius: 0.6rem;
   transition: 500ms opacity ease-in-out;
 }
 
@@ -9,7 +9,7 @@
   text-align: center;
   word-break: keep-all;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 1.2rem;
   white-space: pre-wrap;
   color: var(--white);
 }

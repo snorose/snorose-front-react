@@ -1,12 +1,12 @@
 .logo {
-  margin: 64px var(--default-margin) 26px var(--default-margin);
+  margin: 6.4rem var(--default-margin) 2.6rem var(--default-margin);
 }
 
 .container {
-  margin: 0 var(--default-margin) 100px var(--default-margin);
-  padding: 0 14px;
+  margin: 0 var(--default-margin) 10rem var(--default-margin);
+  padding: 0 1.4rem;
   background: var(--blue-0);
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
 /* 스노로즈 소개 */
@@ -20,7 +20,7 @@
 
 .hallOfFame {
   background: var(--blue-1);
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
 .hallOfFame img {
@@ -29,14 +29,14 @@
 }
 
 .hallOfFame .tags {
-  margin: 0 8px;
-  padding-bottom: 20.48px;
+  margin: 0 0.8rem;
+  padding-bottom: 20rem;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 6.4px;
+  gap: 0.6rem;
 }
 
 .apply {
-  margin-top: 10px;
+  margin-top: 1rem;
 }

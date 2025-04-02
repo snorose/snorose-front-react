@@ -1,8 +1,8 @@
 .container {
-  padding: 4px 13px;
-  margin: 0 20px;
+  padding: 0.4rem 1.3rem;
+  margin: 0 2rem;
   background: var(--gray-2);
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
 .container div:last-child {

@@ -1,7 +1,7 @@
 .appBar {
-  padding: 14px 20px;
+  padding: 1.4rem 2rem;
   width: 100%;
-  max-width: 600px;
+  max-width: 60rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,18 +12,18 @@
 }
 
 .hasGap {
-  /* padding: 14px 20px;
+  /* padding: 1.4rem 2rem;
   width: 100%;
-  max-width: 600px;
+  max-width: 60rem;
   display: flex;
   justify-content: space-between; */
-  gap: 12px;
+  gap: 1.2rem;
 }
 
 .backDiv {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 1.2rem;
 }
 
 .back {
@@ -32,18 +32,18 @@
 
 .title {
   font-weight: 700;
-  font-size: 20px;
+  font-size: 2rem;
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 1.6rem;
 }
 
 .hasWideWidth {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 1.6rem;
   width: 100%;
 }

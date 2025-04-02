@@ -1,8 +1,8 @@
 .list {
-  padding: 4px var(--default-margin) 0 var(--default-margin);
+  padding: 0.4rem var(--default-margin) 0 var(--default-margin);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
   overflow-y: auto;
 }

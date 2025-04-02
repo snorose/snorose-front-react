@@ -14,15 +14,15 @@ a:hover {
 }
 
 .back {
-  margin-top: 14px;
+  margin-top: 1.4rem;
 }
 .back:hover {
   cursor: pointer;
 }
 
 .loginBody {
-  padding: 0 20px;
-  font-size: 9px;
+  padding: 0 2rem;
+  font-size: 0.9rem;
   text-align: center;
   font-family: 'Noto Sans KR', sans-serif;
 }
@@ -30,30 +30,30 @@ a:hover {
 .logo {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 102.672px;
-  margin-bottom: 24.608px;
+  margin-top: 10.3rem;
+  margin-bottom: 2.5rem;
 }
 
 .title {
-  font-size: 14px;
+  font-size: 1.4rem;
   font-style: normal;
-  margin-bottom: 57.232px;
+  margin-bottom: 5.7rem;
 }
 
 .input {
-  margin-bottom: 17.008px;
+  margin-bottom: 1.7rem;
 }
 
 .pwFrame {
   width: 100%;
   display: flex;
   align-items: center;
-  height: 41.008px;
-  border-radius: 6px;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  padding-right: 10px;
-  margin-bottom: 16px;
+  height: 4.1rem;
+  border-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
+  border-bottom-right-radius: 0.6rem;
+  padding-right: 1rem;
+  margin-bottom: 1.6rem;
 }
 
 .ready {
@@ -80,31 +80,31 @@ a:hover {
 
 .button {
   display: block;
-  width: 180px;
-  height: 32px;
+  width: 18rem;
+  height: 3.2rem;
   background-color: var(--blue-4);
   color: var(--white);
-  margin: 18px auto;
-  border-radius: 7px;
+  margin: 1.8rem auto;
+  border-radius: 0.7rem;
 }
 
 .find {
   display: flex;
   justify-content: center;
   color: var(--gray-3-1);
-  font-size: 12px;
-  margin-top: 37.008px;
-  margin-bottom: 12px;
+  font-size: 1.2rem;
+  margin-top: 3.7rem;
+  margin-bottom: 1.2rem;
 }
 
 .divider {
-  margin: 0 11.008px;
+  margin: 0 1.1rem;
 }
 
 .signUp {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
-  font-size: 14px;
+  gap: 0.4rem;
+  font-size: 1.4rem;
 }

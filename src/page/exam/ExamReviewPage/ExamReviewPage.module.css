@@ -1,19 +1,19 @@
 .top {
   width: 100%;
-  padding-bottom: 23px;
-  padding-top: 45.008px;
+  padding-bottom: 2.3rem;
+  padding-top: 4.5rem;
   display: flex;
   flex-direction: column;
   background-color: var(--blue-0);
-  border-radius: 0 0 15px 15px;
+  border-radius: 0 0 1.5rem 1.5rem;
 }
 
 .displayBox {
-  margin: 12px var(--default-margin) 4px var(--default-margin);
+  margin: 1.2rem var(--default-margin) 0.4rem var(--default-margin);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
+  font-size: 1.2rem;
   color: var(--gray-3-1);
 }
 
@@ -23,42 +23,42 @@
 }
 
 .cloudIcon {
-  margin-right: 7px;
+  margin-right: 0.7rem;
 }
 
 .checkCircleIcon {
-  margin-left: 4px;
+  margin-left: 0.4rem;
 }
 
 .dot {
-  width: 3px;
-  height: 3px;
-  margin: 0 8px;
+  width: 0.3rem;
+  height: 0.3rem;
+  margin: 0 0.8rem;
   background: var(--gray-3-1);
   border-radius: 100%;
 }
 
 .more {
-  padding: 0 4px;
+  padding: 0 0.4rem;
   cursor: pointer;
 }
 
 .title {
   margin: 0 var(--default-margin);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 
 .info {
-  padding: 2px 13px;
-  margin: 23px var(--default-margin);
+  padding: 0.2rem 1.3rem;
+  margin: 2.3rem var(--default-margin);
   background: var(--white);
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
 .content {
-  margin: 0 var(--default-margin) 23px var(--default-margin);
-  font-size: 14px;
+  margin: 0 var(--default-margin) 2.3rem var(--default-margin);
+  font-size: 1.4rem;
   word-break: keep-all;
 }
 
@@ -67,11 +67,11 @@
 }
 
 .actions {
-  margin: 15px var(--default-margin) 0 0;
+  margin: 1.5rem var(--default-margin) 0 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-size: 11px;
+  font-size: 1.1rem;
   color: var(--gray-3-1);
 
   div:nth-of-type(2):hover {
@@ -81,13 +81,13 @@
 }
 
 .action {
-  padding: 4px 8px;
+  padding: 0.4rem 0.8rem;
   display: flex;
   align-items: center;
-  gap: 6px;
-  border-radius: 5px;
+  gap: 0.6rem;
+  border-radius: 0.5rem;
 }
 
 .comment {
-  margin-top: 1px;
+  margin-top: 0.1rem;
 }
