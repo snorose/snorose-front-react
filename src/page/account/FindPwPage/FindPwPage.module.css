@@ -47,7 +47,7 @@
 }
 
 .alert {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: grey;
   padding: 0 2rem;
   margin-top: 3rem;

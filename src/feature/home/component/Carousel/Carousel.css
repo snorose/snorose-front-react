@@ -28,5 +28,5 @@
 .swiper-button-prev::after,
 .swiper-button-next::after {
   color: var(--blue-1);
-  font-size: 40px;
+  font-size: 2.5rem;
 }

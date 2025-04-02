@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 0.5px solid var(--gray-3);
+  border-bottom: 0.0313rem solid var(--gray-3);
 }
 
 .item:last-child {

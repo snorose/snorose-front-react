@@ -14,7 +14,7 @@
 
 .popUp {
   width: 80%;
-  max-width: 500px;
+  max-width: 31.25rem;
   max-height: 80%;
   min-height: 60%;
   display: flex;
@@ -29,20 +29,20 @@
   height: 100%;
   display: flex;
   background-color: var(--blue-1);
-  border-radius: 5px 5px 0 0;
+  border-radius: 0.3125rem 0.3125rem 0 0;
   overflow: auto;
   scrollbar-width: thin;
 }
 
 .top::-webkit-scrollbar {
-  width: 10px;
+  width: 0.625rem;
   display: block;
 }
 
 .top::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.5); /* 스크롤바 색상 */
-  border-radius: 5px;
-  border: 2px solid var(--blue-1);
+  border-radius: 0.3125rem;
+  border: 0.125rem solid var(--blue-1);
 }
 
 .top::-webkit-scrollbar-track {
@@ -68,7 +68,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 0.3125rem 0.3125rem;
   background-color: var(--gray-4);
   color: var(--white);
 }
@@ -91,7 +91,7 @@
 }
 
 .bottom button:hover {
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   background-color: var(--gray-3-1);
 }
 

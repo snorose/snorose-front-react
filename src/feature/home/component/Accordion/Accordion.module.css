@@ -1,5 +1,5 @@
 .accordion {
-  border-bottom: 0.5px solid var(--gray-3);
+  border-bottom: 0.0313rem solid var(--gray-3);
 }
 
 .accordion:last-child {
@@ -21,7 +21,7 @@
 }
 
 .opend .panelHeader {
-  border-bottom: 0.5px solid var(--gray-3);
+  border-bottom: 0.0313rem solid var(--gray-3);
 }
 
 .toggleIcon {
@@ -43,6 +43,6 @@
 
 .opend .panelBody {
   padding: 1rem 0 0.625rem 0;
-  max-height: 2500px;
+  max-height: 156.25rem;
   overflow-y: auto;
 }

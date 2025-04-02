@@ -3,7 +3,7 @@
 }
 
 .container {
-  margin: 0 var(--default-margin) 100px var(--default-margin);
+  margin: 0 var(--default-margin) 6.25rem var(--default-margin);
   padding: 0 0.875rem;
   background: var(--blue-0);
   border-radius: 0.3125rem;
@@ -38,5 +38,5 @@
 }
 
 .apply {
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
