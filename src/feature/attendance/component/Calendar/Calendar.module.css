@@ -1,21 +1,21 @@
 /* Tile */
 
 .tile {
-  width: 2rem;
-  height: 3.25rem;
+  width: 32px;
+  height: 52px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 4px;
 }
 
 .day {
-  width: 2rem;
-  height: 2rem;
+  width: 32px;
+  height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 16px;
   text-align: center;
   color: var(--white);
 }
@@ -28,7 +28,7 @@
 }
 
 .difference {
-  font-size: 0.75rem;
+  font-size: 12px;
   text-align: center;
   color: var(--pink-2);
 }

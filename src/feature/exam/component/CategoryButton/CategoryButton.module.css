@@ -1,9 +1,9 @@
 .button {
   width: 100%;
-  padding: 0.5625rem 0;
+  padding: 9px 0;
   background: var(--gray-2);
-  border-radius: 0.3125rem;
-  font-size: 0.8125rem;
+  border-radius: 5px;
+  font-size: 13px;
   color: var(--gray-4);
 }
 

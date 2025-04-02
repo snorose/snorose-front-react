@@ -1,7 +1,7 @@
 .appBar {
-  padding: 0.875rem 1.25rem;
+  padding: 14px 20px;
   width: 100%;
-  max-width: 37.5rem;
+  max-width: 600px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,5 +13,5 @@
 
 .title {
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 20px;
 }
