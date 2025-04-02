@@ -8,24 +8,24 @@
 }
 
 .pageTopFrame {
-  padding: 0 20px;
+  padding: 0 2rem;
 }
 
 .pageTitle {
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
-  margin-top: 51.2px;
+  margin-top: 5.1rem;
 }
 
 .pageExplanation {
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
   color: var(--gray-4);
-  margin-top: 14px;
+  margin-top: 1.4rem;
 }
 
 .pageBottomFrame {
-  padding: 0 20px;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -40,22 +40,22 @@
 .resultFrame {
   display: flex;
   flex-direction: column;
-  margin-top: 16px;
+  margin-top: 1.6rem;
 }
 
 .result {
-  margin-top: 9.6px;
-  font-size: 25.008px;
+  margin-top: 1;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--blue-4);
 }
 
 .dot {
-  height: 6px;
-  width: 6px;
+  height: 0.6rem;
+  width: 0.6rem;
   border-radius: 50%;
   display: inline-block;
-  margin-bottom: 7.008px;
+  margin-bottom: 0.7rem;
 }
 
 .first {
@@ -77,14 +77,14 @@
 }
 
 .loginButton {
-  margin-bottom: 18px;
+  margin-bottom: 1.8rem;
 }
 
 .findPWButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 46px;
+  margin-bottom: 4.6rem;
   color: var(--gray-4);
-  font-size: 12px;
+  font-size: 1.2rem;
 }

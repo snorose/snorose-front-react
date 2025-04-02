@@ -1,12 +1,12 @@
 .layout {
   max-width: calc(100% - 2 * var(--default-margin));
-  padding: 5px 12px;
+  padding: 0.5rem 1.2rem;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
   background: var(--blue-2);
-  border-radius: 5px;
-  font-size: 12px;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
   color: var(--blue-4);
   word-break: keep-all;
 }

@@ -1,8 +1,8 @@
 .post {
-  padding: 13px 15px;
+  padding: 1.3rem 1.5rem;
   width: 100%;
   background-color: var(--gray-1);
-  border-radius: 5px;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
 
@@ -12,7 +12,7 @@
 }
 
 .title {
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -22,11 +22,11 @@
 }
 
 .post_center {
-  padding-top: 6px;
+  padding-top: 0.6rem;
 }
 
 .text {
-  font-size: 13px;
+  font-size: 1.3rem;
   color: #484848;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -39,17 +39,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 8px;
+  padding-top: 0.8rem;
   color: var(--gray-3-1);
-  font-size: 11px;
+  font-size: 1.1rem;
 }
 
 .postBottomRight {
-  gap: 6px;
+  gap: 0.6rem;
   display: flex;
   align-items: center;
 
   p {
-    margin-bottom: 3px;
+    margin-bottom: 0.3rem;
   }
 }

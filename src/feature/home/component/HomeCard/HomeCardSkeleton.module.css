@@ -1,12 +1,12 @@
 .layout {
-  margin: 24px var(--default-margin) 28px var(--default-margin);
+  margin: 2.4rem var(--default-margin) 2.8rem var(--default-margin);
   display: flex;
-  gap: 7.2px;
+  gap: 0.72rem;
 }
 
 .layout div {
-  height: 112px;
-  border-radius: 6px;
+  height: 11.2rem;
+  border-radius: 0.6rem;
   background: linear-gradient(
     45deg,
     var(--gray-2) 25%,

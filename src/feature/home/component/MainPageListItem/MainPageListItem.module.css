@@ -4,12 +4,12 @@
 
 .item {
   width: 100%;
-  padding: 13px 15px;
+  padding: 1.3rem 1.5rem;
   display: flex;
   justify-content: space-between;
-  gap: 24px;
+  gap: 2.4rem;
   background: var(--gray-1);
-  border-radius: 5px;
+  border-radius: 0.5rem;
   box-sizing: border-box;
 }
 
@@ -19,29 +19,29 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1.2rem;
 }
 
 .top {
   display: flex;
   align-items: center;
-  gap: 4.8px;
+  gap: 0.48rem;
 }
 
 .meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 7px;
-  font-size: 9px;
+  gap: 0.7rem;
+  font-size: 0.9rem;
   color: var(--gray-4);
 }
 
 .dot {
-  width: 2px;
-  height: 2px;
+  width: 0.2rem;
+  height: 0.2rem;
   display: inline-block;
-  border-radius: 10px;
+  border-radius: 1rem;
   background-color: var(--gray-4);
 }
 
@@ -53,17 +53,17 @@
 }
 
 .content {
-  height: 52px;
+  height: 5.2rem;
 }
 
 .title {
-  margin-bottom: 2px;
+  margin-bottom: 0.2rem;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 1.2rem;
 }
 
 .overview {
-  font-size: 11px;
+  font-size: 1.1rem;
   color: var(--gray-4);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -74,7 +74,7 @@
 }
 
 .boardName {
-  font-size: 8px;
+  font-size: 0.8rem;
   color: var(--gray-3-1);
 }
 
@@ -86,7 +86,7 @@
 }
 
 .right img {
-  width: 76px;
-  height: 76px;
-  border-radius: 4px;
+  width: 7.6rem;
+  height: 7.6rem;
+  border-radius: 0.4rem;
 }
