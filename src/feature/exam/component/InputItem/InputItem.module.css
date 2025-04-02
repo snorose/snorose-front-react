@@ -1,25 +1,25 @@
 .item {
-  padding: 0.625rem 0;
+  padding: 10px 0;
   display: flex;
   flex-direction: column;
-  border-bottom: 0.0313rem solid var(--gray-3);
+  border-bottom: 0.5008px solid var(--gray-3);
 }
 
 .tag {
   align-self: flex-start;
   position: relative;
-  font-size: 0.6875rem;
+  font-size: 11px;
   color: var(--gray-3-1);
 }
 
 .required {
-  width: 0.3125rem;
-  height: 0.3125rem;
+  width: 5px;
+  height: 5px;
   display: inline-block;
   position: absolute;
-  top: 0.125rem;
-  right: -0.625rem;
-  border-radius: 0.625rem;
+  top: 2px;
+  right: -10px;
+  border-radius: 10px;
   background-color: var(--pink-3);
 }
 
@@ -28,7 +28,7 @@
   border: none;
   outline: none;
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 14px;
   color: var(--gray-4);
 }
 

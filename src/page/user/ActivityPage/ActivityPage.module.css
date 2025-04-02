@@ -7,7 +7,7 @@
 
 .contentWrapper {
   flex: 1;
-  padding: 2.813rem 1.25rem 3.375rem 1.25rem;
+  padding: 45.008px 20px 54px 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -16,10 +16,10 @@
 .topContainer {
   display: flex;
   justify-content: space-between;
-  padding: 0.875rem 0;
+  padding: 14px 0;
 }
 
 .title {
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 700;
 }

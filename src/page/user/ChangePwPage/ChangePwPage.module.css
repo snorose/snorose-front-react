@@ -11,13 +11,13 @@
 
 .submitBtn {
   background-color: transparent;
-  padding: 0.875rem 1.25rem;
-  font-size: 1rem;
+  padding: 14px 20px;
+  font-size: 16px;
 }
 
 .contentContainer {
   display: flex;
   flex-direction: column;
-  padding: 0.875rem 1.25rem;
-  gap: 1.75rem;
+  padding: 14px 20px;
+  gap: 28px;
 }
