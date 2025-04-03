@@ -1,6 +1,6 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import {
   deleteExamReview,
@@ -9,7 +9,6 @@ import {
   reportUser,
 } from '@/apis';
 
-import { useAuth, useToast } from '@/shared/hook';
 import {
   BackAppBar,
   DeleteModal,
@@ -18,20 +17,21 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
+import { BOARD_MENUS, MUTATION_KEY, QUERY_KEY, TOAST } from '@/shared/constant';
+import { useAuth, useToast } from '@/shared/hook';
 import { dateFormat } from '@/shared/lib';
-import { BOARD_MENUS, QUERY_KEY, MUTATION_KEY, TOAST } from '@/shared/constant';
 
 import { NotFoundPage } from '@/page/etc';
 
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 import { ReviewContentItem, ReviewDownload } from '@/feature/exam/component';
-import { convertToObject } from '@/feature/exam/lib';
 import {
-  LECTURE_TYPES,
-  SEMESTERS,
   EXAM_TYPES,
   FLEX_ALIGN,
+  LECTURE_TYPES,
+  SEMESTERS,
 } from '@/feature/exam/constant';
+import { convertToObject } from '@/feature/exam/lib';
 import { useScrap } from '@/feature/scrap/hook';
 
 import styles from './ExamReviewPage.module.css';
@@ -263,6 +263,7 @@ export default function ExamReviewPage() {
               id='comment'
               width={15}
               height={14}
+              fill='#D9D9D9'
             />
             <span>{commentCount.toLocaleString()}</span>
           </div>

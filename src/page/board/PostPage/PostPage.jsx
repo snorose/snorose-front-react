@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
+import { deletePost, getPostContent, reportPost, reportUser } from '@/apis';
 
-import { useAuth, useToast } from '@/shared/hook';
 import {
   BackAppBar,
   DeleteModal,
@@ -187,18 +186,25 @@ export default function PostPage() {
               {data.isEdited && ' (수정됨)'}
             </p>
           </div>
-          <div
-            style={{
-              display: data.isNotice && !data.isWriter ? 'none' : 'block',
-            }}
-            className={styles.dot3}
-            onClick={() => {
-              data.isWriter
-                ? setIsOptionsModalOpen(true)
-                : setIsReportModalOpen(true);
-            }}
-          >
-            <Icon id='ellipsis-vertical' width={3} height={11} />
+          <div className={styles.contentTopRight}>
+            {data.isScrapped ? (
+              <Icon id='bookmark-fill' width={14} height={18} fill='#5F86BF' />
+            ) : (
+              <Icon id='bookmark' width={14} height={18} />
+            )}
+            <div
+              style={{
+                display: data.isNotice && !data.isWriter ? 'none' : 'block',
+              }}
+              className={styles.dot3}
+              onClick={() => {
+                data.isWriter
+                  ? setIsOptionsModalOpen(true)
+                  : setIsReportModalOpen(true);
+              }}
+            >
+              <Icon id='ellipsis-vertical' width={4} height={17} />
+            </div>
           </div>
         </div>
         <div className={styles.title}>
@@ -215,20 +221,15 @@ export default function PostPage() {
         ></p>
         <div className={styles.post_bottom}>
           <div className={styles.count} onClick={inputFocus}>
-            <Icon id='comment' width={15} height={13} />
-            <p>{data.commentCount.toLocaleString()}</p>
+            <Icon id='comment' width={15} height={13} fill='#5F86BF' />
+            <p>댓글 {data.commentCount.toLocaleString()}</p>
           </div>
           <div
             className={styles.count}
             onClick={() => (data.isLiked ? unlike.mutate() : like.mutate())}
           >
-            <Icon
-              id='like'
-              width={13}
-              height={12}
-              fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
-            />
-            <p>{data.likeCount.toLocaleString()}</p>
+            <Icon id='like' width={13} height={12} fill='#5F86BF' />
+            <p>공감 {data.likeCount.toLocaleString()}</p>
           </div>
           <div
             className={styles.count}
@@ -236,13 +237,8 @@ export default function PostPage() {
               data.isScrapped ? unscrap.mutate() : scrap.mutate()
             }
           >
-            <Icon
-              id='bookmark-fill'
-              width={10}
-              height={13}
-              fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
-            />
-            <p>{data.scrapCount.toLocaleString()}</p>
+            <Icon id='bookmark-fill' width={10} height={13} fill='#5F86BF' />
+            <p>스크랩 {data.scrapCount.toLocaleString()}</p>
           </div>
         </div>
       </div>
