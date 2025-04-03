@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
+import { deletePost, getPostContent, reportPost, reportUser } from '@/apis';
 
-import { useAuth, useToast } from '@/shared/hook';
 import {
   BackAppBar,
   DeleteModal,
@@ -12,13 +11,14 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
+import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY, TOAST } from '@/shared/constant';
+import { useAuth, useToast } from '@/shared/hook';
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
-import { MUTATION_KEY, QUERY_KEY, TOAST, LIKE_TYPE } from '@/shared/constant';
 
 import { NotFoundPage } from '@/page/etc';
 
-import { useCommentContext } from '@/feature/comment/context';
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
+import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
@@ -33,6 +33,7 @@ export default function PostPage() {
   const { inputFocus } = useCommentContext();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
+  const [hoveredIcon, setHoveredIcon] = useState(null);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -214,35 +215,50 @@ export default function PostPage() {
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
         <div className={styles.post_bottom}>
-          <div className={styles.count} onClick={inputFocus}>
-            <Icon id='comment' width={15} height={13} />
-            <p>{data.commentCount.toLocaleString()}</p>
+          <div
+            className={styles.count}
+            style={{
+              display: data.isNotice ? 'none' : 'flex',
+            }}
+            onClick={inputFocus}
+            onMouseEnter={() => setHoveredIcon('comment')}
+            onMouseLeave={() => setHoveredIcon(null)}
+          >
+            {hoveredIcon === 'comment' ? (
+              <Icon id='comment-fill' width={18} height={16} fill='#5F86BF' />
+            ) : (
+              <Icon id='comment-stroke' width={18} height={16} />
+            )}
+            <p>댓글 {data.commentCount.toLocaleString()}</p>
           </div>
           <div
             className={styles.count}
             onClick={() => (data.isLiked ? unlike.mutate() : like.mutate())}
+            onMouseEnter={() => setHoveredIcon('like')}
+            onMouseLeave={() => setHoveredIcon(null)}
           >
-            <Icon
-              id='like'
-              width={13}
-              height={12}
-              fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
-            />
-            <p>{data.likeCount.toLocaleString()}</p>
+            {data.isLiked || hoveredIcon === 'like' ? (
+              <Icon id='like-fill' width={16} height={16} fill='#5F86BF' />
+            ) : (
+              <Icon id='like-stroke' width={16} height={16} />
+            )}
+
+            <p>공감 {data.likeCount.toLocaleString()}</p>
           </div>
           <div
             className={styles.count}
             onClick={() =>
               data.isScrapped ? unscrap.mutate() : scrap.mutate()
             }
+            onMouseEnter={() => setHoveredIcon('bookmark')}
+            onMouseLeave={() => setHoveredIcon(null)}
           >
-            <Icon
-              id='bookmark-fill'
-              width={10}
-              height={13}
-              fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
-            />
-            <p>{data.scrapCount.toLocaleString()}</p>
+            {data.isScrapped || hoveredIcon === 'bookmark' ? (
+              <Icon id='bookmark-fill' width={12} height={15} fill='#5F86BF' />
+            ) : (
+              <Icon id='bookmark-stroke' width={12} height={15} />
+            )}
+            <p>스크랩 {data.scrapCount.toLocaleString()}</p>
           </div>
         </div>
       </div>
