@@ -44,7 +44,7 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
           {hasLike && (
             <>
               <Icon
-                id='like'
+                id='like-fill'
                 width={12}
                 height={11}
                 fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
