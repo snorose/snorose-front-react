@@ -111,6 +111,10 @@
   }
 }
 
+#comment-fill {
+  fill: #FF5733;  /* 아이콘 색상 변경 */
+}
+
 .whiteBox {
   width: 100%;
   height: 50px;

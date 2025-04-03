@@ -33,6 +33,7 @@ export default function PostPage() {
   const { inputFocus } = useCommentContext();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
+  const [isCommentIconHovered, setIsCommentIconHovered] = useState(false);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -216,8 +217,22 @@ export default function PostPage() {
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
         <div className={styles.post_bottom}>
-          <div className={styles.count} onClick={inputFocus}>
-            <Icon id='comment' width={15} height={13} fill='#5F86BF' />
+          <div
+            className={styles.count}
+            onClick={inputFocus}
+            onMouseEnter={() => setIsCommentIconHovered(true)}
+            onMouseLeave={() => setIsCommentIconHovered(false)}
+          >
+            {isCommentIconHovered ? (
+              <Icon id='comment-fill' width={18} height={15} fill='#5F86BF' />
+            ) : (
+              <Icon
+                id='comment-stroke'
+                width={18}
+                height={15}
+                stroke='#5F86BF'
+              />
+            )}
             <p>댓글 {data.commentCount.toLocaleString()}</p>
           </div>
           <div
