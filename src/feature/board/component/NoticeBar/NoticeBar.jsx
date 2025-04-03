@@ -21,7 +21,7 @@ export default function NoticeBar({ data, onClick }) {
           <span className={styles.comment_cnt}>
             {data.commentCount.toLocaleString()}
           </span>
-          <Icon id='like' width={12} height={11} fill='#D9D9D9' />
+          <Icon id='like-fill' width={12} height={11} fill='#D9D9D9' />
           <span className={styles.like_cnt}>
             {data.likeCount.toLocaleString()}
           </span>
