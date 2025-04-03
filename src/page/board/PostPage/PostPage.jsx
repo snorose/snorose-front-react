@@ -188,20 +188,18 @@ export default function PostPage() {
               {data.isEdited && ' (수정됨)'}
             </p>
           </div>
-          <div className={styles.contentTopRight}>
-            <div
-              style={{
-                display: data.isNotice && !data.isWriter ? 'none' : 'block',
-              }}
-              className={styles.dot3}
-              onClick={() => {
-                data.isWriter
-                  ? setIsOptionsModalOpen(true)
-                  : setIsReportModalOpen(true);
-              }}
-            >
-              <Icon id='ellipsis-vertical' width={3} height={11} />
-            </div>
+          <div
+            style={{
+              display: data.isNotice && !data.isWriter ? 'none' : 'block',
+            }}
+            className={styles.dot3}
+            onClick={() => {
+              data.isWriter
+                ? setIsOptionsModalOpen(true)
+                : setIsReportModalOpen(true);
+            }}
+          >
+            <Icon id='ellipsis-vertical' width={3} height={11} />
           </div>
         </div>
         <div className={styles.title}>
