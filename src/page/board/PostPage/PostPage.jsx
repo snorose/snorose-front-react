@@ -11,13 +11,14 @@ import {
   Icon,
   OptionModal,
 } from '@/shared/component';
+import { LIKE_TYPE, MUTATION_KEY, QUERY_KEY, TOAST } from '@/shared/constant';
+import { useAuth, useToast } from '@/shared/hook';
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
-import { MUTATION_KEY, QUERY_KEY, TOAST, LIKE_TYPE } from '@/shared/constant';
 
 import { NotFoundPage } from '@/page/etc';
 
-import { useCommentContext } from '@/feature/comment/context';
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
+import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
