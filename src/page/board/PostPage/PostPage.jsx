@@ -33,7 +33,7 @@ export default function PostPage() {
   const { inputFocus } = useCommentContext();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
-  const [isCommentIconHovered, setIsCommentIconHovered] = useState(false);
+  const [hoveredIcon, setHoveredIcon] = useState(null);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -220,26 +220,28 @@ export default function PostPage() {
           <div
             className={styles.count}
             onClick={inputFocus}
-            onMouseEnter={() => setIsCommentIconHovered(true)}
-            onMouseLeave={() => setIsCommentIconHovered(false)}
+            onMouseEnter={() => setHoveredIcon('comment')}
+            onMouseLeave={() => setHoveredIcon(null)}
           >
-            {isCommentIconHovered ? (
-              <Icon id='comment-fill' width={18} height={15} fill='#5F86BF' />
+            {hoveredIcon === 'comment' ? (
+              <Icon id='comment-fill' width={18} height={16} fill='#5F86BF' />
             ) : (
-              <Icon
-                id='comment-stroke'
-                width={18}
-                height={15}
-                stroke='#5F86BF'
-              />
+              <Icon id='comment-stroke' width={18} height={16} />
             )}
             <p>댓글 {data.commentCount.toLocaleString()}</p>
           </div>
           <div
             className={styles.count}
             onClick={() => (data.isLiked ? unlike.mutate() : like.mutate())}
+            onMouseEnter={() => setHoveredIcon('like')}
+            onMouseLeave={() => setHoveredIcon(null)}
           >
-            <Icon id='like' width={13} height={12} fill='#5F86BF' />
+            {data.isLiked || hoveredIcon === 'like' ? (
+              <Icon id='like-fill' width={16} height={16} fill='#5F86BF' />
+            ) : (
+              <Icon id='like-stroke' width={16} height={16} />
+            )}
+
             <p>공감 {data.likeCount.toLocaleString()}</p>
           </div>
           <div
@@ -247,8 +249,14 @@ export default function PostPage() {
             onClick={() =>
               data.isScrapped ? unscrap.mutate() : scrap.mutate()
             }
+            onMouseEnter={() => setHoveredIcon('bookmark')}
+            onMouseLeave={() => setHoveredIcon(null)}
           >
-            <Icon id='bookmark-fill' width={10} height={13} fill='#5F86BF' />
+            {data.isScrapped || hoveredIcon === 'bookmark' ? (
+              <Icon id='bookmark-fill' width={12} height={15} fill='#5F86BF' />
+            ) : (
+              <Icon id='bookmark-stroke' width={12} height={15} />
+            )}
             <p>스크랩 {data.scrapCount.toLocaleString()}</p>
           </div>
         </div>
