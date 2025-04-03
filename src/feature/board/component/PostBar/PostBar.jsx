@@ -33,7 +33,7 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
             <>
               <Icon
                 className={styles.comment}
-                id='comment'
+                id='comment-fill'
                 width={13}
                 height={11}
                 fill='#D9D9D9'

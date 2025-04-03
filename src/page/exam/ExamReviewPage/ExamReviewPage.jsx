@@ -260,7 +260,7 @@ export default function ExamReviewPage() {
           <div className={styles.action}>
             <Icon
               className={styles.comment}
-              id='comment'
+              id='comment-fill'
               width={15}
               height={14}
               fill='#D9D9D9'
