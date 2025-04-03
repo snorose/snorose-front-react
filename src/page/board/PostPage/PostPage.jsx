@@ -219,6 +219,9 @@ export default function PostPage() {
         <div className={styles.post_bottom}>
           <div
             className={styles.count}
+            style={{
+              display: data.isNotice ? 'none' : 'flex',
+            }}
             onClick={inputFocus}
             onMouseEnter={() => setHoveredIcon('comment')}
             onMouseLeave={() => setHoveredIcon(null)}
