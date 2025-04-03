@@ -32,6 +32,7 @@
   align-items: center;
 
   width: 100%;
+  min-height: 31px;
 
   font-size: 0.75rem;
   color: var(--gray-3-1);
