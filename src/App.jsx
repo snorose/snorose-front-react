@@ -36,7 +36,10 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <div>{token}</div>
+      <div>Ii Ll O0</div>
+      <div style={{ whiteSpace: 'normal', overflowWrap: 'break-word' }}>
+        {token}
+      </div>
       <Outlet />
       {!hideNav && <Navbar />}
       <Sidebar />
