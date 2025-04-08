@@ -14,7 +14,7 @@ export const requestPermission = async () => {
       });
 
       console.log('FCM 토큰:', token);
-
+      return token;
       // await fetch('/api/register-token', {
       //   method: 'POST',
       //   body: JSON.stringify({ token }),
@@ -22,9 +22,11 @@ export const requestPermission = async () => {
       // });
     } catch (error) {
       console.error('FCM 토큰 가져오기 실패:', error);
+      return '';
     }
   } else {
     console.log('알림 권한 거부됨');
+    return '';
   }
 };
 
