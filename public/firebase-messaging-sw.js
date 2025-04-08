@@ -49,11 +49,11 @@ const app = firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging(app);
 
 messaging.onBackgroundMessage((payload) => {
-  // console.log(payload);
-  // const notificationTitle = payload.data.title;
-  // const notificationOptions = {
-  //   body: payload.data.body,
-  //   // icon: payload.icon
-  // };
-  // self.registration.showNotification(notificationTitle, notificationOptions);
+  console.log(payload);
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+    // icon: payload.icon
+  };
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });
