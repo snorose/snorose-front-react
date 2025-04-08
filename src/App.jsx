@@ -37,6 +37,9 @@ function App() {
   return (
     <div className={styles.app}>
       <div>Ii Ll O0</div>
+      <div>MI Ml</div>
+      <div>RI Rl</div>
+      <div>YI Yl</div>
       <div style={{ whiteSpace: 'normal', overflowWrap: 'break-word' }}>
         {token}
       </div>
