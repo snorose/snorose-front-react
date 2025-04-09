@@ -1,6 +1,7 @@
 import StageDots from '@/feature/account/component/StageDots/StageDots';
 
 const stageDotsStoryConfig = {
+  title: 'Component/StageDots',
   component: StageDots,
   parameters: {
     docs: {

@@ -1,6 +1,7 @@
 import Button from '@/shared/component/button/Button/Button';
 
 const submitButtonConfig = {
+  title: 'Component/Button',
   component: Button,
   parameters: {
     docs: {

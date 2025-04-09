@@ -1,6 +1,7 @@
 import ResetButton from '@/shared/component/button/ResetButton/ResetButton';
 
 const resetButtonStoryConfig = {
+  title: 'Component/ResetButton',
   component: ResetButton,
   parameters: {
     docs: {

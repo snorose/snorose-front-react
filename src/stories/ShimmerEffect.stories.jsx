@@ -1,6 +1,7 @@
 import ShimmerEffect from '@/shared/component/suspense/ShimmerEffect/ShimmerEffect';
 
 const shimmerEffectStoryConfig = {
+  title: 'Component/ShimmerEffect',
   component: ShimmerEffect,
   parameters: {
     docs: {

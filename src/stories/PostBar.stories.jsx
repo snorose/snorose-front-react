@@ -2,6 +2,7 @@ import PostBar from '@/feature/board/component/PostBar/PostBar';
 const now = new Date();
 
 const postBarStoryConfig = {
+  title: 'Component/PostBar',
   component: PostBar,
   parameters: {
     docs: {

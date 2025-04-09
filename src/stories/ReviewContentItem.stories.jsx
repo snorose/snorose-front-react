@@ -2,6 +2,7 @@ import ReviewContentItem from '@/feature/exam/component/ReviewContentItem/Review
 import { FLEX_ALIGN } from '@/feature/exam/constant';
 
 const reviewContentItemStoryConfig = {
+  title: 'Component/ReviewContentItem',
   component: ReviewContentItem,
   parameters: {
     docs: {

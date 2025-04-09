@@ -25,6 +25,7 @@ const ReviewDownloadWrapper = (props) => {
 };
 
 const reviewDownloadStoryConfig = {
+  title: 'Component/ReviewDownload',
   component: ReviewDownloadWrapper,
   parameters: {
     docs: {
