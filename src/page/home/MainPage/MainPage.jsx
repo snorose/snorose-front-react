@@ -6,7 +6,7 @@ import {
   Carousel,
   CarouselErrorFallback,
   CarouselSkeleton,
-  // PopUp,
+  PopUp,
   HomeBesookt,
   HomeBesooktErrorFallback,
   HomeBesooktSkeleton,
@@ -68,7 +68,7 @@ export default function MainPage() {
       </QueryErrorResetBoundary>
 
       <Footer />
-      {/* <PopUp /> */}
+      <PopUp />
     </main>
   );
 }
