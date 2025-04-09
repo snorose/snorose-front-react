@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
-import InnisfreeEventImage from '@/feature/home/component/PopUp/event-innisfree.png';
+import aprilCalendar from '@/feature/home/component/PopUp/april-calendar.png';
 import styles from './PopUp.module.css';
 
 const content = (
@@ -10,56 +10,105 @@ const content = (
       <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
-      <Heading>
-        스노로즈X이니스프리 비타민C 7일 톤업 키트 샘플링 이벤트 🎁✨
-      </Heading>
+      <Heading>1. 4월 스노로즈 캘린더</Heading>
 
       <Content>
-        <img src={InnisfreeEventImage} alt='스노로즈X이니스프리 이벤트' />
-      </Content>
-      <Content>
-        봄철 칙칙한 피부 톤, 환하게 케어하세요!
-        <br />
-        이니스프리 비타민C 7일 톤업 키트 체험 기회가 찾아왔습니다.
-        <br />
-        맑고 생기 넘치는 피부로 가꿔줄 비타민C의 힘을 느껴보세요!
+        <img src={aprilCalendar} alt='4월 달력' />
       </Content>
 
-      <SubHeading>🌞 체험단 제품 구성</SubHeading>
+      <Heading>2. 25-1 중간고사 포인트 미지급 기간 운영 공지</Heading>
       <Content>
-        - 비타민C 7일 톤업 세럼
+        - 첫눈온방 및 함박눈방에 게시글, 댓글 작성 포인트가 지급되지 않습니다.
         <br />
-        - 비타민C 캡슐 수분 크림
-        <br />
-        - 비타민C 잡티 톤업 선
-        <br />
-      </Content>
-
-      <SubHeading>✅ 대상</SubHeading>
-      <Content>
-        - 스노로즈 가입자 중 숙명여자대학교 재학생, 휴학생, 졸업생
-      </Content>
-
-      <SubHeading>📆 신청 기간</SubHeading>
-      <Content>- 3월 24일(월) ~ 3월 31일(월)</Content>
-
-      <SubHeading>🔗 자세한 내용</SubHeading>
-      <Content>
+        - 기간: 2025/04/15(화) 00:00 ~ 2025/04/28(월) 23:59
+        <br />- 자세한 내용은{' '}
         <a
           className={styles.link}
-          href='https://www.snorose.com/board/notice/post/1802411
-          '
+          href='https://snorose.com/board/notice/post/1811569'
         >
-          https://www.snorose.com/board/notice/post/1802411
+          관련 공지
         </a>
+        를 참고해주시길 바랍니다.
       </Content>
-    </div>
-    <div>
+
+      <Heading>3. 25-1 시험후기 게시판 운영 공지</Heading>
+      <Content>
+        - 시험후기 게시판 운영 기간: 2025/04/29(화)00:00 ~ 2025/05/05(월) 23:59
+        <br />
+        - 기간: 2025/04/15(화) 00:00 ~ 2025/04/28(월) 23:59
+        <br />- 자세한 내용은{' '}
+        <a
+          className={styles.link}
+          href='https://snorose.com/board/notice/post/1811569'
+        >
+          관련 공지
+        </a>
+        를 참고해주시길 바랍니다.
+      </Content>
+
+      <Heading>4. 족보 공유 관련 규정 개정 안내</Heading>
+      <Content>
+        ✓ 족보를 공유한 경우 → <strong>영구 강등</strong>{' '}
+        <span style={{ color: 'red' }}>(기존과 동일)</span>
+        <br />
+        ✓ 족보를 공유받은 경우  
+        <br />{' '}
+        <span style={{ paddingLeft: '18px' }}>
+          A. 금전 거래가 있었거나 시도한 경우 → <strong>영구 강등</strong>
+        </span>
+        <br />
+        <span style={{ paddingLeft: '20px' }}>
+          B. A항이 아닌 경우 → <strong>2년 강등</strong>
+        </span>
+        <br />
+        (※ 단, 새내기는 입학년도 4월 이전 위반 시 6개월 강등, 4월부터는 2년 강등
+        적용)
+        <br />- 자세한 내용은{' '}
+        <a
+          className={styles.link}
+          href='https://snorose.com/board/exam-review-notice/post/1811681'
+        >
+          관련 공지
+        </a>
+        를 참고해주시길 바랍니다.
+      </Content>
+
+      <Heading>5. 3월 회계 보고</Heading>
+      <Content>
+        -{' '}
+        <a
+          className={styles.link}
+          href='https://docs.google.com/spreadsheets/u/0/d/1MzXAHemKqPwVj3PzPJch5cR5z49gFtzABPgJ_FVjCXM/edit?usp=sharing&pli=1&authuser=0'
+        >
+          스노로즈 회계 보고 링크 바로가기
+        </a>
+        <br />- 자세한 내용은{' '}
+        <a
+          className={styles.link}
+          href='https://snorose.com/board/notice/post/1807846'
+        >
+          관련 공지
+        </a>
+        를 참고해주시길 바랍니다.
+      </Content>
+
       <hr />
       <Content>
-        ※공식 문의 창구 (이메일(snorose1906@gmail.com), 카카오톡 1:1 문의)
-        이외의 문의는 받고 있지 않습니다. 공식 문의 창구 이외의 문의 글은 답변
-        없이 삭제될 수 있음을 알려드립니다.
+        ※ 스노로즈 인스타그램(@snorose1906)에서 월별 스노로즈 일정을 쉽게 확인할
+        수 있습니다.
+        <br />※ 공식 문의 창구 (
+        <span>
+          이메일(
+          <a
+            href='mailto:snorose1906@gmail.com'
+            style={{ color: '#007bff', textDecoration: 'underline' }}
+          >
+            snorose1906@gmail.com
+          </a>
+          )
+        </span>
+        , 카카오톡 1:1 문의) 이외의 문의는 받고 있지 않습니다. 공식 문의 창구
+        이외의 문의 글은 답변 없이 삭제될 수 있음을 알려드립니다.
       </Content>
     </div>
   </div>
