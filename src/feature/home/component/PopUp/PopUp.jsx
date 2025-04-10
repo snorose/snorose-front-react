@@ -73,25 +73,6 @@ const content = (
         를 참고해주시길 바랍니다.
       </Content>
 
-      <Heading>5. 3월 회계 보고</Heading>
-      <Content>
-        -{' '}
-        <a
-          className={styles.link}
-          href='https://docs.google.com/spreadsheets/u/0/d/1MzXAHemKqPwVj3PzPJch5cR5z49gFtzABPgJ_FVjCXM/edit?usp=sharing&pli=1&authuser=0'
-        >
-          스노로즈 회계 보고 링크 바로가기
-        </a>
-        <br />- 자세한 내용은{' '}
-        <a
-          className={styles.link}
-          href='https://snorose.com/board/notice/post/1807846'
-        >
-          관련 공지
-        </a>
-        를 참고해주시길 바랍니다.
-      </Content>
-
       <hr />
       <Content>
         ※ 스노로즈 인스타그램(@snorose1906)에서 월별 스노로즈 일정을 쉽게 확인할
