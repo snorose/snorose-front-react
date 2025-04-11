@@ -2,24 +2,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2.75rem 0 7rem;
+  margin: 4.4rem 0 11.2rem;
   background: linear-gradient(180deg, #f9f9f9 0%, var(--white) 100%);
-  padding-top: 1.75rem;
+  padding-top: 2.8rem;
 }
 
 .info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  margin-top: 0.875rem;
-  font-size: 10px;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+  font-size: 1rem;
   text-align: center;
   color: #6a6a6a;
 }
 
 .email {
-  font-size: 11px;
+  font-size: 1.1rem;
 }
 
 .menu {
@@ -30,5 +30,5 @@
 
 .link {
   display: flex;
-  padding: 0 6px;
+  padding: 0 0.6rem;
 }

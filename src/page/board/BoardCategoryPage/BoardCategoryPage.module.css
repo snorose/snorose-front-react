@@ -4,15 +4,15 @@
 }
 
 .paddingContainer {
-  padding: 0 1.25rem;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  font-size: 0.5rem;
+  font-size: 0.8rem;
 }
 
 .header {
-  height: 2.75rem;
+  height: 4.4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,25 +22,25 @@
 .searchbarBox {
   width: 100%;
   /* 양옆 여백 */
-  padding: 0.625rem 0 0 0;
+  padding: 1rem 0 0 0;
 }
 
 .searchbar {
-  border-radius: 0.3125rem;
-  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
   color: var(--gray-1-1);
   width: 100%;
-  height: 2.5rem;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: var(--gray-1);
-  padding: 0 0.8125rem;
+  padding: 0 1.3rem;
 
   input {
     width: 100%;
-    padding: 0 0.625rem 0.125rem 0.625rem;
-    border-radius: 0.625rem;
+    padding: 0 1rem 0.2rem 1rem;
+    border-radius: 1rem;
     border: transparent;
     background: var(--gray-1);
   }
@@ -51,14 +51,14 @@
 }
 
 .boardBox {
-  padding: 1.625rem 0;
+  padding: 2.6rem 0;
   width: 100%;
 }
 
 .boardTitle {
   box-sizing: border-box;
-  padding: 0 0 0.5rem 0;
-  font-size: 1rem;
+  padding: 0 0 0.8rem 0;
+  font-size: 1.6rem;
   font-weight: 700;
 }
 
@@ -66,8 +66,8 @@
   display: grid;
   grid-template-columns: repeat(2, 2fr);
   grid-row: auto auto;
-  grid-column-gap: 0.625rem;
-  grid-row-gap: 0.625rem;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
 }
 
 .moreBoardBox {
@@ -75,12 +75,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.875rem 0;
-  min-height: 18.75rem;
+  padding: 3rem 0;
+  min-height: 30rem;
   background: linear-gradient(180deg, #f9f9f9 0%, var(--white) 100%);
-  font-size: 0.75rem;
+  font-size: 1.2rem;
 }
 
 .iconLogo {
-  margin-bottom: 0.625rem;
+  margin-bottom: 1rem;
 }

@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   overflow-y: scroll;
-  padding: 0 1.25rem;
+  padding: 0 2rem;
 }
 
 .pageFrame form {
@@ -13,8 +13,8 @@
   height: 100%;
 }
 .back {
-  margin-top: 0.875rem;
-  margin-bottom: 0.875rem;
+  margin-top: 1.4rem;
+  margin-bottom: 1.4rem;
 }
 .back:hover {
   cursor: pointer;
@@ -29,31 +29,31 @@
 }
 
 .arrowLeft {
-  margin-top: 0.875rem;
-  margin-bottom: 1.703rem;
+  margin-top: 1.4rem;
+  margin-bottom: 2.7rem;
 }
 
 .pageTitle {
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: 700;
-  margin-top: 0.875rem;
-  margin-bottom: 3.5rem;
+  margin-top: 1.4rem;
+  margin-bottom: 5.6rem;
 }
 
 .inputFrame {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.4rem;
 }
 
 .buttonFrame {
-  margin-top: 1.5rem;
-  margin-bottom: 2.125rem;
+  margin-top: 2.4rem;
+  margin-bottom: 3.4rem;
 }
 
 .alert {
-  font-size: 12px;
+  font-size: 1.2rem;
   color: grey;
-  padding: 0 2rem;
-  margin-top: 3rem;
+  padding: 0 3.2rem;
+  margin-top: 4.8rem;
   line-height: 1.7;
   word-break: keep-all;
 }
