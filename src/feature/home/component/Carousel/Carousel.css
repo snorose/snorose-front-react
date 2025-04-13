@@ -12,9 +12,9 @@
 }
 
 .swiper-pagination-bullet {
-  width: 0.375rem;
-  height: 0.375rem;
-  border-radius: 0.625rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 1rem;
   background-color: var(--blue-4);
 }
 
@@ -28,5 +28,5 @@
 .swiper-button-prev::after,
 .swiper-button-next::after {
   color: var(--blue-1);
-  font-size: 40px;
+  font-size: 4rem;
 }
