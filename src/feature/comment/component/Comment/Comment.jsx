@@ -120,10 +120,14 @@ const Comment = forwardRef((props, ref) => {
             <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
               {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
             </p>
-            {userRoleId === ROLE.official && (
+            {[ROLE.admin, ROLE.official].includes(userRoleId) && (
               <Icon
-                className={styles.officialBadge}
-                id='official-badge'
+                className={styles.badge}
+                id={
+                  userRoleId === ROLE.official
+                    ? 'official-badge'
+                    : 'admin-badge'
+                }
                 width={18}
                 height={18}
               />
