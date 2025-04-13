@@ -22,10 +22,10 @@ export default function MyInfo({ userInfo }) {
         <div className={styles.memberType}>
           {ROLE_NAME[userInfo?.userRoleId]}
         </div>
-        {userInfo?.userRoleId === 5 && (
+        {[4, 5].includes(userInfo?.userRoleId) && (
           <Icon
-            className={styles.officialBadge}
-            id='official-badge'
+            className={styles.badge}
+            id={userInfo.userRoleId === 5 ? 'official-badge' : 'admin-badge'}
             width={32}
             height={32}
           />
