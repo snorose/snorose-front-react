@@ -187,10 +187,14 @@ export default function PostPage() {
           <div className={styles.contentTopLeft}>
             <Icon id='cloud' width={25} height={16} />
             <p>{data.userDisplay || 'Unknown'}</p>
-            {data.userRoleId === ROLE.official && (
+            {[ROLE.admin, ROLE.official].includes(data.userRoleId) && (
               <Icon
-                className={styles.officialBadge}
-                id='official-badge'
+                className={styles.badge}
+                id={
+                  data.userRoleId === ROLE.official
+                    ? 'official-badge'
+                    : 'admin-badge'
+                }
                 width={18}
                 height={18}
               />
