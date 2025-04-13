@@ -1,6 +1,6 @@
 :root {
-  --default-width: 600px;
-  --default-margin: 1.25rem;
+  --default-width: 60rem;
+  --default-margin: 2rem;
 
   /* Color */
 
@@ -90,7 +90,7 @@ pre {
   box-sizing: border-box;
   font: inherit;
   vertical-align: baseline;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.05rem;
 }
 
 p,
@@ -131,6 +131,7 @@ button {
 
 html {
   background-color: #dfdfdf;
+  font-size: 62.5%;
 }
 
 body {
@@ -179,7 +180,7 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 0.4rem;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -188,14 +189,14 @@ code {
 }
 
 .react-calendar {
-  margin: 0 1.25rem;
+  margin: 0 2rem;
   background-color: rgba(95, 133, 191, 0.4);
-  border-radius: 0.3125rem;
+  border-radius: 0.5rem;
   border: none;
 }
 
-@media screen and (max-width: 400px) {
+/* @media screen and (max-width: 400px) {
   html {
-    font-size: 14px;
+    font-size: 55%
   }
-}
+} */

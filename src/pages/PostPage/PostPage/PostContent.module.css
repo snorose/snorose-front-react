@@ -1,0 +1,16 @@
+.content {
+  font-size: 1.2rem;
+  color: var(--gray-4);
+  font-size: 1.4rem;
+  padding: 0 1.3rem 1.5rem 0;
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+.content a {
+  color: var(--blue-3);
+}
+
+.content a:hover {
+  text-decoration: underline;
+}

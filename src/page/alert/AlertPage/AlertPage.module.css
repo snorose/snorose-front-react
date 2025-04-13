@@ -5,14 +5,14 @@
 
 .menu {
   display: flex;
-  padding: 0.875rem 1.25rem;
+  padding: 1.4rem 2rem;
   justify-content: flex-end;
 }
 
 .contentWrapper {
   display: flex;
   flex-direction: column;
-  padding: 0 1.25rem 6.25rem 1.25rem;
+  padding: 0 2rem 10rem 2rem;
   width: 100%;
 }
 
@@ -20,11 +20,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.875rem 0;
+  padding: 1.4rem 0;
 }
 
 .title {
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
 }
 
@@ -32,27 +32,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3.25rem;
-  height: 1.125rem;
-  border-radius: 0.1875rem;
+  width: 5.2rem;
+  height: 1.8rem;
+  border-radius: 0.3rem;
   background: var(--blue-0);
   color: var(--blue-3);
-  font-size: 0.5625rem;
+  font-size: 0.9rem;
 }
 
 .alertListContainer {
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 1rem;
 }
 
 .alertBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 0.3125rem;
+  border-radius: 0.5rem;
   background: var(--gray-1-1);
-  padding: 0.9375rem;
+  padding: 1.5rem;
 }
 
 .alertBox.unread {
@@ -66,23 +66,23 @@
 .alertIconContentWrapper {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
+  gap: 1rem;
 }
 
 .alertIconContentWrapper svg {
-  width: 2rem;
-  height: 2rem;
+  width: 3.2rem;
+  height: 3.2rem;
 }
 
 .alertContent {
   display: flex;
   flex-direction: column;
-  gap: 0.1875rem;
+  gap: 0.3rem;
 }
 
 .alertTitle {
   color: var(--gray-4);
-  font-size: 0.75rem;
+  font-size: 1.2rem;
   font-weight: 500;
 }
 .alertTitle.unreadTitle {
@@ -94,7 +94,7 @@
 
 .alertDesc {
   color: var(--gray-4);
-  font-size: 0.6875rem;
+  font-size: 1.1rem;
   white-space: pre-line;
 }
 .alertDesc.unreadDesc {
