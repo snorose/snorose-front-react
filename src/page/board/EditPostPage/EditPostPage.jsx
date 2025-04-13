@@ -159,10 +159,14 @@ export default function EditPostPage() {
             <div className={styles.profileBoxLeft}>
               <Icon id='cloud' width={25} height={16} />
               <p>{userDisplay}</p>
-              {userInfo?.userRoleId === ROLE.official && (
+              {[ROLE.admin, ROLE.official].includes(userInfo?.userRoleId) && (
                 <Icon
-                  className={styles.officialBadge}
-                  id='official-badge'
+                  className={styles.badge}
+                  id={
+                    userInfo.userRoleId === ROLE.official
+                      ? 'official-badge'
+                      : 'admin-badge'
+                  }
                   width={18}
                   height={18}
                 />

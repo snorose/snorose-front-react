@@ -211,14 +211,19 @@ export default function WritePostPage() {
             <div className={styles.profileBoxLeft}>
               <Icon id='cloud' width={25} height={16} />
               <p>{userInfo?.nickname}</p>
-              {userInfo?.userRoleId === ROLE.official && (
+              {[ROLE.admin, ROLE.official].includes(userInfo?.userRoleId) && (
                 <Icon
-                  className={styles.officialBadge}
-                  id='official-badge'
+                  className={styles.badge}
+                  id={
+                    userInfo.userRoleId === ROLE.official
+                      ? 'official-badge'
+                      : 'admin-badge'
+                  }
                   width={18}
                   height={18}
                 />
               )}
+
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
             </div>
