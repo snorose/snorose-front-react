@@ -24,6 +24,10 @@
   padding-left: 0.6rem;
 }
 
+.badge {
+  padding-left: 0.2rem;
+}
+
 .dot {
   font-weight: 800;
   padding: 0 0.3rem;

@@ -36,6 +36,10 @@
   gap: 0.7rem;
 }
 
+.badge {
+  margin-left: -0.5rem;
+}
+
 .dot {
   font-weight: 800;
 }

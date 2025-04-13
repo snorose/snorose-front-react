@@ -22,6 +22,10 @@
   gap: 0.8rem;
 }
 
+.badge {
+  margin-left: -0.6rem;
+}
+
 .cloud {
   display: flex;
   height: 1.2rem;
