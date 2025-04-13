@@ -1,6 +1,7 @@
 export const STATIC_ICON_LIST = Object.freeze({
   abuseComment: 'abuse-comment',
   adult: 'adult',
+  adminBadge: 'admin-badge',
   angleDown: 'angle-down',
   angleDownBlue: 'angle-down-blue',
   angleRight: 'angle-right',
