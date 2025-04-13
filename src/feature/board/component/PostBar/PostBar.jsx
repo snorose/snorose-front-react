@@ -10,10 +10,14 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
       <div className={styles.post_top}>
         <Icon id='cloud' width={18} height={11} />
         <p className={styles.name}>{data.userDisplay}</p>
-        {data.userRoleId === ROLE.official && (
+        {[ROLE.admin, ROLE.official].includes(data.userRoleId) && (
           <Icon
-            className={styles.officialBadge}
-            id='official-badge'
+            className={styles.badge}
+            id={
+              data.userRoleId === ROLE.official
+                ? 'official-badge'
+                : 'admin-badge'
+            }
             width={16}
             height={16}
           />
