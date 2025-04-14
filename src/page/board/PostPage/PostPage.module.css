@@ -18,12 +18,12 @@
   flex-direction: column;
 
   width: 100%;
-  padding: 55px 11px 11px 21px;
-  border-radius: 0 0 15px 15px;
+  padding: 5.5rem 1.1rem 1.1rem 2.1rem;
+  border-radius: 0 0 1.5rem 1.5rem;
 
   background-color: var(--blue-0);
 
-  font-size: 8px;
+  font-size: 0.8rem;
 }
 
 .contentTop {
@@ -32,16 +32,16 @@
   align-items: center;
 
   width: 100%;
-  min-height: 31px;
+  min-height: 3.1rem;
 
-  font-size: 12px;
+  font-size: 1.2rem;
   color: var(--gray-3-1);
 }
 
 .contentTopLeft {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 0.7rem;
 }
 
 .dot {
@@ -51,7 +51,7 @@
 .dot3 {
   flex-shrink: 0;
 
-  padding: 10px;
+  padding: 1rem;
 
   cursor: pointer;
 }
@@ -60,17 +60,17 @@
   display: flex;
   align-items: end;
 
-  padding: 0 10px 26px 0;
+  padding: 0 1rem 2.6rem 0;
 
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--gray-4);
 }
 
 .views {
-  padding-left: 2px;
+  padding-left: 0.2rem;
 
-  font-size: 11px;
+  font-size: 1.1rem;
   font-weight: 400;
   color: var(--blue-3);
   white-space: nowrap;
@@ -79,26 +79,26 @@
 .post_bottom {
   display: flex;
   justify-content: space-between;
-  gap: 25px;
+  gap: 2.5rem;
 
-  padding-top: 9px;
+  padding-top: 0.9rem;
 }
 
 .count {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 0.6rem;
 
   width: 100%;
-  padding: 9px 20px;
+  padding: 0.9rem 2rem;
 
-  border-radius: 5px;
+  border-radius: 0.5rem;
 
-  font-size: 11px;
+  font-size: 1.1rem;
   font-weight: 400;
   line-height: 150%;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.05rem;
   color: var(--gray-3-1);
   white-space: nowrap;
 
@@ -119,7 +119,7 @@
 
 .whiteBox {
   width: 100%;
-  height: 50px;
+  height: 5rem;
 
   background-color: #fff;
 }
@@ -127,12 +127,12 @@
 /* post content */
 
 .contentText {
-  border-bottom: 0.5px solid rgba(137, 137, 137, 0.7);
+  border-bottom: 0.05rem solid rgba(137, 137, 137, 0.7);
 
-  font-size: 12px;
+  font-size: 1.2rem;
   color: var(--gray-4);
-  font-size: 14px;
-  padding: 0 13px 15px 0;
+  font-size: 1.4rem;
+  padding: 0 1.3rem 1.5rem 0;
   white-space: pre-wrap;
   word-break: keep-all;
   a {
