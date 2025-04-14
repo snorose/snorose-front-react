@@ -1,22 +1,22 @@
+import { useMutation } from '@tanstack/react-query';
 import { forwardRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
 
 import { reportComment } from '@/apis';
 
-import { useModal, useToast } from '@/shared/hook';
 import {
   ConfirmModal,
   DeleteModal,
   Icon,
   OptionModal,
 } from '@/shared/component';
-import { timeAgo, convertHyperlink } from '@/shared/lib';
-import { MUTATION_KEY, LIKE_TYPE } from '@/shared/constant';
+import { LIKE_TYPE, MUTATION_KEY } from '@/shared/constant';
+import { useModal, useToast } from '@/shared/hook';
+import { convertHyperlink, timeAgo } from '@/shared/lib';
 
+import { NestedComment } from '@/feature/comment/component';
 import { useCommentContext } from '@/feature/comment/context';
 import { useComment } from '@/feature/comment/hook';
-import { NestedComment } from '@/feature/comment/component';
 import { useLike } from '@/feature/like/hook';
 
 import styles from './Comment.module.css';
@@ -155,7 +155,7 @@ const Comment = forwardRef((props, ref) => {
                 type='button'
                 onClick={handleReply}
               >
-                <Icon id='comment' width={15} height={13} />
+                <Icon id='comment' width={15} height={13} fill='#D9D9D9' />
                 <p>{children.length}</p>
               </button>
               <button
