@@ -77,6 +77,10 @@ export default function PostPage() {
     },
   });
 
+  const handleIconTouch = (iconType) => {
+    setHoveredIcon(hoveredIcon === iconType ? null : iconType);
+  };
+
   const handleDelete = async () => {
     if (deleteSubmitDisabled) return;
     setDeleteSubmitDisabled(true);
@@ -234,6 +238,7 @@ export default function PostPage() {
           <div
             className={styles.count}
             onClick={() => (data.isLiked ? unlike.mutate() : like.mutate())}
+            onTouchStart={() => handleIconTouch('like')}
             onMouseEnter={() => setHoveredIcon('like')}
             onMouseLeave={() => setHoveredIcon(null)}
           >
@@ -250,6 +255,7 @@ export default function PostPage() {
             onClick={() =>
               data.isScrapped ? unscrap.mutate() : scrap.mutate()
             }
+            onTouchStart={() => handleIconTouch('bookmark')}
             onMouseEnter={() => setHoveredIcon('bookmark')}
             onMouseLeave={() => setHoveredIcon(null)}
           >
