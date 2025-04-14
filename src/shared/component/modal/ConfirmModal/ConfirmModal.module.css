@@ -51,6 +51,7 @@
   width: 100%;
   padding: 0.625rem 0.75rem;
   background-color: transparent;
+  border: none;
   font-weight: 500;
   color: var(--pink-3);
 }
@@ -59,6 +60,7 @@
   width: 100%;
   padding: 0.625rem 0.75rem;
   background-color: transparent;
+  border: none;
   font-weight: 500;
   color: var(--gray-3-1);
 }
