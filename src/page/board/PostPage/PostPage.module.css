@@ -126,12 +126,13 @@
 /* post content */
 
 .contentText {
-  font-size: 1.4rem;
+  border-bottom: 0.5px solid rgba(137, 137, 137, 0.7);
+
+  font-size: 0.75rem;
   color: var(--gray-4);
   padding: 0 1.3rem 1.5rem 0;
   white-space: pre-wrap;
   word-break: keep-all;
-
   a {
     color: var(--blue-3);
   }
