@@ -105,9 +105,15 @@
   resize: none;
 }
 
+.imageList {
+  cursor: default;
+}
+
 .imageContainer {
+  width: fit-content;
   display: flex;
   margin-bottom: 1.25rem;
+  list-style-type: none;
 }
 
 .image {

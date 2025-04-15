@@ -229,9 +229,34 @@ export default function WritePostPage() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
-              <div>
-                {images.map((image) => (
-                  <div className={styles.imageContainer}>
+
+              <ul className={styles.imageList}>
+                {images.map((image, index) => (
+                  <li
+                    key={index}
+                    className={styles.imageContainer}
+                    draggable
+                    onDragStart={(e) => {
+                      e.dataTransfer.setData('text/plain', index);
+                      e.dataTransfer.effectAllowed = 'move';
+                    }}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      const draggedIndex = parseInt(
+                        e.dataTransfer.getData('text/plain'),
+                        10
+                      );
+                      const droppedIndex = index;
+
+                      if (draggedIndex === droppedIndex) return;
+
+                      const updated = [...images];
+                      const [moved] = updated.splice(draggedIndex, 1);
+                      updated.splice(droppedIndex, 0, moved);
+                      setImages(updated);
+                    }}
+                  >
                     <img src={image} className={styles.image} />
                     <Icon
                       id='image-select-bar'
@@ -240,9 +265,9 @@ export default function WritePostPage() {
                       fill='white'
                       className={styles.imageSelectBar}
                     />
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </div>
