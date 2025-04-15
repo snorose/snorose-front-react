@@ -3,9 +3,24 @@ import { useState } from 'react';
 import styles from './AttatchmentBar.module.css';
 import { Icon } from '@/shared/component';
 
-export default function AttatchmentBar() {
+export default function AttatchmentBar({ setImages }) {
   const img = useRef();
   const vid = useRef();
+  const changeImageUpload = async (e) => {
+    const { files } = e.target;
+    const fileArray = Array.from(files);
+
+    const readFilesAsDataURLs = fileArray.map((file) => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => resolve(reader.result);
+      });
+    });
+
+    const imageDataUrls = await Promise.all(readFilesAsDataURLs);
+    setImages(imageDataUrls);
+  };
   const [imageIconState, setImageIconState] = useState('image');
   const [videoIconState, setVideoIconState] = useState('video');
 
@@ -29,6 +44,8 @@ export default function AttatchmentBar() {
           accept='image/*'
           className={styles.imageInput}
           ref={img}
+          onChange={changeImageUpload}
+          multiple
         />
         <Icon
           id={videoIconState}
@@ -46,6 +63,7 @@ export default function AttatchmentBar() {
           accept='video/*'
           className={styles.videoInput}
           ref={vid}
+          multiple
         />
       </div>
     </div>

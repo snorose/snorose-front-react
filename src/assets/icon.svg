@@ -461,4 +461,13 @@
     <circle cx="12" cy="12" r="11" fill="#5F86BF" stroke="#5F86BF" stroke-width="2"/>
     <path d="M15.3889 11.1342C16.0556 11.5191 16.0556 12.4813 15.3889 12.8662L11.0556 15.3681C10.3889 15.753 9.55558 15.2719 9.55558 14.5021L9.55558 9.49837C9.55558 8.72857 10.3889 8.24744 11.0556 8.63234L15.3889 11.1342Z" fill="#EAF5FD"/>
   </symbol>
+  <symbol id="image-select-bar" viewBox="0 0 31 96" fill="none" >
+    <path d="M0.5 0H18.5C25.1274 0 30.5 5.37258 30.5 12V84C30.5 90.6274 25.1274 96 18.5 96H0.5V0Z" fill="white"  stroke="white"/>
+    <circle cx="12.1587" cy="41" r="2" fill="#BFD7EC" stroke="none"/>
+    <circle cx="18.8413" cy="41" r="2" fill="#BFD7EC" stroke="none"/>
+    <circle cx="12.1587" cy="48" r="2" fill="#BFD7EC" stroke="none"/>
+    <circle cx="18.8413" cy="48" r="2" fill="#BFD7EC" stroke="none"/>
+    <circle cx="12.1587" cy="55" r="2" fill="#BFD7EC" stroke="none"/>
+    <circle cx="18.8413" cy="55" r="2" fill="#BFD7EC" stroke="none"/>
+  </symbol>
 </svg>

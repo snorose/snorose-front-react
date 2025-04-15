@@ -30,6 +30,7 @@ export default function WritePostPage() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
+  const [images, setImages] = useState([]);
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
@@ -228,10 +229,24 @@ export default function WritePostPage() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
+              <div>
+                {images.map((image) => (
+                  <div className={styles.imageContainer}>
+                    <img src={image} className={styles.image} />
+                    <Icon
+                      id='image-select-bar'
+                      width={'1.875rem'}
+                      height={'6rem'}
+                      fill='white'
+                      className={styles.imageSelectBar}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-        <AttatchmentBar />
+        <AttatchmentBar setImages={setImages} />
       </div>
       <DeleteModal
         id='post-write-exit-check'
