@@ -105,6 +105,25 @@
   resize: none;
 }
 
+.trashInvisible {
+  opacity: 0%;
+  pointer-events: all;
+  width: fit-content;
+  position: fixed;
+  bottom: 6rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.trashVisible {
+  opacity: 100%;
+  pointer-events: all;
+  width: fit-content;
+  position: fixed;
+  bottom: 6rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
 .imageList {
   cursor: default;
 }
