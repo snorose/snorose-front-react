@@ -141,6 +141,11 @@ export default function PostPage() {
     setIsUserReportModalOpen(false);
   };
 
+  // 뱃지를 보여주는 ROLE
+  const showBadge =
+    data?.userRoleId === ROLE.official ||
+    (data?.userRoleId === ROLE.admin && data?.userDisplay !== '익명송이');
+
   // 로딩과 에러 상태에 따라 조건부 렌더링
   if (isLoading) {
     return (
@@ -187,7 +192,7 @@ export default function PostPage() {
           <div className={styles.contentTopLeft}>
             <Icon id='cloud' width={25} height={16} />
             <p>{data.userDisplay || 'Unknown'}</p>
-            {[ROLE.admin, ROLE.official].includes(data.userRoleId) && (
+            {showBadge && (
               <Icon
                 className={styles.badge}
                 id={
