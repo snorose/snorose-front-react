@@ -1,16 +1,27 @@
 import { React, useRef } from 'react';
 import { useState } from 'react';
-import styles from './AttatchmentBar.module.css';
+
+import { useToast } from '@/shared/hook';
 import { Icon } from '@/shared/component';
 
+import styles from './AttatchmentBar.module.css';
+
 export default function AttatchmentBar({ setImages }) {
+  const { toast } = useToast();
   const img = useRef();
   const vid = useRef();
   const changeImageUpload = async (e) => {
     const { files } = e.target;
+
+    //이미지 개수 제한
+    if (files.length > 10) {
+      toast('사진은 최대 10장까지만 첨부할 수 있습니다.');
+      return;
+    }
     const fileArray = Array.from(files);
 
     const readFilesAsDataURLs = fileArray.map((file) => {
+      console.log(file);
       return new Promise((resolve) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -19,6 +30,7 @@ export default function AttatchmentBar({ setImages }) {
     });
 
     const imageDataUrls = await Promise.all(readFilesAsDataURLs);
+    console.log(imageDataUrls);
     setImages(imageDataUrls);
   };
   const [imageIconState, setImageIconState] = useState('image');

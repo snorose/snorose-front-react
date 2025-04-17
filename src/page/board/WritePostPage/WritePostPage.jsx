@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -22,7 +22,6 @@ import AttatchmentBar from '@/feature/board/component/AttatchmentBar/Attatchment
 import styles from './WritePostPage.module.css';
 
 export default function WritePostPage() {
-  const trashcan = useRef();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { pathname } = useLocation();
@@ -284,7 +283,6 @@ export default function WritePostPage() {
           width='6.25rem'
           height='6.25rem'
           className={`${isTrashOverlapped ? styles.trashVisible : styles.trashInvisible}`}
-          ref={trashcan}
           onDragEnter={(e) => {
             e.preventDefault();
             setIsTrashOverlapped(true);
@@ -299,24 +297,6 @@ export default function WritePostPage() {
           }}
           onDrop={(e) => {
             e.preventDefault();
-
-            //쓰레기통에 드롭했을 때
-            /*const [draggedTop, draggedBottom, draggedLeft, draggedRight] =
-              e.getBoundingClientRect();
-            const trashRect = e.target.getBoundingClientRect();
-            const draggedMidX = (draggedTop + draggedBottom) / 2;
-            const draggedMidY = (draggedLeft + draggedRight) / 2;
-            setIsTrashOverlapped(
-              draggedMidX >= trashRect.left &&
-                draggedMidX <= trashRect.right &&
-                draggedMidY >= trashRect.top &&
-                draggedMidY <= trashRect.bottom
-            );
-            const overlap =
-              draggedMidX >= trashRect.left &&
-              draggedMidX <= trashRect.right &&
-              draggedMidY >= trashRect.top &&
-              draggedMidY <= trashRect.bottom;*/
             const draggedIndex = parseInt(
               e.dataTransfer.getData('text/plain'),
               10
