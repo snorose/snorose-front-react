@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth, useScrollRestoration } from '@/shared/hook';
 import { BackAppBar, FetchLoading, WriteButton } from '@/shared/component';
 import { getBoard } from '@/shared/lib';
-import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
+import { QUERY_KEY, STALE_TIME, ROLE } from '@/shared/constant';
 
 import { getNoticeList } from '@/apis/notice';
 import { NoticeBar } from '@/feature/board/component';
@@ -28,12 +28,6 @@ export default function NoticeListPage() {
   });
 
   const { scrollRef, saveScrollPosition } = useScrollRestoration();
-
-  const officialBoardId = [
-    'student-council',
-    'graduation-preparation',
-    'finance-audit',
-  ];
 
   // 데이터 화면 표시
   useEffect(() => {
@@ -94,15 +88,8 @@ export default function NoticeListPage() {
           </div>
         )}
       </div>
-      {userInfo?.userRoleId === 4 && currentBoardTextId === 'notice' && (
-        <WriteButton
-          to={`/board/${currentBoardTextId}/post-write`}
-          className={styles.writeButton}
-        />
-      )}
-      {/* 공식 게시판 글쓰기 */}
-      {(userInfo?.userRoleId === 4 || userInfo?.userRoleId === 5) &&
-        officialBoardId.includes(currentBoardTextId) && (
+      {userInfo?.userRoleId === ROLE.admin &&
+        currentBoardTextId === 'notice' && (
           <WriteButton
             to={`/board/${currentBoardTextId}/post-write`}
             className={styles.writeButton}
