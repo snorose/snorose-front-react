@@ -138,6 +138,13 @@ export const BOARD_MENUS = [
   },
 ];
 
+// 공식게시판
+export const OFFICIAL_BOARD = Object.freeze([
+  'student-council',
+  'graduation-preparation',
+  'finance-audit',
+]);
+
 // 뱃지가 보이는 경로 (일반 게시판에서는 리자의 뱃지가 안보이게 설정)
 export const SHOW_BADGE_PATH = Object.freeze([
   '/notice',
