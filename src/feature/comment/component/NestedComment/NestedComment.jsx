@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { Icon } from '@/shared/component';
+import { Icon, Badge } from '@/shared/component';
 import { timeAgo, convertHyperlink } from '@/shared/lib';
 import { LIKE_TYPE, ROLE, SHOW_BADGE_PATH } from '@/shared/constant';
 
@@ -60,14 +60,7 @@ export default function NestedComment({
             {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
           </p>
           {showBadge && (
-            <Icon
-              className={styles.badge}
-              id={
-                userRoleId === ROLE.official ? 'official-badge' : 'admin-badge'
-              }
-              width={18}
-              height={18}
-            />
+            <Badge userRoleId={userRoleId} className={styles.badge} />
           )}
           <p className={styles.dot}>·</p>
           <p>

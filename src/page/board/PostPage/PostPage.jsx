@@ -11,6 +11,7 @@ import {
   FetchLoading,
   Icon,
   OptionModal,
+  Badge,
 } from '@/shared/component';
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 import {
@@ -193,16 +194,7 @@ export default function PostPage() {
             <Icon id='cloud' width={25} height={16} />
             <p>{data.userDisplay || 'Unknown'}</p>
             {showBadge && (
-              <Icon
-                className={styles.badge}
-                id={
-                  data.userRoleId === ROLE.official
-                    ? 'official-badge'
-                    : 'admin-badge'
-                }
-                width={18}
-                height={18}
-              />
+              <Badge userRoleId={data.userRoleId} className={styles.badge} />
             )}
             <p className={styles.dot}>·</p>
             <p>

@@ -1,4 +1,4 @@
-import { Icon } from '@/shared/component';
+import { Icon, Badge } from '@/shared/component';
 import { postBarDateFormat } from '@/shared/lib';
 import { ROLE } from '@/shared/constant';
 
@@ -16,16 +16,7 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
         <Icon id='cloud' width={18} height={11} />
         <p className={styles.name}>{data.userDisplay}</p>
         {showBadge && (
-          <Icon
-            className={styles.badge}
-            id={
-              data.userRoleId === ROLE.official
-                ? 'official-badge'
-                : 'admin-badge'
-            }
-            width={16}
-            height={16}
-          />
+          <Badge userRoleId={data.userRoleId} className={styles.badge} />
         )}
         <p className={styles.dot}>·</p>
         <p>{postBarDateFormat(data.createdAt)}</p>

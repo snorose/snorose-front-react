@@ -10,6 +10,7 @@ import {
   DeleteModal,
   FetchLoading,
   Icon,
+  Badge,
 } from '@/shared/component';
 import { formattedNowTime } from '@/shared/lib';
 import {
@@ -159,18 +160,12 @@ export default function EditPostPage() {
             <div className={styles.profileBoxLeft}>
               <Icon id='cloud' width={25} height={16} />
               <p>{userDisplay}</p>
-              {[ROLE.admin, ROLE.official].includes(userInfo?.userRoleId) && (
-                <Icon
+              {
+                <Badge
+                  userRoleId={userInfo?.userRoleId}
                   className={styles.badge}
-                  id={
-                    userInfo.userRoleId === ROLE.official
-                      ? 'official-badge'
-                      : 'admin-badge'
-                  }
-                  width={18}
-                  height={18}
                 />
-              )}
+              }
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
             </div>
