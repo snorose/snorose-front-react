@@ -138,6 +138,14 @@ export const BOARD_MENUS = [
   },
 ];
 
+// 뱃지가 보이는 경로 (일반 게시판에서는 리자의 뱃지가 안보이게 설정)
+export const SHOW_BADGE_PATH = Object.freeze([
+  '/notice',
+  '/student-council',
+  'finance-audit',
+  '/graduation-preparation',
+]);
+
 // 게시글 신고
 export const POST_REPORT_TYPE_ENUM = Object.freeze({
   POST_PERSONAL_ABUSE: 'POST_PERSONAL_ABUSE',

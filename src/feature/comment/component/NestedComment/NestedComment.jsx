@@ -1,6 +1,7 @@
+import { useLocation } from 'react-router-dom';
 import { Icon } from '@/shared/component';
 import { timeAgo, convertHyperlink } from '@/shared/lib';
-import { LIKE_TYPE, ROLE } from '@/shared/constant';
+import { LIKE_TYPE, ROLE, SHOW_BADGE_PATH } from '@/shared/constant';
 
 import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
@@ -13,6 +14,7 @@ export default function NestedComment({
   isFirst,
   onCommentOptionClick,
 }) {
+  const { pathname } = useLocation();
   const { commentId } = useCommentContext();
   const { like, unlike } = useLike({
     type: LIKE_TYPE.comment,
@@ -31,6 +33,12 @@ export default function NestedComment({
     isUpdated,
     isDeleted,
   } = data;
+
+  // 뱃지가 보이는 ROLE
+  const showBadge =
+    userRoleId === ROLE.official ||
+    (userRoleId === ROLE.admin &&
+      SHOW_BADGE_PATH.some((path) => pathname.includes(path)));
 
   return (
     <div
@@ -51,7 +59,7 @@ export default function NestedComment({
           <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
             {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
           </p>
-          {[ROLE.admin, ROLE.official].includes(userRoleId) && (
+          {showBadge && (
             <Icon
               className={styles.badge}
               id={
