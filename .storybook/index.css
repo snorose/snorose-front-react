@@ -79,3 +79,10 @@ pre {
   vertical-align: baseline;
   letter-spacing: -0.5px;
 }
+
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
