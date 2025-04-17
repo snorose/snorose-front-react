@@ -3,6 +3,7 @@ import { Portal } from '@/shared/component';
 import styles from './ConfirmModal.module.css';
 
 export default function ConfirmModal({
+  isBackgroundBlurred = true,
   isOpen,
   title,
   message,
@@ -17,7 +18,10 @@ export default function ConfirmModal({
 
   return (
     <Portal portalKey='modal'>
-      <div className={styles.dim} onClick={(event) => event.stopPropagation()}>
+      <div
+        className={`${styles.dim} ${isBackgroundBlurred && styles.blurred}`}
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className={styles.container}>
           <h1 className={styles.title}>{title}</h1>
           {!!message && <p className={styles.deleteCenter}>{message}</p>}

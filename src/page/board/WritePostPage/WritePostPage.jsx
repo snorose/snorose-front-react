@@ -3,10 +3,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuth, useToast } from '@/shared/hook';
+import { useAuth, useToast, useModal } from '@/shared/hook';
 import {
   ActionButton,
   CloseAppBar,
+  ConfirmModal,
   DeleteModal,
   Icon,
   FetchLoading,
@@ -35,6 +36,8 @@ export default function WritePostPage() {
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
+  const [trashImageIndex, setTrashImageIndex] = useState(null);
+  const trashImageConfirmModal = useModal();
 
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
@@ -285,7 +288,6 @@ export default function WritePostPage() {
           onDragEnter={(e) => {
             e.preventDefault();
             setIsTrashOverlapped(true);
-            console.log(isTrashOverlapped);
           }}
           onDragOver={(e) => {
             setIsTrashOverlapped(true);
@@ -294,7 +296,6 @@ export default function WritePostPage() {
           onDragLeave={(e) => {
             e.preventDefault();
             setIsTrashOverlapped(false);
-            console.log(isTrashOverlapped);
           }}
           onDrop={(e) => {
             e.preventDefault();
@@ -316,16 +317,13 @@ export default function WritePostPage() {
               draggedMidX <= trashRect.right &&
               draggedMidY >= trashRect.top &&
               draggedMidY <= trashRect.bottom;*/
-
             const draggedIndex = parseInt(
               e.dataTransfer.getData('text/plain'),
               10
             );
+            setTrashImageIndex(draggedIndex);
 
-            const updated = [...images];
-            updated.splice(draggedIndex, 1);
-            setImages(updated);
-            setIsTrashOverlapped(false);
+            trashImageConfirmModal.openModal();
           }}
         />
         <AttatchmentBar setImages={setImages} />
@@ -336,6 +334,24 @@ export default function WritePostPage() {
         isOpen={isCheckModalOpen}
         closeFn={() => setIsCheckModalOpen(false)}
         redBtnFunction={() => navigate(-1, { replace: true })}
+      />
+      <ConfirmModal
+        isBackgroundBlurred={false}
+        isOpen={trashImageConfirmModal.isOpen}
+        title='삭제하시겠습니까?'
+        primaryButtonText='확인'
+        secondaryButtonText='취소'
+        onPrimaryButtonClick={() => {
+          const updated = [...images];
+          updated.splice(trashImageIndex, 1);
+          setImages(updated);
+          setIsTrashOverlapped(false);
+          trashImageConfirmModal.closeModal();
+        }}
+        onSecondaryButtonClick={() => {
+          trashImageConfirmModal.closeModal();
+          setIsTrashOverlapped(false);
+        }}
       />
     </>
   );
