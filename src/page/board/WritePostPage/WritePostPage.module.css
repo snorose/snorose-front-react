@@ -51,6 +51,8 @@
 }
 
 .badge {
+  width: 1.8rem;
+  height: 1.8rem;
   margin-left: -0.5rem;
 }
 
