@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: baseline;
   font-size: 0.8rem;
+  gap: 2.6rem;
 }
 
 .header {
@@ -22,7 +23,7 @@
 .searchbarBox {
   width: 100%;
   /* 양옆 여백 */
-  padding: 1rem 0 2.6rem 0;
+  padding-top: 1rem;
 }
 
 .searchbar {
@@ -51,7 +52,6 @@
 }
 
 .boardBox {
-  padding: 2.6rem 0;
   width: 100%;
 }
 
@@ -76,7 +76,8 @@
   flex-direction: column;
   align-items: center;
   padding: 3rem 0;
-  min-height: 30rem;
+  margin-top: 2.6rem;
+  min-height: 18rem;
   background: linear-gradient(180deg, #f9f9f9 0%, var(--white) 100%);
   font-size: 1.2rem;
 }
