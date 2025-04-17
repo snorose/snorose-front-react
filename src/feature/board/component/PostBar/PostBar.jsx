@@ -5,12 +5,17 @@ import { ROLE } from '@/shared/constant';
 import styles from './PostBar.module.css';
 
 export default function PostBar({ data, hasComment = true, hasLike = true }) {
+  // 뱃지가 보이는 ROLE
+  const showBadge =
+    data.userRoleId === ROLE.official ||
+    (data.userRoleId === ROLE.admin && data.userDisplay !== '익명송이');
+
   return (
     <div className={styles.post}>
       <div className={styles.post_top}>
         <Icon id='cloud' width={18} height={11} />
         <p className={styles.name}>{data.userDisplay}</p>
-        {[ROLE.admin, ROLE.official].includes(data.userRoleId) && (
+        {showBadge && (
           <Icon
             className={styles.badge}
             id={
