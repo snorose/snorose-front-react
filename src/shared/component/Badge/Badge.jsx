@@ -8,7 +8,7 @@ export default function Badge({ userRoleId, className = '' }) {
   }
 
   if (userRoleId === ROLE.official) {
-    return <img src={officialBadge} alt='리자 뱃지' className={className} />;
+    return <img src={officialBadge} alt='공식 뱃지' className={className} />;
   }
 
   return null;
