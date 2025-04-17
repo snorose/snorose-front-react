@@ -1,6 +1,8 @@
 :root {
-  --default-width: 600px;
-  --default-margin: 1.25rem;
+  font-size: 62.5%;
+
+  --default-width: 60rem;
+  --default-margin: 2rem;
 
   /* Color */
 

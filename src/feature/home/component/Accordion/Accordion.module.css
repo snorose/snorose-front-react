@@ -1,5 +1,5 @@
 .accordion {
-  border-bottom: 0.5px solid var(--gray-3);
+  border-bottom: 0.05rem solid var(--gray-3);
 }
 
 .accordion:last-child {
@@ -7,7 +7,7 @@
 }
 
 .panelHeader {
-  padding: 0.875rem 0;
+  padding: 1.4rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,12 +16,12 @@
 
 .panelHeader span {
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 1.4rem;
   color: var(--gray-4);
 }
 
 .opend .panelHeader {
-  border-bottom: 0.5px solid var(--gray-3);
+  border-bottom: 0.05rem solid var(--gray-3);
 }
 
 .toggleIcon {
@@ -35,14 +35,14 @@
 .panelBody {
   max-height: 0;
   color: var(--gray-4);
-  font-size: 0.875rem;
-  letter-spacing: -0.03125rem;
+  font-size: 1.4rem;
+  letter-spacing: -0.05rem;
   overflow: hidden;
   transition: 300ms all ease;
 }
 
 .opend .panelBody {
-  padding: 1rem 0 0.625rem 0;
-  max-height: 2500px;
+  padding: 1.6rem 0 1rem 0;
+  max-height: 250rem;
   overflow-y: auto;
 }

@@ -1,6 +1,6 @@
 .retry {
-  padding: 10px;
-  font-size: 20px;
+  padding: 1rem;
+  font-size: 2rem;
   transition: 400ms all ease;
   border-radius: 100%;
   cursor: pointer;

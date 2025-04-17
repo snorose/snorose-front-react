@@ -33,9 +33,9 @@ const Template = (args) => <Accordion {...args} />;
 const StyledTemplate = (args) => (
   <div
     style={{
-      padding: '0 0.875rem',
+      padding: '0 1.4rem',
       backgroundColor: 'var(--blue-0)',
-      borderRadius: '0.3125rem',
+      borderRadius: '0.5rem',
     }}
   >
     <Accordion {...args} />

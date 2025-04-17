@@ -1,13 +1,11 @@
-import { Suspense } from 'react';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
+import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { Footer, Header } from '@/shared/component';
 import {
   Carousel,
   CarouselErrorFallback,
   CarouselSkeleton,
-  ListHeader,
   PopUp,
   HomeBesookt,
   HomeBesooktErrorFallback,
@@ -16,7 +14,9 @@ import {
   HomeCardErrorFallback,
   HomeCardSkeleton,
   HomeCommunity,
+  ListHeader,
 } from '@/feature/home/component';
+import { Footer, Header } from '@/shared/component';
 
 import styles from './MainPage.module.css';
 

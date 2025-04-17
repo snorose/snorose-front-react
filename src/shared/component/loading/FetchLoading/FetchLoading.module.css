@@ -6,12 +6,12 @@
 }
 
 .centerBox {
-  padding: 1.875rem 0;
+  padding: 3rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 0.625rem;
-  font-size: 0.8125rem;
+  row-gap: 1rem;
+  font-size: 1.3rem;
 }
 
 .icon {

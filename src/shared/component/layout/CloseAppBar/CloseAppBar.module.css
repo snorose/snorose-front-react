@@ -1,10 +1,10 @@
 .appBar {
-  padding: 0.875rem 1.25rem;
+  padding: 1.4rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 60rem;
   background-color: var(--white);
   position: fixed;
   top: 0;
@@ -18,6 +18,6 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.4rem;
   cursor: pointer;
 }
