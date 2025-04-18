@@ -37,6 +37,16 @@
   color: var(--gray-4);
 }
 
+.name {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.badge {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 .dot {
   width: 0.2rem;
   height: 0.2rem;

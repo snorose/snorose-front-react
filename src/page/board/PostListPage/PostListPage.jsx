@@ -3,10 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getNoticeLine } from '@/apis';
 
-import { useScrollRestoration } from '@/shared/hook';
+import { useAuth, useScrollRestoration } from '@/shared/hook';
 import { BackAppBar, Icon, WriteButton } from '@/shared/component';
 import { getBoard } from '@/shared/lib';
-import { QUERY_KEY } from '@/shared/constant';
+import { QUERY_KEY, ROLE, OFFICIAL_BOARD } from '@/shared/constant';
 
 import { PostListSuspense } from '@/feature/board/component';
 
@@ -14,10 +14,25 @@ import styles from './PostListPage.module.css';
 
 export default function PostListPage() {
   const { pathname } = useLocation();
+  const { userInfo } = useAuth();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
   const { scrollRef, saveScrollPosition } = useScrollRestoration();
   const isBesookt = currentBoardTextId === 'besookt' ? true : false;
+  const isFirstSnow = currentBoardTextId === 'first-snow' ? true : false;
+  const isPreUser = userInfo?.userRoleId === ROLE.preUser;
+  const isUser = userInfo?.userRoleId === ROLE.user;
+  const isAdmin = userInfo?.userRoleId === ROLE.admin;
+  const isOfficial = userInfo?.userRoleId === ROLE.official;
+
+  const isOfficialBoard = OFFICIAL_BOARD.includes(currentBoardTextId);
+
+  const showWriteButton =
+    !isBesookt &&
+    (isAdmin ||
+      (isOfficial && (isOfficialBoard || isFirstSnow)) ||
+      (isUser && !isOfficialBoard) ||
+      (isPreUser && isFirstSnow));
 
   const { data: noticeLineData } = useQuery({
     queryKey: [QUERY_KEY.noticeLine, currentBoard.id],
@@ -44,7 +59,7 @@ export default function PostListPage() {
         </div>
       )}
       <PostListSuspense saveScrollPosition={saveScrollPosition} />
-      {!isBesookt && (
+      {showWriteButton && (
         <WriteButton
           to={`/board/${currentBoardTextId}/post-write`}
           className={styles.writeButton}

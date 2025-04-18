@@ -26,6 +26,7 @@ export default function HomeBesookt({ className }) {
           content,
           boardName,
           createdAt,
+          userRoleId,
         }) => (
           <MainPageListItem
             key={postId}
@@ -36,6 +37,7 @@ export default function HomeBesookt({ className }) {
             boardId={boardId}
             boardName={boardName}
             createdAt={createdAt}
+            userRoleId={userRoleId}
           />
         )
       )}
