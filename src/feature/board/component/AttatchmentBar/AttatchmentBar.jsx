@@ -12,16 +12,27 @@ export default function AttatchmentBar({ setImages }) {
   const vid = useRef();
   const changeImageUpload = async (e) => {
     const { files } = e.target;
+    const maxFileSize = 50 * 1024 * 1024; //50MB
+    let totalFileSize = 0;
 
-    //이미지 개수 제한
+    //첨부파일 개수 제한
     if (files.length > 10) {
       toast('사진은 최대 10장까지만 첨부할 수 있습니다.');
       return;
     }
-    const fileArray = Array.from(files);
 
+    //첨부파일 용량 제한
+    for (let file of files) {
+      totalFileSize = totalFileSize + file.size;
+    }
+    if (totalFileSize > maxFileSize) {
+      toast('최대 50MB까지만 첨부할 수 있습니다.');
+      return;
+    }
+
+    //인풋된 파일들 읽기
+    const fileArray = Array.from(files);
     const readFilesAsDataURLs = fileArray.map((file) => {
-      console.log(file);
       return new Promise((resolve) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -30,7 +41,6 @@ export default function AttatchmentBar({ setImages }) {
     });
 
     const imageDataUrls = await Promise.all(readFilesAsDataURLs);
-    console.log(imageDataUrls);
     setImages(imageDataUrls);
   };
   const [imageIconState, setImageIconState] = useState('image');
