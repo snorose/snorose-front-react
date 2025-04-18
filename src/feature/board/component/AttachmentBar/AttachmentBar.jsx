@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useToast } from '@/shared/hook';
 import { Icon } from '@/shared/component';
 
-import styles from './AttatchmentBar.module.css';
+import styles from './AttachmentBar.module.css';
 
 export default function AttatchmentBar({ setImages }) {
   const { toast } = useToast();

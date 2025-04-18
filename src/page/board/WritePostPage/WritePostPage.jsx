@@ -17,7 +17,7 @@ import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
 
 import { postPost } from '@/apis';
 import { DropDownMenu } from '@/feature/board/component';
-import AttatchmentBar from '@/feature/board/component/AttatchmentBar/AttatchmentBar';
+import AttachmentBar from '@/feature/board/component/AttachmentBar/AttachmentBar';
 
 import styles from './WritePostPage.module.css';
 
@@ -81,6 +81,7 @@ export default function WritePostPage() {
     title,
     content: text,
     isNotice: textId === 'notice' ? true : isNotice,
+    attachments: [],
   };
 
   const handleSubmit = (e) => {
@@ -306,7 +307,7 @@ export default function WritePostPage() {
             trashImageConfirmModal.openModal();
           }}
         />
-        <AttatchmentBar setImages={setImages} />
+        <AttachmentBar setImages={setImages} />
       </div>
 
       <DeleteModal
