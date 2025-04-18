@@ -1,33 +1,41 @@
 .container {
-  width: 100%;
   display: flex;
   flex-direction: column;
+
   align-items: center;
+
+  width: 100%;
 }
 
 .backAppBar {
-  background-color: var(--blue-0);
   width: 100%;
+
+  background-color: var(--blue-0);
 }
 
 .content {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  font-size: 0.8rem;
-  /* 양옆 여백 */
+
+  width: 100%;
   padding: 5.5rem 1.1rem 1.1rem 2.1rem;
   border-radius: 0 0 1.5rem 1.5rem;
+
   background-color: var(--blue-0);
+
+  font-size: 0.8rem;
 }
 
 .contentTop {
   display: flex;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
-  color: var(--gray-3-1);
+
+  width: 100%;
+  min-height: 3.1rem;
+
   font-size: 1.2rem;
+  color: var(--gray-3-1);
 }
 
 .contentTopLeft {
@@ -41,65 +49,92 @@
 }
 
 .dot3 {
+  flex-shrink: 0;
+
   padding: 1rem;
+
   cursor: pointer;
 }
 
 .title {
   display: flex;
   align-items: end;
-  padding: 0.8rem 1rem 2.6rem 0;
+
+  padding: 0 1rem 2.6rem 0;
+
   font-size: 2rem;
   font-weight: 700;
   color: var(--gray-4);
 }
 
 .views {
-  white-space: nowrap;
-  color: var(--blue-3);
-  font-size: 1.1rem;
   padding-left: 0.2rem;
+
+  font-size: 1.1rem;
   font-weight: 400;
+  color: var(--blue-3);
+  white-space: nowrap;
 }
 
 .post_bottom {
   display: flex;
-  justify-content: end;
-  padding: 0 1rem 0 0;
+  justify-content: space-between;
+  gap: 2.5rem;
 
-  div:nth-of-type(2):hover,
-  div:nth-of-type(3):hover {
-    background-color: rgba(var(--white-rgb), 0.8);
-    cursor: pointer;
-  }
+  padding-top: 0.9rem;
 }
 
 .count {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.5rem;
   gap: 0.6rem;
-  color: var(--gray-3-1);
+
+  width: 100%;
+  padding: 0.9rem 2rem;
+
+  border-radius: 0.5rem;
+
   font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.05rem;
+  color: var(--gray-3-1);
+  white-space: nowrap;
+
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--blue-1);
+
+    color: var(--blue-3);
+
+    cursor: pointer;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
 }
 
 .whiteBox {
-  background-color: #fff;
   width: 100%;
   height: 5rem;
+
+  background-color: #fff;
 }
 
 /* post content */
 
 .contentText {
-  font-size: 1.4rem;
+  border-bottom: 0.05rem solid rgba(137, 137, 137, 0.7);
+
+  font-size: 1.2rem;
   color: var(--gray-4);
+  font-size: 1.4rem;
   padding: 0 1.3rem 1.5rem 0;
   white-space: pre-wrap;
   word-break: keep-all;
-
   a {
     color: var(--blue-3);
   }
