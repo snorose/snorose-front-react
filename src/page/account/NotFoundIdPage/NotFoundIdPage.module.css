@@ -18,6 +18,12 @@
   align-items: center;
 }
 
+.illust {
+  width: 21.9rem;
+  height: 16.9rem;
+  flex-shrink: 0;
+}
+
 .explanation {
   height: fit-content;
   padding: 0 2rem;

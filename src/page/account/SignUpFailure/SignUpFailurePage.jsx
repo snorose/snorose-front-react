@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { BackAppBar, Button, Icon } from '@/shared/component';
+import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './SignUpFailurePage.module.css';
+
+import findIdPwFail from '@/assets/images/find-id-pw-fail.svg';
 
 export default function SignUpFailurePage() {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ export default function SignUpFailurePage() {
         <p className={styles.pageExplanation}>{state?.message}</p>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <Icon id='star-alert' width={231} height={217} />
+        <img src={findIdPwFail} alt='NotFoundPw' className={styles.illust} />
       </div>
       <div className={styles.pageBottomFrame}>
         <Link to='/signup'>

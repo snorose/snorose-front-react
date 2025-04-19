@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { BackAppBar, Button, Icon } from '@/shared/component';
+import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './NotFoundIdPage.module.css';
+
+import findIdPwFail from '@/assets/images/find-id-pw-fail.svg';
 
 export default function NotFoundIdPage() {
   const navigate = useNavigate();
@@ -28,12 +30,7 @@ export default function NotFoundIdPage() {
         </div>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <Icon
-          id='star-alert'
-          className={styles.starAlert}
-          width={231}
-          height={217}
-        />
+        <img src={findIdPwFail} alt='NotFoundId' className={styles.illust} />
       </div>
       <div className={styles.pageBottomFrame}>
         <Link to='/find-id'>
