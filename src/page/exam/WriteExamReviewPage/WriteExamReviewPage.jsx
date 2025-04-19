@@ -268,7 +268,7 @@ export default function WriteExamReviewPage() {
         <Textarea
           value={questionDetail}
           setFn={setQuestionDetail}
-          placeholder='강의 시험 유형 및 부가적인 설명을 기술해주세요'
+          placeholder='ex) n문제 중 n문제 복기'
           minRows='5'
           maxRows='10'
         />
