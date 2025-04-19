@@ -21,12 +21,12 @@
 
 .label {
   color: var(--gray-3-1);
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 
 .value {
   color: var(--gray-4);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 500;
 }
 
@@ -34,7 +34,7 @@
 .buttonWrapper {
   display: flex;
   justify-content: flex-end;
-  gap: 1.5rem;
+  gap: 1.6rem;
   margin: 2rem;
 }
 
@@ -42,22 +42,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 9rem;
-  height: 2.8rem;
   border-radius: 0.5rem;
+  padding: 0.9rem 1.5rem;
   background: var(--blue-4);
   color: var(--white);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .passwordButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 9.5rem;
-  height: 2.8rem;
   border-radius: 0.5rem;
+  padding: 0.9rem 1.5rem;
   background: var(--blue-1);
   color: var(--blue-4);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }

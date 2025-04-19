@@ -26,7 +26,7 @@ const ActivityTab = () => {
             link: 'scrap-exam-review',
           },
           {
-            label: '스크랩 모아보기',
+            label: '스크랩한 글 모아보기',
             link: 'scrap',
           },
         ].map((item, index) => (

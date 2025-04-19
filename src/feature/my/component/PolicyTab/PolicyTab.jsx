@@ -28,10 +28,10 @@ const PolicyTab = () => {
 
       <div className={styles.buttonWrapper}>
         <button type='button' onClick={logout}>
-          <div className={styles.editButton}>로그아웃</div>
+          <div className={styles.logoutButton}>로그아웃</div>
         </button>
         <Link to='delete-account'>
-          <div className={styles.passwordButton}>회원탈퇴</div>
+          <div className={styles.deleteAccountButton}>회원탈퇴</div>
         </Link>
       </div>
     </>

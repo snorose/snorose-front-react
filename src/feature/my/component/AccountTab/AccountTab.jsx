@@ -48,7 +48,7 @@ const AccountTab = () => {
       </div>
       <div className={styles.buttonWrapper}>
         <Link to='edit-info'>
-          <div className={styles.editButton}>내 정보 수정</div>
+          <div className={styles.editButton}>프로필 수정</div>
         </Link>
         <Link to='password'>
           <div className={styles.passwordButton}>비밀번호 변경</div>
