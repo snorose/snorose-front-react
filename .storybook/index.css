@@ -81,3 +81,17 @@ pre {
   vertical-align: baseline;
   letter-spacing: -0.5px;
 }
+
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.react-calendar {
+  margin: 0 2rem !important;
+  background-color: rgba(95, 133, 191, 0.4) !important;
+  border-radius: 0.5rem !important;
+  border: none !important;
+}
