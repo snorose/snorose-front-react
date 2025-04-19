@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { BackAppBar, Button, Icon } from '@/shared/component';
+import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './FoundPwPage.module.css';
+
+import findIdPwSuccess from '@/assets/images/find-id-pw-success.svg';
 
 export default function FoundPwPage() {
   const navigate = useNavigate();
@@ -40,7 +42,7 @@ export default function FoundPwPage() {
         </div>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <Icon id='star-mail' width={231} height={217} />
+        <img src={findIdPwSuccess} alt='FoundPw' className={styles.illust} />
       </div>
       <div className={styles.pageBottomFrame}>
         <Link to='/find-pw'>

@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { BackAppBar, Button, Icon } from '@/shared/component';
 
 import styles from './FoundIdPage.module.css';
+
+import findIdPwSuccess from '@/assets/images/find-id-pw-success.svg';
 
 export default function FoundIdPage() {
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ export default function FoundIdPage() {
         </div>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <Icon id='star-mail' width={231} height={217} />
+        <img src={findIdPwSuccess} alt='FoundId' className={styles.illust} />
       </div>
       <div className={styles.pageBottomFrame}>
         <Link to='/login'>
