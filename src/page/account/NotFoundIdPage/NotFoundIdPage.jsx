@@ -19,7 +19,7 @@ export default function NotFoundIdPage() {
   return (
     <div className={styles.pageFrame}>
       <BackAppBar backNavTo='/login' classname={styles.backAppBar} />
-      <div className={styles.pageTopFrame}>
+      <div>
         <div className={styles.explanation}>
           <p className={styles.pageTitle}>아이디 찾기</p>
           <p className={styles.pageExplanation}>
