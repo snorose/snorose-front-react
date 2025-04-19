@@ -173,7 +173,6 @@ export default function ExamReviewPage() {
   }
 
   const {
-    content,
     commentCount,
     createdAt,
     examType,
@@ -249,7 +248,6 @@ export default function ExamReviewPage() {
             align={FLEX_ALIGN.flexStart}
           />
         </div>
-        {content && <div className={styles.content}>{content}</div>}
         <ReviewDownload
           className={styles.fileDownload}
           fileName={fileName}
