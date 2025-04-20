@@ -5,7 +5,7 @@ import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './SignUpFailurePage.module.css';
 
-import findIdPwFail from '@/assets/images/find-id-pw-fail.svg';
+import findIdPwFail from '@/assets/images/taskFailedIllustration.svg';
 
 export default function SignUpFailurePage() {
   const navigate = useNavigate();
