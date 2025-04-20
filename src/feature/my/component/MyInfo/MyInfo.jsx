@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { Icon } from '@/shared/component';
+import { Icon, Badge } from '@/shared/component';
 import { ROLE_NAME } from '@/shared/constant';
 
 import styles from './MyInfo.module.css';
@@ -13,10 +13,16 @@ export default function MyInfo({ userInfo }) {
         <div className={styles.studentId}>
           {userInfo?.studentNumber.slice(0, 2)}학번
         </div>
-        <Icon id='middle-dot' width={5} height={5} />
+        <Icon
+          className={styles.middleDot}
+          id='middle-dot'
+          width={5}
+          height={5}
+        />
         <div className={styles.memberType}>
           {ROLE_NAME[userInfo?.userRoleId]}
         </div>
+        {<Badge userRoleId={userInfo?.userRoleId} className={styles.badge} />}
       </div>
       <Link to='view-point-list'>
         <div className={styles.pointWrapper}>

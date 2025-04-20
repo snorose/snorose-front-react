@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth, useScrollRestoration } from '@/shared/hook';
 import { BackAppBar, FetchLoading, WriteButton } from '@/shared/component';
 import { getBoard } from '@/shared/lib';
-import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
+import { QUERY_KEY, STALE_TIME, ROLE } from '@/shared/constant';
 
 import { getNoticeList } from '@/apis/notice';
 import { NoticeBar } from '@/feature/board/component';
@@ -88,12 +88,13 @@ export default function NoticeListPage() {
           </div>
         )}
       </div>
-      {userInfo?.userRoleId === 4 && currentBoardTextId === 'notice' && (
-        <WriteButton
-          to={`/board/${currentBoardTextId}/post-write`}
-          className={styles.writeButton}
-        />
-      )}
+      {userInfo?.userRoleId === ROLE.admin &&
+        currentBoardTextId === 'notice' && (
+          <WriteButton
+            to={`/board/${currentBoardTextId}/post-write`}
+            className={styles.writeButton}
+          />
+        )}
     </div>
   );
 }

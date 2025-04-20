@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { Icon } from '@/shared/component';
+import { Icon, Badge } from '@/shared/component';
 import { timeAgo, getBoardTextId } from '@/shared/lib';
+import { ROLE } from '@/shared/constant';
 
 import styles from './MainPageListItem.module.css';
 
@@ -14,8 +15,14 @@ export default function MainPageListItem({
   boardId,
   boardName,
   image,
+  userRoleId,
 }) {
   const imgSrc = image ? require(`@/dummy/images/${image}`) : '';
+
+  // 뱃지가 보이는 ROLE
+  const showBadge =
+    userRoleId === ROLE.official ||
+    (userRoleId === ROLE.admin && displayName !== '익명송이');
 
   return (
     <Link
@@ -27,7 +34,12 @@ export default function MainPageListItem({
           <div className={styles.top}>
             <Icon id='cloud' width={19} height={12} />
             <p className={styles.meta}>
-              <span>{displayName}</span>
+              <span className={styles.name}>
+                {displayName}
+                {showBadge && (
+                  <Badge userRoleId={userRoleId} className={styles.badge} />
+                )}
+              </span>
               <span className={styles.dot}></span>
               <span>{timeAgo(createdAt)}</span>
             </p>

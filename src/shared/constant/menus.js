@@ -60,6 +60,15 @@ export const SIDEBAR_MENUS = Object.freeze([
     ],
   },
   {
+    to: '/board',
+    title: '공식 게시판',
+    items: [
+      { to: '/board/student-council', name: '총학생회' },
+      { to: '/board/graduation-preparation', name: '졸업준비위원회' },
+      { to: '/board/finance-audit', name: '재정감사위원회' },
+    ],
+  },
+  {
     to: '/board/exam-review',
     title: '시험후기',
   },
