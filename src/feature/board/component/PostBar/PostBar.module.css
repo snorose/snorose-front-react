@@ -22,6 +22,7 @@
   text-overflow: ellipsis;
   max-width: 15.6rem;
   padding-left: 0.6rem;
+  font-size: 1.4rem;
 }
 
 .badge {
@@ -35,6 +36,10 @@
   padding: 0 0.3rem;
 }
 
+.date {
+  font-size: 1.4rem;
+}
+
 .checkCircleIcon {
   margin-left: 0.4rem;
 }
@@ -46,7 +51,7 @@
 }
 
 .title {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 500;
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -56,7 +61,7 @@
 }
 
 .text {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: var(--gray-4);
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -89,7 +94,7 @@
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   color: var(--gray-3-1);
 }
 

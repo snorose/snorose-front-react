@@ -13,13 +13,13 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
   return (
     <div className={styles.post}>
       <div className={styles.post_top}>
-        <Icon id='cloud' width={18} height={11} />
+        <Icon id='cloud' width={23} height={14} />
         <p className={styles.name}>{data.userDisplay}</p>
         {showBadge && (
           <Badge userRoleId={data.userRoleId} className={styles.badge} />
         )}
         <p className={styles.dot}>·</p>
-        <p>{postBarDateFormat(data.createdAt)}</p>
+        <p className={styles.date}>{postBarDateFormat(data.createdAt)}</p>
         {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
         {data.isConfirmed && (
           <Icon
@@ -30,10 +30,12 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
           />
         )}
       </div>
+
       <div className={styles.post_center}>
         <p className={styles.title}>{data.title}</p>
         <p className={styles.text}>{data.questionDetail ?? data.content}</p>
       </div>
+
       <div className={styles.post_bottom}>
         <span className={styles.board}>{data.boardName}</span>
         <div className={styles.iconContainer}>
@@ -43,8 +45,8 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
               <Icon
                 className={styles.comment}
                 id='comment'
-                width={13}
-                height={11}
+                width={16}
+                height={13}
               />
               <span>{data.commentCount.toLocaleString()}</span>
             </>
@@ -53,8 +55,8 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
             <>
               <Icon
                 id='like'
-                width={12}
-                height={11}
+                width={14}
+                height={13}
                 fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
               />
               <span>{data.likeCount.toLocaleString()}</span>
@@ -64,8 +66,8 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
           <>
             <Icon
               id='bookmark-fill'
-              width={9}
-              height={11}
+              width={11}
+              height={13}
               fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
             />
             <span>{data?.scrapCount.toLocaleString()}</span>
