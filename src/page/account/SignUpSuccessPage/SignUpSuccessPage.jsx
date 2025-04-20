@@ -5,7 +5,7 @@ import { Button, Icon } from '@/shared/component';
 
 import styles from './SignUpSuccessPage.module.css';
 
-import signUpSuccess from '@/assets/images/sign-up-success.svg';
+import taskCompleteIllustration from '@/assets/images/taskCompleteIllustration.svg';
 
 export default function SignUpSuccessPage() {
   const navigate = useNavigate();
@@ -31,8 +31,8 @@ export default function SignUpSuccessPage() {
       </div>
       <div className={styles.img}>
         <img
-          src={signUpSuccess}
-          alt='SignUpSuccess'
+          src={taskCompleteIllustration}
+          alt='signUpComplete'
           className={styles.illust}
         />
       </div>
