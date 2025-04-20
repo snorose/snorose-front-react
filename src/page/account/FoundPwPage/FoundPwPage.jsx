@@ -5,7 +5,7 @@ import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './FoundPwPage.module.css';
 
-import findIdPwSuccess from '@/assets/images/find-id-pw-success.svg';
+import emailSendIllustration from '@/assets/images/emailSendIllustration.svg';
 
 export default function FoundPwPage() {
   const navigate = useNavigate();
@@ -42,7 +42,11 @@ export default function FoundPwPage() {
         </div>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <img src={findIdPwSuccess} alt='FoundPw' className={styles.illust} />
+        <img
+          src={emailSendIllustration}
+          alt='FoundPw'
+          className={styles.illust}
+        />
       </div>
       <div className={styles.pageBottomFrame}>
         <Link to='/find-pw'>
