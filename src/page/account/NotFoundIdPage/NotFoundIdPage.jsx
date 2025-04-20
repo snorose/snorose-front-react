@@ -5,7 +5,7 @@ import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './NotFoundIdPage.module.css';
 
-import findIdPwFail from '@/assets/images/taskFailedIllustration.svg';
+import taskFailedIllustration from '@/assets/images/taskFailedIllustration.svg';
 
 export default function NotFoundIdPage() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function NotFoundIdPage() {
         </div>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <img src={findIdPwFail} alt='NotFoundId' className={styles.illust} />
+        <img src={taskFailedIllustration} alt='IdNotFound' className={styles.illust} />
       </div>
       <div className={styles.pageBottomFrame}>
         <Link to='/find-id'>

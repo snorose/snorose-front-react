@@ -5,7 +5,7 @@ import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './SignUpFailurePage.module.css';
 
-import findIdPwFail from '@/assets/images/taskFailedIllustration.svg';
+import taskFailedIllustration from '@/assets/images/taskFailedIllustration.svg';
 
 export default function SignUpFailurePage() {
   const navigate = useNavigate();
@@ -26,7 +26,11 @@ export default function SignUpFailurePage() {
         <p className={styles.pageExplanation}>{state?.message}</p>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <img src={findIdPwFail} alt='NotFoundPw' className={styles.illust} />
+        <img
+          src={taskFailedIllustration}
+          alt='SignUpFailed'
+          className={styles.illust}
+        />
       </div>
       <div className={styles.pageBottomFrame}>
         <Link to='/signup'>
