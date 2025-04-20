@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button, Icon } from '@/shared/component';
 
 import styles from './SignUpSuccessPage.module.css';
+
+import signUpSuccess from '@/assets/images/sign-up-success.svg';
 
 export default function SignUpSuccessPage() {
   const navigate = useNavigate();
@@ -28,7 +30,11 @@ export default function SignUpSuccessPage() {
         </p>
       </div>
       <div className={styles.img}>
-        <Icon id='star-check' width={231} height={217} />
+        <img
+          src={signUpSuccess}
+          alt='SignUpSuccess'
+          className={styles.illust}
+        />
       </div>
 
       <div>

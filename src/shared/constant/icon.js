@@ -73,7 +73,6 @@ export const STROKE_ICON_LIST = Object.freeze({
 });
 
 export const ILLUSTRATION_ICON_LIST = Object.freeze({
-  starCheck: 'star-check',
   starNoComment: 'star-no-comment',
   starNoPost: 'star-no-post',
   starNoReview: 'star-no-review',
