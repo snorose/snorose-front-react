@@ -27,7 +27,7 @@ export const ACTIVITIES = [
   },
   {
     path: ROUTE.mypageDownloadExamReview,
-    title: '다운받은 시험후기',
+    title: '다운받은 시험 후기',
     queryKey: QUERY_KEY.myDownloadedExamReviews,
     queryFn: getDownloadedExamReviews,
     hasLike: false,
@@ -45,7 +45,7 @@ export const ACTIVITIES = [
   },
   {
     path: ROUTE.mypageScrap,
-    title: '스크랩',
+    title: '스크랩한 글',
     queryKey: QUERY_KEY.myScrapedPosts,
     queryFn: getScrapedPosts,
     errorMessage: '아직 스크랩 한 글이 없어요',

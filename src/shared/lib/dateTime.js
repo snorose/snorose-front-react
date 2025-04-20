@@ -40,8 +40,8 @@ export const postBarDateFormat = (date) => {
   }
 
   return isSameYear(targetDate, now)
-    ? `${month}/${day} ${hours}:${minutes}`
-    : `${year}/${month}/${day} ${hours}:${minutes}`;
+    ? `${month}.${day} ${hours}:${minutes}`
+    : `${year}.${month}.${day} ${hours}:${minutes}`;
 };
 
 export const isToday = (date) => {
