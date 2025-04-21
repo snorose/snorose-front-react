@@ -25,17 +25,33 @@ export const postPost = async ({
   title,
   content,
   isNotice,
+  attachments,
+  images,
 }) => {
   const data = {
     category: category,
     title: title,
     content: content,
     isNotice: isNotice,
+    attachments: attachments,
   };
+  console.log(data);
   const response = await authAxios.post(
     `/v1/boards/${boardId}/posts/newpost`,
     data
   );
+  console.log(response);
+  /*if (attachments.length) {
+    console.log('이건 됐음1');
+    let attachmentUrlList = response.data.result.attachmentUrlList;
+    console.log(response);
+    console.log(attachmentUrlList);
+    for (let x = 0; x < attachmentUrlList.length; x++) {
+      await authAxios.post(`${attachmentUrlList[x]}`, images[x]);
+      console.log('이것도 됐음2');
+    }
+    console.log('이건 됐음3');
+  }*/
   return response;
 };
 

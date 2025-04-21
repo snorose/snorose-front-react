@@ -31,6 +31,7 @@ export default function WritePostPage() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
+  const [attachments, setAttachments] = useState([]);
   const [images, setImages] = useState([]);
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
@@ -81,7 +82,8 @@ export default function WritePostPage() {
     title,
     content: text,
     isNotice: textId === 'notice' ? true : isNotice,
-    attachments: [],
+    attachments: attachments,
+    images: images,
   };
 
   const handleSubmit = (e) => {
@@ -307,7 +309,7 @@ export default function WritePostPage() {
             trashImageConfirmModal.openModal();
           }}
         />
-        <AttachmentBar setImages={setImages} />
+        <AttachmentBar setAttachments={setAttachments} setImages={setImages} />
       </div>
 
       <DeleteModal
@@ -326,6 +328,11 @@ export default function WritePostPage() {
           const updated = [...images];
           updated.splice(trashImageIndex, 1);
           setImages(updated);
+          setAttachments((prev) =>
+            prev
+              .slice(0, trashImageIndex)
+              .concat(prev.slice(trashImageIndex + 1))
+          );
           setIsTrashOverlapped(false);
           trashImageConfirmModal.closeModal();
         }}
