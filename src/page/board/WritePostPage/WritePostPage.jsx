@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuth, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import {
   ActionButton,
   CloseAppBar,
@@ -32,6 +32,10 @@ export default function WritePostPage() {
   const [text, setText] = useState('');
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
+
+  // navigation guard
+  const isDirty = title.trim().length > 0 || text.trim().length > 0;
+  useBlocker(isDirty);
 
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
