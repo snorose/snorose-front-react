@@ -25,6 +25,8 @@
 .image {
   position: absolute;
   right: -0.1rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .textBox {

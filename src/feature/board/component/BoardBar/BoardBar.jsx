@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './BoardBar.module.css';
 
 export default function BoardBar({ data }) {
-  const isOfficial = [60, 61, 62].includes(data.id);
+  const isBesookt = data.id === 20;
 
   return (
     <Link to={`/board/${data.textId}`} className={styles.container}>
@@ -12,8 +12,7 @@ export default function BoardBar({ data }) {
         src={data.image}
         alt={data.textId}
         style={{
-          height: isOfficial ? 'none' : '100%',
-          bottom: isOfficial ? '0.8rem' : '-0.2rem',
+          height: isBesookt ? '100%' : 'none',
         }}
       />
       <div className={styles.textBox}>
