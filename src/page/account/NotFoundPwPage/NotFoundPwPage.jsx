@@ -29,7 +29,11 @@ export default function NotFoundPwPage() {
         </p>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <img src={taskFailedIllustration} alt='PasswordNotFound' className={styles.illust} />
+        <img
+          src={taskFailedIllustration}
+          alt='비밀번호 찾기 실패를 알리는 일러스트'
+          className={styles.illust}
+        />
       </div>
       <div className={styles.pageBottomFrame}>
         <Link to='/find-pw'>

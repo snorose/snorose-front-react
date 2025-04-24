@@ -32,7 +32,7 @@ export default function SignUpSuccessPage() {
       <div className={styles.img}>
         <img
           src={taskCompleteIllustration}
-          alt='signUpComplete'
+          alt='회원가입 성공을 알리는 일러스트'
           className={styles.illust}
         />
       </div>

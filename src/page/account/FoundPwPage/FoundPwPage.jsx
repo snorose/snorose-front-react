@@ -44,7 +44,7 @@ export default function FoundPwPage() {
       <div className={styles.pageMiddleFrame}>
         <img
           src={emailSendIllustration}
-          alt='FoundPw'
+          alt='이메일로 비밀번호를 전송했음을 알리는 일러스트'
           className={styles.illust}
         />
       </div>

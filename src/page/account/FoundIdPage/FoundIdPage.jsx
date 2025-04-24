@@ -37,7 +37,7 @@ export default function FoundIdPage() {
       <div className={styles.pageMiddleFrame}>
         <img
           src={emailSendIllustration}
-          alt='FoundId'
+          alt='이메일로 아이디를 전송했음을 알리는 일러스트'
           className={styles.illust}
         />
       </div>

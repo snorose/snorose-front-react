@@ -30,7 +30,11 @@ export default function NotFoundIdPage() {
         </div>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <img src={taskFailedIllustration} alt='IdNotFound' className={styles.illust} />
+        <img
+          src={taskFailedIllustration}
+          alt='아이디 찾기 실패를 알리는 일러스트'
+          className={styles.illust}
+        />
       </div>
       <div className={styles.pageBottomFrame}>
         <Link to='/find-id'>

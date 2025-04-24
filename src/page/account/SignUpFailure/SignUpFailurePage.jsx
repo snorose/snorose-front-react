@@ -28,7 +28,7 @@ export default function SignUpFailurePage() {
       <div className={styles.pageMiddleFrame}>
         <img
           src={taskFailedIllustration}
-          alt='SignUpFailed'
+          alt='회원가입 실패를 알리는 일러스트'
           className={styles.illust}
         />
       </div>
