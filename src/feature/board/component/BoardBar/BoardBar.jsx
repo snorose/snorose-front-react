@@ -16,7 +16,7 @@ export default function BoardBar({ data }) {
         }}
       />
       <div className={styles.textBox}>
-        <h1 className={styles.title}>{data.title}</h1>
+        <h3 className={styles.title}>{data.title}</h3>
         <p className={styles.description}>{data.desc}</p>
       </div>
     </Link>

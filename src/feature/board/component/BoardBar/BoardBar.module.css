@@ -7,7 +7,7 @@
   background-color: var(--gray-1);
   transition: background-color 200ms ease-in-out;
 
-  h1,
+  h3,
   p {
     transition: color 200ms ease-in-out;
   }
@@ -15,7 +15,7 @@
   &:hover {
     background-color: var(--blue-4);
 
-    h1,
+    h3,
     p {
       color: white;
     }
