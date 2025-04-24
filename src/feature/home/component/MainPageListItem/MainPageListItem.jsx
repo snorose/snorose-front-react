@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { Icon, Badge } from '@/shared/component';
-import { timeAgo, getBoardTextId } from '@/shared/lib';
+import { Badge, Icon } from '@/shared/component';
 import { ROLE } from '@/shared/constant';
+import { getBoardTextId, postBarDateFormat } from '@/shared/lib';
 
 import styles from './MainPageListItem.module.css';
 
@@ -41,7 +41,7 @@ export default function MainPageListItem({
                 )}
               </span>
               <span className={styles.dot}></span>
-              <span>{timeAgo(createdAt)}</span>
+              <span>{postBarDateFormat(createdAt)}</span>
             </p>
           </div>
           <div className={styles.bottom}>
