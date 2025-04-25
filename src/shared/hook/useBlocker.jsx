@@ -14,8 +14,8 @@ export default function useBlocker(isBlock) {
   useEffect(() => {
     if (blocker.state === 'blocked') {
       open('confirm', {
-        title: '작성 중인 글이 있습니다',
-        description: `정말 이동하시겠습니까?`,
+        title: '페이지를 떠나시겠습니까?',
+        description: `지금까지 작업한 내용이 저장되지 않습니다`,
         primaryText: '떠나기',
         secondaryText: '머물기',
         onPrimary: blocker.proceed,

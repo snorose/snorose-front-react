@@ -3,11 +3,10 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuth, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import {
   BackAppBar,
   CloseAppBar,
-  DeleteModal,
   FetchLoading,
   Icon,
   Badge,
@@ -41,7 +40,6 @@ export default function EditPostPage() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [userDisplay, setUserDisplay] = useState('');
-  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
   // 게시글 내용 가져오기
@@ -50,6 +48,14 @@ export default function EditPostPage() {
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
   });
+
+  // navigation guard
+  const isBlock =
+    data.title !== title.trim() ||
+    data.content !== text.trim() ||
+    data.isNotice !== isNotice;
+
+  useBlocker(isBlock);
 
   // 데이터 화면 표시
   useEffect(() => {
@@ -140,13 +146,6 @@ export default function EditPostPage() {
           <CloseAppBar
             children={<p onClick={handleSubmit}>수정</p>}
             backgroundColor={'#eaf5fd'}
-            onClose={() => {
-              data.title !== title ||
-              data.content !== text ||
-              data.isNotice !== isNotice
-                ? setIsCheckModalOpen(true)
-                : navigate(-1, { replace: true });
-            }}
           />
         </div>
         <div className={styles.center}>
@@ -204,12 +203,6 @@ export default function EditPostPage() {
           </div>
         </div>
       </div>
-      <DeleteModal
-        id='post-edit-exit-check'
-        isOpen={isCheckModalOpen}
-        closeFn={() => setIsCheckModalOpen(false)}
-        redBtnFunction={() => navigate(-1, { replace: true })}
-      />
     </>
   );
 }

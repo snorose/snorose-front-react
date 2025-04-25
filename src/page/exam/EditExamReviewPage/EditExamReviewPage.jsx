@@ -4,7 +4,7 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 import { editReviewDetail } from '@/apis';
 
-import { useToast } from '@/shared/hook';
+import { useBlocker, useToast } from '@/shared/hook';
 import {
   ActionButton,
   CloseAppBar,
@@ -98,6 +98,19 @@ export default function EditExamReviewPage() {
     isOnline,
     category: '',
   };
+
+  // navigation guard
+  const isBlock =
+    state.lectureName !== lectureName.trim() ||
+    state.professor !== professor.trim() ||
+    state.lectureType !== lectureType.id ||
+    state.examType !== examType.id ||
+    state.lectureYear !== lectureYear.id ||
+    state.semester !== semester.id ||
+    state.classNumber !== classNumber ||
+    state.questionDetail !== questionDetail.trim();
+
+  useBlocker(isBlock);
 
   return (
     <main className={styles.container}>
