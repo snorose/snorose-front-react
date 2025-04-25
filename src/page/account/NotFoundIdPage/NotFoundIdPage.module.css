@@ -11,14 +11,17 @@
   display: block;
 }
 
-.pageTopFrame {
-}
-
 .pageMiddleFrame {
   height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.illustration {
+  width: 21.9rem;
+  height: 16.9rem;
+  flex-shrink: 0;
 }
 
 .explanation {

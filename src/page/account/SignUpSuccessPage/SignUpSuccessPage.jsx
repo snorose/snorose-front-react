@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button, Icon } from '@/shared/component';
 
 import styles from './SignUpSuccessPage.module.css';
+
+import taskCompleteIllustration from '@/assets/images/taskCompleteIllustration.svg';
 
 export default function SignUpSuccessPage() {
   const navigate = useNavigate();
@@ -28,7 +30,11 @@ export default function SignUpSuccessPage() {
         </p>
       </div>
       <div className={styles.img}>
-        <Icon id='star-check' width={231} height={217} />
+        <img
+          src={taskCompleteIllustration}
+          alt='회원가입 성공을 알리는 일러스트'
+          className={styles.illustration}
+        />
       </div>
 
       <div>
