@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { useSuspensePagination } from '@/shared/hook';
-import { FetchLoading, Icon } from '@/shared/component';
+import { FetchLoading } from '@/shared/component';
 import {
   getBoardTextId,
   deduplicatePaginatedData,
@@ -13,6 +13,11 @@ import { PostBar } from '@/feature/board/component';
 
 import styles from './MyPostList.module.css';
 import { ACTIVITIES } from '../../constant/activity';
+import {
+  noPostsIllustration,
+  noScrapedPostsIllustration,
+  noCommentsIllustration,
+} from '@/assets/illustrations';
 
 export default function MyPostList({
   queryKey,
@@ -32,15 +37,27 @@ export default function MyPostList({
   const activity = ACTIVITIES.find(
     (activity) => activity.queryKey === queryKey
   );
-  const emptyStateIllustrationId =
-    activity?.emptyStateIllustrationId || 'star-no-post';
+
+  const emptyStateIllustration =
+    activity?.emptyStateIllustration || 'noScrapedPostsIllustration';
+
+  const illustrationMap = {
+    noPostsIllustration,
+    noScrapedPostsIllustration,
+    noCommentsIllustration,
+  };
 
   if (list.length === 0) {
     return (
       <div className={styles.noContentWrapper}>
         <p className={styles.noContentMessage}>{errorMessage}</p>
         <div className={styles.imageWrapper}>
-          <Icon id={emptyStateIllustrationId} width={220} height={182} />
+          <img
+            src={illustrationMap[emptyStateIllustration]}
+            width={220}
+            height={182}
+            alt={errorMessage}
+          />
         </div>
       </div>
     );
