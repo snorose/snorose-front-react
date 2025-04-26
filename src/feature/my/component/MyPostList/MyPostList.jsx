@@ -56,7 +56,7 @@ export default function MyPostList({
             src={illustrationMap[emptyStateIllustration]}
             width={220}
             height={182}
-            alt={errorMessage}
+            alt={`${errorMessage}를 알리는 일러스트`}
           />
         </div>
       </div>
