@@ -1,4 +1,4 @@
-import { authAxios } from '@/axios';
+import { defaultAxios, authAxios } from '@/axios';
 
 // 게시글 리스트 가져오기
 export const getPosts = async (boardId, page = 0) => {
@@ -15,6 +15,7 @@ export const getPosts = async (boardId, page = 0) => {
 // 게시글 상세 조회
 export const getPostContent = async (boardId, postId) => {
   const response = await authAxios.get(`/v1/boards/${boardId}/posts/${postId}`);
+  console.log(response);
   return response?.data.result;
 };
 
@@ -25,33 +26,44 @@ export const postPost = async ({
   title,
   content,
   isNotice,
-  attachments,
-  images,
+  attachmentsInfo,
+  files,
 }) => {
   const data = {
     category: category,
     title: title,
     content: content,
     isNotice: isNotice,
-    attachments: attachments,
+    attachments: attachmentsInfo.map(({ fileType, ...info }) => info),
   };
   console.log(data);
+  //'게시글 생성' API에서 받아오는 데이터
   const response = await authAxios.post(
     `/v1/boards/${boardId}/posts/newpost`,
     data
   );
-  console.log(response);
-  /*if (attachments.length) {
-    console.log('이건 됐음1');
+
+  //만일 '게시글 생성' API에 첨부파일을 넘겼더라면
+  if (attachmentsInfo.length) {
+    //attachmentUrlList 변수에 '게시글 생성' API한테 받은 이미지 S3 url 리스트 저장
     let attachmentUrlList = response.data.result.attachmentUrlList;
-    console.log(response);
+
     console.log(attachmentUrlList);
+    console.log(files);
+    //각 S3 URL 리스트에 대해 반복
     for (let x = 0; x < attachmentUrlList.length; x++) {
-      await authAxios.post(`${attachmentUrlList[x]}`, images[x]);
-      console.log('이것도 됐음2');
+      try {
+        await defaultAxios.put(`${attachmentUrlList[x]}`, files[x], {
+          baseURL: '',
+          headers: {
+            'Content-Type': `${attachmentsInfo[x].fileType}`,
+          },
+        });
+      } catch (e) {
+        console.log(e);
+      }
     }
-    console.log('이건 됐음3');
-  }*/
+  }
   return response;
 };
 

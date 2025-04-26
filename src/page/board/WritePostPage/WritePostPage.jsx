@@ -16,8 +16,7 @@ import { formattedNowTime, getBoard } from '@/shared/lib';
 import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
 
 import { postPost } from '@/apis';
-import { DropDownMenu } from '@/feature/board/component';
-import AttachmentBar from '@/feature/board/component/AttachmentBar/AttachmentBar';
+import { AttachmentBar, DropDownMenu } from '@/feature/board/component';
 
 import styles from './WritePostPage.module.css';
 
@@ -31,8 +30,14 @@ export default function WritePostPage() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [attachments, setAttachments] = useState([]);
-  const [images, setImages] = useState([]);
+
+  //'게시글 생성' API에서 요구하는 데이터 (중 attachments array)
+  const [attachmentsInfo, setAttachmentsInfo] = useState([]);
+  //'게시글 첨부파일 저장' API로 넘기는 데이터
+  const [files, setFiles] = useState([]);
+  //화면상 보여주기 위해 DataUrl로 전환한 이미지들
+  const [dataUrlImages, setDataUrlImages] = useState([]);
+
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
@@ -82,8 +87,8 @@ export default function WritePostPage() {
     title,
     content: text,
     isNotice: textId === 'notice' ? true : isNotice,
-    attachments: attachments,
-    images: images,
+    attachmentsInfo: attachmentsInfo,
+    files: files,
   };
 
   const handleSubmit = (e) => {
@@ -238,7 +243,7 @@ export default function WritePostPage() {
               />
 
               <ul className={styles.imageList}>
-                {images.map((image, index) => (
+                {dataUrlImages.map((image, index) => (
                   <li
                     key={index}
                     className={styles.imageContainer}
@@ -261,10 +266,24 @@ export default function WritePostPage() {
                       //같은 위치에 드롭했을 때
                       if (draggedIndex === droppedIndex) return;
 
-                      const updated = [...images];
-                      const [moved] = updated.splice(draggedIndex, 1);
-                      updated.splice(droppedIndex, 0, moved);
-                      setImages(updated);
+                      setAttachmentsInfo((prev) => {
+                        const copy = [...prev];
+                        const [moved] = copy.splice(draggedIndex, 1);
+                        copy.splice(droppedIndex, 0, moved);
+                        return copy;
+                      });
+                      setDataUrlImages((prev) => {
+                        const copy = [...prev];
+                        const [moved] = copy.splice(draggedIndex, 1);
+                        copy.splice(droppedIndex, 0, moved);
+                        return copy;
+                      });
+                      setFiles((prev) => {
+                        const copy = [...prev];
+                        const [moved] = copy.splice(draggedIndex, 1);
+                        copy.splice(droppedIndex, 0, moved);
+                        return copy;
+                      });
                     }}
                   >
                     <img src={image} className={styles.image} />
@@ -309,7 +328,12 @@ export default function WritePostPage() {
             trashImageConfirmModal.openModal();
           }}
         />
-        <AttachmentBar setAttachments={setAttachments} setImages={setImages} />
+        <AttachmentBar
+          setAttachmentsInfo={setAttachmentsInfo}
+          setFiles={setFiles}
+          files={files}
+          setDataUrlImages={setDataUrlImages}
+        />
       </div>
 
       <DeleteModal
@@ -325,10 +349,17 @@ export default function WritePostPage() {
         primaryButtonText='확인'
         secondaryButtonText='취소'
         onPrimaryButtonClick={() => {
-          const updated = [...images];
-          updated.splice(trashImageIndex, 1);
-          setImages(updated);
-          setAttachments((prev) =>
+          setDataUrlImages((prev) =>
+            prev
+              .slice(0, trashImageIndex)
+              .concat(prev.slice(trashImageIndex + 1))
+          );
+          setFiles((prev) =>
+            prev
+              .slice(0, trashImageIndex)
+              .concat(prev.slice(trashImageIndex + 1))
+          );
+          setAttachmentsInfo((prev) =>
             prev
               .slice(0, trashImageIndex)
               .concat(prev.slice(trashImageIndex + 1))

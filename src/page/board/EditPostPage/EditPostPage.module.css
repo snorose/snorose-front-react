@@ -2,6 +2,9 @@
   width: 100%;
   height: 100vh;
   background-color: var(--blue-0);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .top {

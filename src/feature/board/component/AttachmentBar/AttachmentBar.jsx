@@ -6,23 +6,36 @@ import { Icon } from '@/shared/component';
 
 import styles from './AttachmentBar.module.css';
 
-export default function AttachmentBar({ setAttachments, setImages }) {
+export default function AttachmentBar({
+  setAttachmentsInfo,
+  setDataUrlImages,
+  files,
+  setFiles,
+}) {
   const { toast } = useToast();
   const img = useRef();
   const vid = useRef();
   const changeImageUpload = async (e) => {
-    const { files } = e.target;
+    //files는 binary file list-> 사진 파일 그자체의 배열, JS에서는 File Object List가 됨
+    const newFiles = e.target.files;
+    console.log(newFiles);
+
     const maxFileSize = 50 * 1024 * 1024; //50MB
     let totalFileSize = 0;
 
+    //인풋된 파일들 읽기
+    //shallow copy 만들기
+    const newFileArray = Array.from(newFiles);
+    const updated = [...files, ...newFileArray];
+    console.log(updated);
     //첨부파일 개수 제한
-    if (files.length > 10) {
+    if (updated.length > 10) {
       toast('사진은 최대 10장까지만 첨부할 수 있습니다.');
       return;
     }
 
     //첨부파일 용량 제한
-    for (let file of files) {
+    for (let file of updated) {
       totalFileSize = totalFileSize + file.size;
     }
     if (totalFileSize > maxFileSize) {
@@ -30,14 +43,16 @@ export default function AttachmentBar({ setAttachments, setImages }) {
       return;
     }
 
-    //인풋된 파일들 읽기
-    const fileArray = Array.from(files);
-    const readFilesAsDataURLs = fileArray.map((file) => {
-      setAttachments((attArray) => [
+    setFiles(updated);
+
+    const readFilesAsDataURLs = newFileArray.map((file) => {
+      //attachmentsInfo state에 데이터 넣기
+      setAttachmentsInfo((attArray) => [
         ...attArray,
         {
           fileName: file.name,
           fileComment: '',
+          fileType: file.type,
           type: 'PHOTO',
         },
       ]);
@@ -49,7 +64,7 @@ export default function AttachmentBar({ setAttachments, setImages }) {
     });
 
     const imageDataUrls = await Promise.all(readFilesAsDataURLs);
-    setImages((imgArray) => [...imgArray, ...imageDataUrls]);
+    setDataUrlImages((imgArray) => [...imgArray, ...imageDataUrls]);
   };
   const [imageIconState, setImageIconState] = useState('image');
   const [videoIconState, setVideoIconState] = useState('video');
