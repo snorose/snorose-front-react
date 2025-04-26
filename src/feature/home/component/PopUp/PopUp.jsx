@@ -16,22 +16,7 @@ const content = (
         <img src={aprilCalendar} alt='4월 달력' />
       </Content>
 
-      <Heading>2. 25-1 중간고사 포인트 미지급 기간 운영 공지</Heading>
-      <Content>
-        - 첫눈온방 및 함박눈방에 게시글, 댓글 작성 포인트가 지급되지 않습니다.
-        <br />
-        - 기간: 2025/04/15(화) 00:00 ~ 2025/04/28(월) 23:59
-        <br />- 자세한 내용은{' '}
-        <a
-          className={styles.link}
-          href='https://snorose.com/board/notice/post/1811569'
-        >
-          관련 공지
-        </a>
-        를 참고해주시길 바랍니다.
-      </Content>
-
-      <Heading>3. 25-1 시험후기 게시판 운영 공지</Heading>
+      <Heading>2. 25-1 시험후기 게시판 운영 공지</Heading>
       <Content>
         - 시험후기 게시판 운영 기간: 2025/04/29(화)00:00 ~ 2025/05/05(월) 23:59
         <br />- 자세한 내용은{' '}
@@ -44,7 +29,7 @@ const content = (
         를 참고해주시길 바랍니다.
       </Content>
 
-      <Heading>4. 족보 공유 관련 규정 개정 안내</Heading>
+      <Heading>3. 족보 공유 관련 규정 개정 안내</Heading>
       <Content>
         ✓ 족보를 공유한 경우 → <strong>영구 강등</strong>{' '}
         <span style={{ color: 'red' }}>(기존과 동일)</span>
