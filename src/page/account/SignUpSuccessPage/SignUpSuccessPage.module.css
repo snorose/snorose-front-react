@@ -25,6 +25,12 @@
   align-items: center;
 }
 
+.illustration {
+  width: 22.1rem;
+  height: 16.9rem;
+  flex-shrink: 0;
+}
+
 .submit {
   margin-top: 3rem;
   margin-bottom: 3.4rem;

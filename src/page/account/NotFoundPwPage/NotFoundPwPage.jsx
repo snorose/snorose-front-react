@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { BackAppBar, Button, Icon } from '@/shared/component';
+import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './NotFoundPwPage.module.css';
+
+import taskFailedIllustration from '@/assets/images/taskFailedIllustration.svg';
 
 export default function NotFoundPwPage() {
   const navigate = useNavigate();
@@ -27,7 +29,11 @@ export default function NotFoundPwPage() {
         </p>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <Icon id='star-alert' width={231} height={217} />
+        <img
+          src={taskFailedIllustration}
+          alt='비밀번호 찾기 실패를 알리는 일러스트'
+          className={styles.illustration}
+        />
       </div>
       <div className={styles.pageBottomFrame}>
         <Link to='/find-pw'>
