@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/shared/hook';
 import { ROLE } from '@/shared/constant/role';
 
-const examStart = new Date(2024, 11, 21, 0, 0, 0);
-const examEnd = new Date(2024, 11, 21, 23, 59, 59);
+const examStart = new Date(2025, 3, 29, 0, 0, 0);
+const examEnd = new Date(2025, 4, 5, 23, 59, 59);
 
 export default function CheckExamPeriodRoute({ children }) {
   const { userInfo } = useAuth();
