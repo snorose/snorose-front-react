@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Badge } from '@/shared/component';
 import { ROLE } from '@/shared/constant';
 
 export const ADMIN_ROLE = Object.freeze({
@@ -45,14 +44,14 @@ export const SNOROSE_MEMBERSHIP_LEVEL = Object.freeze([
     name: '준회원',
     description:
       ': 최초 가입 시 수여되는 등급으로, 숙명인 인증이 완료되지 않은 회원입니다. 일부 게시판 및 기능만 이용할 수 있습니다.',
-    badge: null,
+    badge: false,
   },
   {
     role: ROLE.user,
     name: '정회원',
     description:
       ': 숙명인 인증을 완료한 회원입니다. 모든 게시판 및 기능을 이용할 수 있습니다.',
-    badge: null,
+    badge: false,
   },
   {
     role: ROLE.admin,
@@ -72,7 +71,7 @@ export const SNOROSE_MEMBERSHIP_LEVEL = Object.freeze([
     name: '블랙리스트',
     description:
       ': 강등된 회원입니다. 강등 기간이 종료되면 준회원으로 조정됩니다.',
-    badge: null,
+    badge: false,
   },
 ]);
 
