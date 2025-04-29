@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
@@ -39,22 +39,6 @@ export default function EditExamReviewPage() {
   const { toast } = useToast();
   const [loading, setLoading] = useState();
 
-  const editReview = useMutation({
-    mutationKey: [MUTATION_KEY.editExamReview],
-    mutationFn: (edit) => editReviewDetail(postId, edit),
-    onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.post, postId]);
-      navigate(ROUTE.examReviewDetail(postId), { replace: true });
-      toast(TOAST.EXAM_REVIEW.edit);
-    },
-    onError: ({ response }) => {
-      toast(response.data.message);
-    },
-    onSettled: () => {
-      setLoading(false);
-    },
-  });
-
   const [lectureName, setLectureName] = useState(state.lectureName);
   const [professor, setProfessor] = useState(state.professor);
   const [lectureType, setLectureType] = useState(
@@ -73,6 +57,33 @@ export default function EditExamReviewPage() {
   const [isOnline, setIsOnline] = useState(state.isOnline);
   const [classNumber, setClassNumber] = useState(state.classNumber);
   const [questionDetail, setQuestionDetail] = useState(state.questionDetail);
+
+  // navigation guard
+  const [isBlock, setIsBlock] = useState(false);
+
+  useEffect(() => {
+    setIsBlock(
+      state.lectureName !== lectureName.trim() ||
+        state.professor !== professor.trim() ||
+        state.lectureType !== lectureType.id ||
+        state.examType !== examType.id ||
+        state.lectureYear !== lectureYear.id ||
+        state.semester !== semester.id ||
+        state.classNumber !== classNumber ||
+        state.questionDetail !== questionDetail.trim()
+    );
+  }, [
+    lectureName,
+    professor,
+    lectureType.id,
+    examType.id,
+    lectureYear.id,
+    semester.id,
+    classNumber,
+    questionDetail,
+  ]);
+
+  useBlocker(isBlock);
 
   const pass =
     lectureName.trim() &&
@@ -99,18 +110,21 @@ export default function EditExamReviewPage() {
     category: '',
   };
 
-  // navigation guard
-  const isBlock =
-    state.lectureName !== lectureName.trim() ||
-    state.professor !== professor.trim() ||
-    state.lectureType !== lectureType.id ||
-    state.examType !== examType.id ||
-    state.lectureYear !== lectureYear.id ||
-    state.semester !== semester.id ||
-    state.classNumber !== classNumber ||
-    state.questionDetail !== questionDetail.trim();
-
-  useBlocker(isBlock);
+  const editReview = useMutation({
+    mutationKey: [MUTATION_KEY.editExamReview],
+    mutationFn: (edit) => editReviewDetail(postId, edit),
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_KEY.post, postId]);
+      navigate(-1);
+      toast(TOAST.EXAM_REVIEW.edit);
+    },
+    onError: ({ response }) => {
+      toast(response.data.message);
+    },
+    onSettled: () => {
+      setLoading(false);
+    },
+  });
 
   return (
     <main className={styles.container}>
@@ -118,6 +132,7 @@ export default function EditExamReviewPage() {
         <ActionButton
           onClick={() => {
             setLoading(true);
+            setIsBlock(false);
             editReview.mutate(data);
           }}
           disabled={!pass}

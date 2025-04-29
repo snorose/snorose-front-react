@@ -3,13 +3,17 @@ import { useBlocker as useRouteBlocker } from 'react-router-dom';
 
 import { ModalContext } from '@/shared/context/ModalContext';
 
-export default function useBlocker(isBlock) {
+export default function useBlocker(isBlock, actions = ['POP']) {
   const { open } = useContext(ModalContext);
 
   // 뒤로가기 시 커스텀 모달 노출
-  const blocker = useRouteBlocker(
-    ({ historyAction }) => isBlock && historyAction === 'POP'
-  );
+  const blocker = useRouteBlocker(({ historyAction }) => {
+    if (!isBlock) return false;
+
+    const actionType = actions.map((action) => action.toUpperCase());
+
+    return actionType.includes(historyAction);
+  });
 
   useEffect(() => {
     if (blocker.state === 'blocked') {

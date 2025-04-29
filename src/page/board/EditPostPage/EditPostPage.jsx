@@ -50,10 +50,15 @@ export default function EditPostPage() {
   });
 
   // navigation guard
-  const isBlock =
-    data.title !== title.trim() ||
-    data.content !== text.trim() ||
-    data.isNotice !== isNotice;
+  const [isBlock, setIsBlock] = useState(false);
+
+  useEffect(() => {
+    setIsBlock(
+      data.title !== title.trim() ||
+        data.content !== text.trim() ||
+        data.isNotice !== isNotice
+    );
+  }, [title, text, isNotice]);
 
   useBlocker(isBlock);
 
@@ -73,7 +78,7 @@ export default function EditPostPage() {
     mutationFn: patchPost,
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_KEY.post, postId]);
-      navigate(-1, { replace: true });
+      navigate(-1);
       toast(TOAST.POST.edit);
       setSubmitDisabled(false);
     },
@@ -112,6 +117,8 @@ export default function EditPostPage() {
     }
 
     setSubmitDisabled(true);
+    setIsBlock(false);
+
     mutation.mutate({
       boardId: currentBoard?.id,
       postId,
