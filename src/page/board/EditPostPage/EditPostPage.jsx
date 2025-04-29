@@ -55,10 +55,15 @@ export default function EditPostPage() {
   });
 
   // navigation guard
-  const isBlock =
-    data.title !== title.trim() ||
-    data.content !== text.trim() ||
-    data.isNotice !== isNotice;
+  const [isBlock, setIsBlock] = useState(false);
+
+  useEffect(() => {
+    setIsBlock(
+      data.title !== title.trim() ||
+        data.content !== text.trim() ||
+        data.isNotice !== isNotice
+    );
+  }, [title, text, isNotice]);
 
   useBlocker(isBlock);
 
