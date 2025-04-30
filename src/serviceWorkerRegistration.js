@@ -7,9 +7,8 @@ export async function register() {
     const registration = await navigator.serviceWorker.register(
       '/firebase-messaging-sw.js'
     );
-    const token = await subscribeToPushNotification(registration);
-    console.log(token);
-    return token;
+
+    await subscribeToPushNotification(registration);
   } catch (error) {
     console.error(error);
   }
