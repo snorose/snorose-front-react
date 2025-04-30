@@ -43,6 +43,10 @@ export const SIDEBAR_MENUS = Object.freeze([
     items: [
       { to: '/about', name: 'About 스노로즈' },
       { to: '/board/notice', name: '공지사항' },
+      {
+        to: 'https://snorose.notion.site/1a37ef0aa3bf8071bcd0cb35c035636e?pvs=4',
+        name: '스노로즈 블로그',
+      },
     ],
   },
   {
