@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
-import aprilCalendar from '@/feature/home/component/PopUp/april-calendar.png';
+import calendar from '@/feature/home/component/PopUp/calendar.jpg';
 import styles from './PopUp.module.css';
 
 const content = (
@@ -10,46 +10,41 @@ const content = (
       <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
-      <Heading>1. 4월 스노로즈 캘린더</Heading>
+      <Heading>
+        1. 5월 스노로즈 캘린더{' '}
+        <a
+          className={styles.link}
+          href='https://www.snorose.com/board/notice/post/1818753'
+        >
+          [링크]
+        </a>
+      </Heading>
 
       <Content>
-        <img src={aprilCalendar} alt='4월 달력' />
+        <img src={calendar} alt='5월 달력' />
       </Content>
 
-      <Heading>2. 25-1 시험후기 게시판 운영 공지</Heading>
+      <Heading>2. 스노로즈 블로그 오픈 공지</Heading>
+      <Content>
+        운영진이 직접 전하는 &lt;스노로즈 리뉴얼&gt; 비하인드 스토리,
+        <br />
+        지금 스노로즈 블로그에서 확인해보세요!
+        <br />
+        <a
+          className={styles.link}
+          href='https://snorose.notion.site/1a37ef0aa3bf8071bcd0cb35c035636e'
+        >
+          [블로그 링크 바로가기]
+        </a>
+      </Content>
+
+      <Heading>3. 25-1 시험후기 게시판 운영 공지</Heading>
       <Content>
         - 시험후기 게시판 운영 기간: 2025/04/29(화)00:00 ~ 2025/05/05(월) 23:59
         <br />- 자세한 내용은{' '}
         <a
           className={styles.link}
           href='https://snorose.com/board/notice/post/1811569'
-        >
-          관련 공지
-        </a>
-        를 참고해주시길 바랍니다.
-      </Content>
-
-      <Heading>3. 족보 공유 관련 규정 개정 안내</Heading>
-      <Content>
-        ✓ 족보를 공유한 경우 → <strong>영구 강등</strong>{' '}
-        <span style={{ color: 'red' }}>(기존과 동일)</span>
-        <br />
-        ✓ 족보를 공유받은 경우  
-        <br />{' '}
-        <span style={{ paddingLeft: '18px' }}>
-          A. 금전 거래가 있었거나 시도한 경우 → <strong>영구 강등</strong>
-        </span>
-        <br />
-        <span style={{ paddingLeft: '20px' }}>
-          B. A항이 아닌 경우 → <strong>2년 강등</strong>
-        </span>
-        <br />
-        (※ 단, 새내기는 입학년도 4월 이전 위반 시 6개월 강등, 4월부터는 2년 강등
-        적용)
-        <br />- 자세한 내용은{' '}
-        <a
-          className={styles.link}
-          href='https://snorose.com/board/exam-review-notice/post/1811681'
         >
           관련 공지
         </a>
