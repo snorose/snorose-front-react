@@ -13,9 +13,11 @@
 }
 
 .sidebar {
+  overflow-y: auto;
+
   width: 80%;
   height: 100%;
-  padding: 2rem 0 0 3rem;
+  padding-left: 3rem;
   position: absolute;
   right: 0;
   border-radius: 1.6rem 0 0 0;
@@ -23,8 +25,14 @@
 }
 
 .logo {
+  position: sticky;
+  top: 0;
+
   display: inline-block;
-  margin-bottom: 2rem;
+  width: 100%;
+  padding: 2rem 0;
+
+  background-color: white;
 }
 
 .title {
