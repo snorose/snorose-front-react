@@ -11,6 +11,7 @@ export const subscribeToPushNotification = async (registration) => {
         serviceWorkerRegistration: registration,
       });
 
+      return token;
       // 백엔드로 token 전달
       // await fetch('/api/register-token', {
       //   method: 'POST',
