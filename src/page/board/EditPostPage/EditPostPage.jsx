@@ -54,9 +54,6 @@ export default function EditPostPage() {
     placeholderData: {},
   });
 
-  // navigation guard
-  const [isBlock, setIsBlock] = useState(false);
-
   useEffect(() => {
     setIsBlock(
       data.title !== title.trim() ||
