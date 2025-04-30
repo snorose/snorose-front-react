@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import { Navbar, Sidebar } from '@/shared/component';
@@ -13,12 +13,20 @@ function App() {
   const currentRoute = findRouteByPath(pathname, routeList);
   const hideNav = currentRoute?.meta?.hideNav ?? false;
 
+  const [token, setToken] = useState('');
+
   useEffect(() => {
-    serviceWorkerRegistration.register();
+    const test = async () => {
+      const fcmToken = await serviceWorkerRegistration.register();
+      setToken(fcmToken);
+    };
+
+    test();
   }, []);
 
   return (
     <div className={styles.app}>
+      {token}
       <Outlet />
       {!hideNav && <Navbar />}
       <Sidebar />

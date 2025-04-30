@@ -9,6 +9,7 @@ export async function register() {
     );
     const token = await subscribeToPushNotification(registration);
     console.log(token);
+    return token;
   } catch (error) {
     console.error(error);
   }
