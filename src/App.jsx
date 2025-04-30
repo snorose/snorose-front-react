@@ -26,7 +26,13 @@ function App() {
 
   return (
     <div className={styles.app}>
-      {token}
+      <div
+        style={{
+          overflowWrap: 'break-word',
+        }}
+      >
+        {token}
+      </div>
       <Outlet />
       {!hideNav && <Navbar />}
       <Sidebar />
