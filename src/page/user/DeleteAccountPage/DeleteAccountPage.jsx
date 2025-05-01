@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAuth, useModal } from '@/shared/hook';
-import { CloseAppBar, ConfirmModal, PwInput } from '@/shared/component';
+import { CloseAppBar, ConfirmModal, PwInput, Icon } from '@/shared/component';
 
 import styles from './DeleteAccountPage.module.css';
 
 const DESCRIPTION_LIST = [
-  '• 회원탈퇴 시 모든 정보가 영구적으로 삭제되며, 다시는 복구할 수 없습니다.',
-  '• 보유 포인트 및 포인트 기록은 복구가 불가능합니다.',
-  '• 비밀번호를 입력해야 탈퇴가 가능해요',
+  '아이디, 이메일, 이름, 학번은 민원 처리 및 분쟁 조정 목적으로 보관돼요',
+  '보유 포인트 및 포인트 기록은 복구가 불가능해요',
+  '포인트가 음수인 경우, 재가입 후 인증하면 탈퇴 전 포인트로 설정돼요',
 ];
 
 export default function DeleteAccountPage() {
@@ -35,11 +35,19 @@ export default function DeleteAccountPage() {
       <section className={styles.contentContainer}>
         <div className={styles.titleDescWrapper}>
           <h1 className={styles.title}>탈퇴 시 아래 내용을 확인해주세요</h1>
-          <div className={styles.descWrapper}>
+          <div className={styles.descriptionWrapper}>
             {DESCRIPTION_LIST.map((desc, index) => (
-              <p key={index} className={styles.desc}>
-                {desc}
-              </p>
+              <div className={styles.dotDescriptionList}>
+                <Icon
+                  className={styles.middleDot}
+                  id='middle-dot'
+                  width={6}
+                  height={6}
+                />
+                <p key={index} className={styles.description}>
+                  {desc}
+                </p>
+              </div>
             ))}
           </div>
 
