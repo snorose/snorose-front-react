@@ -67,6 +67,7 @@
     "@storybook/react-webpack5": "^8.4.7",
     "@storybook/test": "^8.4.7",
     "@tanstack/react-query-devtools": "^5.51.23",
+    "chromatic": "^11.28.2",
     "eslint-plugin-storybook": "^0.11.2",
     "prettier": "^3.3.2",
     "prop-types": "^15.8.1",
