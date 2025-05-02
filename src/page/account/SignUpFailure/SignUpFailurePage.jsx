@@ -5,7 +5,7 @@ import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './SignUpFailurePage.module.css';
 
-import taskFailedIllustration from '@/assets/images/taskFailedIllustration.svg';
+import { taskFailedIllustration } from '@/assets/illustrations';
 
 export default function SignUpFailurePage() {
   const navigate = useNavigate();
