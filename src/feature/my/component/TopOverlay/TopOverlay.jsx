@@ -13,8 +13,8 @@ export default function TopOverlay() {
             className={styles.editIcon}
             id='pencil-underline'
             stroke='white'
-            width={20}
-            height={20}
+            width={24}
+            height={24}
           />
         </Link>
       </div>

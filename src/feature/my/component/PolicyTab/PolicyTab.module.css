@@ -25,12 +25,12 @@
   align-items: center;
   padding: 1.2rem 0;
   color: var(--gray-4);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 500;
 
   svg {
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 2.4rem;
+    height: 2.4rem;
   }
 }
 
@@ -38,30 +38,28 @@
 .buttonWrapper {
   display: flex;
   justify-content: flex-end;
-  gap: 1.5rem;
+  gap: 1.6rem;
   margin: 2rem;
 }
 
-.editButton {
+.logoutButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 9rem;
-  height: 2.8rem;
   border-radius: 0.5rem;
+  padding: 0.9rem 1.5rem;
   background: var(--blue-4);
   color: var(--white);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
-.passwordButton {
+.deleteAccountButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 9.5rem;
-  height: 2.8rem;
   border-radius: 0.5rem;
+  padding: 0.9rem 1.5rem;
   background: var(--blue-1);
   color: var(--blue-4);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }

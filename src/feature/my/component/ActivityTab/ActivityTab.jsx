@@ -26,7 +26,7 @@ const ActivityTab = () => {
             link: 'scrap-exam-review',
           },
           {
-            label: '스크랩 모아보기',
+            label: '스크랩한 글 모아보기',
             link: 'scrap',
           },
         ].map((item, index) => (
@@ -34,7 +34,13 @@ const ActivityTab = () => {
             <Link to={item.link}>
               <div className={styles.item}>
                 <span>{item.label}</span>
-                <Icon id='angle-right' width={16} height={16} />
+                <Icon
+                  id='angle-right'
+                  width={16}
+                  height={16}
+                  fill='#898989'
+                  stroke='#898989'
+                />
               </div>
             </Link>
           </div>

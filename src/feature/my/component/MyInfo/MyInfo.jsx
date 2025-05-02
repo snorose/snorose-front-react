@@ -24,6 +24,7 @@ export default function MyInfo({ userInfo }) {
         </div>
         {<Badge userRoleId={userInfo?.userRoleId} className={styles.badge} />}
       </div>
+
       <Link to='view-point-list'>
         <div className={styles.pointWrapper}>
           <div className={styles.point}>
@@ -32,7 +33,13 @@ export default function MyInfo({ userInfo }) {
           </div>
           <div className={styles.pointList}>
             포인트 내역 보기
-            <Icon id='angle-right' width={16} height={16} fill='#00368e' />
+            <Icon
+              id='angle-right'
+              width={24}
+              height={24}
+              fill='#00368e'
+              stroke='#00368e'
+            />
           </div>
         </div>
       </Link>
