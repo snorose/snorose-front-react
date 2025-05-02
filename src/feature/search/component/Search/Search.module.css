@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  background: var(--gray-1-1);
+  background: var(--grey-1-1);
   border-radius: 0.5rem;
 }
 
@@ -19,5 +19,5 @@
 
 .search::placeholder {
   font-size: 1.2rem;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
 }

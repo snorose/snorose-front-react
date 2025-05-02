@@ -2,7 +2,7 @@
   margin-top: 0.8rem;
   width: calc(100% - 4rem);
   padding: 1.3rem 0.6rem;
-  background-color: var(--gray-2);
+  background-color: var(--grey-2);
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@
   border-radius: 0.5rem;
   background-color: transparent;
   padding: 0 1.3rem;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
   cursor: pointer;
 }
 
