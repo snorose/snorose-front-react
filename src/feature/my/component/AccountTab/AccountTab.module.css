@@ -5,14 +5,14 @@
   padding: 0.4rem 1.3rem;
   margin: 0 2rem;
   border-radius: 0.5rem;
-  background: var(--gray-1);
+  background: var(--grey-1);
 }
 
 .info {
   display: flex;
   flex-direction: column;
   padding: 1rem 0;
-  border-bottom: 0.1rem solid var(--gray-3);
+  border-bottom: 0.1rem solid var(--grey-3);
 
   &:last-child {
     border-bottom: none;
@@ -20,12 +20,12 @@
 }
 
 .label {
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
   font-size: 1.1rem;
 }
 
 .value {
-  color: var(--gray-4);
+  color: var(--grey-4);
   font-size: 1.4rem;
   font-weight: 500;
 }

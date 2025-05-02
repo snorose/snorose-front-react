@@ -1,7 +1,7 @@
 .post {
   padding: 1.3rem 1.5rem;
   width: 100%;
-  background-color: var(--gray-1);
+  background-color: var(--grey-1);
   border-radius: 0.5rem;
   cursor: pointer;
   user-select: none;
@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   font-size: 1.1rem;
-  color: var(--gray-4);
+  color: var(--grey-4);
   white-space: nowrap;
 }
 
@@ -57,7 +57,7 @@
 
 .text {
   font-size: 1.3rem;
-  color: var(--gray-4);
+  color: var(--grey-4);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -71,7 +71,7 @@
   justify-content: space-between;
   font-size: 1rem;
   padding: 0.5rem 0 0 0;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
   justify-content: space-between;
 
   p {
@@ -90,7 +90,7 @@
   align-items: center;
   gap: 0.7rem;
   font-size: 1.1rem;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
 }
 
 .comment {

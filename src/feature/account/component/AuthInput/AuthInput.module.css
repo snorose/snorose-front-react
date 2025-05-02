@@ -3,13 +3,13 @@
   display: inline-block;
   font-weight: 500;
   font-size: 1.4rem;
-  color: var(--gray-4);
+  color: var(--grey-4);
 }
 
 .input {
   width: 100%;
   padding: 1.2rem 0 1.1rem 1.3rem;
-  background: var(--gray-1-1);
+  background: var(--grey-1-1);
   border-radius: 0.5rem;
   border: none;
   outline: none;
@@ -17,7 +17,7 @@
 }
 
 .input::placeholder {
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
 }
 
 .input.isInvalid {

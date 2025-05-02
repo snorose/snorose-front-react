@@ -14,7 +14,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 1.2rem;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
 }
 
 .displayBoxLeft {
@@ -34,7 +34,7 @@
   width: 0.3rem;
   height: 0.3rem;
   margin: 0 0.8rem;
-  background: var(--gray-3-1);
+  background: var(--grey-3-1);
   border-radius: 100%;
 }
 
@@ -72,7 +72,7 @@
   justify-content: flex-end;
   align-items: center;
   font-size: 1.1rem;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
 
   div:nth-of-type(2):hover {
     background-color: rgba(var(--white-rgb), 0.8);
