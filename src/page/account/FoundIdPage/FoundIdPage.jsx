@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { BackAppBar, Button, Icon } from '@/shared/component';
 
 import styles from './FoundIdPage.module.css';
+
+import { emailSendIllustration } from '@/assets/illustrations';
 
 export default function FoundIdPage() {
   const navigate = useNavigate();
@@ -33,7 +35,11 @@ export default function FoundIdPage() {
         </div>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <Icon id='star-mail' width={231} height={217} />
+        <img
+          src={emailSendIllustration}
+          alt='이메일로 아이디를 전송했음을 알리는 일러스트'
+          className={styles.illustration}
+        />
       </div>
       <div className={styles.pageBottomFrame}>
         <Link to='/login'>

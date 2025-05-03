@@ -11,14 +11,17 @@
   display: block;
 }
 
-.pageTopFrame {
-}
-
 .pageMiddleFrame {
   height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.illustration {
+  width: 21.9rem;
+  height: 16.9rem;
+  flex-shrink: 0;
 }
 
 .explanation {
@@ -35,7 +38,7 @@
 .pageExplanation {
   font-size: 1.4rem;
   font-weight: 500;
-  color: var(--gray-4);
+  color: var(--grey-4);
   margin-top: 1.4rem;
 }
 

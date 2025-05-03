@@ -1,10 +1,10 @@
 .button {
   width: 100%;
   padding: 0.9rem 0;
-  background: var(--gray-2);
+  background: var(--grey-2);
   border-radius: 0.5rem;
   font-size: 1.3rem;
-  color: var(--gray-4);
+  color: var(--grey-4);
 }
 
 .select {

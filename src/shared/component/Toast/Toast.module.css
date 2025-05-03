@@ -1,6 +1,6 @@
 .toast {
   padding: 1.3rem 3.2rem;
-  background: rgba(var(--gray-4-rgb), 0.8);
+  background: rgba(var(--grey-4-rgb), 0.8);
   border-radius: 0.6rem;
   transition: 500ms opacity ease-in-out;
 }
