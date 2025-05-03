@@ -2,9 +2,11 @@
 
 > 리뷰어가 이번 PR의 맥락을 알 수 있도록 관련 자료를 링크해주세요.
 
-- 노션:
-- 피그마:
-- 기타 관련 문서:
+|                                                   항목                                                   |        LINK        |
+| :------------------------------------------------------------------------------------------------------: | :----------------: |
+| <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion" width="24"/> |     [Notion]()     |
+|  <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" width="16"/>  |     [Figma]()      |
+|                                                    📋                                                    | [기타 관련 문서]() |
 
 Close #
 
