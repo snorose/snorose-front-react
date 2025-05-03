@@ -41,36 +41,39 @@ export default function EditPostPage() {
   const [text, setText] = useState('');
   const [userDisplay, setUserDisplay] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [isBlock, setIsBlock] = useState(false);
+
+  // navigation guard
+  useBlocker(isBlock);
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
+    placeholderData: {},
   });
 
-  // navigation guard
-  const [isBlock, setIsBlock] = useState(false);
-
+  // 데이터 화면 표시
   useEffect(() => {
+    if (!data || Object.keys(data).length === 0) return;
+
+    setTitle(data.title);
+    setText(data.content);
+    setIsNotice(data.isNotice);
+    setUserDisplay(data.userDisplay);
+  }, [data]);
+
+  // isBlock 업데이트
+  useEffect(() => {
+    if (!data || Object.keys(data).length === 0) return;
+
     setIsBlock(
       data.title !== title.trim() ||
         data.content !== text.trim() ||
         data.isNotice !== isNotice
     );
   }, [title, text, isNotice]);
-
-  useBlocker(isBlock);
-
-  // 데이터 화면 표시
-  useEffect(() => {
-    if (data) {
-      setTitle(data.title);
-      setText(data.content);
-      setIsNotice(data.isNotice);
-      setUserDisplay(data.userDisplay);
-    }
-  }, [data]);
 
   // 게시글 수정
   const mutation = useMutation({
