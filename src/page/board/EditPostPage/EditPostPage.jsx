@@ -3,11 +3,10 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuth, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import {
   BackAppBar,
   CloseAppBar,
-  DeleteModal,
   FetchLoading,
   Icon,
   Badge,
@@ -41,25 +40,40 @@ export default function EditPostPage() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [userDisplay, setUserDisplay] = useState('');
-  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [isBlock, setIsBlock] = useState(false);
+
+  // navigation guard
+  useBlocker(isBlock);
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
+    placeholderData: {},
   });
 
   // 데이터 화면 표시
   useEffect(() => {
-    if (data) {
-      setTitle(data.title);
-      setText(data.content);
-      setIsNotice(data.isNotice);
-      setUserDisplay(data.userDisplay);
-    }
+    if (!data || Object.keys(data).length === 0) return;
+
+    setTitle(data.title);
+    setText(data.content);
+    setIsNotice(data.isNotice);
+    setUserDisplay(data.userDisplay);
   }, [data]);
+
+  // isBlock 업데이트
+  useEffect(() => {
+    if (!data || Object.keys(data).length === 0) return;
+
+    setIsBlock(
+      data.title !== title.trim() ||
+        data.content !== text.trim() ||
+        data.isNotice !== isNotice
+    );
+  }, [title, text, isNotice]);
 
   // 게시글 수정
   const mutation = useMutation({
@@ -67,7 +81,7 @@ export default function EditPostPage() {
     mutationFn: patchPost,
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_KEY.post, postId]);
-      navigate(-1, { replace: true });
+      navigate(-1);
       toast(TOAST.POST.edit);
       setSubmitDisabled(false);
     },
@@ -106,6 +120,8 @@ export default function EditPostPage() {
     }
 
     setSubmitDisabled(true);
+    setIsBlock(false);
+
     mutation.mutate({
       boardId: currentBoard?.id,
       postId,
@@ -140,13 +156,6 @@ export default function EditPostPage() {
           <CloseAppBar
             children={<p onClick={handleSubmit}>수정</p>}
             backgroundColor={'#eaf5fd'}
-            onClose={() => {
-              data.title !== title ||
-              data.content !== text ||
-              data.isNotice !== isNotice
-                ? setIsCheckModalOpen(true)
-                : navigate(-1, { replace: true });
-            }}
           />
         </div>
         <div className={styles.center}>
@@ -204,12 +213,6 @@ export default function EditPostPage() {
           </div>
         </div>
       </div>
-      <DeleteModal
-        id='post-edit-exit-check'
-        isOpen={isCheckModalOpen}
-        closeFn={() => setIsCheckModalOpen(false)}
-        redBtnFunction={() => navigate(-1, { replace: true })}
-      />
     </>
   );
 }

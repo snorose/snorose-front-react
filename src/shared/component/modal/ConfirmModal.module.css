@@ -4,10 +4,11 @@
   max-width: var(--default-width);
   height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   background: rgba(228, 228, 228, 0.6);
   backdrop-filter: blur(1rem);
+  /* Note: backdrop-filter has minimal browser support */
 }
 
 .container {
@@ -29,12 +30,13 @@
   white-space: pre-line;
 }
 
-.deleteCenter {
+.description {
   width: 80%;
   text-align: center;
-  color: var(--grey-4);
+  color: var(--gray-4);
   font-size: 1.2rem;
   white-space: pre-line;
+  word-break: keep-all;
 }
 
 /* button */
@@ -47,18 +49,16 @@
   width: 100%;
   padding: 1rem 1.2rem;
   background-color: transparent;
-  border: none;
   font-weight: 500;
-  font-size: 1.4rem;
   color: var(--pink-3);
+  font-size: 1.4rem;
 }
 
 .secondaryButton {
   width: 100%;
   padding: 1rem 1.2rem;
   background-color: transparent;
-  border: none;
   font-weight: 500;
-  font-size: 1.4rem;
   color: var(--gray-3-1);
+  font-size: 1.4rem;
 }
