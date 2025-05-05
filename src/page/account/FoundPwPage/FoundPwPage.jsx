@@ -5,7 +5,7 @@ import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './FoundPwPage.module.css';
 
-import emailSendIllustration from '@/assets/images/emailSendIllustration.svg';
+import { emailSendIllustration } from '@/assets/illustrations';
 
 export default function FoundPwPage() {
   const navigate = useNavigate();

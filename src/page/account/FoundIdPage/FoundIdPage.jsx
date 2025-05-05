@@ -5,7 +5,7 @@ import { BackAppBar, Button, Icon } from '@/shared/component';
 
 import styles from './FoundIdPage.module.css';
 
-import emailSendIllustration from '@/assets/images/emailSendIllustration.svg';
+import { emailSendIllustration } from '@/assets/illustrations';
 
 export default function FoundIdPage() {
   const navigate = useNavigate();

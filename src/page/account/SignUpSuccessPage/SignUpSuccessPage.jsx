@@ -5,7 +5,7 @@ import { Button, Icon } from '@/shared/component';
 
 import styles from './SignUpSuccessPage.module.css';
 
-import taskCompleteIllustration from '@/assets/images/taskCompleteIllustration.svg';
+import { taskCompleteIllustration } from '@/assets/illustrations';
 
 export default function SignUpSuccessPage() {
   const navigate = useNavigate();

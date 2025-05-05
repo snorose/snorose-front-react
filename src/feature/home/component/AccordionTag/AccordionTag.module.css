@@ -22,7 +22,7 @@
 }
 
 .title {
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
   font-size: 0.9rem;
 }
 
@@ -30,5 +30,5 @@
 
 .studentInfo {
   font-size: 0.8rem;
-  color: var(--gray-4);
+  color: var(--grey-4);
 }

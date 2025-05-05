@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   left: 50%;
-  z-index: 101;
+  z-index: 1;
   width: 100vw;
   max-width: var(--default-width);
   height: 100vh;
@@ -26,7 +26,7 @@
   display: flex;
   justify-content: center;
   padding: 1.6rem 0;
-  border-bottom: 0.05rem solid var(--gray-2);
+  border-bottom: 0.05rem solid var(--grey-2);
 }
 
 /* OptionModal: 옵션이 있는 모달 스타일 */
@@ -49,7 +49,7 @@
 
 .leftCloseBtn {
   padding: 1rem;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
   font-size: 1.4rem;
   font-weight: 500;
   cursor: pointer;
@@ -77,7 +77,7 @@
 }
 
 .optionText {
-  color: var(--gray-4);
+  color: var(--grey-4);
   font-size: 1.4rem;
 }
 
@@ -91,9 +91,9 @@
 
 .deleteCenter {
   display: flex;
-  color: var(--gray-4);
+  color: var(--grey-4);
   justify-content: center;
-  color: var(--gray-4);
+  color: var(--grey-4);
   font-size: 1.3rem;
   padding-bottom: 1rem;
 }
@@ -102,7 +102,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
   font-size: 1.4rem;
   font-weight: 500;
   gap: 8rem;

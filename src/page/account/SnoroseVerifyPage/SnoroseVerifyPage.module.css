@@ -19,7 +19,7 @@
   width: 0.9rem;
   height: 0.9rem;
   border-radius: 100%;
-  background-color: var(--gray-2);
+  background-color: var(--grey-2);
 }
 
 .dot.select {
@@ -37,7 +37,7 @@
   margin: 0 var(--default-margin) 2.7rem var(--default-margin);
   font-weight: 500;
   font-size: 1.4rem;
-  color: var(--gray-4);
+  color: var(--grey-4);
   white-space: pre-line;
   word-break: keep-all;
 }

@@ -32,7 +32,7 @@
 .tag {
   font-weight: 500;
   font-size: 1.4rem;
-  color: var(--gray-4);
+  color: var(--grey-4);
 }
 
 .right {
@@ -42,10 +42,10 @@
 label[for='file'] {
   padding: 0.8rem 1.6rem;
   display: block;
-  background: var(--gray-2);
+  background: var(--grey-2);
   border-radius: 0.5rem;
   font-size: 1.3rem;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
   cursor: pointer;
 }
 

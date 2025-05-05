@@ -25,13 +25,13 @@
 .tabMenu {
   display: flex;
   margin: 2.9rem 2rem 1.4rem;
-  border-top: 0.1rem solid var(--gray-3);
+  border-top: 0.1rem solid var(--grey-3);
 }
 
 .tab {
   width: 100%;
   padding: 1.5rem;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
   text-align: center;
   font-size: 1.4rem;
   font-weight: 500;

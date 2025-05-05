@@ -3,11 +3,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuth, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import {
   ActionButton,
   CloseAppBar,
-  DeleteModal,
   Icon,
   FetchLoading,
   Badge,
@@ -30,8 +29,12 @@ export default function WritePostPage() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
+
+  // navigation guard
+  const isBlock = title.trim().length > 0 || text.trim().length > 0;
+
+  useBlocker(isBlock);
 
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
@@ -154,14 +157,7 @@ export default function WritePostPage() {
     <>
       <div className={styles.container}>
         <div className={styles.top}>
-          <CloseAppBar
-            backgroundColor={'#eaf5fd'}
-            onClose={() => {
-              title.trim() || text.trim()
-                ? setIsCheckModalOpen(true)
-                : navigate(-1, { replace: true });
-            }}
-          >
+          <CloseAppBar backgroundColor={'#eaf5fd'}>
             <ActionButton onClick={handleSubmit} disabled={!pass}>
               등록
             </ActionButton>
@@ -256,12 +252,6 @@ export default function WritePostPage() {
           </div>
         </div>
       </div>
-      <DeleteModal
-        id='post-write-exit-check'
-        isOpen={isCheckModalOpen}
-        closeFn={() => setIsCheckModalOpen(false)}
-        redBtnFunction={() => navigate(-1, { replace: true })}
-      />
     </>
   );
 }
