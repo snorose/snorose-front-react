@@ -38,6 +38,19 @@ const content = (
         </a>
       </Content>
 
+      <Heading>3. 25-1 시험후기 게시판 운영 공지</Heading>
+      <Content>
+        - 시험후기 게시판 운영 기간: 2025/04/29(화)00:00 ~ 2025/05/05(월) 23:59
+        <br />- 자세한 내용은{' '}
+        <a
+          className={styles.link}
+          href='https://snorose.com/board/notice/post/1811569'
+        >
+          관련 공지
+        </a>
+        를 참고해주시길 바랍니다.
+      </Content>
+
       <hr />
       <Content>
         ※ 스노로즈 인스타그램(@snorose1906)에서 월별 스노로즈 일정을 쉽게 확인할
