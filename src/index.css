@@ -48,7 +48,15 @@ pre {
   box-sizing: border-box;
   font: inherit;
   vertical-align: baseline;
-  letter-spacing: -0.05rem;
+}
+
+input,
+textarea,
+keygen,
+select,
+button {
+  letter-spacing: inherit;
+  line-height: inherit;
 }
 
 p,
@@ -89,6 +97,8 @@ button {
 html {
   background-color: #dfdfdf;
   font-size: 62.5%;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
 }
 
 body {
@@ -110,7 +120,6 @@ body {
     sans-serif;
   font-display: swap;
   font-optical-sizing: auto;
-  line-height: 1.5;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
