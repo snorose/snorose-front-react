@@ -14,14 +14,14 @@
 .titleDescWrapper {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
-  gap: 0.875rem;
+  padding: 2rem;
+  gap: 1.4rem;
   flex-grow: 1;
 }
 
 .title {
   color: var(--black);
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 
@@ -29,13 +29,13 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-  gap: 0.3125rem;
-  padding-bottom: 0.8125rem;
+  gap: 0.5rem;
+  padding-bottom: 1.3rem;
 }
 
 .desc {
-  color: var(--gray-4);
-  font-size: 0.875rem;
+  color: var(--grey-4);
+  font-size: 1.4rem;
   font-weight: 500;
 }
 
@@ -45,8 +45,8 @@
   flex-direction: column;
   bottom: 0;
   width: 100%;
-  gap: 0.5rem;
-  padding: 1.25rem 1.25rem 3.375rem;
+  gap: 0.8rem;
+  padding: 2rem 2rem 5.4rem;
 }
 
 .goBackButton {
@@ -54,11 +54,11 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 2.9375rem;
-  border-radius: 0.3125rem;
+  height: 4.7rem;
+  border-radius: 0.5rem;
   background: var(--blue-1);
   color: var(--blue-3);
-  font-size: 0.875rem;
+  font-size: 1.4rem;
   font-weight: 500;
 }
 
@@ -67,11 +67,11 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 2.9375rem;
-  border-radius: 0.3125rem;
+  height: 4.7rem;
+  border-radius: 0.5rem;
   background: var(--blue-4);
   color: var(--white);
   text-align: center;
-  font-size: 0.875rem;
+  font-size: 1.4rem;
   font-weight: 500;
 }

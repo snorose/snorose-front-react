@@ -10,9 +10,15 @@ import {
   DeleteModal,
   Icon,
   OptionModal,
+  Badge,
 } from '@/shared/component';
 import { timeAgo, convertHyperlink } from '@/shared/lib';
-import { MUTATION_KEY, LIKE_TYPE } from '@/shared/constant';
+import {
+  MUTATION_KEY,
+  LIKE_TYPE,
+  ROLE,
+  SHOW_BADGE_PATH,
+} from '@/shared/constant';
 
 import { useCommentContext } from '@/feature/comment/context';
 import { useComment } from '@/feature/comment/hook';
@@ -89,6 +95,7 @@ const Comment = forwardRef((props, ref) => {
   };
 
   const {
+    userRoleId,
     userDisplay,
     isWriterWithdrawn,
     content,
@@ -100,6 +107,12 @@ const Comment = forwardRef((props, ref) => {
     isDeleted,
     children,
   } = data;
+
+  // 뱃지가 보이는 ROLE
+  const showBadge =
+    userRoleId === ROLE.official ||
+    (userRoleId === ROLE.admin &&
+      SHOW_BADGE_PATH.some((path) => pathname.includes(path)));
 
   return (
     <>
@@ -119,6 +132,9 @@ const Comment = forwardRef((props, ref) => {
             <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
               {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
             </p>
+            {showBadge && (
+              <Badge userRoleId={userRoleId} className={styles.badge} />
+            )}
             <p className={styles.dot}>·</p>
             <p>
               {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}

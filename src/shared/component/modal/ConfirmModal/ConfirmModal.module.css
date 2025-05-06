@@ -3,37 +3,27 @@
   width: 100vw;
   max-width: var(--default-width);
   height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(228, 228, 228, 0.6);
-  backdrop-filter: blur(0.625rem);
+  backdrop-filter: blur(1rem);
 }
 
 .container {
+  width: 29rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  width: 18rem;
-  padding: 1.25rem 0.625rem 0.625rem;
-  border-radius: 0.625rem;
+  gap: 1.2rem;
+  padding: 2rem 1rem 1rem;
+  border-radius: 1rem;
   background: var(--white);
-}
-
-.buttonGroup {
-  display: flex;
-  width: 100%;
 }
 
 .title {
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: 500;
   color: var(--black);
   white-space: pre-line;
@@ -42,23 +32,33 @@
 .deleteCenter {
   width: 80%;
   text-align: center;
-  color: var(--gray-4);
-  font-size: 0.75rem;
+  color: var(--grey-4);
+  font-size: 1.2rem;
   white-space: pre-line;
+}
+
+/* button */
+.buttonGroup {
+  display: flex;
+  width: 100%;
 }
 
 .primaryButton {
   width: 100%;
-  padding: 0.625rem 0.75rem;
+  padding: 1rem 1.2rem;
   background-color: transparent;
+  border: none;
   font-weight: 500;
+  font-size: 1.4rem;
   color: var(--pink-3);
 }
 
 .secondaryButton {
   width: 100%;
-  padding: 0.625rem 0.75rem;
+  padding: 1rem 1.2rem;
   background-color: transparent;
+  border: none;
   font-weight: 500;
+  font-size: 1.4rem;
   color: var(--gray-3-1);
 }

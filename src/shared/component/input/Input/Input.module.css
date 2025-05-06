@@ -1,32 +1,32 @@
 .title {
   font-weight: 500;
-  font-size: 0.875rem;
-  margin-bottom: 0.349rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
 }
 
 .input {
   width: 100%;
-  height: 2.563rem;
-  border-radius: 0.375rem;
-  padding-left: 1rem;
-  padding-right: 0.625rem;
-  font-size: 0.75rem;
+  height: 4.1rem;
+  border-radius: 0.6rem;
+  padding-left: 1.6rem;
+  padding-right: 1rem;
+  font-size: 1.2rem;
   outline: 0;
 }
 
 .input [type='date']::-webkit-calendar-picker-indicator {
-  width: 10rem;
-  height: 1.188rem;
+  width: 16rem;
+  height: 1.9rem;
   background-color: var(--blue-4);
 }
 
 .ready {
   border: 0;
-  background-color: var(--gray-1-1);
+  background-color: var(--grey-1-1);
 }
 
 .ready::placeholder {
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
 }
 
 .right {
@@ -42,6 +42,6 @@
 }
 
 .errMsg {
-  font-size: 0.688rem;
+  font-size: 1.1rem;
   color: var(--pink-3);
 }

@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { BackAppBar, Button, Icon } from '@/shared/component';
+import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './NotFoundIdPage.module.css';
+
+import { taskFailedIllustration } from '@/assets/illustrations';
 
 export default function NotFoundIdPage() {
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ export default function NotFoundIdPage() {
   return (
     <div className={styles.pageFrame}>
       <BackAppBar backNavTo='/login' classname={styles.backAppBar} />
-      <div className={styles.pageTopFrame}>
+      <div>
         <div className={styles.explanation}>
           <p className={styles.pageTitle}>아이디 찾기</p>
           <p className={styles.pageExplanation}>
@@ -28,11 +30,10 @@ export default function NotFoundIdPage() {
         </div>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <Icon
-          id='star-alert'
-          className={styles.starAlert}
-          width={231}
-          height={217}
+        <img
+          src={taskFailedIllustration}
+          alt='아이디 찾기 실패를 알리는 일러스트'
+          className={styles.illustration}
         />
       </div>
       <div className={styles.pageBottomFrame}>

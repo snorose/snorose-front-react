@@ -10,9 +10,14 @@ import {
 import { STALE_TIME } from '@/shared/constant';
 
 import { PostBar } from '@/feature/board/component';
-import frustratedWomanIllustration from '@/assets/images/frustratedWoman.svg';
 
 import styles from './MyPostList.module.css';
+import { ACTIVITIES } from '../../constant/activity';
+import {
+  noPostsIllustration,
+  noScrapedPostsIllustration,
+  noCommentsIllustration,
+} from '@/assets/illustrations';
 
 export default function MyPostList({
   queryKey,
@@ -29,15 +34,29 @@ export default function MyPostList({
 
   const list = deduplicatePaginatedData(flatPaginationCache(data));
 
+  const activity = ACTIVITIES.find(
+    (activity) => activity.queryKey === queryKey
+  );
+
+  const emptyStateIllustration =
+    activity?.emptyStateIllustration || 'noScrapedPostsIllustration';
+
+  const illustrationMap = {
+    noPostsIllustration,
+    noScrapedPostsIllustration,
+    noCommentsIllustration,
+  };
+
   if (list.length === 0) {
     return (
       <div className={styles.noContentWrapper}>
         <p className={styles.noContentMessage}>{errorMessage}</p>
         <div className={styles.imageWrapper}>
           <img
-            src={frustratedWomanIllustration}
-            alt='frustrated woman'
-            className={styles.image}
+            src={illustrationMap[emptyStateIllustration]}
+            width={220}
+            height={182}
+            alt={`${errorMessage}를 알리는 일러스트`}
           />
         </div>
       </div>

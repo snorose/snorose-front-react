@@ -42,7 +42,7 @@ export const getMyComments = async (params = {}) => {
   return response?.data.result;
 };
 
-export const getDonwloadedExamReviews = async (params = {}) => {
+export const getDownloadedExamReviews = async (params = {}) => {
   const response = await authAxios.get('/v1/users/mypage/reviewFileList', {
     params,
   });

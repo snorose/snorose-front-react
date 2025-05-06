@@ -1,38 +1,38 @@
 .main {
-  margin-bottom: 3.125rem;
-  padding-top: 3.875rem;
+  margin-bottom: 5rem;
+  padding-top: 6.2rem;
 }
 
 .file {
-  margin: 0 1.25rem;
+  margin: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 1.6rem;
 }
 
 .left {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
   position: relative;
 }
 
 .left .required {
-  width: 0.3125rem;
-  height: 0.3125rem;
+  width: 0.5rem;
+  height: 0.5rem;
   display: inline-block;
   position: absolute;
-  top: 0.125rem;
-  right: -0.625rem;
-  border-radius: 0.625rem;
+  top: 0.2rem;
+  right: -1rem;
+  border-radius: 1rem;
   background-color: var(--pink-3);
 }
 
 .tag {
   font-weight: 500;
-  font-size: 0.875rem;
-  color: var(--gray-4);
+  font-size: 1.4rem;
+  color: var(--grey-4);
 }
 
 .right {
@@ -40,12 +40,12 @@
 }
 
 label[for='file'] {
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1.6rem;
   display: block;
-  background: var(--gray-2);
-  border-radius: 0.3125rem;
-  font-size: 0.8125rem;
-  color: var(--gray-3-1);
+  background: var(--grey-2);
+  border-radius: 0.5rem;
+  font-size: 1.3rem;
+  color: var(--grey-3-1);
   cursor: pointer;
 }
 
