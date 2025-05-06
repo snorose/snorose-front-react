@@ -1,11 +1,6 @@
-@import './style/font.css';
+@import './style/reset.css';
 @import './style/variable.css';
-
-/* reset */
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@import './style/font.css';
 
 html,
 body,
@@ -13,87 +8,6 @@ body,
   height: 100%;
 }
 
-html,
-body,
-header,
-nav,
-main,
-article,
-section,
-aside,
-footer,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-div,
-p,
-span,
-ul,
-ol,
-fieldset,
-legend,
-label,
-form,
-input,
-button,
-select,
-option,
-textarea,
-pre {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-input,
-textarea,
-keygen,
-select,
-button {
-  letter-spacing: inherit;
-  line-height: inherit;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-
-img,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-ul,
-ol {
-  list-style: none;
-}
-
-a,
-abbr {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  outline: none;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-/* style */
 html {
   background-color: #dfdfdf;
   font-size: 62.5%;
