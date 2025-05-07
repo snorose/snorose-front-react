@@ -41,8 +41,10 @@ a:hover {
   color: var(--blue-4);
 }
 
-.input {
-  margin-bottom: 1.7rem;
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 .pwFrame {
@@ -54,7 +56,6 @@ a:hover {
   border-top-right-radius: 0.6rem;
   border-bottom-right-radius: 0.6rem;
   padding-right: 1rem;
-  margin-bottom: 1.7rem;
 }
 
 .ready {
@@ -79,13 +80,14 @@ a:hover {
   cursor: pointer;
 }
 
-.RememberIdCheckbox {
+.keepLoginCheckbox {
   display: flex;
   align-items: center;
   margin: 1.5rem 0;
+  line-height: 130%;
   gap: 0.8rem;
   color: var(--grey-4);
-  font: var(--text-body-1-reg);
+  font-size: 1.4rem;
 }
 
 .button {
