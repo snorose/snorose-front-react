@@ -15,8 +15,14 @@ export default function Login() {
   const [formData, setFormData] = useState({ loginId: '', password: '' });
   const [isError, setIsError] = useState(false);
   const [visBtnClick, setVisBtnClick] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
   const toggleVisBtn = () => {
     setVisBtnClick((prev) => !prev);
+  };
+
+  const toggleCheckIcon = () => {
+    setIsChecked((prev) => !prev);
   };
 
   return (
@@ -85,12 +91,18 @@ export default function Login() {
             </div>
           </div>
 
-          <div className={styles.keepLoginCheckbox}>
-            <Icon id='inactive-check-circle' width={22} height={22} />
+          <div className={styles.keepLoginCheckbox} onClick={toggleCheckIcon}>
+            <Icon
+              id={isChecked ? 'inactive-check-circle' : 'active-check-circle'}
+              width={22}
+              height={22}
+            />
+
             <span>로그인 상태 유지하기</span>
           </div>
 
           <Button btnName='로그인하기' className='right' />
+
           <div className={styles.find}>
             <Link to='/signup'>회원가입하기</Link>
             <p className={styles.divider}>|</p>
