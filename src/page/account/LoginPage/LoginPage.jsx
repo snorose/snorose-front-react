@@ -39,47 +39,56 @@ export default function Login() {
             <br />
             스노로즈에 오신 것을 환영합니다!
           </p>
-          <div
-            className={styles.input}
-            onChange={() => {
-              setIsError(false);
-            }}
-          >
-            <Input
-              placeholder={'아이디'}
-              className={isError ? 'wrong' : 'ready'}
-              inputType={'loginId'}
-              inputData={setFormData}
-            />
-          </div>
-          <div
-            className={!isError ? styles.input : undefined}
-            onChange={() => {
-              setIsError(false);
-            }}
-          >
+
+          <div className={styles.inputWrapper}>
             <div
-              className={`${styles.pwFrame} ${styles[isError ? 'wrong' : 'ready']}`}
+              className={styles.input}
+              onChange={() => {
+                setIsError(false);
+              }}
             >
               <Input
-                type={visBtnClick ? 'text' : 'password'}
-                placeholder={'영어, 숫자, 특수문자를 포함한 비밀번호'}
+                placeholder={'아이디'}
                 className={isError ? 'wrong' : 'ready'}
-                inputType={'password'}
+                inputType={'loginId'}
                 inputData={setFormData}
               />
-              {formData.password && (
-                <Icon
-                  id={visBtnClick ? 'closed-eye' : 'opened-eye'}
-                  fill={isError ? '#ff4b6c' : '#898989'}
-                  width={18}
-                  height={13}
-                  className={styles.visibility}
-                  onClick={toggleVisBtn}
+            </div>
+            <div
+              className={!isError ? styles.input : undefined}
+              onChange={() => {
+                setIsError(false);
+              }}
+            >
+              <div
+                className={`${styles.pwFrame} ${styles[isError ? 'wrong' : 'ready']}`}
+              >
+                <Input
+                  type={visBtnClick ? 'text' : 'password'}
+                  placeholder={'영어, 숫자, 특수문자를 포함한 비밀번호'}
+                  className={isError ? 'wrong' : 'ready'}
+                  inputType={'password'}
+                  inputData={setFormData}
                 />
-              )}
+                {formData.password && (
+                  <Icon
+                    id={visBtnClick ? 'closed-eye' : 'opened-eye'}
+                    fill={isError ? '#ff4b6c' : '#898989'}
+                    width={18}
+                    height={13}
+                    className={styles.visibility}
+                    onClick={toggleVisBtn}
+                  />
+                )}
+              </div>
             </div>
           </div>
+
+          <div className={styles.keepLoginCheckbox}>
+            <Icon id='inactive-check-circle' width={22} height={22} />
+            <span>로그인 상태 유지하기</span>
+          </div>
+
           <Button btnName='로그인하기' className='right' />
           <div className={styles.find}>
             <Link to='/find-id'>아이디 찾기</Link>
