@@ -14,14 +14,14 @@ export default function Login() {
   const login = useLogin();
   const [formData, setFormData] = useState({ loginId: '', password: '' });
   const [isError, setIsError] = useState(false);
-  const [visBtnClick, setVisBtnClick] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  const toggleVisBtn = () => {
-    setVisBtnClick((prev) => !prev);
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible((prev) => !prev);
   };
 
-  const toggleCheckIcon = () => {
+  const toggleKeepLogin = () => {
     setIsChecked((prev) => !prev);
   };
 
@@ -70,7 +70,7 @@ export default function Login() {
                 className={`${styles.pwFrame} ${styles[isError ? 'wrong' : 'ready']}`}
               >
                 <Input
-                  type={visBtnClick ? 'text' : 'password'}
+                  type={isPasswordVisible ? 'text' : 'password'}
                   placeholder={'영어, 숫자, 특수문자를 포함한 비밀번호'}
                   className={isError ? 'wrong' : 'ready'}
                   inputType={'password'}
@@ -78,19 +78,19 @@ export default function Login() {
                 />
                 {formData.password && (
                   <Icon
-                    id={visBtnClick ? 'closed-eye' : 'opened-eye'}
+                    id={isPasswordVisible ? 'closed-eye' : 'opened-eye'}
                     fill={isError ? '#ff4b6c' : '#898989'}
                     width={18}
                     height={13}
                     className={styles.visibility}
-                    onClick={toggleVisBtn}
+                    onClick={togglePasswordVisibility}
                   />
                 )}
               </div>
             </div>
           </div>
 
-          <div className={styles.keepLoginCheckbox} onClick={toggleCheckIcon}>
+          <div className={styles.keepLoginCheckbox} onClick={toggleKeepLogin}>
             <Icon
               id={isChecked ? 'inactive-check-circle' : 'active-check-circle'}
               width={22}
