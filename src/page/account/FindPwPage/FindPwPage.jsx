@@ -41,11 +41,6 @@ export default function FindPwPage() {
       '이메일만 입력 가능합니다',
     ],
   ];
-  const submitState = () => {
-    if (idStyle === 'right' && emailStyle === 'right') return 'right';
-    else if (idStyle === 'wrong' || emailStyle === 'wrong') return 'wrong';
-    else return 'ready';
-  };
 
   return (
     <div className={styles.pageFrame}>
@@ -91,34 +86,39 @@ export default function FindPwPage() {
             <div className={styles.alert}>
               <ul>
                 <li>
-                  기존 이메일을 알 수 없는 경우, "아이디 찾기" 기능을 통해
-                  확인할 수 있습니다.
+                  기존 이메일을 알 수 없는 경우,
+                  <span className={styles.highlight}> 아이디 찾기</span> 기능을
+                  통해 확인할 수 있어요
                 </li>
                 <li>
-                  "아이디 찾기"에서 이름과 학번을 입력하면, “다음 이메일로
-                  아이디를 전달했습니다.
-                  [snorose@snorose.com](mailto:snorose@snorose.com)”라는 안내를
-                  통해 이메일 주소를 확인할 수 있습니다.
-                </li>
-                <li>
-                  만약 이메일이 존재하지 않거나 유효하지 않을 경우,{' '}
-                  <strong>아래 구글 폼</strong>을 작성해주시기 바랍니다.
+                  <span className={styles.highlight}>아이디 찾기</span>에서
+                  이름과 학번을 입력하면,
                   <br />
-                  <a href='https://forms.gle/PDmKuPUuUzKXTh8BA'>구글폼 링크</a>
+                  <span className={styles.highlight}>
+                    다음 이메일로 아이디가 발송되었어요
+                  </span>
+                  라는 안내를 통해 이메일 주소를 확인할 수 있어요
                 </li>
               </ul>
+              <p className={styles.highlight} style={{ marginTop: '1.3rem' }}>
+                만약 이메일이 존재하지 않거나 유효하지 않을 경우,
+                <br />
+                아래 구글 폼을 작성해주시면 신속히 해결해드릴게요.
+              </p>
+              <button className={styles.googleFormBtn}>
+                <Icon id='google-form' width={'1.6rem'} height={'1.6rem'} />
+                <a href='https://forms.gle/PDmKuPUuUzKXTh8BA'>구글 폼</a>
+              </button>
             </div>
           </div>
-        </div>
-
-        <div className={styles.buttonFrame}>
-          <Button btnName='완료' className={submitState()} />
-          <Link to='/find-id'>
-            <div className={styles.findIDButton}>
-              <p>아이디 찾기</p>
-              <Icon id='angle-right' width={24} height={24} />
-            </div>
-          </Link>
+          <div className={styles.buttonFrame}>
+            <Button btnName='완료' className={'right'} />
+            <Link to='/find-id'>
+              <div className={styles.findIDButton}>
+                <Button btnName='아이디를 잊어버렸어요' className={'ready'} />
+              </div>
+            </Link>
+          </div>
         </div>
       </form>
       {loading && <FetchLoadingOverlay text={LOADING_MESSAGE.default} />}
