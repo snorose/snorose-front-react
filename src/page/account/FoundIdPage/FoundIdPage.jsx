@@ -27,12 +27,17 @@ export default function FoundIdPage() {
         <p className={styles.pageExplanation}>
           다음 이메일로 아이디를 전달했습니다.
         </p>
-        <p className={styles.result}>{email}</p>
+        <p className={styles.pageSubExplanation}>
+          이메일을 받지 못하셨다면
+          <br />
+          스팸함을 확인해주세요
+        </p>
         <div className={styles.resultFrame}>
           <span className={`${styles.dot} ${styles.first}`}></span>
           <span className={`${styles.dot} ${styles.second}`}></span>
           <span className={`${styles.dot} ${styles.third}`}></span>
         </div>
+        <p className={styles.result}>{email}</p>
       </div>
       <div className={styles.pageMiddleFrame}>
         <img
@@ -49,8 +54,7 @@ export default function FoundIdPage() {
         </Link>
         <Link to='/find-pw'>
           <div className={styles.findPWButton}>
-            <p>비밀번호 찾기</p>
-            <Icon id='angle-right' width={24} height={24} />
+            <Button btnName='비밀번호를 잊어버렸어요' className='ready' />
           </div>
         </Link>
       </div>

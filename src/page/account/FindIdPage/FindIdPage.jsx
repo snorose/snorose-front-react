@@ -64,8 +64,8 @@ export default function FindIdPage() {
             <Icon
               className={styles.back}
               id='arrow-left'
-              width={19}
-              height={17}
+              width={'1.8rem'}
+              height={'1.6rem'}
               onClick={() => {
                 //BackAppBar 사용 불가 -> 로그인페이지에서 findId/findPw했다가 다시 돌아오면 다시는 main으로 못 돌아가는 루프구조가 되어버림
                 navigate('/login');
