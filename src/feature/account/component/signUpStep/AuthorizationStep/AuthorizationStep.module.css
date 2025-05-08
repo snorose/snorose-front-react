@@ -6,12 +6,17 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 700;
+  line-height: 130%;
+  margin-bottom: 0.6rem;
 }
 
 .text {
-  margin-bottom: 2.7rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--grey-4);
+  margin-bottom: 2.4rem;
 }
 
 .submit {

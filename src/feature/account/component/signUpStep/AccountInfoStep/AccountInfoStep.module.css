@@ -1,18 +1,13 @@
 .pageFrame {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.scrollFrame {
   overflow-y: scroll;
 }
 
 .text {
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 700;
   margin-bottom: 3rem;
+  line-height: 130%;
 }
 
 .inputFrame {
@@ -20,5 +15,6 @@
 }
 
 .submit {
-  margin-bottom: 3.4rem;
+  margin-top: 3.9rem;
+  margin-bottom: 3.9rem;
 }

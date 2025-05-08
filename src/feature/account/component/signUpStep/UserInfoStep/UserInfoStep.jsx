@@ -35,7 +35,11 @@ export default function UserInfoStep({ setFormData, formData }) {
   return (
     <div className={styles.pageFrame}>
       <div className={styles.scrollFrame}>
-        <p className={styles.text}>사용자 정보 입력</p>
+        <p className={styles.text}>
+          사용자 정보를
+          <br />
+          입력해주세요
+        </p>
         <div className={styles.inputFrame}>
           <Input
             title={'닉네임'}
