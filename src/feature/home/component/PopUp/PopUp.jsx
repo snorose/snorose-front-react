@@ -29,7 +29,7 @@ const content = (
         >
           [관련 공지]
         </a>
-        를 참고해주시길 바랍니다.
+        를 참고해 주시길 바랍니다.
         <img src={financialReport} alt='4월 회계 보고' />
       </Content>
 
@@ -44,14 +44,8 @@ const content = (
         >
           [관련 공지]
         </a>
-        를 참고해주시길 바랍니다. <br />
+        를 참고해 주시길 바랍니다. <br />
         <br />
-        <strong>[ 1차 후원금 모금 이벤트 ]</strong>
-        <br />
-        📌 기간 : 25.05.01(목) ~ 25.05.31(토) <br />
-        📌 목표 모금액 : 1,000,000원 <br />
-        📌 보상 포인트 : 50 point <br />
-        📌 모금 계좌 : 카카오뱅크 3333-31-8162062 (예금주 : 김*지)
         <img src={fundraisingEvent} alt='4월 회계 보고' />
       </Content>
 
