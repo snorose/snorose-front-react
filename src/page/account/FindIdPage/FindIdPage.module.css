@@ -51,16 +51,28 @@
 }
 
 .alert {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: grey;
-  padding: 0 3.2rem;
-
-  line-height: 1.7;
   word-break: keep-all;
+  padding: 0 1.6rem;
 }
-.alert ul {
+.alert li {
   list-style-type: circle;
 }
-.alert a {
+.highlight {
   color: var(--blue-3);
+}
+.alertArrow {
+  margin-bottom: 1.2rem;
+}
+.googleFormBtn {
+  width: 8.5rem;
+  height: 3.6rem;
+  border-radius: 0.5rem;
+  border: solid 0.1rem var(--grey-3);
+  margin-top: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1rem;
 }
