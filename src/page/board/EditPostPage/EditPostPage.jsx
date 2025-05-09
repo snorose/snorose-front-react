@@ -54,28 +54,6 @@ export default function EditPostPage() {
     placeholderData: {},
   });
 
-  useEffect(() => {
-    if (!data || Object.keys(data).length === 0) return;
-
-    setTitle(data.title);
-    setText(data.content);
-    setIsNotice(data.isNotice);
-    setUserDisplay(data.userDisplay);
-  }, [data]);
-
-  // isBlock 업데이트
-  useEffect(() => {
-    if (!data || Object.keys(data).length === 0) return;
-
-    setIsBlock(
-      data.title !== title.trim() ||
-        data.content !== text.trim() ||
-        data.isNotice !== isNotice
-    );
-  }, [title, text, isNotice]);
-
-  useBlocker(isBlock);
-
   // 데이터 화면 표시
   useEffect(() => {
     if (!data || Object.keys(data).length === 0) return;
