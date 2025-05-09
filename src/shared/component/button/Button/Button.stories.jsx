@@ -1,12 +1,12 @@
-import Submit from './Submit';
+import Button from './Button';
 
-const submitStoryConfig = {
-  component: Submit,
+const submitButtonConfig = {
+  component: Button,
   parameters: {
     docs: {
       description: {
         component:
-          'Submit 컴포넌트는 페이지가 준비가 되었을 때 누를 수 있도록 하는 submit 버튼 컴포넌트입니다.\n\n' +
+          'Button 컴포넌트는 페이지가 준비가 되었을 때 누를 수 있도록 하는 submit 버튼 컴포넌트입니다.\n\n' +
           '버튼 내의 문구를 정할 수 있으며, 버튼이 누를 수 있게 되었을 때는 짙은 파란색으로 변합니다.\n\n' +
           '**참고를 위해 쓰이는 파일 목록**\n' +
           '- `FindIdPage.jsx`\n\n' +
@@ -64,8 +64,8 @@ const submitStoryConfig = {
     },
   },
 };
-export default submitStoryConfig;
+export default submitButtonConfig;
 
-const Template = (args) => <Submit {...args} />;
+const Template = (args) => <Button {...args} />;
 export const Default = Template.bind({});
 Default.args = {};

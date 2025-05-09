@@ -8,8 +8,8 @@ const shimmerEffectStoryConfig = {
         component:
           'ShimmerEffect 컴포넌트는 자식에게 반짝이는 애니메이션 style을 추가하는 컴포넌트입니다.\n\n' +
           '**참고를 위해 쓰이는 파일 목록**\n' +
-          '- `CarouselSkeleton.jsx`: Suspense(로딩해야하는거 로딩되기 이전에 특정 컴포넌트가 보이게 할 수 있음)를 사용해서 Carousel이 로딩되기 이전에 반짝이는 회색 패널을 보여줍니다.' +
-          '- `HomeBesooktSkeleton.jsx`:  비슷하게 HomeBesookt가 로딩되기 이전에 반짝이는 회색 패널을 보여줍니다.' +
+          '- `CarouselSkeleton.jsx`: Suspense(로딩해야하는거 로딩되기 이전에 특정 컴포넌트가 보이게 할 수 있음)를 사용해서 Carousel이 로딩되기 이전에 반짝이는 회색 패널을 보여줍니다.\n\n' +
+          '- `HomeBesooktSkeleton.jsx`:  비슷하게 HomeBesookt가 로딩되기 이전에 반짝이는 회색 패널을 보여줍니다.\n\n' +
           '- `HomeCardSkeleton.jsx`: 비슷하게 HomeCard가 로딩되기 이전에 반짝이는 회색 패널을 보여줍니다.',
       },
     },

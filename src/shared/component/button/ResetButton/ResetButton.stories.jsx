@@ -8,7 +8,7 @@ const resetButtonStoryConfig = {
         component:
           'ResetButton 컴포넌트는 resetErrorBoundary 함수를 reset props로 받아서, 누르면 ErrorBoundary의 자식 컴포넌트를 re-render하는 아이콘을 띄웁니다.\n\n' +
           '**참고를 위해 쓰이는 파일 목록**\n' +
-          '- `ServerErrorFallback.jsx`: 서버 에러가 나서 못 띄운 컴포넌트 대신 나타나는 컴포넌트이다. 요청 처리를 실패했다는 메세지와 함께 re-rendering 버튼인 ResetButton도 띄워줍니다.\n\n',
+          '- `ServerErrorFallback.jsx`: 서버 에러가 나서 못 띄운 컴포넌트 대신 나타나는 컴포넌트입니다. 요청 처리를 실패했다는 메세지와 함께 re-rendering 버튼인 ResetButton도 띄워줍니다.\n\n',
       },
     },
   },

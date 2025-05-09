@@ -1,8 +1,10 @@
-import PTR from './PTR';
-import { useSearch } from '@/hooks';
-import { FetchLoading, List, PostBar } from '@/components';
-import { deduplicatePaginatedData, flatPaginationCache } from '@/utils';
-import { provideFullMemberAccessToken } from '../../../.storybook/provideAccessToken';
+import PTR from './PullToRefresh';
+import { useSearch } from '@/feature/search/hook';
+import { FetchLoading, List } from '@/shared/component';
+import { PostBar } from '@/feature/board/component';
+import { deduplicatePaginatedData, flatPaginationCache } from '@/shared/lib';
+import { provideFullMemberAccessToken } from '../../../../.storybook/provideAccessToken';
+import PullToRefresh from './PullToRefresh';
 provideFullMemberAccessToken();
 
 const PTRWrapper = (props) => {
@@ -22,7 +24,7 @@ const PTRWrapper = (props) => {
     onRefresh: () => refetch().then(() => console.log('Refreshed!')),
   };
 
-  return <PTR {...newArgs} />;
+  return <PullToRefresh {...newArgs} />;
 };
 
 const PTRStoryConfig = {

@@ -1,5 +1,5 @@
 import ReviewContentItem from './ReviewContentItem';
-import { FLEX_ALIGN } from '@/constants';
+import { FLEX_ALIGN } from '@/feature/exam/constant';
 
 const reviewContentItemStoryConfig = {
   component: ReviewContentItem,

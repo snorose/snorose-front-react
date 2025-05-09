@@ -7,7 +7,7 @@ const postBarStoryConfig = {
     docs: {
       description: {
         component:
-          'PopUp 컴포넌트는 게시판에서 여러 글을 나열할때 사용됩니다.\n\n' +
+          'PostBar 컴포넌트는 게시판에서 여러 글을 나열할때 사용됩니다.\n\n' +
           '**주의 사항**\n' +
           '- 해당 컴포넌트는 게시판에서 각 글의 정보(좋아요 수 등)을 표시만 하기 때문에 아이콘을 눌러도 별 작용이 없습니다.\n' +
           '- 생성된 날짜(data.createAt)는 시기에 따라서 표기법이 다릅니다 (date.js의 postBarDateFormat 참고).\n * `1시간 내의 글일때`: m분전\n * `1시간 이후의 오늘내의 글일때`: hh:mm\n * `오늘 이전의 올해 글일때`: month/day hh:mm\n * `올해 이전 글일때`: year/month/day hh:mm\n\n' +
