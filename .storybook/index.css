@@ -88,6 +88,7 @@ button {
   background-color: transparent;
   cursor: pointer;
 }
+<<<<<<< HEAD
 
 .react-calendar {
   margin: 0 2rem !important;
@@ -95,3 +96,5 @@ button {
   border-radius: 0.5rem !important;
   border: none !important;
 }
+=======
+>>>>>>> 06193710 (#803 [STYLE] 스토리북 기본 버튼 스타일 초기화)
