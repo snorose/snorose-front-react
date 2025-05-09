@@ -37,18 +37,14 @@
 
 .title {
   margin: 1.6rem 0;
-  font-weight: 700;
-  font-size: 1.6rem;
+
+  font: var(--text-headline-1-bold);
+
   color: var(--grey-4);
 }
 
 .title:hover {
   color: var(--blue-3);
-}
-
-.menuList {
-  font-size: 1.4rem;
-  color: var(--grey-4);
 }
 
 /* menu list */
@@ -60,7 +56,9 @@
 }
 
 .item {
-  font-weight: 500;
+  font: var(--text-headline-2-reg);
+
+  color: var(--grey-4);
 }
 
 .item li {

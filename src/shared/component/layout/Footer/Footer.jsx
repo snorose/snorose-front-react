@@ -11,9 +11,7 @@ export default function Footer() {
       <div className={styles.info}>
         <p>
           {'CONTACT US : '}
-          <a href='mailto:smsnorose@gmail.com' className={styles.email}>
-            snorose1906@gmail.com
-          </a>
+          <a href='mailto:smsnorose@gmail.com'>snorose1906@gmail.com</a>
         </p>
         <p>후원하기 : 카카오뱅크 3333-31-8162062 (예금주: 김*지)</p>
         <div className={styles.menu}>

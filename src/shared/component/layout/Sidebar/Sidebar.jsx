@@ -47,7 +47,7 @@ export default function Sidebar() {
             <Link to={to}>
               <h3 className={styles.title}>{title}</h3>
             </Link>
-            <MenuList className={styles.menuList} items={items} />
+            <MenuList items={items} />
           </div>
         ))}
       </aside>
@@ -55,14 +55,14 @@ export default function Sidebar() {
   );
 }
 
-function MenuList({ className, items }) {
+function MenuList({ items }) {
   if (!items) return null;
 
   return (
     <ul className={styles.list}>
       {items.map(({ to, name }) => (
         <Link to={to} key={name} className={styles.item}>
-          <li className={className}>{name}</li>
+          <li>{name}</li>
         </Link>
       ))}
     </ul>

@@ -49,17 +49,20 @@
 }
 
 .title {
+  overflow: hidden; /* Hide text overflow */
+
   display: -webkit-box; /* Required for the ellipsis effect */
   -webkit-line-clamp: 2; /* Limit text to 4 lines */
   -webkit-box-orient: vertical; /* Required for the ellipsis effect */
-  overflow: hidden; /* Hide text overflow */
+
   white-space: pre-line;
-  font-size: 1.6rem;
-  font-weight: 500;
+
+  font: var(--text-headline-1-med);
 }
 
 .tag {
-  font-size: 1.2rem;
+  font: var(--text-body-2-reg);
+
   color: var(--grey-4);
 }
 

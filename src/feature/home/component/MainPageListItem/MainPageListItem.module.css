@@ -36,7 +36,9 @@
   justify-content: space-between;
   align-items: center;
   gap: 0.7rem;
-  font-size: 0.9rem;
+
+  font: var(--text-body-1-reg);
+
   color: var(--grey-4);
 }
 
@@ -71,23 +73,26 @@
 
 .title {
   margin-bottom: 0.2rem;
-  font-weight: 500;
-  font-size: 1.2rem;
+
+  font: var(--text-headline-2-med);
 }
 
 .overview {
-  font-size: 1.1rem;
-  color: var(--grey-4);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+
+  font: var(--text-body-1-reg);
+
+  color: var(--grey-4);
 }
 
 .boardName {
-  font-size: 0.8rem;
+  font: var(--text-body-1-reg);
+
   color: var(--grey-3-1);
 }
 
