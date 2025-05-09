@@ -54,6 +54,14 @@ export default function EditPostPage() {
     placeholderData: {},
   });
 
+  // navigation guard
+  const isBlock =
+    data.title !== title.trim() ||
+    data.content !== text.trim() ||
+    data.isNotice !== isNotice;
+
+  useBlocker(isBlock);
+
   // 데이터 화면 표시
   useEffect(() => {
     if (!data || Object.keys(data).length === 0) return;
