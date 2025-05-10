@@ -79,7 +79,7 @@ a:hover {
   cursor: pointer;
 }
 
-.keepLoginCheckbox {
+.RememberIdCheckbox {
   display: flex;
   align-items: center;
   margin: 1.5rem 0;
