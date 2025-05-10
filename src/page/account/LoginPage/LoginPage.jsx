@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useLogin } from '@/apis';
@@ -25,9 +25,28 @@ export default function Login() {
     setIsChecked((prev) => !prev);
   };
 
+  const handleLoginSubmit = (e) => {
+    if (isChecked) {
+      localStorage.setItem('rememberedLoginId', formData.loginId);
+    } else {
+      localStorage.removeItem('rememberedLoginId');
+    }
+
+    login(e, setIsError, formData, navigate);
+  };
+
+  useEffect(() => {
+    const savedId = localStorage.getItem('rememberedLoginId');
+
+    if (savedId) {
+      setFormData((prev) => ({ ...prev, loginId: savedId }));
+      setIsChecked(true);
+    }
+  }, []);
+
   return (
     <div className={styles.loginframe}>
-      <form onSubmit={(e) => login(e, setIsError, formData, navigate)}>
+      <form onSubmit={handleLoginSubmit}>
         <div className={styles.loginBody}>
           <Icon
             className={styles.back}
@@ -58,6 +77,7 @@ export default function Login() {
                 className={isError ? 'wrong' : 'ready'}
                 inputType={'loginId'}
                 inputData={setFormData}
+                value={formData.loginId}
               />
             </div>
             <div
@@ -75,6 +95,7 @@ export default function Login() {
                   className={isError ? 'wrong' : 'ready'}
                   inputType={'password'}
                   inputData={setFormData}
+                  value={formData.password}
                 />
                 {formData.password && (
                   <Icon
@@ -96,8 +117,7 @@ export default function Login() {
               width={22}
               height={22}
             />
-
-            <span>로그인 상태 유지하기</span>
+            <span>아이디 기억하기</span>
           </div>
 
           <Button btnName='로그인하기' className='right' />

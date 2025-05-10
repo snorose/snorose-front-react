@@ -13,16 +13,15 @@ export default function Input({
   inputData,
   data,
   errMsg,
+  value,
 }) {
   useEffect(() => {
     try {
-      if (data[inputType]) {
-        if (setClassName !== undefined) {
-          const checkedClass = classNameCheck(data[inputType]);
-          checkedClass instanceof Promise
-            ? checkedClass.then((res) => setClassName(res))
-            : setClassName(checkedClass);
-        }
+      if (data[inputType] && setClassName) {
+        const checkedClass = classNameCheck(data[inputType]);
+        checkedClass instanceof Promise
+          ? checkedClass.then((res) => setClassName(res))
+          : setClassName(checkedClass);
       }
     } catch (e) {}
   }, []);
@@ -31,13 +30,7 @@ export default function Input({
     <>
       {title && <p className={styles.title}>{title}</p>}
       <input
-        value={
-          data !== undefined
-            ? data[inputType]
-              ? data[inputType]
-              : ''
-            : undefined
-        }
+        value={value ?? data?.[inputType] ?? ''}
         type={type}
         placeholder={placeholder}
         className={`${styles[className]} ${styles['input']}`}
