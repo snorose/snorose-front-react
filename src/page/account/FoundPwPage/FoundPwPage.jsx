@@ -49,9 +49,14 @@ export default function FoundPwPage() {
         />
       </div>
       <div className={styles.pageBottomFrame}>
-        <Link to='/find-pw'>
+        <Link to='/login'>
           <div className={styles.loginButton}>
-            <Button btnName='뒤로가기' className='right' />
+            <Button btnName='로그인하기' className='right' />
+          </div>
+        </Link>
+        <Link to='/find-id'>
+          <div className={styles.findIdButton}>
+            <Button btnName='아이디를 잊어버렸어요' className='ready' />
           </div>
         </Link>
       </div>

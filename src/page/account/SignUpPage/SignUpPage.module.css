@@ -22,11 +22,12 @@
   align-items: center;
 }
 
-.stageDotsFrame {
-  margin-top: 1.3rem;
-  margin-bottom: 2.9rem;
+.arrowLeft {
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
 }
 
-.submit {
-  margin-bottom: 3.4rem;
+.stageDotsFrame {
+  margin-top: 1.3rem;
+  margin-bottom: 3rem;
 }
