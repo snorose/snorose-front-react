@@ -1,9 +1,12 @@
 .dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 1rem 0;
   background: var(--grey-2);
   border-radius: 0.5rem;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: var(--grey-4);
 }
 
