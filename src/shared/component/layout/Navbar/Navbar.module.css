@@ -24,6 +24,7 @@
 }
 
 .menu span {
-  font-size: 0.9rem;
+  font: var(--text-body-2-reg);
+
   color: var(--blue-2);
 }
