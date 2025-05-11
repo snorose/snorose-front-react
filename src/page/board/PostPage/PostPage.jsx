@@ -206,14 +206,14 @@ export default function PostPage() {
             style={{
               display: data.isNotice && !data.isWriter ? 'none' : 'block',
             }}
-            className={styles.dot3}
+            className={styles.meatBall}
             onClick={() => {
               data.isWriter
                 ? setIsOptionsModalOpen(true)
                 : setIsReportModalOpen(true);
             }}
           >
-            <Icon id='ellipsis-vertical' width={3} height={11} />
+            <Icon id='meat-ball' width={18} height={4} stroke='none' />
           </div>
         </div>
         <div className={styles.title}>

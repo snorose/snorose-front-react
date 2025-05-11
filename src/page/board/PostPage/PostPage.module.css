@@ -46,7 +46,8 @@
   font-weight: 800;
 }
 
-.dot3 {
+.meatBall {
+  margin-right: -1rem;
   padding: 1rem;
   cursor: pointer;
 }
