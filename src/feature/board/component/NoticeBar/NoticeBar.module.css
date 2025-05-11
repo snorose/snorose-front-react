@@ -12,7 +12,7 @@
 }
 
 .title {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 500;
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -26,7 +26,7 @@
 }
 
 .text {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: #484848;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -39,17 +39,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 0.8rem;
+  padding-top: 0.3rem;
   color: var(--grey-3-1);
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 
 .postBottomRight {
-  gap: 0.6rem;
+  gap: 1rem;
   display: flex;
   align-items: center;
 
   p {
     margin-bottom: 0.3rem;
   }
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
 }
