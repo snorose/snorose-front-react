@@ -267,37 +267,6 @@ export default function PostPage() {
             />
             <p>스크랩 {data.scrapCount.toLocaleString()}</p>
           </div>
-
-          {/* <div className={styles.count} onClick={inputFocus}>
-            <Icon id='comment' width={15} height={13} />
-            <p>{data.commentCount.toLocaleString()}</p>
-          </div>
-          <div
-            className={styles.count}
-            onClick={() => (data.isLiked ? unlike.mutate() : like.mutate())}
-          >
-            <Icon
-              id='like'
-              width={13}
-              height={12}
-              fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
-            />
-            <p>{data.likeCount.toLocaleString()}</p>
-          </div>
-          <div
-            className={styles.count}
-            onClick={() =>
-              data.isScrapped ? unscrap.mutate() : scrap.mutate()
-            }
-          >
-            <Icon
-              id='bookmark-fill'
-              width={10}
-              height={13}
-              fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
-            />
-            <p>{data.scrapCount.toLocaleString()}</p>
-          </div> */}
         </div>
       </div>
       {data.isNotice ? (
