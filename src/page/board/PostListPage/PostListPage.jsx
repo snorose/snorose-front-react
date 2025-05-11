@@ -53,7 +53,7 @@ export default function PostListPage() {
             className={styles.notificationBar}
             to={`/board/${currentBoardTextId}/notice`}
           >
-            <Icon id='notice-bell' width={11} height={13} />
+            <Icon id='notice-bell' width={13} height={16} />
             <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
           </Link>
         </div>
