@@ -4,12 +4,12 @@
   padding: 0 2rem 10rem 2rem;
   display: flex;
   flex-direction: column;
-  row-gap: 0.7rem;
+  row-gap: 1.4rem;
   min-height: 30rem;
 }
 
 .commentsTitle {
-  padding: 1.4rem 0 0.2rem 0;
+  padding: 1.8rem 0 0.2rem 0;
 }
 
 .failComment {
