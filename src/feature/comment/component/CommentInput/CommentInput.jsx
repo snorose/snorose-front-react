@@ -75,7 +75,7 @@ const CommentInput = () => {
       onClick={(event) => event.stopPropagation()}
     >
       <div className={styles.input_bar}>
-        <Icon id='cloud' width={25} height={16} />
+        <Icon id='cloud' width={22} height={14} />
         <TextareaAutosize
           ref={inputRef}
           className={styles.input_zone}
@@ -93,6 +93,7 @@ const CommentInput = () => {
         id='arrow-up-right'
         width={32}
         height={32}
+        fill='#898989'
         onClick={submitComment}
       />
     </div>
