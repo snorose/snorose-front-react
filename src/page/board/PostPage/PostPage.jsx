@@ -1,31 +1,31 @@
-import { useState } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
+import { deletePost, getPostContent, reportPost, reportUser } from '@/apis';
 
-import { useAuth, useToast } from '@/shared/hook';
 import {
   BackAppBar,
+  Badge,
   DeleteModal,
   FetchLoading,
   Icon,
   OptionModal,
-  Badge,
 } from '@/shared/component';
-import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 import {
+  LIKE_TYPE,
   MUTATION_KEY,
   QUERY_KEY,
-  TOAST,
-  LIKE_TYPE,
   ROLE,
+  TOAST,
 } from '@/shared/constant';
+import { useAuth, useToast } from '@/shared/hook';
+import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 
 import { NotFoundPage } from '@/page/etc';
 
-import { useCommentContext } from '@/feature/comment/context';
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
+import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
@@ -229,7 +229,46 @@ export default function PostPage() {
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
         <div className={styles.post_bottom}>
-          <div className={styles.count} onClick={inputFocus}>
+          <div
+            className={styles.count}
+            style={{
+              display: data.isNotice ? 'none' : 'flex',
+            }}
+            onClick={inputFocus}
+          >
+            <Icon id='comment-stroke' width={20} height={16} />
+            <p>댓글 {data.commentCount.toLocaleString()}</p>
+          </div>
+          <div
+            className={styles.count}
+            onClick={() => (data.isLiked ? unlike.mutate() : like.mutate())}
+          >
+            <Icon
+              id='like-stroke'
+              width={16}
+              height={15}
+              stroke='#5F86BF'
+              fill={data.isLiked ? '#5F86BF' : 'none'}
+            />
+            <p>공감 {data.likeCount.toLocaleString()}</p>
+          </div>
+          <div
+            className={styles.count}
+            onClick={() =>
+              data.isScrapped ? unscrap.mutate() : scrap.mutate()
+            }
+          >
+            <Icon
+              id='scrap-stroke'
+              width={13}
+              height={16}
+              stroke='#5F86BF'
+              fill={data.isScrapped ? '#5F86BF' : 'none'}
+            />
+            <p>스크랩 {data.scrapCount.toLocaleString()}</p>
+          </div>
+
+          {/* <div className={styles.count} onClick={inputFocus}>
             <Icon id='comment' width={15} height={13} />
             <p>{data.commentCount.toLocaleString()}</p>
           </div>
@@ -258,7 +297,7 @@ export default function PostPage() {
               fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
             />
             <p>{data.scrapCount.toLocaleString()}</p>
-          </div>
+          </div> */}
         </div>
       </div>
       {data.isNotice ? (
