@@ -29,13 +29,13 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
             height={12}
           />
         )}
+        <div className={styles.boardChip}>{data.boardName}</div>
       </div>
       <div className={styles.post_center}>
         <p className={styles.title}>{data.title}</p>
         <p className={styles.text}>{data.questionDetail ?? data.content}</p>
       </div>
       <div className={styles.post_bottom}>
-        <span className={styles.board}>{data.boardName}</span>
         <div className={styles.iconListContainer}>
           {/* 서버 수정 후 조건문 제거 처리 필요 */}
           {hasComment && (

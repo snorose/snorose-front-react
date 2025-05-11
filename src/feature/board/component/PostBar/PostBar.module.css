@@ -68,20 +68,24 @@
 .post_bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 0.5rem 0 0 0;
   color: var(--grey-3-1);
-  justify-content: space-between;
 
   p {
     margin-bottom: 0.3rem;
   }
 }
 
-.board {
+.boardChip {
+  padding: 0.1rem 0.4rem;
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 0.3rem;
+  margin-left: 0.6rem;
+  color: var(--grey-3-1, #898989);
+  border-radius: 0.5rem;
+  background: var(--grey-2, #f0f0f0);
 }
 
 .iconListContainer {
