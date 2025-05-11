@@ -8,7 +8,7 @@
 
 .commentTop {
   width: 100%;
-  padding: 0.6rem 0 0.4rem 1.4rem;
+  padding: 1.3rem 1.5rem 0.9rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,14 +46,19 @@
 }
 
 .dot3 {
-  padding: 2rem 1.4rem 0.2rem 1rem;
+  position: absolute;
+  right: 2.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
   cursor: pointer;
 }
 
 .commentCenter {
   color: var(--grey-4);
   font-size: 1.6rem;
-  padding: 0 1.4rem;
+  padding: 0 1.5rem;
   white-space: pre-wrap;
 }
 
@@ -123,7 +128,7 @@
 
 .nestedCommentTop {
   width: 100%;
-  padding: 1rem 0 0 1.4rem;
+  padding: 1.6rem 1.5rem 0.6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -139,7 +144,7 @@
 
 .nestedPadding {
   width: 100%;
-  padding-left: 2.2rem;
+  padding-left: 2.4rem;
 }
 
 .nestedPadding.hide {

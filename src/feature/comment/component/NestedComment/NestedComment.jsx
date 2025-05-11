@@ -54,7 +54,7 @@ export default function NestedComment({
             {isFirst && <Icon id='nested-arrow' width={15} height={15} />}
           </div>
           <div className={styles.cloud}>
-            <Icon id='cloud' width={19} heigth={13} />
+            <Icon id='cloud' width={22} heigth={14} />
           </div>
           <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
             {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
@@ -69,7 +69,7 @@ export default function NestedComment({
         </div>
         <p className={styles.dot3} onClick={(e) => onCommentOptionClick(data)}>
           {!isDeleted && isVisible && (
-            <Icon id='ellipsis-vertical' width={3} height={11} />
+            <Icon id='meat-ball' width={18} height={4} stroke='none'/>
           )}
         </p>
       </div>

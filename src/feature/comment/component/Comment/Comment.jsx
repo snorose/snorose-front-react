@@ -127,7 +127,7 @@ const Comment = forwardRef((props, ref) => {
         <div className={styles.commentTop}>
           <div className={styles.commentTopLeft}>
             <div className={styles.cloud}>
-              <Icon id='cloud' width={19} height={13} />
+              <Icon id='cloud' width={22} height={14} />
             </div>
             <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
               {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
@@ -145,7 +145,7 @@ const Comment = forwardRef((props, ref) => {
             onClick={(e) => onCommentOptionClick(data)}
           >
             {!isDeleted && isVisible && (
-              <Icon id='ellipsis-vertical' width={3} height={11} />
+              <Icon id='meat-ball' width={18} height={4} stroke='none'/>
             )}
           </p>
         </div>
