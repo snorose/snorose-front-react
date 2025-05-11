@@ -45,7 +45,6 @@
 }
 
 .errorMessage {
-  position: absolute;
   color: var(--pink-3);
   font-size: 1.1rem;
   top: 7.1rem;
