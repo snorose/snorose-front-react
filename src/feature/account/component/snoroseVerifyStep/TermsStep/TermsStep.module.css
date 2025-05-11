@@ -15,9 +15,10 @@
 }
 
 .text {
+  font: var(--text-headline-2-reg);
   word-break: keep-all;
   text-wrap: wrap;
-  font-size: 1.4rem;
+
   color: var(--grey-4);
 }
 
