@@ -1,12 +1,12 @@
-import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { Link, useLocation } from 'react-router-dom';
 
 import { getNoticeLine } from '@/apis';
 
-import { useAuth, useScrollRestoration } from '@/shared/hook';
 import { BackAppBar, Icon, WriteButton } from '@/shared/component';
+import { OFFICIAL_BOARD, QUERY_KEY, ROLE } from '@/shared/constant';
+import { useAuth, useScrollRestoration } from '@/shared/hook';
 import { getBoard } from '@/shared/lib';
-import { QUERY_KEY, ROLE, OFFICIAL_BOARD } from '@/shared/constant';
 
 import { PostListSuspense } from '@/feature/board/component';
 
