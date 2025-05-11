@@ -341,7 +341,7 @@
     <path d="M3.63037 18.8906L18.8912 3.62982" stroke-width="2.5" stroke-linecap="round"/>
     <path d="M3.63037 3.63086L18.8912 18.8917" stroke-width="2.5" stroke-linecap="round"/>
   </symbol>
-  <symbol id="comment-stroke" width="19" height="17" viewBox="0 0 19 17" fill="none">
+  <symbol id="comment-stroke" width="19" height="17" viewBox="0 0 19 17" fill="current">
     <path d="M2.41064 0.912109H16.4106C17.2391 0.912109 17.9106 1.58368 17.9106 2.41211V9.58008C17.9106 10.4085 17.2391 11.0801 16.4106 11.0801H5.67725C5.35289 11.0801 5.08785 11.2146 4.89111 11.3555C4.79455 11.4246 4.70453 11.5027 4.62354 11.5791L4.41064 11.792L1.77002 14.5215C1.45769 14.844 0.911002 14.623 0.910645 14.1738V2.41211C0.910645 1.58368 1.58222 0.912109 2.41064 0.912109Z" stroke="#5F86BF" stroke-linejoin="round"/>
   </symbol>
   <symbol id="like-stroke" width="16" height="16" viewBox="0 0 16 16" fill="current">

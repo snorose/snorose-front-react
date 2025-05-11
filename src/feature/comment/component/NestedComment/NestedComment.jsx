@@ -97,10 +97,10 @@ export default function NestedComment({
             onClick={() => (isLiked ? unlike.mutate() : like.mutate())}
           >
             <Icon
-              id='like'
-              width={13}
-              height={12}
-              fill={isLiked ? '#5F86BF' : '#D9D9D9'}
+              id='like-stroke'
+              width={16}
+              height={18}
+              fill={isLiked ? '#5F86BF' : 'none'}
             />
             <span>{likeCount.toLocaleString()}</span>
           </button>

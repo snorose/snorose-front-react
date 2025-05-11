@@ -1,7 +1,7 @@
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useToast } from '@/shared/hook';
 import { Icon } from '@/shared/component';
+import { useToast } from '@/shared/hook';
 
 import { useCommentContext } from '@/feature/comment/context';
 import { useComment } from '@/feature/comment/hook';
@@ -19,6 +19,7 @@ const CommentInput = () => {
     setContent,
     resetCommentState,
     inputRef,
+    setIsInputFocused,
   } = useCommentContext();
 
   const handleInputChange = (e) => setContent(e.target.value);
@@ -82,6 +83,8 @@ const CommentInput = () => {
           value={content}
           onKeyDown={handleKeyPress}
           onChange={handleInputChange}
+          onFocus={() => setIsInputFocused({ isFocused: true, parent: 'post' })}
+          onBlur={() => setIsInputFocused({ isFocused: false, parent: 'post' })}
           maxRows={5}
         />
       </div>

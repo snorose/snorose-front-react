@@ -37,7 +37,7 @@ export default function PostPage() {
   const { postId } = useParams();
   const location = useLocation();
   const { pathname } = location;
-  const { inputFocus } = useCommentContext();
+  const { inputFocus, isInputFocused } = useCommentContext();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
@@ -236,7 +236,17 @@ export default function PostPage() {
             }}
             onClick={inputFocus}
           >
-            <Icon id='comment-stroke' width={20} height={16} />
+            <Icon
+              id='comment-stroke'
+              width={20}
+              height={16}
+              fill={
+                isInputFocused.isFocused === true &&
+                isInputFocused.parent === 'post'
+                  ? '#5F86BF'
+                  : 'none'
+              }
+            />
             <p>댓글 {data.commentCount.toLocaleString()}</p>
           </div>
           <div
