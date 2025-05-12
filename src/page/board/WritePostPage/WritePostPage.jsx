@@ -169,8 +169,8 @@ export default function WritePostPage() {
               <div className={styles.categorySelectContainer}>
                 <Icon
                   id='clip-board-list'
-                  width={18}
-                  height={19}
+                  width={21}
+                  height={22}
                   fill='white'
                 />
                 <p className={styles.categorySelectText}>{boardTitle}</p>
