@@ -12,18 +12,26 @@
   flex-direction: column;
   align-items: center;
   gap: 0.6rem;
-  margin-top: 1.4rem;
+  margin: 1.4rem 0 0.9rem 0;
 
   font: var(--text-body-2-reg);
   text-align: center;
 
-  color: #6a6a6a;
+  color: var(--grey-3-1);
+}
+
+.info .bold {
+  font: var(--text-body-2-med);
 }
 
 .menu {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font: var(--text-body-2-reg);
+
+  color: var(--grey-3-1);
 }
 
 .link {
