@@ -49,11 +49,11 @@
 }
 
 .title {
-  overflow: hidden; /* Hide text overflow */
+  overflow: hidden;
 
-  display: -webkit-box; /* Required for the ellipsis effect */
-  -webkit-line-clamp: 2; /* Limit text to 4 lines */
-  -webkit-box-orient: vertical; /* Required for the ellipsis effect */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 
   white-space: pre-line;
 
