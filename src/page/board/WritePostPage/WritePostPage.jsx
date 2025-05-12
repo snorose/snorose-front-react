@@ -232,7 +232,7 @@ export default function WritePostPage() {
                 <Icon
                   id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
                   width={21}
-                  height={21}
+                  height={22}
                 />
                 <p>공지글</p>
               </div>

@@ -192,8 +192,8 @@ export default function EditPostPage() {
               >
                 <Icon
                   id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
-                  width={24}
-                  height={24}
+                  width={21}
+                  height={22}
                 />
                 <p>공지글</p>
               </div>
