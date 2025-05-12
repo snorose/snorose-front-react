@@ -40,8 +40,9 @@ export default function Sidebar() {
     <div className={styles.dim}>
       <aside onClick={handleEventPropagation} className={styles.sidebar}>
         <Link className={styles.logo} to='/'>
-          <Icon id='logo' width={129} height={23} margin={10} />
+          <Icon id='logo' width={180} height={30} />
         </Link>
+
         {MENUS.map(({ to, title, items }) => (
           <div key={title} onClick={close}>
             <Link to={to}>

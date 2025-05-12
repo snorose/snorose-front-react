@@ -20,7 +20,7 @@
   padding-left: 3rem;
   position: absolute;
   right: 0;
-  border-radius: 1.6rem 0 0 0;
+  border-radius: 1.5rem 0 0 0;
   background-color: var(--white);
 }
 
@@ -30,13 +30,14 @@
 
   display: inline-block;
   width: 100%;
-  padding: 2rem 0;
+  padding: 0.6rem 0;
+  margin-top: 2rem;
 
   background-color: white;
 }
 
 .title {
-  margin: 1.6rem 0;
+  margin: 2rem 0;
 
   font: var(--text-headline-1-bold);
 
@@ -49,10 +50,9 @@
 
 /* menu list */
 .list {
-  padding-left: 1.6rem;
-  margin-bottom: 1.2rem;
   display: flex;
   flex-direction: column;
+  padding-left: 1.3rem;
 }
 
 .item {
