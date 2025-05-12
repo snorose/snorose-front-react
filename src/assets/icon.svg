@@ -107,6 +107,14 @@
       <path id="Vector 3" d="M3 13.2864L9.13167 20L21 5" stroke="#00368E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     </g>
   </symbol>
+  <symbol id="check-circle-grey" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="none">
+   <circle cx="10.5332" cy="10.8418" r="10.5" fill="white"/>
+   <path d="M5.5332 12.2032L9.34846 16.1419L16.7332 7.34186" stroke="#D9D9D9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="check-circle-blue" width="21" height="22" viewBox="0 0 21 22" fill="none" stroke="none">
+    <circle cx="10.5" cy="11.3418" r="10.5" fill="#BFD7EC"/>
+    <path d="M5 12.4031L8.81526 16.3418L16.2 7.54181" stroke="#5F86BF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
   <symbol id="angle-up-blue" viewBox="0 0 8 5" fill="none" stroke="none">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.121048 3.8976C-0.0390477 3.75992 -0.0405293 3.53538 0.117738 3.39607L3.97606 -8.81703e-08L7.87895 3.35639C8.03905 3.49407 8.04053 3.71861 7.88226 3.85792C7.72399 3.99722 7.46591 3.99854 7.30581 3.86086L3.98268 1.00305L0.697495 3.89465C0.539228 4.03396 0.281143 4.03528 0.121048 3.8976Z" fill="#00368E"/>
   </symbol>
@@ -275,14 +283,6 @@
   </symbol>
   <symbol id="blue-triangle" viewBox="0 0 20 20" fill="none" stroke="none">
     <path d="M10 16L3.93782 5.5L16.0622 5.5L10 16Z" fill="#00368E"/>
-  </symbol>
-  <symbol id="toggle-on" viewBox="0 0 21 21" fill="none" stroke="none">
-    <rect width="21" height="21" rx="10.5" fill="#D9D9D9"/>
-    <circle cx="10.5365" cy="10.4994" r="6.53655" fill="#00368E"/>
-  </symbol>
-  <symbol id="toggle-off" viewBox="0 0 22 21" fill="none" stroke="none">
-    <rect width="21.0731" height="21" rx="10.5" fill="#D9D9D9"/>
-    <circle cx="10.5365" cy="10.4994" r="6.53655" fill="white"/>
   </symbol>
 
 

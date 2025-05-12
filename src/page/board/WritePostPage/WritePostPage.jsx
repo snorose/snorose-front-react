@@ -229,12 +229,12 @@ export default function WritePostPage() {
                 }
                 onClick={handleIsNotice}
               >
-                <p>공지글</p>
                 <Icon
-                  id={isNotice ? 'toggle-on' : 'toggle-off'}
-                  width={25}
-                  height={16}
+                  id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
+                  width={21}
+                  height={21}
                 />
+                <p>공지글</p>
               </div>
             )}
           </div>
