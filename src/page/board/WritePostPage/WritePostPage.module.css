@@ -31,8 +31,7 @@
 }
 
 .categorySelectText {
-  font-size: 1.8rem;
-  font-weight: 500;
+  font: var(--text-headline-1-med);
 }
 
 .profileBox {
@@ -41,7 +40,7 @@
   justify-content: space-between;
   padding: 2.2rem 0 1.8rem 0;
   color: var(--grey-3-1);
-  font-size: 1.4rem;
+  font: var(--text-body-1-reg);
 }
 
 .profileBoxLeft {
@@ -84,8 +83,7 @@
 
 .title {
   color: var(--grey-4);
-  font-size: 2.4rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   outline: none;
   border: none;
   background-color: transparent;
@@ -96,7 +94,7 @@
 
 .text {
   color: var(--grey-4);
-  font-size: 1.6rem;
+  font: var(--text-headline-2-reg);
   outline: none;
   border: none;
   background-color: transparent;

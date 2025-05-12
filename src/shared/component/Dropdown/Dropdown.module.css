@@ -3,7 +3,7 @@
   background: var(--grey-2);
   border-radius: 0.5rem;
   border: none;
-  font-size: 1.3rem;
+  font: var(--text-body-2-reg);
   color: var(--grey-4);
 }
 
