@@ -38,11 +38,10 @@
 }
 
 .title {
-  font-size: 1.6rem;
-  font-weight: 500;
+  font: var(--text-headline-2-med);
 }
 
 .description {
-  font-size: 1.4rem;
+  font: var(--text-body-1-reg);
   color: var(--grey-3-1);
 }

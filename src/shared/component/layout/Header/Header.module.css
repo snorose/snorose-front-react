@@ -15,7 +15,6 @@
 .button {
   background-color: var(--white);
   font-weight: bold;
-  font-weight: 500;
-  font-size: 1.6rem;
+  font: var(--text-headline-2-med);
   color: var(--blue-4);
 }

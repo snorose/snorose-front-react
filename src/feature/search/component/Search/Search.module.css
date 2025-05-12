@@ -13,11 +13,11 @@
   outline: none;
   border: none;
   background-color: transparent;
-  font-size: 1.3rem;
+  font: var(--text-body-2-reg);
   color: var(--black);
 }
 
 .search::placeholder {
-  font-size: 1.2rem;
+  font: var(--text-body-2-reg);
   color: var(--grey-3-1);
 }
