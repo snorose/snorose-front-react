@@ -161,7 +161,7 @@ export default function EditPostPage() {
         <div className={styles.center}>
           <div className={styles.categorySelect}>
             <div className={styles.categorySelectContainer}>
-              <Icon id='clip-board-list' width={18} height={19} fill='white' />
+              <Icon id='clip-board-list' width={21} height={22} fill='white' />
               <p className={styles.categorySelectText}>{boardTitle}</p>
             </div>
           </div>

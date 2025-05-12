@@ -30,7 +30,7 @@
 }
 
 .categorySelectText {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 500;
 }
 
@@ -40,7 +40,7 @@
   justify-content: space-between;
   padding: 2.2rem 0 1.8rem 0;
   color: var(--grey-3-1);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .profileBoxLeft {
@@ -81,7 +81,7 @@
 
 .title {
   color: var(--grey-4);
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 700;
   outline: none;
   border: none;
@@ -93,7 +93,7 @@
 
 .text {
   color: var(--grey-4);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   outline: none;
   border: none;
   background-color: transparent;
