@@ -19,11 +19,18 @@ import {
 import { Footer, Header } from '@/shared/component';
 
 import styles from './MainPage.module.css';
+import useDeviceInfo from '../../../feature/alert/hook/userDeviceInfo';
 
 export default function MainPage() {
+  const { isMobile, isAndroid, isIOS } = useDeviceInfo();
+  const ua = navigator.userAgent;
   return (
     <main>
       <Header className={styles.header} />
+      <p>{ua}</p>
+      <p>모바일 기기인가요? {isMobile ? '✅ 예' : '❌ 아니요'}</p>
+      <p>안드로이드인가요? {isAndroid ? '✅ 예' : '❌ 아니요'}</p>
+      <p>iOS인가요? {isIOS ? '✅ 예' : '❌ 아니요'}</p>
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
