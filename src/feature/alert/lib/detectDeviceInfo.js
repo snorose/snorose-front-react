@@ -17,12 +17,12 @@ export function detectDeviceInfo() {
   const isMac = /Macintosh/i.test(ua);
   const isWindows = /Windows/i.test(ua);
 
-  let platform = 'Unknown';
-
   /**
    * Android 기기의 경우 커널 OS 때문에 Linux가 포함되어 있는 경우가 있습니다.
    * Linux 단독으로 있는 경우만 Linux 운영체제 이므로 Android를 우선적으로 체크합니다.
    */
+
+  let platform = 'Unknown';
 
   if (isAndroid) {
     platform = 'Android';

@@ -2,23 +2,30 @@ import { getToken } from 'firebase/messaging';
 import { messaging } from './firebase-config';
 
 export const subscribeToPushNotification = async (registration) => {
-  const permission = await Notification.requestPermission();
+  try {
+    const token = await getToken(messaging, {
+      vapidKey: process.env.REACT_APP_VAPID_KEY,
+      serviceWorkerRegistration: registration,
+    });
 
-  if (permission === 'granted') {
-    try {
-      const token = await getToken(messaging, {
-        vapidKey: process.env.REACT_APP_VAPID_KEY,
-        serviceWorkerRegistration: registration,
-      });
+    console.log('Token:', token);
+    alert(token);
 
-      // 백엔드로 token 전달
-      // await fetch('/api/register-token', {
-      //   method: 'POST',
-      //   body: JSON.stringify({ token }),
-      //   headers: { 'Content-Type': 'application/json' },
-      // });
-    } catch (error) {
-      console.error(error);
-    }
+    // 백엔드로 token 전달
+    // await fetch('/api/register-token', {
+    //   method: 'POST',
+    //   body: JSON.stringify({ token }),
+    //   headers: { 'Content-Type': 'application/json' },
+    // });
+  } catch (error) {
+    console.error(error);
   }
 };
+
+// const savedToken = localStorage.getItem('fcm_token');
+
+// const token = await getToken(...);
+// if (token && token !== savedToken) {
+//   await sendTokenToServer(token);
+//   localStorage.setItem('fcm_token', token);
+// }

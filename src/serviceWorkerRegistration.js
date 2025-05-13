@@ -1,15 +1,19 @@
-import { subscribeToPushNotification } from '@/feature/alert/lib/firebase-messaging';
+let registrationPromise;
 
-export async function register() {
+export function register() {
   if (!('serviceWorker' in navigator)) return;
 
-  try {
-    const registration = await navigator.serviceWorker.register(
-      '/firebase-messaging-sw.js'
-    );
+  registrationPromise = navigator.serviceWorker.register(
+    '/firebase-messaging-sw.js'
+  );
+}
 
-    await subscribeToPushNotification(registration);
-  } catch (error) {
-    console.error(error);
+export function getRegistration() {
+  if (!registrationPromise) {
+    throw new Error(
+      'Service worker not initialized. Did you forget to call initServiceWorker()?'
+    );
   }
+
+  return registrationPromise;
 }
