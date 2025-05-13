@@ -2,6 +2,7 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
+import { Footer, Header } from '@/shared/component';
 import {
   Carousel,
   CarouselErrorFallback,
@@ -16,21 +17,23 @@ import {
   HomeCommunity,
   ListHeader,
 } from '@/feature/home/component';
-import { Footer, Header } from '@/shared/component';
+import { detectDeviceInfo } from '@/feature/alert/lib/detectDeviceInfo';
 
 import styles from './MainPage.module.css';
-import useDeviceInfo from '../../../feature/alert/hook/userDeviceInfo';
 
 export default function MainPage() {
-  const { isMobile, isAndroid, isIOS } = useDeviceInfo();
   const ua = navigator.userAgent;
+
+  const { isMobile, platform } = detectDeviceInfo();
+  console.log(isMobile);
+  console.log(platform);
+
   return (
     <main>
       <Header className={styles.header} />
       <p>{ua}</p>
-      <p>모바일 기기인가요? {isMobile ? '✅ 예' : '❌ 아니요'}</p>
-      <p>안드로이드인가요? {isAndroid ? '✅ 예' : '❌ 아니요'}</p>
-      <p>iOS인가요? {isIOS ? '✅ 예' : '❌ 아니요'}</p>
+      <p>{isMobile ? '✅ 모바일 기기 맞아' : '❌ 모바일 기기 아니야'}</p>
+      <p>{platform}</p>
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
