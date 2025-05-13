@@ -4,7 +4,6 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  font-size: 0.8rem;
   overflow-y: auto;
 }
 
@@ -21,7 +20,7 @@
   gap: 1rem;
   border-radius: 0.5rem;
   background-color: var(--pink-1);
-  font-size: 1.4rem;
+  font: var(--text-body-1-reg);
   color: var(--pink-3);
   box-sizing: border-box;
   cursor: pointer;
