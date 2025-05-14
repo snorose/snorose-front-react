@@ -43,6 +43,5 @@
   color: var(--Grey-4, var(--grey-3, #484848));
   font-size: 1.4rem;
   line-height: 1.6;
-  letter-spacing: -0.05rem;
   white-space: pre-line;
 }
