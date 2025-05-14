@@ -1,17 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import {
   BackAppBar,
+  Badge,
   CloseAppBar,
   FetchLoading,
   Icon,
-  Badge,
 } from '@/shared/component';
-import { formattedNowTime } from '@/shared/lib';
 import {
   BOARD_MENUS,
   MUTATION_KEY,
@@ -19,6 +17,8 @@ import {
   ROLE,
   TOAST,
 } from '@/shared/constant';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { formattedNowTime } from '@/shared/lib';
 
 import { getPostContent, patchPost } from '@/apis';
 
@@ -161,20 +161,22 @@ export default function EditPostPage() {
         <div className={styles.center}>
           <div className={styles.categorySelect}>
             <div className={styles.categorySelectContainer}>
-              <Icon id='clip-board-list' width={18} height={19} fill='white' />
+              <Icon id='clip-board-list' width={21} height={22} fill='white' />
               <p className={styles.categorySelectText}>{boardTitle}</p>
             </div>
           </div>
           <div className={styles.profileBox}>
             <div className={styles.profileBoxLeft}>
-              <Icon id='cloud' width={25} height={16} />
-              <p>{userDisplay}</p>
-              {
+              {userInfo?.userRoleId !== ROLE.admin &&
+              userInfo?.userRoleId !== ROLE.official ? (
+                <Icon id='cloud' width={25} height={16} />
+              ) : (
                 <Badge
                   userRoleId={userInfo?.userRoleId}
                   className={styles.badge}
                 />
-              }
+              )}
+              <p>{userDisplay}</p>
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
             </div>
@@ -188,12 +190,12 @@ export default function EditPostPage() {
                 }
                 onClick={handleIsNotice}
               >
-                <p>공지글</p>
                 <Icon
-                  id={isNotice ? 'toggle-on' : 'toggle-off'}
-                  width={25}
-                  height={16}
+                  id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
+                  width={21}
+                  height={22}
                 />
+                <p>공지글</p>
               </div>
             )}
           </div>
