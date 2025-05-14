@@ -31,8 +31,7 @@
 }
 
 .categorySelectText {
-  font-size: 1.6rem;
-  font-weight: 500;
+  font: var(--text-headline-1-med);
 }
 
 .profileBox {
@@ -41,7 +40,7 @@
   justify-content: space-between;
   padding: 2.2rem 0 1.8rem 0;
   color: var(--grey-3-1);
-  font-size: 1.2rem;
+  font: var(--text-body-1-reg);
 }
 
 .profileBoxLeft {
@@ -51,15 +50,14 @@
 }
 
 .badge {
-  width: 1.8rem;
-  height: 1.8rem;
-  margin-left: -0.5rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .profileBoxRight {
   display: flex;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.7rem;
   color: var(--black);
   cursor: pointer;
 }
@@ -79,14 +77,13 @@
 .content {
   display: flex;
   flex-direction: column;
-  row-gap: 3.6rem;
+  row-gap: 3.4rem;
   padding-bottom: 11rem;
 }
 
 .title {
   color: var(--grey-4);
-  font-size: 2rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   outline: none;
   border: none;
   background-color: transparent;
@@ -97,7 +94,7 @@
 
 .text {
   color: var(--grey-4);
-  font-size: 1.4rem;
+  font: var(--text-headline-2-reg);
   outline: none;
   border: none;
   background-color: transparent;

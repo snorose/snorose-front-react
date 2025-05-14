@@ -20,6 +20,7 @@ export const STATIC_ICON_LIST = Object.freeze({
   checkCircle: 'check-circle',
   checkCircleFill: 'check-circle-fill',
   checkThick: 'check-thick',
+  chevronRight: 'chevron-right',
   comment: 'comment',
   commentCircle: 'comment-circle',
   ellipsisVertical: 'ellipsis-vertical',
