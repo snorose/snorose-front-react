@@ -12,6 +12,8 @@ import { routeList } from '@/router.js';
 import '@/index.css';
 import reportWebVitals from '@/reportWebVitals';
 
+import { ModalProvider } from './shared/context/ModalContext';
+
 const router = createBrowserRouter(routeList);
 
 const queryClient = new QueryClient({
@@ -28,9 +30,11 @@ root.render(
   <React.StrictMode fri>
     <QueryClientProvider client={queryClient}>
       <ToastProvider>
-        <CommentContextProvider>
-          <RouterProvider router={router} />
-        </CommentContextProvider>
+        <ModalProvider>
+          <CommentContextProvider>
+            <RouterProvider router={router} />
+          </CommentContextProvider>
+        </ModalProvider>
       </ToastProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

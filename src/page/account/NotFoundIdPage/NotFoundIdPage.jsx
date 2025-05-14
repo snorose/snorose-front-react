@@ -5,7 +5,7 @@ import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './NotFoundIdPage.module.css';
 
-import taskFailedIllustration from '@/assets/images/taskFailedIllustration.svg';
+import { taskFailedIllustration } from '@/assets/illustrations';
 
 export default function NotFoundIdPage() {
   const navigate = useNavigate();

@@ -48,7 +48,7 @@ export default function BackAppBar({
       <div className={hasSearchInput ? styles.hasWideWidth : styles.actions}>
         {hasSearch && (
           <Link to={`${pathname}/search`}>
-            <Icon id='search-thick' width={19} height={19} stroke='#00368E' />
+            <Icon id='search-thick' width={20} height={20} stroke='#00368E' />
           </Link>
         )}
         {hasMenu && <MenuIcon />}

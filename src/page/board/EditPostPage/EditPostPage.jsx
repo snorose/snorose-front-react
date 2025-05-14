@@ -1,18 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuth, useToast } from '@/shared/hook';
 import {
   BackAppBar,
+  Badge,
   CloseAppBar,
-  DeleteModal,
   FetchLoading,
   Icon,
-  Badge,
 } from '@/shared/component';
-import { formattedNowTime } from '@/shared/lib';
 import {
   BOARD_MENUS,
   MUTATION_KEY,
@@ -20,6 +17,8 @@ import {
   ROLE,
   TOAST,
 } from '@/shared/constant';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { formattedNowTime } from '@/shared/lib';
 
 import { getPostContent, patchPost } from '@/apis';
 
@@ -41,25 +40,40 @@ export default function EditPostPage() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [userDisplay, setUserDisplay] = useState('');
-  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [isBlock, setIsBlock] = useState(false);
+
+  // navigation guard
+  useBlocker(isBlock);
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
+    placeholderData: {},
   });
 
   // 데이터 화면 표시
   useEffect(() => {
-    if (data) {
-      setTitle(data.title);
-      setText(data.content);
-      setIsNotice(data.isNotice);
-      setUserDisplay(data.userDisplay);
-    }
+    if (!data || Object.keys(data).length === 0) return;
+
+    setTitle(data.title);
+    setText(data.content);
+    setIsNotice(data.isNotice);
+    setUserDisplay(data.userDisplay);
   }, [data]);
+
+  // isBlock 업데이트
+  useEffect(() => {
+    if (!data || Object.keys(data).length === 0) return;
+
+    setIsBlock(
+      data.title !== title.trim() ||
+        data.content !== text.trim() ||
+        data.isNotice !== isNotice
+    );
+  }, [title, text, isNotice]);
 
   // 게시글 수정
   const mutation = useMutation({
@@ -67,7 +81,7 @@ export default function EditPostPage() {
     mutationFn: patchPost,
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_KEY.post, postId]);
-      navigate(-1, { replace: true });
+      navigate(-1);
       toast(TOAST.POST.edit);
       setSubmitDisabled(false);
     },
@@ -106,6 +120,8 @@ export default function EditPostPage() {
     }
 
     setSubmitDisabled(true);
+    setIsBlock(false);
+
     mutation.mutate({
       boardId: currentBoard?.id,
       postId,
@@ -140,32 +156,27 @@ export default function EditPostPage() {
           <CloseAppBar
             children={<p onClick={handleSubmit}>수정</p>}
             backgroundColor={'#eaf5fd'}
-            onClose={() => {
-              data.title !== title ||
-              data.content !== text ||
-              data.isNotice !== isNotice
-                ? setIsCheckModalOpen(true)
-                : navigate(-1, { replace: true });
-            }}
           />
         </div>
         <div className={styles.center}>
           <div className={styles.categorySelect}>
             <div className={styles.categorySelectContainer}>
-              <Icon id='clip-board-list' width={18} height={19} fill='white' />
+              <Icon id='clip-board-list' width={21} height={22} fill='white' />
               <p className={styles.categorySelectText}>{boardTitle}</p>
             </div>
           </div>
           <div className={styles.profileBox}>
             <div className={styles.profileBoxLeft}>
-              <Icon id='cloud' width={25} height={16} />
-              <p>{userDisplay}</p>
-              {
+              {userInfo?.userRoleId !== ROLE.admin &&
+              userInfo?.userRoleId !== ROLE.official ? (
+                <Icon id='cloud' width={25} height={16} />
+              ) : (
                 <Badge
                   userRoleId={userInfo?.userRoleId}
                   className={styles.badge}
                 />
-              }
+              )}
+              <p>{userDisplay}</p>
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
             </div>
@@ -179,12 +190,12 @@ export default function EditPostPage() {
                 }
                 onClick={handleIsNotice}
               >
-                <p>공지글</p>
                 <Icon
-                  id={isNotice ? 'toggle-on' : 'toggle-off'}
-                  width={25}
-                  height={16}
+                  id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
+                  width={21}
+                  height={22}
                 />
+                <p>공지글</p>
               </div>
             )}
           </div>
@@ -204,12 +215,6 @@ export default function EditPostPage() {
           </div>
         </div>
       </div>
-      <DeleteModal
-        id='post-edit-exit-check'
-        isOpen={isCheckModalOpen}
-        closeFn={() => setIsCheckModalOpen(false)}
-        redBtnFunction={() => navigate(-1, { replace: true })}
-      />
     </>
   );
 }

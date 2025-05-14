@@ -44,7 +44,7 @@
 }
 
 .description {
-  color: var(--gray-4);
+  color: var(--grey-4);
   font-size: 1.6rem;
   white-space: normal;
   word-break: keep-all;

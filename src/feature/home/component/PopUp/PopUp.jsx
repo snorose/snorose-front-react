@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
-import aprilCalendar from '@/feature/home/component/PopUp/april-calendar.png';
+import financialReport from '@/feature/home/component/PopUp/financial-report.png';
+import fundraisingEvent from '@/feature/home/component/PopUp/fundraising-event.jpg';
 import styles from './PopUp.module.css';
 
 const content = (
@@ -10,65 +11,42 @@ const content = (
       <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
-      <Heading>1. 4월 스노로즈 캘린더</Heading>
+
+      <Heading>1. 4월 회계 보고</Heading>
 
       <Content>
-        <img src={aprilCalendar} alt='4월 달력' />
-      </Content>
-
-      <Heading>2. 25-1 중간고사 포인트 미지급 기간 운영 공지</Heading>
-      <Content>
-        - 첫눈온방 및 함박눈방에 게시글, 댓글 작성 포인트가 지급되지 않습니다.
-        <br />
-        - 기간: 2025/04/15(화) 00:00 ~ 2025/04/28(월) 23:59
+        -{' '}
+        <a
+          className={styles.link}
+          href='https://docs.google.com/spreadsheets/u/0/d/1MzXAHemKqPwVj3PzPJch5cR5z49gFtzABPgJ_FVjCXM/edit?usp=sharing&pli=1&authuser=0'
+        >
+          [스노로즈 회계 보고 링크 바로가기]
+        </a>
         <br />- 자세한 내용은{' '}
         <a
           className={styles.link}
-          href='https://snorose.com/board/notice/post/1811569'
+          href='https://snorose.com/board/notice/post/1807846'
         >
-          관련 공지
+          [관련 공지]
         </a>
-        를 참고해주시길 바랍니다.
+        를 참고해 주시길 바랍니다.
+        <img src={financialReport} alt='4월 회계 보고' />
       </Content>
 
-      <Heading>3. 25-1 시험후기 게시판 운영 공지</Heading>
-      <Content>
-        - 시험후기 게시판 운영 기간: 2025/04/29(화)00:00 ~ 2025/05/05(월) 23:59
-        <br />- 자세한 내용은{' '}
-        <a
-          className={styles.link}
-          href='https://snorose.com/board/notice/post/1811569'
-        >
-          관련 공지
-        </a>
-        를 참고해주시길 바랍니다.
-      </Content>
+      <Heading>2. 1차 후원금 모집 이벤트 진행상황</Heading>
 
-      <Heading>4. 족보 공유 관련 규정 개정 안내</Heading>
       <Content>
-        ✓ 족보를 공유한 경우 → <strong>영구 강등</strong>{' '}
-        <span style={{ color: 'red' }}>(기존과 동일)</span>
-        <br />
-        ✓ 족보를 공유받은 경우  
-        <br />{' '}
-        <span style={{ paddingLeft: '18px' }}>
-          A. 금전 거래가 있었거나 시도한 경우 → <strong>영구 강등</strong>
-        </span>
-        <br />
-        <span style={{ paddingLeft: '20px' }}>
-          B. A항이 아닌 경우 → <strong>2년 강등</strong>
-        </span>
-        <br />
-        (※ 단, 새내기는 입학년도 4월 이전 위반 시 6개월 강등, 4월부터는 2년 강등
-        적용)
-        <br />- 자세한 내용은{' '}
+        - 일정 기간동안 목표 모금액을 달성하는 경우, 모든 스노로즈 정회원들께
+        보상 포인트를 지급해 드리는 이벤트입니다. <br />- 자세한 내용은{' '}
         <a
           className={styles.link}
-          href='https://snorose.com/board/exam-review-notice/post/1811681'
+          href='https://www.snorose.com/board/notice/post/1819262'
         >
-          관련 공지
+          [관련 공지]
         </a>
-        를 참고해주시길 바랍니다.
+        를 참고해 주시길 바랍니다. <br />
+        <br />
+        <img src={fundraisingEvent} alt='4월 회계 보고' />
       </Content>
 
       <hr />
