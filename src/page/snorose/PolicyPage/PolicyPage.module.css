@@ -8,7 +8,7 @@
   flex-direction: column;
   padding: 0 2rem 5.4rem 2rem;
   width: 100%;
-  gap: 1.4rem;
+  gap: 2.4rem;
   padding-top: 5rem;
 }
 .contentWrapper section {
@@ -32,15 +32,14 @@
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
 }
 
 .content {
-  padding: 1.6rem 1.3rem;
+  padding: 2rem 1.3rem;
   border-radius: 0.5rem;
-  background: var(--Miscellaneous-_Kit-Section-Fill, #f5f5f5);
-  color: var(--Grey-4, var(--grey-3, #484848));
+  background: #f5f5f5;
+  color: var(--grey-4);
   font-size: 1.4rem;
   line-height: 1.6;
   white-space: pre-line;

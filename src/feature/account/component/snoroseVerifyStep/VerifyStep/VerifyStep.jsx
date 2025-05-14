@@ -79,7 +79,10 @@ export default function VerifyStep({ setStep }) {
           errorMessage='올바른 이메일을 입력해주세요'
         />
       </div>
-      <PrimaryButton onClick={verify}>인증</PrimaryButton>
+
+      <PrimaryButton className={styles.button} onClick={verify}>
+        인증
+      </PrimaryButton>
       {loading && <FetchLoadingOverlay />}
     </section>
   );

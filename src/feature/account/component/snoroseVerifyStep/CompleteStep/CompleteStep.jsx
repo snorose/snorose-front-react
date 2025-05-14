@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { PrimaryButton } from '@/shared/component';
 
-import Complete from '@/assets/images/completeVerification.svg';
+import Complete from '@/assets/illustrations/taskCompleteIllustration.svg';
 
 import styles from './CompleteStep.module.css';
 
@@ -12,8 +12,9 @@ export default function CompleteStep() {
       <div className={styles.illustration}>
         <img src={Complete} alt='인증 신청 완료' />
       </div>
+
       <Link to='/'>
-        <PrimaryButton>메인 페이지로</PrimaryButton>
+        <PrimaryButton className={styles.button}>메인 페이지로</PrimaryButton>
       </Link>
     </section>
   );
