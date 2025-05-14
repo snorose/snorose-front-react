@@ -1,31 +1,31 @@
-import { useState } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { getPostContent, deletePost, reportPost, reportUser } from '@/apis';
+import { deletePost, getPostContent, reportPost, reportUser } from '@/apis';
 
-import { useAuth, useToast } from '@/shared/hook';
 import {
   BackAppBar,
+  Badge,
   DeleteModal,
   FetchLoading,
   Icon,
   OptionModal,
-  Badge,
 } from '@/shared/component';
-import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 import {
+  LIKE_TYPE,
   MUTATION_KEY,
   QUERY_KEY,
-  TOAST,
-  LIKE_TYPE,
   ROLE,
+  TOAST,
 } from '@/shared/constant';
+import { useAuth, useToast } from '@/shared/hook';
+import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 
 import { NotFoundPage } from '@/page/etc';
 
-import { useCommentContext } from '@/feature/comment/context';
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
+import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
@@ -37,7 +37,7 @@ export default function PostPage() {
   const { postId } = useParams();
   const location = useLocation();
   const { pathname } = location;
-  const { inputFocus } = useCommentContext();
+  const { inputFocus, isInputFocused } = useCommentContext();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
@@ -206,14 +206,14 @@ export default function PostPage() {
             style={{
               display: data.isNotice && !data.isWriter ? 'none' : 'block',
             }}
-            className={styles.dot3}
+            className={styles.meatBall}
             onClick={() => {
               data.isWriter
                 ? setIsOptionsModalOpen(true)
                 : setIsReportModalOpen(true);
             }}
           >
-            <Icon id='ellipsis-vertical' width={3} height={11} />
+            <Icon id='meat-ball' width={18} height={4} stroke='none' />
           </div>
         </div>
         <div className={styles.title}>
@@ -229,21 +229,38 @@ export default function PostPage() {
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
         <div className={styles.post_bottom}>
-          <div className={styles.count} onClick={inputFocus}>
-            <Icon id='comment' width={15} height={13} />
-            <p>{data.commentCount.toLocaleString()}</p>
+          <div
+            className={styles.count}
+            style={{
+              display: data.isNotice ? 'none' : 'flex',
+            }}
+            onClick={inputFocus}
+          >
+            <Icon
+              id='comment-stroke'
+              width={20}
+              height={16}
+              fill={
+                isInputFocused.isFocused === true &&
+                isInputFocused.parent === 'post'
+                  ? '#5F86BF'
+                  : 'none'
+              }
+            />
+            <p>댓글 {data.commentCount.toLocaleString()}</p>
           </div>
           <div
             className={styles.count}
             onClick={() => (data.isLiked ? unlike.mutate() : like.mutate())}
           >
             <Icon
-              id='like'
-              width={13}
-              height={12}
-              fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
+              id='like-stroke'
+              width={16}
+              height={15}
+              stroke='#5F86BF'
+              fill={data.isLiked ? '#5F86BF' : 'none'}
             />
-            <p>{data.likeCount.toLocaleString()}</p>
+            <p>공감 {data.likeCount.toLocaleString()}</p>
           </div>
           <div
             className={styles.count}
@@ -252,12 +269,13 @@ export default function PostPage() {
             }
           >
             <Icon
-              id='bookmark-fill'
-              width={10}
-              height={13}
-              fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
+              id='scrap-stroke'
+              width={13}
+              height={16}
+              stroke='#5F86BF'
+              fill={data.isScrapped ? '#5F86BF' : 'none'}
             />
-            <p>{data.scrapCount.toLocaleString()}</p>
+            <p>스크랩 {data.scrapCount.toLocaleString()}</p>
           </div>
         </div>
       </div>
