@@ -6,8 +6,8 @@
 }
 
 .title {
-  color: var(--grey-4);
   font: var(--text-headline-2-med);
+  color: var(--grey-4);
 }
 
 .inputWrapper {
@@ -29,10 +29,10 @@
 .inputText {
   width: 100%;
   border: none;
-  background-color: transparent;
   outline: none;
-  color: var(--black);
   font: var(--text-body-1-reg);
+  color: var(--black);
+  background-color: transparent;
 
   &:focus {
     outline: none;
@@ -46,6 +46,7 @@
 .errorMessage {
   color: var(--pink-3);
   font-size: 1.1rem;
+  position: absolute;
   top: 7.1rem;
 }
 

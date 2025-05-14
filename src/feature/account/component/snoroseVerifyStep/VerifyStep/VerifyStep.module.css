@@ -1,13 +1,19 @@
 .content {
   flex: 1;
   margin: 0 var(--default-margin);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  position: relative;
 }
 
 .verify {
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
+}
+
+/* button */
+.button {
+  height: 5.4rem;
+  position: absolute;
+  left: 0;
+  bottom: 4rem;
 }
