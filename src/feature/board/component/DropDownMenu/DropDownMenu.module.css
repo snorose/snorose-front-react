@@ -40,5 +40,5 @@
 }
 
 .item {
-  font-size: 1.3rem;
+  font: var(--text-headline-2-reg);
 }

@@ -1,5 +1,5 @@
 .post {
-  padding: 1.3rem 1.5rem;
+  padding: 1.3rem;
   width: 100%;
   background-color: var(--grey-1);
   border-radius: 0.5rem;
@@ -8,10 +8,10 @@
 }
 
 .post_top {
-  padding-bottom: 0.9rem;
+  padding-bottom: 1rem;
   display: flex;
   align-items: center;
-  font-size: 1.1rem;
+  font: var(--text-body-1-reg);
   color: var(--grey-4);
   white-space: nowrap;
 }
@@ -46,8 +46,7 @@
 }
 
 .title {
-  font-size: 1.4rem;
-  font-weight: 500;
+  font: var(--text-headline-2-med);
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -56,7 +55,7 @@
 }
 
 .text {
-  font-size: 1.3rem;
+  font: var(--text-body-1-reg);
   color: var(--grey-4);
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -68,28 +67,36 @@
 .post_bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 1rem;
+  justify-content: flex-end;
   padding: 0.5rem 0 0 0;
   color: var(--grey-3-1);
-  justify-content: space-between;
 
   p {
     margin-bottom: 0.3rem;
   }
 }
 
-.board {
+.boardChip {
+  padding: 0.1rem 0.4rem;
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 0.3rem;
+  margin-left: 0.6rem;
+  color: var(--grey-3-1);
+  border-radius: 0.5rem;
+  background: var(--grey-2);
+}
+
+.iconListContainer {
+  display: flex;
+  gap: 1rem;
 }
 
 .iconContainer {
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  font-size: 1.1rem;
+  font: var(--text-body-2-reg);
   color: var(--grey-3-1);
 }
 
