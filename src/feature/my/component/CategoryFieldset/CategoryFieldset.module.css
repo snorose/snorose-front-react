@@ -5,8 +5,7 @@
 }
 
 .title {
-  font-weight: 500;
-  font-size: 1.6rem;
+  font: var(--text-headline-2-med);
   color: var(--grey-4);
 }
 
@@ -15,7 +14,7 @@
   height: 5rem;
   row-gap: 0.9rem;
   column-gap: 1.3rem;
-  font-size: 1.4rem;
+  font: var(--text-body-1-reg);
 }
 
 .check {
