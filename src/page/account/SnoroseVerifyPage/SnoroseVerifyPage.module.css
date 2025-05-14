@@ -1,5 +1,5 @@
 .main {
-  height: 94%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -28,16 +28,17 @@
 
 .title {
   margin: 0 var(--default-margin) 1.6rem var(--default-margin);
-  font-weight: 700;
-  font-size: 2rem;
+
+  font: var(--text-title-1-bold);
   white-space: pre-line;
 }
 
 .description {
   margin: 0 var(--default-margin) 2.7rem var(--default-margin);
-  font-weight: 500;
-  font-size: 1.4rem;
-  color: var(--grey-4);
+
+  font: var(--text-headline-2-reg);
   white-space: pre-line;
   word-break: keep-all;
+
+  color: var(--grey-4);
 }
