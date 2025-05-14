@@ -4,7 +4,6 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  font-size: 0.8rem;
   overflow-y: auto;
 }
 
@@ -14,14 +13,14 @@
 }
 
 .notificationBar {
-  padding: 1.1rem 1.5rem;
+  padding: 0.9rem 1.5rem;
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1rem;
   border-radius: 0.5rem;
   background-color: var(--pink-1);
-  font-size: 1.3rem;
+  font: var(--text-body-1-reg);
   color: var(--pink-3);
   box-sizing: border-box;
   cursor: pointer;
