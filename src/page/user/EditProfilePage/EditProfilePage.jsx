@@ -292,14 +292,17 @@ export default function EditProfilePage() {
                 )}
               </div>
             </div>
-            <CategoryFieldset title='전공' required>
-              <Dropdown
-                options={MAJORS}
-                select={major}
-                setFn={setMajor}
-                placeholder='선택하세요'
-              />
-            </CategoryFieldset>
+
+            <div className={styles.infoWrapper}>
+              <CategoryFieldset title='전공' required>
+                <Dropdown
+                  options={MAJORS}
+                  select={major}
+                  setFn={setMajor}
+                  placeholder='선택하세요'
+                />
+              </CategoryFieldset>
+            </div>
           </div>
         </div>
       </section>
