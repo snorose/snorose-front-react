@@ -19,7 +19,6 @@ export default function CategoryFieldset({
           <label className={styles.check}>
             <input
               className={styles.input}
-              type='checkbox'
               checked={checked}
               onChange={updateCheck}
             />
