@@ -33,7 +33,7 @@
 .description {
   width: 80%;
   text-align: center;
-  color: var(--gray-4);
+  color: var(--grey-4);
   font-size: 1.2rem;
   white-space: pre-line;
   word-break: keep-all;
@@ -59,6 +59,6 @@
   padding: 1rem 1.2rem;
   background-color: transparent;
   font-weight: 500;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
   font-size: 1.4rem;
 }
