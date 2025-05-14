@@ -22,11 +22,11 @@
 
 .ready {
   border: 0;
-  background-color: var(--gray-1-1);
+  background-color: var(--grey-1-1);
 }
 
 .ready::placeholder {
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
 }
 
 .right {

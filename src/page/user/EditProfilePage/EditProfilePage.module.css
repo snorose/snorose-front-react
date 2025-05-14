@@ -67,7 +67,7 @@
 }
 
 .title {
-  color: var(--gray-4);
+  color: var(--grey-4);
   font-size: 1.4rem;
   font-weight: 500;
 }
@@ -79,13 +79,13 @@
   border-radius: 0.5rem;
   padding: 0 1.2rem;
   border: none;
-  background: var(--gray-1-1);
+  background: var(--grey-1-1);
   outline: none;
   color: var(--black);
   font-size: 1.2rem;
 
   &:disabled {
-    background: var(--gray-3);
+    background: var(--grey-3);
   }
 }
 

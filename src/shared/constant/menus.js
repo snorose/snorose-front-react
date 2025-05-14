@@ -3,36 +3,36 @@ export const NAVBAR_MENUS = Object.freeze([
     id: 'home',
     to: '/home',
     label: '메인홈',
-    width: 28,
-    height: 28,
+    width: 32,
+    height: 32,
   },
   {
     id: 'board',
     to: '/board',
     label: '게시판',
-    width: 28,
-    height: 28,
+    width: 32,
+    height: 32,
   },
   {
     id: 'test',
     to: '/board/exam-review',
     label: '시험후기',
-    width: 28,
-    height: 28,
+    width: 32,
+    height: 32,
   },
   // {
   //   id: 'bell',
   //   to: '/alert',
   //   label: '알림',
-  //   width: 28,
-  //   height: 28,
+  //   width: 32,
+  //   height: 32,
   // },
   {
     id: 'mypage',
     to: '/my-page',
     label: '마이페이지',
-    width: 28,
-    height: 28,
+    width: 32,
+    height: 32,
   },
 ]);
 
@@ -43,6 +43,10 @@ export const SIDEBAR_MENUS = Object.freeze([
     items: [
       { to: '/about', name: 'About 스노로즈' },
       { to: '/board/notice', name: '공지사항' },
+      {
+        to: 'https://snorose.notion.site/1a37ef0aa3bf8071bcd0cb35c035636e?pvs=4',
+        name: '스노로즈 블로그',
+      },
     ],
   },
   {

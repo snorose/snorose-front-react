@@ -1,19 +1,18 @@
-import { useState, useMemo } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { useMemo, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuth, useToast } from '@/shared/hook';
 import {
   ActionButton,
-  CloseAppBar,
-  DeleteModal,
-  Icon,
-  FetchLoading,
   Badge,
+  CloseAppBar,
+  FetchLoading,
+  Icon,
 } from '@/shared/component';
-import { formattedNowTime, getBoard } from '@/shared/lib';
 import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { formattedNowTime, getBoard } from '@/shared/lib';
 
 import { postPost } from '@/apis';
 import { DropDownMenu } from '@/feature/board/component';
@@ -30,8 +29,12 @@ export default function WritePostPage() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
+
+  // navigation guard
+  const isBlock = title.trim().length > 0 || text.trim().length > 0;
+
+  useBlocker(isBlock);
 
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
@@ -154,14 +157,7 @@ export default function WritePostPage() {
     <>
       <div className={styles.container}>
         <div className={styles.top}>
-          <CloseAppBar
-            backgroundColor={'#eaf5fd'}
-            onClose={() => {
-              title.trim() || text.trim()
-                ? setIsCheckModalOpen(true)
-                : navigate(-1, { replace: true });
-            }}
-          >
+          <CloseAppBar backgroundColor={'#eaf5fd'}>
             <ActionButton onClick={handleSubmit} disabled={!pass}>
               등록
             </ActionButton>
@@ -173,8 +169,8 @@ export default function WritePostPage() {
               <div className={styles.categorySelectContainer}>
                 <Icon
                   id='clip-board-list'
-                  width={18}
-                  height={19}
+                  width={21}
+                  height={22}
                   fill='white'
                 />
                 <p className={styles.categorySelectText}>{boardTitle}</p>
@@ -189,8 +185,8 @@ export default function WritePostPage() {
                 <div className={styles.categorySelectContainer}>
                   <Icon
                     id='clip-board-list'
-                    width={18}
-                    height={19}
+                    width={21}
+                    height={22}
                     fill='white'
                   />
                   <p className={styles.categorySelectText}>{boardTitle}</p>
@@ -210,14 +206,16 @@ export default function WritePostPage() {
 
           <div className={styles.profileBox}>
             <div className={styles.profileBoxLeft}>
-              <Icon id='cloud' width={25} height={16} />
-              <p>{userInfo?.nickname}</p>
-              {
+              {userInfo?.userRoleId !== ROLE.admin &&
+              userInfo?.userRoleId !== ROLE.official ? (
+                <Icon id='cloud' width={25} height={16} />
+              ) : (
                 <Badge
                   userRoleId={userInfo?.userRoleId}
                   className={styles.badge}
                 />
-              }
+              )}
+              <p>{userInfo?.nickname}</p>
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
             </div>
@@ -231,12 +229,12 @@ export default function WritePostPage() {
                 }
                 onClick={handleIsNotice}
               >
-                <p>공지글</p>
                 <Icon
-                  id={isNotice ? 'toggle-on' : 'toggle-off'}
-                  width={25}
-                  height={16}
+                  id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
+                  width={21}
+                  height={22}
                 />
+                <p>공지글</p>
               </div>
             )}
           </div>
@@ -256,12 +254,6 @@ export default function WritePostPage() {
           </div>
         </div>
       </div>
-      <DeleteModal
-        id='post-write-exit-check'
-        isOpen={isCheckModalOpen}
-        closeFn={() => setIsCheckModalOpen(false)}
-        redBtnFunction={() => navigate(-1, { replace: true })}
-      />
     </>
   );
 }

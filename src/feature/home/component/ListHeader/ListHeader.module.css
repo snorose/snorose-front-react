@@ -5,15 +5,16 @@
 }
 
 .title {
-  font-weight: 700;
-  font-size: 1.6rem;
+  font: var(--text-headline-1-bold);
 }
 
 .more {
   display: flex;
   align-items: center;
   gap: 0.1rem;
-  font-weight: 500;
-  font-size: 1.2rem;
-  color: var(--gray-4);
+
+  font: var(--text-body-1-reg);
+  text-decoration: none;
+
+  color: var(--grey-4);
 }

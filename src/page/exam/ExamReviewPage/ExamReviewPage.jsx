@@ -93,7 +93,7 @@ export default function ExamReviewPage() {
       queryClient.removeQueries([QUERY_KEY.post, postId]);
       invalidUserInfoQuery();
       toast(TOAST.EXAM_REVIEW.delete);
-      navigate('/board/exam-review', { replace: true });
+      navigate(-1);
     },
     onError: ({ response }) => {
       const { status } = response;
@@ -145,7 +145,6 @@ export default function ExamReviewPage() {
   const edit = () =>
     navigate(`/board/exam-review/${postId}/edit`, {
       state: data,
-      replace: true,
     });
 
   if (isLoading) {

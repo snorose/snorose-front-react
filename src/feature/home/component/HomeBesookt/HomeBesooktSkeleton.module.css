@@ -11,9 +11,9 @@
   border-radius: 0.5rem;
   background: linear-gradient(
     45deg,
-    var(--gray-2) 25%,
-    var(--gray-3) 50%,
-    var(--gray-2) 75%
+    var(--grey-2) 25%,
+    var(--grey-3) 50%,
+    var(--grey-2) 75%
   );
   background-size: 200% 100%;
 }

@@ -40,8 +40,10 @@ a:hover {
   margin-bottom: 5.7rem;
 }
 
-.input {
-  margin-bottom: 1.7rem;
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 .pwFrame {
@@ -53,11 +55,10 @@ a:hover {
   border-top-right-radius: 0.6rem;
   border-bottom-right-radius: 0.6rem;
   padding-right: 1rem;
-  margin-bottom: 1.6rem;
 }
 
 .ready {
-  background-color: var(--gray-1-1);
+  background-color: var(--grey-1-1);
 }
 
 .wrong {
@@ -78,6 +79,16 @@ a:hover {
   cursor: pointer;
 }
 
+.RememberIdCheckbox {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  line-height: 130%;
+  gap: 0.8rem;
+  color: var(--grey-4);
+  font-size: 1.4rem;
+}
+
 .button {
   display: block;
   width: 18rem;
@@ -91,7 +102,7 @@ a:hover {
 .find {
   display: flex;
   justify-content: center;
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
   font-size: 1.2rem;
   margin-top: 3.7rem;
   margin-bottom: 1.2rem;

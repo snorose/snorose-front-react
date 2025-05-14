@@ -13,46 +13,52 @@
 }
 
 .sidebar {
+  overflow-y: auto;
+
   width: 80%;
   height: 100%;
-  padding: 2rem 0 0 3rem;
+  padding-left: 3rem;
   position: absolute;
   right: 0;
-  border-radius: 1.6rem 0 0 0;
+  border-radius: 1.5rem 0 0 0;
   background-color: var(--white);
 }
 
 .logo {
+  position: sticky;
+  top: 0;
+
   display: inline-block;
-  margin-bottom: 2rem;
+  width: 100%;
+  padding: 0.6rem 0;
+  margin-top: 2rem;
+
+  background-color: white;
 }
 
 .title {
-  margin: 1.6rem 0;
-  font-weight: 700;
-  font-size: 1.6rem;
-  color: var(--gray-4);
+  margin: 2rem 0;
+
+  font: var(--text-headline-1-bold);
+
+  color: var(--grey-4);
 }
 
 .title:hover {
   color: var(--blue-3);
 }
 
-.menuList {
-  font-size: 1.4rem;
-  color: var(--gray-4);
-}
-
 /* menu list */
 .list {
-  padding-left: 1.6rem;
-  margin-bottom: 1.2rem;
   display: flex;
   flex-direction: column;
+  padding-left: 1.3rem;
 }
 
 .item {
-  font-weight: 500;
+  font: var(--text-headline-2-reg);
+
+  color: var(--grey-4);
 }
 
 .item li {

@@ -15,7 +15,7 @@ export const ACTIVITIES = [
     queryKey: QUERY_KEY.myPosts,
     queryFn: getMyPosts,
     errorMessage: '아직 작성한 글이 없어요',
-    emptyStateIllustrationId: 'star-no-post',
+    emptyStateIllustration: 'noPostsIllustration',
   },
   {
     path: ROUTE.mypageComment,
@@ -23,7 +23,7 @@ export const ACTIVITIES = [
     queryKey: QUERY_KEY.myCommentedPosts,
     queryFn: getMyComments,
     errorMessage: '아직 작성한 댓글이 없어요',
-    emptyStateIllustrationId: 'star-no-comment',
+    emptyStateIllustration: 'noCommentsIllustration',
   },
   {
     path: ROUTE.mypageDownloadExamReview,
@@ -32,7 +32,7 @@ export const ACTIVITIES = [
     queryFn: getDownloadedExamReviews,
     hasLike: false,
     errorMessage: '아직 다운받은 후기가 없어요',
-    emptyStateIllustrationId: 'star-no-review',
+    emptyStateIllustration: 'noScrapedPostsIllustration',
   },
   {
     path: ROUTE.mypageExamReviewScrap,
@@ -41,7 +41,7 @@ export const ACTIVITIES = [
     queryFn: getScrapedExamReviews,
     hasLike: false,
     errorMessage: '아직 스크랩한 시험 후기가 없어요',
-    emptyStateIllustrationId: 'star-no-review',
+    emptyStateIllustration: 'noScrapedPostsIllustration',
   },
   {
     path: ROUTE.mypageScrap,
@@ -49,6 +49,6 @@ export const ACTIVITIES = [
     queryKey: QUERY_KEY.myScrapedPosts,
     queryFn: getScrapedPosts,
     errorMessage: '아직 스크랩 한 글이 없어요',
-    emptyStateIllustrationId: 'star-no-post',
+    emptyStateIllustration: 'noPostsIllustration',
   },
 ];
