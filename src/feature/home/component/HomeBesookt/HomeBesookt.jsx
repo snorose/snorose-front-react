@@ -4,9 +4,8 @@ import { getBest3 } from '@/apis';
 
 import { QUERY_KEY } from '@/shared/constant';
 
-import { MainPageListItem } from '@/feature/home/component';
-
 import styles from './HomeBesookt.module.css';
+import { PostBar } from '@/feature/board/component';
 
 export default function HomeBesookt({ className }) {
   const { data: besookts } = useSuspenseQuery({
@@ -17,30 +16,12 @@ export default function HomeBesookt({ className }) {
 
   return (
     <div className={`${styles.list} ${className}`}>
-      {besookts.map(
-        ({
-          boardId,
-          postId,
-          userDisplay,
-          title,
-          content,
-          boardName,
-          createdAt,
-          userRoleId,
-        }) => (
-          <MainPageListItem
-            key={postId}
-            postId={postId}
-            displayName={userDisplay}
-            title={title}
-            overview={content}
-            boardId={boardId}
-            boardName={boardName}
-            createdAt={createdAt}
-            userRoleId={userRoleId}
-          />
-        )
-      )}
+      {besookts.map((besookt) => (
+        <PostBar
+          key={`home-besookt-${besookt.boardId}-${besookt.postId}`}
+          data={besookt}
+        />
+      ))}
     </div>
   );
 }
