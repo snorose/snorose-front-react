@@ -3,9 +3,9 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getBest3 } from '@/apis';
 
 import { QUERY_KEY } from '@/shared/constant';
+import { PostBar } from '@/feature/board/component';
 
 import styles from './HomeBesookt.module.css';
-import { PostBar } from '@/feature/board/component';
 
 export default function HomeBesookt({ className }) {
   const { data: besookts } = useSuspenseQuery({
