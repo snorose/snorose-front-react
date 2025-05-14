@@ -12,7 +12,7 @@
 }
 
 .text {
-  font: var(--text-headline-2-reg);
+  font: var(--text-body-1-reg);
   word-break: keep-all;
   text-wrap: wrap;
 
