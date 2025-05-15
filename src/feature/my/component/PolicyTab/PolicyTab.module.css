@@ -25,8 +25,7 @@
   align-items: center;
   padding: 1.2rem 0;
   color: var(--grey-4);
-  font-size: 1.6rem;
-  font-weight: 500;
+  font: var(--text-headline-2-med);
 
   svg {
     width: 2.4rem;
@@ -50,7 +49,7 @@
   padding: 0.9rem 1.5rem;
   background: var(--blue-4);
   color: var(--white);
-  font-size: 1.4rem;
+  font: var(--text-body-1-reg);
 }
 
 .deleteAccountButton {
@@ -61,5 +60,5 @@
   padding: 0.9rem 1.5rem;
   background: var(--blue-1);
   color: var(--blue-4);
-  font-size: 1.4rem;
+  font: var(--text-body-1-reg);
 }
