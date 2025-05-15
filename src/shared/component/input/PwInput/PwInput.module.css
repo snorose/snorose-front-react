@@ -7,7 +7,6 @@
 
 .title {
   font: var(--text-headline-2-med);
-
   color: var(--grey-4);
 }
 
@@ -31,9 +30,7 @@
   width: 100%;
   border: none;
   outline: none;
-
   font: var(--text-body-1-reg);
-
   color: var(--black);
   background-color: transparent;
 
