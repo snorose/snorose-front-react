@@ -68,8 +68,7 @@
   height: 5.4rem;
   border-radius: 0.5rem;
   border: 0.1rem solid var(--blue-4);
-  font-size: 1.6rem;
-  font-weight: 500;
+  font: var(--text-headline-2-med);
 }
 
 .deleteAccountButton {
