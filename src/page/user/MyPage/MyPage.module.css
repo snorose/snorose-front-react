@@ -35,7 +35,6 @@
   font-size: 1.6rem;
   font-weight: 500;
   cursor: pointer;
-  line-height: 130%;
   border-top: 0.1rem solid var(--grey-3);
 }
 
@@ -82,7 +81,6 @@
   font-size: 1.6rem;
   font-weight: 500;
   cursor: pointer;
-  line-height: 130%;
   border-top: 0.1rem solid var(--grey-3);
 }
 
