@@ -45,9 +45,8 @@
 
 .errorMessage {
   color: var(--pink-3);
-  font-size: 1.1rem;
-  position: absolute;
-  top: 7.1rem;
+  font: var(--text-body-1-reg);
+  top: 8rem;
 }
 
 .errorInputWrapper {
