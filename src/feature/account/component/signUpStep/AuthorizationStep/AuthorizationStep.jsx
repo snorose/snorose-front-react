@@ -33,6 +33,7 @@ export default function AuthorizationStep({ email, setStage }) {
             className={codeStyle}
             setClassName={setCodeStyle}
             inputType={'authNum'}
+            data={authNum}
             inputData={setAuthNum}
             errMsg={'코드를 다시 한 번 확인해주세요'}
           />

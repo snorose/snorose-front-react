@@ -84,6 +84,7 @@ export default function FindIdPage() {
                   inputType={props[5]}
                   inputData={setFormData}
                   errMsg={props[6]}
+                  data={formData}
                 />
               </div>
             ))}
