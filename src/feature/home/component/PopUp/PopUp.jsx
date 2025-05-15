@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
-import financialReport from '@/feature/home/component/PopUp/financial-report.png';
-import fundraisingEvent from '@/feature/home/component/PopUp/fundraising-event.jpg';
+import fundraisingEvent from '@/feature/home/component/PopUp/fundraising-event.png';
 import styles from './PopUp.module.css';
 
 const content = (
@@ -12,25 +11,13 @@ const content = (
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
 
-      <Heading>1. 4월 회계 보고</Heading>
+      <Heading>1. 스노로즈 서버 점검 안내</Heading>
 
       <Content>
-        -{' '}
-        <a
-          className={styles.link}
-          href='https://docs.google.com/spreadsheets/u/0/d/1MzXAHemKqPwVj3PzPJch5cR5z49gFtzABPgJ_FVjCXM/edit?usp=sharing&pli=1&authuser=0'
-        >
-          [스노로즈 회계 보고 링크 바로가기]
-        </a>
-        <br />- 자세한 내용은{' '}
-        <a
-          className={styles.link}
-          href='https://snorose.com/board/notice/post/1807846'
-        >
-          [관련 공지]
-        </a>
-        를 참고해 주시길 바랍니다.
-        <img src={financialReport} alt='4월 회계 보고' />
+        안정적인 서비스 제공을 위한 서버 점검이 진행됩니다. <br />
+        <br />- 일시: 2025/05/23(금) 01:00 ~ 09:00 <br />- 점검 시간 동안
+        스노로즈 이용이 일시 중단됩니다.
+        <br />- 자세한 내용은 관련 공지를 참고해주시길 바랍니다.
       </Content>
 
       <Heading>2. 1차 후원금 모집 이벤트 진행상황</Heading>
@@ -46,7 +33,7 @@ const content = (
         </a>
         를 참고해 주시길 바랍니다. <br />
         <br />
-        <img src={fundraisingEvent} alt='4월 회계 보고' />
+        <img src={fundraisingEvent} alt='1차 후원금 모집 이벤트' />
       </Content>
 
       <hr />
