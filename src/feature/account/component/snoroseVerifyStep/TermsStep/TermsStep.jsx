@@ -13,16 +13,23 @@ export default function TermsStep({ setStep }) {
       <div className={styles.terms}>
         <pre className={styles.text}>
           {startTerms}
-          {list.map(({ id, text }) => (
-            <li key={id} className={styles.item}>
-              {text}
-            </li>
-          ))}
-          <br />
+
+          <ul className={styles.list}>
+            {list.map(({ id, text }) => (
+              <li key={id}>{text}</li>
+            ))}
+          </ul>
+
           {endTerms}
         </pre>
       </div>
-      <PrimaryButton onClick={() => setStep('verify')}>동의</PrimaryButton>
+
+      <PrimaryButton
+        className={styles.button}
+        onClick={() => setStep('verify')}
+      >
+        동의
+      </PrimaryButton>
     </section>
   );
 }

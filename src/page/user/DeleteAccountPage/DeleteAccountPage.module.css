@@ -21,11 +21,10 @@
 
 .title {
   color: var(--black);
-  font-size: 2rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
 }
 
-.descWrapper {
+.descriptionWrapper {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -33,10 +32,21 @@
   padding-bottom: 1.3rem;
 }
 
-.desc {
+.dotDescriptionList {
+  display: flex;
+  align-items: start;
+  gap: 1.2rem;
+}
+
+.middleDot {
+  padding-top: 1rem;
+}
+
+.description {
   color: var(--grey-4);
-  font-size: 1.4rem;
-  font-weight: 500;
+  font: var(--text-headline-2-reg);
+  white-space: normal;
+  word-break: keep-all;
 }
 
 /* 하단 버튼 */
@@ -53,13 +63,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
   width: 100%;
-  height: 4.7rem;
+  height: 5.4rem;
   border-radius: 0.5rem;
-  background: var(--blue-1);
-  color: var(--blue-3);
-  font-size: 1.4rem;
-  font-weight: 500;
+  border: 0.1rem solid var(--blue-4);
+  font: var(--text-headline-2-med);
 }
 
 .deleteAccountButton {
@@ -67,11 +76,10 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 4.7rem;
+  height: 5.4rem;
   border-radius: 0.5rem;
   background: var(--blue-4);
   color: var(--white);
   text-align: center;
-  font-size: 1.4rem;
-  font-weight: 500;
+  font: var(--text-headline-2-med);
 }

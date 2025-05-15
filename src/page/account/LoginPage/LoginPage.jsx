@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useLogin } from '@/apis';
@@ -14,14 +14,39 @@ export default function Login() {
   const login = useLogin();
   const [formData, setFormData] = useState({ loginId: '', password: '' });
   const [isError, setIsError] = useState(false);
-  const [visBtnClick, setVisBtnClick] = useState(false);
-  const toggleVisBtn = () => {
-    setVisBtnClick((prev) => !prev);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible((prev) => !prev);
   };
+
+  const toggleRememberId = () => {
+    setIsChecked((prev) => !prev);
+  };
+
+  const handleLoginSubmit = (e) => {
+    if (isChecked) {
+      localStorage.setItem('rememberedLoginId', formData.loginId);
+    } else {
+      localStorage.removeItem('rememberedLoginId');
+    }
+
+    login(e, setIsError, formData, navigate);
+  };
+
+  useEffect(() => {
+    const savedId = localStorage.getItem('rememberedLoginId');
+
+    if (savedId) {
+      setFormData((prev) => ({ ...prev, loginId: savedId }));
+      setIsChecked(true);
+    }
+  }, []);
 
   return (
     <div className={styles.loginframe}>
-      <form onSubmit={(e) => login(e, setIsError, formData, navigate)}>
+      <form onSubmit={handleLoginSubmit}>
         <div className={styles.loginBody}>
           <Icon
             className={styles.back}
@@ -80,13 +105,28 @@ export default function Login() {
               )}
             </div>
           </div>
+
+          <div className={styles.RememberIdCheckbox} onClick={toggleRememberId}>
+            <Icon
+              id={isChecked ? 'inactive-check-circle' : 'active-check-circle'}
+              width={22}
+              height={22}
+            />
+            <span>아이디 기억하기</span>
+          </div>
+
           <Button btnName='로그인하기' className='right' />
+
           <div className={styles.find}>
             <Link to='/signup'>회원가입하기</Link>
             <p className={styles.divider}>|</p>
             <Link to='/find-id'>아이디 찾기</Link>
             <p className={styles.divider}>|</p>
             <Link to='/find-pw'>비밀번호 찾기</Link>
+          </div>
+          <div className={styles.signUp}>
+            <Link to='/signup'>아직 회원이 아니신가요?</Link>
+            <Icon id='angle-right' width={16} height={16} />
           </div>
         </div>
       </form>

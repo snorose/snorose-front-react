@@ -49,6 +49,6 @@ export const ACTIVITIES = [
     queryKey: QUERY_KEY.myScrapedPosts,
     queryFn: getScrapedPosts,
     errorMessage: '아직 스크랩 한 글이 없어요',
-    emptyStateIllustration: 'noScrapedPostsIllustration',
+    emptyStateIllustration: 'noPostsIllustration',
   },
 ];

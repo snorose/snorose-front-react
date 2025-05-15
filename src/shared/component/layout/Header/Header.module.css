@@ -13,7 +13,8 @@
 }
 
 .button {
-  background-color: var(--white);
-  font: var(--text-headline-2-med);
+  font: var(--text-headline-2-reg);
+
   color: var(--blue-4);
+  background-color: var(--white);
 }

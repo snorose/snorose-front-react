@@ -1,7 +1,7 @@
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useToast } from '@/shared/hook';
 import { Icon } from '@/shared/component';
+import { useToast } from '@/shared/hook';
 
 import { useCommentContext } from '@/feature/comment/context';
 import { useComment } from '@/feature/comment/hook';
@@ -19,6 +19,7 @@ const CommentInput = () => {
     setContent,
     resetCommentState,
     inputRef,
+    setIsInputFocused,
   } = useCommentContext();
 
   const handleInputChange = (e) => setContent(e.target.value);
@@ -74,7 +75,7 @@ const CommentInput = () => {
       onClick={(event) => event.stopPropagation()}
     >
       <div className={styles.input_bar}>
-        <Icon id='cloud' width={25} height={16} />
+        <Icon id='cloud' width={22} height={14} />
         <TextareaAutosize
           ref={inputRef}
           className={styles.input_zone}
@@ -82,6 +83,8 @@ const CommentInput = () => {
           value={content}
           onKeyDown={handleKeyPress}
           onChange={handleInputChange}
+          onFocus={() => setIsInputFocused({ isFocused: true, parent: 'post' })}
+          onBlur={() => setIsInputFocused({ isFocused: false, parent: 'post' })}
           maxRows={5}
         />
       </div>
@@ -90,6 +93,7 @@ const CommentInput = () => {
         id='arrow-up-right'
         width={32}
         height={32}
+        fill='#898989'
         onClick={submitComment}
       />
     </div>
