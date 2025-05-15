@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getBest3 } from '@/apis';
 
 import { QUERY_KEY } from '@/shared/constant';
+import { getBoardTextId } from '@/shared/lib';
 import { PostBar } from '@/feature/board/component';
 
 import styles from './HomeBesookt.module.css';
@@ -17,10 +19,12 @@ export default function HomeBesookt({ className }) {
   return (
     <div className={`${styles.list} ${className}`}>
       {besookts.map((besookt) => (
-        <PostBar
+        <Link
           key={`home-besookt-${besookt.boardId}-${besookt.postId}`}
-          data={besookt}
-        />
+          to={`/board/${getBoardTextId(besookt.boardId)}/post/${besookt.postId}`}
+        >
+          <PostBar data={besookt} />
+        </Link>
       ))}
     </div>
   );
