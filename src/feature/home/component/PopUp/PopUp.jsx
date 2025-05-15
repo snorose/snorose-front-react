@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
-import calendar from '@/feature/home/component/PopUp/calendar.jpg';
+import financialReport from '@/feature/home/component/PopUp/financial-report.png';
+import fundraisingEvent from '@/feature/home/component/PopUp/fundraising-event.jpg';
 import styles from './PopUp.module.css';
 
 const content = (
@@ -10,32 +11,42 @@ const content = (
       <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
-      <Heading>
-        1. 5월 스노로즈 캘린더{' '}
-        <a
-          className={styles.link}
-          href='https://www.snorose.com/board/notice/post/1818753'
-        >
-          [링크]
-        </a>
-      </Heading>
+
+      <Heading>1. 4월 회계 보고</Heading>
 
       <Content>
-        <img src={calendar} alt='5월 달력' />
+        -{' '}
+        <a
+          className={styles.link}
+          href='https://docs.google.com/spreadsheets/u/0/d/1MzXAHemKqPwVj3PzPJch5cR5z49gFtzABPgJ_FVjCXM/edit?usp=sharing&pli=1&authuser=0'
+        >
+          [스노로즈 회계 보고 링크 바로가기]
+        </a>
+        <br />- 자세한 내용은{' '}
+        <a
+          className={styles.link}
+          href='https://snorose.com/board/notice/post/1807846'
+        >
+          [관련 공지]
+        </a>
+        를 참고해 주시길 바랍니다.
+        <img src={financialReport} alt='4월 회계 보고' />
       </Content>
 
-      <Heading>2. 스노로즈 블로그 오픈 공지</Heading>
+      <Heading>2. 1차 후원금 모집 이벤트 진행상황</Heading>
+
       <Content>
-        운영진이 직접 전하는 &lt;스노로즈 리뉴얼&gt; 비하인드 스토리,
-        <br />
-        지금 스노로즈 블로그에서 확인해보세요!
-        <br />
+        - 일정 기간동안 목표 모금액을 달성하는 경우, 모든 스노로즈 정회원들께
+        보상 포인트를 지급해 드리는 이벤트입니다. <br />- 자세한 내용은{' '}
         <a
           className={styles.link}
-          href='https://snorose.notion.site/1a37ef0aa3bf8071bcd0cb35c035636e'
+          href='https://www.snorose.com/board/notice/post/1819262'
         >
-          [블로그 링크 바로가기]
+          [관련 공지]
         </a>
+        를 참고해 주시길 바랍니다. <br />
+        <br />
+        <img src={fundraisingEvent} alt='4월 회계 보고' />
       </Content>
 
       <hr />

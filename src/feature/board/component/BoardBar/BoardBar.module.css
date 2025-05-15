@@ -2,7 +2,7 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 8.4rem;
+  height: 9.8rem;
   border-radius: 0.6rem;
   background-color: var(--grey-1);
   transition: background-color 200ms ease-in-out;
@@ -34,15 +34,14 @@
   flex-direction: column;
   position: absolute;
   white-space: pre-wrap;
-  margin: 1.4rem;
+  margin: 1.6rem 0 0 1.4rem;
 }
 
 .title {
-  font-size: 1.4rem;
-  font-weight: 500;
+  font: var(--text-headline-2-med);
 }
 
 .description {
-  font-size: 1.1rem;
+  font: var(--text-body-1-reg);
   color: var(--grey-3-1);
 }
