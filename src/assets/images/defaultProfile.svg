@@ -1,12 +1,10 @@
-<svg width="126" height="124" viewBox="0 0 126 124" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="63" cy="59" r="59" fill="#DDEBF6"/>
-  <path d="M46.999 71.389a23.303 23.303 0 0 0 7.615 5.138 23.43 23.43 0 0 0 18.048 0 23.302 23.302 0 0 0 7.615-5.138" stroke="#00368E" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M43 49.39h.067H43Zm39.933 0H83h-.067Z" fill="url(#b)"/>
-  <path d="M43 49.39h.067m39.866 0H83" stroke="#00368E" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-  <defs>
-    <radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(30.22204 .86808 -.0503 1.75148 49.137 49.636)">
-      <stop stop-color="#00368E"/>
-      <stop offset="1" stop-color="#EAF5FD"/>
-    </radialGradient>
-  </defs>
+<svg width="132" height="131" viewBox="0 0 132 131" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame 2763">
+<g id="Group 2131">
+<circle id="Ellipse 86" cx="65.2852" cy="65" r="59" fill="#DDEBF6"/>
+<path id=" " d="M49.2842 76.3892C51.4531 78.588 54.0419 80.3348 56.899 81.5273C59.7561 82.7198 62.824 83.3341 65.9231 83.3341C69.0222 83.3341 72.0901 82.7198 74.9472 81.5273C77.8043 80.3348 80.3931 78.588 82.5621 76.3892" stroke="#00368E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<circle id="Ellipse 261" cx="49.2852" cy="55" r="5" fill="#00368E"/>
+<circle id="Ellipse 262" cx="82.2852" cy="55" r="5" fill="#00368E"/>
+</g>
 </svg>
