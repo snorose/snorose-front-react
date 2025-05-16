@@ -1,21 +1,30 @@
 import { Badge, Icon } from '@/shared/component';
-
 import styles from './AccordionListItem.module.css';
 
-export default function AccordionListItem({ list }) {
+export default function AccordionListItem({ list, listName }) {
   return (
     <ul className={styles.list}>
-      {list.map((history) => (
-        <li key={history} className={styles.item}>
-          <Icon className={styles.icon} id='cloud' width={28} height={17} />
+      {list.map((content) => (
+        <li key={content.name} className={styles.item}>
+          {content.name === '블랙리스트' ? (
+            <Icon
+              className={styles.icon}
+              id='black-cloud'
+              width={28}
+              height={17}
+            />
+          ) : (
+            <Icon className={styles.icon} id='cloud' width={28} height={17} />
+          )}
           <div className={styles.itemContainer}>
             <span className={styles.name}>
-              {history.name}
-              {history.badge && (
-                <Badge userRoleId={history.role} className={styles.badge} />
+              {content.name}
+              {content.badge && (
+                <Badge userRoleId={content.role} className={styles.badge} />
               )}
             </span>
-            <span className={styles.description}>{history.description}</span>
+            {listName === 'SNOROSE_HISTORY' ? <p>-</p> : <p>:</p>}
+            <span className={styles.description}>{content.description}</span>
           </div>
         </li>
       ))}
