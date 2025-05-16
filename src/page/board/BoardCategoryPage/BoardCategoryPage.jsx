@@ -36,7 +36,7 @@ export default function BoardCategoryPage() {
           </div>
         </div>
         <div className={styles.boardBox}>
-          <div className={styles.boardTitle}>단체</div>
+          <div className={styles.boardTitle}>공식 게시판</div>
           <div className={styles.boardListBox}>
             {BOARD_MENUS.filter((board) => [60, 61, 62].includes(board.id)).map(
               (board, index) => (
