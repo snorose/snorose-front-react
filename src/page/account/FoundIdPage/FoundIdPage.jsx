@@ -25,7 +25,7 @@ export default function FoundIdPage() {
       <div className={styles.pageTopFrame}>
         <p className={styles.pageTitle}>아이디 찾기</p>
         <p className={styles.pageExplanation}>
-          다음 이메일로 아이디를 전달했습니다.
+          다음 이메일로 아이디가 발송되었어요
         </p>
         <p className={styles.pageSubExplanation}>
           이메일을 받지 못하셨다면

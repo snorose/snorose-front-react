@@ -30,14 +30,12 @@
 }
 
 .pageTitle {
-  font-size: 2.4rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   margin-top: 6rem;
 }
 
 .pageExplanation {
-  font-size: 1.6rem;
-  font-weight: 500;
+  font: var(--text-headline-2-reg);
   color: var(--grey-4);
   margin-top: 0.6rem;
 }

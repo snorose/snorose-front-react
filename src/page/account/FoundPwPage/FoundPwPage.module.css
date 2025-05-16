@@ -14,22 +14,19 @@
 }
 
 .pageTitle {
-  font-size: 2.4rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   margin-top: 5.1rem;
   margin-bottom: 0.6rem;
 }
 
 .pageSubtitle {
-  font-size: 1.6rem;
-  font-weight: 500;
-  line-height: 130%;
+  font: var(--text-headline-2-reg);
   color: var(--grey-4);
   margin-bottom: 1.6rem;
 }
 
 .pageExplanation {
-  font-size: 1.6rem;
+  font: var(--text-headline-2-reg);
   color: var(--grey-3-1);
   margin-bottom: 1.8rem;
 }
@@ -61,8 +58,7 @@
 .result {
   display: flex;
   align-items: center;
-  font-size: 2.4rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   color: var(--blue-4);
   margin-top: 1.8rem;
 }
@@ -113,5 +109,4 @@
   align-items: center;
   margin-bottom: 4.6rem;
   color: var(--grey-4);
-  font-size: 1.2rem;
 }

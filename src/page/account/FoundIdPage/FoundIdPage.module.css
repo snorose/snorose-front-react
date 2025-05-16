@@ -12,21 +12,18 @@
 }
 
 .pageTitle {
-  font-size: 2.4rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   margin-top: 5.1rem;
 }
 
 .pageExplanation {
-  font-size: 1.6rem;
-  font-weight: 500;
+  font: var(--text-headline-2-reg);
   color: var(--grey-4);
   margin-top: 1.4rem;
 }
 
 .pageSubExplanation {
-  font-size: 1.6rem;
-  font-weight: 400;
+  font: var(--text-headline-2-reg);
   color: var(--grey-3-1);
   margin-top: 1.6rem;
 }
@@ -52,8 +49,7 @@
 
 .result {
   margin-top: 1;
-  font-size: 2.4rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   color: var(--blue-4);
 }
 
@@ -100,5 +96,4 @@
   align-items: center;
   margin-bottom: 3.3rem;
   color: var(--grey-4);
-  font-size: 1.2rem;
 }

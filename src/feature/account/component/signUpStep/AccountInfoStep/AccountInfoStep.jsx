@@ -31,7 +31,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
   };
   return (
     <div className={styles.pageFrame}>
-      <p className={styles.text}>
+      <p className={styles.title}>
         계정 정보를
         <br /> 입력해주세요
       </p>

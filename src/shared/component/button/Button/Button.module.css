@@ -1,8 +1,7 @@
 .submitBtn {
   width: 100%;
   height: 5.4rem;
-  font-weight: 500;
-  font-size: 1.6rem;
+  font: var(--text-headline-2-med);
   border-radius: 0.5rem;
 }
 

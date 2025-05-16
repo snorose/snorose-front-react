@@ -3,11 +3,9 @@
   overflow-y: scroll;
 }
 
-.text {
-  font-size: 2.4rem;
-  font-weight: 700;
+.title {
+  font: var(--text-title-1-bold);
   margin-bottom: 3rem;
-  line-height: 130%;
 }
 
 .inputFrame {

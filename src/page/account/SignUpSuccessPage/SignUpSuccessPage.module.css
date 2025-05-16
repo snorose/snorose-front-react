@@ -12,14 +12,12 @@
 }
 
 .title {
-  font-size: 2.4rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   margin-bottom: 0.6rem;
 }
 
 .explanation {
-  font-size: 1.6rem;
-  font-weight: 400;
+  font: var(--text-headline-2-reg);
   color: var(--grey-4);
 }
 
