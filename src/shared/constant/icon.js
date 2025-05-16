@@ -10,6 +10,7 @@ export const STATIC_ICON_LIST = Object.freeze({
   ban: 'ban',
   bell: 'bell',
   bellFill: 'bell-fill',
+  blackCloud: 'black-cloud',
   blueCamera: 'blue-camera',
   blueTriangle: 'blue-triangle',
   calendar: 'calendar',
