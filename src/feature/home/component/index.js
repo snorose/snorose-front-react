@@ -22,7 +22,6 @@ export { default as HomeBoardCard } from './HomeBoardCard/HomeBoardCard';
 export { default as HomeCommunity } from './HomeCommunity/HomeCommunity';
 
 // 베숙트
-export { default as MainPageListItem } from './MainPageListItem/MainPageListItem';
 export { default as HomeBesookt } from './HomeBesookt/HomeBesookt';
 export { default as HomeBesooktSkeleton } from './HomeBesookt/HomeBesooktSkeleton';
 export { default as HomeBesooktErrorFallback } from './HomeBesookt/HomeBesooktErrorFallback';
