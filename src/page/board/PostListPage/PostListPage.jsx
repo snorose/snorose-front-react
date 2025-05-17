@@ -1,12 +1,12 @@
-import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { Link, useLocation } from 'react-router-dom';
 
 import { getNoticeLine } from '@/apis';
 
-import { useAuth, useScrollRestoration } from '@/shared/hook';
 import { BackAppBar, Icon, WriteButton } from '@/shared/component';
+import { OFFICIAL_BOARD, QUERY_KEY, ROLE } from '@/shared/constant';
+import { useAuth, useScrollRestoration } from '@/shared/hook';
 import { getBoard } from '@/shared/lib';
-import { QUERY_KEY, ROLE, OFFICIAL_BOARD } from '@/shared/constant';
 
 import { PostListSuspense } from '@/feature/board/component';
 
@@ -53,7 +53,7 @@ export default function PostListPage() {
             className={styles.notificationBar}
             to={`/board/${currentBoardTextId}/notice`}
           >
-            <Icon id='notice-bell' width={11} height={13} />
+            <Icon id='notice-bell' width={13} height={16} />
             <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
           </Link>
         </div>

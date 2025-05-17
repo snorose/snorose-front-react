@@ -14,7 +14,7 @@ import {
   TOAST,
 } from '@/shared/constant';
 
-import { CategoryFieldset } from '@/feature/exam/component';
+import { CategoryFieldset } from '@/feature/my/component';
 import defaultProfile from '@/assets/images/defaultProfile.svg';
 
 import styles from './EditProfilePage.module.css';
@@ -220,89 +220,92 @@ export default function EditProfilePage() {
       </header>
 
       <section className={styles.profileContainer}>
-        <div className={styles.profileImgContainer}>
-          <div
-            className={styles.profileImg}
-            // onClick={() => document.getElementById('profileImageInput').click()}
-          >
-            <img
-              // src={profileImage ?? defaultProfile}
-              src={defaultProfile}
-              alt='프로필'
-              className={styles.profilePreview}
-            />
-            {/* <Icon
+        <h1 className={styles.pageTitle}>프로필 수정</h1>
+        <div className={styles.updateProfileForm}>
+          <div className={styles.profileImgContainer}>
+            <div
+              className={styles.profileImg}
+              // onClick={() => document.getElementById('profileImageInput').click()}
+            >
+              <img
+                // src={profileImage ?? defaultProfile}
+                src={defaultProfile}
+                alt='프로필'
+                className={styles.profilePreview}
+              />
+              {/* <Icon
               className={styles.blueCamera}
               id='blue-camera'
               width={24}
               height={24}
             /> */}
-          </div>
-          {/* <input
+            </div>
+            {/* <input
             type='file'
             id='profileImageInput'
             style={{ display: 'none' }}
             accept='image/*'
             onChange={handleProfileImageChange}
           /> */}
-        </div>
-
-        <div className={styles.contentContainer}>
-          <div className={styles.infoWrapper}>
-            <h3 className={styles.title}>이름</h3>
-            <input
-              type='text'
-              className={`${styles.inputText} ${nameError ? styles.errorInputText : ''}`}
-              placeholder='이름을 입력하세요'
-              value={name}
-              disabled={disabledPrivateUserInfoInput}
-              onChange={handleNameChange}
-            />
-            {nameError && <p className={styles.errorMessage}>{nameError}</p>}
           </div>
+          <div className={styles.contentContainer}>
+            <div className={styles.infoWrapper}>
+              <h3 className={styles.inputTitle}>이름</h3>
+              <input
+                type='text'
+                className={`${styles.inputText} ${nameError ? styles.errorInputText : ''}`}
+                placeholder='이름을 입력하세요'
+                value={name}
+                disabled={disabledPrivateUserInfoInput}
+                onChange={handleNameChange}
+              />
+              {nameError && <p className={styles.errorMessage}>{nameError}</p>}
+            </div>
 
-          <div className={styles.infoWrapper}>
-            <h3 className={styles.title}>생년월일</h3>
-            <input
-              type='text'
-              className={`${styles.inputText} ${birthDateError ? styles.errorInputText : ''}`}
-              placeholder='20020101'
-              maxLength={12}
-              value={birthDate.replaceAll('-', '')}
-              pattern='\d{4}\.\d{2}\.\d{2}'
-              title='형식: YYYYMMDD (예: 19060522)'
-              disabled={disabledPrivateUserInfoInput}
-              onChange={handleBirthDateChange}
-            />
-            {birthDateError && (
-              <p className={styles.errorMessage}>{birthDateError}</p>
-            )}
-          </div>
+            <div className={styles.infoWrapper}>
+              <h3 className={styles.inputTitle}>생년월일</h3>
+              <input
+                type='text'
+                className={`${styles.inputText} ${birthDateError ? styles.errorInputText : ''}`}
+                placeholder='20020101'
+                maxLength={12}
+                value={birthDate.replaceAll('-', '')}
+                pattern='\d{4}\.\d{2}\.\d{2}'
+                title='형식: YYYYMMDD (예: 19060522)'
+                disabled={disabledPrivateUserInfoInput}
+                onChange={handleBirthDateChange}
+              />
+            </div>
 
-          <div className={styles.infoWrapper}>
-            <h3 className={styles.title}>닉네임</h3>
-            <input
-              type='text'
-              className={`${styles.inputText} ${nicknameError ? styles.errorInputText : ''}`}
-              placeholder='닉네임을 입력하세요'
-              value={nickname}
-              onChange={handleNicknameChange}
-            />
-            {nicknameError && (
-              <p className={styles.errorMessage}>{nicknameError}</p>
-            )}
+            <div className={styles.infoWrapper}>
+              <h3 className={styles.inputTitle}>닉네임</h3>
+              <div className={styles.inputWrapper}>
+                <input
+                  type='text'
+                  className={`${styles.inputText} ${nicknameError ? styles.errorInputText : ''}`}
+                  placeholder='닉네임을 입력하세요'
+                  value={nickname}
+                  onChange={handleNicknameChange}
+                />
+                {nicknameError && (
+                  <p className={styles.errorMessage}>{nicknameError}</p>
+                )}
+              </div>
+            </div>
+
+            <div className={styles.infoWrapper}>
+              <CategoryFieldset title='전공' required>
+                <Dropdown
+                  options={MAJORS}
+                  select={major}
+                  setFn={setMajor}
+                  placeholder='선택하세요'
+                />
+              </CategoryFieldset>
+            </div>
           </div>
         </div>
       </section>
-
-      <CategoryFieldset title='전공' required>
-        <Dropdown
-          options={MAJORS}
-          select={major}
-          setFn={setMajor}
-          placeholder='선택하세요'
-        />
-      </CategoryFieldset>
     </main>
   );
 }

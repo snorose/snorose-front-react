@@ -40,14 +40,15 @@ export default function Sidebar() {
     <div className={styles.dim}>
       <aside onClick={handleEventPropagation} className={styles.sidebar}>
         <Link className={styles.logo} to='/'>
-          <Icon id='logo' width={129} height={23} margin={10} />
+          <Icon id='logo' width={180} height={30} />
         </Link>
+
         {MENUS.map(({ to, title, items }) => (
           <div key={title} onClick={close}>
             <Link to={to}>
               <h3 className={styles.title}>{title}</h3>
             </Link>
-            <MenuList className={styles.menuList} items={items} />
+            <MenuList items={items} />
           </div>
         ))}
       </aside>
@@ -55,14 +56,14 @@ export default function Sidebar() {
   );
 }
 
-function MenuList({ className, items }) {
+function MenuList({ items }) {
   if (!items) return null;
 
   return (
     <ul className={styles.list}>
       {items.map(({ to, name }) => (
         <Link to={to} key={name} className={styles.item}>
-          <li className={className}>{name}</li>
+          <li>{name}</li>
         </Link>
       ))}
     </ul>
