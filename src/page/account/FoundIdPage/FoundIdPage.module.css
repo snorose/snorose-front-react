@@ -12,16 +12,20 @@
 }
 
 .pageTitle {
-  font-size: 2rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   margin-top: 5.1rem;
 }
 
 .pageExplanation {
-  font-size: 1.4rem;
-  font-weight: 500;
+  font: var(--text-headline-2-reg);
   color: var(--grey-4);
   margin-top: 1.4rem;
+}
+
+.pageSubExplanation {
+  font: var(--text-headline-2-reg);
+  color: var(--grey-3-1);
+  margin-top: 1.6rem;
 }
 
 .pageBottomFrame {
@@ -45,8 +49,7 @@
 
 .result {
   margin-top: 1;
-  font-size: 2.5rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   color: var(--blue-4);
 }
 
@@ -77,21 +80,20 @@
 }
 
 .illustration {
-  width: 20.3rem;
-  height: 16.9rem;
+  width: 25rem;
+  height: 25rem;
   flex-shrink: 0;
   padding-left: 1.8rem;
 }
 
 .loginButton {
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.2rem;
 }
 
 .findPWButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 4.6rem;
+  margin-bottom: 3.3rem;
   color: var(--grey-4);
-  font-size: 1.2rem;
 }
