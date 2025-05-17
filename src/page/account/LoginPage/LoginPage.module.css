@@ -53,8 +53,6 @@ a:hover {
   align-items: center;
   height: 5rem;
   border-radius: 0.6rem;
-  border-top-right-radius: 0.6rem;
-  border-bottom-right-radius: 0.6rem;
   padding-right: 1.7rem;
   /* margin-bottom: 1.7rem; */
 }
