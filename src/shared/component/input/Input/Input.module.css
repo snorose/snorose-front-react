@@ -41,6 +41,6 @@
 }
 
 .errMsg {
-  font-size: 1.1rem;
+  font: var(--text-body-1-reg);
   color: var(--pink-3);
 }
