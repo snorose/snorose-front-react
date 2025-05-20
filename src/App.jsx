@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import { useAuth } from '@/shared/hook';
@@ -17,15 +17,24 @@ function App() {
   const hideNav = currentRoute?.meta?.hideNav ?? false;
   const { status } = useAuth();
 
+  const [token, setToken] = useState('');
+
   useEffect(() => {
     if (status === 'authenticated') {
-      PushNotificationManager.init();
+      PushNotificationManager.init().then((token) => setToken(token));
       PushNotificationManager.listenForegroundMessage();
     }
   }, [status]);
 
   return (
     <div className={styles.app}>
+      <div
+        style={{
+          overflowWrap: 'break-word',
+        }}
+      >
+        {token}
+      </div>
       <Outlet />
       {!hideNav && <Navbar />}
       <Sidebar />

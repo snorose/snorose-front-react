@@ -8,7 +8,7 @@ export class PushNotificationManager {
 
     if (!granted) return;
 
-    this.#subscribe(registration);
+    return this.#subscribe(registration);
   }
 
   static async #registerServiceWorker() {
@@ -68,15 +68,17 @@ export class PushNotificationManager {
       return;
     }
 
-    const saved = localStorage.getItem(process.env.REACT_APP_FCM_TOKEN_KEY);
-    if (!saved || saved !== token) {
-      try {
-        await this.#sendTokenToServer(token);
-        localStorage.setItem(process.env.REACT_APP_FCM_TOKEN_KEY, token);
-      } catch (error) {
-        console.error('FCM 토큰 서버 전송 실패:', error);
-      }
-    }
+    return token;
+
+    // const saved = localStorage.getItem(process.env.REACT_APP_FCM_TOKEN_KEY);
+    // if (!saved || saved !== token) {
+    //   try {
+    //     await this.#sendTokenToServer(token);
+    //     localStorage.setItem(process.env.REACT_APP_FCM_TOKEN_KEY, token);
+    //   } catch (error) {
+    //     console.error('FCM 토큰 서버 전송 실패:', error);
+    //   }
+    // }
   }
 
   static async #sendTokenToServer(token) {
