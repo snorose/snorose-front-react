@@ -86,4 +86,21 @@ export class PushNotificationManager {
       headers: { 'Content-Type': 'application/json' },
     });
   }
+
+  static async listenForegroundMessage() {
+    onMessage(messaging, (payload) => {
+      if (Notification.permission !== 'granted') {
+        return;
+      }
+
+      const { title, body } = payload.notification || {};
+
+      if (title && body) {
+        new Notification(title, {
+          body,
+          icon: '/icon.png', // optional
+        });
+      }
+    });
+  }
 }

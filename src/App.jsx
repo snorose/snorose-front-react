@@ -20,6 +20,7 @@ function App() {
   useEffect(() => {
     if (status === 'authenticated') {
       PushNotificationManager.init();
+      PushNotificationManager.listenForegroundMessage();
     }
   }, [status]);
 
