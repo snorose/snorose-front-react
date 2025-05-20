@@ -90,7 +90,7 @@ export class PushNotificationManager {
   }
 
   static async listenForegroundMessage() {
-    onMessage(messaging, (payload) => {
+    onMessage(messaging, async (payload) => {
       if (Notification.permission !== 'granted') {
         return;
       }
@@ -101,13 +101,15 @@ export class PushNotificationManager {
       const body = payload.data?.body || payload.notification?.body;
 
       try {
-        new Notification(title, {
-          body: `✅ 포그라운드 메시지: ${body}`,
-          icon: '/icon.png', // optional
-        });
+        const registration = await navigator.serviceWorker.getRegistration();
+        if (registration) {
+          registration.showNotification(title, {
+            body: `✅ 포그라운드 메시지: ${body}`,
+            icon: '/icon.png', // optional
+          });
+        }
       } catch (error) {
-        console.error('❌ 포그라운드 알림 수신 중 오류:', error);
-        alert('❌ 포그라운드 알림 수신 중 오류:', error);
+        alert('❌ 포그라운드 알림 수신 중 오류:', error.message);
       }
     });
   }
