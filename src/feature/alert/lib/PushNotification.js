@@ -97,8 +97,7 @@ export class PushNotificationManager {
 
       console.log('포그라운드 메시지 수신', payload);
 
-      const title = payload.data?.title || payload.notification?.title;
-      const body = payload.data?.body || payload.notification?.body;
+      const { title, body } = payload;
 
       try {
         const registration = await navigator.serviceWorker.getRegistration();
