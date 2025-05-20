@@ -95,14 +95,14 @@ export class PushNotificationManager {
         return;
       }
 
+      console.log(payload);
+
       const { title, body } = payload.notification || {};
 
-      if (title && body) {
-        new Notification(title, {
-          body,
-          icon: '/icon.png', // optional
-        });
-      }
+      new Notification(title, {
+        body,
+        icon: '/icon.png', // optional
+      });
     });
   }
 }
