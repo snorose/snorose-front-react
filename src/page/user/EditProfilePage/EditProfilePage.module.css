@@ -21,7 +21,18 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 2rem;
+  padding: 1.4rem 2rem;
+  gap: 2.6rem;
+}
+
+.pageTitle {
+  font: var(--text-title-1-bold);
+}
+
+.updateProfileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
 }
 
 .profileImgContainer {
@@ -30,11 +41,10 @@
 }
 
 .profileImg {
-  --size: 10.4rem;
+  --size: 8.2rem;
 
   width: var(--size);
   height: var(--size);
-  padding: 1.2rem;
   display: flex;
   flex-shrink: 0;
   position: relative;
@@ -56,33 +66,37 @@
 .contentContainer {
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 1.8rem;
 }
 
 .infoWrapper {
   display: flex;
-  position: relative;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.8rem;
 }
 
-.title {
+.inputTitle {
   color: var(--grey-4);
-  font-size: 1.4rem;
-  font-weight: 500;
+  font: var(--text-headline-2-med);
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
 .inputText {
   display: flex;
   width: 100%;
-  height: 4rem;
+  height: 5rem;
   border-radius: 0.5rem;
-  padding: 0 1.2rem;
+  padding: 1.6rem 1.3rem;
   border: none;
   background: var(--grey-1-1);
   outline: none;
   color: var(--black);
-  font-size: 1.2rem;
+  font: var(--text-body-1-reg);
 
   &:disabled {
     background: var(--grey-3);
@@ -90,10 +104,8 @@
 }
 
 .errorMessage {
-  position: absolute;
   color: var(--pink-3);
-  font-size: 1.1rem;
-  top: 7.1rem;
+  font: var(--text-body-1-reg);
 }
 
 .errorInputText {

@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { ROLE } from '@/shared/constant';
 
 export const ADMIN_ROLE = Object.freeze({
   president: '회장',
@@ -29,20 +30,48 @@ export const ABOUT_SNOROSE = `스노로즈는 숙명인이 직접 운영하는 �
 카카오톡 문의 창구: (http://pf.kakao.com/_Xmhxhn)`;
 
 export const SNOROSE_HISTORY = Object.freeze([
-  '스노로즈 1.0(블랙로즈) - 07.08.15 오픈',
-  '스노로즈 2.0(블루로즈) - 08.01.01 오픈',
-  '스노로즈 3.0(화이트로즈) - 09.11.01 오픈',
-  '스노로즈 4.0 - 15.11.12 오픈',
-  '스노로즈 5.0 - 18.09.08 오픈',
-  '스노로즈 6.0 - 24.10.12 오픈',
+  { name: '스노로즈 1.0(블랙로즈)', description: '07.08.15 오픈' },
+  { name: '스노로즈 2.0(블루로즈)', description: '08.01.01 오픈' },
+  { name: '스노로즈 3.0(화이트로즈)', description: '09.11.01 오픈' },
+  { name: '스노로즈 4.0', description: '15.11.12 오픈' },
+  { name: '스노로즈 5.0', description: '18.09.08 오픈' },
+  { name: '스노로즈 6.0', description: '24.10.12 오픈' },
 ]);
 
 export const SNOROSE_MEMBERSHIP_LEVEL = Object.freeze([
-  '준회원: 최초 가입 시 수여되는 등급으로, 숙명인 인증이 완료되지 않은 회원입니다. 일부 게시판 및 기능만 이용할 수 있습니다.',
-  '정회원: 숙명인 인증을 완료한 회원입니다. 모든 게시판 및 기능을 이용할 수 있습니다.',
-  '리자: 스노로즈의 관리자입니다.',
-  '공식 계정: 총학생회, 졸업준비위원회 등 교내 공식 기구 전용 등급입니다.',
-  '블랙리스트: 강등된 회원입니다. 강등 기간이 종료되면 준회원으로 조정됩니다.',
+  {
+    role: ROLE.preUser,
+    name: '준회원',
+    description:
+      '최초 가입 시 수여되는 등급으로, 숙명인 인증이 완료되지 않은 회원입니다. 일부 게시판 및 기능만 이용할 수 있습니다.',
+    badge: false,
+  },
+  {
+    role: ROLE.user,
+    name: '정회원',
+    description:
+      '숙명인 인증을 완료한 회원입니다. 모든 게시판 및 기능을 이용할 수 있습니다.',
+    badge: false,
+  },
+  {
+    role: ROLE.admin,
+    name: '리자',
+    description: '스노로즈의 관리자입니다.',
+    badge: true,
+  },
+  {
+    role: ROLE.official,
+    name: '공식 계정',
+    description: '총학생회, 졸업준비위원회 등 교내 공식 기구 전용 등급입니다.',
+    badge: true,
+  },
+  {
+    role: ROLE.blacklist,
+    name: '블랙리스트',
+    description:
+      '강등된 회원입니다. 강등 기간이 종료되면 준회원으로 조정됩니다.',
+    badge: false,
+  },
 ]);
 
 export const HALL_OF_FAME_ADMINS = Object.freeze([

@@ -2,12 +2,11 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.8rem;
 }
 
 .title {
   font: var(--text-headline-2-med);
-
   color: var(--grey-4);
 }
 
@@ -17,9 +16,9 @@
   align-items: center;
   width: 100%;
   height: 5rem;
-  padding: 0 1.3rem;
   border-radius: 0.5rem;
   background: var(--grey-1-1);
+  padding: 1.6rem 1.3rem;
 
   svg {
     width: 2.4rem;
@@ -31,9 +30,7 @@
   width: 100%;
   border: none;
   outline: none;
-
   font: var(--text-body-1-reg);
-
   color: var(--black);
   background-color: transparent;
 
@@ -47,12 +44,9 @@
 }
 
 .errorMessage {
-  position: absolute;
-  top: 7.1rem;
-
-  font: var(--text-body-1-reg);
-
   color: var(--pink-3);
+  font: var(--text-body-1-reg);
+  top: 8rem;
 }
 
 .errorInputWrapper {

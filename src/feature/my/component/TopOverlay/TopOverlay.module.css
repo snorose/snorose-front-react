@@ -12,11 +12,9 @@
   left: 0;
   width: 100%;
   height: 43.4rem;
-  opacity: 0.8;
-  background-image: url('/src/assets/images/symbol_White.png');
+  background-image: url('/src/assets/backgrounds/snowyBackground.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
 }
 
 .editIcon {
@@ -24,6 +22,4 @@
   top: 0.6rem;
   right: 0.6rem;
   padding: 2rem;
-  width: 2rem;
-  height: 2rem;
 }
