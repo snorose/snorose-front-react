@@ -95,13 +95,19 @@ export class PushNotificationManager {
         return;
       }
 
+      console.log('포그라운드 메시지 수신', payload);
+
       const title = payload.data?.title || payload.notification?.title;
       const body = payload.data?.body || payload.notification?.body;
 
-      new Notification(title, {
-        body,
-        icon: '/icon.png', // optional
-      });
+      try {
+        new Notification(title, {
+          body,
+          icon: '/icon.png', // optional
+        });
+      } catch (error) {
+        console.error('❌ 포그라운드 알림 수신 중 오류:', error);
+      }
     });
   }
 }
