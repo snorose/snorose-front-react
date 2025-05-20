@@ -107,7 +107,7 @@ export class PushNotificationManager {
         });
       } catch (error) {
         console.error('❌ 포그라운드 알림 수신 중 오류:', error);
-        alert('❌ 포그라운드 알림 수신 중 오류:', error);
+        alert(`알림 표시 중 오류 발생 : ${error.message}`);
       }
     });
   }
