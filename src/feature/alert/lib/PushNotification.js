@@ -95,20 +95,16 @@ export class PushNotificationManager {
         return;
       }
 
-      console.log('포그라운드 메시지 수신', payload);
-
       const { title, body } = payload.notification;
 
       try {
         const registration = await navigator.serviceWorker.getRegistration();
+
         if (registration) {
-          registration.showNotification(title, {
-            body: `✅ 포그라운드 메시지: ${body}`,
-            icon: '/icon.png', // optional
-          });
+          registration.showNotification(title, { body });
         }
       } catch (error) {
-        alert('❌ 포그라운드 알림 수신 중 오류:', error.message);
+        console.error('❌ 포그라운드 알림 수신 중 오류:', error);
       }
     });
   }
