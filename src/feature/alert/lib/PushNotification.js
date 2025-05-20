@@ -102,11 +102,12 @@ export class PushNotificationManager {
 
       try {
         new Notification(title, {
-          body,
+          body: `✅ 포그라운드 메시지: ${body}`,
           icon: '/icon.png', // optional
         });
       } catch (error) {
         console.error('❌ 포그라운드 알림 수신 중 오류:', error);
+        alert('❌ 포그라운드 알림 수신 중 오류:', error);
       }
     });
   }
