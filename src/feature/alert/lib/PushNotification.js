@@ -95,9 +95,8 @@ export class PushNotificationManager {
         return;
       }
 
-      console.log(payload);
-
-      const { title, body } = payload.notification || {};
+      const title = payload.data?.title || payload.notification?.title;
+      const body = payload.data?.body || payload.notification?.body;
 
       new Notification(title, {
         body,
