@@ -5,7 +5,7 @@ import { useAuth } from '@/shared/hook';
 import { Navbar, Sidebar } from '@/shared/component';
 import { findRouteByPath } from '@/shared/lib';
 
-import { PushNotificationManager } from '@/feature/alert/lib/PushNotification';
+import { PushNotificationManager } from '@/feature/alert/lib';
 
 import { routeList } from '@/router.js';
 
