@@ -15,7 +15,6 @@ export const getPosts = async (boardId, page = 0) => {
 // 게시글 상세 조회
 export const getPostContent = async (boardId, postId) => {
   const response = await authAxios.get(`/v1/boards/${boardId}/posts/${postId}`);
-  console.log(response);
   return response?.data.result;
 };
 

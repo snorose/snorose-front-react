@@ -221,7 +221,7 @@ export default function PostPage() {
           className={styles.contentText}
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
-        {data.attachmentUrls.length !== 0 && (
+        {Object.keys(data.attachmentUrlMap).length !== 0 && (
           <div className={styles.swiperContainer}>
             <Swiper
               className={styles.attachmentsContainer}
@@ -242,21 +242,23 @@ export default function PostPage() {
               freeMode={true}
               loop={false}
             >
-              {data.attachmentUrls.map((att, index) => (
-                <SwiperSlide key={index} className={styles.attachmentSlide}>
-                  <div className={styles.attchmentDiv}>
-                    <img
-                      src={att}
-                      className={styles.attachment}
-                      draggable={false}
-                      onClick={() => {
-                        //이미지 클릭 시 전체화면 보기 가능
-                        setClickedImageIndex(index + 1);
-                      }}
-                    />
-                  </div>
-                </SwiperSlide>
-              ))}
+              {Object.entries(data.attachmentUrlMap).map(
+                ([id, presignedUrl], index) => (
+                  <SwiperSlide key={index} className={styles.attachmentSlide}>
+                    <div className={styles.attchmentDiv}>
+                      <img
+                        src={presignedUrl}
+                        className={styles.attachment}
+                        draggable={false}
+                        onClick={() => {
+                          //이미지 클릭 시 전체화면 보기 가능
+                          setClickedImageIndex(index + 1);
+                        }}
+                      />
+                    </div>
+                  </SwiperSlide>
+                )
+              )}
             </Swiper>
             <div ref={scrollbarRef} className={styles.customScrollbar} />
           </div>
@@ -350,7 +352,7 @@ export default function PostPage() {
       />
       {clickedImageIndex !== 0 && (
         <FullScreenAttachment
-          attachmentUrls={data.attachmentUrls}
+          attachmentUrls={Object.values(data.attachmentUrlMap)}
           clickedImageIndex={clickedImageIndex}
           setClickedImageIndex={setClickedImageIndex}
         />
