@@ -1,5 +1,5 @@
 .accordion {
-  border-bottom: 0.05rem solid var(--grey-3);
+  border-bottom: 0.05rem solid var(--blue-2);
 }
 
 .accordion:last-child {
@@ -7,21 +7,42 @@
 }
 
 .panelHeader {
-  padding: 1.4rem 0;
+  padding: 1.3rem 1.4rem 1.3rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  background: var(--blue-0);
+}
+
+.panelHeader.roundTop {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.panelHeader.roundBottom {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.opend .panelHeader.roundBottom {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .panelHeader span {
-  font-weight: 500;
-  font-size: 1.4rem;
+  font: var(--text-headline-2-reg);
   color: var(--grey-4);
 }
 
 .opend .panelHeader {
-  border-bottom: 0.05rem solid var(--grey-3);
+  background: var(--blue-1);
+  border-bottom: 0.05rem solid var(--blue-2);
+}
+
+.opend .panelHeader span {
+  font: var(--text-headline-2-med);
+  color: var(--blue-4);
 }
 
 .toggleIcon {
@@ -39,10 +60,21 @@
   letter-spacing: -0.05rem;
   overflow: hidden;
   transition: 300ms all ease;
+  background: var(--blue-0);
 }
 
 .opend .panelBody {
-  padding: 1.6rem 0 1rem 0;
+  padding: 2rem;
   max-height: 250rem;
   overflow-y: auto;
+  background: var(--blue-1);
+}
+
+.opend .panelBody.roundBottom {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.apply {
+  margin-top: 1rem;
 }
