@@ -9,9 +9,8 @@ import {
   ABOUT_SNOROSE,
   SNOROSE_HISTORY,
   SNOROSE_MEMBERSHIP_LEVEL,
-  HALL_OF_FAME_ADMINS,
 } from '@/feature/home/constant';
-
+import HALL_OF_FAME_ADMINS from '@/feature/home/data/HallOfFrameAdmins.json';
 import HALL_OF_FAME from '@/assets/images/hallOfFame.svg';
 
 import styles from './AboutPage.module.css';
@@ -63,8 +62,11 @@ export default function AboutPage() {
           <section className={styles.hallOfFame}>
             <img src={HALL_OF_FAME} alt='hallOfFame' />
             <div className={styles.tags}>
-              {HALL_OF_FAME_ADMINS.map((admin) => (
-                <AccordionTag key={admin.id} admin={admin} />
+              {HALL_OF_FAME_ADMINS.map((admin, index) => (
+                <AccordionTag
+                  key={`${admin.nickname}-${index}`}
+                  admin={admin}
+                />
               ))}
             </div>
           </section>
