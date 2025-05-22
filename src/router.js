@@ -44,6 +44,7 @@ import {
 } from '@/page/user';
 
 import ProtectedRoute from '@/ProtectedRoute';
+import { MaintenancePage } from '@/page/maintenance';
 // import { AlertPage } from '@/pages/AlertPage';
 
 import { ROLE } from '@/shared/constant';
@@ -556,6 +557,13 @@ export const routeList = [
       {
         path: '/signup/failure',
         element: <SignUpFailurePage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/maintenance',
+        element: <MaintenancePage />,
         meta: {
           hideNav: true,
         },
