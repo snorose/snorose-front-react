@@ -267,6 +267,11 @@
     <circle cx="9" cy="2" r="2" fill="#898989"/>
     <circle cx="17" cy="2" r="2" fill="#898989"/>
   </symbol>
+  <symbol id="meat-ball" width="18" height="4" viewBox="0 0 18 4" fill="none">
+    <circle cx="2" cy="2" r="2" transform="rotate(-90 2 2)" fill="#898989"/>
+    <circle cx="9" cy="2" r="2" transform="rotate(-90 9 2)" fill="#898989"/>
+    <circle cx="16" cy="2" r="2" transform="rotate(-90 16 2)" fill="#898989"/>
+  </symbol>
   <symbol id="ellipsis-vertical" viewBox="0 0 3 12" fill="none" stroke="none">
     <circle cx="1.7065" cy="1.79341" r="1.29341" fill="#898989"/>
     <circle cx="1.7065" cy="6.14107" r="1.29341" fill="#898989"/>
