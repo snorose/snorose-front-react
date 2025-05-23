@@ -1,5 +1,5 @@
 export const MAINTENANCE_START = new Date('2025-05-23T01:00:00+09:00'); // 서버 점검 시작(년-월-일THH:MM:SS+한국기준)
-export const MAINTENANCE_END = new Date('2025-05-23T09:00:00+09:00'); // 서버 점검 끝
+export const MAINTENANCE_END = new Date('2025-05-23T10:00:00+09:00'); // 서버 점검 끝
 
 export function useMaintenance(MAINTENANCE_START, MAINTENANCE_END) {
   const isSameDate =

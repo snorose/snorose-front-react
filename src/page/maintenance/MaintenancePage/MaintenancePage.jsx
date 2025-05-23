@@ -19,6 +19,7 @@ export default function MaintenancePage() {
         <p>안정적인 서비스 제공을 위한 서버 점검을 하고 있습니다.</p>
         <p className={styles.date}>일시 : {period}</p>
 
+        <p>서버 점검 시간이 한시간 연장되었습니다.</p>
         <p>이용에 불편을 드리게 된 점 양해 부탁드립니다.</p>
       </div>
       <Icon className={styles.logo} id='logo' width={221} height={25} />
