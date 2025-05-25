@@ -13,8 +13,8 @@
   align-items: center;
   justify-content: space-between;
   font: var(--text-headline-2-reg);
-  color: var(--Grey-Grey-3-1, #898989);
-  background: var(--Grey-Grey-1-1, #f4f4f4);
+  color: var(--grey-3-1, #898989);
+  background: var(--grey-1-1, #f4f4f4);
   border-radius: 5px;
 }
 
@@ -49,7 +49,10 @@
 }
 
 .option {
-  padding: 1.3rem 2.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.3rem 2rem 1.3rem 2.7rem;
 }
 
 .option:not(:last-child) {
@@ -60,4 +63,9 @@
   background: var(--blue-0, #eaf5fd);
   color: var(--blue-4, #00368e);
   cursor: pointer;
+}
+
+.option.selected {
+  background: var(--blue-0, #eaf5fd);
+  color: var(--blue-4, #00368e);
 }

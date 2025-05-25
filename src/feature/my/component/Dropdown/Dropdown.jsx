@@ -39,12 +39,15 @@ export default function Dropdown({
       <ul className={styles.dropdownContent}>
         {options.map((option) => (
           <li
-            className={styles.option}
+            className={`${styles.option} ${select?.id === option.id ? styles.selected : ''}`}
             key={option.id}
             data-value={JSON.stringify(option)}
             onClick={updateSelect}
           >
             {option?.name}
+            {select?.id === option.id && (
+              <Icon id='check' width={14} height={11} />
+            )}
           </li>
         ))}
       </ul>
