@@ -33,7 +33,7 @@ export default function Dropdown({
         {select?.name ?? (
           <span className={styles.placeholder}>{placeholder}</span>
         )}
-        <Icon id='arrow-down' width={13} height={8} />
+        <Icon id='arrow-down' width={16} height={9} />
       </div>
 
       <ul className={styles.dropdownContent}>
