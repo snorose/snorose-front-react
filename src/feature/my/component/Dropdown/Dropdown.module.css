@@ -10,6 +10,7 @@
 .select {
   padding: 1.6rem 1.3rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   font: var(--text-headline-2-reg);
   color: var(--Grey-Grey-3-1, #898989);
