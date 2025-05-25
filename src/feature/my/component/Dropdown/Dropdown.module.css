@@ -50,6 +50,9 @@
 
 .option {
   padding: 1.3rem 2.7rem;
+}
+
+.option:not(:last-child) {
   border-bottom: 0.5px solid var(--blue-2, #bfd7ec);
 }
 
