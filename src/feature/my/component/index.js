@@ -2,6 +2,7 @@ export { default as AccountTab } from './AccountTab/AccountTab';
 export { default as ActivityTab } from './ActivityTab/ActivityTab';
 export { default as CircleProfile } from './CircleProfile/CircleProfile';
 export { default as CategoryFieldset } from './CategoryFieldset/CategoryFieldset';
+export { default as Dropdown } from './Dropdown/Dropdown';
 export { default as MyInfo } from './MyInfo/MyInfo';
 export { default as MyPostList } from './MyPostList/MyPostList';
 export { default as MyPostListErrorFallback } from './MyPostList/MyPostListErrorFallback';
