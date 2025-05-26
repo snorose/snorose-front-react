@@ -5,6 +5,10 @@ export { default as PrimaryButton } from './button/PrimaryButton/PrimaryButton';
 export { default as ResetButton } from './button/ResetButton/ResetButton';
 export { default as WriteButton } from './button/WriteButton/WriteButton';
 
+// dropdown
+export { default as Dropdown } from './dropdown/Dropdown';
+export { default as MajorDropdown } from './dropdown/MajorDropdown/MajorDropdown';
+
 // input
 export { default as Input } from './input/Input/Input';
 export { default as PwInput } from './input/PwInput/PwInput';
@@ -34,7 +38,6 @@ export { default as ServerErrorFallback } from './suspense/ServerErrorFallback/S
 export { default as ShimmerEffect } from './suspense/ShimmerEffect/ShimmerEffect';
 
 // etc
-export { default as Dropdown } from './Dropdown/Dropdown';
 export { default as Icon } from './Icon/Icon';
 export { default as Portal } from './Portal/Portal';
 export { default as PullToRefresh } from './PullToRefresh/PullToRefresh';

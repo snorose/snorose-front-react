@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { Icon } from '@/shared/component';
 
-import styles from './Dropdown.module.css';
+import styles from './MajorDropdown.module.css';
 
-export default function Dropdown({
+export default function MajorDropdown({
   options,
   placeholder,
   select,
