@@ -24,8 +24,8 @@
 
 .image {
   position: absolute;
-  right: -0.1rem;
-  top: 50%;
+  right: -0.2rem;
+  top: 55%;
   transform: translateY(-50%);
 }
 
