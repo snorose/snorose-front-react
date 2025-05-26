@@ -4,11 +4,10 @@
   max-width: var(--default-width);
   height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   background: rgba(228, 228, 228, 0.6);
   backdrop-filter: blur(1rem);
-  /* Note: backdrop-filter has minimal browser support */
 }
 
 .container {
@@ -24,19 +23,17 @@
 
 .title {
   text-align: center;
-  font-size: 1.6rem;
-  font-weight: 500;
+  font: var(--text-headline-1-med);
   color: var(--black);
   white-space: pre-line;
 }
 
-.description {
+.deleteCenter {
   width: 80%;
   text-align: center;
   color: var(--grey-4);
   font-size: 1.2rem;
   white-space: pre-line;
-  word-break: keep-all;
 }
 
 /* button */
@@ -47,18 +44,17 @@
 
 .primaryButton {
   width: 100%;
-  padding: 1rem 1.2rem;
+  padding: 0.8rem;
   background-color: transparent;
-  font-weight: 500;
+  border: none;
+  font: var(--text-headline-2-med);
   color: var(--pink-3);
-  font-size: 1.4rem;
 }
 
 .secondaryButton {
   width: 100%;
-  padding: 1rem 1.2rem;
+  padding: 0.8rem;
   background-color: transparent;
-  font-weight: 500;
+  font: var(--text-headline-2-med);
   color: var(--grey-3-1);
-  font-size: 1.4rem;
 }
