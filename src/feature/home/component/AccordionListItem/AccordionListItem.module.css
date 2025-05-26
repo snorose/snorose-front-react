@@ -12,9 +12,28 @@
 
 .icon {
   margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.itemContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+
+.name {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+
+.badge {
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
 .description {
-  flex: 1;
   word-break: keep-all;
 }

@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
-import financialReport from '@/feature/home/component/PopUp/financial-report.png';
-import fundraisingEvent from '@/feature/home/component/PopUp/fundraising-event.jpg';
+import fundraisingEvent from '@/feature/home/component/PopUp/fundraising-event.png';
 import styles from './PopUp.module.css';
 
 const content = (
@@ -12,32 +11,11 @@ const content = (
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
 
-      <Heading>1. 4월 회계 보고</Heading>
+      <Heading>1차 후원금 모집 이벤트 진행상황</Heading>
 
       <Content>
-        -{' '}
-        <a
-          className={styles.link}
-          href='https://docs.google.com/spreadsheets/u/0/d/1MzXAHemKqPwVj3PzPJch5cR5z49gFtzABPgJ_FVjCXM/edit?usp=sharing&pli=1&authuser=0'
-        >
-          [스노로즈 회계 보고 링크 바로가기]
-        </a>
-        <br />- 자세한 내용은{' '}
-        <a
-          className={styles.link}
-          href='https://snorose.com/board/notice/post/1807846'
-        >
-          [관련 공지]
-        </a>
-        를 참고해 주시길 바랍니다.
-        <img src={financialReport} alt='4월 회계 보고' />
-      </Content>
-
-      <Heading>2. 1차 후원금 모집 이벤트 진행상황</Heading>
-
-      <Content>
-        - 일정 기간동안 목표 모금액을 달성하는 경우, 모든 스노로즈 정회원들께
-        보상 포인트를 지급해 드리는 이벤트입니다. <br />- 자세한 내용은{' '}
+      - 5월 한 달 동안 목표 모금액 100만원을 달성하는 경우, 모든 스노로즈 정회원들께 보상 포인트를 지급해 드리는 이벤트입니다.<br />
+      - 자세한 내용은{' '}
         <a
           className={styles.link}
           href='https://www.snorose.com/board/notice/post/1819262'
@@ -46,7 +24,7 @@ const content = (
         </a>
         를 참고해 주시길 바랍니다. <br />
         <br />
-        <img src={fundraisingEvent} alt='4월 회계 보고' />
+        <img src={fundraisingEvent} alt='1차 후원금 모집 이벤트' />
       </Content>
 
       <hr />

@@ -9,10 +9,9 @@
   overflow-y: scroll;
 }
 
-.text {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
+.title {
+  font: var(--text-title-1-bold);
+  margin-bottom: 2rem;
 }
 
 .inputFrame {
@@ -20,7 +19,7 @@
 }
 
 .majorTitle {
-  font-size: 1.4rem;
+  font: var(--text-headline-2-med);
   margin-bottom: 0.6rem;
 }
 

@@ -30,7 +30,7 @@ export const NAVBAR_MENUS = Object.freeze([
   {
     id: 'mypage',
     to: '/my-page',
-    label: '마이페이지',
+    label: '내정보',
     width: 32,
     height: 32,
   },
