@@ -1,4 +1,4 @@
-export const REPORT_USER_REASON_LIST = [
+export const REPORT_USER_TYPE_LIST = [
   {
     reportType: 'USER_IMPERSONATION',
     iconId: 'user-question-mark',

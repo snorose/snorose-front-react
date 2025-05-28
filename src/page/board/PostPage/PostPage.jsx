@@ -205,8 +205,8 @@ export default function PostPage() {
             return <PostMoreOptionsModal modal={modal} setModal={setModal} />;
           case 'my-post-more-options':
             return <MyPostMoreOptionsModal modal={modal} setModal={setModal} />;
-          case 'report-post':
-          case 'report-user':
+          case 'report-post-types':
+          case 'report-user-types':
             return <ReportTypesModal modal={modal} setModal={setModal} />;
           case 'confirm-report':
             return (
