@@ -16,7 +16,7 @@ export default function PostMoreOptionsModal({ modal, setModal }) {
           <ul className={styles.content}>
             <li
               className={styles.contentItem}
-              onClick={() => setModal({ id: 'report-post', reportType: null })}
+              onClick={() => setModal({ id: 'report-post-types', reportType: null })}
             >
               <p>게시글 신고하기</p>
               <Icon
@@ -28,7 +28,7 @@ export default function PostMoreOptionsModal({ modal, setModal }) {
             </li>
             <li
               className={styles.contentItem}
-              onClick={() => setModal({ id: 'report-user', reportType: null })}
+              onClick={() => setModal({ id: 'report-user-types', reportType: null })}
             >
               <p>이용자 신고하기</p>
               <Icon
