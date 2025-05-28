@@ -1,25 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
-import { deletePost, getPostContent, reportPost, reportUser } from '@/apis';
+import { getPostContent } from '@/apis';
 
-import {
-  BackAppBar,
-  Badge,
-  DeleteModal,
-  FetchLoading,
-  Icon,
-  OptionModal,
-} from '@/shared/component';
-import {
-  LIKE_TYPE,
-  MUTATION_KEY,
-  QUERY_KEY,
-  ROLE,
-  TOAST,
-} from '@/shared/constant';
-import { useAuth, useToast } from '@/shared/hook';
+import { BackAppBar, Badge, FetchLoading, Icon } from '@/shared/component';
+import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 
 import { NotFoundPage } from '@/page/etc';
@@ -29,24 +15,25 @@ import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
+import {
+  DeleteConfirmModal,
+  MyPostMoreOptionsModal,
+  PostMoreOptionsModal,
+  ReportConfirmModal,
+  ReportTypesModal,
+} from '@/feature/board/component';
 import styles from './PostPage.module.css';
 
 export default function PostPage() {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { postId } = useParams();
   const location = useLocation();
   const { pathname } = location;
   const { inputFocus, isInputFocused } = useCommentContext();
-  const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
-  const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
-  const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
-  const [deleteSubmitDisabled, setDeleteSubmitDisabled] = useState(false);
-  const { invalidUserInfoQuery } = useAuth();
+  const [modal, setModal] = useState({
+    id: 'confirm-report-post',
+    reportType: null,
+  });
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
@@ -60,87 +47,6 @@ export default function PostPage() {
     type: LIKE_TYPE.post,
     sourceId: postId,
   });
-
-  const { mutate: reportPostMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportPost],
-    mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
-
-  const { mutate: reportUserMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportUser],
-    mutationFn: (body) => reportUser(body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
-
-  const handleDelete = async () => {
-    if (deleteSubmitDisabled) return;
-    setDeleteSubmitDisabled(true);
-    try {
-      const response = await deletePost(currentBoard.id, postId);
-
-      if (response.status === 200) {
-        currentBoard.id !== 23
-          ? toast(TOAST.POST.delete)
-          : toast(TOAST.POST.deleteNoPoints);
-        navigate(-1);
-        queryClient.removeQueries([QUERY_KEY.post, postId]);
-        invalidUserInfoQuery();
-      }
-    } catch ({ response }) {
-      toast(response.data.message);
-    } finally {
-      setDeleteSubmitDisabled(false);
-      setIsDeleteModalOpen(false);
-    }
-  };
-
-  const handleReportOptionModalOptionClick = (event) => {
-    const reportCategory = event.currentTarget.dataset.value;
-
-    setIsReportModalOpen(false);
-
-    if (reportCategory === 'post-report') {
-      setIsPostReportModalOpen(true);
-    } else if (reportCategory === 'user-report') {
-      setIsUserReportModalOpen(true);
-    }
-  };
-
-  const handlePostReportOptionModalOptionClick = (event) => {
-    const reportType = event.currentTarget.dataset.value;
-
-    reportPostMutate({
-      reportType,
-    });
-    setIsPostReportModalOpen(false);
-  };
-
-  const handleUserReportOptionModalOptionClick = (event) => {
-    if (data === undefined) {
-      return;
-    }
-
-    const reportType = event.currentTarget.dataset.value;
-    const { userId } = data;
-
-    reportUserMutate({
-      encryptedTargetUserId: userId,
-      reportType,
-    });
-
-    setIsUserReportModalOpen(false);
-  };
 
   // 뱃지를 보여주는 ROLE
   const showBadge =
@@ -209,8 +115,14 @@ export default function PostPage() {
             className={styles.meatBall}
             onClick={() => {
               data.isWriter
-                ? setIsOptionsModalOpen(true)
-                : setIsReportModalOpen(true);
+                ? setModal({
+                    id: 'my-post-more-options',
+                    reportType: null,
+                  })
+                : setModal({
+                    id: 'post-more-options',
+                    reportType: null,
+                  });
             }}
           >
             <Icon id='meat-ball' width={18} height={4} stroke='none' />
@@ -287,51 +199,29 @@ export default function PostPage() {
           <CommentInput />
         </>
       )}
-
-      <OptionModal
-        id='post-more-options'
-        isOpen={isOptionsModalOpen}
-        setIsOpen={setIsOptionsModalOpen}
-        closeFn={() => {
-          setIsOptionsModalOpen(false);
-        }}
-        functions={{
-          pencil: () => navigate(`./edit`),
-          trash: () => {
-            setIsOptionsModalOpen(false);
-            setIsDeleteModalOpen(true);
-          },
-        }}
-      />
-      <DeleteModal
-        id={currentBoard.id !== 23 ? 'post-delete' : 'post-delete-no-points'}
-        isOpen={isDeleteModalOpen}
-        closeFn={() => {
-          setIsDeleteModalOpen(false);
-        }}
-        redBtnFunction={handleDelete}
-      />
-      <OptionModal
-        id='report'
-        isOpen={isReportModalOpen}
-        setIsOpen={setIsReportModalOpen}
-        onOptionClick={handleReportOptionModalOptionClick}
-        closeFn={() => setIsReportModalOpen(false)}
-      />
-      <OptionModal
-        id='post-report'
-        isOpen={isPostReportModalOpen}
-        setIsOpen={setIsPostReportModalOpen}
-        onOptionClick={handlePostReportOptionModalOptionClick}
-        closeFn={() => setIsPostReportModalOpen(false)}
-      />
-      <OptionModal
-        id='user-report'
-        isOpen={isUserReportModalOpen}
-        setIsOpen={setIsUserReportModalOpen}
-        onOptionClick={handleUserReportOptionModalOptionClick}
-        closeFn={() => setIsUserReportModalOpen(false)}
-      />
+      {(() => {
+        switch (modal.id) {
+          case 'post-more-options':
+            return <PostMoreOptionsModal modal={modal} setModal={setModal} />;
+          case 'my-post-more-options':
+            return <MyPostMoreOptionsModal modal={modal} setModal={setModal} />;
+          case 'report-post':
+          case 'report-user':
+            return <ReportTypesModal modal={modal} setModal={setModal} />;
+          case 'confirm-report':
+            return (
+              <ReportConfirmModal
+                modal={modal}
+                setModal={setModal}
+                data={data}
+              />
+            );
+          case 'confirm-post-delete':
+            return <DeleteConfirmModal modal={modal} setModal={setModal} />;
+          default:
+            return null;
+        }
+      })()}
     </div>
   );
 }
