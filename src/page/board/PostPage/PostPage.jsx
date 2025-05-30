@@ -1,33 +1,42 @@
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { useLocation, useParams } from 'react-router-dom';
 
 import { getPostContent } from '@/apis';
-
-import { BackAppBar, Badge, FetchLoading, Icon } from '@/shared/component';
-import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
-import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
-
 import { NotFoundPage } from '@/page/etc';
 
+import {
+  BackAppBar,
+  Badge,
+  FetchLoading,
+  Icon,
+  MoreOptionModal,
+  ReportOptionModal,
+  NewConfirmModal,
+} from '@/shared/component';
+
+import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
+
+import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
+import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
+
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
-import { useCommentContext } from '@/feature/comment/context';
+
+import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
+import { useReportHandler } from '@/feature/board/hook/useReportHandler';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
-import {
-  DeleteConfirmModal,
-  MoreOptionModal,
-  ReportConfirmModal,
-  ReportOptionModal,
-} from '@/shared/component';
-import styles from './PostPage.module.css';
+import { useCommentContext } from '@/feature/comment/context';
+
 import { REPORT_POST_TYPE_LIST } from '@/feature/board/constant/reportPostTypeList';
 import { REPORT_USER_TYPE_LIST } from '@/feature/board/constant/reportUserTypeList';
 import {
   MY_POST_MORE_OPTION_LIST,
   POST_MORE_OPTION_LIST,
 } from '@/feature/board/constant/postMoreOptionList';
+
+import styles from './PostPage.module.css';
 
 export default function PostPage() {
   const { postId } = useParams();
@@ -46,6 +55,9 @@ export default function PostPage() {
     staleTime: 1000 * 60 * 5,
     enabled: !!currentBoard?.id && !!postId,
   });
+
+  const { handleDelete } = useDeletePostHandler(currentBoard?.id);
+  const { handleReport } = useReportHandler(modal, setModal, data);
 
   const { scrap, unscrap } = useScrap();
   const { like, unlike } = useLike({
@@ -238,20 +250,48 @@ export default function PostPage() {
               <ReportOptionModal
                 modal={modal}
                 setModal={setModal}
-                title='유저 신고'
+                title='이용자 신고'
                 optionList={REPORT_USER_TYPE_LIST}
               />
             );
-          case 'confirm-report':
+          case 'confirm-post-report':
             return (
-              <ReportConfirmModal
+              <NewConfirmModal
                 modal={modal}
                 setModal={setModal}
-                data={data}
+                modalText={(() => {
+                  switch (currentBoard.id) {
+                    case 23:
+                      return CONFIRM_MODAL_TEXT.REPORT_POST;
+                    default:
+                      return CONFIRM_MODAL_TEXT.REPORT_POST_WITHOUT_POINT_DEDUCTION;
+                  }
+                })()}
+                onClickHandler={handleReport}
+              />
+            );
+          case 'confirm-user-report':
+            return (
+              <NewConfirmModal
+                modal={modal}
+                setModal={setModal}
+                modalText={CONFIRM_MODAL_TEXT.REPORT_USER}
+                onClickHandler={handleReport}
               />
             );
           case 'confirm-post-delete':
-            return <DeleteConfirmModal modal={modal} setModal={setModal} />;
+            return (
+              <NewConfirmModal
+                modal={modal}
+                setModal={setModal}
+                modalText={
+                  currentBoard.id !== 23
+                    ? CONFIRM_MODAL_TEXT.DELETE_POST
+                    : CONFIRM_MODAL_TEXT.DELETE_POST_WITHOUT_POINT_DEDUCTION
+                }
+                onClickHandler={handleDelete}
+              />
+            );
           default:
             return null;
         }
