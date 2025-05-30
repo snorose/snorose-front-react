@@ -7,6 +7,13 @@ export default function ReportOptionModal({
   title,
   optionList,
 }) {
+  const getModalId = () => {
+    if (title === '게시글 신고') return 'confirm-post-report';
+    if (title === '이용자 신고') return 'confirm-user-report';
+    if (title === '댓글 신고') return 'confirm-comment-report';
+    return null;
+  };
+
   return (
     <DimModal isOpen={modal.id}>
       <h3 className={styles.title}>{title}</h3>
@@ -17,7 +24,7 @@ export default function ReportOptionModal({
             className={styles.contentItem}
             onClick={() => {
               setModal({
-                id: 'confirm-report',
+                id: getModalId(),
                 reportType: option.reportType,
               });
             }}
