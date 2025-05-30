@@ -6,10 +6,3 @@ export { default as PostBar } from './PostBar/PostBar';
 export { default as PostList } from './PostList/PostList';
 export { default as PostListErrorFallback } from './PostList/PostListErrorFallback';
 export { default as PostListSuspense } from './PostList/PostListSuspense';
-
-// 모달
-export { default as DeleteConfirmModal } from './DeleteConfirmModal/DeleteConfirmModal';
-export { default as MyPostMoreOptionsModal } from './MyPostMoreOptionsModal/MyPostMoreOptionsModal';
-export { default as PostMoreOptionsModal } from './PostMoreOptionsModal/PostMoreOptionsModal';
-export { default as ReportConfirmModal } from './ReportConfirmModal/ReportConfirmModal';
-export { default as ReportTypesModal } from './ReportTypesModal/ReportTypesModal';

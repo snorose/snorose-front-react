@@ -2,15 +2,16 @@ import { DimModal } from '@/shared/component';
 import {
   useReportPostMutation,
   useReportUserMutation,
-} from '../../hook/useReportPostUser';
-import { reportType } from '../../lib/reportType';
+} from '@/feature/board/hook/useReportPostUser';
+import { parseReportType } from '@/feature/board/lib/parseReportType';
+
 import styles from './ReportConfirmModal.module.css';
 
 export default function ReportConfirmModal({ modal, setModal, data }) {
   const { mutate: reportPostMutate } = useReportPostMutation();
   const { mutate: reportUserMutate } = useReportUserMutation();
 
-  const parsedReportType = reportType(modal.reportType);
+  const parsedReportType = parseReportType(modal.reportType);
 
   // 게시글 신고
   const handlePostReport = () => {

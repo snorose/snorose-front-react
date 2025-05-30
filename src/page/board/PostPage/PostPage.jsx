@@ -17,12 +17,17 @@ import { useScrap } from '@/feature/scrap/hook';
 
 import {
   DeleteConfirmModal,
-  MyPostMoreOptionsModal,
-  PostMoreOptionsModal,
+  MoreOptionModal,
   ReportConfirmModal,
-  ReportTypesModal,
-} from '@/feature/board/component';
+  ReportOptionModal,
+} from '@/shared/component';
 import styles from './PostPage.module.css';
+import { REPORT_POST_TYPE_LIST } from '@/feature/board/constant/reportPostTypeList';
+import { REPORT_USER_TYPE_LIST } from '@/feature/board/constant/reportUserTypeList';
+import {
+  MY_POST_MORE_OPTION_LIST,
+  POST_MORE_OPTION_LIST,
+} from '@/feature/board/constant/postMoreOptionList';
 
 export default function PostPage() {
   const { postId } = useParams();
@@ -202,12 +207,41 @@ export default function PostPage() {
       {(() => {
         switch (modal.id) {
           case 'post-more-options':
-            return <PostMoreOptionsModal modal={modal} setModal={setModal} />;
+            return (
+              <MoreOptionModal
+                modal={modal}
+                setModal={setModal}
+                title='게시글'
+                optionList={POST_MORE_OPTION_LIST}
+              />
+            );
           case 'my-post-more-options':
-            return <MyPostMoreOptionsModal modal={modal} setModal={setModal} />;
+            return (
+              <MoreOptionModal
+                modal={modal}
+                setModal={setModal}
+                title='내 게시글'
+                optionList={MY_POST_MORE_OPTION_LIST}
+              />
+            );
           case 'report-post-types':
+            return (
+              <ReportOptionModal
+                modal={modal}
+                setModal={setModal}
+                title='게시글 신고'
+                optionList={REPORT_POST_TYPE_LIST}
+              />
+            );
           case 'report-user-types':
-            return <ReportTypesModal modal={modal} setModal={setModal} />;
+            return (
+              <ReportOptionModal
+                modal={modal}
+                setModal={setModal}
+                title='유저 신고'
+                optionList={REPORT_USER_TYPE_LIST}
+              />
+            );
           case 'confirm-report':
             return (
               <ReportConfirmModal
