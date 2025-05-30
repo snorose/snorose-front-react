@@ -31,9 +31,8 @@ export { default as DimModal } from './modal/DimModal';
 export { default as OptionModal } from './modal/OptionModal';
 
 // new modal
-export { default as DeleteConfirmModal } from './newModal/DeleteConfirmModal/DeleteConfirmModal'; // 삭제 확인 모달
+export { default as NewConfirmModal } from './newModal/NewConfirmModal/NewConfirmModal'; // 삭제 및 신고 확인 모달
 export { default as MoreOptionModal } from './newModal/MoreOptionModal/MoreOptionModal'; // 게시글 더보기 버튼 클릭 시 나오는 모달
-export { default as ReportConfirmModal } from './newModal/ReportConfirmModal/ReportConfirmModal'; // 신고 확인 모달
 export { default as ReportOptionModal } from './newModal/ReportOptionModal/ReportOptionModal'; // 신고 종류 선택 모달
 
 // suspense
