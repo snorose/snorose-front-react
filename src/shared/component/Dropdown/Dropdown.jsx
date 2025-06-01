@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Icon } from '@/shared/component';
+import { DropdownList, SelectedItem } from '@/shared/component';
 
 import styles from './Dropdown.module.css';
 
@@ -13,44 +13,31 @@ export default function Dropdown({
   backgroundColor,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const updateSelect = (event) => {
-    setFn((prev) => ({ ...prev, ...JSON.parse(event.target.dataset.value) }));
+
+  const updateSelect = (option) => {
+    setFn((prev) => ({ ...prev, ...option }));
+    console.log('SelectedItem clicked', options);
     setIsOpen(false);
   };
 
   return (
-    <div
-      className={`${styles.dropdown} ${isOpen && styles.open}`}
-      style={{
-        backgroundColor: !isOpen && select?.name && backgroundColor,
-        color: !isOpen && select?.name && color,
-      }}
-    >
-      <div
-        className={`${styles.select} ${select || styles.unselect}`}
+    <div className={styles.dropdownContent}>
+      <SelectedItem
+        select={select}
+        placeholder={placeholder}
+        isOpen={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}
-      >
-        {select?.name ?? (
-          <span className={styles.placeholder}>{placeholder}</span>
-        )}
-        <Icon id='arrow-down' width={16} height={9} />
-      </div>
+        color={color}
+        backgroundColor={backgroundColor}
+      />
 
-      <ul className={styles.dropdownContent}>
-        {options.map((option) => (
-          <li
-            className={`${styles.option} ${select?.id === option.id ? styles.selected : ''}`}
-            key={option.id}
-            data-value={JSON.stringify(option)}
-            onClick={updateSelect}
-          >
-            {option?.name}
-            {select?.id === option.id && (
-              <Icon id='check' width={14} height={11} />
-            )}
-          </li>
-        ))}
-      </ul>
+      {isOpen && (
+        <DropdownList
+          options={options}
+          select={select}
+          onSelect={updateSelect}
+        />
+      )}
     </div>
   );
 }

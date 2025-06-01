@@ -7,6 +7,8 @@ export { default as WriteButton } from './button/WriteButton/WriteButton';
 
 // dropdown
 export { default as Dropdown } from './dropdown/Dropdown';
+export { default as DropdownList } from './dropdown/DropdownList/DropdownList';
+export { default as SelectedItem } from './dropdown/SelectedItem/SelectedItem';
 
 // input
 export { default as Input } from './input/Input/Input';
