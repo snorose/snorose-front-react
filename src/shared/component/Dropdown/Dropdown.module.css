@@ -2,19 +2,20 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem 0;
-  background: var(--grey-2);
   border-radius: 0.5rem;
   border: none;
-  font: var(--text-body-1-reg);
-  color: var(--grey-4);
+  gap: 1rem;
 }
 
 .select {
-  padding: 0 1.6rem;
+  padding: 1.6rem 1.3rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  font: var(--text-body-1-reg);
+  color: var(--grey-3-1, #898989);
+  background: var(--grey-1-1, #f4f4f4);
+  border-radius: 5px;
 }
 
 .select:hover {
@@ -29,26 +30,42 @@
   color: var(--grey-3-1);
 }
 
-.list {
+.dropdownContent {
   max-height: 0;
+  border-radius: 5px;
   overflow: hidden;
   transition: 200ms all ease-in-out;
   text-align: left;
+  font: var(--text-headline-2-reg);
+  color: var(--Grey-Grey-3-1, #898989);
+  box-shadow: 0px 0px 36px 0px rgba(0, 0, 0, 0.1);
 }
 
-.open .list {
-  max-height: 26rem;
+.open .dropdownContent {
+  max-height: 18rem;
   margin-top: 0.6rem;
   overflow: auto;
+  scrollbar-arrow-color: var(--blue-2, #bfd7ec);
 }
 
 .option {
-  padding: 0.8rem 1rem;
-  margin: 0 0.6rem;
-  border-radius: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.3rem 2rem 1.3rem 2.7rem;
+}
+
+.option:not(:last-child) {
+  border-bottom: 0.5px solid var(--blue-2, #bfd7ec);
 }
 
 .option:hover {
-  background-color: var(--grey-3);
+  background: var(--blue-0, #eaf5fd);
+  color: var(--blue-4, #00368e);
   cursor: pointer;
+}
+
+.option.selected {
+  background: var(--blue-0, #eaf5fd);
+  color: var(--blue-4, #00368e);
 }

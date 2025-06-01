@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateUserInfo } from '@/apis';
 
 import { useAuth, useToast } from '@/shared/hook';
-import { ActionButton, BackAppBar, MajorDropdown } from '@/shared/component';
+import { ActionButton, BackAppBar, Dropdown } from '@/shared/component';
 import {
   MAJORS,
   MUTATION_KEY,
@@ -295,7 +295,7 @@ export default function EditProfilePage() {
 
             <div className={styles.infoWrapper}>
               <CategoryFieldset title='전공' required>
-                <MajorDropdown
+                <Dropdown
                   options={MAJORS}
                   select={major}
                   setFn={setMajor}

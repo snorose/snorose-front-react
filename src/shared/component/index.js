@@ -7,7 +7,6 @@ export { default as WriteButton } from './button/WriteButton/WriteButton';
 
 // dropdown
 export { default as Dropdown } from './dropdown/Dropdown';
-export { default as MajorDropdown } from './dropdown/MajorDropdown/MajorDropdown';
 
 // input
 export { default as Input } from './input/Input/Input';
