@@ -68,17 +68,24 @@ export class PushNotificationManager {
       return;
     }
 
-    return token;
+    const savedToken = localStorage.getItem(
+      process.env.REACT_APP_FCM_TOKEN_KEY
+    );
 
-    // const saved = localStorage.getItem(process.env.REACT_APP_FCM_TOKEN_KEY);
-    // if (!saved || saved !== token) {
-    //   try {
-    //     await this.#sendTokenToServer(token);
-    //     localStorage.setItem(process.env.REACT_APP_FCM_TOKEN_KEY, token);
-    //   } catch (error) {
-    //     console.error('FCM 토큰 서버 전송 실패:', error);
-    //   }
-    // }
+    if (!savedToken || savedToken !== token) {
+      try {
+        await this.#sendTokenToServer(token);
+        localStorage.setItem(process.env.REACT_APP_FCM_TOKEN_KEY, token);
+      } catch (error) {
+        console.error('푸시 알림 구독 실패: ', error);
+      }
+    }
+
+    /**
+     * TODO: 푸시 알림 테스트 용도로 token을 외부에 반환
+     * 실제 배포시에는 삭제 필요
+     */
+    return token;
   }
 
   static async #sendTokenToServer(token) {

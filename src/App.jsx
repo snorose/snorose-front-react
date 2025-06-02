@@ -27,6 +27,9 @@ function App() {
 
   useEffect(() => {
     if (status === 'authenticated') {
+      /**
+       * TODO: 푸시 알림 테스트 용으로 token을 저장했기 때문에 실제 배포 시에는 삭제 필요
+       */
       PushNotificationManager.init().then((token) => setToken(token));
       PushNotificationManager.listenForegroundMessage();
     }
