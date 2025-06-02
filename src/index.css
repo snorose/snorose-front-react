@@ -42,10 +42,10 @@ body {
   scrollbar-width: none;
 
   /* 드래그 막기 */
-  /* -webkit-user-select: none;
+  -webkit-user-select: none;
   -moz-user-select: none;
   -ms-use-select: none;
-  user-select: none; */
+  user-select: none;
 }
 ::-webkit-scrollbar {
   display: none;

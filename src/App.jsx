@@ -29,8 +29,6 @@ function App() {
   const hideNav = currentRoute?.meta?.hideNav ?? false;
   const { status } = useAuth();
 
-  const [token, setToken] = useState('');
-
   useEffect(() => {
     // Load features asynchronously when the app renders
     growthbook.init({ streaming: true });
@@ -38,10 +36,7 @@ function App() {
 
   useEffect(() => {
     if (isEnabled && status === 'authenticated') {
-      /**
-       * TODO: 푸시 알림 테스트 용으로 token을 저장했기 때문에 실제 배포 시에는 삭제 필요
-       */
-      PushNotificationManager.init().then((token) => setToken(token));
+      PushNotificationManager.init();
       PushNotificationManager.listenForegroundMessage();
     }
   }, [isEnabled, status]);
@@ -56,13 +51,6 @@ function App() {
   return (
     <GrowthBookProvider growthbook={growthbook}>
       <div className={styles.app}>
-        <div
-          style={{
-            overflowWrap: 'break-word',
-          }}
-        >
-          {token}
-        </div>
         <Outlet />
         {!hideNav && <Navbar />}
         <Sidebar />

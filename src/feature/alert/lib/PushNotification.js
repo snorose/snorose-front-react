@@ -80,12 +80,6 @@ export class PushNotificationManager {
         console.error('푸시 알림 구독 실패: ', error);
       }
     }
-
-    /**
-     * TODO: 푸시 알림 테스트 용도로 token을 외부에 반환
-     * 실제 배포시에는 삭제 필요
-     */
-    return token;
   }
 
   static async #sendTokenToServer(token) {
