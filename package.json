@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@growthbook/growthbook-react": "^1.5.1",
     "@svgr/webpack": "latest",
     "@tanstack/react-query": "^5.51.23",
     "@testing-library/jest-dom": "^5.14.1",
