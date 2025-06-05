@@ -5,6 +5,8 @@ export const QUERY_KEY = Object.freeze({
   search: 'search',
   post: 'post',
   posts: 'posts',
+  review: 'review',
+  reviews: 'reviews',
   comments: 'comments',
   noticeLine: 'noticeLine',
   notices: 'notices',
