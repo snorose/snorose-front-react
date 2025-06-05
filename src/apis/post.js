@@ -55,16 +55,16 @@ export const patchPost = async ({
   content,
   isNotice,
   deleteAttachments = [],
-  createAttachments = [],
+  finalAttachments = [],
 }) => {
   const editedPost = {
-    postId: postId,
+    postId,
     category: null,
-    title: title,
-    content: content,
-    isNotice: isNotice,
+    title,
+    content,
+    isNotice,
     deleteAttachments,
-    createAttachments,
+    finalAttachments,
   };
 
   const response = await authAxios.patch(
