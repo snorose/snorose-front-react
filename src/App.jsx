@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import {
-  GrowthBookProvider,
-  useFeatureIsOn,
-} from '@growthbook/growthbook-react';
+import { useFeatureIsOn } from '@growthbook/growthbook-react';
 
 import { useAuth } from '@/shared/hook';
 import { Navbar, Sidebar } from '@/shared/component';
-import { growthbook, findRouteByPath } from '@/shared/lib';
+import { findRouteByPath } from '@/shared/lib';
 
 import { PushNotificationManager } from '@/feature/alert/lib';
 
@@ -30,11 +27,6 @@ function App() {
   const { status } = useAuth();
 
   useEffect(() => {
-    // Load features asynchronously when the app renders
-    growthbook.init({ streaming: true });
-  }, []);
-
-  useEffect(() => {
     if (isEnabled && status === 'authenticated') {
       PushNotificationManager.init();
       PushNotificationManager.listenForegroundMessage();
@@ -49,13 +41,11 @@ function App() {
   }
 
   return (
-    <GrowthBookProvider growthbook={growthbook}>
-      <div className={styles.app}>
-        <Outlet />
-        {!hideNav && <Navbar />}
-        <Sidebar />
-      </div>
-    </GrowthBookProvider>
+    <div className={styles.app}>
+      <Outlet />
+      {!hideNav && <Navbar />}
+      <Sidebar />
+    </div>
   );
 }
 
