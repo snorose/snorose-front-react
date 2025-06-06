@@ -12,7 +12,7 @@ export default function SelectedItem({
 }) {
   return (
     <div
-      className={`${styles.dropdown} ${isOpen && styles.open}`}
+      className={`${styles.selectedItem} ${isOpen && styles.open}`}
       style={{
         backgroundColor: !isOpen && select?.name && backgroundColor,
         color: !isOpen && select?.name && color,

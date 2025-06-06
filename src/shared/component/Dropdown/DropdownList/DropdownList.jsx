@@ -10,7 +10,6 @@ export default function DropdownList({ options, select, onSelect }) {
           className={`${styles.option} ${select?.id === option.id ? styles.selected : ''}`}
           key={option.id}
           onClick={() => {
-            console.log('Option clicked:', option);
             onSelect(option);
           }}
         >

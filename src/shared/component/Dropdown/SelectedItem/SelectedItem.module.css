@@ -1,4 +1,4 @@
-.dropdown {
+.selectedItem {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,10 +28,4 @@
 
 .placeholder {
   color: var(--grey-3-1);
-}
-
-.open {
-  max-height: 18rem;
-  overflow: auto;
-  scrollbar-arrow-color: var(--blue-2, #bfd7ec);
 }

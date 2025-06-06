@@ -31,13 +31,16 @@ export default function Dropdown({
         backgroundColor={backgroundColor}
       />
 
-      {isOpen && (
+      <div
+        className={`${styles.dropdownListWrapper} ${isOpen ? styles.open : ''}`}
+        aria-hidden={!isOpen}
+      >
         <DropdownList
           options={options}
           select={select}
           onSelect={updateSelect}
         />
-      )}
+      </div>
     </div>
   );
 }
