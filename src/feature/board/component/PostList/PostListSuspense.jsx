@@ -17,7 +17,7 @@ export default function PostListSuspense({ saveScrollPosition }) {
           <Suspense
             fallback={<FetchLoading>게시글 불러오는 중...</FetchLoading>}
           >
-            <PostList saveScrollPosition={saveScrollPosition} />;
+            <PostList saveScrollPosition={saveScrollPosition} />
           </Suspense>
         </ErrorBoundary>
       )}
