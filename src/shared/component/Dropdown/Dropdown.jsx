@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { DropdownList, SelectedItem } from '@/shared/component';
 
+import styles from './Dropdown.module.css';
 
 export default function Dropdown({
   options,
@@ -20,7 +21,7 @@ export default function Dropdown({
   };
 
   return (
-    <div>
+    <div className={styles.dropdown}>
       <SelectedItem
         select={select}
         placeholder={placeholder}

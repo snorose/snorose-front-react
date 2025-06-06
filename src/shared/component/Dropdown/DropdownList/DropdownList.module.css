@@ -38,7 +38,6 @@
   color: var(--Grey-Grey-3-1, #898989);
   box-shadow: 0px 0px 36px 0px rgba(0, 0, 0, 0.1);
   max-height: 18rem;
-  margin-top: 0.6rem;
   overflow: auto;
   scrollbar-arrow-color: var(--blue-2, #bfd7ec);
 }
