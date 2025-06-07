@@ -33,7 +33,7 @@ function AccessDeniedModal({ message }) {
   useEffect(() => {
     open('confirm', {
       title: message,
-      description: `등업 페이지로 이동할까요?`,
+      description: `인증 페이지로 이동할까요?`,
       primaryText: '네',
       secondaryText: '아니요',
       onPrimary: () => navigate('/verify', { replace: true }),
