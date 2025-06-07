@@ -13,8 +13,6 @@
 
   background: var(--grey-1-1);
   background-repeat: no-repeat;
-  background-position: right bottom;
-
   background-position: calc(100% + 1px) 0;
 
   transition: background-color 200ms ease-in-out;
