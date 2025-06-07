@@ -103,11 +103,9 @@ export default function EditExamReviewPage() {
     questionDetail,
     semester: semester?.id,
     lectureType: lectureType?.id,
-    content: '',
     examType: examType?.id,
     lectureYear: lectureYear?.id,
     isOnline,
-    category: '',
   };
 
   const editReview = useMutation({

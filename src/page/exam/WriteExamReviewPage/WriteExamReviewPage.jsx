@@ -157,11 +157,9 @@ export default function WriteExamReviewPage() {
     questionDetail,
     semester: semester?.id,
     lectureType: lectureType?.id,
-    content: '',
     examType: examType?.id,
     lectureYear: lectureYear?.id,
     isOnline,
-    category: '',
   };
 
   return (
