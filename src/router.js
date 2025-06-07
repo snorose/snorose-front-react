@@ -120,7 +120,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        message={'게시판 접근 권한이 없습니다.'}
+        message={'게시판 접근 권한이 없어요'}
       >
         {boardPath === 'notice' ? <NoticeListPage /> : <PostListPage />}
       </ProtectedRoute>
@@ -134,7 +134,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        message={'게시판 접근 권한이 없습니다.'}
+        message={'게시판 접근 권한이 없어요'}
       >
         <NoticeListPage />
       </ProtectedRoute>
@@ -148,7 +148,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        message={'게시글 접근 권한이 없습니다.'}
+        message={'게시글 접근 권한이 없어요'}
       >
         <PostPage />
       </ProtectedRoute>
@@ -162,7 +162,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForWriteBoard(boardPath)}
-        message={'게시글 작성 권한이 없습니다.'}
+        message={'게시글 작성 권한이 없어요'}
       >
         <WritePostPage />
       </ProtectedRoute>
@@ -176,7 +176,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForWriteBoard(boardPath)}
-        message={'게시글 편집 권한이 없습니다.'}
+        message={'게시글 편집 권한이 없어요'}
       >
         <EditPostPage />
       </ProtectedRoute>
@@ -190,7 +190,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        message={'게시판 접근 권한이 없습니다.'}
+        message={'게시판 접근 권한이 없어요'}
       >
         <SearchPage />
       </ProtectedRoute>
@@ -231,7 +231,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없습니다.'}
+            message={'시험후기 게시판 접근 권한이 없어요'}
           >
             <ExamReviewListPage />
           </ProtectedRoute>
@@ -242,7 +242,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없습니다.'}
+            message={'시험후기 게시판 접근 권한이 없어요'}
           >
             <NoticeListPage />
           </ProtectedRoute>
@@ -256,7 +256,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없습니다.'}
+            message={'시험후기 게시판 접근 권한이 없어요'}
           >
             <ExamReviewListPage />
           </ProtectedRoute>
@@ -268,7 +268,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 접근 권한이 없습니다.'}
+            message={'시험후기 접근 권한이 없어요'}
           >
             <ExamReviewPage />
           </ProtectedRoute>
@@ -282,7 +282,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'공지글 접근 권한이 없습니다.'}
+            message={'공지글 접근 권한이 없어요'}
           >
             <PostPage />
           </ProtectedRoute>
@@ -296,7 +296,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.admin]}
-            message={'공지글 수정 권한이 없습니다.'}
+            message={'공지글 수정 권한이 없어요'}
           >
             <EditPostPage />
           </ProtectedRoute>
@@ -310,7 +310,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 수정 권한이 없습니다.'}
+            message={'시험후기 수정 권한이 없어요'}
           >
             <EditExamReviewPage />
           </ProtectedRoute>
@@ -325,7 +325,7 @@ export const routeList = [
           <CheckExamPeriodRoute>
             <ProtectedRoute
               roles={[ROLE.user, ROLE.admin]}
-              message={'시험후기 작성 권한이 없습니다.'}
+              message={'시험후기 작성 권한이 없어요'}
             >
               <WriteExamReviewPage />
             </ProtectedRoute>
@@ -483,7 +483,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.preUser, ROLE.admin]}
-            message='이미 인증을 완료했거나 인증 대상이 아닙니다'
+            message='이미 인증을 완료했거나 인증 대상이 아니에요'
           >
             <SnoroseVerifyPage />
           </ProtectedRoute>
