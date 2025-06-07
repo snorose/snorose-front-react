@@ -1,3 +1,6 @@
+import { attendanceLoader } from '@/shared/loader';
+import { ROLE } from '@/shared/constant';
+
 import App from '@/App';
 import {
   LoginPage,
@@ -46,8 +49,6 @@ import {
 import ProtectedRoute from '@/ProtectedRoute';
 import { MaintenancePage } from '@/page/maintenance';
 // import { AlertPage } from '@/pages/AlertPage';
-
-import { ROLE } from '@/shared/constant';
 
 import { CheckExamPeriodRoute } from '@/feature/exam/lib';
 
@@ -337,6 +338,7 @@ export const routeList = [
       {
         path: '/attendance',
         element: <AttendancePage />,
+        loader: attendanceLoader,
         meta: {
           hideNav: true,
         },
@@ -476,7 +478,6 @@ export const routeList = [
           hideNav: true,
         },
       },
-
       {
         path: '/verify',
         element: (

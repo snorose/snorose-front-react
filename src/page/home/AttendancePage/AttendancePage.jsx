@@ -14,14 +14,12 @@ import {
 } from '@/feature/attendance/constant';
 
 import styles from './AttendancePage.module.css';
+import { useLoaderData } from 'react-router-dom';
 
 export default function AttendancePage() {
-  const queryClient = useQueryClient();
-  const { userInfo } = useAuth();
-  const { toast } = useToast();
-  const [attendanceHistoryByMonth, setAttendanceHistoryByMonth] = useState([]);
-  const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState();
+  const [attendanceHistoryByMonth, setAttendanceHistoryByMonth] = useState([]);
+
   const { title, content } =
     attendanceHistoryByMonth?.length > 0
       ? ATTENDANCE_MESSAGE.CONSECUTIVE
@@ -35,40 +33,9 @@ export default function AttendancePage() {
         <div className={styles.calendar}>
           <Calendar callback={setAttendanceHistoryByMonth} />
         </div>
-        <button
-          className={styles.attendanceButton}
-          disabled={disabled}
-          onClick={() => {
-            setDisabled(true);
-            setLoading(true);
-            updatePoint({
-              userId: userInfo?.userId,
-              category: POINT_CATEGORY_ENUM.ATTENDANCE,
-              source: POINT_SOURCE_ENUM.ATTENDANCE,
-            })
-              .then(({ status }) => {
-                if (status === 200) {
-                  const today = new Date();
-                  queryClient.invalidateQueries([
-                    QUERY_KEY.attendance,
-                    today.getFullYear(),
-                    today.getMonth() + 1,
-                  ]);
-                  toast(TOAST.ATTENDANCE.attendance);
-                }
-              })
-              .catch(({ response }) => {
-                toast(response.data.message);
-              })
-              .finally(() => {
-                setDisabled(false);
-                setLoading(false);
-              });
-          }}
-        >
-          출석하고 포인트 받기
-        </button>
+        <AttendanceButton setLoading={setLoading} />
       </div>
+
       <div className={styles.bottom}>
         <div className={styles.item}>
           <div className={styles.itemLeft}>
@@ -89,5 +56,63 @@ export default function AttendancePage() {
       </div>
       {loading && <FetchLoadingOverlay />}
     </main>
+  );
+}
+
+function AttendanceButton({ setLoading }) {
+  const { attendance } = useLoaderData();
+
+  const queryClient = useQueryClient();
+  const { userInfo } = useAuth();
+  const { toast } = useToast();
+
+  const [isAttendance, setIsAttendance] = useState(attendance);
+  const [disabled, setDisabled] = useState(false);
+
+  const handleCheckIn = () => {
+    setDisabled(true);
+    setLoading(true);
+    updatePoint({
+      userId: userInfo?.userId,
+      category: POINT_CATEGORY_ENUM.ATTENDANCE,
+      source: POINT_SOURCE_ENUM.ATTENDANCE,
+    })
+      .then(({ status }) => {
+        if (status === 200) {
+          const today = new Date();
+          queryClient.invalidateQueries([
+            QUERY_KEY.attendance,
+            today.getFullYear(),
+            today.getMonth() + 1,
+          ]);
+          toast(TOAST.ATTENDANCE.attendance);
+        }
+        setIsAttendance(true);
+      })
+      .catch(({ response }) => {
+        toast(response.data.message);
+      })
+      .finally(() => {
+        setDisabled(false);
+        setLoading(false);
+      });
+  };
+
+  if (isAttendance) {
+    return (
+      <button className={styles.attendanceButton}>
+        오늘 출석을 완료했어요
+      </button>
+    );
+  }
+
+  return (
+    <button
+      className={styles.attendanceButton}
+      disabled={disabled}
+      onClick={handleCheckIn}
+    >
+      출석하고 포인트 받기
+    </button>
   );
 }
