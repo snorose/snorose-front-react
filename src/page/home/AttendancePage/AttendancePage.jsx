@@ -100,7 +100,7 @@ function AttendanceButton({ setLoading }) {
 
   if (isAttendance) {
     return (
-      <button className={styles.attendanceButton}>
+      <button className={styles.attendanceButton} disabled>
         오늘 출석을 완료했어요
       </button>
     );
