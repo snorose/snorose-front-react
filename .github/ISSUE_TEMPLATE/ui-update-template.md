@@ -1,10 +1,9 @@
 ---
 name: UI Update Template
 about: UI 변경사항이 있는 경우에 사용합니다
-title: "[STYLE] UI 변경"
+title: '[STYLE] UI 변경'
 labels: "\U0001F3A8 UI"
 assignees: ''
-
 ---
 
 ## 🎨 디자인/시안
