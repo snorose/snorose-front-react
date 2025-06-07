@@ -13,7 +13,21 @@
 
   background: var(--grey-1-1);
   background-repeat: no-repeat;
-  background-position: right bottom;
+  background-position: calc(100% + 1px) 0;
+
+  transition: background-color 200ms ease-in-out;
+
+  p {
+    transition: color 200ms ease-in-out;
+  }
+
+  &:hover {
+    background-color: var(--blue-4);
+
+    p {
+      color: white;
+    }
+  }
 }
 
 .name {
