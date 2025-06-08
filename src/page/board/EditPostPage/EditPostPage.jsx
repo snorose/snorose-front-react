@@ -28,11 +28,11 @@ import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
 import { ModalContext } from '@/shared/context/ModalContext';
 
 export default function EditPostPage() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { postId } = useParams();
   const { pathname } = useLocation();
   const { userInfo, status } = useAuth();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { toast } = useToast();
   const { setModal } = useContext(ModalContext);
 

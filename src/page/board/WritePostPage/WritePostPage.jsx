@@ -28,7 +28,9 @@ export default function WritePostPage() {
   const { pathname } = useLocation();
   const { toast } = useToast();
   const { userInfo, status } = useAuth();
+  const { invalidUserInfoQuery } = useAuth();
   const { setModal } = useContext(ModalContext);
+
   const [isNotice, setIsNotice] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
@@ -36,26 +38,12 @@ export default function WritePostPage() {
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [isBlock, setIsBlock] = useState(false);
 
-  // 페이지 이탈 방지 모달 노출
-  useEffect(() => {
-    if (title.trim().length > 0 || text.trim().length > 0) {
-      setIsBlock(true);
-    } else {
-      setIsBlock(false);
-    }
-  }, [title, text]);
-
-  // const isBlock = title.trim().length > 0 || text.trim().length > 0;
-  useBlockerNew(isBlock);
-
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
   const [boardTitle, setBoardTitle] = useState(
     currentBoard?.title ?? '게시판을 선택해주세요'
   );
   const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
-
-  const { invalidUserInfoQuery } = useAuth();
 
   const pass = boardId && title.trim() && text.trim();
 
@@ -72,6 +60,17 @@ export default function WritePostPage() {
   const officialNoticeTitles = BOARD_MENUS.filter((menu) =>
     [60, 61, 62].includes(menu.id)
   ).map((menu) => menu.title);
+
+  // 페이지 이탈 방지 모달 노출
+  useEffect(() => {
+    if (title.trim().length > 0 || text.trim().length > 0) {
+      setIsBlock(true);
+    } else {
+      setIsBlock(false);
+    }
+  }, [title, text]);
+
+  useBlockerNew(isBlock);
 
   // 드롭다운 표시
   const displayedTitles = useMemo(() => {
