@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
@@ -9,6 +9,7 @@ import {
   CloseAppBar,
   FetchLoading,
   Icon,
+  NewConfirmModal,
 } from '@/shared/component';
 import {
   BOARD_MENUS,
@@ -17,12 +18,14 @@ import {
   ROLE,
   TOAST,
 } from '@/shared/constant';
-import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { useAuth, useBlockerNew, useToast } from '@/shared/hook';
 import { formattedNowTime } from '@/shared/lib';
 
 import { getPostContent, patchPost } from '@/apis';
 
 import styles from './EditPostPage.module.css';
+import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 export default function EditPostPage() {
   const { postId } = useParams();
@@ -31,6 +34,7 @@ export default function EditPostPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const { setModal } = useContext(ModalContext);
 
   const textId = pathname.split('/')[2];
   const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
@@ -43,8 +47,8 @@ export default function EditPostPage() {
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [isBlock, setIsBlock] = useState(false);
 
-  // navigation guard
-  useBlocker(isBlock);
+  // 페이지 이탈 방지 모달 노출
+  useBlockerNew(isBlock);
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
@@ -90,6 +94,16 @@ export default function EditPostPage() {
       setSubmitDisabled(false);
     },
   });
+
+  // 게시글 수정 중 페이지 이탈
+  const handleExitPage = () => {
+    setModal({
+      id: null,
+      type: null,
+    });
+    setIsBlock(false);
+    navigate(-1);
+  };
 
   // 공지 여부 선택 핸들러
   const handleIsNotice = () => {
@@ -214,6 +228,10 @@ export default function EditPostPage() {
             />
           </div>
         </div>
+        <NewConfirmModal
+          modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+          onClickHandler={handleExitPage}
+        />
       </div>
     </>
   );

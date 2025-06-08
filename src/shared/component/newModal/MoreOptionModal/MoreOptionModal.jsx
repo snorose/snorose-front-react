@@ -1,14 +1,13 @@
 import { Icon, Portal } from '@/shared/component';
 import { useNavigate } from 'react-router-dom';
 import styles from './MoreOptionModal.module.css';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { useContext } from 'react';
 
-export default function MoreOptionModal({
-  modal,
-  setModal,
-  title,
-  optionList,
-}) {
+export default function MoreOptionModal({ title, optionList }) {
   const navigate = useNavigate();
+
+  const { modal, setModal } = useContext(ModalContext);
 
   if (!modal.id) {
     return null;
@@ -17,7 +16,7 @@ export default function MoreOptionModal({
     <Portal portalKey='modal'>
       <div
         className={styles.background}
-        onClick={() => setModal({ id: null, reportType: null })}
+        onClick={() => setModal({ id: null, type: null })}
       >
         <div className={styles.container} onClick={(e) => e.stopPropagation()}>
           <h3 className={styles.title}>{title}</h3>
@@ -27,7 +26,7 @@ export default function MoreOptionModal({
                 key={idx}
                 className={styles.contentItem}
                 onClick={() => {
-                  setModal({ id: item.modalId, reportType: null });
+                  setModal({ id: item.modalId, type: null });
                   if (item.navUrl) {
                     navigate(item.navUrl);
                   }

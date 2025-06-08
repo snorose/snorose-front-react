@@ -1,12 +1,10 @@
 import { DimModal, Icon } from '@/shared/component';
 import styles from './ReportOptionModal.module.css';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { useContext } from 'react';
 
-export default function ReportOptionModal({
-  modal,
-  setModal,
-  title,
-  optionList,
-}) {
+export default function ReportOptionModal({ title, optionList }) {
+  const { modal, setModal } = useContext(ModalContext);
   const getModalId = () => {
     if (title === '게시글 신고') return 'confirm-post-report';
     if (title === '이용자 신고') return 'confirm-user-report';
@@ -25,7 +23,7 @@ export default function ReportOptionModal({
             onClick={() => {
               setModal({
                 id: getModalId(),
-                reportType: option.reportType,
+                type: option.type,
               });
             }}
           >
@@ -41,7 +39,7 @@ export default function ReportOptionModal({
       </ul>
       <button
         className={styles.bottomButton}
-        onClick={() => setModal({ id: null, reportType: null })}
+        onClick={() => setModal({ id: null, type: null })}
       >
         닫기
       </button>

@@ -1,4 +1,10 @@
 export const CONFIRM_MODAL_TEXT = {
+  EXIT_PAGE: {
+    title: '페이지를 떠나시겠습니까?',
+    description: '지금까지 작업한 내용이\n저장되지 않습니다',
+    confirmText: '떠나기',
+    cancelText: '머물기',
+  },
   DELETE_POST: {
     title: '게시글을 삭제할까요?',
     description: '삭제 시 포인트가 차감돼요',
