@@ -19,7 +19,7 @@ export function useReportHandler(modal, setModal, data) {
 
     submitDisabledRef.current = true;
     try {
-      await reportPostMutate({ reportType: modal.reportType });
+      await reportPostMutate({ reportType: modal.type });
     } catch (error) {
       console.error(error);
     } finally {
@@ -29,13 +29,13 @@ export function useReportHandler(modal, setModal, data) {
 
   // 이용자 신고
   const handleUserReport = async () => {
-    if (!modal.reportType || !data?.userId || submitDisabledRef.current) return;
+    if (!modal.type || !data?.userId || submitDisabledRef.current) return;
 
     submitDisabledRef.current = true;
     try {
       await reportUserMutate({
         encryptedTargetUserId: data.userId,
-        reportType: modal.reportType,
+        reportType: modal.type,
       });
     } catch (error) {
       console.error(error);
@@ -57,7 +57,7 @@ export function useReportHandler(modal, setModal, data) {
   };
 
   const handleReport = async () => {
-    if (!modal.reportType || submitDisabledRef.current) return;
+    if (!modal.type || submitDisabledRef.current) return;
 
     switch (parsedReportType) {
       case 'post':
@@ -73,7 +73,7 @@ export function useReportHandler(modal, setModal, data) {
         break;
     }
 
-    setModal({ id: null, reportType: null });
+    setModal({ id: null, type: null });
   };
 
   return {

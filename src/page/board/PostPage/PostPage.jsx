@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation, useParams } from 'react-router-dom';
 
@@ -37,6 +37,7 @@ import {
 } from '@/feature/board/constant/postMoreOptionList';
 
 import styles from './PostPage.module.css';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 export default function PostPage() {
   const { postId } = useParams();
@@ -44,10 +45,8 @@ export default function PostPage() {
   const { pathname } = location;
   const { inputFocus, isInputFocused } = useCommentContext();
   const currentBoard = getBoard(pathname.split('/')[2]);
-  const [modal, setModal] = useState({
-    id: 'confirm-report-post',
-    reportType: null,
-  });
+
+  const { modal, setModal } = useContext(ModalContext);
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
@@ -64,6 +63,13 @@ export default function PostPage() {
     type: LIKE_TYPE.post,
     sourceId: postId,
   });
+
+  useEffect(() => {
+    setModal({
+      id: 'confirm-report-post',
+      type: null,
+    });
+  }, []);
 
   // 뱃지를 보여주는 ROLE
   const showBadge =
@@ -134,11 +140,11 @@ export default function PostPage() {
               data.isWriter
                 ? setModal({
                     id: 'my-post-more-options',
-                    reportType: null,
+                    type: null,
                   })
                 : setModal({
                     id: 'post-more-options',
-                    reportType: null,
+                    type: null,
                   });
             }}
           >
@@ -221,8 +227,6 @@ export default function PostPage() {
           case 'post-more-options':
             return (
               <MoreOptionModal
-                modal={modal}
-                setModal={setModal}
                 title='게시글'
                 optionList={POST_MORE_OPTION_LIST}
               />
@@ -230,8 +234,6 @@ export default function PostPage() {
           case 'my-post-more-options':
             return (
               <MoreOptionModal
-                modal={modal}
-                setModal={setModal}
                 title='내 게시글'
                 optionList={MY_POST_MORE_OPTION_LIST}
               />
@@ -239,8 +241,6 @@ export default function PostPage() {
           case 'report-post-types':
             return (
               <ReportOptionModal
-                modal={modal}
-                setModal={setModal}
                 title='게시글 신고'
                 optionList={REPORT_POST_TYPE_LIST}
               />
@@ -248,8 +248,6 @@ export default function PostPage() {
           case 'report-user-types':
             return (
               <ReportOptionModal
-                modal={modal}
-                setModal={setModal}
                 title='이용자 신고'
                 optionList={REPORT_USER_TYPE_LIST}
               />
@@ -257,8 +255,6 @@ export default function PostPage() {
           case 'confirm-post-report':
             return (
               <NewConfirmModal
-                modal={modal}
-                setModal={setModal}
                 modalText={(() => {
                   switch (currentBoard.id) {
                     case 23:
@@ -273,8 +269,6 @@ export default function PostPage() {
           case 'confirm-user-report':
             return (
               <NewConfirmModal
-                modal={modal}
-                setModal={setModal}
                 modalText={CONFIRM_MODAL_TEXT.REPORT_USER}
                 onClickHandler={handleReport}
               />
@@ -282,8 +276,6 @@ export default function PostPage() {
           case 'confirm-post-delete':
             return (
               <NewConfirmModal
-                modal={modal}
-                setModal={setModal}
                 modalText={
                   currentBoard.id !== 23
                     ? CONFIRM_MODAL_TEXT.DELETE_POST

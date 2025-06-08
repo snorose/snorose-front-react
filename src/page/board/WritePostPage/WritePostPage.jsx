@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
@@ -9,15 +9,18 @@ import {
   CloseAppBar,
   FetchLoading,
   Icon,
+  NewConfirmModal,
 } from '@/shared/component';
 import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
-import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { useAuth, useBlockerNew, useToast } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
 
 import { postPost } from '@/apis';
 import { DropDownMenu } from '@/feature/board/component';
 
 import styles from './WritePostPage.module.css';
+import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 export default function WritePostPage() {
   const navigate = useNavigate();
@@ -25,16 +28,25 @@ export default function WritePostPage() {
   const { pathname } = useLocation();
   const { toast } = useToast();
   const { userInfo, status } = useAuth();
+  const { setModal } = useContext(ModalContext);
   const [isNotice, setIsNotice] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [isBlock, setIsBlock] = useState(false);
 
-  // navigation guard
-  const isBlock = title.trim().length > 0 || text.trim().length > 0;
+  // 페이지 이탈 방지 모달 노출
+  useEffect(() => {
+    if (title.trim().length > 0 || text.trim().length > 0) {
+      setIsBlock(true);
+    } else {
+      setIsBlock(false);
+    }
+  }, [title, text]);
 
-  useBlocker(isBlock);
+  // const isBlock = title.trim().length > 0 || text.trim().length > 0;
+  useBlockerNew(isBlock);
 
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
@@ -85,6 +97,16 @@ export default function WritePostPage() {
       setBoardId(selectedBoard.id);
     }
     setDropDownOpen(false);
+  };
+
+  // 게시글 작성 중 페이지 이탈
+  const handleExitPage = () => {
+    setModal({
+      id: null,
+      type: null,
+    });
+    setIsBlock(false);
+    navigate(-1);
   };
 
   // 공지 여부 선택 핸들러
@@ -253,6 +275,10 @@ export default function WritePostPage() {
             />
           </div>
         </div>
+        <NewConfirmModal
+          modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+          onClickHandler={handleExitPage}
+        />
       </div>
     </>
   );
