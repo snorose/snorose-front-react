@@ -11,7 +11,7 @@ export const CONFIRM_MODAL_TEXT = {
     confirmText: '삭제',
     cancelText: '취소',
   },
-  // 베숙트의 경우 포인트 차감 없음
+  // 베숙트 게시글 삭제는 포인트 차감 없음
   DELETE_POST_WITHOUT_POINT_DEDUCTION: {
     title: '게시글을 삭제할까요?',
     description: null,
@@ -21,6 +21,13 @@ export const CONFIRM_MODAL_TEXT = {
   DELETE_COMMENT: {
     title: '댓글을 삭제할까요?',
     description: '삭제 시 포인트가 차감돼요',
+    confirmText: '삭제',
+    cancelText: '취소',
+  },
+  // 시험후기 댓글 삭제는 포인트 차감 없음
+  DELETE_COMMENT_WITHOUT_POINT_DEDUCTION: {
+    title: '댓글을 삭제할까요?',
+    description: null,
     confirmText: '삭제',
     cancelText: '취소',
   },

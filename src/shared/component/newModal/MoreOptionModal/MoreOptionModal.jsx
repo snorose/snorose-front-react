@@ -4,14 +4,28 @@ import styles from './MoreOptionModal.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
 
-export default function MoreOptionModal({ title, optionList }) {
+export default function MoreOptionModal({ title, optionList, functions }) {
   const navigate = useNavigate();
-
   const { modal, setModal } = useContext(ModalContext);
 
   if (!modal.id) {
     return null;
   }
+
+  const handleOptionClick = (item, idx) => {
+    if (item.modalId) {
+      setModal({ id: item.modalId, type: null });
+    }
+
+    if (functions?.[idx] && typeof functions[idx] === 'function') {
+      functions[idx]();
+    }
+
+    if (item.navUrl) {
+      navigate(item.navUrl);
+    }
+  };
+
   return (
     <Portal portalKey='modal'>
       <div
@@ -25,12 +39,7 @@ export default function MoreOptionModal({ title, optionList }) {
               <li
                 key={idx}
                 className={styles.contentItem}
-                onClick={() => {
-                  setModal({ id: item.modalId, type: null });
-                  if (item.navUrl) {
-                    navigate(item.navUrl);
-                  }
-                }}
+                onClick={() => handleOptionClick(item, idx)}
               >
                 <p>{item.label}</p>
                 <Icon

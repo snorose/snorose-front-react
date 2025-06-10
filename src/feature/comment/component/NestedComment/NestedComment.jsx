@@ -67,9 +67,14 @@ export default function NestedComment({
             {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
           </p>
         </div>
-        <p className={styles.dot3} onClick={(e) => onCommentOptionClick(data)}>
+        <p
+          className={styles.dot3}
+          onClick={(e) => {
+            onCommentOptionClick(data);
+          }}
+        >
           {!isDeleted && isVisible && (
-            <Icon id='meat-ball' width={18} height={4} stroke='none'/>
+            <Icon id='meat-ball' width={18} height={4} stroke='none' />
           )}
         </p>
       </div>
