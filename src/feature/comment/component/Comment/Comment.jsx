@@ -1,4 +1,4 @@
-import { forwardRef, useContext, useEffect } from 'react';
+import { forwardRef, useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import {
@@ -63,9 +63,11 @@ const Comment = forwardRef((props, ref) => {
     sourceId: data.id,
   });
 
+  const [inputContent, setInputContent] = useState(null);
+
   const onCommentOptionClick = (data) => {
     setCommentId(data.id);
-    setContent(data.content);
+    setInputContent(data.content);
     data.isWriter
       ? setModal({ id: 'my-comment-more-options', type: null })
       : setModal({ id: 'report-comment', type: null });
@@ -186,6 +188,7 @@ const Comment = forwardRef((props, ref) => {
             functions={[
               () => {
                 setIsEdit(true);
+                setContent(inputContent);
                 setModal({ id: null, type: null });
                 inputFocus();
               },

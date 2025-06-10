@@ -1,11 +1,9 @@
-import { Icon, Portal } from '@/shared/component';
-import { useNavigate } from 'react-router-dom';
-import styles from './MoreOptionModal.module.css';
-import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
+import { Icon, Portal } from '@/shared/component';
+import { ModalContext } from '@/shared/context/ModalContext';
+import styles from './MoreOptionModal.module.css';
 
 export default function MoreOptionModal({ title, optionList, functions }) {
-  const navigate = useNavigate();
   const { modal, setModal } = useContext(ModalContext);
 
   if (!modal.id) {
@@ -19,10 +17,6 @@ export default function MoreOptionModal({ title, optionList, functions }) {
 
     if (functions?.[idx] && typeof functions[idx] === 'function') {
       functions[idx]();
-    }
-
-    if (item.navUrl) {
-      navigate(item.navUrl);
     }
   };
 

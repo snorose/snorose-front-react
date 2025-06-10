@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { getPostContent } from '@/apis';
 import { NotFoundPage } from '@/page/etc';
@@ -43,6 +43,7 @@ export default function PostPage() {
   const { postId } = useParams();
   const location = useLocation();
   const { pathname } = location;
+  const navigate = useNavigate();
   const { inputFocus, isInputFocused } = useCommentContext();
   const currentBoard = getBoard(pathname.split('/')[2]);
 
@@ -236,6 +237,13 @@ export default function PostPage() {
               <MoreOptionModal
                 title='내 게시글'
                 optionList={MY_POST_MORE_OPTION_LIST}
+                functions={[
+                  () => {
+                    setModal({ id: null, type: null });
+                    navigate(`./edit`);
+                  },
+                  null,
+                ]}
               />
             );
           case 'report-post-types':
@@ -255,14 +263,11 @@ export default function PostPage() {
           case 'confirm-post-report':
             return (
               <NewConfirmModal
-                modalText={(() => {
-                  switch (currentBoard.id) {
-                    case 23:
-                      return CONFIRM_MODAL_TEXT.REPORT_POST;
-                    default:
-                      return CONFIRM_MODAL_TEXT.REPORT_POST_WITHOUT_POINT_DEDUCTION;
-                  }
-                })()}
+                modalText={
+                  currentBoard.id === 23
+                    ? CONFIRM_MODAL_TEXT.REPORT_POST
+                    : CONFIRM_MODAL_TEXT.REPORT_POST_WITHOUT_POINT_DEDUCTION
+                }
                 onClickHandler={handleReport}
               />
             );
