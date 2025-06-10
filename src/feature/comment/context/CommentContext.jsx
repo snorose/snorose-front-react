@@ -24,7 +24,7 @@ export function CommentContextProvider({ children }) {
   };
 
   const resetCommentState = (event) => {
-    setCommentId(undefined);
+    setCommentId(null);
     setIsEdit(false);
     setContent('');
   };

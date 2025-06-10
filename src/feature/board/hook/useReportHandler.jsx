@@ -1,21 +1,25 @@
 import {
   useReportPostMutation,
   useReportUserMutation,
+  useReportCommentMutation,
 } from '@/feature/board/hook/useReport';
 import { parseReportType } from '@/feature/board/lib/parseReportType';
+import { useCommentContext } from '@/feature/comment/context';
 import { useRef } from 'react';
 
 export function useReportHandler(modal, setModal, data) {
+  const { commentId } = useCommentContext();
   const { mutateAsync: reportPostMutate } = useReportPostMutation();
   const { mutateAsync: reportUserMutate } = useReportUserMutation();
+  const { mutateAsync: reportCommentMutate } = useReportCommentMutation();
 
   const submitDisabledRef = useRef(false);
 
-  const parsedReportType = parseReportType(modal.reportType || '');
+  const parsedReportType = parseReportType(modal.type || '');
 
   // 게시글 신고
   const handlePostReport = async () => {
-    if (!modal.reportType || submitDisabledRef.current) return;
+    if (!modal.type || submitDisabledRef.current) return;
 
     submitDisabledRef.current = true;
     try {
@@ -46,11 +50,16 @@ export function useReportHandler(modal, setModal, data) {
 
   // 댓글 신고
   const handleCommentReport = async () => {
-    if (submitDisabledRef.current) return;
+    if (!modal.type || !data?.id || submitDisabledRef.current) return;
 
     submitDisabledRef.current = true;
     try {
-      console.log('댓글 신고');
+      await reportCommentMutate({
+        commentId: commentId,
+        reportType: modal.type,
+      });
+    } catch (error) {
+      console.error(error);
     } finally {
       submitDisabledRef.current = false;
     }
