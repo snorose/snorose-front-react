@@ -107,16 +107,17 @@ export default function WriteExamReviewPage() {
     file;
 
   // navigation guard
-  const isBlock =
+  const isBlock = !!(
     lectureName.trim() ||
     professor.trim() ||
-    lectureType ||
-    examType ||
-    lectureYear ||
-    semester ||
+    Object.keys(lectureType).length > 0 ||
+    Object.keys(examType).length > 0 ||
+    Object.keys(lectureYear).length > 0 ||
+    Object.keys(semester).length > 0 ||
     classNumber ||
     questionDetail.trim() ||
-    file;
+    file
+  );
 
   useBlocker(isBlock);
 
