@@ -15,19 +15,16 @@
   background: var(--blue-0);
 }
 
-.panelHeader.roundTop {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
+.accordion:first-child .panelHeader {
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
-.panelHeader.roundBottom {
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+.accordion:last-child .panelHeader {
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
-.opend .panelHeader.roundBottom {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+.accordion:last-child.opend .panelHeader {
+  border-radius: 0;
 }
 
 .panelHeader span {
@@ -59,8 +56,9 @@
   font-size: 1.4rem;
   letter-spacing: -0.05rem;
   overflow: hidden;
-  transition: 300ms all ease;
+  transition: max-height 200ms ease;
   background: var(--blue-0);
+  padding: 0 2rem;
 }
 
 .opend .panelBody {
@@ -70,9 +68,8 @@
   background: var(--blue-1);
 }
 
-.opend .panelBody.roundBottom {
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+.accordion:last-child.opend .panelBody {
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .apply {
