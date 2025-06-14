@@ -25,7 +25,12 @@ export default function SelectedItem({
         {select?.name ?? (
           <span className={styles.placeholder}>{placeholder}</span>
         )}
-        <Icon id='arrow-down' width={16} height={9} />
+        <Icon
+          id='arrow-down'
+          width={16}
+          height={9}
+          className={`${styles.arrow} ${isOpen ? styles.rotated : ''}`}
+        />
       </div>
     </div>
   );
