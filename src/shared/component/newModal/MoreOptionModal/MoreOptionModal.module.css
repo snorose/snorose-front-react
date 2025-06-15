@@ -10,8 +10,7 @@
 .container {
   z-index: 2;
   position: absolute;
-  top: 9rem;
-  right: 1.8rem;
+  right: 2rem;
   width: 24.4rem;
   height: 13.6rem;
   flex-shrink: 0;

@@ -1,4 +1,4 @@
-import { forwardRef, useContext, useState } from 'react';
+import { forwardRef, useContext, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import {
@@ -32,6 +32,8 @@ const Comment = forwardRef((props, ref) => {
   const { pathname } = useLocation();
   const { data } = props;
 
+  const moreOptionRef = useRef(null);
+
   const {
     userRoleId,
     userDisplay,
@@ -64,6 +66,7 @@ const Comment = forwardRef((props, ref) => {
   });
 
   const [inputContent, setInputContent] = useState(null);
+  const [moreOptionTop, setMoreOptionTop] = useState(0);
 
   const onCommentOptionClick = (data) => {
     setCommentId(data.id);
@@ -71,6 +74,9 @@ const Comment = forwardRef((props, ref) => {
     data.isWriter
       ? setModal({ id: 'my-comment-more-options', type: null })
       : setModal({ id: 'report-comment', type: null });
+
+    const top = moreOptionRef.current.getBoundingClientRect().top;
+    setMoreOptionTop(top);
   };
 
   const handleReply = () => {
@@ -112,6 +118,7 @@ const Comment = forwardRef((props, ref) => {
             </p>
           </div>
           <div
+            ref={moreOptionRef}
             className={styles.dot3}
             onClick={(e) => onCommentOptionClick(data)}
           >
@@ -196,6 +203,7 @@ const Comment = forwardRef((props, ref) => {
                 },
                 null,
               ]}
+              top={moreOptionTop}
             />
           )}
       </div>
@@ -208,6 +216,7 @@ const Comment = forwardRef((props, ref) => {
               <MoreOptionModal
                 title='댓글'
                 optionList={COMMENT_MORE_OPTION_LIST}
+                top={moreOptionTop}
               />
             ) : null;
           // 댓글 신고하기 옵션 모달
