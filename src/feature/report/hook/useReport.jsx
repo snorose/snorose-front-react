@@ -8,7 +8,7 @@ import { MUTATION_KEY } from '@/shared/constant';
 import { useToast } from '@/shared/hook';
 import { getBoard } from '@/shared/lib';
 
-import { parseReportType } from '@/feature/board/lib/parseReportType';
+import { parseReportType } from '@/feature/report/lib/parseReportType';
 import { useCommentContext } from '@/feature/comment/context';
 
 // 게시글 신고 훅

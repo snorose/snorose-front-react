@@ -29,8 +29,8 @@ import { useScrap } from '@/feature/scrap/hook';
 
 import { useCommentContext } from '@/feature/comment/context';
 
-import { REPORT_POST_TYPE_LIST } from '@/feature/board/constant/reportPostTypeList';
-import { REPORT_USER_TYPE_LIST } from '@/feature/board/constant/reportUserTypeList';
+import { REPORT_POST_TYPE_LIST } from '@/feature/report/constant/reportPostTypeList';
+import { REPORT_USER_TYPE_LIST } from '@/feature/report/constant/reportUserTypeList';
 import {
   MY_POST_MORE_OPTION_LIST,
   POST_MORE_OPTION_LIST,
