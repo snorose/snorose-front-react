@@ -1,11 +1,17 @@
-import { reportPost, reportUser } from '@/apis';
+import { useMutation } from '@tanstack/react-query';
+import { useLocation, useParams } from 'react-router-dom';
+import { useRef } from 'react';
+
+import { reportPost, reportUser, reportComment } from '@/apis';
+
 import { MUTATION_KEY } from '@/shared/constant';
 import { useToast } from '@/shared/hook';
 import { getBoard } from '@/shared/lib';
-import { useMutation } from '@tanstack/react-query';
-import { useLocation, useParams } from 'react-router-dom';
-import { reportComment } from '@/apis';
 
+import { parseReportType } from '@/feature/board/lib/parseReportType';
+import { useCommentContext } from '@/feature/comment/context';
+
+// 게시글 신고 훅
 export function useReportPostMutation() {
   const { toast } = useToast();
   const { postId } = useParams();
@@ -24,6 +30,7 @@ export function useReportPostMutation() {
   });
 }
 
+// 유저 신고 훅
 export function useReportUserMutation() {
   const { toast } = useToast();
 
@@ -39,6 +46,7 @@ export function useReportUserMutation() {
   });
 }
 
+// 댓글 신고 훅
 export function useReportCommentMutation() {
   const { toast } = useToast();
   const { postId } = useParams();
@@ -56,23 +64,79 @@ export function useReportCommentMutation() {
   });
 }
 
-// export const useReportCommentMutation = (postId, commentId) => {
-//   const { toast } = useToast();
-//   const { setIsReportModalOpen, reportConfirmModal, resetCommentState } =
-//     useCommentContext();
+// 통합 신고 핸들러 훅
+export function useReportHandler(modal, setModal, data) {
+  const { commentId } = useCommentContext();
+  const { mutateAsync: reportPostMutate } = useReportPostMutation();
+  const { mutateAsync: reportUserMutate } = useReportUserMutation();
+  const { mutateAsync: reportCommentMutate } = useReportCommentMutation();
 
-//   return useMutation({
-//     mutationKey: [MUTATION_KEY.reportComment],
-//     mutationFn: (body) => reportComment(postId, commentId, body),
-//     onSuccess: ({ message }) => {
-//       setIsReportModalOpen(false);
-//       reportConfirmModal.closeModal();
-//       toast(message);
-//       resetCommentState();
-//     },
-//     onError: () => {
-//       toast('댓글 신고에 실패했습니다.');
-//       resetCommentState();
-//     },
-//   });
-// };
+  const submitDisabledRef = useRef(false);
+  const parsedReportType = parseReportType(modal.type || '');
+
+  const handlePostReport = async () => {
+    if (!modal.type || submitDisabledRef.current) return;
+    submitDisabledRef.current = true;
+    try {
+      await reportPostMutate({ reportType: modal.type });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      submitDisabledRef.current = false;
+    }
+  };
+
+  const handleUserReport = async () => {
+    if (!modal.type || !data?.userId || submitDisabledRef.current) return;
+    submitDisabledRef.current = true;
+    try {
+      await reportUserMutate({
+        encryptedTargetUserId: data.userId,
+        reportType: modal.type,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      submitDisabledRef.current = false;
+    }
+  };
+
+  const handleCommentReport = async () => {
+    if (!modal.type || !data?.id || submitDisabledRef.current) return;
+    submitDisabledRef.current = true;
+    try {
+      await reportCommentMutate({
+        commentId,
+        reportType: modal.type,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      submitDisabledRef.current = false;
+    }
+  };
+
+  const handleReport = async () => {
+    if (!modal.type || submitDisabledRef.current) return;
+
+    switch (parsedReportType) {
+      case 'post':
+        await handlePostReport();
+        break;
+      case 'user':
+        await handleUserReport();
+        break;
+      case 'comment':
+        await handleCommentReport();
+        break;
+      default:
+        break;
+    }
+
+    setModal({ id: null, type: null });
+  };
+
+  return {
+    handleReport,
+  };
+}

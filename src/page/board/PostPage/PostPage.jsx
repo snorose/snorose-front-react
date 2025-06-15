@@ -23,7 +23,7 @@ import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 
 import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
-import { useReportHandler } from '@/feature/report/hook/useReportHandler';
+import { useReportHandler } from '@/feature/report/hook/useReport';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
