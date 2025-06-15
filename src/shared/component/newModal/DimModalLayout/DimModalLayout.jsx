@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
-import styles from './DimModal.module.css';
+import styles from './DimModalLayout.module.css';
 
-export default function DimModal({ isOpen, children }) {
+export default function DimModalLayout({ isOpen, children }) {
   if (!isOpen) {
     return null;
   }

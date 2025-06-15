@@ -1,4 +1,4 @@
-import { DimModal } from '@/shared/component';
+import { DimModalLayout } from '@/shared/component';
 import styles from './NewConfirmModal.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
@@ -7,7 +7,7 @@ export default function NewConfirmModal({ modalText, onClickHandler }) {
   const { modal, setModal } = useContext(ModalContext);
 
   return (
-    <DimModal isOpen={modal?.id}>
+    <DimModalLayout isOpen={modal?.id}>
       <div className={styles.top}>
         <h3 className={styles.title}>{modalText.title}</h3>
         {modalText.description && (
@@ -33,6 +33,6 @@ export default function NewConfirmModal({ modalText, onClickHandler }) {
           {modalText.confirmText}
         </button>
       </div>
-    </DimModal>
+    </DimModalLayout>
   );
 }

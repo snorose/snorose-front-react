@@ -1,4 +1,4 @@
-import { DimModal, Icon } from '@/shared/component';
+import { DimModalLayout, Icon } from '@/shared/component';
 import styles from './OptionModal.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
@@ -13,7 +13,7 @@ export default function OptionModal({ title, optionList }) {
   };
 
   return (
-    <DimModal isOpen={modal.id}>
+    <DimModalLayout isOpen={modal.id}>
       <h3 className={styles.title}>{title}</h3>
       <ul className={styles.content}>
         {optionList.map((option, idx) => (
@@ -43,6 +43,6 @@ export default function OptionModal({ title, optionList }) {
       >
         닫기
       </button>
-    </DimModal>
+    </DimModalLayout>
   );
 }

@@ -27,7 +27,7 @@ export { default as FetchLoadingOverlay } from './loading/FetchLoadingOverlay/Fe
 // modal
 export { default as ConfirmModal } from './modal/ConfirmModal';
 export { default as DeleteModal } from './modal/DeleteModal';
-export { default as DimModal } from './modal/DimModal';
+export { default as DimModalLayout } from './newModal/DimModalLayout/DimModalLayout';
 // export { default as OptionModal } from './modal/OptionModal';
 
 // new modal
