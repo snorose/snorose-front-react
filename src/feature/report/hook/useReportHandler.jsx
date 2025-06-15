@@ -2,7 +2,7 @@ import {
   useReportPostMutation,
   useReportUserMutation,
   useReportCommentMutation,
-} from '@/feature/board/hook/useReport';
+} from '@/feature/report/hook/useReport';
 import { parseReportType } from '@/feature/board/lib/parseReportType';
 import { useCommentContext } from '@/feature/comment/context';
 import { useRef } from 'react';

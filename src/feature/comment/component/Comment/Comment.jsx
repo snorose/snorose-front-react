@@ -25,7 +25,7 @@ import {
 } from '../../constant/commentMoreOptionList';
 import { REPORT_COMMENT_TYPE_LIST } from '../../constant/reportCommentTypeList';
 import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
-import { useReportHandler } from '@/feature/board/hook/useReportHandler';
+import { useReportHandler } from '@/feature/report/hook/useReportHandler';
 
 const Comment = forwardRef((props, ref) => {
   const { modal, setModal } = useContext(ModalContext);
