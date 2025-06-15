@@ -3,7 +3,7 @@ import styles from './NewConfirmModal.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
 
-export default function NewConfirmModal({ modalText, onClickHandler }) {
+export default function NewConfirmModal({ modalText, onConfirm }) {
   const { modal, setModal } = useContext(ModalContext);
 
   return (
@@ -27,7 +27,7 @@ export default function NewConfirmModal({ modalText, onClickHandler }) {
         <button
           className={styles.bottomButton}
           onClick={() => {
-            onClickHandler();
+            onConfirm();
           }}
         >
           {modalText.confirmText}

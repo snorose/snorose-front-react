@@ -268,14 +268,14 @@ export default function PostPage() {
                     ? CONFIRM_MODAL_TEXT.REPORT_POST
                     : CONFIRM_MODAL_TEXT.REPORT_POST_WITHOUT_POINT_DEDUCTION
                 }
-                onClickHandler={handleReport}
+                onConfirm={handleReport}
               />
             );
           case 'confirm-user-report':
             return (
               <NewConfirmModal
                 modalText={CONFIRM_MODAL_TEXT.REPORT_USER}
-                onClickHandler={handleReport}
+                onConfirm={handleReport}
               />
             );
           case 'confirm-post-delete':
@@ -286,7 +286,7 @@ export default function PostPage() {
                     ? CONFIRM_MODAL_TEXT.DELETE_POST
                     : CONFIRM_MODAL_TEXT.DELETE_POST_WITHOUT_POINT_DEDUCTION
                 }
-                onClickHandler={handleDelete}
+                onConfirm={handleDelete}
               />
             );
           default:

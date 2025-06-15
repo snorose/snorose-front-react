@@ -276,7 +276,7 @@ export default function WritePostPage() {
         </div>
         <NewConfirmModal
           modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
-          onClickHandler={handleExitPage}
+          onConfirm={handleExitPage}
         />
       </div>
     </>

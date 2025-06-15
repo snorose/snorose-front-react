@@ -220,7 +220,7 @@ const Comment = forwardRef((props, ref) => {
             return (
               <NewConfirmModal
                 modalText={CONFIRM_MODAL_TEXT.REPORT_COMMENT}
-                onClickHandler={handleReport}
+                onConfirm={handleReport}
               />
             );
           // 댓글 삭제 확인 모달
@@ -233,7 +233,7 @@ const Comment = forwardRef((props, ref) => {
                     ? CONFIRM_MODAL_TEXT.DELETE_COMMENT_WITHOUT_POINT_DEDUCTION
                     : CONFIRM_MODAL_TEXT.DELETE_COMMENT
                 }
-                onClickHandler={() => {
+                onConfirm={() => {
                   deleteComment.mutate({ commentId });
                   resetCommentState();
                   setModal({ id: null, type: null });

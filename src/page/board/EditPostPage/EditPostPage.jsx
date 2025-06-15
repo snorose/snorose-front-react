@@ -230,7 +230,7 @@ export default function EditPostPage() {
         </div>
         <NewConfirmModal
           modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
-          onClickHandler={handleExitPage}
+          onConfirm={handleExitPage}
         />
       </div>
     </>
