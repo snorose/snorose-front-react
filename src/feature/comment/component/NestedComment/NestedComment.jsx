@@ -21,6 +21,8 @@ export default function NestedComment({
     sourceId: data.id,
   });
 
+  console.log(data);
+
   const {
     userRoleId,
     userDisplay,

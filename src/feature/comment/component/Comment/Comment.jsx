@@ -1,4 +1,4 @@
-import { forwardRef, useContext, useState, useEffect } from 'react';
+import { forwardRef, useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import {
@@ -31,7 +31,7 @@ const Comment = forwardRef((props, ref) => {
   const { modal, setModal } = useContext(ModalContext);
   const { pathname } = useLocation();
   const { data } = props;
-  const [selectedCommentId, setSelectedCommentId] = useState(null);
+  // const [selectedCommentId, setSelectedCommentId] = useState(null);
 
   const {
     userRoleId,
@@ -69,7 +69,6 @@ const Comment = forwardRef((props, ref) => {
   const onCommentOptionClick = (data) => {
     setCommentId(data.id);
     setInputContent(data.content);
-    setSelectedCommentId(data.id);
     data.isWriter
       ? setModal({ id: 'my-comment-more-options', type: null })
       : setModal({ id: 'report-comment', type: null });
@@ -87,13 +86,6 @@ const Comment = forwardRef((props, ref) => {
     userRoleId === ROLE.official ||
     (userRoleId === ROLE.admin &&
       SHOW_BADGE_PATH.some((path) => pathname.includes(path)));
-
-  // 모달이 닫힐 때 selectedCommentId 초기화
-  useEffect(() => {
-    if (!modal.id) {
-      setSelectedCommentId(null);
-    }
-  }, [modal.id]);
 
   return (
     <>
@@ -190,7 +182,8 @@ const Comment = forwardRef((props, ref) => {
             />
           ))}
         {modal.id === 'my-comment-more-options' &&
-          selectedCommentId === data.id && (
+          (commentId === data.id ||
+            data.children.some((child) => child.id === commentId)) && (
             // 내 댓글 더보기 클릭 시 뜨는 모달
             <MoreOptionModal
               title='내 댓글'
@@ -211,7 +204,8 @@ const Comment = forwardRef((props, ref) => {
         switch (modal.id) {
           // 남의 댓글 더보기 클릭 시 뜨는 모달
           case 'report-comment':
-            return selectedCommentId === data.id ? (
+            return commentId === data.id ||
+              data.children.some((child) => child.id === commentId) ? (
               <MoreOptionModal
                 title='댓글'
                 optionList={COMMENT_MORE_OPTION_LIST}
