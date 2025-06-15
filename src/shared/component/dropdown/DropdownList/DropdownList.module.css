@@ -8,6 +8,8 @@
   max-height: 18rem;
   overflow: auto;
   scrollbar-arrow-color: var(--blue-2, #bfd7ec);
+  background: var(--white);
+  width: 100%;
 }
 
 .select {
@@ -17,7 +19,6 @@
   justify-content: space-between;
   font: var(--text-body-1-reg);
   color: var(--grey-3-1, #898989);
-  background: var(--grey-1-1, #f4f4f4);
 }
 
 .select:hover {

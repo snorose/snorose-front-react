@@ -2,18 +2,23 @@ import { Icon } from '@/shared/component';
 
 import styles from './DropdownList.module.css';
 
-export default function DropdownList({ options, select, onSelect }) {
+export default function DropdownList({
+  options,
+  select,
+  onSelect,
+  className = '',
+}) {
   return (
-    <ul className={styles.dropdownContent}>
+    <ul className={`${styles.dropdownContent} ${className}`}>
       {options.map((option) => (
         <li
-          className={`${styles.option} ${select?.id === option.id ? styles.selected : ''}`}
           key={option.id}
-          onClick={() => {
-            onSelect(option);
-          }}
+          className={`${styles.option} ${
+            select?.id === option.id ? styles.selected : ''
+          }`}
+          onClick={() => onSelect(option)}
         >
-          {option?.name}
+          {option.name}
           {select?.id === option.id && (
             <Icon id='check' width={14} height={11} />
           )}
