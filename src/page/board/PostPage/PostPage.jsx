@@ -11,7 +11,7 @@ import {
   FetchLoading,
   Icon,
   MoreOptionModal,
-  ReportOptionModal,
+  OptionModal,
   NewConfirmModal,
 } from '@/shared/component';
 
@@ -248,14 +248,14 @@ export default function PostPage() {
             );
           case 'report-post-types':
             return (
-              <ReportOptionModal
+              <OptionModal
                 title='게시글 신고'
                 optionList={REPORT_POST_TYPE_LIST}
               />
             );
           case 'report-user-types':
             return (
-              <ReportOptionModal
+              <OptionModal
                 title='이용자 신고'
                 optionList={REPORT_USER_TYPE_LIST}
               />

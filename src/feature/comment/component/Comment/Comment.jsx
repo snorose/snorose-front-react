@@ -6,7 +6,7 @@ import {
   Icon,
   MoreOptionModal,
   NewConfirmModal,
-  ReportOptionModal,
+  OptionModal,
 } from '@/shared/component';
 import { LIKE_TYPE, ROLE, SHOW_BADGE_PATH } from '@/shared/constant';
 import { convertHyperlink, timeAgo } from '@/shared/lib';
@@ -210,7 +210,7 @@ const Comment = forwardRef((props, ref) => {
           // 댓글 신고하기 옵션 모달
           case 'report-comment-types':
             return (
-              <ReportOptionModal
+              <OptionModal
                 title='댓글 신고'
                 optionList={REPORT_COMMENT_TYPE_LIST}
               />

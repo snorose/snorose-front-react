@@ -1,9 +1,9 @@
 import { DimModal, Icon } from '@/shared/component';
-import styles from './ReportOptionModal.module.css';
+import styles from './OptionModal.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
 
-export default function ReportOptionModal({ title, optionList }) {
+export default function OptionModal({ title, optionList }) {
   const { modal, setModal } = useContext(ModalContext);
   const getModalId = () => {
     if (title === '게시글 신고') return 'confirm-post-report';
