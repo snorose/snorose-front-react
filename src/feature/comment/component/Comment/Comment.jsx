@@ -31,7 +31,6 @@ const Comment = forwardRef((props, ref) => {
   const { modal, setModal } = useContext(ModalContext);
   const { pathname } = useLocation();
   const { data } = props;
-  // const [selectedCommentId, setSelectedCommentId] = useState(null);
 
   const {
     userRoleId,
