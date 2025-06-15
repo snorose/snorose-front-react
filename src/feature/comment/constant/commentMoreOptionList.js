@@ -3,7 +3,7 @@ export const COMMENT_MORE_OPTION_LIST = [
     modalId: 'report-comment-types',
     iconId: 'report-comment',
     label: '댓글 신고',
-    width: 19,
+    width: 21,
     height: 22,
   },
   {
