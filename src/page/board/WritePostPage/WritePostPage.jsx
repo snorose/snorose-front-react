@@ -1,19 +1,22 @@
-import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { useMemo, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { useAuth, useToast, useModal } from '@/shared/hook';
 import {
   ActionButton,
+  Badge,
   CloseAppBar,
   ConfirmModal,
   DeleteModal,
   Icon,
   FetchLoading,
+  Icon,
 } from '@/shared/component';
-import { formattedNowTime, getBoard } from '@/shared/lib';
 import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { formattedNowTime, getBoard } from '@/shared/lib';
 
 import { postPost } from '@/apis';
 import { AttachmentBar, DropDownMenu } from '@/feature/board/component';
@@ -42,6 +45,11 @@ export default function WritePostPage() {
   const [trashImageIndex, setTrashImageIndex] = useState(null);
   const trashImageConfirmModal = useModal();
 
+  // navigation guard
+  const isBlock = title.trim().length > 0 || text.trim().length > 0;
+
+  useBlocker(isBlock);
+
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
   const [boardTitle, setBoardTitle] = useState(
@@ -56,6 +64,25 @@ export default function WritePostPage() {
   const boardTitles = BOARD_MENUS.filter((menu) =>
     [21, 22, 23].includes(menu.id)
   ).map((menu) => menu.title);
+
+  // 공식 계정 일반글
+  const officialTitles = BOARD_MENUS.filter((menu) =>
+    [21, 60, 61, 62].includes(menu.id)
+  ).map((menu) => menu.title);
+
+  // 공식 게시판 공지 (ROLE.official)
+  const officialNoticeTitles = BOARD_MENUS.filter((menu) =>
+    [60, 61, 62].includes(menu.id)
+  ).map((menu) => menu.title);
+
+  // 드롭다운 표시
+  const displayedTitles = useMemo(() => {
+    const roleTitleMap = {
+      5: isNotice ? officialNoticeTitles : officialTitles,
+      4: [...boardTitles, ...officialNoticeTitles],
+    };
+    return roleTitleMap[userInfo?.userRoleId] || boardTitles;
+  }, [isNotice, userInfo?.userRoleId]);
 
   // 게시판 선택 핸들러
   const handleDropDownOpen = () => {
@@ -144,85 +171,86 @@ export default function WritePostPage() {
   return (
     <>
       <div className={styles.container}>
-        <div>
-          <div className={styles.top}>
-            <CloseAppBar
-              backgroundColor={'#eaf5fd'}
-              onClose={() => {
-                title.trim() || text.trim()
-                  ? setIsCheckModalOpen(true)
-                  : navigate(-1, { replace: true });
-              }}
-            >
-              <ActionButton onClick={handleSubmit} disabled={!pass}>
-                등록
-              </ActionButton>
-            </CloseAppBar>
-          </div>
-          <div className={styles.center}>
-            {textId === 'notice' ? (
-              <div className={styles.categorySelect}>
+        <div className={styles.top}>
+          <CloseAppBar backgroundColor={'#eaf5fd'}>
+            <ActionButton onClick={handleSubmit} disabled={!pass}>
+              등록
+            </ActionButton>
+          </CloseAppBar>
+        </div>
+        <div className={styles.center}>
+          {textId === 'notice' ? (
+            <div className={styles.categorySelect}>
+              <div className={styles.categorySelectContainer}>
+                <Icon
+                  id='clip-board-list'
+                  width={21}
+                  height={22}
+                  fill='white'
+                />
+                <p className={styles.categorySelectText}>{boardTitle}</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div
+                className={styles.categorySelect}
+                onClick={handleDropDownOpen}
+              >
                 <div className={styles.categorySelectContainer}>
                   <Icon
                     id='clip-board-list'
-                    width={18}
-                    height={19}
+                    width={21}
+                    height={22}
                     fill='white'
                   />
                   <p className={styles.categorySelectText}>{boardTitle}</p>
                 </div>
+                <Icon id='angle-down' width={14} height={7} />
               </div>
-            ) : (
-              <>
-                <div
-                  className={styles.categorySelect}
-                  onClick={handleDropDownOpen}
-                >
-                  <div className={styles.categorySelectContainer}>
-                    <Icon
-                      id='clip-board-list'
-                      width={18}
-                      height={19}
-                      fill='white'
-                    />
-                    <p className={styles.categorySelectText}>{boardTitle}</p>
-                  </div>
-                  <Icon id='angle-down' width={14} height={7} />
-                </div>
-                <DropDownMenu
-                  options={boardTitles}
-                  item={boardTitle}
-                  setItem={handleBoardTitleChange}
-                  dropDownOpen={dropDownOpen}
-                  setDropDownOpen={setDropDownOpen}
-                  backgroundColor={'#fff'}
-                />
-              </>
-            )}
+              <DropDownMenu
+                options={displayedTitles}
+                item={boardTitle}
+                setItem={handleBoardTitleChange}
+                dropDownOpen={dropDownOpen}
+                setDropDownOpen={setDropDownOpen}
+                backgroundColor={'#fff'}
+              />
+            </>
+          )}
 
             <div className={styles.profileBox}>
               <div className={styles.profileBoxLeft}>
+                {userInfo?.userRoleId !== ROLE.admin &&
+              userInfo?.userRoleId !== ROLE.official ? (
                 <Icon id='cloud' width={25} height={16} />
-                <p>{userInfo?.nickname}</p>
+                ) : (
+                <Badge
+                  userRoleId={userInfo?.userRoleId}
+                  className={styles.badge}
+                />
+              )}
+              <p>{userInfo?.nickname}</p>
                 <p className={styles.dot}></p>
                 <p>{formattedNowTime()}</p>
               </div>
               {textId !== 'notice' && (
                 <div
                   className={
-                    userInfo?.userRoleId === ROLE.admin
+                    userInfo?.userRoleId === ROLE.admin ||
+                  userInfo?.userRoleId === ROLE.official
                       ? styles.profileBoxRight
                       : styles.profileBoxRightInvisible
                   }
                   onClick={handleIsNotice}
                 >
-                  <p>공지글</p>
-                  <Icon
-                    id={isNotice ? 'toggle-on' : 'toggle-off'}
-                    width={25}
-                    height={16}
+                    <Icon
+                    id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
+                    width={21}
+                    height={22}
                   />
-                </div>
+                  <p>공지글</p>
+              </div>
               )}
             </div>
             <div className={styles.content}>

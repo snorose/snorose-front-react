@@ -1,6 +1,8 @@
 :root {
-  --default-width: 600px;
-  --default-margin: 1.25rem;
+  font-size: 62.5%;
+
+  --default-width: 60rem;
+  --default-margin: 2rem;
 
   /* Color */
 
@@ -16,16 +18,16 @@
   --pink-2: #ff849a;
   --pink-3: #ff4b6c;
 
-  /* Gray */
+  /* Grey */
   --white: #ffffff;
   --white-rgb: 255, 255, 255;
-  --gray-1: #f8f8f8;
-  --gray-1-1: #f4f4f4;
-  --gray-2: #f0f0f0;
-  --gray-3: #d9d9d9;
-  --gray-3-1: #898989;
-  --gray-4: #484848;
-  --gray-4-rgb: 72, 72, 72;
+  --grey-1: #f8f8f8;
+  --grey-1-1: #f4f4f4;
+  --grey-2: #f0f0f0;
+  --grey-3: #d9d9d9;
+  --grey-3-1: #898989;
+  --grey-4: #484848;
+  --grey-4-rgb: 72, 72, 72;
   --black: #000000;
   --black-rgb: 0, 0, 0;
 
@@ -78,4 +80,18 @@ pre {
   font: inherit;
   vertical-align: baseline;
   letter-spacing: -0.5px;
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.react-calendar {
+  margin: 0 2rem !important;
+  background-color: rgba(95, 133, 191, 0.4) !important;
+  border-radius: 0.5rem !important;
+  border: none !important;
 }

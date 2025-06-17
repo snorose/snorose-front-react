@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   overflow-y: scroll;
-  padding: 0 1.25rem;
+  padding: 0 2rem;
 }
 
 .pageFrame form {
@@ -13,8 +13,8 @@
   height: 100%;
 }
 .back {
-  margin-top: 0.875rem;
-  margin-bottom: 0.875rem;
+  margin-top: 1.4rem;
+  margin-bottom: 2rem;
 }
 .back:hover {
   cursor: pointer;
@@ -26,40 +26,52 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-y: scroll;
 }
 
 .arrowLeft {
-  margin-top: 0.875rem;
-  margin-bottom: 1.703rem;
+  margin-top: 1.4rem;
+  margin-bottom: 2.7rem;
 }
 
 .pageTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-top: 0.875rem;
-  margin-bottom: 3.5rem;
+  font: var(--text-title-1-bold);
+  margin-top: 1.4rem;
+  margin-bottom: 5.6rem;
 }
 
 .inputFrame {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
 }
 
 .buttonFrame {
-  margin-top: 1.5rem;
-  margin-bottom: 2.125rem;
+  margin-top: 2.4rem;
+  margin-bottom: 3.4rem;
 }
 
 .alert {
-  font-size: 12px;
+  font: var(--text-body-1-reg);
   color: grey;
-  padding: 0 2rem;
-  margin-top: 3rem;
-  line-height: 1.7;
   word-break: keep-all;
+  padding: 0 1.6rem;
 }
-.alert ul {
+.alert li {
   list-style-type: circle;
 }
-.alert a {
+.highlight {
   color: var(--blue-3);
+}
+.alertArrow {
+  margin-bottom: 1.2rem;
+}
+.googleFormBtn {
+  width: 8.5rem;
+  height: 3.6rem;
+  border-radius: 0.5rem;
+  border: solid 0.1rem var(--grey-3);
+  margin-top: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1rem;
 }

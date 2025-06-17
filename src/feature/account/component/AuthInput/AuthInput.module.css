@@ -1,23 +1,27 @@
 .label {
-  margin-bottom: 0.375rem;
   display: inline-block;
-  font-weight: 500;
-  font-size: 0.875rem;
-  color: var(--gray-4);
+  margin-bottom: 0.6rem;
+
+  font: var(--text-headline-2-med);
+
+  color: var(--grey-4);
 }
 
 .input {
   width: 100%;
-  padding: 0.75rem 0 0.6875rem 0.8125rem;
-  background: var(--gray-1-1);
-  border-radius: 0.3125rem;
+  height: 5rem;
+  padding: 0 1.3rem;
+  border-radius: 0.5rem;
   border: none;
   outline: none;
-  font-size: 0.75rem;
+
+  font: var(--text-body-1-reg);
+
+  background: var(--grey-1-1);
 }
 
 .input::placeholder {
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
 }
 
 .input.isInvalid {
@@ -26,7 +30,9 @@
 }
 
 .errorMessage {
-  margin-top: 3px;
-  font-size: 0.6875rem;
+  margin-top: 0.3rem;
+
+  font: var(--text-body-1-reg);
+
   color: var(--pink-3);
 }

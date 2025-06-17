@@ -11,13 +11,23 @@
 
 .submitBtn {
   background-color: transparent;
-  padding: 0.875rem 1.25rem;
-  font-size: 1rem;
+  padding: 1.4rem 2rem;
+  font-size: 1.6rem;
 }
 
 .contentContainer {
   display: flex;
   flex-direction: column;
-  padding: 0.875rem 1.25rem;
-  gap: 1.75rem;
+  padding: 1.4rem 2rem;
+  gap: 5.1rem;
+}
+
+.pageTitle {
+  font: var(--text-title-1-bold);
+}
+
+.updatePasswordForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
 }

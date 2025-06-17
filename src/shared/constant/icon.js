@@ -10,6 +10,7 @@ export const STATIC_ICON_LIST = Object.freeze({
   ban: 'ban',
   bell: 'bell',
   bellFill: 'bell-fill',
+  blackCloud: 'black-cloud',
   blueCamera: 'blue-camera',
   blueTriangle: 'blue-triangle',
   calendar: 'calendar',
@@ -20,6 +21,7 @@ export const STATIC_ICON_LIST = Object.freeze({
   checkCircle: 'check-circle',
   checkCircleFill: 'check-circle-fill',
   checkThick: 'check-thick',
+  chevronRight: 'chevron-right',
   comment: 'comment',
   commentCircle: 'comment-circle',
   ellipsisVertical: 'ellipsis-vertical',
@@ -76,9 +78,6 @@ export const STROKE_ICON_LIST = Object.freeze({
 });
 
 export const ILLUSTRATION_ICON_LIST = Object.freeze({
-  starAlert: 'star-alert',
-  starCheck: 'star-check',
-  starMail: 'star-mail',
   starNoComment: 'star-no-comment',
   starNoPost: 'star-no-post',
   starNoReview: 'star-no-review',

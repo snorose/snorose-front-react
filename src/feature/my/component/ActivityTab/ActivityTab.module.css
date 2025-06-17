@@ -1,15 +1,15 @@
 .infoWrapper {
   display: flex;
   flex-direction: column;
-  padding: 4px 13px;
-  margin: 0 20px;
-  border-radius: 5px;
-  background: var(--gray-1);
+  padding: 0.4rem 1.3rem;
+  margin: 0 2rem;
+  border-radius: 0.5rem;
+  background: var(--grey-1);
 }
 
 /* 내 활동, 이용안내 */
 .itemList {
-  border-bottom: 1px solid var(--gray-3);
+  border-bottom: 0.1rem solid var(--grey-3);
 
   &:last-child {
     border-bottom: none;
@@ -24,13 +24,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
-  color: var(--gray-4);
-  font-size: 14px;
-  font-weight: 500;
+  padding: 1.2rem 0;
+  color: var(--grey-4);
+  font: var(--text-headline-2-med);
 
   svg {
-    width: 16px;
-    height: 16px;
+    width: 2.4rem;
+    height: 2.4rem;
   }
 }

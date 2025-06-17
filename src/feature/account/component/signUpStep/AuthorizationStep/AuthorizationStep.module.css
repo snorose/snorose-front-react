@@ -6,14 +6,16 @@
 }
 
 .title {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
+  margin-bottom: 0.6rem;
 }
 
 .text {
-  margin-bottom: 1.688rem;
+  font: var(--text-headline-2-reg);
+  color: var(--grey-4);
+  margin-bottom: 2.4rem;
 }
 
 .submit {
-  margin-bottom: 2.125rem;
+  margin-bottom: 3.4rem;
 }

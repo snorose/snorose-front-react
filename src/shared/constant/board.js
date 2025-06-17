@@ -1,7 +1,10 @@
+import besookt from '@/assets/images/besookt-board-page.svg';
+import financeAudit from '@/assets/images/financeAudit-board-page.svg';
 import firstSnow from '@/assets/images/firstSnow-board-page.svg';
+import graduationPreparation from '@/assets/images/graduationPreparation-board-page.svg';
 import largeSnow from '@/assets/images/largeSnow-board-page.svg';
 import permanentSnow from '@/assets/images/permanentSnow-board-page.svg';
-import besookt from '@/assets/images/besookt-board-page.svg';
+import studentCouncil from '@/assets/images/studentCouncil-board-page.svg';
 
 export const BOARD_ID = Object.freeze({
   all: 0, // 프론트에서만 사용하는 보드 ID
@@ -10,6 +13,9 @@ export const BOARD_ID = Object.freeze({
   'large-snow': 22,
   'permanent-snow': 23,
   'exam-review': 32,
+  'student-council': 60,
+  'graduation-preparation': 61,
+  'finance-audit': 62,
 });
 
 export const BOARDS = Object.freeze([
@@ -31,6 +37,21 @@ export const BOARDS = Object.freeze([
     id: 23,
     name: '만년설방',
     path: '/board/permanent-snow',
+  },
+  {
+    id: 60,
+    name: '총학생회',
+    path: '/board/student-council',
+  },
+  {
+    id: 61,
+    name: '졸업준비위원회',
+    path: 'graduation-preparation',
+  },
+  {
+    id: 62,
+    name: '재정감사위원회',
+    path: '/board/finance-audit',
   },
 ]);
 
@@ -56,7 +77,7 @@ export const BOARD_MENUS = [
     to: '/board/large-snow',
     textId: 'large-snow',
     title: '함박눈방',
-    desc: '눈송이 모두가\n이용하는 커뮤니티',
+    desc: '눈송이 모두의 커뮤니티',
     image: largeSnow,
   },
   {
@@ -91,7 +112,46 @@ export const BOARD_MENUS = [
     desc: '시험후기 공지글 게시판',
     image: besookt,
   },
+  {
+    id: 60,
+    to: '/board/student-council',
+    textId: 'student-council',
+    title: '총학생회',
+    desc: '총학생회 공지',
+    image: studentCouncil,
+  },
+  {
+    id: 61,
+    to: '/board/graduation-preparation',
+    textId: 'graduation-preparation',
+    title: '졸업준비위원회',
+    desc: '졸업준비위원회 공지',
+    image: graduationPreparation,
+  },
+  {
+    id: 62,
+    to: '/board/finance-audit',
+    textId: 'finance-audit',
+    title: '재정감사위원회',
+    desc: '재정감사 보고',
+    image: financeAudit,
+  },
 ];
+
+// 공식게시판
+export const OFFICIAL_BOARD = Object.freeze([
+  'student-council',
+  'graduation-preparation',
+  'finance-audit',
+]);
+
+// 뱃지가 보이는 경로 (일반 게시판에서는 리자의 뱃지가 안보이게 설정)
+export const SHOW_BADGE_PATH = Object.freeze([
+  '/notice',
+  '/student-council',
+  'finance-audit',
+  '/graduation-preparation',
+]);
 
 // 게시글 신고
 export const POST_REPORT_TYPE_ENUM = Object.freeze({

@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button, Icon } from '@/shared/component';
 
 import styles from './SignUpSuccessPage.module.css';
+
+import { taskCompleteIllustration } from '@/assets/illustrations';
 
 export default function SignUpSuccessPage() {
   const navigate = useNavigate();
@@ -13,22 +15,31 @@ export default function SignUpSuccessPage() {
     try {
       const checkAccess = state.access;
     } catch (e) {
-      navigate('/login');
+      //navigate('/login');
     }
   }, []);
 
   return (
     <div className={styles.pageFrame}>
       <div>
-        <Icon id='check-thick' width={24} height={24} className={styles.icon} />
+        <Icon
+          id='check-thick'
+          width={'2.4rem'}
+          height={'2.4rem'}
+          className={styles.icon}
+        />
         <p className={styles.title}>스노로즈 가입이 완료되었어요!</p>
-        <p>
+        <p className={styles.explanation}>
           별도의 인증 절차 후<br />
           스노로즈 전체 서비스를 이용하실 수 있어요
         </p>
       </div>
       <div className={styles.img}>
-        <Icon id='star-check' width={231} height={217} />
+        <img
+          src={taskCompleteIllustration}
+          alt='회원가입 성공을 알리는 일러스트'
+          className={styles.illustration}
+        />
       </div>
 
       <div>

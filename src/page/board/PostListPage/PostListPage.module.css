@@ -1,32 +1,31 @@
 .container {
-  padding-top: 3.375rem;
+  padding-top: 5.4rem;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  font-size: 0.5rem;
   overflow-y: auto;
 }
 
 .top {
   width: 100%;
-  padding: 0.625rem var(--default-margin);
+  padding: 1rem var(--default-margin);
 }
 
 .notificationBar {
-  padding: 0.688rem 0.938rem;
+  padding: 0.9rem 1.5rem;
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 0.861rem;
-  border-radius: 0.3125rem;
+  gap: 1rem;
+  border-radius: 0.5rem;
   background-color: var(--pink-1);
-  font-size: 0.8125rem;
+  font: var(--text-body-1-reg);
   color: var(--pink-3);
   box-sizing: border-box;
   cursor: pointer;
 }
 
 .writeButton {
-  bottom: 1.1875rem;
+  bottom: 1.9rem;
 }

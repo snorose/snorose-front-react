@@ -127,29 +127,32 @@ export default function ChangePwPage() {
       </header>
 
       <section className={styles.contentContainer}>
-        <PwInput
-          title='현재 비밀번호'
-          placeholder='기존 비밀번호를 입력하세요'
-          value={currentPassword}
-          isStatic
-          onChange={handleCurrentPasswordInputChange}
-        />
+        <h1 className={styles.pageTitle}>비밀번호 변경</h1>
+        <div className={styles.updatePasswordForm}>
+          <PwInput
+            title='현재 비밀번호'
+            placeholder='기존 비밀번호를 입력하세요'
+            value={currentPassword}
+            isStatic
+            onChange={handleCurrentPasswordInputChange}
+          />
 
-        <PwInput
-          title='새 비밀번호'
-          placeholder='새로운 비밀번호를 입력하세요'
-          value={newPassword}
-          errorMessage={newPasswordError}
-          onChange={handleNewPasswordInputChange}
-        />
+          <PwInput
+            title='새 비밀번호'
+            placeholder='새로운 비밀번호를 입력하세요'
+            value={newPassword}
+            errorMessage={newPasswordError}
+            onChange={handleNewPasswordInputChange}
+          />
 
-        <PwInput
-          title='새 비밀번호 확인'
-          placeholder='새 비밀번호를 다시 입력하세요'
-          value={newPasswordCheck}
-          errorMessage={newPasswordCheckError}
-          onChange={handleConfirmNewPasswordInputChange}
-        />
+          <PwInput
+            title='새 비밀번호 확인'
+            placeholder='새 비밀번호를 다시 입력하세요'
+            value={newPasswordCheck}
+            errorMessage={newPasswordCheckError}
+            onChange={handleConfirmNewPasswordInputChange}
+          />
+        </div>
       </section>
     </main>
   );

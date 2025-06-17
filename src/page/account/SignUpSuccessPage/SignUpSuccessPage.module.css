@@ -1,20 +1,24 @@
 .pageFrame {
   height: 100%;
-  padding: 0 1.25rem;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .icon {
-  margin-top: 3.313rem;
-  margin-bottom: 1.188rem;
+  margin-top: 5.3rem;
+  margin-bottom: 1.9rem;
 }
 
 .title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+  font: var(--text-title-1-bold);
+  margin-bottom: 0.6rem;
+}
+
+.explanation {
+  font: var(--text-headline-2-reg);
+  color: var(--grey-4);
 }
 
 .img {
@@ -25,7 +29,13 @@
   align-items: center;
 }
 
+.illustration {
+  width: 25rem;
+  height: 25rem;
+  flex-shrink: 0;
+}
+
 .submit {
-  margin-top: 1.875rem;
-  margin-bottom: 2.125rem;
+  margin-top: 3rem;
+  margin-bottom: 3.9rem;
 }

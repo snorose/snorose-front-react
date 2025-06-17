@@ -1,3 +1,6 @@
+import { attendanceLoader } from '@/shared/loader';
+import { ROLE } from '@/shared/constant';
+
 import App from '@/App';
 import {
   LoginPage,
@@ -44,9 +47,8 @@ import {
 } from '@/page/user';
 
 import ProtectedRoute from '@/ProtectedRoute';
+import { MaintenancePage } from '@/page/maintenance';
 // import { AlertPage } from '@/pages/AlertPage';
-
-import { ROLE } from '@/shared/constant';
 
 import { CheckExamPeriodRoute } from '@/feature/exam/lib';
 
@@ -70,6 +72,12 @@ const getRolesForReadBoard = (boardPath) => {
         ROLE.official,
         ROLE.blacklist,
       ];
+    case 'student-council':
+      return [ROLE.user, ROLE.admin, ROLE.official];
+    case 'graduation-preparation':
+      return [ROLE.user, ROLE.admin, ROLE.official];
+    case 'finance-audit':
+      return [ROLE.user, ROLE.admin, ROLE.official];
     default:
       return [];
   }
@@ -85,6 +93,10 @@ const getRolesForWriteBoard = (boardPath) => {
       return [ROLE.user, ROLE.admin];
     case 'notice':
       return [ROLE.admin];
+    case 'student-council':
+    case 'finance-audit':
+    case 'graduation-preparation':
+      return [ROLE.admin, ROLE.official];
     default:
       return [];
   }
@@ -97,6 +109,9 @@ const boardPaths = [
   'besookt',
   'all',
   'notice',
+  'student-council',
+  'graduation-preparation',
+  'finance-audit',
 ];
 
 const boardRoutes = boardPaths.flatMap((boardPath) => [
@@ -105,7 +120,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        message={'게시판 접근 권한이 없습니다.'}
+        message={'게시판 접근 권한이 없어요'}
       >
         {boardPath === 'notice' ? <NoticeListPage /> : <PostListPage />}
       </ProtectedRoute>
@@ -119,7 +134,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        message={'게시판 접근 권한이 없습니다.'}
+        message={'게시판 접근 권한이 없어요'}
       >
         <NoticeListPage />
       </ProtectedRoute>
@@ -133,7 +148,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        message={'게시글 접근 권한이 없습니다.'}
+        message={'게시글 접근 권한이 없어요'}
       >
         <PostPage />
       </ProtectedRoute>
@@ -147,7 +162,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForWriteBoard(boardPath)}
-        message={'게시글 작성 권한이 없습니다.'}
+        message={'게시글 작성 권한이 없어요'}
       >
         <WritePostPage />
       </ProtectedRoute>
@@ -161,7 +176,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForWriteBoard(boardPath)}
-        message={'게시글 편집 권한이 없습니다.'}
+        message={'게시글 편집 권한이 없어요'}
       >
         <EditPostPage />
       </ProtectedRoute>
@@ -175,7 +190,7 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     element: (
       <ProtectedRoute
         roles={getRolesForReadBoard(boardPath)}
-        message={'게시판 접근 권한이 없습니다.'}
+        message={'게시판 접근 권한이 없어요'}
       >
         <SearchPage />
       </ProtectedRoute>
@@ -216,7 +231,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없습니다.'}
+            message={'시험후기 게시판 접근 권한이 없어요'}
           >
             <ExamReviewListPage />
           </ProtectedRoute>
@@ -227,7 +242,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없습니다.'}
+            message={'시험후기 게시판 접근 권한이 없어요'}
           >
             <NoticeListPage />
           </ProtectedRoute>
@@ -241,7 +256,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없습니다.'}
+            message={'시험후기 게시판 접근 권한이 없어요'}
           >
             <ExamReviewListPage />
           </ProtectedRoute>
@@ -253,7 +268,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 접근 권한이 없습니다.'}
+            message={'시험후기 접근 권한이 없어요'}
           >
             <ExamReviewPage />
           </ProtectedRoute>
@@ -267,7 +282,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'공지글 접근 권한이 없습니다.'}
+            message={'공지글 접근 권한이 없어요'}
           >
             <PostPage />
           </ProtectedRoute>
@@ -281,7 +296,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.admin]}
-            message={'공지글 수정 권한이 없습니다.'}
+            message={'공지글 수정 권한이 없어요'}
           >
             <EditPostPage />
           </ProtectedRoute>
@@ -295,7 +310,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 수정 권한이 없습니다.'}
+            message={'시험후기 수정 권한이 없어요'}
           >
             <EditExamReviewPage />
           </ProtectedRoute>
@@ -310,7 +325,7 @@ export const routeList = [
           <CheckExamPeriodRoute>
             <ProtectedRoute
               roles={[ROLE.user, ROLE.admin]}
-              message={'시험후기 작성 권한이 없습니다.'}
+              message={'시험후기 작성 권한이 없어요'}
             >
               <WriteExamReviewPage />
             </ProtectedRoute>
@@ -323,6 +338,7 @@ export const routeList = [
       {
         path: '/attendance',
         element: <AttendancePage />,
+        loader: attendanceLoader,
         meta: {
           hideNav: true,
         },
@@ -462,13 +478,12 @@ export const routeList = [
           hideNav: true,
         },
       },
-
       {
         path: '/verify',
         element: (
           <ProtectedRoute
             roles={[ROLE.preUser, ROLE.admin]}
-            message='이미 인증을 완료했거나 인증 대상이 아닙니다'
+            message='이미 인증을 완료했거나 인증 대상이 아니에요'
           >
             <SnoroseVerifyPage />
           </ProtectedRoute>
@@ -543,6 +558,13 @@ export const routeList = [
       {
         path: '/signup/failure',
         element: <SignUpFailurePage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/maintenance',
+        element: <MaintenancePage />,
         meta: {
           hideNav: true,
         },

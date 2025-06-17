@@ -5,52 +5,52 @@
   position: fixed;
   top: 0;
   left: 50%;
-  z-index: 101;
+  z-index: 1;
   width: 100vw;
   max-width: var(--default-width);
   height: 100vh;
   justify-content: center;
   transform: translateX(-50%);
   background: rgba(228, 228, 228, 0.6);
-  backdrop-filter: blur(0.625rem);
+  backdrop-filter: blur(1rem);
   /* Note: backdrop-filter has minimal browser support */
 }
 
 .container {
-  width: 18rem;
-  border-radius: 0.625rem;
+  width: 29rem;
+  border-radius: 1rem;
   background: var(--white);
 }
 
 .top {
   display: flex;
   justify-content: center;
-  padding: 1rem 0;
-  border-bottom: 0.5px solid var(--gray-2);
+  padding: 1.6rem 0;
+  border-bottom: 0.05rem solid var(--grey-2);
 }
 
 /* OptionModal: 옵션이 있는 모달 스타일 */
 
 .title {
   color: var(--pink-3);
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: 500;
 }
 
 .center {
-  padding-top: 1.5rem;
+  padding-top: 2.4rem;
 }
 
 .bottom {
   display: flex;
   justify-content: end;
-  padding: 0.375rem 1.75rem 0.625rem 1.75rem;
+  padding: 0.6rem 2.8rem 1rem 2.8rem;
 }
 
 .leftCloseBtn {
-  padding: 0.625rem;
-  color: var(--gray-3-1);
-  font-size: 0.875rem;
+  padding: 1rem;
+  color: var(--grey-3-1);
+  font-size: 1.4rem;
   font-weight: 500;
   cursor: pointer;
 }
@@ -58,14 +58,14 @@
 .options {
   display: flex;
   flex-direction: column;
-  row-gap: 0.5rem;
-  padding: 0 1.875rem;
+  row-gap: 0.8rem;
+  padding: 0 3rem;
 }
 
 .optionBar {
   display: flex;
-  gap: 0.9375rem;
-  padding: 0.25rem 0;
+  gap: 1.5rem;
+  padding: 0.4rem 0;
   cursor: pointer;
 }
 
@@ -73,12 +73,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1.875rem;
+  width: 3rem;
 }
 
 .optionText {
-  color: var(--gray-4);
-  font-size: 0.875rem;
+  color: var(--grey-4);
+  font-size: 1.4rem;
 }
 
 /* DeleteModal: 삭제 모달 스타일 */
@@ -86,36 +86,36 @@
 .noBottomLineTop {
   display: flex;
   justify-content: center;
-  padding: 1rem 0 0 0;
+  padding: 1.6rem 0 0 0;
 }
 
 .deleteCenter {
   display: flex;
-  color: var(--gray-4);
+  color: var(--grey-4);
   justify-content: center;
-  color: var(--gray-4);
-  font-size: 0.8125rem;
-  padding-bottom: 0.625rem;
+  color: var(--grey-4);
+  font-size: 1.3rem;
+  padding-bottom: 1rem;
 }
 
 .deleteOrBack {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gray-3-1);
-  font-size: 0.875rem;
+  color: var(--grey-3-1);
+  font-size: 1.4rem;
   font-weight: 500;
-  gap: 5rem;
-  padding: 0.125rem 0 0.625rem 0;
+  gap: 8rem;
+  padding: 0.2rem 0 1rem 0;
 }
 
 .redBtn {
   color: var(--pink-3);
-  padding: 0.625rem;
+  padding: 1rem;
   cursor: pointer;
 }
 
 .greyBtn {
-  padding: 0.625rem;
+  padding: 1rem;
   cursor: pointer;
 }

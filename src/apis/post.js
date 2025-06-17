@@ -93,7 +93,7 @@ export const patchPost = async ({
   deleteAttachments,
 }) => {
   const editedPost = {
-    postId: postId,
+    postId,
     category: null,
     title: title,
     content: content,

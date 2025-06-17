@@ -2,33 +2,39 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2.75rem 0 7rem;
+  margin: 4.4rem 0 11.2rem;
   background: linear-gradient(180deg, #f9f9f9 0%, var(--white) 100%);
-  padding-top: 1.75rem;
+  padding-top: 2.8rem;
 }
 
 .info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  margin-top: 0.875rem;
-  font-size: 10px;
+  gap: 0.6rem;
+  margin: 1.4rem 0 0.9rem 0;
+
+  font: var(--text-body-2-reg);
   text-align: center;
-  color: #6a6a6a;
+
+  color: var(--grey-3-1);
 }
 
-.email {
-  font-size: 11px;
+.info .bold {
+  font: var(--text-body-2-med);
 }
 
 .menu {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font: var(--text-body-2-reg);
+
+  color: var(--grey-3-1);
 }
 
 .link {
   display: flex;
-  padding: 0 6px;
+  padding: 0 0.6rem;
 }

@@ -1,17 +1,16 @@
 .profileImage {
-  width: 135px;
-  height: 135px;
-  padding: 6px;
+  width: 13.5rem;
+  height: 13.5rem;
+  padding: 0.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 125px;
+  top: 12.5rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
   overflow: hidden;
-  filter: drop-shadow(0 4px 4px rgba(var(--black-rgb), 0.15));
 }
 
 .profileImage img {

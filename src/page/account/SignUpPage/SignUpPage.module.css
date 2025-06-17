@@ -1,6 +1,6 @@
 .pageFrame {
   width: 100%;
-  padding: 0 1.25rem;
+  padding: 0 2rem;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -17,16 +17,17 @@
 }
 
 .navFrame {
-  height: 2.75rem;
+  height: 4.4rem;
   display: flex;
   align-items: center;
 }
 
-.stageDotsFrame {
-  margin-top: 0.813rem;
-  margin-bottom: 1.813rem;
+.arrowLeft {
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
 }
 
-.submit {
-  margin-bottom: 2.125rem;
+.stageDotsFrame {
+  margin-top: 1.3rem;
+  margin-bottom: 3rem;
 }

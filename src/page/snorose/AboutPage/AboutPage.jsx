@@ -31,10 +31,16 @@ export default function AboutPage() {
           <pre className={styles.aboutUs}>{ABOUT_SNOROSE}</pre>
         </Accordion>
         <Accordion title='스노로즈 연혁'>
-          <AccordionListItem list={SNOROSE_HISTORY} />
+          <AccordionListItem
+            list={SNOROSE_HISTORY}
+            listName='SNOROSE_HISTORY'
+          />
         </Accordion>
         <Accordion title='회원 등급 설명'>
-          <AccordionListItem list={SNOROSE_MEMBERSHIP_LEVEL} />
+          <AccordionListItem
+            list={SNOROSE_MEMBERSHIP_LEVEL}
+            listName='SNOROSE_MEMBERSHIP_LEVEL'
+          />
         </Accordion>
         <Accordion title='명예의 전당'>
           <section className={styles.hallOfFame}>

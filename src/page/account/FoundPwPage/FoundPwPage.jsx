@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { BackAppBar, Button, Icon } from '@/shared/component';
+import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './FoundPwPage.module.css';
+
+import { emailSendIllustration } from '@/assets/illustrations';
 
 export default function FoundPwPage() {
   const navigate = useNavigate();
@@ -40,12 +42,21 @@ export default function FoundPwPage() {
         </div>
       </div>
       <div className={styles.pageMiddleFrame}>
-        <Icon id='star-mail' width={231} height={217} />
+        <img
+          src={emailSendIllustration}
+          alt='이메일로 비밀번호를 전송했음을 알리는 일러스트'
+          className={styles.illustration}
+        />
       </div>
       <div className={styles.pageBottomFrame}>
-        <Link to='/find-pw'>
+        <Link to='/login'>
           <div className={styles.loginButton}>
-            <Button btnName='뒤로가기' className='right' />
+            <Button btnName='로그인하기' className='right' />
+          </div>
+        </Link>
+        <Link to='/find-id'>
+          <div className={styles.findIdButton}>
+            <Button btnName='아이디를 잊어버렸어요' className='ready' />
           </div>
         </Link>
       </div>

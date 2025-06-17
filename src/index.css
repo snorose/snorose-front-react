@@ -1,53 +1,6 @@
-:root {
-  --default-width: 600px;
-  --default-margin: 1.25rem;
-
-  /* Color */
-
-  /* Blue */
-  --blue-0: #eaf5fd;
-  --blue-1: #ddebf6;
-  --blue-2: #bfd7ec;
-  --blue-3: #5f86bf;
-  --blue-4: #00368e;
-
-  /* Pink */
-  --pink-1: #fee9eb;
-  --pink-2: #ff849a;
-  --pink-3: #ff4b6c;
-
-  /* Gray */
-  --white: #ffffff;
-  --white-rgb: 255, 255, 255;
-  --gray-1: #f8f8f8;
-  --gray-1-1: #f4f4f4;
-  --gray-2: #f0f0f0;
-  --gray-3: #d9d9d9;
-  --gray-3-1: #898989;
-  --gray-4: #484848;
-  --gray-4-rgb: 72, 72, 72;
-  --black: #000000;
-  --black-rgb: 0, 0, 0;
-
-  /* Gradient */
-  --gradient-1: radial-gradient(
-    148.79% 155.78% at 31.85% 57.65%,
-    var(--blue-4) 0%,
-    var(--blue-3) 100%
-  );
-  --gradient-2: radial-gradient(
-    122.47% 119.54% at 77.84% 58.88%,
-    #c5d2ff 29.14%,
-    #82b5ff 100%
-  );
-}
-
-/* reset */
-
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@import './style/reset.css';
+@import './style/variable.css';
+@import './style/font.css';
 
 html,
 body,
@@ -55,88 +8,17 @@ body,
   height: 100%;
 }
 
-html,
-body,
-header,
-nav,
-main,
-article,
-section,
-aside,
-footer,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-div,
-p,
-span,
-ul,
-ol,
-fieldset,
-legend,
-label,
-form,
-input,
-button,
-select,
-option,
-textarea,
-pre {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font: inherit;
-  vertical-align: baseline;
-  letter-spacing: -0.5px;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-
-img,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-ul,
-ol {
-  list-style: none;
-}
-
-a,
-abbr {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  outline: none;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-/* style */
-
 html {
   background-color: #dfdfdf;
+  font-size: 62.5%;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
 }
 
 body {
   padding: 0 !important;
-  margin: 0;
   overflow: hidden;
+
   font-family:
     'Spoqa Han Sans Neo',
     -apple-system,
@@ -152,8 +34,7 @@ body {
     sans-serif;
   font-display: swap;
   font-optical-sizing: auto;
-  line-height: 1.5;
-  overflow: hidden;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -170,16 +51,19 @@ body {
   display: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#modal {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 #toast {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 0.4rem;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -188,14 +72,14 @@ code {
 }
 
 .react-calendar {
-  margin: 0 1.25rem;
+  margin: 0 2rem;
   background-color: rgba(95, 133, 191, 0.4);
-  border-radius: 0.3125rem;
+  border-radius: 0.5rem;
   border: none;
 }
 
-@media screen and (max-width: 400px) {
+/* @media screen and (max-width: 400px) {
   html {
-    font-size: 14px;
+    font-size: 55%
   }
-}
+} */

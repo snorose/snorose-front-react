@@ -1,22 +1,28 @@
+import { useMutation } from '@tanstack/react-query';
 import { forwardRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
 
 import { reportComment } from '@/apis';
 
-import { useModal, useToast } from '@/shared/hook';
 import {
+  Badge,
   ConfirmModal,
   DeleteModal,
   Icon,
   OptionModal,
 } from '@/shared/component';
-import { timeAgo, convertHyperlink } from '@/shared/lib';
-import { MUTATION_KEY, LIKE_TYPE } from '@/shared/constant';
+import {
+  LIKE_TYPE,
+  MUTATION_KEY,
+  ROLE,
+  SHOW_BADGE_PATH,
+} from '@/shared/constant';
+import { useModal, useToast } from '@/shared/hook';
+import { convertHyperlink, timeAgo } from '@/shared/lib';
 
+import { NestedComment } from '@/feature/comment/component';
 import { useCommentContext } from '@/feature/comment/context';
 import { useComment } from '@/feature/comment/hook';
-import { NestedComment } from '@/feature/comment/component';
 import { useLike } from '@/feature/like/hook';
 
 import styles from './Comment.module.css';
@@ -31,6 +37,8 @@ const Comment = forwardRef((props, ref) => {
     setContent,
     inputFocus,
     resetCommentState,
+    isInputFocused,
+    setIsInputFocused,
   } = useCommentContext();
   const { deleteComment } = useComment();
   const { like, unlike } = useLike({
@@ -86,9 +94,11 @@ const Comment = forwardRef((props, ref) => {
     resetCommentState();
     setCommentId(data.id);
     inputFocus();
+    setIsInputFocused({ isFocused: true, parent: String(data.id) });
   };
 
   const {
+    userRoleId,
     userDisplay,
     isWriterWithdrawn,
     content,
@@ -101,24 +111,30 @@ const Comment = forwardRef((props, ref) => {
     children,
   } = data;
 
+  // 뱃지가 보이는 ROLE
+  const showBadge =
+    userRoleId === ROLE.official ||
+    (userRoleId === ROLE.admin &&
+      SHOW_BADGE_PATH.some((path) => pathname.includes(path)));
+
   return (
     <>
       <div
         ref={ref}
         className={styles.comment}
         onClick={(event) => event.stopPropagation()}
-        style={{
-          backgroundColor: commentId === data.id ? '#DDEBF6' : '#f8f8f8',
-        }}
       >
         <div className={styles.commentTop}>
           <div className={styles.commentTopLeft}>
             <div className={styles.cloud}>
-              <Icon id='cloud' width={19} height={13} />
+              <Icon id='cloud' width={22} height={14} />
             </div>
             <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
               {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
             </p>
+            {showBadge && (
+              <Badge userRoleId={userRoleId} className={styles.badge} />
+            )}
             <p className={styles.dot}>·</p>
             <p>
               {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
@@ -129,7 +145,7 @@ const Comment = forwardRef((props, ref) => {
             onClick={(e) => onCommentOptionClick(data)}
           >
             {!isDeleted && isVisible && (
-              <Icon id='ellipsis-vertical' width={3} height={11} />
+              <Icon id='meat-ball' width={18} height={4} stroke='none' />
             )}
           </p>
         </div>
@@ -155,7 +171,16 @@ const Comment = forwardRef((props, ref) => {
                 type='button'
                 onClick={handleReply}
               >
-                <Icon id='comment' width={15} height={13} />
+                <Icon
+                  id='comment-stroke'
+                  width={20}
+                  height={17}
+                  fill={
+                    Number(isInputFocused.parent) === data.id
+                      ? '#5F86BF'
+                      : 'none'
+                  }
+                />
                 <p>{children.length}</p>
               </button>
               <button
@@ -164,10 +189,10 @@ const Comment = forwardRef((props, ref) => {
                 onClick={() => (isLiked ? unlike.mutate() : like.mutate())}
               >
                 <Icon
-                  id='like'
-                  width={13}
-                  height={12}
-                  fill={isLiked ? '#5F86BF' : '#D9D9D9'}
+                  id='like-stroke'
+                  width={16}
+                  height={18}
+                  fill={isLiked ? '#5F86BF' : 'none'}
                 />
                 <span>{likeCount.toLocaleString()}</span>
               </button>
