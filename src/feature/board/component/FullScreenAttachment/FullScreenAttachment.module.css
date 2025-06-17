@@ -24,8 +24,28 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  padding-bottom: 3rem;
 }
 .attachment {
+  max-width: 100%;
   margin: 0 auto;
+}
+/* Make video not block swipe gestures */
+.videoWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.videoElement {
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Show controls only on tap (optional UX) */
+.videoElement.showControls {
+  pointer-events: auto;
 }

@@ -15,6 +15,7 @@ export const getPosts = async (boardId, page = 0) => {
 // 게시글 상세 조회
 export const getPostContent = async (boardId, postId) => {
   const response = await authAxios.get(`/v1/boards/${boardId}/posts/${postId}`);
+  console.log(postId);
   return response?.data.result;
 };
 
@@ -33,9 +34,14 @@ export const postPost = async ({
     title: title,
     content: content,
     isNotice: isNotice,
-    attachments: attachmentsInfo.map(({ fileType, ...info }) => info),
+    attachments: attachmentsInfo.map(
+      ({ type, fileName, fileComment, ...info }) => ({
+        type,
+        fileName,
+        fileComment,
+      })
+    ),
   };
-  console.log(data);
   //'게시글 생성' API에서 받아오는 데이터
   const response = await authAxios.post(
     `/v1/boards/${boardId}/posts/newpost`,
@@ -47,17 +53,19 @@ export const postPost = async ({
     //attachmentUrlList 변수에 '게시글 생성' API한테 받은 이미지 S3 url 리스트 저장
     let attachmentUrlList = response.data.result.attachmentUrlList;
 
-    console.log(attachmentUrlList);
-    console.log(files);
     //각 S3 URL 리스트에 대해 반복
     for (let x = 0; x < attachmentUrlList.length; x++) {
       try {
-        await defaultAxios.put(`${attachmentUrlList[x]}`, files[x], {
-          baseURL: '',
-          headers: {
-            'Content-Type': `${attachmentsInfo[x].fileType}`,
-          },
-        });
+        await defaultAxios.put(
+          `${attachmentUrlList[x]}`,
+          attachmentsInfo[x].file,
+          {
+            baseURL: '',
+            headers: {
+              'Content-Type': `${attachmentsInfo[x].fileType}`,
+            },
+          }
+        );
       } catch (e) {
         console.log(e);
       }
@@ -81,21 +89,41 @@ export const patchPost = async ({
   title,
   content,
   isNotice,
+  attachmentsInfo,
+  deleteAttachments,
 }) => {
   const editedPost = {
     postId: postId,
     category: null,
     title: title,
     content: content,
-    isNotice: isNotice,
+    //isNotice: isNotice,
+    finalAttachments: attachmentsInfo.map((att) => ({
+      id: att.id,
+      fileName: att.fileName,
+      fileComment: att.fileComment,
+      type: att.type,
+    })),
+    deleteAttachments,
   };
 
-  const response = await authAxios.patch(
-    `/v1/boards/${boardId}/posts/${postId}/update`,
-    editedPost
-  );
+  try {
+    const response = await authAxios.patch(
+      `/v1/boards/${boardId}/posts/${postId}/update`,
+      editedPost
+    );
+    const newFiles = attachmentsInfo
+      .filter((att) => att.id === '')
+      .map((att) => att.file);
 
-  return response;
+    response.data.result.attachmentUrlList.map(async (url, index) => {
+      await defaultAxios.put(`${url}`, newFiles[index]);
+    });
+
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 // 게시글 신고

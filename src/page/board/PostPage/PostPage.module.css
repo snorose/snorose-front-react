@@ -133,6 +133,11 @@
   border-radius: 0.75rem;
   object-fit: cover;
 }
+.videoIcon {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+}
 .customScrollbar {
   height: 4px;
   background: rgba(0, 0, 0, 0.01); /* scrollbar track */

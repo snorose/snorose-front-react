@@ -14,6 +14,7 @@ export default function FullScreenAttachment({
   setClickedImageIndex,
 }) {
   const paginationRef = useRef(null);
+  const videoRefs = useRef([]);
   return (
     <div className={styles.fullScreenContainer}>
       <div className={styles.topContainer}>
@@ -49,7 +50,34 @@ export default function FullScreenAttachment({
         >
           {attachmentUrls.map((att, index) => (
             <SwiperSlide key={index} className={styles.attachmentsSlide}>
-              <img src={att} className={styles.attachment} draggable={false} />
+              {console.log(att)}
+              {att.type === 'PHOTO' ? (
+                <img
+                  src={att.url}
+                  className={styles.attachment}
+                  draggable={false}
+                />
+              ) : (
+                <div
+                  className={styles.videoWrapper}
+                  onClick={() => {
+                    const video = videoRefs.current[index];
+                    if (video.paused) {
+                      video.play();
+                    } else {
+                      video.pause();
+                    }
+                  }}
+                >
+                  <video
+                    ref={(el) => (videoRefs.current[index] = el)}
+                    src={att.url}
+                    className={`${styles.attachment} ${styles.videoElement}`}
+                    draggable={false}
+                    controls
+                  />
+                </div>
+              )}
             </SwiperSlide>
           ))}
         </Swiper>

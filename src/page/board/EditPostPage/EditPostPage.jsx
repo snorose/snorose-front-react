@@ -4,10 +4,11 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { AttachmentBar } from '@/feature/board/component';
-import { useAuth, useToast } from '@/shared/hook';
+import { useAuth, useToast, useModal } from '@/shared/hook';
 import {
   BackAppBar,
   CloseAppBar,
+  ConfirmModal,
   DeleteModal,
   FetchLoading,
   Icon,
@@ -43,12 +44,12 @@ export default function EditPostPage() {
   const [userDisplay, setUserDisplay] = useState('');
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
-  //'게시글 생성' API에서 요구하는 데이터 (중 attachments array)
+  //'게시글 상세 조회' API에서 제공하는 기존 첨부파일 정보
   const [attachmentsInfo, setAttachmentsInfo] = useState([]);
-  //'게시글 첨부파일 저장' API로 넘기는 데이터
-  const [files, setFiles] = useState([]);
-  //화면상 보여주기 위해 DataUrl로 전환한 이미지들
-  const [dataUrlImages, setDataUrlImages] = useState([]);
+  const [deleteAttachments, setDeleteAttachments] = useState([]);
+  const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
+  const [trashImageIndex, setTrashImageIndex] = useState(null);
+  const trashImageConfirmModal = useModal();
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
@@ -64,6 +65,7 @@ export default function EditPostPage() {
       setText(data.content);
       setIsNotice(data.isNotice);
       setUserDisplay(data.userDisplay);
+      setAttachmentsInfo(data.attachments);
     }
   }, [data]);
 
@@ -118,6 +120,8 @@ export default function EditPostPage() {
       title,
       content: text,
       isNotice,
+      attachmentsInfo,
+      deleteAttachments,
     });
   };
 
@@ -141,7 +145,13 @@ export default function EditPostPage() {
 
   return (
     <>
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        onClick={() => {
+          console.log(attachmentsInfo);
+          console.log(deleteAttachments);
+        }}
+      >
         <div>
           <div className={styles.top}>
             <CloseAppBar
@@ -206,15 +216,111 @@ export default function EditPostPage() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
+              <ul className={styles.imageList}>
+                {attachmentsInfo.map((att, index) => (
+                  <li
+                    key={index}
+                    className={styles.imageContainer}
+                    draggable
+                    onDragStart={(e) => {
+                      e.dataTransfer.setData('text/plain', index);
+                      e.dataTransfer.effectAllowed = 'move';
+                    }}
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                    }}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      const draggedIndex = parseInt(
+                        e.dataTransfer.getData('text/plain'),
+                        10
+                      );
+                      const droppedIndex = index;
+
+                      //같은 위치에 드롭했을 때
+                      if (draggedIndex === droppedIndex) return;
+
+                      setAttachmentsInfo((prev) => {
+                        const copy = [...prev];
+                        const [moved] = copy.splice(draggedIndex, 1);
+                        copy.splice(droppedIndex, 0, moved);
+                        return copy;
+                      });
+                    }}
+                  >
+                    {attachmentsInfo[index].type === 'PHOTO' ? (
+                      <img
+                        src={att.url || URL.createObjectURL(att.file)}
+                        className={styles.image}
+                      />
+                    ) : (
+                      <div className={styles.image}>
+                        <video
+                          src={att.url}
+                          playsInline
+                          className={styles.video}
+                          onClick={(e) => {
+                            const video = e.target;
+                            if (video.paused) {
+                              video.play();
+                            } else {
+                              video.pause();
+                            }
+                          }}
+                        />
+                        <Icon
+                          id='video-fill'
+                          width={'0.875rem'}
+                          height={'0.875rem'}
+                          className={styles.videoIcon}
+                        />
+                      </div>
+                    )}
+                    <Icon
+                      id='image-select-bar'
+                      width={'1.875rem'}
+                      height={'6rem'}
+                      fill='white'
+                      className={styles.imageSelectBar}
+                    />
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
-
-        <AttachmentBar
-          setAttachmentsInfo={setAttachmentsInfo}
-          setFiles={setFiles}
-          setDataUrlImages={setDataUrlImages}
+        <Icon
+          id='trashcan'
+          width='6.25rem'
+          height='6.25rem'
+          className={`${isTrashOverlapped ? styles.trashVisible : styles.trashInvisible}`}
+          onDragEnter={(e) => {
+            e.preventDefault();
+            setIsTrashOverlapped(true);
+          }}
+          onDragOver={(e) => {
+            setIsTrashOverlapped(true);
+            e.preventDefault();
+          }}
+          onDragLeave={(e) => {
+            e.preventDefault();
+            setIsTrashOverlapped(false);
+          }}
+          onDrop={(e) => {
+            e.preventDefault();
+            const draggedIndex = parseInt(
+              e.dataTransfer.getData('text/plain'),
+              10
+            );
+            setDeleteAttachments((prev) => [
+              ...prev,
+              attachmentsInfo[draggedIndex].id,
+            ]);
+            setTrashImageIndex(draggedIndex);
+            trashImageConfirmModal.openModal();
+          }}
         />
+        <AttachmentBar setAttachmentsInfo={setAttachmentsInfo} />
       </div>
 
       <DeleteModal
@@ -222,6 +328,26 @@ export default function EditPostPage() {
         isOpen={isCheckModalOpen}
         closeFn={() => setIsCheckModalOpen(false)}
         redBtnFunction={() => navigate(-1, { replace: true })}
+      />
+      <ConfirmModal
+        isBackgroundBlurred={false}
+        isOpen={trashImageConfirmModal.isOpen}
+        title='삭제하시겠습니까?'
+        primaryButtonText='확인'
+        secondaryButtonText='취소'
+        onPrimaryButtonClick={() => {
+          setAttachmentsInfo((prev) =>
+            prev
+              .slice(0, trashImageIndex)
+              .concat(prev.slice(trashImageIndex + 1))
+          );
+          setIsTrashOverlapped(false);
+          trashImageConfirmModal.closeModal();
+        }}
+        onSecondaryButtonClick={() => {
+          trashImageConfirmModal.closeModal();
+          setIsTrashOverlapped(false);
+        }}
       />
     </>
   );

@@ -101,6 +101,63 @@
   white-space: pre-wrap; /* 줄바꿈과 공백을 유지 */
 }
 
+.trashInvisible {
+  opacity: 0%;
+  pointer-events: all;
+  width: fit-content;
+  position: fixed;
+  bottom: 6rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.trashVisible {
+  opacity: 100%;
+  pointer-events: all;
+  width: fit-content;
+  position: fixed;
+  bottom: 6rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.imageList {
+  cursor: default;
+}
+
+.imageContainer {
+  width: fit-content;
+  display: flex;
+  margin-bottom: 1.25rem;
+  list-style-type: none;
+}
+
+.image {
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  object-fit: cover;
+}
+
+.video {
+  width: 6rem;
+  height: 6rem;
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  object-fit: cover;
+}
+
+.videoIcon {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+.imageSelectBar {
+  cursor: pointer;
+}
+
 .bottom {
   height: 100%;
 }

@@ -221,7 +221,7 @@ export default function PostPage() {
           className={styles.contentText}
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
-        {Object.keys(data.attachmentUrlMap).length !== 0 && (
+        {data.attachments.length !== 0 && (
           <div className={styles.swiperContainer}>
             <Swiper
               className={styles.attachmentsContainer}
@@ -242,12 +242,13 @@ export default function PostPage() {
               freeMode={true}
               loop={false}
             >
-              {Object.entries(data.attachmentUrlMap).map(
-                ([id, presignedUrl], index) => (
-                  <SwiperSlide key={index} className={styles.attachmentSlide}>
-                    <div className={styles.attchmentDiv}>
+              {data.attachments.map((item, index) => (
+                <SwiperSlide key={index} className={styles.attachmentSlide}>
+                  <div className={styles.attchmentDiv}>
+                    {console.log(item)}
+                    {item.type === 'PHOTO' ? (
                       <img
-                        src={presignedUrl}
+                        src={item.url}
                         className={styles.attachment}
                         draggable={false}
                         onClick={() => {
@@ -255,10 +256,28 @@ export default function PostPage() {
                           setClickedImageIndex(index + 1);
                         }}
                       />
-                    </div>
-                  </SwiperSlide>
-                )
-              )}
+                    ) : (
+                      <div>
+                        <video
+                          src={item.url}
+                          className={styles.attachment}
+                          draggable={false}
+                          onClick={() => {
+                            //이미지 클릭 시 전체화면 보기 가능
+                            setClickedImageIndex(index + 1);
+                          }}
+                        />
+                        <Icon
+                          id='video-fill'
+                          width={'0.875rem'}
+                          height={'0.875rem'}
+                          className={styles.videoIcon}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </SwiperSlide>
+              ))}
             </Swiper>
             <div ref={scrollbarRef} className={styles.customScrollbar} />
           </div>
@@ -352,7 +371,7 @@ export default function PostPage() {
       />
       {clickedImageIndex !== 0 && (
         <FullScreenAttachment
-          attachmentUrls={Object.values(data.attachmentUrlMap)}
+          attachmentUrls={data.attachments}
           clickedImageIndex={clickedImageIndex}
           setClickedImageIndex={setClickedImageIndex}
         />

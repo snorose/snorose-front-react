@@ -6,12 +6,7 @@ import { Icon } from '@/shared/component';
 
 import styles from './AttachmentBar.module.css';
 
-export default function AttachmentBar({
-  setAttachmentsInfo,
-  setDataUrlImages,
-  files,
-  setFiles,
-}) {
+export default function AttachmentBar({ setAttachmentsInfo }) {
   const { toast } = useToast();
   const img = useRef();
   const vid = useRef();
@@ -26,45 +21,47 @@ export default function AttachmentBar({
     //인풋된 파일들 읽기
     //shallow copy 만들기
     const newFileArray = Array.from(newFiles);
-    const updated = [...files, ...newFileArray];
-    console.log(updated);
-    //첨부파일 개수 제한
-    if (updated.length > 10) {
-      toast('사진은 최대 10장까지만 첨부할 수 있습니다.');
-      return;
-    }
 
-    //첨부파일 용량 제한
-    for (let file of updated) {
-      totalFileSize = totalFileSize + file.size;
-    }
-    if (totalFileSize > maxFileSize) {
-      toast('최대 50MB까지만 첨부할 수 있습니다.');
-      return;
-    }
+    newFileArray.map((file) => {
+      setAttachmentsInfo((attArray) => [
+        ...attArray,
+        {
+          fileName: `${file.name}`,
+          fileComment: '',
+          fileType: file.type,
+          type: 'PHOTO',
+          //New Code
+          file: file,
+          id: '',
+        },
+      ]);
+    });
+  };
+  const changeVideoUpload = async (e) => {
+    const newFiles = e.target.files;
+    console.log(newFiles);
 
-    setFiles(updated);
+    const maxFileSize = 50 * 1024 * 1024; //50MB
+    let totalFileSize = 0;
 
-    const readFilesAsDataURLs = newFileArray.map((file) => {
-      //attachmentsInfo state에 데이터 넣기
+    //인풋된 파일들 읽기
+    //shallow copy 만들기
+    const newFileArray = Array.from(newFiles);
+
+    newFileArray.map((file) => {
       setAttachmentsInfo((attArray) => [
         ...attArray,
         {
           fileName: file.name,
           fileComment: '',
           fileType: file.type,
-          type: 'PHOTO',
+          type: 'VIDEO',
+          //New Code
+          file: file,
+          id: '',
         },
       ]);
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => resolve(reader.result);
-      });
     });
-
-    const imageDataUrls = await Promise.all(readFilesAsDataURLs);
-    setDataUrlImages((imgArray) => [...imgArray, ...imageDataUrls]);
   };
   const [imageIconState, setImageIconState] = useState('image');
   const [videoIconState, setVideoIconState] = useState('video');
@@ -78,6 +75,7 @@ export default function AttachmentBar({
           height={24}
           className={styles.image}
           onClick={() => {
+            //이거 고치기
             setImageIconState('image-fill');
             img.current.click();
           }}
@@ -108,6 +106,7 @@ export default function AttachmentBar({
           accept='video/*'
           className={styles.videoInput}
           ref={vid}
+          onChange={changeVideoUpload}
           multiple
         />
       </div>
