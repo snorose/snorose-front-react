@@ -30,15 +30,21 @@
   font-size: 1.4rem;
   text-align: center;
   color: var(--blue-4);
-}
 
-.attendanceButton:active {
-  filter: brightness(0.9);
+  &:active {
+    filter: brightness(0.9);
+  }
 }
 
 .attendanceButton:disabled {
+  color: var(--grey-4);
+  background: var(--grey-3);
+
   cursor: not-allowed;
-  filter: brightness(0.5);
+
+  &:active {
+    filter: none;
+  }
 }
 
 /* bottom */
@@ -74,5 +80,5 @@
 
 .description {
   font-size: 1.3rem;
-  color: var(--gray-4);
+  color: var(--grey-4);
 }

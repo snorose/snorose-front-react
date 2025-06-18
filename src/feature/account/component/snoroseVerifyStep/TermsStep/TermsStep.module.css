@@ -1,26 +1,35 @@
 .content {
   flex: 1;
   margin: 0 var(--default-margin);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  position: relative;
 }
 
 .terms {
-  flex: 1;
   margin-bottom: 1.4rem;
   padding: 1.4rem;
-  background: var(--gray-1-1);
+  background: var(--grey-1-1);
   border-radius: 0.5rem;
 }
 
 .text {
+  font: var(--text-body-1-reg);
   word-break: keep-all;
   text-wrap: wrap;
-  font-size: 1.4rem;
-  color: var(--gray-4);
+
+  color: var(--grey-4);
 }
 
-.item {
-  margin-left: 1rem;
+.list {
+  margin: 2rem 0;
+  margin-left: 2.2rem;
+
+  list-style-type: disc;
+}
+
+/* button */
+.button {
+  height: 5.4rem;
+  position: absolute;
+  left: 0;
+  bottom: 4rem;
 }

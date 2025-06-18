@@ -8,8 +8,14 @@ export const getExamReview = async (postId, fileName) => {
   return response;
 };
 
-export const getReviews = async (page = 0) => {
-  const response = await authAxios.get(`/v1/reviews/32/list/${page}`);
+export const getExamReviewList = async ({ page, params }) => {
+  const response = await authAxios.get('/v1/reviews', {
+    params: {
+      page,
+      ...params,
+    },
+  });
+
   return response?.data.result;
 };
 

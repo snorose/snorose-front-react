@@ -13,16 +13,14 @@
 }
 
 .pageTitle {
-  font-size: 2rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   margin-top: 5.1rem;
 }
 
 .pageExplanation {
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: var(--gray-4);
-  margin-top: 1.4rem;
+  font: var(--text-headline-2-reg);
+  color: var(--grey-4);
+  margin-top: 0.6rem;
 }
 
 .pageMiddleFrame {
@@ -32,8 +30,8 @@
 }
 
 .illustration {
-  width: 21.9rem;
-  height: 16.9rem;
+  width: 25rem;
+  height: 25rem;
   flex-shrink: 0;
 }
 

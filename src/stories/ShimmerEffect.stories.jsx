@@ -23,7 +23,7 @@ const shimmerEffectStoryConfig = {
           width: '100%',
           aspectRatio: 3,
           background:
-            'linear-gradient(45deg, var(--gray-2) 25%, var(--gray-3) 50%, var(--gray-2) 75%)',
+            'linear-gradient(45deg, var(--grey-2) 25%, var(--grey-3) 50%, var(--grey-2) 75%)',
           backgroundSize: '200% 100%',
         }}
       ></div>

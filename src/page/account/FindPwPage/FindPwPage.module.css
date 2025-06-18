@@ -26,46 +26,55 @@
 
 .back {
   margin-top: 1.4rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: 2.7rem;
 }
 .back:hover {
   cursor: pointer;
 }
 
 .pageTitle {
-  font-size: 2rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
   margin-top: 1.4rem;
-  margin-bottom: 5.6rem;
+  margin-bottom: 5.1rem;
 }
 
 .inputFrame {
   margin-bottom: 2.4rem;
 }
 
-.buttonFrame {
-}
-
 .alert {
-  font-size: 1.2rem;
+  font: var(--text-body-1-reg);
   color: grey;
-  padding: 0 3.2rem;
-  margin-top: 4.8rem;
-  line-height: 1.7;
   word-break: keep-all;
 }
 .alert ul {
   list-style-type: circle;
+  padding-left: 2rem;
 }
+
 .alert a {
   color: var(--blue-3);
+}
+.highlight {
+  color: var(--blue-3);
+}
+.googleFormBtn {
+  width: 8.5rem;
+  height: 3.6rem;
+  border-radius: 0.5rem;
+  border: solid 0.1rem var(--grey-3);
+  margin-top: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1rem;
 }
 
 .findIDButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--gray-4);
-  font-size: 1.2rem;
-  margin: 2.1rem 0;
+  color: var(--grey-4);
+  margin-top: 1.2rem;
+  margin-bottom: 3.3rem;
 }

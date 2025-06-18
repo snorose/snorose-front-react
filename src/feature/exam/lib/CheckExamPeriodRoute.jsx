@@ -11,6 +11,8 @@ export default function CheckExamPeriodRoute({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!userInfo) return;
+
     if (userInfo.userRoleId === ROLE.admin) {
       return;
     }
@@ -23,7 +25,7 @@ export default function CheckExamPeriodRoute({ children }) {
 
     alert('시험후기 작성 기간이 아닙니다.');
     navigate('/', { replace: true });
-  }, []);
+  }, [userInfo]);
 
   return children;
 }

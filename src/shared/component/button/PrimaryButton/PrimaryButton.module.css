@@ -1,9 +1,10 @@
 .button {
   width: 100%;
-  padding: 1.3rem 0;
+  padding: 1.65rem 0;
   border-radius: 0.5rem;
-  background: var(--blue-4);
+
+  font: var(--text-headline-2-med);
+
   color: var(--white);
-  font-size: 1.4rem;
-  font-weight: 500;
+  background: var(--blue-4);
 }

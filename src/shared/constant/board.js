@@ -1,10 +1,10 @@
+import besookt from '@/assets/images/besookt-board-page.svg';
+import financeAudit from '@/assets/images/financeAudit-board-page.svg';
 import firstSnow from '@/assets/images/firstSnow-board-page.svg';
+import graduationPreparation from '@/assets/images/graduationPreparation-board-page.svg';
 import largeSnow from '@/assets/images/largeSnow-board-page.svg';
 import permanentSnow from '@/assets/images/permanentSnow-board-page.svg';
-import besookt from '@/assets/images/besookt-board-page.png';
 import studentCouncil from '@/assets/images/studentCouncil-board-page.svg';
-import graduationPreparation from '@/assets/images/graduationPreparation-board-page.svg';
-import financeAudit from '@/assets/images/financeAudit-board-page.svg';
 
 export const BOARD_ID = Object.freeze({
   all: 0, // 프론트에서만 사용하는 보드 ID
@@ -77,7 +77,7 @@ export const BOARD_MENUS = [
     to: '/board/large-snow',
     textId: 'large-snow',
     title: '함박눈방',
-    desc: '눈송이 모두가\n이용하는 커뮤니티',
+    desc: '눈송이 모두의 커뮤니티',
     image: largeSnow,
   },
   {

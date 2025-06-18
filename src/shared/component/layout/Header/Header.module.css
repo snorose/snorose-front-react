@@ -13,9 +13,8 @@
 }
 
 .button {
-  background-color: var(--white);
-  font-weight: bold;
-  font-weight: 500;
-  font-size: 1.3rem;
+  font: var(--text-headline-2-reg);
+
   color: var(--blue-4);
+  background-color: var(--white);
 }

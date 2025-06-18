@@ -1,10 +1,13 @@
 .dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 1rem 0;
-  background: var(--gray-2);
+  background: var(--grey-2);
   border-radius: 0.5rem;
   border: none;
-  font-size: 1.3rem;
-  color: var(--gray-4);
+  font: var(--text-body-1-reg);
+  color: var(--grey-4);
 }
 
 .select {
@@ -19,11 +22,11 @@
 }
 
 .unselect {
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
 }
 
 .placeholder {
-  color: var(--gray-3-1);
+  color: var(--grey-3-1);
 }
 
 .list {
@@ -46,6 +49,6 @@
 }
 
 .option:hover {
-  background-color: var(--gray-3);
+  background-color: var(--grey-3);
   cursor: pointer;
 }

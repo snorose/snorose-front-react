@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postExamReview, checkExamReviewDuplication } from '@/apis';
 
-import { useAuth, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import {
   ActionButton,
   CloseAppBar,
@@ -106,6 +106,21 @@ export default function WriteExamReviewPage() {
     questionDetail.trim() &&
     file;
 
+  // navigation guard
+  const isBlock = !!(
+    lectureName.trim() ||
+    professor.trim() ||
+    Object.keys(lectureType).length > 0 ||
+    Object.keys(examType).length > 0 ||
+    Object.keys(lectureYear).length > 0 ||
+    Object.keys(semester).length > 0 ||
+    classNumber ||
+    questionDetail.trim() ||
+    file
+  );
+
+  useBlocker(isBlock);
+
   const handleFile = (event) => {
     const selectedFile = event.target.files[0];
     event.target.value = '';
@@ -143,11 +158,9 @@ export default function WriteExamReviewPage() {
     questionDetail,
     semester: semester?.id,
     lectureType: lectureType?.id,
-    content: '',
     examType: examType?.id,
     lectureYear: lectureYear?.id,
     isOnline,
-    category: '',
   };
 
   return (
@@ -300,6 +313,7 @@ export default function WriteExamReviewPage() {
         }}
         onSecondaryButtonClick={() => {
           setIsConfirmModalOpen(false);
+          setIsCalled(false);
         }}
       />
       {loading && <FetchLoadingOverlay />}

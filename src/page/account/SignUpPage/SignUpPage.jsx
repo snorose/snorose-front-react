@@ -29,15 +29,16 @@ export default function SignUpPage() {
                 setStage((prev) => prev - 1);
               } else navigate('/login');
             }}
+            className={styles.arrowLeft}
           />
         </div>
         <div className={styles.stageDotsFrame}>
           <StageDots
             quantity={3}
             current={stage}
-            width='5rem'
+            width='5.4rem'
             size='1rem'
-            gap='1.1rem'
+            gap='1.2rem'
           />
         </div>
         {stage === 1 ? (
