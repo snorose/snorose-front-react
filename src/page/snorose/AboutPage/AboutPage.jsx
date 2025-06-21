@@ -16,6 +16,41 @@ import HALL_OF_FAME from '@/assets/images/hallOfFame.svg';
 import styles from './AboutPage.module.css';
 import { useState } from 'react';
 
+const accordionItems = [
+  {
+    title: '스노로즈 소개',
+    content: <pre className={styles.aboutUs}>{ABOUT_SNOROSE}</pre>,
+  },
+  {
+    title: '스노로즈 연혁',
+    content: (
+      <AccordionListItem list={SNOROSE_HISTORY} listName='SNOROSE_HISTORY' />
+    ),
+  },
+  {
+    title: '회원 등급 설명',
+    content: (
+      <AccordionListItem
+        list={SNOROSE_MEMBERSHIP_LEVEL}
+        listName='SNOROSE_MEMBERSHIP_LEVEL'
+      />
+    ),
+  },
+  {
+    title: '명예의 전당',
+    content: (
+      <section className={styles.hallOfFame}>
+        <img src={HALL_OF_FAME} alt='hallOfFame' />
+        <div className={styles.tags}>
+          {HALL_OF_FAME_ADMINS.map((admin, index) => (
+            <AccordionTag key={`${admin.nickname}-${index}`} admin={admin} />
+          ))}
+        </div>
+      </section>
+    ),
+  },
+];
+
 export default function AboutPage() {
   const [openIndex, setOpenIndex] = useState(null);
   const toggle = (index) => {
@@ -27,50 +62,16 @@ export default function AboutPage() {
       <BackAppBar hasMenu />
       <Icon className={styles.logo} id='about-logo' width={221} height={25} />
       <div className={styles.container}>
-        <Accordion
-          title='스노로즈 소개'
-          isOpen={openIndex === 0}
-          onClick={() => toggle(0)}
-        >
-          <pre className={styles.aboutUs}>{ABOUT_SNOROSE}</pre>
-        </Accordion>
-        <Accordion
-          title='스노로즈 연혁'
-          isOpen={openIndex === 1}
-          onClick={() => toggle(1)}
-        >
-          <AccordionListItem
-            list={SNOROSE_HISTORY}
-            listName='SNOROSE_HISTORY'
-          />
-        </Accordion>
-        <Accordion
-          title='회원 등급 설명'
-          isOpen={openIndex === 2}
-          onClick={() => toggle(2)}
-        >
-          <AccordionListItem
-            list={SNOROSE_MEMBERSHIP_LEVEL}
-            listName='SNOROSE_MEMBERSHIP_LEVEL'
-          />
-        </Accordion>
-        <Accordion
-          title='명예의 전당'
-          isOpen={openIndex === 3}
-          onClick={() => toggle(3)}
-        >
-          <section className={styles.hallOfFame}>
-            <img src={HALL_OF_FAME} alt='hallOfFame' />
-            <div className={styles.tags}>
-              {HALL_OF_FAME_ADMINS.map((admin, index) => (
-                <AccordionTag
-                  key={`${admin.nickname}-${index}`}
-                  admin={admin}
-                />
-              ))}
-            </div>
-          </section>
-        </Accordion>
+        {accordionItems.map((item, index) => (
+          <Accordion
+            key={item.title}
+            title={item.title}
+            isOpen={openIndex === index}
+            onClick={() => toggle(index)}
+          >
+            {item.content}
+          </Accordion>
+        ))}
       </div>
     </main>
   );
