@@ -26,7 +26,7 @@ export default function Accordion({ title, children, isOpen, onClick }) {
           // onClick={() => alert('지원 기간이 아닙니다!')}
           onClick={goApply}
         >
-          리자 지원하기
+          지난 모집 공고 확인하기
         </PrimaryButton>
       )}
     </div>
