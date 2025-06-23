@@ -263,11 +263,7 @@ export default function PostPage() {
           case 'confirm-post-report':
             return (
               <NewConfirmModal
-                modalText={
-                  currentBoard.id === 23
-                    ? CONFIRM_MODAL_TEXT.REPORT_POST
-                    : CONFIRM_MODAL_TEXT.REPORT_POST_WITHOUT_POINT_DEDUCTION
-                }
+                modalText={CONFIRM_MODAL_TEXT.REPORT_POST}
                 onConfirm={handleReport}
               />
             );
