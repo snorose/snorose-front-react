@@ -2,15 +2,10 @@ import { DimModalLayout, Icon } from '@/shared/component';
 import styles from './OptionModal.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
+import { getReportModalId } from '@/feature/report/lib/getReportModalId';
 
 export default function OptionModal({ title, optionList }) {
   const { modal, setModal } = useContext(ModalContext);
-  const getModalId = () => {
-    if (title === '게시글 신고') return 'confirm-post-report';
-    if (title === '이용자 신고') return 'confirm-user-report';
-    if (title === '댓글 신고') return 'confirm-comment-report';
-    return null;
-  };
 
   return (
     <DimModalLayout isOpen={modal.id}>
@@ -22,7 +17,7 @@ export default function OptionModal({ title, optionList }) {
             className={styles.contentItem}
             onClick={() => {
               setModal({
-                id: getModalId(),
+                id: getReportModalId(title),
                 type: option.type,
               });
             }}
