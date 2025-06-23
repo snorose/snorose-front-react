@@ -1,4 +1,4 @@
-import { forwardRef, useContext, useRef, useState } from 'react';
+import { forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import {
@@ -68,15 +68,18 @@ const Comment = forwardRef((props, ref) => {
   const [inputContent, setInputContent] = useState(null);
   const [moreOptionTop, setMoreOptionTop] = useState(0);
 
-  const onCommentOptionClick = (data) => {
+  const onCommentOptionClick = (data, refElement) => {
     setCommentId(data.id);
     setInputContent(data.content);
-    data.isWriter
-      ? setModal({ id: 'my-comment-more-options', type: null })
-      : setModal({ id: 'report-comment', type: null });
 
-    const top = moreOptionRef.current.getBoundingClientRect().top;
-    setMoreOptionTop(top);
+    const rect = (refElement || moreOptionRef).current.getBoundingClientRect();
+    setMoreOptionTop(rect.top);
+
+    setModal(
+      data.isWriter
+        ? { id: 'my-comment-more-options', type: null }
+        : { id: 'report-comment', type: null }
+    );
   };
 
   const handleReply = () => {

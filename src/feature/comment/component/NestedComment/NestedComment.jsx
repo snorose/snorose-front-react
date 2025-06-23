@@ -7,6 +7,7 @@ import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
 
 import styles from '@/feature/comment/component/Comment/Comment.module.css';
+import { useRef } from 'react';
 
 export default function NestedComment({
   data,
@@ -14,14 +15,13 @@ export default function NestedComment({
   isFirst,
   onCommentOptionClick,
 }) {
+  const nestedMoreOptionRef = useRef(null);
   const { pathname } = useLocation();
   const { commentId } = useCommentContext();
   const { like, unlike } = useLike({
     type: LIKE_TYPE.comment,
     sourceId: data.id,
   });
-
-  console.log(data);
 
   const {
     userRoleId,
@@ -70,9 +70,10 @@ export default function NestedComment({
           </p>
         </div>
         <p
+          ref={nestedMoreOptionRef}
           className={styles.dot3}
           onClick={(e) => {
-            onCommentOptionClick(data);
+            onCommentOptionClick(data, nestedMoreOptionRef);
           }}
         >
           {!isDeleted && isVisible && (
