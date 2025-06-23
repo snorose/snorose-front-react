@@ -5,11 +5,7 @@ import { ModalContext } from '@/shared/context/ModalContext';
 import styles from './MoreOptionModal.module.css';
 
 export default function MoreOptionModal({ title, optionList, functions, top }) {
-  const { modal, setModal } = useContext(ModalContext);
-
-  if (!modal.id) {
-    return null;
-  }
+  const { setModal } = useContext(ModalContext);
 
   const handleOptionClick = (item, idx) => {
     if (item.modalId) {
@@ -30,7 +26,7 @@ export default function MoreOptionModal({ title, optionList, functions, top }) {
         className={styles.container}
         onClick={(e) => e.stopPropagation()}
         style={{ top: top !== undefined ? `${top + 30}px` : '9rem' }}
-          >
+      >
         <h3 className={styles.title}>{title}</h3>
         <ul className={styles.content}>
           {optionList.map((item, idx) => (
