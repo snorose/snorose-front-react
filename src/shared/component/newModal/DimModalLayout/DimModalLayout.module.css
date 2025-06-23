@@ -8,7 +8,7 @@
   background-color: rgba(var(--grey-4-rgb), 0.2);
 }
 
-.container {
+.layout {
   display: flex;
   flex-direction: column;
   align-items: center;

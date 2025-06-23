@@ -8,7 +8,7 @@ export default function DimModalLayout({ isOpen, children }) {
 
   return createPortal(
     <div className={styles.dim} onClick={(event) => event.stopPropagation()}>
-      <div className={styles.container}>{children}</div>
+      <div className={styles.layout}>{children}</div>
     </div>,
     document.getElementById('modal')
   );
