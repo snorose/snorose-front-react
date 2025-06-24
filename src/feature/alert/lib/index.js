@@ -1,4 +1,3 @@
 export * from './PushNotification';
-
-export * from './detectDeviceInfo';
+export * from '../../../shared/lib/detectDeviceInfo';
 export * from './firebase-config';
