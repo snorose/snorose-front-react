@@ -34,7 +34,7 @@ export default function EditPostPage() {
   const { pathname } = useLocation();
   const { userInfo, status } = useAuth();
   const { toast } = useToast();
-  const { setModal } = useContext(ModalContext);
+  const { modal, setModal } = useContext(ModalContext);
 
   const textId = pathname.split('/')[2];
   const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
@@ -228,10 +228,13 @@ export default function EditPostPage() {
             />
           </div>
         </div>
-        <NewConfirmModal
-          modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
-          onConfirm={handleExitPage}
-        />
+        {/* 페이지 이탈 방지 모달 */}
+        {modal.id === 'exit-page' && (
+          <NewConfirmModal
+            modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+            onConfirm={handleExitPage}
+          />
+        )}
       </div>
     </>
   );

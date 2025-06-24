@@ -29,7 +29,7 @@ export default function WritePostPage() {
   const { toast } = useToast();
   const { userInfo, status } = useAuth();
   const { invalidUserInfoQuery } = useAuth();
-  const { setModal } = useContext(ModalContext);
+  const { modal, setModal } = useContext(ModalContext);
 
   const [isNotice, setIsNotice] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
@@ -274,10 +274,12 @@ export default function WritePostPage() {
             />
           </div>
         </div>
-        <NewConfirmModal
-          modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
-          onConfirm={handleExitPage}
-        />
+        {modal.id === 'exit-page' && (
+          <NewConfirmModal
+            modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+            onConfirm={handleExitPage}
+          />
+        )}
       </div>
     </>
   );

@@ -18,7 +18,7 @@ export default function useBlockerNew(isBlock, actions = ['POP']) {
   useEffect(() => {
     if (blocker.state === 'blocked') {
       setModal({
-        id: 'EXIT_PAGE',
+        id: 'exit-page',
         type: null,
       });
     } else if (blocker.state === 'proceeding') {
