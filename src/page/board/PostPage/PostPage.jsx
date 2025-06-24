@@ -65,13 +65,6 @@ export default function PostPage() {
     sourceId: postId,
   });
 
-  useEffect(() => {
-    setModal({
-      id: 'confirm-report-post',
-      type: null,
-    });
-  }, []);
-
   // 뱃지를 보여주는 ROLE
   const showBadge =
     data?.userRoleId === ROLE.official ||
