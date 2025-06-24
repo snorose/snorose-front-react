@@ -225,6 +225,7 @@ export default function PostPage() {
       )}
       {(() => {
         switch (modal.id) {
+          // 남의 게시글 더보기 클릭 시 뜨는 모달
           case 'post-more-options':
             return (
               <MoreOptionModal
@@ -232,6 +233,7 @@ export default function PostPage() {
                 optionList={POST_MORE_OPTION_LIST}
               />
             );
+          // 내 게시글 더보기 클릭 시 뜨는 모달
           case 'my-post-more-options':
             return (
               <MoreOptionModal
@@ -246,6 +248,7 @@ export default function PostPage() {
                 ]}
               />
             );
+          // 게시글 신고하기 옵션 모달
           case 'report-post-types':
             return (
               <OptionModal
@@ -253,6 +256,7 @@ export default function PostPage() {
                 optionList={REPORT_POST_TYPE_LIST}
               />
             );
+          // 유저 신고하기 옵션 모달
           case 'report-user-types':
             return (
               <OptionModal
@@ -260,6 +264,7 @@ export default function PostPage() {
                 optionList={REPORT_USER_TYPE_LIST}
               />
             );
+          // 게시글 신고 확인 모달
           case 'confirm-post-report':
             return (
               <NewConfirmModal
@@ -267,6 +272,7 @@ export default function PostPage() {
                 onConfirm={handleReport}
               />
             );
+          // 유저 신고 확인 모달
           case 'confirm-user-report':
             return (
               <NewConfirmModal
@@ -274,6 +280,7 @@ export default function PostPage() {
                 onConfirm={handleReport}
               />
             );
+          // 게시글 삭제 확인 모달
           case 'confirm-post-delete':
             return (
               <NewConfirmModal
