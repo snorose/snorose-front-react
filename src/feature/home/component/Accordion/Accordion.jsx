@@ -16,7 +16,7 @@ export default function Accordion({ title, children, isOpen, onClick }) {
           className={styles.toggleIcon}
           id='angle-down-blue'
           width={16}
-          height={16}
+          height={9}
         />
       </div>
       <div className={`${styles.panelBody}`}>{children}</div>
