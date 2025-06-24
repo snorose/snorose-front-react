@@ -5,5 +5,6 @@ export * from './hyperlink.js';
 export * from './pagination.js';
 export * from './validate.js';
 export * from './detectDeviceInfo.js';
+export * from './detectInAppBrowser.js';
 
 export * from './GrowthBook';
