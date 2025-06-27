@@ -1,25 +1,25 @@
 .main {
-  height: 100vh;
+  height: 110%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: #ffffff;
+  word-break: keep-all;
+  padding: 1rem;
 }
 
 .logo {
-  margin-top: 10rem;
+  margin-top: 15rem;
 }
 
-.config {
-  margin-top: 2rem;
+.title {
+  margin-top: 4.25rem;
   font: var(--text-title-1-bold);
   color: var(--blue-4);
 }
 
 .text {
-  margin-top: 2rem;
-  font: var(--text-headline-2-med);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,9 +27,15 @@
 }
 
 .date {
+  margin-top: 1.6rem;
   font: var(--text-headline-2-bold);
+  color: var(--blue-4);
 }
 
-.text p {
+.content {
+  font: var(--text-headline-2-reg);
+  margin-top: 1.3rem;
   padding: 1rem;
+  text-align: center;
+  color: var(--grey-4);
 }
