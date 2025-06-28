@@ -1,52 +1,52 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useLocation, useParams } from 'react-router-dom';
 
-import { deletePost, getPostContent, reportPost, reportUser } from '@/apis';
+import { getPostContent } from '@/apis';
+import { NotFoundPage } from '@/page/etc';
 
 import {
   BackAppBar,
   Badge,
-  DeleteModal,
   FetchLoading,
   Icon,
-  OptionModal,
+  MoreOptionModal,
+  ReportOptionModal,
+  NewConfirmModal,
 } from '@/shared/component';
-import {
-  LIKE_TYPE,
-  MUTATION_KEY,
-  QUERY_KEY,
-  ROLE,
-  TOAST,
-} from '@/shared/constant';
-import { useAuth, useToast } from '@/shared/hook';
+
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 
-import { NotFoundPage } from '@/page/etc';
+import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
+import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
 
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
-import { useCommentContext } from '@/feature/comment/context';
+
+import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
+import { useReportHandler } from '@/feature/board/hook/useReportHandler';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
+import { useCommentContext } from '@/feature/comment/context';
+
+import { REPORT_POST_TYPE_LIST } from '@/feature/board/constant/reportPostTypeList';
+import { REPORT_USER_TYPE_LIST } from '@/feature/board/constant/reportUserTypeList';
+import {
+  MY_POST_MORE_OPTION_LIST,
+  POST_MORE_OPTION_LIST,
+} from '@/feature/board/constant/postMoreOptionList';
+
 import styles from './PostPage.module.css';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 export default function PostPage() {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { postId } = useParams();
   const location = useLocation();
   const { pathname } = location;
   const { inputFocus, isInputFocused } = useCommentContext();
-  const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
-  const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
-  const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
-  const [deleteSubmitDisabled, setDeleteSubmitDisabled] = useState(false);
-  const { invalidUserInfoQuery } = useAuth();
+
+  const { modal, setModal } = useContext(ModalContext);
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
@@ -55,92 +55,21 @@ export default function PostPage() {
     enabled: !!currentBoard?.id && !!postId,
   });
 
+  const { handleDelete } = useDeletePostHandler(currentBoard?.id);
+  const { handleReport } = useReportHandler(modal, setModal, data);
+
   const { scrap, unscrap } = useScrap();
   const { like, unlike } = useLike({
     type: LIKE_TYPE.post,
     sourceId: postId,
   });
 
-  const { mutate: reportPostMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportPost],
-    mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
-
-  const { mutate: reportUserMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportUser],
-    mutationFn: (body) => reportUser(body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
-
-  const handleDelete = async () => {
-    if (deleteSubmitDisabled) return;
-    setDeleteSubmitDisabled(true);
-    try {
-      const response = await deletePost(currentBoard.id, postId);
-
-      if (response.status === 200) {
-        currentBoard.id !== 23
-          ? toast(TOAST.POST.delete)
-          : toast(TOAST.POST.deleteNoPoints);
-        navigate(-1);
-        queryClient.removeQueries([QUERY_KEY.post, postId]);
-        invalidUserInfoQuery();
-      }
-    } catch ({ response }) {
-      toast(response.data.message);
-    } finally {
-      setDeleteSubmitDisabled(false);
-      setIsDeleteModalOpen(false);
-    }
-  };
-
-  const handleReportOptionModalOptionClick = (event) => {
-    const reportCategory = event.currentTarget.dataset.value;
-
-    setIsReportModalOpen(false);
-
-    if (reportCategory === 'post-report') {
-      setIsPostReportModalOpen(true);
-    } else if (reportCategory === 'user-report') {
-      setIsUserReportModalOpen(true);
-    }
-  };
-
-  const handlePostReportOptionModalOptionClick = (event) => {
-    const reportType = event.currentTarget.dataset.value;
-
-    reportPostMutate({
-      reportType,
+  useEffect(() => {
+    setModal({
+      id: 'confirm-report-post',
+      type: null,
     });
-    setIsPostReportModalOpen(false);
-  };
-
-  const handleUserReportOptionModalOptionClick = (event) => {
-    if (data === undefined) {
-      return;
-    }
-
-    const reportType = event.currentTarget.dataset.value;
-    const { userId } = data;
-
-    reportUserMutate({
-      encryptedTargetUserId: userId,
-      reportType,
-    });
-
-    setIsUserReportModalOpen(false);
-  };
+  }, []);
 
   // 뱃지를 보여주는 ROLE
   const showBadge =
@@ -209,8 +138,14 @@ export default function PostPage() {
             className={styles.meatBall}
             onClick={() => {
               data.isWriter
-                ? setIsOptionsModalOpen(true)
-                : setIsReportModalOpen(true);
+                ? setModal({
+                    id: 'my-post-more-options',
+                    type: null,
+                  })
+                : setModal({
+                    id: 'post-more-options',
+                    type: null,
+                  });
             }}
           >
             <Icon id='meat-ball' width={18} height={4} stroke='none' />
@@ -287,51 +222,72 @@ export default function PostPage() {
           <CommentInput />
         </>
       )}
-
-      <OptionModal
-        id='post-more-options'
-        isOpen={isOptionsModalOpen}
-        setIsOpen={setIsOptionsModalOpen}
-        closeFn={() => {
-          setIsOptionsModalOpen(false);
-        }}
-        functions={{
-          pencil: () => navigate(`./edit`),
-          trash: () => {
-            setIsOptionsModalOpen(false);
-            setIsDeleteModalOpen(true);
-          },
-        }}
-      />
-      <DeleteModal
-        id={currentBoard.id !== 23 ? 'post-delete' : 'post-delete-no-points'}
-        isOpen={isDeleteModalOpen}
-        closeFn={() => {
-          setIsDeleteModalOpen(false);
-        }}
-        redBtnFunction={handleDelete}
-      />
-      <OptionModal
-        id='report'
-        isOpen={isReportModalOpen}
-        setIsOpen={setIsReportModalOpen}
-        onOptionClick={handleReportOptionModalOptionClick}
-        closeFn={() => setIsReportModalOpen(false)}
-      />
-      <OptionModal
-        id='post-report'
-        isOpen={isPostReportModalOpen}
-        setIsOpen={setIsPostReportModalOpen}
-        onOptionClick={handlePostReportOptionModalOptionClick}
-        closeFn={() => setIsPostReportModalOpen(false)}
-      />
-      <OptionModal
-        id='user-report'
-        isOpen={isUserReportModalOpen}
-        setIsOpen={setIsUserReportModalOpen}
-        onOptionClick={handleUserReportOptionModalOptionClick}
-        closeFn={() => setIsUserReportModalOpen(false)}
-      />
+      {(() => {
+        switch (modal.id) {
+          case 'post-more-options':
+            return (
+              <MoreOptionModal
+                title='게시글'
+                optionList={POST_MORE_OPTION_LIST}
+              />
+            );
+          case 'my-post-more-options':
+            return (
+              <MoreOptionModal
+                title='내 게시글'
+                optionList={MY_POST_MORE_OPTION_LIST}
+              />
+            );
+          case 'report-post-types':
+            return (
+              <ReportOptionModal
+                title='게시글 신고'
+                optionList={REPORT_POST_TYPE_LIST}
+              />
+            );
+          case 'report-user-types':
+            return (
+              <ReportOptionModal
+                title='이용자 신고'
+                optionList={REPORT_USER_TYPE_LIST}
+              />
+            );
+          case 'confirm-post-report':
+            return (
+              <NewConfirmModal
+                modalText={(() => {
+                  switch (currentBoard.id) {
+                    case 23:
+                      return CONFIRM_MODAL_TEXT.REPORT_POST;
+                    default:
+                      return CONFIRM_MODAL_TEXT.REPORT_POST_WITHOUT_POINT_DEDUCTION;
+                  }
+                })()}
+                onClickHandler={handleReport}
+              />
+            );
+          case 'confirm-user-report':
+            return (
+              <NewConfirmModal
+                modalText={CONFIRM_MODAL_TEXT.REPORT_USER}
+                onClickHandler={handleReport}
+              />
+            );
+          case 'confirm-post-delete':
+            return (
+              <NewConfirmModal
+                modalText={
+                  currentBoard.id !== 23
+                    ? CONFIRM_MODAL_TEXT.DELETE_POST
+                    : CONFIRM_MODAL_TEXT.DELETE_POST_WITHOUT_POINT_DEDUCTION
+                }
+                onClickHandler={handleDelete}
+              />
+            );
+          default:
+            return null;
+        }
+      })()}
     </div>
   );
 }
