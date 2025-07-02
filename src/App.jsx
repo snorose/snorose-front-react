@@ -32,9 +32,13 @@ function App() {
 
   // 푸시 알림 설정
   useEffect(() => {
-    if (isEnabled && status === 'authenticated') {
-      PushNotificationManager.init();
-      PushNotificationManager.listenForegroundMessage();
+    const isInApp = detectInAppBrowser();
+
+    if (!isInApp) {
+      if (isEnabled && status === 'authenticated') {
+        PushNotificationManager.init();
+        PushNotificationManager.listenForegroundMessage();
+      }
     }
   }, [isEnabled, status]);
 
