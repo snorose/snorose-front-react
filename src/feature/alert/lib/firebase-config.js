@@ -15,13 +15,12 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 let messaging = null;
+const isFcmSupported = await isSupported();
 
-isSupported().then((supported) => {
-  if (supported) {
-    messaging = getMessaging(firebaseApp);
-  } else {
-    console.warn('이 브라우저에서 Firebase Messaging을 지원하지 않습니다.');
-  }
-});
+if (isFcmSupported) {
+  messaging = getMessaging(firebaseApp);
+} else {
+  console.warn('이 브라우저에서 Firebase Messaging을 지원하지 않습니다.');
+}
 
 export { messaging };
