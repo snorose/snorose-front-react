@@ -31,16 +31,16 @@ function App() {
   const { status } = useAuth();
 
   // 푸시 알림 설정
-  useEffect(() => {
-    const isInApp = detectInAppBrowser();
+  // useEffect(() => {
+  //   const isInApp = detectInAppBrowser();
 
-    if (!isInApp) {
-      if (isEnabled && status === 'authenticated') {
-        PushNotificationManager.init();
-        PushNotificationManager.listenForegroundMessage();
-      }
-    }
-  }, [isEnabled, status]);
+  //   if (!isInApp) {
+  //     if (isEnabled && status === 'authenticated') {
+  //       PushNotificationManager.init();
+  //       PushNotificationManager.listenForegroundMessage();
+  //     }
+  //   }
+  // }, [isEnabled, status]);
 
   // 인앱 브라우저 감지
   useEffect(() => {
