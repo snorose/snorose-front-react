@@ -31,33 +31,29 @@ function App() {
   const { status } = useAuth();
 
   // 푸시 알림 설정
-  // useEffect(() => {
-  //   const isInApp = detectInAppBrowser();
-
-  //   if (!isInApp) {
-  //     if (isEnabled && status === 'authenticated') {
-  //       PushNotificationManager.init();
-  //       PushNotificationManager.listenForegroundMessage();
-  //     }
-  //   }
-  // }, [isEnabled, status]);
+  useEffect(() => {
+    if (isEnabled && status === 'authenticated') {
+      PushNotificationManager.init();
+      PushNotificationManager.listenForegroundMessage();
+    }
+  }, [isEnabled, status]);
 
   // 인앱 브라우저 감지
-  useEffect(() => {
-    const { platform } = detectDeviceInfo();
-    const isInApp = detectInAppBrowser();
+  // useEffect(() => {
+  //   const { platform } = detectDeviceInfo();
+  //   const isInApp = detectInAppBrowser();
 
-    if (platform === 'iOS' && isInApp) {
-      const url = window.location.href;
-      alert(
-        '현재 인앱 브라우저에서는 일부 기능이 제한될 수 있습니다.\n사파리나 크롬에서 다시 열어주세요.\n주소가 클립보드에 복사되었습니다.'
-      );
+  //   if (platform === 'iOS' && isInApp) {
+  //     const url = window.location.href;
+  //     alert(
+  //       '현재 인앱 브라우저에서는 일부 기능이 제한될 수 있습니다.\n사파리나 크롬에서 다시 열어주세요.\n주소가 클립보드에 복사되었습니다.'
+  //     );
 
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(url).catch(() => {});
-      }
-    }
-  }, [locationKey]);
+  //     if (navigator.clipboard) {
+  //       navigator.clipboard.writeText(url).catch(() => {});
+  //     }
+  //   }
+  // }, [locationKey]);
 
   // 서버 점검 페이지 처리
   const now = new Date();
