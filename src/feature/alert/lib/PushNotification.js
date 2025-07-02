@@ -1,6 +1,5 @@
 import { getToken, isSupported, onMessage } from 'firebase/messaging';
 import { messaging } from './firebase-config';
-import { setDefaultOptions } from 'date-fns';
 
 export class PushNotificationManager {
   static async init() {
