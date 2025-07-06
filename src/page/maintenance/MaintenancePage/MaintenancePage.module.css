@@ -1,5 +1,5 @@
 .main {
-  height: 110%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,13 +10,14 @@
 }
 
 .logo {
-  margin-top: 15rem;
+  margin-top: 30%;
 }
 
 .title {
   margin-top: 4.25rem;
   font: var(--text-title-1-bold);
   color: var(--blue-4);
+  text-align: center;
 }
 
 .text {
@@ -27,14 +28,15 @@
 }
 
 .date {
-  margin-top: 1.6rem;
+  margin: 1.6rem 4.8rem 0;
   font: var(--text-headline-2-bold);
   color: var(--blue-4);
+  text-align: center;
 }
 
 .content {
   font: var(--text-headline-2-reg);
-  margin-top: 1.3rem;
+  margin: 1.3rem 1rem 0;
   padding: 1rem;
   text-align: center;
   color: var(--grey-4);
