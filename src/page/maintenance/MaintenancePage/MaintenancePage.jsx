@@ -14,7 +14,7 @@ export default function MaintenancePage() {
   return (
     <div className={styles.main}>
       <img src={MaintenanceConfig} alt='서버 점검' />
-      <h1 className={styles.title}>스노로즈 서버 점검 안내</h1>
+      <h1 className={styles.title}>서버 점검 안내</h1>
       <div className={styles.text}>
         <p className={styles.date}>일시 : {period}</p>
 
