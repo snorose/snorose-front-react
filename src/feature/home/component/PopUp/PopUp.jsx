@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
-import calendar from '@/feature/home/component/PopUp/calendar.jpg';
+import juneReport from '@/feature/home/component/PopUp/juneReport.png';
 import styles from './PopUp.module.css';
 
 const content = (
@@ -10,22 +10,26 @@ const content = (
       <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
-      <Heading>1. 7월 스노로즈 캘린더</Heading>
+      <Heading>1. 6월 회계 보고</Heading>
       <Content>
-        <img src={calendar} alt='7월 달력' />
-      </Content>
-      <Heading>2. 25-1 기말 시험후기 게시판 운영 공지</Heading>
-      <Content>
-        - 기간: 6월 30일(월) 00:00 ~ 7월 21일(월) 23:59
+        -{' '}
+        <a
+          className={styles.link}
+          href='https://docs.google.com/spreadsheets/u/0/d/1MzXAHemKqPwVj3PzPJch5cR5z49gFtzABPgJ_FVjCXM/edit?usp=sharing&pli=1&authuser=0'
+          alt='스노로즈 회계 보고 링크 바로가기'
+        >
+          [스노로즈 회계 보고 링크 바로가기]
+        </a>
         <br />- 자세한 내용은{' '}
         <a
           className={styles.link}
-          href='https://www.snorose.com/board/notice/post/1833145'
+          href='https://www.snorose.com/board/notice/post/1837759'
           alt='공지'
         >
           [관련 공지]
         </a>
         를 참고해주시길 바랍니다.
+        <img src={juneReport} alt='6월 회계보고' />
       </Content>
       <hr />
       <Content>
