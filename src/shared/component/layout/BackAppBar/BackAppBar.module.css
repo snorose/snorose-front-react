@@ -31,7 +31,7 @@
 }
 
 .title {
-  font: var(--text-title-1-bold);
+  font: var(--text-headline-1-bold);
 }
 
 .actions {
