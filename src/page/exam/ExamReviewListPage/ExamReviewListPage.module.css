@@ -10,7 +10,7 @@
 .notification {
   width: 100%;
   padding: 1rem var(--default-margin);
-  padding-top: 6.4rem;
+  padding-top: 6rem;
 }
 
 .notificationBar {
@@ -21,7 +21,7 @@
   gap: 1.4rem;
   border-radius: 0.5rem;
   background-color: var(--pink-1);
-  font-size: 1.1rem;
+  font: var(--text-body-1-reg);
   color: var(--pink-3);
   box-sizing: border-box;
   cursor: pointer;
