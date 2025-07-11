@@ -82,6 +82,8 @@ export class PushNotificationManager {
         console.error('푸시 알림 구독 실패: ', error);
       }
     }
+
+    return token;
   }
 
   static async #sendTokenToServer(token) {

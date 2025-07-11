@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import { useFeatureIsOn } from '@growthbook/growthbook-react';
@@ -26,6 +26,8 @@ function App() {
   const hideNav = currentRoute?.meta?.hideNav ?? false;
   const { status } = useAuth();
 
+  const [token, setToken] = useState('');
+
   // 푸시 알림 설정
   // useEffect(() => {
   //   if (isEnabled && status === 'authenticated') {
@@ -43,9 +45,23 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <button onClick={() => PushNotificationManager.init()}>
+      <button
+        onClick={async () => {
+          const token = await PushNotificationManager.init();
+          setToken(token);
+        }}
+      >
         알림 권한 허용 요청
       </button>
+
+      <p
+        style={{
+          overflowWrap: 'break-word',
+          wordBreak: 'break-all',
+        }}
+      >
+        {token}
+      </p>
 
       <Outlet />
       {!hideNav && <Navbar />}
