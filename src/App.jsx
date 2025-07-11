@@ -27,12 +27,12 @@ function App() {
   const { status } = useAuth();
 
   // 푸시 알림 설정
-  useEffect(() => {
-    if (isEnabled && status === 'authenticated') {
-      PushNotificationManager.init();
-      PushNotificationManager.listenForegroundMessage();
-    }
-  }, [isEnabled, status]);
+  // useEffect(() => {
+  //   if (isEnabled && status === 'authenticated') {
+  //     PushNotificationManager.init();
+  //     PushNotificationManager.listenForegroundMessage();
+  //   }
+  // }, [isEnabled, status]);
 
   // 서버 점검 페이지 처리
   const now = new Date();
@@ -43,6 +43,10 @@ function App() {
 
   return (
     <div className={styles.app}>
+      <button onClick={() => PushNotificationManager.init()}>
+        알림 권한 허용 요청
+      </button>
+
       <Outlet />
       {!hideNav && <Navbar />}
       <Sidebar />
