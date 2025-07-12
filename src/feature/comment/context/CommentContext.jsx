@@ -11,10 +11,7 @@ const CommentContext = createContext();
 
 export function CommentContextProvider({ children }) {
   const [isEdit, setIsEdit] = useState(false);
-  const [isInputFocused, setIsInputFocused] = useState({
-    isFocused: false,
-    parent: 'post',
-  });
+  const [focusedItem, setFocusedItem] = useState(null);
   const [commentId, setCommentId] = useState();
   const [content, setContent] = useState('');
   const inputRef = useRef();
@@ -40,10 +37,10 @@ export function CommentContextProvider({ children }) {
       inputRef,
       inputFocus,
       resetCommentState,
-      isInputFocused,
-      setIsInputFocused,
+      focusedItem,
+      setFocusedItem,
     }),
-    [isEdit, commentId, content, isInputFocused]
+    [isEdit, commentId, content, focusedItem]
   );
 
   useEffect(() => {

@@ -19,7 +19,7 @@ const CommentInput = () => {
     setContent,
     resetCommentState,
     inputRef,
-    setIsInputFocused,
+    setFocusedItem,
   } = useCommentContext();
 
   const handleInputChange = (e) => setContent(e.target.value);
@@ -83,8 +83,11 @@ const CommentInput = () => {
           value={content}
           onKeyDown={handleKeyPress}
           onChange={handleInputChange}
-          onFocus={() => setIsInputFocused({ isFocused: true, parent: 'post' })}
-          onBlur={() => setIsInputFocused({ isFocused: false, parent: 'post' })}
+          onFocus={() => setFocusedItem('post')}
+          onBlur={() => {
+            // 약간의 지연을 두어 다른 클릭 이벤트가 먼저 처리되도록 함
+            setTimeout(() => setFocusedItem(null), 0);
+          }}
           maxRows={5}
         />
       </div>
