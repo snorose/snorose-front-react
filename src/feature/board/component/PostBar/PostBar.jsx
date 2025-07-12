@@ -37,8 +37,19 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
       </div>
       <div className={styles.post_bottom}>
         <div className={styles.iconListContainer}>
-          {/* 서버 수정 후 조건문 제거 처리 필요 */}
-          {hasComment && (
+          {data.likeCount > 0 && (
+            <div className={styles.iconContainer}>
+              <Icon
+                id='like-stroke'
+                width={14}
+                height={13}
+                fill={data.isLiked ? 'var(--pink-2)' : 'none'}
+                stroke={'var(--pink-2)'}
+              />
+              <span>{data.likeCount.toLocaleString()}</span>
+            </div>
+          )}
+          {data.commentCount > 0 && (
             <div className={styles.iconContainer}>
               <Icon
                 className={styles.comment}
@@ -51,29 +62,18 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
               <span>{data.commentCount.toLocaleString()}</span>
             </div>
           )}
-          {hasLike && (
+          {data.scrapCount > 0 && (
             <div className={styles.iconContainer}>
               <Icon
-                id='like-stroke'
-                width={14}
+                id='scrap-stroke'
+                width={11}
                 height={13}
-                fill={data.isLiked ? 'var(--pink-2)' : 'none'}
-                stroke={'var(--pink-2)'}
+                fill={data.isScrapped ? 'var(--green-1)' : 'none'}
+                stroke={'var(--green-1)'}
               />
-              <span>{data.likeCount.toLocaleString()}</span>
+              <span>{data?.scrapCount.toLocaleString()}</span>
             </div>
           )}
-          {/* 서버 수정 후 조건문 제거 처리 필요 */}
-          <div className={styles.iconContainer}>
-            <Icon
-              id='scrap-stroke'
-              width={11}
-              height={13}
-              fill={data.isScrapped ? 'var(--green-1)' : 'none'}
-              stroke={'var(--green-1)'}
-            />
-            <span>{data?.scrapCount.toLocaleString()}</span>
-          </div>
         </div>
       </div>
     </div>
