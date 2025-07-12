@@ -243,8 +243,11 @@ export default function PostPage() {
           >
             <Icon
               id='comment-stroke'
-              width={20}
-              height={16}
+              width={18}
+              height={15}
+              style={{
+                paddingTop: '0.1rem',
+              }}
               stroke='var(--blue-3)'
               fill='none'
             />
