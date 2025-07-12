@@ -37,39 +37,43 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
       </div>
       <div className={styles.post_bottom}>
         <div className={styles.iconListContainer}>
-          {/* 서버 수정 후 조건문 제거 처리 필요 */}
-          {hasComment && (
+          {data.likeCount > 0 && (
             <div className={styles.iconContainer}>
               <Icon
-                className={styles.comment}
-                id='comment'
-                width={16}
-                height={13}
-              />
-              <span>{data.commentCount.toLocaleString()}</span>
-            </div>
-          )}
-          {hasLike && (
-            <div className={styles.iconContainer}>
-              <Icon
-                id='like'
+                id='like-stroke'
                 width={14}
                 height={13}
-                fill={data.isLiked ? '#5F86BF' : '#D9D9D9'}
+                fill={data.isLiked ? 'var(--pink-2)' : 'none'}
+                stroke={'var(--pink-2)'}
               />
               <span>{data.likeCount.toLocaleString()}</span>
             </div>
           )}
-          {/* 서버 수정 후 조건문 제거 처리 필요 */}
-          <div className={styles.iconContainer}>
-            <Icon
-              id='bookmark-fill'
-              width={11}
-              height={13}
-              fill={data.isScrapped ? '#5F86BF' : '#D9D9D9'}
-            />
-            <span>{data?.scrapCount.toLocaleString()}</span>
-          </div>
+          {data.commentCount > 0 && (
+            <div className={styles.iconContainer}>
+              <Icon
+                className={styles.comment}
+                id='comment-stroke'
+                width={16}
+                height={13}
+                fill='none'
+                stroke={'var(--blue-3)'}
+              />
+              <span>{data.commentCount.toLocaleString()}</span>
+            </div>
+          )}
+          {data.scrapCount > 0 && (
+            <div className={styles.iconContainer}>
+              <Icon
+                id='scrap-stroke'
+                width={11}
+                height={13}
+                fill={data.isScrapped ? 'var(--green-1)' : 'none'}
+                stroke={'var(--green-1)'}
+              />
+              <span>{data?.scrapCount.toLocaleString()}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
