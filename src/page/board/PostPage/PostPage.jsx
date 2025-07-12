@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { deletePost, getPostContent, reportPost, reportUser } from '@/apis';
@@ -37,7 +37,7 @@ export default function PostPage() {
   const { postId } = useParams();
   const location = useLocation();
   const { pathname } = location;
-  const { inputFocus, isInputFocused } = useCommentContext();
+  const { inputFocus, focusedItem } = useCommentContext();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
@@ -234,10 +234,7 @@ export default function PostPage() {
             style={{
               display: data.isNotice ? 'none' : 'flex',
               backgroundColor:
-                isInputFocused.isFocused === true &&
-                isInputFocused.parent === 'post'
-                  ? 'var(--blue-1)'
-                  : 'none',
+                focusedItem === 'post' ? 'var(--blue-1)' : 'transparent',
             }}
             onClick={inputFocus}
           >
