@@ -5,7 +5,8 @@
 }
 
 .display {
-  padding: 0.3rem 1.4rem;
+  padding: 0 1.4rem;
+  height: 3.2rem;
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -15,7 +16,7 @@
 }
 
 .displayOption {
-  font-size: 1.1rem;
+  font: var(--text-body-2-reg);
   color: var(--blue-4);
 }
 
