@@ -39,6 +39,7 @@ export { default as ServerErrorFallback } from './suspense/ServerErrorFallback/S
 export { default as ShimmerEffect } from './suspense/ShimmerEffect/ShimmerEffect';
 
 // etc
+export { default as CategoryFieldset } from './CategoryFieldset/CategoryFieldset';
 export { default as Icon } from './Icon/Icon';
 export { default as Portal } from './Portal/Portal';
 export { default as PullToRefresh } from './PullToRefresh/PullToRefresh';
