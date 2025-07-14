@@ -5,6 +5,7 @@ import { useRegister } from '@/apis';
 
 import { Dropdown, Input, Button } from '@/shared/component';
 import { MAJORS } from '@/shared/constant';
+import { CategoryFieldset } from '@/feature/my/component';
 
 import {
   checkSpecialChar,
@@ -34,7 +35,7 @@ export default function UserInfoStep({ setFormData, formData }) {
 
   return (
     <div className={styles.pageFrame}>
-      <div className={styles.scrollFrame}>
+      <div>
         <p className={styles.title}>
           사용자 정보를
           <br />
@@ -67,15 +68,14 @@ export default function UserInfoStep({ setFormData, formData }) {
           />
         </div>
         <div className={styles.inputFrame}>
-          <p className={styles.majorTitle}>전공</p>
-          <Dropdown
-            options={MAJORS}
-            select={formData}
-            setFn={setFormData}
-            placeholder='전공을 선택해주세요'
-            backgroundColor='#EAF5FD'
-            color='#00368E'
-          />
+          <CategoryFieldset title='전공' required>
+            <Dropdown
+              options={MAJORS}
+              select={formData}
+              setFn={setFormData}
+              placeholder='전공을 선택해주세요'
+            />
+          </CategoryFieldset>
         </div>
         <div className={styles.inputFrame}>
           <Input

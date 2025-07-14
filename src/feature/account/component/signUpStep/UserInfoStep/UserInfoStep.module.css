@@ -5,10 +5,6 @@
   justify-content: space-between;
 }
 
-.scrollFrame {
-  overflow-y: scroll;
-}
-
 .title {
   font: var(--text-title-1-bold);
   margin-bottom: 2rem;
@@ -16,11 +12,6 @@
 
 .inputFrame {
   margin-bottom: 2.4rem;
-}
-
-.majorTitle {
-  font: var(--text-headline-2-med);
-  margin-bottom: 0.6rem;
 }
 
 .submit {
