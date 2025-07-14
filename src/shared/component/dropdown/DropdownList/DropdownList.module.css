@@ -37,7 +37,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.3rem 2rem 1.3rem 2.7rem;
+  padding: 1.3rem 2.7rem;
 }
 
 .option:not(:last-child) {
