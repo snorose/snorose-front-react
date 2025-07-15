@@ -1,5 +1,5 @@
 .list {
-  padding: 0.4rem var(--default-margin) 0 var(--default-margin);
+  padding: 0 var(--default-margin);
   display: flex;
   flex-direction: column;
   align-items: center;

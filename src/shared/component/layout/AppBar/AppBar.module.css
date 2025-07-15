@@ -12,6 +12,5 @@
 }
 
 .title {
-  font-weight: 700;
-  font-size: 2rem;
+  font: var(--text-headline-1-bold);
 }

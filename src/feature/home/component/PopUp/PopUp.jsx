@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
-import juneReport from '@/feature/home/component/PopUp/juneReport.png';
 import styles from './PopUp.module.css';
 
 const content = (
@@ -10,26 +9,32 @@ const content = (
       <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
-      <Heading>1. 6월 회계 보고</Heading>
+      <Heading>1. 스노로즈 서버 점검 안내</Heading>
       <Content>
-        -{' '}
+        - 일시: 2025/07/18(금) 08:00 ~ 16:00 <br />
+        - 점검 시간 동안 스노로즈 이용이 일시 중단됩니다. <br />- 자세한 내용은{' '}
         <a
           className={styles.link}
-          href='https://docs.google.com/spreadsheets/u/0/d/1MzXAHemKqPwVj3PzPJch5cR5z49gFtzABPgJ_FVjCXM/edit?usp=sharing&pli=1&authuser=0'
-          alt='스노로즈 회계 보고 링크 바로가기'
+          href='https://www.snorose.com/board/notice/post/1838654'
+          alt='관련 공지'
         >
-          [스노로즈 회계 보고 링크 바로가기]
-        </a>
-        <br />- 자세한 내용은{' '}
-        <a
-          className={styles.link}
-          href='https://www.snorose.com/board/notice/post/1837759'
-          alt='공지'
-        >
-          [관련 공지]
+          관련 공지
         </a>
         를 참고해주시길 바랍니다.
-        <img src={juneReport} alt='6월 회계보고' />
+      </Content>
+      <Heading>2. 스노로즈 블로그 운영관리편 공개</Heading>
+      <Content>
+        <strong>&lt;스노로즈 리뉴얼&gt; 운영관리편</strong>이 업로드되었습니다.
+        <br />
+        지금{' '}
+        <a
+          className={styles.link}
+          href='https://snorose.notion.site/1e57ef0aa3bf80809d79c8ab544301b4?v=1e57ef0aa3bf81daa299000c4e65257c'
+          alt='스노로즈 블로그'
+        >
+          스노로즈 블로그
+        </a>
+        에서 확인해보세요!
       </Content>
       <hr />
       <Content>
