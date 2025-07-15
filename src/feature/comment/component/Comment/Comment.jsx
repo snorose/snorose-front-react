@@ -1,24 +1,16 @@
-import { useMutation } from '@tanstack/react-query';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useContext, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
-import { reportComment } from '@/apis';
 
 import {
   Badge,
-  ConfirmModal,
-  DeleteModal,
   Icon,
+  MoreOptionModal,
+  NewConfirmModal,
   OptionModal,
 } from '@/shared/component';
-import {
-  LIKE_TYPE,
-  MUTATION_KEY,
-  ROLE,
-  SHOW_BADGE_PATH,
-} from '@/shared/constant';
-import { useModal, useToast } from '@/shared/hook';
+import { LIKE_TYPE, ROLE, SHOW_BADGE_PATH } from '@/shared/constant';
 import { convertHyperlink, timeAgo } from '@/shared/lib';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 import { NestedComment } from '@/feature/comment/component';
 import { useCommentContext } from '@/feature/comment/context';
@@ -27,75 +19,20 @@ import { useLike } from '@/feature/like/hook';
 
 import styles from './Comment.module.css';
 
+import {
+  COMMENT_MORE_OPTION_LIST,
+  MY_COMMENT_MORE_OPTION_LIST,
+} from '../../constant/commentMoreOptionList';
+import { REPORT_COMMENT_TYPE_LIST } from '../../constant/reportCommentTypeList';
+import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
+import { useReportHandler } from '@/feature/report/hook/useReport';
+
 const Comment = forwardRef((props, ref) => {
+  const { modal, setModal } = useContext(ModalContext);
   const { pathname } = useLocation();
   const { data } = props;
-  const {
-    setIsEdit,
-    commentId,
-    setCommentId,
-    setContent,
-    inputFocus,
-    resetCommentState,
-    isInputFocused,
-    setIsInputFocused,
-  } = useCommentContext();
-  const { deleteComment } = useComment();
-  const { like, unlike } = useLike({
-    type: LIKE_TYPE.comment,
-    sourceId: data.id,
-  });
-  const { toast } = useToast();
 
-  const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [selectedReportType, setSelectedReportType] = useState();
-  const reportConfirmModal = useModal();
-
-  const { mutate: reportCommentMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportComment],
-    mutationFn: (body) => reportComment(data.postId, data.id, body),
-    onSuccess: ({ message }) => {
-      setIsReportModalOpen(false);
-      reportConfirmModal.closeModal();
-      toast(message);
-      resetCommentState();
-    },
-    onError: () => {
-      toast('댓글 신고에 실패했습니다.');
-      resetCommentState();
-    },
-  });
-
-  const handleCommentReportOptionModalOptionClick = (event) => {
-    setSelectedReportType(event.currentTarget.dataset.value);
-    reportConfirmModal.openModal();
-  };
-
-  const handleReportConfirmModalPrimaryButtonClick = () => {
-    reportCommentMutate({
-      reportType: selectedReportType,
-    });
-  };
-
-  const onCommentOptionClick = (data) => {
-    setCommentId(data.id);
-    setContent(data.content);
-    data.isWriter ? setIsOptionModalOpen(true) : setIsReportModalOpen(true);
-  };
-
-  const onCloseClick = () => {
-    setCommentId(undefined);
-    setContent('');
-  };
-
-  const handleReply = () => {
-    resetCommentState();
-    setCommentId(data.id);
-    inputFocus();
-    setIsInputFocused({ isFocused: true, parent: String(data.id) });
-  };
+  const moreOptionRef = useRef(null);
 
   const {
     userRoleId,
@@ -111,6 +48,47 @@ const Comment = forwardRef((props, ref) => {
     children,
   } = data;
 
+  const {
+    setIsEdit,
+    commentId,
+    setCommentId,
+    setContent,
+    inputFocus,
+    resetCommentState,
+    isInputFocused,
+    setIsInputFocused,
+  } = useCommentContext();
+  const { deleteComment } = useComment();
+  const { handleReport } = useReportHandler(modal, setModal, data);
+  const { like, unlike } = useLike({
+    type: LIKE_TYPE.comment,
+    sourceId: data.id,
+  });
+
+  const [inputContent, setInputContent] = useState(null);
+  const [moreOptionTop, setMoreOptionTop] = useState(0);
+
+  const onCommentOptionClick = (data, refElement) => {
+    setCommentId(data.id);
+    setInputContent(data.content);
+
+    const rect = (refElement || moreOptionRef).current.getBoundingClientRect();
+    setMoreOptionTop(rect.top);
+
+    setModal(
+      data.isWriter
+        ? { id: 'my-comment-more-options', type: null }
+        : { id: 'report-comment', type: null }
+    );
+  };
+
+  const handleReply = () => {
+    resetCommentState();
+    setCommentId(data.id);
+    inputFocus();
+    setIsInputFocused({ isFocused: true, parent: String(data.id) });
+  };
+
   // 뱃지가 보이는 ROLE
   const showBadge =
     userRoleId === ROLE.official ||
@@ -122,7 +100,9 @@ const Comment = forwardRef((props, ref) => {
       <div
         ref={ref}
         className={styles.comment}
-        onClick={(event) => event.stopPropagation()}
+        onClick={(event) => {
+          event.stopPropagation();
+        }}
       >
         <div className={styles.commentTop}>
           <div className={styles.commentTopLeft}>
@@ -140,14 +120,15 @@ const Comment = forwardRef((props, ref) => {
               {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
             </p>
           </div>
-          <p
+          <div
+            ref={moreOptionRef}
             className={styles.dot3}
             onClick={(e) => onCommentOptionClick(data)}
           >
             {!isDeleted && isVisible && (
               <Icon id='meat-ball' width={18} height={4} stroke='none' />
             )}
-          </p>
+          </div>
         </div>
         <div
           className={`${styles.commentCenter} ${(isDeleted || !isVisible) && styles.hide}`}
@@ -209,57 +190,75 @@ const Comment = forwardRef((props, ref) => {
               onCommentOptionClick={onCommentOptionClick}
             />
           ))}
+        {modal.id === 'my-comment-more-options' &&
+          (commentId === data.id ||
+            data.children.some((child) => child.id === commentId)) && (
+            // 내 댓글 더보기 클릭 시 뜨는 모달
+            <MoreOptionModal
+              title='내 댓글'
+              optionList={MY_COMMENT_MORE_OPTION_LIST}
+              functions={[
+                () => {
+                  setIsEdit(true);
+                  setContent(inputContent);
+                  setModal({ id: null, type: null });
+                  inputFocus();
+                },
+                null,
+              ]}
+              top={moreOptionTop}
+            />
+          )}
       </div>
-      <OptionModal
-        id='comment-more-options'
-        isOpen={isOptionModalOpen}
-        setIsOpen={setIsOptionModalOpen}
-        closeFn={onCloseClick}
-        functions={{
-          pencil: () => {
-            setIsOptionModalOpen(false);
-            setIsEdit(true);
-            inputFocus();
-          },
-          trash: () => {
-            setIsDeleteModalOpen(true);
-            setIsOptionModalOpen(false);
-          },
-        }}
-      />
-      <DeleteModal
-        id={
-          pathname.startsWith('/board/permanent-snow') ||
-          pathname.startsWith('/board/exam-review')
-            ? 'comment-delete-no-points'
-            : 'comment-delete'
+      {(() => {
+        switch (modal.id) {
+          // 남의 댓글 더보기 클릭 시 뜨는 모달
+          case 'report-comment':
+            return commentId === data.id ||
+              data.children.some((child) => child.id === commentId) ? (
+              <MoreOptionModal
+                title='댓글'
+                optionList={COMMENT_MORE_OPTION_LIST}
+                top={moreOptionTop}
+              />
+            ) : null;
+          // 댓글 신고하기 옵션 모달
+          case 'report-comment-types':
+            return (
+              <OptionModal
+                title='댓글 신고'
+                optionList={REPORT_COMMENT_TYPE_LIST}
+              />
+            );
+          // 댓글 신고 확인 모달
+          case 'confirm-comment-report':
+            return (
+              <NewConfirmModal
+                modalText={CONFIRM_MODAL_TEXT.REPORT_COMMENT}
+                onConfirm={handleReport}
+              />
+            );
+          // 댓글 삭제 확인 모달
+          case 'confirm-comment-delete':
+            return (
+              <NewConfirmModal
+                modalText={
+                  pathname.startsWith('/board/permanent-snow') ||
+                  pathname.startsWith('/board/exam-review')
+                    ? CONFIRM_MODAL_TEXT.DELETE_COMMENT_WITHOUT_POINT_DEDUCTION
+                    : CONFIRM_MODAL_TEXT.DELETE_COMMENT
+                }
+                onConfirm={() => {
+                  deleteComment.mutate({ commentId });
+                  resetCommentState();
+                  setModal({ id: null, type: null });
+                }}
+              />
+            );
+          default:
+            return null;
         }
-        isOpen={isDeleteModalOpen}
-        closeFn={() => {
-          resetCommentState();
-          setContent('');
-          setIsDeleteModalOpen(false);
-        }}
-        redBtnFunction={() => deleteComment.mutate({ commentId })}
-      />
-      <OptionModal
-        id='comment-report'
-        isOpen={isReportModalOpen}
-        setIsOpen={setIsReportModalOpen}
-        closeFn={() => {
-          onCloseClick();
-          setIsReportModalOpen(false);
-        }}
-        onOptionClick={handleCommentReportOptionModalOptionClick}
-      />
-      <ConfirmModal
-        title='해당 댓글을 신고할까요?'
-        isOpen={reportConfirmModal.isOpen}
-        primaryButtonText='확인'
-        secondaryButtonText='취소'
-        onPrimaryButtonClick={handleReportConfirmModalPrimaryButtonClick}
-        onSecondaryButtonClick={reportConfirmModal.closeModal}
-      />
+      })()}
     </>
   );
 });
