@@ -8,6 +8,7 @@ import studentCouncil from '@/assets/images/studentCouncil-board-page.svg';
 
 export const BOARD_ID = Object.freeze({
   all: 0, // 프론트에서만 사용하는 보드 ID
+  event: 14,
   besookt: 20,
   'first-snow': 21,
   'large-snow': 22,
@@ -22,6 +23,10 @@ export const BOARDS = Object.freeze([
   {
     id: 0,
     path: '/board/all',
+  },
+  {
+    id: 14,
+    path: '/board/event',
   },
   {
     id: 21,
@@ -61,6 +66,14 @@ export const BOARD_MENUS = [
     to: '/board/notice',
     textId: 'notice',
     title: '공지사항',
+    desc: '',
+    image: '',
+  },
+  {
+    id: 14,
+    to: '/board/event',
+    textId: 'event',
+    title: '이벤트',
     desc: '',
     image: '',
   },
@@ -148,8 +161,9 @@ export const OFFICIAL_BOARD = Object.freeze([
 // 뱃지가 보이는 경로 (일반 게시판에서는 리자의 뱃지가 안보이게 설정)
 export const SHOW_BADGE_PATH = Object.freeze([
   '/notice',
+  '/event',
   '/student-council',
-  'finance-audit',
+  '/finance-audit',
   '/graduation-preparation',
 ]);
 
