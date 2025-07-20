@@ -68,7 +68,7 @@ export default function MainPage() {
       </QueryErrorResetBoundary>
 
       <Footer />
-      <PopUp />
+      {/* <PopUp /> */}
     </main>
   );
 }
