@@ -5,6 +5,19 @@ import { Icon } from '@/shared/component';
 import style from './Footer.module.css';
 
 export default function Footer() {
+  const textToCopy = '카카오뱅크 3333-31-8162062';
+
+  const handleCopy = () => {
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        alert('복사 완료:)');
+      })
+      .catch((error) => {
+        alert('복사 실패ㅜ.ㅜ');
+      });
+  };
+
   return (
     <footer className={style.footer}>
       <Icon id='logo' width={118} height={21} />
@@ -15,8 +28,11 @@ export default function Footer() {
           <a href='mailto:snorose1906@gmail.com'>snorose1906@gmail.com</a>
         </p>
         <p>
-          <span className={style.bold}>숙명여대 후원하기</span> 카카오뱅크
-          3333-31-8162062 (예금주: 김*지)
+          <span className={style.bold}>숙명여대 후원하기</span>{' '}
+          <span onClick={handleCopy} className={style.accountNumber}>
+            {textToCopy}
+          </span>{' '}
+          (예금주: 김*지)
         </p>
       </div>
 
