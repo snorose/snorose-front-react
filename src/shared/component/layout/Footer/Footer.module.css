@@ -24,6 +24,10 @@
   font: var(--text-body-2-med);
 }
 
+.accountNumber {
+  cursor: pointer;
+}
+
 .menu {
   display: flex;
   justify-content: center;
