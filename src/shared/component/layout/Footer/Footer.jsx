@@ -1,20 +1,23 @@
 import { Link } from 'react-router-dom';
 
 import { Icon } from '@/shared/component';
+import { useToast } from '@/shared/hook';
+import { TOAST } from '@/shared/constant';
 
 import style from './Footer.module.css';
 
 export default function Footer() {
+  const { toast } = useToast();
   const textToCopy = '카카오뱅크 3333-31-8162062';
 
   const handleCopy = () => {
     navigator.clipboard
       .writeText(textToCopy)
       .then(() => {
-        alert('복사 완료:)');
+        toast(TOAST.COPY_AND_PASTE.SUCCESS);
       })
       .catch((error) => {
-        alert('복사 실패ㅜ.ㅜ');
+        toast(TOAST.COPY_AND_PASTE.FAIL);
       });
   };
 
