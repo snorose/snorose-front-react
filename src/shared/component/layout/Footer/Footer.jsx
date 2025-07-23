@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
+import { Fragment } from 'react';
 
 import { Icon } from '@/shared/component';
+import { FOOTER_MENUS } from '@/shared/constant';
 
 import style from './Footer.module.css';
 
@@ -21,27 +23,15 @@ export default function Footer() {
       </div>
 
       <div className={style.menu}>
-        <Link to='/my-page/service-policy' className={style.link}>
-          서비스 이용 약관
-        </Link>
-        {' | '}
-        <Link
-          to='https://www.notion.so/snorose/1147ef0aa3bf8039add2e00a4edd0eb4'
-          target='_blank'
-          className={style.link}
-        >
-          배너 및 광고 문의
-        </Link>{' '}
-        {' | '}
-        <Link to='/my-page/privacy-policy' className={style.link}>
-          개인정보 처리방침
-        </Link>{' '}
-        {' | '}
-        <Link
-          to='https://www.instagram.com/snorose1906/'
-          target='_blank'
-          className={style.link}
-        >
+        {FOOTER_MENUS.map(({ title, to }) => (
+          <Fragment key={title}>
+            <Link to={to} target='_blank'>
+              {title}
+            </Link>
+            <span className={style.separator}> | </span>
+          </Fragment>
+        ))}
+        <Link to='https://www.instagram.com/snorose1906/' target='_blank'>
           <Icon id='instagram' width={16.5} height={16.5} />
         </Link>
       </div>
