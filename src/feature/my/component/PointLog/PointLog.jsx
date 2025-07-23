@@ -27,7 +27,7 @@ const PointLog = forwardRef((props, ref) => {
             {POINT_CATEGORY_KOREAN_ENUM[category]}
           </h2>
           {reviewTitle && (
-            <span className={styles.pointDesc}>{reviewTitle}</span>
+            <span className={styles.pointDescription}>{reviewTitle}</span>
           )}
           <span className={styles.pointDate}>
             {format(new Date(createdAt), 'yyyy.MM.dd HH:mm:ss')}
