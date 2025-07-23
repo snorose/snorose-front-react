@@ -17,8 +17,8 @@ const PointLog = forwardRef((props, ref) => {
       <div className={styles.pointIconContentWrapper}>
         <Icon
           id={difference > 0 ? 'heart-plus' : 'heart-minus'}
-          width={28}
-          height={28}
+          width={40}
+          height={40}
         />
         <div className={styles.pointContent}>
           <h2
