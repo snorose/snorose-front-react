@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 500;
+  z-index: var(--z-index-popup);
 }
 
 .popUp {

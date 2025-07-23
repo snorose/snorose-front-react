@@ -56,4 +56,18 @@
   --text-body-2-bold: 700 1.3rem 'Spoqa Han Sans Neo';
   --text-body-2-med: 500 1.3rem 'Spoqa Han Sans Neo';
   --text-body-2-reg: 400 1.3rem 'Spoqa Han Sans Neo';
+
+  /* z-index */
+  --z-index-fetch-loading: 100;
+  --z-index-pull-to-refresh: 100;
+  --z-index-mypage-background: 100;
+  --z-index-profile-image: 200;
+  --z-index-dropdown: 400;
+  --z-index-appbar: 500;
+  --z-index-navbar: 500;
+  --z-index-write-button: 500;
+  --z-index-modal: 600;
+  --z-index-toast: 700;
+  --z-index-sidebar: 900;
+  --z-index-popup: 1000;
 }
