@@ -5,12 +5,17 @@
   border-radius: 0.5rem;
   background: var(--grey-1-1);
   padding: 1.4rem;
+  gap: 1.4rem;
 }
 
 .pointIconContentWrapper {
   display: flex;
   align-items: center;
   gap: 1.4rem;
+}
+
+.pointIcon {
+  flex-shrink: 0;
 }
 
 .pointContent {
