@@ -10,11 +10,11 @@
 .pointIconContentWrapper {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.4rem;
 
   svg {
-    width: 2.6rem;
-    height: 2.3rem;
+    width: 4rem;
+    height: 4rem;
   }
 }
 
@@ -26,23 +26,24 @@
 
 .pointTitle {
   color: var(--blue-4);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 500;
+  padding-bottom: 0.2rem;
 }
 
 .pointDesc {
   color: var(--grey-4);
-  font-size: 0.9rem;
+  font-size: 1.3rem;
 }
 
 .pointDate {
   color: var(--grey-3-1);
-  font-size: 0.9rem;
+  font-size: 1.3rem;
 }
 
 .chargePoint {
   color: var(--blue-4);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 500;
 }
 
