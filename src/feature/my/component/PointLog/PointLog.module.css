@@ -25,10 +25,9 @@
 }
 
 .pointTitle {
-  color: var(--blue-4);
-  font-size: 1.4rem;
-  font-weight: 500;
   padding-bottom: 0.2rem;
+  color: var(--blue-4);
+  font: var(--text-body-1-med);
 }
 
 .pointDescription {
@@ -38,18 +37,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--grey-4);
-  font-size: 1.3rem;
+  font: var(--text-body-2-reg);
 }
 
 .pointDate {
   color: var(--grey-3-1);
-  font-size: 1.3rem;
+  font: var(--text-body-2-reg);
 }
 
 .chargePoint {
   color: var(--blue-4);
-  font-size: 1.6rem;
-  font-weight: 500;
+  font: var(--text-headline-2-med);
 }
 
 .negative {
