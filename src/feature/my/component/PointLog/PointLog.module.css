@@ -32,6 +32,11 @@
 }
 
 .pointDescription {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--grey-4);
   font-size: 1.3rem;
 }
