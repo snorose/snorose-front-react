@@ -11,7 +11,10 @@ export default function ProtectedRoute({ roles, message, children }) {
   const { status, userInfo } = useAuth();
 
   useEffect(() => {
-    if (status === USER_STATUS.isLogout) {
+    if (
+      status === USER_STATUS.isLogout &&
+      !localStorage.getItem('accessToken')
+    ) {
       alert('로그인이 필요합니다.');
       navigate('/login', { replace: true });
       return;
@@ -21,7 +24,11 @@ export default function ProtectedRoute({ roles, message, children }) {
       return;
     }
 
-    if (roles && !roles.includes(userInfo?.userRoleId)) {
+    if (
+      roles &&
+      !roles.includes(userInfo?.userRoleId) &&
+      !localStorage.getItem('accessToken')
+    ) {
       alert(message);
       navigate(-1);
       return;

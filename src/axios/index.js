@@ -1,4 +1,12 @@
 import axios from 'axios';
+import {
+  getAccessToken,
+  setAccessToken,
+  getRefreshToken,
+  setRefreshToken,
+  clearTokens,
+  isTokenExpired,
+} from '@/utils/tokenManager';
 
 const defaultAxios = axios.create({
   baseURL: process.env.REACT_APP_SERVER_DOMAIN,
@@ -28,10 +36,51 @@ authAxios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
+let isRefreshing = false;
+let refreshPromise = null;
 authAxios.interceptors.request.use(
-  (config) => {
-    const accessToken = localStorage.getItem('accessToken');
+  async (config) => {
+    const accessToken = getAccessToken();
+    console.log(accessToken);
+    const expired = isTokenExpired(accessToken);
+
+    if (accessToken && expired) {
+      if (!isRefreshing) {
+        isRefreshing = true;
+        refreshPromise = defaultAxios
+          .post('/v1/users/reissueToken', {
+            refreshToken: getRefreshToken(),
+          })
+          .then(({ data }) => {
+            const {
+              accessToken: newAccessToken,
+              refreshToken: newRefreshToken,
+            } = data.result;
+
+            setAccessToken(newAccessToken);
+            setRefreshToken(newRefreshToken);
+
+            console.log(
+              `accessToken: ${newAccessToken}\n refreshToken: ${newRefreshToken}`
+            );
+            window.location.reload();
+            return newAccessToken;
+          })
+          .catch((e) => {
+            console.error('Token refresh failed', e);
+            throw e;
+          })
+          .finally(() => {
+            isRefreshing = false;
+          });
+      }
+
+      try {
+        accessToken = await refreshPromise;
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
