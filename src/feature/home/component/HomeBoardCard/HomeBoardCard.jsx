@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/shared/hook';
 import { USER_STATUS } from '@/shared/constant';
+import { ACCESS_MESSAGES } from '@/feature/home/constant';
 
 import lockImage from '@/assets/images/lock.svg';
 
@@ -31,7 +32,7 @@ export default function HomeBoardCard({
           </>
         )}
         {status !== USER_STATUS.isLogin && (
-          <p className={style.notLogin}>{`로그인 후 이용해 주세요`}</p>
+          <p className={style.notLogin}>{ACCESS_MESSAGES.NEED_LOGIN}</p>
         )}
       </div>
     </Link>

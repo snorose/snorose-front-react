@@ -1,5 +1,7 @@
 import { ServerErrorFallback } from '@/shared/component';
 
+import { ACCESS_MESSAGES } from '@/feature/home/constant';
+
 import styles from './HomeBesooktErrorFallback.module.css';
 
 export default function HomeBesooktErrorFallback({
@@ -9,11 +11,11 @@ export default function HomeBesooktErrorFallback({
   const { status } = error;
 
   if (status === 401) {
-    return <Fallback text={'로그인 후 이용해 주세요'} />;
+    return <Fallback text={ACCESS_MESSAGES.NEED_LOGIN} />;
   }
 
   if (status === 403) {
-    return <Fallback text={'등업 완료 후 이용 가능해요'} />;
+    return <Fallback text={ACCESS_MESSAGES.NEED_UPGRADE} />;
   }
 
   return <ServerErrorFallback reset={resetErrorBoundary} />;
