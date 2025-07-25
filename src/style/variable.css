@@ -67,7 +67,7 @@
   --z-index-navbar: 500;
   --z-index-write-button: 500;
   --z-index-modal: 600;
-  --z-index-toast: 700;
-  --z-index-sidebar: 900;
-  --z-index-popup: 1000;
+  --z-index-sidebar: 700;
+  --z-index-popup: 800;
+  --z-index-toast: 1000;
 }
