@@ -31,7 +31,7 @@ export default function HomeBoardCard({
           </>
         )}
         {status !== USER_STATUS.isLogin && (
-          <p className={style.notLogin}>{`로그인 후 이용해주세요`}</p>
+          <p className={style.notLogin}>{`로그인 후 이용해 주세요`}</p>
         )}
       </div>
     </Link>

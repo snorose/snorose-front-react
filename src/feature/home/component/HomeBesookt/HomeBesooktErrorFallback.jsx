@@ -9,11 +9,11 @@ export default function HomeBesooktErrorFallback({
   const { status } = error;
 
   if (status === 401) {
-    return <Fallback text={'로그인 후 이용 가능합니다.'} />;
+    return <Fallback text={'로그인 후 이용해 주세요'} />;
   }
 
   if (status === 403) {
-    return <Fallback text={'등업 완료 후 이용 가능합니다.'} />;
+    return <Fallback text={'등업 완료 후 이용 가능해요'} />;
   }
 
   return <ServerErrorFallback reset={resetErrorBoundary} />;
