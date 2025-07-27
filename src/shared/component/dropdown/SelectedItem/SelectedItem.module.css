@@ -7,6 +7,11 @@
   gap: 1rem;
 }
 
+.colored {
+  background-color: var(--grey-1-1, #f4f4f4);
+  color: var(--black);
+}
+
 .select {
   padding: 1.6rem 1.3rem;
   display: flex;

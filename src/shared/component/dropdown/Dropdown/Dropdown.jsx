@@ -4,14 +4,7 @@ import { DropdownList, SelectedItem } from '@/shared/component';
 
 import styles from './Dropdown.module.css';
 
-export default function Dropdown({
-  options,
-  placeholder,
-  select,
-  setFn,
-  color,
-  backgroundColor,
-}) {
+export default function Dropdown({ options, placeholder, select, setFn }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const updateSelect = (option) => {
@@ -27,8 +20,6 @@ export default function Dropdown({
         placeholder={placeholder}
         isOpen={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}
-        color={color}
-        backgroundColor={backgroundColor}
       />
 
       <div

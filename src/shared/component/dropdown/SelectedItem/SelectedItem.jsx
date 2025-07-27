@@ -2,24 +2,17 @@ import { Icon } from '@/shared/component';
 
 import styles from './SelectedItem.module.css';
 
-export default function SelectedItem({
-  select,
-  placeholder,
-  isOpen,
-  onClick,
-  color,
-  backgroundColor,
-}) {
+export default function SelectedItem({ select, placeholder, isOpen, onClick }) {
   return (
     <div
-      className={`${styles.selectedItem} ${isOpen && styles.open}`}
-      style={{
-        backgroundColor: !isOpen && select?.name && backgroundColor,
-        color: !isOpen && select?.name && color,
-      }}
+      className={`
+        ${styles.selectedItem}
+        ${isOpen ? styles.open : ''}
+        ${!isOpen && select?.name ? styles.colored : ''}
+      `}
     >
       <div
-        className={`${styles.select} ${select || styles.unselect}`}
+        className={`${styles.select} ${select ? '' : styles.unselect}`}
         onClick={onClick}
       >
         {select?.name ?? (
