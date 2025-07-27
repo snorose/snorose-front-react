@@ -121,7 +121,9 @@ const Comment = forwardRef((props, ref) => {
     <>
       <div
         ref={ref}
-        className={styles.comment}
+        className={`${styles.comment} ${
+          focusedItem === String(data.id) ? styles.focused : ''
+        }`}
         onClick={(event) => event.stopPropagation()}
       >
         <div className={styles.commentTop}>
@@ -168,12 +170,6 @@ const Comment = forwardRef((props, ref) => {
             <>
               <button
                 className={styles.commentCount}
-                style={{
-                  backgroundColor:
-                    focusedItem === String(data.id)
-                      ? 'var(--blue-1)'
-                      : 'transparent',
-                }}
                 type='button'
                 onClick={handleReply}
               >

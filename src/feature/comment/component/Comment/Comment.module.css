@@ -6,6 +6,10 @@
   background: var(--grey-1);
 }
 
+.comment.focused {
+  background-color: var(--blue-0);
+}
+
 .commentTop {
   width: 100%;
   padding: 1.3rem 1.5rem 0.9rem;
