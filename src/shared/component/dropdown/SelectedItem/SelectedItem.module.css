@@ -15,7 +15,7 @@
   font: var(--text-body-1-reg);
   color: var(--black);
   background: var(--grey-1-1, #f4f4f4);
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
 .select:hover {

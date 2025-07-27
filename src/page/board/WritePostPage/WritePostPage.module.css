@@ -40,7 +40,7 @@
 
 .dropDownList {
   position: absolute;
-  top: calc(100% + 7px);
+  top: calc(100% + 0.7rem);
 }
 
 .profileBox {

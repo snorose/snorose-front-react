@@ -1,10 +1,10 @@
 .dropdownContent {
-  border-radius: 5px;
+  border-radius: 0.5rem;
   transition: 200ms all ease-in-out;
   text-align: left;
   font: var(--text-headline-2-reg);
   color: var(--Grey-Grey-3-1, #898989);
-  box-shadow: 0px 0px 36px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 3.6rem 0 rgba(0, 0, 0, 0.1);
   max-height: 18rem;
   overflow-y: scroll;
   scrollbar-width: thin;
@@ -42,7 +42,7 @@
 }
 
 .option:not(:last-child) {
-  border-bottom: 0.5px solid var(--blue-2, #bfd7ec);
+  border-bottom: 0.05rem solid var(--blue-2, #bfd7ec);
 }
 
 .option:hover {
