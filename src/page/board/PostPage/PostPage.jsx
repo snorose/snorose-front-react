@@ -1,48 +1,28 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { getPostContent } from '@/apis';
 import { NotFoundPage } from '@/page/etc';
 
-import {
-  BackAppBar,
-  Badge,
-  FetchLoading,
-  Icon,
-  MoreOptionModal,
-  OptionModal,
-  NewConfirmModal,
-} from '@/shared/component';
-
+import { BackAppBar, Badge, FetchLoading, Icon } from '@/shared/component';
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
-
 import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
-
 import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
+import { PostModalRenderer } from '@/feature/board/component';
 import { useReportHandler } from '@/feature/report/hook/useReport';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
-
 import { useCommentContext } from '@/feature/comment/context';
 
-import { REPORT_POST_TYPE_LIST } from '@/feature/report/constant/reportPostTypeList';
-import { REPORT_USER_TYPE_LIST } from '@/feature/report/constant/reportUserTypeList';
-import {
-  MY_POST_MORE_OPTION_LIST,
-  POST_MORE_OPTION_LIST,
-} from '@/feature/board/constant/postMoreOptionList';
-
 import styles from './PostPage.module.css';
-import { ModalContext } from '@/shared/context/ModalContext';
 
 export default function PostPage() {
   const { postId } = useParams();
-  const location = useLocation();
-  const { pathname } = location;
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const { inputFocus, isInputFocused } = useCommentContext();
   const currentBoard = getBoard(pathname.split('/')[2]);
@@ -64,6 +44,11 @@ export default function PostPage() {
     type: LIKE_TYPE.post,
     sourceId: postId,
   });
+
+  const handleEdit = () => {
+    setModal({ id: null, type: null });
+    navigate(`./edit`);
+  };
 
   // 뱃지를 보여주는 ROLE
   const showBadge =
@@ -216,79 +201,13 @@ export default function PostPage() {
           <CommentInput />
         </>
       )}
-      {(() => {
-        switch (modal.id) {
-          // 남의 게시글 더보기 클릭 시 뜨는 모달
-          case 'post-more-options':
-            return (
-              <MoreOptionModal
-                title='게시글'
-                optionList={POST_MORE_OPTION_LIST}
-              />
-            );
-          // 내 게시글 더보기 클릭 시 뜨는 모달
-          case 'my-post-more-options':
-            return (
-              <MoreOptionModal
-                title='내 게시글'
-                optionList={MY_POST_MORE_OPTION_LIST}
-                functions={[
-                  () => {
-                    setModal({ id: null, type: null });
-                    navigate(`./edit`);
-                  },
-                  null,
-                ]}
-              />
-            );
-          // 게시글 신고하기 옵션 모달
-          case 'report-post-types':
-            return (
-              <OptionModal
-                title='게시글 신고'
-                optionList={REPORT_POST_TYPE_LIST}
-              />
-            );
-          // 유저 신고하기 옵션 모달
-          case 'report-user-types':
-            return (
-              <OptionModal
-                title='이용자 신고'
-                optionList={REPORT_USER_TYPE_LIST}
-              />
-            );
-          // 게시글 신고 확인 모달
-          case 'confirm-post-report':
-            return (
-              <NewConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_POST}
-                onConfirm={handleReport}
-              />
-            );
-          // 유저 신고 확인 모달
-          case 'confirm-user-report':
-            return (
-              <NewConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_USER}
-                onConfirm={handleReport}
-              />
-            );
-          // 게시글 삭제 확인 모달
-          case 'confirm-post-delete':
-            return (
-              <NewConfirmModal
-                modalText={
-                  currentBoard.id !== 23
-                    ? CONFIRM_MODAL_TEXT.DELETE_POST
-                    : CONFIRM_MODAL_TEXT.DELETE_POST_WITHOUT_POINT_DEDUCTION
-                }
-                onConfirm={handleDelete}
-              />
-            );
-          default:
-            return null;
-        }
-      })()}
+      {/* PostPage에서 사용하는 모달 렌더러 */}
+      <PostModalRenderer
+        modal={modal}
+        handleEdit={handleEdit}
+        handleReport={handleReport}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 }
