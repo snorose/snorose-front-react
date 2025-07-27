@@ -20,10 +20,14 @@
   justify-content: space-between;
   font: var(--text-body-1-reg);
   color: var(--grey-3-1, #898989);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .select:hover {
   cursor: pointer;
+  background-color: var(--grey-1-2, #eaeaea); /* 시각적 변화 추천 */
 }
 
 .unselect {
@@ -39,6 +43,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.3rem 2rem 1.3rem 2.7rem;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .option:not(:last-child) {
