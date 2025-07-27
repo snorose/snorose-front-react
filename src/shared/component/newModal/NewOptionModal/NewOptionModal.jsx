@@ -1,10 +1,10 @@
 import { DimModalLayout, Icon } from '@/shared/component';
-import styles from './OptionModal.module.css';
+import styles from './NewOptionModal.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
 import { getReportModalId } from '@/feature/report/lib/getReportModalId';
 
-export default function OptionModal({ title, optionList }) {
+export default function NewOptionModal({ title, optionList }) {
   const { modal, setModal } = useContext(ModalContext);
 
   return (

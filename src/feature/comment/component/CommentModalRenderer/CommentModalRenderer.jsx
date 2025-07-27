@@ -1,7 +1,7 @@
 import {
   MoreOptionModal,
   NewConfirmModal,
-  OptionModal,
+  NewOptionModal,
 } from '@/shared/component';
 import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
 
@@ -9,9 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { REPORT_COMMENT_TYPE_LIST } from '../../constant/reportCommentTypeList';
 import { COMMENT_MORE_OPTION_LIST } from '../../constant/commentMoreOptionList';
 import { useCommentContext } from '../../context';
-import {
-  useReportHandler,
-} from '@/feature/report/hook/useReport';
+import { useReportHandler } from '@/feature/report/hook/useReport';
 import { useComment } from '../../hook';
 import { useContext } from 'react';
 import { ModalContext } from '@/shared/context/ModalContext';
@@ -41,7 +39,7 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
           // 댓글 신고하기 옵션 모달
           case 'report-comment-types':
             return (
-              <OptionModal
+              <NewOptionModal
                 title='댓글 신고'
                 optionList={REPORT_COMMENT_TYPE_LIST}
               />

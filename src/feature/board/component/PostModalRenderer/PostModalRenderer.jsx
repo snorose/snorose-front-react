@@ -1,7 +1,7 @@
 import {
   MoreOptionModal,
   NewConfirmModal,
-  OptionModal,
+  NewOptionModal,
 } from '@/shared/component';
 import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
 import {
@@ -47,7 +47,7 @@ export default function PostModalRenderer({
           // 게시글 신고하기 옵션 리스트 모달
           case 'report-post-types':
             return (
-              <OptionModal
+              <NewOptionModal
                 title='게시글 신고'
                 optionList={REPORT_POST_TYPE_LIST}
               />
@@ -55,7 +55,7 @@ export default function PostModalRenderer({
           // 유저 신고하기 옵션 리스트 모달
           case 'report-user-types':
             return (
-              <OptionModal
+              <NewOptionModal
                 title='이용자 신고'
                 optionList={REPORT_USER_TYPE_LIST}
               />
