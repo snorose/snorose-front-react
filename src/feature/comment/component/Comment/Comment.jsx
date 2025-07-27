@@ -37,8 +37,8 @@ const Comment = forwardRef((props, ref) => {
     setContent,
     inputFocus,
     resetCommentState,
-    isInputFocused,
-    setIsInputFocused,
+    focusedItem,
+    setFocusedItem,
   } = useCommentContext();
   const { deleteComment } = useComment();
   const { like, unlike } = useLike({
@@ -94,7 +94,7 @@ const Comment = forwardRef((props, ref) => {
     resetCommentState();
     setCommentId(data.id);
     inputFocus();
-    setIsInputFocused({ isFocused: true, parent: String(data.id) });
+    setFocusedItem(String(data.id));
   };
 
   const {
@@ -121,7 +121,9 @@ const Comment = forwardRef((props, ref) => {
     <>
       <div
         ref={ref}
-        className={styles.comment}
+        className={`${styles.comment} ${
+          focusedItem === String(data.id) ? styles.focused : ''
+        }`}
         onClick={(event) => event.stopPropagation()}
       >
         <div className={styles.commentTop}>
@@ -173,13 +175,13 @@ const Comment = forwardRef((props, ref) => {
               >
                 <Icon
                   id='comment-stroke'
-                  width={20}
-                  height={17}
-                  fill={
-                    Number(isInputFocused.parent) === data.id
-                      ? '#5F86BF'
-                      : 'none'
-                  }
+                  width={18}
+                  height={15}
+                  style={{
+                    paddingTop: '0.1rem',
+                  }}
+                  stroke='var(--blue-3)'
+                  fill='none'
                 />
                 <p>{children.length}</p>
               </button>
@@ -192,7 +194,8 @@ const Comment = forwardRef((props, ref) => {
                   id='like-stroke'
                   width={16}
                   height={18}
-                  fill={isLiked ? '#5F86BF' : 'none'}
+                  stroke='var(--blue-3)'
+                  fill={isLiked ? 'var(--blue-3)' : 'none'}
                 />
                 <span>{likeCount.toLocaleString()}</span>
               </button>
