@@ -6,3 +6,5 @@ export { default as CommentListErrorFallback } from './CommentList/CommentListEr
 export { default as CommentListSuspense } from './CommentList/CommentListSuspense';
 
 export { default as CommentInput } from './CommentInput/CommentInput';
+
+export { default as CommentModalRenderer } from './CommentModalRenderer/CommentModalRenderer';

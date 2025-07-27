@@ -1,31 +1,21 @@
 import { forwardRef, useContext, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import {
-  Badge,
-  Icon,
-  MoreOptionModal,
-  NewConfirmModal,
-  OptionModal,
-} from '@/shared/component';
+import { Badge, Icon, MoreOptionModal } from '@/shared/component';
 import { LIKE_TYPE, ROLE, SHOW_BADGE_PATH } from '@/shared/constant';
 import { convertHyperlink, timeAgo } from '@/shared/lib';
 import { ModalContext } from '@/shared/context/ModalContext';
 
-import { NestedComment } from '@/feature/comment/component';
+import {
+  CommentModalRenderer,
+  NestedComment,
+} from '@/feature/comment/component';
 import { useCommentContext } from '@/feature/comment/context';
-import { useComment } from '@/feature/comment/hook';
 import { useLike } from '@/feature/like/hook';
 
-import styles from './Comment.module.css';
+import { MY_COMMENT_MORE_OPTION_LIST } from '../../constant/commentMoreOptionList';
 
-import {
-  COMMENT_MORE_OPTION_LIST,
-  MY_COMMENT_MORE_OPTION_LIST,
-} from '../../constant/commentMoreOptionList';
-import { REPORT_COMMENT_TYPE_LIST } from '../../constant/reportCommentTypeList';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
-import { useReportHandler } from '@/feature/report/hook/useReport';
+import styles from './Comment.module.css';
 
 const Comment = forwardRef((props, ref) => {
   const { modal, setModal } = useContext(ModalContext);
@@ -58,8 +48,6 @@ const Comment = forwardRef((props, ref) => {
     isInputFocused,
     setIsInputFocused,
   } = useCommentContext();
-  const { deleteComment } = useComment();
-  const { handleReport } = useReportHandler(modal, setModal, data);
   const { like, unlike } = useLike({
     type: LIKE_TYPE.comment,
     sourceId: data.id,
@@ -210,55 +198,7 @@ const Comment = forwardRef((props, ref) => {
             />
           )}
       </div>
-      {(() => {
-        switch (modal.id) {
-          // 남의 댓글 더보기 클릭 시 뜨는 모달
-          case 'report-comment':
-            return commentId === data.id ||
-              data.children.some((child) => child.id === commentId) ? (
-              <MoreOptionModal
-                title='댓글'
-                optionList={COMMENT_MORE_OPTION_LIST}
-                top={moreOptionTop}
-              />
-            ) : null;
-          // 댓글 신고하기 옵션 모달
-          case 'report-comment-types':
-            return (
-              <OptionModal
-                title='댓글 신고'
-                optionList={REPORT_COMMENT_TYPE_LIST}
-              />
-            );
-          // 댓글 신고 확인 모달
-          case 'confirm-comment-report':
-            return (
-              <NewConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_COMMENT}
-                onConfirm={handleReport}
-              />
-            );
-          // 댓글 삭제 확인 모달
-          case 'confirm-comment-delete':
-            return (
-              <NewConfirmModal
-                modalText={
-                  pathname.startsWith('/board/permanent-snow') ||
-                  pathname.startsWith('/board/exam-review')
-                    ? CONFIRM_MODAL_TEXT.DELETE_COMMENT_WITHOUT_POINT_DEDUCTION
-                    : CONFIRM_MODAL_TEXT.DELETE_COMMENT
-                }
-                onConfirm={() => {
-                  deleteComment.mutate({ commentId });
-                  resetCommentState();
-                  setModal({ id: null, type: null });
-                }}
-              />
-            );
-          default:
-            return null;
-        }
-      })()}
+      <CommentModalRenderer data={data} moreOptionTop={moreOptionTop} />
     </>
   );
 });
