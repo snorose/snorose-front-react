@@ -24,6 +24,14 @@ const CommentInput = () => {
 
   const handleInputChange = (e) => setContent(e.target.value);
 
+  const handleInputFocus = () => {
+    setFocusedItem('post');
+  };
+
+  const handleInputBlur = () => {
+    setTimeout(() => setFocusedItem(null), 0);
+  };
+
   // 댓글 등록 or 수정
   const submitComment = () => {
     if (loading) {
@@ -83,11 +91,8 @@ const CommentInput = () => {
           value={content}
           onKeyDown={handleKeyPress}
           onChange={handleInputChange}
-          onFocus={() => setFocusedItem('post')}
-          onBlur={() => {
-            // 약간의 지연을 두어 다른 클릭 이벤트가 먼저 처리되도록 함
-            setTimeout(() => setFocusedItem(null), 0);
-          }}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           maxRows={5}
         />
       </div>
