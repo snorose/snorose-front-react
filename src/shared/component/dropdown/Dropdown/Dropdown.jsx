@@ -9,7 +9,6 @@ export default function Dropdown({ options, placeholder, select, setFn }) {
 
   const updateSelect = (option) => {
     setFn((prev) => ({ ...prev, ...option }));
-    console.log('SelectedItem clicked', options);
     setIsOpen(false);
   };
 
