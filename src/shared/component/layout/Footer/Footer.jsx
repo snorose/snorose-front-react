@@ -2,22 +2,21 @@ import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
 
 import { Icon } from '@/shared/component';
-import { FOOTER_MENUS, TOAST } from '@/shared/constant';
+import { FOOTER_CONTACT_ITEMS, FOOTER_MENUS, TOAST } from '@/shared/constant';
 import { useToast } from '@/shared/hook';
 
 import style from './Footer.module.css';
 
 export default function Footer() {
   const { toast } = useToast();
-  const textToCopy = '카카오뱅크 3333-31-8162062';
 
-  const handleCopy = () => {
+  const handleCopy = (text) => {
     navigator.clipboard
-      .writeText(textToCopy)
+      .writeText(text)
       .then(() => {
         toast(TOAST.COPY_AND_PASTE.SUCCESS);
       })
-      .catch((error) => {
+      .catch(() => {
         toast(TOAST.COPY_AND_PASTE.FAIL);
       });
   };
@@ -27,17 +26,18 @@ export default function Footer() {
       <Icon id='logo' width={118} height={21} />
 
       <div className={style.info}>
-        <p>
-          <span className={style.bold}>CONTACT US </span>
-          <a href='mailto:snorose1906@gmail.com'>snorose1906@gmail.com</a>
-        </p>
-        <p>
-          <span className={style.bold}>숙명여대 후원하기</span>{' '}
-          <span onClick={handleCopy} className={style.accountNumber}>
-            {textToCopy}
-          </span>{' '}
-          (예금주: 김*지)
-        </p>
+        {FOOTER_CONTACT_ITEMS.map(({ type, label, value, accountHolder }) => (
+          <p key={type}>
+            <span className={style.bold}>{label}</span>{' '}
+            <span
+              onClick={() => handleCopy(value)}
+              className={style.accountNumber}
+            >
+              {value}
+            </span>{' '}
+            {accountHolder}
+          </p>
+        ))}
       </div>
 
       <div className={style.menu}>

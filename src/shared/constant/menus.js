@@ -94,6 +94,20 @@ export const SIDEBAR_MENUS = Object.freeze([
   },
 ]);
 
+export const FOOTER_CONTACT_ITEMS = Object.freeze([
+  {
+    type: 'email',
+    label: 'CONTACT US',
+    value: 'snorose1906@gmail.com',
+  },
+  {
+    type: 'bank',
+    label: '숙명여대 후원하기',
+    value: '카카오뱅크 3333-31-8162062',
+    accountHolder: '(예금주: 김*지)',
+  },
+]);
+
 export const FOOTER_MENUS = Object.freeze([
   {
     to: '/my-page/service-policy',
