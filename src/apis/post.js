@@ -8,6 +8,7 @@ export const getPosts = async (boardId, page = 0) => {
       : `/v1/boards/${boardId}/posts/postlist?page=${page}`;
 
   const response = await authAxios.get(url);
+  console.log(response?.data.result);
 
   return response?.data.result;
 };
@@ -15,7 +16,6 @@ export const getPosts = async (boardId, page = 0) => {
 // 게시글 상세 조회
 export const getPostContent = async (boardId, postId) => {
   const response = await authAxios.get(`/v1/boards/${boardId}/posts/${postId}`);
-  console.log(postId);
   return response?.data.result;
 };
 
@@ -27,20 +27,17 @@ export const postPost = async ({
   content,
   isNotice,
   attachmentsInfo,
-  files,
 }) => {
   const data = {
     category: category,
     title: title,
     content: content,
     isNotice: isNotice,
-    attachments: attachmentsInfo.map(
-      ({ type, fileName, fileComment, ...info }) => ({
-        type,
-        fileName,
-        fileComment,
-      })
-    ),
+    attachments: attachmentsInfo.map(({ type, fileName, fileComment }) => ({
+      type,
+      fileName,
+      fileComment,
+    })),
   };
   //'게시글 생성' API에서 받아오는 데이터
   const response = await authAxios.post(
@@ -53,7 +50,7 @@ export const postPost = async ({
     //attachmentUrlList 변수에 '게시글 생성' API한테 받은 이미지 S3 url 리스트 저장
     let attachmentUrlList = response.data.result.attachmentUrlList;
 
-    //각 S3 URL 리스트에 대해 반복
+    //각 S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
     for (let x = 0; x < attachmentUrlList.length; x++) {
       try {
         await defaultAxios.put(
@@ -70,6 +67,7 @@ export const postPost = async ({
         console.log(e);
       }
     }
+    await defaultAxios;
   }
   return response;
 };

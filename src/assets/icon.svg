@@ -475,4 +475,8 @@
     </clipPath>
     </defs>
   </symbol>
+  <svg id="download" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M12 3V16M12 16L6 10.3478M12 16L18 10.3478" stroke="black" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3 17V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V17" stroke="black" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
 </svg>

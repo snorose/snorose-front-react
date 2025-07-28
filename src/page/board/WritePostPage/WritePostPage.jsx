@@ -3,7 +3,6 @@ import { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuth, useToast, useModal } from '@/shared/hook';
 import {
   ActionButton,
   Badge,
@@ -12,10 +11,9 @@ import {
   DeleteModal,
   Icon,
   FetchLoading,
-  Icon,
 } from '@/shared/component';
 import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
-import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { useAuth, useToast, useModal, useBlocker } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
 
 import { postPost } from '@/apis';
@@ -36,8 +34,6 @@ export default function WritePostPage() {
 
   //'게시글 생성' API에서 요구하는 데이터 (중 attachments array)
   const [attachmentsInfo, setAttachmentsInfo] = useState([]);
-  //'게시글 첨부파일 저장' API로 넘기는 데이터 -> attachmentsInfo로 합침
-  //화면상 보여주기 위해 DataUrl로 전환한 이미지들 -> File로 처리해서 없앰
 
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
@@ -126,7 +122,6 @@ export default function WritePostPage() {
     postPost(data)
       .then((response) => {
         if (response.status === 201) {
-          console.log(response.data.result.pointDifference);
           !response.data.result.pointDifference
             ? toast(TOAST.POST.createNoPoints)
             : toast(TOAST.POST.create);
@@ -171,32 +166,17 @@ export default function WritePostPage() {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.top}>
-          <CloseAppBar backgroundColor={'#eaf5fd'}>
-            <ActionButton onClick={handleSubmit} disabled={!pass}>
-              등록
-            </ActionButton>
-          </CloseAppBar>
-        </div>
-        <div className={styles.center}>
-          {textId === 'notice' ? (
-            <div className={styles.categorySelect}>
-              <div className={styles.categorySelectContainer}>
-                <Icon
-                  id='clip-board-list'
-                  width={21}
-                  height={22}
-                  fill='white'
-                />
-                <p className={styles.categorySelectText}>{boardTitle}</p>
-              </div>
-            </div>
-          ) : (
-            <>
-              <div
-                className={styles.categorySelect}
-                onClick={handleDropDownOpen}
-              >
+        <div>
+          <div className={styles.top}>
+            <CloseAppBar backgroundColor={'#eaf5fd'}>
+              <ActionButton onClick={handleSubmit} disabled={!pass}>
+                등록
+              </ActionButton>
+            </CloseAppBar>
+          </div>
+          <div className={styles.center}>
+            {textId === 'notice' ? (
+              <div className={styles.categorySelect}>
                 <div className={styles.categorySelectContainer}>
                   <Icon
                     id='clip-board-list'
@@ -206,31 +186,47 @@ export default function WritePostPage() {
                   />
                   <p className={styles.categorySelectText}>{boardTitle}</p>
                 </div>
-                <Icon id='angle-down' width={14} height={7} />
               </div>
-              <DropDownMenu
-                options={displayedTitles}
-                item={boardTitle}
-                setItem={handleBoardTitleChange}
-                dropDownOpen={dropDownOpen}
-                setDropDownOpen={setDropDownOpen}
-                backgroundColor={'#fff'}
-              />
-            </>
-          )}
+            ) : (
+              <>
+                <div
+                  className={styles.categorySelect}
+                  onClick={handleDropDownOpen}
+                >
+                  <div className={styles.categorySelectContainer}>
+                    <Icon
+                      id='clip-board-list'
+                      width={21}
+                      height={22}
+                      fill='white'
+                    />
+                    <p className={styles.categorySelectText}>{boardTitle}</p>
+                  </div>
+                  <Icon id='angle-down' width={14} height={7} />
+                </div>
+                <DropDownMenu
+                  options={displayedTitles}
+                  item={boardTitle}
+                  setItem={handleBoardTitleChange}
+                  dropDownOpen={dropDownOpen}
+                  setDropDownOpen={setDropDownOpen}
+                  backgroundColor={'#fff'}
+                />
+              </>
+            )}
 
             <div className={styles.profileBox}>
               <div className={styles.profileBoxLeft}>
                 {userInfo?.userRoleId !== ROLE.admin &&
-              userInfo?.userRoleId !== ROLE.official ? (
-                <Icon id='cloud' width={25} height={16} />
+                userInfo?.userRoleId !== ROLE.official ? (
+                  <Icon id='cloud' width={25} height={16} />
                 ) : (
-                <Badge
-                  userRoleId={userInfo?.userRoleId}
-                  className={styles.badge}
-                />
-              )}
-              <p>{userInfo?.nickname}</p>
+                  <Badge
+                    userRoleId={userInfo?.userRoleId}
+                    className={styles.badge}
+                  />
+                )}
+                <p>{userInfo?.nickname}</p>
                 <p className={styles.dot}></p>
                 <p>{formattedNowTime()}</p>
               </div>
@@ -238,19 +234,19 @@ export default function WritePostPage() {
                 <div
                   className={
                     userInfo?.userRoleId === ROLE.admin ||
-                  userInfo?.userRoleId === ROLE.official
+                    userInfo?.userRoleId === ROLE.official
                       ? styles.profileBoxRight
                       : styles.profileBoxRightInvisible
                   }
                   onClick={handleIsNotice}
                 >
-                    <Icon
+                  <Icon
                     id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
                     width={21}
                     height={22}
                   />
                   <p>공지글</p>
-              </div>
+                </div>
               )}
             </div>
             <div className={styles.content}>
@@ -268,7 +264,7 @@ export default function WritePostPage() {
               />
 
               <ul className={styles.imageList}>
-                {attachmentsInfo.map(({ file, ...info }, index) => (
+                {attachmentsInfo.map(({ file }, index) => (
                   <li
                     key={index}
                     className={styles.imageContainer}
@@ -329,8 +325,8 @@ export default function WritePostPage() {
                     )}
                     <Icon
                       id='image-select-bar'
-                      width={'1.875rem'}
-                      height={'6rem'}
+                      width={'3rem'}
+                      height={'9.6rem'}
                       fill='white'
                       className={styles.imageSelectBar}
                     />
@@ -342,8 +338,8 @@ export default function WritePostPage() {
         </div>
         <Icon
           id='trashcan'
-          width='6.25rem'
-          height='6.25rem'
+          width='10rem'
+          height='10rem'
           className={`${isTrashOverlapped ? styles.trashVisible : styles.trashInvisible}`}
           onDragEnter={(e) => {
             e.preventDefault();
@@ -368,7 +364,10 @@ export default function WritePostPage() {
             trashImageConfirmModal.openModal();
           }}
         />
-        <AttachmentBar setAttachmentsInfo={setAttachmentsInfo} />
+        <AttachmentBar
+          attachmentsInfo={attachmentsInfo}
+          setAttachmentsInfo={setAttachmentsInfo}
+        />
       </div>
 
       <DeleteModal

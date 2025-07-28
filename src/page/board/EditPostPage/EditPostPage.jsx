@@ -4,7 +4,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { AttachmentBar } from '@/feature/board/component';
-import { useAuth, useToast, useModal } from '@/shared/hook';
 import {
   BackAppBar,
   Badge,
@@ -21,7 +20,7 @@ import {
   ROLE,
   TOAST,
 } from '@/shared/constant';
-import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useModal, useToast } from '@/shared/hook';
 import { formattedNowTime } from '@/shared/lib';
 
 import { getPostContent, patchPost } from '@/apis';
@@ -44,6 +43,7 @@ export default function EditPostPage() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [userDisplay, setUserDisplay] = useState('');
+  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   //'게시글 상세 조회' API에서 제공하는 기존 첨부파일 정보
   const [attachmentsInfo, setAttachmentsInfo] = useState([]);

@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar } from 'swiper/modules';
 
@@ -193,7 +192,12 @@ export default function PostPage() {
   }
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onClick={() => {
+        console.log(data.attachments);
+      }}
+    >
       <div className={styles.backAppBar}>
         <BackAppBar backgroundColor={'#eaf5fd'} />
       </div>
@@ -261,7 +265,6 @@ export default function PostPage() {
               {data.attachments.map((item, index) => (
                 <SwiperSlide key={index} className={styles.attachmentSlide}>
                   <div className={styles.attchmentDiv}>
-                    {console.log(item)}
                     {item.type === 'PHOTO' ? (
                       <img
                         src={item.url}

@@ -14,16 +14,18 @@ export default function FullScreenAttachment({
   setClickedImageIndex,
 }) {
   const paginationRef = useRef(null);
+  //스와이핑 액션에 대해 video와 swiper이 충돌이 나서, js 코드로 직접 영상을 틀어줘야함 -> ref 필요
   const videoRefs = useRef([]);
   return (
     <div className={styles.fullScreenContainer}>
       <div className={styles.topContainer}>
         <Icon
           id={'x'}
-          width={'1.875rem'}
-          height={'1.875rem'}
+          width={'1.8rem'}
+          height={'1.8rem'}
           className={styles.x}
           onClick={() => {
+            //clickedImageIndex가 0이야지 FullScreenAttachment가 보이지 않음 (PostPage.jsx 분기처리 확인하기)
             setClickedImageIndex(0);
           }}
         />
@@ -31,6 +33,12 @@ export default function FullScreenAttachment({
           className={`${styles.pagination} swiper-custom-pagination`}
           ref={paginationRef}
         ></p>
+        <Icon
+          id={'download'}
+          width={'2.4rem'}
+          height={'2.4rem'}
+          className={styles.download}
+        />
       </div>
       <div className={styles.bodyContainer}>
         <Swiper
@@ -50,7 +58,6 @@ export default function FullScreenAttachment({
         >
           {attachmentUrls.map((att, index) => (
             <SwiperSlide key={index} className={styles.attachmentsSlide}>
-              {console.log(att)}
               {att.type === 'PHOTO' ? (
                 <img
                   src={att.url}
@@ -70,6 +77,8 @@ export default function FullScreenAttachment({
                   }}
                 >
                   <video
+                    //videoRefs의 첨부파일 index 위치에 el (video element) 저장
+                    //특정 index 위치에만 video가 저장되고, 비어있는 index들은 자동으로 undefined가 채워짐
                     ref={(el) => (videoRefs.current[index] = el)}
                     src={att.url}
                     className={`${styles.attachment} ${styles.videoElement}`}
