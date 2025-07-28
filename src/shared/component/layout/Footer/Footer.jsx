@@ -2,11 +2,26 @@ import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
 
 import { Icon } from '@/shared/component';
-import { FOOTER_MENUS } from '@/shared/constant';
+import { FOOTER_MENUS, TOAST } from '@/shared/constant';
+import { useToast } from '@/shared/hook';
 
 import style from './Footer.module.css';
 
 export default function Footer() {
+  const { toast } = useToast();
+  const textToCopy = '카카오뱅크 3333-31-8162062';
+
+  const handleCopy = () => {
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        toast(TOAST.COPY_AND_PASTE.SUCCESS);
+      })
+      .catch((error) => {
+        toast(TOAST.COPY_AND_PASTE.FAIL);
+      });
+  };
+
   return (
     <footer className={style.footer}>
       <Icon id='logo' width={118} height={21} />
@@ -17,8 +32,11 @@ export default function Footer() {
           <a href='mailto:snorose1906@gmail.com'>snorose1906@gmail.com</a>
         </p>
         <p>
-          <span className={style.bold}>숙명여대 후원하기</span> 카카오뱅크
-          3333-31-8162062 (예금주: 김*지)
+          <span className={style.bold}>숙명여대 후원하기</span>{' '}
+          <span onClick={handleCopy} className={style.accountNumber}>
+            {textToCopy}
+          </span>{' '}
+          (예금주: 김*지)
         </p>
       </div>
 
