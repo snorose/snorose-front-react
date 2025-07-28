@@ -1,22 +1,27 @@
 import { Link } from 'react-router-dom';
+import { Fragment } from 'react';
 
 import { Icon } from '@/shared/component';
+import {
+  FOOTER_CONTACT_ITEMS,
+  FOOTER_MENUS,
+  FOOTER_SNS_LINKS,
+  TOAST,
+} from '@/shared/constant';
 import { useToast } from '@/shared/hook';
-import { TOAST } from '@/shared/constant';
 
 import style from './Footer.module.css';
 
 export default function Footer() {
   const { toast } = useToast();
-  const textToCopy = '카카오뱅크 3333-31-8162062';
 
-  const handleCopy = () => {
+  const handleCopy = (text) => {
     navigator.clipboard
-      .writeText(textToCopy)
+      .writeText(text)
       .then(() => {
         toast(TOAST.COPY_AND_PASTE.SUCCESS);
       })
-      .catch((error) => {
+      .catch(() => {
         toast(TOAST.COPY_AND_PASTE.FAIL);
       });
   };
@@ -26,43 +31,35 @@ export default function Footer() {
       <Icon id='logo' width={118} height={21} />
 
       <div className={style.info}>
-        <p>
-          <span className={style.bold}>CONTACT US </span>
-          <a href='mailto:snorose1906@gmail.com'>snorose1906@gmail.com</a>
-        </p>
-        <p>
-          <span className={style.bold}>숙명여대 후원하기</span>{' '}
-          <span onClick={handleCopy} className={style.accountNumber}>
-            {textToCopy}
-          </span>{' '}
-          (예금주: 김*지)
-        </p>
+        {FOOTER_CONTACT_ITEMS.map(({ type, label, value, accountHolder }) => (
+          <p key={type}>
+            <span className={style.bold}>{label}</span>{' '}
+            <span
+              onClick={() => handleCopy(value)}
+              className={style.accountNumber}
+            >
+              {value}
+            </span>{' '}
+            {accountHolder}
+          </p>
+        ))}
       </div>
 
       <div className={style.menu}>
-        <Link to='/my-page/service-policy' className={style.link}>
-          서비스 이용 약관
-        </Link>
-        {' | '}
-        <Link
-          to='https://www.notion.so/snorose/1147ef0aa3bf8039add2e00a4edd0eb4'
-          target='_blank'
-          className={style.link}
-        >
-          배너 및 광고 문의
-        </Link>{' '}
-        {' | '}
-        <Link to='/my-page/privacy-policy' className={style.link}>
-          개인정보 처리방침
-        </Link>{' '}
-        {' | '}
-        <Link
-          to='https://www.instagram.com/snorose1906/'
-          target='_blank'
-          className={style.link}
-        >
-          <Icon id='instagram' width={16.5} height={16.5} />
-        </Link>
+        {FOOTER_MENUS.map(({ title, to }) => (
+          <Fragment key={title}>
+            <Link to={to} target='_blank'>
+              {title}
+            </Link>
+            <span className={style.separator}> | </span>
+          </Fragment>
+        ))}
+
+        {FOOTER_SNS_LINKS.map(({ id, iconId, to }) => (
+          <Link key={id} to={to} target='_blank'>
+            <Icon id={iconId} width={16.5} height={16.5} />
+          </Link>
+        ))}
       </div>
     </footer>
   );
