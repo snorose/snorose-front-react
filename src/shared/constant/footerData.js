@@ -26,3 +26,11 @@ export const FOOTER_MENUS = Object.freeze([
     title: '배너 및 광고 문의',
   },
 ]);
+
+export const FOOTER_SNS_LINKS = Object.freeze([
+  {
+    id: 'instagram',
+    iconId: 'instagram',
+    to: 'https://www.instagram.com/snorose1906/',
+  },
+]);
