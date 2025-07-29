@@ -26,12 +26,12 @@ export default function VerifyStep({ setStep }) {
 
   const verify = async () => {
     if (!isAllFieldsCompleted) {
-      toast(TOAST.VERIFY.notCompleted);
+      toast({ message: TOAST.VERIFY.notCompleted });
       return;
     }
 
     if (!isEmailValid(email)) {
-      toast(TOAST.VERIFY.invalidEmail);
+      toast({ message: TOAST.VERIFY.invalidEmail });
       return;
     }
 
@@ -46,7 +46,7 @@ export default function VerifyStep({ setStep }) {
 
       setStep('complete');
     } catch ({ response }) {
-      toast(response.data.message);
+      toast({ message: response.data.message, type: 'error' });
     } finally {
       setLoading(false);
     }
