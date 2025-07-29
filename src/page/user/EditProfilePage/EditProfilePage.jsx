@@ -53,7 +53,7 @@ export default function EditProfilePage() {
           queryKey: [QUERY_KEY.userInfo],
         });
 
-        toast(TOAST.USER.editUserInfo);
+        toast({ message: TOAST.USER.editUserInfo });
         navigate('/my-page');
       },
       onError: ({ response }) => {
