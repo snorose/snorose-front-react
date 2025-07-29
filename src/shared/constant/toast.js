@@ -23,6 +23,8 @@ const TOAST = Object.freeze({
     delete: '댓글이 삭제되었어요 (-1P)',
     deleteNoPoints: '댓글이 삭제되었어요',
     edit: '댓글이 수정되었어요',
+    emptyContent: '댓글 내용을 입력하세요',
+    tooLongContent: '댓글은 1,000자 이내로 작성해 주세요',
   },
   REPORT: {
     commentSuccess: '댓글이 신고되었어요',
