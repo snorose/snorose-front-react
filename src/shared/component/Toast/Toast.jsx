@@ -52,7 +52,7 @@ export default function Toast({ toast }) {
 
   return createPortal(
     <div ref={toastRef} className={toastClassName}>
-      <Icon className={styles.icon} id={iconId} width={22} height={20} />
+      <Icon id={iconId} width={21} height={20} />
       <p className={styles.message}>{toast.message}</p>
     </div>,
     root
