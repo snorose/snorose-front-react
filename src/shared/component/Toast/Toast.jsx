@@ -11,10 +11,6 @@ export default function Toast({ toast }) {
   const toastRef = useRef(null);
 
   const toastConfig = {
-    success: {
-      icon: 'check-circle',
-      className: styles.success,
-    },
     error: {
       icon: 'info-triangle',
       className: styles.error,

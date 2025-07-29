@@ -40,8 +40,8 @@ const TOAST = Object.freeze({
     NETWORK: '네트워크 에러, 잠시 후 다시 시도해주세요',
   },
   COPY_AND_PASTE: {
-    SUCCESS: '복사되었어요.',
-    FAIL: '⚠️ 복사에 실패했어요.',
+    SUCCESS: '복사되었어요',
+    FAIL: '복사에 실패했어요',
   },
 });
 
