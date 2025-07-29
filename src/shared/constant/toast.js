@@ -14,6 +14,8 @@ const TOAST = Object.freeze({
     delete: '게시글이 삭제되었어요 (-2P)',
     deleteNoPoints: '게시글이 삭제되었어요',
     edit: '게시글이 수정되었어요',
+    emptyTitle: '게시글 제목을 작성해 주세요',
+    emptyContent: '게시글 본문을 작성해 주세요',
   },
   COMMENT: {
     create: '댓글을 등록했어요 (+1P)',
