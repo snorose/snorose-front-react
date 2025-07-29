@@ -10,9 +10,9 @@ export const useLogin = () => {
     const endpoint = '/v1/users/login';
 
     if (!formData.loginId) {
-      toast(TOAST.LOGIN.emptyId);
+      toast({ message: TOAST.LOGIN.emptyId });
     } else if (!formData.password) {
-      toast(TOAST.LOGIN.emptyPw);
+      toast({ message: TOAST.LOGIN.emptyPw });
     } else {
       try {
         const response = await defaultAxios.post(endpoint, formData);
@@ -27,9 +27,9 @@ export const useLogin = () => {
         window.location.reload();
       } catch (e) {
         if (e.response.status === 500) {
-          toast(TOAST.ERROR.SERVER);
+          toast({ message: TOAST.ERROR.SERVER, type: 'error' });
         } else {
-          toast(e.response.data.message);
+          toast({ message: e.response.data.message, type: 'error' });
         }
         setIsError(true);
       }
@@ -58,7 +58,7 @@ export const useFindId = () => {
       } catch (e) {
         setLoading(false);
         if (e.response.status === 500) {
-          toast(TOAST.ERROR.SERVER);
+          toast({ message: TOAST.ERROR.SERVER, type: 'error' });
         } else {
           navigate('/not-found-id', { state: { access: true } });
         }
@@ -86,7 +86,7 @@ export const useFindPw = () => {
       } catch (e) {
         setLoading(false);
         if (e.response.status === 500) {
-          toast(TOAST.ERROR.SERVER);
+          toast({ message: TOAST.ERROR.SERVER, type: 'error' });
         } else {
           navigate('/not-found-pw', { state: { access: true } });
         }
