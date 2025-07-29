@@ -85,7 +85,7 @@ function AttendanceButton({ setLoading }) {
             today.getFullYear(),
             today.getMonth() + 1,
           ]);
-          toast(TOAST.ATTENDANCE.attendance);
+          toast({ message: TOAST.ATTENDANCE.attendance });
         }
         setIsAttendance(true);
       })
