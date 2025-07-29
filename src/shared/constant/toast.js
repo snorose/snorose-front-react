@@ -32,7 +32,7 @@ const TOAST = Object.freeze({
     postSuccess: '게시글이 신고되었어요',
     postFail: '게시글 신고에 실패했어요',
     userSuccess: '사용자가 신고되었어요',
-    userFail: '사용자 신고에 실패했어요.',
+    userFail: '사용자 신고에 실패했어요',
   },
   USER: {
     editPassword: '비밀번호가 수정되었어요',
@@ -40,20 +40,20 @@ const TOAST = Object.freeze({
     withdraw: '회원 탈퇴되었어요',
   },
   LOGIN: {
-    emptyId: '아이디를 입력해주세요',
-    emptyPw: '비밀번호를 입력해주세요',
+    emptyId: '아이디를 입력해 주세요',
+    emptyPw: '비밀번호를 입력해 주세요',
   },
   VERIFY: {
-    notCompleted: '모두 입력해주세요',
-    invalidEmail: '올바른 이메일을 입력해주세요',
+    notCompleted: '모두 입력해 주세요',
+    invalidEmail: '올바른 이메일을 입력해 주세요',
   },
   ERROR: {
-    SERVER: '서버 에러, 잠시 후 다시 시도해주세요',
-    NETWORK: '네트워크 에러, 잠시 후 다시 시도해주세요',
+    SERVER: '서버 에러, 잠시 후 다시 시도해 주세요',
+    NETWORK: '네트워크 에러, 잠시 후 다시 시도해 주세요',
   },
   COPY_AND_PASTE: {
-    SUCCESS: '복사되었어요',
-    FAIL: '복사에 실패했어요',
+    success: '복사되었어요',
+    fail: '복사에 실패했어요',
   },
 });
 

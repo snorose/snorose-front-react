@@ -19,10 +19,10 @@ export default function Footer() {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        toast({ message: TOAST.COPY_AND_PASTE.SUCCESS });
+        toast({ message: TOAST.COPY_AND_PASTE.success });
       })
       .catch(() => {
-        toast({ message: TOAST.COPY_AND_PASTE.FAIL, variant: 'error' });
+        toast({ message: TOAST.COPY_AND_PASTE.fail, variant: 'error' });
       });
   };
 
