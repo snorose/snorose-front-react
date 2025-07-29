@@ -114,10 +114,10 @@ export default function EditExamReviewPage() {
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_KEY.post, postId]);
       navigate(-1);
-      toast({ message: TOAST.EXAM_REVIEW.edit });
+      toast({ message: TOAST.EXAM_REVIEW.edit, type: 'defaultDark' });
     },
     onError: ({ response }) => {
-      toast(response.data.message);
+      toast({ message: response.data.message, type: 'error' });
     },
     onSettled: () => {
       setLoading(false);

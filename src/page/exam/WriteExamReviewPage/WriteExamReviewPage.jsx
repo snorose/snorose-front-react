@@ -71,7 +71,7 @@ export default function WriteExamReviewPage() {
         return;
       }
 
-      toast(response.data.message);
+      toast({ message: response.data.message, type: 'error' });
     },
     onSettled: () => {
       setLoading(false);
@@ -143,7 +143,7 @@ export default function WriteExamReviewPage() {
         examType: examType?.id,
       });
     } catch (error) {
-      toast('error');
+      toast({ message: error, type: 'error' });
       setIsCalled(false);
       throw error;
     }
