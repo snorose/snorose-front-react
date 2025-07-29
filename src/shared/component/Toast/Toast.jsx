@@ -25,8 +25,8 @@ export default function Toast({ toast }) {
     },
   };
 
-  const type = toast.type || 'default';
-  const config = toastConfig[type] || toastConfig.default;
+  const variant = toast.variant || 'default';
+  const config = toastConfig[variant] || toastConfig.default;
   const iconId = config.icon;
   const toastClassName = `${styles.toast} ${config.className || ''}`;
 

@@ -9,11 +9,11 @@ const ToastContext = createContext();
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 
-  const addToast = ({ message, type = 'default' }) => {
+  const addToast = ({ message, variant = 'default' }) => {
     if (toasts.find((item) => item.message === message)) {
       removeToast(message);
     }
-    setToasts((prev) => [...prev, { id: uuidv4(), message, type }]);
+    setToasts((prev) => [...prev, { id: uuidv4(), message, variant }]);
   };
 
   const removeToast = (message) => {

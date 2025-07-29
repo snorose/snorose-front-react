@@ -47,7 +47,7 @@ export default function useLike({ type, sourceId }) {
   };
 
   const onError = ({ response }) => {
-    toast({ message: response.data.message, type: 'error' });
+    toast({ message: response.data.message, variant: 'error' });
   };
 
   const like = useMutation({

@@ -60,18 +60,18 @@ export default function WriteExamReviewPage() {
 
       queryClient.removeQueries([QUERY_KEY.post]);
       invalidUserInfoQuery();
-      toast({ message: TOAST.EXAM_REVIEW.create, type: 'defaultDark' });
+      toast({ message: TOAST.EXAM_REVIEW.create, variant: 'defaultDark' });
       navigate(`/board/exam-review/post/${postId}`, { replace: true });
     },
     onError: ({ response }) => {
       const { status } = response;
 
       if (status === 500) {
-        toast({ message: TOAST.ERROR.SERVER, type: 'error' });
+        toast({ message: TOAST.ERROR.SERVER, variant: 'error' });
         return;
       }
 
-      toast({ message: response.data.message, type: 'error' });
+      toast({ message: response.data.message, variant: 'error' });
     },
     onSettled: () => {
       setLoading(false);
@@ -143,7 +143,7 @@ export default function WriteExamReviewPage() {
         examType: examType?.id,
       });
     } catch (error) {
-      toast({ message: error, type: 'error' });
+      toast({ message: error, variant: 'error' });
       setIsCalled(false);
       throw error;
     }

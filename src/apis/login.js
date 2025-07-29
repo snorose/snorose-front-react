@@ -27,9 +27,9 @@ export const useLogin = () => {
         window.location.reload();
       } catch (e) {
         if (e.response.status === 500) {
-          toast({ message: TOAST.ERROR.SERVER, type: 'error' });
+          toast({ message: TOAST.ERROR.SERVER, variant: 'error' });
         } else {
-          toast({ message: e.response.data.message, type: 'error' });
+          toast({ message: e.response.data.message, variant: 'error' });
         }
         setIsError(true);
       }
@@ -58,7 +58,7 @@ export const useFindId = () => {
       } catch (e) {
         setLoading(false);
         if (e.response.status === 500) {
-          toast({ message: TOAST.ERROR.SERVER, type: 'error' });
+          toast({ message: TOAST.ERROR.SERVER, variant: 'error' });
         } else {
           navigate('/not-found-id', { state: { access: true } });
         }
@@ -86,7 +86,7 @@ export const useFindPw = () => {
       } catch (e) {
         setLoading(false);
         if (e.response.status === 500) {
-          toast({ message: TOAST.ERROR.SERVER, type: 'error' });
+          toast({ message: TOAST.ERROR.SERVER, variant: 'error' });
         } else {
           navigate('/not-found-pw', { state: { access: true } });
         }

@@ -90,7 +90,7 @@ function AttendanceButton({ setLoading }) {
         setIsAttendance(true);
       })
       .catch(({ response }) => {
-        toast({ message: response.data.message, type: 'error' });
+        toast({ message: response.data.message, variant: 'error' });
       })
       .finally(() => {
         setDisabled(false);

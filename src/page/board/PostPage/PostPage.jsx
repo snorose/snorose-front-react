@@ -65,10 +65,10 @@ export default function PostPage() {
     mutationKey: [MUTATION_KEY.reportPost],
     mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
     onSuccess: ({ message }) => {
-      toast({ message, type: 'defaultDark' });
+      toast({ message, variant: 'defaultDark' });
     },
     onError: () => {
-      toast({ message: TOAST.REPORT.postFail, type: 'error' });
+      toast({ message: TOAST.REPORT.postFail, variant: 'error' });
     },
   });
 
@@ -76,10 +76,10 @@ export default function PostPage() {
     mutationKey: [MUTATION_KEY.reportUser],
     mutationFn: (body) => reportUser(body),
     onSuccess: ({ message }) => {
-      toast({ message, type: 'defaultDark' });
+      toast({ message, variant: 'defaultDark' });
     },
     onError: () => {
-      toast({ message: TOAST.REPORT.userFail, type: 'error' });
+      toast({ message: TOAST.REPORT.userFail, variant: 'error' });
     },
   });
 
@@ -98,7 +98,7 @@ export default function PostPage() {
         invalidUserInfoQuery();
       }
     } catch ({ response }) {
-      toast({ message: response.data.message, type: 'error' });
+      toast({ message: response.data.message, variant: 'error' });
     } finally {
       setDeleteSubmitDisabled(false);
       setIsDeleteModalOpen(false);

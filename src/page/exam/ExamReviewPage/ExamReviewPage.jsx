@@ -68,10 +68,10 @@ export default function ExamReviewPage() {
     mutationKey: [MUTATION_KEY.reportPost],
     mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
     onSuccess: ({ message }) => {
-      toast({ message, type: 'defaultDark' });
+      toast({ message, variant: 'defaultDark' });
     },
     onError: () => {
-      toast({ message: TOAST.REPORT.postFail, type: 'error' });
+      toast({ message: TOAST.REPORT.postFail, variant: 'error' });
     },
   });
 
@@ -79,10 +79,10 @@ export default function ExamReviewPage() {
     mutationKey: [MUTATION_KEY.reportUser],
     mutationFn: (body) => reportUser(body),
     onSuccess: ({ message }) => {
-      toast({ message: message, type: 'defaultDark' });
+      toast({ message: message, variant: 'defaultDark' });
     },
     onError: () => {
-      toast({ message: TOAST.REPORT.userFail, type: 'error' });
+      toast({ message: TOAST.REPORT.userFail, variant: 'error' });
     },
   });
 
@@ -99,11 +99,11 @@ export default function ExamReviewPage() {
       const { status } = response;
 
       if (status === 500) {
-        toast({ message: TOAST.ERROR.SERVER, type: 'error' });
+        toast({ message: TOAST.ERROR.SERVER, variant: 'error' });
         return;
       }
 
-      toast({ message: response.data.message, type: 'error' });
+      toast({ message: response.data.message, variant: 'error' });
     },
     onSettled: () => {
       setLoading(false);

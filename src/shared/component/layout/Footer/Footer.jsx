@@ -22,7 +22,7 @@ export default function Footer() {
         toast({ message: TOAST.COPY_AND_PASTE.SUCCESS });
       })
       .catch(() => {
-        toast({ message: TOAST.COPY_AND_PASTE.FAIL, type: 'error' });
+        toast({ message: TOAST.COPY_AND_PASTE.FAIL, variant: 'error' });
       });
   };
 

@@ -46,7 +46,7 @@ export default function VerifyStep({ setStep }) {
 
       setStep('complete');
     } catch ({ response }) {
-      toast({ message: response.data.message, type: 'error' });
+      toast({ message: response.data.message, variant: 'error' });
     } finally {
       setLoading(false);
     }

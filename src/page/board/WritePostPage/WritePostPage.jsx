@@ -113,8 +113,11 @@ export default function WritePostPage() {
         if (response.status === 201) {
           console.log(response.data.result.pointDifference);
           !response.data.result.pointDifference
-            ? toast({ message: TOAST.POST.createNoPoints, type: 'defaultDark' })
-            : toast({ message: TOAST.POST.create, type: 'defaultDark' });
+            ? toast({
+                message: TOAST.POST.createNoPoints,
+                variant: 'defaultDark',
+              })
+            : toast({ message: TOAST.POST.create, variant: 'defaultDark' });
           const newPostId = response.data.result.postId;
 
           queryClient.removeQueries([QUERY_KEY.post]);
@@ -130,7 +133,7 @@ export default function WritePostPage() {
         }
       })
       .catch(({ response }) => {
-        toast({ message: response.data.message, type: 'error' });
+        toast({ message: response.data.message, variant: 'error' });
       })
       .finally(() => {
         setSubmitDisabled(false);

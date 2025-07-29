@@ -30,7 +30,7 @@ export default function ChangePwPage() {
         navigate('/my-page');
       },
       onError: ({ response }) => {
-        toast({ message: response.data.message, type: 'error' });
+        toast({ message: response.data.message, variant: 'error' });
       },
     });
 

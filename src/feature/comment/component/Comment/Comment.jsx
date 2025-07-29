@@ -60,11 +60,11 @@ const Comment = forwardRef((props, ref) => {
     onSuccess: () => {
       setIsReportModalOpen(false);
       reportConfirmModal.closeModal();
-      toast({ message: TOAST.REPORT.commentSuccess, type: 'defaultDark' });
+      toast({ message: TOAST.REPORT.commentSuccess, variant: 'defaultDark' });
       resetCommentState();
     },
     onError: () => {
-      toast({ message: TOAST.REPORT.commentFail, type: 'error' });
+      toast({ message: TOAST.REPORT.commentFail, variant: 'error' });
       resetCommentState();
     },
   });

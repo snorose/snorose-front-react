@@ -82,11 +82,11 @@ export default function EditPostPage() {
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_KEY.post, postId]);
       navigate(-1);
-      toast({ message: TOAST.POST.edit, type: 'defaultDark' });
+      toast({ message: TOAST.POST.edit, variant: 'defaultDark' });
       setSubmitDisabled(false);
     },
     onError: ({ response }) => {
-      toast({ message: response.data.message, type: 'error' });
+      toast({ message: response.data.message, variant: 'error' });
       setSubmitDisabled(false);
     },
   });
@@ -111,11 +111,11 @@ export default function EditPostPage() {
     if (submitDisabled) return;
 
     if (!title.trim()) {
-      toast({ message: TOAST.POST.emptyTitle, type: 'defaultDark' });
+      toast({ message: TOAST.POST.emptyTitle, variant: 'defaultDark' });
       return;
     }
     if (!text.trim()) {
-      toast({ message: TOAST.POST.emptyContent, type: 'defaultDark' });
+      toast({ message: TOAST.POST.emptyContent, variant: 'defaultDark' });
       return;
     }
 
