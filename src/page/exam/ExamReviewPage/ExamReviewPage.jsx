@@ -92,14 +92,14 @@ export default function ExamReviewPage() {
     onSuccess: () => {
       queryClient.removeQueries([QUERY_KEY.post, postId]);
       invalidUserInfoQuery();
-      toast(TOAST.EXAM_REVIEW.delete);
+      toast({ message: TOAST.EXAM_REVIEW.delete });
       navigate(-1);
     },
     onError: ({ response }) => {
       const { status } = response;
 
       if (status === 500) {
-        toast(TOAST.ERROR.SERVER);
+        toast({ message: TOAST.ERROR.SERVER, type: 'error' });
         return;
       }
 

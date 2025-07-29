@@ -60,14 +60,14 @@ export default function WriteExamReviewPage() {
 
       queryClient.removeQueries([QUERY_KEY.post]);
       invalidUserInfoQuery();
-      toast(TOAST.EXAM_REVIEW.create);
+      toast({ message: TOAST.EXAM_REVIEW.create, type: 'defaultDark' });
       navigate(`/board/exam-review/post/${postId}`, { replace: true });
     },
     onError: ({ response }) => {
       const { status } = response;
 
       if (status === 500) {
-        toast(TOAST.ERROR.SERVER);
+        toast({ message: TOAST.ERROR.SERVER, type: 'error' });
         return;
       }
 
