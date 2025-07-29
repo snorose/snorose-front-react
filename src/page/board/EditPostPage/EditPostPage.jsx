@@ -86,7 +86,7 @@ export default function EditPostPage() {
       setSubmitDisabled(false);
     },
     onError: ({ response }) => {
-      toast(response.data.message);
+      toast({ message: response.data.message, type: 'error' });
       setSubmitDisabled(false);
     },
   });

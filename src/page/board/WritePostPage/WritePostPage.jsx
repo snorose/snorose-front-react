@@ -130,7 +130,7 @@ export default function WritePostPage() {
         }
       })
       .catch(({ response }) => {
-        toast(response.data.message);
+        toast({ message: response.data.message, type: 'error' });
       })
       .finally(() => {
         setSubmitDisabled(false);
