@@ -113,8 +113,8 @@ export default function WritePostPage() {
         if (response.status === 201) {
           console.log(response.data.result.pointDifference);
           !response.data.result.pointDifference
-            ? toast(TOAST.POST.createNoPoints)
-            : toast(TOAST.POST.create);
+            ? toast({ message: TOAST.POST.createNoPoints, type: 'defaultDark' })
+            : toast({ message: TOAST.POST.create, type: 'defaultDark' });
           const newPostId = response.data.result.postId;
 
           queryClient.removeQueries([QUERY_KEY.post]);
