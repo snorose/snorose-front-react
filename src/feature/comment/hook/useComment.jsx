@@ -55,7 +55,7 @@ export default function useComment() {
   };
 
   const onError = ({ response }) => {
-    toast(response.data.message);
+    toast({ message: response.data.message, type: 'error' });
   };
 
   const onSettled = () => {
@@ -140,7 +140,7 @@ export default function useComment() {
         })
       );
 
-      toast(TOAST.COMMENT.edit);
+      toast({ message: TOAST.COMMENT.edit, type: 'defaultDark' });
     },
     onError,
     onSettled,
