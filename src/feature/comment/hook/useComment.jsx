@@ -90,8 +90,8 @@ export default function useComment() {
 
       updateCommentCountCache({ type: COMMENT_ACTION_TYPE.create });
       !pointDifference
-        ? toast(TOAST.COMMENT.createNoPoints)
-        : toast(TOAST.COMMENT.create);
+        ? toast({ message: TOAST.COMMENT.createNoPoints, type: 'defaultDark' })
+        : toast({ message: TOAST.COMMENT.create, type: 'defaultDark' });
     },
     onError,
     onSettled,
@@ -117,8 +117,8 @@ export default function useComment() {
       updateCommentCountCache({ type: COMMENT_ACTION_TYPE.delete });
       // !pointDifference; // pointDifference값 백엔 수정 되면 이 코드로 다시 변경
       currentBoard.id === 23 || currentBoard.id === 32
-        ? toast(TOAST.COMMENT.deleteNoPoints)
-        : toast(TOAST.COMMENT.delete);
+        ? toast({ message: TOAST.COMMENT.deleteNoPoints, type: 'defaultDark' })
+        : toast({ message: TOAST.COMMENT.delete, type: 'defaultDark' });
     },
     onError,
     onSettled,

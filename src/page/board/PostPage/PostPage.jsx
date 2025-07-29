@@ -91,8 +91,8 @@ export default function PostPage() {
 
       if (response.status === 200) {
         currentBoard.id !== 23
-          ? toast(TOAST.POST.delete)
-          : toast(TOAST.POST.deleteNoPoints);
+          ? toast({ message: TOAST.POST.delete })
+          : toast({ message: TOAST.POST.deleteNoPoints });
         navigate(-1);
         queryClient.removeQueries([QUERY_KEY.post, postId]);
         invalidUserInfoQuery();
