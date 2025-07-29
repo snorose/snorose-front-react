@@ -2,9 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.5rem 1.8rem;
-  background: rgba(var(--grey-4-rgb), 0.8);
   border-radius: 0.5rem;
+  padding: 1.5rem 1.8rem;
   transition: 500ms opacity ease-in-out;
   gap: 1rem;
   box-shadow: 0 0 3.6rem 0 rgba(0, 0, 0, 0.1);
@@ -13,7 +12,26 @@
 .message {
   text-align: center;
   word-break: keep-all;
-  font-size: 1.4rem;
   white-space: pre-wrap;
-  color: var(--white);
+  font: var(--text-body-1-reg);
+}
+
+/* 성공케이스는 디자인 작업 후 수정 예정 */
+.success {
+  background-color: greenyellow;
+}
+
+.error {
+  background: var(--pink-1);
+  color: var(--pink-3);
+}
+
+.default {
+  background: var(--blue-1);
+  color: var(--blue-4);
+}
+
+.defaultDark {
+  background: var(--blue-2);
+  color: var(--blue-4);
 }
