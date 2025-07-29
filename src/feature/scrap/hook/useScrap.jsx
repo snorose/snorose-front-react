@@ -28,7 +28,7 @@ export default function useScrap() {
   };
 
   const onError = ({ response }) => {
-    toast(response.data.message);
+    toast({ message: response.data.message, type: 'error' });
   };
 
   const scrap = useMutation({
