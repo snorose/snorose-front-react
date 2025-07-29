@@ -24,6 +24,10 @@ const TOAST = Object.freeze({
     deleteNoPoints: '댓글이 삭제되었어요',
     edit: '댓글이 수정되었어요',
   },
+  REPORT: {
+    commentSuccess: '댓글이 신고되었어요',
+    commentFail: '댓글 신고에 실패했어요.',
+  },
   USER: {
     editPassword: '비밀번호가 수정되었어요',
     editUserInfo: '회원 정보가 수정되었어요',

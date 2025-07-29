@@ -16,6 +16,7 @@ import {
   MUTATION_KEY,
   ROLE,
   SHOW_BADGE_PATH,
+  TOAST,
 } from '@/shared/constant';
 import { useModal, useToast } from '@/shared/hook';
 import { convertHyperlink, timeAgo } from '@/shared/lib';
@@ -56,14 +57,14 @@ const Comment = forwardRef((props, ref) => {
   const { mutate: reportCommentMutate } = useMutation({
     mutationKey: [MUTATION_KEY.reportComment],
     mutationFn: (body) => reportComment(data.postId, data.id, body),
-    onSuccess: ({ message }) => {
+    onSuccess: () => {
       setIsReportModalOpen(false);
       reportConfirmModal.closeModal();
-      toast(message);
+      toast({ message: TOAST.REPORT.commentSuccess, type: 'defaultDark' });
       resetCommentState();
     },
     onError: () => {
-      toast('댓글 신고에 실패했습니다.');
+      toast({ message: TOAST.REPORT.commentFail, type: 'error' });
       resetCommentState();
     },
   });
