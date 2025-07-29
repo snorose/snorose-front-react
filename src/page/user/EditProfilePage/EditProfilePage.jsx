@@ -61,11 +61,14 @@ export default function EditProfilePage() {
 
         toast(
           // data.userProfile ||
-          data.userName ||
-            data.birthday ||
-            data.nickname ||
-            data.major ||
-            data.message
+          {
+            message:
+              data.userName ||
+              data.birthday ||
+              data.nickname ||
+              data.major ||
+              data.message,
+          }
         );
       },
     });
