@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
 import styles from './PopUp.module.css';
-import askUsAnything from './askUsAnything.jpg';
+import august from './august.jpeg';
 
 const content = (
   <div className={styles.notice}>
@@ -10,7 +10,7 @@ const content = (
       <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
-      <Heading>1. 스노로즈 블로그 운영관리편 공개</Heading>
+      {/* <Heading>1. 스노로즈 블로그 운영관리편 공개</Heading>
       <Content>
         <strong>&lt;스노로즈 리뉴얼&gt; 운영관리편</strong>이 업로드되었습니다.
         <br />
@@ -23,11 +23,11 @@ const content = (
           스노로즈 블로그
         </a>
         에서 확인해보세요!
-      </Content>
+      </Content> */}
 
-      <Heading>2. 스노로즈 무물 이벤트</Heading>
+      <Heading>1. 8월 스노로즈 캘린더</Heading>
       <Content>
-        스노로즈에 대한 학우 여러분의 <strong>궁금증</strong>을 풀어드릴 수 있는
+        {/* 스노로즈에 대한 학우 여러분의 <strong>궁금증</strong>을 풀어드릴 수 있는
         이벤트를 준비했습니다.
         <br />
         평소에 스노로즈에게 궁금했던 점, 하고 싶었던 이야기, 혹은 바라는 점까지!
@@ -54,9 +54,8 @@ const content = (
           관련 공지
         </a>
         를 참고해주시길 바랍니다.
-        <br />
-        <br />
-        <img src={askUsAnything} alt='무물 카드뉴스' />
+        <br /> */}
+        <img src={august} alt='8월 캘린더' />
       </Content>
       <hr />
       <Content>
