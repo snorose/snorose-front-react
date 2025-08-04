@@ -16,7 +16,7 @@ import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
 import { useAuth, useToast, useModal, useBlocker } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
 
-import { postPost } from '@/apis';
+import { createThumbnail, postPost } from '@/apis';
 import { AttachmentBar, DropDownMenu } from '@/feature/board/component';
 
 import styles from './WritePostPage.module.css';
@@ -137,6 +137,7 @@ export default function WritePostPage() {
                 `/board/${BOARD_MENUS.find((menu) => menu.id === boardId).textId}/post/${newPostId}`,
                 { replace: true }
               );
+          createThumbnail(boardId, newPostId);
         }
       })
       .catch(({ response }) => {

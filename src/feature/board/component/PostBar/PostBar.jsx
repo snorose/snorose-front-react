@@ -39,7 +39,11 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
           </div>
         </div>
         {data.thumbnailUrl && (
-          <img className={styles.thumbnail} src={data.thumbnailUrl} />
+          <img
+            className={styles.thumbnail}
+            src={data.thumbnailUrl}
+            loading='lazy'
+          />
         )}
       </div>
 

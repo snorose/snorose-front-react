@@ -140,3 +140,9 @@ export const reportUser = async (body) => {
 
   return data;
 };
+
+//게시글 썸네일 생성
+export const createThumbnail = async (boardId, postId) => {
+  console.log(boardId, postId);
+  await defaultAxios.post(`/v1/boards/${boardId}/posts/${postId}/thumbnail`);
+};

@@ -23,18 +23,20 @@ export default function FullScreenAttachment({
 
   //다운로드 함수 후보 1) file fetch하고 Blob으로 바꾼뒤 다운로드 받는 방식
   const handleDownload = async (url) => {
-    const response = await fetch(url, { mode: 'cors' });
-    const blob = await response.blob();
+    const response = await fetch(url, { method: 'GET', mode: 'cors' });
+    if (response.ok) {
+      const blob = await response.blob();
 
-    const a = document.createElement('a');
-    const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const blobUrl = URL.createObjectURL(blob);
 
-    a.href = blobUrl;
-    a.download = url.split('/').pop(); // fallback name
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(blobUrl);
+      a.href = blobUrl;
+      a.download = url.split('/').pop(); // fallback name
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(blobUrl);
+    }
   };
 
   //다운로드 함수 후보 2) 백엔드에서 건내준 url을 바로 쓰는 방식
