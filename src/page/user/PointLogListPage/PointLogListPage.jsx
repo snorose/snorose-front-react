@@ -27,7 +27,7 @@ export default function PointLogListPage() {
         <div className={styles.topContainer}>
           <h1 className={styles.title}>보유 포인트</h1>
           <div className={styles.totalPointWrapper}>
-            <Icon id='point-circle' width={22} height={22} />
+            <Icon id='point-circle-blue' width={22} height={22} />
             <span className={styles.totalPoint}>
               {userInfo?.balance.toLocaleString()}
             </span>
