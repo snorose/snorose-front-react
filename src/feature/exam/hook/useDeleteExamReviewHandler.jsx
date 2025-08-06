@@ -1,12 +1,12 @@
 import { useRef, useState, useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useToast, useAuth } from '@/shared/hook';
-import { deletePost } from '@/apis';
 import { TOAST, QUERY_KEY } from '@/shared/constant';
+import { useToast, useAuth } from '@/shared/hook';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { deleteExamReview } from '@/apis';
 import { ModalContext } from '@/shared/context/ModalContext';
 
-export function useDeletePostHandler(boardId) {
+export function useDeleteExamReviewHandler() {
   const { postId } = useParams();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ export function useDeletePostHandler(boardId) {
   const { setModal } = useContext(ModalContext);
 
   const submitDisabledRef = useRef(false);
-
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const handleDelete = async () => {
@@ -24,15 +23,11 @@ export function useDeletePostHandler(boardId) {
     setSubmitDisabled(true);
 
     try {
-      const response = await deletePost(boardId, postId);
-
+      const response = await deleteExamReview(postId);
       if (response.status === 200) {
-        boardId !== 23
-          ? toast(TOAST.POST.delete)
-          : toast(TOAST.POST.deleteNoPoints);
-
+        toast(TOAST.EXAM_REVIEW.delete);
         navigate(-1);
-        queryClient.removeQueries([QUERY_KEY.post, postId]);
+        queryClient.removeQueries([QUERY_KEY.review, postId]);
         invalidUserInfoQuery();
       }
     } catch ({ response }) {
