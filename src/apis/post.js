@@ -8,7 +8,6 @@ export const getPosts = async (boardId, page = 0) => {
       : `/v1/boards/${boardId}/posts/postlist?page=${page}`;
 
   const response = await authAxios.get(url);
-  console.log(response?.data.result);
 
   return response?.data.result;
 };
@@ -143,6 +142,5 @@ export const reportUser = async (body) => {
 
 //게시글 썸네일 생성
 export const createThumbnail = async (boardId, postId) => {
-  console.log(boardId, postId);
-  await defaultAxios.post(`/v1/boards/${boardId}/posts/${postId}/thumbnail`);
+  await authAxios.post(`/v1/boards/${boardId}/posts/${postId}/thumbnail`);
 };

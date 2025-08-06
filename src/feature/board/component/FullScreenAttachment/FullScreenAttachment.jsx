@@ -21,41 +21,48 @@ export default function FullScreenAttachment({
   const [isChoiceModalOpen, setIsChoiceModalOpen] = useState(false);
   const urls = attachmentUrls.map((att) => att.url);
 
-  //다운로드 함수 후보 1) file fetch하고 Blob으로 바꾼뒤 다운로드 받는 방식
-  const handleDownload = async (url) => {
-    const response = await fetch(url, { method: 'GET', mode: 'cors' });
+  const handleDownload = async (s3Url) => {
+    const response = await fetch(s3Url, {
+      mode: 'cors',
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache',
+      },
+    });
+
     if (response.ok) {
       const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = '첨부파일.jpg';
 
-      const a = document.createElement('a');
-      const blobUrl = URL.createObjectURL(blob);
+      // 자동 다운로드 트리거
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
-      a.href = blobUrl;
-      a.download = url.split('/').pop(); // fallback name
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(blobUrl);
+      // URL 정리
+      window.URL.revokeObjectURL(url);
     }
   };
-
-  //다운로드 함수 후보 2) 백엔드에서 건내준 url을 바로 쓰는 방식
-  /*const handleDownload = (url) => {
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = '';
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };*/
 
   //다수의 첨부파일을 다운받을때 -> zip으로 묶고 다운받기
   const handleZipDownload = async (urls) => {
     const zip = new JSZip();
-    for (const url in urls) {
-      const filename = '';
-      const response = await fetch(url);
+    for (let i = 0; i < urls.length; i++) {
+      const url = urls[i];
+      const urlParts = url.split('.');
+      const ext =
+        urlParts.length > 1 ? urlParts.pop().split(/\#|\?/)[0] : 'jpg';
+      const filename = `첨부파일${i + 1}.${ext}`;
+      const response = await fetch(url, {
+        mode: 'cors',
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      });
       const blob = await response.blob();
       zip.file(filename, blob);
     }
@@ -149,7 +156,8 @@ export default function FullScreenAttachment({
           () => {
             //게시글 사진 전체 저장 - 전체 파일들을 zip 해서 리턴하기
             //attachmentUrls안에 있는 모든 url을 zip 해서 한 파일로 만들고, 그걸 다운로드 받게 하기
-            handleDownload();
+            handleZipDownload(urls);
+            setIsChoiceModalOpen(false);
           },
           () => {
             //이 사진만 저장
@@ -157,7 +165,7 @@ export default function FullScreenAttachment({
             const currentIndex =
               paginationRef.current?.textContent.split('/')[0] - 1;
             handleDownload(urls[currentIndex]);
-            //console.log('option2');
+            setIsChoiceModalOpen(false);
           },
         ]}
       />

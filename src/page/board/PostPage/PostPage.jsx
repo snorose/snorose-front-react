@@ -192,12 +192,7 @@ export default function PostPage() {
   }
 
   return (
-    <div
-      className={styles.container}
-      onClick={() => {
-        console.log(data.attachments);
-      }}
-    >
+    <div className={styles.container}>
       <div className={styles.backAppBar}>
         <BackAppBar backgroundColor={'#eaf5fd'} />
       </div>
