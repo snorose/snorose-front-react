@@ -50,11 +50,6 @@ export default function PostPage() {
     navigate(`./edit`);
   };
 
-  const handleDeleteConfirm = () => {
-    setModal({ id: null, type: null });
-    handleDelete();
-  };
-
   // 뱃지를 보여주는 ROLE
   const showBadge =
     data?.userRoleId === ROLE.official ||
@@ -211,7 +206,7 @@ export default function PostPage() {
         modal={modal}
         handleEdit={handleEdit}
         handleReport={handleReport}
-        handleDelete={handleDeleteConfirm}
+        handleDelete={handleDelete}
       />
     </div>
   );
