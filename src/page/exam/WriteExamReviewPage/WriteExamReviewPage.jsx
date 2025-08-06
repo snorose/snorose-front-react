@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postExamReview, checkExamReviewDuplication } from '@/apis';
 
-import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { useAuth, useBlockerNew, useToast } from '@/shared/hook';
+import { ModalContext } from '@/shared/context/ModalContext';
 import {
   ActionButton,
   CloseAppBar,
@@ -12,6 +13,7 @@ import {
   Dropdown,
   FetchLoadingOverlay,
   Icon,
+  NewConfirmModal,
   Textarea,
 } from '@/shared/component';
 import { validClassNumber } from '@/shared/lib';
@@ -22,6 +24,7 @@ import {
   QUERY_KEY,
   TOAST,
 } from '@/shared/constant';
+import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
 
 import {
   CategoryButton,
@@ -45,7 +48,7 @@ export default function WriteExamReviewPage() {
   const { toast } = useToast();
   const { invalidUserInfoQuery } = useAuth();
   const queryClient = useQueryClient();
-
+  const { modal } = useContext(ModalContext);
   const createExamReview = useMutation({
     mutationKey: [MUTATION_KEY.createExamReview],
     mutationFn: ({ data, file }) =>
@@ -107,19 +110,41 @@ export default function WriteExamReviewPage() {
     file;
 
   // navigation guard
-  const isBlock = !!(
-    lectureName.trim() ||
-    professor.trim() ||
-    Object.keys(lectureType).length > 0 ||
-    Object.keys(examType).length > 0 ||
-    Object.keys(lectureYear).length > 0 ||
-    Object.keys(semester).length > 0 ||
-    classNumber ||
-    questionDetail.trim() ||
-    file
-  );
 
-  useBlocker(isBlock);
+  const [isBlock, setIsBlock] = useState(false);
+  useEffect(() => {
+    setIsBlock(
+      !!(
+        lectureName.trim() ||
+        professor.trim() ||
+        Object.keys(lectureType).length > 0 ||
+        Object.keys(examType).length > 0 ||
+        Object.keys(lectureYear).length > 0 ||
+        Object.keys(semester).length > 0 ||
+        classNumber ||
+        questionDetail.trim() ||
+        file
+      )
+    );
+  }, [
+    lectureName,
+    professor,
+    lectureType,
+    examType,
+    lectureYear,
+    semester,
+    classNumber,
+    questionDetail,
+    file,
+  ]);
+
+  useBlockerNew(isBlock);
+
+  // 게시글 수정 중 페이지 이탈
+  const handleExitPage = () => {
+    setIsBlock(false);
+    navigate(-1);
+  };
 
   const handleFile = (event) => {
     const selectedFile = event.target.files[0];
@@ -317,6 +342,13 @@ export default function WriteExamReviewPage() {
         }}
       />
       {loading && <FetchLoadingOverlay />}
+      {/* 페이지 이탈 방지 모달 */}
+      {modal.id === 'exit-page' && (
+        <NewConfirmModal
+          modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+          onConfirm={handleExitPage}
+        />
+      )}
     </main>
   );
 }
