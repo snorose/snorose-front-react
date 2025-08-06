@@ -85,7 +85,7 @@ export default function PostModalRenderer({
                     ? CONFIRM_MODAL_TEXT.DELETE_POST
                     : CONFIRM_MODAL_TEXT.DELETE_POST_WITHOUT_POINT_DEDUCTION
                 }
-                onClickHandler={handleDelete}
+                onConfirm={handleDelete}
               />
             );
           default:
