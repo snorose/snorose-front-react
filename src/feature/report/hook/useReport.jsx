@@ -11,57 +11,47 @@ import { getBoard } from '@/shared/lib';
 import { parseReportType } from '@/feature/report/lib/parseReportType';
 import { useCommentContext } from '@/feature/comment/context';
 
+// 공통 신고 뮤테이션 훅
+function useReportMutation(mutationKey, mutationFn) {
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationKey: [mutationKey],
+    mutationFn,
+    onSuccess: ({ message }) => {
+      toast(message);
+    },
+    onError: () => {
+      toast('신고에 실패했습니다.');
+    },
+  });
+}
+
 // 게시글 신고 훅
 export function useReportPostMutation() {
-  const { toast } = useToast();
   const { postId } = useParams();
   const { pathname } = useLocation();
   const currentBoard = getBoard(pathname.split('/')[2]);
 
-  return useMutation({
-    mutationKey: [MUTATION_KEY.reportPost],
-    mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
+  return useReportMutation(MUTATION_KEY.reportPost, (body) =>
+    reportPost(currentBoard?.id, postId, body)
+  );
 }
 
 // 유저 신고 훅
 export function useReportUserMutation() {
-  const { toast } = useToast();
-
-  return useMutation({
-    mutationKey: [MUTATION_KEY.reportUser],
-    mutationFn: (body) => reportUser(body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
+  return useReportMutation(MUTATION_KEY.reportUser, (body) => reportUser(body));
 }
 
 // 댓글 신고 훅
 export function useReportCommentMutation() {
-  const { toast } = useToast();
   const { postId } = useParams();
 
-  return useMutation({
-    mutationKey: [MUTATION_KEY.reportComment],
-    mutationFn: ({ commentId, reportType }) =>
-      reportComment(postId, commentId, { reportType }),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
+  return useReportMutation(
+    MUTATION_KEY.reportComment,
+    ({ commentId, reportType }) =>
+      reportComment(postId, commentId, { reportType })
+  );
 }
 
 // 통합 신고 핸들러 훅
