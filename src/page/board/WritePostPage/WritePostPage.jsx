@@ -79,7 +79,7 @@ export default function WritePostPage() {
       4: [...boardTitles, ...officialNoticeTitles],
     };
     return roleTitleMap[userInfo?.userRoleId] || boardTitles;
-  }, [isNotice, userInfo?.userRoleId]);
+  }, [isNotice, userInfo?.userRoleId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // 게시판 선택 핸들러
   const handleDropDownOpen = () => {
