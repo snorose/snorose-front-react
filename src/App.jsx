@@ -26,6 +26,7 @@ function App() {
   const hideNav = currentRoute?.meta?.hideNav ?? false;
   const { status } = useAuth();
 
+  // 푸시 알림 설정
   useEffect(() => {
     if (isEnabled && status === 'authenticated') {
       PushNotificationManager.init();
@@ -33,9 +34,9 @@ function App() {
     }
   }, [isEnabled, status]);
 
-  const now = new Date(); // 서버 점검 페이지
+  // 서버 점검 페이지 처리
+  const now = new Date();
   const isMaintenance = now >= MAINTENANCE_START && now <= MAINTENANCE_END;
-
   if (isMaintenance) {
     return <MaintenancePage />;
   }

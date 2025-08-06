@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getMessaging } from 'firebase/messaging';
+import { getMessaging, isSupported } from 'firebase/messaging';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -13,6 +13,14 @@ const firebaseConfig = {
 
 // Firebase 초기화
 const firebaseApp = initializeApp(firebaseConfig);
-const messaging = getMessaging(firebaseApp);
+
+let messaging = null;
+const isFcmSupported = await isSupported();
+
+if (isFcmSupported) {
+  messaging = getMessaging(firebaseApp);
+} else {
+  console.warn('이 브라우저에서 Firebase Messaging을 지원하지 않습니다.');
+}
 
 export { messaging };

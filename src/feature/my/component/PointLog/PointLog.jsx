@@ -17,8 +17,9 @@ const PointLog = forwardRef((props, ref) => {
       <div className={styles.pointIconContentWrapper}>
         <Icon
           id={difference > 0 ? 'heart-plus' : 'heart-minus'}
-          width={28}
-          height={28}
+          width={40}
+          height={40}
+          className={styles.pointIcon}
         />
         <div className={styles.pointContent}>
           <h2
@@ -27,7 +28,7 @@ const PointLog = forwardRef((props, ref) => {
             {POINT_CATEGORY_KOREAN_ENUM[category]}
           </h2>
           {reviewTitle && (
-            <span className={styles.pointDesc}>{reviewTitle}</span>
+            <span className={styles.pointDescription}>{reviewTitle}</span>
           )}
           <span className={styles.pointDate}>
             {format(new Date(createdAt), 'yyyy.MM.dd HH:mm:ss')}

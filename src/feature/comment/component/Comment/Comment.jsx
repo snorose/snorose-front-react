@@ -45,9 +45,10 @@ const Comment = forwardRef((props, ref) => {
     setContent,
     inputFocus,
     resetCommentState,
-    isInputFocused,
+    focusedItem,
     setIsInputFocused,
   } = useCommentContext();
+
   const { like, unlike } = useLike({
     type: LIKE_TYPE.comment,
     sourceId: data.id,
@@ -77,6 +78,13 @@ const Comment = forwardRef((props, ref) => {
     setIsInputFocused({ isFocused: true, parent: String(data.id) });
   };
 
+  const handleEdit = () => {
+    setIsEdit(true);
+    setContent(inputContent);
+    setModal({ id: null, type: null });
+    inputFocus();
+  };
+
   // 뱃지가 보이는 ROLE
   const showBadge =
     userRoleId === ROLE.official ||
@@ -87,10 +95,10 @@ const Comment = forwardRef((props, ref) => {
     <>
       <div
         ref={ref}
-        className={styles.comment}
-        onClick={(event) => {
-          event.stopPropagation();
-        }}
+        className={`${styles.comment} ${
+          focusedItem === String(data.id) ? styles.focused : ''
+        }`}
+        onClick={(event) => event.stopPropagation()}
       >
         <div className={styles.commentTop}>
           <div className={styles.commentTopLeft}>
@@ -142,13 +150,13 @@ const Comment = forwardRef((props, ref) => {
               >
                 <Icon
                   id='comment-stroke'
-                  width={20}
-                  height={17}
-                  fill={
-                    Number(isInputFocused.parent) === data.id
-                      ? '#5F86BF'
-                      : 'none'
-                  }
+                  width={18}
+                  height={15}
+                  style={{
+                    paddingTop: '0.1rem',
+                  }}
+                  stroke='var(--blue-3)'
+                  fill='none'
                 />
                 <p>{children.length}</p>
               </button>
@@ -161,7 +169,8 @@ const Comment = forwardRef((props, ref) => {
                   id='like-stroke'
                   width={16}
                   height={18}
-                  fill={isLiked ? '#5F86BF' : 'none'}
+                  stroke='var(--blue-3)'
+                  fill={isLiked ? 'var(--blue-3)' : 'none'}
                 />
                 <span>{likeCount.toLocaleString()}</span>
               </button>
@@ -185,15 +194,7 @@ const Comment = forwardRef((props, ref) => {
             <MoreOptionModal
               title='내 댓글'
               optionList={MY_COMMENT_MORE_OPTION_LIST}
-              functions={[
-                () => {
-                  setIsEdit(true);
-                  setContent(inputContent);
-                  setModal({ id: null, type: null });
-                  inputFocus();
-                },
-                null,
-              ]}
+              functions={[handleEdit, null]}
               top={moreOptionTop}
             />
           )}

@@ -108,7 +108,8 @@ export default function NestedComment({
               id='like-stroke'
               width={16}
               height={18}
-              fill={isLiked ? '#5F86BF' : 'none'}
+              stroke='var(--blue-3)'
+              fill={isLiked ? 'var(--blue-3)' : 'none'}
             />
             <span>{likeCount.toLocaleString()}</span>
           </button>

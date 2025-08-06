@@ -8,10 +8,9 @@
   background-color: var(--white);
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 300;
 }
 
 .title {
-  font-weight: 700;
-  font-size: 2rem;
+  font: var(--text-headline-1-bold);
 }

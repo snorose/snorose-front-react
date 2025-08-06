@@ -19,10 +19,18 @@ const CommentInput = () => {
     setContent,
     resetCommentState,
     inputRef,
-    setIsInputFocused,
+    setFocusedItem,
   } = useCommentContext();
 
   const handleInputChange = (e) => setContent(e.target.value);
+
+  const handleInputFocus = () => {
+    setFocusedItem('post');
+  };
+
+  const handleInputBlur = () => {
+    setTimeout(() => setFocusedItem(null), 0);
+  };
 
   // 댓글 등록 or 수정
   const submitComment = () => {
@@ -83,8 +91,8 @@ const CommentInput = () => {
           value={content}
           onKeyDown={handleKeyPress}
           onChange={handleInputChange}
-          onFocus={() => setIsInputFocused({ isFocused: true, parent: 'post' })}
-          onBlur={() => setIsInputFocused({ isFocused: false, parent: 'post' })}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           maxRows={5}
         />
       </div>

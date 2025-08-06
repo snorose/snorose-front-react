@@ -4,18 +4,18 @@
   align-items: center;
   border-radius: 0.5rem;
   background: var(--grey-1-1);
-  padding: 1.5rem;
+  padding: 1.4rem;
+  gap: 1.4rem;
 }
 
 .pointIconContentWrapper {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.4rem;
+}
 
-  svg {
-    width: 2.6rem;
-    height: 2.3rem;
-  }
+.pointIcon {
+  flex-shrink: 0;
 }
 
 .pointContent {
@@ -25,25 +25,29 @@
 }
 
 .pointTitle {
+  padding-bottom: 0.2rem;
   color: var(--blue-4);
-  font-size: 1.2rem;
-  font-weight: 500;
+  font: var(--text-body-1-med);
 }
 
-.pointDesc {
+.pointDescription {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--grey-4);
-  font-size: 0.9rem;
+  font: var(--text-body-2-reg);
 }
 
 .pointDate {
   color: var(--grey-3-1);
-  font-size: 0.9rem;
+  font: var(--text-body-2-reg);
 }
 
 .chargePoint {
   color: var(--blue-4);
-  font-size: 1.4rem;
-  font-weight: 500;
+  font: var(--text-headline-2-med);
 }
 
 .negative {
