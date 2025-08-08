@@ -16,6 +16,20 @@
   /* Note: backdrop-filter has minimal browser support */
 }
 
+.notDim {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  width: 100vw;
+  max-width: var(--default-width);
+  height: 100vh;
+  justify-content: center;
+  transform: translateX(-50%);
+}
+
 .container {
   width: 29rem;
   border-radius: 1rem;
@@ -118,4 +132,20 @@
 .greyBtn {
   padding: 1rem;
   cursor: pointer;
+}
+
+/*ChoiceModal: 옵션 있는 모달 디자인이긴하나, OptionModal과 다르게 생김*/
+.choiceTitle {
+  display: flex;
+  justify-content: center;
+  padding: 2.3rem 0;
+}
+
+.choiceOptions {
+  height: 4.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  border-top: 0.1rem solid var(--grey-2);
 }

@@ -202,6 +202,21 @@ export const MODAL_OPTIONS = [
       greyBtn: '취소',
     },
   },
+  {
+    id: 'save-image',
+    title: '사진 저장하기',
+    titleColor: '#000',
+    children: [
+      {
+        text: '게시글 사진 전체 저장',
+        color: '#898989',
+      },
+      {
+        text: '이 사진만 저장',
+        color: '#898989',
+      },
+    ],
+  },
 ];
 
 export const MODAL_CONFIRM = {

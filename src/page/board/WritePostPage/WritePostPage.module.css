@@ -2,6 +2,9 @@
   width: 100%;
   height: 100vh;
   background-color: var(--blue-0);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .top {
@@ -78,6 +81,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 3.4rem;
+  /*padding-bottom 때문에 마지막 이미지 밑에 의도치 않은 공간이 생김*/
   padding-bottom: 11rem;
 }
 
@@ -100,8 +104,65 @@
   background-color: transparent;
   display: block;
   width: 100%;
-  min-height: 10rem;
+  min-height: 6.25rem;
   resize: none;
+}
+
+.trashInvisible {
+  opacity: 0%;
+  pointer-events: all;
+  width: fit-content;
+  position: fixed;
+  bottom: 10.2rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.trashVisible {
+  opacity: 100%;
+  pointer-events: all;
+  width: fit-content;
+  position: fixed;
+  bottom: 10.2rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.imageList {
+  cursor: default;
+}
+
+.imageContainer {
+  width: fit-content;
+  display: flex;
+  margin-bottom: 1.25rem;
+  list-style-type: none;
+}
+
+.image {
+  position: relative;
+  width: 9.6rem;
+  height: 9.6rem;
+  border-top-left-radius: 1.2rem;
+  border-bottom-left-radius: 1.2rem;
+  object-fit: cover;
+}
+
+.video {
+  width: 9.6rem;
+  height: 9.6rem;
+  border-top-left-radius: 1.2rem;
+  border-bottom-left-radius: 1.2rem;
+  object-fit: cover;
+}
+
+.videoIcon {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+.imageSelectBar {
+  cursor: pointer;
 }
 
 .bottom {

@@ -51,7 +51,6 @@ export const useFindId = () => {
         setLoading(true);
         const response = await defaultAxios.post(endpoint, formData);
         setLoading(false);
-        console.log(response.data.result);
         navigate('/found-id', {
           state: { email: response.data.result },
         });

@@ -12,29 +12,41 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
 
   return (
     <div className={styles.post}>
-      <div className={styles.post_top}>
-        <Icon id='cloud' width={23} height={14} />
-        <p className={styles.name}>{data.userDisplay}</p>
-        {showBadge && (
-          <Badge userRoleId={data.userRoleId} className={styles.badge} />
-        )}
-        <p className={styles.dot}>·</p>
-        <p>{postBarDateFormat(data.createdAt)}</p>
-        {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
-        {data.isConfirmed && (
-          <Icon
-            className={styles.checkCircleIcon}
-            id='check-circle'
-            width={12}
-            height={12}
+      <div className={styles.thumbnailContainer}>
+        <div>
+          <div className={styles.post_top}>
+            <Icon id='cloud' width={23} height={14} />
+            <p className={styles.name}>{data.userDisplay}</p>
+            {showBadge && (
+              <Badge userRoleId={data.userRoleId} className={styles.badge} />
+            )}
+            <p className={styles.dot}>·</p>
+            <p>{postBarDateFormat(data.createdAt)}</p>
+            {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
+            {data.isConfirmed && (
+              <Icon
+                className={styles.checkCircleIcon}
+                id='check-circle'
+                width={12}
+                height={12}
+              />
+            )}
+            <div className={styles.boardChip}>{data.boardName}</div>
+          </div>
+          <div className={styles.post_center}>
+            <p className={styles.title}>{data.title}</p>
+            <p className={styles.text}>{data.questionDetail ?? data.content}</p>
+          </div>
+        </div>
+        {data.thumbnailUrl && (
+          <img
+            className={styles.thumbnail}
+            src={data.thumbnailUrl}
+            loading='lazy'
           />
         )}
-        <div className={styles.boardChip}>{data.boardName}</div>
       </div>
-      <div className={styles.post_center}>
-        <p className={styles.title}>{data.title}</p>
-        <p className={styles.text}>{data.questionDetail ?? data.content}</p>
-      </div>
+
       <div className={styles.post_bottom}>
         <div className={styles.iconListContainer}>
           {data.likeCount > 0 && (

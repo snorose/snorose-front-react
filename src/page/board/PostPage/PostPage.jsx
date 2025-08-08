@@ -1,6 +1,8 @@
+import { useState, useRef } from 'react';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Scrollbar } from 'swiper/modules';
 
 import { deletePost, getPostContent, reportPost, reportUser } from '@/apis';
 
@@ -24,12 +26,16 @@ import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 
 import { NotFoundPage } from '@/page/etc';
 
+import { FullScreenAttachment } from '@/feature/board/component';
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
 import styles from './PostPage.module.css';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/scrollbar';
 
 export default function PostPage() {
   const navigate = useNavigate();
@@ -40,12 +46,14 @@ export default function PostPage() {
   const { inputFocus, focusedItem } = useCommentContext();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
+  const scrollbarRef = useRef(null);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
   const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
   const [deleteSubmitDisabled, setDeleteSubmitDisabled] = useState(false);
+  const [clickedImageIndex, setClickedImageIndex] = useState(0);
   const { invalidUserInfoQuery } = useAuth();
 
   const { data, isLoading, error, isError } = useQuery({
@@ -228,6 +236,67 @@ export default function PostPage() {
           className={styles.contentText}
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
+        {data.attachments.length !== 0 && (
+          <div className={styles.swiperContainer}>
+            <Swiper
+              className={styles.attachmentsContainer}
+              modules={[Scrollbar]}
+              slidesPerView={'auto'}
+              spaceBetween={8}
+              scrollbar={{
+                el: scrollbarRef.current,
+                draggable: true,
+                dragSize: 50,
+              }}
+              onSwiper={(swiper) => {
+                // Manually update scrollbar element after mount
+                swiper.params.scrollbar.el = scrollbarRef.current;
+                swiper.scrollbar.init();
+                swiper.scrollbar.updateSize();
+              }}
+              freeMode={true}
+              loop={false}
+            >
+              {data.attachments.map((item, index) => (
+                <SwiperSlide key={index} className={styles.attachmentSlide}>
+                  <div className={styles.attchmentDiv}>
+                    {item.type === 'PHOTO' ? (
+                      <img
+                        src={item.url}
+                        className={styles.attachment}
+                        draggable={false}
+                        onClick={() => {
+                          //이미지 클릭 시 전체화면 보기 가능
+                          setClickedImageIndex(index + 1);
+                        }}
+                      />
+                    ) : (
+                      <div>
+                        <video
+                          src={item.url}
+                          className={styles.attachment}
+                          draggable={false}
+                          onClick={() => {
+                            //이미지 클릭 시 전체화면 보기 가능
+                            setClickedImageIndex(index + 1);
+                          }}
+                        />
+                        <Icon
+                          id='video-fill'
+                          width={'0.875rem'}
+                          height={'0.875rem'}
+                          className={styles.videoIcon}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div ref={scrollbarRef} className={styles.customScrollbar} />
+          </div>
+        )}
+
         <div className={styles.post_bottom}>
           <div
             className={styles.count}
@@ -333,6 +402,13 @@ export default function PostPage() {
         onOptionClick={handleUserReportOptionModalOptionClick}
         closeFn={() => setIsUserReportModalOpen(false)}
       />
+      {clickedImageIndex !== 0 && (
+        <FullScreenAttachment
+          attachmentUrls={data.attachments}
+          clickedImageIndex={clickedImageIndex}
+          setClickedImageIndex={setClickedImageIndex}
+        />
+      )}
     </div>
   );
 }
