@@ -5,6 +5,13 @@ export const CONFIRM_MODAL_TEXT = {
     confirmText: '떠나기',
     cancelText: '머물기',
   },
+  // 회원 탈퇴
+  WITHDRAW_ACCOUNT: {
+    title: '정말 탈퇴하시겠습니까?',
+    description: null,
+    confirmText: '확인',
+    cancelText: '취소',
+  },
 
   // 삭제 관련
   DELETE_POST: {
