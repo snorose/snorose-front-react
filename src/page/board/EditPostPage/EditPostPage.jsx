@@ -255,6 +255,7 @@ export default function EditPostPage() {
                       //같은 위치에 드롭했을 때
                       if (draggedIndex === droppedIndex) return;
 
+                      //다른 위치에 드롭했을 때
                       setAttachmentsInfo((prev) => {
                         const copy = [...prev];
                         const [moved] = copy.splice(draggedIndex, 1);
@@ -264,11 +265,13 @@ export default function EditPostPage() {
                     }}
                   >
                     {attachmentsInfo[index].type === 'PHOTO' ? (
+                      //첨부파일이 이미지일 경우
                       <img
                         src={att.url || URL.createObjectURL(att.file)}
                         className={styles.image}
                       />
                     ) : (
+                      //첨부파일이 영상일 경우
                       <div className={styles.image}>
                         <video
                           src={att.url}

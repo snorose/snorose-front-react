@@ -38,7 +38,7 @@ export default function WritePostPage() {
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
-  const [trashImageIndex, setTrashImageIndex] = useState(null);
+  const [trashImageIndex, setTrashImageIndex] = useState(null); //지우는 이미지 index
   const trashImageConfirmModal = useModal();
 
   // navigation guard
@@ -137,6 +137,8 @@ export default function WritePostPage() {
                 `/board/${BOARD_MENUS.find((menu) => menu.id === boardId).textId}/post/${newPostId}`,
                 { replace: true }
               );
+
+          //post 등록이 잘 되었으면 썸네일 생성하기
           createThumbnail(boardId, newPostId);
         }
       })
@@ -288,6 +290,7 @@ export default function WritePostPage() {
                       //같은 위치에 드롭했을 때
                       if (draggedIndex === droppedIndex) return;
 
+                      //다른 위치에 드롭했을 때
                       setAttachmentsInfo((prev) => {
                         const copy = [...prev];
                         const [moved] = copy.splice(draggedIndex, 1);
@@ -297,11 +300,13 @@ export default function WritePostPage() {
                     }}
                   >
                     {attachmentsInfo[index].type === 'PHOTO' ? (
+                      //첨부파일이 이미지일 경우
                       <img
                         src={URL.createObjectURL(file)}
                         className={styles.image}
                       />
                     ) : (
+                      //첨부파일이 영상일 경우
                       <div className={styles.image}>
                         <video
                           src={URL.createObjectURL(file)}
@@ -393,8 +398,8 @@ export default function WritePostPage() {
           trashImageConfirmModal.closeModal();
         }}
         onSecondaryButtonClick={() => {
-          trashImageConfirmModal.closeModal();
           setIsTrashOverlapped(false);
+          trashImageConfirmModal.closeModal();
         }}
       />
     </>
