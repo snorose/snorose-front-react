@@ -296,8 +296,8 @@ export default function EditPostPage() {
                     )}
                     <Icon
                       id='image-select-bar'
-                      width={'1.875rem'}
-                      height={'6rem'}
+                      width={'3rem'}
+                      height={'9.6rem'}
                       fill='white'
                       className={styles.imageSelectBar}
                     />
@@ -309,8 +309,8 @@ export default function EditPostPage() {
         </div>
         <Icon
           id='trashcan'
-          width='6.25rem'
-          height='6.25rem'
+          width='10rem'
+          height='10rem'
           className={`${isTrashOverlapped ? styles.trashVisible : styles.trashInvisible}`}
           onDragEnter={(e) => {
             e.preventDefault();
