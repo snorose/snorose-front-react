@@ -17,11 +17,15 @@ export function CommentContextProvider({ children }) {
   const inputRef = useRef();
 
   const inputFocus = () => {
-    inputRef.current?.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+      const length = inputRef.current.value.length;
+      inputRef.current.setSelectionRange(length, length);
+    }
   };
 
   const resetCommentState = (event) => {
-    setCommentId(undefined);
+    setCommentId(null);
     setIsEdit(false);
     setContent('');
   };

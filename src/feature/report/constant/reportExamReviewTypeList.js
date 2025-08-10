@@ -1,0 +1,58 @@
+export const REPORT_EXAM_REVIEW_TYPE_LIST = [
+  {
+    type: 'POST_PERSONAL_ABUSE',
+    iconId: 'comment-exclamation-question-mark',
+    label: '특정인에 대한 욕설 및 비하',
+    width: 20,
+    height: 20,
+  },
+  {
+    type: 'POST_COMMERCIAL_AD',
+    iconId: 'dollar-circle',
+    label: '상업적 광고 및 판매',
+    width: 20,
+    height: 20,
+  },
+  {
+    type: 'POST_ILLEGAL_DISTRIBUTION',
+    iconId: 'camera-blue-stroke',
+    label: '불법촬영물 등의 유통',
+    width: 20,
+    height: 19,
+  },
+  {
+    type: 'POST_PRIVACY_VIOLATION',
+    iconId: 'x-shield',
+    label: '개인정보 유출',
+    width: 18,
+    height: 20,
+  },
+  {
+    type: 'POST_INCITEMENT_DIVISION',
+    iconId: 'traffic-cone',
+    label: '선동 및 분란 유발',
+    width: 20,
+    height: 20,
+  },
+  {
+    type: 'POST_ADULT_CONTENT',
+    iconId: 'hand-stop',
+    label: '음란물 / 불건전한 만남 및 대화',
+    width: 20,
+    height: 22,
+  },
+  {
+    type: 'POST_INSINCERE_CONTENT',
+    iconId: 'list-x-circle',
+    label: '무성의한 게시글',
+    width: 20,
+    height: 16,
+  },
+  {
+    type: 'POST_HATEFUL_CONTENT',
+    iconId: 'sad-face',
+    label: '타인에게 혐오감 선사',
+    width: 20,
+    height: 20,
+  },
+];
