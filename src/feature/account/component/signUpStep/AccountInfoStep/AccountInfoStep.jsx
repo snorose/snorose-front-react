@@ -38,14 +38,16 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
       <div className={styles.inputFrame}>
         <Input
           title={'이름'}
-          placeholder={'이름을 입력해주세요'}
+          placeholder={'이름을 입력해 주세요'}
           className={nameStyle}
           setClassName={setNameStyle}
           classNameCheck={checkName}
           inputType={'userName'}
           inputData={setFormData}
           data={formData}
-          errMsg={'한글 또는 영어 대소문자로 2자 이상 30자 이하로 입력해주세요'}
+          errMsg={
+            '한글 또는 영어 대소문자로 2자 이상 30자 이하로 입력해 주세요'
+          }
         />
       </div>
       <div className={styles.inputFrame}>
@@ -58,26 +60,26 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           inputType={'email'}
           inputData={setFormData}
           data={formData}
-          errMsg={'숙명 이메일만 입력 가능합니다'}
+          errMsg={'숙명 이메일만 입력 가능해요'}
         />
       </div>
       <div className={styles.inputFrame}>
         <Input
           title={'아이디'}
-          placeholder={'사용할 아이디를 입력해주세요'}
+          placeholder={'사용할 아이디를 입력해 주세요'}
           className={idStyle}
           setClassName={setIdStyle}
           classNameCheck={checkID}
           inputType={'loginId'}
           inputData={setFormData}
           data={formData}
-          errMsg={'특수문자를 제외한 5자 이상 30자 이하로 입력해주세요'}
+          errMsg={'특수문자를 제외한 5자 이상 30자 이하로 입력해 주세요'}
         />
       </div>
       <div className={styles.inputFrame}>
         <SpecialInput
           title={'비밀번호'}
-          placeholder={'비밀번호를 입력해주세요'}
+          placeholder={'비밀번호를 입력해 주세요'}
           className={pwStyle}
           setClassName={setPwStyle}
           classNameCheck={checkPW}
@@ -92,14 +94,14 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           state1={'text'}
           state2={'password'}
           errMsg={
-            '영어, 숫자, 특수문자(!@#%^&*)만 사용하여 8자 이상 16자 이하로 작성해주세요'
+            '영어, 숫자, 특수문자(!@#%^&*)를 사용하여 8자 이상 16자 이하로 작성해 주세요'
           }
         />
       </div>
       <div className={styles.inputFrame}>
         <SpecialInput
           title={'비밀번호 확인'}
-          placeholder={'비밀번호를 다시 입력해주세요'}
+          placeholder={'비밀번호를 다시 입력해 주세요'}
           className={pw2Style}
           setClassName={setPw2Style}
           classNameCheck={() =>
@@ -115,7 +117,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           color3={'#ff4b6c'}
           state1={'text'}
           state2={'password'}
-          errMsg={'비밀번호가 일치하지 않습니다'}
+          errMsg={'비밀번호가 일치하지 않아요'}
         />
       </div>
 
