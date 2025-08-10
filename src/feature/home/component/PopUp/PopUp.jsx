@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { usePopUp } from '@/feature/home/hook';
 import styles from './PopUp.module.css';
 import august from './august.jpeg';
-import snoroseLogo from '@/assets/images/snoroseLogo.svg';
+import accounting from './accounting.png';
 
 const content = (
   <div className={styles.notice}>
@@ -28,7 +28,32 @@ const content = (
           </a>
         </strong>
         에서 확인해보세요!
-        {/* <img src={snoroseLogo} alt='스노로즈 로고' /> */}
+      </Content>
+
+      <Heading>2. 7월 회계 보고</Heading>
+      <Content>
+        -{' '}
+        <strong>
+          <a
+            className={styles.link}
+            href='https://docs.google.com/spreadsheets/u/0/d/1MzXAHemKqPwVj3PzPJch5cR5z49gFtzABPgJ_FVjCXM/edit?usp=sharing&pli=1&authuser=0'
+            alt='스노로즈 회계 보고 링크 바로가기'
+          >
+            스노로즈 회계 보고 링크 바로가기
+          </a>
+        </strong>
+        <br />- 자세한 내용은{' '}
+        <strong>
+          <a
+            className={styles.link}
+            href='https://www.snorose.com/board/notice/post/1840783'
+            alt='공지'
+          >
+            관련 공지
+          </a>
+        </strong>
+        를 참고해주시길 바랍니다.
+        <img src={accounting} alt='7월 회계보고' />
       </Content>
 
       {/* <Heading>1. 8월 스노로즈 캘린더</Heading>
