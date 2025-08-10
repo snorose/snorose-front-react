@@ -28,7 +28,7 @@ export default function MyInfo({ userInfo }) {
       <Link to='view-point-list'>
         <div className={styles.pointWrapper}>
           <div className={styles.point}>
-            <Icon id='point-circle-line' width={32} height={32} />
+            <Icon id='point-circle' width={32} height={32} />
             <span>{userInfo?.balance.toLocaleString()}</span>
           </div>
           <div className={styles.pointList}>
