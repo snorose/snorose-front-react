@@ -70,10 +70,10 @@ export default function WritePostPage() {
       }));
 
     const roleOptions = {
-      5: isNotice
+      [ROLE.official]: isNotice
         ? getOptionObjects(officialNoticeTitles)
         : getOptionObjects(officialTitles),
-      4: getOptionObjects([...boardTitles, ...officialNoticeTitles]),
+      [ROLE.admin]: getOptionObjects([...boardTitles, ...officialNoticeTitles]),
     };
 
     return roleOptions[userInfo?.userRoleId] || getOptionObjects(boardTitles);
