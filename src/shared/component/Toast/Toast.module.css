@@ -1,15 +1,36 @@
 .toast {
-  padding: 1.3rem 3.2rem;
-  background: rgba(var(--grey-4-rgb), 0.8);
-  border-radius: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  padding: 1.5rem 1.8rem;
   transition: 500ms opacity ease-in-out;
+  gap: 0.8rem;
+  box-shadow: 0 0 3.6rem 0 rgba(0, 0, 0, 0.1);
 }
 
 .message {
   text-align: center;
   word-break: keep-all;
-  font-weight: 500;
-  font-size: 1.2rem;
   white-space: pre-wrap;
-  color: var(--white);
+  font: var(--text-body-1-reg);
+}
+
+.error {
+  background: var(--pink-1);
+  color: var(--pink-3);
+}
+
+.default {
+  background: var(--blue-1);
+  color: var(--blue-4);
+}
+
+.defaultDark {
+  background: var(--blue-2);
+  color: var(--blue-4);
+}
+
+.icon {
+  flex-shrink: 0;
 }

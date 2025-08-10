@@ -68,10 +68,10 @@ export default function ExamReviewPage() {
     mutationKey: [MUTATION_KEY.reportPost],
     mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
     onSuccess: ({ message }) => {
-      toast(message);
+      toast({ message, variant: 'defaultDark' });
     },
     onError: () => {
-      toast('신고에 실패했습니다.');
+      toast({ message: TOAST.REPORT.postFail, variant: 'error' });
     },
   });
 
@@ -79,10 +79,10 @@ export default function ExamReviewPage() {
     mutationKey: [MUTATION_KEY.reportUser],
     mutationFn: (body) => reportUser(body),
     onSuccess: ({ message }) => {
-      toast(message);
+      toast({ message: message, variant: 'defaultDark' });
     },
     onError: () => {
-      toast('신고에 실패했습니다.');
+      toast({ message: TOAST.REPORT.userFail, variant: 'error' });
     },
   });
 
@@ -92,18 +92,18 @@ export default function ExamReviewPage() {
     onSuccess: () => {
       queryClient.removeQueries([QUERY_KEY.post, postId]);
       invalidUserInfoQuery();
-      toast(TOAST.EXAM_REVIEW.delete);
+      toast({ message: TOAST.EXAM_REVIEW.delete });
       navigate(-1);
     },
     onError: ({ response }) => {
       const { status } = response;
 
       if (status === 500) {
-        toast(TOAST.ERROR.SERVER);
+        toast({ message: TOAST.ERROR.SERVER, variant: 'error' });
         return;
       }
 
-      toast(response.data.message);
+      toast({ message: response.data.message, variant: 'error' });
     },
     onSettled: () => {
       setLoading(false);
@@ -135,7 +135,7 @@ export default function ExamReviewPage() {
     const reportType = event.currentTarget.dataset.value;
 
     reportUserMutate({
-      // targetUserId,
+      encryptedTargetUserId: data?.userId,
       reportType,
     });
 

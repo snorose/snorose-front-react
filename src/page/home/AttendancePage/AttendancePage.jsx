@@ -85,12 +85,12 @@ function AttendanceButton({ setLoading }) {
             today.getFullYear(),
             today.getMonth() + 1,
           ]);
-          toast(TOAST.ATTENDANCE.attendance);
+          toast({ message: TOAST.ATTENDANCE.attendance });
         }
         setIsAttendance(true);
       })
       .catch(({ response }) => {
-        toast(response.data.message);
+        toast({ message: response.data.message, variant: 'error' });
       })
       .finally(() => {
         setDisabled(false);

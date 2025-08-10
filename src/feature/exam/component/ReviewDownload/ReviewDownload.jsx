@@ -59,7 +59,7 @@ export default function ReviewDownload({
         balance: isDownloaded ? prev.balance : prev.balance - 50,
       }));
 
-      toast(TOAST.EXAM_REVIEW.download);
+      toast({ message: TOAST.EXAM_REVIEW.download });
     } catch ({ response }) {
       const text = await response.data.text();
       const { message } = JSON.parse(text);
