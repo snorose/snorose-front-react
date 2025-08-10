@@ -33,7 +33,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
     <div className={styles.pageFrame}>
       <p className={styles.title}>
         계정 정보를
-        <br /> 입력해주세요
+        <br /> 입력해 주세요
       </p>
       <div className={styles.inputFrame}>
         <Input
