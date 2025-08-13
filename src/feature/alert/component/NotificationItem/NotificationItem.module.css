@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* top */
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+}
+
+.title {
+  font: var(--body-1-med);
+  color: var(--blue-4);
+}
+
+.category {
+}
+
+.time {
+  font: var(--body-1-reg);
+  color: var(--grey-3-1);
+}
+
+/* bottom */
+
+.content {
+  font: var(--body-1-reg);
+  color: var(--blue-4);
+
+  /* 말줄임.. */
+}

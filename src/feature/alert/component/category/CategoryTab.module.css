@@ -1,0 +1,11 @@
+.tabButton {
+  padding: 0.6rem 2rem;
+
+  font: var(--body-1-reg);
+  color: var(--grey-3-1);
+
+  &:checked {
+    font: var(--body-1-med);
+    color: var(--blue-4);
+  }
+}
