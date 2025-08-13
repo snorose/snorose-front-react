@@ -1,23 +1,13 @@
 import style from './GradientBox.module.css';
 
-export default function GradientBox({
-  padding = '14px',
-  height = 'auto',
-  children,
-}) {
-  const boxStyle = {};
-
-  if (padding !== undefined) {
-    boxStyle.padding = padding;
-  }
-
-  if (height !== undefined) {
-    boxStyle.height = height;
-  }
+export default function GradientBox({ type = 'default', children }) {
+  const inlineStyle = {
+    gray: style.gray,
+    pink: style.pink,
+    default: null,
+  };
 
   return (
-    <div className={style.container} style={boxStyle}>
-      {children}
-    </div>
+    <div className={`${style.container} ${inlineStyle[type]}`}>{children}</div>
   );
 }
