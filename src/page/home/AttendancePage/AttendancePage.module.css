@@ -69,16 +69,17 @@
 .itemLeft {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.3rem;
 }
 
 .label {
-  font-weight: 500;
-  font-size: 1.4rem;
+  font: var(--text-headline-2-med);
   color: var(--blue-4);
 }
 
 .description {
-  font-size: 1.3rem;
-  color: var(--grey-4);
+  margin-left: 0.1rem;
+
+  font: var(--text-body-1-reg);
+  color: var(--blue-4);
 }
