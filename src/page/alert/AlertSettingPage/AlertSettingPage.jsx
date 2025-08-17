@@ -26,7 +26,7 @@ export default function AlertSettingPage() {
   );
 
   return (
-    <div className={style.container}>
+    <div>
       <BackAppBar title='알림 설정' />
 
       <div className={style.alert}>
