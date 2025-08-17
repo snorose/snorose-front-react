@@ -15,6 +15,7 @@ import {
   SignUpFailurePage,
   SnoroseVerifyPage,
 } from '@/page/account';
+import { AlertPage, AlertSettingPage } from '@/page/alert';
 import {
   BoardCategoryPage,
   EditPostPage,
@@ -48,7 +49,6 @@ import {
 
 import ProtectedRoute from '@/ProtectedRoute';
 import { MaintenancePage } from '@/page/maintenance';
-// import { AlertPage } from '@/pages/AlertPage';
 
 import { CheckExamPeriodRoute } from '@/feature/exam/lib';
 
@@ -336,6 +336,14 @@ export const routeList = [
         },
       },
       {
+        path: '/alert',
+        element: <AlertPage />,
+      },
+      {
+        path: '/alert/setting',
+        element: <AlertSettingPage />,
+      },
+      {
         path: '/attendance',
         element: <AttendancePage />,
         loader: attendanceLoader,
@@ -343,13 +351,6 @@ export const routeList = [
           hideNav: true,
         },
       },
-      // {
-      //   path: '/alert',
-      //   element: <AlertPage />,
-      //   meta: {
-      //     hideNav: true,
-      //   },
-      // },
       {
         path: '/my-page',
         element: (
