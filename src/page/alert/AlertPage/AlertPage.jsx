@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { MenuIcon, Icon } from '@/shared/component';
 
 import styles from './AlertPage.module.css';
+import { Link } from 'react-router-dom';
 
 const initialAlertData = [
   {
@@ -92,6 +93,8 @@ export default function AlertPage() {
       <header className={styles.menu}>
         <MenuIcon stroke='#00368E' />
       </header>
+
+      <Link to='setting'>설정 페이지로 이동</Link>
 
       <section className={styles.contentWrapper}>
         <div className={styles.topContainer}>

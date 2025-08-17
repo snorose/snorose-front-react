@@ -14,6 +14,8 @@ export const ROUTE = Object.freeze({
   examReviewDetail: (postId) => `/board/exam-review/post/${postId}`,
   examReviewWrite: '/board/exam-review-write',
   examReviewEdit: (postId) => `/board/exam-review/${postId}/edit`,
+  alert: '/alert',
+  alertSetting: '/alert/setting',
   mypage: '/my-page',
   mypagePassword: '/my-page/password',
   mypageEditInfo: '/my-page/edit-info',
@@ -41,5 +43,4 @@ export const ROUTE = Object.freeze({
   help: '/help',
   notice: '/notice',
   attendance: '/attendance',
-  alert: '/alert',
 });
