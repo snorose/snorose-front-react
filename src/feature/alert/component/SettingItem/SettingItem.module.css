@@ -64,7 +64,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 
-  white-space: normal;
+  white-space: pre-line;
   word-break: keep-all;
   overflow-wrap: normal;
 }

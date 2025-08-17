@@ -1,0 +1,21 @@
+.container {
+}
+
+.alert {
+  margin: 0 2rem;
+  margin-top: 7rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.attendance {
+  margin: 0 2rem;
+}
+
+.line {
+  margin: 2.4rem 0;
+  height: 0;
+  border-top: 1px solid var(--grey-2);
+}
