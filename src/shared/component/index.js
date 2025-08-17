@@ -1,6 +1,3 @@
-// box
-export { default as GradientBox } from './Box/GradientBox';
-
 // button
 export { default as ActionButton } from './button/ActionButton/ActionButton';
 export { default as Button } from './button/Button/Button';
