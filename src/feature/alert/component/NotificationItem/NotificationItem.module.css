@@ -2,6 +2,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  padding: 1.4rem;
+  border-radius: 0.5rem;
+
+  &.gray {
+    background-color: var(--grey-1-1);
+  }
+
+  &.gradient {
+    background: var(--gradient-4);
+  }
 }
 
 /* top */
@@ -19,23 +30,39 @@
 }
 
 .title {
-  font: var(--body-1-med);
+  font: var(--text-body-1-med);
   color: var(--blue-4);
 }
 
-.category {
-}
-
-.time {
-  font: var(--body-1-reg);
+.createdAt {
+  font: var(--text-body-1-reg);
   color: var(--grey-3-1);
 }
 
 /* bottom */
 
 .content {
-  font: var(--body-1-reg);
+  font: var(--text-body-1-reg);
   color: var(--blue-4);
 
-  /* 말줄임.. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* chip */
+
+.category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 2rem;
+  padding: 0.1rem 0.4rem;
+
+  border-radius: 0.5rem;
+  background: var(--gradient-2);
+
+  font: var(--text-body-2-reg);
+  color: var(--blue-4);
 }

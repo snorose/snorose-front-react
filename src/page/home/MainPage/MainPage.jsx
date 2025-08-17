@@ -19,16 +19,20 @@ import {
 } from '@/feature/home/component';
 
 import styles from './MainPage.module.css';
+import { NotificationItem } from '@/feature/alert/component';
 
 export default function MainPage() {
   return (
     <main>
-      <GradientBox type='gray'>
-        자주 묻는 질문을 확인해보세요. 궁금하신 점이 해결되지 않았다면, 카카오톡
-        1:1 문의 및 이메일 snorose1906@gmail.com를 통해 연락해주세요.
-      </GradientBox>
-
       <Header className={styles.header} />
+      <NotificationItem
+        title='알림제목'
+        content='알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용'
+        category='전체'
+        dateTime='dfdffdfdffd'
+        isRead
+        url='lalsjdlkdsj'
+      />
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
