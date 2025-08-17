@@ -44,27 +44,27 @@
   );
 
   /* text */
-  --text-title-1-bold: 700 2.4rem 'Spoqa Han Sans Neo';
-  --text-title-1-med: 500 2.4rem 'Spoqa Han Sans Neo';
-  --text-title-1-reg: 400 2.4rem 'Spoqa Han Sans Neo';
+  --text-title-1-bold: 700 2.4rem/1.3 'Spoqa Han Sans Neo';
+  --text-title-1-med: 500 2.4rem/1.3 'Spoqa Han Sans Neo';
+  --text-title-1-reg: 400 2.4rem/1.3 'Spoqa Han Sans Neo';
 
-  --text-heading-1-bold: 700 2rem 'Spoqa Han Sans Neo';
-  --text-heading-1-med: 500 2rem 'Spoqa Han Sans Neo';
-  --text-heading-1-reg: 400 2rem 'Spoqa Han Sans Neo';
+  --text-heading-1-bold: 700 2rem/1.4 'Spoqa Han Sans Neo';
+  --text-heading-1-med: 500 2rem/1.4 'Spoqa Han Sans Neo';
+  --text-heading-1-reg: 400 2rem/1.4 'Spoqa Han Sans Neo';
 
-  --text-headline-1-bold: 700 1.8rem 'Spoqa Han Sans Neo';
-  --text-headline-1-med: 500 1.8rem 'Spoqa Han Sans Neo';
-  --text-headline-1-reg: 400 1.8rem 'Spoqa Han Sans Neo';
+  --text-headline-1-bold: 700 1.8rem/1.4 'Spoqa Han Sans Neo';
+  --text-headline-1-med: 500 1.8rem/1.4 'Spoqa Han Sans Neo';
+  --text-headline-1-reg: 400 1.8rem/1.4 'Spoqa Han Sans Neo';
 
-  --text-headline-2-bold: 700 1.6rem 'Spoqa Han Sans Neo';
-  --text-headline-2-med: 500 1.6rem 'Spoqa Han Sans Neo';
-  --text-headline-2-reg: 400 1.6rem 'Spoqa Han Sans Neo';
+  --text-headline-2-bold: 700 1.6rem/1.4 'Spoqa Han Sans Neo';
+  --text-headline-2-med: 500 1.6rem/1.4 'Spoqa Han Sans Neo';
+  --text-headline-2-reg: 400 1.6rem/1.4 'Spoqa Han Sans Neo';
 
-  --text-body-1-bold: 700 1.4rem 'Spoqa Han Sans Neo';
-  --text-body-1-med: 500 1.4rem 'Spoqa Han Sans Neo';
-  --text-body-1-reg: 400 1.4rem 'Spoqa Han Sans Neo';
+  --text-body-1-bold: 700 1.4rem/1.4 'Spoqa Han Sans Neo';
+  --text-body-1-med: 500 1.4rem/1.4 'Spoqa Han Sans Neo';
+  --text-body-1-reg: 400 1.4rem/1.4 'Spoqa Han Sans Neo';
 
-  --text-body-2-bold: 700 1.3rem 'Spoqa Han Sans Neo';
-  --text-body-2-med: 500 1.3rem 'Spoqa Han Sans Neo';
-  --text-body-2-reg: 400 1.3rem 'Spoqa Han Sans Neo';
+  --text-body-2-bold: 700 1.3rem/1.4 'Spoqa Han Sans Neo';
+  --text-body-2-med: 500 1.3rem/1.4 'Spoqa Han Sans Neo';
+  --text-body-2-reg: 400 1.3rem/1.4 'Spoqa Han Sans Neo';
 }
