@@ -2,7 +2,7 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { Footer, GradientBox, Header } from '@/shared/component';
+import { Footer, Header } from '@/shared/component';
 import {
   Carousel,
   CarouselErrorFallback,
@@ -19,20 +19,12 @@ import {
 } from '@/feature/home/component';
 
 import styles from './MainPage.module.css';
-import { NotificationItem } from '@/feature/alert/component';
 
 export default function MainPage() {
   return (
     <main>
       <Header className={styles.header} />
-      <NotificationItem
-        title='알림제목'
-        content='알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용 알림 내용'
-        category='전체'
-        dateTime='dfdffdfdffd'
-        isRead
-        url='lalsjdlkdsj'
-      />
+
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
@@ -45,6 +37,7 @@ export default function MainPage() {
           </ErrorBoundary>
         )}
       </QueryErrorResetBoundary>
+
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
@@ -57,8 +50,10 @@ export default function MainPage() {
           </ErrorBoundary>
         )}
       </QueryErrorResetBoundary>
+
       <ListHeader to='/board' title='커뮤니티' />
       <HomeCommunity className={styles.community} />
+
       <ListHeader to='/board/besookt' title='베숙트' />
       <QueryErrorResetBoundary>
         {({ reset }) => (
@@ -72,6 +67,7 @@ export default function MainPage() {
           </ErrorBoundary>
         )}
       </QueryErrorResetBoundary>
+
       <Footer />
       <PopUp />
     </main>
