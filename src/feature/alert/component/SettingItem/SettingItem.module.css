@@ -9,16 +9,34 @@
   border-radius: 0.5rem;
   box-sizing: border-box;
 
-  &.grey {
-    background-color: var(--grey-1);
+  &.gradient {
+    background: var(--gradient-4);
   }
 
   &.blue {
     background-color: var(--blue-0);
   }
 
-  &.gradient {
-    background: var(--gradient-4);
+  /* disabled */
+
+  &.disabled {
+    background-color: var(--grey-1);
+
+    .title {
+      color: var(--grey-4);
+    }
+
+    .content {
+      color: var(--grey-4);
+    }
+
+    .termsLink {
+      color: var(--grey-3-1);
+    }
+
+    .switch {
+      cursor: not-allowed;
+    }
   }
 }
 
