@@ -96,6 +96,11 @@ export default function useComment() {
       !pointDifference
         ? toast(TOAST.COMMENT.createNoPoints)
         : toast(TOAST.COMMENT.create);
+
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.userInfo],
+        refetchType: 'inactive',
+      });
     },
     onError,
     onSettled,
@@ -128,6 +133,11 @@ export default function useComment() {
       currentBoard.id === 23 || currentBoard.id === 32
         ? toast(TOAST.COMMENT.deleteNoPoints)
         : toast(TOAST.COMMENT.delete);
+
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.userInfo],
+        refetchType: 'inactive',
+      });
     },
     onError,
     onSettled,
