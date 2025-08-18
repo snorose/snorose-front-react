@@ -5,13 +5,24 @@
 
   padding: 1.4rem;
   border-radius: 0.5rem;
+  cursor: pointer;
 
-  &.gray {
+  &.read {
     background-color: var(--grey-1-1);
+
+    .title,
+    .content {
+      color: var(--grey-4);
+    }
   }
 
-  &.gradient {
+  &.unread {
     background: var(--gradient-4);
+
+    .title,
+    .content {
+      color: var(--blue-4);
+    }
   }
 }
 
@@ -31,7 +42,6 @@
 
 .title {
   font: var(--text-body-1-med);
-  color: var(--blue-4);
 }
 
 .createdAt {
@@ -43,7 +53,6 @@
 
 .content {
   font: var(--text-body-1-reg);
-  color: var(--blue-4);
 
   white-space: nowrap;
   overflow: hidden;
