@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getNoticeLine } from '@/apis';
 
 import { useScrollRestoration } from '@/shared/hook';
-import { AppBar, Icon, WriteButton } from '@/shared/component';
+import { AppBar, Icon, MenuIcon, WriteButton } from '@/shared/component';
 import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
 import { Filter, FilterList } from '@/feature/exam/component';
@@ -27,7 +27,9 @@ export default function ExamReviewListPage() {
 
   return (
     <section className={styles.container} ref={scrollRef}>
-      <AppBar title='시험후기' />
+      <AppBar title='시험후기'>
+        <MenuIcon />
+      </AppBar>
       <div className={styles.notification}>
         <Link
           className={styles.notificationBar}
