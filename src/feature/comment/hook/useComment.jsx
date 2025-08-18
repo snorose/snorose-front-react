@@ -8,7 +8,7 @@ import {
   editComment as edit,
 } from '@/apis';
 
-import { useAuth, useToast } from '@/shared/hook';
+import { useToast } from '@/shared/hook';
 import {
   getBoard,
   flatPaginationCache,
@@ -32,7 +32,6 @@ export default function useComment() {
   const { pathname } = useLocation();
   const queryClient = useQueryClient();
   const { toast } = useToast();
-  const { invalidUserInfoQuery } = useAuth();
   const currentBoard = getBoard(pathname.split('/')[2]);
 
   const updateCommentCache = (actionIfTargetComment) => {
@@ -69,8 +68,13 @@ export default function useComment() {
     onSuccess: (newComment) => {
       const { parentId, pointDifference } = newComment;
 
-      invalidUserInfoQuery();
+      // 포인트 갱신
+      queryClient.setQueryData([QUERY_KEY.userInfo], (prev) => ({
+        ...prev,
+        points: prev.points + pointDifference,
+      }));
 
+      // 댓글 목록 갱신
       queryClient.setQueryData([QUERY_KEY.comments, postId], (prev) => {
         const flattenComments = flatPaginationCache(prev);
 
@@ -88,6 +92,7 @@ export default function useComment() {
       });
 
       updateCommentCountCache({ type: COMMENT_ACTION_TYPE.create });
+
       !pointDifference
         ? toast(TOAST.COMMENT.createNoPoints)
         : toast(TOAST.COMMENT.create);
@@ -102,10 +107,15 @@ export default function useComment() {
       return await remove({ postId, commentId });
     },
     onSuccess: (deletedComment) => {
-      // const { id, pointDifference } = deletedComment;
-      const { id } = deletedComment;
+      const { id, pointDifference } = deletedComment;
 
-      invalidUserInfoQuery();
+      // 포인트 갱신
+      queryClient.setQueryData([QUERY_KEY.userInfo], (prev) => ({
+        ...prev,
+        points: prev.points + pointDifference,
+      }));
+
+      // 댓글 목록에 삭제 반영
       updateCommentCache((comment) =>
         deleteIfTargetComment({
           comment,
