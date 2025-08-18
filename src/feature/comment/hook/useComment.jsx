@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { useLocation } from 'react-router-dom';
 
 import {
   deleteComment as remove,
