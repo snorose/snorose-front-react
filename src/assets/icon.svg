@@ -106,6 +106,14 @@
   <symbol id='check-thick' viewBox="0 0 24 25" fill="none" stroke="none">
     <path d="M3 14.2353L9.13167 20.949L21 5.94897" stroke="#898989" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
+  <symbol id="checkbox-blue" viewBox="0 0 20 20" fill="none" stroke="none">
+    <circle cx="10" cy="10" r="10" fill="#DDEBF6"/>
+    <path d="M5 10.7832L8.46842 14.3638L15.1818 6.36377" stroke="#5F86BF" stroke-width="1.54545" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="checkbox-grey" viewBox="0 0 20 20" fill="none" stroke="none">
+    <circle cx="10" cy="10" r="10" fill="#F4F4F4"/>
+    <path d="M5 10.7832L8.46842 14.3638L15.1818 6.36377" stroke="#D9D9D9" stroke-width="1.54545" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
   <symbol id="chevron-right" viewBox="0 0 25 24" fill="none" stroke="none">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M16.8057 12C16.8057 12.2196 16.7178 12.4292 16.5635 12.5775L9.05477 19.7946C8.75103 20.0865 8.27938 20.0647 8.00132 19.7457C7.72326 19.4268 7.74408 18.9316 8.04782 18.6397L14.9558 12L8.04783 5.36033C7.74408 5.06838 7.72326 4.57317 8.00132 4.25426C8.27938 3.93534 8.75103 3.91348 9.05477 4.20543L16.5635 11.4225C16.7178 11.5708 16.8057 11.7804 16.8057 12Z" fill="#898989"/>
   </symbol>
@@ -690,3 +698,4 @@
     <path d="M5.5 11.8613L9.31526 15.8L16.7 7" stroke="#5F86BF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
 </svg>
+
