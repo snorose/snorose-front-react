@@ -3,7 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { useRegister } from '@/apis';
 
-import { CategoryFieldset, Dropdown, Input, Button } from '@/shared/component';
+import {
+  CategoryFieldset,
+  Button,
+  Dropdown,
+  Icon,
+  Input,
+} from '@/shared/component';
 import { MAJORS } from '@/shared/constant';
 
 import {
@@ -12,7 +18,7 @@ import {
   checkBirthday,
 } from '@/feature/account/lib';
 
-import styles from './UserInfoStep.module.css';
+import style from './UserInfoStep.module.css';
 
 export default function UserInfoStep({ setFormData, formData }) {
   const register = useRegister();
@@ -33,14 +39,14 @@ export default function UserInfoStep({ setFormData, formData }) {
   };
 
   return (
-    <div className={styles.pageFrame}>
+    <div className={style.pageFrame}>
       <div>
-        <p className={styles.title}>
+        <p className={style.title}>
           사용자 정보를
           <br />
           입력해 주세요
         </p>
-        <div className={styles.inputFrame}>
+        <div className={style.inputFrame}>
           <Input
             title={'닉네임'}
             placeholder={'닉네임을 입력해 주세요'}
@@ -53,7 +59,7 @@ export default function UserInfoStep({ setFormData, formData }) {
             errMsg={'특수문자 제외 2자 이상 20자 이하로 작성해 주세요'}
           />
         </div>
-        <div className={styles.inputFrame}>
+        <div className={style.inputFrame}>
           <Input
             title={'학번'}
             placeholder={'학번을 입력해 주세요'}
@@ -66,7 +72,7 @@ export default function UserInfoStep({ setFormData, formData }) {
             errMsg={'학번 형식을 올바르게 입력해 주세요'}
           />
         </div>
-        <div className={styles.inputFrame}>
+        <div className={style.inputFrame}>
           <CategoryFieldset title='전공' required>
             <Dropdown
               options={MAJORS}
@@ -76,7 +82,7 @@ export default function UserInfoStep({ setFormData, formData }) {
             />
           </CategoryFieldset>
         </div>
-        <div className={styles.inputFrame}>
+        <div className={style.inputFrame}>
           <Input
             title={'생년월일'}
             placeholder={'YYYY-MM-DD'}
@@ -91,12 +97,46 @@ export default function UserInfoStep({ setFormData, formData }) {
         </div>
       </div>
 
-      <div className={styles.submit}>
+      <CheckTerms label={'개인정보 수집 및 이용 동의'} required />
+
+      <div className={style.submit}>
         <Button
           btnName='다음으로'
           className={checkDone()}
           onClick={() => register(formData, navigate)}
         />
+      </div>
+    </div>
+  );
+}
+
+function CheckTerms({ label, isChecked = false, required = false }) {
+  const tagStyle = required ? style.required : style.optional;
+  const tag = required ? '필수' : '선택';
+
+  return (
+    <div className={style.checkTerms}>
+      <input id='terms' className={style.checkbox} type='checkbox' hidden />
+      <label htmlFor='terms' className={style.label}>
+        <Icon
+          className={style.blueBox}
+          id='checkbox-blue'
+          width={20}
+          height={20}
+        />
+        <Icon
+          className={style.greyBox}
+          id='checkbox-grey'
+          width={20}
+          height={20}
+        />
+
+        <span className={`${style.tag} ${tagStyle}`}>{tag}</span>
+        <p className={style.checkboxLabel}>{label}</p>
+      </label>
+
+      <div className={style.termsLink}>
+        <Icon id='chevron-right' width={20} height={20} />
       </div>
     </div>
   );
