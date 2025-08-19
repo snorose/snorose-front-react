@@ -10,3 +10,59 @@
 .submit {
   margin-bottom: 3.4rem;
 }
+
+/* checkbox */
+
+.checkTerms {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+}
+
+.blueBox {
+  display: none;
+}
+
+.checkbox:checked {
+  & + .label .blueBox {
+    display: block;
+  }
+
+  & + .label .greyBox {
+    display: none;
+  }
+}
+
+.tag {
+  height: 2rem;
+  padding: 0 0.4rem;
+  margin: 0 0.8rem 0 1rem;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 0.5rem;
+
+  &.required {
+    color: var(--pink-2);
+    background-color: var(--pink-1);
+  }
+
+  &.optional {
+    color: var(--grey-3-1);
+    background-color: var(--grey-2);
+  }
+}
+
+.checkboxLabel {
+  font: var(--text-body-2-reg);
+}
+
+.termsLink {
+  cursor: pointer;
+}
