@@ -52,6 +52,20 @@ export default function useComment() {
     }));
   };
 
+  const updateUserPoints = (pointDifference) => {
+    queryClient.setQueryData([QUERY_KEY.userInfo], (prev) => ({
+      ...prev,
+      points: prev.points + pointDifference,
+    }));
+  };
+
+  const invalidateUserInfo = () => {
+    queryClient.invalidateQueries({
+      queryKey: [QUERY_KEY.userInfo],
+      refetchType: 'inactive',
+    });
+  };
+
   const onError = ({ response }) => {
     toast(response.data.message);
   };
@@ -68,13 +82,8 @@ export default function useComment() {
     onSuccess: (newComment) => {
       const { parentId, pointDifference } = newComment;
 
-      // 포인트 갱신
-      queryClient.setQueryData([QUERY_KEY.userInfo], (prev) => ({
-        ...prev,
-        points: prev.points + pointDifference,
-      }));
+      updateUserPoints(pointDifference);
 
-      // 댓글 목록 갱신
       queryClient.setQueryData([QUERY_KEY.comments, postId], (prev) => {
         const flattenComments = flatPaginationCache(prev);
 
@@ -97,10 +106,7 @@ export default function useComment() {
         ? toast(TOAST.COMMENT.createNoPoints)
         : toast(TOAST.COMMENT.create);
 
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY.userInfo],
-        refetchType: 'inactive',
-      });
+      invalidateUserInfo();
     },
     onError,
     onSettled,
@@ -114,13 +120,8 @@ export default function useComment() {
     onSuccess: (deletedComment) => {
       const { id, pointDifference } = deletedComment;
 
-      // 포인트 갱신
-      queryClient.setQueryData([QUERY_KEY.userInfo], (prev) => ({
-        ...prev,
-        points: prev.points + pointDifference,
-      }));
+      updateUserPoints(pointDifference);
 
-      // 댓글 목록에 삭제 반영
       updateCommentCache((comment) =>
         deleteIfTargetComment({
           comment,
@@ -134,10 +135,7 @@ export default function useComment() {
         ? toast(TOAST.COMMENT.deleteNoPoints)
         : toast(TOAST.COMMENT.delete);
 
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY.userInfo],
-        refetchType: 'inactive',
-      });
+      invalidateUserInfo();
     },
     onError,
     onSettled,
