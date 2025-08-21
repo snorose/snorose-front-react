@@ -6,10 +6,12 @@ import { NAVBAR_MENUS } from '@/shared/constant';
 import styles from './Navbar.module.css';
 import { useEffect, useState } from 'react';
 import { getUnreadAlertCount } from '@/apis/alert';
+import { useAuth } from '@/shared/hook';
 
 export default function Navbar() {
   const { pathname } = useLocation();
   const [unreadAlertCount, setUnreadAlertCount] = useState(0);
+  const { status } = useAuth();
 
   const isActive = ({ id, to }) =>
     pathname === to ||
@@ -18,6 +20,8 @@ export default function Navbar() {
 
   // 폴링 로직
   useEffect(() => {
+    if (status !== 'authenticated') return; // 로그인이 안 되어 있으면 API를 호출하지 않음
+
     let alive = true; // 비동기 작업이 끝났을 때 컴포넌트가 이미 언마운트 상태인지 체크하기 위한 취소 플래그
 
     async function loadUnread() {
@@ -38,7 +42,7 @@ export default function Navbar() {
       alive = false;
       clearInterval(interval); // 폴링 중단 -> 타이머 누수 방지
     };
-  }, []);
+  }, [status]);
 
   return (
     <nav className={styles.nav}>
