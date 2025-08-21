@@ -1,11 +1,11 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { fetchNotificationList } from '@/apis';
+import { fetchNotificationList, fetchNotificationSettings } from '@/apis';
 
 import { toNotificationItem } from '@/feature/alert/mapper';
 
 export function useNotification(category) {
-  const query = useSuspenseQuery({
+  return useSuspenseQuery({
     queryKey: ['notifications', { category }],
     queryFn: () =>
       fetchNotificationList(category === 'ALL' ? undefined : category),
@@ -13,6 +13,20 @@ export function useNotification(category) {
     staleTime: 5 * 60 * 1000,
     gcTime: 30 * 60 * 1000,
   });
+}
 
-  return query;
+export function useNotificationSettings() {
+  return useSuspenseQuery({
+    queryKey: ['notificationSettings'],
+    queryFn: () => fetchNotificationSettings(),
+    select: ({ result }) => {
+      return {
+        required: result.isRequiredConsent,
+        marketing: result.isMarketingConsent,
+        attendance: result.isAttendanceConsent,
+      };
+    },
+    staleTime: Infinity,
+    gcTime: Infinity,
+  });
 }
