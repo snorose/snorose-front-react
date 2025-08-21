@@ -337,11 +337,19 @@ export const routeList = [
       },
       {
         path: '/alert',
-        element: <AlertPage />,
+        element: (
+          <ProtectedRoute>
+            <AlertPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/alert/setting',
-        element: <AlertSettingPage />,
+        element: (
+          <ProtectedRoute>
+            <AlertSettingPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/attendance',
