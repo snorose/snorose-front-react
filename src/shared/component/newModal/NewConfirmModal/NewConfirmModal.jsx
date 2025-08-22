@@ -6,6 +6,10 @@ import { useContext } from 'react';
 export default function NewConfirmModal({ modalText, onConfirm, onCancel }) {
   const { modal, setModal } = useContext(ModalContext);
 
+  const handleCancel = () => {
+    onCancel?.() || setModal({ id: null, type: null });
+  };
+
   return (
     <DimModalLayout isOpen={modal?.id}>
       <div className={styles.top}>
@@ -21,22 +25,11 @@ export default function NewConfirmModal({ modalText, onConfirm, onCancel }) {
         )}
       </div>
       <div className={styles.bottom}>
-        <button
-          className={styles.bottomButton}
-          onClick={() => {
-            onCancel();
-            setModal({ id: null, type: null });
-          }}
-        >
+        <button className={styles.bottomButton} onClick={handleCancel}>
           {modalText.cancelText}
         </button>
         <div className={styles.buttonDivider} />
-        <button
-          className={styles.bottomButton}
-          onClick={() => {
-            onConfirm();
-          }}
-        >
+        <button className={styles.bottomButton} onClick={onConfirm}>
           {modalText.confirmText}
         </button>
       </div>
