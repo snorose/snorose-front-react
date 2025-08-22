@@ -3,21 +3,28 @@ import styles from './NewConfirmModal.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
 
-export default function NewConfirmModal({ modalText, onConfirm }) {
+export default function NewConfirmModal({ modalText, onConfirm, onCancel }) {
   const { modal, setModal } = useContext(ModalContext);
 
   return (
     <DimModalLayout isOpen={modal?.id}>
       <div className={styles.top}>
-        <h3 className={styles.title}>{modalText.title}</h3>
+        <h3
+          className={styles.title}
+          dangerouslySetInnerHTML={{ __html: modalText.title }}
+        />
         {modalText.description && (
-          <p className={styles.description}>{modalText.description}</p>
+          <p
+            className={styles.description}
+            dangerouslySetInnerHTML={{ __html: modalText.description }}
+          />
         )}
       </div>
       <div className={styles.bottom}>
         <button
           className={styles.bottomButton}
           onClick={() => {
+            onCancel();
             setModal({ id: null, type: null });
           }}
         >
