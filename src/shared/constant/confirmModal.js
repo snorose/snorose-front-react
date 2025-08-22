@@ -80,4 +80,12 @@ export const CONFIRM_MODAL_TEXT = {
     confirmText: '확인',
     cancelText: '취소',
   },
+
+  // 시험후기 다운로드 관련
+  EXAM_REVIEW_DOWNLOAD: {
+    title: '다운로드할까요?',
+    description: '다운로드시 50 포인트가 차감돼요',
+    confirmText: '확인',
+    cancelText: '취소',
+  },
 };

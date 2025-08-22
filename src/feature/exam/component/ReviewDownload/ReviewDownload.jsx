@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { useToast } from '@/shared/hook';
-import { DeleteModal, FetchLoadingOverlay, Icon } from '@/shared/component';
+import { FetchLoadingOverlay, Icon, NewConfirmModal } from '@/shared/component';
 import { LOADING_MESSAGE, QUERY_KEY, TOAST } from '@/shared/constant';
+import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 import { getExamReview } from '@/apis';
 
@@ -22,7 +24,7 @@ export default function ReviewDownload({
 }) {
   const { postId } = useParams();
   const { toast } = useToast();
-  const [isOpen, setIsOpen] = useState(false);
+  const { modal, setModal } = useContext(ModalContext);
   const [loading, setLoading] = useState();
 
   const queryClient = useQueryClient();
@@ -66,6 +68,7 @@ export default function ReviewDownload({
       toast(message);
     } finally {
       setLoading(false);
+      setModal({ id: null, type: null });
     }
   };
 
@@ -81,18 +84,18 @@ export default function ReviewDownload({
             return;
           }
 
-          setIsOpen(true);
+          setModal({ id: 'exam-review-download', type: null });
         }}
       >
         <Icon id='file' width={10} height={14} />
         <span className={styles.name}>{fileName}</span>
       </button>
-      <DeleteModal
-        id='exam-review-download'
-        isOpen={isOpen}
-        closeFn={() => setIsOpen(false)}
-        redBtnFunction={handleDownload}
-      />
+      {modal.id === 'exam-review-download' && (
+        <NewConfirmModal
+          modalText={CONFIRM_MODAL_TEXT.EXAM_REVIEW_DOWNLOAD}
+          onConfirm={handleDownload}
+        />
+      )}
       {loading && (
         <FetchLoadingOverlay text={LOADING_MESSAGE.downloadExamReview} />
       )}

@@ -21,6 +21,13 @@ export default function ExamReviewModalRenderer({
     <>
       {(() => {
         switch (modal.id) {
+          case 'exam-review-download':
+            return (
+              <NewConfirmModal
+                modalText={CONFIRM_MODAL_TEXT.EXAM_REVIEW_DUPLICATION}
+                onConfirm={handleReport}
+              />
+            );
           // 시험후기 더보기 모달 (게시글 신고, 이용자 신고)
           case 'exam-review-more-options':
             return (
