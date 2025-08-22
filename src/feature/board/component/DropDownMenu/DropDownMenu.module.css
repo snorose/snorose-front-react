@@ -8,7 +8,7 @@
   flex-direction: column;
   row-gap: 0.5rem;
   position: absolute;
-  z-index: 1;
+  z-index: var(--z-index-dropdown);
 }
 
 .invisible {
