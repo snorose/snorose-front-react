@@ -9,18 +9,23 @@ import {
   CloseAppBar,
   FetchLoading,
   Icon,
-  NewConfirmModal,
+  ConfirmModal,
 } from '@/shared/component';
-import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
+import {
+  BOARD_MENUS,
+  QUERY_KEY,
+  ROLE,
+  TOAST,
+  CONFIRM_MODAL_TEXT,
+} from '@/shared/constant';
 import { useAuth, useBlockerNew, useToast } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 import { postPost } from '@/apis';
 import { DropDownMenu } from '@/feature/board/component';
 
 import styles from './WritePostPage.module.css';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
-import { ModalContext } from '@/shared/context/ModalContext';
 
 export default function WritePostPage() {
   const navigate = useNavigate();
@@ -275,7 +280,7 @@ export default function WritePostPage() {
           </div>
         </div>
         {modal.id === 'exit-page' && (
-          <NewConfirmModal
+          <ConfirmModal
             modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
             onConfirm={handleExitPage}
           />

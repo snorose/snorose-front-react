@@ -9,7 +9,7 @@ import {
   CloseAppBar,
   FetchLoading,
   Icon,
-  NewConfirmModal,
+  ConfirmModal,
 } from '@/shared/component';
 import {
   BOARD_MENUS,
@@ -17,15 +17,15 @@ import {
   QUERY_KEY,
   ROLE,
   TOAST,
+  CONFIRM_MODAL_TEXT,
 } from '@/shared/constant';
 import { useAuth, useBlockerNew, useToast } from '@/shared/hook';
 import { formattedNowTime } from '@/shared/lib';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 import { getPostContent, patchPost } from '@/apis';
 
 import styles from './EditPostPage.module.css';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
-import { ModalContext } from '@/shared/context/ModalContext';
 
 export default function EditPostPage() {
   const navigate = useNavigate();
@@ -230,7 +230,7 @@ export default function EditPostPage() {
         </div>
         {/* 페이지 이탈 방지 모달 */}
         {modal.id === 'exit-page' && (
-          <NewConfirmModal
+          <ConfirmModal
             modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
             onConfirm={handleExitPage}
           />

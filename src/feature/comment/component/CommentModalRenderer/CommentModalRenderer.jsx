@@ -1,18 +1,16 @@
+import { MoreOptionModal, ConfirmModal, OptionModal } from '@/shared/component';
+import { ModalContext } from '@/shared/context/ModalContext';
 import {
-  MoreOptionModal,
-  NewConfirmModal,
-  NewOptionModal,
-} from '@/shared/component';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
+  CONFIRM_MODAL_TEXT,
+  MORE_OPTION_MODAL_TEXT,
+  OPTION_MODAL_TEXT,
+} from '@/shared/constant';
 
 import { useLocation } from 'react-router-dom';
-import { REPORT_COMMENT_TYPE_LIST } from '../../constant/reportCommentTypeList';
-import { COMMENT_MORE_OPTION_LIST } from '../../constant/commentMoreOptionList';
 import { useCommentContext } from '../../context';
 import { useReportHandler } from '@/feature/report/hook/useReport';
 import { useComment } from '../../hook';
 import { useContext } from 'react';
-import { ModalContext } from '@/shared/context/ModalContext';
 
 export default function CommentModalRenderer({ data, moreOptionTop }) {
   const { pathname } = useLocation();
@@ -32,22 +30,22 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
               data.children.some((child) => child.id === commentId) ? (
               <MoreOptionModal
                 title='댓글'
-                optionList={COMMENT_MORE_OPTION_LIST}
+                optionList={MORE_OPTION_MODAL_TEXT.COMMENT_MORE_OPTION_LIST}
                 top={moreOptionTop}
               />
             ) : null;
           // 댓글 신고하기 옵션 모달
           case 'report-comment-types':
             return (
-              <NewOptionModal
+              <OptionModal
                 title='댓글 신고'
-                optionList={REPORT_COMMENT_TYPE_LIST}
+                optionList={OPTION_MODAL_TEXT.REPORT_COMMENT_TYPE_LIST}
               />
             );
           // 댓글 신고 확인 모달
           case 'confirm-comment-report':
             return (
-              <NewConfirmModal
+              <ConfirmModal
                 modalText={CONFIRM_MODAL_TEXT.REPORT_COMMENT}
                 onConfirm={handleReport}
               />
@@ -55,7 +53,7 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
           // 댓글 삭제 확인 모달
           case 'confirm-comment-delete':
             return (
-              <NewConfirmModal
+              <ConfirmModal
                 modalText={
                   pathname.startsWith('/board/permanent-snow') ||
                   pathname.startsWith('/board/exam-review')

@@ -1,18 +1,12 @@
-import {
-  MoreOptionModal,
-  NewConfirmModal,
-  NewOptionModal,
-} from '@/shared/component';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
-import {
-  MY_POST_MORE_OPTION_LIST,
-  POST_MORE_OPTION_LIST,
-} from '../../constant/postMoreOptionList';
-import { REPORT_POST_TYPE_LIST } from '@/feature/report/constant/reportPostTypeList';
-import { REPORT_USER_TYPE_LIST } from '@/feature/report/constant/reportUserTypeList';
-
 import { useLocation } from 'react-router-dom';
+
+import { MoreOptionModal, ConfirmModal, OptionModal } from '@/shared/component';
 import { getBoard } from '@/shared/lib';
+import {
+  MORE_OPTION_MODAL_TEXT,
+  CONFIRM_MODAL_TEXT,
+  OPTION_MODAL_TEXT,
+} from '@/shared/constant';
 
 export default function PostModalRenderer({
   modal,
@@ -32,7 +26,7 @@ export default function PostModalRenderer({
             return (
               <MoreOptionModal
                 title='게시글'
-                optionList={POST_MORE_OPTION_LIST}
+                optionList={MORE_OPTION_MODAL_TEXT.POST_MORE_OPTION_LIST}
               />
             );
           // 내 게시글 더보기 모달 (수정, 삭제)
@@ -40,30 +34,30 @@ export default function PostModalRenderer({
             return (
               <MoreOptionModal
                 title='내 게시글'
-                optionList={MY_POST_MORE_OPTION_LIST}
+                optionList={MORE_OPTION_MODAL_TEXT.MY_POST_MORE_OPTION_LIST}
                 functions={[handleEdit, null]}
               />
             );
           // 게시글 신고하기 옵션 리스트 모달
           case 'report-post-types':
             return (
-              <NewOptionModal
+              <OptionModal
                 title='게시글 신고'
-                optionList={REPORT_POST_TYPE_LIST}
+                optionList={OPTION_MODAL_TEXT.REPORT_POST_TYPE_LIST}
               />
             );
           // 유저 신고하기 옵션 리스트 모달
           case 'report-user-types':
             return (
-              <NewOptionModal
+              <OptionModal
                 title='이용자 신고'
-                optionList={REPORT_USER_TYPE_LIST}
+                optionList={OPTION_MODAL_TEXT.REPORT_USER_TYPE_LIST}
               />
             );
           // 게시글 신고 최종 확인 모달
           case 'confirm-post-report':
             return (
-              <NewConfirmModal
+              <ConfirmModal
                 modalText={CONFIRM_MODAL_TEXT.REPORT_POST}
                 onConfirm={handleReport}
               />
@@ -71,7 +65,7 @@ export default function PostModalRenderer({
           // 유저 신고 최종 확인 모달
           case 'confirm-user-report':
             return (
-              <NewConfirmModal
+              <ConfirmModal
                 modalText={CONFIRM_MODAL_TEXT.REPORT_USER}
                 onConfirm={handleReport}
               />
@@ -79,7 +73,7 @@ export default function PostModalRenderer({
           // 게시글 삭제 최종 확인 모달
           case 'confirm-post-delete':
             return (
-              <NewConfirmModal
+              <ConfirmModal
                 modalText={
                   currentBoard.id !== 23
                     ? CONFIRM_MODAL_TEXT.DELETE_POST

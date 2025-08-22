@@ -3,9 +3,13 @@ import { useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { useToast } from '@/shared/hook';
-import { FetchLoadingOverlay, Icon, NewConfirmModal } from '@/shared/component';
-import { LOADING_MESSAGE, QUERY_KEY, TOAST } from '@/shared/constant';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
+import { FetchLoadingOverlay, Icon, ConfirmModal } from '@/shared/component';
+import {
+  LOADING_MESSAGE,
+  QUERY_KEY,
+  TOAST,
+  CONFIRM_MODAL_TEXT,
+} from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
 
 import { getExamReview } from '@/apis';
@@ -91,7 +95,7 @@ export default function ReviewDownload({
         <span className={styles.name}>{fileName}</span>
       </button>
       {modal.id === 'exam-review-download' && (
-        <NewConfirmModal
+        <ConfirmModal
           modalText={CONFIRM_MODAL_TEXT.EXAM_REVIEW_DOWNLOAD}
           onConfirm={handleDownload}
         />

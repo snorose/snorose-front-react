@@ -2,7 +2,12 @@ import { forwardRef, useContext, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Badge, Icon, MoreOptionModal } from '@/shared/component';
-import { LIKE_TYPE, ROLE, SHOW_BADGE_PATH } from '@/shared/constant';
+import {
+  LIKE_TYPE,
+  ROLE,
+  SHOW_BADGE_PATH,
+  MORE_OPTION_MODAL_TEXT,
+} from '@/shared/constant';
 import { convertHyperlink, timeAgo } from '@/shared/lib';
 import { ModalContext } from '@/shared/context/ModalContext';
 
@@ -12,8 +17,6 @@ import {
 } from '@/feature/comment/component';
 import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
-
-import { MY_COMMENT_MORE_OPTION_LIST } from '../../constant/commentMoreOptionList';
 
 import styles from './Comment.module.css';
 
@@ -193,7 +196,7 @@ const Comment = forwardRef((props, ref) => {
             // 내 댓글 더보기 클릭 시 뜨는 모달
             <MoreOptionModal
               title='내 댓글'
-              optionList={MY_COMMENT_MORE_OPTION_LIST}
+              optionList={MORE_OPTION_MODAL_TEXT.MY_COMMENT_MORE_OPTION_LIST}
               functions={[handleEdit, null]}
               top={moreOptionTop}
             />

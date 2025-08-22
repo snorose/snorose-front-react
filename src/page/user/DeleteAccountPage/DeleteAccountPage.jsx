@@ -2,16 +2,11 @@ import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/shared/hook';
-import {
-  CloseAppBar,
-  PwInput,
-  Icon,
-  NewConfirmModal,
-} from '@/shared/component';
+import { CloseAppBar, PwInput, Icon, ConfirmModal } from '@/shared/component';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { CONFIRM_MODAL_TEXT } from '@/shared/constant';
 
 import styles from './DeleteAccountPage.module.css';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
-import { ModalContext } from '@/shared/context/ModalContext';
 
 const DESCRIPTION_LIST = [
   '아이디, 이메일, 이름, 학번은 민원 처리 및 분쟁 조정 목적으로 보관돼요',
@@ -81,7 +76,7 @@ export default function DeleteAccountPage() {
         </div>
       </section>
       {modal.id === 'withdraw-account' && (
-        <NewConfirmModal
+        <ConfirmModal
           modalText={CONFIRM_MODAL_TEXT.WITHDRAW_ACCOUNT}
           onConfirm={handleModalPrimaryButtonClick}
         />

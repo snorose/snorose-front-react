@@ -12,12 +12,17 @@ import {
   Dropdown,
   FetchLoadingOverlay,
   Icon,
-  NewConfirmModal,
+  ConfirmModal,
   Textarea,
 } from '@/shared/component';
 import { validClassNumber } from '@/shared/lib';
-import { BOARD_ID, MUTATION_KEY, QUERY_KEY, TOAST } from '@/shared/constant';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
+import {
+  BOARD_ID,
+  MUTATION_KEY,
+  QUERY_KEY,
+  TOAST,
+  CONFIRM_MODAL_TEXT,
+} from '@/shared/constant';
 
 import {
   CategoryButton,
@@ -317,7 +322,7 @@ export default function WriteExamReviewPage() {
       </div>
       {/* 중복 후기 모달 */}
       {modal.id === 'exam-review-duplication' && (
-        <NewConfirmModal
+        <ConfirmModal
           modalText={CONFIRM_MODAL_TEXT.EXAM_REVIEW_DUPLICATION}
           onConfirm={() => {
             setLoading(true);
@@ -336,7 +341,7 @@ export default function WriteExamReviewPage() {
       {loading && <FetchLoadingOverlay />}
       {/* 페이지 이탈 방지 모달 */}
       {modal.id === 'exit-page' && (
-        <NewConfirmModal
+        <ConfirmModal
           modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
           onConfirm={handleExitPage}
         />

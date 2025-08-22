@@ -11,11 +11,16 @@ import {
   CloseAppBar,
   Dropdown,
   FetchLoadingOverlay,
-  NewConfirmModal,
+  ConfirmModal,
   Textarea,
 } from '@/shared/component';
 import { validClassNumber } from '@/shared/lib';
-import { MUTATION_KEY, QUERY_KEY, TOAST } from '@/shared/constant';
+import {
+  MUTATION_KEY,
+  QUERY_KEY,
+  TOAST,
+  CONFIRM_MODAL_TEXT,
+} from '@/shared/constant';
 
 import {
   CategoryButton,
@@ -32,7 +37,6 @@ import {
 } from '@/feature/exam/constant';
 
 import styles from './EditExamReviewPage.module.css';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant/confirmModal';
 
 export default function EditExamReviewPage() {
   const { postId } = useParams();
@@ -245,7 +249,7 @@ export default function EditExamReviewPage() {
       {loading && <FetchLoadingOverlay />}
       {/* 페이지 이탈 방지 모달 */}
       {modal.id === 'exit-page' && (
-        <NewConfirmModal
+        <ConfirmModal
           modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
           onConfirm={handleExitPage}
         />
