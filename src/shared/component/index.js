@@ -25,12 +25,7 @@ export { default as FetchLoading } from './loading/FetchLoading/FetchLoading';
 export { default as FetchLoadingOverlay } from './loading/FetchLoadingOverlay/FetchLoadingOverlay';
 
 // modal
-export { default as ConfirmModal } from './modal/ConfirmModal';
-export { default as DeleteModal } from './modal/DeleteModal';
 export { default as DimModalLayout } from './newModal/DimModalLayout/DimModalLayout';
-export { default as OptionModal } from './modal/OptionModal';
-
-// new modal
 export { default as NewConfirmModal } from './newModal/NewConfirmModal/NewConfirmModal'; // 삭제 및 신고 확인 모달
 export { default as MoreOptionModal } from './newModal/MoreOptionModal/MoreOptionModal'; // 게시글 더보기 버튼 클릭 시 나오는 모달
 export { default as NewOptionModal } from './newModal/NewOptionModal/NewOptionModal'; // 신고 종류 선택 모달

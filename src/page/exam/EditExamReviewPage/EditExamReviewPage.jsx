@@ -15,7 +15,7 @@ import {
   Textarea,
 } from '@/shared/component';
 import { validClassNumber } from '@/shared/lib';
-import { MUTATION_KEY, QUERY_KEY, ROUTE, TOAST } from '@/shared/constant';
+import { MUTATION_KEY, QUERY_KEY, TOAST } from '@/shared/constant';
 
 import {
   CategoryButton,
