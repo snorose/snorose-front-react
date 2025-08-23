@@ -28,3 +28,25 @@
   font: var(--text-body-2-reg);
   color: var(--blue-2);
 }
+
+.iconWrapper {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  min-width: 23px;
+  height: 23px;
+  padding: 6px;
+  border-radius: 9999px;
+  background: #ff4d6c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.badge span {
+  color: #fff;
+}
