@@ -51,7 +51,7 @@ export function useUpdateNotificationSetting() {
     mutationKey: MUTATION_KEY.updateNotificationSettings,
 
     mutationFn: async ({ type }) => {
-      const next = queryClient.getQueryData(QUERY_KEY.notificationSettings);
+      const next = queryClient.getQueryData(QUERY_KEY.notificationSettings); // onMutate 실행 이후 캐시값 조회
 
       return await updateNotificationSettings({
         isRequiredConsent: next.required,
@@ -60,6 +60,7 @@ export function useUpdateNotificationSetting() {
       });
     },
 
+    // 낙관적 업데이트
     onMutate: async ({ type }) => {
       await queryClient.cancelQueries({
         queryKey: QUERY_KEY.notificationSettings,
@@ -108,6 +109,7 @@ export function useUpdateNotificationSetting() {
   });
 }
 
+// 알림 수신 설정 다음 상태값 계산
 function calculateNextNotificationSettings({ current, type }) {
   switch (type.toUpperCase()) {
     case 'REQUIRED': {
