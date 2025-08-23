@@ -8,7 +8,10 @@ import {
   ServerErrorFallback,
 } from '@/shared/component';
 
-import { useNotificationSettings } from '@/feature/alert/hook';
+import {
+  useNotificationSettings,
+  useUpdateNotificationSetting,
+} from '@/feature/alert/hook';
 import { SettingItem } from '@/feature/alert/component';
 
 import style from './AlertSettingPage.module.css';
@@ -34,7 +37,13 @@ export default function AlertSettingPage() {
               </div>
             )}
           >
-            <Suspense fallback={<FetchLoading />}>
+            <Suspense
+              fallback={
+                <div className={style.loading}>
+                  <FetchLoading />
+                </div>
+              }
+            >
               <NotificationSettings />
             </Suspense>
           </ErrorBoundary>
@@ -46,6 +55,7 @@ export default function AlertSettingPage() {
 
 function NotificationSettings() {
   const { data: notificationSettings } = useNotificationSettings();
+  const updateSettings = useUpdateNotificationSetting();
 
   return (
     <>
@@ -54,13 +64,13 @@ function NotificationSettings() {
           title='알림 받기'
           content={content.alert}
           isEnabled={notificationSettings.required}
-          // onToggle={() => dispatch({ type: 'TOGGLE_ALERT' })}
+          onToggle={() => updateSettings.mutate({ type: 'required' })}
         />
         <SettingItem
           title='광고성 알림 받기'
           content={content.advertisement}
           isEnabled={notificationSettings.marketing}
-          // onToggle={() => dispatch({ type: 'TOGGLE_ADVERTISEMENT' })}
+          onToggle={() => updateSettings.mutate({ type: 'marketing' })}
           variant='blue'
           disabled={!notificationSettings.required}
         />
@@ -73,7 +83,7 @@ function NotificationSettings() {
           title='출석체크 알림'
           content={content.attendance}
           isEnabled={notificationSettings.attendance}
-          // onToggle={() => dispatch({ type: 'TOGGLE_ATTENDANCE' })}
+          onToggle={() => updateSettings.mutate({ type: 'attendance' })}
           variant='blue'
           disabled={!notificationSettings.required}
         />

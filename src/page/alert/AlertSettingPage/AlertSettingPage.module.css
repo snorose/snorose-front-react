@@ -22,6 +22,7 @@
   border-top: 1px solid var(--grey-2);
 }
 
+.loading,
 .errorFallback {
   height: 100%;
 
