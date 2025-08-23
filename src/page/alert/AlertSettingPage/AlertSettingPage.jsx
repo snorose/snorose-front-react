@@ -1,8 +1,17 @@
-import { useReducer } from 'react';
+import { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
-import { BackAppBar } from '@/shared/component';
+import {
+  BackAppBar,
+  FetchLoading,
+  ServerErrorFallback,
+} from '@/shared/component';
 
-import { alertSettingReducer } from '@/feature/alert/reducer';
+import {
+  useNotificationSettings,
+  useUpdateNotificationSetting,
+} from '@/feature/alert/hook';
 import { SettingItem } from '@/feature/alert/component';
 
 import style from './AlertSettingPage.module.css';
@@ -13,36 +22,57 @@ const content = {
   attendance: `매일 오후 10시에 출석 체크를 잊지 않도록\n알림으로 알려드려요`,
 };
 
-const initialState = {
-  alert: false,
-  advertisement: false,
-  attendance: false,
-};
-
 export default function AlertSettingPage() {
-  const [alertSettings, dispatch] = useReducer(
-    alertSettingReducer,
-    initialState
-  );
-
   return (
-    <div>
+    <div className={style.container}>
       <BackAppBar title='알림 설정' />
 
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary
+            onReset={reset}
+            FallbackComponent={({ resetErrorBoundary }) => (
+              <div className={style.errorFallback}>
+                <ServerErrorFallback reset={resetErrorBoundary} />
+              </div>
+            )}
+          >
+            <Suspense
+              fallback={
+                <div className={style.loading}>
+                  <FetchLoading />
+                </div>
+              }
+            >
+              <NotificationSettings />
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
+    </div>
+  );
+}
+
+function NotificationSettings() {
+  const { data: notificationSettings } = useNotificationSettings();
+  const updateSettings = useUpdateNotificationSetting();
+
+  return (
+    <>
       <div className={style.alert}>
         <SettingItem
           title='알림 받기'
           content={content.alert}
-          isEnabled={alertSettings.alert}
-          onToggle={() => dispatch({ type: 'TOGGLE_ALERT' })}
+          isEnabled={notificationSettings.required}
+          onToggle={() => updateSettings.mutate({ type: 'required' })}
         />
         <SettingItem
           title='광고성 알림 받기'
           content={content.advertisement}
-          isEnabled={alertSettings.advertisement}
-          onToggle={() => dispatch({ type: 'TOGGLE_ADVERTISEMENT' })}
+          isEnabled={notificationSettings.marketing}
+          onToggle={() => updateSettings.mutate({ type: 'marketing' })}
           variant='blue'
-          disabled={!alertSettings.alert}
+          disabled={!notificationSettings.required}
         />
       </div>
 
@@ -52,12 +82,12 @@ export default function AlertSettingPage() {
         <SettingItem
           title='출석체크 알림'
           content={content.attendance}
-          isEnabled={alertSettings.attendance}
-          onToggle={() => dispatch({ type: 'TOGGLE_ATTENDANCE' })}
+          isEnabled={notificationSettings.attendance}
+          onToggle={() => updateSettings.mutate({ type: 'attendance' })}
           variant='blue'
-          disabled={!alertSettings.alert}
+          disabled={!notificationSettings.required}
         />
       </div>
-    </div>
+    </>
   );
 }
