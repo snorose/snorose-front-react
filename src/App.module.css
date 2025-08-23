@@ -1,5 +1,6 @@
 .app {
   width: 100vw;
+  /* min-height: 100dvh; */
   height: 100%;
   max-width: var(--default-width);
   margin: 0 auto;
