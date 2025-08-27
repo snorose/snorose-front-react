@@ -18,7 +18,8 @@ export const QUERY_KEY = Object.freeze({
   myScrapedPosts: 'myScrapedPosts',
   myScrapedExamReviews: 'myScrapedExamReviews',
   best3: 'best3',
-  notifications: (category) => ['notifications', { category }],
+  notifications: (category) =>
+    category ? ['notifications', { category }] : ['notifications'],
   notificationSettings: ['notificationSettings'],
 });
 
@@ -39,6 +40,8 @@ export const MUTATION_KEY = Object.freeze({
   unscrap: 'unscrap',
   updateUserInfo: 'updateUserInfo',
   updatePassword: 'updatePassword',
+  readNotifications: ['readNotifications', 'single'],
+  readAllNotifications: ['readNotifications', 'all'],
   updateNotificationSettings: ['updateNotificationSettings'],
 });
 
