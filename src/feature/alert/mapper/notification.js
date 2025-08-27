@@ -1,5 +1,3 @@
-import { CATEGORY } from '@/feature/alert/constant';
-
 export function toNotificationItem({
   id,
   title,
@@ -16,7 +14,7 @@ export function toNotificationItem({
     isRead,
     createdAt: formatToKST_MMDD_HHMM(createdAt),
     url,
-    category: CATEGORY[filter],
+    category: filter,
   };
 }
 

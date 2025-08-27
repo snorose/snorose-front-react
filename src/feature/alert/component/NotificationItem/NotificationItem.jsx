@@ -7,9 +7,13 @@ export default function NotificationItem({
   createdAt,
   isRead = false,
   url,
+  onClick,
 }) {
   return (
-    <div className={`${style.container} ${isRead ? style.read : style.unread}`}>
+    <div
+      className={`${style.container} ${isRead ? style.read : style.unread}`}
+      onClick={onClick}
+    >
       <div className={style.top}>
         <div>
           <div className={style.title}>{title}</div>
