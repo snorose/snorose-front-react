@@ -65,10 +65,10 @@ export default function PostPage() {
     mutationKey: [MUTATION_KEY.reportPost],
     mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
     onSuccess: ({ message }) => {
-      toast(message);
+      toast({ message, variant: 'defaultDark' });
     },
     onError: () => {
-      toast('신고에 실패했습니다.');
+      toast({ message: TOAST.REPORT.postFail, variant: 'error' });
     },
   });
 
@@ -76,10 +76,10 @@ export default function PostPage() {
     mutationKey: [MUTATION_KEY.reportUser],
     mutationFn: (body) => reportUser(body),
     onSuccess: ({ message }) => {
-      toast(message);
+      toast({ message, variant: 'defaultDark' });
     },
     onError: () => {
-      toast('신고에 실패했습니다.');
+      toast({ message: TOAST.REPORT.userFail, variant: 'error' });
     },
   });
 
@@ -91,14 +91,14 @@ export default function PostPage() {
 
       if (response.status === 200) {
         currentBoard.id !== 23
-          ? toast(TOAST.POST.delete)
-          : toast(TOAST.POST.deleteNoPoints);
+          ? toast({ message: TOAST.POST.delete })
+          : toast({ message: TOAST.POST.deleteNoPoints });
         navigate(-1);
         queryClient.removeQueries([QUERY_KEY.post, postId]);
         invalidUserInfoQuery();
       }
     } catch ({ response }) {
-      toast(response.data.message);
+      toast({ message: response.data.message, variant: 'error' });
     } finally {
       setDeleteSubmitDisabled(false);
       setIsDeleteModalOpen(false);
