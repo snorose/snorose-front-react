@@ -51,6 +51,7 @@ import ProtectedRoute from '@/ProtectedRoute';
 import { MaintenancePage } from '@/page/maintenance';
 
 import { CheckExamPeriodRoute } from '@/feature/exam/lib';
+import CheckPrivacyTermPage from './page/account/CheckPrivacyTermPage/CheckPrivacyTermPage';
 
 const getRolesForReadBoard = (boardPath) => {
   switch (boardPath) {
@@ -507,6 +508,11 @@ export const routeList = [
         meta: {
           hideNav: true,
         },
+      },
+      {
+        path: '/check-privacy-term',
+        element: <CheckPrivacyTermPage />,
+        hideNav: true,
       },
       {
         path: '/find-id',
