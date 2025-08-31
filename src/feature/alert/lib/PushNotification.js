@@ -1,17 +1,14 @@
-import { getToken, isSupported, onMessage } from 'firebase/messaging';
+import { getToken, isSupported } from 'firebase/messaging';
 import { messaging } from './firebase-config';
 
+import { sendFCMToken } from '@/apis';
+
+import { ERROR_MESSAGE } from '@/feature/alert/constant';
+
 export class PushNotificationManager {
-  static async init() {
-    const registration = await this.#registerServiceWorker();
-    const granted = await this.#ensurePermission();
+  static #registration = null;
 
-    if (!granted) return;
-
-    return this.#subscribe(registration);
-  }
-
-  static async #registerServiceWorker() {
+  static async registerServiceWorker() {
     const isFcmSupported = await isSupported();
 
     if (!isFcmSupported) {
@@ -21,21 +18,23 @@ export class PushNotificationManager {
 
     try {
       let registration = await navigator.serviceWorker.getRegistration();
+
       if (registration) {
-        return registration;
+        this.#registration = registration;
+        return;
       }
 
       registration = await navigator.serviceWorker.register(
         '/firebase-messaging-sw.js'
       );
-      return registration;
+
+      this.#registration = registration;
     } catch (error) {
       console.error('서비스 워커 등록 실패:', error);
-      return;
     }
   }
 
-  static async #ensurePermission() {
+  static async ensurePermission() {
     const current = Notification.permission;
 
     if (current === 'granted') return true;
@@ -45,12 +44,13 @@ export class PushNotificationManager {
     return result === 'granted';
   }
 
-  static async #subscribe(registration) {
-    if (!registration) {
-      console.warn(
-        'Service worker 등록 정보가 없습니다. 푸시 구독을 건너뜁니다.'
-      );
-      return;
+  static async subscribe(deviceType) {
+    if (!this.#registration) {
+      await PushNotificationManager.registerServiceWorker();
+
+      if (!this.#registration) {
+        throw new Error(ERROR_MESSAGE.SW_REGISTER_FAILED);
+      }
     }
 
     let token;
@@ -58,16 +58,16 @@ export class PushNotificationManager {
     try {
       token = await getToken(messaging, {
         vapidKey: process.env.REACT_APP_VAPID_KEY,
-        serviceWorkerRegistration: registration,
+        serviceWorkerRegistration: this.#registration,
       });
     } catch (error) {
       console.error('FCM 토큰 발급 실패:', error);
-      return;
+      throw new Error(ERROR_MESSAGE.FCM_TOKEN_ISSUE_FAILED);
     }
 
     if (!token) {
       console.warn('FCM 토큰을 받을 수 없습니다.');
-      return;
+      throw new Error(ERROR_MESSAGE.FCM_TOKEN_EMPTY);
     }
 
     const savedToken = localStorage.getItem(
@@ -76,45 +76,12 @@ export class PushNotificationManager {
 
     if (!savedToken || savedToken !== token) {
       try {
-        await this.#sendTokenToServer(token);
+        await sendFCMToken(token, deviceType);
         localStorage.setItem(process.env.REACT_APP_FCM_TOKEN_KEY, token);
       } catch (error) {
         console.error('푸시 알림 구독 실패: ', error);
+        throw new Error(ERROR_MESSAGE.SUBSCRIBE_FAILED);
       }
     }
-  }
-
-  static async #sendTokenToServer(token) {
-    await fetch('/api/register-token', {
-      method: 'POST',
-      body: JSON.stringify({ token }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
-
-  static async listenForegroundMessage() {
-    onMessage(messaging, async (payload) => {
-      const isFcmSupported = await isSupported();
-
-      if (!isFcmSupported) {
-        return;
-      }
-
-      if (Notification.permission !== 'granted') {
-        return;
-      }
-
-      const { title, body } = payload.notification;
-
-      try {
-        const registration = await navigator.serviceWorker.getRegistration();
-
-        if (registration) {
-          registration.showNotification(title, { body });
-        }
-      } catch (error) {
-        console.error('❌ 포그라운드 알림 수신 중 오류:', error);
-      }
-    });
   }
 }

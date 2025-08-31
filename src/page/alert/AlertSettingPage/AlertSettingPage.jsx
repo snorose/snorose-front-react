@@ -2,6 +2,8 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
+import { useToast } from '@/shared/hook';
+import { isMobile, isPWA } from '@/shared/lib';
 import {
   BackAppBar,
   FetchLoading,
@@ -12,6 +14,7 @@ import {
   useNotificationSettings,
   useUpdateNotificationSetting,
 } from '@/feature/alert/hook';
+import { PushNotificationManager } from '@/feature/alert/lib';
 import { SettingItem } from '@/feature/alert/component';
 
 import style from './AlertSettingPage.module.css';
@@ -54,8 +57,41 @@ export default function AlertSettingPage() {
 }
 
 function NotificationSettings() {
+  const { toast } = useToast();
   const { data: notificationSettings } = useNotificationSettings();
   const updateSettings = useUpdateNotificationSetting();
+
+  const handlePermissionDenied = () => {
+    const message = isPWA()
+      ? '알림을 받고 싶다면 일반 브라우저로 이동해서 알림 권한을 허용으로 바꿔주세요'
+      : '알림을 받고 싶다면 브라우저 알림 권한을 허용으로 바꿔주세요';
+
+    toast(message);
+  };
+
+  const onToggleMasterNotification = async () => {
+    const turningOff = notificationSettings.required;
+
+    if (turningOff) {
+      updateSettings.mutate({ type: 'required' });
+      return;
+    }
+
+    const ok = await PushNotificationManager.ensurePermission();
+
+    if (!ok) {
+      handlePermissionDenied();
+      return;
+    }
+
+    updateSettings.mutate({ type: 'required' });
+
+    const deviceType = isMobile() ? 'MOBILE' : '';
+    PushNotificationManager.subscribe(deviceType).catch((error) => {
+      updateSettings.mutate({ type: 'required' });
+      toast(error.message);
+    });
+  };
 
   return (
     <>
@@ -64,7 +100,7 @@ function NotificationSettings() {
           title='알림 받기'
           content={content.alert}
           isEnabled={notificationSettings.required}
-          onToggle={() => updateSettings.mutate({ type: 'required' })}
+          onToggle={() => onToggleMasterNotification()}
         />
         <SettingItem
           title='광고성 알림 받기'

@@ -3,7 +3,6 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import { useFeatureIsOn } from '@growthbook/growthbook-react';
 
-import { useAuth } from '@/shared/hook';
 import { Navbar, Sidebar } from '@/shared/component';
 import { findRouteByPath } from '@/shared/lib';
 
@@ -24,15 +23,13 @@ function App() {
   const { pathname } = useLocation();
   const currentRoute = findRouteByPath(pathname, routeList);
   const hideNav = currentRoute?.meta?.hideNav ?? false;
-  const { status } = useAuth();
 
   // 푸시 알림 설정
   useEffect(() => {
-    if (isEnabled && status === 'authenticated') {
-      PushNotificationManager.init();
-      PushNotificationManager.listenForegroundMessage();
+    if (isEnabled) {
+      PushNotificationManager.registerServiceWorker();
     }
-  }, [isEnabled, status]);
+  }, [isEnabled]);
 
   // 서버 점검 페이지 처리
   const now = new Date();
