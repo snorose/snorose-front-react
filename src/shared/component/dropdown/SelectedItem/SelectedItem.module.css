@@ -1,0 +1,44 @@
+.selectedItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: none;
+  gap: 1rem;
+}
+
+.colored {
+  background-color: var(--grey-1-1, #f4f4f4);
+  color: var(--black);
+}
+
+.select {
+  padding: 1.6rem 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: var(--text-body-1-reg);
+  color: var(--black);
+  background: var(--grey-1-1, #f4f4f4);
+  border-radius: 0.5rem;
+}
+
+.select:hover {
+  cursor: pointer;
+}
+
+.unselect {
+  color: var(--grey-3-1);
+}
+
+.placeholder {
+  color: var(--grey-3-1);
+}
+
+.arrow {
+  transition: transform 0.2s ease;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}

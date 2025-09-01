@@ -5,7 +5,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateUserInfo } from '@/apis';
 
 import { useAuth, useToast } from '@/shared/hook';
-import { ActionButton, BackAppBar, Dropdown } from '@/shared/component';
+import {
+  ActionButton,
+  BackAppBar,
+  CategoryFieldset,
+  Dropdown,
+} from '@/shared/component';
 import {
   MAJORS,
   MUTATION_KEY,
@@ -14,7 +19,6 @@ import {
   TOAST,
 } from '@/shared/constant';
 
-import { CategoryFieldset } from '@/feature/my/component';
 import defaultProfile from '@/assets/images/defaultProfile.svg';
 
 import styles from './EditProfilePage.module.css';
