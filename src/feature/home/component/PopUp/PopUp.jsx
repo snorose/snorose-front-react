@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
-import juneReport from '@/feature/home/component/PopUp/juneReport.png';
 import styles from './PopUp.module.css';
+import august from './august.jpeg';
+import accounting from './accounting.png';
 
 const content = (
   <div className={styles.notice}>
@@ -10,27 +11,83 @@ const content = (
       <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
-      <Heading>1. 6월 회계 보고</Heading>
+      <Heading>
+        1. 스노로즈 블로그 - 무엇이든 물어보세요(무물) 특별편 공개
+      </Heading>
+      <Content>
+        <strong>&lt;스노로즈 리뉴얼&gt; 무물 특별편</strong>이 업로드되었습니다.
+        <br />
+        지금{' '}
+        <strong>
+          <a
+            className={styles.link}
+            href='https://snorose.notion.site/2467ef0aa3bf806e9920dc5586292898'
+            alt='스노로즈 블로그'
+          >
+            스노로즈 블로그
+          </a>
+        </strong>
+        에서 확인해보세요!
+      </Content>
+
+      <Heading>2. 7월 회계 보고</Heading>
       <Content>
         -{' '}
-        <a
-          className={styles.link}
-          href='https://docs.google.com/spreadsheets/u/0/d/1MzXAHemKqPwVj3PzPJch5cR5z49gFtzABPgJ_FVjCXM/edit?usp=sharing&pli=1&authuser=0'
-          alt='스노로즈 회계 보고 링크 바로가기'
-        >
-          [스노로즈 회계 보고 링크 바로가기]
-        </a>
+        <strong>
+          <a
+            className={styles.link}
+            href='https://docs.google.com/spreadsheets/u/0/d/1MzXAHemKqPwVj3PzPJch5cR5z49gFtzABPgJ_FVjCXM/edit?usp=sharing&pli=1&authuser=0'
+            alt='스노로즈 회계 보고 링크 바로가기'
+          >
+            스노로즈 회계 보고 링크 바로가기
+          </a>
+        </strong>
         <br />- 자세한 내용은{' '}
+        <strong>
+          <a
+            className={styles.link}
+            href='https://www.snorose.com/board/notice/post/1840783'
+            alt='공지'
+          >
+            관련 공지
+          </a>
+        </strong>
+        를 참고해주시길 바랍니다.
+        <img src={accounting} alt='7월 회계보고' />
+      </Content>
+
+      {/* <Heading>1. 8월 스노로즈 캘린더</Heading>
+      <Content>
+        스노로즈에 대한 학우 여러분의 <strong>궁금증</strong>을 풀어드릴 수 있는
+        이벤트를 준비했습니다.
+        <br />
+        평소에 스노로즈에게 궁금했던 점, 하고 싶었던 이야기, 혹은 바라는 점까지!
+        익명으로 자유롭게 물어보실 수 있어요.
+        <br />
+        <br />
+        💛 이벤트 기간: 7/14(월) ~ 7/20(일) <br />
+        💛 참여 방법:{' '}
         <a
           className={styles.link}
-          href='https://www.snorose.com/board/notice/post/1837759'
-          alt='공지'
+          href='https://forms.gle/AFyphXwP5TGcGuKc7'
+          alt='구글폼'
         >
-          [관련 공지]
+          구글폼
+        </a>{' '}
+        제출
+        <br />
+        💛 자세한 내용은{' '}
+        <a
+          className={styles.link}
+          href='https://www.snorose.com/board/notice/post/1838687'
+          alt='관련 공지'
+        >
+          관련 공지
         </a>
         를 참고해주시길 바랍니다.
-        <img src={juneReport} alt='6월 회계보고' />
-      </Content>
+        <br />
+        <img src={august} alt='8월 캘린더' />
+      </Content> */}
       <hr />
       <Content>
         ※ 스노로즈 인스타그램(@snorose1906)에서 월별 스노로즈 일정을 쉽게 확인할

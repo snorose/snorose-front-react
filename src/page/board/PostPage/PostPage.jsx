@@ -37,7 +37,7 @@ export default function PostPage() {
   const { postId } = useParams();
   const location = useLocation();
   const { pathname } = location;
-  const { inputFocus, isInputFocused } = useCommentContext();
+  const { inputFocus, focusedItem } = useCommentContext();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
@@ -228,24 +228,25 @@ export default function PostPage() {
           className={styles.contentText}
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
-        <div className={styles.post_bottom}>
+        <div className={styles.postBottom}>
           <div
             className={styles.count}
             style={{
               display: data.isNotice ? 'none' : 'flex',
+              backgroundColor:
+                focusedItem === 'post' ? 'var(--blue-1)' : 'transparent',
             }}
             onClick={inputFocus}
           >
             <Icon
               id='comment-stroke'
-              width={20}
-              height={16}
-              fill={
-                isInputFocused.isFocused === true &&
-                isInputFocused.parent === 'post'
-                  ? '#5F86BF'
-                  : 'none'
-              }
+              width={18}
+              height={15}
+              style={{
+                paddingTop: '0.1rem',
+              }}
+              stroke='var(--blue-3)'
+              fill='none'
             />
             <p>댓글 {data.commentCount.toLocaleString()}</p>
           </div>
@@ -257,8 +258,8 @@ export default function PostPage() {
               id='like-stroke'
               width={16}
               height={15}
-              stroke='#5F86BF'
-              fill={data.isLiked ? '#5F86BF' : 'none'}
+              stroke='var(--pink-2)'
+              fill={data.isLiked ? 'var(--pink-2)' : 'none'}
             />
             <p>공감 {data.likeCount.toLocaleString()}</p>
           </div>
@@ -272,8 +273,8 @@ export default function PostPage() {
               id='scrap-stroke'
               width={13}
               height={16}
-              stroke='#5F86BF'
-              fill={data.isScrapped ? '#5F86BF' : 'none'}
+              stroke={'var(--green-1)'}
+              fill={data.isScrapped ? 'var(--green-1)' : 'none'}
             />
             <p>스크랩 {data.scrapCount.toLocaleString()}</p>
           </div>

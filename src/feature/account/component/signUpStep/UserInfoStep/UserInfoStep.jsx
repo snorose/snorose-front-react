@@ -38,32 +38,32 @@ export default function UserInfoStep({ setFormData, formData }) {
         <p className={styles.title}>
           사용자 정보를
           <br />
-          입력해주세요
+          입력해 주세요
         </p>
         <div className={styles.inputFrame}>
           <Input
             title={'닉네임'}
-            placeholder={'닉네임을 입력해주세요'}
+            placeholder={'닉네임을 입력해 주세요'}
             className={nicknameStyle}
             setClassName={setNicknameStyle}
             classNameCheck={checkSpecialChar}
             inputType={'nickname'}
             inputData={setFormData}
             data={formData}
-            errMsg={'특수문자 제외 2자 이상 20자 이하로 작성해주세요'}
+            errMsg={'특수문자 제외 2자 이상 20자 이하로 작성해 주세요'}
           />
         </div>
         <div className={styles.inputFrame}>
           <Input
             title={'학번'}
-            placeholder={'학번을 입력해주세요'}
+            placeholder={'학번을 입력해 주세요'}
             className={stuNumStyle}
             setClassName={setStuNumStyle}
             classNameCheck={checkStudentNum}
             inputType={'studentNumber'}
             inputData={setFormData}
             data={formData}
-            errMsg={'학번 형식이 옳지 않습니다'}
+            errMsg={'학번 형식을 올바르게 입력해 주세요'}
           />
         </div>
         <div className={styles.inputFrame}>
@@ -86,7 +86,7 @@ export default function UserInfoStep({ setFormData, formData }) {
             inputType={'birthday'}
             inputData={setFormData}
             data={formData}
-            errMsg={'입력 형식을 확인해주세요'}
+            errMsg={'입력 형식을 확인해 주세요'}
           />
         </div>
       </div>

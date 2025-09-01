@@ -15,7 +15,7 @@ export default function NotFoundPage() {
           alt='404일러스트'
           className={styles.illustration}
         />
-        <p className={styles.text}>페이지를 찾을 수 없습니다.</p>
+        <p className={styles.text}>페이지를 찾을 수 없어요</p>
       </div>
 
       <Link className={styles.button} to='/'>
