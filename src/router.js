@@ -512,7 +512,9 @@ export const routeList = [
       {
         path: '/check-privacy-term',
         element: <CheckPrivacyTermPage />,
-        hideNav: true,
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/find-id',

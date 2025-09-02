@@ -2,6 +2,12 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
   padding: 0 2rem;
   gap: 2rem;
 }
@@ -22,6 +28,19 @@
 }
 
 .description {
+  height: 600px;
+  overflow: scroll !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   background: var(--grey-1-1);
   padding: 1.4rem;
+  font-size: small;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.summary,
+.notice {
+  font-weight: 500;
 }
