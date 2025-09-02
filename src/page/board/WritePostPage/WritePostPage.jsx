@@ -7,6 +7,7 @@ import {
   ActionButton,
   Badge,
   CloseAppBar,
+  DropdownList,
   FetchLoading,
   Icon,
 } from '@/shared/component';
@@ -15,7 +16,6 @@ import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
 
 import { postPost } from '@/apis';
-import { DropDownMenu } from '@/feature/board/component';
 
 import styles from './WritePostPage.module.css';
 
@@ -62,12 +62,21 @@ export default function WritePostPage() {
   ).map((menu) => menu.title);
 
   // 드롭다운 표시
-  const displayedTitles = useMemo(() => {
-    const roleTitleMap = {
-      5: isNotice ? officialNoticeTitles : officialTitles,
-      4: [...boardTitles, ...officialNoticeTitles],
+  const displayedOptions = useMemo(() => {
+    const getOptionObjects = (titles) =>
+      BOARD_MENUS.filter((menu) => titles.includes(menu.title)).map((menu) => ({
+        id: menu.id,
+        name: menu.title,
+      }));
+
+    const roleOptions = {
+      [ROLE.official]: isNotice
+        ? getOptionObjects(officialNoticeTitles)
+        : getOptionObjects(officialTitles),
+      [ROLE.admin]: getOptionObjects([...boardTitles, ...officialNoticeTitles]),
     };
-    return roleTitleMap[userInfo?.userRoleId] || boardTitles;
+
+    return roleOptions[userInfo?.userRoleId] || getOptionObjects(boardTitles);
   }, [isNotice, userInfo?.userRoleId]);
 
   // 게시판 선택 핸들러
@@ -76,14 +85,9 @@ export default function WritePostPage() {
   };
 
   // 게시판 제목 선택 핸들러
-  const handleBoardTitleChange = (selectedTitle) => {
-    const selectedBoard = BOARD_MENUS.find(
-      (menu) => menu.title === selectedTitle
-    );
-    if (selectedBoard) {
-      setBoardTitle(selectedBoard.title);
-      setBoardId(selectedBoard.id);
-    }
+  const handleBoardTitleChange = (option) => {
+    setBoardTitle(option.name);
+    setBoardId(option.id);
     setDropDownOpen(false);
   };
 
@@ -177,7 +181,7 @@ export default function WritePostPage() {
               </div>
             </div>
           ) : (
-            <>
+            <div className={styles.categoryDropdownContainer}>
               <div
                 className={styles.categorySelect}
                 onClick={handleDropDownOpen}
@@ -193,15 +197,16 @@ export default function WritePostPage() {
                 </div>
                 <Icon id='angle-down' width={14} height={7} />
               </div>
-              <DropDownMenu
-                options={displayedTitles}
-                item={boardTitle}
-                setItem={handleBoardTitleChange}
-                dropDownOpen={dropDownOpen}
-                setDropDownOpen={setDropDownOpen}
-                backgroundColor={'#fff'}
-              />
-            </>
+
+              {dropDownOpen && (
+                <DropdownList
+                  options={displayedOptions}
+                  select={{ id: boardId, name: boardTitle }}
+                  onSelect={handleBoardTitleChange}
+                  className={styles.dropDownList}
+                />
+              )}
+            </div>
           )}
 
           <div className={styles.profileBox}>

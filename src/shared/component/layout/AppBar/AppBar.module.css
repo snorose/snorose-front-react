@@ -8,7 +8,7 @@
   background-color: var(--white);
   position: fixed;
   top: 0;
-  z-index: 300;
+  z-index: var(--z-index-appbar);
 }
 
 .title {

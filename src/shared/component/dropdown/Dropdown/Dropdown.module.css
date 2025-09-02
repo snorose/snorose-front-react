@@ -1,0 +1,23 @@
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.dropdownListWrapper {
+  position: absolute;
+  top: calc(100% + 1rem);
+  width: 100%;
+  z-index: 1;
+  background-color: var(--white);
+
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in-out;
+}
+
+.dropdownListWrapper.open {
+  max-height: 18rem;
+  overflow: visible;
+  scrollbar-arrow-color: var(--blue-2, #bfd7ec);
+}
