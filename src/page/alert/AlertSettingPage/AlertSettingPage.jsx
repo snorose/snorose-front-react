@@ -1,21 +1,23 @@
-import { Suspense } from 'react';
+import { Suspense, useReducer } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
+import { AppError, getDeviceFormFactor } from '@/shared/lib';
 import { useToast } from '@/shared/hook';
-import { isMobile, isPWA } from '@/shared/lib';
 import {
   BackAppBar,
   FetchLoading,
   ServerErrorFallback,
 } from '@/shared/component';
 
-import {
-  useNotificationSettings,
-  useUpdateNotificationSetting,
-} from '@/feature/alert/hook';
+import * as notificationSettingsStore from '@/feature/alert/store/notificationSettings';
 import { PushNotificationManager } from '@/feature/alert/lib';
+import {
+  useUpdateNotificationSetting,
+  useNotificationSettings,
+} from '@/feature/alert/hook';
 import { SettingItem } from '@/feature/alert/component';
+import { ERROR_CODE } from '@/feature/alert/constant';
 
 import style from './AlertSettingPage.module.css';
 
@@ -57,40 +59,44 @@ export default function AlertSettingPage() {
 }
 
 function NotificationSettings() {
-  const { toast } = useToast();
   const { data: notificationSettings } = useNotificationSettings();
   const updateSettings = useUpdateNotificationSetting();
 
-  const handlePermissionDenied = () => {
-    const message = isPWA()
-      ? '알림을 받고 싶다면 일반 브라우저로 이동해서 알림 권한을 허용으로 바꿔주세요'
-      : '알림을 받고 싶다면 브라우저 알림 권한을 허용으로 바꿔주세요';
+  const [state, dispatch] = useReducer(
+    notificationSettingsStore.reducer,
+    notificationSettings // init 함수?로 처리해보기
+  );
 
-    toast(message);
+  const { toast } = useToast();
+
+  const setupNotifications = async () => {
+    try {
+      await PushNotificationManager.ensurePermission();
+
+      const token = await PushNotificationManager.issueToken();
+      const deviceType = getDeviceFormFactor();
+
+      if (PushNotificationManager.isTokenChanged(token)) {
+        await PushNotificationManager.syncWithServer(token, deviceType);
+      }
+    } catch (error) {
+      throw error;
+    }
   };
 
-  const onToggleMasterNotification = async () => {
-    const turningOff = notificationSettings.required;
+  const onToggle = async (type) => {
+    const prev = state;
+    const action = notificationSettingsStore.actions[type](!state[type]);
+    const next = notificationSettingsStore.reducer(state, action);
+    dispatch(action);
 
-    if (turningOff) {
-      updateSettings.mutate({ type: 'required' });
-      return;
-    }
-
-    const ok = await PushNotificationManager.ensurePermission();
-
-    if (!ok) {
-      handlePermissionDenied();
-      return;
-    }
-
-    updateSettings.mutate({ type: 'required' });
-
-    const deviceType = isMobile() ? 'MOBILE' : '';
-    PushNotificationManager.subscribe(deviceType).catch((error) => {
-      updateSettings.mutate({ type: 'required' });
+    try {
+      await updateSettings.mutateAsync(next);
+    } catch (error) {
+      const rollbackAction = notificationSettingsStore.actions.hydrate(prev);
+      dispatch(rollbackAction);
       toast(error.message);
-    });
+    }
   };
 
   return (
@@ -99,16 +105,39 @@ function NotificationSettings() {
         <SettingItem
           title='알림 받기'
           content={content.alert}
-          isEnabled={notificationSettings.required}
-          onToggle={() => onToggleMasterNotification()}
+          isEnabled={state.required}
+          onToggle={async () => {
+            if (!state.required) {
+              try {
+                await setupNotifications();
+              } catch (error) {
+                if (!(error instanceof AppError)) {
+                  return;
+                }
+
+                switch (error.code) {
+                  case ERROR_CODE.PERMISSION_JUST_DENIED: {
+                    return;
+                  }
+
+                  default: {
+                    toast(error.message);
+                    return;
+                  }
+                }
+              }
+            }
+
+            await onToggle('required');
+          }}
         />
         <SettingItem
           title='광고성 알림 받기'
           content={content.advertisement}
-          isEnabled={notificationSettings.marketing}
-          onToggle={() => updateSettings.mutate({ type: 'marketing' })}
+          isEnabled={state.marketing}
+          onToggle={() => onToggle('marketing')}
           variant='blue'
-          disabled={!notificationSettings.required}
+          disabled={!state.required}
         />
       </div>
 
@@ -118,10 +147,10 @@ function NotificationSettings() {
         <SettingItem
           title='출석체크 알림'
           content={content.attendance}
-          isEnabled={notificationSettings.attendance}
-          onToggle={() => updateSettings.mutate({ type: 'attendance' })}
+          isEnabled={state.attendance}
+          onToggle={() => onToggle('attendance')}
           variant='blue'
-          disabled={!notificationSettings.required}
+          disabled={!state.required}
         />
       </div>
     </>
