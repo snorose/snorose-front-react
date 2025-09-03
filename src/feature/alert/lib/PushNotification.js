@@ -3,8 +3,9 @@ import { messaging } from './firebase-config';
 
 import { sendFCMToken } from '@/apis';
 
-import { AppError, isPWA } from '@/shared/lib';
+import { AppError } from '@/shared/lib';
 
+import { isIOS } from '@/feature/alert/lib';
 import { ERROR_CODE, ERROR_MESSAGE } from '@/feature/alert/constant';
 
 export class PushNotificationManager {
@@ -48,9 +49,9 @@ export class PushNotificationManager {
 
     if (current === 'granted') return;
     if (current === 'denied') {
-      const message = isPWA()
-        ? ERROR_MESSAGE.PERMISSION_DENIED_PWA
-        : ERROR_MESSAGE.PERMISSION_DENIED_WEB;
+      const message = isIOS()
+        ? ERROR_MESSAGE.PERMISSION_DENIED_IOS
+        : ERROR_MESSAGE.PERMISSION_DENIED_ANDROID;
 
       throw new AppError(ERROR_CODE.PERMISSION_BLOCKED, message);
     }

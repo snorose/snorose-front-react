@@ -2,7 +2,7 @@ import { Suspense, useReducer } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
-import { AppError, getDeviceFormFactor } from '@/shared/lib';
+import { AppError } from '@/shared/lib';
 import { useToast } from '@/shared/hook';
 import {
   BackAppBar,
@@ -11,7 +11,11 @@ import {
 } from '@/shared/component';
 
 import * as notificationSettingsStore from '@/feature/alert/store/notificationSettings';
-import { PushNotificationManager } from '@/feature/alert/lib';
+import {
+  PushNotificationManager,
+  getDeviceFormFactor,
+  isNotificationUnsupported,
+} from '@/feature/alert/lib';
 import {
   useUpdateNotificationSetting,
   useNotificationSettings,
@@ -64,7 +68,7 @@ function NotificationSettings() {
 
   const [state, dispatch] = useReducer(
     notificationSettingsStore.reducer,
-    notificationSettings // init 함수?로 처리해보기
+    notificationSettings
   );
 
   const { toast } = useToast();
@@ -99,6 +103,8 @@ function NotificationSettings() {
     }
   };
 
+  const isUnsupported = isNotificationUnsupported();
+
   return (
     <>
       <div className={style.alert}>
@@ -130,6 +136,7 @@ function NotificationSettings() {
 
             await onToggle('required');
           }}
+          disabled={isUnsupported}
         />
         <SettingItem
           title='광고성 알림 받기'
@@ -137,7 +144,7 @@ function NotificationSettings() {
           isEnabled={state.marketing}
           onToggle={() => onToggle('marketing')}
           variant='blue'
-          disabled={!state.required}
+          disabled={isUnsupported || !state.required}
         />
       </div>
 
@@ -150,7 +157,7 @@ function NotificationSettings() {
           isEnabled={state.attendance}
           onToggle={() => onToggle('attendance')}
           variant='blue'
-          disabled={!state.required}
+          disabled={isUnsupported || !state.required}
         />
       </div>
     </>
