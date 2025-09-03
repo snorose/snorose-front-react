@@ -27,7 +27,9 @@ function App() {
   // 푸시 알림 설정
   useEffect(() => {
     if (isEnabled) {
-      PushNotificationManager.registerServiceWorker();
+      PushNotificationManager.registerServiceWorker().catch((error) =>
+        console.error(error)
+      );
     }
   }, [isEnabled]);
 
