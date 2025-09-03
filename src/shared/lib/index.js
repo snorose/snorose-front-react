@@ -1,3 +1,5 @@
+export * from './AppError';
+
 export * from './dateTime.js';
 export * from './environment.js';
 export * from './findRoute.js';
