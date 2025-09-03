@@ -31,9 +31,11 @@ export default function SettingItem({
 }
 
 function Switch({ isEnabled = false, onToggle, disabled }) {
+  const enabled = disabled ? false : isEnabled;
+
   return (
     <div
-      className={`${style.switch} ${isEnabled ? style.on : style.off}`}
+      className={`${style.switch} ${enabled ? style.on : style.off}`}
       onClick={disabled ? undefined : onToggle}
     >
       <div className={style.slider}></div>
