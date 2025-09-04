@@ -187,6 +187,12 @@ const CONFIRM_MODAL = {
     confirmText: '떠나기',
     cancelText: '머물기',
   },
+  ACCESS_DENIED: {
+    title: '인증 페이지로 이동할까요?',
+    description: null,
+    confirmText: '네',
+    cancelText: '아니요',
+  },
 };
 
 // =================== Option Modal ===================
