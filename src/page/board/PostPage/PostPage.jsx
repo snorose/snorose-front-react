@@ -143,7 +143,7 @@ export default function PostPage() {
           className={styles.contentText}
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
-        <div className={styles.post_bottom}>
+        <div className={styles.postBottom}>
           <div
             className={styles.count}
             style={{
