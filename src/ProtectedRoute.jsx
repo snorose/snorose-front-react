@@ -20,9 +20,14 @@ export default function ProtectedRoute({ roles, message, children }) {
   }
 
   if (roles && !roles.includes(userInfo?.userRoleId)) {
+    const modalText = {
+      ...CONFIRM_MODAL_TEXT.ACCESS_DENIED,
+      title: message,
+    };
+
     return (
       <ConfirmModal
-        modalText={CONFIRM_MODAL_TEXT.ACCESS_DENIED}
+        modalText={modalText}
         onConfirm={() => navigate('/verify', { replace: true })}
         onCancel={() => navigate(-1)}
       />

@@ -188,8 +188,8 @@ const CONFIRM_MODAL = {
     cancelText: '머물기',
   },
   ACCESS_DENIED: {
-    title: '인증 페이지로 이동할까요?',
-    description: null,
+    title: null,
+    description: '인증 페이지로 이동할까요?',
     confirmText: '네',
     cancelText: '아니요',
   },
