@@ -19,7 +19,7 @@ import {
   TOAST,
   CONFIRM_MODAL_TEXT,
 } from '@/shared/constant';
-import { useAuth, useBlockerNew, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
 import { ModalContext } from '@/shared/context/ModalContext';
 
@@ -75,7 +75,7 @@ export default function WritePostPage() {
     }
   }, [title, text]);
 
-  useBlockerNew(isBlock);
+  useBlocker(isBlock);
 
   // 드롭다운 표시
   const displayedOptions = useMemo(() => {

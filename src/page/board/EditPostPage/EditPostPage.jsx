@@ -19,7 +19,7 @@ import {
   TOAST,
   CONFIRM_MODAL_TEXT,
 } from '@/shared/constant';
-import { useAuth, useBlockerNew, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import { formattedNowTime } from '@/shared/lib';
 import { ModalContext } from '@/shared/context/ModalContext';
 
@@ -48,7 +48,7 @@ export default function EditPostPage() {
   const [isBlock, setIsBlock] = useState(false);
 
   // 페이지 이탈 방지 모달 노출
-  useBlockerNew(isBlock);
+  useBlocker(isBlock);
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({

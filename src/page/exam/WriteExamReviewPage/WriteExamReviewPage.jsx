@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postExamReview, checkExamReviewDuplication } from '@/apis';
 
-import { useAuth, useBlockerNew, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import { ModalContext } from '@/shared/context/ModalContext';
 import {
   ActionButton,
@@ -135,7 +135,7 @@ export default function WriteExamReviewPage() {
     file,
   ]);
 
-  useBlockerNew(isBlock);
+  useBlocker(isBlock);
 
   // 게시글 수정 중 페이지 이탈
   const handleExitPage = () => {
