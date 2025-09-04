@@ -49,7 +49,7 @@ const Comment = forwardRef((props, ref) => {
     inputFocus,
     resetCommentState,
     focusedItem,
-    setIsInputFocused,
+    setFocusedItem,
   } = useCommentContext();
 
   const { like, unlike } = useLike({
@@ -78,7 +78,8 @@ const Comment = forwardRef((props, ref) => {
     resetCommentState();
     setCommentId(data.id);
     inputFocus();
-    setIsInputFocused({ isFocused: true, parent: String(data.id) });
+    setFocusedItem(String(data.id));
+    // setIsInputFocused({ isFocused: true, parent: String(data.id) });
   };
 
   const handleEdit = () => {
@@ -99,7 +100,7 @@ const Comment = forwardRef((props, ref) => {
       <div
         ref={ref}
         className={`${styles.comment} ${
-          focusedItem === String(data.id) ? styles.focused : ''
+          commentId === data.id ? styles.focused : ''
         }`}
         onClick={(event) => event.stopPropagation()}
       >

@@ -44,11 +44,10 @@ export default function NestedComment({
 
   return (
     <div
-      className={`${styles.nestedComment} ${isLast && styles.isLast}`}
+      className={`${styles.nestedComment} ${isLast && styles.isLast} ${
+        commentId === data.id ? styles.focused : ''
+      }`}
       onClick={(event) => event.stopPropagation()}
-      style={{
-        backgroundColor: commentId === data.id ? '#DDEBF6' : '#f0f0f0',
-      }}
     >
       <div className={styles.nestedCommentTop}>
         <div className={styles.commentTopLeft}>
