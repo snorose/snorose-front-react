@@ -57,3 +57,11 @@
     background-color: var(--grey-2);
   }
 }
+
+.leftHover {
+  border-bottom-left-radius: 1rem;
+}
+
+.rightHover {
+  border-bottom-right-radius: 1rem;
+}

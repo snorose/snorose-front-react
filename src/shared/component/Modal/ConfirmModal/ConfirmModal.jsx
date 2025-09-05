@@ -25,11 +25,17 @@ export default function ConfirmModal({ modalText, onConfirm, onCancel }) {
         )}
       </div>
       <div className={styles.bottom}>
-        <button className={styles.bottomButton} onClick={handleCancel}>
+        <button
+          className={`${styles.bottomButton} ${styles.leftHover}`}
+          onClick={handleCancel}
+        >
           {modalText.cancelText}
         </button>
         <div className={styles.buttonDivider} />
-        <button className={styles.bottomButton} onClick={onConfirm}>
+        <button
+          className={`${styles.bottomButton} ${styles.rightHover}`}
+          onClick={onConfirm}
+        >
           {modalText.confirmText}
         </button>
       </div>
