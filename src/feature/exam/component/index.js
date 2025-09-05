@@ -7,3 +7,4 @@ export { default as InputList } from './InputList/InputList';
 export { default as ReviewContentItem } from './ReviewContentItem/ReviewContentItem';
 export { default as ReviewDownload } from './ReviewDownload/ReviewDownload';
 export { default as TextField } from './TextField/TextField';
+export { default as ExamReviewModalRenderer } from './ExamReviewModalRenderer/ExamReviewModalRenderer';

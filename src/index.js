@@ -1,20 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { GrowthBookProvider } from '@growthbook/growthbook-react';
 
 import { ModalProvider } from '@/shared/context/ModalContext';
 import { ToastProvider } from '@/shared/context/ToastContext';
 import { growthbook } from '@/shared/lib';
-
 import { CommentContextProvider } from '@/feature/comment/context';
-import { routeList } from '@/router.js';
 
-import '@/index.css';
+import { routeList } from '@/router.js';
 import reportWebVitals from '@/reportWebVitals';
+import '@/index.css';
 
 const router = createBrowserRouter(routeList);
 
@@ -31,7 +30,7 @@ growthbook.init({ streaming: true });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode fri>
+  <React.StrictMode>
     <GrowthBookProvider growthbook={growthbook}>
       <QueryClientProvider client={queryClient}>
         <ToastProvider>

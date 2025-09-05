@@ -231,7 +231,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없어요'}
+            message={'시험후기 접근 권한이 없어요'}
           >
             <ExamReviewListPage />
           </ProtectedRoute>
@@ -242,7 +242,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없어요'}
+            message={'시험후기 접근 권한이 없어요'}
           >
             <NoticeListPage />
           </ProtectedRoute>
@@ -256,7 +256,7 @@ export const routeList = [
         element: (
           <ProtectedRoute
             roles={[ROLE.user, ROLE.admin]}
-            message={'시험후기 게시판 접근 권한이 없어요'}
+            message={'시험후기 접근 권한이 없어요'}
           >
             <ExamReviewListPage />
           </ProtectedRoute>
