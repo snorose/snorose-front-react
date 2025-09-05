@@ -36,7 +36,7 @@ export default function MoreOptionModal({ title, optionList, functions, top }) {
           {optionList.map((item, idx) => (
             <li
               key={idx}
-              className={styles.contentItem}
+              className={`${styles.contentItem} ${idx === optionList.length - 1 ? styles.lastItem : ''}`}
               onClick={() => handleOptionClick(item, idx)}
             >
               <p>{item.label}</p>
