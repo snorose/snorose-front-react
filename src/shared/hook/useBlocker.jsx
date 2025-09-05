@@ -40,3 +40,14 @@ export default function useBlocker(isBlock, actions = ['POP']) {
     return () => window.removeEventListener('beforeunload', handleBeforeunload);
   }, [isBlock]);
 }
+
+// 페이지 언마운트 시 모달 상태를 초기화하는 훅
+export function useModalReset() {
+  const { setModal } = useContext(ModalContext);
+
+  useEffect(() => {
+    return () => {
+      setModal({ id: null, type: null });
+    };
+  }, [setModal]);
+}

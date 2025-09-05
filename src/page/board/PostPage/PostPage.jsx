@@ -9,6 +9,7 @@ import { BackAppBar, Badge, FetchLoading, Icon } from '@/shared/component';
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
+import { useModalReset } from '@/shared/hook/useBlocker';
 
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
@@ -29,6 +30,9 @@ export default function PostPage() {
   const currentBoard = getBoard(pathname.split('/')[2]);
 
   const { modal, setModal } = useContext(ModalContext);
+
+  // 페이지 언마운트 시 모달 상태 초기화
+  useModalReset();
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],

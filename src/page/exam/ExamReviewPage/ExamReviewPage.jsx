@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
@@ -34,6 +34,7 @@ import styles from './ExamReviewPage.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useReportHandler } from '@/feature/report/hook/useReport';
 import { useDeleteExamReviewHandler } from '@/feature/exam/hook/useDeleteExamReviewHandler';
+import { useModalReset } from '@/shared/hook/useBlocker';
 
 const COURSE_TYPE = convertToObject(LECTURE_TYPES);
 const SEMESTER = convertToObject(SEMESTERS);
@@ -44,6 +45,9 @@ export default function ExamReviewPage() {
   const navigate = useNavigate();
   const { scrap, unscrap } = useScrap();
   const { modal, setModal } = useContext(ModalContext);
+
+  // 페이지 언마운트 시 모달 상태 초기화
+  useModalReset();
 
   const { data, error, isError, isLoading } = useQuery({
     queryKey: [QUERY_KEY.post, postId],

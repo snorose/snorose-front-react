@@ -1,4 +1,4 @@
-import { forwardRef, useContext, useRef, useState } from 'react';
+import { forwardRef, useContext, useRef, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Badge, Icon, MoreOptionModal } from '@/shared/component';
@@ -59,6 +59,13 @@ const Comment = forwardRef((props, ref) => {
 
   const [inputContent, setInputContent] = useState(null);
   const [moreOptionTop, setMoreOptionTop] = useState(0);
+
+  // 컴포넌트 언마운트 시 댓글 ID 초기화
+  useEffect(() => {
+    return () => {
+      setCommentId(null);
+    };
+  }, [setCommentId]);
 
   const onCommentOptionClick = (data, refElement) => {
     setCommentId(data.id);
