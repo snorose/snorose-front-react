@@ -11,7 +11,7 @@ import styles from './PointLog.module.css';
 
 const PointLog = forwardRef((props, ref) => {
   const { log } = props;
-  const { difference, category, createdAt, reviewTitle } = log;
+  const { difference, category, createdAt, sourceDetail } = log;
 
   return (
     <li ref={ref} className={styles.pointBox}>
@@ -27,8 +27,8 @@ const PointLog = forwardRef((props, ref) => {
           >
             {POINT_CATEGORY_KOREAN_ENUM[category]}
           </h2>
-          {reviewTitle && (
-            <span className={styles.pointDescription}>{reviewTitle}</span>
+          {sourceDetail && (
+            <span className={styles.pointDescription}>{sourceDetail}</span>
           )}
           <span className={styles.pointDate}>
             {format(new Date(createdAt), 'yyyy.MM.dd HH:mm:ss')}

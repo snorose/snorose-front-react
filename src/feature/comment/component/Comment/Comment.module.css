@@ -131,6 +131,10 @@
   border-radius: 0 0 0.5rem 0.5rem;
 }
 
+.nestedComment.focused {
+  background-color: var(--blue-0);
+}
+
 .nestedCommentTop {
   width: 100%;
   padding: 1.6rem 1.5rem 0.6rem;

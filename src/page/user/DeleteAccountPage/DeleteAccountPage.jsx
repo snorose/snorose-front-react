@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useAuth, useModal } from '@/shared/hook';
-import { CloseAppBar, ConfirmModal, PwInput, Icon } from '@/shared/component';
+import { useAuth } from '@/shared/hook';
+import { CloseAppBar, PwInput, Icon, ConfirmModal } from '@/shared/component';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { CONFIRM_MODAL_TEXT } from '@/shared/constant';
 
 import styles from './DeleteAccountPage.module.css';
 
@@ -16,7 +18,7 @@ export default function DeleteAccountPage() {
   const [password, setPassword] = useState('');
 
   const { withdraw } = useAuth();
-  const withdrawConfirmModal = useModal();
+  const { modal, setModal } = useContext(ModalContext);
 
   const handlePasswordInputChange = (event) => {
     setPassword(event.target.value);
@@ -24,7 +26,7 @@ export default function DeleteAccountPage() {
 
   const handleModalPrimaryButtonClick = () => {
     withdraw(password, {
-      onError: withdrawConfirmModal.closeModal,
+      onError: setModal({ id: null, type: null }),
     });
   };
 
@@ -67,21 +69,18 @@ export default function DeleteAccountPage() {
           <button
             disabled={password === ''}
             className={styles.deleteAccountButton}
-            onClick={withdrawConfirmModal.openModal}
+            onClick={() => setModal({ id: 'withdraw-account', type: null })}
           >
             탈퇴하기
           </button>
         </div>
       </section>
-
-      <ConfirmModal
-        isOpen={withdrawConfirmModal.isOpen}
-        title='정말로 탈퇴하시겠습니까?'
-        primaryButtonText='확인'
-        secondaryButtonText='취소'
-        onPrimaryButtonClick={handleModalPrimaryButtonClick}
-        onSecondaryButtonClick={withdrawConfirmModal.closeModal}
-      />
+      {modal.id === 'withdraw-account' && (
+        <ConfirmModal
+          modalText={CONFIRM_MODAL_TEXT.WITHDRAW_ACCOUNT}
+          onConfirm={handleModalPrimaryButtonClick}
+        />
+      )}
     </main>
   );
 }
