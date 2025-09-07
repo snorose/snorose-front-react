@@ -42,7 +42,7 @@ export default function ProtectedRoute({ roles, message, children }) {
     return (
       <ConfirmModal
         modalText={modalText}
-        onConfirm={() => navigate('/', { replace: true })}
+        onConfirm={() => navigate('/verify', { replace: true })}
         onCancel={() => navigate(-1)}
       />
     );
