@@ -32,6 +32,7 @@ export { default as FetchLoadingOverlay } from './loading/FetchLoadingOverlay/Fe
 // modal
 export { default as DimModalLayout } from './Modal/DimModalLayout/DimModalLayout';
 export { default as ConfirmModal } from './Modal/ConfirmModal/ConfirmModal';
+export { default as NoticeModal } from './Modal/NoticeModal/NoticeModal';
 export { default as MoreOptionModal } from './Modal/MoreOptionModal/MoreOptionModal';
 export { default as OptionModal } from './Modal/OptionModal/OptionModal';
 

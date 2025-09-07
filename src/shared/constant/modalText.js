@@ -195,6 +195,15 @@ const CONFIRM_MODAL = {
   },
 };
 
+// =================== Notice Modal ===================
+const NOTICE_MODAL = {
+  ALREADY_VERIFIED: {
+    title: '인증이 필요하지 않아요',
+    description: '이미 인증을 완료했거나 인증 대상이 아니에요.',
+    confirmText: '홈으로 이동',
+  },
+};
+
 // =================== Option Modal ===================
 // 게시글 신고 모달
 const REPORT_POST_TYPE_LIST = [
@@ -418,6 +427,8 @@ export const MORE_OPTION_MODAL_TEXT = {
 };
 
 export const CONFIRM_MODAL_TEXT = CONFIRM_MODAL;
+
+export const NOTICE_MODAL_TEXT = NOTICE_MODAL;
 
 export const OPTION_MODAL_TEXT = {
   REPORT_POST_TYPE_LIST,
