@@ -12,32 +12,53 @@ const content = (
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
 
-      <Heading>1. 9월 스노로즈 캘린더</Heading>
+      {/* <Heading>1. 9월 스노로즈 캘린더</Heading>
       <Content>
         청파제(9/17~18)에서 스노로즈 부스를 운영합니다. <br />
         학우 여러분의 많은 관심과 방문 부탁드립니다 ✨
         <br />
         <img src={september} alt='9월 캘린더' />
+      </Content> */}
+
+      <Heading>1. 스노로즈 전체 재인증 안내</Heading>
+      <Content>
+        안정적인 커뮤니티 운영을 위해 <strong>전체 재인증</strong>을 실시합니다.
+        <br />
+        <strong>2025/09/07 기준</strong>으로 모든 정회원이 준회원으로
+        전환되었으며, 재인증 완료 시 정회원으로 복구됩니다.
+        <br />
+        📌 재인증 대상: 모든 회원
+        <br />
+        📌 재인증 방법:{' '}
+        <strong>
+          <a
+            className={styles.link}
+            href='https://snorose.com/verify'
+            target='_blank'
+          >
+            인증 페이지
+          </a>
+        </strong>{' '}
+        접속 후 인증
       </Content>
 
-      {/* <Heading>
-        1. 스노로즈 블로그 - 무엇이든 물어보세요(무물) 특별편 공개
-      </Heading>
+      <Heading>2. 스노로즈 블로그 이벤트기획파트편 공개</Heading>
       <Content>
-        <strong>&lt;스노로즈 리뉴얼&gt; 무물 특별편</strong>이 업로드되었습니다.
+        <strong>&lt;스노로즈 리뉴얼&gt; 이벤트기획파트편</strong>이
+        업로드되었습니다.
         <br />
         지금{' '}
         <strong>
           <a
             className={styles.link}
-            href='https://snorose.notion.site/2467ef0aa3bf806e9920dc5586292898'
+            href='https://snorose.notion.site/2677ef0aa3bf80a4910afcf464b4ead2'
             alt='스노로즈 블로그'
           >
             스노로즈 블로그
           </a>
         </strong>
         에서 확인해보세요!
-      </Content> */}
+      </Content>
 
       {/* <Heading>2. 7월 회계 보고</Heading>
       <Content>
