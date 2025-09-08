@@ -7,7 +7,7 @@
   overflow-y: auto;
 }
 
-.top {
+.notification {
   width: 100%;
   padding: 1rem var(--default-margin);
 }
