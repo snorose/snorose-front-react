@@ -116,3 +116,8 @@ export function formattedNowTime() {
 
   return formattedNowTime;
 }
+
+// 이벤트 페이지
+export function eventTime(date) {
+  return date ? date.slice(0, 10) : '';
+}
