@@ -78,6 +78,14 @@ export const BOARD_MENUS = [
     image: '',
   },
   {
+    id: 14,
+    to: '/board/event-notice',
+    textId: 'event-notice',
+    title: '이벤트 공지글 게시판',
+    desc: '',
+    image: '',
+  },
+  {
     id: 21,
     to: '/board/first-snow',
     textId: 'first-snow',
