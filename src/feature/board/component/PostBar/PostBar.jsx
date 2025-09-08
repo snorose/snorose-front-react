@@ -30,6 +30,7 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
           />
         )}
         <div className={styles.boardChip}>{data.boardName}</div>
+        {data.isEnd && <div className={styles.boardChip}>응모 중</div>}
       </div>
       <div className={styles.post_center}>
         <p className={styles.title}>{data.title}</p>
