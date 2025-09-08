@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import styles from './NoticeForm.module.css';
-export default function NoticeForm({ data, onChange }) {
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
+
+export default function NoticeForm({ data, onChange, onValid }) {
+  useEffect(() => {
+    const valid = !!(data.title.trim() && data.content.trim());
+    onValid(valid);
+  }, [data.title, data.content, onValid]);
 
   return (
     <div className={styles.noticeArea}>

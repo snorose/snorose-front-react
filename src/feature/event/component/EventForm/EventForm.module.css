@@ -3,6 +3,10 @@
   font: var(--text-headline-2-med);
 }
 
+.section {
+  margin: 0.7rem 0 1.8rem;
+}
+
 .textarea {
   outline: none;
   border: 0.1rem solid var(--blue-2);
@@ -15,7 +19,7 @@
   line-height: 1.5;
   min-height: 5rem;
   box-sizing: border-box;
-  margin: 0.7rem 0 1.8rem;
+  margin-top: 0.7rem;
 }
 
 .textarea::placeholder {
@@ -92,4 +96,27 @@
   font-size: 1.6rem;
   min-width: 2rem;
   text-align: center;
+}
+
+.error {
+  border: 1px solid var(--pink-3);
+  color: var(--pink-3);
+  background-color: var(--pink-1);
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.errorMessage {
+  color: var(--pink-3);
+}
+
+.linkArea {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-end;
+}
+.button {
+  height: 5.5rem;
+  width: 7rem;
 }
