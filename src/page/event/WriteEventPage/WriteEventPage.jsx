@@ -11,13 +11,14 @@ import {
 } from '@/shared/component';
 import { BOARD_ID, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
 import { useAuth, useBlocker, useToast } from '@/shared/hook';
-import { formattedNowTime, getBoard } from '@/shared/lib';
+import { formattedNowTime, getBoard, isUrlValid } from '@/shared/lib';
 
-import { postPost } from '@/apis';
+import { postEvent, postPost } from '@/apis';
 import { DropDownMenu } from '@/feature/board/component';
 
 import styles from './WriteEventPage.module.css';
 import { EventForm, NoticeForm } from '@/feature/event/component';
+import { bool } from 'prop-types';
 
 export default function WritePostPage() {
   const navigate = useNavigate();
@@ -25,11 +26,12 @@ export default function WritePostPage() {
   const { pathname } = useLocation();
   const { toast } = useToast();
   const { userInfo, status } = useAuth();
-  const [isNotice, setIsNotice] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
   const [text, setText] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [isNotice, setIsNotice] = useState(false);
 
   // navigation guard
   const isBlock = title.trim().length > 0 || text.trim().length > 0;
@@ -38,13 +40,12 @@ export default function WritePostPage() {
 
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
+  const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
   const [eventType, setEventType] = useState('유형을 선택해주세요');
 
   const { invalidUserInfoQuery } = useAuth();
 
-  // 무슨 역할?? 인지 파악하기
-  //const pass = boardId && title.trim() && text.trim();
-  const pass = title.trim() && text.trim();
+  const [formValid, setFormValid] = useState(false);
 
   const displayedTypes = ['공지사항', '연극/뮤지컬', '영화', '기타'];
 
@@ -54,36 +55,73 @@ export default function WritePostPage() {
   };
 
   useEffect(() => {
-    setData((prev) => ({
-      ...prev,
-      category: eventType,
-    }));
+    const isNowNotice = eventType === '공지사항';
+    setIsNotice(isNowNotice);
+
+    if (isNowNotice) {
+      setNoticeData((prev) => ({
+        ...prev,
+        isNotice: true,
+      }));
+    } else {
+      setData((prev) => ({
+        ...prev,
+        category: eventType,
+        isNotice: false,
+      }));
+    }
   }, [eventType]);
 
   // 유형에 따른 폼 렌더링
   const renderForm = () => {
     switch (eventType) {
       case '공지사항':
-        return <NoticeForm data={data} onChange={handleChange} />;
+        return (
+          <NoticeForm
+            data={noticeData}
+            onChange={handleChange}
+            onValid={setFormValid}
+            errors={errors}
+          />
+        );
       case '연극/뮤지컬':
         return (
-          <EventForm formType='theater' data={data} onChange={handleChange} />
+          <EventForm
+            formType='theater'
+            data={data}
+            onChange={handleChange}
+            onValid={setFormValid}
+            errors={errors}
+          />
         );
       case '영화':
         return (
-          <EventForm formType='movie' data={data} onChange={handleChange} />
+          <EventForm
+            formType='movie'
+            data={data}
+            onChange={handleChange}
+            onValid={setFormValid}
+            errors={errors}
+          />
         );
       case '기타':
-        return <EventForm formType='etc' data={data} onChange={handleChange} />;
+        return (
+          <EventForm
+            formType='etc'
+            data={data}
+            onChange={handleChange}
+            onValid={setFormValid}
+            errors={errors}
+          />
+        );
       default:
         return null;
     }
   };
 
-  const [data, setData] = useState({
+  const INIT_DATA = {
     category: eventType,
-    boardId: BOARD_ID['event'],
-    isNotice: eventType === '공지사항' ? true : isNotice,
+    isNotice: eventType === '공지사항',
     title: '',
     content: '',
     host: '',
@@ -93,19 +131,54 @@ export default function WritePostPage() {
     announceDate: '',
     drawCount: 1,
     link: '',
-  });
+  };
+  const [data, setData] = useState(INIT_DATA);
+
+  const INIT_NOTICE = {
+    category: '',
+    boardId: boardId,
+    title: '',
+    content: '',
+    isNotice: eventType === '공지사항',
+  };
+  const [noticeData, setNoticeData] = useState(INIT_NOTICE);
 
   const [errors, setErrors] = useState({});
 
-  const handleChange = (field, value) => {
-    setData((prev) => ({ ...prev, [field]: value }));
+  // eventType 변경시 내용 초기화
+  useEffect(() => {
+    if (eventType === '공지사항') {
+      setNoticeData(INIT_NOTICE);
+    } else {
+      setData(INIT_DATA);
+    }
+  }, [eventType]);
 
-    // 간단한 유효성 검사
+  const handleChange = (field, value) => {
+    if (isNotice) {
+      setNoticeData((prev) => ({
+        ...prev,
+        [field]: value,
+      }));
+    } else {
+      setData((prev) => ({
+        ...prev,
+        [field]: value,
+      }));
+    }
+
+    // title, host, place 유효성 검사 (즉시)
     const newErrors = { ...errors };
     if (field === 'title' && value.length > 127) {
       newErrors.title = '제목은 127자 이하로 입력해주세요';
     } else if (field === 'host' && value.length > 20) {
-      newErrors.host = '공연명은 20자 이하로 입력해주세요';
+      if (data.formType === 'theater') {
+        newErrors.host = '공연명은 20자 이하로 입력해주세요';
+      } else if (data.formType === 'movie') {
+        newErrors.host = '영화명은 20자 이하로 입력해주세요';
+      } else {
+        newErrors.host = '주최사는 20자 이하로 입력해주세요';
+      }
     } else if (field === 'place' && value.length > 20) {
       newErrors.place = '장소는 20자 이하로 입력해주세요';
     } else {
@@ -113,65 +186,98 @@ export default function WritePostPage() {
     }
 
     setErrors(newErrors);
+    setSubmitDisabled(false);
   };
 
-  const handleSubmit = () => {
-    // 모든 필드 에러 체크
-    if (Object.keys(errors).length > 0) {
-      alert('입력값을 확인해주세요');
+  const validateOnSubmit = (data) => {
+    const errors = {};
+
+    // 종료일 검증
+    if (data.startDate && data.endDate && data.startDate > data.endDate) {
+      errors.endDate = '종료일은 시작일보다 빠를 수 없어요';
+      setSubmitDisabled(false);
+    }
+
+    // 발표일 검증
+    if (
+      data.announceDate &&
+      ((data.startDate && data.announceDate < data.startDate) ||
+        (data.endDate && data.announceDate < data.endDate))
+    ) {
+      errors.announceDate = '발표일은 종료일 이후로 설정해주세요';
+      setSubmitDisabled(false);
+    }
+
+    // 상세설명 검증
+    if (data.content.length < 5) {
+      errors.content = '상세설명은 5자 이상 적어주세요';
+      setSubmitDisabled(false);
+    }
+
+    // 연계링크 검증
+    console.log(isUrlValid(data.link));
+    if (!isUrlValid(data.link)) {
+      errors.link = '유효한 링크를 넣어주세요';
+      setSubmitDisabled(false);
+    }
+
+    return errors;
+  };
+
+  // '등록' 클릭 이벤트와 유효성 검사
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const submitErrors = validateOnSubmit(data);
+
+    if (Object.keys(submitErrors).length > 0) {
+      console.log('날짜설정 에러');
+      setErrors(submitErrors);
       return;
     }
 
-    // axios 요청 또는 백엔드 전송 로직...
-    console.log('제출 완료', data);
-  };
+    setSubmitDisabled(true);
 
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
+    // 추후 삭제
+    console.log(data);
+    console.log('등록');
 
-  //     if (submitDisabled) return;
+    // 백엔드 리팩토링 후 주석 제거 및 테스트 필요
+    // let request;
+    // if (isNotice) {
+    //   // 확인용!! 나중에 지우기
+    //   console.log('이벤트 공지 제출 시작', noticeData);
 
-  //     setSubmitDisabled(true);
+    //   request = postPost(noticeData);
+    // } else {
+    //   // 확인용!! 나중에 지우기
+    //   console.log('이벤트 제출 시작', data);
 
-  //     console.log(data);
+    //   request = postEvent(data);
+    // }
 
-  //     // // 게시글 등록
-  //     // postPost(data)
-  //     //   .then((response) => {
-  //     //     if (response.status === 201) {
-  //     //       console.log(response.data.result.pointDifference);
-  //     //       !response.data.result.pointDifference
-  //     //         ? toast(TOAST.POST.createNoPoints)
-  //     //         : toast(TOAST.POST.create);
-  //     //       const newPostId = response.data.result.postId;
+    // request
+    //   .then((response) => {
+    //     if (response.status === 201) {
+    //       const newPostId = response.data.result.postId;
 
-  //     //       queryClient.removeQueries([QUERY_KEY.post]);
-  //     //       invalidUserInfoQuery();
-  //     //       // 공지글 전송시 notice: true로 재표시
-  //     //       //   currentBoard.id === 12 || isNotice
-  //     //       //     ? navigate(`/board/${currentBoard.textId}/notice`, {
-  //     //       //         replace: true,
-  //     //       //       })
-  //     //       //     : navigate(
-  //     //       //         `/board/${BOARD_MENUS.find((menu) => menu.id === boardId).textId}/post/${newPostId}`,
-  //     //       //         { replace: true }
-  //     //       //       );
-  //     //     }
-  //     //   })
-  //     //   .catch(({ response }) => {
-  //     //     toast(response.data.message);
-  //     //   })
-  //     //   .finally(() => {
-  //     //     setSubmitDisabled(false);
-  //     //   });
-  //   };
-
-  // 제목 127자 제한
-  const handleTitleChange = (e) => {
-    const newValue = e.target.value;
-    if (newValue.length <= 127) {
-      setTitle(newValue);
-    }
+    //       queryClient.removeQueries([QUERY_KEY.post]);
+    //       invalidUserInfoQuery();
+    //       isNotice
+    //         ? navigate(`/board/event/notice`, {
+    //             replace: true,
+    //           })
+    //         : navigate(`/board/event/post/${newPostId}`, {
+    //             replace: true,
+    //           });
+    //     }
+    //   })
+    //   .catch(({ response }) => {
+    //     toast(response.data.message);
+    //     console.log(response.data);
+    //   })
+    //   .finally(() => {
+    //     setSubmitDisabled(false);
+    //   });
   };
 
   if (status === 'loading') {
@@ -187,7 +293,9 @@ export default function WritePostPage() {
       <div className={styles.container}>
         <div className={styles.top}>
           <CloseAppBar backgroundColor={'#eaf5fd'}>
-            <ActionButton onClick={handleSubmit}>등록</ActionButton>
+            <ActionButton onClick={handleSubmit} disabled={!formValid}>
+              등록
+            </ActionButton>
           </CloseAppBar>
         </div>
         <div className={styles.center}>
@@ -246,41 +354,8 @@ export default function WritePostPage() {
               <p className={styles.dot}></p>
               <p>{formattedNowTime()}</p>
             </div>
-            {/* 공지글 선택시 공지글로 전송됨
-            {textId !== 'notice' && (
-              <div
-                className={
-                  userInfo?.userRoleId === ROLE.admin ||
-                  userInfo?.userRoleId === ROLE.official
-                    ? styles.profileBoxRight
-                    : styles.profileBoxRightInvisible
-                }
-                onClick={handleIsNotice}
-              >
-                <Icon
-                  id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
-                  width={21}
-                  height={22}
-                />
-                <p>공지글</p>
-              </div>
-            )} */}
           </div>
-          {/* 공지사항, 일반글 폼 
-          <div className={styles.content}>
-            <TextareaAutosize
-              className={styles.title}
-              placeholder='제목'
-              value={title}
-              onChange={handleTitleChange}
-            />
-            <TextareaAutosize
-              className={styles.text}
-              placeholder='내용'
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
-          </div> */}
+
           <div className={styles.form}>{renderForm()}</div>
         </div>
       </div>

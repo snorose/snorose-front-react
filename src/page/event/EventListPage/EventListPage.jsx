@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { getNoticeLine } from '@/apis';
 
-import { AppBar, Icon, WriteButton } from '@/shared/component';
+import { BackAppBar, Icon, WriteButton } from '@/shared/component';
 import { QUERY_KEY, ROLE } from '@/shared/constant';
 import { useAuth, useScrollRestoration } from '@/shared/hook';
 import { getBoard } from '@/shared/lib';
@@ -28,7 +28,7 @@ export default function PostListPage() {
 
   return (
     <section className={styles.container} ref={scrollRef}>
-      <AppBar title='이벤트' />
+      <BackAppBar title='이벤트' hasMenu />
       <div className={styles.notification}>
         <Link className={styles.notificationBar} to={`/board/event/notice`}>
           <Icon id='notice-bell' width={11} height={13} />

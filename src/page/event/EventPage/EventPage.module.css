@@ -1,0 +1,151 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.backAppBar {
+  background-color: var(--blue-0);
+  width: 100%;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* 양옆 여백 */
+  padding: 5.5rem 2rem 0.9rem;
+  border-radius: 0 0 1.5rem 1.5rem;
+  background-color: var(--blue-0);
+}
+
+.contentTop {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--grey-3-1);
+  font: var(--text-body-2-reg);
+}
+
+.contentTopLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.badge {
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-left: -0.5rem;
+}
+
+.dot {
+  font-weight: 800;
+}
+
+.meatBall {
+  margin-right: -1rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.title {
+  display: flex;
+  align-items: end;
+  padding: 0.8rem 1rem 2.6rem 0;
+  font: var(--text-title-1-bold);
+  color: var(--grey-4);
+}
+
+.views {
+  white-space: nowrap;
+  color: var(--blue-3);
+  font-size: 1.1rem;
+  font-weight: 400;
+  padding-left: 0.2rem;
+}
+
+.post_bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 2.5rem;
+  padding: 0.9rem 0 0 0;
+  border-top: 0.05rem solid rgba(var(--grey-3-1-rgb), 0.7);
+}
+
+.count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+
+  p {
+    color: var(--grey-3-1);
+    font: var(--text-body-1-reg);
+  }
+
+  &:hover {
+    background: var(--blue-1);
+  }
+}
+
+.whiteBox {
+  background-color: #fff;
+  width: 100%;
+  height: 5rem;
+}
+
+/* post content */
+
+.contentText {
+  font: var(--text-headline-2-reg);
+  color: var(--grey-4);
+  padding: 0 1.3rem 1.5rem 0;
+  white-space: pre-wrap;
+  word-break: keep-all;
+
+  a {
+    color: var(--blue-3);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.host,
+.place,
+.drawCount,
+.applicationDate,
+.announceDate {
+  display: flex;
+  flex-direction: row;
+  font: var(--text-headline-2-med);
+  color: var(--grey-4);
+  gap: 0.8rem;
+  margin-bottom: 1.4rem;
+  word-break: keep-all;
+}
+
+.note {
+  font: var(--text-headline-2-reg);
+  color: var(--grey-4);
+  margin-bottom: 1.4rem;
+  word-break: keep-all;
+}
+
+.data {
+  font: var(--text-headline-2-reg);
+  word-break: keep-all;
+}
+
+.button {
+  margin-bottom: 2rem;
+}
