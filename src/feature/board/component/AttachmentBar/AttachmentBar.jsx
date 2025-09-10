@@ -28,7 +28,7 @@ export default function AttachmentBar({ attachmentsInfo, setAttachmentsInfo }) {
         newFiles.length >
       attachmentFileSizeLimit.imageQuantity
     ) {
-      alert('이미지는 10개까지만 첨부 가능합니다. ');
+      alert('이미지는 최대 10개까지 첨부 가능해요.');
       return;
     }
 
@@ -37,7 +37,7 @@ export default function AttachmentBar({ attachmentsInfo, setAttachmentsInfo }) {
       (file) => file.size <= attachmentFileSizeLimit.imageFileSize
     );
     if (newFiles.length > newFileArray.length) {
-      alert('파일 크기는 5MB를 초과할 수 없습니다.');
+      alert('파일 크기는 최대 5MB까지 업로드할 수 있어요.');
     }
 
     //새로 선택한 이미지들을 attachmentsInfo 리스트 맨 뒤에 추가해주기
