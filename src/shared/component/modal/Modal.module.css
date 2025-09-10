@@ -16,20 +16,6 @@
   /* Note: backdrop-filter has minimal browser support */
 }
 
-.notDim {
-  display: flex;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  z-index: 1;
-  width: 100vw;
-  max-width: var(--default-width);
-  height: 100vh;
-  justify-content: center;
-  transform: translateX(-50%);
-}
-
 .container {
   width: 29rem;
   border-radius: 1rem;

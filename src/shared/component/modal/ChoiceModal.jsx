@@ -8,7 +8,7 @@ export default function ChoiceModal({ id, isOpen, closeFn, optionFns }) {
   if (!isOpen || !modalOption) return null;
 
   return (
-    <div className={styles.notDim} onClick={() => closeFn()}>
+    <div className={styles.dim} onClick={() => closeFn()}>
       <div
         className={styles.container}
         onClick={(event) => event.stopPropagation()}
