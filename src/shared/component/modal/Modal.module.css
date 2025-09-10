@@ -135,3 +135,10 @@
   font-size: 1.3rem;
   border-top: 0.1rem solid var(--grey-2);
 }
+
+.choiceOptions:hover {
+  background-color: var(--grey-2);
+}
+.choiceOptions:last-child:hover {
+  border-radius: 0 0 1rem 1rem;
+}
