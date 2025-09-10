@@ -21,6 +21,10 @@ export default function FullScreenAttachment({
   const [isChoiceModalOpen, setIsChoiceModalOpen] = useState(false);
   const urls = attachmentUrls.map((att) => att.url);
 
+  const isExtImg = (url) => {
+    return url.includes('.webp');
+  };
+
   const handleDownload = async (s3Url) => {
     const response = await fetch(s3Url, {
       mode: 'cors',
@@ -35,7 +39,7 @@ export default function FullScreenAttachment({
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = '첨부파일.jpg';
+      link.download = isExtImg(s3Url) ? '첨부파일.webp' : '첨부파일.mp4';
 
       // 자동 다운로드 트리거
       document.body.appendChild(link);
@@ -50,12 +54,10 @@ export default function FullScreenAttachment({
   //다수의 첨부파일을 다운받을때 -> zip으로 묶고 다운받기
   const handleZipDownload = async (urls) => {
     const zip = new JSZip();
+    console.log(urls);
     for (let i = 0; i < urls.length; i++) {
       const url = urls[i];
-      const urlParts = url.split('.');
-      const ext =
-        urlParts.length > 1 ? urlParts.pop().split(/\#|\?/)[0] : 'jpg';
-      const filename = `첨부파일${i + 1}.${ext}`;
+      const filename = isExtImg(url) ? '첨부파일.webp' : '첨부파일.mp4';
       const response = await fetch(url, {
         mode: 'cors',
         cache: 'no-store',
