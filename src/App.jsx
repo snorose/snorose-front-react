@@ -26,11 +26,11 @@ function App() {
 
   // 푸시 알림 설정
   useEffect(() => {
-    if (isEnabled) {
-      PushNotificationManager.registerServiceWorker().catch((error) =>
-        console.error(error)
-      );
-    }
+    if (!isEnabled) return;
+
+    PushNotificationManager.registerServiceWorker().catch((error) =>
+      console.error(error)
+    );
   }, [isEnabled]);
 
   // 서버 점검 페이지 처리
