@@ -5,6 +5,7 @@ import graduationPreparation from '@/assets/images/graduationPreparation-board-p
 import largeSnow from '@/assets/images/largeSnow-board-page.svg';
 import permanentSnow from '@/assets/images/permanentSnow-board-page.svg';
 import studentCouncil from '@/assets/images/studentCouncil-board-page.svg';
+import event from '@/assets/images/event-board-page.svg';
 
 export const BOARD_ID = Object.freeze({
   all: 0, // 프론트에서만 사용하는 보드 ID
@@ -74,16 +75,8 @@ export const BOARD_MENUS = [
     to: '/board/event',
     textId: 'event',
     title: '이벤트',
-    desc: '',
-    image: '',
-  },
-  {
-    id: 14,
-    to: '/board/event-notice',
-    textId: 'event-notice',
-    title: '이벤트 공지글 게시판',
-    desc: '',
-    image: '',
+    desc: '스노로즈 이벤트 공지',
+    image: event,
   },
   {
     id: 21,

@@ -45,6 +45,16 @@ export default function BoardCategoryPage() {
             )}
           </div>
         </div>
+        <div className={styles.boardBox}>
+          <div className={styles.boardTitle}>스노로즈</div>
+          <div className={styles.boardListBox}>
+            {BOARD_MENUS.filter((board) => [14].includes(board.id)).map(
+              (board, index) => (
+                <BoardBar key={board.id} data={board} />
+              )
+            )}
+          </div>
+        </div>
       </div>
       <div className={styles.moreBoardBox}>
         <Icon className={styles.iconLogo} id='cloud' width={31} height={19} />
