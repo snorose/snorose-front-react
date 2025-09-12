@@ -6,7 +6,12 @@ import { getPostContent } from '@/apis';
 
 import { NotFoundPage } from '@/page/etc';
 
-import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
+import {
+  AppError,
+  convertHyperlink,
+  fullDateTimeFormat,
+  getBoard,
+} from '@/shared/lib';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useModalReset } from '@/shared/hook/useBlocker';
 import { BackAppBar, Badge, FetchLoading, Icon } from '@/shared/component';
@@ -25,6 +30,7 @@ import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
 import style from './PostPage.module.css';
+import { useToast } from '@/shared/hook';
 
 export default function PostPage() {
   const { postId } = useParams();
@@ -150,13 +156,13 @@ function MetaContainer({
   isWriter,
   isCommentAlertConsent,
 }) {
-  console.log(isCommentAlertConsent);
-
   const { postId } = useParams();
   const { pathname } = useLocation();
   const { id: boardId } = getBoard(pathname.split('/')[2]);
 
   const { setModal } = useContext(ModalContext);
+
+  const { toast } = useToast();
 
   const updatetNotificationSetting = useUpdateCommentNotificationSetting(
     boardId,
@@ -166,7 +172,20 @@ function MetaContainer({
   const updateSetting = async () => {
     const nextStatus = !isCommentAlertConsent;
 
-    await updatetNotificationSetting.mutate(nextStatus);
+    try {
+      await updatetNotificationSetting.mutateAsync(nextStatus);
+
+      const message = nextStatus
+        ? '댓글 알림이 설정되었습니다.'
+        : '댓글 알림이 해제되었습니다.';
+      toast(message);
+    } catch (error) {
+      if (error instanceof AppError) {
+        toast.error(error.message);
+      } else {
+        toast.error('잠시 후 다시 시도해주세요.');
+      }
+    }
   };
 
   const onMenuOpen = () => {
