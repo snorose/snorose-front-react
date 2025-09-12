@@ -6,15 +6,15 @@ import {
 
 import {
   fetchNotificationList,
-  fetchNotificationSettings,
   readNotifications,
+  fetchNotificationSettings,
   updateNotificationSettings,
+  updateCommentNotificationSetting,
 } from '@/apis';
 
 import { MUTATION_KEY, QUERY_KEY } from '@/shared/constant';
 
 import { toNotificationItem } from '@/feature/alert/mapper';
-import { calculateNextNotificationSettings } from '@/feature/alert/lib';
 import { CATEGORY } from '@/feature/alert/constant';
 
 export function useNotification(category) {
@@ -167,6 +167,27 @@ export function useUpdateNotificationSetting() {
       queryClient.invalidateQueries({
         queryKey: QUERY_KEY.notificationSettings,
         refetchType: 'inactive',
+      });
+    },
+  });
+}
+
+export function useUpdateCommentNotificationSetting(boardId, postId) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEY.updateCommentNotificationSetting,
+
+    mutationFn: async (isCommentAlertConsent) =>
+      await updateCommentNotificationSetting({
+        boardId,
+        postId,
+        isCommentAlertConsent,
+      }),
+
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEY.post(postId),
       });
     },
   });

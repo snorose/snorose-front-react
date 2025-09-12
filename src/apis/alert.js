@@ -53,7 +53,7 @@ export async function sendFCMToken(token, deviceType = '') {
   return response.data.result;
 }
 
-export async function updateCommentNotificationSettings({
+export async function updateCommentNotificationSetting({
   boardId,
   postId,
   isCommentAlertConsent,

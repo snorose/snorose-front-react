@@ -15,6 +15,8 @@ import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
 import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
 import { PostModalRenderer } from '@/feature/board/component';
 
+import { useUpdateCommentNotificationSetting } from '@/feature/alert/hook';
+
 import { useCommentContext } from '@/feature/comment/context';
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 
@@ -148,12 +150,24 @@ function MetaContainer({
   isWriter,
   isCommentAlertConsent,
 }) {
+  console.log(isCommentAlertConsent);
+
+  const { postId } = useParams();
+  const { pathname } = useLocation();
+  const { id: boardId } = getBoard(pathname.split('/')[2]);
+
   const { setModal } = useContext(ModalContext);
 
-  // 뱃지를 보여주는 ROLE
-  const showBadge =
-    userRoleId === ROLE.official ||
-    (userRoleId === ROLE.admin && userDisplay !== '익명송이');
+  const updatetNotificationSetting = useUpdateCommentNotificationSetting(
+    boardId,
+    postId
+  );
+
+  const updateSetting = async () => {
+    const nextStatus = !isCommentAlertConsent;
+
+    await updatetNotificationSetting.mutate(nextStatus);
+  };
 
   const onMenuOpen = () => {
     const id = isWriter ? 'my-post-more-options' : 'post-more-options';
@@ -163,6 +177,13 @@ function MetaContainer({
       type: null,
     });
   };
+
+  const showBadge =
+    userRoleId === ROLE.official ||
+    (userRoleId === ROLE.admin && userDisplay !== '익명송이');
+
+  const showBellIcon = !isNotice && isWriter;
+  const showMeatBallIcon = !isNotice || isWriter;
 
   return (
     <div className={style.metaContainer}>
@@ -178,23 +199,21 @@ function MetaContainer({
       </div>
 
       <div className={style.actions}>
-        <div className={style.commentBell}>
-          <Icon
-            id={isCommentAlertConsent ? 'comment-bell-fill' : 'comment-bell'}
-            width={18}
-            height={21}
-          />
-        </div>
+        {showBellIcon && (
+          <div className={style.commentBell} onClick={updateSetting}>
+            <Icon
+              id={isCommentAlertConsent ? 'comment-bell-fill' : 'comment-bell'}
+              width={18}
+              height={21}
+            />
+          </div>
+        )}
 
-        <div
-          className={style.meatBall}
-          style={{
-            display: isNotice && !isWriter ? 'none' : 'block',
-          }}
-          onClick={onMenuOpen}
-        >
-          <Icon id='meat-ball' width={18} height={4} stroke='none' />
-        </div>
+        {showMeatBallIcon && (
+          <div className={style.meatBall} onClick={onMenuOpen}>
+            <Icon id='meat-ball' width={18} height={4} stroke='none' />
+          </div>
+        )}
       </div>
     </div>
   );
