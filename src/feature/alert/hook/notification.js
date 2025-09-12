@@ -14,7 +14,6 @@ import {
 import { MUTATION_KEY, QUERY_KEY } from '@/shared/constant';
 
 import { toNotificationItem } from '@/feature/alert/mapper';
-import { calculateNextNotificationSettings } from '@/feature/alert/lib';
 import { CATEGORY } from '@/feature/alert/constant';
 
 export function useNotification(category) {
