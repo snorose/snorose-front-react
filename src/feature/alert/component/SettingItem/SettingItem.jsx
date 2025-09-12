@@ -23,18 +23,20 @@ export default function SettingItem({
       </div>
 
       <div className={style.right}>
-        <Switch isEnabled={isEnabled} onToggle={onToggle} />
+        <Switch isEnabled={isEnabled} onToggle={onToggle} disabled={disabled} />
         <div className={style.termsLink}>약관</div>
       </div>
     </div>
   );
 }
 
-function Switch({ isEnabled = false, onToggle }) {
+function Switch({ isEnabled = false, onToggle, disabled }) {
+  const enabled = disabled ? false : isEnabled;
+
   return (
     <div
-      className={`${style.switch} ${isEnabled ? style.on : style.off}`}
-      onClick={onToggle}
+      className={`${style.switch} ${enabled ? style.on : style.off}`}
+      onClick={disabled ? undefined : onToggle}
     >
       <div className={style.slider}></div>
     </div>

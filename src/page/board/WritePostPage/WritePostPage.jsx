@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
@@ -7,15 +7,23 @@ import {
   ActionButton,
   Badge,
   CloseAppBar,
+  DropdownList,
   FetchLoading,
   Icon,
+  ConfirmModal,
 } from '@/shared/component';
-import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
+import {
+  BOARD_MENUS,
+  QUERY_KEY,
+  ROLE,
+  TOAST,
+  CONFIRM_MODAL_TEXT,
+} from '@/shared/constant';
 import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 import { postPost } from '@/apis';
-import { DropDownMenu } from '@/feature/board/component';
 
 import styles from './WritePostPage.module.css';
 
@@ -25,16 +33,15 @@ export default function WritePostPage() {
   const { pathname } = useLocation();
   const { toast } = useToast();
   const { userInfo, status } = useAuth();
+  const { invalidUserInfoQuery } = useAuth();
+  const { modal, setModal } = useContext(ModalContext);
+
   const [isNotice, setIsNotice] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(false);
-
-  // navigation guard
-  const isBlock = title.trim().length > 0 || text.trim().length > 0;
-
-  useBlocker(isBlock);
+  const [isBlock, setIsBlock] = useState(false);
 
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
@@ -42,8 +49,6 @@ export default function WritePostPage() {
     currentBoard?.title ?? '게시판을 선택해주세요'
   );
   const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
-
-  const { invalidUserInfoQuery } = useAuth();
 
   const pass = boardId && title.trim() && text.trim();
 
@@ -61,14 +66,34 @@ export default function WritePostPage() {
     [60, 61, 62].includes(menu.id)
   ).map((menu) => menu.title);
 
+  // 페이지 이탈 방지 모달 노출
+  useEffect(() => {
+    if (title.trim().length > 0 || text.trim().length > 0) {
+      setIsBlock(true);
+    } else {
+      setIsBlock(false);
+    }
+  }, [title, text]);
+
+  useBlocker(isBlock);
+
   // 드롭다운 표시
-  const displayedTitles = useMemo(() => {
-    const roleTitleMap = {
-      5: isNotice ? officialNoticeTitles : officialTitles,
-      4: [...boardTitles, ...officialNoticeTitles],
+  const displayedOptions = useMemo(() => {
+    const getOptionObjects = (titles) =>
+      BOARD_MENUS.filter((menu) => titles.includes(menu.title)).map((menu) => ({
+        id: menu.id,
+        name: menu.title,
+      }));
+
+    const roleOptions = {
+      [ROLE.official]: isNotice
+        ? getOptionObjects(officialNoticeTitles)
+        : getOptionObjects(officialTitles),
+      [ROLE.admin]: getOptionObjects([...boardTitles, ...officialNoticeTitles]),
     };
-    return roleTitleMap[userInfo?.userRoleId] || boardTitles;
-  }, [isNotice, userInfo?.userRoleId]);
+
+    return roleOptions[userInfo?.userRoleId] || getOptionObjects(boardTitles);
+  }, [isNotice, userInfo?.userRoleId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // 게시판 선택 핸들러
   const handleDropDownOpen = () => {
@@ -76,15 +101,20 @@ export default function WritePostPage() {
   };
 
   // 게시판 제목 선택 핸들러
-  const handleBoardTitleChange = (selectedTitle) => {
-    const selectedBoard = BOARD_MENUS.find(
-      (menu) => menu.title === selectedTitle
-    );
-    if (selectedBoard) {
-      setBoardTitle(selectedBoard.title);
-      setBoardId(selectedBoard.id);
-    }
+  const handleBoardTitleChange = (option) => {
+    setBoardTitle(option.name);
+    setBoardId(option.id);
     setDropDownOpen(false);
+  };
+
+  // 게시글 작성 중 페이지 이탈
+  const handleExitPage = () => {
+    setModal({
+      id: null,
+      type: null,
+    });
+    setIsBlock(false);
+    navigate(-1);
   };
 
   // 공지 여부 선택 핸들러
@@ -177,7 +207,7 @@ export default function WritePostPage() {
               </div>
             </div>
           ) : (
-            <>
+            <div className={styles.categoryDropdownContainer}>
               <div
                 className={styles.categorySelect}
                 onClick={handleDropDownOpen}
@@ -193,15 +223,16 @@ export default function WritePostPage() {
                 </div>
                 <Icon id='angle-down' width={14} height={7} />
               </div>
-              <DropDownMenu
-                options={displayedTitles}
-                item={boardTitle}
-                setItem={handleBoardTitleChange}
-                dropDownOpen={dropDownOpen}
-                setDropDownOpen={setDropDownOpen}
-                backgroundColor={'#fff'}
-              />
-            </>
+
+              {dropDownOpen && (
+                <DropdownList
+                  options={displayedOptions}
+                  select={{ id: boardId, name: boardTitle }}
+                  onSelect={handleBoardTitleChange}
+                  className={styles.dropDownList}
+                />
+              )}
+            </div>
           )}
 
           <div className={styles.profileBox}>
@@ -253,6 +284,12 @@ export default function WritePostPage() {
             />
           </div>
         </div>
+        {modal.id === 'exit-page' && (
+          <ConfirmModal
+            modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+            onConfirm={handleExitPage}
+          />
+        )}
       </div>
     </>
   );

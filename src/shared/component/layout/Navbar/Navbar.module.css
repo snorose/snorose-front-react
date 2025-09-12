@@ -6,7 +6,7 @@
   border-radius: 1rem 1rem 0 0;
   position: fixed;
   bottom: 0;
-  z-index: 1;
+  z-index: var(--z-index-navbar);
   background-color: var(--white);
   filter: drop-shadow(0 -0.4rem 0.7rem var(--blue-1));
 }

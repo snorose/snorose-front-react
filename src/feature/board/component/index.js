@@ -6,3 +6,5 @@ export { default as PostBar } from './PostBar/PostBar';
 export { default as PostList } from './PostList/PostList';
 export { default as PostListErrorFallback } from './PostList/PostListErrorFallback';
 export { default as PostListSuspense } from './PostList/PostListSuspense';
+
+export { default as PostModalRenderer } from './PostModalRenderer/PostModalRenderer';

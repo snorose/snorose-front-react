@@ -1,9 +1,27 @@
-import { useReducer } from 'react';
+import { Suspense, useReducer } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
-import { BackAppBar } from '@/shared/component';
+import { AppError } from '@/shared/lib';
+import { useToast } from '@/shared/hook';
+import {
+  BackAppBar,
+  FetchLoading,
+  ServerErrorFallback,
+} from '@/shared/component';
 
-import { alertSettingReducer } from '@/feature/alert/reducer';
+import * as notificationSettingsStore from '@/feature/alert/store/notificationSettings';
+import {
+  PushNotificationManager,
+  getDeviceFormFactor,
+  isNotificationUnsupported,
+} from '@/feature/alert/lib';
+import {
+  useUpdateNotificationSetting,
+  useNotificationSettings,
+} from '@/feature/alert/hook';
 import { SettingItem } from '@/feature/alert/component';
+import { ERROR_CODE } from '@/feature/alert/constant';
 
 import style from './AlertSettingPage.module.css';
 
@@ -13,36 +31,120 @@ const content = {
   attendance: `매일 오후 10시에 출석 체크를 잊지 않도록\n알림으로 알려드려요`,
 };
 
-const initialState = {
-  alert: false,
-  advertisement: false,
-  attendance: false,
-};
-
 export default function AlertSettingPage() {
-  const [alertSettings, dispatch] = useReducer(
-    alertSettingReducer,
-    initialState
-  );
-
   return (
-    <div>
+    <div className={style.container}>
       <BackAppBar title='알림 설정' />
 
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary
+            onReset={reset}
+            FallbackComponent={({ resetErrorBoundary }) => (
+              <div className={style.errorFallback}>
+                <ServerErrorFallback reset={resetErrorBoundary} />
+              </div>
+            )}
+          >
+            <Suspense
+              fallback={
+                <div className={style.loading}>
+                  <FetchLoading />
+                </div>
+              }
+            >
+              <NotificationSettings />
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
+    </div>
+  );
+}
+
+function NotificationSettings() {
+  const { data: notificationSettings } = useNotificationSettings();
+  const updateSettings = useUpdateNotificationSetting();
+
+  const [state, dispatch] = useReducer(
+    notificationSettingsStore.reducer,
+    notificationSettings
+  );
+
+  const { toast } = useToast();
+
+  const setupNotifications = async () => {
+    try {
+      await PushNotificationManager.ensurePermission();
+
+      const token = await PushNotificationManager.issueToken();
+      const deviceType = getDeviceFormFactor();
+
+      if (PushNotificationManager.isTokenChanged(token)) {
+        await PushNotificationManager.syncWithServer(token, deviceType);
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const onToggle = async (type) => {
+    const prev = state;
+    const action = notificationSettingsStore.actions[type](!state[type]);
+    const next = notificationSettingsStore.reducer(state, action);
+    dispatch(action);
+
+    try {
+      await updateSettings.mutateAsync(next);
+    } catch (error) {
+      const rollbackAction = notificationSettingsStore.actions.hydrate(prev);
+      dispatch(rollbackAction);
+      toast(error.message);
+    }
+  };
+
+  const isUnsupported = isNotificationUnsupported();
+
+  return (
+    <>
       <div className={style.alert}>
         <SettingItem
           title='알림 받기'
           content={content.alert}
-          isEnabled={alertSettings.alert}
-          onToggle={() => dispatch({ type: 'TOGGLE_ALERT' })}
+          isEnabled={state.required}
+          onToggle={async () => {
+            if (!state.required) {
+              try {
+                await setupNotifications();
+              } catch (error) {
+                if (!(error instanceof AppError)) {
+                  return;
+                }
+
+                switch (error.code) {
+                  case ERROR_CODE.PERMISSION_JUST_DENIED: {
+                    return;
+                  }
+
+                  default: {
+                    toast(error.message);
+                    return;
+                  }
+                }
+              }
+            }
+
+            await onToggle('required');
+          }}
+          disabled={isUnsupported}
         />
         <SettingItem
           title='광고성 알림 받기'
           content={content.advertisement}
-          isEnabled={alertSettings.advertisement}
-          onToggle={() => dispatch({ type: 'TOGGLE_ADVERTISEMENT' })}
+          isEnabled={state.marketing}
+          onToggle={() => onToggle('marketing')}
           variant='blue'
-          disabled={!alertSettings.alert}
+          disabled={isUnsupported || !state.required}
         />
       </div>
 
@@ -52,12 +154,12 @@ export default function AlertSettingPage() {
         <SettingItem
           title='출석체크 알림'
           content={content.attendance}
-          isEnabled={alertSettings.attendance}
-          onToggle={() => dispatch({ type: 'TOGGLE_ATTENDANCE' })}
+          isEnabled={state.attendance}
+          onToggle={() => onToggle('attendance')}
           variant='blue'
-          disabled={!alertSettings.alert}
+          disabled={isUnsupported || !state.required}
         />
       </div>
-    </div>
+    </>
   );
 }

@@ -5,7 +5,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateUserInfo } from '@/apis';
 
 import { useAuth, useToast } from '@/shared/hook';
-import { ActionButton, BackAppBar, Dropdown } from '@/shared/component';
+import {
+  ActionButton,
+  BackAppBar,
+  CategoryFieldset,
+  Dropdown,
+} from '@/shared/component';
 import {
   MAJORS,
   MUTATION_KEY,
@@ -14,7 +19,6 @@ import {
   TOAST,
 } from '@/shared/constant';
 
-import { CategoryFieldset } from '@/feature/my/component';
 import defaultProfile from '@/assets/images/defaultProfile.svg';
 
 import styles from './EditProfilePage.module.css';
@@ -111,7 +115,7 @@ export default function EditProfilePage() {
       VALIDATIONS.EMOJI.test(value)
     ) {
       setNicknameError(
-        '특수문자, 띄어쓰기를 제외한 2자 이상 30자 이하로 작성해주세요'
+        '특수문자, 띄어쓰기를 제외한 2자 이상 30자 이하로 작성해 주세요'
       );
     } else {
       setNicknameError('');

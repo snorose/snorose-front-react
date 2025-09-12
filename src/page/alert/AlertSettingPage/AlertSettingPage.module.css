@@ -1,6 +1,11 @@
+.container {
+  height: 100%;
+  padding-top: 7rem;
+  padding-bottom: 7.5rem;
+}
+
 .alert {
   margin: 0 2rem;
-  margin-top: 7rem;
 
   display: flex;
   flex-direction: column;
@@ -15,4 +20,13 @@
   margin: 2.4rem 0;
   height: 0;
   border-top: 1px solid var(--grey-2);
+}
+
+.loading,
+.errorFallback {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

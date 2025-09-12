@@ -1,5 +1,11 @@
 import { Suspense } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
+import {
+  QueryErrorResetBoundary,
+  useIsFetching,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 import {
   AppBar,
@@ -8,14 +14,16 @@ import {
   NewButton,
   ServerErrorFallback,
 } from '@/shared/component';
+import { QUERY_KEY } from '@/shared/constant';
 
-import { useNotification } from '@/feature/alert/hook/notification';
+import {
+  useNotification,
+  useReadNotifications,
+} from '@/feature/alert/hook/notification';
 import { CategoryTab, NotificationItem } from '@/feature/alert/component';
 import { CATEGORY } from '@/feature/alert/constant';
 
 import style from './AlertPage.module.css';
-import { QueryErrorResetBoundary } from '@tanstack/react-query';
-import { ErrorBoundary } from 'react-error-boundary';
 
 export default function AlertPage() {
   const navigate = useNavigate();
@@ -67,11 +75,7 @@ export default function AlertPage() {
         ))}
       </div>
 
-      <div className={style.readAllButton}>
-        <NewButton variant='outlined' size='small' disabled>
-          모두읽기
-        </NewButton>
-      </div>
+      <AllReadButton activeCategory={activeCategory} />
 
       <QueryErrorResetBoundary>
         {({ reset }) => (
@@ -91,8 +95,51 @@ export default function AlertPage() {
   );
 }
 
+function AllReadButton({ activeCategory }) {
+  const queryClient = useQueryClient();
+  const { markAllNotificationsAsRead } = useReadNotifications();
+
+  const isFetching =
+    useIsFetching({
+      queryKey: QUERY_KEY.notifications(activeCategory),
+      exact: true,
+    }) > 0;
+
+  const data = queryClient.getQueryData(
+    QUERY_KEY.notifications(activeCategory)
+  );
+
+  const noData = data?.length === 0;
+  const allRead = data?.every((item) => item.isRead);
+
+  const disabled = isFetching || noData || allRead;
+
+  return (
+    <div className={style.readAllButton}>
+      <NewButton
+        variant='outlined'
+        size='small'
+        onClick={() => markAllNotificationsAsRead.mutate(activeCategory)}
+        disabled={disabled}
+      >
+        모두읽기
+      </NewButton>
+    </div>
+  );
+}
+
 function NotificationList({ category }) {
+  const navigate = useNavigate();
   const { data: notifications } = useNotification(category);
+  const { markNotificationAsRead } = useReadNotifications();
+
+  const read = async (item) => {
+    await markNotificationAsRead.mutate(item);
+
+    if (item.url) {
+      navigate(item.url);
+    }
+  };
 
   if (notifications.length === 0) {
     return <div className={style.noNotification}>새로운 알림이 없어요</div>;
@@ -101,7 +148,12 @@ function NotificationList({ category }) {
   return (
     <div className={style.notificationList}>
       {notifications.map((item) => (
-        <NotificationItem key={item.id} {...item} />
+        <NotificationItem
+          key={item.id}
+          {...item}
+          category={CATEGORY[item.category]}
+          onClick={() => read(item)}
+        />
       ))}
     </div>
   );
