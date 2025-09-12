@@ -1,10 +1,9 @@
 import { React, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Keyboard } from 'swiper/modules';
-import JSZip from 'jszip';
-import { saveAs } from 'file-saver';
 
 import { Icon, ChoiceModal } from '@/shared/component';
+import { handleDownload, handleZipDownload } from '@/shared/lib';
 
 import styles from './FullScreenAttachment.module.css';
 import 'swiper/css';
@@ -20,56 +19,6 @@ export default function FullScreenAttachment({
   const videoRefs = useRef([]);
   const [isChoiceModalOpen, setIsChoiceModalOpen] = useState(false);
   const urls = attachmentUrls.map((att) => att.url);
-
-  const isExtImg = (url) => {
-    return url.includes('.webp');
-  };
-
-  const handleDownload = async (s3Url) => {
-    const response = await fetch(s3Url, {
-      mode: 'cors',
-      cache: 'no-store',
-      headers: {
-        'Cache-Control': 'no-cache',
-      },
-    });
-
-    if (response.ok) {
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = isExtImg(s3Url) ? '첨부파일.webp' : '첨부파일.mp4';
-
-      // 자동 다운로드 트리거
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      // URL 정리
-      window.URL.revokeObjectURL(url);
-    }
-  };
-
-  //다수의 첨부파일을 다운받을때 -> zip으로 묶고 다운받기
-  const handleZipDownload = async (urls) => {
-    const zip = new JSZip();
-    for (let i = 0; i < urls.length; i++) {
-      const url = urls[i];
-      const filename = isExtImg(url) ? `첨부파일${i}.webp` : `첨부파일${i}.mp4`;
-      const response = await fetch(url, {
-        mode: 'cors',
-        cache: 'no-store',
-        headers: {
-          'Cache-Control': 'no-cache',
-        },
-      });
-      const blob = await response.blob();
-      zip.file(filename, blob);
-    }
-    const zipContent = await zip.generateAsync({ type: 'blob' });
-    saveAs(zipContent, 'attachments.zip');
-  };
 
   return (
     <div className={styles.fullScreenContainer}>

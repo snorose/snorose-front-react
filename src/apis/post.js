@@ -46,20 +46,10 @@ export const postPost = async ({
     let attachmentUrlList = response.data.result.attachmentUrlList;
 
     //각 S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
-    try {
-      await Promise.all(
-        attachmentUrlList.map((url, index) =>
-          defaultAxios.put(url, attachmentsInfo[index].file, {
-            baseURL: '',
-            headers: {
-              'Content-Type': attachmentsInfo[index].fileType,
-            },
-          })
-        )
-      );
-    } catch (e) {
-      console.log(e);
-    }
+    putFileInBucket(
+      attachmentUrlList,
+      attachmentsInfo.map((att) => att.file)
+    );
   }
   return response;
 };
@@ -107,11 +97,7 @@ export const patchPost = async ({
       .map((att) => att.file);
 
     let attachmentUrlList = response.data.result.attachmentUrlList;
-    await Promise.all(
-      attachmentUrlList.map((url, index) =>
-        defaultAxios.put(url, newFiles[index])
-      )
-    );
+    putFileInBucket(attachmentUrlList, newFiles);
 
     return response;
   } catch (e) {
@@ -139,4 +125,15 @@ export const reportUser = async (body) => {
 //게시글 썸네일 생성
 export const createThumbnail = async (boardId, postId) => {
   await authAxios.post(`/v1/boards/${boardId}/posts/${postId}/thumbnail`);
+};
+
+//S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
+export const putFileInBucket = async (urls, files) => {
+  try {
+    await Promise.all(
+      urls.map((url, index) => defaultAxios.put(url, files[index]))
+    );
+  } catch (e) {
+    console.log(e);
+  }
 };

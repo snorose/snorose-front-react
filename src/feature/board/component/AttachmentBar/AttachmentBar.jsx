@@ -2,7 +2,13 @@ import { React, useRef, useState } from 'react';
 
 import { Icon } from '@/shared/component';
 import { useToast } from '@/shared/hook';
-import { TOAST, ATTACHMENT_SIZE_LIMIT } from '@/shared/constant';
+import { ATTACHMENT_SIZE_LIMIT } from '@/shared/constant';
+import {
+  checkImageQuantity,
+  checkImageSize,
+  checkVideoQuantity,
+  checkVideoSize,
+} from '@/shared/lib';
 
 import styles from './AttachmentBar.module.css';
 
@@ -17,22 +23,17 @@ export default function AttachmentBar({ attachmentsInfo, setAttachmentsInfo }) {
 
   const changeImageUpload = async (e) => {
     const newFiles = e.target.files;
-    //이미지 첨부 개수 제한
-    if (
-      attachmentsInfo.filter((att) => att.type === 'PHOTO').length +
-        newFiles.length >
-      ATTACHMENT_SIZE_LIMIT.imageQuantity
-    ) {
-      toast(TOAST.ATTACHMENT.imageQuantityError);
-      return;
-    }
-
-    //이미지 용량 제한
     const newFileArray = Array.from(newFiles).filter(
       (file) => file.size <= ATTACHMENT_SIZE_LIMIT.imageFileSize
     );
-    if (newFiles.length > newFileArray.length) {
-      toast(TOAST.ATTACHMENT.imageFileSizeError);
+
+    try {
+      //이미지 첨부 개수 제한
+      checkImageQuantity(attachmentsInfo, newFiles, toast);
+      //이미지 용량 제한
+      checkImageSize(newFiles, newFileArray, toast);
+    } catch (e) {
+      return;
     }
 
     //새로 선택한 이미지들을 attachmentsInfo 리스트 맨 뒤에 추가해주기
@@ -52,22 +53,17 @@ export default function AttachmentBar({ attachmentsInfo, setAttachmentsInfo }) {
 
   const changeVideoUpload = async (e) => {
     const newFiles = e.target.files;
-    //영상 첨부 개수 제한
-    if (
-      attachmentsInfo.filter((att) => att.type === 'VIDEO').length +
-        newFiles.length >
-      ATTACHMENT_SIZE_LIMIT.videoQuantity
-    ) {
-      toast(TOAST.ATTACHMENT.videoQuantityError);
-      return;
-    }
-
-    //영상 용량 제한
     const newFileArray = Array.from(newFiles).filter(
       (file) => file.size <= ATTACHMENT_SIZE_LIMIT.videoFileSize
     );
-    if (newFiles.length > newFileArray.length) {
-      toast(TOAST.ATTACHMENT.videoFileSizeError);
+
+    try {
+      //영상 첨부 개수 제한
+      checkVideoQuantity(attachmentsInfo, newFiles, toast);
+      //영상 용량 제한
+      checkVideoSize(newFiles, newFileArray, toast);
+    } catch (e) {
+      return;
     }
 
     //새로 선택한 영상들을 attachmentsInfo 리스트 맨 뒤에 추가해주기
