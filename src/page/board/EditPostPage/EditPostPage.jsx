@@ -272,7 +272,11 @@ export default function EditPostPage() {
                       />
                     ) : (
                       //첨부파일이 영상일 경우
-                      <div className={styles.image}>
+                      <div
+                        className={
+                          styles.image || URL.createObjectURL(att.file)
+                        }
+                      >
                         <video
                           src={att.url}
                           playsInline
@@ -338,7 +342,10 @@ export default function EditPostPage() {
             trashImageConfirmModal.openModal();
           }}
         />
-        <AttachmentBar setAttachmentsInfo={setAttachmentsInfo} />
+        <AttachmentBar
+          attachmentsInfo={attachmentsInfo}
+          setAttachmentsInfo={setAttachmentsInfo}
+        />
       </div>
 
       <DeleteModal

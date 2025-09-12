@@ -1,5 +1,6 @@
 .fullScreenContainer {
   width: 100%;
+  max-width: var(--default-width);
   height: 100vh;
   position: fixed;
   background-color: var(--blue-0);

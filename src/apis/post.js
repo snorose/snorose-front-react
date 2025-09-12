@@ -27,22 +27,18 @@ export const postPost = async ({
   isNotice,
   attachmentsInfo,
 }) => {
-  const data = {
-    category: category,
-    title: title,
-    content: content,
-    isNotice: isNotice,
+  //'게시글 생성' API에서 받아오는 데이터
+  const response = await authAxios.post(`/v1/boards/${boardId}/posts/newpost`, {
+    category,
+    title,
+    content,
+    isNotice,
     attachments: attachmentsInfo.map(({ type, fileName, fileComment }) => ({
       type,
       fileName,
       fileComment,
     })),
-  };
-  //'게시글 생성' API에서 받아오는 데이터
-  const response = await authAxios.post(
-    `/v1/boards/${boardId}/posts/newpost`,
-    data
-  );
+  });
 
   //만일 '게시글 생성' API에 첨부파일을 넘겼더라면
   if (attachmentsInfo.length) {
@@ -66,7 +62,6 @@ export const postPost = async ({
         console.log(e);
       }
     }
-    await defaultAxios;
   }
   return response;
 };
@@ -89,25 +84,25 @@ export const patchPost = async ({
   attachmentsInfo,
   deleteAttachments,
 }) => {
-  const editedPost = {
-    postId,
-    category: null,
-    title: title,
-    content: content,
-    //isNotice: isNotice,
-    finalAttachments: attachmentsInfo.map((att) => ({
-      id: att.id,
-      fileName: att.fileName,
-      fileComment: att.fileComment,
-      type: att.type,
-    })),
-    deleteAttachments,
-  };
-
   try {
     const response = await authAxios.patch(
       `/v1/boards/${boardId}/posts/${postId}/update`,
-      editedPost
+      {
+        postId,
+        category: null,
+        title,
+        content,
+        //isNotice: isNotice,
+        finalAttachments: attachmentsInfo.map(
+          ({ id, fileName, fileComment, type }) => ({
+            id,
+            fileName,
+            fileComment,
+            type,
+          })
+        ),
+        deleteAttachments,
+      }
     );
     const newFiles = attachmentsInfo
       .filter((att) => att.id === '')

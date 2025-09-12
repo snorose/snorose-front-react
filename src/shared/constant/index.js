@@ -10,3 +10,4 @@ export * from './route.js';
 export * from './toast.js';
 export * from './type.js';
 export * from './user.js';
+export * from './attachment.js';
