@@ -46,21 +46,19 @@ export const postPost = async ({
     let attachmentUrlList = response.data.result.attachmentUrlList;
 
     //각 S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
-    for (let x = 0; x < attachmentUrlList.length; x++) {
-      try {
-        await defaultAxios.put(
-          `${attachmentUrlList[x]}`,
-          attachmentsInfo[x].file,
-          {
+    try {
+      await Promise.all(
+        attachmentUrlList.map((url, index) =>
+          defaultAxios.put(url, attachmentsInfo[index].file, {
             baseURL: '',
             headers: {
-              'Content-Type': `${attachmentsInfo[x].fileType}`,
+              'Content-Type': attachmentsInfo[index].fileType,
             },
-          }
-        );
-      } catch (e) {
-        console.log(e);
-      }
+          })
+        )
+      );
+    } catch (e) {
+      console.log(e);
     }
   }
   return response;
@@ -108,9 +106,12 @@ export const patchPost = async ({
       .filter((att) => att.id === '')
       .map((att) => att.file);
 
-    response.data.result.attachmentUrlList.map(async (url, index) => {
-      await defaultAxios.put(`${url}`, newFiles[index]);
-    });
+    let attachmentUrlList = response.data.result.attachmentUrlList;
+    await Promise.all(
+      attachmentUrlList.map((url, index) =>
+        defaultAxios.put(url, newFiles[index])
+      )
+    );
 
     return response;
   } catch (e) {
