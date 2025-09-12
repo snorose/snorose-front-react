@@ -22,20 +22,30 @@ import style from './UserInfoStep.module.css';
 
 export default function UserInfoStep({ setFormData, formData }) {
   const register = useRegister();
+  const navigate = useNavigate();
   const [nicknameStyle, setNicknameStyle] = useState('ready');
   const [stuNumStyle, setStuNumStyle] = useState('ready');
   const [birthdayStyle, setBirthdayStyle] = useState('ready');
-  const navigate = useNavigate();
-  const checkDone = () => {
-    if (
-      nicknameStyle === 'right' &&
-      stuNumStyle === 'right' &&
-      birthdayStyle === 'right' &&
-      formData.name
-    ) {
-      return 'right';
+
+  const isFormValid = () =>
+    nicknameStyle === 'right' &&
+    stuNumStyle === 'right' &&
+    birthdayStyle === 'right' &&
+    formData.name;
+
+  const getButtonState = () => (isFormValid() ? 'right' : 'ready');
+
+  const handleRegister = async () => {
+    if (getButtonState() !== 'right') {
+      alert('모든 필드를 올바르게 입력해주세요.');
+      return;
     }
-    return 'ready';
+    try {
+      await register(formData, navigate);
+    } catch (error) {
+      console.error('회원가입 처리 중 오류:', error);
+      alert('회원가입 처리 중 오류가 발생했습니다.');
+    }
   };
 
   return (
@@ -97,22 +107,30 @@ export default function UserInfoStep({ setFormData, formData }) {
         </div>
       </div>
 
-      <CheckTerms label={'개인정보 수집 및 이용 동의'} required />
+      <CheckTerms
+        label={'개인정보 수집 및 이용 동의'}
+        required
+        navigate={navigate}
+      />
 
       <div className={style.submit}>
         <Button
           btnName='다음으로'
-          className={checkDone()}
-          onClick={() => register(formData, navigate)}
+          className={getButtonState()}
+          onClick={handleRegister}
         />
       </div>
     </div>
   );
 }
 
-function CheckTerms({ label, isChecked = false, required = false }) {
+function CheckTerms({ label, isChecked = false, required = false, navigate }) {
   const tagStyle = required ? style.required : style.optional;
   const tag = required ? '필수' : '선택';
+
+  const handlePrivacyTermClick = () => {
+    navigate('/check-privacy-term');
+  };
 
   return (
     <div className={style.checkTerms}>
@@ -135,7 +153,7 @@ function CheckTerms({ label, isChecked = false, required = false }) {
         <p className={style.checkboxLabel}>{label}</p>
       </label>
 
-      <div className={style.termsLink}>
+      <div className={style.termsLink} onClick={handlePrivacyTermClick}>
         <Icon id='chevron-right' width={20} height={20} />
       </div>
     </div>
