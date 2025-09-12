@@ -28,15 +28,11 @@ export default function ExamReviewListPage() {
   return (
     <section className={styles.container} ref={scrollRef}>
       <AppBar title='시험후기' />
-      <div className={styles.notification}>
-        <Link
-          className={styles.notificationBar}
-          to={`/board/exam-review/notice`}
-        >
-          <Icon id='notice-bell' width={11} height={13} />
-          <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
-        </Link>
-      </div>
+
+      <Link className={styles.notificationBar} to={`/board/exam-review/notice`}>
+        <Icon id='notice-bell' width={11} height={13} />
+        <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
+      </Link>
 
       <Search className={styles.search} placeholder='시험후기 검색' />
       <FilterList>

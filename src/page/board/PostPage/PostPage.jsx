@@ -98,9 +98,8 @@ export default function PostPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.backAppBar}>
-        <BackAppBar backgroundColor={'#eaf5fd'} />
-      </div>
+      <BackAppBar backgroundColor={'#eaf5fd'} />
+
       <div className={styles.content}>
         <div className={styles.contentTop}>
           <div className={styles.contentTopLeft}>
