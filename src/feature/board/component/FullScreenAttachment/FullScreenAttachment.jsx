@@ -56,7 +56,7 @@ export default function FullScreenAttachment({
     const zip = new JSZip();
     for (let i = 0; i < urls.length; i++) {
       const url = urls[i];
-      const filename = isExtImg(url) ? '첨부파일.webp' : '첨부파일.mp4';
+      const filename = isExtImg(url) ? `첨부파일${i}.webp` : `첨부파일${i}.mp4`;
       const response = await fetch(url, {
         mode: 'cors',
         cache: 'no-store',
