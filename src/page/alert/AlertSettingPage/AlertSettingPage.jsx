@@ -1,18 +1,27 @@
-import { Suspense } from 'react';
+import { Suspense, useReducer } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
+import { AppError } from '@/shared/lib';
+import { useToast } from '@/shared/hook';
 import {
   BackAppBar,
   FetchLoading,
   ServerErrorFallback,
 } from '@/shared/component';
 
+import * as notificationSettingsStore from '@/feature/alert/store/notificationSettings';
 import {
-  useNotificationSettings,
+  PushNotificationManager,
+  getDeviceFormFactor,
+  isNotificationUnsupported,
+} from '@/feature/alert/lib';
+import {
   useUpdateNotificationSetting,
+  useNotificationSettings,
 } from '@/feature/alert/hook';
 import { SettingItem } from '@/feature/alert/component';
+import { ERROR_CODE } from '@/feature/alert/constant';
 
 import style from './AlertSettingPage.module.css';
 
@@ -57,22 +66,85 @@ function NotificationSettings() {
   const { data: notificationSettings } = useNotificationSettings();
   const updateSettings = useUpdateNotificationSetting();
 
+  const [state, dispatch] = useReducer(
+    notificationSettingsStore.reducer,
+    notificationSettings
+  );
+
+  const { toast } = useToast();
+
+  const setupNotifications = async () => {
+    try {
+      await PushNotificationManager.ensurePermission();
+
+      const token = await PushNotificationManager.issueToken();
+      const deviceType = getDeviceFormFactor();
+
+      if (PushNotificationManager.isTokenChanged(token)) {
+        await PushNotificationManager.syncWithServer(token, deviceType);
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const onToggle = async (type) => {
+    const prev = state;
+    const action = notificationSettingsStore.actions[type](!state[type]);
+    const next = notificationSettingsStore.reducer(state, action);
+    dispatch(action);
+
+    try {
+      await updateSettings.mutateAsync(next);
+    } catch (error) {
+      const rollbackAction = notificationSettingsStore.actions.hydrate(prev);
+      dispatch(rollbackAction);
+      toast(error.message);
+    }
+  };
+
+  const isUnsupported = isNotificationUnsupported();
+
   return (
     <>
       <div className={style.alert}>
         <SettingItem
           title='알림 받기'
           content={content.alert}
-          isEnabled={notificationSettings.required}
-          onToggle={() => updateSettings.mutate({ type: 'required' })}
+          isEnabled={state.required}
+          onToggle={async () => {
+            if (!state.required) {
+              try {
+                await setupNotifications();
+              } catch (error) {
+                if (!(error instanceof AppError)) {
+                  return;
+                }
+
+                switch (error.code) {
+                  case ERROR_CODE.PERMISSION_JUST_DENIED: {
+                    return;
+                  }
+
+                  default: {
+                    toast(error.message);
+                    return;
+                  }
+                }
+              }
+            }
+
+            await onToggle('required');
+          }}
+          disabled={isUnsupported}
         />
         <SettingItem
           title='광고성 알림 받기'
           content={content.advertisement}
-          isEnabled={notificationSettings.marketing}
-          onToggle={() => updateSettings.mutate({ type: 'marketing' })}
+          isEnabled={state.marketing}
+          onToggle={() => onToggle('marketing')}
           variant='blue'
-          disabled={!notificationSettings.required}
+          disabled={isUnsupported || !state.required}
         />
       </div>
 
@@ -82,10 +154,10 @@ function NotificationSettings() {
         <SettingItem
           title='출석체크 알림'
           content={content.attendance}
-          isEnabled={notificationSettings.attendance}
-          onToggle={() => updateSettings.mutate({ type: 'attendance' })}
+          isEnabled={state.attendance}
+          onToggle={() => onToggle('attendance')}
           variant='blue'
-          disabled={!notificationSettings.required}
+          disabled={isUnsupported || !state.required}
         />
       </div>
     </>

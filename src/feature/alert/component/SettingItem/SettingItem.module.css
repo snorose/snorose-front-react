@@ -20,6 +20,7 @@
   /* disabled */
 
   &.disabled {
+    background: none;
     background-color: var(--grey-1);
 
     .title {

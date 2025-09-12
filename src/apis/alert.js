@@ -31,3 +31,13 @@ export async function updateNotificationSettings(data) {
 
   return response.data.result;
 }
+
+export async function sendFCMToken(token, deviceType = '') {
+  const response = await authAxios.post(
+    '/v1/alerts/token',
+    { fcmToken: token },
+    { headers: { 'X-Device-Type': deviceType } }
+  );
+
+  return response.data.result;
+}
