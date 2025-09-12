@@ -54,7 +54,6 @@ export default function FullScreenAttachment({
   //다수의 첨부파일을 다운받을때 -> zip으로 묶고 다운받기
   const handleZipDownload = async (urls) => {
     const zip = new JSZip();
-    console.log(urls);
     for (let i = 0; i < urls.length; i++) {
       const url = urls[i];
       const filename = isExtImg(url) ? '첨부파일.webp' : '첨부파일.mp4';
