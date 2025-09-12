@@ -1,7 +1,8 @@
 .appBar {
   position: fixed;
   top: 0;
-
+  z-index: var(--z-index-appbar);
+  
   width: 100%;
   max-width: 60rem;
   height: 6rem;
