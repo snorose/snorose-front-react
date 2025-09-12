@@ -1,21 +1,19 @@
 .container {
-  width: 100%;
+  margin-top: 6rem;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.backAppBar {
-  background-color: var(--blue-0);
-  width: 100%;
-}
-
 .content {
   width: 100%;
+
+  padding: 0 var(--default-margin);
+
   display: flex;
   flex-direction: column;
-  /* 양옆 여백 */
-  padding: 5.5rem 2rem 0.9rem;
+
   border-radius: 0 0 1.5rem 1.5rem;
   background-color: var(--blue-0);
 }

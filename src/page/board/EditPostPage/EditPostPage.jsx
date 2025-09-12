@@ -166,12 +166,11 @@ export default function EditPostPage() {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.top}>
-          <CloseAppBar
-            children={<p onClick={handleSubmit}>수정</p>}
-            backgroundColor={'#eaf5fd'}
-          />
-        </div>
+        <CloseAppBar
+          children={<p onClick={handleSubmit}>수정</p>}
+          backgroundColor={'#eaf5fd'}
+        />
+
         <div className={styles.center}>
           <div className={styles.categorySelect}>
             <div className={styles.categorySelectContainer}>

@@ -3,12 +3,18 @@
   height: 100%;
 }
 
+.searchbarBox {
+  box-sizing: border-box;
+
+  margin: 1rem var(--default-margin) 2.4rem var(--default-margin);
+}
+
 .paddingContainer {
   padding: 0 2rem;
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  gap: 2.6rem;
+  gap: 2.4rem;
 }
 
 .header {
@@ -17,12 +23,6 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-}
-
-.searchbarBox {
-  width: 100%;
-  /* 양옆 여백 */
-  padding-top: 1rem;
 }
 
 .searchbar {

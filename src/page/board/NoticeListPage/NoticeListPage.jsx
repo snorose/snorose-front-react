@@ -66,6 +66,7 @@ export default function NoticeListPage() {
         }
         hasNotice={true}
       />
+
       <div className={styles.content}>
         {Array.isArray(noticeList) && noticeList.length > 0 ? (
           noticeList.map((post) => (
