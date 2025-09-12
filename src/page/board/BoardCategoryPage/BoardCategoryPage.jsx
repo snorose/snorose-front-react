@@ -21,10 +21,12 @@ export default function BoardCategoryPage() {
   return (
     <div className={styles.container}>
       <Header />
+
+      <div className={styles.searchbarBox}>
+        <Search placeholder='전체 게시판 내 검색' onKeyDown={handleKeyDown} />
+      </div>
+
       <div className={styles.paddingContainer}>
-        <div className={styles.searchbarBox}>
-          <Search placeholder='전체 게시판 내 검색' onKeyDown={handleKeyDown} />
-        </div>
         <div className={styles.boardBox}>
           <div className={styles.boardTitle}>커뮤니티</div>
           <div className={styles.boardListBox}>
