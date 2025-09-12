@@ -107,6 +107,7 @@ export default function AttachmentBar({ attachmentsInfo, setAttachmentsInfo }) {
           id={isVideoIconHighlighted ? 'video-fill' : 'video'}
           width={24}
           height={24}
+          className={styles.image}
           onClick={() => {
             vid.current.click();
           }}

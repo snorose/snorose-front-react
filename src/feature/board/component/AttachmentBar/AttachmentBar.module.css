@@ -15,6 +15,7 @@
 }
 .image {
   margin-right: 2.4rem;
+  cursor: pointer;
 }
 .imageInput {
   display: none;

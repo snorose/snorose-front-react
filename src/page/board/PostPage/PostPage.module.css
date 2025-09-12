@@ -128,25 +128,25 @@
 }
 .attachmentsContainer {
   width: 100%;
-  height: 9rem;
+  height: 14.4rem;
   user-select: none;
 }
 .attachmentSlide {
-  width: 9rem !important;
+  width: 14.4rem !important;
 }
 .attchmentDiv {
-  width: 9rem; /* Force slide to fit image width */
+  width: 14.4rem; /* Force slide to fit image width */
 }
 .attachment {
   width: 100%;
-  height: 9rem;
+  height: 14.4rem;
   border-radius: 0.75rem;
   object-fit: cover;
 }
 .videoIcon {
   position: absolute;
-  left: 0.5rem;
-  top: 0.5rem;
+  inset: 0;
+  margin: auto;
 }
 .customScrollbar {
   height: 4px;

@@ -366,7 +366,7 @@ export default function WritePostPage() {
               10
             );
             setTrashImageIndex(draggedIndex);
-
+            setIsTrashOverlapped(false);
             trashImageConfirmModal.openModal();
           }}
         />
@@ -383,7 +383,7 @@ export default function WritePostPage() {
         redBtnFunction={() => navigate(-1, { replace: true })}
       />
       <ConfirmModal
-        isBackgroundBlurred={false}
+        isBackgroundBlurred={true}
         isOpen={trashImageConfirmModal.isOpen}
         title='삭제하시겠습니까?'
         primaryButtonText='확인'
@@ -394,11 +394,9 @@ export default function WritePostPage() {
               .slice(0, trashImageIndex)
               .concat(prev.slice(trashImageIndex + 1))
           );
-          setIsTrashOverlapped(false);
           trashImageConfirmModal.closeModal();
         }}
         onSecondaryButtonClick={() => {
-          setIsTrashOverlapped(false);
           trashImageConfirmModal.closeModal();
         }}
       />

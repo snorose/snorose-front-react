@@ -427,20 +427,24 @@
   <symbol id="image" viewBox="0 0 24 24" fill="none">
     <rect x="1" y="1" width="22" height="22" rx="4.8" stroke="#5F86BF" stroke-width="1.8"/>
     <path d="M4.66699 17.3553L8.5452 13.4929C9.79378 12.2495 11.8127 12.2494 13.0613 13.4929L13.7832 14.2118C15.0318 15.4552 17.0507 15.4552 18.2993 14.2118L19.3337 13.1817" stroke="#5F86BF" stroke-width="1.8" stroke-linecap="round"/>
-    <circle cx="16.3838" cy="7.49175" r="1.22222" fill="#5F86BF"/>
+    <circle cx="16.3838" cy="7.49175" r="1.22222" fill="#5F86BF" stroke="#5F86BF"/>
   </symbol>
   <symbol id="image-fill" viewBox="0 0 24 24" fill="none">
     <rect x="1" y="1" width="22" height="22" rx="4.8" fill="#5F86BF" stroke="#5F86BF" stroke-width="2"/>
     <path d="M4.66699 17.3553L8.5452 13.4929C9.79378 12.2495 11.8127 12.2494 13.0613 13.4929L13.7832 14.2118C15.0318 15.4552 17.0507 15.4552 18.2993 14.2118L19.3337 13.1817" stroke="#EAF5FD" stroke-width="2" stroke-linecap="round"/>
-    <circle cx="16.3838" cy="7.49175" r="1.22222" fill="#EAF5FD"/>
+    <circle cx="16.3838" cy="7.49175" r="1.22222" fill="#EAF5FD" stroke="#EAF5FD"/>
   </symbol>
   <symbol id="video" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="12" cy="12" r="11" stroke="#5F86BF" stroke-width="1.8"/>
     <path d="M15.3887 11.1342C16.0553 11.5191 16.0553 12.4813 15.3887 12.8662L11.0553 15.3681C10.3887 15.753 9.55534 15.2719 9.55534 14.5021L9.55534 9.49837C9.55534 8.72857 10.3887 8.24744 11.0553 8.63234L15.3887 11.1342Z" stroke="#5F86BF" stroke-width="1.8"/>
   </symbol>
+  <symbol id="video-opaque" width="40" height="39" viewBox="0 0 40 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20.1599" cy="19.4116" r="18.48" fill="#EAF5FD" fill-opacity="0.5" stroke="#EAF5FD" stroke-width="1.8"/>
+    <path d="M25.8533 17.9576C26.9733 18.6043 26.9733 20.2208 25.8533 20.8675L18.5733 25.0706C17.4533 25.7172 16.0533 24.9089 16.0533 23.6157L16.0533 15.2094C16.0533 13.9162 17.4533 13.1079 18.5733 13.7545L25.8533 17.9576Z" fill="#EAF5FD"/>
+  </symbol>
   <symbol id="video-fill" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="12" cy="12" r="11" fill="#5F86BF" stroke="#5F86BF" stroke-width="2"/>
-    <path d="M15.3889 11.1342C16.0556 11.5191 16.0556 12.4813 15.3889 12.8662L11.0556 15.3681C10.3889 15.753 9.55558 15.2719 9.55558 14.5021L9.55558 9.49837C9.55558 8.72857 10.3889 8.24744 11.0556 8.63234L15.3889 11.1342Z" fill="#EAF5FD"/>
+    <path d="M15.3889 11.1342C16.0556 11.5191 16.0556 12.4813 15.3889 12.8662L11.0556 15.3681C10.3889 15.753 9.55558 15.2719 9.55558 14.5021L9.55558 9.49837C9.55558 8.72857 10.3889 8.24744 11.0556 8.63234L15.3889 11.1342Z" fill="#EAF5FD" stroke="#EAF5FD"/>
   </symbol>
   <symbol id="image-select-bar" viewBox="0 0 31 96" fill="none" >
     <path d="M0.5 0H18.5C25.1274 0 30.5 5.37258 30.5 12V84C30.5 90.6274 25.1274 96 18.5 96H0.5V0Z" fill="white"  stroke="white"/>

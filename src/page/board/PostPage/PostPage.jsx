@@ -271,20 +271,21 @@ export default function PostPage() {
                         }}
                       />
                     ) : (
-                      <div>
+                      <div
+                        onClick={() => {
+                          //이미지 클릭 시 전체화면 보기 가능
+                          setClickedImageIndex(index + 1);
+                        }}
+                      >
                         <video
                           src={item.url}
                           className={styles.attachment}
                           draggable={false}
-                          onClick={() => {
-                            //이미지 클릭 시 전체화면 보기 가능
-                            setClickedImageIndex(index + 1);
-                          }}
                         />
                         <Icon
-                          id='video-fill'
-                          width={'0.875rem'}
-                          height={'0.875rem'}
+                          id='video-opaque'
+                          width={'4rem'}
+                          height={'4rem'}
                           className={styles.videoIcon}
                         />
                       </div>
