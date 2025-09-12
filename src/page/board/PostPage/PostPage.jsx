@@ -33,7 +33,7 @@ export default function PostPage() {
   const { modal, setModal } = useContext(ModalContext);
 
   const { data, isLoading, error, isError } = useQuery({
-    queryKey: [QUERY_KEY.post, postId],
+    queryKey: QUERY_KEY.post(postId),
     queryFn: () => getPostContent(currentBoard?.id, postId),
     staleTime: 1000 * 60 * 5,
     enabled: !!currentBoard?.id && !!postId,
