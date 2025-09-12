@@ -9,6 +9,7 @@
   font: var(--text-headline-1-bold);
   position: fixed;
   top: 0;
+  z-index: var(--z-index-appbar);
 }
 
 .close {
