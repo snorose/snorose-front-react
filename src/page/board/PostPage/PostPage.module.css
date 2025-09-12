@@ -1,37 +1,26 @@
 .container {
   margin-top: 6rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-/* body */
-
-.contentBody {
-  width: 100%;
-
-  padding: 0 var(--default-margin);
-
-  display: flex;
-  flex-direction: column;
-
+.blueContainer {
   padding: 0 var(--default-margin);
 
   border-radius: 0 0 1.5rem 1.5rem;
   background-color: var(--blue-0);
 }
 
-.contentTop {
+/* meta */
+
+.metaContainer {
   display: flex;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
-  color: var(--grey-3-1);
+
   font: var(--text-body-2-reg);
+  color: var(--grey-3-1);
 }
 
-.contentTopLeft {
+.meta {
   display: flex;
   align-items: center;
   gap: 0.7rem;
@@ -47,16 +36,30 @@
   font-weight: 800;
 }
 
-.meatBall {
-  margin-right: -1rem;
-  padding: 1rem;
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.commentBell {
   cursor: pointer;
 }
 
+.meatBall {
+  padding: 1rem;
+  margin-right: -1rem;
+
+  cursor: pointer;
+}
+
+/* title */
+
 .titleContainer {
+  margin: 0.7rem 0 2.6rem 0;
+
   display: flex;
   align-items: flex-end;
-  margin: 0.7rem 0 2.6rem 0;
 }
 
 .title {
@@ -72,7 +75,27 @@
   padding-bottom: 0.7rem;
 }
 
-.postBottom {
+/* content */
+
+.contentText {
+  font: var(--text-headline-2-reg);
+  color: var(--grey-4);
+  padding: 0 1.3rem 1.5rem 0;
+  white-space: pre-wrap;
+  word-break: keep-all;
+
+  a {
+    color: var(--blue-3);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+/* action */
+
+.actionContainer {
   display: flex;
   justify-content: space-between;
   gap: 1.6rem;
@@ -101,24 +124,10 @@
   }
 }
 
+/* comment */
+
 .whiteBox {
   background-color: #fff;
   width: 100%;
   height: 5rem;
-}
-
-.contentText {
-  font: var(--text-headline-2-reg);
-  color: var(--grey-4);
-  padding: 0 1.3rem 1.5rem 0;
-  white-space: pre-wrap;
-  word-break: keep-all;
-
-  a {
-    color: var(--blue-3);
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
 }

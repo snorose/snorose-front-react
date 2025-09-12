@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { getPostContent } from '@/apis';
+
 import { NotFoundPage } from '@/page/etc';
 
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
@@ -14,12 +15,12 @@ import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
 import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
 import { PostModalRenderer } from '@/feature/board/component';
 
+import { useCommentContext } from '@/feature/comment/context';
+import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
+
 import { useReportHandler } from '@/feature/report/hook/useReport';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
-
-import { useCommentContext } from '@/feature/comment/context';
-import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 
 import style from './PostPage.module.css';
 
@@ -89,7 +90,7 @@ export default function PostPage() {
     <div className={style.container}>
       <BackAppBar backgroundColor={'#eaf5fd'} />
 
-      <div className={style.contentBody}>
+      <div className={style.blueContainer}>
         <MetaContainer
           userDisplay={data.userDisplay}
           userRoleId={data.userRoleId}
@@ -97,13 +98,20 @@ export default function PostPage() {
           isEdited={data.isEdited}
           isNotice={data.isNotice}
           isWriter={data.isWriter}
+          isCommentAlertConsent={data.isCommentAlertConsent}
         />
 
-        <BodyContainer
-          title={data.title}
-          viewCount={data.viewCount}
-          content={data.content}
-        />
+        <div className={style.titleContainer}>
+          <h1 className={style.title}>{data.title}</h1>
+          <span className={style.views}>
+            &nbsp;&nbsp;{data.viewCount.toLocaleString()} views
+          </span>
+        </div>
+
+        <p
+          className={style.contentText}
+          dangerouslySetInnerHTML={convertHyperlink(data.content)}
+        ></p>
 
         <ActionContainer
           isNotice={data.isNotice}
@@ -138,6 +146,7 @@ function MetaContainer({
   isEdited,
   isNotice,
   isWriter,
+  isCommentAlertConsent,
 }) {
   const { setModal } = useContext(ModalContext);
 
@@ -146,9 +155,18 @@ function MetaContainer({
     userRoleId === ROLE.official ||
     (userRoleId === ROLE.admin && userDisplay !== '익명송이');
 
+  const onMenuOpen = () => {
+    const id = isWriter ? 'my-post-more-options' : 'post-more-options';
+
+    setModal({
+      id,
+      type: null,
+    });
+  };
+
   return (
-    <div className={style.contentTop}>
-      <div className={style.contentTopLeft}>
+    <div className={style.metaContainer}>
+      <div className={style.meta}>
         <Icon id='cloud' width={25} height={16} />
         <p>{userDisplay || 'Unknown'}</p>
         {showBadge && <Badge userRoleId={userRoleId} className={style.badge} />}
@@ -158,44 +176,27 @@ function MetaContainer({
           {isEdited && ' (수정됨)'}
         </p>
       </div>
-      <div
-        style={{
-          display: isNotice && !isWriter ? 'none' : 'block',
-        }}
-        className={style.meatBall}
-        onClick={() => {
-          isWriter
-            ? setModal({
-                id: 'my-post-more-options',
-                type: null,
-              })
-            : setModal({
-                id: 'post-more-options',
-                type: null,
-              });
-        }}
-      >
-        <Icon id='meat-ball' width={18} height={4} stroke='none' />
+
+      <div className={style.actions}>
+        <div className={style.commentBell}>
+          <Icon
+            id={isCommentAlertConsent ? 'comment-bell-fill' : 'comment-bell'}
+            width={18}
+            height={21}
+          />
+        </div>
+
+        <div
+          className={style.meatBall}
+          style={{
+            display: isNotice && !isWriter ? 'none' : 'block',
+          }}
+          onClick={onMenuOpen}
+        >
+          <Icon id='meat-ball' width={18} height={4} stroke='none' />
+        </div>
       </div>
     </div>
-  );
-}
-
-function BodyContainer({ title, viewCount, content }) {
-  return (
-    <>
-      <div className={style.titleContainer}>
-        <h1 className={style.title}>{title}</h1>
-        <span className={style.views}>
-          &nbsp;&nbsp;{viewCount.toLocaleString()} views
-        </span>
-      </div>
-
-      <p
-        className={style.contentText}
-        dangerouslySetInnerHTML={convertHyperlink(content)}
-      ></p>
-    </>
   );
 }
 
@@ -208,6 +209,7 @@ function ActionContainer({
   scrapCount,
 }) {
   const { postId } = useParams();
+
   const { inputFocus, focusedItem } = useCommentContext();
   const { scrap, unscrap } = useScrap();
   const { like, unlike } = useLike({
@@ -216,7 +218,7 @@ function ActionContainer({
   });
 
   return (
-    <div className={style.postBottom}>
+    <div className={style.actionContainer}>
       <div
         className={style.count}
         style={{
