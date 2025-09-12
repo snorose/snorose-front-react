@@ -17,7 +17,18 @@ export async function fetchNotificationList(category) {
     params: { filter: category },
   });
 
-  return response.data;
+  return response.data.result;
+}
+
+export async function readNotifications(alertIds) {
+  const params = new URLSearchParams();
+  alertIds.forEach((id) => params.append('alertIds', String(id)));
+
+  const response = await authAxios.patch('/v1/alerts/is-read', null, {
+    params,
+  });
+
+  return response.data.result;
 }
 
 export async function fetchNotificationSettings() {
