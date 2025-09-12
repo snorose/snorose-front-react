@@ -185,10 +185,29 @@ export function useUpdateCommentNotificationSetting(boardId, postId) {
         isCommentAlertConsent,
       }),
 
-    onSettled: () => {
-      queryClient.invalidateQueries({
+    onMutate: (next) => {
+      queryClient.cancelQueries({
         queryKey: QUERY_KEY.post(postId),
       });
+
+      const previousData = queryClient.getQueryData(QUERY_KEY.post(postId));
+
+      queryClient.setQueryData(QUERY_KEY.post(postId), (old) => ({
+        ...old,
+        isCommentAlertConsent: next,
+      }));
+
+      return { previousData };
+    },
+
+    onError: (error, variables, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(QUERY_KEY.post(postId), context.previousData);
+      }
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.post(postId) });
     },
   });
 }
