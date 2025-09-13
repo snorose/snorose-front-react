@@ -6,15 +6,17 @@ import {
 
 import {
   fetchNotificationList,
-  fetchNotificationSettings,
   readNotifications,
+  fetchNotificationSettings,
   updateNotificationSettings,
+  updateCommentNotificationSetting,
 } from '@/apis';
 
+import { AppError } from '@/shared/lib';
 import { MUTATION_KEY, QUERY_KEY } from '@/shared/constant';
 
 import { toNotificationItem } from '@/feature/alert/mapper';
-import { CATEGORY } from '@/feature/alert/constant';
+import { CATEGORY, ERROR_CODE, ERROR_MESSAGE } from '@/feature/alert/constant';
 
 export function useNotification(category) {
   return useSuspenseQuery({
@@ -167,6 +169,80 @@ export function useUpdateNotificationSetting() {
         queryKey: QUERY_KEY.notificationSettings,
         refetchType: 'inactive',
       });
+    },
+  });
+}
+
+export function useUpdateCommentNotificationSetting(boardId, postId) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEY.updateCommentNotificationSetting,
+
+    mutationFn: async (isCommentAlertConsent) =>
+      await updateCommentNotificationSetting({
+        boardId,
+        postId,
+        isCommentAlertConsent,
+      }),
+
+    onMutate: (next) => {
+      queryClient.cancelQueries({
+        queryKey: QUERY_KEY.post(postId),
+      });
+
+      const previousData = queryClient.getQueryData(QUERY_KEY.post(postId));
+
+      queryClient.setQueryData(QUERY_KEY.post(postId), (old) => ({
+        ...old,
+        isCommentAlertConsent: next,
+      }));
+
+      return { previousData };
+    },
+
+    onError: (error, variables, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(QUERY_KEY.post(postId), context.previousData);
+      }
+
+      const code = error.response?.data?.code;
+
+      const {
+        COMMENT_ALERT_NOT_AUTHOR,
+        COMMENT_ALERT_POST_NOT_FOUND,
+        COMMENT_ALERT_NO_PERMISSION,
+      } = ERROR_CODE;
+
+      switch (code) {
+        case COMMENT_ALERT_NOT_AUTHOR: {
+          throw new AppError(
+            COMMENT_ALERT_NOT_AUTHOR,
+            ERROR_MESSAGE.COMMENT_ALERT_NOT_AUTHOR
+          );
+        }
+
+        case COMMENT_ALERT_POST_NOT_FOUND: {
+          throw new AppError(
+            COMMENT_ALERT_POST_NOT_FOUND,
+            ERROR_MESSAGE.COMMENT_ALERT_POST_NOT_FOUND
+          );
+        }
+
+        case COMMENT_ALERT_NO_PERMISSION: {
+          throw new AppError(
+            COMMENT_ALERT_NO_PERMISSION,
+            ERROR_MESSAGE.COMMENT_ALERT_NO_PERMISSION
+          );
+        }
+
+        default:
+          throw error;
+      }
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.post(postId) });
     },
   });
 }

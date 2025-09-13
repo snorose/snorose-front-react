@@ -52,7 +52,7 @@ export default function EditPostPage() {
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
-    queryKey: [QUERY_KEY.post, postId],
+    queryKey: QUERY_KEY.post(postId),
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
     placeholderData: {},
@@ -84,7 +84,7 @@ export default function EditPostPage() {
     mutationKey: [MUTATION_KEY.editPost],
     mutationFn: patchPost,
     onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.post, postId]);
+      queryClient.invalidateQueries(QUERY_KEY.post(postId));
       navigate(-1);
       toast(TOAST.POST.edit);
       setSubmitDisabled(false);
@@ -166,12 +166,11 @@ export default function EditPostPage() {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.top}>
-          <CloseAppBar
-            children={<p onClick={handleSubmit}>수정</p>}
-            backgroundColor={'#eaf5fd'}
-          />
-        </div>
+        <CloseAppBar
+          children={<p onClick={handleSubmit}>수정</p>}
+          backgroundColor={'#eaf5fd'}
+        />
+
         <div className={styles.center}>
           <div className={styles.categorySelect}>
             <div className={styles.categorySelectContainer}>

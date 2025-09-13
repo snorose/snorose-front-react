@@ -1,35 +1,26 @@
 .container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top: 6rem;
 }
 
-.backAppBar {
-  background-color: var(--blue-0);
-  width: 100%;
-}
+.blueContainer {
+  padding: 0 var(--default-margin);
 
-.content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  /* 양옆 여백 */
-  padding: 5.5rem 2rem 0.9rem;
   border-radius: 0 0 1.5rem 1.5rem;
   background-color: var(--blue-0);
 }
 
-.contentTop {
+/* meta */
+
+.metaContainer {
   display: flex;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
-  color: var(--grey-3-1);
+
   font: var(--text-body-2-reg);
+  color: var(--grey-3-1);
 }
 
-.contentTopLeft {
+.meta {
   display: flex;
   align-items: center;
   gap: 0.7rem;
@@ -45,16 +36,33 @@
   font-weight: 800;
 }
 
-.meatBall {
-  margin-right: -1rem;
-  padding: 1rem;
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.commentBell {
   cursor: pointer;
 }
 
-.title {
+.meatBall {
+  padding: 1rem;
+  margin-right: -1rem;
+
+  cursor: pointer;
+}
+
+/* title */
+
+.titleContainer {
+  margin: 0.7rem 0 2.6rem 0;
+
   display: flex;
-  align-items: end;
-  padding: 0.8rem 1rem 2.6rem 0;
+  align-items: flex-end;
+}
+
+.title {
   font: var(--text-title-1-bold);
   color: var(--grey-4);
 }
@@ -63,15 +71,35 @@
   white-space: nowrap;
   color: var(--blue-3);
   font-size: 1.1rem;
-  font-weight: 400;
   padding-left: 0.2rem;
+  padding-bottom: 0.7rem;
 }
 
-.postBottom {
+/* content */
+
+.contentText {
+  font: var(--text-headline-2-reg);
+  color: var(--grey-4);
+  padding: 0 1.3rem 1.5rem 0;
+  white-space: pre-wrap;
+  word-break: keep-all;
+
+  a {
+    color: var(--blue-3);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+/* action */
+
+.actionContainer {
   display: flex;
   justify-content: space-between;
   gap: 1.6rem;
-  padding: 0.9rem 0 0;
+  padding: 0.9rem;
   border-top: 0.05rem solid rgba(var(--grey-3-1-rgb), 0.7);
 }
 
@@ -96,24 +124,10 @@
   }
 }
 
+/* comment */
+
 .whiteBox {
   background-color: #fff;
   width: 100%;
   height: 5rem;
-}
-
-.contentText {
-  font: var(--text-headline-2-reg);
-  color: var(--grey-4);
-  padding: 0 1.3rem 1.5rem 0;
-  white-space: pre-wrap;
-  word-break: keep-all;
-
-  a {
-    color: var(--blue-3);
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
 }

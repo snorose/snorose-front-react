@@ -8,7 +8,7 @@ import { getReviewDetail } from '@/apis';
 const ReviewDownloadWrapper = (props) => {
   const { postId } = useParams(); // useParams inside component
   const { data } = useQuery({
-    queryKey: [QUERY_KEY.post, postId],
+    queryKey: QUERY_KEY.post(postId),
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
   });

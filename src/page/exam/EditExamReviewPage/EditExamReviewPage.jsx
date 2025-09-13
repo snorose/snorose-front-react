@@ -130,7 +130,7 @@ export default function EditExamReviewPage() {
     mutationKey: [MUTATION_KEY.editExamReview],
     mutationFn: (edit) => editReviewDetail(postId, edit),
     onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.post, postId]);
+      queryClient.invalidateQueries(QUERY_KEY.post(postId));
       navigate(-1);
       toast(TOAST.EXAM_REVIEW.edit);
     },

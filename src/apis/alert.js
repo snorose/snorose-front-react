@@ -11,6 +11,7 @@ export const getUnreadAlertCount = async () => {
   const count = Number(data?.result ?? 0);
   return Number.isFinite(count) ? count : 0;
 };
+
 export async function fetchNotificationList(category) {
   const response = await authAxios.get('/v1/alerts', {
     params: { filter: category },
@@ -47,6 +48,19 @@ export async function sendFCMToken(token, deviceType = '') {
     '/v1/alerts/token',
     { fcmToken: token },
     { headers: { 'X-Device-Type': deviceType } }
+  );
+
+  return response.data.result;
+}
+
+export async function updateCommentNotificationSetting({
+  boardId,
+  postId,
+  isCommentAlertConsent,
+}) {
+  const response = await authAxios.patch(
+    `/v1/boards/${boardId}/posts/${postId}/comment-alert-consent`,
+    { isCommentAlertConsent }
   );
 
   return response.data.result;

@@ -50,7 +50,7 @@ export default function ExamReviewPage() {
   useModalReset();
 
   const { data, error, isError, isLoading } = useQuery({
-    queryKey: [QUERY_KEY.post, postId],
+    queryKey: QUERY_KEY.post(postId),
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
   });
@@ -113,7 +113,7 @@ export default function ExamReviewPage() {
   } = data ?? {};
 
   return (
-    <main>
+    <section className={styles.container}>
       <div className={styles.top}>
         <BackAppBar backgroundColor={'#eaf5fd'} />
         <div className={styles.displayBox}>
@@ -207,6 +207,6 @@ export default function ExamReviewPage() {
         handleDelete={handleDelete}
       />
       {isLoading && <FetchLoadingOverlay />}
-    </main>
+    </section>
   );
 }
