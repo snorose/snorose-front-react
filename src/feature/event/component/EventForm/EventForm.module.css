@@ -29,18 +29,18 @@
 .contentArea {
   min-height: 15rem;
 }
-.dateRangeWrapper {
+
+.dateSection {
   display: flex;
+  flex-direction: row;
+  gap: 1rem;
   align-items: center;
-  gap: 0.5rem;
-  margin: 0.7rem 0 1.8rem;
-  flex-wrap: wrap;
+  word-break: keep-all;
+  margin-top: 0.7rem;
 }
 
-.dateSeparator {
-  margin: 0 0.5rem;
-  font-size: 1.4rem;
-  color: var(--grey-4);
+.dateSection p {
+  font: var(--text-body-1-med);
 }
 
 .dateInput {
@@ -52,17 +52,10 @@
   color: var(--grey-3-1);
 }
 
-.announceDate {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin: 0.7rem 0 1.8rem;
-  border: 1px solid var(--blue-2);
-  border-radius: 0.5rem;
-  padding: 1.4rem;
-  background-color: transparent;
-  color: var(--grey-3-1);
-  width: 100%;
+.divider {
+  height: 0.1rem;
+  border: 0;
+  background: var(--blue-2);
 }
 
 .counterControls {
@@ -75,7 +68,6 @@
 .minus {
   width: 3rem;
   height: 3rem;
-  font-size: 1.6rem;
   border-radius: 50%;
   border: none;
   background-color: var(--blue-2);
@@ -85,7 +77,6 @@
 .plus {
   width: 3rem;
   height: 3rem;
-  font-size: 1.6rem;
   border-radius: 50%;
   border: none;
   background-color: var(--blue-4);
@@ -93,7 +84,6 @@
 }
 
 .count {
-  font-size: 1.6rem;
   min-width: 2rem;
   text-align: center;
 }
@@ -102,7 +92,6 @@
   border: 1px solid var(--pink-3);
   color: var(--pink-3);
   background-color: var(--pink-1);
-  font-size: 1.6rem;
   margin-bottom: 0.6rem;
 }
 

@@ -117,7 +117,7 @@ export function formattedNowTime() {
   return formattedNowTime;
 }
 
-// 이벤트 페이지
+// 이벤트 페이지 (YYYY-MM-DDTHH:MM)
 export function eventTime(date) {
-  return date ? date.slice(0, 10) : '';
+  return date ? date.slice(0, 16) : '';
 }
