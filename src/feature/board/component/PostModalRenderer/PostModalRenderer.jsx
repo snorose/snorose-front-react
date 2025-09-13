@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import { MoreOptionModal, ConfirmModal, OptionModal } from '@/shared/component';
+import { MoreOptionModal, ConfirmModal, IconOptionModal } from '@/shared/component';
 import { getBoard } from '@/shared/lib';
 import {
   MORE_OPTION_MODAL_TEXT,
@@ -41,7 +41,7 @@ export default function PostModalRenderer({
           // 게시글 신고하기 옵션 리스트 모달
           case 'report-post-types':
             return (
-              <OptionModal
+              <IconOptionModal
                 title='게시글 신고'
                 optionList={OPTION_MODAL_TEXT.REPORT_POST_TYPE_LIST}
               />
@@ -49,7 +49,7 @@ export default function PostModalRenderer({
           // 유저 신고하기 옵션 리스트 모달
           case 'report-user-types':
             return (
-              <OptionModal
+              <IconOptionModal
                 title='이용자 신고'
                 optionList={OPTION_MODAL_TEXT.REPORT_USER_TYPE_LIST}
               />

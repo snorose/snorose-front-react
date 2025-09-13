@@ -1,4 +1,8 @@
-import { MoreOptionModal, ConfirmModal, OptionModal } from '@/shared/component';
+import {
+  MoreOptionModal,
+  ConfirmModal,
+  IconOptionModal,
+} from '@/shared/component';
 import {
   CONFIRM_MODAL_TEXT,
   OPTION_MODAL_TEXT,
@@ -44,7 +48,7 @@ export default function ExamReviewModalRenderer({
           // 시험후기 신고하기 옵션 리스트 모달
           case 'report-exam-review-types':
             return (
-              <OptionModal
+              <IconOptionModal
                 title='시험후기 신고'
                 optionList={OPTION_MODAL_TEXT.REPORT_EXAM_REVIEW_TYPE_LIST}
               />
@@ -52,7 +56,7 @@ export default function ExamReviewModalRenderer({
           // 이용자 신고하기 옵션 리스트 모달
           case 'report-user-types':
             return (
-              <OptionModal
+              <IconOptionModal
                 title='이용자 신고'
                 optionList={OPTION_MODAL_TEXT.REPORT_USER_TYPE_LIST}
               />

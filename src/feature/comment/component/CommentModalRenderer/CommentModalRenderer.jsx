@@ -1,4 +1,8 @@
-import { MoreOptionModal, ConfirmModal, OptionModal } from '@/shared/component';
+import {
+  MoreOptionModal,
+  ConfirmModal,
+  IconOptionModal,
+} from '@/shared/component';
 import { ModalContext } from '@/shared/context/ModalContext';
 import {
   CONFIRM_MODAL_TEXT,
@@ -37,7 +41,7 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
           // 댓글 신고하기 옵션 모달
           case 'report-comment-types':
             return (
-              <OptionModal
+              <IconOptionModal
                 title='댓글 신고'
                 optionList={OPTION_MODAL_TEXT.REPORT_COMMENT_TYPE_LIST}
               />
