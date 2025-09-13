@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
 
 import {
   MoreOptionModal,
@@ -12,7 +13,7 @@ import {
   ICON_OPTION_MODAL,
 } from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
-import { useContext } from 'react';
+import { createOptionActions } from '@/shared/component/Modal/lib/createOptionActions';
 
 export default function PostModalRenderer({
   modal,
@@ -59,46 +60,11 @@ export default function PostModalRenderer({
               <IconOptionModal
                 modalContent={ICON_OPTION_MODAL.REPORT_POST_TYPES}
                 optionActions={{
-                  'post-personal-abuse': () =>
-                    setModal({
-                      id: 'confirm-post-report',
-                      type: 'POST_PERSONAL_ABUSE',
-                    }),
-                  'post-commercial-ad': () =>
-                    setModal({
-                      id: 'confirm-post-report',
-                      type: 'POST_COMMERCIAL_AD',
-                    }),
-                  'post-illegal-distribution': () =>
-                    setModal({
-                      id: 'confirm-post-report',
-                      type: 'POST_ILLEGAL_DISTRIBUTION',
-                    }),
-                  'post-privacy-violation': () =>
-                    setModal({
-                      id: 'confirm-post-report',
-                      type: 'POST_PRIVACY_VIOLATION',
-                    }),
-                  'post-incitement-division': () =>
-                    setModal({
-                      id: 'confirm-post-report',
-                      type: 'POST_INCITEMENT_DIVISION',
-                    }),
-                  'post-adult-content': () =>
-                    setModal({
-                      id: 'confirm-post-report',
-                      type: 'POST_ADULT_CONTENT',
-                    }),
-                  'post-insincere-content': () =>
-                    setModal({
-                      id: 'confirm-post-report',
-                      type: 'POST_INSINCERE_CONTENT',
-                    }),
-                  'post-hateful-content': () =>
-                    setModal({
-                      id: 'confirm-post-report',
-                      type: 'POST_HATEFUL_CONTENT',
-                    }),
+                  ...createOptionActions(
+                    setModal,
+                    ICON_OPTION_MODAL.REPORT_POST_TYPES.options,
+                    'confirm-post-report'
+                  ),
                 }}
               />
             );
@@ -108,31 +74,11 @@ export default function PostModalRenderer({
               <IconOptionModal
                 modalContent={ICON_OPTION_MODAL.REPORT_USER_TYPES}
                 optionActions={{
-                  'user-impersonation': () =>
-                    setModal({
-                      id: 'confirm-user-report',
-                      type: 'USER_IMPERSONATION',
-                    }),
-                  'user-fraud': () =>
-                    setModal({
-                      id: 'confirm-user-report',
-                      type: 'USER_FRAUD',
-                    }),
-                  'user-external-party': () =>
-                    setModal({
-                      id: 'confirm-user-report',
-                      type: 'USER_EXTERNAL_PARTY',
-                    }),
-                  'user-harassment': () =>
-                    setModal({
-                      id: 'confirm-user-report',
-                      type: 'USER_HARASSMENT',
-                    }),
-                  'user-other': () =>
-                    setModal({
-                      id: 'confirm-user-report',
-                      type: 'USER_OTHER',
-                    }),
+                  ...createOptionActions(
+                    setModal,
+                    ICON_OPTION_MODAL.REPORT_USER_TYPES.options,
+                    'confirm-user-report'
+                  ),
                 }}
               />
             );

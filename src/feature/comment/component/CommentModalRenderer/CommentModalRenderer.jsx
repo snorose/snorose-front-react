@@ -1,20 +1,22 @@
+import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+
 import {
   MoreOptionModal,
   ConfirmModal,
   IconOptionModal,
 } from '@/shared/component';
 import { ModalContext } from '@/shared/context/ModalContext';
+import { createOptionActions } from '@/shared/component/Modal/lib/createOptionActions';
 import {
   CONFIRM_MODAL,
   MORE_OPTION_MODAL,
   ICON_OPTION_MODAL,
 } from '@/shared/constant';
 
-import { useLocation } from 'react-router-dom';
 import { useCommentContext } from '../../context';
 import { useReportHandler } from '@/feature/report/hook/useReport';
 import { useComment } from '../../hook';
-import { useContext } from 'react';
 
 export default function CommentModalRenderer({ data, moreOptionTop }) {
   const { pathname } = useLocation();
@@ -49,41 +51,11 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
               <IconOptionModal
                 modalContent={ICON_OPTION_MODAL.REPORT_COMMENT_TYPES}
                 optionActions={{
-                  'comment-personal-abuse': () =>
-                    setModal({
-                      id: 'confirm-comment-report',
-                      type: 'COMMENT_PERSONAL_ABUSE',
-                    }),
-                  'comment-commercial-ad': () =>
-                    setModal({
-                      id: 'confirm-comment-report',
-                      type: 'COMMENT_COMMERCIAL_AD',
-                    }),
-                  'comment-privacy-violation': () =>
-                    setModal({
-                      id: 'confirm-comment-report',
-                      type: 'COMMENT_PRIVACY_VIOLATION',
-                    }),
-                  'comment-incitement-division': () =>
-                    setModal({
-                      id: 'confirm-comment-report',
-                      type: 'COMMENT_INCITEMENT_DIVISION',
-                    }),
-                  'comment-adult-content': () =>
-                    setModal({
-                      id: 'confirm-comment-report',
-                      type: 'COMMENT_ADULT_CONTENT',
-                    }),
-                  'comment-spam': () =>
-                    setModal({
-                      id: 'confirm-comment-report',
-                      type: 'COMMENT_SPAM',
-                    }),
-                  'comment-other': () =>
-                    setModal({
-                      id: 'confirm-comment-report',
-                      type: 'COMMENT_OTHER',
-                    }),
+                  ...createOptionActions(
+                    setModal,
+                    ICON_OPTION_MODAL.REPORT_COMMENT_TYPES.options,
+                    'confirm-comment-report'
+                  ),
                 }}
               />
             );
