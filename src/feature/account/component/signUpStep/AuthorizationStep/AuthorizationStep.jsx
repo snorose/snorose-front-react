@@ -16,6 +16,30 @@ export default function AuthorizationStep({ email, setStage }) {
     sendUser(email);
   }, [email]);
 
+  // 인증 처리 함수
+  const handleVerification = async (e) => {
+    e.preventDefault();
+
+    try {
+      // authNum이 객체인 경우와 문자열인 경우를 모두 처리
+      const authCode = typeof authNum === 'object' ? authNum.authNum : authNum;
+
+      const res = await certifyUser({
+        email: email,
+        authNum: authCode,
+      });
+
+      if (res) {
+        setStage(3); // 직접 3단계로 설정
+      } else {
+        setCodeStyle('wrong');
+      }
+    } catch (error) {
+      console.error('인증 처리 중 오류:', error);
+      setCodeStyle('wrong');
+    }
+  };
+
   return (
     <>
       <div>
@@ -42,20 +66,8 @@ export default function AuthorizationStep({ email, setStage }) {
         <Button
           btnName='다음으로'
           className={'right'}
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-          onClick={(e) => {
-            certifyUser({ email: email, authNum: authNum.authNum }).then(
-              (res) => {
-                if (res) {
-                  setStage((prev) => prev + 1);
-                } else {
-                  setCodeStyle('wrong');
-                }
-              }
-            );
-          }}
+          onSubmit={handleVerification}
+          onClick={handleVerification}
         />
       </div>
     </>

@@ -10,6 +10,7 @@ import { taskFailedIllustration } from '@/assets/illustrations';
 export default function NotFoundIdPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
+
   useEffect(() => {
     try {
       const checkAccess = state.access;
