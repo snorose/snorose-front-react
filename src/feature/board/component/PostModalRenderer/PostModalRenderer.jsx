@@ -9,7 +9,7 @@ import { getBoard } from '@/shared/lib';
 import {
   MORE_OPTION_MODAL,
   CONFIRM_MODAL,
-  OPTION_MODAL,
+  ICON_OPTION_MODAL,
 } from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
@@ -32,7 +32,7 @@ export default function PostModalRenderer({
           case 'post-more-options':
             return (
               <MoreOptionModal
-                modalContent={MORE_OPTION_MODAL.POST_MORE_OPTION}
+                modalContent={MORE_OPTION_MODAL.POST_MORE_OPTIONS}
                 optionActions={{
                   'report-post': () =>
                     setModal({ id: 'report-post-types', type: null }),
@@ -45,7 +45,7 @@ export default function PostModalRenderer({
           case 'my-post-more-options':
             return (
               <MoreOptionModal
-                modalContent={MORE_OPTION_MODAL.MY_POST_MORE_OPTION}
+                modalContent={MORE_OPTION_MODAL.MY_POST_MORE_OPTIONS}
                 optionActions={{
                   'edit-post': () => handleEdit(),
                   'delete-post': () =>
@@ -57,7 +57,7 @@ export default function PostModalRenderer({
           case 'report-post-types':
             return (
               <IconOptionModal
-                modalContent={OPTION_MODAL.REPORT_POST_TYPES}
+                modalContent={ICON_OPTION_MODAL.REPORT_POST_TYPES}
                 optionActions={{
                   'post-personal-abuse': () =>
                     setModal({
@@ -106,7 +106,7 @@ export default function PostModalRenderer({
           case 'report-user-types':
             return (
               <IconOptionModal
-                modalContent={OPTION_MODAL.REPORT_USER_TYPES}
+                modalContent={ICON_OPTION_MODAL.REPORT_USER_TYPES}
                 optionActions={{
                   'user-impersonation': () =>
                     setModal({

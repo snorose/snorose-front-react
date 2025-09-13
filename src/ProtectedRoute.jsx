@@ -4,7 +4,7 @@ import { useAuth } from '@/shared/hook';
 import {
   USER_STATUS,
   CONFIRM_MODAL,
-  TEXT_OPTION_MODAL_TEXT,
+  TEXT_OPTION_MODAL,
 } from '@/shared/constant';
 import { ConfirmModal, TextOptionModal } from '@/shared/component';
 
@@ -28,7 +28,7 @@ export default function ProtectedRoute({ roles, message, children }) {
     if (message === '이미 인증을 완료했거나 인증 대상이 아니에요') {
       return (
         <TextOptionModal
-          modalContent={TEXT_OPTION_MODAL_TEXT.ALREADY_VERIFIED}
+          modalContent={TEXT_OPTION_MODAL.ALREADY_VERIFIED}
           optionActions={{
             home: () => navigate('/', { replace: true }),
           }}

@@ -5,7 +5,7 @@ import {
 } from '@/shared/component';
 import {
   CONFIRM_MODAL,
-  OPTION_MODAL,
+  ICON_OPTION_MODAL,
   MORE_OPTION_MODAL,
 } from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
@@ -35,7 +35,7 @@ export default function ExamReviewModalRenderer({
           case 'exam-review-more-options':
             return (
               <MoreOptionModal
-                modalContent={MORE_OPTION_MODAL.EXAM_REVIEW_MORE_OPTION}
+                modalContent={MORE_OPTION_MODAL.EXAM_REVIEW_MORE_OPTIONS}
                 optionActions={{
                   'report-exam-review': () =>
                     setModal({ id: 'report-exam-review-types', type: null }),
@@ -48,7 +48,7 @@ export default function ExamReviewModalRenderer({
           case 'my-exam-review-more-options':
             return (
               <MoreOptionModal
-                modalContent={MORE_OPTION_MODAL.MY_EXAM_REVIEW_MORE_OPTION}
+                modalContent={MORE_OPTION_MODAL.MY_EXAM_REVIEW_MORE_OPTIONS}
                 optionActions={{
                   'edit-exam-review': () => handleEdit(),
                   'delete-exam-review': () =>
@@ -60,11 +60,11 @@ export default function ExamReviewModalRenderer({
           case 'report-exam-review-types':
             return (
               <IconOptionModal
-                modalContent={OPTION_MODAL.REPORT_EXAM_REVIEW_TYPES}
+                modalContent={ICON_OPTION_MODAL.REPORT_EXAM_REVIEW_TYPES}
                 optionActions={{
                   ...createOptionActions(
                     setModal,
-                    OPTION_MODAL.REPORT_EXAM_REVIEW_TYPES.options,
+                    ICON_OPTION_MODAL.REPORT_EXAM_REVIEW_TYPES.options,
                     'confirm-exam-review-report'
                   ),
                 }}
@@ -74,11 +74,11 @@ export default function ExamReviewModalRenderer({
           case 'report-user-types':
             return (
               <IconOptionModal
-                modalContent={OPTION_MODAL.REPORT_USER_TYPES}
+                modalContent={ICON_OPTION_MODAL.REPORT_USER_TYPES}
                 optionActions={{
                   ...createOptionActions(
                     setModal,
-                    OPTION_MODAL.REPORT_USER_TYPES.options,
+                    ICON_OPTION_MODAL.REPORT_USER_TYPES.options,
                     'confirm-user-report'
                   ),
                 }}

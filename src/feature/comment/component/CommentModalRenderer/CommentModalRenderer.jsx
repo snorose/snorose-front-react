@@ -7,7 +7,7 @@ import { ModalContext } from '@/shared/context/ModalContext';
 import {
   CONFIRM_MODAL,
   MORE_OPTION_MODAL,
-  OPTION_MODAL,
+  ICON_OPTION_MODAL,
 } from '@/shared/constant';
 
 import { useLocation } from 'react-router-dom';
@@ -33,7 +33,7 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
             return commentId === data.id ||
               data.children.some((child) => child.id === commentId) ? (
               <MoreOptionModal
-                modalContent={MORE_OPTION_MODAL.COMMENT_MORE_OPTION}
+                modalContent={MORE_OPTION_MODAL.COMMENT_MORE_OPTIONS}
                 optionActions={{
                   'report-comment': () =>
                     setModal({ id: 'report-comment-types', type: null }),
@@ -47,7 +47,7 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
           case 'report-comment-types':
             return (
               <IconOptionModal
-                modalContent={OPTION_MODAL.REPORT_COMMENT_TYPES}
+                modalContent={ICON_OPTION_MODAL.REPORT_COMMENT_TYPES}
                 optionActions={{
                   'comment-personal-abuse': () =>
                     setModal({

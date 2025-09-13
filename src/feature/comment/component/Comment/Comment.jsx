@@ -203,7 +203,7 @@ const Comment = forwardRef((props, ref) => {
             data.children.some((child) => child.id === commentId)) && (
             // 내 댓글 더보기 클릭 시 뜨는 모달
             <MoreOptionModal
-              modalContent={MORE_OPTION_MODAL.MY_COMMENT_MORE_OPTION}
+              modalContent={MORE_OPTION_MODAL.MY_COMMENT_MORE_OPTIONS}
               optionActions={{
                 'edit-comment': () => handleEdit(),
                 'delete-comment': () =>
