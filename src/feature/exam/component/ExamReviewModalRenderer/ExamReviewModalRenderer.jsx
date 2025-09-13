@@ -4,12 +4,13 @@ import {
   IconOptionModal,
 } from '@/shared/component';
 import {
-  CONFIRM_MODAL_TEXT,
+  CONFIRM_MODAL,
   OPTION_MODAL,
   MORE_OPTION_MODAL,
 } from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
+import { createOptionActions } from '@/shared/component/Modal/lib/createOptionActions';
 
 export default function ExamReviewModalRenderer({
   modal,
@@ -26,7 +27,7 @@ export default function ExamReviewModalRenderer({
           case 'exam-review-download':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.EXAM_REVIEW_DUPLICATION}
+                modalContent={CONFIRM_MODAL.EXAM_REVIEW_DUPLICATION}
                 onConfirm={handleReport}
               />
             );
@@ -61,46 +62,11 @@ export default function ExamReviewModalRenderer({
               <IconOptionModal
                 modalContent={OPTION_MODAL.REPORT_EXAM_REVIEW_TYPES}
                 optionActions={{
-                  'post-personal-abuse': () =>
-                    setModal({
-                      id: 'confirm-exam-review-report',
-                      type: 'POST_PERSONAL_ABUSE',
-                    }),
-                  'post-commercial-ad': () =>
-                    setModal({
-                      id: 'confirm-exam-review-report',
-                      type: 'POST_COMMERCIAL_AD',
-                    }),
-                  'post-illegal-distribution': () =>
-                    setModal({
-                      id: 'confirm-exam-review-report',
-                      type: 'POST_ILLEGAL_DISTRIBUTION',
-                    }),
-                  'post-privacy-violation': () =>
-                    setModal({
-                      id: 'confirm-exam-review-report',
-                      type: 'POST_PRIVACY_VIOLATION',
-                    }),
-                  'post-incitement-division': () =>
-                    setModal({
-                      id: 'confirm-exam-review-report',
-                      type: 'POST_INCITEMENT_DIVISION',
-                    }),
-                  'post-adult-content': () =>
-                    setModal({
-                      id: 'confirm-exam-review-report',
-                      type: 'POST_ADULT_CONTENT',
-                    }),
-                  'post-insincere-content': () =>
-                    setModal({
-                      id: 'confirm-exam-review-report',
-                      type: 'POST_INSINCERE_CONTENT',
-                    }),
-                  'post-hateful-content': () =>
-                    setModal({
-                      id: 'confirm-exam-review-report',
-                      type: 'POST_HATEFUL_CONTENT',
-                    }),
+                  ...createOptionActions(
+                    setModal,
+                    OPTION_MODAL.REPORT_EXAM_REVIEW_TYPES.options,
+                    'confirm-exam-review-report'
+                  ),
                 }}
               />
             );
@@ -110,25 +76,11 @@ export default function ExamReviewModalRenderer({
               <IconOptionModal
                 modalContent={OPTION_MODAL.REPORT_USER_TYPES}
                 optionActions={{
-                  'user-impersonation': () =>
-                    setModal({
-                      id: 'confirm-user-report',
-                      type: 'USER_IMPERSONATION',
-                    }),
-                  'user-fraud': () =>
-                    setModal({ id: 'confirm-user-report', type: 'USER_FRAUD' }),
-                  'user-external-party': () =>
-                    setModal({
-                      id: 'confirm-user-report',
-                      type: 'USER_EXTERNAL_PARTY',
-                    }),
-                  'user-harassment': () =>
-                    setModal({
-                      id: 'confirm-user-report',
-                      type: 'USER_HARASSMENT',
-                    }),
-                  'user-other': () =>
-                    setModal({ id: 'confirm-user-report', type: 'USER_OTHER' }),
+                  ...createOptionActions(
+                    setModal,
+                    OPTION_MODAL.REPORT_USER_TYPES.options,
+                    'confirm-user-report'
+                  ),
                 }}
               />
             );
@@ -136,7 +88,7 @@ export default function ExamReviewModalRenderer({
           case 'confirm-exam-review-report':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_EXAM_REVIEW}
+                modalContent={CONFIRM_MODAL.REPORT_EXAM_REVIEW}
                 onConfirm={handleReport}
               />
             );
@@ -144,7 +96,7 @@ export default function ExamReviewModalRenderer({
           case 'confirm-user-report':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_USER}
+                modalContent={CONFIRM_MODAL.REPORT_USER}
                 onConfirm={handleReport}
               />
             );
@@ -152,7 +104,7 @@ export default function ExamReviewModalRenderer({
           case 'confirm-exam-review-delete':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.DELETE_EXAM_REVIEW}
+                modalContent={CONFIRM_MODAL.DELETE_EXAM_REVIEW}
                 onConfirm={handleDelete}
               />
             );

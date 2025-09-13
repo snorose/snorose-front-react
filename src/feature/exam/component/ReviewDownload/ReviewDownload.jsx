@@ -8,7 +8,7 @@ import {
   LOADING_MESSAGE,
   QUERY_KEY,
   TOAST,
-  CONFIRM_MODAL_TEXT,
+  CONFIRM_MODAL,
 } from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
 
@@ -96,7 +96,7 @@ export default function ReviewDownload({
       </button>
       {modal.id === 'exam-review-download' && (
         <ConfirmModal
-          modalText={CONFIRM_MODAL_TEXT.EXAM_REVIEW_DOWNLOAD}
+          modalContent={CONFIRM_MODAL.EXAM_REVIEW_DOWNLOAD}
           onConfirm={handleDownload}
         />
       )}

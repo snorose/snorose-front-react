@@ -8,7 +8,7 @@ import {
 import { getBoard } from '@/shared/lib';
 import {
   MORE_OPTION_MODAL,
-  CONFIRM_MODAL_TEXT,
+  CONFIRM_MODAL,
   OPTION_MODAL,
 } from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
@@ -140,7 +140,7 @@ export default function PostModalRenderer({
           case 'confirm-post-report':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_POST}
+                modalContent={CONFIRM_MODAL.REPORT_POST}
                 onConfirm={handleReport}
               />
             );
@@ -148,7 +148,7 @@ export default function PostModalRenderer({
           case 'confirm-user-report':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_USER}
+                modalContent={CONFIRM_MODAL.REPORT_USER}
                 onConfirm={handleReport}
               />
             );
@@ -156,10 +156,10 @@ export default function PostModalRenderer({
           case 'confirm-post-delete':
             return (
               <ConfirmModal
-                modalText={
+                modalContent={
                   currentBoard.id !== 23
-                    ? CONFIRM_MODAL_TEXT.DELETE_POST
-                    : CONFIRM_MODAL_TEXT.DELETE_POST_WITHOUT_POINT_DEDUCTION
+                    ? CONFIRM_MODAL.DELETE_POST
+                    : CONFIRM_MODAL.DELETE_POST_WITHOUT_POINT_DEDUCTION
                 }
                 onConfirm={handleDelete}
               />

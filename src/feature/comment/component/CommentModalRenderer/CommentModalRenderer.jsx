@@ -5,7 +5,7 @@ import {
 } from '@/shared/component';
 import { ModalContext } from '@/shared/context/ModalContext';
 import {
-  CONFIRM_MODAL_TEXT,
+  CONFIRM_MODAL,
   MORE_OPTION_MODAL,
   OPTION_MODAL,
 } from '@/shared/constant';
@@ -91,7 +91,7 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
           case 'confirm-comment-report':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_COMMENT}
+                modalContent={CONFIRM_MODAL.REPORT_COMMENT}
                 onConfirm={handleReport}
               />
             );
@@ -99,11 +99,11 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
           case 'confirm-comment-delete':
             return (
               <ConfirmModal
-                modalText={
+                modalContent={
                   pathname.startsWith('/board/permanent-snow') ||
                   pathname.startsWith('/board/exam-review')
-                    ? CONFIRM_MODAL_TEXT.DELETE_COMMENT_WITHOUT_POINT_DEDUCTION
-                    : CONFIRM_MODAL_TEXT.DELETE_COMMENT
+                    ? CONFIRM_MODAL.DELETE_COMMENT_WITHOUT_POINT_DEDUCTION
+                    : CONFIRM_MODAL.DELETE_COMMENT
                 }
                 onConfirm={() => {
                   deleteComment.mutate({ commentId });

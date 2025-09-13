@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/shared/hook';
 import {
   USER_STATUS,
-  CONFIRM_MODAL_TEXT,
+  CONFIRM_MODAL,
   TEXT_OPTION_MODAL_TEXT,
 } from '@/shared/constant';
 import { ConfirmModal, TextOptionModal } from '@/shared/component';
@@ -36,14 +36,9 @@ export default function ProtectedRoute({ roles, message, children }) {
       );
     }
 
-    const modalText = {
-      ...CONFIRM_MODAL_TEXT.ACCESS_DENIED,
-      title: message,
-    };
-
     return (
       <ConfirmModal
-        modalText={modalText}
+        modalContent={CONFIRM_MODAL.ACCESS_DENIED}
         onConfirm={() => navigate('/verify', { replace: true })}
         onCancel={() => navigate(-1)}
       />

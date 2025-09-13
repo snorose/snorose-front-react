@@ -17,7 +17,7 @@ import {
   QUERY_KEY,
   ROLE,
   TOAST,
-  CONFIRM_MODAL_TEXT,
+  CONFIRM_MODAL,
 } from '@/shared/constant';
 import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
@@ -276,7 +276,7 @@ export default function WritePostPage() {
       </div>
       {modal.id === 'exit-page' && (
         <ConfirmModal
-          modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+          modalContent={CONFIRM_MODAL.EXIT_PAGE}
           onConfirm={handleExitPage}
         />
       )}

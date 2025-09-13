@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '@/shared/hook';
 import { CloseAppBar, PwInput, Icon, ConfirmModal } from '@/shared/component';
 import { ModalContext } from '@/shared/context/ModalContext';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant';
+import { CONFIRM_MODAL } from '@/shared/constant';
 
 import styles from './DeleteAccountPage.module.css';
 
@@ -77,7 +77,7 @@ export default function DeleteAccountPage() {
       </section>
       {modal.id === 'withdraw-account' && (
         <ConfirmModal
-          modalText={CONFIRM_MODAL_TEXT.WITHDRAW_ACCOUNT}
+          modalContent={CONFIRM_MODAL.WITHDRAW_ACCOUNT}
           onConfirm={handleModalPrimaryButtonClick}
         />
       )}

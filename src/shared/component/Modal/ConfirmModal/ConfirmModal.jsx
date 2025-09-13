@@ -3,7 +3,7 @@ import styles from './ConfirmModal.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
 
-export default function ConfirmModal({ modalText, onConfirm, onCancel }) {
+export default function ConfirmModal({ modalContent, onConfirm, onCancel }) {
   const { modal, setModal } = useContext(ModalContext);
 
   const handleCancel = () => {
@@ -15,12 +15,12 @@ export default function ConfirmModal({ modalText, onConfirm, onCancel }) {
       <div className={styles.top}>
         <h3
           className={styles.title}
-          dangerouslySetInnerHTML={{ __html: modalText.title }}
+          dangerouslySetInnerHTML={{ __html: modalContent.title }}
         />
-        {modalText.description && (
+        {modalContent.description && (
           <p
             className={styles.description}
-            dangerouslySetInnerHTML={{ __html: modalText.description }}
+            dangerouslySetInnerHTML={{ __html: modalContent.description }}
           />
         )}
       </div>
@@ -29,14 +29,14 @@ export default function ConfirmModal({ modalText, onConfirm, onCancel }) {
           className={`${styles.bottomButton} ${styles.leftHover}`}
           onClick={handleCancel}
         >
-          {modalText.cancelText}
+          {modalContent.cancelText}
         </button>
         <div className={styles.buttonDivider} />
         <button
           className={`${styles.bottomButton} ${styles.rightHover}`}
           onClick={onConfirm}
         >
-          {modalText.confirmText}
+          {modalContent.confirmText}
         </button>
       </div>
     </DimModalLayout>
