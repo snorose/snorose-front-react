@@ -59,7 +59,7 @@ export default function WriteExamReviewPage() {
         result: { postId },
       } = data;
 
-      queryClient.removeQueries([QUERY_KEY.post]);
+      queryClient.removeQueries(QUERY_KEY.post());
       invalidUserInfoQuery();
       toast(TOAST.EXAM_REVIEW.create);
       navigate(`/board/exam-review/post/${postId}`, { replace: true });

@@ -52,3 +52,16 @@ export async function sendFCMToken(token, deviceType = '') {
 
   return response.data.result;
 }
+
+export async function updateCommentNotificationSetting({
+  boardId,
+  postId,
+  isCommentAlertConsent,
+}) {
+  const response = await authAxios.patch(
+    `/v1/boards/${boardId}/posts/${postId}/comment-alert-consent`,
+    { isCommentAlertConsent }
+  );
+
+  return response.data.result;
+}
