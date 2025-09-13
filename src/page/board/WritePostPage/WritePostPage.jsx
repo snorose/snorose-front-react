@@ -312,14 +312,6 @@ export default function WritePostPage() {
                           src={URL.createObjectURL(file)}
                           playsInline
                           className={styles.video}
-                          onClick={(e) => {
-                            const video = e.target;
-                            if (video.paused) {
-                              video.play();
-                            } else {
-                              video.pause();
-                            }
-                          }}
                         />
                         <Icon
                           id='video-fill'

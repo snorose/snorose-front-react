@@ -15,8 +15,6 @@ export default function FullScreenAttachment({
   setClickedImageIndex,
 }) {
   const paginationRef = useRef(null);
-  //스와이핑 액션에 대해 video와 swiper이 충돌이 나서, js 코드로 직접 영상을 틀어줘야함 -> ref 필요
-  const videoRefs = useRef([]);
   const swiperRef = useRef(null);
   const [isChoiceModalOpen, setIsChoiceModalOpen] = useState(false);
   const urls = attachmentUrls.map((att) => att.url);
@@ -66,6 +64,11 @@ export default function FullScreenAttachment({
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
+          onSlideChangeTransitionStart={(swiper) => {
+            const videoToPause =
+              swiper.slides[swiper.previousIndex].querySelector('video');
+            if (videoToPause) videoToPause.pause();
+          }}
         >
           {attachmentUrls.map((att, index) => (
             <SwiperSlide key={index} className={styles.attachmentsSlide}>
@@ -76,21 +79,8 @@ export default function FullScreenAttachment({
                   draggable={false}
                 />
               ) : (
-                <div
-                  className={styles.videoWrapper}
-                  onClick={() => {
-                    const video = videoRefs.current[index];
-                    if (video.paused) {
-                      video.play();
-                    } else {
-                      video.pause();
-                    }
-                  }}
-                >
+                <div className={styles.videoWrapper}>
                   <video
-                    //videoRefs의 첨부파일 index 위치에 el (video element) 저장
-                    //특정 index 위치에만 video가 저장되고, 비어있는 index들은 자동으로 undefined가 채워짐
-                    ref={(el) => (videoRefs.current[index] = el)}
                     src={att.url}
                     className={`${styles.attachment} ${styles.videoElement}`}
                     draggable={false}
@@ -98,6 +88,10 @@ export default function FullScreenAttachment({
                     onLoadedMetadata={() => {
                       // 해당 코드가 없을시 전체화면 슬라이드 시작점을 영상으로 잡으면 영상의 위치가 이상함
                       swiperRef.current?.updateAutoHeight();
+                    }}
+                    onDragStart={(e) => {
+                      console.log('dragging');
+                      e.preventDefault();
                     }}
                   />
                 </div>
