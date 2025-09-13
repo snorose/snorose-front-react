@@ -17,6 +17,7 @@ export default function FullScreenAttachment({
   const paginationRef = useRef(null);
   //스와이핑 액션에 대해 video와 swiper이 충돌이 나서, js 코드로 직접 영상을 틀어줘야함 -> ref 필요
   const videoRefs = useRef([]);
+  const swiperRef = useRef(null);
   const [isChoiceModalOpen, setIsChoiceModalOpen] = useState(false);
   const urls = attachmentUrls.map((att) => att.url);
 
@@ -62,6 +63,9 @@ export default function FullScreenAttachment({
             el: '.swiper-custom-pagination',
             type: 'fraction',
           }}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
         >
           {attachmentUrls.map((att, index) => (
             <SwiperSlide key={index} className={styles.attachmentsSlide}>
@@ -91,6 +95,10 @@ export default function FullScreenAttachment({
                     className={`${styles.attachment} ${styles.videoElement}`}
                     draggable={false}
                     controls
+                    onLoadedMetadata={() => {
+                      // 해당 코드가 없을시 전체화면 슬라이드 시작점을 영상으로 잡으면 영상의 위치가 이상함
+                      swiperRef.current?.updateAutoHeight();
+                    }}
                   />
                 </div>
               )}
