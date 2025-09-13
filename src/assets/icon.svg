@@ -486,6 +486,19 @@
     <circle cx="10.5" cy="11.3418" r="10.5" fill="#BFD7EC"/>
     <path d="M5 12.4031L8.81526 16.3418L16.2 7.54181" stroke="#5F86BF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
+  <symbol id="comment-bell-fill" viewBox="0 0 17 21" fill="none" stroke="none">
+    <path opacity="0.7" d="M1.13379 9.70004C1.13379 5.63154 4.43196 2.33337 8.50046 2.33337C12.569 2.33337 15.8671 5.63154 15.8671 9.70004V12.9999C15.8671 13.5522 15.4194 13.9999 14.8671 13.9999H2.13379C1.5815 13.9999 1.13379 13.5522 1.13379 12.9999V9.70004Z" fill="#00368E"/>
+    <rect opacity="0.5" y="13.9996" width="17" height="3.49996" rx="1.74998" fill="#00368E"/>
+    <rect x="6.7998" y="17.5001" width="3.4" height="3.49996" rx="1.7" fill="#00368E"/>
+    <rect x="6.7998" width="3.4" height="3.49996" rx="1.7" fill="#00368E"/>
+  </symbol>
+  <symbol id="comment-bell" viewBox="0 0 20 21" fill="none" stroke="none">
+    <path opacity="0.7" d="M2.63379 9.70004C2.63379 5.63154 5.93196 2.33337 10.0005 2.33337C14.069 2.33337 17.3671 5.63154 17.3671 9.70004V12.9999C17.3671 13.5522 16.9194 13.9999 16.3671 13.9999H3.63379C3.0815 13.9999 2.63379 13.5522 2.63379 12.9999V9.70004Z" fill="#898989"/>
+    <rect opacity="0.5" x="1.5" y="13.9996" width="17" height="3.49996" rx="1.74998" fill="#898989"/>
+    <rect x="8.2998" y="17.5001" width="3.4" height="3.49996" rx="1.7" fill="#898989"/>
+    <rect x="8.2998" width="3.4" height="3.49996" rx="1.7" fill="#898989"/>
+    <path d="M19 1.50012L1 19.4998" stroke="#898989" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
 
 
   <!-- report icon -->

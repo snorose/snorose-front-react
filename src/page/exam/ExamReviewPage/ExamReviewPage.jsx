@@ -50,7 +50,7 @@ export default function ExamReviewPage() {
   useModalReset();
 
   const { data, error, isError, isLoading } = useQuery({
-    queryKey: [QUERY_KEY.post, postId],
+    queryKey: QUERY_KEY.post(postId),
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
   });
