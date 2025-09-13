@@ -164,7 +164,7 @@ function MetaContainer({
 
   const { toast } = useToast();
 
-  const updatetNotificationSetting = useUpdateCommentNotificationSetting(
+  const updateNotificationSetting = useUpdateCommentNotificationSetting(
     boardId,
     postId
   );
@@ -173,7 +173,7 @@ function MetaContainer({
     const nextStatus = !isCommentAlertConsent;
 
     try {
-      await updatetNotificationSetting.mutateAsync(nextStatus);
+      await updateNotificationSetting.mutateAsync(nextStatus);
 
       const message = nextStatus
         ? '댓글 알림이 설정되었습니다.'
