@@ -1,4 +1,4 @@
-// =================== More Option Modal ===================
+// =================== More Option Modal (옵션 n개로 확장 가능)===================
 const POST_MORE_OPTION_LIST = [
   {
     modalId: 'report-post-types',
@@ -98,7 +98,7 @@ const MY_COMMENT_MORE_OPTION_LIST = [
   },
 ];
 
-// =================== Confirm Modal ===================
+// =================== Confirm Modal (옵션 2개로 고정 - confirm, cancel)===================
 const CONFIRM_MODAL = {
   // 게시글 관련 확인 모달
   DELETE_POST: {
@@ -195,16 +195,15 @@ const CONFIRM_MODAL = {
   },
 };
 
-// =================== Notice Modal ===================
-const NOTICE_MODAL = {
-  ALREADY_VERIFIED: {
-    title: '인증이 필요하지 않아요',
-    description: '이미 인증을 완료했거나 인증 대상이 아니에요.',
-    confirmText: '홈으로 이동',
-  },
+// =================== Text Option Modal (옵션 n개로 확장 가능)===================
+// 인증 관련 모달
+const ALREADY_VERIFIED = {
+  title: '인증이 필요하지 않아요',
+  description: '이미 인증을 완료했거나\n인증 대상이 아니에요.',
+  options: [{ id: 'home', text: '홈으로 이동' }],
 };
 
-// =================== Option Modal ===================
+// =================== Icon Option Modal (옵션 n개로 확장 가능)===================
 // 게시글 신고 모달
 const REPORT_POST_TYPE_LIST = [
   {
@@ -417,6 +416,7 @@ const REPORT_COMMENT_TYPE_LIST = [
   },
 ];
 
+// =================== 종류별 모달 모음 ===================
 export const MORE_OPTION_MODAL_TEXT = {
   POST_MORE_OPTION_LIST,
   MY_POST_MORE_OPTION_LIST,
@@ -428,7 +428,7 @@ export const MORE_OPTION_MODAL_TEXT = {
 
 export const CONFIRM_MODAL_TEXT = CONFIRM_MODAL;
 
-export const NOTICE_MODAL_TEXT = NOTICE_MODAL;
+export const TEXT_OPTION_MODAL_TEXT = { ALREADY_VERIFIED };
 
 export const OPTION_MODAL_TEXT = {
   REPORT_POST_TYPE_LIST,
