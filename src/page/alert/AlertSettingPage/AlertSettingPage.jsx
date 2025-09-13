@@ -1,14 +1,17 @@
-import { Suspense, useReducer } from 'react';
+import { Suspense, useContext, useReducer } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { AppError } from '@/shared/lib';
+import { ModalContext } from '@/shared/context/ModalContext';
 import { useToast } from '@/shared/hook';
 import {
   BackAppBar,
+  ConfirmModal,
   FetchLoading,
   ServerErrorFallback,
 } from '@/shared/component';
+import { CONFIRM_MODAL_TEXT } from '@/shared/constant';
 
 import * as notificationSettingsStore from '@/feature/alert/store/notificationSettings';
 import {
@@ -63,6 +66,8 @@ export default function AlertSettingPage() {
 }
 
 function NotificationSettings() {
+  const { setModal } = useContext(ModalContext);
+
   const { data: notificationSettings } = useNotificationSettings();
   const updateSettings = useUpdateNotificationSetting();
 
@@ -113,23 +118,26 @@ function NotificationSettings() {
           content={content.alert}
           isEnabled={state.required}
           onToggle={async () => {
-            if (!state.required) {
-              try {
-                await setupNotifications();
-              } catch (error) {
-                if (!(error instanceof AppError)) {
+            if (state.required) {
+              setModal({ id: 'disable-notification' });
+              return;
+            }
+
+            try {
+              await setupNotifications();
+            } catch (error) {
+              if (!(error instanceof AppError)) {
+                return;
+              }
+
+              switch (error.code) {
+                case ERROR_CODE.PERMISSION_JUST_DENIED: {
                   return;
                 }
 
-                switch (error.code) {
-                  case ERROR_CODE.PERMISSION_JUST_DENIED: {
-                    return;
-                  }
-
-                  default: {
-                    toast(error.message);
-                    return;
-                  }
+                default: {
+                  toast(error.message);
+                  return;
                 }
               }
             }
@@ -160,6 +168,34 @@ function NotificationSettings() {
           disabled={isUnsupported || !state.required}
         />
       </div>
+
+      <NotificationSettingModalRenderer onToggle={onToggle} />
+    </>
+  );
+}
+
+function NotificationSettingModalRenderer({ onToggle }) {
+  const { modal, setModal } = useContext(ModalContext);
+
+  return (
+    <>
+      {(() => {
+        switch (modal.id) {
+          case 'disable-notification':
+            return (
+              <ConfirmModal
+                modalText={CONFIRM_MODAL_TEXT.DISABLE_NOTIFICATION}
+                onConfirm={() => {
+                  onToggle('required');
+                  setModal({ id: null, type: null });
+                }}
+              />
+            );
+
+          default:
+            return null;
+        }
+      })()}
     </>
   );
 }
