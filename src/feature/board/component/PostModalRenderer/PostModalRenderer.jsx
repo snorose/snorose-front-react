@@ -9,7 +9,7 @@ import { getBoard } from '@/shared/lib';
 import {
   MORE_OPTION_MODAL,
   CONFIRM_MODAL_TEXT,
-  OPTION_MODAL_TEXT,
+  OPTION_MODAL,
 } from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
@@ -57,16 +57,83 @@ export default function PostModalRenderer({
           case 'report-post-types':
             return (
               <IconOptionModal
-                title='게시글 신고'
-                optionList={OPTION_MODAL_TEXT.REPORT_POST_TYPE_LIST}
+                modalContent={OPTION_MODAL.REPORT_POST_TYPES}
+                optionActions={{
+                  'post-personal-abuse': () =>
+                    setModal({
+                      id: 'confirm-post-report',
+                      type: 'POST_PERSONAL_ABUSE',
+                    }),
+                  'post-commercial-ad': () =>
+                    setModal({
+                      id: 'confirm-post-report',
+                      type: 'POST_COMMERCIAL_AD',
+                    }),
+                  'post-illegal-distribution': () =>
+                    setModal({
+                      id: 'confirm-post-report',
+                      type: 'POST_ILLEGAL_DISTRIBUTION',
+                    }),
+                  'post-privacy-violation': () =>
+                    setModal({
+                      id: 'confirm-post-report',
+                      type: 'POST_PRIVACY_VIOLATION',
+                    }),
+                  'post-incitement-division': () =>
+                    setModal({
+                      id: 'confirm-post-report',
+                      type: 'POST_INCITEMENT_DIVISION',
+                    }),
+                  'post-adult-content': () =>
+                    setModal({
+                      id: 'confirm-post-report',
+                      type: 'POST_ADULT_CONTENT',
+                    }),
+                  'post-insincere-content': () =>
+                    setModal({
+                      id: 'confirm-post-report',
+                      type: 'POST_INSINCERE_CONTENT',
+                    }),
+                  'post-hateful-content': () =>
+                    setModal({
+                      id: 'confirm-post-report',
+                      type: 'POST_HATEFUL_CONTENT',
+                    }),
+                }}
               />
             );
           // 유저 신고하기 옵션 리스트 모달
           case 'report-user-types':
             return (
               <IconOptionModal
-                title='이용자 신고'
-                optionList={OPTION_MODAL_TEXT.REPORT_USER_TYPE_LIST}
+                modalContent={OPTION_MODAL.REPORT_USER_TYPES}
+                optionActions={{
+                  'user-impersonation': () =>
+                    setModal({
+                      id: 'confirm-user-report',
+                      type: 'USER_IMPERSONATION',
+                    }),
+                  'user-fraud': () =>
+                    setModal({
+                      id: 'confirm-user-report',
+                      type: 'USER_FRAUD',
+                    }),
+                  'user-external-party': () =>
+                    setModal({
+                      id: 'confirm-user-report',
+                      type: 'USER_EXTERNAL_PARTY',
+                    }),
+                  'user-harassment': () =>
+                    setModal({
+                      id: 'confirm-user-report',
+                      type: 'USER_HARASSMENT',
+                    }),
+                  'user-other': () =>
+                    setModal({
+                      id: 'confirm-user-report',
+                      type: 'USER_OTHER',
+                    }),
+                }}
               />
             );
           // 게시글 신고 최종 확인 모달

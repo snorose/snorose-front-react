@@ -7,7 +7,7 @@ import { ModalContext } from '@/shared/context/ModalContext';
 import {
   CONFIRM_MODAL_TEXT,
   MORE_OPTION_MODAL,
-  OPTION_MODAL_TEXT,
+  OPTION_MODAL,
 } from '@/shared/constant';
 
 import { useLocation } from 'react-router-dom';
@@ -47,8 +47,44 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
           case 'report-comment-types':
             return (
               <IconOptionModal
-                title='댓글 신고'
-                optionList={OPTION_MODAL_TEXT.REPORT_COMMENT_TYPE_LIST}
+                modalContent={OPTION_MODAL.REPORT_COMMENT_TYPES}
+                optionActions={{
+                  'comment-personal-abuse': () =>
+                    setModal({
+                      id: 'confirm-comment-report',
+                      type: 'COMMENT_PERSONAL_ABUSE',
+                    }),
+                  'comment-commercial-ad': () =>
+                    setModal({
+                      id: 'confirm-comment-report',
+                      type: 'COMMENT_COMMERCIAL_AD',
+                    }),
+                  'comment-privacy-violation': () =>
+                    setModal({
+                      id: 'confirm-comment-report',
+                      type: 'COMMENT_PRIVACY_VIOLATION',
+                    }),
+                  'comment-incitement-division': () =>
+                    setModal({
+                      id: 'confirm-comment-report',
+                      type: 'COMMENT_INCITEMENT_DIVISION',
+                    }),
+                  'comment-adult-content': () =>
+                    setModal({
+                      id: 'confirm-comment-report',
+                      type: 'COMMENT_ADULT_CONTENT',
+                    }),
+                  'comment-spam': () =>
+                    setModal({
+                      id: 'confirm-comment-report',
+                      type: 'COMMENT_SPAM',
+                    }),
+                  'comment-other': () =>
+                    setModal({
+                      id: 'confirm-comment-report',
+                      type: 'COMMENT_OTHER',
+                    }),
+                }}
               />
             );
           // 댓글 신고 확인 모달

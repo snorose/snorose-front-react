@@ -42,7 +42,7 @@ export default function MoreOptionModal({ modalContent, optionActions, top }) {
               className={`${styles.contentItem} ${idx === modalContent.length - 1 ? styles.lastItem : ''}`}
               onClick={() => handleOptionClick(option)}
             >
-              <p>{option.label}</p>
+              <p>{option.text}</p>
               {option.iconId && (
                 <Icon
                   id={option.iconId}

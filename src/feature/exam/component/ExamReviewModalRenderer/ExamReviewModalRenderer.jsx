@@ -5,7 +5,7 @@ import {
 } from '@/shared/component';
 import {
   CONFIRM_MODAL_TEXT,
-  OPTION_MODAL_TEXT,
+  OPTION_MODAL,
   MORE_OPTION_MODAL,
 } from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
@@ -59,16 +59,77 @@ export default function ExamReviewModalRenderer({
           case 'report-exam-review-types':
             return (
               <IconOptionModal
-                title='시험후기 신고'
-                optionList={OPTION_MODAL_TEXT.REPORT_EXAM_REVIEW_TYPE_LIST}
+                modalContent={OPTION_MODAL.REPORT_EXAM_REVIEW_TYPES}
+                optionActions={{
+                  'post-personal-abuse': () =>
+                    setModal({
+                      id: 'confirm-exam-review-report',
+                      type: 'POST_PERSONAL_ABUSE',
+                    }),
+                  'post-commercial-ad': () =>
+                    setModal({
+                      id: 'confirm-exam-review-report',
+                      type: 'POST_COMMERCIAL_AD',
+                    }),
+                  'post-illegal-distribution': () =>
+                    setModal({
+                      id: 'confirm-exam-review-report',
+                      type: 'POST_ILLEGAL_DISTRIBUTION',
+                    }),
+                  'post-privacy-violation': () =>
+                    setModal({
+                      id: 'confirm-exam-review-report',
+                      type: 'POST_PRIVACY_VIOLATION',
+                    }),
+                  'post-incitement-division': () =>
+                    setModal({
+                      id: 'confirm-exam-review-report',
+                      type: 'POST_INCITEMENT_DIVISION',
+                    }),
+                  'post-adult-content': () =>
+                    setModal({
+                      id: 'confirm-exam-review-report',
+                      type: 'POST_ADULT_CONTENT',
+                    }),
+                  'post-insincere-content': () =>
+                    setModal({
+                      id: 'confirm-exam-review-report',
+                      type: 'POST_INSINCERE_CONTENT',
+                    }),
+                  'post-hateful-content': () =>
+                    setModal({
+                      id: 'confirm-exam-review-report',
+                      type: 'POST_HATEFUL_CONTENT',
+                    }),
+                }}
               />
             );
           // 이용자 신고하기 옵션 리스트 모달
           case 'report-user-types':
             return (
               <IconOptionModal
-                title='이용자 신고'
-                optionList={OPTION_MODAL_TEXT.REPORT_USER_TYPE_LIST}
+                modalContent={OPTION_MODAL.REPORT_USER_TYPES}
+                optionActions={{
+                  'user-impersonation': () =>
+                    setModal({
+                      id: 'confirm-user-report',
+                      type: 'USER_IMPERSONATION',
+                    }),
+                  'user-fraud': () =>
+                    setModal({ id: 'confirm-user-report', type: 'USER_FRAUD' }),
+                  'user-external-party': () =>
+                    setModal({
+                      id: 'confirm-user-report',
+                      type: 'USER_EXTERNAL_PARTY',
+                    }),
+                  'user-harassment': () =>
+                    setModal({
+                      id: 'confirm-user-report',
+                      type: 'USER_HARASSMENT',
+                    }),
+                  'user-other': () =>
+                    setModal({ id: 'confirm-user-report', type: 'USER_OTHER' }),
+                }}
               />
             );
           // 시험후기 신고 최종 확인 모달

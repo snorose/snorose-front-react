@@ -6,14 +6,14 @@ const POST_MORE_OPTION = {
     {
       id: 'report-post',
       iconId: 'report-post',
-      label: '게시글 신고',
+      text: '게시글 신고',
       width: 19,
       height: 22,
     },
     {
       id: 'report-user',
       iconId: 'report-user',
-      label: '이용자 신고하기',
+      text: '이용자 신고하기',
       width: 17,
       height: 17,
     },
@@ -27,14 +27,14 @@ const MY_POST_MORE_OPTION = {
     {
       id: 'edit-post',
       iconId: 'pencil-grey',
-      label: '수정하기',
+      text: '수정하기',
       width: 19,
       height: 22,
     },
     {
       id: 'delete-post',
       iconId: 'trash',
-      label: '삭제하기',
+      text: '삭제하기',
       width: 16,
       height: 20,
     },
@@ -48,14 +48,14 @@ const EXAM_REVIEW_MORE_OPTION = {
     {
       id: 'report-exam-review',
       iconId: 'report-post',
-      label: '시험후기 신고',
+      text: '시험후기 신고',
       width: 19,
       height: 22,
     },
     {
       id: 'report-user',
       iconId: 'report-user',
-      label: '이용자 신고하기',
+      text: '이용자 신고하기',
       width: 17,
       height: 17,
     },
@@ -69,14 +69,14 @@ const MY_EXAM_REVIEW_MORE_OPTION = {
     {
       id: 'edit-exam-review',
       iconId: 'pencil-grey',
-      label: '수정하기',
+      text: '수정하기',
       width: 19,
       height: 22,
     },
     {
       id: 'delete-exam-review',
       iconId: 'trash',
-      label: '삭제하기',
+      text: '삭제하기',
       width: 16,
       height: 20,
     },
@@ -90,14 +90,14 @@ const COMMENT_MORE_OPTION = {
     {
       id: 'report-comment',
       iconId: 'report-comment',
-      label: '댓글 신고',
+      text: '댓글 신고',
       width: 21,
       height: 22,
     },
     {
       id: 'report-user',
       iconId: 'report-user',
-      label: '이용자 신고하기',
+      text: '이용자 신고하기',
       width: 17,
       height: 17,
     },
@@ -110,14 +110,14 @@ const MY_COMMENT_MORE_OPTION = {
     {
       id: 'edit-comment',
       iconId: 'pencil-grey',
-      label: '수정하기',
+      text: '수정하기',
       width: 19,
       height: 22,
     },
     {
       id: 'delete-comment',
       iconId: 'trash',
-      label: '삭제하기',
+      text: '삭제하기',
       width: 16,
       height: 20,
     },
@@ -231,216 +231,232 @@ const ALREADY_VERIFIED = {
 
 // =================== Icon Option Modal (옵션 n개로 확장 가능)===================
 // 게시글 신고 모달
-const REPORT_POST_TYPE_LIST = [
-  {
-    type: 'POST_PERSONAL_ABUSE',
-    iconId: 'comment-exclamation-question-mark',
-    label: '특정인에 대한 욕설 및 비하',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'POST_COMMERCIAL_AD',
-    iconId: 'dollar-circle',
-    label: '상업적 광고 및 판매',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'POST_ILLEGAL_DISTRIBUTION',
-    iconId: 'camera-blue-stroke',
-    label: '불법촬영물 등의 유통',
-    width: 20,
-    height: 19,
-  },
-  {
-    type: 'POST_PRIVACY_VIOLATION',
-    iconId: 'x-shield',
-    label: '개인정보 유출',
-    width: 18,
-    height: 20,
-  },
-  {
-    type: 'POST_INCITEMENT_DIVISION',
-    iconId: 'traffic-cone',
-    label: '선동 및 분란 유발',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'POST_ADULT_CONTENT',
-    iconId: 'hand-stop',
-    label: '음란물 / 불건전한 만남 및 대화',
-    width: 20,
-    height: 22,
-  },
-  {
-    type: 'POST_INSINCERE_CONTENT',
-    iconId: 'list-x-circle',
-    label: '무성의한 게시글',
-    width: 20,
-    height: 16,
-  },
-  {
-    type: 'POST_HATEFUL_CONTENT',
-    iconId: 'sad-face',
-    label: '타인에게 혐오감 선사',
-    width: 20,
-    height: 20,
-  },
-];
+const REPORT_POST_TYPES = {
+  modalId: 'report-post-types',
+  title: '게시글 신고',
+  options: [
+    {
+      id: 'post-personal-abuse',
+      iconId: 'comment-exclamation-question-mark',
+      text: '특정인에 대한 욕설 및 비하',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'post-commercial-ad',
+      iconId: 'dollar-circle',
+      text: '상업적 광고 및 판매',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'post-illegal-distribution',
+      iconId: 'camera-blue-stroke',
+      text: '불법촬영물 등의 유통',
+      width: 20,
+      height: 19,
+    },
+    {
+      id: 'post-privacy-violation',
+      iconId: 'x-shield',
+      text: '개인정보 유출',
+      width: 18,
+      height: 20,
+    },
+    {
+      id: 'post-incitement-division',
+      iconId: 'traffic-cone',
+      text: '선동 및 분란 유발',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'post-adult-content',
+      iconId: 'hand-stop',
+      text: '음란물 / 불건전한 만남 및 대화',
+      width: 20,
+      height: 22,
+    },
+    {
+      id: 'post-insincere-content',
+      iconId: 'list-x-circle',
+      text: '무성의한 게시글',
+      width: 20,
+      height: 16,
+    },
+    {
+      id: 'post-hateful-content',
+      iconId: 'sad-face',
+      text: '타인에게 혐오감 선사',
+      width: 20,
+      height: 20,
+    },
+  ],
+};
 
 // 시험후기 신고 모달
-const REPORT_EXAM_REVIEW_TYPE_LIST = [
-  {
-    type: 'POST_PERSONAL_ABUSE',
-    iconId: 'comment-exclamation-question-mark',
-    label: '특정인에 대한 욕설 및 비하',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'POST_COMMERCIAL_AD',
-    iconId: 'dollar-circle',
-    label: '상업적 광고 및 판매',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'POST_ILLEGAL_DISTRIBUTION',
-    iconId: 'camera-blue-stroke',
-    label: '불법촬영물 등의 유통',
-    width: 20,
-    height: 19,
-  },
-  {
-    type: 'POST_PRIVACY_VIOLATION',
-    iconId: 'x-shield',
-    label: '개인정보 유출',
-    width: 18,
-    height: 20,
-  },
-  {
-    type: 'POST_INCITEMENT_DIVISION',
-    iconId: 'traffic-cone',
-    label: '선동 및 분란 유발',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'POST_ADULT_CONTENT',
-    iconId: 'hand-stop',
-    label: '음란물 / 불건전한 만남 및 대화',
-    width: 20,
-    height: 22,
-  },
-  {
-    type: 'POST_INSINCERE_CONTENT',
-    iconId: 'list-x-circle',
-    label: '무성의한 게시글',
-    width: 20,
-    height: 16,
-  },
-  {
-    type: 'POST_HATEFUL_CONTENT',
-    iconId: 'sad-face',
-    label: '타인에게 혐오감 선사',
-    width: 20,
-    height: 20,
-  },
-];
+const REPORT_EXAM_REVIEW_TYPES = {
+  modalId: 'report-exam-review-types',
+  title: '시험후기 신고',
+  options: [
+    {
+      id: 'post-personal-abuse',
+      iconId: 'comment-exclamation-question-mark',
+      text: '특정인에 대한 욕설 및 비하',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'post-commercial-ad',
+      iconId: 'dollar-circle',
+      text: '상업적 광고 및 판매',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'post-illegal-distribution',
+      iconId: 'camera-blue-stroke',
+      text: '불법촬영물 등의 유통',
+      width: 20,
+      height: 19,
+    },
+    {
+      id: 'post-privacy-violation',
+      iconId: 'x-shield',
+      text: '개인정보 유출',
+      width: 18,
+      height: 20,
+    },
+    {
+      id: 'post-incitement-division',
+      iconId: 'traffic-cone',
+      text: '선동 및 분란 유발',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'post-adult-content',
+      iconId: 'hand-stop',
+      text: '음란물 / 불건전한 만남 및 대화',
+      width: 20,
+      height: 22,
+    },
+    {
+      id: 'post-insincere-content',
+      iconId: 'list-x-circle',
+      text: '무성의한 게시글',
+      width: 20,
+      height: 16,
+    },
+    {
+      id: 'post-hateful-content',
+      iconId: 'sad-face',
+      text: '타인에게 혐오감 선사',
+      width: 20,
+      height: 20,
+    },
+  ],
+};
 
 // 유저 신고 모달
-const REPORT_USER_TYPE_LIST = [
-  {
-    type: 'USER_IMPERSONATION',
-    iconId: 'user-question-mark',
-    label: '타인 사칭',
-    width: 20,
-    height: 18,
-  },
-  {
-    type: 'USER_FRAUD',
-    iconId: 'dollar-circle',
-    label: '사기',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'USER_EXTERNAL_PARTY',
-    iconId: 'question-mark-circle',
-    label: '외부인 의심',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'USER_HARASSMENT',
-    iconId: 'skull-face',
-    label: '괴롭힘 / 사이버폭력',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'USER_OTHER',
-    iconId: 'null',
-    label: '기타',
-    width: 20,
-    height: 20,
-  },
-];
+const REPORT_USER_TYPES = {
+  modalId: 'report-user-types',
+  title: '유저 신고',
+  options: [
+    {
+      id: 'user-impersonation',
+      iconId: 'user-question-mark',
+      text: '타인 사칭',
+      width: 20,
+      height: 18,
+    },
+    {
+      id: 'user-fraud',
+      iconId: 'dollar-circle',
+      text: '사기',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'user-external-party',
+      iconId: 'question-mark-circle',
+      text: '외부인 의심',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'user-harassment',
+      iconId: 'skull-face',
+      text: '괴롭힘 / 사이버폭력',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'user-other',
+      iconId: 'null',
+      text: '기타',
+      width: 20,
+      height: 20,
+    },
+  ],
+};
 
 // 댓글 신고 모달
-const REPORT_COMMENT_TYPE_LIST = [
-  {
-    type: 'COMMENT_PERSONAL_ABUSE',
-    iconId: 'comment-exclamation-question-mark',
-    label: '특정인에 대한 욕설 및 비하',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'COMMENT_COMMERCIAL_AD',
-    iconId: 'dollar-circle',
-    label: '상업적 광고 및 판매',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'COMMENT_PRIVACY_VIOLATION',
-    iconId: 'x-shield',
-    label: '개인정보 유출',
-    width: 18,
-    height: 20,
-  },
-  {
-    type: 'COMMENT_INCITEMENT_DIVISION',
-    iconId: 'traffic-cone',
-    label: '선동 및 분란 유발',
-    width: 20,
-    height: 20,
-  },
-  {
-    type: 'COMMENT_ADULT_CONTENT',
-    iconId: 'hand-stop',
-    label: '음란물 / 불건전한 만남 및 대화',
-    width: 20,
-    height: 22,
-  },
-  {
-    type: 'COMMENT_SPAM',
-    iconId: 'list-x-circle',
-    label: '스팸 / 무성의한 댓글',
-    width: 20,
-    height: 16,
-  },
-  {
-    type: 'COMMENT_OTHER',
-    iconId: 'null',
-    label: '기타',
-    width: 20,
-    height: 20,
-  },
-];
+const REPORT_COMMENT_TYPES = {
+  modalId: 'report-comment-types',
+  title: '댓글 신고',
+  options: [
+    {
+      id: 'comment-personal-abuse',
+      iconId: 'comment-exclamation-question-mark',
+      text: '특정인에 대한 욕설 및 비하',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'comment-commercial-ad',
+      iconId: 'dollar-circle',
+      text: '상업적 광고 및 판매',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'comment-privacy-violation',
+      iconId: 'x-shield',
+      text: '개인정보 유출',
+      width: 18,
+      height: 20,
+    },
+    {
+      id: 'comment-incitement-division',
+      iconId: 'traffic-cone',
+      text: '선동 및 분란 유발',
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 'comment-adult-content',
+      iconId: 'hand-stop',
+      text: '음란물 / 불건전한 만남 및 대화',
+      width: 20,
+      height: 22,
+    },
+    {
+      id: 'comment-spam',
+      iconId: 'list-x-circle',
+      text: '스팸 / 무성의한 댓글',
+      width: 20,
+      height: 16,
+    },
+    {
+      id: 'comment-other',
+      iconId: 'null',
+      text: '기타',
+      width: 20,
+      height: 20,
+    },
+  ],
+};
 
 // =================== 종류별 모달 모음 ===================
 
@@ -457,9 +473,9 @@ export const CONFIRM_MODAL_TEXT = CONFIRM_MODAL;
 
 export const TEXT_OPTION_MODAL_TEXT = { ALREADY_VERIFIED };
 
-export const OPTION_MODAL_TEXT = {
-  REPORT_POST_TYPE_LIST,
-  REPORT_EXAM_REVIEW_TYPE_LIST,
-  REPORT_USER_TYPE_LIST,
-  REPORT_COMMENT_TYPE_LIST,
+export const OPTION_MODAL = {
+  REPORT_POST_TYPES,
+  REPORT_EXAM_REVIEW_TYPES,
+  REPORT_USER_TYPES,
+  REPORT_COMMENT_TYPES,
 };
