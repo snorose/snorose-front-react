@@ -1,12 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Scrollbar } from 'swiper/modules';
 
 import { deletePost, getPostContent, reportPost, reportUser } from '@/apis';
 
 import {
+  AttachmentSwiper,
   BackAppBar,
   Badge,
   DeleteModal,
@@ -46,7 +45,6 @@ export default function PostPage() {
   const { inputFocus, isInputFocused } = useCommentContext();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
-  const scrollbarRef = useRef(null);
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -237,65 +235,10 @@ export default function PostPage() {
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
         {data.attachments.length !== 0 && (
-          <div className={styles.swiperContainer}>
-            <Swiper
-              className={styles.attachmentsContainer}
-              modules={[Scrollbar]}
-              slidesPerView={'auto'}
-              spaceBetween={8}
-              scrollbar={{
-                el: scrollbarRef.current,
-                draggable: true,
-                dragSize: 50,
-              }}
-              onSwiper={(swiper) => {
-                // Manually update scrollbar element after mount
-                swiper.params.scrollbar.el = scrollbarRef.current;
-                swiper.scrollbar.init();
-                swiper.scrollbar.updateSize();
-              }}
-              freeMode={true}
-              loop={false}
-            >
-              {data.attachments.map((item, index) => (
-                <SwiperSlide key={index} className={styles.attachmentSlide}>
-                  <div className={styles.attchmentDiv}>
-                    {item.type === 'PHOTO' ? (
-                      <img
-                        src={item.url}
-                        className={styles.attachment}
-                        draggable={false}
-                        onClick={() => {
-                          //이미지 클릭 시 전체화면 보기 가능
-                          setClickedImageIndex(index + 1);
-                        }}
-                      />
-                    ) : (
-                      <div
-                        onClick={() => {
-                          //이미지 클릭 시 전체화면 보기 가능
-                          setClickedImageIndex(index + 1);
-                        }}
-                      >
-                        <video
-                          src={item.url}
-                          className={styles.attachment}
-                          draggable={false}
-                        />
-                        <Icon
-                          id='video-opaque'
-                          width={'4rem'}
-                          height={'4rem'}
-                          className={styles.videoIcon}
-                        />
-                      </div>
-                    )}
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <div ref={scrollbarRef} className={styles.customScrollbar} />
-          </div>
+          <AttachmentSwiper
+            data={data}
+            setClickedImageIndex={setClickedImageIndex}
+          />
         )}
 
         <div className={styles.post_bottom}>
