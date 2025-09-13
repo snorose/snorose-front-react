@@ -1,102 +1,128 @@
 // =================== More Option Modal (옵션 n개로 확장 가능)===================
-const POST_MORE_OPTION_LIST = [
-  {
-    modalId: 'report-post-types',
-    iconId: 'report-post',
-    label: '게시글 신고',
-    width: 19,
-    height: 22,
-  },
-  {
-    modalId: 'report-user-types',
-    iconId: 'report-user',
-    label: '이용자 신고하기',
-    width: 17,
-    height: 17,
-  },
-];
-const MY_POST_MORE_OPTION_LIST = [
-  {
-    modalId: null,
-    iconId: 'pencil-grey',
-    label: '수정하기',
-    width: 19,
-    height: 22,
-  },
-  {
-    modalId: 'confirm-post-delete',
-    iconId: 'trash',
-    label: '삭제하기',
-    width: 16,
-    height: 20,
-  },
-];
+const POST_MORE_OPTION = {
+  modalId: 'post-more-options',
+  title: '게시글',
+  options: [
+    {
+      id: 'report-post',
+      iconId: 'report-post',
+      label: '게시글 신고',
+      width: 19,
+      height: 22,
+    },
+    {
+      id: 'report-user',
+      iconId: 'report-user',
+      label: '이용자 신고하기',
+      width: 17,
+      height: 17,
+    },
+  ],
+};
 
-const EXAM_REVIEW_MORE_OPTION_LIST = [
-  {
-    modalId: 'report-exam-review-types',
-    iconId: 'report-post',
-    label: '시험후기 신고',
-    width: 19,
-    height: 22,
-  },
-  {
-    modalId: 'report-user-types',
-    iconId: 'report-user',
-    label: '이용자 신고하기',
-    width: 17,
-    height: 17,
-  },
-];
-const MY_EXAM_REVIEW_MORE_OPTION_LIST = [
-  {
-    modalId: null,
-    iconId: 'pencil-grey',
-    label: '수정하기',
-    width: 19,
-    height: 22,
-  },
-  {
-    modalId: 'confirm-exam-review-delete',
-    iconId: 'trash',
-    label: '삭제하기',
-    width: 16,
-    height: 20,
-  },
-];
+const MY_POST_MORE_OPTION = {
+  modalId: 'my-post-more-options',
+  title: '내 게시글',
+  options: [
+    {
+      id: 'edit-post',
+      iconId: 'pencil-grey',
+      label: '수정하기',
+      width: 19,
+      height: 22,
+    },
+    {
+      id: 'delete-post',
+      iconId: 'trash',
+      label: '삭제하기',
+      width: 16,
+      height: 20,
+    },
+  ],
+};
 
-const COMMENT_MORE_OPTION_LIST = [
-  {
-    modalId: 'report-comment-types',
-    iconId: 'report-comment',
-    label: '댓글 신고',
-    width: 21,
-    height: 22,
-  },
-  {
-    modalId: 'report-user-types',
-    iconId: 'report-user',
-    label: '이용자 신고하기',
-    width: 17,
-    height: 17,
-  },
-];
-const MY_COMMENT_MORE_OPTION_LIST = [
-  {
-    modalId: null,
-    iconId: 'pencil-grey',
-    label: '수정하기',
-    width: 19,
-    height: 22,
-  },
-  {
-    modalId: 'confirm-comment-delete',
-    iconId: 'trash',
-    label: '삭제하기',
-    width: 16,
-    height: 20,
-  },
-];
+const EXAM_REVIEW_MORE_OPTION = {
+  modalId: 'exam-review-more-options',
+  title: '시험후기',
+  options: [
+    {
+      id: 'report-exam-review',
+      iconId: 'report-post',
+      label: '시험후기 신고',
+      width: 19,
+      height: 22,
+    },
+    {
+      id: 'report-user',
+      iconId: 'report-user',
+      label: '이용자 신고하기',
+      width: 17,
+      height: 17,
+    },
+  ],
+};
+
+const MY_EXAM_REVIEW_MORE_OPTION = {
+  modalId: 'my-exam-review-more-options',
+  title: '내 시험후기',
+  options: [
+    {
+      id: 'edit-exam-review',
+      iconId: 'pencil-grey',
+      label: '수정하기',
+      width: 19,
+      height: 22,
+    },
+    {
+      id: 'delete-exam-review',
+      iconId: 'trash',
+      label: '삭제하기',
+      width: 16,
+      height: 20,
+    },
+  ],
+};
+
+const COMMENT_MORE_OPTION = {
+  modalId: 'comment-more-options',
+  title: '댓글',
+  options: [
+    {
+      id: 'report-comment',
+      iconId: 'report-comment',
+      label: '댓글 신고',
+      width: 21,
+      height: 22,
+    },
+    {
+      id: 'report-user',
+      iconId: 'report-user',
+      label: '이용자 신고하기',
+      width: 17,
+      height: 17,
+    },
+  ],
+};
+const MY_COMMENT_MORE_OPTION = {
+  modalId: 'my-comment-more-options',
+  title: '내 댓글',
+  options: [
+    {
+      id: 'edit-comment',
+      iconId: 'pencil-grey',
+      label: '수정하기',
+      width: 19,
+      height: 22,
+    },
+    {
+      id: 'delete-comment',
+      iconId: 'trash',
+      label: '삭제하기',
+      width: 16,
+      height: 20,
+    },
+  ],
+};
 
 // =================== Confirm Modal (옵션 2개로 고정 - confirm, cancel)===================
 const CONFIRM_MODAL = {
@@ -417,13 +443,14 @@ const REPORT_COMMENT_TYPE_LIST = [
 ];
 
 // =================== 종류별 모달 모음 ===================
-export const MORE_OPTION_MODAL_TEXT = {
-  POST_MORE_OPTION_LIST,
-  MY_POST_MORE_OPTION_LIST,
-  EXAM_REVIEW_MORE_OPTION_LIST,
-  MY_EXAM_REVIEW_MORE_OPTION_LIST,
-  COMMENT_MORE_OPTION_LIST,
-  MY_COMMENT_MORE_OPTION_LIST,
+
+export const MORE_OPTION_MODAL = {
+  POST_MORE_OPTION,
+  MY_POST_MORE_OPTION,
+  EXAM_REVIEW_MORE_OPTION,
+  MY_EXAM_REVIEW_MORE_OPTION,
+  COMMENT_MORE_OPTION,
+  MY_COMMENT_MORE_OPTION,
 };
 
 export const CONFIRM_MODAL_TEXT = CONFIRM_MODAL;

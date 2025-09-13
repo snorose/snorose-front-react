@@ -6,7 +6,7 @@ import {
 import { ModalContext } from '@/shared/context/ModalContext';
 import {
   CONFIRM_MODAL_TEXT,
-  MORE_OPTION_MODAL_TEXT,
+  MORE_OPTION_MODAL,
   OPTION_MODAL_TEXT,
 } from '@/shared/constant';
 
@@ -33,8 +33,13 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
             return commentId === data.id ||
               data.children.some((child) => child.id === commentId) ? (
               <MoreOptionModal
-                title='댓글'
-                optionList={MORE_OPTION_MODAL_TEXT.COMMENT_MORE_OPTION_LIST}
+                modalContent={MORE_OPTION_MODAL.COMMENT_MORE_OPTION}
+                optionActions={{
+                  'report-comment': () =>
+                    setModal({ id: 'report-comment-types', type: null }),
+                  'report-user': () =>
+                    setModal({ id: 'report-user-types', type: null }),
+                }}
                 top={moreOptionTop}
               />
             ) : null;

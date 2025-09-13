@@ -6,8 +6,10 @@ import {
 import {
   CONFIRM_MODAL_TEXT,
   OPTION_MODAL_TEXT,
-  MORE_OPTION_MODAL_TEXT,
+  MORE_OPTION_MODAL,
 } from '@/shared/constant';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { useContext } from 'react';
 
 export default function ExamReviewModalRenderer({
   modal,
@@ -15,6 +17,8 @@ export default function ExamReviewModalRenderer({
   handleReport,
   handleDelete,
 }) {
+  const { setModal } = useContext(ModalContext);
+
   return (
     <>
       {(() => {
@@ -30,19 +34,25 @@ export default function ExamReviewModalRenderer({
           case 'exam-review-more-options':
             return (
               <MoreOptionModal
-                title='시험후기'
-                optionList={MORE_OPTION_MODAL_TEXT.EXAM_REVIEW_MORE_OPTION_LIST}
+                modalContent={MORE_OPTION_MODAL.EXAM_REVIEW_MORE_OPTION}
+                optionActions={{
+                  'report-exam-review': () =>
+                    setModal({ id: 'report-exam-review-types', type: null }),
+                  'report-user': () =>
+                    setModal({ id: 'report-user-types', type: null }),
+                }}
               />
             );
           // 내 시험후기 더보기 모달 (수정, 삭제)
           case 'my-exam-review-more-options':
             return (
               <MoreOptionModal
-                title='내 시험후기'
-                optionList={
-                  MORE_OPTION_MODAL_TEXT.MY_EXAM_REVIEW_MORE_OPTION_LIST
-                }
-                functions={[handleEdit, null]}
+                modalContent={MORE_OPTION_MODAL.MY_EXAM_REVIEW_MORE_OPTION}
+                optionActions={{
+                  'edit-exam-review': () => handleEdit(),
+                  'delete-exam-review': () =>
+                    setModal({ id: 'confirm-exam-review-delete', type: null }),
+                }}
               />
             );
           // 시험후기 신고하기 옵션 리스트 모달

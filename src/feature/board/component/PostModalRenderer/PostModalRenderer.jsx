@@ -1,12 +1,18 @@
 import { useLocation } from 'react-router-dom';
 
-import { MoreOptionModal, ConfirmModal, IconOptionModal } from '@/shared/component';
+import {
+  MoreOptionModal,
+  ConfirmModal,
+  IconOptionModal,
+} from '@/shared/component';
 import { getBoard } from '@/shared/lib';
 import {
-  MORE_OPTION_MODAL_TEXT,
+  MORE_OPTION_MODAL,
   CONFIRM_MODAL_TEXT,
   OPTION_MODAL_TEXT,
 } from '@/shared/constant';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { useContext } from 'react';
 
 export default function PostModalRenderer({
   modal,
@@ -16,6 +22,7 @@ export default function PostModalRenderer({
 }) {
   const { pathname } = useLocation();
   const currentBoard = getBoard(pathname.split('/')[2]);
+  const { setModal } = useContext(ModalContext);
 
   return (
     <>
@@ -25,17 +32,25 @@ export default function PostModalRenderer({
           case 'post-more-options':
             return (
               <MoreOptionModal
-                title='게시글'
-                optionList={MORE_OPTION_MODAL_TEXT.POST_MORE_OPTION_LIST}
+                modalContent={MORE_OPTION_MODAL.POST_MORE_OPTION}
+                optionActions={{
+                  'report-post': () =>
+                    setModal({ id: 'report-post-types', type: null }),
+                  'report-user': () =>
+                    setModal({ id: 'report-user-types', type: null }),
+                }}
               />
             );
           // 내 게시글 더보기 모달 (수정, 삭제)
           case 'my-post-more-options':
             return (
               <MoreOptionModal
-                title='내 게시글'
-                optionList={MORE_OPTION_MODAL_TEXT.MY_POST_MORE_OPTION_LIST}
-                functions={[handleEdit, null]}
+                modalContent={MORE_OPTION_MODAL.MY_POST_MORE_OPTION}
+                optionActions={{
+                  'edit-post': () => handleEdit(),
+                  'delete-post': () =>
+                    setModal({ id: 'confirm-post-delete', type: null }),
+                }}
               />
             );
           // 게시글 신고하기 옵션 리스트 모달
