@@ -31,6 +31,12 @@ export default function PostList({ saveScrollPosition }) {
 
   const postList = deduplicatePaginatedData(flatPaginationCache(data));
 
+  if (postList.length === 0) {
+    return <FetchLoading animation={false}>게시물이 없어요</FetchLoading>;
+  }
+
+  console.log(postList);
+
   return (
     <PullToRefresh
       onRefresh={() => refetch().then(() => console.log('Refreshed!'))}
