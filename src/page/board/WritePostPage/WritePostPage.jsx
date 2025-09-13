@@ -159,7 +159,7 @@ export default function WritePostPage() {
             : toast(TOAST.POST.create);
           const newPostId = response.data.result.postId;
 
-          queryClient.removeQueries([QUERY_KEY.post]);
+          queryClient.removeQueries(QUERY_KEY.post());
           invalidUserInfoQuery();
           currentBoard.id === 12 || isNotice
             ? navigate(`/board/${currentBoard.textId}/notice`, {

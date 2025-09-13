@@ -1,45 +1,52 @@
 import { useContext, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/scrollbar';
 
 import { getPostContent } from '@/apis';
+
 import { NotFoundPage } from '@/page/etc';
 
+import {
+  AppError,
+  convertHyperlink,
+  fullDateTimeFormat,
+  getBoard,
+} from '@/shared/lib';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { useToast, useModalReset } from '@/shared/hook';
 import {
   AttachmentSwiper,
   BackAppBar,
   Badge,
   FetchLoading,
   Icon,
-  OptionModal,
 } from '@/shared/component';
-import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
-import { ModalContext } from '@/shared/context/ModalContext';
-import { useModalReset } from '@/shared/hook/useBlocker';
 
 import { FullScreenAttachment } from '@/feature/board/component';
-import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
 import { PostModalRenderer } from '@/feature/board/component';
+
+import { useCommentContext } from '@/feature/comment/context';
+import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
+
+import { useUpdateCommentNotificationSetting } from '@/feature/alert/hook';
 import { useReportHandler } from '@/feature/report/hook/useReport';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
-import { useCommentContext } from '@/feature/comment/context';
 
 import cloudLogo from '@/assets/images/cloudLogo.svg';
 
 import styles from './PostPage.module.css';
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/scrollbar';
 
 export default function PostPage() {
   const { postId } = useParams();
-
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { inputFocus, focusedItem } = useCommentContext();
   const currentBoard = getBoard(pathname.split('/')[2]);
 
   const { modal, setModal } = useContext(ModalContext);
@@ -47,36 +54,25 @@ export default function PostPage() {
   // 페이지 언마운트 시 모달 상태 초기화
   useModalReset();
 
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
-  const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
   const [clickedImageIndex, setClickedImageIndex] = useState(0);
 
   const { data, isLoading, error, isError } = useQuery({
-    queryKey: [QUERY_KEY.post, postId],
+    queryKey: QUERY_KEY.post(postId),
     queryFn: () => getPostContent(currentBoard?.id, postId),
     staleTime: 1000 * 60 * 5,
     enabled: !!currentBoard?.id && !!postId,
   });
 
+  // 페이지 언마운트 시 모달 상태 초기화
+  useModalReset();
+
   const { handleDelete } = useDeletePostHandler(currentBoard?.id);
   const { handleReport } = useReportHandler(modal, setModal, data);
-
-  const { scrap, unscrap } = useScrap();
-  const { like, unlike } = useLike({
-    type: LIKE_TYPE.post,
-    sourceId: postId,
-  });
 
   const handleEdit = () => {
     setModal({ id: null, type: null });
     navigate(`./edit`);
   };
-
-  // 뱃지를 보여주는 ROLE
-  const showBadge =
-    data?.userRoleId === ROLE.official ||
-    (data?.userRoleId === ROLE.admin && data?.userDisplay !== '익명송이');
 
   // 로딩과 에러 상태에 따라 조건부 렌더링
   if (isLoading) {
@@ -126,52 +122,29 @@ export default function PostPage() {
         />
       )}
 
-      <div className={styles.content}>
-        <div className={styles.contentTop}>
-          <div className={styles.contentTopLeft}>
-            <img className={styles.logoIcon} src={cloudLogo} alt='로고' />
-            <p>{data.userDisplay || 'Unknown'}</p>
-            {showBadge && (
-              <Badge userRoleId={data.userRoleId} className={styles.badge} />
-            )}
-            <p className={styles.dot}>·</p>
-            <p>
-              {fullDateTimeFormat(data.createdAt)}
-              {data.isEdited && ' (수정됨)'}
-            </p>
-          </div>
-          <div
-            style={{
-              display: data.isNotice && !data.isWriter ? 'none' : 'block',
-            }}
-            className={styles.meatBall}
-            onClick={() => {
-              data.isWriter
-                ? setModal({
-                    id: 'my-post-more-options',
-                    type: null,
-                  })
-                : setModal({
-                    id: 'post-more-options',
-                    type: null,
-                  });
-            }}
-          >
-            <Icon id='meat-ball' width={18} height={4} stroke='none' />
-          </div>
+      <div className={styles.blueContainer}>
+        <MetaContainer
+          userDisplay={data.userDisplay}
+          userRoleId={data.userRoleId}
+          createdAt={data.createdAt}
+          isEdited={data.isEdited}
+          isNotice={data.isNotice}
+          isWriter={data.isWriter}
+          isCommentAlertConsent={data.isCommentAlertConsent}
+        />
+
+        <div className={styles.titleContainer}>
+          <h1 className={styles.title}>{data.title}</h1>
+          <span className={styles.views}>
+            &nbsp;&nbsp;{data.viewCount.toLocaleString()} views
+          </span>
         </div>
-        <div className={styles.title}>
-          <p>
-            {data.title}
-            <span className={styles.views}>
-              &nbsp;&nbsp;{data.viewCount.toLocaleString()} views
-            </span>
-          </p>
-        </div>
+
         <p
           className={styles.contentText}
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
+
         {data.attachments.length !== 0 && (
           <AttachmentSwiper
             data={data}
@@ -179,66 +152,21 @@ export default function PostPage() {
           />
         )}
 
-        <div className={styles.postBottom}>
-          <div
-            className={styles.count}
-            style={{
-              display: data.isNotice ? 'none' : 'flex',
-              backgroundColor:
-                focusedItem === 'post' ? 'var(--blue-1)' : 'transparent',
-            }}
-            onClick={inputFocus}
-          >
-            <Icon
-              id='comment-stroke'
-              width={18}
-              height={15}
-              style={{
-                paddingTop: '0.1rem',
-              }}
-              stroke='var(--blue-3)'
-              fill='none'
-            />
-            <p>댓글 {data.commentCount.toLocaleString()}</p>
-          </div>
-          <div
-            className={styles.count}
-            onClick={() => (data.isLiked ? unlike.mutate() : like.mutate())}
-          >
-            <Icon
-              id='like-stroke'
-              width={16}
-              height={15}
-              stroke='var(--pink-2)'
-              fill={data.isLiked ? 'var(--pink-2)' : 'none'}
-            />
-            <p>공감 {data.likeCount.toLocaleString()}</p>
-          </div>
-          <div
-            className={styles.count}
-            onClick={() =>
-              data.isScrapped ? unscrap.mutate() : scrap.mutate()
-            }
-          >
-            <Icon
-              id='scrap-stroke'
-              width={13}
-              height={16}
-              stroke={'var(--green-1)'}
-              fill={data.isScrapped ? 'var(--green-1)' : 'none'}
-            />
-            <p>스크랩 {data.scrapCount.toLocaleString()}</p>
-          </div>
-        </div>
+        <ActionContainer
+          isNotice={data.isNotice}
+          commentCount={data.commentCount}
+          isLiked={data.isLiked}
+          likeCount={data.likeCount}
+          isScrapped={data.isScrapped}
+          scrapCount={data.scrapCount}
+        />
       </div>
-      {data.isNotice ? (
-        <div className={styles.whiteBox} />
-      ) : (
-        <>
-          <CommentListSuspense commentCount={data.commentCount} />
-          <CommentInput />
-        </>
-      )}
+
+      <CommentContainer
+        isNotice={data.isNotice}
+        commentCount={data.commentCount}
+      />
+
       {/* PostPage에서 사용하는 모달 렌더러 */}
       <PostModalRenderer
         modal={modal}
@@ -247,5 +175,183 @@ export default function PostPage() {
         handleDelete={handleDelete}
       />
     </div>
+  );
+}
+
+function MetaContainer({
+  userDisplay,
+  userRoleId,
+  createdAt,
+  isEdited,
+  isNotice,
+  isWriter,
+  isCommentAlertConsent,
+}) {
+  const { postId } = useParams();
+  const { pathname } = useLocation();
+  const { id: boardId } = getBoard(pathname.split('/')[2]);
+
+  const { setModal } = useContext(ModalContext);
+
+  const { toast } = useToast();
+
+  const updateNotificationSetting = useUpdateCommentNotificationSetting(
+    boardId,
+    postId
+  );
+
+  const updateSetting = async () => {
+    const nextStatus = !isCommentAlertConsent;
+
+    try {
+      await updateNotificationSetting.mutateAsync(nextStatus);
+
+      const message = nextStatus
+        ? '댓글 알림이 설정되었습니다.'
+        : '댓글 알림이 해제되었습니다.';
+      toast(message);
+    } catch (error) {
+      if (error instanceof AppError) {
+        toast.error(error.message);
+      } else {
+        toast.error('잠시 후 다시 시도해주세요.');
+      }
+    }
+  };
+
+  const onMenuOpen = () => {
+    const id = isWriter ? 'my-post-more-options' : 'post-more-options';
+
+    setModal({
+      id,
+      type: null,
+    });
+  };
+
+  const showBadge =
+    userRoleId === ROLE.official ||
+    (userRoleId === ROLE.admin && userDisplay !== '익명송이');
+
+  const showBellIcon = !isNotice && isWriter;
+  const showMeatBallIcon = !isNotice || isWriter;
+
+  return (
+    <div className={styles.metaContainer}>
+      <div className={styles.meta}>
+        <Icon id='cloud' width={25} height={16} />
+        <p>{userDisplay || 'Unknown'}</p>
+        {showBadge && (
+          <Badge userRoleId={userRoleId} className={styles.badge} />
+        )}
+        <p className={styles.dot}>·</p>
+        <p>
+          {fullDateTimeFormat(createdAt)}
+          {isEdited && ' (수정됨)'}
+        </p>
+      </div>
+
+      <div className={styles.actions}>
+        {showBellIcon && (
+          <div className={styles.commentBell} onClick={updateSetting}>
+            <Icon
+              id={isCommentAlertConsent ? 'comment-bell-fill' : 'comment-bell'}
+              width={18}
+              height={21}
+            />
+          </div>
+        )}
+
+        {showMeatBallIcon && (
+          <div className={styles.meatBall} onClick={onMenuOpen}>
+            <Icon id='meat-ball' width={18} height={4} stroke='none' />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ActionContainer({
+  isNotice,
+  commentCount,
+  isLiked,
+  likeCount,
+  isScrapped,
+  scrapCount,
+}) {
+  const { postId } = useParams();
+
+  const { inputFocus, focusedItem } = useCommentContext();
+  const { scrap, unscrap } = useScrap();
+  const { like, unlike } = useLike({
+    type: LIKE_TYPE.post,
+    sourceId: postId,
+  });
+
+  return (
+    <div className={styles.actionContainer}>
+      <div
+        className={styles.count}
+        styles={{
+          display: isNotice ? 'none' : 'flex',
+          backgroundColor:
+            focusedItem === 'post' ? 'var(--blue-1)' : 'transparent',
+        }}
+        onClick={inputFocus}
+      >
+        <Icon
+          id='comment-stroke'
+          width={18}
+          height={15}
+          styles={{
+            paddingTop: '0.1rem',
+          }}
+          stroke='var(--blue-3)'
+          fill='none'
+        />
+        <p>댓글 {commentCount.toLocaleString()}</p>
+      </div>
+      <div
+        className={styles.count}
+        onClick={() => (isLiked ? unlike.mutate() : like.mutate())}
+      >
+        <Icon
+          id='like-stroke'
+          width={16}
+          height={15}
+          stroke='var(--pink-2)'
+          fill={isLiked ? 'var(--pink-2)' : 'none'}
+        />
+        <p>공감 {likeCount.toLocaleString()}</p>
+      </div>
+      <div
+        className={styles.count}
+        onClick={() => (isScrapped ? unscrap.mutate() : scrap.mutate())}
+      >
+        <Icon
+          id='scrap-stroke'
+          width={13}
+          height={16}
+          stroke={'var(--green-1)'}
+          fill={isScrapped ? 'var(--green-1)' : 'none'}
+        />
+        <p>스크랩 {scrapCount.toLocaleString()}</p>
+      </div>
+    </div>
+  );
+}
+
+function CommentContainer({ isNotice, commentCount }) {
+  return (
+    <>
+      {isNotice ? (
+        <div className={styles.whiteBox} />
+      ) : (
+        <>
+          <CommentListSuspense commentCount={commentCount} />
+          <CommentInput />
+        </>
+      )}
+    </>
   );
 }

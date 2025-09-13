@@ -66,7 +66,7 @@ export default function EditPostPage() {
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
-    queryKey: [QUERY_KEY.post, postId],
+    queryKey: QUERY_KEY.post(postId),
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
     placeholderData: {},
@@ -99,7 +99,7 @@ export default function EditPostPage() {
     mutationKey: [MUTATION_KEY.editPost],
     mutationFn: patchPost,
     onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.post, postId]);
+      queryClient.invalidateQueries(QUERY_KEY.post(postId));
       navigate(-1);
       toast(TOAST.POST.edit);
       setSubmitDisabled(false);

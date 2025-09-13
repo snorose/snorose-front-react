@@ -6,6 +6,11 @@ export const ERROR_MESSAGE = Object.freeze({
   FCM_TOKEN_EMPTY: `토큰을 발급받지 못했어요.\n잠시 후 다시 시도해 주세요.`,
   FCM_TOKEN_ISSUE_FAILED: `푸시 토큰 발급에 실패했어요.\n잠시 후 다시 시도해 주세요.`,
   FCM_TOKEN_SYNC_FAILED: `이 기기에서는 푸시 알림 등록을 지원하지 않아요.\n스마트폰에서 알림을 켜주세요.`,
+
+  // 댓글 알림 설정 API 관련
+  COMMENT_ALERT_NOT_AUTHOR: `댓글 알림은 게시글 작성자만 설정할 수 있어요.`,
+  COMMENT_ALERT_POST_NOT_FOUND: `삭제되었거나 존재하지 않는 글이에요.`,
+  COMMENT_ALERT_NO_PERMISSION: `댓글 알림 설정 권한이 없어요.\n관리자에게 문의해 주세요.`,
 });
 
 export const ERROR_CODE = Object.freeze({
@@ -16,4 +21,9 @@ export const ERROR_CODE = Object.freeze({
   FCM_TOKEN_EMPTY: 'FCM_TOKEN_EMPTY',
   FCM_TOKEN_ISSUE_FAILED: 'FCM_TOKEN_ISSUE_FAILED',
   FCM_TOKEN_SYNC_FAILED: 'FCM_TOKEN_SYNC_FAILED',
+
+  // 댓글 알림 설정 API 관련
+  COMMENT_ALERT_NOT_AUTHOR: 2030,
+  COMMENT_ALERT_POST_NOT_FOUND: 3031,
+  COMMENT_ALERT_NO_PERMISSION: 2007,
 });

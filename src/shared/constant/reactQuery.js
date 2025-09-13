@@ -3,7 +3,7 @@ export const QUERY_KEY = Object.freeze({
   banner: 'banner',
   attendance: 'monthlyAttendanceHistory',
   search: 'search',
-  post: 'post',
+  post: (postId) => (postId ? ['post', postId] : ['post']),
   posts: 'posts',
   review: 'review',
   reviews: 'reviews',
@@ -43,6 +43,7 @@ export const MUTATION_KEY = Object.freeze({
   readNotifications: ['readNotifications', 'single'],
   readAllNotifications: ['readNotifications', 'all'],
   updateNotificationSettings: ['updateNotificationSettings'],
+  updateCommentNotificationSetting: ['updateCommentNotificationSetting'],
 });
 
 export const STALE_TIME = Object.freeze({
