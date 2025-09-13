@@ -16,6 +16,7 @@
   text-align: center;
   color: var(--black);
   font: var(--text-headline-1-med);
+  white-space: pre-line;
 }
 
 .description {
