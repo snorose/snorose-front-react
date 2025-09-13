@@ -1,16 +1,22 @@
-import { MoreOptionModal, ConfirmModal, OptionModal } from '@/shared/component';
-import { ModalContext } from '@/shared/context/ModalContext';
+import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+
 import {
-  CONFIRM_MODAL_TEXT,
-  MORE_OPTION_MODAL_TEXT,
-  OPTION_MODAL_TEXT,
+  MoreOptionModal,
+  ConfirmModal,
+  IconOptionModal,
+} from '@/shared/component';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { createOptionActions } from '@/shared/component/Modal/lib/createOptionActions';
+import {
+  CONFIRM_MODAL,
+  MORE_OPTION_MODAL,
+  ICON_OPTION_MODAL,
 } from '@/shared/constant';
 
-import { useLocation } from 'react-router-dom';
 import { useCommentContext } from '../../context';
 import { useReportHandler } from '@/feature/report/hook/useReport';
 import { useComment } from '../../hook';
-import { useContext } from 'react';
 
 export default function CommentModalRenderer({ data, moreOptionTop }) {
   const { pathname } = useLocation();
@@ -29,24 +35,35 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
             return commentId === data.id ||
               data.children.some((child) => child.id === commentId) ? (
               <MoreOptionModal
-                title='댓글'
-                optionList={MORE_OPTION_MODAL_TEXT.COMMENT_MORE_OPTION_LIST}
+                modalContent={MORE_OPTION_MODAL.COMMENT_MORE_OPTIONS}
+                optionActions={{
+                  'report-comment': () =>
+                    setModal({ id: 'report-comment-types', type: null }),
+                  'report-user': () =>
+                    setModal({ id: 'report-user-types', type: null }),
+                }}
                 top={moreOptionTop}
               />
             ) : null;
           // 댓글 신고하기 옵션 모달
           case 'report-comment-types':
             return (
-              <OptionModal
-                title='댓글 신고'
-                optionList={OPTION_MODAL_TEXT.REPORT_COMMENT_TYPE_LIST}
+              <IconOptionModal
+                modalContent={ICON_OPTION_MODAL.REPORT_COMMENT_TYPES}
+                optionActions={{
+                  ...createOptionActions(
+                    setModal,
+                    ICON_OPTION_MODAL.REPORT_COMMENT_TYPES.options,
+                    'confirm-comment-report'
+                  ),
+                }}
               />
             );
           // 댓글 신고 확인 모달
           case 'confirm-comment-report':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_COMMENT}
+                modalContent={CONFIRM_MODAL.REPORT_COMMENT}
                 onConfirm={handleReport}
               />
             );
@@ -54,11 +71,11 @@ export default function CommentModalRenderer({ data, moreOptionTop }) {
           case 'confirm-comment-delete':
             return (
               <ConfirmModal
-                modalText={
+                modalContent={
                   pathname.startsWith('/board/permanent-snow') ||
                   pathname.startsWith('/board/exam-review')
-                    ? CONFIRM_MODAL_TEXT.DELETE_COMMENT_WITHOUT_POINT_DEDUCTION
-                    : CONFIRM_MODAL_TEXT.DELETE_COMMENT
+                    ? CONFIRM_MODAL.DELETE_COMMENT_WITHOUT_POINT_DEDUCTION
+                    : CONFIRM_MODAL.DELETE_COMMENT
                 }
                 onConfirm={() => {
                   deleteComment.mutate({ commentId });

@@ -19,7 +19,7 @@ import {
   MUTATION_KEY,
   QUERY_KEY,
   TOAST,
-  CONFIRM_MODAL_TEXT,
+  CONFIRM_MODAL,
 } from '@/shared/constant';
 
 import {
@@ -250,7 +250,7 @@ export default function EditExamReviewPage() {
       {/* 페이지 이탈 방지 모달 */}
       {modal.id === 'exit-page' && (
         <ConfirmModal
-          modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+          modalContent={CONFIRM_MODAL.EXIT_PAGE}
           onConfirm={handleExitPage}
         />
       )}

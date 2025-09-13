@@ -1,12 +1,19 @@
 import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
 
-import { MoreOptionModal, ConfirmModal, OptionModal } from '@/shared/component';
+import {
+  MoreOptionModal,
+  ConfirmModal,
+  IconOptionModal,
+} from '@/shared/component';
 import { getBoard } from '@/shared/lib';
 import {
-  MORE_OPTION_MODAL_TEXT,
-  CONFIRM_MODAL_TEXT,
-  OPTION_MODAL_TEXT,
+  MORE_OPTION_MODAL,
+  CONFIRM_MODAL,
+  ICON_OPTION_MODAL,
 } from '@/shared/constant';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { createOptionActions } from '@/shared/component/Modal/lib/createOptionActions';
 
 export default function PostModalRenderer({
   modal,
@@ -16,6 +23,7 @@ export default function PostModalRenderer({
 }) {
   const { pathname } = useLocation();
   const currentBoard = getBoard(pathname.split('/')[2]);
+  const { setModal } = useContext(ModalContext);
 
   return (
     <>
@@ -25,40 +33,60 @@ export default function PostModalRenderer({
           case 'post-more-options':
             return (
               <MoreOptionModal
-                title='게시글'
-                optionList={MORE_OPTION_MODAL_TEXT.POST_MORE_OPTION_LIST}
+                modalContent={MORE_OPTION_MODAL.POST_MORE_OPTIONS}
+                optionActions={{
+                  'report-post': () =>
+                    setModal({ id: 'report-post-types', type: null }),
+                  'report-user': () =>
+                    setModal({ id: 'report-user-types', type: null }),
+                }}
               />
             );
           // 내 게시글 더보기 모달 (수정, 삭제)
           case 'my-post-more-options':
             return (
               <MoreOptionModal
-                title='내 게시글'
-                optionList={MORE_OPTION_MODAL_TEXT.MY_POST_MORE_OPTION_LIST}
-                functions={[handleEdit, null]}
+                modalContent={MORE_OPTION_MODAL.MY_POST_MORE_OPTIONS}
+                optionActions={{
+                  'edit-post': () => handleEdit(),
+                  'delete-post': () =>
+                    setModal({ id: 'confirm-post-delete', type: null }),
+                }}
               />
             );
           // 게시글 신고하기 옵션 리스트 모달
           case 'report-post-types':
             return (
-              <OptionModal
-                title='게시글 신고'
-                optionList={OPTION_MODAL_TEXT.REPORT_POST_TYPE_LIST}
+              <IconOptionModal
+                modalContent={ICON_OPTION_MODAL.REPORT_POST_TYPES}
+                optionActions={{
+                  ...createOptionActions(
+                    setModal,
+                    ICON_OPTION_MODAL.REPORT_POST_TYPES.options,
+                    'confirm-post-report'
+                  ),
+                }}
               />
             );
           // 유저 신고하기 옵션 리스트 모달
           case 'report-user-types':
             return (
-              <OptionModal
-                title='이용자 신고'
-                optionList={OPTION_MODAL_TEXT.REPORT_USER_TYPE_LIST}
+              <IconOptionModal
+                modalContent={ICON_OPTION_MODAL.REPORT_USER_TYPES}
+                optionActions={{
+                  ...createOptionActions(
+                    setModal,
+                    ICON_OPTION_MODAL.REPORT_USER_TYPES.options,
+                    'confirm-user-report'
+                  ),
+                }}
               />
             );
           // 게시글 신고 최종 확인 모달
           case 'confirm-post-report':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_POST}
+                modalContent={CONFIRM_MODAL.REPORT_POST}
                 onConfirm={handleReport}
               />
             );
@@ -66,7 +94,7 @@ export default function PostModalRenderer({
           case 'confirm-user-report':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_USER}
+                modalContent={CONFIRM_MODAL.REPORT_USER}
                 onConfirm={handleReport}
               />
             );
@@ -74,10 +102,10 @@ export default function PostModalRenderer({
           case 'confirm-post-delete':
             return (
               <ConfirmModal
-                modalText={
+                modalContent={
                   currentBoard.id !== 23
-                    ? CONFIRM_MODAL_TEXT.DELETE_POST
-                    : CONFIRM_MODAL_TEXT.DELETE_POST_WITHOUT_POINT_DEDUCTION
+                    ? CONFIRM_MODAL.DELETE_POST
+                    : CONFIRM_MODAL.DELETE_POST_WITHOUT_POINT_DEDUCTION
                 }
                 onConfirm={handleDelete}
               />

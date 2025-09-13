@@ -1,9 +1,17 @@
-import { MoreOptionModal, ConfirmModal, OptionModal } from '@/shared/component';
+import { useContext } from 'react';
+
 import {
-  CONFIRM_MODAL_TEXT,
-  OPTION_MODAL_TEXT,
-  MORE_OPTION_MODAL_TEXT,
+  MoreOptionModal,
+  ConfirmModal,
+  IconOptionModal,
+} from '@/shared/component';
+import {
+  CONFIRM_MODAL,
+  ICON_OPTION_MODAL,
+  MORE_OPTION_MODAL,
 } from '@/shared/constant';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { createOptionActions } from '@/shared/component/Modal/lib/createOptionActions';
 
 export default function ExamReviewModalRenderer({
   modal,
@@ -11,6 +19,8 @@ export default function ExamReviewModalRenderer({
   handleReport,
   handleDelete,
 }) {
+  const { setModal } = useContext(ModalContext);
+
   return (
     <>
       {(() => {
@@ -18,7 +28,7 @@ export default function ExamReviewModalRenderer({
           case 'exam-review-download':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.EXAM_REVIEW_DUPLICATION}
+                modalContent={CONFIRM_MODAL.EXAM_REVIEW_DUPLICATION}
                 onConfirm={handleReport}
               />
             );
@@ -26,42 +36,60 @@ export default function ExamReviewModalRenderer({
           case 'exam-review-more-options':
             return (
               <MoreOptionModal
-                title='시험후기'
-                optionList={MORE_OPTION_MODAL_TEXT.EXAM_REVIEW_MORE_OPTION_LIST}
+                modalContent={MORE_OPTION_MODAL.EXAM_REVIEW_MORE_OPTIONS}
+                optionActions={{
+                  'report-exam-review': () =>
+                    setModal({ id: 'report-exam-review-types', type: null }),
+                  'report-user': () =>
+                    setModal({ id: 'report-user-types', type: null }),
+                }}
               />
             );
           // 내 시험후기 더보기 모달 (수정, 삭제)
           case 'my-exam-review-more-options':
             return (
               <MoreOptionModal
-                title='내 시험후기'
-                optionList={
-                  MORE_OPTION_MODAL_TEXT.MY_EXAM_REVIEW_MORE_OPTION_LIST
-                }
-                functions={[handleEdit, null]}
+                modalContent={MORE_OPTION_MODAL.MY_EXAM_REVIEW_MORE_OPTIONS}
+                optionActions={{
+                  'edit-exam-review': () => handleEdit(),
+                  'delete-exam-review': () =>
+                    setModal({ id: 'confirm-exam-review-delete', type: null }),
+                }}
               />
             );
           // 시험후기 신고하기 옵션 리스트 모달
           case 'report-exam-review-types':
             return (
-              <OptionModal
-                title='시험후기 신고'
-                optionList={OPTION_MODAL_TEXT.REPORT_EXAM_REVIEW_TYPE_LIST}
+              <IconOptionModal
+                modalContent={ICON_OPTION_MODAL.REPORT_EXAM_REVIEW_TYPES}
+                optionActions={{
+                  ...createOptionActions(
+                    setModal,
+                    ICON_OPTION_MODAL.REPORT_EXAM_REVIEW_TYPES.options,
+                    'confirm-exam-review-report'
+                  ),
+                }}
               />
             );
           // 이용자 신고하기 옵션 리스트 모달
           case 'report-user-types':
             return (
-              <OptionModal
-                title='이용자 신고'
-                optionList={OPTION_MODAL_TEXT.REPORT_USER_TYPE_LIST}
+              <IconOptionModal
+                modalContent={ICON_OPTION_MODAL.REPORT_USER_TYPES}
+                optionActions={{
+                  ...createOptionActions(
+                    setModal,
+                    ICON_OPTION_MODAL.REPORT_USER_TYPES.options,
+                    'confirm-user-report'
+                  ),
+                }}
               />
             );
           // 시험후기 신고 최종 확인 모달
           case 'confirm-exam-review-report':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_EXAM_REVIEW}
+                modalContent={CONFIRM_MODAL.REPORT_EXAM_REVIEW}
                 onConfirm={handleReport}
               />
             );
@@ -69,7 +97,7 @@ export default function ExamReviewModalRenderer({
           case 'confirm-user-report':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.REPORT_USER}
+                modalContent={CONFIRM_MODAL.REPORT_USER}
                 onConfirm={handleReport}
               />
             );
@@ -77,7 +105,7 @@ export default function ExamReviewModalRenderer({
           case 'confirm-exam-review-delete':
             return (
               <ConfirmModal
-                modalText={CONFIRM_MODAL_TEXT.DELETE_EXAM_REVIEW}
+                modalContent={CONFIRM_MODAL.DELETE_EXAM_REVIEW}
                 onConfirm={handleDelete}
               />
             );

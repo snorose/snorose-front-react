@@ -6,7 +6,7 @@ import {
   LIKE_TYPE,
   ROLE,
   SHOW_BADGE_PATH,
-  MORE_OPTION_MODAL_TEXT,
+  MORE_OPTION_MODAL,
 } from '@/shared/constant';
 import { convertHyperlink, timeAgo } from '@/shared/lib';
 import { ModalContext } from '@/shared/context/ModalContext';
@@ -203,9 +203,12 @@ const Comment = forwardRef((props, ref) => {
             data.children.some((child) => child.id === commentId)) && (
             // 내 댓글 더보기 클릭 시 뜨는 모달
             <MoreOptionModal
-              title='내 댓글'
-              optionList={MORE_OPTION_MODAL_TEXT.MY_COMMENT_MORE_OPTION_LIST}
-              functions={[handleEdit, null]}
+              modalContent={MORE_OPTION_MODAL.MY_COMMENT_MORE_OPTIONS}
+              optionActions={{
+                'edit-comment': () => handleEdit(),
+                'delete-comment': () =>
+                  setModal({ id: 'confirm-comment-delete', type: null }),
+              }}
               top={moreOptionTop}
             />
           )}
