@@ -72,37 +72,33 @@ export const patchPost = async ({
   attachmentsInfo,
   deleteAttachments,
 }) => {
-  try {
-    const response = await authAxios.patch(
-      `/v1/boards/${boardId}/posts/${postId}/update`,
-      {
-        postId,
-        category: null,
-        title,
-        content,
-        //isNotice: isNotice,
-        finalAttachments: attachmentsInfo.map(
-          ({ id, fileName, fileComment, type }) => ({
-            id,
-            fileName,
-            fileComment,
-            type,
-          })
-        ),
-        deleteAttachments,
-      }
-    );
-    const newFiles = attachmentsInfo
-      .filter((att) => att.id === '')
-      .map((att) => att.file);
+  const response = await authAxios.patch(
+    `/v1/boards/${boardId}/posts/${postId}/update`,
+    {
+      postId,
+      category: null,
+      title,
+      content,
+      //isNotice: isNotice,
+      finalAttachments: attachmentsInfo.map(
+        ({ id, fileName, fileComment, type }) => ({
+          id,
+          fileName,
+          fileComment,
+          type,
+        })
+      ),
+      deleteAttachments,
+    }
+  );
+  const newFiles = attachmentsInfo
+    .filter((att) => att.id === '')
+    .map((att) => att.file);
 
-    let attachmentUrlList = response.data.result.attachmentUrlList;
-    putFileInBucket(attachmentUrlList, newFiles);
+  let attachmentUrlList = response.data.result.attachmentUrlList;
+  putFileInBucket(attachmentUrlList, newFiles);
 
-    return response;
-  } catch (e) {
-    console.log(e);
-  }
+  return response;
 };
 
 // 게시글 신고
@@ -129,11 +125,7 @@ export const createThumbnail = async (boardId, postId) => {
 
 //S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
 export const putFileInBucket = async (urls, files) => {
-  try {
-    await Promise.all(
-      urls.map((url, index) => defaultAxios.put(url, files[index]))
-    );
-  } catch (e) {
-    console.log(e);
-  }
+  await Promise.all(
+    urls.map((url, index) => defaultAxios.put(url, files[index]))
+  );
 };
