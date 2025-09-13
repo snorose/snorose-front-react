@@ -1,14 +1,16 @@
 import { DimModalLayout, Icon } from '@/shared/component';
 import styles from './IconOptionModal.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 export default function IconOptionModal({ modalContent, optionActions }) {
   const { modal, setModal } = useContext(ModalContext);
 
-  if (modalContent.options.length === 0) {
-    setModal({ id: null, type: null });
-  }
+  useEffect(() => {
+    if (modalContent.options.length === 0) {
+      setModal({ id: null, type: null });
+    }
+  }, [modalContent.options.length, setModal]);
 
   // 옵션을 누르면, 그 옵션 id가 일치하는 함수를 실행 (없으면 모달 닫기 함수 리턴)
   const handleOptionClick = (item) => {

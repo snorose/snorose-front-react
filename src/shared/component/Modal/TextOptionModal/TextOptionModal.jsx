@@ -1,14 +1,16 @@
 import { DimModalLayout } from '@/shared/component';
 import styles from './TextOptionModal.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 export default function TextOptionModal({ modalContent, optionActions }) {
   const { modal, setModal } = useContext(ModalContext);
 
-  if (modalContent.options.length === 0) {
-    setModal({ id: null, type: null });
-  }
+  useEffect(() => {
+    if (modalContent.options.length === 0) {
+      setModal({ id: null, type: null });
+    }
+  }, [modalContent.options.length, setModal]);
 
   // 들어온 옵션 개수에 따라 타입 결정 (single: 블루 계열 ui, multiple: 회색 계열 ui)
   const type = modalContent.options.length === 1 ? 'single' : 'multiple';

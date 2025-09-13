@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Icon } from '@/shared/component';
 import { ModalContext } from '@/shared/context/ModalContext';
@@ -9,9 +9,11 @@ export default function MoreOptionModal({ modalContent, optionActions, top }) {
   const { setModal } = useContext(ModalContext);
   const { resetCommentState } = useCommentContext();
 
-  if (modalContent.options.length === 0) {
-    setModal({ id: null, type: null });
-  }
+  useEffect(() => {
+    if (modalContent.options.length === 0) {
+      setModal({ id: null, type: null });
+    }
+  }, [modalContent.options.length, setModal]);
 
   // 옵션을 누르면, 그 옵션 id가 일치하는 함수를 실행 (없으면 모달 닫기 함수 리턴)
   const handleOptionClick = (item) => {
@@ -39,7 +41,7 @@ export default function MoreOptionModal({ modalContent, optionActions, top }) {
           {modalContent.options.map((option, idx) => (
             <li
               key={idx}
-              className={`${styles.contentItem} ${idx === modalContent.length - 1 ? styles.lastItem : ''}`}
+              className={`${styles.contentItem} ${idx === modalContent.options.length - 1 ? styles.lastItem : ''}`}
               onClick={() => handleOptionClick(option)}
             >
               <p>{option.text}</p>
