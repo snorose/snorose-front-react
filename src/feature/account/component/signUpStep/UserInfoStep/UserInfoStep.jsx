@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useRegister } from '@/apis';
@@ -23,15 +23,56 @@ import style from './UserInfoStep.module.css';
 export default function UserInfoStep({ setFormData, formData }) {
   const register = useRegister();
   const navigate = useNavigate();
+
   const [nicknameStyle, setNicknameStyle] = useState('ready');
   const [stuNumStyle, setStuNumStyle] = useState('ready');
   const [birthdayStyle, setBirthdayStyle] = useState('ready');
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
+
+  // 개인정보 동의 이벤트 리스너 등록
+  useEffect(() => {
+    const handlePrivacyAgreed = () => {
+      if (window.privacyTermsAgreed) {
+        setIsTermsChecked(true);
+        // 사용 후 정리
+        window.privacyTermsAgreed = false;
+      }
+    };
+
+    // 이벤트 리스너 등록
+    window.addEventListener('privacyTermsAgreed', handlePrivacyAgreed);
+
+    // 컴포넌트가 마운트될 때 한 번 확인 (페이지 새로고침 등의 경우)
+    handlePrivacyAgreed();
+
+    // cleanup
+    return () => {
+      window.removeEventListener('privacyTermsAgreed', handlePrivacyAgreed);
+    };
+  }, []);
+
+  // 페이지 포커스 시에도 확인 (뒤로가기로 돌아왔을 때)
+  useEffect(() => {
+    const handleFocus = () => {
+      if (window.privacyTermsAgreed) {
+        setIsTermsChecked(true);
+        window.privacyTermsAgreed = false;
+      }
+    };
+
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, []);
 
   const isFormValid = () =>
     nicknameStyle === 'right' &&
     stuNumStyle === 'right' &&
     birthdayStyle === 'right' &&
-    formData.name;
+    formData.name &&
+    isTermsChecked;
 
   const getButtonState = () => (isFormValid() ? 'right' : 'ready');
 
@@ -111,6 +152,8 @@ export default function UserInfoStep({ setFormData, formData }) {
         label={'개인정보 수집 및 이용 동의'}
         required
         navigate={navigate}
+        isChecked={isTermsChecked}
+        setIsChecked={setIsTermsChecked}
       />
 
       <div className={style.submit}>
@@ -124,7 +167,13 @@ export default function UserInfoStep({ setFormData, formData }) {
   );
 }
 
-function CheckTerms({ label, isChecked = false, required = false, navigate }) {
+function CheckTerms({
+  label,
+  isChecked = false,
+  required = false,
+  navigate,
+  setIsChecked,
+}) {
   const tagStyle = required ? style.required : style.optional;
   const tag = required ? '필수' : '선택';
 
@@ -132,18 +181,29 @@ function CheckTerms({ label, isChecked = false, required = false, navigate }) {
     navigate('/check-privacy-term');
   };
 
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <div className={style.checkTerms}>
-      <input id='terms' className={style.checkbox} type='checkbox' hidden />
+      <input
+        id='terms'
+        className={style.checkbox}
+        type='checkbox'
+        hidden
+        checked={isChecked}
+        onChange={handleCheckboxChange}
+      />
       <label htmlFor='terms' className={style.label}>
         <Icon
-          className={style.blueBox}
+          className={`${style.blueBox} ${isChecked ? style.checked : ''}`}
           id='checkbox-blue'
           width={20}
           height={20}
         />
         <Icon
-          className={style.greyBox}
+          className={`${style.greyBox} ${!isChecked ? style.unchecked : ''}`}
           id='checkbox-grey'
           width={20}
           height={20}
