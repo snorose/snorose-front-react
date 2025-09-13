@@ -27,6 +27,7 @@ export default function FindPwPage() {
     loginId: '',
     email: '',
   });
+
   const inputProps = [
     [
       '아이디',

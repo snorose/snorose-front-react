@@ -11,6 +11,7 @@ export default function FoundIdPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [email, setEmail] = useState('');
+
   useEffect(() => {
     try {
       setEmail(state.email);
