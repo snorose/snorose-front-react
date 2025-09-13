@@ -2,6 +2,7 @@ import { React, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Keyboard } from 'swiper/modules';
 
+import { useToast } from '@/shared/hook';
 import { Icon, ChoiceModal } from '@/shared/component';
 import { handleDownload, handleZipDownload } from '@/shared/lib';
 
@@ -14,6 +15,7 @@ export default function FullScreenAttachment({
   clickedImageIndex,
   setClickedImageIndex,
 }) {
+  const { toast } = useToast();
   const paginationRef = useRef(null);
   const swiperRef = useRef(null);
   const [isChoiceModalOpen, setIsChoiceModalOpen] = useState(false);
@@ -108,15 +110,23 @@ export default function FullScreenAttachment({
           () => {
             //게시글 사진 전체 저장 - 전체 파일들을 zip 해서 리턴하기
             //attachmentUrls안에 있는 모든 url을 zip 해서 한 파일로 만들고, 그걸 다운로드 받게 하기
-            handleZipDownload(urls);
+            try {
+              handleZipDownload(urls);
+            } catch (e) {
+              toast('다운로드에 문제가 발생했습니다. 다시 시도해주세요.');
+            }
             setIsChoiceModalOpen(false);
           },
           () => {
             //이 사진만 저장
             //attachmentUrls[currentIndex]
-            const currentIndex =
-              paginationRef.current?.textContent.split('/')[0] - 1;
-            handleDownload(urls[currentIndex]);
+            try {
+              const currentIndex =
+                paginationRef.current?.textContent.split('/')[0] - 1;
+              handleDownload(urls[currentIndex]);
+            } catch (e) {
+              toast('다운로드에 문제가 발생했습니다. 다시 시도해주세요.');
+            }
             setIsChoiceModalOpen(false);
           },
         ]}
