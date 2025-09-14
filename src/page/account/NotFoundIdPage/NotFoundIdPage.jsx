@@ -19,16 +19,16 @@ export default function NotFoundIdPage() {
   }, []);
 
   return (
-    <div className={styles.pageFrame}>
-      <BackAppBar backNavTo='/login' classname={styles.backAppBar} />
-      <div>
-        <div className={styles.explanation}>
-          <p className={styles.pageTitle}>아이디 찾기</p>
-          <p className={styles.pageExplanation}>
-            입력하신 정보와 일치하는 정보가 없어요
-          </p>
-        </div>
+    <div className={styles.container}>
+      <BackAppBar backNavTo='/login' />
+
+      <div className={styles.explanation}>
+        <p className={styles.pageTitle}>아이디 찾기</p>
+        <p className={styles.pageExplanation}>
+          입력하신 정보와 일치하는 정보가 없어요
+        </p>
       </div>
+
       <div className={styles.pageMiddleFrame}>
         <img
           src={taskFailedIllustration}
@@ -36,6 +36,7 @@ export default function NotFoundIdPage() {
           className={styles.illustration}
         />
       </div>
+
       <div className={styles.pageBottomFrame}>
         <Link to='/find-id'>
           <div className={styles.goBackButton}>

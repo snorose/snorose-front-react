@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  height: 6rem;
+  height: var(--default-appbar-height);
 
   padding: 0 2rem;
 

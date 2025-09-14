@@ -2,6 +2,7 @@
   /* box model */
   --default-width: 60rem;
   --default-margin: 2rem;
+  --default-appbar-height: 6rem;
 
   /* color */
   --blue-0: #eaf5fd;

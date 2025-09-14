@@ -5,7 +5,7 @@
 
   width: 100%;
   max-width: 60rem;
-  height: 6rem;
+  height: var(--default-appbar-height);
 
   padding: 0 2rem;
 

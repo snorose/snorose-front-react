@@ -3,7 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { useFindId } from '@/apis';
 
-import { FetchLoadingOverlay, Icon, Input, Button } from '@/shared/component';
+import {
+  FetchLoadingOverlay,
+  Icon,
+  Input,
+  Button,
+  BackAppBar,
+} from '@/shared/component';
 import { LOADING_MESSAGE } from '@/shared/constant';
 
 import { checkName, checkStudentNum } from '@/feature/account/lib';
@@ -48,7 +54,9 @@ export default function FindIdPage() {
   };
 
   return (
-    <div className={styles.pageFrame}>
+    <div className={styles.container}>
+      <BackAppBar />
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -61,16 +69,6 @@ export default function FindIdPage() {
       >
         <div className={styles.findIdFrame}>
           <div>
-            <Icon
-              className={styles.back}
-              id='arrow-left'
-              width={'1.8rem'}
-              height={'1.6rem'}
-              onClick={() => {
-                //BackAppBar 사용 불가 -> 로그인페이지에서 findId/findPw했다가 다시 돌아오면 다시는 main으로 못 돌아가는 루프구조가 되어버림
-                navigate('/login');
-              }}
-            />
             <h1 className={styles.pageTitle}>아이디 찾기</h1>
 
             {inputProps.map((props, i) => (

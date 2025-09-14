@@ -53,7 +53,7 @@ export default function VerifyStep({ setStep }) {
   };
 
   return (
-    <section className={styles.content}>
+    <section className={styles.container}>
       <div className={styles.verify}>
         <AuthInput
           label='학번'

@@ -58,10 +58,10 @@ export default function AboutPage() {
   };
 
   return (
-    <main>
+    <section className={styles.container}>
       <BackAppBar hasMenu />
       <Icon className={styles.logo} id='about-logo' width={221} height={25} />
-      <div className={styles.container}>
+      <div className={styles.accordionList}>
         {accordionItems.map((item, index) => (
           <Accordion
             key={item.title}
@@ -73,6 +73,6 @@ export default function AboutPage() {
           </Accordion>
         ))}
       </div>
-    </main>
+    </section>
   );
 }
