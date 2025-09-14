@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 const defaultAxios = axios.create({
-  baseURL: 'https://dev.snorose.com',
+  baseURL: process.env.REACT_APP_SERVER_DOMAIN,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 const authAxios = axios.create({
-  baseURL: 'https://dev.snorose.com',
+  baseURL: process.env.REACT_APP_SERVER_DOMAIN,
   headers: {
     'Content-Type': 'application/json',
     withCredentials: true,
