@@ -16,7 +16,7 @@
   padding-bottom: 1rem;
   display: flex;
   align-items: center;
-  font: var(--text-body-1-reg);
+  font: var(--text-body-2-reg);
   color: var(--grey-4);
   white-space: nowrap;
 }
@@ -51,7 +51,7 @@
 }
 
 .title {
-  font: var(--text-headline-2-med);
+  font: var(--text-body-1-med);
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -106,9 +106,9 @@
 .iconContainer {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.6rem;
   font: var(--text-body-2-reg);
-  color: var(--grey-3-1);
+  color: var(--grey-4);
 }
 
 .comment {

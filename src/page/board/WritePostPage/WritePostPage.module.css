@@ -37,6 +37,15 @@
   font: var(--text-headline-1-med);
 }
 
+.categoryDropdownContainer {
+  position: relative;
+}
+
+.dropDownList {
+  position: absolute;
+  top: calc(100% + 0.7rem);
+}
+
 .profileBox {
   display: flex;
   align-items: center;

@@ -6,6 +6,10 @@
   background: var(--grey-1);
 }
 
+.comment.focused {
+  background-color: var(--blue-0);
+}
+
 .commentTop {
   width: 100%;
   padding: 1.3rem 1.5rem 0.9rem;
@@ -87,7 +91,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.8rem;
   border-radius: 0.5rem;
   color: var(--grey-3-1);
   background-color: transparent;
@@ -125,6 +129,10 @@
 
 .nestedComment.isLast {
   border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.nestedComment.focused {
+  background-color: var(--blue-0);
 }
 
 .nestedCommentTop {

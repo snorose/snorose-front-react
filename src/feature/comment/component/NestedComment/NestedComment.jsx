@@ -7,6 +7,7 @@ import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
 
 import styles from '@/feature/comment/component/Comment/Comment.module.css';
+import { useRef } from 'react';
 
 export default function NestedComment({
   data,
@@ -14,6 +15,7 @@ export default function NestedComment({
   isFirst,
   onCommentOptionClick,
 }) {
+  const nestedMoreOptionRef = useRef(null);
   const { pathname } = useLocation();
   const { commentId } = useCommentContext();
   const { like, unlike } = useLike({
@@ -42,11 +44,10 @@ export default function NestedComment({
 
   return (
     <div
-      className={`${styles.nestedComment} ${isLast && styles.isLast}`}
+      className={`${styles.nestedComment} ${isLast && styles.isLast} ${
+        commentId === data.id ? styles.focused : ''
+      }`}
       onClick={(event) => event.stopPropagation()}
-      style={{
-        backgroundColor: commentId === data.id ? '#DDEBF6' : '#f0f0f0',
-      }}
     >
       <div className={styles.nestedCommentTop}>
         <div className={styles.commentTopLeft}>
@@ -67,9 +68,15 @@ export default function NestedComment({
             {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
           </p>
         </div>
-        <p className={styles.dot3} onClick={(e) => onCommentOptionClick(data)}>
+        <p
+          ref={nestedMoreOptionRef}
+          className={styles.dot3}
+          onClick={(e) => {
+            onCommentOptionClick(data, nestedMoreOptionRef);
+          }}
+        >
           {!isDeleted && isVisible && (
-            <Icon id='meat-ball' width={18} height={4} stroke='none'/>
+            <Icon id='meat-ball' width={18} height={4} stroke='none' />
           )}
         </p>
       </div>
@@ -100,7 +107,8 @@ export default function NestedComment({
               id='like-stroke'
               width={16}
               height={18}
-              fill={isLiked ? '#5F86BF' : 'none'}
+              stroke='var(--blue-3)'
+              fill={isLiked ? 'var(--blue-3)' : 'none'}
             />
             <span>{likeCount.toLocaleString()}</span>
           </button>

@@ -1,101 +1,31 @@
-import { useMutation } from '@tanstack/react-query';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useContext, useRef, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { reportComment } from '@/apis';
-
-import {
-  Badge,
-  ConfirmModal,
-  DeleteModal,
-  Icon,
-  OptionModal,
-} from '@/shared/component';
+import { Badge, Icon, MoreOptionModal } from '@/shared/component';
 import {
   LIKE_TYPE,
-  MUTATION_KEY,
   ROLE,
   SHOW_BADGE_PATH,
+  MORE_OPTION_MODAL_TEXT,
 } from '@/shared/constant';
-import { useModal, useToast } from '@/shared/hook';
 import { convertHyperlink, timeAgo } from '@/shared/lib';
+import { ModalContext } from '@/shared/context/ModalContext';
 
-import { NestedComment } from '@/feature/comment/component';
+import {
+  CommentModalRenderer,
+  NestedComment,
+} from '@/feature/comment/component';
 import { useCommentContext } from '@/feature/comment/context';
-import { useComment } from '@/feature/comment/hook';
 import { useLike } from '@/feature/like/hook';
 
 import styles from './Comment.module.css';
 
 const Comment = forwardRef((props, ref) => {
+  const { modal, setModal } = useContext(ModalContext);
   const { pathname } = useLocation();
   const { data } = props;
-  const {
-    setIsEdit,
-    commentId,
-    setCommentId,
-    setContent,
-    inputFocus,
-    resetCommentState,
-    isInputFocused,
-    setIsInputFocused,
-  } = useCommentContext();
-  const { deleteComment } = useComment();
-  const { like, unlike } = useLike({
-    type: LIKE_TYPE.comment,
-    sourceId: data.id,
-  });
-  const { toast } = useToast();
 
-  const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [selectedReportType, setSelectedReportType] = useState();
-  const reportConfirmModal = useModal();
-
-  const { mutate: reportCommentMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportComment],
-    mutationFn: (body) => reportComment(data.postId, data.id, body),
-    onSuccess: ({ message }) => {
-      setIsReportModalOpen(false);
-      reportConfirmModal.closeModal();
-      toast(message);
-      resetCommentState();
-    },
-    onError: () => {
-      toast('댓글 신고에 실패했습니다.');
-      resetCommentState();
-    },
-  });
-
-  const handleCommentReportOptionModalOptionClick = (event) => {
-    setSelectedReportType(event.currentTarget.dataset.value);
-    reportConfirmModal.openModal();
-  };
-
-  const handleReportConfirmModalPrimaryButtonClick = () => {
-    reportCommentMutate({
-      reportType: selectedReportType,
-    });
-  };
-
-  const onCommentOptionClick = (data) => {
-    setCommentId(data.id);
-    setContent(data.content);
-    data.isWriter ? setIsOptionModalOpen(true) : setIsReportModalOpen(true);
-  };
-
-  const onCloseClick = () => {
-    setCommentId(undefined);
-    setContent('');
-  };
-
-  const handleReply = () => {
-    resetCommentState();
-    setCommentId(data.id);
-    inputFocus();
-    setIsInputFocused({ isFocused: true, parent: String(data.id) });
-  };
+  const moreOptionRef = useRef(null);
 
   const {
     userRoleId,
@@ -111,6 +41,61 @@ const Comment = forwardRef((props, ref) => {
     children,
   } = data;
 
+  const {
+    setIsEdit,
+    commentId,
+    setCommentId,
+    setContent,
+    inputFocus,
+    resetCommentState,
+    focusedItem,
+    setFocusedItem,
+  } = useCommentContext();
+
+  const { like, unlike } = useLike({
+    type: LIKE_TYPE.comment,
+    sourceId: data.id,
+  });
+
+  const [inputContent, setInputContent] = useState(null);
+  const [moreOptionTop, setMoreOptionTop] = useState(0);
+
+  // 컴포넌트 언마운트 시 댓글 ID 초기화
+  useEffect(() => {
+    return () => {
+      setCommentId(null);
+    };
+  }, [setCommentId]);
+
+  const onCommentOptionClick = (data, refElement) => {
+    setCommentId(data.id);
+    setInputContent(data.content);
+
+    const rect = (refElement || moreOptionRef).current.getBoundingClientRect();
+    setMoreOptionTop(rect.top);
+
+    setModal(
+      data.isWriter
+        ? { id: 'my-comment-more-options', type: null }
+        : { id: 'report-comment', type: null }
+    );
+  };
+
+  const handleReply = () => {
+    resetCommentState();
+    setCommentId(data.id);
+    inputFocus();
+    setFocusedItem(String(data.id));
+    // setIsInputFocused({ isFocused: true, parent: String(data.id) });
+  };
+
+  const handleEdit = () => {
+    setIsEdit(true);
+    setContent(inputContent);
+    setModal({ id: null, type: null });
+    inputFocus();
+  };
+
   // 뱃지가 보이는 ROLE
   const showBadge =
     userRoleId === ROLE.official ||
@@ -121,7 +106,9 @@ const Comment = forwardRef((props, ref) => {
     <>
       <div
         ref={ref}
-        className={styles.comment}
+        className={`${styles.comment} ${
+          commentId === data.id ? styles.focused : ''
+        }`}
         onClick={(event) => event.stopPropagation()}
       >
         <div className={styles.commentTop}>
@@ -140,14 +127,15 @@ const Comment = forwardRef((props, ref) => {
               {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
             </p>
           </div>
-          <p
+          <div
+            ref={moreOptionRef}
             className={styles.dot3}
             onClick={(e) => onCommentOptionClick(data)}
           >
             {!isDeleted && isVisible && (
               <Icon id='meat-ball' width={18} height={4} stroke='none' />
             )}
-          </p>
+          </div>
         </div>
         <div
           className={`${styles.commentCenter} ${(isDeleted || !isVisible) && styles.hide}`}
@@ -173,13 +161,13 @@ const Comment = forwardRef((props, ref) => {
               >
                 <Icon
                   id='comment-stroke'
-                  width={20}
-                  height={17}
-                  fill={
-                    Number(isInputFocused.parent) === data.id
-                      ? '#5F86BF'
-                      : 'none'
-                  }
+                  width={18}
+                  height={15}
+                  style={{
+                    paddingTop: '0.1rem',
+                  }}
+                  stroke='var(--blue-3)'
+                  fill='none'
                 />
                 <p>{children.length}</p>
               </button>
@@ -192,7 +180,8 @@ const Comment = forwardRef((props, ref) => {
                   id='like-stroke'
                   width={16}
                   height={18}
-                  fill={isLiked ? '#5F86BF' : 'none'}
+                  stroke='var(--blue-3)'
+                  fill={isLiked ? 'var(--blue-3)' : 'none'}
                 />
                 <span>{likeCount.toLocaleString()}</span>
               </button>
@@ -209,57 +198,19 @@ const Comment = forwardRef((props, ref) => {
               onCommentOptionClick={onCommentOptionClick}
             />
           ))}
+        {modal.id === 'my-comment-more-options' &&
+          (commentId === data.id ||
+            data.children.some((child) => child.id === commentId)) && (
+            // 내 댓글 더보기 클릭 시 뜨는 모달
+            <MoreOptionModal
+              title='내 댓글'
+              optionList={MORE_OPTION_MODAL_TEXT.MY_COMMENT_MORE_OPTION_LIST}
+              functions={[handleEdit, null]}
+              top={moreOptionTop}
+            />
+          )}
       </div>
-      <OptionModal
-        id='comment-more-options'
-        isOpen={isOptionModalOpen}
-        setIsOpen={setIsOptionModalOpen}
-        closeFn={onCloseClick}
-        functions={{
-          pencil: () => {
-            setIsOptionModalOpen(false);
-            setIsEdit(true);
-            inputFocus();
-          },
-          trash: () => {
-            setIsDeleteModalOpen(true);
-            setIsOptionModalOpen(false);
-          },
-        }}
-      />
-      <DeleteModal
-        id={
-          pathname.startsWith('/board/permanent-snow') ||
-          pathname.startsWith('/board/exam-review')
-            ? 'comment-delete-no-points'
-            : 'comment-delete'
-        }
-        isOpen={isDeleteModalOpen}
-        closeFn={() => {
-          resetCommentState();
-          setContent('');
-          setIsDeleteModalOpen(false);
-        }}
-        redBtnFunction={() => deleteComment.mutate({ commentId })}
-      />
-      <OptionModal
-        id='comment-report'
-        isOpen={isReportModalOpen}
-        setIsOpen={setIsReportModalOpen}
-        closeFn={() => {
-          onCloseClick();
-          setIsReportModalOpen(false);
-        }}
-        onOptionClick={handleCommentReportOptionModalOptionClick}
-      />
-      <ConfirmModal
-        title='해당 댓글을 신고할까요?'
-        isOpen={reportConfirmModal.isOpen}
-        primaryButtonText='확인'
-        secondaryButtonText='취소'
-        onPrimaryButtonClick={handleReportConfirmModalPrimaryButtonClick}
-        onSecondaryButtonClick={reportConfirmModal.closeModal}
-      />
+      <CommentModalRenderer data={data} moreOptionTop={moreOptionTop} />
     </>
   );
 });

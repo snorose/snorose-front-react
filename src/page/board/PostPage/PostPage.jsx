@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useContext } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { deletePost, getPostContent, reportPost, reportUser } from '@/apis';
+import { getPostContent } from '@/apis';
 
 import {
   AttachmentSwiper,
@@ -25,11 +25,26 @@ import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 
 import { NotFoundPage } from '@/page/etc';
 
+import { BackAppBar, Badge, FetchLoading, Icon } from '@/shared/component';
+import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
+import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { useModalReset } from '@/shared/hook/useBlocker';
+
+import { BackAppBar, Badge, FetchLoading, Icon } from '@/shared/component';
+import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
+import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { useModalReset } from '@/shared/hook/useBlocker';
+
 import { FullScreenAttachment } from '@/feature/board/component';
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
-import { useCommentContext } from '@/feature/comment/context';
+import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
+import { PostModalRenderer } from '@/feature/board/component';
+import { useReportHandler } from '@/feature/report/hook/useReport';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
+import { useCommentContext } from '@/feature/comment/context';
 
 import styles from './PostPage.module.css';
 import 'swiper/css';
@@ -37,14 +52,17 @@ import 'swiper/css/free-mode';
 import 'swiper/css/scrollbar';
 
 export default function PostPage() {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { postId } = useParams();
-  const location = useLocation();
-  const { pathname } = location;
-  const { inputFocus, isInputFocused } = useCommentContext();
-  const { toast } = useToast();
+
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { inputFocus, focusedItem } = useCommentContext();
   const currentBoard = getBoard(pathname.split('/')[2]);
+
+  const { modal, setModal } = useContext(ModalContext);
+
+  // 페이지 언마운트 시 모달 상태 초기화
+  useModalReset();
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -61,91 +79,18 @@ export default function PostPage() {
     enabled: !!currentBoard?.id && !!postId,
   });
 
+  const { handleDelete } = useDeletePostHandler(currentBoard?.id);
+  const { handleReport } = useReportHandler(modal, setModal, data);
+
   const { scrap, unscrap } = useScrap();
   const { like, unlike } = useLike({
     type: LIKE_TYPE.post,
     sourceId: postId,
   });
 
-  const { mutate: reportPostMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportPost],
-    mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
-
-  const { mutate: reportUserMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportUser],
-    mutationFn: (body) => reportUser(body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
-
-  const handleDelete = async () => {
-    if (deleteSubmitDisabled) return;
-    setDeleteSubmitDisabled(true);
-    try {
-      const response = await deletePost(currentBoard.id, postId);
-
-      if (response.status === 200) {
-        currentBoard.id !== 23
-          ? toast(TOAST.POST.delete)
-          : toast(TOAST.POST.deleteNoPoints);
-        navigate(-1);
-        queryClient.removeQueries([QUERY_KEY.post, postId]);
-        invalidUserInfoQuery();
-      }
-    } catch ({ response }) {
-      toast(response.data.message);
-    } finally {
-      setDeleteSubmitDisabled(false);
-      setIsDeleteModalOpen(false);
-    }
-  };
-
-  const handleReportOptionModalOptionClick = (event) => {
-    const reportCategory = event.currentTarget.dataset.value;
-
-    setIsReportModalOpen(false);
-
-    if (reportCategory === 'post-report') {
-      setIsPostReportModalOpen(true);
-    } else if (reportCategory === 'user-report') {
-      setIsUserReportModalOpen(true);
-    }
-  };
-
-  const handlePostReportOptionModalOptionClick = (event) => {
-    const reportType = event.currentTarget.dataset.value;
-
-    reportPostMutate({
-      reportType,
-    });
-    setIsPostReportModalOpen(false);
-  };
-
-  const handleUserReportOptionModalOptionClick = (event) => {
-    if (data === undefined) {
-      return;
-    }
-
-    const reportType = event.currentTarget.dataset.value;
-    const { userId } = data;
-
-    reportUserMutate({
-      encryptedTargetUserId: userId,
-      reportType,
-    });
-
-    setIsUserReportModalOpen(false);
+  const handleEdit = () => {
+    setModal({ id: null, type: null });
+    navigate(`./edit`);
   };
 
   // 뱃지를 보여주는 ROLE
@@ -215,8 +160,14 @@ export default function PostPage() {
             className={styles.meatBall}
             onClick={() => {
               data.isWriter
-                ? setIsOptionsModalOpen(true)
-                : setIsReportModalOpen(true);
+                ? setModal({
+                    id: 'my-post-more-options',
+                    type: null,
+                  })
+                : setModal({
+                    id: 'post-more-options',
+                    type: null,
+                  });
             }}
           >
             <Icon id='meat-ball' width={18} height={4} stroke='none' />
@@ -241,24 +192,25 @@ export default function PostPage() {
           />
         )}
 
-        <div className={styles.post_bottom}>
+        <div className={styles.postBottom}>
           <div
             className={styles.count}
             style={{
               display: data.isNotice ? 'none' : 'flex',
+              backgroundColor:
+                focusedItem === 'post' ? 'var(--blue-1)' : 'transparent',
             }}
             onClick={inputFocus}
           >
             <Icon
               id='comment-stroke'
-              width={20}
-              height={16}
-              fill={
-                isInputFocused.isFocused === true &&
-                isInputFocused.parent === 'post'
-                  ? '#5F86BF'
-                  : 'none'
-              }
+              width={18}
+              height={15}
+              style={{
+                paddingTop: '0.1rem',
+              }}
+              stroke='var(--blue-3)'
+              fill='none'
             />
             <p>댓글 {data.commentCount.toLocaleString()}</p>
           </div>
@@ -270,8 +222,8 @@ export default function PostPage() {
               id='like-stroke'
               width={16}
               height={15}
-              stroke='#5F86BF'
-              fill={data.isLiked ? '#5F86BF' : 'none'}
+              stroke='var(--pink-2)'
+              fill={data.isLiked ? 'var(--pink-2)' : 'none'}
             />
             <p>공감 {data.likeCount.toLocaleString()}</p>
           </div>
@@ -285,8 +237,8 @@ export default function PostPage() {
               id='scrap-stroke'
               width={13}
               height={16}
-              stroke='#5F86BF'
-              fill={data.isScrapped ? '#5F86BF' : 'none'}
+              stroke={'var(--green-1)'}
+              fill={data.isScrapped ? 'var(--green-1)' : 'none'}
             />
             <p>스크랩 {data.scrapCount.toLocaleString()}</p>
           </div>
@@ -300,29 +252,12 @@ export default function PostPage() {
           <CommentInput />
         </>
       )}
-
-      <OptionModal
-        id='post-more-options'
-        isOpen={isOptionsModalOpen}
-        setIsOpen={setIsOptionsModalOpen}
-        closeFn={() => {
-          setIsOptionsModalOpen(false);
-        }}
-        functions={{
-          pencil: () => navigate(`./edit`),
-          trash: () => {
-            setIsOptionsModalOpen(false);
-            setIsDeleteModalOpen(true);
-          },
-        }}
-      />
-      <DeleteModal
-        id={currentBoard.id !== 23 ? 'post-delete' : 'post-delete-no-points'}
-        isOpen={isDeleteModalOpen}
-        closeFn={() => {
-          setIsDeleteModalOpen(false);
-        }}
-        redBtnFunction={handleDelete}
+      {/* PostPage에서 사용하는 모달 렌더러 */}
+      <PostModalRenderer
+        modal={modal}
+        handleEdit={handleEdit}
+        handleReport={handleReport}
+        handleDelete={handleDelete}
       />
       <OptionModal
         id='report'
