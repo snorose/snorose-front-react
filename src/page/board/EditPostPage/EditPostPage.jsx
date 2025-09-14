@@ -283,7 +283,7 @@ export default function EditPostPage() {
         redBtnFunction={() => navigate(-1, { replace: true })}
       />
       <ConfirmModal
-        isBackgroundBlurred={false}
+        isBackgroundBlurred={true}
         isOpen={trashImageConfirmModal.isOpen}
         title='삭제하시겠습니까?'
         primaryButtonText='확인'
