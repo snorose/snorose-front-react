@@ -420,8 +420,7 @@ const REPORT_COMMENT_TYPE_LIST = [
 //첨부파일 모달
 const ATTACHMENT_MODAL = {
   DELETE_ATTACHMENT: {
-    title: '댓글을 삭제할까요?',
-    description: '삭제 시 포인트가 차감돼요',
+    title: '삭제하시겠습니까?',
     confirmText: '삭제',
     cancelText: '취소',
   },

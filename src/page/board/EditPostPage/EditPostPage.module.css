@@ -10,11 +10,6 @@
   justify-content: space-between;
 }
 
-.top {
-  width: 100%;
-  padding-top: 5.2rem;
-}
-
 .center {
   padding: 0 2rem 4rem 2rem;
   background-color: var(--blue-0);

@@ -204,15 +204,15 @@ export const MODAL_OPTIONS = [
   },
   {
     id: 'save-image',
-    title: '사진 저장하기',
+    title: '첨부파일 저장하기',
     titleColor: '#000',
     children: [
       {
-        text: '게시글 사진 전체 저장',
+        text: '게시글 첨부파일 전체 저장',
         color: '#898989',
       },
       {
-        text: '이 사진만 저장',
+        text: '이 첨부파일만 저장',
         color: '#898989',
       },
     ],

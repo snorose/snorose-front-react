@@ -4,6 +4,7 @@
   height: 100vh;
   position: fixed;
   background-color: var(--blue-0);
+  transform: translateY(-6rem);
   z-index: 10;
   overflow: hidden;
 }

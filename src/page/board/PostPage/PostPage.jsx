@@ -114,7 +114,7 @@ export default function PostPage() {
 
   return (
     <div className={styles.container}>
-      <BackAppBar backgroundColor={'#eaf5fd'} />
+      {clickedImageIndex == 0 && <BackAppBar backgroundColor={'#eaf5fd'} />}
 
       <div className={styles.content}>
         <div className={styles.contentTop}>
