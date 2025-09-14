@@ -19,13 +19,14 @@ import {
   ROLE,
   TOAST,
   CONFIRM_MODAL_TEXT,
+  ATTACHMENT_MODAL_TEXT,
 } from '@/shared/constant';
-import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useToast, useModal } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
 import { ModalContext } from '@/shared/context/ModalContext';
 
 import { createThumbnail, postPost } from '@/apis';
-import { AttachmentBar, DropDownMenu } from '@/feature/board/component';
+import { AttachmentBar } from '@/feature/board/component';
 
 import styles from './WritePostPage.module.css';
 
@@ -42,16 +43,15 @@ export default function WritePostPage() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
+  const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [isBlock, setIsBlock] = useState(false);
 
   //'게시글 생성' API에서 요구하는 데이터 (중 attachments array)
   const [attachmentsInfo, setAttachmentsInfo] = useState([]);
 
-  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
-  const [submitDisabled, setSubmitDisabled] = useState(false);
   const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
   const [trashImageIndex, setTrashImageIndex] = useState(null); //지우는 이미지 index
   const trashImageConfirmModal = useModal();
-  const [isBlock, setIsBlock] = useState(false);
 
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
@@ -221,7 +221,7 @@ export default function WritePostPage() {
                 </div>
               </div>
             ) : (
-              <>
+              <div className={styles.categoryDropdownContainer}>
                 <div
                   className={styles.categorySelect}
                   onClick={handleDropDownOpen}
@@ -237,64 +237,16 @@ export default function WritePostPage() {
                   </div>
                   <Icon id='angle-down' width={14} height={7} />
                 </div>
-                <DropDownMenu
-                  options={displayedTitles}
-                  item={boardTitle}
-                  setItem={handleBoardTitleChange}
-                  dropDownOpen={dropDownOpen}
-                  setDropDownOpen={setDropDownOpen}
-                  backgroundColor={'#fff'}
-                />
-              </>
-            )}
-        <div className={styles.top}>
-          <CloseAppBar backgroundColor={'#eaf5fd'}>
-            <ActionButton onClick={handleSubmit} disabled={!pass}>
-              등록
-            </ActionButton>
-          </CloseAppBar>
-        </div>
-        <div className={styles.center}>
-          {textId === 'notice' ? (
-            <div className={styles.categorySelect}>
-              <div className={styles.categorySelectContainer}>
-                <Icon
-                  id='clip-board-list'
-                  width={21}
-                  height={22}
-                  fill='white'
-                />
-                <p className={styles.categorySelectText}>{boardTitle}</p>
-              </div>
-            </div>
-          ) : (
-            <div className={styles.categoryDropdownContainer}>
-              <div
-                className={styles.categorySelect}
-                onClick={handleDropDownOpen}
-              >
-                <div className={styles.categorySelectContainer}>
-                  <Icon
-                    id='clip-board-list'
-                    width={21}
-                    height={22}
-                    fill='white'
+                {dropDownOpen && (
+                  <DropdownList
+                    options={displayedOptions}
+                    select={{ id: boardId, name: boardTitle }}
+                    onSelect={handleBoardTitleChange}
+                    className={styles.dropDownList}
                   />
-                  <p className={styles.categorySelectText}>{boardTitle}</p>
-                </div>
-                <Icon id='angle-down' width={14} height={7} />
+                )}
               </div>
-
-              {dropDownOpen && (
-                <DropdownList
-                  options={displayedOptions}
-                  select={{ id: boardId, name: boardTitle }}
-                  onSelect={handleBoardTitleChange}
-                  className={styles.dropDownList}
-                />
-              )}
-            </div>
-          )}
+            )}
 
             <div className={styles.profileBox}>
               <div className={styles.profileBoxLeft}>
@@ -350,6 +302,7 @@ export default function WritePostPage() {
             </div>
           </div>
         </div>
+
         {modal.id === 'exit-page' && (
           <ConfirmModal
             modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
@@ -390,30 +343,22 @@ export default function WritePostPage() {
         />
       </div>
 
-      <DeleteModal
-        id='post-write-exit-check'
-        isOpen={isCheckModalOpen}
-        closeFn={() => setIsCheckModalOpen(false)}
-        redBtnFunction={() => navigate(-1, { replace: true })}
-      />
-      <ConfirmModal
-        isBackgroundBlurred={true}
-        isOpen={trashImageConfirmModal.isOpen}
-        title='삭제하시겠습니까?'
-        primaryButtonText='확인'
-        secondaryButtonText='취소'
-        onPrimaryButtonClick={() => {
-          setAttachmentsInfo((prev) =>
-            prev
-              .slice(0, trashImageIndex)
-              .concat(prev.slice(trashImageIndex + 1))
-          );
-          trashImageConfirmModal.closeModal();
-        }}
-        onSecondaryButtonClick={() => {
-          trashImageConfirmModal.closeModal();
-        }}
-      />
+      {trashImageConfirmModal.isOpen && (
+        <ConfirmModal
+          modalText={ATTACHMENT_MODAL_TEXT.DELETE_ATTACHMENT}
+          onConfirm={() => {
+            setAttachmentsInfo((prev) =>
+              prev
+                .slice(0, trashImageIndex)
+                .concat(prev.slice(trashImageIndex + 1))
+            );
+            trashImageConfirmModal.closeModal();
+          }}
+          onCancel={() => {
+            trashImageConfirmModal.closeModal();
+          }}
+        />
+      )}
     </>
   );
 }

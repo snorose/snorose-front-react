@@ -13,7 +13,6 @@ import {
   DeleteModal,
   FetchLoading,
   Icon,
-  ConfirmModal,
 } from '@/shared/component';
 import {
   BOARD_MENUS,
@@ -22,6 +21,7 @@ import {
   ROLE,
   TOAST,
   CONFIRM_MODAL_TEXT,
+  ATTACHMENT_MODAL_TEXT,
 } from '@/shared/constant';
 import { useAuth, useBlocker, useModal, useToast } from '@/shared/hook';
 import { formattedNowTime } from '@/shared/lib';
@@ -48,15 +48,16 @@ export default function EditPostPage() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [userDisplay, setUserDisplay] = useState('');
-  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [isBlock, setIsBlock] = useState(false);
+
   //'게시글 상세 조회' API에서 제공하는 기존 첨부파일 정보
+  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
   const [attachmentsInfo, setAttachmentsInfo] = useState([]);
   const [deleteAttachments, setDeleteAttachments] = useState([]);
   const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
   const [trashImageIndex, setTrashImageIndex] = useState(null);
   const trashImageConfirmModal = useModal();
-  const [isBlock, setIsBlock] = useState(false);
 
   // 페이지 이탈 방지 모달 노출
   useBlocker(isBlock);
@@ -288,6 +289,7 @@ export default function EditPostPage() {
               attachmentsInfo[draggedIndex].id,
             ]);
             setTrashImageIndex(draggedIndex);
+            setIsTrashOverlapped(false);
             trashImageConfirmModal.openModal();
           }}
         />
@@ -297,32 +299,22 @@ export default function EditPostPage() {
         />
       </div>
 
-      <DeleteModal
-        id='post-edit-exit-check'
-        isOpen={isCheckModalOpen}
-        closeFn={() => setIsCheckModalOpen(false)}
-        redBtnFunction={() => navigate(-1, { replace: true })}
-      />
-      <ConfirmModal
-        isBackgroundBlurred={true}
-        isOpen={trashImageConfirmModal.isOpen}
-        title='삭제하시겠습니까?'
-        primaryButtonText='확인'
-        secondaryButtonText='취소'
-        onPrimaryButtonClick={() => {
-          setAttachmentsInfo((prev) =>
-            prev
-              .slice(0, trashImageIndex)
-              .concat(prev.slice(trashImageIndex + 1))
-          );
-          setIsTrashOverlapped(false);
-          trashImageConfirmModal.closeModal();
-        }}
-        onSecondaryButtonClick={() => {
-          trashImageConfirmModal.closeModal();
-          setIsTrashOverlapped(false);
-        }}
-      />
+      {trashImageConfirmModal.isOpen && (
+        <ConfirmModal
+          modalText={ATTACHMENT_MODAL_TEXT.DELETE_ATTACHMENT}
+          onConfirm={() => {
+            setAttachmentsInfo((prev) =>
+              prev
+                .slice(0, trashImageIndex)
+                .concat(prev.slice(trashImageIndex + 1))
+            );
+            trashImageConfirmModal.closeModal();
+          }}
+          onCancel={() => {
+            trashImageConfirmModal.closeModal();
+          }}
+        />
+      )}
     </>
   );
 }

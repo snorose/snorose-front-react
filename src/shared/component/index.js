@@ -35,7 +35,7 @@ export { default as ConfirmModal } from './Modal/ConfirmModal/ConfirmModal';
 export { default as NoticeModal } from './Modal/NoticeModal/NoticeModal';
 export { default as MoreOptionModal } from './Modal/MoreOptionModal/MoreOptionModal';
 export { default as OptionModal } from './Modal/OptionModal/OptionModal';
-export { default as ChoiceModal } from './modal/ChoiceModal';
+export { default as ChoiceModal } from './Modal/ChoiceModal';
 
 // suspense
 export { default as ServerErrorFallback } from './suspense/ServerErrorFallback/ServerErrorFallback';

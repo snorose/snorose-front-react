@@ -1,37 +1,18 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { getPostContent } from '@/apis';
+import { NotFoundPage } from '@/page/etc';
 
 import {
   AttachmentSwiper,
   BackAppBar,
   Badge,
-  DeleteModal,
   FetchLoading,
   Icon,
   OptionModal,
 } from '@/shared/component';
-import {
-  LIKE_TYPE,
-  MUTATION_KEY,
-  QUERY_KEY,
-  ROLE,
-  TOAST,
-} from '@/shared/constant';
-import { useAuth, useToast } from '@/shared/hook';
-import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
-
-import { NotFoundPage } from '@/page/etc';
-
-import { BackAppBar, Badge, FetchLoading, Icon } from '@/shared/component';
-import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
-import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
-import { ModalContext } from '@/shared/context/ModalContext';
-import { useModalReset } from '@/shared/hook/useBlocker';
-
-import { BackAppBar, Badge, FetchLoading, Icon } from '@/shared/component';
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
@@ -63,14 +44,11 @@ export default function PostPage() {
 
   // 페이지 언마운트 시 모달 상태 초기화
   useModalReset();
-  const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
   const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
-  const [deleteSubmitDisabled, setDeleteSubmitDisabled] = useState(false);
   const [clickedImageIndex, setClickedImageIndex] = useState(0);
-  const { invalidUserInfoQuery } = useAuth();
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
@@ -258,27 +236,6 @@ export default function PostPage() {
         handleEdit={handleEdit}
         handleReport={handleReport}
         handleDelete={handleDelete}
-      />
-      <OptionModal
-        id='report'
-        isOpen={isReportModalOpen}
-        setIsOpen={setIsReportModalOpen}
-        onOptionClick={handleReportOptionModalOptionClick}
-        closeFn={() => setIsReportModalOpen(false)}
-      />
-      <OptionModal
-        id='post-report'
-        isOpen={isPostReportModalOpen}
-        setIsOpen={setIsPostReportModalOpen}
-        onOptionClick={handlePostReportOptionModalOptionClick}
-        closeFn={() => setIsPostReportModalOpen(false)}
-      />
-      <OptionModal
-        id='user-report'
-        isOpen={isUserReportModalOpen}
-        setIsOpen={setIsUserReportModalOpen}
-        onOptionClick={handleUserReportOptionModalOptionClick}
-        closeFn={() => setIsUserReportModalOpen(false)}
       />
       {clickedImageIndex !== 0 && (
         <FullScreenAttachment
