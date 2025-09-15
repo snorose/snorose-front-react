@@ -65,6 +65,12 @@ const TOAST = Object.freeze({
     FAIL: '잘못된 링크에요.',
     EMPTY: '링크를 입력해주세요',
   },
+  ATTACHMENT: {
+    imageFileSizeError: '파일 크기는 최대 5MB까지 업로드할 수 있어요.',
+    imageQuantityError: '이미지는 최대 10개까지 첨부 가능해요.',
+    videoFileSizeError: '파일 크기는 최대 50MB까지 업로드할 수 있어요.',
+    videoQuantityError: '영상은 최대 1개까지 첨부 가능해요.',
+  },
 });
 
 export { TOAST };
