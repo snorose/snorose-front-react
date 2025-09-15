@@ -1,16 +1,24 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { getPostContent } from '@/apis';
 import { NotFoundPage } from '@/page/etc';
 
-import { BackAppBar, Badge, FetchLoading, Icon } from '@/shared/component';
+import {
+  AttachmentSwiper,
+  BackAppBar,
+  Badge,
+  FetchLoading,
+  Icon,
+  OptionModal,
+} from '@/shared/component';
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 import { LIKE_TYPE, QUERY_KEY, ROLE } from '@/shared/constant';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useModalReset } from '@/shared/hook/useBlocker';
 
+import { FullScreenAttachment } from '@/feature/board/component';
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
 import { PostModalRenderer } from '@/feature/board/component';
@@ -20,6 +28,9 @@ import { useScrap } from '@/feature/scrap/hook';
 import { useCommentContext } from '@/feature/comment/context';
 
 import styles from './PostPage.module.css';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/scrollbar';
 
 export default function PostPage() {
   const { postId } = useParams();
@@ -33,6 +44,11 @@ export default function PostPage() {
 
   // 페이지 언마운트 시 모달 상태 초기화
   useModalReset();
+
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
+  const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
+  const [clickedImageIndex, setClickedImageIndex] = useState(0);
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
@@ -98,7 +114,7 @@ export default function PostPage() {
 
   return (
     <div className={styles.container}>
-      <BackAppBar backgroundColor={'#eaf5fd'} />
+      {clickedImageIndex == 0 && <BackAppBar backgroundColor={'#eaf5fd'} />}
 
       <div className={styles.content}>
         <div className={styles.contentTop}>
@@ -146,6 +162,13 @@ export default function PostPage() {
           className={styles.contentText}
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
+        {data.attachments.length !== 0 && (
+          <AttachmentSwiper
+            data={data}
+            setClickedImageIndex={setClickedImageIndex}
+          />
+        )}
+
         <div className={styles.postBottom}>
           <div
             className={styles.count}
@@ -213,6 +236,13 @@ export default function PostPage() {
         handleReport={handleReport}
         handleDelete={handleDelete}
       />
+      {clickedImageIndex !== 0 && (
+        <FullScreenAttachment
+          attachmentUrls={data.attachments}
+          clickedImageIndex={clickedImageIndex}
+          setClickedImageIndex={setClickedImageIndex}
+        />
+      )}
     </div>
   );
 }

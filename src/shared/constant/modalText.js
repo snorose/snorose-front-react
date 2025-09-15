@@ -417,6 +417,15 @@ const REPORT_COMMENT_TYPE_LIST = [
   },
 ];
 
+//첨부파일 모달
+const ATTACHMENT_MODAL = {
+  DELETE_ATTACHMENT: {
+    title: '삭제하시겠습니까?',
+    confirmText: '삭제',
+    cancelText: '취소',
+  },
+};
+
 export const MORE_OPTION_MODAL_TEXT = {
   POST_MORE_OPTION_LIST,
   MY_POST_MORE_OPTION_LIST,
@@ -436,3 +445,5 @@ export const OPTION_MODAL_TEXT = {
   REPORT_USER_TYPE_LIST,
   REPORT_COMMENT_TYPE_LIST,
 };
+
+export const ATTACHMENT_MODAL_TEXT = ATTACHMENT_MODAL;

@@ -3,13 +3,16 @@ import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
+import { AttachmentBar } from '@/feature/board/component';
 import {
+  AttachmentList,
   BackAppBar,
   Badge,
   CloseAppBar,
+  ConfirmModal,
+  DeleteModal,
   FetchLoading,
   Icon,
-  ConfirmModal,
 } from '@/shared/component';
 import {
   BOARD_MENUS,
@@ -18,8 +21,9 @@ import {
   ROLE,
   TOAST,
   CONFIRM_MODAL_TEXT,
+  ATTACHMENT_MODAL_TEXT,
 } from '@/shared/constant';
-import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useModal, useToast } from '@/shared/hook';
 import { formattedNowTime } from '@/shared/lib';
 import { ModalContext } from '@/shared/context/ModalContext';
 
@@ -47,6 +51,14 @@ export default function EditPostPage() {
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [isBlock, setIsBlock] = useState(false);
 
+  //'게시글 상세 조회' API에서 제공하는 기존 첨부파일 정보
+  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
+  const [attachmentsInfo, setAttachmentsInfo] = useState([]);
+  const [deleteAttachments, setDeleteAttachments] = useState([]);
+  const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
+  const [trashImageIndex, setTrashImageIndex] = useState(null);
+  const trashImageConfirmModal = useModal();
+
   // 페이지 이탈 방지 모달 노출
   useBlocker(isBlock);
 
@@ -66,6 +78,7 @@ export default function EditPostPage() {
     setText(data.content);
     setIsNotice(data.isNotice);
     setUserDisplay(data.userDisplay);
+    setAttachmentsInfo(data.attachments);
   }, [data]);
 
   // isBlock 업데이트
@@ -142,6 +155,8 @@ export default function EditPostPage() {
       title,
       content: text,
       isNotice,
+      attachmentsInfo,
+      deleteAttachments,
     });
   };
 
@@ -166,65 +181,77 @@ export default function EditPostPage() {
   return (
     <>
       <div className={styles.container}>
-        <CloseAppBar
-          children={<p onClick={handleSubmit}>수정</p>}
-          backgroundColor={'#eaf5fd'}
-        />
-
-        <div className={styles.center}>
-          <div className={styles.categorySelect}>
-            <div className={styles.categorySelectContainer}>
-              <Icon id='clip-board-list' width={21} height={22} fill='white' />
-              <p className={styles.categorySelectText}>{boardTitle}</p>
-            </div>
+        <div>
+          <div className={styles.top}>
+            <CloseAppBar
+              children={<p onClick={handleSubmit}>수정</p>}
+              backgroundColor={'#eaf5fd'}
+            />
           </div>
-          <div className={styles.profileBox}>
-            <div className={styles.profileBoxLeft}>
-              {userInfo?.userRoleId !== ROLE.admin &&
-              userInfo?.userRoleId !== ROLE.official ? (
-                <Icon id='cloud' width={25} height={16} />
-              ) : (
-                <Badge
-                  userRoleId={userInfo?.userRoleId}
-                  className={styles.badge}
-                />
-              )}
-              <p>{userDisplay}</p>
-              <p className={styles.dot}></p>
-              <p>{formattedNowTime()}</p>
-            </div>
-            {textId !== 'notice' && (
-              <div
-                className={
-                  userInfo?.userRoleId === ROLE.admin ||
-                  userInfo?.userRoleId === ROLE.official
-                    ? styles.profileBoxRight
-                    : styles.profileBoxRightInvisible
-                }
-                onClick={handleIsNotice}
-              >
+          <div className={styles.center}>
+            <div className={styles.categorySelect}>
+              <div className={styles.categorySelectContainer}>
                 <Icon
-                  id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
+                  id='clip-board-list'
                   width={21}
                   height={22}
+                  fill='white'
                 />
-                <p>공지글</p>
+                <p className={styles.categorySelectText}>{boardTitle}</p>
               </div>
-            )}
-          </div>
-          <div className={styles.content}>
-            <TextareaAutosize
-              className={styles.title}
-              placeholder='제목'
-              value={title}
-              onChange={handleTitleChange}
-            />
-            <TextareaAutosize
-              className={styles.text}
-              placeholder='내용'
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
+            </div>
+            <div className={styles.profileBox}>
+              <div className={styles.profileBoxLeft}>
+                {userInfo?.userRoleId !== ROLE.admin &&
+                userInfo?.userRoleId !== ROLE.official ? (
+                  <Icon id='cloud' width={25} height={16} />
+                ) : (
+                  <Badge
+                    userRoleId={userInfo?.userRoleId}
+                    className={styles.badge}
+                  />
+                )}
+                <p>{userDisplay}</p>
+                <p className={styles.dot}></p>
+                <p>{formattedNowTime()}</p>
+              </div>
+              {textId !== 'notice' && (
+                <div
+                  className={
+                    userInfo?.userRoleId === ROLE.admin ||
+                    userInfo?.userRoleId === ROLE.official
+                      ? styles.profileBoxRight
+                      : styles.profileBoxRightInvisible
+                  }
+                  onClick={handleIsNotice}
+                >
+                  <Icon
+                    id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
+                    width={21}
+                    height={22}
+                  />
+                  <p>공지글</p>
+                </div>
+              )}
+            </div>
+            <div className={styles.content}>
+              <TextareaAutosize
+                className={styles.title}
+                placeholder='제목'
+                value={title}
+                onChange={handleTitleChange}
+              />
+              <TextareaAutosize
+                className={styles.text}
+                placeholder='내용'
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+              <AttachmentList
+                attachmentsInfo={attachmentsInfo}
+                setAttachmentsInfo={setAttachmentsInfo}
+              />
+            </div>
           </div>
         </div>
         {/* 페이지 이탈 방지 모달 */}
@@ -234,7 +261,60 @@ export default function EditPostPage() {
             onConfirm={handleExitPage}
           />
         )}
+        <Icon
+          id='trashcan'
+          width='10rem'
+          height='10rem'
+          className={`${isTrashOverlapped ? styles.trashVisible : styles.trashInvisible}`}
+          onDragEnter={(e) => {
+            e.preventDefault();
+            setIsTrashOverlapped(true);
+          }}
+          onDragOver={(e) => {
+            setIsTrashOverlapped(true);
+            e.preventDefault();
+          }}
+          onDragLeave={(e) => {
+            e.preventDefault();
+            setIsTrashOverlapped(false);
+          }}
+          onDrop={(e) => {
+            e.preventDefault();
+            const draggedIndex = parseInt(
+              e.dataTransfer.getData('text/plain'),
+              10
+            );
+            setDeleteAttachments((prev) => [
+              ...prev,
+              attachmentsInfo[draggedIndex].id,
+            ]);
+            setTrashImageIndex(draggedIndex);
+            setIsTrashOverlapped(false);
+            trashImageConfirmModal.openModal();
+          }}
+        />
+        <AttachmentBar
+          attachmentsInfo={attachmentsInfo}
+          setAttachmentsInfo={setAttachmentsInfo}
+        />
       </div>
+
+      {trashImageConfirmModal.isOpen && (
+        <ConfirmModal
+          modalText={ATTACHMENT_MODAL_TEXT.DELETE_ATTACHMENT}
+          onConfirm={() => {
+            setAttachmentsInfo((prev) =>
+              prev
+                .slice(0, trashImageIndex)
+                .concat(prev.slice(trashImageIndex + 1))
+            );
+            trashImageConfirmModal.closeModal();
+          }}
+          onCancel={() => {
+            trashImageConfirmModal.closeModal();
+          }}
+        />
+      )}
     </>
   );
 }

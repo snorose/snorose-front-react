@@ -35,6 +35,7 @@ export { default as ConfirmModal } from './Modal/ConfirmModal/ConfirmModal';
 export { default as NoticeModal } from './Modal/NoticeModal/NoticeModal';
 export { default as MoreOptionModal } from './Modal/MoreOptionModal/MoreOptionModal';
 export { default as OptionModal } from './Modal/OptionModal/OptionModal';
+export { default as ChoiceModal } from './Modal/ChoiceModal';
 
 // suspense
 export { default as ServerErrorFallback } from './suspense/ServerErrorFallback/ServerErrorFallback';
@@ -49,3 +50,5 @@ export { default as MenuIcon } from './MenuIcon/MenuIcon';
 export { default as Portal } from './Portal/Portal';
 export { default as PullToRefresh } from './PullToRefresh/PullToRefresh';
 export { default as Toast } from './Toast/Toast';
+export { default as AttachmentSwiper } from './AttachmentSwiper/AttachmentSwiper';
+export { default as AttachmentList } from './AttachmentList/AttachmentList';
