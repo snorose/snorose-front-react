@@ -10,6 +10,6 @@
   word-break: keep-all;
   font-weight: 500;
   font-size: 1.2rem;
-  white-space: pre-wrap;
+  white-space: nowrap;
   color: var(--white);
 }
