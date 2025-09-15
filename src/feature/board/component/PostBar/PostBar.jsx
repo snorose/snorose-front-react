@@ -44,7 +44,7 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
         <p className={styles.text}>{data.questionDetail ?? data.content}</p>
       </div>
 
-      <div className={styles.postBarBottom}>
+      <div className={styles.post_bottom}>
         <div className={styles.iconListContainer}>
           {data.likeCount > 0 && (
             <div className={styles.iconContainer}>
