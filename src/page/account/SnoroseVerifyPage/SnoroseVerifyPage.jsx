@@ -16,8 +16,9 @@ export default function SnoroseVerifyPage() {
   const { title, description } = TITLE_DES[step];
 
   return (
-    <main className={styles.main}>
+    <dev className={styles.container}>
       <BackAppBar title='인증 신청' notFixed />
+
       {step === 'complete' ? (
         <Icon
           className={styles.check}
@@ -35,11 +36,13 @@ export default function SnoroseVerifyPage() {
           ></span>
         </div>
       )}
+
       <div className={styles.title}>{title}</div>
+
       {description && <div className={styles.description}>{description}</div>}
       {step === 'terms' && <TermsStep setStep={setStep} />}
       {step === 'verify' && <VerifyStep setStep={setStep} />}
       {step === 'complete' && <CompleteStep />}
-    </main>
+    </dev>
   );
 }

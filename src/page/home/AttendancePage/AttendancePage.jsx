@@ -26,7 +26,7 @@ export default function AttendancePage() {
       : ATTENDANCE_MESSAGE.FIRST;
 
   return (
-    <main>
+    <div>
       <div className={styles.top}>
         <BackAppBar isDark backgroundColor={'transparent'} notFixed />
         <h2 className={styles.title}>{`매일 출석체크하고 \n 포인트 모아요`}</h2>
@@ -55,7 +55,7 @@ export default function AttendancePage() {
         </div> */}
       </div>
       {loading && <FetchLoadingOverlay />}
-    </main>
+    </div>
   );
 }
 

@@ -3,9 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { BackAppBar, Button } from '@/shared/component';
 
-import styles from './FoundPwPage.module.css';
-
 import { emailSendIllustration } from '@/assets/illustrations';
+
+import styles from './FoundPwPage.module.css';
 
 export default function FoundPwPage() {
   const navigate = useNavigate();
@@ -20,8 +20,9 @@ export default function FoundPwPage() {
   }, []);
 
   return (
-    <div className={styles.pageFrame}>
+    <div className={styles.container}>
       <BackAppBar backNavTo='/login' />
+
       <div className={styles.pageTopFrame}>
         <p className={styles.pageTitle}>비밀번호 찾기</p>
         <p className={styles.pageSubtitle}>

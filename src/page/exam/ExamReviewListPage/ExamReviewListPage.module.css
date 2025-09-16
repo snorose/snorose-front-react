@@ -1,8 +1,7 @@
 .container {
   height: 100vh;
 
-  margin-top: 6rem;
-  padding-bottom: 11.2rem;
+  padding-top: var(--default-appbar-height);
 }
 
 .notificationBar {

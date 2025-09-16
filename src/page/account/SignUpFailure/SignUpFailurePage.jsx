@@ -19,12 +19,14 @@ export default function SignUpFailurePage() {
   }, []);
 
   return (
-    <div className={styles.pageFrame}>
+    <div className={styles.container}>
       <BackAppBar />
+
       <div className={styles.pageTopFrame}>
         <p className={styles.pageTitle}>회원가입 실패</p>
         <p className={styles.pageExplanation}>{state?.message}</p>
       </div>
+
       <div className={styles.pageMiddleFrame}>
         <img
           src={taskFailedIllustration}
@@ -32,6 +34,7 @@ export default function SignUpFailurePage() {
           className={styles.illustration}
         />
       </div>
+
       <div className={styles.pageBottomFrame}>
         <Link to='/signup'>
           <div className={styles.loginButton}>

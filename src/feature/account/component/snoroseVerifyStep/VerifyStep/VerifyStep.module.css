@@ -1,10 +1,9 @@
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+.container {
+  position: relative;
+
   margin: 0 var(--default-margin);
-  gap: 5rem;
+
+  flex: 1;
 }
 
 .verify {
@@ -15,6 +14,9 @@
 
 /* button */
 .button {
+  position: absolute;
+  left: 0;
+  bottom: 4rem;
+
   height: 5.4rem;
-  margin-bottom: 4rem;
 }
