@@ -10,7 +10,7 @@ import {
   checkIfSame,
 } from '@/feature/account/lib';
 
-import styles from './AccountInfoStep.module.css';
+import style from './AccountInfoStep.module.css';
 
 export default function AccountInfoStep({ formData, setFormData, setStage }) {
   const [nameStyle, setNameStyle] = useState('ready');
@@ -30,12 +30,12 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
     else return 'ready';
   };
   return (
-    <div className={styles.pageFrame}>
-      <p className={styles.title}>
+    <>
+      <p className={style.title}>
         계정 정보를
         <br /> 입력해 주세요
       </p>
-      <div className={styles.inputFrame}>
+      <div className={style.inputFrame}>
         <Input
           title={'이름'}
           placeholder={'이름을 입력해 주세요'}
@@ -50,7 +50,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           }
         />
       </div>
-      <div className={styles.inputFrame}>
+      <div className={style.inputFrame}>
         <Input
           title={'숙명 구글 이메일'}
           placeholder={'sample@sookmyung.ac.kr'}
@@ -63,7 +63,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           errMsg={'숙명 이메일만 입력 가능해요'}
         />
       </div>
-      <div className={styles.inputFrame}>
+      <div className={style.inputFrame}>
         <Input
           title={'아이디'}
           placeholder={'사용할 아이디를 입력해 주세요'}
@@ -76,7 +76,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           errMsg={'특수문자를 제외한 5자 이상 30자 이하로 입력해 주세요'}
         />
       </div>
-      <div className={styles.inputFrame}>
+      <div className={style.inputFrame}>
         <SpecialInput
           title={'비밀번호'}
           placeholder={'비밀번호를 입력해 주세요'}
@@ -98,7 +98,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           }
         />
       </div>
-      <div className={styles.inputFrame}>
+      <div className={style.inputFrame}>
         <SpecialInput
           title={'비밀번호 확인'}
           placeholder={'비밀번호를 다시 입력해 주세요'}
@@ -121,13 +121,13 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
         />
       </div>
 
-      <div className={styles.submit}>
+      <div className={style.submit}>
         <Button
           btnName='다음으로'
           className={setDoneState()}
           onClick={() => setStage((prev) => prev + 1)}
         />
       </div>
-    </div>
+    </>
   );
 }

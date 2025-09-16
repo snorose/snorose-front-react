@@ -9,17 +9,17 @@ import {
   UserInfoStep,
 } from '@/feature/account/component';
 
-import styles from './SignUpPage.module.css';
+import style from './SignUpPage.module.css';
 
 export default function SignUpPage() {
   const [stage, setStage] = useState(1);
   const [formData, setFormData] = useState({});
 
   return (
-    <div className={styles.pageFrame}>
+    <div className={style.container}>
       <BackAppBar notFixed />
 
-      <div className={styles.stageDotsFrame}>
+      <div className={style.stageDotsFrame}>
         <StageDots
           quantity={3}
           current={stage}
@@ -29,7 +29,7 @@ export default function SignUpPage() {
         />
       </div>
 
-      <div className={styles.signupFrame}>
+      <div className={style.signupFrame}>
         {stage === 1 ? (
           <AccountInfoStep
             setFormData={setFormData}
