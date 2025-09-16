@@ -90,11 +90,9 @@ function AttendanceButton({ setLoading }) {
           const now = new Date();
           const startDate = new Date('2025-09-17T00:00:00+09:00');
           const endDate = new Date('2025-09-18T23:59:59+09:00');
-          const startUTC = new Date(startDate.getTime() - 9 * 60 * 60 * 1000);
-          const endUTC = new Date(endDate.getTime() - 9 * 60 * 60 * 1000);
 
           const message =
-            now >= startUTC && now <= endUTC
+            now >= startDate && now <= endDate
               ? '🎉 스노로즈 청파제 부스 오픈 기념 5P 제공 🎉'
               : TOAST.ATTENDANCE.attendance;
 
