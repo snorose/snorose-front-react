@@ -1,6 +1,7 @@
-.pageFrame {
+.container {
   height: 100%;
-  padding: 0 2rem;
+  padding: 0 var(--default-margin);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -1,21 +1,22 @@
-.pageFrame {
-  width: 100%;
+.container {
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+  padding-top: var(--default-appbar-height);
+
   overflow-y: scroll;
-  padding: 0 2rem;
 }
 
-.pageFrame form {
-  width: 100%;
+.container form {
   height: 100%;
+
+  padding: 0 var(--default-margin);
 }
+
 .back {
   margin-top: 1.4rem;
   margin-bottom: 2rem;
 }
+
 .back:hover {
   cursor: pointer;
 }

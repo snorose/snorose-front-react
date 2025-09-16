@@ -1,9 +1,5 @@
 .container {
-  margin-top: 6rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding-top: var(--default-appbar-height);
 }
 
 .content {
@@ -69,7 +65,7 @@
   display: flex;
   justify-content: space-between;
   gap: 1.6rem;
-  padding: 0.9rem 0 0;
+  padding: 0.9rem 0;
   border-top: 0.05rem solid rgba(var(--grey-3-1-rgb), 0.7);
 }
 

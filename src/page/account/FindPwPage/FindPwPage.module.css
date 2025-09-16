@@ -1,16 +1,16 @@
-.pageFrame {
-  width: 100%;
+.container {
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+  padding-top: var(--default-appbar-height);
+
   overflow-y: scroll;
-  padding: 0 2rem;
 }
 
-.pageFrame form {
-  width: 100%;
+.container form {
   height: 100%;
+
+  margin: 0 var(--default-margin);
+
   display: flex;
   flex-direction: column;
   justify-content: center;

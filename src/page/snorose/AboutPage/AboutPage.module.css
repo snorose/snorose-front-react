@@ -1,8 +1,12 @@
-.logo {
-  margin: 6.4rem var(--default-margin) 2.6rem var(--default-margin);
+.container {
+  padding-top: var(--default-appbar-height);
 }
 
-.container {
+.logo {
+  margin: 0 var(--default-margin) 2.6rem;
+}
+
+.accordionList {
   margin: 0 var(--default-margin) 10rem var(--default-margin);
   border-radius: 0.5rem;
 }

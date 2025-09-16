@@ -3,7 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useFindPw } from '@/apis';
 
-import { Button, FetchLoadingOverlay, Icon, Input } from '@/shared/component';
+import {
+  BackAppBar,
+  Button,
+  FetchLoadingOverlay,
+  Icon,
+  Input,
+} from '@/shared/component';
 import { LOADING_MESSAGE } from '@/shared/constant';
 
 import { checkIfEntered, checkMail } from '@/feature/account/lib';
@@ -43,7 +49,9 @@ export default function FindPwPage() {
   ];
 
   return (
-    <div className={styles.pageFrame}>
+    <div className={styles.container}>
+      <BackAppBar />
+
       <form
         className={styles.form}
         onSubmit={(e) => {
@@ -57,7 +65,7 @@ export default function FindPwPage() {
       >
         <div className={styles.findIdFrame}>
           <div>
-            <Icon
+            {/* <Icon
               className={styles.back}
               id='arrow-left'
               width={19}
@@ -66,7 +74,7 @@ export default function FindPwPage() {
                 //BackAppBar 사용 불가 -> 로그인페이지에서 findId/findPw했다가 다시 돌아오면 다시는 main으로 못 돌아가는 루프구조가 되어버림
                 navigate('/login');
               }}
-            />
+            /> */}
             <h1 className={styles.pageTitle}>비밀번호 찾기</h1>
             {inputProps.map((props, i) => (
               <div className={styles.inputFrame} key={i}>

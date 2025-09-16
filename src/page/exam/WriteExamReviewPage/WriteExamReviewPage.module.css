@@ -1,6 +1,6 @@
 .container {
-  margin-top: 6rem;
-  margin-bottom: 5rem;
+  padding-top: var(--default-appbar-height);
+  padding-bottom: 5rem;
 }
 
 .file {
