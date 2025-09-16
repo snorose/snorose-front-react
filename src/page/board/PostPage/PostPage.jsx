@@ -114,7 +114,15 @@ export default function PostPage() {
 
   return (
     <div className={styles.container}>
-      {clickedImageIndex == 0 && <BackAppBar backgroundColor={'#eaf5fd'} />}
+      {clickedImageIndex === 0 ? (
+        <BackAppBar backgroundColor={'#eaf5fd'} />
+      ) : (
+        <FullScreenAttachment
+          attachmentUrls={data.attachments}
+          clickedImageIndex={clickedImageIndex}
+          setClickedImageIndex={setClickedImageIndex}
+        />
+      )}
 
       <div className={styles.content}>
         <div className={styles.contentTop}>
@@ -236,13 +244,6 @@ export default function PostPage() {
         handleReport={handleReport}
         handleDelete={handleDelete}
       />
-      {clickedImageIndex !== 0 && (
-        <FullScreenAttachment
-          attachmentUrls={data.attachments}
-          clickedImageIndex={clickedImageIndex}
-          setClickedImageIndex={setClickedImageIndex}
-        />
-      )}
     </div>
   );
 }
