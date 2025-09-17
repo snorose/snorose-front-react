@@ -30,7 +30,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
     else return 'ready';
   };
   return (
-    <div className={styles.pageFrame}>
+    <>
       <p className={styles.title}>
         계정 정보를
         <br /> 입력해 주세요
@@ -128,6 +128,6 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           onClick={() => setStage((prev) => prev + 1)}
         />
       </div>
-    </div>
+    </>
   );
 }

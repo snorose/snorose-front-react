@@ -65,16 +65,6 @@ export default function FindPwPage() {
       >
         <div className={styles.findIdFrame}>
           <div>
-            {/* <Icon
-              className={styles.back}
-              id='arrow-left'
-              width={19}
-              height={17}
-              onClick={() => {
-                //BackAppBar 사용 불가 -> 로그인페이지에서 findId/findPw했다가 다시 돌아오면 다시는 main으로 못 돌아가는 루프구조가 되어버림
-                navigate('/login');
-              }}
-            /> */}
             <h1 className={styles.pageTitle}>비밀번호 찾기</h1>
             {inputProps.map((props, i) => (
               <div className={styles.inputFrame} key={i}>

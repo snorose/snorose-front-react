@@ -16,7 +16,7 @@ export default function SignUpPage() {
   const [formData, setFormData] = useState({});
 
   return (
-    <div className={styles.pageFrame}>
+    <div className={styles.container}>
       <BackAppBar notFixed />
 
       <div className={styles.stageDotsFrame}>

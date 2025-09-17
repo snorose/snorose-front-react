@@ -1,8 +1,3 @@
-.pageFrame {
-  height: 100%;
-  overflow-y: scroll;
-}
-
 .title {
   font: var(--text-title-1-bold);
   margin-bottom: 3rem;
