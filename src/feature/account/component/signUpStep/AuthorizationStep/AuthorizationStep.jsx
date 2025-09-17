@@ -4,7 +4,7 @@ import { useSendUser, useCertifyUser } from '@/apis';
 
 import { Input, Button } from '@/shared/component';
 
-import style from './AuthorizationStep.module.css';
+import styles from './AuthorizationStep.module.css';
 
 export default function AuthorizationStep({ email, setStage }) {
   const sendUser = useSendUser();
@@ -19,11 +19,11 @@ export default function AuthorizationStep({ email, setStage }) {
   return (
     <>
       <div>
-        <p className={style.title}>
+        <p className={styles.title}>
           이메일 인증을 <br />
           완료해 주세요
         </p>
-        <p className={style.text}>
+        <p className={styles.text}>
           숙명 구글 이메일로 확인 코드를 보내드렸어요
         </p>
         <Input
@@ -38,7 +38,7 @@ export default function AuthorizationStep({ email, setStage }) {
         />
       </div>
 
-      <div className={style.submit}>
+      <div className={styles.submit}>
         <Button
           btnName='다음으로'
           className={'right'}

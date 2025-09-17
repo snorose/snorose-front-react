@@ -10,7 +10,7 @@ import {
   checkIfSame,
 } from '@/feature/account/lib';
 
-import style from './AccountInfoStep.module.css';
+import styles from './AccountInfoStep.module.css';
 
 export default function AccountInfoStep({ formData, setFormData, setStage }) {
   const [nameStyle, setNameStyle] = useState('ready');
@@ -31,11 +31,11 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
   };
   return (
     <>
-      <p className={style.title}>
+      <p className={styles.title}>
         계정 정보를
         <br /> 입력해 주세요
       </p>
-      <div className={style.inputFrame}>
+      <div className={styles.inputFrame}>
         <Input
           title={'이름'}
           placeholder={'이름을 입력해 주세요'}
@@ -50,7 +50,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           }
         />
       </div>
-      <div className={style.inputFrame}>
+      <div className={styles.inputFrame}>
         <Input
           title={'숙명 구글 이메일'}
           placeholder={'sample@sookmyung.ac.kr'}
@@ -63,7 +63,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           errMsg={'숙명 이메일만 입력 가능해요'}
         />
       </div>
-      <div className={style.inputFrame}>
+      <div className={styles.inputFrame}>
         <Input
           title={'아이디'}
           placeholder={'사용할 아이디를 입력해 주세요'}
@@ -76,7 +76,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           errMsg={'특수문자를 제외한 5자 이상 30자 이하로 입력해 주세요'}
         />
       </div>
-      <div className={style.inputFrame}>
+      <div className={styles.inputFrame}>
         <SpecialInput
           title={'비밀번호'}
           placeholder={'비밀번호를 입력해 주세요'}
@@ -98,7 +98,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           }
         />
       </div>
-      <div className={style.inputFrame}>
+      <div className={styles.inputFrame}>
         <SpecialInput
           title={'비밀번호 확인'}
           placeholder={'비밀번호를 다시 입력해 주세요'}
@@ -121,7 +121,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
         />
       </div>
 
-      <div className={style.submit}>
+      <div className={styles.submit}>
         <Button
           btnName='다음으로'
           className={setDoneState()}

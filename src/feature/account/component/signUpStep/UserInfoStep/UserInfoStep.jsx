@@ -12,7 +12,7 @@ import {
   checkBirthday,
 } from '@/feature/account/lib';
 
-import style from './UserInfoStep.module.css';
+import styles from './UserInfoStep.module.css';
 
 export default function UserInfoStep({ setFormData, formData }) {
   const register = useRegister();
@@ -35,12 +35,12 @@ export default function UserInfoStep({ setFormData, formData }) {
   return (
     <>
       <div>
-        <p className={style.title}>
+        <p className={styles.title}>
           사용자 정보를
           <br />
           입력해 주세요
         </p>
-        <div className={style.inputFrame}>
+        <div className={styles.inputFrame}>
           <Input
             title={'닉네임'}
             placeholder={'닉네임을 입력해 주세요'}
@@ -53,7 +53,7 @@ export default function UserInfoStep({ setFormData, formData }) {
             errMsg={'특수문자 제외 2자 이상 20자 이하로 작성해 주세요'}
           />
         </div>
-        <div className={style.inputFrame}>
+        <div className={styles.inputFrame}>
           <Input
             title={'학번'}
             placeholder={'학번을 입력해 주세요'}
@@ -66,7 +66,7 @@ export default function UserInfoStep({ setFormData, formData }) {
             errMsg={'학번 형식을 올바르게 입력해 주세요'}
           />
         </div>
-        <div className={style.inputFrame}>
+        <div className={styles.inputFrame}>
           <CategoryFieldset title='전공' required>
             <Dropdown
               options={MAJORS}
@@ -76,7 +76,7 @@ export default function UserInfoStep({ setFormData, formData }) {
             />
           </CategoryFieldset>
         </div>
-        <div className={style.inputFrame}>
+        <div className={styles.inputFrame}>
           <Input
             title={'생년월일'}
             placeholder={'YYYY-MM-DD'}
@@ -91,7 +91,7 @@ export default function UserInfoStep({ setFormData, formData }) {
         </div>
       </div>
 
-      <div className={style.submit}>
+      <div className={styles.submit}>
         <Button
           btnName='다음으로'
           className={checkDone()}
