@@ -33,7 +33,7 @@ export default function UserInfoStep({ setFormData, formData }) {
   };
 
   return (
-    <div className={styles.pageFrame}>
+    <>
       <div>
         <p className={styles.title}>
           사용자 정보를
@@ -98,6 +98,6 @@ export default function UserInfoStep({ setFormData, formData }) {
           onClick={() => register(formData, navigate)}
         />
       </div>
-    </div>
+    </>
   );
 }
