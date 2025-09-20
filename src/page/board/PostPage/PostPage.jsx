@@ -27,6 +27,8 @@ import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 import { useCommentContext } from '@/feature/comment/context';
 
+import cloudLogo from '@/assets/images/cloudLogo.svg';
+
 import styles from './PostPage.module.css';
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -127,7 +129,7 @@ export default function PostPage() {
       <div className={styles.content}>
         <div className={styles.contentTop}>
           <div className={styles.contentTopLeft}>
-            <Icon id='cloud' width={25} height={16} />
+            <img className={styles.logoIcon} src={cloudLogo} alt='로고' />
             <p>{data.userDisplay || 'Unknown'}</p>
             {showBadge && (
               <Badge userRoleId={data.userRoleId} className={styles.badge} />

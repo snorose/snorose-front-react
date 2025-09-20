@@ -29,6 +29,8 @@ import { ModalContext } from '@/shared/context/ModalContext';
 
 import { getPostContent, patchPost } from '@/apis';
 
+import cloudLogo from '@/assets/images/cloudLogo.svg';
+
 import styles from './EditPostPage.module.css';
 
 export default function EditPostPage() {
@@ -204,7 +206,7 @@ export default function EditPostPage() {
               <div className={styles.profileBoxLeft}>
                 {userInfo?.userRoleId !== ROLE.admin &&
                 userInfo?.userRoleId !== ROLE.official ? (
-                  <Icon id='cloud' width={25} height={16} />
+                  <img className={styles.logoIcon} src={cloudLogo} alt='로고' />
                 ) : (
                   <Badge
                     userRoleId={userInfo?.userRoleId}
