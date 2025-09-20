@@ -17,7 +17,7 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
       <div className={styles.thumbnailContainer}>
         <div>
           <div className={styles.postBarTop}>
-            <img src={cloudLogo} alt='로고' />
+            <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
             <p className={styles.author}>{data.userDisplay}</p>
             {showBadge && (
               <Badge userRoleId={data.userRoleId} className={styles.badge} />

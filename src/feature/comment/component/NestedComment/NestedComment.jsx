@@ -57,7 +57,7 @@ export default function NestedComment({
             {isFirst && <Icon id='nested-arrow' width={15} height={15} />}
           </div>
           <div className={styles.cloud}>
-            <img src={cloudLogo} alt='로고' />
+            <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
           </div>
           <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
             {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}

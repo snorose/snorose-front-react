@@ -79,6 +79,8 @@
   font: var(--text-body-2-reg);
 }
 
-.iconLogo {
+.cloudLogoIcon {
   margin-bottom: 1rem;
+  width: 3.1rem;
+  height: 1.9rem;
 }

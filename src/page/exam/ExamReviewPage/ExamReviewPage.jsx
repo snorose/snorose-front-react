@@ -120,7 +120,7 @@ export default function ExamReviewPage() {
         <BackAppBar backgroundColor={'#eaf5fd'} />
         <div className={styles.displayBox}>
           <div className={styles.displayBoxLeft}>
-            <img src={cloudLogo} alt='로고' />
+            <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
             <span>{userDisplay}</span>
             <span className={styles.dot}></span>
             <span>{dateFormat(createdAt)}</span>

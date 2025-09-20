@@ -84,11 +84,11 @@ const CommentInput = () => {
       className={styles.container}
       onClick={(event) => event.stopPropagation()}
     >
-      <div className={styles.input_bar}>
-        <img src={cloudLogo} alt='로고' />
+      <div className={styles.inputBar}>
+        <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
         <TextareaAutosize
           ref={inputRef}
-          className={styles.input_zone}
+          className={styles.inputZone}
           placeholder='댓글을 입력하세요'
           value={content}
           onKeyDown={handleKeyPress}
