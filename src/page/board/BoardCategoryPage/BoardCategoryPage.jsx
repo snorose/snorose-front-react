@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Header, Icon } from '@/shared/component';
+import { Header } from '@/shared/component';
 import { BOARD_MENUS } from '@/shared/constant';
 
 import { BoardBar } from '@/feature/board/component';
 import { Search } from '@/feature/search/component';
+
+import cloudLogo from '@/assets/images/cloudLogo.svg';
 
 import styles from './BoardCategoryPage.module.css';
 
@@ -49,7 +51,7 @@ export default function BoardCategoryPage() {
         </div>
       </div>
       <div className={styles.moreBoardBox}>
-        <Icon className={styles.iconLogo} id='cloud' width={31} height={19} />
+        <img className={styles.iconLogo} src={cloudLogo} alt='로고' />
         <p>스노로즈에서 더 다양한 게시판을 준비하고 있어요</p>
       </div>
     </div>
