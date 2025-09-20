@@ -18,6 +18,8 @@ import {
 import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
 
+import cloudLogo from '@/assets/images/cloudLogo.svg';
+
 import styles from './Comment.module.css';
 
 const Comment = forwardRef((props, ref) => {
@@ -114,7 +116,7 @@ const Comment = forwardRef((props, ref) => {
         <div className={styles.commentTop}>
           <div className={styles.commentTopLeft}>
             <div className={styles.cloud}>
-              <Icon id='cloud' width={22} height={14} />
+              <img src={cloudLogo} alt='로고' />
             </div>
             <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
               {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}
