@@ -1,20 +1,18 @@
 import { Badge, Icon } from '@/shared/component';
 import styles from './AccordionListItem.module.css';
 
+import cloudLogo from '@/assets/images/cloudLogo.svg';
+import blackCloud from '@/assets/images/blackCloudLogo.svg';
+
 export default function AccordionListItem({ list, listName }) {
   return (
     <ul className={styles.list}>
       {list.map((content) => (
         <li key={content.name} className={styles.item}>
           {content.name === '블랙리스트' ? (
-            <Icon
-              className={styles.icon}
-              id='black-cloud'
-              width={28}
-              height={17}
-            />
+            <img className={styles.icon} src={blackCloud} alt='블랙 클라우드' />
           ) : (
-            <Icon className={styles.icon} id='cloud' width={28} height={17} />
+            <img className={styles.icon} src={cloudLogo} alt='로고' />
           )}
           <div className={styles.itemContainer}>
             <span className={styles.name}>
