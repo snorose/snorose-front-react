@@ -28,6 +28,8 @@ import { ModalContext } from '@/shared/context/ModalContext';
 import { createThumbnail, postPost } from '@/apis';
 import { AttachmentBar } from '@/feature/board/component';
 
+import cloudLogo from '@/assets/images/cloudLogo.svg';
+
 import styles from './WritePostPage.module.css';
 
 export default function WritePostPage() {
@@ -252,7 +254,7 @@ export default function WritePostPage() {
               <div className={styles.profileBoxLeft}>
                 {userInfo?.userRoleId !== ROLE.admin &&
                 userInfo?.userRoleId !== ROLE.official ? (
-                  <Icon id='cloud' width={25} height={16} />
+                  <img className={styles.logoIcon} src={cloudLogo} alt='로고' />
                 ) : (
                   <Badge
                     userRoleId={userInfo?.userRoleId}

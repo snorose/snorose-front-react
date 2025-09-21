@@ -12,7 +12,7 @@
   justify-content: space-between;
 }
 
-.post_top {
+.postBarTop {
   padding-bottom: 1rem;
   display: flex;
   align-items: center;
@@ -21,7 +21,12 @@
   white-space: nowrap;
 }
 
-.name {
+.cloudLogoIcon {
+  width: 2.2rem;
+  height: 1.4rem;
+}
+
+.author {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -44,7 +49,7 @@
   margin-left: 0.4rem;
 }
 
-.post_center {
+.postBarCenter {
   display: flex;
   flex-direction: column;
   row-gap: 0.6rem;
@@ -75,7 +80,7 @@
   border-radius: 0.5rem;
 }
 
-.post_bottom {
+.postBarBottom {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -87,7 +92,7 @@
   }
 }
 
-.boardChip {
+.boardName {
   padding: 0.1rem 0.4rem;
   display: flex;
   justify-content: center;

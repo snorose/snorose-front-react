@@ -6,6 +6,8 @@ import { LIKE_TYPE, ROLE, SHOW_BADGE_PATH } from '@/shared/constant';
 import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
 
+import cloudLogo from '@/assets/images/cloudLogo.svg';
+
 import styles from '@/feature/comment/component/Comment/Comment.module.css';
 import { useRef } from 'react';
 
@@ -55,7 +57,7 @@ export default function NestedComment({
             {isFirst && <Icon id='nested-arrow' width={15} height={15} />}
           </div>
           <div className={styles.cloud}>
-            <Icon id='cloud' width={22} heigth={14} />
+            <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
           </div>
           <p className={`${isWriterWithdrawn && styles.isWriterWithdrawn}`}>
             {isWriterWithdrawn ? '(알 수 없음)' : userDisplay}

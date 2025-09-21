@@ -2,6 +2,8 @@ import { Badge, Icon } from '@/shared/component';
 import { ROLE } from '@/shared/constant';
 import { postBarDateFormat } from '@/shared/lib';
 
+import cloudLogo from '@/assets/images/cloudLogo.svg';
+
 import styles from './PostBar.module.css';
 
 export default function PostBar({ data, hasComment = true, hasLike = true }) {
@@ -14,9 +16,9 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
     <div className={styles.post}>
       <div className={styles.thumbnailContainer}>
         <div>
-          <div className={styles.post_top}>
-            <Icon id='cloud' width={23} height={14} />
-            <p className={styles.name}>{data.userDisplay}</p>
+          <div className={styles.postBarTop}>
+            <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
+            <p className={styles.author}>{data.userDisplay}</p>
             {showBadge && (
               <Badge userRoleId={data.userRoleId} className={styles.badge} />
             )}
@@ -31,9 +33,9 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
                 height={12}
               />
             )}
-            <div className={styles.boardChip}>{data.boardName}</div>
+            <div className={styles.boardName}>{data.boardName}</div>
           </div>
-          <div className={styles.post_center}>
+          <div className={styles.postBarCenter}>
             <p className={styles.title}>{data.title}</p>
             <p className={styles.text}>{data.questionDetail ?? data.content}</p>
           </div>
@@ -47,7 +49,7 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
         )}
       </div>
 
-      <div className={styles.post_bottom}>
+      <div className={styles.postBarBottom}>
         <div className={styles.iconListContainer}>
           {data.likeCount > 0 && (
             <div className={styles.iconContainer}>

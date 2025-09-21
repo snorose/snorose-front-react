@@ -11,6 +11,8 @@
 
 .refreshIcon {
   animation: rotateAndPause 1s linear infinite;
+  width: 3.4rem;
+  height: 2.1rem;
 }
 
 .ptrTouchZone {
