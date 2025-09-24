@@ -15,12 +15,7 @@ import {
   SignUpFailurePage,
   SnoroseVerifyPage,
 } from '@/page/account';
-import {
-  AlertPage,
-  AlertSettingPage,
-  AlertTermsPage,
-  MarketingTemrsPage,
-} from '@/page/alert';
+import { AlertPage, AlertSettingPage, MarketingTermsPage } from '@/page/alert';
 import {
   BoardCategoryPage,
   EditPostPage,
@@ -358,12 +353,8 @@ export const routeList = [
         ),
       },
       {
-        path: '/terms/alert',
-        element: <AlertTermsPage />,
-      },
-      {
-        path: '/temrs/marketing',
-        element: <MarketingTemrsPage />,
+        path: '/terms/marketing',
+        element: <MarketingTermsPage />,
       },
       {
         path: '/attendance',
