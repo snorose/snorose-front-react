@@ -46,7 +46,7 @@ export const postPost = async ({
     let attachmentUrlList = response.data.result.attachmentUrlList;
 
     //각 S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
-    putFileInBucket(
+    await putFileInBucket(
       attachmentUrlList,
       attachmentsInfo.map((att) => att.file)
     );

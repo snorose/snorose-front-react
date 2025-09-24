@@ -1,6 +1,7 @@
 import { Badge, Icon } from '@/shared/component';
 import { ROLE } from '@/shared/constant';
 import { postBarDateFormat } from '@/shared/lib';
+import altImage from '@/assets/images/altImage.png';
 
 import styles from './PostBar.module.css';
 
@@ -43,6 +44,9 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
             className={styles.thumbnail}
             src={data.thumbnailUrl}
             loading='lazy'
+            onError={(e) => {
+              e.currentTarget.src = altImage;
+            }}
           />
         )}
       </div>
