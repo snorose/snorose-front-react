@@ -15,7 +15,12 @@ import {
   SignUpFailurePage,
   SnoroseVerifyPage,
 } from '@/page/account';
-import { AlertPage, AlertSettingPage } from '@/page/alert';
+import {
+  AlertPage,
+  AlertSettingPage,
+  AlertTermsPage,
+  MarketingTemrsPage,
+} from '@/page/alert';
 import {
   BoardCategoryPage,
   EditPostPage,
@@ -52,7 +57,6 @@ import { MaintenancePage } from '@/page/maintenance';
 
 import { CheckExamPeriodRoute } from '@/feature/exam/lib';
 import CheckPrivacyTermPage from './page/account/CheckPrivacyTermPage/CheckPrivacyTermPage';
-import { element } from 'prop-types';
 
 const getRolesForReadBoard = (boardPath) => {
   switch (boardPath) {
@@ -354,6 +358,14 @@ export const routeList = [
         ),
       },
       {
+        path: '/terms/alert',
+        element: <AlertTermsPage />,
+      },
+      {
+        path: '/temrs/marketing',
+        element: <MarketingTemrsPage />,
+      },
+      {
         path: '/attendance',
         element: <AttendancePage />,
         loader: attendanceLoader,
@@ -511,7 +523,7 @@ export const routeList = [
         },
       },
       {
-        path: '/check-privacy-term',
+        path: '/terms/privacy',
         element: <CheckPrivacyTermPage />,
         meta: {
           hideNav: true,
