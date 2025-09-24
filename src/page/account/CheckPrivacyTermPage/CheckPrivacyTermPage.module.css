@@ -15,7 +15,7 @@
 .title {
   display: flex;
   gap: 5px;
-  /* margin: 0 var(--default-margin) 1.6rem var(--default-margin); */
+
   font: var(--text-title-1-bold);
   white-space: pre-line;
 }
@@ -30,17 +30,21 @@
 .description {
   height: 600px;
   overflow: scroll !important;
+
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  background: var(--grey-1-1);
+
   padding: 1.4rem;
-  font-size: small;
-  line-height: 1.6;
+
+  border-radius: 0.5rem;
+  background: var(--grey-1-1);
+
+  font: var(--text-body-1-reg);
   white-space: pre-line;
 }
 
 .summary,
 .notice {
-  font-weight: 500;
+  font: var(--text-body-1-med);
 }

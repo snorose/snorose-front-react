@@ -1,65 +1,41 @@
 import { BackAppBar } from '@/shared/component';
 
-import styles from './MarketingTermsPage.module.css';
+import { MARKETING_TERMS } from '@/feature/alert/constant';
 
-const TERMS = [
-  {
-    title: '1. 수집·이용 목적',
-    list: [
-      '서비스 및 이벤트 안내, 혜택 및 할인 정보 제공',
-      '신규 서비스 또는 기능 안내',
-      '사용자 맞춤형 마케팅 및 광고성 정보 제공',
-    ],
-  },
-  {
-    title: '2. 수집 항목',
-    content: '이름, 학번 및 학적정보, 접속 이력 등',
-  },
-  {
-    title: '3. 수신 방법',
-    content: '푸시 알림(Web Push)',
-  },
-  {
-    title: '4. 보유 및 이용 기간',
-    content: `회원 탈퇴 또는 동의 철회 시까지 보유하며, 철회 요청 시 지체 없이 파기합니다.\n단, 관계 법령에 따라 일정 기간 보존할 필요가 있는 경우에는 해당 법령에서 정한 기간 동안 보관합니다.`,
-  },
-  {
-    title: '5. 동의 거부 권리 안내',
-    content: `귀하는 마케팅 목적의 개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있으며, 동의를 거부하시더라도 회원가입 및 서비스 이용에는 영향을 미치지 않습니다.\n다만, 마케팅 정보 수신에 동의하지 않으실 경우 이벤트, 할인, 혜택 등의 안내를 받지 못할 수 있습니다.`,
-  },
-  {
-    title: '6. 수신 정보 변경',
-    content:
-      '스노로즈에서 제공하는 마케팅 정보 수신을 원하지 않을 경우 변경할 수 있습니다.',
-  },
-  {
-    title: '7. 동의 거부 방법 안내',
-    content:
-      '마케팅 정보 수신 동의 여부에 변동이 있는 경우, [알림함 → 설정 버튼(톱니바퀴 모양) → 광고성 알림 받기]에서 설정을 변경하실 수 있습니다.',
-  },
-];
+import styles from './MarketingTermsPage.module.css';
 
 export default function MarketingTermsPage() {
   return (
-    <div className={styles.container}>
+    <div>
       <BackAppBar notFixed />
 
-      <div className={styles.title}>마케팅 정보 수신 동의</div>
+      <div className={styles.title}>마케팅 정보 수신 동의 약관</div>
 
       <div className={styles.body}>
-        <div className={styles.summary}>
+        <div>
           스노로즈는 이용자의 동의를 받아 이벤트, 혜택, 최신 정보 등 마케팅
           목적의 정보를 전송하고자 합니다. 동의를 거부하셔도 서비스 이용에는
           제한이 없습니다.
         </div>
 
-        {TERMS.map(({ title, list, content }) => (
-          <div className={styles.term}>
+        {MARKETING_TERMS.map(({ title, list, content }) => (
+          <div key={`terms-merketing-${title}`}>
             <div className={styles.subTitle}>{title}</div>
             <div className={styles.content}>{content}</div>
+            {list && <TermsList list={list} />}
           </div>
         ))}
       </div>
     </div>
+  );
+}
+
+function TermsList({ list }) {
+  return (
+    <ul className={styles.list}>
+      {list.map((item) => (
+        <li key={`terms-marketing-${item}`}>{item}</li>
+      ))}
+    </ul>
   );
 }

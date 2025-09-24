@@ -153,6 +153,8 @@ function NotificationSettings() {
           onToggle={() => onToggle('marketing')}
           variant='blue'
           disabled={isUnsupported || !state.required}
+          hasTerms
+          to='/terms/marketing'
         />
       </div>
 

@@ -355,6 +355,9 @@ export const routeList = [
       {
         path: '/terms/marketing',
         element: <MarketingTermsPage />,
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: '/attendance',

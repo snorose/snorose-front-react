@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import style from './SettingItem.module.css';
 
 const backgroundStyle = {
@@ -11,6 +13,8 @@ export default function SettingItem({
   isEnabled,
   onToggle,
   variant = 'default',
+  hasTerms = false,
+  to,
   disabled = false,
 }) {
   return (
@@ -24,7 +28,11 @@ export default function SettingItem({
 
       <div className={style.right}>
         <Switch isEnabled={isEnabled} onToggle={onToggle} disabled={disabled} />
-        <div className={style.termsLink}>약관</div>
+        {hasTerms && (
+          <Link to={to} className={style.termsLink}>
+            약관
+          </Link>
+        )}
       </div>
     </div>
   );
