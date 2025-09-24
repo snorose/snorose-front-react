@@ -16,8 +16,8 @@ import { CONFIRM_MODAL_TEXT } from '@/shared/constant';
 import * as notificationSettingsStore from '@/feature/alert/store/notificationSettings';
 import {
   PushNotificationManager,
-  getDeviceFormFactor,
-  isNotificationUnsupported,
+  getDeviceType,
+  canUseAlertSetting,
 } from '@/feature/alert/lib';
 import {
   useUpdateNotificationSetting,
@@ -83,7 +83,7 @@ function NotificationSettings() {
       await PushNotificationManager.ensurePermission();
 
       const token = await PushNotificationManager.issueToken();
-      const deviceType = getDeviceFormFactor();
+      const deviceType = getDeviceType();
 
       if (PushNotificationManager.isTokenChanged(token)) {
         await PushNotificationManager.syncWithServer(token, deviceType);
@@ -108,7 +108,7 @@ function NotificationSettings() {
     }
   };
 
-  const isUnsupported = isNotificationUnsupported();
+  const canUseAlert = canUseAlertSetting();
 
   return (
     <>
@@ -144,7 +144,7 @@ function NotificationSettings() {
 
             await onToggle('required');
           }}
-          disabled={isUnsupported}
+          disabled={!canUseAlert}
         />
         <SettingItem
           title='광고성 알림 받기'
@@ -152,7 +152,7 @@ function NotificationSettings() {
           isEnabled={state.marketing}
           onToggle={() => onToggle('marketing')}
           variant='blue'
-          disabled={isUnsupported || !state.required}
+          disabled={!canUseAlert || !state.required}
         />
       </div>
 
@@ -165,7 +165,7 @@ function NotificationSettings() {
           isEnabled={state.attendance}
           onToggle={() => onToggle('attendance')}
           variant='blue'
-          disabled={isUnsupported || !state.required}
+          disabled={!canUseAlert || !state.required}
         />
       </div>
 
