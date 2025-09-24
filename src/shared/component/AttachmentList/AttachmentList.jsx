@@ -46,11 +46,7 @@ export default function AttachmentList({
           {attachmentsInfo[index].type === 'PHOTO' ? (
             //첨부파일이 이미지일 경우
             <img
-              src={
-                att.url ||
-                (att.file && URL.createObjectURL(att.file)) ||
-                altImage
-              }
+              src={att.url || (att.file && URL.createObjectURL(att.file))}
               className={styles.image}
               onError={(e) => {
                 e.currentTarget.src = altImage;

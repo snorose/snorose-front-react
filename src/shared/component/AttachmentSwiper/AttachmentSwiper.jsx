@@ -35,7 +35,7 @@ export default function AttachmentSwiper({ data, setClickedImageIndex }) {
             <div className={styles.attchmentDiv}>
               {item.type === 'PHOTO' ? (
                 <img
-                  src={item.url || altImage}
+                  src={item.url}
                   className={styles.attachment}
                   draggable={false}
                   onClick={() => {

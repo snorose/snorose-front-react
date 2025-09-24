@@ -1,4 +1,6 @@
 import { defaultAxios, authAxios } from '@/axios';
+import { IconItem } from '@storybook/blocks';
+import altImage from '@/assets/images/altImage.png';
 
 // 게시글 리스트 가져오기
 export const getPosts = async (boardId, page = 0) => {
@@ -15,6 +17,16 @@ export const getPosts = async (boardId, page = 0) => {
 // 게시글 상세 조회
 export const getPostContent = async (boardId, postId) => {
   const response = await authAxios.get(`/v1/boards/${boardId}/posts/${postId}`);
+
+  //url이 null일시 대체 이미지로 대체
+  if (response?.data.result?.attachments.length) {
+    response.data.result.attachments = response.data.result.attachments.map(
+      (data) => ({
+        ...data,
+        url: data.url || altImage,
+      })
+    );
+  }
   return response?.data.result;
 };
 
