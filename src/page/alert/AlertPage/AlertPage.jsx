@@ -23,6 +23,8 @@ import {
 import { CategoryTab, NotificationItem } from '@/feature/alert/component';
 import { CATEGORY } from '@/feature/alert/constant';
 
+import { noAlertIllustration } from '@/assets/illustrations';
+
 import style from './AlertPage.module.css';
 
 export default function AlertPage() {
@@ -142,7 +144,16 @@ function NotificationList({ category }) {
   };
 
   if (notifications.length === 0) {
-    return <div className={style.noNotification}>새로운 알림이 없어요</div>;
+    return (
+      <div className={style.noAlertContainer}>
+        <img
+          className={style.noAlertIllustration}
+          src={noAlertIllustration}
+          alt='새로운 알림이 없어요'
+        />
+        <div>새로운 알림이 없어요</div>
+      </div>
+    );
   }
 
   return (

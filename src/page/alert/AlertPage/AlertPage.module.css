@@ -1,5 +1,7 @@
 .container {
+  height: 100%;
   padding: 7rem 0 9rem 0;
+
   display: flex;
   flex-direction: column;
 }
@@ -29,6 +31,7 @@
 
 .categoryTabs {
   margin-bottom: 2.2rem;
+  min-height: 3.2rem;
 
   display: flex;
   gap: 0.8rem;
@@ -68,4 +71,28 @@
 
 .noNotification {
   font: var(--text-body-1-reg);
+}
+
+/* 알림 없는 경우 fallback */
+
+.noAlertContainer {
+  flex: 1;
+
+  padding-bottom: 7rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.3rem;
+
+  box-sizing: border-box;
+
+  & div {
+    font: var(--text-headline-2-reg);
+  }
+}
+
+.noAlertIllustration {
+  width: 101px;
 }
