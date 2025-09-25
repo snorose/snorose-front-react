@@ -1,8 +1,11 @@
-import { BackAppBar, Button } from '@/shared/component';
-import styles from './CheckPrivacyTermPage.module.css';
-import { PRIVACY_TERM } from '@/feature/account/constant/privacyTerm';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { BackAppBar, Button } from '@/shared/component';
+
+import { PRIVACY_TERM } from '@/feature/account/constant/privacyTerm';
+
+import styles from './CheckPrivacyTermPage.module.css';
 
 export default function CheckPrivacyTermPage() {
   const [hasScrolledToEnd, setHasScrolledToEnd] = useState(false);
@@ -43,7 +46,7 @@ export default function CheckPrivacyTermPage() {
   };
 
   return (
-    <main className={styles.main}>
+    <div className={styles.container}>
       <BackAppBar notFixed />
       <div className={styles.body}>
         <div className={styles.title}>
@@ -74,6 +77,6 @@ export default function CheckPrivacyTermPage() {
           />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
