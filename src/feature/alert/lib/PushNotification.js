@@ -1,4 +1,4 @@
-import { getToken, isSupported } from 'firebase/messaging';
+import { getToken, isSupported, onMessage } from 'firebase/messaging';
 import { messaging } from './firebase-config';
 
 import { sendFCMToken } from '@/apis';
@@ -112,5 +112,11 @@ export class PushNotificationManager {
   static #setCachedToken(token) {
     const key = process.env.REACT_APP_FCM_TOKEN_KEY;
     localStorage.setItem(key, token);
+  }
+
+  static onForegroundMessage(callback) {
+    onMessage(messaging, (payload) => {
+      callback();
+    });
   }
 }
