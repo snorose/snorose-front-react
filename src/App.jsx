@@ -8,7 +8,10 @@ import { findRouteByPath } from '@/shared/lib';
 import { Navbar, Sidebar } from '@/shared/component';
 import { QUERY_KEY } from '@/shared/constant';
 
-import { PushNotificationManager } from '@/feature/alert/lib';
+import {
+  isWebPushSupported,
+  PushNotificationManager,
+} from '@/feature/alert/lib';
 
 import {
   MAINTENANCE_START,
@@ -26,6 +29,12 @@ function App() {
   const { pathname } = useLocation();
   const currentRoute = findRouteByPath(pathname, routeList);
   const hideNav = currentRoute?.meta?.hideNav ?? false;
+
+  console.log(navigator.userAgent);
+  console.log(navigator.userAgentData);
+  console.log(navigator.serviceWorker);
+
+  console.log(isWebPushSupported());
 
   // 푸시 알림 설정
   useEffect(() => {
