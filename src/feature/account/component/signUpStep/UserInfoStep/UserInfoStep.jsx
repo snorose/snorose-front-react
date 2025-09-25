@@ -178,7 +178,7 @@ function CheckTerms({
   const tag = required ? '필수' : '선택';
 
   const handlePrivacyTermClick = () => {
-    navigate('/check-privacy-term');
+    navigate('/terms/privacy');
   };
 
   const handleCheckboxChange = () => {

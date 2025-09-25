@@ -1,19 +1,17 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { useFeatureIsOn } from '@growthbook/growthbook-react';
 
-import { Navbar, Sidebar } from '@/shared/component';
 import { findRouteByPath } from '@/shared/lib';
+import { Navbar, Sidebar } from '@/shared/component';
+import { QUERY_KEY } from '@/shared/constant';
 
 import {
   isWebPushSupported,
   PushNotificationManager,
 } from '@/feature/alert/lib';
-
-import { routeList } from '@/router.js';
-
-import styles from './App.module.css';
 
 import {
   MAINTENANCE_START,
@@ -21,7 +19,12 @@ import {
 } from '@/feature/maintenance/hook/useMaintenance';
 import { MaintenancePage } from './page/maintenance';
 
+import { routeList } from '@/router.js';
+
+import styles from './App.module.css';
+
 function App() {
+  const queryClient = useQueryClient();
   const isEnabled = useFeatureIsOn('push-notification');
   const { pathname } = useLocation();
   const currentRoute = findRouteByPath(pathname, routeList);
@@ -37,9 +40,17 @@ function App() {
   useEffect(() => {
     if (!isEnabled) return;
 
-    PushNotificationManager.registerServiceWorker().catch((error) =>
-      console.error(error)
-    );
+    const listen = () => {
+      console.log('listen');
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.notifications() });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEY.unreadNotificationCount,
+      });
+    };
+
+    PushNotificationManager.registerServiceWorker()
+      .then(() => PushNotificationManager.onForegroundMessage(listen))
+      .catch((error) => console.error(error));
   }, [isEnabled]);
 
   // 서버 점검 페이지 처리

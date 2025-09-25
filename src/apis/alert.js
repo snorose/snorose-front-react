@@ -1,6 +1,6 @@
 import { authAxios } from '@/axios';
 
-export const getUnreadAlertCount = async () => {
+export const fetchUnreadAlertCount = async () => {
   const response = await authAxios.get('/v1/alerts/unread/count');
   const data = response?.data ?? {};
 

@@ -20,6 +20,7 @@ export const QUERY_KEY = Object.freeze({
   best3: 'best3',
   notifications: (category) =>
     category ? ['notifications', { category }] : ['notifications'],
+  unreadNotificationCount: ['unreadNotificationCount'],
   notificationSettings: ['notificationSettings'],
 });
 
