@@ -5,6 +5,7 @@ import emailSendIllustration from './emailSendIllustration.svg';
 import taskCompleteIllustration from './taskCompleteIllustration.svg';
 import taskFailedIllustration from './taskFailedIllustration.svg';
 import notFoundIllustration from './notFoundIllustration.svg';
+import noAlertIllustration from './noAlertIllustration.svg';
 
 export {
   noPostsIllustration,
@@ -14,4 +15,5 @@ export {
   taskCompleteIllustration,
   taskFailedIllustration,
   notFoundIllustration,
+  noAlertIllustration,
 };
