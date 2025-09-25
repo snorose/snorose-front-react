@@ -1,54 +1,61 @@
-export function isPWA() {
-  if (typeof window === 'undefined') return false;
-
-  // iOS: 오직 홈 화면 실행일 때만 true
-  if (isIOS()) {
-    return navigator.standalone === true;
-  }
-
-  // 2) Display Mode 기반 (표준) — 설치 실행만 긍정
-  const displayModes = ['standalone', 'fullscreen', 'window-controls-overlay'];
-  return displayModes.some(
-    (mode) => window.matchMedia?.(`(display-mode: ${mode})`).matches
+export function isWebPushSupported() {
+  return (
+    'Notification' in window &&
+    'serviceWorker' in navigator &&
+    'PushManager' in window
   );
 }
 
-export function getDeviceFormFactor() {
-  const nav = navigator;
+function isAndroidPhone() {
+  const isSmartPhone = navigator.userAgentData?.mobile;
+
+  if (isSmartPhone !== undefined) {
+    return isSmartPhone;
+  }
+
+  // userAgentData을 지원하지 않는 경우의 fallback
   const ua = navigator.userAgent || '';
+  return /Android/i.test(ua) && /Mobile/i.test(ua);
+}
 
-  // 1) Chromium 계열(안드)에서 가장 신뢰도 높은 신호
-  if (nav.userAgentData?.mobile === true) return 'MOBILE';
+export function isIPhone() {
+  return navigator.platform === 'iPhone';
+}
 
-  // 2) iOS: iPhone/iPod은 폰, iPad는 제외
-  if (/\biPhone\b|\biPod\b/i.test(ua)) return 'MOBILE';
-  if (/\biPad\b/i.test(ua)) return 'OTHER';
+function isIOSPWA() {
+  return (
+    typeof navigator.standalone !== 'undefined' && navigator.standalone === true
+  );
+}
 
-  // iPadOS 13+: UA가 "Mac"로 위장하므로 따로 제외
-  if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-    return 'OTHER';
+export function canUseAlertSetting() {
+  if (!isWebPushSupported()) return false;
 
-  // 3) Android: UA에 'Mobile' 토큰이 있으면 보통 폰, 없으면 태블릿
-  if (/Android/i.test(ua)) return /\bMobile\b/i.test(ua);
+  if (isAndroidPhone()) return true;
+
+  if (isIPhone() && isIOSPWA()) return true;
+
+  return false;
+}
+
+/**
+ * MOBILE: 스마트폰
+ * TABLET: 태블릿 PC
+ * PC: 데스크톱/노트북
+ * OTHER: 그 외
+ */
+export function getDeviceType() {
+  const ua = navigator.userAgent || '';
+  const platform = navigator.platform || '';
+
+  if (isIPhone()) return 'MOBILE';
+  if (isAndroidPhone()) return 'MOBILE';
+
+  if (platform === 'iPad') return 'TABLET';
+  if (platform === 'MacIntel' && navigator.maxTouchPoints > 1) return 'TABLET';
+  if (/Android/i.test(ua) && !/Mobile/i.test(ua)) return 'TABLET';
+
+  if (/Macintosh|Windows|Win32|Win64|Linux/i.test(ua)) return 'PC';
 
   return 'OTHER';
-}
-
-export function isMobile() {
-  const ua = navigator.userAgent;
-
-  return /Android.+Mobile|iPhone|iPod/i.test(ua);
-}
-
-export function isIOS() {
-  const ua = navigator.userAgent;
-  const isIOSDevice = /iPhone|iPod/.test(ua);
-  const isIpadOS13Up = ua.includes('Macintosh') && 'ontouchend' in document;
-  return isIOSDevice || isIpadOS13Up;
-}
-
-export function isNotificationUnsupported() {
-  if (!isMobile()) return true;
-  if (isIOS() && !isPWA()) return true;
-  return false;
 }

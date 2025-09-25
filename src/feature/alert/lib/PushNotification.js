@@ -5,7 +5,7 @@ import { sendFCMToken } from '@/apis';
 
 import { AppError } from '@/shared/lib';
 
-import { isIOS } from '@/feature/alert/lib';
+import { isIPhone } from '@/feature/alert/lib';
 import { ERROR_CODE, ERROR_MESSAGE } from '@/feature/alert/constant';
 
 export class PushNotificationManager {
@@ -49,7 +49,7 @@ export class PushNotificationManager {
 
     if (current === 'granted') return;
     if (current === 'denied') {
-      const message = isIOS()
+      const message = isIPhone()
         ? ERROR_MESSAGE.PERMISSION_DENIED_IOS
         : ERROR_MESSAGE.PERMISSION_DENIED_ANDROID;
 
