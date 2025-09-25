@@ -167,7 +167,6 @@ export function useUpdateNotificationSetting() {
     onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: QUERY_KEY.notificationSettings,
-        refetchType: 'inactive',
       });
     },
   });
