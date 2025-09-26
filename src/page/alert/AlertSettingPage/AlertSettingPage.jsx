@@ -39,6 +39,11 @@ export default function AlertSettingPage() {
     <div className={style.container}>
       <BackAppBar title='알림 설정' />
 
+      <div className={style.noticeContainer}>
+        {`알림은 스마트폰에서만 설정할 수 있어요.
+        아이폰은 Safari 홈 화면 추가 후 이용해주세요.`}
+      </div>
+
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary

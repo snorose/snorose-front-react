@@ -4,6 +4,18 @@
   padding-bottom: 7.5rem;
 }
 
+.noticeContainer {
+  margin: 0 var(--default-margin) 2rem;
+  padding: 1.4rem;
+
+  border-radius: 0.5rem;
+  background: var(--gradient-4);
+
+  font: var(--text-headline-2-reg);
+  color: var(--blue-4);
+  white-space: pre-line;
+}
+
 .alert {
   margin: 0 2rem;
 
