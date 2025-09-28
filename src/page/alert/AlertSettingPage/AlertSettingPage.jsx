@@ -2,16 +2,17 @@ import { Suspense, useContext, useReducer } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
-import { AppError } from '@/shared/lib';
-import { ModalContext } from '@/shared/context/ModalContext';
+import { AppError, fullDateTimeFormat } from '@/shared/lib';
 import { useToast } from '@/shared/hook';
+import { ModalContext } from '@/shared/context/ModalContext';
 import {
   BackAppBar,
   ConfirmModal,
   FetchLoading,
+  NoticeModal,
   ServerErrorFallback,
 } from '@/shared/component';
-import { CONFIRM_MODAL_TEXT } from '@/shared/constant';
+import { CONFIRM_MODAL_TEXT, NOTICE_MODAL_TEXT } from '@/shared/constant';
 
 import * as notificationSettingsStore from '@/feature/alert/store/notificationSettings';
 import {
@@ -105,7 +106,7 @@ function NotificationSettings() {
     dispatch(action);
 
     try {
-      await updateSettings.mutateAsync(next);
+      return await updateSettings.mutateAsync(next);
     } catch (error) {
       const rollbackAction = notificationSettingsStore.actions.hydrate(prev);
       dispatch(rollbackAction);
@@ -155,7 +156,29 @@ function NotificationSettings() {
           title='광고성 알림 받기'
           content={content.advertisement}
           isEnabled={state.marketing}
-          onToggle={() => onToggle('marketing')}
+          onToggle={async () => {
+            const { isMarketingConsent, marketingConsentUpdatedAt } =
+              await onToggle('marketing');
+
+            const modalText = {
+              title:
+                NOTICE_MODAL_TEXT.MAEKETING_NOTICE_MODAL.title(
+                  isMarketingConsent
+                ),
+              description: NOTICE_MODAL_TEXT.MAEKETING_NOTICE_MODAL.description(
+                isMarketingConsent,
+                fullDateTimeFormat(marketingConsentUpdatedAt)
+              ),
+              confirmText: NOTICE_MODAL_TEXT.MAEKETING_NOTICE_MODAL.confirmText,
+            };
+
+            setModal({
+              id: 'marketing-notice',
+              modalProps: {
+                modalText,
+              },
+            });
+          }}
           variant='blue'
           disabled={!canUseAlert || !state.required}
           hasTerms
@@ -198,6 +221,9 @@ function NotificationSettingModalRenderer({ onToggle }) {
                 }}
               />
             );
+
+          case 'marketing-notice':
+            return <NoticeModal {...modal.modalProps} />;
 
           default:
             return null;

@@ -1,4 +1,6 @@
 .container {
+  width: 29rem;
+
   background-color: white;
   border-radius: 1rem;
   overflow: hidden;
@@ -8,7 +10,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  padding: 2.3rem 4rem;
+  padding: 2.3rem 2rem;
   text-align: center;
 }
 
@@ -22,16 +24,17 @@
   color: var(--grey-4);
   font: var(--text-headline-2-reg);
   word-break: keep-all;
+  white-space: pre-line;
 }
 
 .confirmButton {
   width: 100%;
   padding: 1.3rem 5.7rem;
-  color: var(--blue-3);
+  color: var(--blue-4);
   font: var(--text-headline-2-med);
   cursor: pointer;
   transition: background-color 0.2s ease;
-  border-top: solid 0.1rem var(--blue-0);
+  border-top: solid 0.1rem var(--grey-2);
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
