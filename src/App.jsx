@@ -32,7 +32,6 @@ function App() {
     if (!isEnabled) return;
 
     const listen = () => {
-      console.log('listen');
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.notifications() });
       queryClient.invalidateQueries({
         queryKey: QUERY_KEY.unreadNotificationCount,

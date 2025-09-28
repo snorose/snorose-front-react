@@ -211,6 +211,18 @@ const NOTICE_MODAL = {
     description: '이미 인증을 완료했거나 인증 대상이 아니에요.',
     confirmText: '홈으로 이동',
   },
+  MAEKETING_NOTICE_MODAL: {
+    id: 'marketing-notice',
+    title: (isMarketingAgreed) =>
+      isMarketingAgreed
+        ? '광고성 정보 수신 동의 완료'
+        : '광고성 정보 수신 동의 해제 완료',
+    description: (isMarketingAgreed, date) =>
+      isMarketingAgreed
+        ? `${date}\n\n매체 : 앱 푸시\n목적 :  마케팅 정보 수신\n수신거부 : 알림 설정에서 수신 거부 가능`
+        : date,
+    confirmText: '닫기',
+  },
 };
 
 // =================== Option Modal ===================
