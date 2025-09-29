@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar } from 'swiper/modules';
 
 import { Icon } from '@/shared/component';
+import altImage from '@/assets/images/altImage.png';
 
 import styles from './AttachmentSwiper.module.css';
 
@@ -41,6 +42,9 @@ export default function AttachmentSwiper({ data, setClickedImageIndex }) {
                     //이미지 클릭 시 전체화면 보기 가능
                     setClickedImageIndex(index + 1);
                   }}
+                  onError={(e) => {
+                    e.currentTarget.src = altImage;
+                  }}
                 />
               ) : (
                 <div
@@ -53,6 +57,12 @@ export default function AttachmentSwiper({ data, setClickedImageIndex }) {
                     src={item.url}
                     className={styles.attachment}
                     draggable={false}
+                    onError={(e) => {
+                      const img = document.createElement('img');
+                      img.src = altImage;
+                      img.className = styles.attachment;
+                      e.currentTarget.replaceWith(img);
+                    }}
                   />
                   <Icon
                     id='video-opaque'

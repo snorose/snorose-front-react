@@ -1,6 +1,7 @@
 import { Badge, Icon } from '@/shared/component';
 import { ROLE } from '@/shared/constant';
 import { postBarDateFormat } from '@/shared/lib';
+import altImage from '@/assets/images/altImage.png';
 
 import cloudLogo from '@/assets/images/cloudLogo.svg';
 
@@ -14,7 +15,12 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
 
   return (
     <div className={styles.post}>
-      <div className={styles.thumbnailContainer}>
+      <div
+        className={styles.thumbnailContainer}
+        onClick={() => {
+          console.log(data.thumbnailUrl);
+        }}
+      >
         <div>
           <div className={styles.postBarTop}>
             <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
@@ -40,11 +46,14 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
             <p className={styles.text}>{data.questionDetail ?? data.content}</p>
           </div>
         </div>
-        {data.thumbnailUrl && (
+        {data.hasMediaAttachment && (
           <img
             className={styles.thumbnail}
-            src={data.thumbnailUrl}
+            src={data.thumbnailUrl || altImage}
             loading='lazy'
+            onError={(e) => {
+              e.currentTarget.src = altImage;
+            }}
           />
         )}
       </div>

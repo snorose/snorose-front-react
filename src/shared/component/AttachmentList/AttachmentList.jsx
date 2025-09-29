@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Icon } from '@/shared/component';
+import altImage from '@/assets/images/altImage.png';
 
 import styles from './AttachmentList.module.css';
 
@@ -45,16 +46,25 @@ export default function AttachmentList({
           {attachmentsInfo[index].type === 'PHOTO' ? (
             //첨부파일이 이미지일 경우
             <img
-              src={att.url || URL.createObjectURL(att.file)}
+              src={att.url || (att.file && URL.createObjectURL(att.file))}
               className={styles.image}
+              onError={(e) => {
+                e.currentTarget.src = altImage;
+              }}
             />
           ) : (
             //첨부파일이 영상일 경우
             <div className={styles.image}>
               <video
-                src={att.url || URL.createObjectURL(att.file)}
+                src={att.url || (att.file && URL.createObjectURL(att.file))}
                 playsInline
                 className={styles.video}
+                onError={(e) => {
+                  const img = document.createElement('img');
+                  img.src = altImage;
+                  img.className = styles.attachment;
+                  e.currentTarget.replaceWith(img);
+                }}
               />
               <Icon
                 id='video-fill'

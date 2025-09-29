@@ -1,4 +1,6 @@
 import { defaultAxios, authAxios } from '@/axios';
+import { IconItem } from '@storybook/blocks';
+import altImage from '@/assets/images/altImage.png';
 
 // 게시글 리스트 가져오기
 export const getPosts = async (boardId, page = 0) => {
@@ -15,7 +17,22 @@ export const getPosts = async (boardId, page = 0) => {
 // 게시글 상세 조회
 export const getPostContent = async (boardId, postId) => {
   const response = await authAxios.get(`/v1/boards/${boardId}/posts/${postId}`);
-  return response?.data.result;
+  const result = response?.data.result;
+
+  //url이 null일시 대체 이미지로 대체
+  if (response?.data.result?.attachments.length) {
+    const processedAttachments = response.data.result.attachments.map(
+      (data) => ({
+        ...data,
+        url: data.url || altImage,
+      })
+    );
+    return {
+      ...result,
+      attachments: processedAttachments,
+    };
+  }
+  return result;
 };
 
 // 게시글 등록
@@ -46,7 +63,7 @@ export const postPost = async ({
     let attachmentUrlList = response.data.result.attachmentUrlList;
 
     //각 S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
-    putFileInBucket(
+    await putFileInBucket(
       attachmentUrlList,
       attachmentsInfo.map((att) => att.file)
     );
