@@ -17,17 +17,22 @@ export const getPosts = async (boardId, page = 0) => {
 // 게시글 상세 조회
 export const getPostContent = async (boardId, postId) => {
   const response = await authAxios.get(`/v1/boards/${boardId}/posts/${postId}`);
+  const result = response?.data.result;
 
   //url이 null일시 대체 이미지로 대체
   if (response?.data.result?.attachments.length) {
-    response.data.result.attachments = response.data.result.attachments.map(
+    const processedAttachments = response.data.result.attachments.map(
       (data) => ({
         ...data,
         url: data.url || altImage,
       })
     );
+    return {
+      ...result,
+      attachments: processedAttachments,
+    };
   }
-  return response?.data.result;
+  return result;
 };
 
 // 게시글 등록
