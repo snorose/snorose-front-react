@@ -224,8 +224,8 @@ export default function PostPage() {
               id='scrap-stroke'
               width={13}
               height={16}
-              stroke={'var(--green-1)'}
-              fill={data.isScrapped ? 'var(--green-1)' : 'none'}
+              stroke={'var(--green-2)'}
+              fill={data.isScrapped ? 'var(--green-2)' : 'none'}
             />
             <p>스크랩 {data.scrapCount.toLocaleString()}</p>
           </div>
