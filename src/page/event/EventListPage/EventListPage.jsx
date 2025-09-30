@@ -12,7 +12,7 @@ import { PostListSuspense } from '@/feature/board/component';
 
 import styles from './EventListPage.module.css';
 
-export default function PostListPage() {
+export default function EventListPage() {
   const { pathname } = useLocation();
   const { userInfo } = useAuth();
   const currentBoardTextId = pathname.split('/')[2];

@@ -108,4 +108,5 @@
 .button {
   height: 5.5rem;
   width: 7rem;
+  padding: unset;
 }

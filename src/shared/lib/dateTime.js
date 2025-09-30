@@ -121,3 +121,7 @@ export function formattedNowTime() {
 export function eventTime(date) {
   return date ? date.slice(0, 16) : '';
 }
+
+export function kstISO(date) {
+  if (date.length === 16) return `${date}:00`;
+}

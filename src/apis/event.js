@@ -1,4 +1,5 @@
 import { authAxios } from '@/axios';
+import { kstISO } from '@/shared/lib';
 
 // 이벤트 게시글 상세조회
 export const getEventContent = async (postId) => {
@@ -14,9 +15,9 @@ export const postEvent = async ({
   content,
   host,
   place,
-  startDate,
-  endDate,
-  announceDate,
+  startAt,
+  endAt,
+  announceAt,
   drawCount,
   link,
 }) => {
@@ -27,12 +28,13 @@ export const postEvent = async ({
     content: content,
     host: host,
     place: place,
-    startDate: startDate,
-    endDate: endDate,
-    announceDate: announceDate,
+    startAt: kstISO(startAt),
+    endAt: kstISO(endAt),
+    announceAt: kstISO(announceAt),
     drawCount: drawCount,
     link: link,
   };
+  console.log(data);
   const response = await authAxios.post(`/v1/events`, data);
   return response;
 };
@@ -48,31 +50,28 @@ export const patchEvent = async ({
   content,
   host,
   place,
-  startDate,
-  endDate,
-  announceDate,
+  startAt,
+  endAt,
+  announceAt,
   drawCount,
   link,
 }) => {
   const editedEvent = {
-    postId,
-    category,
-    isNotice,
-    title,
-    content,
-    host,
-    place,
-    startDate,
-    endDate,
-    announceDate,
-    drawCount,
-    link,
+    postId: postId,
+    category: category,
+    isNotice: isNotice,
+    title: title,
+    content: content,
+    host: host,
+    place: place,
+    startAt: kstISO(startAt),
+    endAt: kstISO(endAt),
+    announceAt: kstISO(announceAt),
+    drawCount: drawCount,
+    link: link,
   };
 
   const response = await authAxios.patch(`v1/events/${postId}`, editedEvent);
-
-  console.log('서버요청완료');
-
   return response;
 };
 

@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useMemo, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -9,151 +9,66 @@ import {
   FetchLoading,
   Icon,
 } from '@/shared/component';
-import { BOARD_ID, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
+import { QUERY_KEY, ROLE } from '@/shared/constant';
 import { useAuth, useBlocker, useToast } from '@/shared/hook';
-import { formattedNowTime, getBoard, isUrlValid } from '@/shared/lib';
+import { formattedNowTime, getBoard } from '@/shared/lib';
 
 import { postEvent, postPost } from '@/apis';
 import { DropDownMenu } from '@/feature/board/component';
 
 import styles from './WriteEventPage.module.css';
 import { EventForm, NoticeForm } from '@/feature/event/component';
-import { bool } from 'prop-types';
+import { validateOnSubmit } from '@/feature/event/lib';
+import {
+  EVENT_FORM_DATA,
+  NOTICE_FORM_DATA,
+  EVENT_TYPES,
+} from '@/feature/event/constant';
 
-export default function WritePostPage() {
+export default function WriteEventPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { pathname } = useLocation();
   const { toast } = useToast();
   const { userInfo, status } = useAuth();
   const [dropDownOpen, setDropDownOpen] = useState(false);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [text, setText] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [isNotice, setIsNotice] = useState(false);
-
-  // navigation guard
-  const isBlock = title.trim().length > 0 || text.trim().length > 0;
-
-  useBlocker(isBlock);
-
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
   const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
+  const { invalidUserInfoQuery } = useAuth();
   const [eventType, setEventType] = useState('유형을 선택해주세요');
 
-  const { invalidUserInfoQuery } = useAuth();
+  const [data, setData] = useState(() => EVENT_FORM_DATA(eventType));
+  const [noticeData, setNoticeData] = useState(() => NOTICE_FORM_DATA(boardId));
+  const [errors, setErrors] = useState({});
 
-  const [formValid, setFormValid] = useState(false);
+  // navigation guard
+  const isBlock = !!(data || noticeData);
+  useBlocker(isBlock);
 
-  const displayedTypes = ['공지사항', '연극/뮤지컬', '영화', '기타'];
-
-  // 이벤트 유형 선택 핸들러
-  const handleDropDownOpen = () => {
-    setDropDownOpen((prev) => !prev);
-  };
-
+  // 폼 내용 입력 및 eventType 변경 시 초기화
   useEffect(() => {
     const isNowNotice = eventType === '공지사항';
     setIsNotice(isNowNotice);
 
     if (isNowNotice) {
-      setNoticeData((prev) => ({
-        ...prev,
+      setNoticeData({
+        ...NOTICE_FORM_DATA(boardId),
         isNotice: true,
-      }));
+      });
     } else {
-      setData((prev) => ({
-        ...prev,
+      setData({
+        ...EVENT_FORM_DATA(eventType),
         category: eventType,
         isNotice: false,
-      }));
+      });
     }
-  }, [eventType]);
+    setErrors({});
+  }, [eventType, boardId]);
 
-  // 유형에 따른 폼 렌더링
-  const renderForm = () => {
-    switch (eventType) {
-      case '공지사항':
-        return (
-          <NoticeForm
-            data={noticeData}
-            onChange={handleChange}
-            onValid={setFormValid}
-            errors={errors}
-          />
-        );
-      case '연극/뮤지컬':
-        return (
-          <EventForm
-            formType='theater'
-            data={data}
-            onChange={handleChange}
-            onValid={setFormValid}
-            errors={errors}
-          />
-        );
-      case '영화':
-        return (
-          <EventForm
-            formType='movie'
-            data={data}
-            onChange={handleChange}
-            onValid={setFormValid}
-            errors={errors}
-          />
-        );
-      case '기타':
-        return (
-          <EventForm
-            formType='etc'
-            data={data}
-            onChange={handleChange}
-            onValid={setFormValid}
-            errors={errors}
-          />
-        );
-      default:
-        return null;
-    }
-  };
-
-  const INIT_DATA = {
-    category: eventType,
-    isNotice: eventType === '공지사항',
-    title: '',
-    content: '',
-    host: '',
-    place: '',
-    startDate: '',
-    endDate: '',
-    announceDate: '',
-    drawCount: 1,
-    link: '',
-  };
-  const [data, setData] = useState(INIT_DATA);
-
-  const INIT_NOTICE = {
-    category: '',
-    boardId: boardId,
-    title: '',
-    content: '',
-    isNotice: eventType === '공지사항',
-  };
-  const [noticeData, setNoticeData] = useState(INIT_NOTICE);
-
-  const [errors, setErrors] = useState({});
-
-  // eventType 변경시 내용 초기화
-  useEffect(() => {
-    if (eventType === '공지사항') {
-      setNoticeData(INIT_NOTICE);
-    } else {
-      setData(INIT_DATA);
-    }
-  }, [eventType]);
-
+  // 입력값 표시 및 즉시 유효성 검사 항목
   const handleChange = (field, value) => {
     if (isNotice) {
       setNoticeData((prev) => ({
@@ -172,9 +87,9 @@ export default function WritePostPage() {
     if (field === 'title' && value.length > 127) {
       newErrors.title = '제목은 127자 이하로 입력해주세요';
     } else if (field === 'host' && value.length > 20) {
-      if (data.formType === 'theater') {
+      if (EVENT_TYPES[eventType] === 'theater') {
         newErrors.host = '공연명은 20자 이하로 입력해주세요';
-      } else if (data.formType === 'movie') {
+      } else if (EVENT_TYPES[eventType] === 'movie') {
         newErrors.host = '영화명은 20자 이하로 입력해주세요';
       } else {
         newErrors.host = '주최사는 20자 이하로 입력해주세요';
@@ -189,95 +104,83 @@ export default function WritePostPage() {
     setSubmitDisabled(false);
   };
 
-  const validateOnSubmit = (data) => {
-    const errors = {};
+  // 이벤트 유형 선택 핸들러
+  const handleDropDownOpen = () => {
+    setDropDownOpen((prev) => !prev);
+  };
 
-    // 종료일 검증
-    if (data.startDate && data.endDate && data.startDate > data.endDate) {
-      errors.endDate = '종료일은 시작일보다 빠를 수 없어요';
-      setSubmitDisabled(false);
+  // 이벤트 유형에 따른 폼 렌더링
+  const renderForm = () => {
+    if (eventType === '공지사항') {
+      return (
+        <NoticeForm
+          data={noticeData}
+          onChange={handleChange}
+          onValid={setSubmitDisabled}
+          errors={errors}
+        />
+      );
     }
 
-    // 발표일 검증
-    if (
-      data.announceDate &&
-      ((data.startDate && data.announceDate < data.startDate) ||
-        (data.endDate && data.announceDate < data.endDate))
-    ) {
-      errors.announceDate = '발표일은 종료일 이후로 설정해주세요';
-      setSubmitDisabled(false);
-    }
+    const formType = EVENT_TYPES[eventType];
+    if (!formType) return null;
 
-    // 상세설명 검증
-    if (data.content.length < 5) {
-      errors.content = '상세설명은 5자 이상 적어주세요';
-      setSubmitDisabled(false);
-    }
-
-    // 연계링크 검증
-    console.log(isUrlValid(data.link));
-    if (!isUrlValid(data.link)) {
-      errors.link = '유효한 링크를 넣어주세요';
-      setSubmitDisabled(false);
-    }
-
-    return errors;
+    return (
+      <EventForm
+        formType={formType}
+        data={data}
+        onChange={handleChange}
+        onValid={setSubmitDisabled}
+        errors={errors}
+      />
+    );
   };
 
   // '등록' 클릭 이벤트와 유효성 검사
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // 날짜 설정, url 오류 검증
     const submitErrors = validateOnSubmit(data);
+    let request;
 
-    if (Object.keys(submitErrors).length > 0) {
-      console.log('날짜설정 에러');
-      setErrors(submitErrors);
-      return;
+    e.preventDefault();
+
+    if (isNotice) {
+      // 공지사항 등록
+      request = postPost(noticeData);
+    } else {
+      // 이벤트 등록
+      if (Object.keys(submitErrors).length > 0) {
+        setErrors(submitErrors);
+        setSubmitDisabled(false);
+        return;
+      }
+
+      request = postEvent(data);
     }
-
     setSubmitDisabled(true);
 
-    // 추후 삭제
-    console.log(data);
-    console.log('등록');
+    request
+      .then((response) => {
+        if (response.status === 201) {
+          const newPostId = response.data.result.postId;
 
-    // 백엔드 리팩토링 후 주석 제거 및 테스트 필요
-    // let request;
-    // if (isNotice) {
-    //   // 확인용!! 나중에 지우기
-    //   console.log('이벤트 공지 제출 시작', noticeData);
-
-    //   request = postPost(noticeData);
-    // } else {
-    //   // 확인용!! 나중에 지우기
-    //   console.log('이벤트 제출 시작', data);
-
-    //   request = postEvent(data);
-    // }
-
-    // request
-    //   .then((response) => {
-    //     if (response.status === 201) {
-    //       const newPostId = response.data.result.postId;
-
-    //       queryClient.removeQueries([QUERY_KEY.post]);
-    //       invalidUserInfoQuery();
-    //       isNotice
-    //         ? navigate(`/board/event/notice`, {
-    //             replace: true,
-    //           })
-    //         : navigate(`/board/event/post/${newPostId}`, {
-    //             replace: true,
-    //           });
-    //     }
-    //   })
-    //   .catch(({ response }) => {
-    //     toast(response.data.message);
-    //     console.log(response.data);
-    //   })
-    //   .finally(() => {
-    //     setSubmitDisabled(false);
-    //   });
+          queryClient.removeQueries([QUERY_KEY.post]);
+          invalidUserInfoQuery();
+          isNotice
+            ? navigate(`/board/event/notice`, {
+                replace: true,
+              })
+            : navigate(`/board/event/post/${newPostId}`, {
+                replace: true,
+              });
+        }
+      })
+      .catch(({ response }) => {
+        toast(response.data.message);
+      })
+      .finally(() => {
+        setSubmitDisabled(false);
+      });
   };
 
   if (status === 'loading') {
@@ -293,7 +196,7 @@ export default function WritePostPage() {
       <div className={styles.container}>
         <div className={styles.top}>
           <CloseAppBar backgroundColor={'#eaf5fd'}>
-            <ActionButton onClick={handleSubmit} disabled={!formValid}>
+            <ActionButton onClick={handleSubmit} disabled={!submitDisabled}>
               등록
             </ActionButton>
           </CloseAppBar>
@@ -329,7 +232,7 @@ export default function WritePostPage() {
                 <Icon id='angle-down' width={14} height={7} />
               </div>
               <DropDownMenu
-                options={displayedTypes}
+                options={Object.keys(EVENT_TYPES)}
                 item={eventType}
                 setItem={setEventType}
                 dropDownOpen={dropDownOpen}
