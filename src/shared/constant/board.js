@@ -74,8 +74,16 @@ export const BOARD_MENUS = [
     id: 14,
     to: '/board/event',
     textId: 'event',
+    title: '스노로즈 이벤트',
+    desc: '스노로즈 이벤트 게시판',
+    image: event,
+  },
+  {
+    id: 14,
+    to: '/board/event-notice',
+    textId: 'event-notice',
     title: '이벤트',
-    desc: '스노로즈 이벤트 공지',
+    desc: '이벤트 공지글',
     image: event,
   },
   {

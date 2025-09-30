@@ -64,11 +64,11 @@ export default function MyPostList({
   }
 
   const makePath = ({ boardId, postId }) => {
-    if (boardId) {
-      return `/board/${getBoardTextId(boardId)}/post/${postId}`;
-    }
-
-    return `/board/exam-review/post/${postId}`;
+    if (boardId === 14) {
+      return `/board/event/post/${postId}`;
+    } else if (boardId === 32) {
+      return `/board/exam-review/post/${postId}`;
+    } else return `/board/${getBoardTextId(boardId)}/post/${postId}`;
   };
 
   return (
