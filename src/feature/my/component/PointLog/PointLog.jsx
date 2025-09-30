@@ -2,23 +2,23 @@ import { forwardRef } from 'react';
 
 import { format } from 'date-fns';
 
-import { Icon } from '@/shared/component';
-
 import { POINT_CATEGORY_KOREAN_ENUM } from '@/feature/attendance/constant';
+
+import heartPlus from '@/assets/images/heartPlus.svg';
+import heartMinus from '@/assets/images/heartMinus.svg';
 
 import styles from './PointLog.module.css';
 
 const PointLog = forwardRef((props, ref) => {
   const { log } = props;
-  const { difference, category, createdAt, reviewTitle } = log;
+  const { difference, category, createdAt, sourceDetail } = log;
 
   return (
     <li ref={ref} className={styles.pointBox}>
       <div className={styles.pointIconContentWrapper}>
-        <Icon
-          id={difference > 0 ? 'heart-plus' : 'heart-minus'}
-          width={40}
-          height={40}
+        <img
+          src={difference > 0 ? heartPlus : heartMinus}
+          alt={difference > 0 ? '포인트 증가' : '포인트 감소'}
           className={styles.pointIcon}
         />
         <div className={styles.pointContent}>
@@ -27,8 +27,8 @@ const PointLog = forwardRef((props, ref) => {
           >
             {POINT_CATEGORY_KOREAN_ENUM[category]}
           </h2>
-          {reviewTitle && (
-            <span className={styles.pointDescription}>{reviewTitle}</span>
+          {sourceDetail && (
+            <span className={styles.pointDescription}>{sourceDetail}</span>
           )}
           <span className={styles.pointDate}>
             {format(new Date(createdAt), 'yyyy.MM.dd HH:mm:ss')}

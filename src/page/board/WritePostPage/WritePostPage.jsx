@@ -1,21 +1,34 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import {
   ActionButton,
+  AttachmentList,
   Badge,
   CloseAppBar,
+  DropdownList,
   FetchLoading,
   Icon,
+  ConfirmModal,
 } from '@/shared/component';
-import { BOARD_MENUS, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
-import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import {
+  BOARD_MENUS,
+  QUERY_KEY,
+  ROLE,
+  TOAST,
+  CONFIRM_MODAL_TEXT,
+  ATTACHMENT_MODAL_TEXT,
+} from '@/shared/constant';
+import { useAuth, useBlocker, useToast, useModal } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
+import { ModalContext } from '@/shared/context/ModalContext';
 
-import { postPost } from '@/apis';
-import { DropDownMenu } from '@/feature/board/component';
+import { createThumbnail, postPost } from '@/apis';
+import { AttachmentBar } from '@/feature/board/component';
+
+import cloudLogo from '@/assets/images/cloudLogo.svg';
 
 import styles from './WritePostPage.module.css';
 
@@ -25,16 +38,22 @@ export default function WritePostPage() {
   const { pathname } = useLocation();
   const { toast } = useToast();
   const { userInfo, status } = useAuth();
+  const { invalidUserInfoQuery } = useAuth();
+  const { modal, setModal } = useContext(ModalContext);
+
   const [isNotice, setIsNotice] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [isBlock, setIsBlock] = useState(false);
 
-  // navigation guard
-  const isBlock = title.trim().length > 0 || text.trim().length > 0;
+  //'게시글 생성' API에서 요구하는 데이터 (중 attachments array)
+  const [attachmentsInfo, setAttachmentsInfo] = useState([]);
 
-  useBlocker(isBlock);
+  const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
+  const [trashImageIndex, setTrashImageIndex] = useState(null); //지우는 이미지 index
+  const trashImageConfirmModal = useModal();
 
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
@@ -42,8 +61,6 @@ export default function WritePostPage() {
     currentBoard?.title ?? '게시판을 선택해주세요'
   );
   const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
-
-  const { invalidUserInfoQuery } = useAuth();
 
   const pass = boardId && title.trim() && text.trim();
 
@@ -61,14 +78,34 @@ export default function WritePostPage() {
     [60, 61, 62].includes(menu.id)
   ).map((menu) => menu.title);
 
+  // 페이지 이탈 방지 모달 노출
+  useEffect(() => {
+    if (title.trim().length > 0 || text.trim().length > 0) {
+      setIsBlock(true);
+    } else {
+      setIsBlock(false);
+    }
+  }, [title, text]);
+
+  useBlocker(isBlock);
+
   // 드롭다운 표시
-  const displayedTitles = useMemo(() => {
-    const roleTitleMap = {
-      5: isNotice ? officialNoticeTitles : officialTitles,
-      4: [...boardTitles, ...officialNoticeTitles],
+  const displayedOptions = useMemo(() => {
+    const getOptionObjects = (titles) =>
+      BOARD_MENUS.filter((menu) => titles.includes(menu.title)).map((menu) => ({
+        id: menu.id,
+        name: menu.title,
+      }));
+
+    const roleOptions = {
+      [ROLE.official]: isNotice
+        ? getOptionObjects(officialNoticeTitles)
+        : getOptionObjects(officialTitles),
+      [ROLE.admin]: getOptionObjects([...boardTitles, ...officialNoticeTitles]),
     };
-    return roleTitleMap[userInfo?.userRoleId] || boardTitles;
-  }, [isNotice, userInfo?.userRoleId]);
+
+    return roleOptions[userInfo?.userRoleId] || getOptionObjects(boardTitles);
+  }, [isNotice, userInfo?.userRoleId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // 게시판 선택 핸들러
   const handleDropDownOpen = () => {
@@ -76,15 +113,20 @@ export default function WritePostPage() {
   };
 
   // 게시판 제목 선택 핸들러
-  const handleBoardTitleChange = (selectedTitle) => {
-    const selectedBoard = BOARD_MENUS.find(
-      (menu) => menu.title === selectedTitle
-    );
-    if (selectedBoard) {
-      setBoardTitle(selectedBoard.title);
-      setBoardId(selectedBoard.id);
-    }
+  const handleBoardTitleChange = (option) => {
+    setBoardTitle(option.name);
+    setBoardId(option.id);
     setDropDownOpen(false);
+  };
+
+  // 게시글 작성 중 페이지 이탈
+  const handleExitPage = () => {
+    setModal({
+      id: null,
+      type: null,
+    });
+    setIsBlock(false);
+    navigate(-1);
   };
 
   // 공지 여부 선택 핸들러
@@ -98,6 +140,7 @@ export default function WritePostPage() {
     title,
     content: text,
     isNotice: textId === 'notice' ? true : isNotice,
+    attachmentsInfo: attachmentsInfo,
   };
 
   const handleSubmit = (e) => {
@@ -111,7 +154,6 @@ export default function WritePostPage() {
     postPost(data)
       .then((response) => {
         if (response.status === 201) {
-          console.log(response.data.result.pointDifference);
           !response.data.result.pointDifference
             ? toast({
                 message: TOAST.POST.createNoPoints,
@@ -130,6 +172,9 @@ export default function WritePostPage() {
                 `/board/${BOARD_MENUS.find((menu) => menu.id === boardId).textId}/post/${newPostId}`,
                 { replace: true }
               );
+
+          //post 등록이 잘 되었으면 썸네일 생성하기
+          createThumbnail(boardId, newPostId);
         }
       })
       .catch(({ response }) => {
@@ -159,32 +204,17 @@ export default function WritePostPage() {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.top}>
-          <CloseAppBar backgroundColor={'#eaf5fd'}>
-            <ActionButton onClick={handleSubmit} disabled={!pass}>
-              등록
-            </ActionButton>
-          </CloseAppBar>
-        </div>
-        <div className={styles.center}>
-          {textId === 'notice' ? (
-            <div className={styles.categorySelect}>
-              <div className={styles.categorySelectContainer}>
-                <Icon
-                  id='clip-board-list'
-                  width={21}
-                  height={22}
-                  fill='white'
-                />
-                <p className={styles.categorySelectText}>{boardTitle}</p>
-              </div>
-            </div>
-          ) : (
-            <>
-              <div
-                className={styles.categorySelect}
-                onClick={handleDropDownOpen}
-              >
+        <div>
+          <div className={styles.top}>
+            <CloseAppBar backgroundColor={'#eaf5fd'}>
+              <ActionButton onClick={handleSubmit} disabled={!pass}>
+                등록
+              </ActionButton>
+            </CloseAppBar>
+          </div>
+          <div className={styles.center}>
+            {textId === 'notice' ? (
+              <div className={styles.categorySelect}>
                 <div className={styles.categorySelectContainer}>
                   <Icon
                     id='clip-board-list'
@@ -194,69 +224,146 @@ export default function WritePostPage() {
                   />
                   <p className={styles.categorySelectText}>{boardTitle}</p>
                 </div>
-                <Icon id='angle-down' width={14} height={7} />
               </div>
-              <DropDownMenu
-                options={displayedTitles}
-                item={boardTitle}
-                setItem={handleBoardTitleChange}
-                dropDownOpen={dropDownOpen}
-                setDropDownOpen={setDropDownOpen}
-                backgroundColor={'#fff'}
-              />
-            </>
-          )}
-
-          <div className={styles.profileBox}>
-            <div className={styles.profileBoxLeft}>
-              {userInfo?.userRoleId !== ROLE.admin &&
-              userInfo?.userRoleId !== ROLE.official ? (
-                <Icon id='cloud' width={25} height={16} />
-              ) : (
-                <Badge
-                  userRoleId={userInfo?.userRoleId}
-                  className={styles.badge}
-                />
-              )}
-              <p>{userInfo?.nickname}</p>
-              <p className={styles.dot}></p>
-              <p>{formattedNowTime()}</p>
-            </div>
-            {textId !== 'notice' && (
-              <div
-                className={
-                  userInfo?.userRoleId === ROLE.admin ||
-                  userInfo?.userRoleId === ROLE.official
-                    ? styles.profileBoxRight
-                    : styles.profileBoxRightInvisible
-                }
-                onClick={handleIsNotice}
-              >
-                <Icon
-                  id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
-                  width={21}
-                  height={22}
-                />
-                <p>공지글</p>
+            ) : (
+              <div className={styles.categoryDropdownContainer}>
+                <div
+                  className={styles.categorySelect}
+                  onClick={handleDropDownOpen}
+                >
+                  <div className={styles.categorySelectContainer}>
+                    <Icon
+                      id='clip-board-list'
+                      width={21}
+                      height={22}
+                      fill='white'
+                    />
+                    <p className={styles.categorySelectText}>{boardTitle}</p>
+                  </div>
+                  <Icon id='angle-down' width={14} height={7} />
+                </div>
+                {dropDownOpen && (
+                  <DropdownList
+                    options={displayedOptions}
+                    select={{ id: boardId, name: boardTitle }}
+                    onSelect={handleBoardTitleChange}
+                    className={styles.dropDownList}
+                  />
+                )}
               </div>
             )}
-          </div>
-          <div className={styles.content}>
-            <TextareaAutosize
-              className={styles.title}
-              placeholder='제목'
-              value={title}
-              onChange={handleTitleChange}
-            />
-            <TextareaAutosize
-              className={styles.text}
-              placeholder='내용'
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
+
+            <div className={styles.profileBox}>
+              <div className={styles.profileBoxLeft}>
+                {userInfo?.userRoleId !== ROLE.admin &&
+                userInfo?.userRoleId !== ROLE.official ? (
+                  <img className={styles.logoIcon} src={cloudLogo} alt='로고' />
+                ) : (
+                  <Badge
+                    userRoleId={userInfo?.userRoleId}
+                    className={styles.badge}
+                  />
+                )}
+                <p>{userInfo?.nickname}</p>
+                <p className={styles.dot}></p>
+                <p>{formattedNowTime()}</p>
+              </div>
+              {textId !== 'notice' && (
+                <div
+                  className={
+                    userInfo?.userRoleId === ROLE.admin ||
+                    userInfo?.userRoleId === ROLE.official
+                      ? styles.profileBoxRight
+                      : styles.profileBoxRightInvisible
+                  }
+                  onClick={handleIsNotice}
+                >
+                  <Icon
+                    id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
+                    width={21}
+                    height={22}
+                  />
+                  <p>공지글</p>
+                </div>
+              )}
+            </div>
+            <div className={styles.content}>
+              <TextareaAutosize
+                className={styles.title}
+                placeholder='제목'
+                value={title}
+                onChange={handleTitleChange}
+              />
+              <TextareaAutosize
+                className={styles.text}
+                placeholder='내용'
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+              <AttachmentList
+                attachmentsInfo={attachmentsInfo}
+                setAttachmentsInfo={setAttachmentsInfo}
+              />
+            </div>
           </div>
         </div>
+
+        {modal.id === 'exit-page' && (
+          <ConfirmModal
+            modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+            onConfirm={handleExitPage}
+          />
+        )}
+        <Icon
+          id='trashcan'
+          width='10rem'
+          height='10rem'
+          className={`${isTrashOverlapped ? styles.trashVisible : styles.trashInvisible}`}
+          onDragEnter={(e) => {
+            e.preventDefault();
+            setIsTrashOverlapped(true);
+          }}
+          onDragOver={(e) => {
+            setIsTrashOverlapped(true);
+            e.preventDefault();
+          }}
+          onDragLeave={(e) => {
+            e.preventDefault();
+            setIsTrashOverlapped(false);
+          }}
+          onDrop={(e) => {
+            e.preventDefault();
+            const draggedIndex = parseInt(
+              e.dataTransfer.getData('text/plain'),
+              10
+            );
+            setTrashImageIndex(draggedIndex);
+            setIsTrashOverlapped(false);
+            trashImageConfirmModal.openModal();
+          }}
+        />
+        <AttachmentBar
+          attachmentsInfo={attachmentsInfo}
+          setAttachmentsInfo={setAttachmentsInfo}
+        />
       </div>
+
+      {trashImageConfirmModal.isOpen && (
+        <ConfirmModal
+          modalText={ATTACHMENT_MODAL_TEXT.DELETE_ATTACHMENT}
+          onConfirm={() => {
+            setAttachmentsInfo((prev) =>
+              prev
+                .slice(0, trashImageIndex)
+                .concat(prev.slice(trashImageIndex + 1))
+            );
+            trashImageConfirmModal.closeModal();
+          }}
+          onCancel={() => {
+            trashImageConfirmModal.closeModal();
+          }}
+        />
+      )}
     </>
   );
 }

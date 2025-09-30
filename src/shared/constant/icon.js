@@ -32,7 +32,8 @@ export const STATIC_ICON_LIST = Object.freeze({
   heartPlus: 'heart-plus',
   home: 'home',
   homeFill: 'home-fill',
-  instagram: 'instagram',
+  image: 'image',
+  imageFill: 'image-fill',
   logo: 'logo',
   middleDot: 'middle-dot',
   mypage: 'mypage',
@@ -42,6 +43,7 @@ export const STATIC_ICON_LIST = Object.freeze({
   noticeBell: 'notice-bell',
   point: 'point',
   pointCircle: 'point-circle',
+  pointCircleBlue: 'point-circle-blue',
   pencil: 'pencil',
   refresh: 'refresh',
   report: 'report',
@@ -58,6 +60,8 @@ export const STATIC_ICON_LIST = Object.freeze({
   userDisgust: 'user-disgust',
   userStranger: 'user-stranger',
   userSunglasses: 'user-sunglasses',
+  video: 'video',
+  videoFill: 'video-fill',
 });
 
 export const FILL_ICON_LIST = Object.freeze({

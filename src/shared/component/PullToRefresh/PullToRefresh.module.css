@@ -11,20 +11,21 @@
 
 .refreshIcon {
   animation: rotateAndPause 1s linear infinite;
+  width: 3.4rem;
+  height: 2.1rem;
 }
 
 .ptrTouchZone {
   width: 100%;
   height: 30rem;
   position: absolute;
-  z-index: 1;
+  z-index: var(--z-index-pull-to-refresh);
   user-select: none;
   pointer-events: none;
 }
 
 .content {
   width: 100%;
-  z-index: 0;
 }
 
 @keyframes rotateAndPause {

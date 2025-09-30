@@ -1,0 +1,39 @@
+.swiperContainer {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 1.063rem;
+  padding-bottom: 12px;
+  padding-right: 10px;
+}
+.attachmentsContainer {
+  width: 100%;
+  height: 14.4rem;
+  user-select: none;
+}
+.attachmentSlide {
+  width: 14.4rem !important;
+}
+.attchmentDiv {
+  width: 14.4rem; /* Force slide to fit image width */
+}
+.attachment {
+  width: 100%;
+  height: 14.4rem;
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+.videoIcon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+.customScrollbar {
+  height: 4px;
+  background: rgba(0, 0, 0, 0.01); /* scrollbar track */
+  border-radius: 2px;
+  padding-right: 1rem;
+}
+.custom-swiper-scrollbar .swiper-scrollbar-drag {
+  background: #888; /* scrollbar thumb */
+  border-radius: 2px;
+}

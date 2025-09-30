@@ -38,6 +38,11 @@
   align-items: center;
 }
 
+.cloudLogoIcon {
+  width: 2.2rem;
+  height: 1.4rem;
+}
+
 .isWriterWithdrawn {
   color: var(--grey-3-1);
 }
@@ -129,6 +134,10 @@
 
 .nestedComment.isLast {
   border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.nestedComment.focused {
+  background-color: var(--blue-0);
 }
 
 .nestedCommentTop {

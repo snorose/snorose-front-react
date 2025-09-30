@@ -1,19 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 import { editReviewDetail } from '@/apis';
 
 import { useBlocker, useToast } from '@/shared/hook';
+import { ModalContext } from '@/shared/context/ModalContext';
 import {
   ActionButton,
   CloseAppBar,
   Dropdown,
   FetchLoadingOverlay,
+  ConfirmModal,
   Textarea,
 } from '@/shared/component';
 import { validClassNumber } from '@/shared/lib';
-import { MUTATION_KEY, QUERY_KEY, ROUTE, TOAST } from '@/shared/constant';
+import {
+  MUTATION_KEY,
+  QUERY_KEY,
+  TOAST,
+  CONFIRM_MODAL_TEXT,
+} from '@/shared/constant';
 
 import {
   CategoryButton,
@@ -38,6 +45,7 @@ export default function EditExamReviewPage() {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const [loading, setLoading] = useState();
+  const { modal, setModal } = useContext(ModalContext);
 
   const [lectureName, setLectureName] = useState(state.lectureName);
   const [professor, setProfessor] = useState(state.professor);
@@ -84,6 +92,16 @@ export default function EditExamReviewPage() {
   ]);
 
   useBlocker(isBlock);
+
+  // 게시글 수정 중 페이지 이탈
+  const handleExitPage = () => {
+    setModal({
+      id: null,
+      type: null,
+    });
+    setIsBlock(false);
+    navigate(-1);
+  };
 
   const pass =
     lectureName.trim() &&
@@ -229,6 +247,13 @@ export default function EditExamReviewPage() {
         />
       </CategoryFieldset>
       {loading && <FetchLoadingOverlay />}
+      {/* 페이지 이탈 방지 모달 */}
+      {modal.id === 'exit-page' && (
+        <ConfirmModal
+          modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+          onConfirm={handleExitPage}
+        />
+      )}
     </main>
   );
 }

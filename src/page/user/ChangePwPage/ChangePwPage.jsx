@@ -48,7 +48,7 @@ export default function ChangePwPage() {
       emojiRegex.test(password)
     ) {
       setNewPasswordError(
-        '영어, 숫자, 특수문자(!@#%^&*)만 사용하여 8자 이상 16자 이하로 작성해주세요.'
+        '영어, 숫자, 특수문자(!@#%^&*)를 사용하여 8자 이상 16자 이하로 작성해 주세요.'
       );
       setIsPasswordValid(false);
     } else {
@@ -59,7 +59,7 @@ export default function ChangePwPage() {
 
   const validatePasswordMatch = (passwordCheck, password) => {
     if (passwordCheck !== password) {
-      setNewPasswordCheckError('비밀번호가 일치하지 않습니다');
+      setNewPasswordCheckError('비밀번호가 일치하지 않아요');
     } else {
       setNewPasswordCheckError('');
     }

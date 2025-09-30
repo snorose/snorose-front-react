@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useRegister } from '@/apis';
 
-import { Dropdown, Input, Button } from '@/shared/component';
+import { CategoryFieldset, Dropdown, Input, Button } from '@/shared/component';
 import { MAJORS } from '@/shared/constant';
 
 import {
@@ -33,49 +33,48 @@ export default function UserInfoStep({ setFormData, formData }) {
   };
 
   return (
-    <div className={styles.pageFrame}>
-      <div className={styles.scrollFrame}>
+    <>
+      <div>
         <p className={styles.title}>
           사용자 정보를
           <br />
-          입력해주세요
+          입력해 주세요
         </p>
         <div className={styles.inputFrame}>
           <Input
             title={'닉네임'}
-            placeholder={'닉네임을 입력해주세요'}
+            placeholder={'닉네임을 입력해 주세요'}
             className={nicknameStyle}
             setClassName={setNicknameStyle}
             classNameCheck={checkSpecialChar}
             inputType={'nickname'}
             inputData={setFormData}
             data={formData}
-            errMsg={'특수문자 제외 2자 이상 20자 이하로 작성해주세요'}
+            errMsg={'특수문자 제외 2자 이상 20자 이하로 작성해 주세요'}
           />
         </div>
         <div className={styles.inputFrame}>
           <Input
             title={'학번'}
-            placeholder={'학번을 입력해주세요'}
+            placeholder={'학번을 입력해 주세요'}
             className={stuNumStyle}
             setClassName={setStuNumStyle}
             classNameCheck={checkStudentNum}
             inputType={'studentNumber'}
             inputData={setFormData}
             data={formData}
-            errMsg={'학번 형식이 옳지 않습니다'}
+            errMsg={'학번 형식을 올바르게 입력해 주세요'}
           />
         </div>
         <div className={styles.inputFrame}>
-          <p className={styles.majorTitle}>전공</p>
-          <Dropdown
-            options={MAJORS}
-            select={formData}
-            setFn={setFormData}
-            placeholder='전공을 선택해주세요'
-            backgroundColor='#EAF5FD'
-            color='#00368E'
-          />
+          <CategoryFieldset title='전공' required>
+            <Dropdown
+              options={MAJORS}
+              select={formData}
+              setFn={setFormData}
+              placeholder='전공을 선택해주세요'
+            />
+          </CategoryFieldset>
         </div>
         <div className={styles.inputFrame}>
           <Input
@@ -87,7 +86,7 @@ export default function UserInfoStep({ setFormData, formData }) {
             inputType={'birthday'}
             inputData={setFormData}
             data={formData}
-            errMsg={'입력 형식을 확인해주세요'}
+            errMsg={'입력 형식을 확인해 주세요'}
           />
         </div>
       </div>
@@ -99,6 +98,6 @@ export default function UserInfoStep({ setFormData, formData }) {
           onClick={() => register(formData, navigate)}
         />
       </div>
-    </div>
+    </>
   );
 }

@@ -1,6 +1,9 @@
 import { Badge, Icon } from '@/shared/component';
 import { ROLE } from '@/shared/constant';
 import { postBarDateFormat } from '@/shared/lib';
+import altImage from '@/assets/images/altImage.png';
+
+import cloudLogo from '@/assets/images/cloudLogo.svg';
 
 import styles from './PostBar.module.css';
 
@@ -12,30 +15,50 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
 
   return (
     <div className={styles.post}>
-      <div className={styles.post_top}>
-        <Icon id='cloud' width={23} height={14} />
-        <p className={styles.name}>{data.userDisplay}</p>
-        {showBadge && (
-          <Badge userRoleId={data.userRoleId} className={styles.badge} />
-        )}
-        <p className={styles.dot}>·</p>
-        <p>{postBarDateFormat(data.createdAt)}</p>
-        {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
-        {data.isConfirmed && (
-          <Icon
-            className={styles.checkCircleIcon}
-            id='check-circle'
-            width={12}
-            height={12}
+      <div
+        className={styles.thumbnailContainer}
+        onClick={() => {
+          console.log(data.thumbnailUrl);
+        }}
+      >
+        <div>
+          <div className={styles.postBarTop}>
+            <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
+            <p className={styles.author}>{data.userDisplay}</p>
+            {showBadge && (
+              <Badge userRoleId={data.userRoleId} className={styles.badge} />
+            )}
+            <p className={styles.dot}>·</p>
+            <p>{postBarDateFormat(data.createdAt)}</p>
+            {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
+            {data.isConfirmed && (
+              <Icon
+                className={styles.checkCircleIcon}
+                id='check-circle'
+                width={12}
+                height={12}
+              />
+            )}
+            <div className={styles.boardName}>{data.boardName}</div>
+          </div>
+          <div className={styles.postBarCenter}>
+            <p className={styles.title}>{data.title}</p>
+            <p className={styles.text}>{data.questionDetail ?? data.content}</p>
+          </div>
+        </div>
+        {data.hasMediaAttachment && (
+          <img
+            className={styles.thumbnail}
+            src={data.thumbnailUrl || altImage}
+            loading='lazy'
+            onError={(e) => {
+              e.currentTarget.src = altImage;
+            }}
           />
         )}
-        <div className={styles.boardChip}>{data.boardName}</div>
       </div>
-      <div className={styles.post_center}>
-        <p className={styles.title}>{data.title}</p>
-        <p className={styles.text}>{data.questionDetail ?? data.content}</p>
-      </div>
-      <div className={styles.post_bottom}>
+
+      <div className={styles.postBarBottom}>
         <div className={styles.iconListContainer}>
           {data.likeCount > 0 && (
             <div className={styles.iconContainer}>

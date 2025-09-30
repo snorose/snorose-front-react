@@ -1,26 +1,27 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postExamReview, checkExamReviewDuplication } from '@/apis';
 
 import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { ModalContext } from '@/shared/context/ModalContext';
 import {
   ActionButton,
   CloseAppBar,
-  ConfirmModal,
   Dropdown,
   FetchLoadingOverlay,
   Icon,
+  ConfirmModal,
   Textarea,
 } from '@/shared/component';
 import { validClassNumber } from '@/shared/lib';
 import {
   BOARD_ID,
-  MODAL_CONFIRM,
   MUTATION_KEY,
   QUERY_KEY,
   TOAST,
+  CONFIRM_MODAL_TEXT,
 } from '@/shared/constant';
 
 import {
@@ -45,7 +46,7 @@ export default function WriteExamReviewPage() {
   const { toast } = useToast();
   const { invalidUserInfoQuery } = useAuth();
   const queryClient = useQueryClient();
-
+  const { modal, setModal } = useContext(ModalContext);
   const createExamReview = useMutation({
     mutationKey: [MUTATION_KEY.createExamReview],
     mutationFn: ({ data, file }) =>
@@ -93,7 +94,6 @@ export default function WriteExamReviewPage() {
 
   const [isCalled, setIsCalled] = useState();
   const [loading, setLoading] = useState();
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   const pass =
     lectureName.trim() &&
@@ -107,19 +107,42 @@ export default function WriteExamReviewPage() {
     file;
 
   // navigation guard
-  const isBlock = !!(
-    lectureName.trim() ||
-    professor.trim() ||
-    Object.keys(lectureType).length > 0 ||
-    Object.keys(examType).length > 0 ||
-    Object.keys(lectureYear).length > 0 ||
-    Object.keys(semester).length > 0 ||
-    classNumber ||
-    questionDetail.trim() ||
-    file
-  );
+
+  const [isBlock, setIsBlock] = useState(false);
+  useEffect(() => {
+    setIsBlock(
+      !!(
+        lectureName.trim() ||
+        professor.trim() ||
+        Object.keys(lectureType).length > 0 ||
+        Object.keys(examType).length > 0 ||
+        Object.keys(lectureYear).length > 0 ||
+        Object.keys(semester).length > 0 ||
+        classNumber ||
+        questionDetail.trim() ||
+        file
+      )
+    );
+  }, [
+    lectureName,
+    professor,
+    lectureType,
+    examType,
+    lectureYear,
+    semester,
+    classNumber,
+    questionDetail,
+    file,
+  ]);
 
   useBlocker(isBlock);
+
+  // 게시글 수정 중 페이지 이탈
+  const handleExitPage = () => {
+    setIsBlock(false);
+    setModal({ id: null, type: null });
+    navigate(-1);
+  };
 
   const handleFile = (event) => {
     const selectedFile = event.target.files[0];
@@ -164,7 +187,7 @@ export default function WriteExamReviewPage() {
   };
 
   return (
-    <main className={styles.main}>
+    <section className={styles.container}>
       <CloseAppBar>
         <ActionButton
           onClick={async () => {
@@ -178,7 +201,7 @@ export default function WriteExamReviewPage() {
               const response = await checkDuplication();
 
               if (response?.data.result.isDuplicated) {
-                setIsConfirmModalOpen(true);
+                setModal({ id: 'exam-review-duplication', type: null });
                 return;
               }
             } catch (error) {
@@ -297,26 +320,32 @@ export default function WriteExamReviewPage() {
           <input id='file' type='file' accept='.pdf' onChange={handleFile} />
         </div>
       </div>
-      <ConfirmModal
-        isOpen={isConfirmModalOpen}
-        title={MODAL_CONFIRM.EXAM_REVIEW_DUPLICATION.title}
-        message={MODAL_CONFIRM.EXAM_REVIEW_DUPLICATION.message}
-        primaryButtonText='확인'
-        secondaryButtonText='취소'
-        onPrimaryButtonClick={() => {
-          setLoading(true);
-          createExamReview.mutate({
-            data: formBody,
-            file,
-          });
-          setIsConfirmModalOpen(false);
-        }}
-        onSecondaryButtonClick={() => {
-          setIsConfirmModalOpen(false);
-          setIsCalled(false);
-        }}
-      />
+      {/* 중복 후기 모달 */}
+      {modal.id === 'exam-review-duplication' && (
+        <ConfirmModal
+          modalText={CONFIRM_MODAL_TEXT.EXAM_REVIEW_DUPLICATION}
+          onConfirm={() => {
+            setLoading(true);
+            createExamReview.mutate({
+              data: formBody,
+              file,
+            });
+            setModal({ id: null, type: null });
+          }}
+          onCancel={() => {
+            setIsCalled(false);
+            setModal({ id: null, type: null });
+          }}
+        />
+      )}
       {loading && <FetchLoadingOverlay />}
-    </main>
+      {/* 페이지 이탈 방지 모달 */}
+      {modal.id === 'exit-page' && (
+        <ConfirmModal
+          modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+          onConfirm={handleExitPage}
+        />
+      )}
+    </section>
   );
 }

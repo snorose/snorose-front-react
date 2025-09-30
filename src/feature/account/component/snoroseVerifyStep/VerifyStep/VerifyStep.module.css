@@ -1,7 +1,9 @@
-.content {
-  flex: 1;
-  margin: 0 var(--default-margin);
+.container {
   position: relative;
+
+  margin: 0 var(--default-margin);
+
+  flex: 1;
 }
 
 .verify {
@@ -12,8 +14,9 @@
 
 /* button */
 .button {
-  height: 5.4rem;
   position: absolute;
   left: 0;
   bottom: 4rem;
+
+  height: 5.4rem;
 }

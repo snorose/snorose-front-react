@@ -20,7 +20,7 @@ export default function SignUpSuccessPage() {
   }, []);
 
   return (
-    <div className={styles.pageFrame}>
+    <div className={styles.container}>
       <div>
         <Icon
           id='check-thick'

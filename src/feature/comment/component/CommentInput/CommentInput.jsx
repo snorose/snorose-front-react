@@ -7,6 +7,8 @@ import { TOAST } from '@/shared/constant';
 import { useCommentContext } from '@/feature/comment/context';
 import { useComment } from '@/feature/comment/hook';
 
+import cloudLogo from '@/assets/images/cloudLogo.svg';
+
 import styles from './CommentInput.module.css';
 
 const CommentInput = () => {
@@ -83,11 +85,11 @@ const CommentInput = () => {
       className={styles.container}
       onClick={(event) => event.stopPropagation()}
     >
-      <div className={styles.input_bar}>
-        <Icon id='cloud' width={22} height={14} />
+      <div className={styles.inputBar}>
+        <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
         <TextareaAutosize
           ref={inputRef}
-          className={styles.input_zone}
+          className={styles.inputZone}
           placeholder='댓글을 입력하세요'
           value={content}
           onKeyDown={handleKeyPress}
