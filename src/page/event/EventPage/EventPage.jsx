@@ -12,7 +12,6 @@ import {
   Icon,
   OptionModal,
   PrimaryButton,
-  GuideModal,
 } from '@/shared/component';
 import {
   LIKE_TYPE,
@@ -20,15 +19,12 @@ import {
   QUERY_KEY,
   ROLE,
   TOAST,
-  EVENT_GUIDE_MODAL_OPTIONS,
 } from '@/shared/constant';
 import { useAuth, useToast } from '@/shared/hook';
-import {
-  convertHyperlink,
-  fullDateTimeFormat,
-  getBoard,
-  dateFormat,
-} from '@/shared/lib';
+import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
+import { GuideModal } from '@/feature/event/component';
+import { isUrlValid } from '@/feature/event/lib';
+import { EVENT_GUIDE_MODAL_OPTIONS } from '@/feature/event/constant';
 
 import { NotFoundPage } from '@/page/etc';
 
@@ -36,7 +32,6 @@ import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 import { useCommentContext } from '@/feature/comment/context';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
-
 import styles from './EventPage.module.css';
 
 export default function EventPage() {
@@ -149,19 +144,20 @@ export default function EventPage() {
     setIsUserReportModalOpen(false);
   };
 
+  // 신청 시간 판단
+  const now = Date.now();
+  const openDraw = data?.startAt ? new Date(data.startAt).getTime() : null;
+  const closeDraw = data?.endAt ? new Date(data.endAt).getTime() : null;
+  const beforeOpen = now < openDraw;
+  const opened = now >= openDraw && now <= closeDraw;
+  const closed = now > closeDraw;
+
   const [open, setOpen] = useState(false);
 
   // '신청하기'버튼 누르면 폼으로 이동
   const handleApplyClick = () => {
-    const link = new URL(
-      data.link.trim().startsWith('http')
-        ? data.link.trim()
-        : `https://${data.link.trim()}`
-    );
-    if (link) {
-      window.open(link, '_blank');
-    } else {
-      alert('링크가 존재하지 않습니다.');
+    if (!isUrlValid(data.link, { open: true })) {
+      toast('잘못된 링크에요');
     }
   };
 
@@ -248,10 +244,17 @@ export default function EventPage() {
           </p>
         </div>
 
-        {['연극/뮤지컬', '영화'].includes(data.category) && (
+        {['연극/뮤지컬'].includes(data.category) && (
           <div className={styles.host}>
             <Icon id='movie' width={20} height={20} />
             <p>공연명</p>
+            <p className={styles.data}>{data.host}</p>
+          </div>
+        )}
+        {['영화'].includes(data.category) && (
+          <div className={styles.host}>
+            <Icon id='movie' width={20} height={20} />
+            <p>영화명</p>
             <p className={styles.data}>{data.host}</p>
           </div>
         )}
@@ -287,7 +290,8 @@ export default function EventPage() {
           />
           <p>응모 날짜</p>
           <p className={styles.data}>
-            {dateFormat(data.startDate)} ~ {dateFormat(data.endDate)}
+            시작일 : {fullDateTimeFormat(data.startAt)} <br />
+            종료일 : {fullDateTimeFormat(data.endAt)}
           </p>
         </div>
 
@@ -300,7 +304,7 @@ export default function EventPage() {
             stroke='#484848'
           />
           <p>당첨자 발표일</p>
-          <p className={styles.data}>{dateFormat(data.announceDate)}</p>
+          <p className={styles.data}>{fullDateTimeFormat(data.announceAt)}</p>
         </div>
         <p
           className={styles.contentText}
@@ -316,23 +320,39 @@ export default function EventPage() {
         </div>
 
         {/* <div className={styles.iamges}></div> */}
-        <>
-          <PrimaryButton
-            className={styles.button}
-            onClick={() => setOpen(true)}
-          >
-            신청하기
+
+        {beforeOpen && (
+          <PrimaryButton className={styles.button} disabled>
+            응모 시작 전이에요
           </PrimaryButton>
-          {open && (
-            <GuideModal
-              boardName='event'
-              options={EVENT_GUIDE_MODAL_OPTIONS}
-              onConfirm={handleApplyClick}
-              onClose={() => setOpen(false)}
-              onIsLast='신청하기'
-            />
-          )}
-        </>
+        )}
+
+        {opened && (
+          <>
+            <PrimaryButton
+              className={styles.button}
+              onClick={() => setOpen(true)}
+            >
+              신청하기
+            </PrimaryButton>
+
+            {open && (
+              <GuideModal
+                boardName='event'
+                options={EVENT_GUIDE_MODAL_OPTIONS}
+                onConfirm={handleApplyClick}
+                onClose={() => setOpen(false)}
+                onIsLast='신청하기'
+              />
+            )}
+          </>
+        )}
+
+        {closed && (
+          <PrimaryButton className={styles.button} disabled>
+            응모 마감
+          </PrimaryButton>
+        )}
 
         <div className={styles.post_bottom}>
           <div
@@ -410,7 +430,7 @@ export default function EventPage() {
         }}
       />
       <DeleteModal
-        id={currentBoard.id !== 23 ? 'post-delete' : 'post-delete-no-points'}
+        id='post-delete-no-points'
         isOpen={isDeleteModalOpen}
         closeFn={() => {
           setIsDeleteModalOpen(false);

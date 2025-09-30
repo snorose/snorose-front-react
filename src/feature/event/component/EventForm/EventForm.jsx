@@ -4,6 +4,8 @@ import TextareaAutosize from 'react-textarea-autosize';
 import styles from './EventForm.module.css';
 import { eventTime } from '@/shared/lib';
 import { PrimaryButton } from '@/shared/component';
+import { useToast } from '@/shared/hook';
+import { isUrlValid, validateRequiredFields } from '@/feature/event/lib';
 
 export default function EventForm({
   formType,
@@ -12,58 +14,21 @@ export default function EventForm({
   onValid,
   errors,
 }) {
+  const { toast } = useToast();
   // 공백 방지
   useEffect(() => {
-    let valid;
-    if (formType === 'etc') {
-      valid = !!(
-        data.title.trim() &&
-        data.host.trim() &&
-        data.startDate.trim() &&
-        data.endDate.trim() &&
-        data.announceDate.trim() &&
-        data.content.trim() &&
-        data.link.trim()
-      );
-    } else {
-      valid = !!(
-        data.title.trim() &&
-        data.host.trim() &&
-        data.place.trim() &&
-        data.startDate.trim() &&
-        data.endDate.trim() &&
-        data.announceDate.trim() &&
-        data.content.trim() &&
-        data.link.trim()
-      );
-    }
-
-    onValid(valid);
-  }, [
-    formType,
-    data.title,
-    data.host,
-    data.place,
-    data.startDate,
-    data.endDate,
-    data.announceDate,
-    data.content,
-    data.link,
-    onValid,
-  ]);
+    onValid(validateRequiredFields(formType, data, errors));
+  }, [formType, data, errors, onValid]);
 
   const today = new Date().toISOString().slice(0, 16);
 
-  const checkLink = () => {
-    const link = new URL(
-      data.link.trim().startsWith('http')
-        ? data.link.trim()
-        : `https://${data.link.trim()}`
-    );
-    if (link) {
-      window.open(link, '_blank');
-    } else {
-      alert('링크가 존재하지 않습니다.');
+  const handleCheckLink = () => {
+    if (!data.link.trim()) {
+      toast('링크를 입력해주세요');
+      return;
+    }
+    if (!isUrlValid(data.link, { open: true })) {
+      toast('잘못된 링크에요');
     }
   };
 
@@ -128,28 +93,28 @@ export default function EventForm({
             <input
               type='datetime-local'
               min={today}
-              value={eventTime(data.startDate)}
-              onChange={(e) => onChange('startDate', e.target.value)}
-              className={`${styles.dateInput} ${errors.startDate ? styles.error : ''}`}
+              value={eventTime(data.startAt)}
+              onChange={(e) => onChange('startAt', e.target.value)}
+              className={`${styles.dateInput} ${errors.startAt ? styles.error : ''}`}
             />
-            {errors.startDate && (
-              <span className={styles.errorMessage}>{errors.startDate}</span>
-            )}
           </div>
+          {errors.startAt && (
+            <span className={styles.errorMessage}>{errors.startAt}</span>
+          )}
 
           <div className={styles.dateSection}>
             <p>종료일</p>
             <input
               type='datetime-local'
-              min={data.startDate || today}
-              value={eventTime(data.endDate)}
-              onChange={(e) => onChange('endDate', e.target.value)}
-              className={`${styles.dateInput} ${errors.endDate ? styles.error : ''}`}
+              min={data.startAt || today}
+              value={eventTime(data.endAt)}
+              onChange={(e) => onChange('endAt', e.target.value)}
+              className={`${styles.dateInput} ${errors.endAt ? styles.error : ''}`}
             />
-            {errors.endDate && (
-              <span className={styles.errorMessage}>{errors.endDate}</span>
-            )}
           </div>
+          {errors.endAt && (
+            <span className={styles.errorMessage}>{errors.endAt}</span>
+          )}
           <hr className={styles.divider} />
           <div className={styles.dateSection}>
             <p>
@@ -160,15 +125,15 @@ export default function EventForm({
             </p>
             <input
               type='datetime-local'
-              min={data.endDate || today}
-              value={eventTime(data.announceDate)}
-              onChange={(e) => onChange('announceDate', e.target.value)}
-              className={`${styles.dateInput} ${errors.announceDate ? styles.error : ''}`}
+              min={data.endAt || today}
+              value={eventTime(data.announceAt)}
+              onChange={(e) => onChange('announceAt', e.target.value)}
+              className={`${styles.dateInput} ${errors.announceAt ? styles.error : ''}`}
             />
-            {errors.announceDate && (
-              <span className={styles.errorMessage}>{errors.announceDate}</span>
-            )}
           </div>
+          {errors.announceAt && (
+            <span className={styles.errorMessage}>{errors.announceAt}</span>
+          )}
         </div>
       </div>
 
@@ -216,19 +181,20 @@ export default function EventForm({
             value={data.link}
             onChange={(e) => onChange('link', e.target.value)}
           />
-          {errors.link && (
-            <span className={styles.errorMessage}>{errors.link}</span>
-          )}
-
-          <PrimaryButton className={styles.button} onClick={checkLink}>
-            확인
+          <PrimaryButton className={styles.button} onClick={handleCheckLink}>
+            미리
+            <br />
+            보기
           </PrimaryButton>
         </div>
+        {errors.link && (
+          <span className={styles.errorMessage}>{errors.link}</span>
+        )}
       </div>
 
-      <div className={styles.image}>
+      {/* <div className={styles.image}>
         <p>이미지</p>
-      </div>
+      </div> */}
     </div>
   );
 }

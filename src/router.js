@@ -242,6 +242,9 @@ export const routeList = [
             <EventListPage />
           </ProtectedRoute>
         ),
+        meta: {
+          hideNav: true,
+        },
       },
       {
         path: `/board/event/notice`,

@@ -8,3 +8,9 @@
   color: var(--white);
   background: var(--blue-4);
 }
+
+.button:disabled {
+  cursor: auto;
+  background: var(--grey-2);
+  color: var(--grey-3-1);
+}
