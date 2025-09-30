@@ -14,3 +14,4 @@ export * from './signUp';
 export * from './userInfo';
 export * from './verify';
 export * from './besookt';
+export * from './event';

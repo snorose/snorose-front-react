@@ -59,6 +59,10 @@ export const STATIC_ICON_LIST = Object.freeze({
   userDisgust: 'user-disgust',
   userStranger: 'user-stranger',
   userSunglasses: 'user-sunglasses',
+  movie: 'movie',
+  location: 'location',
+  person: 'person',
+  host: 'host',
 });
 
 export const FILL_ICON_LIST = Object.freeze({
