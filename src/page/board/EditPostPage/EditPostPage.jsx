@@ -101,7 +101,7 @@ export default function EditPostPage() {
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_KEY.post, postId]);
       navigate(-1);
-      toast({ message: TOAST.POST.edit, variant: 'defaultDark' });
+      toast({ message: TOAST.POST.edit });
       setSubmitDisabled(false);
     },
     onError: ({ response }) => {
@@ -140,11 +140,11 @@ export default function EditPostPage() {
     if (submitDisabled) return;
 
     if (!title.trim()) {
-      toast({ message: TOAST.POST.emptyTitle, variant: 'defaultDark' });
+      toast({ message: TOAST.POST.emptyTitle });
       return;
     }
     if (!text.trim()) {
-      toast({ message: TOAST.POST.emptyContent, variant: 'defaultDark' });
+      toast({ message: TOAST.POST.emptyContent });
       return;
     }
 

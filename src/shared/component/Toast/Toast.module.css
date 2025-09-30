@@ -23,11 +23,6 @@
 }
 
 .default {
-  background: var(--blue-1);
-  color: var(--blue-4);
-}
-
-.defaultDark {
   background: var(--blue-2);
   color: var(--blue-4);
 }

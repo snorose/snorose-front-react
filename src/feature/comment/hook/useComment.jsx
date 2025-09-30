@@ -105,9 +105,8 @@ export default function useComment() {
       !pointDifference
         ? toast({
             message: TOAST.COMMENT.createNoPoints,
-            variant: 'defaultDark',
           })
-        : toast({ message: TOAST.COMMENT.create, variant: 'defaultDark' });
+        : toast({ message: TOAST.COMMENT.create });
     },
     onError,
     onSettled,
@@ -135,9 +134,8 @@ export default function useComment() {
       currentBoard.id === 23 || currentBoard.id === 32
         ? toast({
             message: TOAST.COMMENT.deleteNoPoints,
-            variant: 'defaultDark',
           })
-        : toast({ message: TOAST.COMMENT.delete, variant: 'defaultDark' });
+        : toast({ message: TOAST.COMMENT.delete });
     },
     onError,
     onSettled,
@@ -159,7 +157,7 @@ export default function useComment() {
         })
       );
 
-      toast({ message: TOAST.COMMENT.edit, variant: 'defaultDark' });
+      toast({ message: TOAST.COMMENT.edit });
     },
     onError,
     onSettled,
