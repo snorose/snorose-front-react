@@ -1,30 +1,26 @@
-import { useState } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
+import { useContext, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
-import {
-  deleteExamReview,
-  getReviewDetail,
-  reportPost,
-  reportUser,
-} from '@/apis';
+import { getReviewDetail } from '@/apis';
 
-import { useAuth, useToast } from '@/shared/hook';
 import {
   BackAppBar,
-  DeleteModal,
   FetchLoading,
   FetchLoadingOverlay,
   Icon,
-  OptionModal,
 } from '@/shared/component';
 import { dateFormat } from '@/shared/lib';
-import { BOARD_MENUS, QUERY_KEY, MUTATION_KEY, TOAST } from '@/shared/constant';
+import { QUERY_KEY } from '@/shared/constant';
 
 import { NotFoundPage } from '@/page/etc';
 
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
-import { ReviewContentItem, ReviewDownload } from '@/feature/exam/component';
+import {
+  ExamReviewModalRenderer,
+  ReviewContentItem,
+  ReviewDownload,
+} from '@/feature/exam/component';
 import { convertToObject } from '@/feature/exam/lib';
 import {
   LECTURE_TYPES,
@@ -35,28 +31,23 @@ import {
 import { useScrap } from '@/feature/scrap/hook';
 
 import styles from './ExamReviewPage.module.css';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { useReportHandler } from '@/feature/report/hook/useReport';
+import { useDeleteExamReviewHandler } from '@/feature/exam/hook/useDeleteExamReviewHandler';
+import { useModalReset } from '@/shared/hook/useBlocker';
 
 const COURSE_TYPE = convertToObject(LECTURE_TYPES);
 const SEMESTER = convertToObject(SEMESTERS);
 const EXAM_TYPE = convertToObject(EXAM_TYPES);
 
 export default function ExamReviewPage() {
-  const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
-  const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
-  const [loading, setLoading] = useState();
-
-  const { pathname } = useLocation();
   const { postId } = useParams();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { scrap, unscrap } = useScrap();
-  const { invalidUserInfoQuery } = useAuth();
-  const { toast } = useToast();
-  const currentBoard =
-    BOARD_MENUS.find((menu) => menu.textId === pathname.split('/')[2]) || {};
+  const { modal, setModal } = useContext(ModalContext);
+
+  // 페이지 언마운트 시 모달 상태 초기화
+  useModalReset();
 
   const { data, error, isError, isLoading } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
@@ -64,88 +55,15 @@ export default function ExamReviewPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const { mutate: reportPostMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportPost],
-    mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
+  const { handleReport } = useReportHandler(modal, setModal, data);
+  const { handleDelete } = useDeleteExamReviewHandler();
 
-  const { mutate: reportUserMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportUser],
-    mutationFn: (body) => reportUser(body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
-
-  const deleteReview = useMutation({
-    mutationKey: [MUTATION_KEY.deleteExamReview],
-    mutationFn: () => deleteExamReview(postId),
-    onSuccess: () => {
-      queryClient.removeQueries([QUERY_KEY.post, postId]);
-      invalidUserInfoQuery();
-      toast(TOAST.EXAM_REVIEW.delete);
-      navigate(-1);
-    },
-    onError: ({ response }) => {
-      const { status } = response;
-
-      if (status === 500) {
-        toast(TOAST.ERROR.SERVER);
-        return;
-      }
-
-      toast(response.data.message);
-    },
-    onSettled: () => {
-      setLoading(false);
-    },
-  });
-
-  const handleReportOptionModalOptionClick = (event) => {
-    const reportCategory = event.currentTarget.dataset.value;
-
-    setIsReportModalOpen(false);
-
-    if (reportCategory === 'post-report') {
-      setIsPostReportModalOpen(true);
-    } else if (reportCategory === 'user-report') {
-      setIsUserReportModalOpen(true);
-    }
-  };
-
-  const handlePostReportOptionModalOptionClick = (event) => {
-    const reportType = event.currentTarget.dataset.value;
-
-    reportPostMutate({
-      reportType,
-    });
-    setIsPostReportModalOpen(false);
-  };
-
-  const handleUserReportOptionModalOptionClick = (event) => {
-    const reportType = event.currentTarget.dataset.value;
-
-    reportUserMutate({
-      // targetUserId,
-      reportType,
-    });
-
-    setIsUserReportModalOpen(false);
-  };
-
-  const edit = () =>
+  const handleEdit = () => {
+    setModal({ id: null, type: null });
     navigate(`/board/exam-review/${postId}/edit`, {
       state: data,
     });
+  };
 
   if (isLoading) {
     return (
@@ -222,7 +140,9 @@ export default function ExamReviewPage() {
           <Icon
             className={styles.more}
             onClick={() =>
-              isWriter ? setIsOptionModalOpen(true) : setIsReportModalOpen(true)
+              isWriter
+                ? setModal({ id: 'my-exam-review-more-options' })
+                : setModal({ id: 'exam-review-more-options' })
             }
             id='ellipsis-vertical'
             width={3}
@@ -279,50 +199,14 @@ export default function ExamReviewPage() {
       </div>
       <CommentListSuspense commentCount={commentCount} />
       <CommentInput />
-      <OptionModal
-        id={isConfirmed ? 'confirmed-exam-review-option' : 'exam-review-option'}
-        isOpen={isOptionModalOpen}
-        setIsOpen={setIsOptionModalOpen}
-        closeFn={() => setIsOptionModalOpen(false)}
-        functions={{
-          pencil: edit,
-          trash: () => {
-            setIsOptionModalOpen(false);
-            setIsDeleteModalOpen(true);
-          },
-        }}
+      {/* 시험후기 관련 모달 렌더링 */}
+      <ExamReviewModalRenderer
+        modal={modal}
+        handleEdit={handleEdit}
+        handleReport={handleReport}
+        handleDelete={handleDelete}
       />
-      <DeleteModal
-        id='exam-review-delete'
-        isOpen={isDeleteModalOpen}
-        closeFn={() => setIsDeleteModalOpen(false)}
-        redBtnFunction={() => {
-          setLoading(true);
-          deleteReview.mutate();
-        }}
-      />
-      <OptionModal
-        id='report'
-        isOpen={isReportModalOpen}
-        setIsOpen={setIsReportModalOpen}
-        onOptionClick={handleReportOptionModalOptionClick}
-        closeFn={() => setIsReportModalOpen(false)}
-      />
-      <OptionModal
-        id='post-report'
-        isOpen={isPostReportModalOpen}
-        setIsOpen={setIsPostReportModalOpen}
-        onOptionClick={handlePostReportOptionModalOptionClick}
-        closeFn={() => setIsPostReportModalOpen(false)}
-      />
-      <OptionModal
-        id='user-report'
-        isOpen={isUserReportModalOpen}
-        setIsOpen={setIsUserReportModalOpen}
-        onOptionClick={handleUserReportOptionModalOptionClick}
-        closeFn={() => setIsUserReportModalOpen(false)}
-      />
-      {loading && <FetchLoadingOverlay />}
+      {isLoading && <FetchLoadingOverlay />}
     </main>
   );
 }

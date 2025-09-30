@@ -24,6 +24,10 @@
   font: var(--text-body-2-med);
 }
 
+.accountNumber {
+  cursor: pointer;
+}
+
 .menu {
   display: flex;
   justify-content: center;
@@ -34,7 +38,6 @@
   color: var(--grey-3-1);
 }
 
-.link {
-  display: flex;
+.separator {
   padding: 0 0.6rem;
 }

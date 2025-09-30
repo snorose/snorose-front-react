@@ -1,0 +1,64 @@
+.dropdownContent {
+  border-radius: 0.5rem;
+  transition: 200ms all ease-in-out;
+  text-align: left;
+  font: var(--text-headline-2-reg);
+  color: var(--Grey-Grey-3-1, #898989);
+  box-shadow: 0 0 3.6rem 0 rgba(0, 0, 0, 0.1);
+  max-height: 18rem;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue-2, #bfd7ec) transparent;
+  background: var(--white);
+  width: 100%;
+}
+
+.select {
+  padding: 1.6rem 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: var(--text-body-1-reg);
+  color: var(--grey-3-1, #898989);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.select:hover {
+  cursor: pointer;
+  background-color: var(--grey-1-2, #eaeaea); /* 시각적 변화 추천 */
+}
+
+.unselect {
+  color: var(--grey-3-1);
+}
+
+.placeholder {
+  color: var(--grey-3-1);
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.3rem 2rem 1.3rem 2.7rem;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.option:not(:last-child) {
+  border-bottom: 0.05rem solid var(--blue-2, #bfd7ec);
+}
+
+.option:hover {
+  background: var(--blue-0, #eaf5fd);
+  color: var(--blue-4, #00368e);
+  cursor: pointer;
+}
+
+.option.selected {
+  background: var(--blue-0, #eaf5fd);
+  color: var(--blue-4, #00368e);
+}

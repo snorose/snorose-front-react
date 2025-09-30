@@ -16,28 +16,21 @@
 .topContainer {
   display: flex;
   justify-content: space-between;
-  padding: 1.4rem 0;
+  padding: 1.4rem 0 2.4rem;
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: 700;
+  font: var(--text-title-1-bold);
 }
 
 .totalPointWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.4rem;
-
-  svg {
-    width: 1.6rem;
-    height: 1.6rem;
-  }
+  gap: 0.5rem;
 }
 
-.totalPoint {
+.totalPoints {
   color: var(--blue-4);
-  font-size: 1.4rem;
-  font-weight: 500;
+  font: var(--text-headline-1-med);
 }

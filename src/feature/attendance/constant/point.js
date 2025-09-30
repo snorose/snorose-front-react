@@ -1,25 +1,36 @@
 export const POINT_CATEGORY_ENUM = Object.freeze({
+  // 출석체크
   ATTENDANCE: 'ATTENDANCE',
 
+  // 게시글
   POST_CREATE: 'POST_CREATE',
   POST_DELETE: 'POST_DELETE',
 
+  // 댓글
   COMMENT_CREATE: 'COMMENT_CREATE',
   COMMENT_DELETE: 'COMMENT_DELETE',
 
+  // 시험후기
   EXAM_REVIEW_CREATE: 'EXAM_REVIEW_CREATE',
   EXAM_REVIEW_DOWNLOAD: 'EXAM_REVIEW_DOWNLOAD',
   EXAM_REVIEW_DELETE: 'EXAM_REVIEW_DELETE',
 
+  // 강의후기
   LECTURE_REVIEW_CREATE: 'LECTURE_REVIEW_CREATE',
   LECTURE_REVIEW_DELETE: 'LECTURE_REVIEW_DELETE',
 
+  // 관리자 삭제
+  ADMIN_POST_DELETE: 'ADMIN_POST_DELETE',
+  ADMIN_COMMENT_DELETE: 'ADMIN_COMMENT_DELETE',
+  ADMIN_EXAM_REVIEW_DELETE: 'ADMIN_EXAM_REVIEW_DELETE',
+  ADMIN_LECTURE_REVIEW_DELETE: 'ADMIN_LECTURE_REVIEW_DELETE',
+
+  // 포인트 보상
   POINT_REWARD_REPORT_GENERAL: 'POINT_REWARD_REPORT_GENERAL', // 일반 신고자 (호칭, 도배 등)
   POINT_REWARD_REPORT_EXAM_REVIEW: 'POINT_REWARD_REPORT_EXAM_REVIEW', //  시험후기 관련 신고자 (중복/허위 족보 등)
   POINT_REWARD_REPORT_OUTSIDER: 'POINT_REWARD_REPORT_OUTSIDER', // 외부인 신고자
   POINT_REWARD_REPORT_PERMANENT_DEMOTION:
     'POINT_REWARD_REPORT_PERMANENT_DEMOTION', // 영구강등에 해당하는 위반사항 신고자 (외부 유출, 아이디 공유 등)
-
   POINT_REWARD_5_LIKES: 'POINT_REWARD_5_LIKES', // 좋아요 5개 게시글
   POINT_REWARD_10_LIKES: 'POINT_REWARD_10_LIKES', // 좋아요 10개 게시글
   POINT_REWARD_20_LIKES: 'POINT_REWARD_20_LIKES', // 좋아요 20개 게시글
@@ -28,51 +39,70 @@ export const POINT_CATEGORY_ENUM = Object.freeze({
   POINT_REWARD_1000_LIKES: 'POINT_REWARD_1000_LIKES', // 좋아요 1000개 게시글
   POINT_REWARD_USER_AUTH: 'POINT_REWARD_USER_AUTH', // 정회원 인증 기념
   POINT_REWARD_ETC: 'POINT_REWARD_ETC', // 기타 사유
+
+  // 포인트 차감
+  POINT_DEDUCTION_FLOODING: 'POINT_DEDUCTION_FLOODING', // 도배
   POINT_DEDUCTION_ETC: 'POINT_DEDUCTION_ETC', // 기타 사유
 
-  POINT_DEDUCTION_FLOODING: 'POINT_DEDUCTION_FLOODING', // 도배
-
+  // 이벤트
   EVENT: 'EVENT',
+
+  // 기타
   ETC: 'ETC',
 });
 
 export const POINT_CATEGORY_KOREAN_ENUM = Object.freeze({
+  // 출석체크
   ATTENDANCE: '출석체크',
 
+  // 게시글
   POST_CREATE: '게시글 작성',
   POST_DELETE: '게시글 삭제',
 
+  // 댓글
   COMMENT_CREATE: '댓글 작성',
   COMMENT_DELETE: '댓글 삭제',
 
+  // 시험후기
   EXAM_REVIEW_CREATE: '시험후기 작성',
   EXAM_REVIEW_DOWNLOAD: '시험후기 다운로드',
   EXAM_REVIEW_DELETE: '시험후기 삭제',
 
+  // 강의후기
   LECTURE_REVIEW_CREATE: '강의후기 작성',
   LECTURE_REVIEW_DELETE: '강의후기 삭제',
 
+  // 관리자 삭제
+  ADMIN_POST_DELETE: '관리자 삭제 - 게시글 (무성의 글, 출석 글 등)',
+  ADMIN_COMMENT_DELETE: '관리자 삭제 - 댓글 (무성의 댓글, 출석 댓글 등)',
+  ADMIN_EXAM_REVIEW_DELETE: '관리자 삭제 - 시험후기 (중복/허위 족보 등)',
+  ADMIN_LECTURE_REVIEW_DELETE: '관리자 삭제 - 강의후기',
+
+  // 포인트 보상
   POINT_REWARD_REPORT_GENERAL: '일반 신고 보상 (호칭, 도배 등)',
   POINT_REWARD_REPORT_EXAM_REVIEW:
     '시험후기 관련 신고 보상 (중복/허위 족보 등)',
   POINT_REWARD_REPORT_OUTSIDER: '외부인 신고 보상',
   POINT_REWARD_REPORT_PERMANENT_DEMOTION:
     '영구강등에 해당하는 위반사항 신고 보상 (외부 유출, 아이디 공유 등)',
-
-  POINT_REWARD_5_LIKES: '좋아요 5개 게시글',
-  POINT_REWARD_10_LIKES: '좋아요 10개 게시글',
-  POINT_REWARD_20_LIKES: '좋아요 20개 게시글',
-  POINT_REWARD_50_LIKES: '좋아요 50개 게시글',
-  POINT_REWARD_100_LIKES: '좋아요 100개 게시글',
-  POINT_REWARD_1000_LIKES: '좋아요 1,000개 게시글',
+  POINT_REWARD_5_LIKES: '좋아요 5개 게시글 보상',
+  POINT_REWARD_10_LIKES: '좋아요 10개 게시글 보상',
+  POINT_REWARD_20_LIKES: '좋아요 20개 게시글 보상',
+  POINT_REWARD_50_LIKES: '좋아요 50개 게시글 보상',
+  POINT_REWARD_100_LIKES: '좋아요 100개 게시글 보상',
+  POINT_REWARD_1000_LIKES: '좋아요 1,000개 게시글 보상',
   POINT_REWARD_USER_AUTH: '정회원 인증 기념',
-  POINT_REWARD_ETC: '포인트 보상 - 기타 사유',
-  POINT_DEDUCTION_ETC: '포인트 차감 - 기타 사유',
+  POINT_REWARD_ETC: '기타 사유',
 
-  POINT_DEDUCTION_FLOODING: '포인트 차감 - 도배',
+  // 포인트 차감
+  POINT_DEDUCTION_FLOODING: '글/댓글 도배 적발',
+  POINT_DEDUCTION_ETC: '기타 사유',
 
-  EVENT: '이벤트',
-  ETC: '기타',
+  // 이벤트
+  EVENT: '이벤트 참여',
+
+  // 기타
+  ETC: '기타 사유',
 });
 
 export const POINT_SOURCE_ENUM = Object.freeze({

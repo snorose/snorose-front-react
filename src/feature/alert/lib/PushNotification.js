@@ -1,4 +1,4 @@
-import { getToken, onMessage } from 'firebase/messaging';
+import { getToken, isSupported, onMessage } from 'firebase/messaging';
 import { messaging } from './firebase-config';
 
 export class PushNotificationManager {
@@ -12,7 +12,9 @@ export class PushNotificationManager {
   }
 
   static async #registerServiceWorker() {
-    if (!('serviceWorker' in navigator)) {
+    const isFcmSupported = await isSupported();
+
+    if (!isFcmSupported) {
       console.warn('이 브라우저에서는 푸시 알림을 지원하지 않습니다.');
       return;
     }
@@ -92,6 +94,12 @@ export class PushNotificationManager {
 
   static async listenForegroundMessage() {
     onMessage(messaging, async (payload) => {
+      const isFcmSupported = await isSupported();
+
+      if (!isFcmSupported) {
+        return;
+      }
+
       if (Notification.permission !== 'granted') {
         return;
       }

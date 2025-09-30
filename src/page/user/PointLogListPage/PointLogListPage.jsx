@@ -10,6 +10,8 @@ import {
   PointLogListErrorFallback,
 } from '@/feature/my/component';
 
+import pointCircleBlue from '@/assets/images/pointCircleBlue.svg';
+
 import styles from './PointLogListPage.module.css';
 
 export default function PointLogListPage() {
@@ -27,8 +29,8 @@ export default function PointLogListPage() {
         <div className={styles.topContainer}>
           <h1 className={styles.title}>보유 포인트</h1>
           <div className={styles.totalPointWrapper}>
-            <Icon id='point-circle' width={32} height={32} />
-            <span className={styles.totalPoint}>
+            <img src={pointCircleBlue} alt='총 포인트' />
+            <span className={styles.totalPoints}>
               {userInfo?.balance.toLocaleString()}
             </span>
           </div>
