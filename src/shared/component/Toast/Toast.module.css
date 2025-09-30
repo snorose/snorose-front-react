@@ -5,8 +5,12 @@
   border-radius: 0.5rem;
   padding: 1.5rem 1.8rem;
   transition: 500ms opacity ease-in-out;
-  gap: 0.8rem;
+  gap: 1rem;
   box-shadow: 0 0 3.6rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+  flex-shrink: 0;
 }
 
 .message {
@@ -22,11 +26,12 @@
   color: var(--pink-3);
 }
 
-.default {
+.info {
   background: var(--blue-2);
   color: var(--blue-4);
 }
 
-.icon {
-  flex-shrink: 0;
+.success {
+  background: var(--green-1);
+  color: var(--grey-4);
 }

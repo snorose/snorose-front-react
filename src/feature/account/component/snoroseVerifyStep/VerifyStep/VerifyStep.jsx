@@ -26,12 +26,12 @@ export default function VerifyStep({ setStep }) {
 
   const verify = async () => {
     if (!isAllFieldsCompleted) {
-      toast({ message: TOAST.VERIFY.notCompleted });
+      toast({ message: TOAST.VERIFY.notCompleted, variant: 'info' });
       return;
     }
 
     if (!isEmailValid(email)) {
-      toast({ message: TOAST.VERIFY.invalidEmail });
+      toast({ message: TOAST.VERIFY.invalidEmail, variant: 'info' });
       return;
     }
 

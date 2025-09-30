@@ -57,7 +57,7 @@ export default function EditProfilePage() {
           queryKey: [QUERY_KEY.userInfo],
         });
 
-        toast({ message: TOAST.USER.editUserInfo });
+        toast({ message: TOAST.USER.editUserInfo, variant: 'success' });
         navigate('/my-page');
       },
       onError: ({ response }) => {
@@ -72,6 +72,7 @@ export default function EditProfilePage() {
               data.nickname ||
               data.major ||
               data.message,
+            variant: 'error',
           }
         );
       },

@@ -15,18 +15,18 @@ export default function Toast({ toast }) {
       icon: 'info-triangle',
       className: styles.error,
     },
-    default: {
+    info: {
       icon: 'info-circle',
-      className: styles.default,
+      className: styles.info,
     },
-    defaultDark: {
-      icon: 'info-circle',
-      className: styles.defaultDark,
+    success: {
+      icon: 'active-check-circle-outline',
+      className: styles.success,
     },
   };
 
-  const variant = toast.variant || 'default';
-  const config = toastConfig[variant] || toastConfig.default;
+  const variant = toast.variant || 'info';
+  const config = toastConfig[variant] || toastConfig.info;
   const iconId = config.icon;
   const toastClassName = `${styles.toast} ${config.className || ''}`;
 
@@ -35,7 +35,7 @@ export default function Toast({ toast }) {
       if (toastRef.current) {
         toastRef.current.style.opacity = '0';
       }
-    }, 3000);
+    }, 300000);
 
     const unmount = setTimeout(() => {
       removeToast(toast.message);

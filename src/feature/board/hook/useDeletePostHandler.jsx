@@ -28,8 +28,8 @@ export function useDeletePostHandler(boardId) {
 
       if (response.status === 200) {
         boardId !== 23
-          ? toast({ message: TOAST.POST.delete })
-          : toast({ message: TOAST.POST.deleteNoPoints });
+          ? toast({ message: TOAST.POST.delete, variant: 'success' })
+          : toast({ message: TOAST.POST.deleteNoPoints, variant: 'success' });
 
         navigate(-1);
         queryClient.removeQueries([QUERY_KEY.post, postId]);

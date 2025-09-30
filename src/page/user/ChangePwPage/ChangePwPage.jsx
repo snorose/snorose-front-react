@@ -26,7 +26,7 @@ export default function ChangePwPage() {
       mutationKey: [MUTATION_KEY.updatePassword],
       mutationFn: (body) => updatePassword(body),
       onSuccess: () => {
-        toast({ message: TOAST.USER.editPassword });
+        toast({ message: TOAST.USER.editPassword, variant: 'success' });
         navigate('/my-page');
       },
       onError: ({ response }) => {

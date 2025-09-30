@@ -10,9 +10,9 @@ export const useLogin = () => {
     const endpoint = '/v1/users/login';
 
     if (!formData.loginId) {
-      toast({ message: TOAST.LOGIN.emptyId });
+      toast({ message: TOAST.LOGIN.emptyId, variant: 'info' });
     } else if (!formData.password) {
-      toast({ message: TOAST.LOGIN.emptyPw });
+      toast({ message: TOAST.LOGIN.emptyPw, variant: 'info' });
     } else {
       try {
         const response = await defaultAxios.post(endpoint, formData);

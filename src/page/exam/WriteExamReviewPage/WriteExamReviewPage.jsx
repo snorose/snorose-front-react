@@ -61,7 +61,7 @@ export default function WriteExamReviewPage() {
 
       queryClient.removeQueries([QUERY_KEY.post]);
       invalidUserInfoQuery();
-      toast({ message: TOAST.EXAM_REVIEW.create });
+      toast({ message: TOAST.EXAM_REVIEW.create, variant: 'success' });
       navigate(`/board/exam-review/post/${postId}`, { replace: true });
     },
     onError: ({ response }) => {

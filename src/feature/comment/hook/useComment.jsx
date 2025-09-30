@@ -105,8 +105,9 @@ export default function useComment() {
       !pointDifference
         ? toast({
             message: TOAST.COMMENT.createNoPoints,
+            variant: 'success',
           })
-        : toast({ message: TOAST.COMMENT.create });
+        : toast({ message: TOAST.COMMENT.create, variant: 'success' });
     },
     onError,
     onSettled,
@@ -134,8 +135,9 @@ export default function useComment() {
       currentBoard.id === 23 || currentBoard.id === 32
         ? toast({
             message: TOAST.COMMENT.deleteNoPoints,
+            variant: 'success',
           })
-        : toast({ message: TOAST.COMMENT.delete });
+        : toast({ message: TOAST.COMMENT.delete, variant: 'success' });
     },
     onError,
     onSettled,
@@ -157,7 +159,7 @@ export default function useComment() {
         })
       );
 
-      toast({ message: TOAST.COMMENT.edit });
+      toast({ message: TOAST.COMMENT.edit, variant: 'success' });
     },
     onError,
     onSettled,

@@ -19,10 +19,10 @@ function useReportMutation(mutationKey, mutationFn) {
     mutationKey: [mutationKey],
     mutationFn,
     onSuccess: ({ message }) => {
-      toast({ message });
+      toast({ message, variant: 'success' });
     },
     onError: () => {
-      toast('신고에 실패했습니다.');
+      toast({ message: '신고에 실패했습니다.', variant: 'error' });
     },
   });
 }

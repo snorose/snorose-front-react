@@ -19,7 +19,7 @@ export default function Footer() {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        toast({ message: TOAST.COPY_AND_PASTE.success });
+        toast({ message: TOAST.COPY_AND_PASTE.success, variant: 'success' });
       })
       .catch(() => {
         toast({ message: TOAST.COPY_AND_PASTE.fail, variant: 'error' });

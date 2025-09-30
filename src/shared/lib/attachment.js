@@ -59,13 +59,13 @@ export const checkImageQuantity = (orgAtts, newAtts, toast) => {
     orgAtts.filter((att) => att.type === 'PHOTO').length + newAtts.length >
     ATTACHMENT_SIZE_LIMIT.imageQuantity
   ) {
-    toast(TOAST.ATTACHMENT.imageQuantityError);
+    toast({ message: TOAST.ATTACHMENT.imageQuantityError, variant: 'info' });
     throw new Error('이미지 개수 초과');
   }
 };
 export const checkImageSize = (entireAtts, filteredAtts, toast) => {
   if (entireAtts.length !== filteredAtts.length) {
-    toast(TOAST.ATTACHMENT.imageFileSizeError);
+    toast({ message: TOAST.ATTACHMENT.imageFileSizeError, variant: 'info' });
     throw new Error('이미지 용량 초과');
   }
 };
@@ -74,13 +74,13 @@ export const checkVideoQuantity = (orgAtts, newAtts, toast) => {
     orgAtts.filter((att) => att.type === 'VIDEO').length + newAtts.length >
     ATTACHMENT_SIZE_LIMIT.videoQuantity
   ) {
-    toast(TOAST.ATTACHMENT.videoQuantityError);
+    toast({ message: TOAST.ATTACHMENT.videoQuantityError, variant: 'info' });
     throw new Error('비디오 개수 초과');
   }
 };
 export const checkVideoSize = (entireAtts, filteredAtts, toast) => {
   if (entireAtts.length !== filteredAtts.length) {
-    toast(TOAST.ATTACHMENT.videoFileSizeError);
+    toast({ message: TOAST.ATTACHMENT.videoFileSizeError, variant: 'info' });
     throw new Error('비디오 용량 초과');
   }
 };

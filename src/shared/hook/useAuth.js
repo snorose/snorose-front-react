@@ -60,7 +60,7 @@ const useAuth = () => {
       await withdrawAccount({
         currentPassword,
       });
-      toast({ message: TOAST.USER.withdraw });
+      toast({ message: TOAST.USER.withdraw, variant: 'success' });
       logout();
 
       if (onSuccess !== undefined) {

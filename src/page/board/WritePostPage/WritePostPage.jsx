@@ -157,8 +157,9 @@ export default function WritePostPage() {
           !response.data.result.pointDifference
             ? toast({
                 message: TOAST.POST.createNoPoints,
+                variant: 'success',
               })
-            : toast({ message: TOAST.POST.create });
+            : toast({ message: TOAST.POST.create, variant: 'success' });
           const newPostId = response.data.result.postId;
 
           queryClient.removeQueries([QUERY_KEY.post]);
