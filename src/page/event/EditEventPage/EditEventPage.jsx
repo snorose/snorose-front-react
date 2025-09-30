@@ -1,13 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import TextareaAutosize from 'react-textarea-autosize';
 import {
   BackAppBar,
   Badge,
   CloseAppBar,
   FetchLoading,
   Icon,
+  ActionButton,
 } from '@/shared/component';
 import {
   BOARD_MENUS,
@@ -19,12 +19,18 @@ import {
 import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import { formattedNowTime } from '@/shared/lib';
 
-import { getPostContent, patchPost, getEventContent, patchEvent } from '@/apis';
+import { getEventContent, patchEvent } from '@/apis';
 import { EventForm, NoticeForm } from '@/feature/event/component';
+import { validateOnSubmit } from '@/feature/event/lib';
+import {
+  EVENT_FORM_DATA,
+  NOTICE_FORM_DATA,
+  EVENT_TYPES,
+} from '@/feature/event/constant';
 
 import styles from './EditEventPage.module.css';
 
-export default function EditPostPage() {
+export default function EditEventPage() {
   const { postId } = useParams();
   const { pathname } = useLocation();
   const { userInfo, status } = useAuth();
@@ -34,19 +40,17 @@ export default function EditPostPage() {
 
   const textId = pathname.split('/')[2];
   const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
-  const boardTitle = currentBoard?.title || '';
-
+  const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
   const [isNotice, setIsNotice] = useState(false);
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
   const [userDisplay, setUserDisplay] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(false);
-  const [isBlock, setIsBlock] = useState(false);
   const [eventType, setEventType] = useState('유형을 선택해주세요');
+  const [data, setData] = useState(() => EVENT_FORM_DATA(eventType));
+  const [noticeData, setNoticeData] = useState(() => NOTICE_FORM_DATA(boardId));
   const [errors, setErrors] = useState({});
-  const [formValid, setFormValid] = useState(false);
 
   // navigation guard
+  const isBlock = !!(data || noticeData);
   useBlocker(isBlock);
 
   // 이벤트 게시글 내용 가져오기
@@ -61,50 +65,17 @@ export default function EditPostPage() {
     placeholderData: {},
   });
 
-  const [data, setData] = useState({
-    category: '',
-    isNotice: false,
-    title: '',
-    content: '',
-    host: '',
-    place: '',
-    startDate: '',
-    endDate: '',
-    announceDate: '',
-    drawCount: 1,
-    link: '',
-  });
-
-  const [noticeData, setNoticeData] = useState({
-    category: '',
-    boardId: '',
-    title: '',
-    content: '',
-    isNotice: false,
-  });
-
   // 데이터 화면 표시
   useEffect(() => {
     if (!eventData) return;
     setEventType(eventData.category || '유형을 선택해주세요');
     setIsNotice(eventData.isNotice);
     if (eventData.isNotice) {
-      setNoticeData(eventData);
+      setNoticeData((prev) => ({ ...prev, ...eventData }));
     } else {
-      setData(eventData);
+      setData((prev) => ({ ...prev, ...eventData }));
     }
   }, [eventData]);
-
-  // isBlock 업데이트
-  useEffect(() => {
-    if (!data || Object.keys(data).length === 0) return;
-
-    setIsBlock(
-      data.title !== title.trim() ||
-        data.content !== text.trim() ||
-        data.isNotice !== isNotice
-    );
-  }, [title, text, isNotice]);
 
   // 게시글 수정
   const mutation = useMutation({
@@ -121,33 +92,6 @@ export default function EditPostPage() {
       setSubmitDisabled(false);
     },
   });
-
-  // 게시글 수정 나머지 유효성 검사 및 제출
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // if (submitDisabled) return;
-
-    // setSubmitDisabled(true);
-    // setIsBlock(false);
-
-    if (eventData.isNotice) {
-      // 데이터 확인용 나중에 지우기!!
-      console.log('data:', noticeData);
-      console.log('postId: ', postId);
-
-      mutation.mutate({ ...noticeData, postId });
-    } else {
-      // 데이터 확인용 나중에 지우기!!
-      console.log('data:', data, postId);
-      console.log('postId: ', postId);
-
-      mutation.mutate({
-        ...data,
-        postId,
-      });
-    }
-  };
 
   const handleChange = (field, value) => {
     if (isNotice) {
@@ -167,7 +111,13 @@ export default function EditPostPage() {
     if (field === 'title' && value.length > 127) {
       newErrors.title = '제목은 127자 이하로 입력해주세요';
     } else if (field === 'host' && value.length > 20) {
-      newErrors.host = '공연명은 20자 이하로 입력해주세요';
+      if (EVENT_TYPES[eventType] === 'theater') {
+        newErrors.host = '공연명은 20자 이하로 입력해주세요';
+      } else if (EVENT_TYPES[eventType] === 'movie') {
+        newErrors.host = '영화명은 20자 이하로 입력해주세요';
+      } else {
+        newErrors.host = '주최사는 20자 이하로 입력해주세요';
+      }
     } else if (field === 'place' && value.length > 20) {
       newErrors.place = '장소는 20자 이하로 입력해주세요';
     } else {
@@ -175,50 +125,69 @@ export default function EditPostPage() {
     }
 
     setErrors(newErrors);
+    setSubmitDisabled(false);
   };
 
+  // 이벤트 유형에 따른 폼 렌더링
   const renderForm = () => {
-    if (isNotice || eventType === '공지사항') {
+    if (eventType === '공지사항') {
       return (
         <NoticeForm
           data={noticeData}
           onChange={handleChange}
-          onValid={setFormValid}
+          onValid={setSubmitDisabled}
+          errors={errors}
         />
       );
     }
-    // 유형별로 다르게 보여주고 싶으면 추가 분기
-    if (eventType === '연극/뮤지컬') {
-      return (
-        <EventForm
-          formType='theater'
-          data={data}
-          onChange={handleChange}
-          onValid={setFormValid}
-        />
-      );
+
+    const formType = EVENT_TYPES[eventType];
+    if (!formType) return null;
+
+    return (
+      <EventForm
+        formType={formType}
+        data={data}
+        onChange={handleChange}
+        onValid={setSubmitDisabled}
+        errors={errors}
+      />
+    );
+  };
+
+  // 게시글 수정 나머지 유효성 검사 및 제출
+  const handleSubmit = (e) => {
+    const submitErrors = validateOnSubmit(data);
+    e.preventDefault();
+
+    if (eventData.isNotice) {
+      // 이벤트 공지사항 수정
+      // 데이터 확인용 나중에 지우기!!
+      console.log('data:', noticeData);
+      console.log('postId: ', postId);
+
+      setSubmitDisabled(true);
+
+      mutation.mutate({ ...noticeData, postId });
+    } else {
+      // 이벤트 수정
+      if (Object.keys(submitErrors).length > 0) {
+        setErrors(submitErrors);
+        setSubmitDisabled(false);
+        return;
+      }
+
+      // 데이터 확인용 나중에 지우기!!
+      console.log('data:', data, postId);
+      console.log('postId: ', postId);
+
+      setSubmitDisabled(true);
+
+      mutation.mutate({
+        ...data,
+        postId,
+      });
     }
-    if (eventType === '영화') {
-      return (
-        <EventForm
-          formType='movie'
-          data={data}
-          onChange={handleChange}
-          onValid={setFormValid}
-        />
-      );
-    }
-    if (eventType === '기타') {
-      return (
-        <EventForm
-          formType='etc'
-          data={data}
-          onChange={handleChange}
-          onValid={setFormValid}
-        />
-      );
-    }
-    return null;
   };
 
   if (status === 'loading' || isLoading) {
@@ -244,9 +213,13 @@ export default function EditPostPage() {
       <div className={styles.container}>
         <div className={styles.top}>
           <CloseAppBar
-            children={<p onClick={handleSubmit}>수정</p>}
+            // children={<p onClick={handleSubmit}>수정</p>}
             backgroundColor={'#eaf5fd'}
-          />
+          >
+            <ActionButton onClick={handleSubmit} disabled={!submitDisabled}>
+              수정
+            </ActionButton>
+          </CloseAppBar>
         </div>
         <div className={styles.center}>
           <div className={styles.categorySelect}>
