@@ -1,6 +1,7 @@
 import { Badge, Icon } from '@/shared/component';
 import { ROLE } from '@/shared/constant';
 import { postBarDateFormat } from '@/shared/lib';
+import { PROGRESS } from '@/feature/event/constant';
 
 import styles from './PostBar.module.css';
 
@@ -9,6 +10,10 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
   const showBadge =
     data.userRoleId === ROLE.official ||
     (data.userRoleId === ROLE.admin && data.userDisplay !== '익명송이');
+
+  // 이벤트 게시판 응모상황 표시
+  const inProgress =
+    data.progressType === 'IN_PROGRESS' ? styles.inProgress : '';
 
   return (
     <div className={styles.post}>
@@ -29,8 +34,14 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
             height={12}
           />
         )}
-        <div className={styles.boardChip}>{data.boardName}</div>
-        {data.isEnd && <div className={styles.boardChip}>응모 중</div>}
+        {data.boardName && (
+          <div className={styles.boardChip}>{data.boardName}</div>
+        )}
+        {data.progressType && (
+          <div className={`${styles.progressChip} ${inProgress}`}>
+            {PROGRESS[data.progressType]}
+          </div>
+        )}
       </div>
       <div className={styles.post_center}>
         <p className={styles.title}>{data.title}</p>
