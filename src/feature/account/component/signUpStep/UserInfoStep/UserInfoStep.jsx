@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useRegister } from '@/apis';
@@ -19,6 +19,7 @@ import {
 } from '@/feature/account/lib';
 
 import style from './UserInfoStep.module.css';
+import { PRIVACY_TERM } from '@/feature/account/constant/privacyTerm';
 
 export default function UserInfoStep({ setFormData, formData }) {
   const register = useRegister();
@@ -28,44 +29,6 @@ export default function UserInfoStep({ setFormData, formData }) {
   const [stuNumStyle, setStuNumStyle] = useState('ready');
   const [birthdayStyle, setBirthdayStyle] = useState('ready');
   const [isTermsChecked, setIsTermsChecked] = useState(false);
-
-  // 개인정보 동의 이벤트 리스너 등록
-  useEffect(() => {
-    const handlePrivacyAgreed = () => {
-      if (window.privacyTermsAgreed) {
-        setIsTermsChecked(true);
-        // 사용 후 정리
-        window.privacyTermsAgreed = false;
-      }
-    };
-
-    // 이벤트 리스너 등록
-    window.addEventListener('privacyTermsAgreed', handlePrivacyAgreed);
-
-    // 컴포넌트가 마운트될 때 한 번 확인 (페이지 새로고침 등의 경우)
-    handlePrivacyAgreed();
-
-    // cleanup
-    return () => {
-      window.removeEventListener('privacyTermsAgreed', handlePrivacyAgreed);
-    };
-  }, []);
-
-  // 페이지 포커스 시에도 확인 (뒤로가기로 돌아왔을 때)
-  useEffect(() => {
-    const handleFocus = () => {
-      if (window.privacyTermsAgreed) {
-        setIsTermsChecked(true);
-        window.privacyTermsAgreed = false;
-      }
-    };
-
-    window.addEventListener('focus', handleFocus);
-
-    return () => {
-      window.removeEventListener('focus', handleFocus);
-    };
-  }, []);
 
   const isFormValid = () =>
     nicknameStyle === 'right' &&
@@ -174,15 +137,25 @@ function CheckTerms({
   navigate,
   setIsChecked,
 }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const tagStyle = required ? style.required : style.optional;
   const tag = required ? '필수' : '선택';
 
   const handlePrivacyTermClick = () => {
-    navigate('/terms/privacy');
+    setIsModalOpen(true);
   };
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+  };
+
+  const handleModalAgree = () => {
+    setIsChecked(true);
+    setIsModalOpen(false);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -215,6 +188,88 @@ function CheckTerms({
 
       <div className={style.termsLink} onClick={handlePrivacyTermClick}>
         <Icon id='chevron-right' width={20} height={20} />
+      </div>
+
+      {isModalOpen && (
+        <PrivacyTermModal
+          onAgree={handleModalAgree}
+          onClose={handleModalClose}
+        />
+      )}
+    </div>
+  );
+}
+
+function PrivacyTermModal({ onAgree, onClose }) {
+  const [hasScrolledToEnd, setHasScrolledToEnd] = useState(false);
+  const descriptionRef = useRef(null);
+
+  const handleScroll = (e) => {
+    // 이미 한 번 끝까지 스크롤했다면 더 이상 확인하지 않음
+    if (hasScrolledToEnd) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    // 스크롤이 끝에 도달했는지 확인 (약간의 여유값 추가)
+    const isAtEnd = scrollTop + clientHeight >= scrollHeight - 5;
+
+    if (isAtEnd) {
+      setHasScrolledToEnd(true);
+    }
+  };
+
+  // 컨텐츠가 스크롤 없이도 모두 보이는 경우 처리
+  useEffect(() => {
+    if (descriptionRef.current) {
+      const { scrollHeight, clientHeight } = descriptionRef.current;
+      if (scrollHeight <= clientHeight) {
+        setHasScrolledToEnd(true);
+      }
+    }
+  }, []);
+
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  return (
+    <div className={style.modalOverlay} onClick={handleOverlayClick}>
+      <div className={style.modalContainer}>
+        <div className={style.modalHeader}>
+          <h2 className={style.modalTitle}>
+            {PRIVACY_TERM.title}
+            <span className={style.modalRequired}>*</span>
+          </h2>
+          <button className={style.closeButton} onClick={onClose}>
+            <Icon id='x' width={24} height={24} />
+          </button>
+        </div>
+
+        <div
+          className={style.modalContent}
+          ref={descriptionRef}
+          onScroll={handleScroll}
+        >
+          <div className={style.modalSummary}>{PRIVACY_TERM.summary}</div>
+          <div className={style.modalGuide}>{PRIVACY_TERM.guide}</div>
+          {PRIVACY_TERM.details.map((section, idx) => (
+            <div key={idx} className={style.modalDetails}>
+              <div className={style.modalSubtitle}>{section.title}</div>
+              <div className={style.modalText}>{section.content}</div>
+            </div>
+          ))}
+          <div className={style.modalNotice}>{PRIVACY_TERM.notice}</div>
+        </div>
+
+        <div className={style.modalFooter}>
+          <Button
+            btnName='동의하고 계속하기'
+            className={hasScrolledToEnd ? 'right' : 'ready'}
+            disabled={!hasScrolledToEnd}
+            onClick={onAgree}
+          />
+        </div>
       </div>
     </div>
   );
