@@ -8,11 +8,19 @@ import accounting from './accounting.png';
 const content = (
   <div className={styles.notice}>
     <div>
-      {/* <p className={styles.hello}>
+      <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
-      </p> */}
+      </p>
 
-      <Heading>💙 10월 스노로즈 일정 💙</Heading>
+      {/* <Heading>1. 청파제 이벤트 포인트 지급 일정 안내</Heading>
+      <Content>
+        <p>
+          청파제 이벤트 포인트는 <strong>10월 13일(월)</strong>까지 순차적으로
+          지급될 예정입니다.
+        </p>
+      </Content> */}
+
+      <Heading>1. 10월 스노로즈 일정</Heading>
       <Content>
         <img src={october} alt='10월 캘린더' />
       </Content>
