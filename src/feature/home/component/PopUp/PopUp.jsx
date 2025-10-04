@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
 import styles from './PopUp.module.css';
-import september from './september.jpg';
+import october from './october.png';
 import accounting from './accounting.png';
 
 const content = (
@@ -12,15 +12,20 @@ const content = (
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
 
-      {/* <Heading>1. 9월 스노로즈 캘린더</Heading>
+      {/* <Heading>1. 청파제 이벤트 포인트 지급 일정 안내</Heading>
       <Content>
-        청파제(9/17~18)에서 스노로즈 부스를 운영합니다. <br />
-        학우 여러분의 많은 관심과 방문 부탁드립니다 ✨
-        <br />
-        <img src={september} alt='9월 캘린더' />
+        <p>
+          청파제 이벤트 포인트는 <strong>10월 13일(월)</strong>까지 순차적으로
+          지급될 예정입니다.
+        </p>
       </Content> */}
 
-      <Heading>1. 스노로즈 전체 재인증 안내</Heading>
+      <Heading>1. 10월 스노로즈 일정</Heading>
+      <Content>
+        <img src={october} alt='10월 캘린더' />
+      </Content>
+
+      {/* <Heading>1. 스노로즈 전체 재인증 안내</Heading>
       <Content>
         안정적인 커뮤니티 운영을 위해 <strong>전체 재인증</strong>을 실시합니다.
         <br />
@@ -40,9 +45,9 @@ const content = (
           </a>
         </strong>{' '}
         접속 후 인증
-      </Content>
+      </Content> */}
 
-      <Heading>2. 스노로즈 블로그 이벤트기획파트편 공개</Heading>
+      {/* <Heading>2. 스노로즈 블로그 이벤트기획파트편 공개</Heading>
       <Content>
         <strong>&lt;스노로즈 리뉴얼&gt; 이벤트기획파트편</strong>이
         업로드되었습니다.
@@ -58,7 +63,7 @@ const content = (
           </a>
         </strong>
         에서 확인해보세요!
-      </Content>
+      </Content> */}
 
       {/* <Heading>2. 7월 회계 보고</Heading>
       <Content>
