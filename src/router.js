@@ -35,6 +35,7 @@ import { AttendancePage, MainPage } from '@/page/home';
 import { SearchPage } from '@/page/search';
 import {
   AboutPage,
+  FAQPage,
   PrivacyPolicyPage,
   ServicePolicyPage,
 } from '@/page/snorose';
@@ -414,6 +415,13 @@ export const routeList = [
             <DeleteAccountPage />
           </ProtectedRoute>
         ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/faq',
+        element: <FAQPage />,
         meta: {
           hideNav: true,
         },
