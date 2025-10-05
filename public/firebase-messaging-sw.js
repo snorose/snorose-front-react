@@ -16,11 +16,6 @@ const app = firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging(app);
 
 messaging.onBackgroundMessage((payload) => {
-  console.log(
-    '[firebase-messaging-sw.js] Received background message:',
-    payload
-  );
-
   const { title, body, link } = payload.data;
 
   const notificationOptions = {
@@ -34,7 +29,7 @@ messaging.onBackgroundMessage((payload) => {
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  const targetUrl = event.notification.data?.link || '/';
+  // const targetUrl = event.notification.data?.link || '/alert';
 
   event.waitUntil(
     clients
