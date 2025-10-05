@@ -47,9 +47,9 @@ export default function AttendancePage() {
           <Icon id='point-circle' width={32} height={32} />
         </div>
 
-        <div style={{ margin: '0 2rem' }}>
+        {/* <div style={{ margin: '0 2rem' }}>
           <AlertSetting />
-        </div>
+        </div> */}
       </div>
 
       {loading && <FetchLoadingOverlay />}
