@@ -64,6 +64,11 @@ export function useReadNotifications() {
     if (context?.previousData) {
       invalidateAll(context.queryKeys);
     }
+
+    queryClient.invalidateQueries({
+      queryKey: QUERY_KEY.unreadNotificationCount,
+      refetchType: 'inactive',
+    });
   };
 
   const markNotificationAsRead = useMutation({
@@ -105,6 +110,10 @@ export function useReadNotifications() {
       );
       const ids = notifications.map((notification) => notification.id);
       readNotifications(ids);
+    },
+
+    onSuccess: () => {
+      queryClient.setQueryData(QUERY_KEY.unreadNotificationCount, 0);
     },
 
     onMutate: async (category) => {
