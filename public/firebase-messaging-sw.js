@@ -21,11 +21,12 @@ messaging.onBackgroundMessage((payload) => {
     payload
   );
 
-  const { title, body, url } = payload.data;
+  const { title, body, link } = payload.data;
 
   const notificationOptions = {
     body,
-    data: { url },
+    icon: '/logos/snoroseLogo180.png',
+    data: { link },
   };
 
   self.registration.showNotification(title, notificationOptions);
@@ -33,7 +34,7 @@ messaging.onBackgroundMessage((payload) => {
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  const targetUrl = event.notification.data?.url || '/';
+  const targetUrl = event.notification.data?.link || '/';
 
   event.waitUntil(
     clients
@@ -41,7 +42,7 @@ self.addEventListener('notificationclick', (event) => {
       .then((clientList) => {
         // 이미 열린 창이 있으면 focus
         for (const client of clientList) {
-          if (client.url.includes(targetUrl) && 'focus' in client) {
+          if (client.link.includes(targetUrl) && 'focus' in client) {
             return client.focus();
           }
         }
