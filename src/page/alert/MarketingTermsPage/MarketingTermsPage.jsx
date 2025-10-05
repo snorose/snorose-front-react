@@ -6,7 +6,7 @@ import styles from './MarketingTermsPage.module.css';
 
 export default function MarketingTermsPage() {
   return (
-    <div>
+    <div className={styles.contianer}>
       <BackAppBar notFixed />
 
       <div className={styles.title}>마케팅 정보 수신 동의 약관</div>
