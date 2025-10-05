@@ -41,14 +41,15 @@ self.addEventListener('notificationclick', (event) => {
       .matchAll({ type: 'window', includeUncontrolled: true })
       .then((clientList) => {
         // 이미 열린 창이 있으면 focus
-        for (const client of clientList) {
-          if (client.link.includes(targetUrl) && 'focus' in client) {
-            return client.focus();
-          }
-        }
+        // for (const client of clientList) {
+        //   if (client.link.includes(targetUrl) && 'focus' in client) {
+        //     return client.focus();
+        //   }
+        // }
         // 없으면 새 탭 열기
         if (clients.openWindow) {
-          return clients.openWindow(targetUrl);
+          return clients.openWindow('/alert');
+          // return clients.openWindow(targetUrl);
         }
       })
   );
