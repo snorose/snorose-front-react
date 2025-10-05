@@ -12,7 +12,7 @@
 
 /* notice */
 .notice {
-  margin: 0 var(--default-margin) 1rem;
+  margin: 0 var(--default-margin) 5rem;
   border-radius: 0.5rem;
 }
 
