@@ -93,11 +93,10 @@ export const patchPost = async ({
   const response = await authAxios.patch(
     `/v1/boards/${boardId}/posts/${postId}/update`,
     {
-      postId,
-      category: null,
+      category: '',
       title,
       content,
-      //isNotice: isNotice,
+      isNotice,
       // finalAttachments: attachmentsInfo.map(
       //   ({ id, fileName, fileComment, type }) => ({
       //     id,
@@ -109,6 +108,7 @@ export const patchPost = async ({
       // deleteAttachments,
     }
   );
+
   // const newFiles = attachmentsInfo
   //   .filter((att) => att.id === '')
   //   .map((att) => att.file);
