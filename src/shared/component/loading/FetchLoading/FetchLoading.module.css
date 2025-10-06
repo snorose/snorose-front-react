@@ -16,6 +16,8 @@
 
 .icon {
   animation: rotateAndPause 1s linear infinite;
+  width: 2.5rem;
+  height: 1.6rem;
 }
 
 .iconStatic {

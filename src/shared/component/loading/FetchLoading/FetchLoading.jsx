@@ -1,4 +1,4 @@
-import { Icon } from '@/shared/component';
+import cloudLogo from '@/assets/images/cloudLogo.svg';
 
 import styles from './FetchLoading.module.css';
 
@@ -11,7 +11,7 @@ export default function FetchLoading({
     <div className={`${styles.loading} ${className}`}>
       <div className={styles.centerBox}>
         <div className={animation ? styles.icon : styles.iconStatic}>
-          <Icon id='cloud' width={25} height={16} />
+          <img src={cloudLogo} alt='로고' />
         </div>
         <p>{children}</p>
       </div>

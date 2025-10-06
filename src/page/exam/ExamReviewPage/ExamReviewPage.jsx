@@ -29,12 +29,14 @@ import {
   FLEX_ALIGN,
 } from '@/feature/exam/constant';
 import { useScrap } from '@/feature/scrap/hook';
+import { useReportHandler } from '@/feature/report/hook/useReport';
+import { useDeleteExamReviewHandler } from '@/feature/exam/hook/useDeleteExamReviewHandler';
 
 import styles from './ExamReviewPage.module.css';
 import { ModalContext } from '@/shared/context/ModalContext';
-import { useReportHandler } from '@/feature/report/hook/useReport';
-import { useDeleteExamReviewHandler } from '@/feature/exam/hook/useDeleteExamReviewHandler';
 import { useModalReset } from '@/shared/hook/useBlocker';
+
+import cloudLogo from '@/assets/images/cloudLogo.svg';
 
 const COURSE_TYPE = convertToObject(LECTURE_TYPES);
 const SEMESTER = convertToObject(SEMESTERS);
@@ -50,7 +52,7 @@ export default function ExamReviewPage() {
   useModalReset();
 
   const { data, error, isError, isLoading } = useQuery({
-    queryKey: [QUERY_KEY.post, postId],
+    queryKey: QUERY_KEY.post(postId),
     queryFn: () => getReviewDetail(postId),
     staleTime: 1000 * 60 * 5,
   });
@@ -113,29 +115,17 @@ export default function ExamReviewPage() {
   } = data ?? {};
 
   return (
-    <main>
+    <section className={styles.container}>
       <div className={styles.top}>
         <BackAppBar backgroundColor={'#eaf5fd'} />
         <div className={styles.displayBox}>
           <div className={styles.displayBoxLeft}>
-            <Icon
-              className={styles.cloudIcon}
-              id='cloud'
-              width={25}
-              height={16}
-            />
+            <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
             <span>{userDisplay}</span>
             <span className={styles.dot}></span>
             <span>{dateFormat(createdAt)}</span>
             {isEdited && <span>&nbsp;(수정됨)</span>}
-            {isConfirmed && (
-              <Icon
-                className={styles.checkCircleIcon}
-                id='check-circle'
-                width={15}
-                height={15}
-              />
-            )}
+            {isConfirmed && <Icon id='check-circle' width={15} height={15} />}
           </div>
           <Icon
             className={styles.more}
@@ -207,6 +197,6 @@ export default function ExamReviewPage() {
         handleDelete={handleDelete}
       />
       {isLoading && <FetchLoadingOverlay />}
-    </main>
+    </section>
   );
 }

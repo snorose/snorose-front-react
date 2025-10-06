@@ -1,22 +1,27 @@
-.pageFrame {
-  width: 100%;
+.container {
   height: 100vh;
+
+  padding-top: var(--default-appbar-height);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0 auto;
+}
+
+.pageTopFrame,
+.pageMiddleFrame,
+.pageBottomFrame {
+  margin: 0 var(--default-margin);
 }
 
 .pageTopFrame {
-  padding: 0 2rem;
   display: flex;
   flex-direction: column;
 }
 
 .pageTitle {
-  font: var(--text-title-1-bold);
-  margin-top: 5.1rem;
   margin-bottom: 0.6rem;
+  font: var(--text-title-1-bold);
 }
 
 .pageSubtitle {
@@ -45,7 +50,6 @@
 }
 
 .pageBottomFrame {
-  padding: 0 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -100,13 +104,5 @@
 }
 
 .findIdButton {
-  margin-bottom: 3.3rem;
-}
-
-.findPWButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 4.6rem;
-  color: var(--grey-4);
+  margin-bottom: 4rem;
 }

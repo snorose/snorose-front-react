@@ -15,6 +15,7 @@ import {
   SignUpFailurePage,
   SnoroseVerifyPage,
 } from '@/page/account';
+import { AlertPage, AlertSettingPage, MarketingTermsPage } from '@/page/alert';
 import {
   BoardCategoryPage,
   EditPostPage,
@@ -34,6 +35,7 @@ import { AttendancePage, MainPage } from '@/page/home';
 import { SearchPage } from '@/page/search';
 import {
   AboutPage,
+  FAQPage,
   PrivacyPolicyPage,
   ServicePolicyPage,
 } from '@/page/snorose';
@@ -48,7 +50,6 @@ import {
 
 import ProtectedRoute from '@/ProtectedRoute';
 import { MaintenancePage } from '@/page/maintenance';
-// import { AlertPage } from '@/pages/AlertPage';
 
 import { CheckExamPeriodRoute } from '@/feature/exam/lib';
 
@@ -336,6 +337,29 @@ export const routeList = [
         },
       },
       {
+        path: '/alert',
+        element: (
+          <ProtectedRoute>
+            <AlertPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/alert/setting',
+        element: (
+          <ProtectedRoute>
+            <AlertSettingPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/terms/marketing',
+        element: <MarketingTermsPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
         path: '/attendance',
         element: <AttendancePage />,
         loader: attendanceLoader,
@@ -343,13 +367,6 @@ export const routeList = [
           hideNav: true,
         },
       },
-      // {
-      //   path: '/alert',
-      //   element: <AlertPage />,
-      //   meta: {
-      //     hideNav: true,
-      //   },
-      // },
       {
         path: '/my-page',
         element: (
@@ -398,6 +415,13 @@ export const routeList = [
             <DeleteAccountPage />
           </ProtectedRoute>
         ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/my-page/faq',
+        element: <FAQPage />,
         meta: {
           hideNav: true,
         },

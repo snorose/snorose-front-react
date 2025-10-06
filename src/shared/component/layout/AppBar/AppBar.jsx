@@ -1,8 +1,6 @@
-import { MenuIcon } from '@/shared/component';
-
 import styles from './AppBar.module.css';
 
-export default function AppBar({ title, backgroundColor, notFixed }) {
+export default function AppBar({ title, backgroundColor, notFixed, children }) {
   return (
     <div
       className={styles.appBar}
@@ -12,7 +10,7 @@ export default function AppBar({ title, backgroundColor, notFixed }) {
       }}
     >
       <h2 className={styles.title}>{title}</h2>
-      <MenuIcon />
+      {children}
     </div>
   );
 }

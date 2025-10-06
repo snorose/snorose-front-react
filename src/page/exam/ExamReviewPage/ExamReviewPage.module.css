@@ -1,7 +1,10 @@
+.container {
+  padding-top: var(--default-appbar-height);
+}
+
 .top {
-  width: 100%;
-  padding-bottom: 2.3rem;
-  padding-top: 4.5rem;
+  padding-bottom: 1.2rem;
+
   display: flex;
   flex-direction: column;
   background-color: var(--blue-0);
@@ -20,20 +23,17 @@
 .displayBoxLeft {
   display: flex;
   align-items: center;
+  gap: 0.6rem;
 }
 
-.cloudIcon {
-  margin-right: 0.7rem;
-}
-
-.checkCircleIcon {
-  margin-left: 0.4rem;
+.cloudLogoIcon {
+  width: 2.5rem;
+  height: 1.6rem;
 }
 
 .dot {
   width: 0.3rem;
   height: 0.3rem;
-  margin: 0 0.8rem;
   background: var(--grey-3-1);
   border-radius: 100%;
 }

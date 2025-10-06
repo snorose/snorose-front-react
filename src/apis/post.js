@@ -1,4 +1,6 @@
-import { authAxios } from '@/axios';
+import { defaultAxios, authAxios } from '@/axios';
+import { IconItem } from '@storybook/blocks';
+import altImage from '@/assets/images/altImage.png';
 
 // 게시글 리스트 가져오기
 export const getPosts = async (boardId, page = 0) => {
@@ -15,7 +17,22 @@ export const getPosts = async (boardId, page = 0) => {
 // 게시글 상세 조회
 export const getPostContent = async (boardId, postId) => {
   const response = await authAxios.get(`/v1/boards/${boardId}/posts/${postId}`);
-  return response?.data.result;
+  const result = response?.data.result;
+
+  //url이 null일시 대체 이미지로 대체
+  if (response?.data.result?.attachments.length) {
+    const processedAttachments = response.data.result.attachments.map(
+      (data) => ({
+        ...data,
+        url: data.url || altImage,
+      })
+    );
+    return {
+      ...result,
+      attachments: processedAttachments,
+    };
+  }
+  return result;
 };
 
 // 게시글 등록
@@ -25,17 +42,32 @@ export const postPost = async ({
   title,
   content,
   isNotice,
+  attachmentsInfo,
 }) => {
-  const data = {
-    category: category,
-    title: title,
-    content: content,
-    isNotice: isNotice,
-  };
-  const response = await authAxios.post(
-    `/v1/boards/${boardId}/posts/newpost`,
-    data
-  );
+  //'게시글 생성' API에서 받아오는 데이터
+  const response = await authAxios.post(`/v1/boards/${boardId}/posts/newpost`, {
+    category,
+    title,
+    content,
+    isNotice,
+    attachments: attachmentsInfo.map(({ type, fileName, fileComment }) => ({
+      type,
+      fileName,
+      fileComment,
+    })),
+  });
+
+  //만일 '게시글 생성' API에 첨부파일을 넘겼더라면
+  if (attachmentsInfo.length) {
+    //attachmentUrlList 변수에 '게시글 생성' API한테 받은 이미지 S3 url 리스트 저장
+    let attachmentUrlList = response.data.result.attachmentUrlList;
+
+    //각 S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
+    await putFileInBucket(
+      attachmentUrlList,
+      attachmentsInfo.map((att) => att.file)
+    );
+  }
   return response;
 };
 
@@ -54,23 +86,34 @@ export const patchPost = async ({
   title,
   content,
   isNotice,
-  deleteAttachments = [],
-  finalAttachments = [],
+  attachmentsInfo,
+  deleteAttachments,
 }) => {
-  const editedPost = {
-    postId,
-    category: null,
-    title,
-    content,
-    isNotice,
-    deleteAttachments,
-    finalAttachments,
-  };
-
   const response = await authAxios.patch(
     `/v1/boards/${boardId}/posts/${postId}/update`,
-    editedPost
+    {
+      postId,
+      category: null,
+      title,
+      content,
+      //isNotice: isNotice,
+      finalAttachments: attachmentsInfo.map(
+        ({ id, fileName, fileComment, type }) => ({
+          id,
+          fileName,
+          fileComment,
+          type,
+        })
+      ),
+      deleteAttachments,
+    }
   );
+  const newFiles = attachmentsInfo
+    .filter((att) => att.id === '')
+    .map((att) => att.file);
+
+  let attachmentUrlList = response.data.result.attachmentUrlList;
+  putFileInBucket(attachmentUrlList, newFiles);
 
   return response;
 };
@@ -90,4 +133,16 @@ export const reportUser = async (body) => {
   const { data } = await authAxios.post(`/v1/users/report`, body);
 
   return data;
+};
+
+//게시글 썸네일 생성
+export const createThumbnail = async (boardId, postId) => {
+  await authAxios.post(`/v1/boards/${boardId}/posts/${postId}/thumbnail`);
+};
+
+//S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
+export const putFileInBucket = async (urls, files) => {
+  await Promise.all(
+    urls.map((url, index) => defaultAxios.put(url, files[index]))
+  );
 };

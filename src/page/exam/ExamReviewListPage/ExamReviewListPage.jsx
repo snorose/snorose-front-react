@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getNoticeLine } from '@/apis';
 
 import { useScrollRestoration } from '@/shared/hook';
-import { AppBar, Icon, WriteButton } from '@/shared/component';
+import { AppBar, Icon, MenuIcon, WriteButton } from '@/shared/component';
 import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
 import { Filter, FilterList } from '@/feature/exam/component';
@@ -27,16 +27,14 @@ export default function ExamReviewListPage() {
 
   return (
     <section className={styles.container} ref={scrollRef}>
-      <AppBar title='시험후기' />
-      <div className={styles.notification}>
-        <Link
-          className={styles.notificationBar}
-          to={`/board/exam-review/notice`}
-        >
-          <Icon id='notice-bell' width={11} height={13} />
-          <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
-        </Link>
-      </div>
+      <AppBar title='시험후기'>
+        <MenuIcon />
+      </AppBar>
+
+      <Link className={styles.notificationBar} to={`/board/exam-review/notice`}>
+        <Icon id='notice-bell' width={11} height={13} />
+        <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
+      </Link>
 
       <Search className={styles.search} placeholder='시험후기 검색' />
       <FilterList>

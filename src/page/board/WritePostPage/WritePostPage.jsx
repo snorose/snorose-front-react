@@ -5,6 +5,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 
 import {
   ActionButton,
+  AttachmentList,
   Badge,
   CloseAppBar,
   DropdownList,
@@ -18,12 +19,16 @@ import {
   ROLE,
   TOAST,
   CONFIRM_MODAL_TEXT,
+  ATTACHMENT_MODAL_TEXT,
 } from '@/shared/constant';
-import { useAuth, useBlocker, useToast } from '@/shared/hook';
+import { useAuth, useBlocker, useToast, useModal } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
 import { ModalContext } from '@/shared/context/ModalContext';
 
-import { postPost } from '@/apis';
+import { createThumbnail, postPost } from '@/apis';
+import { AttachmentBar } from '@/feature/board/component';
+
+import cloudLogo from '@/assets/images/cloudLogo.svg';
 
 import styles from './WritePostPage.module.css';
 
@@ -42,6 +47,16 @@ export default function WritePostPage() {
   const [text, setText] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [isBlock, setIsBlock] = useState(false);
+
+  /**
+   * 이미지 TF 코드
+   */
+  //'게시글 생성' API에서 요구하는 데이터 (중 attachments array)
+  // const [attachmentsInfo, setAttachmentsInfo] = useState([]);
+
+  // const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
+  // const [trashImageIndex, setTrashImageIndex] = useState(null); //지우는 이미지 index
+  // const trashImageConfirmModal = useModal();
 
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
@@ -128,6 +143,7 @@ export default function WritePostPage() {
     title,
     content: text,
     isNotice: textId === 'notice' ? true : isNotice,
+    // attachmentsInfo: attachmentsInfo,
   };
 
   const handleSubmit = (e) => {
@@ -141,13 +157,12 @@ export default function WritePostPage() {
     postPost(data)
       .then((response) => {
         if (response.status === 201) {
-          console.log(response.data.result.pointDifference);
           !response.data.result.pointDifference
             ? toast(TOAST.POST.createNoPoints)
             : toast(TOAST.POST.create);
           const newPostId = response.data.result.postId;
 
-          queryClient.removeQueries([QUERY_KEY.post]);
+          queryClient.removeQueries(QUERY_KEY.post());
           invalidUserInfoQuery();
           currentBoard.id === 12 || isNotice
             ? navigate(`/board/${currentBoard.textId}/notice`, {
@@ -157,6 +172,9 @@ export default function WritePostPage() {
                 `/board/${BOARD_MENUS.find((menu) => menu.id === boardId).textId}/post/${newPostId}`,
                 { replace: true }
               );
+
+          //post 등록이 잘 되었으면 썸네일 생성하기
+          createThumbnail(boardId, newPostId);
         }
       })
       .catch(({ response }) => {
@@ -186,32 +204,17 @@ export default function WritePostPage() {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.top}>
-          <CloseAppBar backgroundColor={'#eaf5fd'}>
-            <ActionButton onClick={handleSubmit} disabled={!pass}>
-              등록
-            </ActionButton>
-          </CloseAppBar>
-        </div>
-        <div className={styles.center}>
-          {textId === 'notice' ? (
-            <div className={styles.categorySelect}>
-              <div className={styles.categorySelectContainer}>
-                <Icon
-                  id='clip-board-list'
-                  width={21}
-                  height={22}
-                  fill='white'
-                />
-                <p className={styles.categorySelectText}>{boardTitle}</p>
-              </div>
-            </div>
-          ) : (
-            <div className={styles.categoryDropdownContainer}>
-              <div
-                className={styles.categorySelect}
-                onClick={handleDropDownOpen}
-              >
+        <div>
+          <div className={styles.top}>
+            <CloseAppBar backgroundColor={'#eaf5fd'}>
+              <ActionButton onClick={handleSubmit} disabled={!pass}>
+                등록
+              </ActionButton>
+            </CloseAppBar>
+          </div>
+          <div className={styles.center}>
+            {textId === 'notice' ? (
+              <div className={styles.categorySelect}>
                 <div className={styles.categorySelectContainer}>
                   <Icon
                     id='clip-board-list'
@@ -221,76 +224,147 @@ export default function WritePostPage() {
                   />
                   <p className={styles.categorySelectText}>{boardTitle}</p>
                 </div>
-                <Icon id='angle-down' width={14} height={7} />
               </div>
-
-              {dropDownOpen && (
-                <DropdownList
-                  options={displayedOptions}
-                  select={{ id: boardId, name: boardTitle }}
-                  onSelect={handleBoardTitleChange}
-                  className={styles.dropDownList}
-                />
-              )}
-            </div>
-          )}
-
-          <div className={styles.profileBox}>
-            <div className={styles.profileBoxLeft}>
-              {userInfo?.userRoleId !== ROLE.admin &&
-              userInfo?.userRoleId !== ROLE.official ? (
-                <Icon id='cloud' width={25} height={16} />
-              ) : (
-                <Badge
-                  userRoleId={userInfo?.userRoleId}
-                  className={styles.badge}
-                />
-              )}
-              <p>{userInfo?.nickname}</p>
-              <p className={styles.dot}></p>
-              <p>{formattedNowTime()}</p>
-            </div>
-            {textId !== 'notice' && (
-              <div
-                className={
-                  userInfo?.userRoleId === ROLE.admin ||
-                  userInfo?.userRoleId === ROLE.official
-                    ? styles.profileBoxRight
-                    : styles.profileBoxRightInvisible
-                }
-                onClick={handleIsNotice}
-              >
-                <Icon
-                  id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
-                  width={21}
-                  height={22}
-                />
-                <p>공지글</p>
+            ) : (
+              <div className={styles.categoryDropdownContainer}>
+                <div
+                  className={styles.categorySelect}
+                  onClick={handleDropDownOpen}
+                >
+                  <div className={styles.categorySelectContainer}>
+                    <Icon
+                      id='clip-board-list'
+                      width={21}
+                      height={22}
+                      fill='white'
+                    />
+                    <p className={styles.categorySelectText}>{boardTitle}</p>
+                  </div>
+                  <Icon id='angle-down' width={14} height={7} />
+                </div>
+                {dropDownOpen && (
+                  <DropdownList
+                    options={displayedOptions}
+                    select={{ id: boardId, name: boardTitle }}
+                    onSelect={handleBoardTitleChange}
+                    className={styles.dropDownList}
+                  />
+                )}
               </div>
             )}
-          </div>
-          <div className={styles.content}>
-            <TextareaAutosize
-              className={styles.title}
-              placeholder='제목'
-              value={title}
-              onChange={handleTitleChange}
-            />
-            <TextareaAutosize
-              className={styles.text}
-              placeholder='내용'
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
+
+            <div className={styles.profileBox}>
+              <div className={styles.profileBoxLeft}>
+                {userInfo?.userRoleId !== ROLE.admin &&
+                userInfo?.userRoleId !== ROLE.official ? (
+                  <img className={styles.logoIcon} src={cloudLogo} alt='로고' />
+                ) : (
+                  <Badge
+                    userRoleId={userInfo?.userRoleId}
+                    className={styles.badge}
+                  />
+                )}
+                <p>{userInfo?.nickname}</p>
+                <p className={styles.dot}></p>
+                <p>{formattedNowTime()}</p>
+              </div>
+              {textId !== 'notice' && (
+                <div
+                  className={
+                    userInfo?.userRoleId === ROLE.admin ||
+                    userInfo?.userRoleId === ROLE.official
+                      ? styles.profileBoxRight
+                      : styles.profileBoxRightInvisible
+                  }
+                  onClick={handleIsNotice}
+                >
+                  <Icon
+                    id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
+                    width={21}
+                    height={22}
+                  />
+                  <p>공지글</p>
+                </div>
+              )}
+            </div>
+            <div className={styles.content}>
+              <TextareaAutosize
+                className={styles.title}
+                placeholder='제목'
+                value={title}
+                onChange={handleTitleChange}
+              />
+              <TextareaAutosize
+                className={styles.text}
+                placeholder='내용'
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+              {/* <AttachmentList
+                attachmentsInfo={attachmentsInfo}
+                setAttachmentsInfo={setAttachmentsInfo}
+              /> */}
+            </div>
           </div>
         </div>
+
         {modal.id === 'exit-page' && (
           <ConfirmModal
             modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
             onConfirm={handleExitPage}
           />
         )}
+
+        {/* <Icon
+          id='trashcan'
+          width='10rem'
+          height='10rem'
+          className={`${isTrashOverlapped ? styles.trashVisible : styles.trashInvisible}`}
+          onDragEnter={(e) => {
+            e.preventDefault();
+            setIsTrashOverlapped(true);
+          }}
+          onDragOver={(e) => {
+            setIsTrashOverlapped(true);
+            e.preventDefault();
+          }}
+          onDragLeave={(e) => {
+            e.preventDefault();
+            setIsTrashOverlapped(false);
+          }}
+          onDrop={(e) => {
+            e.preventDefault();
+            const draggedIndex = parseInt(
+              e.dataTransfer.getData('text/plain'),
+              10
+            );
+            setTrashImageIndex(draggedIndex);
+            setIsTrashOverlapped(false);
+            trashImageConfirmModal.openModal();
+          }}
+        />
+        <AttachmentBar
+          attachmentsInfo={attachmentsInfo}
+          setAttachmentsInfo={setAttachmentsInfo}
+        /> */}
       </div>
+
+      {/* {trashImageConfirmModal.isOpen && (
+        <ConfirmModal
+          modalText={ATTACHMENT_MODAL_TEXT.DELETE_ATTACHMENT}
+          onConfirm={() => {
+            setAttachmentsInfo((prev) =>
+              prev
+                .slice(0, trashImageIndex)
+                .concat(prev.slice(trashImageIndex + 1))
+            );
+            trashImageConfirmModal.closeModal();
+          }}
+          onCancel={() => {
+            trashImageConfirmModal.closeModal();
+          }}
+        />
+      )} */}
     </>
   );
 }

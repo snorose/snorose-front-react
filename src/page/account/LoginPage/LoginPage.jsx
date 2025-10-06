@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useLogin } from '@/apis';
 
-import { Button, Icon, Input } from '@/shared/component';
+import { BackAppBar, Button, Icon, Input } from '@/shared/component';
 
 import snoroseLogo from '@/assets/images/snoroseLogo.svg';
 
@@ -46,18 +46,10 @@ export default function Login() {
 
   return (
     <div className={styles.loginframe}>
+      <BackAppBar notFixed />
+
       <form onSubmit={handleLoginSubmit}>
         <div className={styles.loginBody}>
-          <Icon
-            className={styles.back}
-            id='arrow-left'
-            width={'1.8rem'}
-            height={'1.6rem'}
-            onClick={() => {
-              //BackAppBar 사용 불가 -> 로그인페이지에서 findId/findPw했다가 다시 돌아오면 다시는 main으로 못 돌아가는 루프구조가 되어버림
-              navigate('/');
-            }}
-          />
           <img src={snoroseLogo} alt='스노로즈 로고' className={styles.logo} />
           <p className={styles.title}>
             숙명인을 위한 커뮤니티,

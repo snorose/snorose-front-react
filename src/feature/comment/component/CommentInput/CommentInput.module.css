@@ -15,7 +15,7 @@
   bottom: 0;
 }
 
-.input_bar {
+.inputBar {
   background-color: var(--grey-1-1);
   width: 100%;
   min-height: 4rem;
@@ -26,7 +26,12 @@
   border-radius: 0.5rem;
 }
 
-.input_zone {
+.cloudLogoIcon {
+  width: 2.2rem;
+  height: 1.4rem;
+}
+
+.inputZone {
   width: 100%;
   min-height: 2rem;
   outline: none;
@@ -36,14 +41,8 @@
   resize: none;
 }
 
-.input_zone::placeholder {
+.inputZone::placeholder {
   color: var(--grey-3-1);
-}
-
-.profile_icon {
-  display: flex;
-  width: 2rem;
-  height: 2rem;
 }
 
 .enter {

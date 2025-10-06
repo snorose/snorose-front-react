@@ -193,6 +193,15 @@ const CONFIRM_MODAL = {
     confirmText: '네',
     cancelText: '아니요',
   },
+
+  // 알림 해제 모달
+  DISABLE_NOTIFICATION: {
+    title: '알림을 끌까요?',
+    description:
+      '알림을 끄시면 강등, 무통보 삭제 등의\n중요한 안내를 받지 못해요.',
+    confirmText: '끄기',
+    cancelText: '취소',
+  },
 };
 
 // =================== Notice Modal ===================
@@ -201,6 +210,18 @@ const NOTICE_MODAL = {
     title: '인증이 필요하지 않아요',
     description: '이미 인증을 완료했거나 인증 대상이 아니에요.',
     confirmText: '홈으로 이동',
+  },
+  MAEKETING_NOTICE_MODAL: {
+    id: 'marketing-notice',
+    title: (isMarketingAgreed) =>
+      isMarketingAgreed
+        ? '광고성 정보 수신 동의 완료'
+        : '광고성 정보 수신 동의 해제 완료',
+    description: (isMarketingAgreed, date) =>
+      isMarketingAgreed
+        ? `${date}\n\n매체 : 앱 푸시\n목적 :  마케팅 정보 수신\n수신거부 : 알림 설정에서 수신 거부 가능`
+        : date,
+    confirmText: '닫기',
   },
 };
 
@@ -417,6 +438,15 @@ const REPORT_COMMENT_TYPE_LIST = [
   },
 ];
 
+//첨부파일 모달
+const ATTACHMENT_MODAL = {
+  DELETE_ATTACHMENT: {
+    title: '삭제하시겠습니까?',
+    confirmText: '삭제',
+    cancelText: '취소',
+  },
+};
+
 export const MORE_OPTION_MODAL_TEXT = {
   POST_MORE_OPTION_LIST,
   MY_POST_MORE_OPTION_LIST,
@@ -436,3 +466,5 @@ export const OPTION_MODAL_TEXT = {
   REPORT_USER_TYPE_LIST,
   REPORT_COMMENT_TYPE_LIST,
 };
+
+export const ATTACHMENT_MODAL_TEXT = ATTACHMENT_MODAL;

@@ -1,11 +1,27 @@
-.pageFrame {
-  width: 100%;
-
+.container {
   height: 100vh;
+
+  padding-top: var(--default-appbar-height);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0 auto;
+}
+
+.pageTopFrame,
+.pageMiddleFrame,
+.pageBottomFrame {
+  margin: 0 var(--default-margin);
+}
+
+.pageTitle {
+  font: var(--text-title-1-bold);
+}
+
+.pageExplanation {
+  font: var(--text-headline-2-reg);
+  color: var(--grey-4);
+  margin-top: 0.6rem;
 }
 
 .pageMiddleFrame {
@@ -20,23 +36,7 @@
   flex-shrink: 0;
 }
 
-.pageTopFrame {
-  padding: 0 2rem;
-}
-
-.pageTitle {
-  font: var(--text-title-1-bold);
-  margin-top: 5.1rem;
-}
-
-.pageExplanation {
-  font: var(--text-headline-2-reg);
-  color: var(--grey-4);
-  margin-top: 0.6rem;
-}
-
 .pageBottomFrame {
-  padding: 0 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -54,5 +54,5 @@
 }
 
 .loginButton {
-  margin-bottom: 3.3rem;
+  margin-bottom: 4rem;
 }

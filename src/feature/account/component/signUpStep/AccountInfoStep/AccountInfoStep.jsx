@@ -18,19 +18,34 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
   const [idStyle, setIdStyle] = useState('ready');
   const [pwStyle, setPwStyle] = useState('ready');
   const [pw2Style, setPw2Style] = useState('ready');
-  const setDoneState = () => {
-    if (
+
+  // 모든 필드가 유효한지 확인하는 함수
+  const isAllValid = () => {
+    return (
       nameStyle === 'right' &&
       emailStyle === 'right' &&
       idStyle === 'right' &&
       pwStyle === 'right' &&
       pw2Style === 'right'
-    )
-      return 'right';
-    else return 'ready';
+    );
   };
+
+  // 다음 단계로 이동하는 함수
+  const handleNext = () => {
+    if (isAllValid()) {
+      setStage(2); // 직접 2단계로 설정
+    } else {
+      // 유효성 검사가 완료되지 않은 경우 알림 또는 다른 처리
+      alert('모든 필드를 올바르게 입력해주세요.');
+    }
+  };
+
+  const setDoneState = () => {
+    return isAllValid() ? 'right' : 'ready';
+  };
+
   return (
-    <div className={styles.pageFrame}>
+    <>
       <p className={styles.title}>
         계정 정보를
         <br /> 입력해 주세요
@@ -125,9 +140,9 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
         <Button
           btnName='다음으로'
           className={setDoneState()}
-          onClick={() => setStage((prev) => prev + 1)}
+          onClick={handleNext}
         />
       </div>
-    </div>
+    </>
   );
 }

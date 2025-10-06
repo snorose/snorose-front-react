@@ -6,6 +6,8 @@ import { BackAppBar, FetchLoadingOverlay, Icon } from '@/shared/component';
 import { QUERY_KEY, TOAST } from '@/shared/constant';
 
 import { updatePoint } from '@/apis';
+
+import { SettingItem } from '@/feature/alert/component';
 import { Calendar } from '@/feature/attendance/component';
 import {
   ATTENDANCE_MESSAGE,
@@ -26,7 +28,7 @@ export default function AttendancePage() {
       : ATTENDANCE_MESSAGE.FIRST;
 
   return (
-    <main>
+    <div>
       <div className={styles.top}>
         <BackAppBar isDark backgroundColor={'transparent'} notFixed />
         <h2 className={styles.title}>{`매일 출석체크하고 \n 포인트 모아요`}</h2>
@@ -44,18 +46,29 @@ export default function AttendancePage() {
           </div>
           <Icon id='point-circle' width={32} height={32} />
         </div>
-        {/* <div className={styles.item}>
-          <div className={styles.itemLeft}>
-            <span className={styles.label}>알림 설정</span>
-            <p className={styles.description}>
-              매일 출석체크 알림을 보내드릴게요
-            </p>
-          </div>
-          <Icon id='point-circle' width={32} height={32} />
+
+        {/* <div style={{ margin: '0 2rem' }}>
+          <AlertSetting />
         </div> */}
       </div>
+
       {loading && <FetchLoadingOverlay />}
-    </main>
+    </div>
+  );
+}
+
+function AlertSetting() {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggle = () => setIsEnabled((prev) => !prev);
+
+  return (
+    <SettingItem
+      title='알림설정'
+      content='매일 출석체크 알림을 보내드릴게요'
+      isEnabled={isEnabled}
+      onToggle={toggle}
+      variant='blue'
+    />
   );
 }
 

@@ -1,6 +1,7 @@
-.pageFrame {
+.container {
   height: 100%;
-  padding: 0 2rem;
+  padding: 0 var(--default-margin);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -37,5 +38,5 @@
 
 .submit {
   margin-top: 3rem;
-  margin-bottom: 3.9rem;
+  margin-bottom: 4rem;
 }

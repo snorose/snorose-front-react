@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { Icon } from '@/shared/component';
+import cloudLogo from '@/assets/images/cloudLogo.svg';
 
 import styles from './PullToRefresh.module.css';
 
@@ -95,7 +95,7 @@ export default function PullToRefresh({ children, onRefresh }) {
       {refreshing ? (
         <div className={styles.refreshBox}>
           <div className={styles.refreshIcon}>
-            <Icon id='cloud' width={34} height={21} />
+            <img src={cloudLogo} alt='로고' />
           </div>
         </div>
       ) : (

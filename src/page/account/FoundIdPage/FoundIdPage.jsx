@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { BackAppBar, Button, Icon } from '@/shared/component';
+import { BackAppBar, Button } from '@/shared/component';
 
 import styles from './FoundIdPage.module.css';
 
@@ -11,6 +11,7 @@ export default function FoundIdPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [email, setEmail] = useState('');
+
   useEffect(() => {
     try {
       setEmail(state.email);
@@ -20,8 +21,9 @@ export default function FoundIdPage() {
   }, []);
 
   return (
-    <div className={styles.pageFrame}>
+    <div className={styles.container}>
       <BackAppBar backNavTo='/login' />
+
       <div className={styles.pageTopFrame}>
         <p className={styles.pageTitle}>아이디 찾기</p>
         <p className={styles.pageExplanation}>

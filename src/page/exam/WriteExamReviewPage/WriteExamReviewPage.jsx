@@ -59,7 +59,7 @@ export default function WriteExamReviewPage() {
         result: { postId },
       } = data;
 
-      queryClient.removeQueries([QUERY_KEY.post]);
+      queryClient.removeQueries(QUERY_KEY.post());
       invalidUserInfoQuery();
       toast(TOAST.EXAM_REVIEW.create);
       navigate(`/board/exam-review/post/${postId}`, { replace: true });
@@ -187,7 +187,7 @@ export default function WriteExamReviewPage() {
   };
 
   return (
-    <main className={styles.main}>
+    <section className={styles.container}>
       <CloseAppBar>
         <ActionButton
           onClick={async () => {
@@ -346,6 +346,6 @@ export default function WriteExamReviewPage() {
           onConfirm={handleExitPage}
         />
       )}
-    </main>
+    </section>
   );
 }

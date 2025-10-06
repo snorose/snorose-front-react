@@ -1,19 +1,21 @@
-.pageFrame {
-  width: 100%;
+.container {
   height: 100vh;
+
+  padding-top: var(--default-appbar-height);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0 auto;
 }
 
-.pageTopFrame {
-  padding: 0 2rem;
+.pageTopFrame,
+.pageMiddleFrame,
+.pageBottomFrame {
+  padding: 0 var(--default-margin);
 }
 
 .pageTitle {
   font: var(--text-title-1-bold);
-  margin-top: 5.1rem;
 }
 
 .pageExplanation {
@@ -29,7 +31,6 @@
 }
 
 .pageBottomFrame {
-  padding: 0 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -94,6 +95,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 3.3rem;
+  margin-bottom: 4rem;
   color: var(--grey-4);
 }
