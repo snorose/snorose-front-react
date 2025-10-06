@@ -23,8 +23,13 @@
   border-radius: 0 0 0.5rem 0.5rem;
 }
 
+.accordion:first-child:last-child .panelHeader {
+  border-radius: 0.5rem;
+}
+
 .accordion:last-child.opend .panelHeader {
-  border-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .panelHeader span {
@@ -53,14 +58,18 @@
 .panelBody {
   max-height: 0;
   padding: 0 2rem;
-  color: var(--grey-4);
-  font-size: 1.4rem;
-  letter-spacing: -0.05rem;
+
   overflow: hidden;
+
+  background: var(--blue-0);
+  color: var(--grey-4);
+
+  font: var(--text-body-1-reg);
+  white-space: pre-line;
+
   transition:
     max-height 300ms ease,
     padding 300ms ease;
-  background: var(--blue-0);
 }
 
 .opend .panelBody {

@@ -1,120 +1,122 @@
 import { getToken, isSupported, onMessage } from 'firebase/messaging';
 import { messaging } from './firebase-config';
 
+import { sendFCMToken } from '@/apis';
+
+import { AppError } from '@/shared/lib';
+
+import { isIPhone } from '@/feature/alert/lib';
+import { ERROR_CODE, ERROR_MESSAGE } from '@/feature/alert/constant';
+
 export class PushNotificationManager {
-  static async init() {
-    const registration = await this.#registerServiceWorker();
-    const granted = await this.#ensurePermission();
+  static #registration = null;
 
-    if (!granted) return;
-
-    return this.#subscribe(registration);
-  }
-
-  static async #registerServiceWorker() {
-    const isFcmSupported = await isSupported();
-
-    if (!isFcmSupported) {
-      console.warn('이 브라우저에서는 푸시 알림을 지원하지 않습니다.');
-      return;
-    }
+  static async registerServiceWorker() {
+    this.#assertSupport();
 
     try {
       let registration = await navigator.serviceWorker.getRegistration();
+
       if (registration) {
-        return registration;
+        this.#registration = registration;
+        return;
       }
 
-      registration = await navigator.serviceWorker.register(
+      this.#registration = await navigator.serviceWorker.register(
         '/firebase-messaging-sw.js'
       );
-      return registration;
     } catch (error) {
-      console.error('서비스 워커 등록 실패:', error);
-      return;
+      throw new AppError(
+        ERROR_CODE.SW_REGISTER_FAILED,
+        ERROR_MESSAGE.SW_REGISTER_FAILED
+      );
     }
   }
 
-  static async #ensurePermission() {
+  static async #assertSupport() {
+    const isFcmSupported = await isSupported().catch(() => false);
+
+    if (!isFcmSupported) {
+      throw new AppError(
+        ERROR_CODE.SW_ENV_UNSUPPORTED,
+        ERROR_MESSAGE.SW_ENV_UNSUPPORTED
+      );
+    }
+  }
+
+  static async ensurePermission() {
     const current = Notification.permission;
 
-    if (current === 'granted') return true;
-    if (current === 'denied') return false;
+    if (current === 'granted') return;
+    if (current === 'denied') {
+      const message = isIPhone()
+        ? ERROR_MESSAGE.PERMISSION_DENIED_IOS
+        : ERROR_MESSAGE.PERMISSION_DENIED_ANDROID;
+
+      throw new AppError(ERROR_CODE.PERMISSION_BLOCKED, message);
+    }
 
     const result = await Notification.requestPermission();
-    return result === 'granted';
-  }
 
-  static async #subscribe(registration) {
-    if (!registration) {
-      console.warn(
-        'Service worker 등록 정보가 없습니다. 푸시 구독을 건너뜁니다.'
-      );
+    if (result === 'granted') {
       return;
     }
 
-    let token;
+    throw new AppError(ERROR_CODE.PERMISSION_JUST_DENIED);
+  }
 
+  static async issueToken() {
     try {
-      token = await getToken(messaging, {
+      const token = await getToken(messaging, {
         vapidKey: process.env.REACT_APP_VAPID_KEY,
-        serviceWorkerRegistration: registration,
+        serviceWorkerRegistration: this.#registration ?? undefined,
       });
+
+      if (!token) {
+        throw new AppError(
+          ERROR_CODE.FCM_TOKEN_EMPTY,
+          ERROR_MESSAGE.FCM_TOKEN_EMPTY
+        );
+      }
+
+      return token;
     } catch (error) {
-      console.error('FCM 토큰 발급 실패:', error);
-      return;
-    }
-
-    if (!token) {
-      console.warn('FCM 토큰을 받을 수 없습니다.');
-      return;
-    }
-
-    const savedToken = localStorage.getItem(
-      process.env.REACT_APP_FCM_TOKEN_KEY
-    );
-
-    if (!savedToken || savedToken !== token) {
-      try {
-        await this.#sendTokenToServer(token);
-        localStorage.setItem(process.env.REACT_APP_FCM_TOKEN_KEY, token);
-      } catch (error) {
-        console.error('푸시 알림 구독 실패: ', error);
-      }
+      throw new AppError(
+        ERROR_CODE.FCM_TOKEN_ISSUE_FAILED,
+        ERROR_MESSAGE.FCM_TOKEN_ISSUE_FAILED
+      );
     }
   }
 
-  static async #sendTokenToServer(token) {
-    await fetch('/api/register-token', {
-      method: 'POST',
-      body: JSON.stringify({ token }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+  static async syncWithServer(token, deviceType) {
+    try {
+      await sendFCMToken(token, deviceType);
+      this.#setCachedToken(token);
+    } catch (error) {
+      throw new AppError(
+        ERROR_CODE.FCM_TOKEN_SYNC_FAILED,
+        ERROR_MESSAGE.FCM_TOKEN_SYNC_FAILED
+      );
+    }
   }
 
-  static async listenForegroundMessage() {
-    onMessage(messaging, async (payload) => {
-      const isFcmSupported = await isSupported();
+  static isTokenChanged(newToken) {
+    const saved = this.#getCachedToken();
+    return !saved || saved !== newToken;
+  }
 
-      if (!isFcmSupported) {
-        return;
-      }
+  static #getCachedToken() {
+    return localStorage.getItem(process.env.REACT_APP_FCM_TOKEN_KEY);
+  }
 
-      if (Notification.permission !== 'granted') {
-        return;
-      }
+  static #setCachedToken(token) {
+    const key = process.env.REACT_APP_FCM_TOKEN_KEY;
+    localStorage.setItem(key, token);
+  }
 
-      const { title, body } = payload.notification;
-
-      try {
-        const registration = await navigator.serviceWorker.getRegistration();
-
-        if (registration) {
-          registration.showNotification(title, { body });
-        }
-      } catch (error) {
-        console.error('❌ 포그라운드 알림 수신 중 오류:', error);
-      }
+  static onForegroundMessage(callback) {
+    onMessage(messaging, (payload) => {
+      callback();
     });
   }
 }

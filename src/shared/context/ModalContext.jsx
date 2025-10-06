@@ -6,6 +6,7 @@ export function ModalProvider({ children }) {
   const [modal, setModal] = useState({
     id: null,
     type: null,
+    modalProps: null,
   });
 
   return (

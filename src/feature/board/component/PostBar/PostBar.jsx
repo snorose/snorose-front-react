@@ -46,7 +46,8 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
             <p className={styles.text}>{data.questionDetail ?? data.content}</p>
           </div>
         </div>
-        {data.hasMediaAttachment && (
+
+        {/* {data.hasMediaAttachment && (
           <img
             className={styles.thumbnail}
             src={data.thumbnailUrl || altImage}
@@ -55,7 +56,7 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
               e.currentTarget.src = altImage;
             }}
           />
-        )}
+        )} */}
       </div>
 
       <div className={styles.postBarBottom}>

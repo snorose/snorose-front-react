@@ -1,0 +1,130 @@
+.container {
+  height: 9.3rem;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 2.5rem;
+
+  padding: 1.4rem 2rem;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+
+  &.gradient {
+    background: var(--gradient-4);
+  }
+
+  &.blue {
+    background-color: var(--blue-0);
+  }
+
+  /* disabled */
+
+  &.disabled {
+    background: none;
+    background-color: var(--grey-1);
+
+    .title {
+      color: var(--grey-4);
+    }
+
+    .content {
+      color: var(--grey-4);
+    }
+
+    .termsLink {
+      color: var(--grey-3-1);
+    }
+
+    .switch {
+      cursor: not-allowed;
+    }
+  }
+}
+
+/* left */
+
+.left {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.title {
+  font: var(--text-headline-2-med);
+  color: var(--blue-4);
+}
+
+.content {
+  margin-left: 0.1rem;
+
+  font: var(--text-body-1-reg);
+  color: var(--blue-4);
+
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  white-space: pre-line;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+/* right */
+
+.right {
+  width: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 0.4rem;
+}
+
+.termsLink {
+  margin-right: 0.35rem;
+
+  font: var(--text-body-2-reg);
+  color: var(--blue-3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+/* switch */
+
+.switch {
+  width: 4rem;
+  height: 2.5rem;
+
+  display: flex;
+  padding: 0.2rem;
+  box-sizing: border-box;
+
+  border-radius: 2rem;
+  cursor: pointer;
+
+  &.off {
+    justify-content: flex-start;
+    background-color: var(--blue-2);
+  }
+
+  &.on {
+    justify-content: flex-end;
+    background-color: var(--blue-4);
+  }
+}
+
+.slider {
+  width: 2.1rem;
+  height: 2.1rem;
+
+  border-radius: 50%;
+  background-color: var(--white);
+  box-shadow:
+    0px 0px 0px rgba(0, 0, 0, 0.25),
+    0px 3px 1px rgba(0, 0, 0, 0.05);
+}

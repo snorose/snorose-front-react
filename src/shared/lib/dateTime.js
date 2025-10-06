@@ -4,6 +4,9 @@ const DAY_SECONDS = 60 * 60 * 24;
 const MONTH_SECONDS = 60 * 60 * 24 * 30;
 const YEAR_SECONDS = 60 * 60 * 24 * 30 * 12;
 
+/**
+ * YYYY.MM.DD
+ */
 export const dateFormat = (date) => {
   const dateObj = new Date(date);
   const year = dateObj.getFullYear();
@@ -12,6 +15,9 @@ export const dateFormat = (date) => {
   return `${year}.${month}.${day}`;
 };
 
+/**
+ * YYYY/MM/DD HH:MM
+ */
 export const fullDateTimeFormat = (date) => {
   const dateObj = new Date(date);
   const year = dateObj.getFullYear();
@@ -22,6 +28,10 @@ export const fullDateTimeFormat = (date) => {
   return `${year}/${month}/${day} ${hours}:${minutes}`;
 };
 
+/**
+ * same year: MM/DD HH:MM
+ * other year: YYYY/MM/DD HH:MM
+ */
 export const postBarDateFormat = (date) => {
   const now = new Date();
   const targetDate = new Date(date);
@@ -103,6 +113,9 @@ export function timeAgo(date) {
   }
 }
 
+/**
+ * MM/DD/YYYY HH:MM
+ */
 export function formattedNowTime() {
   const formattedNowTime = new Date()
     .toLocaleString('en-US', {

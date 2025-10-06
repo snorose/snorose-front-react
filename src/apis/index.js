@@ -1,4 +1,5 @@
 export * from './account';
+export * from './alert';
 export * from './attendance';
 export * from './banner';
 export * from './comment';

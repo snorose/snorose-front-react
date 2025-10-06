@@ -53,10 +53,10 @@ export default function ReviewDownload({
     try {
       await downloadExamReview();
 
-      const reviewDetail = queryClient.getQueryData([QUERY_KEY.post, postId]);
+      const reviewDetail = queryClient.getQueryData(QUERY_KEY.post(postId));
       const { isDownloaded } = reviewDetail ?? { isDownloaded: false };
 
-      queryClient.setQueryData([QUERY_KEY.post, postId], (prev) => {
+      queryClient.setQueryData(QUERY_KEY.post(postId), (prev) => {
         return { ...prev, isDownloaded: true };
       });
 
