@@ -186,7 +186,7 @@ function NotificationSettings() {
         />
       </div>
 
-      <div className={style.line}></div>
+      {/* <div className={style.line}></div>
 
       <div className={style.attendance}>
         <SettingItem
@@ -197,7 +197,7 @@ function NotificationSettings() {
           variant='blue'
           disabled={!canUseAlert || !state.required}
         />
-      </div>
+      </div> */}
 
       <NotificationSettingModalRenderer onToggle={onToggle} />
     </>
