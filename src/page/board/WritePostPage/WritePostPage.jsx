@@ -173,8 +173,11 @@ export default function WritePostPage() {
                 { replace: true }
               );
 
-          //post 등록이 잘 되었으면 썸네일 생성하기
-          createThumbnail(boardId, newPostId);
+          /**
+           * 이미지 TF 코드
+           */
+          // post 등록이 잘 되었으면 썸네일 생성하기
+          // createThumbnail(boardId, newPostId);
         }
       })
       .catch(({ response }) => {
