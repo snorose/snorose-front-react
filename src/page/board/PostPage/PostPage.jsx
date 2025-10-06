@@ -42,9 +42,6 @@ import { useScrap } from '@/feature/scrap/hook';
 import cloudLogo from '@/assets/images/cloudLogo.svg';
 
 import styles from './PostPage.module.css';
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/scrollbar';
 
 export default function PostPage() {
   const { postId } = useParams();
