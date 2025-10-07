@@ -99,14 +99,14 @@ function AttendanceButton({ setLoading }) {
             today.getMonth() + 1,
           ]);
 
-          // 청파제(9/17~18) 기간 동안 특별 메시지 표시 (한국 시간 기준)
+          // 출석체크 - 리뉴얼 1주년(10/12) 기간 동안 특별 메시지 표시 (한국 시간 기준)
           const now = new Date();
-          const startDate = new Date('2025-09-17T00:00:00+09:00');
-          const endDate = new Date('2025-09-18T23:59:59+09:00');
+          const startDate = new Date('2025-10-12T00:00:00+09:00');
+          const endDate = new Date('2025-10-12T23:59:59+09:00');
 
           const message =
             now >= startDate && now <= endDate
-              ? '🎉 스노로즈 청파제 부스 오픈 기념 5P 제공 🎉'
+              ? '🎉 스노로즈 리뉴얼 1주년 기념 5P 제공 🎉'
               : TOAST.ATTENDANCE.attendance;
 
           toast(message);
