@@ -53,7 +53,9 @@ export default function PostListPage() {
           to={`/board/${currentBoardTextId}/notice`}
         >
           <Icon id='notice-bell' width={13} height={16} />
-          <p>[필독]&nbsp;&nbsp;{noticeLineData?.title}</p>
+          <p className={styles.notificationBarText}>
+            [필독]&nbsp;&nbsp;{noticeLineData?.title}
+          </p>
         </Link>
       )}
       <PostListSuspense saveScrollPosition={saveScrollPosition} />
