@@ -16,17 +16,15 @@
 }
 
 .notificationBar {
-  width: 100%;
-
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.9rem 1.5rem;
   border-radius: 0.5rem;
+  background-color: var(--pink-1);
+  padding: 1.2rem 1.5rem;
 
   font: var(--text-body-1-reg);
   color: var(--pink-3);
-  background-color: var(--pink-1);
 }
 
 .categoryTabs {
