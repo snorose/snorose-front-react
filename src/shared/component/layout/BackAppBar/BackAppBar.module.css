@@ -4,6 +4,7 @@
   z-index: var(--z-index-appbar);
 
   width: 100%;
+  height: 6rem;
   max-width: 60rem;
   height: var(--default-appbar-height);
 

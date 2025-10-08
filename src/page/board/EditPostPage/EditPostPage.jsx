@@ -55,18 +55,22 @@ export default function EditPostPage() {
 
   //'게시글 상세 조회' API에서 제공하는 기존 첨부파일 정보
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
-  const [attachmentsInfo, setAttachmentsInfo] = useState([]);
-  const [deleteAttachments, setDeleteAttachments] = useState([]);
-  const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
-  const [trashImageIndex, setTrashImageIndex] = useState(null);
-  const trashImageConfirmModal = useModal();
+
+  /**
+   * 이미지 TF 코드
+   */
+  // const [attachmentsInfo, setAttachmentsInfo] = useState([]);
+  // const [deleteAttachments, setDeleteAttachments] = useState([]);
+  // const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
+  // const [trashImageIndex, setTrashImageIndex] = useState(null);
+  // const trashImageConfirmModal = useModal();
 
   // 페이지 이탈 방지 모달 노출
   useBlocker(isBlock);
 
   // 게시글 내용 가져오기
   const { data, isLoading, error } = useQuery({
-    queryKey: [QUERY_KEY.post, postId],
+    queryKey: QUERY_KEY.post(postId),
     queryFn: () => getPostContent(currentBoard?.id, postId),
     enabled: !!currentBoard?.id && !!postId,
     placeholderData: {},
@@ -80,7 +84,7 @@ export default function EditPostPage() {
     setText(data.content);
     setIsNotice(data.isNotice);
     setUserDisplay(data.userDisplay);
-    setAttachmentsInfo(data.attachments);
+    // setAttachmentsInfo(data.attachments);
   }, [data]);
 
   // isBlock 업데이트
@@ -99,7 +103,7 @@ export default function EditPostPage() {
     mutationKey: [MUTATION_KEY.editPost],
     mutationFn: patchPost,
     onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.post, postId]);
+      queryClient.invalidateQueries(QUERY_KEY.post(postId));
       navigate(-1);
       toast({ message: TOAST.POST.edit, variant: 'success' });
       setSubmitDisabled(false);
@@ -157,8 +161,8 @@ export default function EditPostPage() {
       title,
       content: text,
       isNotice,
-      attachmentsInfo,
-      deleteAttachments,
+      // attachmentsInfo,
+      // deleteAttachments,
     });
   };
 
@@ -249,13 +253,14 @@ export default function EditPostPage() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
-              <AttachmentList
+              {/* <AttachmentList
                 attachmentsInfo={attachmentsInfo}
                 setAttachmentsInfo={setAttachmentsInfo}
-              />
+              /> */}
             </div>
           </div>
         </div>
+
         {/* 페이지 이탈 방지 모달 */}
         {modal.id === 'exit-page' && (
           <ConfirmModal
@@ -263,7 +268,8 @@ export default function EditPostPage() {
             onConfirm={handleExitPage}
           />
         )}
-        <Icon
+
+        {/* <Icon
           id='trashcan'
           width='10rem'
           height='10rem'
@@ -298,10 +304,10 @@ export default function EditPostPage() {
         <AttachmentBar
           attachmentsInfo={attachmentsInfo}
           setAttachmentsInfo={setAttachmentsInfo}
-        />
+        /> */}
       </div>
 
-      {trashImageConfirmModal.isOpen && (
+      {/* {trashImageConfirmModal.isOpen && (
         <ConfirmModal
           modalText={ATTACHMENT_MODAL_TEXT.DELETE_ATTACHMENT}
           onConfirm={() => {
@@ -316,7 +322,7 @@ export default function EditPostPage() {
             trashImageConfirmModal.closeModal();
           }}
         />
-      )}
+      )} */}
     </>
   );
 }

@@ -43,7 +43,7 @@ export default function useComment() {
   };
 
   const updateCommentCountCache = ({ type }) => {
-    queryClient.setQueryData([QUERY_KEY.post, postId], (prev) => ({
+    queryClient.setQueryData(QUERY_KEY.post(postId), (prev) => ({
       ...prev,
       commentCount:
         type === COMMENT_ACTION_TYPE.create

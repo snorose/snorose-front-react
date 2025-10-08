@@ -32,7 +32,7 @@ export function useDeletePostHandler(boardId) {
           : toast({ message: TOAST.POST.deleteNoPoints, variant: 'success' });
 
         navigate(-1);
-        queryClient.removeQueries([QUERY_KEY.post, postId]);
+        queryClient.removeQueries(QUERY_KEY.post(postId));
         invalidUserInfoQuery();
       }
     } catch ({ response }) {

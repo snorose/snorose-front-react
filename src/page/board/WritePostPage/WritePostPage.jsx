@@ -48,12 +48,15 @@ export default function WritePostPage() {
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [isBlock, setIsBlock] = useState(false);
 
+  /**
+   * 이미지 TF 코드
+   */
   //'게시글 생성' API에서 요구하는 데이터 (중 attachments array)
-  const [attachmentsInfo, setAttachmentsInfo] = useState([]);
+  // const [attachmentsInfo, setAttachmentsInfo] = useState([]);
 
-  const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
-  const [trashImageIndex, setTrashImageIndex] = useState(null); //지우는 이미지 index
-  const trashImageConfirmModal = useModal();
+  // const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
+  // const [trashImageIndex, setTrashImageIndex] = useState(null); //지우는 이미지 index
+  // const trashImageConfirmModal = useModal();
 
   const textId = pathname.split('/')[2];
   const currentBoard = getBoard(textId);
@@ -140,7 +143,7 @@ export default function WritePostPage() {
     title,
     content: text,
     isNotice: textId === 'notice' ? true : isNotice,
-    attachmentsInfo: attachmentsInfo,
+    // attachmentsInfo: attachmentsInfo,
   };
 
   const handleSubmit = (e) => {
@@ -162,7 +165,7 @@ export default function WritePostPage() {
             : toast({ message: TOAST.POST.create, variant: 'success' });
           const newPostId = response.data.result.postId;
 
-          queryClient.removeQueries([QUERY_KEY.post]);
+          queryClient.removeQueries(QUERY_KEY.post());
           invalidUserInfoQuery();
           currentBoard.id === 12 || isNotice
             ? navigate(`/board/${currentBoard.textId}/notice`, {
@@ -173,8 +176,11 @@ export default function WritePostPage() {
                 { replace: true }
               );
 
-          //post 등록이 잘 되었으면 썸네일 생성하기
-          createThumbnail(boardId, newPostId);
+          /**
+           * 이미지 TF 코드
+           */
+          // post 등록이 잘 되었으면 썸네일 생성하기
+          // createThumbnail(boardId, newPostId);
         }
       })
       .catch(({ response }) => {
@@ -300,10 +306,10 @@ export default function WritePostPage() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
-              <AttachmentList
+              {/* <AttachmentList
                 attachmentsInfo={attachmentsInfo}
                 setAttachmentsInfo={setAttachmentsInfo}
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -314,7 +320,8 @@ export default function WritePostPage() {
             onConfirm={handleExitPage}
           />
         )}
-        <Icon
+
+        {/* <Icon
           id='trashcan'
           width='10rem'
           height='10rem'
@@ -345,10 +352,10 @@ export default function WritePostPage() {
         <AttachmentBar
           attachmentsInfo={attachmentsInfo}
           setAttachmentsInfo={setAttachmentsInfo}
-        />
+        /> */}
       </div>
 
-      {trashImageConfirmModal.isOpen && (
+      {/* {trashImageConfirmModal.isOpen && (
         <ConfirmModal
           modalText={ATTACHMENT_MODAL_TEXT.DELETE_ATTACHMENT}
           onConfirm={() => {
@@ -363,7 +370,7 @@ export default function WritePostPage() {
             trashImageConfirmModal.closeModal();
           }}
         />
-      )}
+      )} */}
     </>
   );
 }

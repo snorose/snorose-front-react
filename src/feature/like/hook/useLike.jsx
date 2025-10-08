@@ -15,7 +15,7 @@ export default function useLike({ type, sourceId }) {
   const { toast } = useToast();
 
   const updatePostLikeCache = ({ isLiked, likeCount }) => {
-    queryClient.setQueryData([QUERY_KEY.post, postId], (prev) => ({
+    queryClient.setQueryData(QUERY_KEY.post(postId), (prev) => ({
       ...prev,
       isLiked,
       likeCount,

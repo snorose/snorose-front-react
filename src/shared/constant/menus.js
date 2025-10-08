@@ -20,13 +20,13 @@ export const NAVBAR_MENUS = Object.freeze([
     width: 32,
     height: 32,
   },
-  // {
-  //   id: 'bell',
-  //   to: '/alert',
-  //   label: '알림',
-  //   width: 32,
-  //   height: 32,
-  // },
+  {
+    id: 'bell',
+    to: '/alert',
+    label: '알림',
+    width: 32,
+    height: 32,
+  },
   {
     id: 'mypage',
     to: '/my-page',

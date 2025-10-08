@@ -13,7 +13,7 @@ export default function useScrap() {
   const queryClient = useQueryClient();
 
   const updateScrapCache = ({ isScrapped, scrapCount }) => {
-    queryClient.setQueryData([QUERY_KEY.post, postId], (prev) => ({
+    queryClient.setQueryData(QUERY_KEY.post(postId), (prev) => ({
       ...prev,
       isScrapped,
       scrapCount,

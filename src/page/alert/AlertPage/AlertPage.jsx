@@ -1,156 +1,171 @@
-import { useState } from 'react';
+import { Suspense } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
+import {
+  QueryErrorResetBoundary,
+  useIsFetching,
+  useQueryClient,
+} from '@tanstack/react-query';
 
-import { MenuIcon, Icon } from '@/shared/component';
+import {
+  AppBar,
+  FetchLoading,
+  Icon,
+  NewButton,
+  ServerErrorFallback,
+} from '@/shared/component';
+import { QUERY_KEY } from '@/shared/constant';
 
-import styles from './AlertPage.module.css';
+import {
+  useNotification,
+  useReadNotifications,
+} from '@/feature/alert/hook/notification';
+import { CategoryTab, NotificationItem } from '@/feature/alert/component';
+import { CATEGORY } from '@/feature/alert/constant';
 
-const initialAlertData = [
-  {
-    type: 'addedToBoard',
-    title: '내 글이 베숙트에 추가되었습니다',
-    description: `‘스노르즈 포인트를 모으는 5가지 방법’ 글이 베송트에 추가되었습니다.`,
-    isRead: false,
-    isWarning: false,
-  },
-  {
-    type: 'pointEarned',
-    title: '베숙트 포인트가 적립되었습니다',
-    description: `좋아요 10개를 받아 50포인트가 적립되었습니다.`,
-    isRead: false,
-    isWarning: false,
-  },
-  {
-    type: 'commentReply',
-    title: '스노르즈 포인트를 모으는 5가지 방법',
-    description: `내가 단 댓글에 답글이 달렸습니다.`,
-    isRead: false,
-    isWarning: false,
-  },
-  {
-    type: 'reportReward',
-    title: '신고 포상 포인트가 적립되었습니다',
-    description: `시험 후기 게시글 신고가 완료되어 20포인트가 적립되었습니다.`,
-    isRead: true,
-    isWarning: false,
-  },
-  {
-    type: 'announcement',
-    title: '족보 거래 목격시 즉시 신고해주세요',
-    description: `최근 기밀사항을 알아 폭보 거래 제보가 증가하고 있습니다.
-족보 거래를 목격하시면 즉시 신고하고 100포인트를 적립하세요.`,
-    isRead: false,
-    isWarning: true,
-  },
-  {
-    type: 'announcement',
-    title: '족보 거래 목격시 즉시 신고해주세요',
-    description: `최근 기밀사항을 알아 폭보 거래 제보가 증가하고 있습니다.
-족보 거래를 목격하시면 즉시 신고하고 100포인트를 적립하세요.`,
-    isRead: true,
-    isWarning: true,
-  },
-  {
-    type: 'announcement',
-    title: '시험후기 오픈 일정 알림',
-    description: `시험후기 게시판 오픈일정 안내입니다. (24.12.20 - 25.01.15)
-자세한 내용은 공지사항을 확인하세요.`,
-    isRead: true,
-    isWarning: false,
-  },
-];
+import { noAlertIllustration } from '@/assets/illustrations';
 
-const getIconId = (type, isRead) => {
-  switch (type) {
-    case 'addedToBoard':
-      return 'star-circle';
-    case 'pointEarned':
-      return 'point-circle';
-    case 'commentReply':
-      return 'comment-circle';
-    case 'reportReward':
-      return 'triangle-exclamation-circle';
-    case 'announcement':
-      return isRead ? 'snow-circle-blue' : 'snow-circle-pink';
-    default:
-      return 'default-icon';
-  }
-};
+import style from './AlertPage.module.css';
 
 export default function AlertPage() {
-  const [alerts, setAlerts] = useState(initialAlertData);
+  const navigate = useNavigate();
 
-  const markAllAsRead = () => {
-    const updatedAlerts = alerts.map((alert) => ({
-      ...alert,
-      isRead: true,
-    }));
-    setAlerts(updatedAlerts);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeCategory = searchParams.get('category') ?? 'ALL';
+
+  const updateCategory = (category) => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+
+      if (category === 'ALL') {
+        newParams.delete('category');
+      } else {
+        newParams.set('category', category);
+      }
+
+      return newParams;
+    });
   };
 
   return (
-    <main className={styles.alertPage}>
-      <header className={styles.menu}>
-        <MenuIcon stroke='#00368E' />
-      </header>
+    <div className={style.container}>
+      <AppBar title='알림'>
+        <Icon
+          className={style.settingIcon}
+          id='setting'
+          width='24'
+          height='24'
+          onClick={() => navigate('/alert/setting')}
+        />
+      </AppBar>
 
-      <section className={styles.contentWrapper}>
-        <div className={styles.topContainer}>
-          <h1 className={styles.title}>알림</h1>
-          <button className={styles.readAllButton} onClick={markAllAsRead}>
-            모두 읽기
-          </button>
+      <div className={style.top}>
+        <div className={style.notificationBar}>
+          <Icon id='notice-bell' width={13} height={16} />
+          <p>모든 알림은 14일 후 자동으로 삭제돼요!</p>
         </div>
+      </div>
 
-        <article className={styles.alertListContainer}>
-          {alerts.map((item, index) => (
-            <section
-              key={index}
-              className={`${styles.alertBox} ${
-                !item.isRead
-                  ? item.isWarning
-                    ? styles.unreadWarning
-                    : styles.unread
-                  : ''
-              }`}
-            >
-              <div className={styles.alertIconContentWrapper}>
-                <Icon
-                  id={getIconId(item.type, item.isRead)}
-                  width={32}
-                  height={32}
-                  fill='none'
-                />
-                <div className={styles.alertContent}>
-                  <h2
-                    className={`${styles.alertTitle} ${
-                      !item.isRead
-                        ? item.isWarning
-                          ? styles.unreadWarningTitle
-                          : styles.unreadTitle
-                        : ''
-                    }`}
-                  >
-                    {item.title}
-                  </h2>
-                  {item.description && (
-                    <p
-                      className={`${styles.alertDesc} ${
-                        !item.isRead
-                          ? item.isWarning
-                            ? styles.unreadWarningDesc
-                            : styles.unreadDesc
-                          : ''
-                      }`}
-                    >
-                      {item.description}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </section>
-          ))}
-        </article>
-      </section>
-    </main>
+      <div className={style.categoryTabs}>
+        {Object.entries(CATEGORY).map(([key, value]) => (
+          <CategoryTab
+            key={key}
+            label={value}
+            isSelected={key === activeCategory}
+            onClick={() => updateCategory(key)}
+          />
+        ))}
+      </div>
+
+      <AllReadButton activeCategory={activeCategory} />
+
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary
+            onReset={reset}
+            FallbackComponent={({ resetErrorBoundary }) => (
+              <ServerErrorFallback reset={resetErrorBoundary} />
+            )}
+          >
+            <Suspense fallback={<FetchLoading />}>
+              <NotificationList category={activeCategory} />
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
+    </div>
+  );
+}
+
+function AllReadButton({ activeCategory }) {
+  const queryClient = useQueryClient();
+  const { markAllNotificationsAsRead } = useReadNotifications();
+
+  const isFetching =
+    useIsFetching({
+      queryKey: QUERY_KEY.notifications(activeCategory),
+      exact: true,
+    }) > 0;
+
+  const data = queryClient.getQueryData(
+    QUERY_KEY.notifications(activeCategory)
+  );
+
+  const noData = data?.length === 0;
+  const allRead = data?.every((item) => item.isRead);
+
+  const disabled = isFetching || noData || allRead;
+
+  return (
+    <div className={style.readAllButton}>
+      <NewButton
+        variant='outlined'
+        size='small'
+        onClick={() => markAllNotificationsAsRead.mutate(activeCategory)}
+        disabled={disabled}
+      >
+        모두읽기
+      </NewButton>
+    </div>
+  );
+}
+
+function NotificationList({ category }) {
+  const navigate = useNavigate();
+  const { data: notifications } = useNotification(category);
+  const { markNotificationAsRead } = useReadNotifications();
+
+  const read = async (item) => {
+    await markNotificationAsRead.mutate(item);
+
+    if (item.url) {
+      navigate(item.url);
+    }
+  };
+
+  if (notifications.length === 0) {
+    return (
+      <div className={style.noAlertContainer}>
+        <img
+          className={style.noAlertIllustration}
+          src={noAlertIllustration}
+          alt='새로운 알림이 없어요'
+        />
+        <div>새로운 알림이 없어요</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={style.notificationList}>
+      {notifications.map((item) => (
+        <NotificationItem
+          key={item.id}
+          {...item}
+          category={CATEGORY[item.category]}
+          onClick={() => read(item)}
+        />
+      ))}
+    </div>
   );
 }
