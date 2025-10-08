@@ -12,40 +12,37 @@ const content = (
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
 
-      {/* <Heading>1. 청파제 이벤트 포인트 지급 일정 안내</Heading>
+      <Heading>1. 스노로즈 알림 기능 런칭 안내</Heading>
+      <Content>
+        <strong>10월 6일(월)</strong>부터 스노로즈에서{' '}
+        <strong>알림 기능</strong>을 제공합니다.
+        <br />
+        알림 기능 소개 및 사용 방법은{' '}
+        <strong>
+          <a
+            className={styles.link}
+            href='http://localhost:3001/board/notice/post/1854049'
+            target='_blank'
+            alt='스노로즈 알림 기능 런칭 안내'
+          >
+            관련 공지
+          </a>
+        </strong>{' '}
+        를 참고해주시길 바랍니다.
+      </Content>
+
+      <Heading>2. 청파제 이벤트 포인트 지급 일정 안내</Heading>
       <Content>
         <p>
           청파제 이벤트 포인트는 <strong>10월 13일(월)</strong>까지 순차적으로
           지급될 예정입니다.
         </p>
-      </Content> */}
+      </Content>
 
-      <Heading>1. 10월 스노로즈 일정</Heading>
+      <Heading>3. 10월 스노로즈 일정</Heading>
       <Content>
         <img src={october} alt='10월 캘린더' />
       </Content>
-
-      {/* <Heading>1. 스노로즈 전체 재인증 안내</Heading>
-      <Content>
-        안정적인 커뮤니티 운영을 위해 <strong>전체 재인증</strong>을 실시합니다.
-        <br />
-        <strong>2025/09/07 기준</strong>으로 모든 정회원이 준회원으로
-        전환되었으며, 재인증 완료 시 정회원으로 복구됩니다.
-        <br />
-        📌 재인증 대상: 모든 회원
-        <br />
-        📌 재인증 방법:{' '}
-        <strong>
-          <a
-            className={styles.link}
-            href='https://snorose.com/verify'
-            target='_blank'
-          >
-            인증 페이지
-          </a>
-        </strong>{' '}
-        접속 후 인증
-      </Content> */}
 
       {/* <Heading>2. 스노로즈 블로그 이벤트기획파트편 공개</Heading>
       <Content>
