@@ -2,6 +2,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 
 import { Icon } from '@/shared/component';
 import { useToast } from '@/shared/hook';
+import { TOAST } from '@/shared/constant';
 
 import { useCommentContext } from '@/feature/comment/context';
 import { useComment } from '@/feature/comment/hook';
@@ -41,12 +42,12 @@ const CommentInput = () => {
     }
 
     if (!content.trim()) {
-      toast('댓글 내용을 입력하세요.');
+      toast({ message: TOAST.COMMENT.emptyContent, variant: 'info' });
       return;
     }
 
     if (content.length > 1000) {
-      toast('댓글은 1000자 이내로 작성해주세요.');
+      toast({ message: TOAST.COMMENT.tooLongContent, variant: 'info' });
       return;
     }
 

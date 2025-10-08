@@ -28,15 +28,15 @@ export function useDeletePostHandler(boardId) {
 
       if (response.status === 200) {
         boardId !== 23
-          ? toast(TOAST.POST.delete)
-          : toast(TOAST.POST.deleteNoPoints);
+          ? toast({ message: TOAST.POST.delete, variant: 'success' })
+          : toast({ message: TOAST.POST.deleteNoPoints, variant: 'success' });
 
         navigate(-1);
         queryClient.removeQueries(QUERY_KEY.post(postId));
         invalidUserInfoQuery();
       }
     } catch ({ response }) {
-      toast(response.data.message);
+      toast({ message: response.data.message });
     } finally {
       submitDisabledRef.current = false;
       setSubmitDisabled(false);

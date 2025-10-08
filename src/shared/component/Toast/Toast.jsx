@@ -2,17 +2,40 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import { useToastContext } from '@/shared/context/ToastContext';
+import { Icon } from '@/shared/component';
 
 import styles from './Toast.module.css';
 
 export default function Toast({ toast }) {
   const { removeToast } = useToastContext();
-  const toastRef = useRef();
+  const toastRef = useRef(null);
+
+  const toastConfig = {
+    error: {
+      icon: 'info-triangle',
+      className: styles.error,
+    },
+    info: {
+      icon: 'info-circle',
+      className: styles.info,
+    },
+    success: {
+      icon: 'active-check-circle-outline',
+      className: styles.success,
+    },
+  };
+
+  const variant = toast.variant || 'info';
+  const config = toastConfig[variant] || toastConfig.info;
+  const iconId = config.icon;
+  const toastClassName = `${styles.toast} ${config.className || ''}`;
 
   useEffect(() => {
     const fadeOut = setTimeout(() => {
-      toastRef.current.style.opacity = '0';
-    }, 3000);
+      if (toastRef.current) {
+        toastRef.current.style.opacity = '0';
+      }
+    }, 300000);
 
     const unmount = setTimeout(() => {
       removeToast(toast.message);
@@ -25,9 +48,11 @@ export default function Toast({ toast }) {
   }, [toast]);
 
   const root = document.getElementById('toast');
+  if (!root) return null;
 
   return createPortal(
-    <div ref={toastRef} className={styles.toast}>
+    <div ref={toastRef} className={toastClassName}>
+      <Icon className={styles.icon} id={iconId} width={21} height={20} />
       <p className={styles.message}>{toast.message}</p>
     </div>,
     root

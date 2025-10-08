@@ -113,7 +113,10 @@ export default function FullScreenAttachment({
             try {
               handleZipDownload(urls);
             } catch (e) {
-              toast('다운로드에 문제가 발생했습니다. 다시 시도해주세요.');
+              toast({
+                message: '다운로드에 문제가 발생했습니다. 다시 시도해주세요.',
+                variant: 'error',
+              });
             }
             setIsChoiceModalOpen(false);
           },
@@ -125,7 +128,10 @@ export default function FullScreenAttachment({
                 paginationRef.current?.textContent.split('/')[0] - 1;
               handleDownload(urls[currentIndex]);
             } catch (e) {
-              toast('다운로드에 문제가 발생했습니다. 다시 시도해주세요.');
+              toast({
+                message: '다운로드에 문제가 발생했습니다. 다시 시도해주세요.',
+                variant: 'error',
+              });
             }
             setIsChoiceModalOpen(false);
           },
