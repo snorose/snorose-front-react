@@ -92,8 +92,8 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
                 id='scrap-stroke'
                 width={11}
                 height={13}
-                fill={data.isScrapped ? 'var(--green-1)' : 'none'}
-                stroke={'var(--green-1)'}
+                fill={data.isScrapped ? 'var(--green-2)' : 'none'}
+                stroke={'var(--green-2)'}
               />
               <span>{data?.scrapCount.toLocaleString()}</span>
             </div>

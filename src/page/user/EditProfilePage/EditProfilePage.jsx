@@ -57,7 +57,7 @@ export default function EditProfilePage() {
           queryKey: [QUERY_KEY.userInfo],
         });
 
-        toast(TOAST.USER.editUserInfo);
+        toast({ message: TOAST.USER.editUserInfo, variant: 'success' });
         navigate('/my-page');
       },
       onError: ({ response }) => {
@@ -65,11 +65,15 @@ export default function EditProfilePage() {
 
         toast(
           // data.userProfile ||
-          data.userName ||
-            data.birthday ||
-            data.nickname ||
-            data.major ||
-            data.message
+          {
+            message:
+              data.userName ||
+              data.birthday ||
+              data.nickname ||
+              data.major ||
+              data.message,
+            variant: 'error',
+          }
         );
       },
     });

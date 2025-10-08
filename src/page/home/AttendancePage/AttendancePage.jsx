@@ -99,7 +99,7 @@ function AttendanceButton({ setLoading }) {
             today.getMonth() + 1,
           ]);
 
-          // 출석체크 - 리뉴얼 1주년(10/12) 기간 동안 특별 메시지 표시 (한국 시간 기준)
+          // 출석체크 - 리뉴얼 1주년(10/12) 기간 동안 특별 메시지 표시 (KST)
           const now = new Date();
           const startDate = new Date('2025-10-12T00:00:00+09:00');
           const endDate = new Date('2025-10-12T23:59:59+09:00');
@@ -109,15 +109,12 @@ function AttendanceButton({ setLoading }) {
               ? '🎉 스노로즈 리뉴얼 1주년 기념 5P 제공 🎉'
               : TOAST.ATTENDANCE.attendance;
 
-          toast(message);
-
-          // 기존 메시지 (출석 체크 완료)
-          // toast(TOAST.ATTENDANCE.attendance);
+          toast({ message, variant: 'success' });
         }
         setIsAttendance(true);
       })
       .catch(({ response }) => {
-        toast(response.data.message);
+        toast({ message: response.data.message, variant: 'error' });
       })
       .finally(() => {
         setDisabled(false);

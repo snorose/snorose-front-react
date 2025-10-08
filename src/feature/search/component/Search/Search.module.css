@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  padding: 1.2rem 1.2rem;
+  padding: 1.2rem 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.7rem;
@@ -13,11 +13,11 @@
   outline: none;
   border: none;
   background-color: transparent;
-  font: var(--text-body-2-reg);
+  font: var(--text-body-1-reg);
   color: var(--black);
 }
 
 .search::placeholder {
-  font: var(--text-body-2-reg);
+  font: var(--text-body-1-reg);
   color: var(--grey-3-1);
 }
