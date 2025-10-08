@@ -59,9 +59,12 @@
   font: var(--text-body-1-med);
   display: -webkit-box;
   -webkit-line-clamp: 1;
+  line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .text {
@@ -69,9 +72,12 @@
   color: var(--grey-4);
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .thumbnail {
