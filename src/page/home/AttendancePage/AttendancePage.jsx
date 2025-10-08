@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useAuth, useToast } from '@/shared/hook';
 import { BackAppBar, FetchLoadingOverlay, Icon } from '@/shared/component';
 import { QUERY_KEY, TOAST } from '@/shared/constant';
+import { fireConfetti } from '@/shared/lib/confetti';
 
 import { updatePoint } from '@/apis';
 
@@ -104,10 +105,20 @@ function AttendanceButton({ setLoading }) {
           const startDate = new Date('2025-10-12T00:00:00+09:00');
           const endDate = new Date('2025-10-12T23:59:59+09:00');
 
-          const message =
-            now >= startDate && now <= endDate
-              ? '🎉 스노로즈 리뉴얼 1주년 기념 5P 제공 🎉'
-              : TOAST.ATTENDANCE.attendance;
+          const isEventPeriod = now >= startDate && now <= endDate;
+
+          const message = isEventPeriod
+            ? '스노로즈 리뉴얼 1주년 기념 5P 제공 🎉'
+            : TOAST.ATTENDANCE.attendance;
+
+          // 이벤트 기간 동안만 폭죽 효과 실행
+          if (isEventPeriod) {
+            try {
+              fireConfetti();
+            } catch (error) {
+              console.warn('폭죽 효과 실행 중 오류:', error);
+            }
+          }
 
           toast({ message, variant: 'success' });
         }
