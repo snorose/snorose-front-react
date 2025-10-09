@@ -133,6 +133,7 @@
 
 .content {
   margin: 0.8rem 0 3.2rem 0;
+  line-height: 1.4;
   white-space: pre-wrap;
   word-break: break-all;
 }
