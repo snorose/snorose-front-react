@@ -19,10 +19,6 @@ import {
   PushNotificationManager,
   getDeviceType,
   canUseAlertSetting,
-  isWebPushSupported,
-  isAndroidPhone,
-  isIPhone,
-  isIOSPWA,
 } from '@/feature/alert/lib';
 import {
   useUpdateNotificationSetting,
@@ -130,34 +126,9 @@ function NotificationSettings() {
     userAgent: navigator.userAgent,
   });
 
-  const supported = isWebPushSupported();
-  const android = isAndroidPhone();
-  const ios = isIPhone();
-  const iosPWA = isIOSPWA();
-
   return (
     <>
       <div className={style.alert}>
-        <div>supported: {supported ? 'true' : 'false'}</div>
-        <div>android: {android ? 'true' : 'false'}</div>
-        <div>ios: {ios ? 'true' : 'false'}</div>
-        <div>iosPWA: {iosPWA ? 'true' : 'false'}</div>
-
-        <hr />
-
-        <div>
-          Notification in window: {'Notification' in window ? 'true' : 'false'}
-        </div>
-        <div>
-          serviceWorker in navigator:{' '}
-          {'serviceWorker' in window ? 'true' : 'false'}
-        </div>
-        <div>
-          PushManager in window: {'PushManager' in window ? 'true' : 'false'}
-        </div>
-        <div>navigator.standalone: {navigator.standalone}</div>
-        <div>navigator.platform: {navigator.platform}</div>
-        <div>userAgent: {navigator.userAgent}</div>
         <SettingItem
           title='알림 받기'
           content={content.alert}
