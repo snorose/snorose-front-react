@@ -21,7 +21,7 @@ const content = (
         <strong>
           <a
             className={styles.link}
-            href='http://localhost:3001/board/notice/post/1854049'
+            href='https://www.snorose.com/board/notice/post/1854049'
             target='_blank'
             alt='스노로즈 알림 기능 런칭 안내'
           >
