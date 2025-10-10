@@ -14,6 +14,13 @@ const POST_MORE_OPTION_LIST = [
     width: 17,
     height: 17,
   },
+  {
+    modalId: 'share',
+    iconId: 'share',
+    label: '공유하기',
+    width: 18,
+    height: 19,
+  },
 ];
 const MY_POST_MORE_OPTION_LIST = [
   {
@@ -29,6 +36,13 @@ const MY_POST_MORE_OPTION_LIST = [
     label: '삭제하기',
     width: 16,
     height: 20,
+  },
+  {
+    modalId: 'share',
+    iconId: 'share',
+    label: '공유하기',
+    width: 18,
+    height: 19,
   },
 ];
 
