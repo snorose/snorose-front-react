@@ -6,7 +6,7 @@ export function isWebPushSupported() {
   );
 }
 
-function isAndroidPhone() {
+export function isAndroidPhone() {
   const isSmartPhone = navigator.userAgentData?.mobile;
 
   if (isSmartPhone !== undefined) {
@@ -22,7 +22,7 @@ export function isIPhone() {
   return navigator.platform === 'iPhone';
 }
 
-function isIOSPWA() {
+export function isIOSPWA() {
   return (
     typeof navigator.standalone !== 'undefined' && navigator.standalone === true
   );
