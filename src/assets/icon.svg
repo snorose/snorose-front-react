@@ -646,6 +646,12 @@
   <symbol id="scrap-stroke" viewBox="0 0 13 16" fill="current" stroke="current">
     <path d="M2.80078 0.635254H10.8008C11.6292 0.635254 12.3008 1.30683 12.3008 2.13525V13.3823C12.3006 13.7453 11.9303 13.9791 11.6094 13.8442L11.5459 13.812L7.56445 11.4575C7.15243 11.2139 6.65266 11.183 6.21875 11.3657L6.03711 11.4575L2.05566 13.812C1.72243 14.0091 1.30096 13.7694 1.30078 13.3823V2.13525C1.30078 1.30683 1.97235 0.635254 2.80078 0.635254Z" stroke="#current"/>
   </symbol>
+  <symbol id="share" viewBox="0 0 18 19" fill="none" stroke="none">
+    <path d="M13.9995 4L3.49951 9.5L13.9995 15.5" stroke="#898989" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="14.5" cy="3.5" r="3.5" fill="#AAD916"/>
+    <circle cx="14.5" cy="15.5" r="3.5" fill="#AAD916"/>
+    <circle cx="3.5" cy="9.5" r="3.5" fill="#AAD916"/>
+  </symbol>
 
 
   <!-- 일러스트 -->
