@@ -47,6 +47,8 @@ export const STATIC_ICON_LIST = Object.freeze({
   pointCircle: 'point-circle',
   pointCircleBlue: 'point-circle-blue',
   pencil: 'pencil',
+  pencilGrey: 'pencil-grey',
+  pencilBlue: 'pencil-blue',
   refresh: 'refresh',
   search: 'search',
   searchThick: 'search-thick',

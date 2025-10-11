@@ -25,7 +25,7 @@ const POST_MORE_OPTION_LIST = [
 const MY_POST_MORE_OPTION_LIST = [
   {
     modalId: null,
-    iconId: 'pencil-grey',
+    iconId: 'pencil-blue',
     label: '수정하기',
     width: 19,
     height: 22,
