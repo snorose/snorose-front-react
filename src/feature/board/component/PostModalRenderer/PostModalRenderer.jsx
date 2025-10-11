@@ -13,6 +13,7 @@ export default function PostModalRenderer({
   handleEdit,
   handleReport,
   handleDelete,
+  handleShare,
 }) {
   const { pathname } = useLocation();
   const currentBoard = getBoard(pathname.split('/')[2]);
@@ -21,21 +22,22 @@ export default function PostModalRenderer({
     <>
       {(() => {
         switch (modal.id) {
-          // 게시글 더보기 모달 (게시글 신고, 이용자 신고)
+          // 게시글 더보기 모달 (게시글 신고, 이용자 신고, 공유하기)
           case 'post-more-options':
             return (
               <MoreOptionModal
                 title='게시글'
                 optionList={MORE_OPTION_MODAL_TEXT.POST_MORE_OPTION_LIST}
+                functions={[null, null, handleShare]}
               />
             );
-          // 내 게시글 더보기 모달 (수정, 삭제)
+          // 내 게시글 더보기 모달 (수정, 삭제, 공유하기)
           case 'my-post-more-options':
             return (
               <MoreOptionModal
                 title='내 게시글'
                 optionList={MORE_OPTION_MODAL_TEXT.MY_POST_MORE_OPTION_LIST}
-                functions={[handleEdit, null]}
+                functions={[handleEdit, null, handleShare]}
               />
             );
           // 게시글 신고하기 옵션 리스트 모달

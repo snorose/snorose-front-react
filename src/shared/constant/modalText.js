@@ -2,7 +2,7 @@
 const POST_MORE_OPTION_LIST = [
   {
     modalId: 'report-post-types',
-    iconId: 'report-post',
+    iconId: 'flag-pink',
     label: '게시글 신고',
     width: 19,
     height: 22,
@@ -14,11 +14,18 @@ const POST_MORE_OPTION_LIST = [
     width: 17,
     height: 17,
   },
+  {
+    modalId: 'share',
+    iconId: 'share',
+    label: '공유하기',
+    width: 18,
+    height: 19,
+  },
 ];
 const MY_POST_MORE_OPTION_LIST = [
   {
     modalId: null,
-    iconId: 'pencil-grey',
+    iconId: 'pencil-blue',
     label: '수정하기',
     width: 19,
     height: 22,
@@ -29,6 +36,13 @@ const MY_POST_MORE_OPTION_LIST = [
     label: '삭제하기',
     width: 16,
     height: 20,
+  },
+  {
+    modalId: 'share',
+    iconId: 'share',
+    label: '공유하기',
+    width: 18,
+    height: 19,
   },
 ];
 
