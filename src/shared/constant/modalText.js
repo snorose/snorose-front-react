@@ -2,7 +2,7 @@
 const POST_MORE_OPTION_LIST = [
   {
     modalId: 'report-post-types',
-    iconId: 'report-post',
+    iconId: 'flag-pink',
     label: '게시글 신고',
     width: 19,
     height: 22,
