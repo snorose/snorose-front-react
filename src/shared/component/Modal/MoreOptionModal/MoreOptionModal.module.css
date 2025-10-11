@@ -23,7 +23,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.9rem 0;
-  font: var(--text-body-2-reg);
+  font: var(--text-body-1-reg);
   color: var(--grey-3-1);
   border-bottom: 0.1rem solid var(--blue-0);
 }
