@@ -71,10 +71,21 @@ export default function PostPage() {
 
   const { handleDelete } = useDeletePostHandler(currentBoard?.id);
   const { handleReport } = useReportHandler(modal, setModal, data);
+  const { toast } = useToast();
 
   const handleEdit = () => {
     setModal({ id: null, type: null });
     navigate(`./edit`);
+  };
+
+  const handleShare = async () => {
+    try {
+      const url = window.location.href;
+      await navigator.clipboard.writeText(url);
+      toast({ message: '링크가 복사되었어요', variant: 'success' });
+    } catch (error) {
+      toast({ message: '링크 복사에 실패했어요', variant: 'error' });
+    }
   };
 
   // 로딩과 에러 상태에 따라 조건부 렌더링
@@ -178,6 +189,7 @@ export default function PostPage() {
         handleEdit={handleEdit}
         handleReport={handleReport}
         handleDelete={handleDelete}
+        handleShare={handleShare}
       />
     </div>
   );
