@@ -1,3 +1,5 @@
+const MAX_SMARTPHONE_WIDTH = 600;
+
 export function isWebPushSupported() {
   return (
     'Notification' in window &&
@@ -6,23 +8,17 @@ export function isWebPushSupported() {
   );
 }
 
-function isAndroidPhone() {
-  const isSmartPhone = navigator.userAgentData?.mobile;
+function isSmallTouchDevice() {
+  const isTouch =
+    ('maxTouchPoints' in navigator && navigator.maxTouchPoints > 0) ||
+    'ontouchstart' in window;
 
-  if (isSmartPhone !== undefined) {
-    return isSmartPhone;
-  }
+  if (!isTouch) return false;
 
-  // userAgentData을 지원하지 않는 경우의 fallback
-  const ua = navigator.userAgent || '';
-  return /Android/i.test(ua) && /Mobile/i.test(ua);
+  return window.innerWidth <= MAX_SMARTPHONE_WIDTH;
 }
 
-export function isIPhone() {
-  return navigator.platform === 'iPhone';
-}
-
-function isIOSPWA() {
+export function isIOSPWA() {
   return (
     typeof navigator.standalone !== 'undefined' && navigator.standalone === true
   );
@@ -31,11 +27,11 @@ function isIOSPWA() {
 export function canUseAlertSetting() {
   if (!isWebPushSupported()) return false;
 
-  if (isAndroidPhone()) return true;
+  if (isIOSPWA()) {
+    return isSmallTouchDevice();
+  }
 
-  if (isIPhone() && isIOSPWA()) return true;
-
-  return false;
+  return isSmallTouchDevice();
 }
 
 /**
@@ -48,8 +44,7 @@ export function getDeviceType() {
   const ua = navigator.userAgent || '';
   const platform = navigator.platform || '';
 
-  if (isIPhone()) return 'MOBILE';
-  if (isAndroidPhone()) return 'MOBILE';
+  if (isSmallTouchDevice()) return 'MOBILE';
 
   if (platform === 'iPad') return 'TABLET';
   if (platform === 'MacIntel' && navigator.maxTouchPoints > 1) return 'TABLET';

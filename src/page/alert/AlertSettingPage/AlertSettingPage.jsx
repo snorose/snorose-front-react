@@ -116,6 +116,16 @@ function NotificationSettings() {
 
   const canUseAlert = canUseAlertSetting();
 
+  console.table({
+    'Notification in window': 'Notification' in window,
+    'serviceWorker in navigator': 'serviceWorker' in navigator,
+    'PushManager in window': 'PushManager' in window,
+
+    'navigator.standalone': navigator.standalone,
+    'navigator.platform': navigator.platform,
+    userAgent: navigator.userAgent,
+  });
+
   return (
     <>
       <div className={style.alert}>
