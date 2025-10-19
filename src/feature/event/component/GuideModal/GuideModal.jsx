@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Keyboard } from 'swiper/modules';
 
+import { Icon } from '@/shared/component';
 import styles from './GuideModal.module.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -36,7 +37,13 @@ export default function GuideModal({
       <div className={styles.modal}>
         <div className={styles.modalTop}>
           <button className={styles.close} onClick={onClose}>
-            닫기
+            <Icon
+              className={styles.close}
+              id='x'
+              width={18}
+              height={18}
+              stroke={'grey'}
+            />
           </button>
         </div>
 
