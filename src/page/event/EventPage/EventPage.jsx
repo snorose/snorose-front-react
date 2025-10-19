@@ -1,56 +1,51 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useState, useContext } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { deleteEvent, getEventContent, reportPost, reportUser } from '@/apis';
+import { getEventContent } from '@/apis';
+import { NotFoundPage } from '@/page/etc';
 
 import {
   BackAppBar,
   Badge,
-  DeleteModal,
   FetchLoading,
   Icon,
-  OptionModal,
   PrimaryButton,
 } from '@/shared/component';
-import {
-  LIKE_TYPE,
-  MUTATION_KEY,
-  QUERY_KEY,
-  ROLE,
-  TOAST,
-} from '@/shared/constant';
-import { useAuth, useToast } from '@/shared/hook';
+import { LIKE_TYPE, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
 import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
+import { ModalContext } from '@/shared/context/ModalContext';
+import { useModalReset } from '@/shared/hook/useBlocker';
+import { useAuth, useToast } from '@/shared/hook';
+
 import { GuideModal } from '@/feature/event/component';
 import { isUrlValid } from '@/feature/event/lib';
 import { EVENT_GUIDE_MODAL_OPTIONS } from '@/feature/event/constant';
 
-import { NotFoundPage } from '@/page/etc';
-
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
-import { useCommentContext } from '@/feature/comment/context';
+import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
+import { PostModalRenderer } from '@/feature/board/component';
+import { useReportHandler } from '@/feature/report/hook/useReport';
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
+import { useCommentContext } from '@/feature/comment/context';
+
 import styles from './EventPage.module.css';
 
 export default function EventPage() {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { postId } = useParams();
-  const location = useLocation();
-  const { pathname } = location;
-  const { inputFocus, isInputFocused } = useCommentContext();
+
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { inputFocus, focusedItem } = useCommentContext();
+  const { userInfo } = useAuth();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
-  const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
-  const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
-  const [deleteSubmitDisabled, setDeleteSubmitDisabled] = useState(false);
-  const { invalidUserInfoQuery } = useAuth();
-  const { userInfo } = useAuth();
+
+  const { modal, setModal } = useContext(ModalContext);
+
+  // 페이지 언마운트 시 모달 상태 초기화
+  useModalReset();
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: [QUERY_KEY.post, postId],
@@ -59,89 +54,18 @@ export default function EventPage() {
     enabled: !!currentBoard?.id && !!postId,
   });
 
+  const { handleDelete } = useDeletePostHandler(currentBoard?.id);
+  const { handleReport } = useReportHandler(modal, setModal, data);
+
   const { scrap, unscrap } = useScrap();
   const { like, unlike } = useLike({
     type: LIKE_TYPE.post,
     sourceId: postId,
   });
 
-  const { mutate: reportPostMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportPost],
-    mutationFn: (body) => reportPost(currentBoard?.id, postId, body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
-
-  const { mutate: reportUserMutate } = useMutation({
-    mutationKey: [MUTATION_KEY.reportUser],
-    mutationFn: (body) => reportUser(body),
-    onSuccess: ({ message }) => {
-      toast(message);
-    },
-    onError: () => {
-      toast('신고에 실패했습니다.');
-    },
-  });
-
-  const handleDelete = async () => {
-    if (deleteSubmitDisabled) return;
-    setDeleteSubmitDisabled(true);
-    try {
-      const response = await deleteEvent(postId);
-
-      if (response.status === 200) {
-        toast(TOAST.POST.deleteNoPoints);
-        navigate(-1);
-        queryClient.removeQueries([QUERY_KEY.post, postId]);
-        invalidUserInfoQuery();
-      }
-    } catch ({ response }) {
-      toast(response.data.message);
-    } finally {
-      setDeleteSubmitDisabled(false);
-      setIsDeleteModalOpen(false);
-    }
-  };
-
-  const handleReportOptionModalOptionClick = (event) => {
-    const reportCategory = event.currentTarget.dataset.value;
-
-    setIsReportModalOpen(false);
-
-    if (reportCategory === 'post-report') {
-      setIsPostReportModalOpen(true);
-    } else if (reportCategory === 'user-report') {
-      setIsUserReportModalOpen(true);
-    }
-  };
-
-  const handlePostReportOptionModalOptionClick = (event) => {
-    const reportType = event.currentTarget.dataset.value;
-
-    reportPostMutate({
-      reportType,
-    });
-    setIsPostReportModalOpen(false);
-  };
-
-  const handleUserReportOptionModalOptionClick = (event) => {
-    if (data === undefined) {
-      return;
-    }
-
-    const reportType = event.currentTarget.dataset.value;
-    const { userId } = data;
-
-    reportUserMutate({
-      encryptedTargetUserId: userId,
-      reportType,
-    });
-
-    setIsUserReportModalOpen(false);
+  const handleEdit = () => {
+    setModal({ id: null, type: null });
+    navigate(`./edit`);
   };
 
   // 신청 시간 판단
@@ -157,7 +81,7 @@ export default function EventPage() {
   // '신청하기'버튼 누르면 폼으로 이동
   const handleApplyClick = () => {
     if (!isUrlValid(data.link, { open: true })) {
-      toast('잘못된 링크에요');
+      toast(TOAST.EVENT.FAIL);
     }
   };
 
@@ -228,8 +152,14 @@ export default function EventPage() {
             className={styles.meatBall}
             onClick={() => {
               data.isWriter
-                ? setIsOptionsModalOpen(true)
-                : setIsReportModalOpen(true);
+                ? setModal({
+                    id: 'my-post-more-options',
+                    type: null,
+                  })
+                : setModal({
+                    id: 'post-more-options',
+                    type: null,
+                  });
             }}
           >
             <Icon id='meat-ball' width={18} height={4} stroke='none' />
@@ -354,24 +284,25 @@ export default function EventPage() {
           </PrimaryButton>
         )}
 
-        <div className={styles.post_bottom}>
+        <div className={styles.postBottom}>
           <div
             className={styles.count}
             style={{
               display: data.isNotice ? 'none' : 'flex',
+              backgroundColor:
+                focusedItem === 'post' ? 'var(--blue-1)' : 'transparent',
             }}
             onClick={inputFocus}
           >
             <Icon
               id='comment-stroke'
-              width={20}
-              height={16}
-              fill={
-                isInputFocused.isFocused === true &&
-                isInputFocused.parent === 'post'
-                  ? '#5F86BF'
-                  : 'none'
-              }
+              width={18}
+              height={15}
+              style={{
+                paddingTop: '0.1rem',
+              }}
+              stroke='var(--blue-3)'
+              fill='none'
             />
             <p>댓글 {data.commentCount.toLocaleString()}</p>
           </div>
@@ -383,8 +314,8 @@ export default function EventPage() {
               id='like-stroke'
               width={16}
               height={15}
-              stroke='#5F86BF'
-              fill={data.isLiked ? '#5F86BF' : 'none'}
+              stroke='var(--pink-2)'
+              fill={data.isLiked ? 'var(--pink-2)' : 'none'}
             />
             <p>공감 {data.likeCount.toLocaleString()}</p>
           </div>
@@ -398,8 +329,8 @@ export default function EventPage() {
               id='scrap-stroke'
               width={13}
               height={16}
-              stroke='#5F86BF'
-              fill={data.isScrapped ? '#5F86BF' : 'none'}
+              stroke={'var(--green-1)'}
+              fill={data.isScrapped ? 'var(--green-1)' : 'none'}
             />
             <p>스크랩 {data.scrapCount.toLocaleString()}</p>
           </div>
@@ -414,49 +345,12 @@ export default function EventPage() {
         </>
       )}
 
-      <OptionModal
-        id='post-more-options'
-        isOpen={isOptionsModalOpen}
-        setIsOpen={setIsOptionsModalOpen}
-        closeFn={() => {
-          setIsOptionsModalOpen(false);
-        }}
-        functions={{
-          pencil: () => navigate(`./edit`),
-          trash: () => {
-            setIsOptionsModalOpen(false);
-            setIsDeleteModalOpen(true);
-          },
-        }}
-      />
-      <DeleteModal
-        id='post-delete-no-points'
-        isOpen={isDeleteModalOpen}
-        closeFn={() => {
-          setIsDeleteModalOpen(false);
-        }}
-        redBtnFunction={handleDelete}
-      />
-      <OptionModal
-        id='report'
-        isOpen={isReportModalOpen}
-        setIsOpen={setIsReportModalOpen}
-        onOptionClick={handleReportOptionModalOptionClick}
-        closeFn={() => setIsReportModalOpen(false)}
-      />
-      <OptionModal
-        id='post-report'
-        isOpen={isPostReportModalOpen}
-        setIsOpen={setIsPostReportModalOpen}
-        onOptionClick={handlePostReportOptionModalOptionClick}
-        closeFn={() => setIsPostReportModalOpen(false)}
-      />
-      <OptionModal
-        id='user-report'
-        isOpen={isUserReportModalOpen}
-        setIsOpen={setIsUserReportModalOpen}
-        onOptionClick={handleUserReportOptionModalOptionClick}
-        closeFn={() => setIsUserReportModalOpen(false)}
+      {/* PostPage에서 사용하는 모달 렌더러 */}
+      <PostModalRenderer
+        modal={modal}
+        handleEdit={handleEdit}
+        handleReport={handleReport}
+        handleDelete={handleDelete}
       />
     </div>
   );
