@@ -98,10 +98,10 @@ export default function WriteExamReviewPage() {
   const pass =
     lectureName.trim() &&
     professor.trim() &&
-    lectureType &&
-    examType &&
-    lectureYear &&
-    semester &&
+    Object.keys(lectureType).length > 0 &&
+    Object.keys(examType).length > 0 &&
+    Object.keys(lectureYear).length > 0 &&
+    Object.keys(semester).length > 0 &&
     classNumber &&
     questionDetail.trim() &&
     file;
@@ -338,7 +338,9 @@ export default function WriteExamReviewPage() {
           }}
         />
       )}
+
       {loading && <FetchLoadingOverlay />}
+
       {/* 페이지 이탈 방지 모달 */}
       {modal.id === 'exit-page' && (
         <ConfirmModal
