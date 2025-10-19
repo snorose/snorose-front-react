@@ -5,6 +5,7 @@ import styles from './EventForm.module.css';
 import { eventTime } from '@/shared/lib';
 import { PrimaryButton } from '@/shared/component';
 import { useToast } from '@/shared/hook';
+import { TOAST } from '@/shared/constant';
 import { isUrlValid, validateRequiredFields } from '@/feature/event/lib';
 
 export default function EventForm({
@@ -24,11 +25,11 @@ export default function EventForm({
 
   const handleCheckLink = () => {
     if (!data.link.trim()) {
-      toast('링크를 입력해주세요');
+      toast({ message: TOAST.EVENT.EMPTY, variant: 'error' });
       return;
     }
     if (!isUrlValid(data.link, { open: true })) {
-      toast('잘못된 링크에요');
+      toast({ message: TOAST.EVENT.FAIL, variant: 'error' });
     }
   };
 
