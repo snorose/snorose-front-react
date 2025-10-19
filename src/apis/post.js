@@ -1,15 +1,11 @@
 import { defaultAxios, authAxios } from '@/axios';
 import { IconItem } from '@storybook/blocks';
+import { getBoardUrl } from '@/shared/lib';
 import altImage from '@/assets/images/altImage.png';
 
 // 게시글 리스트 가져오기
 export const getPosts = async (boardId, page = 0) => {
-  const url =
-    boardId === 20
-      ? `/v1/best-posts?page=${page}`
-      : boardId === 14
-        ? `/v1/events?page=${page}`
-        : `/v1/boards/${boardId}/posts/postlist?page=${page}`;
+  const url = getBoardUrl(boardId, page);
 
   const response = await authAxios.get(url);
 
