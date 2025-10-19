@@ -62,7 +62,8 @@ const TOAST = Object.freeze({
     videoQuantityError: '영상은 최대 1개까지 첨부 가능해요.',
   },
   EVENT: {
-    FAIL: '⚠️ 잘못된 링크에요.',
+    FAIL: '잘못된 링크에요.',
+    EMPTY: '링크를 입력해주세요',
   },
 });
 
