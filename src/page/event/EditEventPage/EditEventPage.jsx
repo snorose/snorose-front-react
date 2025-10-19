@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   BackAppBar,
@@ -8,6 +8,7 @@ import {
   FetchLoading,
   Icon,
   ActionButton,
+  ConfirmModal,
 } from '@/shared/component';
 import {
   BOARD_MENUS,
@@ -15,11 +16,14 @@ import {
   QUERY_KEY,
   ROLE,
   TOAST,
+  CONFIRM_MODAL_TEXT,
 } from '@/shared/constant';
 import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import { formattedNowTime } from '@/shared/lib';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 import { getEventContent, patchEvent } from '@/apis';
+
 import { EventForm, NoticeForm } from '@/feature/event/component';
 import { validateOnSubmit } from '@/feature/event/lib';
 import {
@@ -28,6 +32,7 @@ import {
   EVENT_TYPES,
 } from '@/feature/event/constant';
 
+import cloudLogo from '@/assets/images/cloudLogo.svg';
 import styles from './EditEventPage.module.css';
 
 export default function EditEventPage() {
@@ -37,10 +42,12 @@ export default function EditEventPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const { modal, setModal } = useContext(ModalContext);
 
   const textId = pathname.split('/')[2];
   const currentBoard = BOARD_MENUS.find((menu) => menu.textId === textId);
   const [boardId, setBoardId] = useState(currentBoard?.id ?? '');
+
   const [isNotice, setIsNotice] = useState(false);
   const [userDisplay, setUserDisplay] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState(false);
@@ -49,8 +56,9 @@ export default function EditEventPage() {
   const [noticeData, setNoticeData] = useState(() => NOTICE_FORM_DATA(boardId));
   const [errors, setErrors] = useState({});
 
-  // navigation guard
-  const isBlock = !!(data || noticeData);
+  const [isBlock, setIsBlock] = useState(false);
+
+  // 페이지 이탈 방지 모달 노출
   useBlocker(isBlock);
 
   // 이벤트 게시글 내용 가져오기
@@ -77,21 +85,38 @@ export default function EditEventPage() {
     }
   }, [eventData]);
 
+  // isBlock 업데이트
+  useEffect(() => {
+    if (!data || Object.keys(data).length === 0) return;
+
+    setIsBlock(eventData);
+  }, [eventData]);
+
   // 게시글 수정
   const mutation = useMutation({
     mutationKey: [MUTATION_KEY.editPost],
     mutationFn: patchEvent,
     onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.post, postId]);
+      queryClient.invalidateQueries(QUERY_KEY.post(postId));
       navigate(-1);
-      toast(TOAST.POST.edit);
+      toast({ message: TOAST.POST.edit, variant: 'success' });
       setSubmitDisabled(false);
     },
     onError: ({ response }) => {
-      toast(response.data.message);
+      toast({ message: response.data.message, variant: 'error' });
       setSubmitDisabled(false);
     },
   });
+
+  // 게시글 수정 중 페이지 이탈
+  const handleExitPage = () => {
+    setModal({
+      id: null,
+      type: null,
+    });
+    setIsBlock(false);
+    navigate(-1);
+  };
 
   const handleChange = (field, value) => {
     if (isNotice) {
@@ -162,12 +187,6 @@ export default function EditEventPage() {
 
     if (eventData.isNotice) {
       // 이벤트 공지사항 수정
-      // 데이터 확인용 나중에 지우기!!
-      console.log('data:', noticeData);
-      console.log('postId: ', postId);
-
-      setSubmitDisabled(true);
-
       mutation.mutate({ ...noticeData, postId });
     } else {
       // 이벤트 수정
@@ -176,10 +195,6 @@ export default function EditEventPage() {
         setSubmitDisabled(false);
         return;
       }
-
-      // 데이터 확인용 나중에 지우기!!
-      console.log('data:', data, postId);
-      console.log('postId: ', postId);
 
       setSubmitDisabled(true);
 
@@ -212,10 +227,7 @@ export default function EditEventPage() {
     <>
       <div className={styles.container}>
         <div className={styles.top}>
-          <CloseAppBar
-            // children={<p onClick={handleSubmit}>수정</p>}
-            backgroundColor={'#eaf5fd'}
-          >
+          <CloseAppBar backgroundColor={'#eaf5fd'}>
             <ActionButton onClick={handleSubmit} disabled={!submitDisabled}>
               수정
             </ActionButton>
@@ -247,6 +259,14 @@ export default function EditEventPage() {
           <div className={styles.form}>{renderForm()}</div>
         </div>
       </div>
+
+      {/* 페이지 이탈 방지 모달 */}
+      {modal.id === 'exit-page' && (
+        <ConfirmModal
+          modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+          onConfirm={handleExitPage}
+        />
+      )}
     </>
   );
 }
