@@ -1,0 +1,23 @@
+.label {
+  align-self: flex-start;
+
+  position: relative;
+
+  margin-bottom: 0.7rem;
+  display: inline-block;
+
+  font: var(--text-headline-2-med);
+  color: var(--grey-4);
+}
+
+.required {
+  position: absolute;
+  right: -1.2rem;
+
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+
+  border-radius: 1rem;
+  background-color: var(--pink-3);
+}

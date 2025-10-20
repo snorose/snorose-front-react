@@ -11,11 +11,15 @@ export { default as Dropdown } from './dropdown/Dropdown/Dropdown';
 export { default as DropdownList } from './dropdown/DropdownList/DropdownList';
 export { default as SelectedItem } from './dropdown/SelectedItem/SelectedItem';
 
-// input
-export { default as Input } from './input/Input/Input';
-export { default as SpecialInput } from './input/Input/SpecialInput';
-export { default as PwInput } from './input/PwInput/PwInput';
-export { default as Textarea } from './input/Textarea/Textarea';
+// form
+export { default as CheckBox } from './form/CheckBox/CheckBox';
+export { default as Input } from './form/input/Input';
+export { default as NumberInput } from './form/input/NumberInput';
+export { default as SpecialInput } from './form/input/SpecialInput';
+export { default as TextInput } from './form/input/TextInput';
+export { default as Label } from './form/Label/Label';
+export { default as PwInput } from './form/PwInput/PwInput';
+export { default as Textarea } from './form/Textarea/Textarea';
 
 // layout
 export { default as AppBar } from './layout/AppBar/AppBar';
