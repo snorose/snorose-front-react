@@ -35,12 +35,12 @@ export { default as FetchLoading } from './loading/FetchLoading/FetchLoading';
 export { default as FetchLoadingOverlay } from './loading/FetchLoadingOverlay/FetchLoadingOverlay';
 
 // modal
-export { default as ChoiceModal } from './Modal/ChoiceModal/ChoiceModal';
-export { default as ConfirmModal } from './Modal/ConfirmModal/ConfirmModal';
-export { default as DimModalLayout } from './Modal/DimModalLayout/DimModalLayout';
-export { default as MoreOptionModal } from './Modal/MoreOptionModal/MoreOptionModal';
-export { default as NoticeModal } from './Modal/NoticeModal/NoticeModal';
-export { default as OptionModal } from './Modal/OptionModal/OptionModal';
+export { default as ChoiceModal } from './modal/ChoiceModal/ChoiceModal';
+export { default as ConfirmModal } from './modal/ConfirmModal/ConfirmModal';
+export { default as DimModalLayout } from './modal/DimModalLayout/DimModalLayout';
+export { default as MoreOptionModal } from './modal/MoreOptionModal/MoreOptionModal';
+export { default as NoticeModal } from './modal/NoticeModal/NoticeModal';
+export { default as OptionModal } from './modal/OptionModal/OptionModal';
 
 // suspense
 export { default as ServerErrorFallback } from './suspense/ServerErrorFallback/ServerErrorFallback';
