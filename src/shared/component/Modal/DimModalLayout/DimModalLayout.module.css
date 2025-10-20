@@ -11,6 +11,8 @@
 }
 
 .layout {
+  width: 28.8rem;
+
   display: flex;
   flex-direction: column;
   align-items: center;

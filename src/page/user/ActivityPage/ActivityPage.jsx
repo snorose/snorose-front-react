@@ -20,8 +20,8 @@ export default function ActivityPage() {
   );
 
   return (
-    <section className={styles.activityPage} ref={scrollRef}>
-      <BackAppBar stroke='#000' />
+    <section className={styles.container} ref={scrollRef}>
+      <BackAppBar />
 
       <div className={styles.contentWrapper}>
         <div className={styles.topContainer}>

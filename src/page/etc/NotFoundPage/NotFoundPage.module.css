@@ -2,7 +2,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 0 2rem 6rem;
+  padding: 0 var(--default-margin) 6rem;
 }
 
 .illustrationWrapper {

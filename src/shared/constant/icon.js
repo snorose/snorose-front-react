@@ -24,7 +24,6 @@ export const STATIC_ICON_LIST = Object.freeze({
   chevronRight: 'chevron-right',
   comment: 'comment',
   commentCircle: 'comment-circle',
-  ellipsisVertical: 'ellipsis-vertical',
   file: 'file',
   flag: 'flag',
   flagBlue: 'flag-blue',
