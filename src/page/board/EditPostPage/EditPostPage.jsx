@@ -187,77 +187,69 @@ export default function EditPostPage() {
   return (
     <>
       <div className={styles.container}>
-        <div>
-          <div className={styles.top}>
-            <CloseAppBar
-              children={<p onClick={handleSubmit}>수정</p>}
-              backgroundColor={'#eaf5fd'}
-            />
+        <CloseAppBar
+          children={<p onClick={handleSubmit}>수정</p>}
+          backgroundColor={'#eaf5fd'}
+        />
+
+        <div className={styles.center}>
+          <div className={styles.categorySelect}>
+            <div className={styles.categorySelectContainer}>
+              <Icon id='clip-board-list' width={21} height={22} fill='white' />
+              <p className={styles.categorySelectText}>{boardTitle}</p>
+            </div>
           </div>
-          <div className={styles.center}>
-            <div className={styles.categorySelect}>
-              <div className={styles.categorySelectContainer}>
+          <div className={styles.profileBox}>
+            <div className={styles.profileBoxLeft}>
+              {userInfo?.userRoleId !== ROLE.admin &&
+              userInfo?.userRoleId !== ROLE.official ? (
+                <img className={styles.logoIcon} src={cloudLogo} alt='로고' />
+              ) : (
+                <Badge
+                  userRoleId={userInfo?.userRoleId}
+                  className={styles.badge}
+                />
+              )}
+              <p>{userDisplay}</p>
+              <p className={styles.dot}></p>
+              <p>{formattedNowTime()}</p>
+            </div>
+            {textId !== 'notice' && (
+              <div
+                className={
+                  userInfo?.userRoleId === ROLE.admin ||
+                  userInfo?.userRoleId === ROLE.official
+                    ? styles.profileBoxRight
+                    : styles.profileBoxRightInvisible
+                }
+                onClick={handleIsNotice}
+              >
                 <Icon
-                  id='clip-board-list'
+                  id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
                   width={21}
                   height={22}
-                  fill='white'
                 />
-                <p className={styles.categorySelectText}>{boardTitle}</p>
+                <p>공지글</p>
               </div>
-            </div>
-            <div className={styles.profileBox}>
-              <div className={styles.profileBoxLeft}>
-                {userInfo?.userRoleId !== ROLE.admin &&
-                userInfo?.userRoleId !== ROLE.official ? (
-                  <img className={styles.logoIcon} src={cloudLogo} alt='로고' />
-                ) : (
-                  <Badge
-                    userRoleId={userInfo?.userRoleId}
-                    className={styles.badge}
-                  />
-                )}
-                <p>{userDisplay}</p>
-                <p className={styles.dot}></p>
-                <p>{formattedNowTime()}</p>
-              </div>
-              {textId !== 'notice' && (
-                <div
-                  className={
-                    userInfo?.userRoleId === ROLE.admin ||
-                    userInfo?.userRoleId === ROLE.official
-                      ? styles.profileBoxRight
-                      : styles.profileBoxRightInvisible
-                  }
-                  onClick={handleIsNotice}
-                >
-                  <Icon
-                    id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
-                    width={21}
-                    height={22}
-                  />
-                  <p>공지글</p>
-                </div>
-              )}
-            </div>
-            <div className={styles.content}>
-              <TextareaAutosize
-                className={styles.title}
-                placeholder='제목'
-                value={title}
-                onChange={handleTitleChange}
-              />
-              <TextareaAutosize
-                className={styles.text}
-                placeholder='내용'
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-              />
-              {/* <AttachmentList
+            )}
+          </div>
+          <div className={styles.content}>
+            <TextareaAutosize
+              className={styles.title}
+              placeholder='제목'
+              value={title}
+              onChange={handleTitleChange}
+            />
+            <TextareaAutosize
+              className={styles.text}
+              placeholder='내용'
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+            {/* <AttachmentList
                 attachmentsInfo={attachmentsInfo}
                 setAttachmentsInfo={setAttachmentsInfo}
               /> */}
-            </div>
           </div>
         </div>
 

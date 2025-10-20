@@ -1,9 +1,15 @@
 .button {
   width: 100%;
-  padding: 0.9rem 0;
-  background: var(--grey-2);
+  height: 4.4rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--grey-1-1);
   border-radius: 0.5rem;
-  font-size: 1.3rem;
+
+  font: var(--text-body-1-reg);
   color: var(--grey-4);
 }
 
