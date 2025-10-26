@@ -11,7 +11,7 @@ import {
   Icon,
 } from '@/shared/component';
 import { dateFormat } from '@/shared/lib';
-import { LIKE_TYPE, QUERY_KEY } from '@/shared/constant';
+import { QUERY_KEY } from '@/shared/constant';
 
 import { NotFoundPage } from '@/page/etc';
 
@@ -38,7 +38,6 @@ import { useModalReset } from '@/shared/hook/useBlocker';
 
 import cloudLogo from '@/assets/images/cloudLogo.svg';
 import { useCommentContext } from '@/feature/comment/context';
-import { useLike } from '@/feature/like/hook';
 
 const COURSE_TYPE = convertToObject(LECTURE_TYPES);
 const SEMESTER = convertToObject(SEMESTERS);
@@ -47,7 +46,6 @@ const EXAM_TYPE = convertToObject(EXAM_TYPES);
 export default function ExamReviewPage() {
   const { postId } = useParams();
   const navigate = useNavigate();
-  const { scrap, unscrap } = useScrap();
   const { modal, setModal } = useContext(ModalContext);
 
   // 페이지 언마운트 시 모달 상태 초기화
