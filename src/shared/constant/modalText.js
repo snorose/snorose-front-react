@@ -49,7 +49,7 @@ const MY_POST_MORE_OPTION_LIST = [
 const EXAM_REVIEW_MORE_OPTION_LIST = [
   {
     modalId: 'report-exam-review-types',
-    iconId: 'report-post',
+    iconId: 'flag-pink',
     label: '시험후기 신고',
     width: 19,
     height: 22,
@@ -65,7 +65,7 @@ const EXAM_REVIEW_MORE_OPTION_LIST = [
 const MY_EXAM_REVIEW_MORE_OPTION_LIST = [
   {
     modalId: null,
-    iconId: 'pencil-grey',
+    iconId: 'pencil-blue',
     label: '수정하기',
     width: 19,
     height: 22,

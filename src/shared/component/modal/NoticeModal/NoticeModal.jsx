@@ -1,8 +1,9 @@
 import { useContext } from 'react';
-import styles from './NoticeModal.module.css';
 
-import { DimModalLayout } from '@/shared/component';
 import { ModalContext } from '@/shared/context/ModalContext';
+import { DimModalLayout } from '@/shared/component';
+
+import styles from './NoticeModal.module.css';
 
 export default function NoticeModal({ modalText, onConfirm }) {
   const { modal, setModal } = useContext(ModalContext);

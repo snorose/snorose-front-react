@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
@@ -37,6 +37,7 @@ import { ModalContext } from '@/shared/context/ModalContext';
 import { useModalReset } from '@/shared/hook/useBlocker';
 
 import cloudLogo from '@/assets/images/cloudLogo.svg';
+import { useCommentContext } from '@/feature/comment/context';
 
 const COURSE_TYPE = convertToObject(LECTURE_TYPES);
 const SEMESTER = convertToObject(SEMESTERS);
@@ -45,7 +46,6 @@ const EXAM_TYPE = convertToObject(EXAM_TYPES);
 export default function ExamReviewPage() {
   const { postId } = useParams();
   const navigate = useNavigate();
-  const { scrap, unscrap } = useScrap();
   const { modal, setModal } = useContext(ModalContext);
 
   // 페이지 언마운트 시 모달 상태 초기화
@@ -116,8 +116,9 @@ export default function ExamReviewPage() {
 
   return (
     <section className={styles.container}>
-      <div className={styles.top}>
-        <BackAppBar backgroundColor={'#eaf5fd'} />
+      <BackAppBar backgroundColor={'#eaf5fd'} />
+
+      <div className={styles.blueContainer}>
         <div className={styles.displayBox}>
           <div className={styles.displayBoxLeft}>
             <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
@@ -127,19 +128,23 @@ export default function ExamReviewPage() {
             {isEdited && <span>&nbsp;(수정됨)</span>}
             {isConfirmed && <Icon id='check-circle' width={15} height={15} />}
           </div>
+
           <Icon
             className={styles.more}
+            id='meat-ball'
             onClick={() =>
               isWriter
                 ? setModal({ id: 'my-exam-review-more-options' })
                 : setModal({ id: 'exam-review-more-options' })
             }
-            id='ellipsis-vertical'
-            width={3}
-            height={11}
+            width={18}
+            height={4}
+            stroke='none'
           />
         </div>
+
         <div className={styles.title}>{title}</div>
+
         <div className={styles.info}>
           <ReviewContentItem tag='강의명' value={lectureName} />
           <ReviewContentItem tag='교수' value={professor} />
@@ -157,38 +162,24 @@ export default function ExamReviewPage() {
             align={FLEX_ALIGN.flexStart}
           />
         </div>
+
         <ReviewDownload
           className={styles.fileDownload}
           fileName={fileName}
           isDownloaded={isDownloaded}
           isWriter={isWriter}
         />
-        <div className={styles.actions}>
-          <div className={styles.action}>
-            <Icon
-              className={styles.comment}
-              id='comment'
-              width={15}
-              height={14}
-            />
-            <span>{commentCount.toLocaleString()}</span>
-          </div>
-          <div
-            className={styles.action}
-            onClick={() => (isScrapped ? unscrap.mutate() : scrap.mutate())}
-          >
-            <Icon
-              id='bookmark-fill'
-              width={10}
-              height={13}
-              fill={isScrapped ? '#5F86BF' : '#D9D9D9'}
-            />
-            <span>{scrapCount.toLocaleString()}</span>
-          </div>
-        </div>
+
+        <ActionContainer
+          commentCount={commentCount}
+          isScrapped={isScrapped}
+          scrapCount={scrapCount}
+        />
       </div>
+
       <CommentListSuspense commentCount={commentCount} />
       <CommentInput />
+
       {/* 시험후기 관련 모달 렌더링 */}
       <ExamReviewModalRenderer
         modal={modal}
@@ -196,7 +187,52 @@ export default function ExamReviewPage() {
         handleReport={handleReport}
         handleDelete={handleDelete}
       />
+
       {isLoading && <FetchLoadingOverlay />}
     </section>
+  );
+}
+
+function ActionContainer({ commentCount, isScrapped, scrapCount }) {
+  const { inputFocus, focusedItem } = useCommentContext();
+  const { scrap, unscrap } = useScrap();
+
+  return (
+    <div className={styles.actionContainer}>
+      <div
+        className={styles.count}
+        styles={{
+          backgroundColor:
+            focusedItem === 'post' ? 'var(--blue-1)' : 'transparent',
+        }}
+        onClick={inputFocus}
+      >
+        <Icon
+          id='comment-stroke'
+          width={18}
+          height={15}
+          styles={{
+            paddingTop: '0.1rem',
+          }}
+          stroke='var(--blue-3)'
+          fill='none'
+        />
+        <p>댓글 {commentCount.toLocaleString()}</p>
+      </div>
+
+      <div
+        className={styles.count}
+        onClick={() => (isScrapped ? unscrap.mutate() : scrap.mutate())}
+      >
+        <Icon
+          id='scrap-stroke'
+          width={13}
+          height={17}
+          stroke={'var(--green-1)'}
+          fill={isScrapped ? 'var(--green-1)' : 'none'}
+        />
+        <p>스크랩 {scrapCount.toLocaleString()}</p>
+      </div>
+    </div>
   );
 }

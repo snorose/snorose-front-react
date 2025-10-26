@@ -1,8 +1,11 @@
 import { useContext } from 'react';
 import { createPortal } from 'react-dom';
-import { Icon } from '@/shared/component';
+
 import { ModalContext } from '@/shared/context/ModalContext';
+import { Icon } from '@/shared/component';
+
 import { useCommentContext } from '@/feature/comment/context';
+
 import styles from './MoreOptionModal.module.css';
 
 export default function MoreOptionModal({ title, optionList, functions, top }) {

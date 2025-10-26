@@ -1,13 +1,15 @@
 .textarea {
   height: 13.2rem;
-  padding: 1.4rem 1.6rem;
+  padding: 1.6rem 1.3rem;
   grid-column: span 2;
-  background: var(--grey-2);
+  background: var(--grey-1-1);
   border-radius: 0.5rem;
   border: none;
   outline: none;
   resize: none;
-  font-size: 1.3rem;
+
+  font: var(--text-body-1-reg);
+  color: var(--grey-4);
 }
 
 .textarea::placeholder {

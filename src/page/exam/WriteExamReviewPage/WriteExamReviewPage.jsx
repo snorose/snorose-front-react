@@ -8,14 +8,17 @@ import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import { ModalContext } from '@/shared/context/ModalContext';
 import {
   ActionButton,
+  CheckBox,
   CloseAppBar,
+  ConfirmModal,
   Dropdown,
   FetchLoadingOverlay,
   Icon,
-  ConfirmModal,
+  Label,
+  NumberInput,
   Textarea,
+  TextInput,
 } from '@/shared/component';
-import { validClassNumber } from '@/shared/lib';
 import {
   BOARD_ID,
   MUTATION_KEY,
@@ -24,13 +27,7 @@ import {
   CONFIRM_MODAL_TEXT,
 } from '@/shared/constant';
 
-import {
-  CategoryButton,
-  CategoryFieldset,
-  InputItem,
-  InputList,
-  TextField,
-} from '@/feature/exam/component';
+import { CategoryButton } from '@/feature/exam/component';
 import {
   EXAM_TYPES,
   FILE_MAX_SIZE,
@@ -219,111 +216,155 @@ export default function WriteExamReviewPage() {
           게시
         </ActionButton>
       </CloseAppBar>
-      <InputList>
-        <InputItem
-          tag='강의명'
-          required
-          value={lectureName}
-          placeholder='강의명을 입력하세요'
-          setFn={setLectureName}
-        />
-        <InputItem
-          tag='교수명'
-          required
-          value={professor}
-          placeholder='교수명을 입력하세요'
-          setFn={setProfessor}
-        />
-      </InputList>
-      <CategoryFieldset title='강의 종류' required>
-        {LECTURE_TYPES.map((option) => (
-          <CategoryButton
-            key={option.id}
-            select={lectureType}
-            option={option}
-            callback={setLectureType}
-          >
-            {option.name}
-          </CategoryButton>
-        ))}
-      </CategoryFieldset>
-      <CategoryFieldset title='시험 종류' required>
-        {EXAM_TYPES.map((option) => (
-          <CategoryButton
-            key={option.id}
-            select={examType}
-            option={option}
-            callback={setExamType}
-          >
-            {option.name}
-          </CategoryButton>
-        ))}
-      </CategoryFieldset>
-      <CategoryFieldset title='수강 연도' required>
-        <Dropdown
-          options={YEARS}
-          select={lectureYear}
-          setFn={setLectureYear}
-          placeholder='선택하세요'
-        />
-      </CategoryFieldset>
-      <CategoryFieldset title='수강 학기' required>
-        <Dropdown
-          options={SEMESTERS}
-          select={semester}
-          setFn={setSemester}
-          placeholder='선택하세요'
-        />
-      </CategoryFieldset>
-      <CategoryFieldset title='수강 분반' required>
-        <TextField
-          value={classNumber}
-          onChange={(event) => {
-            const { value } = event.target;
 
-            if (validClassNumber(value)) {
-              setClassNumber(value);
-            }
-          }}
-          placeholder='수강 분반을 입력하세요'
-        />
-      </CategoryFieldset>
-      <CategoryFieldset
-        title='P/F 수업입니다'
-        hasCheckbox
-        checked={isPF}
-        setFn={setIsPF}
-      />
-      <CategoryFieldset
-        title='온라인 수업입니다'
-        hasCheckbox
-        checked={isOnline}
-        setFn={setIsOnline}
-      />
-      <CategoryFieldset title='문항 수 및 시험 유형 설명' required>
-        <Textarea
-          value={questionDetail}
-          setFn={setQuestionDetail}
-          placeholder={`총 출제 문항 수와 복기한 문항 수를 함께 입력해 주세요.
+      <div className={styles.top}>
+        <div className={styles.field}>
+          <Label htmlFor='lectureName' required>
+            강의명
+          </Label>
+          <TextInput
+            id='lectureName'
+            value={lectureName}
+            onChange={(next) => setLectureName(next)}
+            placeholder='강의명을 입력해주세요'
+          />
+        </div>
+
+        <div className={styles.field}>
+          <Label htmlFor='professor' required>
+            교수명
+          </Label>
+          <TextInput
+            id='professor'
+            value={professor}
+            onChange={(next) => setProfessor(next)}
+            placeholder='교수명을 입력해주세요'
+          />
+        </div>
+
+        <div className={styles.field}>
+          <Label htmlFor='classNumber' required>
+            수강 분반
+          </Label>
+          <NumberInput
+            id='classNumber'
+            value={classNumber}
+            onChange={(next) => setClassNumber(next)}
+            placeholder='수강분반을 입력해주세요'
+          />
+        </div>
+
+        <div className={styles.field}>
+          <Label htmlFor='semester' required>
+            수강 연도
+          </Label>
+          <div className={styles.dropdown}>
+            <Dropdown
+              options={YEARS}
+              select={lectureYear}
+              setFn={setLectureYear}
+              placeholder='수강연도를 선택해주세요'
+            />
+          </div>
+        </div>
+
+        <div className={styles.field}>
+          <Label htmlFor='semester' required>
+            수강 학기
+          </Label>
+          <Dropdown
+            options={SEMESTERS}
+            select={semester}
+            setFn={setSemester}
+            placeholder='수강학기를 선택해주세요'
+          />
+        </div>
+
+        <div className={styles.field}>
+          <Label required>강의 종류</Label>
+          <div className={styles.cagetories}>
+            {LECTURE_TYPES.map((option) => (
+              <CategoryButton
+                key={option.id}
+                select={lectureType}
+                option={option}
+                callback={setLectureType}
+              >
+                {option.name}
+              </CategoryButton>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.field}>
+          <Label required>시험 종류</Label>
+          <div className={styles.cagetories}>
+            {EXAM_TYPES.map((option) => (
+              <CategoryButton
+                key={option.id}
+                select={examType}
+                option={option}
+                callback={setExamType}
+              >
+                {option.name}
+              </CategoryButton>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.bottom}>
+        <div className={`${styles.field} ${styles.checkbox}`}>
+          <Label htmlFor='isPF'>P/F 수업이에요</Label>
+          <CheckBox
+            id='isPF'
+            checked={isPF}
+            onChange={(next) => setIsPF(next)}
+          />
+        </div>
+
+        <div className={`${styles.field} ${styles.checkbox}`}>
+          <Label htmlFor='isOnline'>온라인(비대면) 수업이에요</Label>
+          <CheckBox
+            id='isOnline'
+            checked={isOnline}
+            onChange={(next) => setIsOnline(next)}
+          />
+        </div>
+
+        <div className={styles.field}>
+          <Label htmlFor='questionDetail' required>
+            문항 수 및 시험 유형 설명
+          </Label>
+          <Textarea
+            id='questionDetail'
+            value={questionDetail}
+            onChange={(next) => setQuestionDetail(next)}
+            placeholder={`총 출제 문항 수와 복기한 문항 수를 함께 입력해 주세요.
 (예: 20문항 중 15문항 복기)
 
 ※ '모두 복기'로만 기입하거나 총 문항 수를 입력하지 않은 경우, 시험후기 규정에 따라 경고 1회가 부여됩니다.`}
-          minRows='5'
-          maxRows='10'
-        />
-      </CategoryFieldset>
+            minRows='5'
+            maxRows='10'
+          />
+        </div>
+      </div>
+
       <div className={styles.file}>
-        <div className={styles.left}>
+        <div className={styles.tag}>
           <Icon id='clip-board-list' width={18} height={19} fill='#BFD7EC' />
-          <span className={styles.tag}>첨부파일</span>
+          <span className={styles.label}>첨부파일</span>
           <span className={styles.required}></span>
         </div>
-        <div className={styles.right}>
+
+        <div className={styles.name}>
           <label htmlFor='file'>{file?.name ?? '첨부된 파일이 없어요'}</label>
           <input id='file' type='file' accept='.pdf' onChange={handleFile} />
         </div>
       </div>
+
       {/* 중복 후기 모달 */}
+
       {modal.id === 'exam-review-duplication' && (
         <ConfirmModal
           modalText={CONFIRM_MODAL_TEXT.EXAM_REVIEW_DUPLICATION}

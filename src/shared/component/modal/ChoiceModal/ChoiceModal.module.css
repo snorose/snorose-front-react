@@ -12,12 +12,12 @@
   justify-content: center;
   transform: translateX(-50%);
   background: rgba(228, 228, 228, 0.6);
+  -webkit-backdrop-filter: blur(1rem);
   backdrop-filter: blur(1rem);
   /* Note: backdrop-filter has minimal browser support */
 }
 
 .container {
-  width: 29rem;
   border-radius: 1rem;
   background: var(--white);
 }

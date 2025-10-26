@@ -285,12 +285,13 @@ const ServicePolicyPageContent = (
 
 export default function ServicePolicyPage() {
   return (
-    <main className={styles.policyPage}>
+    <div className={styles.container}>
       <CloseAppBar alignRight={true} />
+
       <section className={styles.contentWrapper}>
         <h1 className={styles.title}>서비스 이용 약관</h1>
         <article className={styles.content}>{ServicePolicyPageContent}</article>
       </section>
-    </main>
+    </div>
   );
 }
