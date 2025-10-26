@@ -340,7 +340,10 @@ export default function WriteExamReviewPage() {
             id='questionDetail'
             value={questionDetail}
             onChange={(next) => setQuestionDetail(next)}
-            placeholder='강의, 시험 유형 및 부가적인 설명을 기술해주세요'
+            placeholder={`총 출제 문항 수와 복기한 문항 수를 함께 입력해 주세요.
+(예: 20문항 중 15문항 복기)
+
+※ '모두 복기'로만 기입하거나 총 문항 수를 입력하지 않은 경우, 시험후기 규정에 따라 경고 1회가 부여됩니다.`}
             minRows='5'
             maxRows='10'
           />
