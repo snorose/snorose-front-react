@@ -1,15 +1,16 @@
-.policyPage {
+.container {
+  padding-top: var(--default-appbar-height);
+
   display: flex;
   flex-direction: column;
 }
 
 .contentWrapper {
+  padding: 0 var(--default-margin) 5.4rem;
+
   display: flex;
   flex-direction: column;
-  padding: 0 2rem 5.4rem 2rem;
-  width: 100%;
   gap: 2.4rem;
-  padding-top: 5rem;
 }
 .contentWrapper section {
   margin-bottom: 2rem;

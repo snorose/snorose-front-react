@@ -1,9 +1,5 @@
-.container {
+.blueContainer {
   padding-top: var(--default-appbar-height);
-}
-
-.top {
-  padding-bottom: 1.2rem;
 
   display: flex;
   flex-direction: column;
@@ -12,11 +8,12 @@
 }
 
 .displayBox {
-  margin: 1.2rem var(--default-margin) 0.4rem var(--default-margin);
+  margin: 0.9rem var(--default-margin) 0.7rem var(--default-margin);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.2rem;
+
+  font: var(--text-body-2-reg);
   color: var(--grey-3-1);
 }
 
@@ -45,13 +42,14 @@
 
 .title {
   margin: 0 var(--default-margin);
-  font-weight: 700;
-  font-size: 1.6rem;
+
+  font: var(--text-title-1-bold);
+  color: var(--grey-4);
 }
 
 .info {
-  padding: 0.2rem 1.3rem;
-  margin: 2.3rem var(--default-margin);
+  margin: 2.6rem var(--default-margin) 0;
+  padding: 0.6rem 1.3rem;
   background: var(--white);
   border-radius: 0.5rem;
 }
@@ -63,29 +61,40 @@
 }
 
 .fileDownload {
-  margin: 0 var(--default-margin) 0 auto;
+  margin: 1.7rem var(--default-margin) 1.7rem auto;
 }
 
-.actions {
-  margin: 1.5rem var(--default-margin) 0 0;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  font-size: 1.1rem;
-  color: var(--grey-3-1);
+/* action */
+.actionContainer {
+  height: 5.7rem;
+  padding: 0.9rem 0;
+  margin: 0 var(--default-margin);
 
-  div:nth-of-type(2):hover {
-    background-color: rgba(var(--white-rgb), 0.8);
-    cursor: pointer;
-  }
+  display: flex;
+  justify-content: space-between;
+  gap: 1.6rem;
+  border-top: 0.05rem solid rgba(var(--grey-3-1-rgb), 0.7);
 }
 
-.action {
-  padding: 0.4rem 0.8rem;
+.count {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.7rem;
+  padding: 0.8rem;
+  width: 100%;
   border-radius: 0.5rem;
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+
+  p {
+    color: var(--grey-3-1);
+    font: var(--text-body-1-reg);
+  }
+
+  &:hover {
+    background-color: var(--blue-1);
+  }
 }
 
 .comment {

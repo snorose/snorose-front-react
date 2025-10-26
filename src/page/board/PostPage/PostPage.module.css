@@ -1,9 +1,5 @@
-.container {
-  padding-top: var(--default-appbar-height);
-}
-
 .blueContainer {
-  padding: 0 var(--default-margin);
+  padding: var(--default-appbar-height) var(--default-margin) 0;
 
   border-radius: 0 0 1.5rem 1.5rem;
   background-color: var(--blue-0);
@@ -99,12 +95,13 @@
 }
 
 /* action */
-
 .actionContainer {
+  height: 5.7rem;
+  padding: 0.9rem 0;
+
   display: flex;
   justify-content: space-between;
   gap: 1.6rem;
-  padding: 0.9rem 0;
   border-top: 0.05rem solid rgba(var(--grey-3-1-rgb), 0.7);
 }
 

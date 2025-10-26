@@ -1,7 +1,9 @@
-import { DimModalLayout } from '@/shared/component';
-import styles from './ConfirmModal.module.css';
-import { ModalContext } from '@/shared/context/ModalContext';
 import { useContext } from 'react';
+
+import { ModalContext } from '@/shared/context/ModalContext';
+import { DimModalLayout } from '@/shared/component';
+
+import styles from './ConfirmModal.module.css';
 
 export default function ConfirmModal({ modalText, onConfirm, onCancel }) {
   const { modal, setModal } = useContext(ModalContext);

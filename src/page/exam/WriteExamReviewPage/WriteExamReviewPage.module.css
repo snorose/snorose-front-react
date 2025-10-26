@@ -1,54 +1,101 @@
 .container {
   padding-top: var(--default-appbar-height);
-  padding-bottom: 5rem;
+  padding-bottom: 8rem;
 }
 
+/* top */
+.top {
+  margin: 1.8rem 0 2.8rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.field {
+  margin: 0 var(--default-margin);
+}
+
+.cagetories {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(10rem, 1fr));
+  row-gap: 1rem;
+  column-gap: 1.5rem;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* bottom */
+.bottom {
+  margin-bottom: 1.8rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+}
+
+/* file */
 .file {
-  margin: 0 2rem;
+  margin: 0 var(--default-margin);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.6rem;
+  gap: 2.4rem;
 }
 
-.left {
+.tag {
+  position: relative;
+
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  position: relative;
 }
 
-.left .required {
-  width: 0.5rem;
-  height: 0.5rem;
-  display: inline-block;
+.tag .required {
   position: absolute;
-  top: 0.2rem;
-  right: -1rem;
+  top: 0;
+  right: -1.2rem;
+
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+
   border-radius: 1rem;
   background-color: var(--pink-3);
 }
 
-.tag {
-  font-weight: 500;
-  font-size: 1.4rem;
+.label {
+  font: var(--text-headline-2-med);
   color: var(--grey-4);
 }
 
-.right {
+/* name */
+.name {
   flex: 1;
 }
 
-label[for='file'] {
-  padding: 0.8rem 1.6rem;
-  display: block;
+.name label[for='file'] {
+  /* min-width: 0; */
+  height: 4rem;
+
+  padding-left: 1.3rem;
+
+  display: flex;
+  align-items: center;
+
   background: var(--grey-2);
   border-radius: 0.5rem;
-  font-size: 1.3rem;
+
+  font: var(--text-body-1-reg);
   color: var(--grey-3-1);
+
   cursor: pointer;
 }
 
-input[type='file'] {
+.name input[type='file'] {
   display: none;
 }

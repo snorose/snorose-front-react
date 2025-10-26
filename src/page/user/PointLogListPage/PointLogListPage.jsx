@@ -3,7 +3,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { useAuth } from '@/shared/hook';
-import { BackAppBar, FetchLoading, Icon } from '@/shared/component';
+import { BackAppBar, FetchLoading } from '@/shared/component';
 
 import {
   PointLogList,
@@ -20,10 +20,8 @@ export default function PointLogListPage() {
   });
 
   return (
-    <section className={styles.viewPointListPage}>
-      <header>
-        <BackAppBar stroke='#000' />
-      </header>
+    <section className={styles.container}>
+      <BackAppBar />
 
       <div className={styles.contentWrapper}>
         <div className={styles.topContainer}>
