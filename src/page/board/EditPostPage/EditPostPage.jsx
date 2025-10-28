@@ -56,14 +56,11 @@ export default function EditPostPage() {
   //'게시글 상세 조회' API에서 제공하는 기존 첨부파일 정보
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
 
-  /**
-   * 이미지 TF 코드
-   */
-  // const [attachmentsInfo, setAttachmentsInfo] = useState([]);
-  // const [deleteAttachments, setDeleteAttachments] = useState([]);
-  // const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
-  // const [trashImageIndex, setTrashImageIndex] = useState(null);
-  // const trashImageConfirmModal = useModal();
+  const [attachmentsInfo, setAttachmentsInfo] = useState([]);
+  const [deleteAttachments, setDeleteAttachments] = useState([]);
+  const [isTrashOverlapped, setIsTrashOverlapped] = useState(false);
+  const [trashImageIndex, setTrashImageIndex] = useState(null);
+  const trashImageConfirmModal = useModal();
 
   // 페이지 이탈 방지 모달 노출
   useBlocker(isBlock);
@@ -84,7 +81,7 @@ export default function EditPostPage() {
     setText(data.content);
     setIsNotice(data.isNotice);
     setUserDisplay(data.userDisplay);
-    // setAttachmentsInfo(data.attachments);
+    setAttachmentsInfo(data.attachments);
   }, [data]);
 
   // isBlock 업데이트
@@ -161,8 +158,8 @@ export default function EditPostPage() {
       title,
       content: text,
       isNotice,
-      // attachmentsInfo,
-      // deleteAttachments,
+      attachmentsInfo,
+      deleteAttachments,
     });
   };
 
@@ -187,69 +184,77 @@ export default function EditPostPage() {
   return (
     <>
       <div className={styles.container}>
-        <CloseAppBar
-          children={<p onClick={handleSubmit}>수정</p>}
-          backgroundColor={'#eaf5fd'}
-        />
-
-        <div className={styles.center}>
-          <div className={styles.categorySelect}>
-            <div className={styles.categorySelectContainer}>
-              <Icon id='clip-board-list' width={21} height={22} fill='white' />
-              <p className={styles.categorySelectText}>{boardTitle}</p>
-            </div>
+        <div>
+          <div className={styles.top}>
+            <CloseAppBar
+              children={<p onClick={handleSubmit}>수정</p>}
+              backgroundColor={'#eaf5fd'}
+            />
           </div>
-          <div className={styles.profileBox}>
-            <div className={styles.profileBoxLeft}>
-              {userInfo?.userRoleId !== ROLE.admin &&
-              userInfo?.userRoleId !== ROLE.official ? (
-                <img className={styles.logoIcon} src={cloudLogo} alt='로고' />
-              ) : (
-                <Badge
-                  userRoleId={userInfo?.userRoleId}
-                  className={styles.badge}
-                />
-              )}
-              <p>{userDisplay}</p>
-              <p className={styles.dot}></p>
-              <p>{formattedNowTime()}</p>
-            </div>
-            {textId !== 'notice' && (
-              <div
-                className={
-                  userInfo?.userRoleId === ROLE.admin ||
-                  userInfo?.userRoleId === ROLE.official
-                    ? styles.profileBoxRight
-                    : styles.profileBoxRightInvisible
-                }
-                onClick={handleIsNotice}
-              >
+          <div className={styles.center}>
+            <div className={styles.categorySelect}>
+              <div className={styles.categorySelectContainer}>
                 <Icon
-                  id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
+                  id='clip-board-list'
                   width={21}
                   height={22}
+                  fill='white'
                 />
-                <p>공지글</p>
+                <p className={styles.categorySelectText}>{boardTitle}</p>
               </div>
-            )}
-          </div>
-          <div className={styles.content}>
-            <TextareaAutosize
-              className={styles.title}
-              placeholder='제목'
-              value={title}
-              onChange={handleTitleChange}
-            />
-            <TextareaAutosize
-              className={styles.text}
-              placeholder='내용'
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
-            {/* <AttachmentList
+            </div>
+            <div className={styles.profileBox}>
+              <div className={styles.profileBoxLeft}>
+                {userInfo?.userRoleId !== ROLE.admin &&
+                userInfo?.userRoleId !== ROLE.official ? (
+                  <img className={styles.logoIcon} src={cloudLogo} alt='로고' />
+                ) : (
+                  <Badge
+                    userRoleId={userInfo?.userRoleId}
+                    className={styles.badge}
+                  />
+                )}
+                <p>{userDisplay}</p>
+                <p className={styles.dot}></p>
+                <p>{formattedNowTime()}</p>
+              </div>
+              {textId !== 'notice' && (
+                <div
+                  className={
+                    userInfo?.userRoleId === ROLE.admin ||
+                    userInfo?.userRoleId === ROLE.official
+                      ? styles.profileBoxRight
+                      : styles.profileBoxRightInvisible
+                  }
+                  onClick={handleIsNotice}
+                >
+                  <Icon
+                    id={isNotice ? 'check-circle-blue' : 'check-circle-grey'}
+                    width={21}
+                    height={22}
+                  />
+                  <p>공지글</p>
+                </div>
+              )}
+            </div>
+            <div className={styles.content}>
+              <TextareaAutosize
+                className={styles.title}
+                placeholder='제목'
+                value={title}
+                onChange={handleTitleChange}
+              />
+              <TextareaAutosize
+                className={styles.text}
+                placeholder='내용'
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+              <AttachmentList
                 attachmentsInfo={attachmentsInfo}
                 setAttachmentsInfo={setAttachmentsInfo}
-              /> */}
+              />
+            </div>
           </div>
         </div>
 
@@ -261,7 +266,7 @@ export default function EditPostPage() {
           />
         )}
 
-        {/* <Icon
+        <Icon
           id='trashcan'
           width='10rem'
           height='10rem'
@@ -296,10 +301,10 @@ export default function EditPostPage() {
         <AttachmentBar
           attachmentsInfo={attachmentsInfo}
           setAttachmentsInfo={setAttachmentsInfo}
-        /> */}
+        />
       </div>
 
-      {/* {trashImageConfirmModal.isOpen && (
+      {trashImageConfirmModal.isOpen && (
         <ConfirmModal
           modalText={ATTACHMENT_MODAL_TEXT.DELETE_ATTACHMENT}
           onConfirm={() => {
@@ -314,7 +319,7 @@ export default function EditPostPage() {
             trashImageConfirmModal.closeModal();
           }}
         />
-      )} */}
+      )}
     </>
   );
 }
