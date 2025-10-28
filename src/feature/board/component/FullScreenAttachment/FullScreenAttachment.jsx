@@ -92,7 +92,6 @@ export default function FullScreenAttachment({
                       swiperRef.current?.updateAutoHeight();
                     }}
                     onDragStart={(e) => {
-                      console.log('dragging');
                       e.preventDefault();
                     }}
                   />
