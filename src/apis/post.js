@@ -42,7 +42,7 @@ export const postPost = async ({
   title,
   content,
   isNotice,
-  // attachmentsInfo,
+  attachmentsInfo,
 }) => {
   //'게시글 생성' API에서 받아오는 데이터
   const response = await authAxios.post(`/v1/boards/${boardId}/posts/newpost`, {
@@ -50,24 +50,23 @@ export const postPost = async ({
     title,
     content,
     isNotice,
-    // attachments: attachmentsInfo.map(({ type, fileName, fileComment }) => ({
-    //   type,
-    //   fileName,
-    //   fileComment,
-    // })),
+    attachments: attachmentsInfo.map(({ type, fileName, fileComment }) => ({
+      type,
+      fileName,
+      fileComment,
+    })),
   });
 
   //만일 '게시글 생성' API에 첨부파일을 넘겼더라면
-  // if (attachmentsInfo.length) {
-  //   //attachmentUrlList 변수에 '게시글 생성' API한테 받은 이미지 S3 url 리스트 저장
-  //   let attachmentUrlList = response.data.result.attachmentUrlList;
-
-  //   //각 S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
-  //   await putFileInBucket(
-  //     attachmentUrlList,
-  //     attachmentsInfo.map((att) => att.file)
-  //   );
-  // }
+  if (attachmentsInfo.length) {
+    //attachmentUrlList 변수에 '게시글 생성' API한테 받은 이미지 S3 url 리스트 저장
+    let attachmentUrlList = response.data.result.attachmentUrlList;
+    //각 S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
+    await putFileInBucket(
+      attachmentUrlList,
+      attachmentsInfo.map((att) => att.file)
+    );
+  }
 
   return response;
 };
@@ -87,8 +86,8 @@ export const patchPost = async ({
   title,
   content,
   isNotice,
-  // attachmentsInfo,
-  // deleteAttachments,
+  attachmentsInfo,
+  deleteAttachments,
 }) => {
   const response = await authAxios.patch(
     `/v1/boards/${boardId}/posts/${postId}/update`,
@@ -99,24 +98,23 @@ export const patchPost = async ({
       isNotice,
       finalAttachments: [],
       deleteAttachments: [],
-      // finalAttachments: attachmentsInfo.map(
-      //   ({ id, fileName, fileComment, type }) => ({
-      //     id,
-      //     fileName,
-      //     fileComment,
-      //     type,
-      //   })
-      // ),
-      // deleteAttachments,
+      finalAttachments: attachmentsInfo.map(
+        ({ id, fileName, fileComment, type }) => ({
+          id,
+          fileName,
+          fileComment,
+          type,
+        })
+      ),
+      deleteAttachments,
     }
   );
 
-  // const newFiles = attachmentsInfo
-  //   .filter((att) => att.id === '')
-  //   .map((att) => att.file);
-
-  // let attachmentUrlList = response.data.result.attachmentUrlList;
-  // putFileInBucket(attachmentUrlList, newFiles);
+  const newFiles = attachmentsInfo
+    .filter((att) => att.id === '')
+    .map((att) => att.file);
+  let attachmentUrlList = response.data.result.attachmentUrlList;
+  putFileInBucket(attachmentUrlList, newFiles);
 
   return response;
 };

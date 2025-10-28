@@ -54,10 +54,7 @@ export default function PostPage() {
   // 페이지 언마운트 시 모달 상태 초기화
   useModalReset();
 
-  /**
-   * 이미지 TF 코드
-   */
-  // const [clickedImageIndex, setClickedImageIndex] = useState(0);
+  const [clickedImageIndex, setClickedImageIndex] = useState(0);
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: QUERY_KEY.post(postId),
@@ -126,9 +123,9 @@ export default function PostPage() {
 
   return (
     <div className={styles.container}>
-      <BackAppBar backgroundColor={'#eaf5fd'} />
+      {/*<BackAppBar backgroundColor={'#eaf5fd'} />*/}
 
-      {/* {clickedImageIndex === 0 ? (
+      {clickedImageIndex === 0 ? (
         <BackAppBar backgroundColor={'#eaf5fd'} />
       ) : (
         <FullScreenAttachment
@@ -136,7 +133,7 @@ export default function PostPage() {
           clickedImageIndex={clickedImageIndex}
           setClickedImageIndex={setClickedImageIndex}
         />
-      )} */}
+      )}
 
       <div className={styles.blueContainer}>
         <MetaContainer
@@ -161,12 +158,12 @@ export default function PostPage() {
           dangerouslySetInnerHTML={convertHyperlink(data.content)}
         ></p>
 
-        {/* {data.attachments.length !== 0 && (
+        {data.attachments.length !== 0 && (
           <AttachmentSwiper
             data={data}
             setClickedImageIndex={setClickedImageIndex}
           />
-        )} */}
+        )}
 
         <ActionContainer
           isNotice={data.isNotice}
