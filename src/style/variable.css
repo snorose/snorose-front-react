@@ -1,4 +1,7 @@
 :root {
+  /* status bar background color */
+  --page-bg-color: #ffffff;
+
   /* box model */
   --default-width: 60rem;
   --default-margin: 2rem;

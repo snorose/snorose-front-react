@@ -19,13 +19,25 @@ import { MaintenancePage } from './page/maintenance';
 import { routeList } from '@/router.js';
 
 import styles from './App.module.css';
+import { setStatusBarColor } from '@/shared/lib/statusBar';
 
 function App() {
+  const location = useLocation();
   const queryClient = useQueryClient();
   const isEnabled = useFeatureIsOn('push-notification');
   const { pathname } = useLocation();
   const currentRoute = findRouteByPath(pathname, routeList);
   const hideNav = currentRoute?.meta?.hideNav ?? false;
+
+  useEffect(() => {
+    const color =
+      location.pathname === '/home'
+        ? '#ffcc00'
+        : location.pathname === '/about'
+          ? '#333333'
+          : '#ffffff';
+    setStatusBarColor(color);
+  }, [location.pathname]);
 
   // 푸시 알림 설정
   useEffect(() => {

@@ -6,6 +6,7 @@ html,
 body,
 #root {
   height: 100%;
+  background-color: var(--page-bg-color);
 }
 
 html {
@@ -48,6 +49,21 @@ body {
 }
 ::-webkit-scrollbar {
   display: none;
+}
+
+/* 상단 status bar 시각적 영역 */
+#status-bar-fake {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: env(safe-area-inset-top, 20px); /* notch 대응 */
+  background-color: var(--page-bg-color);
+  z-index: 9999;
+}
+
+#root {
+  padding-top: env(safe-area-inset-top, 20px);
 }
 
 #modal {
