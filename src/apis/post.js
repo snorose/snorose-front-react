@@ -7,7 +7,9 @@ export const getPosts = async (boardId, page = 0) => {
   const url =
     boardId === 20
       ? `/v1/best-posts?page=${page}`
-      : `/v1/boards/${boardId}/posts/postlist?page=${page}`;
+      : boardId === 14
+        ? `/v1/events?page=${page}`
+        : `/v1/boards/${boardId}/posts/postlist?page=${page}`;
 
   const response = await authAxios.get(url);
 
