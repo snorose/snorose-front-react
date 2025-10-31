@@ -44,7 +44,7 @@ export const postPost = async ({
   title,
   content,
   isNotice,
-  attachmentsInfo,
+  // attachmentsInfo,
 }) => {
   //'게시글 생성' API에서 받아오는 데이터
   const response = await authAxios.post(`/v1/boards/${boardId}/posts/newpost`, {
@@ -88,8 +88,8 @@ export const patchPost = async ({
   title,
   content,
   isNotice,
-  attachmentsInfo,
-  deleteAttachments,
+  // attachmentsInfo,
+  // deleteAttachments,
 }) => {
   const response = await authAxios.patch(
     `/v1/boards/${boardId}/posts/${postId}/update`,
