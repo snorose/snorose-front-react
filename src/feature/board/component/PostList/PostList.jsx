@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { useSuspensePagination } from '@/shared/hook';
@@ -15,12 +16,17 @@ import { getPosts } from '@/apis';
 import { PostBar } from '@/feature/board/component';
 
 import styles from './PostList.module.css';
+import ProgressTab from '@/feature/event/component/ProgressTab/ProgressTab';
+
+import { PROGRESS } from '@/feature/event/constant';
 
 export default function PostList({ saveScrollPosition }) {
   const { pathname } = useLocation();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
   const isBesookt = currentBoardTextId === 'besookt' ? true : false;
+  const isEvent = currentBoardTextId === 'event';
+  const [activeTab, setActiveTab] = useState('ALL');
 
   // 페이지네이션 관련 hook
   const { data, ref, isFetching, refetch } = useSuspensePagination({
@@ -31,34 +37,60 @@ export default function PostList({ saveScrollPosition }) {
 
   const postList = deduplicatePaginatedData(flatPaginationCache(data));
 
+  const filteredPosts = isEvent
+    ? activeTab === 'ALL'
+      ? postList
+      : postList.filter((post) => post.progressType === activeTab)
+    : postList;
+
+  const isProgressEmpty = filteredPosts.length === 0;
+
   if (postList.length === 0) {
     return <FetchLoading animation={false}>게시물이 없어요</FetchLoading>;
   }
 
-  console.log(postList);
-
   return (
-    <PullToRefresh
-      onRefresh={() => refetch().then(() => console.log('Refreshed!'))}
-    >
-      <List>
-        {postList.map((post, index) => (
-          <Link
-            className={styles.to}
-            key={post.postId}
-            to={
-              isBesookt
-                ? `/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`
-                : `/board/${currentBoardTextId}/post/${post.postId}`
-            }
-            ref={index === postList.length - 1 ? ref : undefined}
-            onClick={() => saveScrollPosition()}
-          >
-            <PostBar data={{ ...post, timeAgo: timeAgo(post.date) }} />
-          </Link>
-        ))}
-        {isFetching && <FetchLoading />}
-      </List>
-    </PullToRefresh>
+    <div>
+      {isEvent && (
+        <div className={styles.progressTab}>
+          {Object.entries(PROGRESS).map(([key, value]) => (
+            <ProgressTab
+              key={key}
+              progress={value}
+              isSelected={key === activeTab}
+              onClick={() => setActiveTab(key)}
+            >
+              {value}
+            </ProgressTab>
+          ))}
+        </div>
+      )}
+
+      <PullToRefresh
+        onRefresh={() => refetch().then(() => console.log('Refreshed!'))}
+      >
+        <List>
+          {filteredPosts.map((post, index) => (
+            <Link
+              className={styles.to}
+              key={post.postId}
+              to={
+                isBesookt
+                  ? `/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`
+                  : `/board/${currentBoardTextId}/post/${post.postId}`
+              }
+              ref={index === postList.length - 1 ? ref : undefined}
+              onClick={() => saveScrollPosition()}
+            >
+              <PostBar data={{ ...post, timeAgo: timeAgo(post.date) }} />
+            </Link>
+          ))}
+          {isFetching && <FetchLoading />}
+          {isEvent && isProgressEmpty && (
+            <FetchLoading animation={false}>해당 이벤트가 없어요</FetchLoading>
+          )}
+        </List>
+      </PullToRefresh>
+    </div>
   );
 }
