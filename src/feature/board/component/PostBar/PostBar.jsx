@@ -2,10 +2,8 @@ import { Badge, Icon } from '@/shared/component';
 import { ROLE } from '@/shared/constant';
 import { postBarDateFormat } from '@/shared/lib';
 import altImage from '@/assets/images/altImage.png';
-
 import cloudLogo from '@/assets/images/cloudLogo.svg';
-import { PROGRESS } from '@/feature/event/constant';
-
+import { Chip } from '@/feature/board/component';
 import styles from './PostBar.module.css';
 
 export default function PostBar({ data, hasComment = true, hasLike = true }) {
@@ -14,9 +12,9 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
     data.userRoleId === ROLE.official ||
     (data.userRoleId === ROLE.admin && data.userDisplay !== '익명송이');
 
-  // 이벤트 게시판 응모상황 표시
-  const inProgress =
-    data.progressType === 'IN_PROGRESS' ? styles.inProgress : '';
+  // // 이벤트 게시판 응모상황 표시
+  // const inProgress =
+  //   data.progressType === 'IN_PROGRESS' ? styles.inProgress : '';
 
   return (
     <div className={styles.post}>
@@ -37,9 +35,10 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
             height={12}
           />
         )}
-        <div className={styles.boardChip}>{data.boardName}</div>
-        {data.isEnd && <div className={styles.boardChip}>응모 중</div>}
-      </div>
+        {data.boardName && <Chip type={'board'} label={data.boardName} />}
+            {data.progressType && (
+              <Chip type={'event'} label={data.progressType} />
+            )}
       <div className={styles.post_center}>
         <p className={styles.title}>{data.title}</p>
         <p className={styles.text}>{data.questionDetail ?? data.content}</p>
