@@ -99,12 +99,13 @@
   color: var(--pink-3);
 }
 
-.linkArea {
+.linkField {
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  align-items: flex-end;
+  align-items: center;
 }
+
 .button {
   height: 5.5rem;
   width: 7rem;

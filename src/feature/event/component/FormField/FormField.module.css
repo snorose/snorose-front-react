@@ -1,0 +1,102 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin: 0.7rem 0 1.8rem;
+  color: var(--grey-4);
+  font: var(--text-headline-2-med);
+}
+
+/* 라벨 텍스트 */
+.label {
+  font: var(--text-body-1-med);
+}
+
+/* Textarea (기본 입력창) */
+.textarea {
+  outline: none;
+  border: 0.1rem solid var(--blue-2);
+  border-radius: 0.5rem;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+  resize: none;
+  padding: 1.5rem;
+  line-height: 1.5;
+  min-height: 5rem;
+  box-sizing: border-box;
+  margin-top: 0.4rem;
+  transition: border-color 0.2s ease;
+}
+
+.textarea:focus {
+  border-color: var(--blue-4);
+}
+
+.textarea::placeholder {
+  color: var(--grey-3-1);
+}
+
+.contentArea {
+  min-height: 15rem;
+}
+
+/* date */
+.dateInput {
+  width: 100%;
+  border: 0.1rem solid var(--blue-2);
+  border-radius: 0.5rem;
+  padding: 1.4rem;
+  background-color: transparent;
+  color: var(--grey-3-1);
+  transition: border-color 0.2s ease;
+}
+
+.dateInput:focus {
+  border-color: var(--blue-4);
+}
+
+.dateSection {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0.7rem;
+  word-break: keep-all;
+}
+
+.dateSection p {
+  font: var(--text-body-1-med);
+}
+
+.divider {
+  height: 0.1rem;
+  border: 0;
+  background: var(--blue-2);
+}
+
+.linkArea {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.button {
+  height: 5.5rem;
+  width: 15%;
+  padding: unset;
+}
+
+/* error */
+.error {
+  border: 0.1rem solid var(--pink-3) !important;
+  color: var(--pink-3);
+  background-color: var(--pink-1);
+}
+
+.errorMessage {
+  color: var(--pink-3);
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
