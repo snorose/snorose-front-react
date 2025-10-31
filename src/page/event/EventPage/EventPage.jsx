@@ -11,7 +11,6 @@ import {
   FetchLoading,
   Icon,
   PrimaryButton,
-  GuideModal,
 } from '@/shared/component';
 import { LIKE_TYPE, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
 import {
