@@ -12,6 +12,7 @@ import {
   Icon,
   OptionModal,
   PrimaryButton,
+  GuideModal,
 } from '@/shared/component';
 import {
   LIKE_TYPE,
@@ -19,6 +20,7 @@ import {
   QUERY_KEY,
   ROLE,
   TOAST,
+  EVENT_GUIDE_MODAL_OPTIONS,
 } from '@/shared/constant';
 import { useAuth, useToast } from '@/shared/hook';
 import {
@@ -36,7 +38,6 @@ import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
 
 import styles from './EventPage.module.css';
-import { GuideModal } from '@/feature/event/component';
 
 export default function EventPage() {
   const navigate = useNavigate();
@@ -324,8 +325,11 @@ export default function EventPage() {
           </PrimaryButton>
           {open && (
             <GuideModal
+              boardName='event'
+              options={EVENT_GUIDE_MODAL_OPTIONS}
               onConfirm={handleApplyClick}
               onClose={() => setOpen(false)}
+              onIsLast='신청하기'
             />
           )}
         </>
