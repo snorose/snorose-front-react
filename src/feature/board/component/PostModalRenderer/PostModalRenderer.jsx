@@ -77,7 +77,7 @@ export default function PostModalRenderer({
             return (
               <ConfirmModal
                 modalText={
-                  currentBoard.id !== 23
+                  [21, 22].includes(Number(currentBoard.id))
                     ? CONFIRM_MODAL_TEXT.DELETE_POST
                     : CONFIRM_MODAL_TEXT.DELETE_POST_WITHOUT_POINT_DEDUCTION
                 }
