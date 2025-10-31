@@ -25,7 +25,12 @@ import {
   WritePostPage,
 } from '@/page/board';
 import { NotFoundPage } from '@/page/etc';
-import { WriteEventPage, EditEventPage, EventListPage } from '@/page/event';
+import {
+  WriteEventPage,
+  EditEventPage,
+  EventListPage,
+  EventPage,
+} from '@/page/event';
 import {
   EditExamReviewPage,
   ExamReviewListPage,
@@ -253,6 +258,34 @@ export const routeList = [
         },
       },
       {
+        path: '/board/event-notice/post/:postId',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            message={'공지글 접근 권한이 없어요'}
+          >
+            <PostPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/board/event-notice/post/:postId/edit',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.admin]}
+            message={'공지글 수정 권한이 없어요'}
+          >
+            <EditPostPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
         path: `/board/event/event-post-write`,
         element: (
           <ProtectedRoute
@@ -287,7 +320,7 @@ export const routeList = [
             roles={[ROLE.user, ROLE.admin]}
             message={'게시글 접근 권한이 없어요'}
           >
-            <PostPage />
+            <EventPage />
           </ProtectedRoute>
         ),
         meta: {
