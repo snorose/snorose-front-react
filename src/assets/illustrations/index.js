@@ -6,6 +6,9 @@ import taskCompleteIllustration from './taskCompleteIllustration.svg';
 import taskFailedIllustration from './taskFailedIllustration.svg';
 import notFoundIllustration from './notFoundIllustration.svg';
 import noAlertIllustration from './noAlertIllustration.svg';
+import noTransferIllustration from './noTransferIllustration.svg';
+import noSellIllustration from './noSellIllustration.svg';
+import noParticipationIllustration from './noParticipationIllustration.svg';
 
 export {
   noPostsIllustration,
@@ -15,5 +18,4 @@ export {
   taskCompleteIllustration,
   taskFailedIllustration,
   notFoundIllustration,
-  noAlertIllustration,
 };
