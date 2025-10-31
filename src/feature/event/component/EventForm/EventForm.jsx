@@ -52,7 +52,7 @@ export default function EventForm({
     onValid,
   ]);
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().slice(0, 16);
 
   const checkLink = () => {
     const link = new URL(
@@ -122,45 +122,54 @@ export default function EventForm({
 
       <div className={styles.section}>
         <p>응모 날짜</p>
-        <div className={styles.dateRangeWrapper}>
-          <input
-            id='start-date'
-            type='date'
-            min={today}
-            value={eventTime(data.startDate)}
-            onChange={(e) => onChange('startDate', e.target.value)}
-            className={`${styles.dateInput} ${errors.startDate ? styles.error : ''}`}
-          />
-          {errors.startDate && (
-            <span className={styles.errorMessage}>{errors.startDate}</span>
-          )}
+        <div>
+          <div className={styles.dateSection}>
+            <p>시작일</p>
+            <input
+              type='datetime-local'
+              min={today}
+              value={eventTime(data.startDate)}
+              onChange={(e) => onChange('startDate', e.target.value)}
+              className={`${styles.dateInput} ${errors.startDate ? styles.error : ''}`}
+            />
+            {errors.startDate && (
+              <span className={styles.errorMessage}>{errors.startDate}</span>
+            )}
+          </div>
 
-          <span className={styles.dateSeparator}>~</span>
-
-          <input
-            type='date'
-            min={data.startDate || today}
-            value={eventTime(data.endDate)}
-            onChange={(e) => onChange('endDate', e.target.value)}
-            className={`${styles.dateInput} ${errors.endDate ? styles.error : ''}`}
-          />
-          {errors.endDate && (
-            <span className={styles.errorMessage}>{errors.endDate}</span>
-          )}
+          <div className={styles.dateSection}>
+            <p>종료일</p>
+            <input
+              type='datetime-local'
+              min={data.startDate || today}
+              value={eventTime(data.endDate)}
+              onChange={(e) => onChange('endDate', e.target.value)}
+              className={`${styles.dateInput} ${errors.endDate ? styles.error : ''}`}
+            />
+            {errors.endDate && (
+              <span className={styles.errorMessage}>{errors.endDate}</span>
+            )}
+          </div>
+          <hr className={styles.divider} />
+          <div className={styles.dateSection}>
+            <p>
+              {' '}
+              당첨자
+              <br />
+              발표일
+            </p>
+            <input
+              type='datetime-local'
+              min={data.endDate || today}
+              value={eventTime(data.announceDate)}
+              onChange={(e) => onChange('announceDate', e.target.value)}
+              className={`${styles.dateInput} ${errors.announceDate ? styles.error : ''}`}
+            />
+            {errors.announceDate && (
+              <span className={styles.errorMessage}>{errors.announceDate}</span>
+            )}
+          </div>
         </div>
-      </div>
-      <div className={styles.section}>
-        <p>당첨자 발표일</p>
-        <input
-          type='date'
-          min={data.endDate || today}
-          value={eventTime(data.announceDate)}
-          onChange={(e) => onChange('announceDate', e.target.value)}
-          className={`${styles.announceDate} ${errors.announceDate ? styles.error : ''}`}
-        />
-        {errors.announceDate && (
-          <span className={styles.errorMessage}>{errors.announceDate}</span>
-        )}
       </div>
 
       <div className={styles.drawCount}>

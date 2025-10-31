@@ -145,7 +145,22 @@ export const serverTimeStr = (date) => {
   });
 };
 
-// 이벤트 페이지
+// 서버 점검 페이지 (useMaintenance.jsx)
+// YYYY.MM.DD (day) 형식
+export const dateStrWithDay = (date) => {
+  const days = ['일', '월', '화', '수', '목', '금', '토'];
+  return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, 0)} (${days[date.getDay()]})`;
+};
+// HH:MM 형식 (초 미출력, 24시 형식)
+export const serverTimeStr = (date) => {
+  return date.toLocaleTimeString('ko-KR', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+};
+
+// 이벤트 페이지 (YYYY-MM-DDTHH:MM)
 export function eventTime(date) {
-  return date ? date.slice(0, 10) : '';
+  return date ? date.slice(0, 16) : '';
 }
