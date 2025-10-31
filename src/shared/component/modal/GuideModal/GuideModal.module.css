@@ -30,6 +30,9 @@
   padding: 2rem;
   text-align: center;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .modalTop {
@@ -47,6 +50,7 @@
   display: flex;
   justify-content: center;
 }
+
 .image {
   width: 60%;
   max-width: 15rem;
@@ -65,8 +69,9 @@
 
 .buttons {
   display: flex;
-  justify-content: space-between;
   padding: 2rem;
+  z-index: 5;
+  justify-content: space-between;
 }
 
 .goNotice {
@@ -75,6 +80,7 @@
   font: var(--text-headline-2-reg);
   cursor: pointer;
   color: var(--blue-3);
+  padding: 1.5rem 0.9rem;
 }
 
 .confirm {
@@ -83,22 +89,5 @@
   font: var(--text-headline-2-reg);
   cursor: pointer;
   color: var(--blue-4);
-}
-
-.stepIndicator {
-  margin-top: 16px;
-}
-
-.dot,
-.activeDot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin: 0 4px;
-  border-radius: 50%;
-  background-color: var(--blue-2);
-}
-
-.activeDot {
-  background-color: var(--blue-4);
+  padding: 1.5rem 0.9rem;
 }
