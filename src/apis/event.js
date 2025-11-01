@@ -1,6 +1,18 @@
 import { authAxios } from '@/axios';
 import { kstISO } from '@/shared/lib';
 
+// 이벤트 게시글 목록 조회
+export const getEventPosts = async ({ page, progress }) => {
+  const response = await authAxios.get('/v1/events', {
+    params: {
+      page,
+      progress,
+    },
+  });
+
+  return response?.data.result;
+};
+
 // 이벤트 게시글 상세조회
 export const getEventContent = async (postId) => {
   const response = await authAxios.get(`v1/events/${postId}`);

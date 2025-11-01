@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 import { useSuspensePagination } from '@/shared/hook';
 import { FetchLoading, List, PullToRefresh } from '@/shared/component';
@@ -12,65 +11,57 @@ import {
 } from '@/shared/lib';
 import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
-import { getPosts } from '@/apis';
+import { getEventPosts, getPosts } from '@/apis';
 import { PostBar } from '@/feature/board/component';
 
 import styles from './PostList.module.css';
-import ProgressTab from '@/feature/event/component/ProgressTab/ProgressTab';
-
-import { PROGRESS } from '@/feature/event/constant';
 
 export default function PostList({ saveScrollPosition }) {
   const { pathname } = useLocation();
+  const [searchParams] = useSearchParams();
+
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
   const isBesookt = currentBoardTextId === 'besookt' ? true : false;
-  const isEvent = currentBoardTextId === 'event';
-  const [activeTab, setActiveTab] = useState('ALL');
+  const isEvent = currentBoardTextId === 'event' ? true : false;
+  const progress = searchParams.get('progress') ?? 'ALL';
 
-  // 페이지네이션 관련 hook
+  // 페이지네이션 관련 hook (일반 / 이벤트 )
   const { data, ref, isFetching, refetch } = useSuspensePagination({
-    queryKey: [QUERY_KEY.posts, currentBoard.id],
-    queryFn: ({ pageParam }) => getPosts(currentBoard.id, pageParam),
+    queryKey: isEvent
+      ? [QUERY_KEY.events, currentBoard.id, progress]
+      : [QUERY_KEY.posts, currentBoard.id],
+    queryFn: ({ pageParam }) =>
+      isEvent
+        ? getEventPosts({
+            page: pageParam,
+            progress: progress === 'ALL' ? undefined : progress,
+          })
+        : getPosts(currentBoard.id, pageParam),
     staleTime: STALE_TIME.boardPostList,
   });
 
   const postList = deduplicatePaginatedData(flatPaginationCache(data));
 
-  const filteredPosts = isEvent
-    ? activeTab === 'ALL'
-      ? postList
-      : postList.filter((post) => post.progressType === activeTab)
-    : postList;
-
-  const isProgressEmpty = filteredPosts.length === 0;
-
-  if (postList.length === 0) {
-    return <FetchLoading animation={false}>게시물이 없어요</FetchLoading>;
+  if (!postList.length) {
+    return (
+      <FetchLoading animation={false}>
+        {isEvent
+          ? progress === 'ALL'
+            ? '게시물이 없어요'
+            : '해당 상태의 이벤트가 없어요'
+          : '게시물이 없어요'}
+      </FetchLoading>
+    );
   }
 
   return (
     <div>
-      {isEvent && (
-        <div className={styles.progressTab}>
-          {Object.entries(PROGRESS).map(([key, value]) => (
-            <ProgressTab
-              key={key}
-              progress={value}
-              isSelected={key === activeTab}
-              onClick={() => setActiveTab(key)}
-            >
-              {value}
-            </ProgressTab>
-          ))}
-        </div>
-      )}
-
       <PullToRefresh
         onRefresh={() => refetch().then(() => console.log('Refreshed!'))}
       >
         <List>
-          {filteredPosts.map((post, index) => (
+          {postList.map((post, index) => (
             <Link
               className={styles.to}
               key={post.postId}
@@ -86,9 +77,6 @@ export default function PostList({ saveScrollPosition }) {
             </Link>
           ))}
           {isFetching && <FetchLoading />}
-          {isEvent && isProgressEmpty && (
-            <FetchLoading animation={false}>해당 이벤트가 없어요</FetchLoading>
-          )}
         </List>
       </PullToRefresh>
     </div>
