@@ -1,25 +1,19 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useState, useContext } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { deleteEvent, getEventContent, reportPost, reportUser } from '@/apis';
+import { getEventContent } from '@/apis';
+import { NotFoundPage } from '@/page/etc';
 
 import {
   BackAppBar,
   Badge,
-  DeleteModal,
   FetchLoading,
   Icon,
-  OptionModal,
   PrimaryButton,
 } from '@/shared/component';
 import { LIKE_TYPE, QUERY_KEY, ROLE, TOAST } from '@/shared/constant';
-import {
-  AppError,
-  convertHyperlink,
-  fullDateTimeFormat,
-  getBoard,
-} from '@/shared/lib';
+import { convertHyperlink, fullDateTimeFormat, getBoard } from '@/shared/lib';
 import { ModalContext } from '@/shared/context/ModalContext';
 import { useModalReset } from '@/shared/hook/useBlocker';
 import { useAuth, useToast } from '@/shared/hook';
@@ -28,13 +22,10 @@ import { GuideModal } from '@/feature/event/component';
 import { isUrlValid } from '@/feature/event/lib';
 import { EVENT_GUIDE_MODAL_OPTIONS } from '@/feature/event/constant';
 
-import { NotFoundPage } from '@/page/etc';
-
 import { CommentInput, CommentListSuspense } from '@/feature/comment/component';
 import { useDeletePostHandler } from '@/feature/board/hook/useDeletePostHandler';
 import { PostModalRenderer } from '@/feature/board/component';
 import { useReportHandler } from '@/feature/report/hook/useReport';
-import { useUpdateCommentNotificationSetting } from '@/feature/alert/hook';
 
 import { useLike } from '@/feature/like/hook';
 import { useScrap } from '@/feature/scrap/hook';
@@ -44,35 +35,28 @@ import cloudLogo from '@/assets/images/cloudLogo.svg';
 import styles from './EventPage.module.css';
 
 export default function EventPage() {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { postId } = useParams();
-  const location = useLocation();
-  const { pathname } = location;
-  const { inputFocus, isInputFocused } = useCommentContext();
+
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
-  const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [isPostReportModalOpen, setIsPostReportModalOpen] = useState(false);
-  const [isUserReportModalOpen, setIsUserReportModalOpen] = useState(false);
-  const [deleteSubmitDisabled, setDeleteSubmitDisabled] = useState(false);
-  const { invalidUserInfoQuery } = useAuth();
-  const { userInfo } = useAuth();
+  const { useInfo } = useAuth();
+
+  const { modal, setModal } = useContext(ModalContext);
+
+  // 페이지 언마운트 시 모달 상태 초기화
+  useModalReset();
 
   const { data, isLoading, error, isError } = useQuery({
-    queryKey: [QUERY_KEY.post, postId],
+    queryKey: QUERY_KEY.post(postId),
     queryFn: () => getEventContent(postId),
     staleTime: 1000 * 60 * 5,
     enabled: !!currentBoard?.id && !!postId,
   });
 
-  const { scrap, unscrap } = useScrap();
-  const { like, unlike } = useLike({
-    type: LIKE_TYPE.post,
-    sourceId: postId,
-  });
+  const { handleDelete } = useDeletePostHandler(currentBoard?.id);
+  const { handleReport } = useReportHandler(modal, setModal, data);
 
   const handleEdit = () => {
     setModal({ id: null, type: null });
@@ -106,10 +90,6 @@ export default function EventPage() {
     }
   };
 
-  // 뱃지를 보여주는 ROLE
-  const showBadge =
-    data?.userRoleId === ROLE.official ||
-    (data?.userRoleId === ROLE.admin && data?.userDisplay !== '익명송이');
   // 로딩과 에러 상태에 따라 조건부 렌더링
   if (isLoading) {
     return (
@@ -148,9 +128,7 @@ export default function EventPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.backAppBar}>
-        <BackAppBar backgroundColor={'#eaf5fd'} />
-      </div>
+      <BackAppBar backgroundColor={'#eaf5fd'} />
 
       <div className={styles.blueContainer}>
         <MetaContainer
@@ -295,10 +273,9 @@ export default function EventPage() {
       <CommentContainer
         isNotice={data.isNotice}
         commentCount={data.commentCount}
-        userRoleId={data.userRoleId}
+        userInfo={useInfo}
       />
 
-      {/* PostPage에서 사용하는 모달 렌더러 */}
       <PostModalRenderer
         modal={modal}
         handleEdit={handleEdit}
@@ -317,39 +294,8 @@ function MetaContainer({
   isEdited,
   isNotice,
   isWriter,
-  isCommentAlertConsent,
 }) {
-  const { postId } = useParams();
-  const { pathname } = useLocation();
-  const { id: boardId } = getBoard(pathname.split('/')[2]);
-
   const { setModal } = useContext(ModalContext);
-
-  const { toast } = useToast();
-
-  const updateNotificationSetting = useUpdateCommentNotificationSetting(
-    boardId,
-    postId
-  );
-
-  const updateSetting = async () => {
-    const nextStatus = !isCommentAlertConsent;
-
-    try {
-      await updateNotificationSetting.mutateAsync(nextStatus);
-
-      const message = nextStatus
-        ? '댓글 알림이 설정되었습니다.'
-        : '댓글 알림이 해제되었습니다.';
-      toast(message);
-    } catch (error) {
-      if (error instanceof AppError) {
-        toast.error(error.message);
-      } else {
-        toast.error('잠시 후 다시 시도해주세요.');
-      }
-    }
-  };
 
   const onMenuOpen = () => {
     const id = isWriter ? 'my-post-more-options' : 'post-more-options';
@@ -364,7 +310,6 @@ function MetaContainer({
     userRoleId === ROLE.official ||
     (userRoleId === ROLE.admin && userDisplay !== '익명송이');
 
-  const showBellIcon = !isNotice && isWriter;
   const showMeatBallIcon = !isNotice || isWriter;
 
   return (
@@ -383,16 +328,6 @@ function MetaContainer({
       </div>
 
       <div className={styles.actions}>
-        {showBellIcon && (
-          <div className={styles.commentBell} onClick={updateSetting}>
-            <Icon
-              id={isCommentAlertConsent ? 'comment-bell-fill' : 'comment-bell'}
-              width={18}
-              height={21}
-            />
-          </div>
-        )}
-
         {showMeatBallIcon && (
           <div className={styles.meatBall} onClick={onMenuOpen}>
             <Icon id='meat-ball' width={18} height={4} stroke='none' />
@@ -438,8 +373,8 @@ function ActionContainer({
           styles={{
             paddingTop: '0.1rem',
           }}
-          stroke='var(--blue-3)'
-          fill='none'
+          stroke={'var(--blue-3)'}
+          fill={'none'}
         />
         <p>댓글 {commentCount.toLocaleString()}</p>
       </div>
@@ -451,7 +386,7 @@ function ActionContainer({
           id='like-stroke'
           width={16}
           height={15}
-          stroke='var(--pink-2)'
+          stroke={'var(--pink-2)'}
           fill={isLiked ? 'var(--pink-2)' : 'none'}
         />
         <p>공감 {likeCount.toLocaleString()}</p>
@@ -473,7 +408,7 @@ function ActionContainer({
   );
 }
 
-function CommentContainer({ isNotice, commentCount, userRoleId }) {
+function CommentContainer({ isNotice, commentCount, userInfo }) {
   return (
     <>
       {isNotice ? (
@@ -481,7 +416,7 @@ function CommentContainer({ isNotice, commentCount, userRoleId }) {
       ) : (
         <>
           <CommentListSuspense commentCount={commentCount} />
-          {userRoleId === 4 ? <CommentInput /> : ''}
+          {userInfo === 4 ? <CommentInput /> : ''}
         </>
       )}
     </>

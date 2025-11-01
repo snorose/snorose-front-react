@@ -1,9 +1,10 @@
 import { Badge, Icon } from '@/shared/component';
 import { ROLE } from '@/shared/constant';
 import { postBarDateFormat } from '@/shared/lib';
+import { Chip } from '@/feature/board/component';
 import altImage from '@/assets/images/altImage.png';
 import cloudLogo from '@/assets/images/cloudLogo.svg';
-import { Chip } from '@/feature/board/component';
+
 import styles from './PostBar.module.css';
 
 export default function PostBar({ data, hasComment = true, hasLike = true }) {
@@ -12,36 +13,48 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
     data.userRoleId === ROLE.official ||
     (data.userRoleId === ROLE.admin && data.userDisplay !== '익명송이');
 
-  // // 이벤트 게시판 응모상황 표시
-  // const inProgress =
-  //   data.progressType === 'IN_PROGRESS' ? styles.inProgress : '';
-
   return (
     <div className={styles.post}>
-      <div className={styles.post_top}>
-        <Icon id='cloud' width={23} height={14} />
-        <p className={styles.name}>{data.userDisplay}</p>
-        {showBadge && (
-          <Badge userRoleId={data.userRoleId} className={styles.badge} />
-        )}
-        <p className={styles.dot}>·</p>
-        <p>{postBarDateFormat(data.createdAt)}</p>
-        {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
-        {data.isConfirmed && (
-          <Icon
-            className={styles.checkCircleIcon}
-            id='check-circle'
-            width={12}
-            height={12}
-          />
-        )}
-        {data.boardName && <Chip type={'board'} label={data.boardName} />}
+      <div className={styles.thumbnailContainer}>
+        <div>
+          <div className={styles.postBarTop}>
+            <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
+            <p className={styles.author}>{data.userDisplay}</p>
+            {showBadge && (
+              <Badge userRoleId={data.userRoleId} className={styles.badge} />
+            )}
+            <p className={styles.dot}>·</p>
+            <p>{postBarDateFormat(data.createdAt)}</p>
+            {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
+            {data.isConfirmed && (
+              <Icon
+                className={styles.checkCircleIcon}
+                id='check-circle'
+                width={12}
+                height={12}
+              />
+            )}
+            {data.boardName && <Chip type={'board'} label={data.boardName} />}
             {data.progressType && (
               <Chip type={'event'} label={data.progressType} />
             )}
-      <div className={styles.post_center}>
-        <p className={styles.title}>{data.title}</p>
-        <p className={styles.text}>{data.questionDetail ?? data.content}</p>
+          </div>
+          <div className={styles.postBarCenter}>
+            <p className={styles.title}>{data.title}</p>
+            <p className={styles.text}>{data.questionDetail ?? data.content}</p>
+          </div>
+        </div>
+
+        {data.hasMediaAttachment && (
+          <img
+            className={styles.thumbnail}
+            src={data.thumbnailUrl || altImage}
+            loading='lazy'
+            onError={(e) => {
+              e.currentTarget.src = altImage;
+            }}
+          />
+        )}
       </div>
 
       <div className={styles.postBarBottom}>

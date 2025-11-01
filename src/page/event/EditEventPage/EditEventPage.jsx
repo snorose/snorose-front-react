@@ -67,7 +67,7 @@ export default function EditEventPage() {
     isLoading,
     error,
   } = useQuery({
-    queryKey: [QUERY_KEY.post, postId],
+    queryKey: QUERY_KEY.post(postId),
     queryFn: () => getEventContent(postId),
     enabled: !!currentBoard?.id && !!postId,
     placeholderData: {},

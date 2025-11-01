@@ -1,20 +1,15 @@
+.blueContainer {
+  padding: var(--default-appbar-height) var(--default-margin) 1rem;
+
+  border-radius: 0 0 1.5rem 1.5rem;
+  background-color: var(--blue-0);
+}
+
 .container {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.backAppBar {
-  background-color: var(--blue-0);
-  width: 100%;
-}
-
-.blueContainer {
-  padding: 0 var(--default-margin);
-
-  border-radius: 0 0 1.5rem 1.5rem;
-  background-color: var(--blue-0);
 }
 
 /* meta */
