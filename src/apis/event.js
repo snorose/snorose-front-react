@@ -46,7 +46,7 @@ export const postEvent = async ({
     drawCount: drawCount,
     link: link,
   };
-  console.log(data);
+
   const response = await authAxios.post(`/v1/events`, data);
   return response;
 };
