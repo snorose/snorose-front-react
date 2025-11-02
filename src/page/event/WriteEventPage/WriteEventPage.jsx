@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -8,15 +8,19 @@ import {
   CloseAppBar,
   FetchLoading,
   Icon,
+  ConfirmModal,
 } from '@/shared/component';
-import { QUERY_KEY, ROLE } from '@/shared/constant';
+import { QUERY_KEY, ROLE, CONFIRM_MODAL_TEXT } from '@/shared/constant';
 import { useAuth, useBlocker, useToast } from '@/shared/hook';
 import { formattedNowTime, getBoard } from '@/shared/lib';
+import { ModalContext } from '@/shared/context/ModalContext';
 
 import { postEvent, postPost } from '@/apis';
 import { DropDownMenu } from '@/feature/board/component';
 
 import styles from './WriteEventPage.module.css';
+import cloudLogo from '@/assets/images/cloudLogo.svg';
+
 import { EventForm, NoticeForm } from '@/feature/event/component';
 import { validateOnSubmit } from '@/feature/event/lib';
 import {
@@ -44,9 +48,21 @@ export default function WriteEventPage() {
   const [noticeData, setNoticeData] = useState(() => NOTICE_FORM_DATA(boardId));
   const [errors, setErrors] = useState({});
 
+  const { modal, setModal } = useContext(ModalContext);
+  const [isBlock, setIsBlock] = useState(!!(data || noticeData));
+
   // navigation guard
-  const isBlock = !!(data || noticeData);
   useBlocker(isBlock);
+
+  // 게시글 작성 중 페이지 이탈
+  const handleExitPage = () => {
+    setModal({
+      id: null,
+      type: null,
+    });
+    setIsBlock(false);
+    navigate(-1);
+  };
 
   // 폼 내용 입력 및 eventType 변경 시 초기화
   useEffect(() => {
@@ -117,7 +133,6 @@ export default function WriteEventPage() {
           data={noticeData}
           onChange={handleChange}
           onValid={setSubmitDisabled}
-          errors={errors}
         />
       );
     }
@@ -162,6 +177,7 @@ export default function WriteEventPage() {
     request
       .then((response) => {
         if (response.status === 201) {
+          console.log(response);
           const newPostId = response.data.result.postId;
 
           queryClient.removeQueries([QUERY_KEY.post]);
@@ -246,7 +262,11 @@ export default function WriteEventPage() {
             <div className={styles.profileBoxLeft}>
               {userInfo?.userRoleId !== ROLE.admin &&
               userInfo?.userRoleId !== ROLE.official ? (
-                <Icon id='cloud' width={25} height={16} />
+                <img
+                  className={styles.cloudLogoIcon}
+                  src={cloudLogo}
+                  alt='로고'
+                />
               ) : (
                 <Badge
                   userRoleId={userInfo?.userRoleId}
@@ -261,6 +281,12 @@ export default function WriteEventPage() {
 
           <div className={styles.form}>{renderForm()}</div>
         </div>
+        {modal.id === 'exit-page' && (
+          <ConfirmModal
+            modalText={CONFIRM_MODAL_TEXT.EXIT_PAGE}
+            onConfirm={handleExitPage}
+          />
+        )}
       </div>
     </>
   );
