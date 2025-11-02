@@ -50,6 +50,16 @@
     #167ed8 100%
   );
 
+  /* mainPage 게시판*/
+  --firstSnow-bg: #eaf5fd;
+  --largeSnow-bg: #c8dfff;
+  --permanentSnow-bg: linear-gradient(180deg, #40669d 0%, #1e304a 100%);
+  --event-bg: radial-gradient(
+    64.42% 64.42% at 58.93% 36.2%,
+    #53afff 0%,
+    #cbf2ff 100%
+  );
+
   /* text */
   --text-title-1-bold: 700 2.4rem/1.3 'Spoqa Han Sans Neo';
   --text-title-1-med: 500 2.4rem/1.3 'Spoqa Han Sans Neo';
