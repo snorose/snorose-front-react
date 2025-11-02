@@ -6,7 +6,7 @@ import { TOAST, QUERY_KEY } from '@/shared/constant';
 import { useQueryClient } from '@tanstack/react-query';
 import { ModalContext } from '@/shared/context/ModalContext';
 
-export function useDeletePostHandler(boardId) {
+export function useDeletePostHandler(boardId, currentBoardTextId) {
   const { postId } = useParams();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export function useDeletePostHandler(boardId) {
 
     try {
       const response =
-        boardId === 14
+        boardId === 14 && currentBoardTextId === 'event'
           ? await deleteEvent(postId)
           : await deletePost(boardId, postId);
 
