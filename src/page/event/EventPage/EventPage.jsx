@@ -41,7 +41,7 @@ export default function EventPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const currentBoard = getBoard(pathname.split('/')[2]);
-  const { useInfo } = useAuth();
+  const { userInfo } = useAuth();
 
   const { modal, setModal } = useContext(ModalContext);
 
@@ -273,7 +273,7 @@ export default function EventPage() {
       <CommentContainer
         isNotice={data.isNotice}
         commentCount={data.commentCount}
-        userInfo={useInfo}
+        userInfo={userInfo.userRoleId}
       />
 
       <PostModalRenderer
