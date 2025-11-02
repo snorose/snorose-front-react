@@ -28,8 +28,6 @@ export default function HomeCard() {
         tag='공지'
         icon={{
           id: isLogin ? 'blueMegaphone' : 'megaphone',
-          mixBlendMode: isLogin ? 'color-burn' : 'luminosity',
-          rotate: isLogin ? -34.271 : 34.27,
         }}
         isDark={isLogin ? false : true}
       />
@@ -40,7 +38,7 @@ export default function HomeCard() {
           to='/attendance'
           title={`오늘의\n출석체크`}
           tag='출석체크'
-          icon={{ id: 'flag', mixBlendMode: 'luminosity' }}
+          icon={{ id: 'flag' }}
           isDark
         />
       )}

@@ -44,6 +44,11 @@
     var(--blue-1) 37.32%,
     #cbe0ff 100%
   );
+  --gradient-5: radial-gradient(
+    248.57% 98.91% at 25.35% 34.53%,
+    #10389c 0%,
+    #167ed8 100%
+  );
 
   /* text */
   --text-title-1-bold: 700 2.4rem/1.3 'Spoqa Han Sans Neo';
