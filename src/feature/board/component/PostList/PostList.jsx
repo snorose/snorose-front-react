@@ -24,18 +24,18 @@ export default function PostList({ saveScrollPosition }) {
   const currentBoard = getBoard(currentBoardTextId);
   const isBesookt = currentBoardTextId === 'besookt' ? true : false;
   const isEvent = currentBoardTextId === 'event' ? true : false;
-  const progress = searchParams.get('progress') ?? 'ALL';
+  const progressType = searchParams.get('progressType') ?? 'ALL';
 
   // 페이지네이션 관련 hook (일반 / 이벤트 )
   const { data, ref, isFetching, refetch } = useSuspensePagination({
     queryKey: isEvent
-      ? [QUERY_KEY.events, currentBoard.id, progress]
+      ? [QUERY_KEY.events, currentBoard.id, progressType]
       : [QUERY_KEY.posts, currentBoard.id],
     queryFn: ({ pageParam }) =>
       isEvent
         ? getEventPosts({
             page: pageParam,
-            progress: progress === 'ALL' ? undefined : progress,
+            progressType: progressType === 'ALL' ? undefined : progressType,
           })
         : getPosts(currentBoard.id, pageParam),
     staleTime: STALE_TIME.boardPostList,
@@ -47,7 +47,7 @@ export default function PostList({ saveScrollPosition }) {
     return (
       <FetchLoading animation={false}>
         {isEvent
-          ? progress === 'ALL'
+          ? progressType === 'ALL'
             ? '게시물이 없어요'
             : '해당 상태의 이벤트가 없어요'
           : '게시물이 없어요'}

@@ -23,7 +23,7 @@ export default function EventListPage() {
   const isAdmin = userInfo?.userRoleId === ROLE.admin;
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const activeProgress = searchParams.get('progress') ?? 'ALL';
+  const activeProgress = searchParams.get('progressType') ?? 'ALL';
 
   const { data: noticeLineData } = useQuery({
     queryKey: [QUERY_KEY.noticeLine, currentBoard.id],
@@ -31,14 +31,14 @@ export default function EventListPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const updateProgress = (progress) => {
+  const updateProgress = (progressType) => {
     setSearchParams((prev) => {
       const newParams = new URLSearchParams(prev);
 
-      if (progress === 'ALL') {
-        newParams.delete('progress');
+      if (progressType === 'ALL') {
+        newParams.delete('progressType');
       } else {
-        newParams.set('progress', progress);
+        newParams.set('progressType', progressType);
       }
 
       return newParams;
@@ -59,7 +59,7 @@ export default function EventListPage() {
         {Object.entries(PROGRESS).map(([key, value]) => (
           <ProgressTab
             key={key}
-            progress={value}
+            progressType={value}
             isSelected={key === activeProgress}
             onClick={() => updateProgress(key)}
           >

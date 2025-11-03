@@ -1,11 +1,15 @@
 import styles from './ProgressTab.module.css';
 
-export default function ProgressTab({ progress, isSelected = false, onClick }) {
+export default function ProgressTab({
+  progressType,
+  isSelected = false,
+  onClick,
+}) {
   const active = isSelected ? styles.active : '';
 
   return (
     <button className={`${styles.box} ${active}`} onClick={onClick}>
-      {progress}
+      {progressType}
     </button>
   );
 }
