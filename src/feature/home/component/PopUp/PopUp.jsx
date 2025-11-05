@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
 import styles from './PopUp.module.css';
-import october from './october.png';
+import calendar from './calendar.png';
 import accounting from './accounting.png';
 
 const content = (
@@ -12,7 +12,7 @@ const content = (
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
       </p>
 
-      <Heading>1. 스노로즈 알림 기능 런칭 안내</Heading>
+      {/* <Heading>1. 스노로즈 알림 기능 런칭 안내</Heading>
       <Content>
         <strong>10월 6일(월)</strong>부터 스노로즈에서{' '}
         <strong>알림 기능</strong>을 제공합니다.
@@ -37,11 +37,11 @@ const content = (
           청파제 이벤트 포인트는 <strong>10월 13일(월)</strong>까지 순차적으로
           지급될 예정입니다.
         </p>
-      </Content>
+      </Content> */}
 
-      <Heading>3. 10월 스노로즈 일정</Heading>
+      <Heading>11월 스노로즈 일정</Heading>
       <Content>
-        <img src={october} alt='10월 캘린더' />
+        <img src={calendar} alt='캘린더' />
       </Content>
 
       {/* <Heading>2. 스노로즈 블로그 이벤트기획파트편 공개</Heading>
