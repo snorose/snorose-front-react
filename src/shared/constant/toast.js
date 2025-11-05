@@ -57,7 +57,7 @@ const TOAST = Object.freeze({
   },
   ATTACHMENT: {
     imageFileSizeError: '파일 크기는 최대 5MB까지 업로드할 수 있어요.',
-    imageQuantityError: '이미지는 최대 10개까지 첨부 가능해요.',
+    imageQuantityError: '이미지는 최대 5개까지 첨부 가능해요.',
     videoFileSizeError: '파일 크기는 최대 50MB까지 업로드할 수 있어요.',
     videoQuantityError: '영상은 최대 1개까지 첨부 가능해요.',
   },
