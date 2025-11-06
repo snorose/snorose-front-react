@@ -14,9 +14,8 @@ export default function PasswordInput({
 }) {
   const [visible, setVisible] = useState(false);
   const fillColor = {
-    defauilt: 'var(--grey-1-1)',
-    valid: 'var(--blue-0)',
-    error: 'var(--pink-1)',
+    valid: '#00368E',
+    error: '#FF4B6C',
   }[status];
 
   return (
@@ -29,14 +28,16 @@ export default function PasswordInput({
         onChange={(e) => onChange(e.target.value)}
       />
 
-      <Icon
-        className={styles.icon}
-        id={visible ? 'opened-eye' : 'closed-eye'}
-        fill={fillColor}
-        width={24}
-        height={24}
-        onClick={() => setVisible((prev) => !prev)}
-      />
+      {value && (
+        <Icon
+          className={styles.icon}
+          id={visible ? 'opened-eye' : 'closed-eye'}
+          fill={fillColor}
+          width={24}
+          height={24}
+          onClick={() => setVisible((prev) => !prev)}
+        />
+      )}
     </InputLayout>
   );
 }
