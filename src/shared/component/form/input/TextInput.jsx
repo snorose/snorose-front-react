@@ -2,9 +2,9 @@ import InputLayout from '@/shared/component/form/input/InputLayout';
 
 export default function TextInput({
   id,
+  placeholder,
   value,
   onChange,
-  placeholder,
   status = 'default',
 }) {
   return (
@@ -12,8 +12,8 @@ export default function TextInput({
       <input
         id={id}
         type='text'
-        value={value}
         placeholder={placeholder}
+        value={value}
         onChange={(e) => onChange(e.target.value)}
       />
     </InputLayout>
