@@ -3,14 +3,15 @@
   height: 5rem;
 
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
 
   border-radius: 0.5rem;
 
   font: var(--text-body-1-reg);
 
-  &::placeholder {
+  & input::placeholder {
     color: var(--grey-3-1);
   }
 }
@@ -27,8 +28,22 @@
   color: var(--pink-3);
 }
 
+/* input */
 .container input {
+  width: 100%;
+  height: 100%;
+
   outline: none;
   border: none;
   background-color: transparent;
+}
+
+.container.default input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px var(--grey-1-1) inset;
+}
+.container.valid input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px var(--blue-0) inset;
+}
+.container.error input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px var(--pink-1) inset;
 }
