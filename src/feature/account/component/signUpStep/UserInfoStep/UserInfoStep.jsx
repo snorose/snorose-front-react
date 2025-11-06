@@ -65,7 +65,7 @@ export default function UserInfoStep({ setFormData, formData }) {
           studentNumber: next,
         })),
       validate: validateStudentNumber,
-      message: '학번 형식을 올바르게 입력해 주세요',
+      message: '학번은 7자리 숫자에요',
     },
     {
       type: 'text',

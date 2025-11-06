@@ -55,7 +55,7 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
           userName: next,
         })),
       validate: validateUserName,
-      message: '한글 또는 영어 대소문자로 2자 이상 30자 이하로 입력해 주세요',
+      message: '한글 또는 영어로 2자 이상 30자 이하로 입력해 주세요',
     },
     {
       type: 'email',
