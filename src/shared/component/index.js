@@ -19,6 +19,7 @@ export { default as CheckBox } from './form/CheckBox/CheckBox';
 
 export { default as EmailInput } from './form/input/EmailInput';
 export { default as NumberInput } from './form/input/NumberInput';
+export { default as PasswordInput } from './form/input/PasswordInput';
 export { default as TextInput } from './form/input/TextInput';
 
 export { default as Input } from './form/input/Input';
