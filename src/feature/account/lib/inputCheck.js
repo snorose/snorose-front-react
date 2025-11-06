@@ -1,3 +1,62 @@
+import { isNumber } from '@/shared/lib';
+
+export function validateUserName(value = '') {
+  const format = /^[A-Za-z가-힣ㄱ-ㅎ]+$/;
+
+  if (value.length === 0) {
+    return 'default';
+  }
+
+  if (format.test(value) && value.length >= 2 && value.length <= 30) {
+    return 'valid';
+  }
+
+  return 'error';
+}
+
+export function validateSookmyungEmail(value = '') {
+  const domain = value.split('@')[1];
+
+  if (value.length === 0) {
+    return 'default';
+  }
+
+  if (domain === 'sookmyung.ac.kr' || domain === 'sm.ac.kr') {
+    return 'valid';
+  }
+
+  return 'error';
+}
+
+export function validateId(value = '') {
+  const format = /^[A-Za-z0-9]+$/;
+
+  if (value.length === 0) {
+    return 'default';
+  }
+
+  if (format.test(value) && value.length >= 5 && value.length <= 30) {
+    return 'valid';
+  }
+
+  return 'error';
+}
+
+export function validatePassword(value = '') {
+  const format = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#%^&*])[A-Za-z\d!@#%^&*]+$/;
+
+  if (value.length === 0) {
+    return 'default';
+  }
+
+  if (format.test(value) && value.length >= 8 && value.length <= 16) {
+    return 'valid';
+  }
+
+  return 'error';
+}
+
+// --------------------------------------------
 export function checkIfEntered(input) {
   input = input?.trim();
   if (!input?.length) {
@@ -32,6 +91,7 @@ export function checkSpecialChar(input) {
     return 'wrong';
   }
 }
+
 export function checkMail(mail) {
   mail = mail?.trim();
   let isDomain = true;
@@ -57,19 +117,6 @@ export function checkMail(mail) {
   }
 }
 
-export function checkSookmyungMail(mail) {
-  mail = mail?.trim();
-  const splitMailArr = mail?.split('@');
-  if (!mail?.length) {
-    return 'ready';
-  }
-  if (splitMailArr[1] === 'sookmyung.ac.kr' || splitMailArr[1] === 'sm.ac.kr') {
-    return 'right';
-  } else {
-    return 'wrong';
-  }
-}
-
 export function checkStudentNum(number) {
   number = number?.trim();
   if (number) {
@@ -80,48 +127,6 @@ export function checkStudentNum(number) {
     }
   }
   return 'ready';
-}
-
-export function checkID(id) {
-  id = id?.trim();
-  const format = /^[A-Za-z0-9]+$/;
-  if (id?.length === 0) {
-    return 'ready';
-  } else if (id.length >= 5 && id.length <= 30 && format.test(id))
-    return 'right';
-  else return 'wrong';
-}
-
-export function checkPW(pw) {
-  pw = pw?.trim();
-  if (pw?.length === 0) return 'ready';
-  let isAlphabet,
-    isNumber,
-    isSpecialChar = false;
-  if (pw?.length < 8 || pw?.length > 17) {
-    return 'wrong';
-  }
-  pw.split('').map((char) => {
-    if (/^[A-Za-z]+$/.test(char)) {
-      isAlphabet = true;
-    } else if (/^[0-9]+$/.test(char)) {
-      isNumber = true;
-    } else if (/^[!@#%^&*]+$/.test(char)) {
-      isSpecialChar = true;
-    }
-  });
-  if (isAlphabet && isNumber && isSpecialChar) {
-    return 'right';
-  }
-  return 'wrong';
-}
-
-export function checkIfSame(input1, input2) {
-  input1 = input1?.trim();
-  input2 = input2?.trim();
-  if (!input2) return 'ready';
-  else if (input1 === input2) return 'right';
-  else return 'wrong';
 }
 
 export function checkBirthday(input) {
