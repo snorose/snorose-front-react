@@ -298,7 +298,7 @@ function MetaContainer({
   const { setModal } = useContext(ModalContext);
 
   const onMenuOpen = () => {
-    const id = isWriter ? 'my-post-more-options' : 'post-more-options';
+    const id = isWriter ? 'my-post-more-options' : 'event-post-more-option';
 
     setModal({
       id,
