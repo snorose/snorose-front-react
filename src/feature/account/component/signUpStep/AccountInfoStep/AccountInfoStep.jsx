@@ -22,26 +22,6 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
     return formData.password === formData.checkedPassword ? 'valid' : 'error';
   };
 
-  const validators = [
-    () => validateUserName(formData.userName),
-    () => validateSookmyungEmail(formData.email),
-    () => validateId(formData.loginId),
-    () => validatePassword(formData.password),
-    validateCheckedPassword,
-  ];
-
-  const isAllValid = validators.every((fn) => fn() === 'valid');
-
-  // 다음 단계로 이동하는 함수
-  const handleNext = () => {
-    if (isAllValid) {
-      setStage(2); // 직접 2단계로 설정
-    } else {
-      // 유효성 검사가 완료되지 않은 경우 알림 또는 다른 처리
-      alert('모든 필드를 올바르게 입력해주세요.');
-    }
-  };
-
   const inputList = [
     {
       type: 'text',
@@ -115,6 +95,18 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
       message: '비밀번호가 일치하지 않아요',
     },
   ];
+
+  const isAllValid = inputList.every(
+    (field) => field.validate(field.value) === 'valid'
+  );
+
+  const handleNext = () => {
+    if (isAllValid) {
+      setStage(2);
+    } else {
+      alert('모든 필드를 올바르게 입력해주세요.');
+    }
+  };
 
   return (
     <div className={styles.container}>
