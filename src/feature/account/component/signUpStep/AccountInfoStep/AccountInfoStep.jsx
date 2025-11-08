@@ -1,3 +1,4 @@
+import { useToast } from '@/shared/hook';
 import {
   EmailInput,
   ErrorMessage,
@@ -17,6 +18,8 @@ import {
 import styles from './AccountInfoStep.module.css';
 
 export default function AccountInfoStep({ formData, setFormData, setStage }) {
+  const { toast } = useToast();
+
   const validateCheckedPassword = () => {
     if (formData.checkedPassword === '') return 'default';
     return formData.password === formData.checkedPassword ? 'valid' : 'error';
@@ -104,7 +107,10 @@ export default function AccountInfoStep({ formData, setFormData, setStage }) {
     if (isAllValid) {
       setStage(2);
     } else {
-      alert('모든 필드를 올바르게 입력해주세요.');
+      toast({
+        message: '모든 필드를 올바르게 입력해주세요.',
+        variant: 'error',
+      });
     }
   };
 
