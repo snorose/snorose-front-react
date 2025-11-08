@@ -192,7 +192,7 @@ export default function WriteEventPage() {
         }
       })
       .catch(({ response }) => {
-        toast(response.data.message);
+        toast({ message: response.data.message, variant: 'error' });
       })
       .finally(() => {
         setSubmitDisabled(false);
