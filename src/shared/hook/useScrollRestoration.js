@@ -1,25 +1,41 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-const KEEP_SCROLL_SESSION = 'scrollTop';
+export default function useScrollRestoration(scrollContainerRef) {
+  const { key } = useLocation();
+  const scrollMapRef = useRef({});
 
-export default function useScrollRestoration() {
-  const scrollRef = useRef(0);
-
-  // 스크롤 위치를 저장
   const saveScrollPosition = () => {
-    if (scrollRef.current) {
-      sessionStorage.setItem(KEEP_SCROLL_SESSION, scrollRef.current.scrollTop);
-    }
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
+    scrollMapRef.current[key] = scrollContainer.scrollTop;
+  };
+
+  const restoreScrollPosition = () => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
+    const saved = scrollMapRef.current[key];
+    scrollContainer.scrollTop = saved === undefined ? 0 : saved;
   };
 
   useLayoutEffect(() => {
-    const scrollTop = sessionStorage.getItem(KEEP_SCROLL_SESSION) ?? 0;
+    restoreScrollPosition();
+  }, [key]);
 
-    // 이전 스크롤 위치 복원
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollTop; // 원하는 위치로 복원
-    }
-  }, []);
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
 
-  return { scrollRef, saveScrollPosition }; // 필요 시 외부에서 호출 가능
+    scrollContainer.addEventListener('scroll', saveScrollPosition, {
+      passive: true,
+    });
+
+    return () => {
+      if (scrollContainer) {
+        scrollContainer.removeEventListener('scroll', saveScrollPosition);
+      }
+    };
+  }, [key]);
 }
