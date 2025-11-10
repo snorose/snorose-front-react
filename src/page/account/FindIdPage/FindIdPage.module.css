@@ -41,8 +41,12 @@
   margin-bottom: 5.6rem;
 }
 
-.inputFrame {
+.form {
   margin-bottom: 1.8rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
 }
 
 .buttonFrame {

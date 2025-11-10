@@ -120,19 +120,6 @@ export function checkIfEntered(input) {
   }
 }
 
-export function checkName(input) {
-  input = input?.trim();
-  const format = /^[A-Za-z가-힣ㄱ-ㅎ]+$/;
-  if (!input?.length) {
-    return 'ready';
-  }
-  if (format.test(input) && input?.length > 1 && input?.length < 31) {
-    return 'right';
-  } else {
-    return 'wrong';
-  }
-}
-
 export function checkMail(mail) {
   mail = mail?.trim();
   let isDomain = true;
@@ -156,16 +143,4 @@ export function checkMail(mail) {
       }
     }
   }
-}
-
-export function checkStudentNum(number) {
-  number = number?.trim();
-  if (number) {
-    if (number?.length === 7 && !isNaN(number)) {
-      return 'right';
-    } else {
-      return 'wrong';
-    }
-  }
-  return 'ready';
 }
