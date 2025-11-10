@@ -53,12 +53,6 @@
   font: var(--text-headline-1-med);
 }
 
-.tag {
-  font: var(--text-body-2-reg);
-
-  color: var(--grey-4);
-}
-
 .dark .tag {
   color: var(--grey-1-1);
 }

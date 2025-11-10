@@ -25,7 +25,6 @@ export default function HomeCard() {
         className={styles.left}
         to='/board/notice'
         title={notice.title}
-        tag='공지'
         icon={{
           id: isLogin ? 'blueMegaphone' : 'megaphone',
         }}
@@ -37,7 +36,6 @@ export default function HomeCard() {
           className={styles.right}
           to='/attendance'
           title={`오늘의\n출석체크`}
-          tag='출석체크'
           icon={{ id: 'flag' }}
           isDark
         />
@@ -46,7 +44,7 @@ export default function HomeCard() {
   );
 }
 
-function Card({ className, to, title, tag, icon, isDark }) {
+function Card({ className, to, title, icon, isDark }) {
   const { mixBlendMode, rotate } = icon;
   const imgSrc = icon?.id ? require(`@/assets/images/${icon.id}.svg`) : '';
 
@@ -55,7 +53,6 @@ function Card({ className, to, title, tag, icon, isDark }) {
       <div className={styles.card}>
         <div className={styles.text}>
           <span className={styles.title}>{title}</span>
-          <span className={styles.tag}>[{tag}]</span>
         </div>
         <img
           className={styles.image}
