@@ -49,6 +49,11 @@
     #10389c 0%,
     #167ed8 100%
   );
+  --gradient-attendance: radial-gradient(
+    98.91% 248.57% at 25.35% 34.53%,
+    #10389c 0%,
+    #167ed8 100%
+  );
 
   /* mainPage 게시판*/
   --firstSnow-bg: #eaf5fd;
