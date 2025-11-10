@@ -38,8 +38,12 @@
   margin-bottom: 5.1rem;
 }
 
-.inputFrame {
+.form {
   margin-bottom: 2.4rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
 }
 
 .alert {
@@ -70,11 +74,10 @@
   gap: 0.1rem;
 }
 
-.findIDButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--grey-4);
-  margin-top: 1.2rem;
+.buttonFrame {
   margin-bottom: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }

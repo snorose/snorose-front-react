@@ -110,6 +110,21 @@ export function validateBirthday(value) {
 
   return 'valid';
 }
+
+export function validateEmail(value) {
+  const format = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+  if (value.length === 0) {
+    return 'default';
+  }
+
+  if (format.test(value)) {
+    return 'valid';
+  }
+
+  return 'error';
+}
+
 // --------------------------------------------
 export function checkIfEntered(input) {
   input = input?.trim();
@@ -130,31 +145,6 @@ export function checkName(input) {
     return 'right';
   } else {
     return 'wrong';
-  }
-}
-
-export function checkMail(mail) {
-  mail = mail?.trim();
-  let isDomain = true;
-  if (!mail?.length) {
-    return 'ready';
-  } else {
-    const [email, domain] = mail?.split('@');
-    if (!email || !domain) {
-      return 'wrong';
-    } else {
-      const domainArr = domain.split('.');
-      domainArr.map((element) => {
-        if (!element?.length) {
-          isDomain = false;
-        }
-      });
-      if (domainArr.length === 1 || !isDomain) {
-        return 'wrong';
-      } else {
-        return 'right';
-      }
-    }
   }
 }
 
