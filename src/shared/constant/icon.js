@@ -64,6 +64,10 @@ export const STATIC_ICON_LIST = Object.freeze({
   userSunglasses: 'user-sunglasses',
   video: 'video',
   videoFill: 'video-fill',
+  movie: 'movie',
+  location: 'location',
+  person: 'person',
+  host: 'host',
 });
 
 export const FILL_ICON_LIST = Object.freeze({

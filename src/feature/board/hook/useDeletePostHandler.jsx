@@ -1,7 +1,7 @@
 import { useRef, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useToast, useAuth } from '@/shared/hook';
-import { deletePost } from '@/apis';
+import { deletePost, deleteEvent } from '@/apis';
 import { TOAST, QUERY_KEY } from '@/shared/constant';
 import { useQueryClient } from '@tanstack/react-query';
 import { ModalContext } from '@/shared/context/ModalContext';
@@ -24,10 +24,13 @@ export function useDeletePostHandler(boardId) {
     setSubmitDisabled(true);
 
     try {
-      const response = await deletePost(boardId, postId);
+      const response =
+        boardId === 14
+          ? await deleteEvent(postId)
+          : await deletePost(boardId, postId);
 
       if (response.status === 200) {
-        boardId !== 23
+        [21, 22].includes(boardId)
           ? toast({ message: TOAST.POST.delete, variant: 'success' })
           : toast({ message: TOAST.POST.deleteNoPoints, variant: 'success' });
 

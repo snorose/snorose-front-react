@@ -1,13 +1,11 @@
 import { defaultAxios, authAxios } from '@/axios';
 import { IconItem } from '@storybook/blocks';
+import { getBoardUrl } from '@/shared/lib';
 import altImage from '@/assets/images/altImage.png';
 
 // 게시글 리스트 가져오기
 export const getPosts = async (boardId, page = 0) => {
-  const url =
-    boardId === 20
-      ? `/v1/best-posts?page=${page}`
-      : `/v1/boards/${boardId}/posts/postlist?page=${page}`;
+  const url = getBoardUrl(boardId, page);
 
   const response = await authAxios.get(url);
 
@@ -42,7 +40,7 @@ export const postPost = async ({
   title,
   content,
   isNotice,
-  attachmentsInfo,
+  // attachmentsInfo,
 }) => {
   //'게시글 생성' API에서 받아오는 데이터
   const response = await authAxios.post(`/v1/boards/${boardId}/posts/newpost`, {
@@ -86,8 +84,8 @@ export const patchPost = async ({
   title,
   content,
   isNotice,
-  attachmentsInfo,
-  deleteAttachments,
+  // attachmentsInfo,
+  // deleteAttachments,
 }) => {
   const response = await authAxios.patch(
     `/v1/boards/${boardId}/posts/${postId}/update`,

@@ -50,6 +50,10 @@ export const SIDEBAR_MENUS = Object.freeze([
     ],
   },
   {
+    to: '/board/event',
+    title: '이벤트',
+  },
+  {
     to: '/verify',
     title: '인증',
   },
