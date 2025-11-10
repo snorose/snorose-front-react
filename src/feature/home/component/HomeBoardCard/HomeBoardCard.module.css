@@ -24,6 +24,22 @@
   transform: scale(1.05);
 }
 
+.firstSnow {
+  background: var(--firstSnow-bg);
+}
+
+.largeSnow {
+  background: var(--largeSnow-bg);
+}
+
+.permanentSnow {
+  background: var(--permanentSnow-bg);
+}
+
+.event {
+  background: var(--event-bg);
+}
+
 /* 아이콘 */
 .icon {
   padding-top: 0.5rem;
