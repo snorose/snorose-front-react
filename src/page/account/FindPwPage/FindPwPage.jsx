@@ -53,7 +53,7 @@ export default function FindPwPage() {
     },
   ];
 
-  const isValid = inputProps.every(
+  const isFormValid = inputProps.every(
     ({ validate, value }) => validate(value) === 'valid'
   );
 
@@ -65,7 +65,7 @@ export default function FindPwPage() {
         className={styles.form}
         onSubmit={(e) => {
           e.preventDefault();
-          if (isValid && allowSubmit) {
+          if (isFormValid && allowSubmit) {
             findPw(e, formData, navigate, setLoading);
             setAllowSubmit(false);
           }
@@ -127,7 +127,7 @@ export default function FindPwPage() {
           </div>
 
           <div className={styles.buttonFrame}>
-            <NewButton disabled={!isValid}>완료</NewButton>
+            <NewButton disabled={!isFormValid}>완료</NewButton>
             <NewButton
               variant='outlinedSecondary'
               onClick={() => navigate('/find-id')}
