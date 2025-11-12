@@ -110,37 +110,17 @@ export function validateBirthday(value) {
 
   return 'valid';
 }
-// --------------------------------------------
-export function checkIfEntered(input) {
-  input = input?.trim();
-  if (!input?.length) {
-    return 'ready';
-  } else {
-    return 'right';
-  }
-}
 
-export function checkMail(mail) {
-  mail = mail?.trim();
-  let isDomain = true;
-  if (!mail?.length) {
-    return 'ready';
-  } else {
-    const [email, domain] = mail?.split('@');
-    if (!email || !domain) {
-      return 'wrong';
-    } else {
-      const domainArr = domain.split('.');
-      domainArr.map((element) => {
-        if (!element?.length) {
-          isDomain = false;
-        }
-      });
-      if (domainArr.length === 1 || !isDomain) {
-        return 'wrong';
-      } else {
-        return 'right';
-      }
-    }
+export function validateEmail(value) {
+  const format = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+  if (value.length === 0) {
+    return 'default';
   }
+
+  if (format.test(value)) {
+    return 'valid';
+  }
+
+  return 'error';
 }
