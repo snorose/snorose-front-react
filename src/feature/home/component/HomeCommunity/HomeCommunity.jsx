@@ -1,23 +1,39 @@
-import { BOARD_MENUS } from '@/shared/constant';
+import { BOARDS } from '@/shared/constant';
 
 import { HomeBoardCard } from '@/feature/home/component';
 
 import styles from './HomeCommunity.module.css';
 
-const BOARDS = BOARD_MENUS.filter((board) => [21, 22, 23].includes(board.id));
+import { useAuth } from '@/shared/hook';
+import { USER_STATUS } from '@/shared/constant';
+import { ACCESS_MESSAGES } from '@/feature/home/constant';
 
-export default function HomeCommunity({ className }) {
+const order = [21, 22, 23, 14];
+
+const MAIN_BOARDS = BOARDS.filter((board) => order.includes(board.id)).sort(
+  (a, b) => order.indexOf(a.id) - order.indexOf(b.id)
+);
+
+export default function HomeCommunity() {
+  const { status } = useAuth();
+  const isLogin = status === USER_STATUS.isLogin;
   return (
-    <div className={`${styles.list} ${className}`}>
-      {BOARDS.map((board) => (
-        <HomeBoardCard
-          key={board.id}
-          to={board.to}
-          name={board.title}
-          desc={board.desc}
-          backgroundImage={board.image}
-        />
-      ))}
+    <div className={styles.commuintyContainer}>
+      <div className={`${styles.list}`}>
+        {MAIN_BOARDS.map((board) => (
+          <HomeBoardCard
+            key={board.id}
+            path={board.path}
+            name={board.name}
+            mainImage={board.mainImage}
+          />
+        ))}
+      </div>
+      {isLogin ? (
+        ''
+      ) : (
+        <p className={styles.notLogin}>{ACCESS_MESSAGES.NEED_LOGIN}</p>
+      )}
     </div>
   );
 }

@@ -51,8 +51,8 @@ export default function MainPage() {
         )}
       </QueryErrorResetBoundary>
 
-      <ListHeader to='/board' title='커뮤니티' />
-      <HomeCommunity className={styles.community} />
+      <ListHeader to='/board' title='게시판' />
+      <HomeCommunity />
 
       <ListHeader to='/board/besookt' title='베숙트' />
       <QueryErrorResetBoundary>

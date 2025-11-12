@@ -9,4 +9,5 @@
   aspect-ratio: 3.23 / 1;
   object-fit: cover;
   object-position: center;
+  border-radius: 0.5rem;
 }

@@ -1,5 +1,18 @@
+.commuintyContainer {
+  margin-bottom: 3.2rem;
+}
+
 .list {
   margin: 0 var(--default-margin);
   display: flex;
   gap: 1rem;
+}
+
+.notLogin {
+  margin-top: 1.2rem;
+  display: flex;
+  justify-content: center;
+
+  font: var(--text-body-1-med);
+  color: var(--grey-3-1);
 }
