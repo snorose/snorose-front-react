@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { useFeatureIsOn } from '@growthbook/growthbook-react';
 
 import { findRouteByPath } from '@/shared/lib';
+import { useScrollRestoration } from '@/shared/hook';
 import { Navbar, Sidebar } from '@/shared/component';
 import { QUERY_KEY } from '@/shared/constant';
 
@@ -21,6 +22,7 @@ import { routeList } from '@/router.js';
 import styles from './App.module.css';
 
 function App() {
+  const appRef = useRef();
   const queryClient = useQueryClient();
   const isEnabled = useFeatureIsOn('push-notification');
   const { pathname } = useLocation();
@@ -43,6 +45,8 @@ function App() {
       .catch((error) => console.error(error));
   }, [isEnabled]);
 
+  useScrollRestoration(appRef);
+
   // 서버 점검 페이지 처리
   const now = new Date();
   const isMaintenance = now >= MAINTENANCE_START && now <= MAINTENANCE_END;
@@ -51,7 +55,7 @@ function App() {
   }
 
   return (
-    <div className={styles.app}>
+    <div className={styles.app} ref={appRef}>
       <Outlet />
       {!hideNav && <Navbar />}
       <Sidebar />

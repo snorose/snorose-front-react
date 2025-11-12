@@ -10,7 +10,7 @@ import {
   SearchExamReviewListErrorFallback,
 } from '@/feature/search/component';
 
-export default function SearchExamReviewListSuspense({ saveScrollPosition }) {
+export default function SearchExamReviewListSuspense() {
   const [searchParams] = useSearchParams();
   const params = Object.fromEntries(searchParams.entries());
 
@@ -23,7 +23,7 @@ export default function SearchExamReviewListSuspense({ saveScrollPosition }) {
           resetKeys={[params]}
         >
           <Suspense fallback={<FetchLoading>검색 중</FetchLoading>}>
-            <SearchExamReviewList saveScrollPosition={saveScrollPosition} />
+            <SearchExamReviewList />
           </Suspense>
         </ErrorBoundary>
       )}

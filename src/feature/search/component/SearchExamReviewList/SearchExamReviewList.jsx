@@ -11,7 +11,7 @@ import { PostBar } from '@/feature/board/component';
 
 import styles from './SearchExamReviewList.module.css';
 
-export default function SearchExamReviewList({ saveScrollPosition }) {
+export default function SearchExamReviewList() {
   const [searchParams] = useSearchParams();
   const params = Object.fromEntries(searchParams.entries());
   const paramsLength = Object.keys(params).length;
@@ -40,7 +40,6 @@ export default function SearchExamReviewList({ saveScrollPosition }) {
             ref={index === examList.length - 1 ? ref : undefined}
             key={post.postId}
             to={`/board/exam-review/post/${post.postId}`}
-            onClick={saveScrollPosition}
           >
             <PostBar data={post} hasLike={false} />
           </Link>

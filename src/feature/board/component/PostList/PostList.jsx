@@ -16,7 +16,7 @@ import { PostBar } from '@/feature/board/component';
 
 import styles from './PostList.module.css';
 
-export default function PostList({ saveScrollPosition }) {
+export default function PostList() {
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
 

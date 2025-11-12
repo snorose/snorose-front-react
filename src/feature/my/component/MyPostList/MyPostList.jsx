@@ -24,7 +24,6 @@ export default function MyPostList({
   queryFn,
   hasLike = true,
   errorMessage,
-  saveScrollPosition,
 }) {
   const { data, ref, isFetching } = useSuspensePagination({
     queryKey: [queryKey],
