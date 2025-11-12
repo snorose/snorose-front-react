@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
-import { useScrollRestoration } from '@/shared/hook';
 import { BackAppBar, FetchLoading } from '@/shared/component';
 
 import { MyPostList, MyPostListErrorFallback } from '@/feature/my/component';
@@ -13,14 +12,13 @@ import styles from './ActivityPage.module.css';
 
 export default function ActivityPage() {
   const { pathname } = useLocation();
-  const { scrollRef, saveScrollPosition } = useScrollRestoration();
 
   const { title, queryKey, queryFn, hasLike, errorMessage } = ACTIVITIES.find(
     ({ path }) => path === pathname
   );
 
   return (
-    <section className={styles.container} ref={scrollRef}>
+    <section className={styles.container}>
       <BackAppBar />
 
       <div className={styles.contentWrapper}>
@@ -40,7 +38,6 @@ export default function ActivityPage() {
                   queryFn={queryFn}
                   hasLike={hasLike}
                   errorMessage={errorMessage}
-                  saveScrollPosition={saveScrollPosition}
                 />
               </Suspense>
             </ErrorBoundary>
