@@ -54,7 +54,7 @@ export default function FindIdPage() {
     },
   ];
 
-  const isValid = inputProps.every(
+  const isFormValid = inputProps.every(
     ({ validate, value }) => validate(value) === 'valid'
   );
 
@@ -65,7 +65,7 @@ export default function FindIdPage() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (isValid && allowSubmit) {
+          if (isFormValid && allowSubmit) {
             findId(e, formData, navigate, setLoading);
             setAllowSubmit(false);
           }
@@ -133,7 +133,7 @@ export default function FindIdPage() {
           </div>
 
           <div className={styles.buttonFrame}>
-            <NewButton disabled={!isValid}>다음으로</NewButton>
+            <NewButton disabled={!isFormValid}>다음으로</NewButton>
           </div>
         </div>
       </form>
