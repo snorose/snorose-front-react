@@ -24,7 +24,6 @@ export default function MyPostList({
   queryFn,
   hasLike = true,
   errorMessage,
-  saveScrollPosition,
 }) {
   const { data, ref, isFetching } = useSuspensePagination({
     queryKey: [queryKey],
@@ -79,7 +78,6 @@ export default function MyPostList({
           ref={index === list.length - 1 ? ref : undefined}
           key={post.postId}
           to={makePath({ boardId: post.boardId, postId: post.postId })}
-          onClick={saveScrollPosition}
         >
           <PostBar data={post} hasLike={hasLike} />
         </Link>

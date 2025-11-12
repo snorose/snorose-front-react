@@ -2,15 +2,16 @@ import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
 import styles from './PopUp.module.css';
-import calendar from './calendar.png';
-import accounting from './accounting.png';
+// import calendar from './calendar.png';
+// import accounting from './accounting.png';
+import eventLectureImage from './event_lecture.png';
 
 const content = (
   <div className={styles.notice}>
     <div>
-      <p className={styles.hello}>
+      {/* <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
-      </p>
+      </p> */}
 
       {/* <Heading>1. 스노로즈 알림 기능 런칭 안내</Heading>
       <Content>
@@ -29,20 +30,54 @@ const content = (
           </a>
         </strong>{' '}
         를 참고해주시길 바랍니다.
-      </Content>
-
-      <Heading>2. 청파제 이벤트 포인트 지급 일정 안내</Heading>
-      <Content>
-        <p>
-          청파제 이벤트 포인트는 <strong>10월 13일(월)</strong>까지 순차적으로
-          지급될 예정입니다.
-        </p>
       </Content> */}
 
-      <Heading>11월 스노로즈 일정</Heading>
+      <Heading>
+        스노로즈 제1회 특별 초청강연 | 동문 ‘유트루’ 강연 신청 안내 🎤✨
+      </Heading>
+      <Content>
+        <p>
+          📌 신청 기간: ~ 11월 19일(수) 17:00 <br />
+          📌 강연 일시: 11월 19일(수) 18:00 ~ 20:00 <br />
+          📌 참여 신청: {''}
+          <a
+            href='https://forms.gle/zb7wCTtH6BZEDvZA9'
+            target='_blank'
+            rel='noopener noreferrer'
+            alt='신청 폼'
+            style={{
+              color: '#007bff',
+              // fontWeight: 'bold',
+              textDecoration: 'underline',
+            }}
+          >
+            구글 신청 폼 바로가기
+          </a>{' '}
+          <br />
+          <br />
+          📢 자세한 내용은 스노로즈{' '}
+          <a
+            href='https://www.snorose.com/board/notice/post/1859489'
+            target='_blank'
+            rel='noopener noreferrer'
+            alt='스노로즈 공지사항'
+            style={{
+              color: '#007bff',
+              // fontWeight: 'bold',
+              textDecoration: 'underline',
+            }}
+          >
+            공지사항
+          </a>
+          을 확인해주세요!
+        </p>
+        <img src={eventLectureImage} alt='초청강연 이벤트' />
+      </Content>
+
+      {/* <Heading>11월 스노로즈 일정</Heading>
       <Content>
         <img src={calendar} alt='캘린더' />
-      </Content>
+      </Content> */}
 
       {/* <Heading>2. 스노로즈 블로그 이벤트기획파트편 공개</Heading>
       <Content>

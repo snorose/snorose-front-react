@@ -10,7 +10,7 @@ import {
   SearchResultListErrorFallback,
 } from '@/feature/search/component';
 
-export default function SearchResultListSuspense({ saveScrollPosition }) {
+export default function SearchResultListSuspense() {
   const [searchParams] = useSearchParams();
   const params = Object.fromEntries(searchParams.entries());
 
@@ -23,7 +23,7 @@ export default function SearchResultListSuspense({ saveScrollPosition }) {
           resetKeys={[params]}
         >
           <Suspense fallback={<FetchLoading>검색 중</FetchLoading>}>
-            <SearchResultList saveScrollPosition={saveScrollPosition} />
+            <SearchResultList />
           </Suspense>
         </ErrorBoundary>
       )}

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { useAuth, useScrollRestoration } from '@/shared/hook';
+import { useAuth } from '@/shared/hook';
 import { BackAppBar, FetchLoading, WriteButton } from '@/shared/component';
 import { getBoard } from '@/shared/lib';
 import { QUERY_KEY, STALE_TIME, ROLE } from '@/shared/constant';
@@ -26,8 +26,6 @@ export default function NoticeListPage() {
     staleTime: STALE_TIME.noticeList,
     enabled: !!currentBoard?.id,
   });
-
-  const { scrollRef, saveScrollPosition } = useScrollRestoration();
 
   // 데이터 화면 표시
   useEffect(() => {
@@ -57,7 +55,7 @@ export default function NoticeListPage() {
   }
 
   return (
-    <div className={styles.container} ref={scrollRef}>
+    <div className={styles.container}>
       <BackAppBar
         title={
           currentBoardTextId === 'notice'
@@ -74,7 +72,6 @@ export default function NoticeListPage() {
               key={post.postId}
               data={post}
               onClick={() => {
-                saveScrollPosition();
                 if (currentBoardTextId === 'exam-review') {
                   navigate(`/board/exam-review-notice/post/${post.postId}`);
                 } else {
