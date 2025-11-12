@@ -16,7 +16,7 @@ import { PostBar } from '@/feature/board/component';
 
 import styles from './PostList.module.css';
 
-export default function PostList({ saveScrollPosition }) {
+export default function PostList() {
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
 
@@ -71,7 +71,6 @@ export default function PostList({ saveScrollPosition }) {
                   : `/board/${currentBoardTextId}/post/${post.postId}`
               }
               ref={index === postList.length - 1 ? ref : undefined}
-              onClick={() => saveScrollPosition()}
             >
               <PostBar data={{ ...post, timeAgo: timeAgo(post.date) }} />
             </Link>
@@ -79,6 +78,6 @@ export default function PostList({ saveScrollPosition }) {
           {isFetching && <FetchLoading />}
         </List>
       </PullToRefresh>
-    </div>
+  </div>
   );
 }

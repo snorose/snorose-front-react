@@ -1,6 +1,6 @@
 import InputLayout from '@/shared/component/form/input/InputLayout';
 
-export default function TextInput({
+export default function EmailInput({
   id,
   placeholder,
   value,
@@ -11,7 +11,9 @@ export default function TextInput({
     <InputLayout status={status}>
       <input
         id={id}
-        type='text'
+        type='email'
+        inputMode='email'
+        spellCheck='false'
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}

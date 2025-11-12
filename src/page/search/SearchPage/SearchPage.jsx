@@ -1,6 +1,5 @@
 import { useSearchParams, useLocation } from 'react-router-dom';
 
-import { useScrollRestoration } from '@/shared/hook';
 import { BackAppBar } from '@/shared/component';
 
 import { Search, SearchResultListSuspense } from '@/feature/search/component';
@@ -16,17 +15,13 @@ export default function SearchPage() {
   const { pathname } = useLocation();
   const current = pathname.split('/')[2];
 
-  const { scrollRef, saveScrollPosition } = useScrollRestoration();
-
   return (
-    <div className={styles.container} ref={scrollRef}>
+    <div className={styles.container}>
       <BackAppBar hasSearchInput={true}>
         <Search placeholder={PLACEHOLDER[current]} />
       </BackAppBar>
 
-      {paramsLength > 0 && (
-        <SearchResultListSuspense saveScrollPosition={saveScrollPosition} />
-      )}
+      {paramsLength > 0 && <SearchResultListSuspense />}
     </div>
   );
 }
