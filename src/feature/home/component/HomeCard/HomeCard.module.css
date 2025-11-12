@@ -28,7 +28,7 @@
 }
 
 .dark .card {
-  background: var(--gradient-attendance);
+  background: var(--gradient-5);
   color: var(--white);
 }
 
