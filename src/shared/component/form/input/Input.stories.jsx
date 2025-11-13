@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { Input } from '@/shared/component';
+import Input from './Input';
 
 const meta = {
-  title: 'Component/Input',
+  title: 'Component/Form/Input',
   component: Input,
   parameters: {
     docs: {
       description: {
         component:
           'Input 컴포넌트는 사용자 입력에 따라 스타일이 바뀌며, `ready`, `right`, `wrong` 상태로 입력 상태를 명확하게 시각화합니다.<br />' +
-          '`Input.module.css`의 클래스에 따라 배경색, 글자색, placeholder 색 등이 동적으로 적용됩니다.',
+          '`Input.module.css`의 클래스에 따라 배경색, 글자색, placeholder 색 등이 동적으로 적용됩니다.<br />',
       },
     },
   },
@@ -39,6 +39,8 @@ const meta = {
     data: { table: { disable: true } },
     defaultValue: { table: { disable: true } },
     defaultClassName: { table: { disable: true } },
+    value: { table: { disable: true } },
+    containerWidth: { table: { disable: true } },
   },
 };
 
@@ -52,23 +54,31 @@ const Template = (args) => {
     args.defaultClassName || 'ready'
   );
 
-  const validate = (value) => {
-    const trimmed = value.trim();
-    if (trimmed.length === 0) return 'ready';
-    if (trimmed.length < 3) return 'wrong';
-    return 'right';
-  };
-
   return (
-    <Input
-      {...args}
-      data={formData}
-      inputData={setFormData}
-      className={inputClassName}
-      setClassName={setInputClassName}
-      classNameCheck={validate}
-    />
+    <div
+      style={{
+        maxWidth: args.containerWidth || '400px',
+        margin: '0 auto',
+      }}
+    >
+      <Input
+        {...args}
+        data={formData}
+        inputData={setFormData}
+        className={inputClassName}
+        setClassName={setInputClassName}
+        classNameCheck={args.classNameCheck}
+      />
+    </div>
   );
+};
+
+// 기본 validation 함수
+const defaultValidate = (value) => {
+  const trimmed = value.trim();
+  if (trimmed.length === 0) return 'ready';
+  if (trimmed.length < 3) return 'wrong';
+  return 'right';
 };
 
 export const Default = Template.bind({});
@@ -80,6 +90,8 @@ Default.args = {
   errMsg: '3자 이상 입력해주세요.',
   defaultValue: '',
   defaultClassName: 'ready',
+  classNameCheck: defaultValidate,
+  containerWidth: '400px',
 };
 
 export const RightInput = Template.bind({});
@@ -91,6 +103,8 @@ RightInput.args = {
   errMsg: '3자 이상 입력해주세요.',
   defaultValue: '홍길동',
   defaultClassName: 'right',
+  classNameCheck: defaultValidate,
+  containerWidth: '400px',
 };
 
 export const WrongInput = Template.bind({});
@@ -102,4 +116,6 @@ WrongInput.args = {
   errMsg: '3자 이상 입력해주세요.',
   defaultValue: '가',
   defaultClassName: 'wrong',
+  classNameCheck: defaultValidate,
+  containerWidth: '400px',
 };
