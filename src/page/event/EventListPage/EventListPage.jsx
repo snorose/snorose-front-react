@@ -5,7 +5,7 @@ import { getNoticeLine } from '@/apis';
 
 import { BackAppBar, Icon, WriteButton } from '@/shared/component';
 import { QUERY_KEY, ROLE } from '@/shared/constant';
-import { useAuth, useScrollRestoration } from '@/shared/hook';
+import { useAuth } from '@/shared/hook';
 import { getBoard } from '@/shared/lib';
 
 import ProgressTab from '@/feature/event/component/ProgressTab/ProgressTab';
@@ -19,7 +19,6 @@ export default function EventListPage() {
   const { userInfo } = useAuth();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
-  const { scrollRef, saveScrollPosition } = useScrollRestoration();
   const isAdmin = userInfo?.userRoleId === ROLE.admin;
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -46,7 +45,7 @@ export default function EventListPage() {
   };
 
   return (
-    <section className={styles.container} ref={scrollRef}>
+    <section className={styles.container}>
       <BackAppBar title='이벤트' hasMenu />
       <div className={styles.notification}>
         <Link className={styles.notificationBar} to={`/board/event/notice`}>
@@ -68,7 +67,7 @@ export default function EventListPage() {
         ))}
       </div>
 
-      <PostListSuspense saveScrollPosition={saveScrollPosition} />
+      <PostListSuspense />
       {isAdmin && (
         <WriteButton
           to={`/board/event/event-post-write`}

@@ -85,7 +85,6 @@ export default function MyPostList({
             postId: post.postId,
             isNotice: post.isNotice,
           })}
-          onClick={saveScrollPosition}
         >
           <PostBar data={post} hasLike={hasLike} />
         </Link>
