@@ -76,6 +76,8 @@ export default function EditEventPage() {
   // 데이터 화면 표시
   useEffect(() => {
     if (!eventData) return;
+
+    setUserDisplay(eventData.userDisplay);
     setEventType(eventData.category || '유형을 선택해주세요');
     setIsNotice(eventData.isNotice);
     if (eventData.isNotice) {
@@ -244,7 +246,11 @@ export default function EditEventPage() {
             <div className={styles.profileBoxLeft}>
               {userInfo?.userRoleId !== ROLE.admin &&
               userInfo?.userRoleId !== ROLE.official ? (
-                <Icon id='cloud' width={25} height={16} />
+                <img
+                  className={styles.cloudLogoIcon}
+                  src={cloudLogo}
+                  alt='로고'
+                />
               ) : (
                 <Badge
                   userRoleId={userInfo?.userRoleId}
