@@ -70,7 +70,7 @@ export default function UserInfoStep({ setFormData, formData }) {
             inputType={'nickname'}
             inputData={setFormData}
             data={formData}
-            errMsg={'특수문자 제외 2자 이상 20자 이하로 작성해 주세요'}
+            errMsg={'특수문자 제외 2자 이상 20자 이하로 작성해주세요'}
           />
         </div>
         <div className={style.inputFrame}>
