@@ -144,3 +144,12 @@ export const serverTimeStr = (date) => {
     hour12: false,
   });
 };
+
+// 이벤트 페이지 (YYYY-MM-DDTHH:MM)
+export function eventTime(date) {
+  return date ? date.slice(0, 16) : '';
+}
+
+export function kstISO(date) {
+  if (date.length === 16) return `${date}:00`;
+}

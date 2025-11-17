@@ -5,9 +5,11 @@ import graduationPreparation from '@/assets/images/graduationPreparation-board-p
 import largeSnow from '@/assets/images/largeSnow-board-page.svg';
 import permanentSnow from '@/assets/images/permanentSnow-board-page.svg';
 import studentCouncil from '@/assets/images/studentCouncil-board-page.svg';
+import event from '@/assets/images/event-board-page.svg';
 
 export const BOARD_ID = Object.freeze({
   all: 0, // 프론트에서만 사용하는 보드 ID
+  event: 14,
   besookt: 20,
   'first-snow': 21,
   'large-snow': 22,
@@ -22,6 +24,10 @@ export const BOARDS = Object.freeze([
   {
     id: 0,
     path: '/board/all',
+  },
+  {
+    id: 14,
+    path: '/board/event',
   },
   {
     id: 21,
@@ -63,6 +69,22 @@ export const BOARD_MENUS = [
     title: '공지사항',
     desc: '',
     image: '',
+  },
+  {
+    id: 14,
+    to: '/board/event',
+    textId: 'event',
+    title: '스노로즈 이벤트',
+    desc: '스노로즈 이벤트 게시판',
+    image: event,
+  },
+  {
+    id: 14,
+    to: '/board/event-notice',
+    textId: 'event-notice',
+    title: '이벤트',
+    desc: '이벤트 공지글',
+    image: event,
   },
   {
     id: 21,
@@ -148,8 +170,9 @@ export const OFFICIAL_BOARD = Object.freeze([
 // 뱃지가 보이는 경로 (일반 게시판에서는 리자의 뱃지가 안보이게 설정)
 export const SHOW_BADGE_PATH = Object.freeze([
   '/notice',
+  '/event',
   '/student-council',
-  'finance-audit',
+  '/finance-audit',
   '/graduation-preparation',
 ]);
 

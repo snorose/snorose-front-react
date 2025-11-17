@@ -22,6 +22,7 @@ export const QUERY_KEY = Object.freeze({
     category ? ['notifications', { category }] : ['notifications'],
   unreadNotificationCount: ['unreadNotificationCount'],
   notificationSettings: ['notificationSettings'],
+  events: 'events',
 });
 
 export const MUTATION_KEY = Object.freeze({
