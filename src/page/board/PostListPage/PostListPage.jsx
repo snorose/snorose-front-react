@@ -5,7 +5,7 @@ import { getNoticeLine } from '@/apis';
 
 import { BackAppBar, Icon, WriteButton } from '@/shared/component';
 import { OFFICIAL_BOARD, QUERY_KEY, ROLE } from '@/shared/constant';
-import { useAuth, useScrollRestoration } from '@/shared/hook';
+import { useAuth } from '@/shared/hook';
 import { getBoard } from '@/shared/lib';
 
 import { PostListSuspense } from '@/feature/board/component';
@@ -17,7 +17,7 @@ export default function PostListPage() {
   const { userInfo } = useAuth();
   const currentBoardTextId = pathname.split('/')[2];
   const currentBoard = getBoard(currentBoardTextId);
-  const { scrollRef, saveScrollPosition } = useScrollRestoration();
+
   const isBesookt = currentBoardTextId === 'besookt' ? true : false;
   const isFirstSnow = currentBoardTextId === 'first-snow' ? true : false;
   const isPreUser = userInfo?.userRoleId === ROLE.preUser;
@@ -37,11 +37,12 @@ export default function PostListPage() {
   const { data: noticeLineData } = useQuery({
     queryKey: [QUERY_KEY.noticeLine, currentBoard.id],
     queryFn: () => getNoticeLine(currentBoard?.id),
-    staleTime: 1000 * 60 * 5,
+    staleTime: 0,
+    // staleTime: 1000 * 60 * 5,
   });
 
   return (
-    <section className={styles.container} ref={scrollRef}>
+    <section className={styles.container}>
       <BackAppBar
         title={currentBoard.title}
         hasMenu
@@ -58,7 +59,7 @@ export default function PostListPage() {
           </p>
         </Link>
       )}
-      <PostListSuspense saveScrollPosition={saveScrollPosition} />
+      <PostListSuspense />
       {showWriteButton && (
         <WriteButton
           to={`/board/${currentBoardTextId}/post-write`}

@@ -13,7 +13,7 @@ import { useSearch } from '@/feature/search/hook';
 
 import styles from './SearchResultList.module.css';
 
-export default function SearchResultList({ saveScrollPosition }) {
+export default function SearchResultList() {
   const { pathname } = useLocation();
   const boardId = BOARDS.find(({ path }) => pathname.includes(path)).id;
 
@@ -31,7 +31,6 @@ export default function SearchResultList({ saveScrollPosition }) {
             ref={index === postList.length - 1 ? ref : undefined}
             key={post.postId}
             to={`/board/${getBoardTitleToTextId(post.boardName)}/post/${post.postId}`}
-            onClick={saveScrollPosition}
           >
             <PostBar data={post} />
           </Link>

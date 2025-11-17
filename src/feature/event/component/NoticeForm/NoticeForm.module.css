@@ -1,0 +1,29 @@
+.noticeArea {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3.4rem;
+  padding-bottom: 11rem;
+}
+
+.title {
+  color: var(--grey-4);
+  font: var(--text-title-1-bold);
+  outline: none;
+  border: none;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+  resize: none;
+}
+
+.content {
+  color: var(--grey-4);
+  font: var(--text-headline-2-reg);
+  outline: none;
+  border: none;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+  min-height: 10rem;
+  resize: none;
+}

@@ -66,7 +66,10 @@ export default function PostPage() {
   // 페이지 언마운트 시 모달 상태 초기화
   useModalReset();
 
-  const { handleDelete } = useDeletePostHandler(currentBoard?.id);
+  const { handleDelete } = useDeletePostHandler(
+    currentBoard?.id,
+    currentBoard?.textId
+  );
   const { handleReport } = useReportHandler(modal, setModal, data);
   const { toast } = useToast();
 

@@ -1,0 +1,49 @@
+.textarea {
+  outline: none;
+  border: 0.1rem solid var(--blue-2);
+  border-radius: 0.5rem;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+  resize: none;
+  padding: 1.5rem;
+  line-height: 1.5;
+  min-height: 5rem;
+  box-sizing: border-box;
+  font: var(--text-body-1-reg);
+}
+
+.textarea:focus {
+  border-color: var(--blue-4);
+}
+
+.textarea::placeholder {
+  color: var(--grey-3-1);
+}
+
+.linkArea {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.button {
+  height: 5.5rem;
+  width: 7rem;
+  padding: unset;
+  font: var(--text-body-1-reg);
+}
+
+.error {
+  border: 1px solid var(--pink-3);
+  color: var(--pink-3);
+  background-color: var(--pink-1);
+}
+
+.errorMessage {
+  color: var(--pink-3);
+  margin-top: 0.3rem;
+  display: block;
+  font: var(--text-body-1-reg);
+}
