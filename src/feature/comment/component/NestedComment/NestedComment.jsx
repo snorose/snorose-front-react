@@ -36,6 +36,7 @@ export default function NestedComment({
     isVisible,
     isUpdated,
     isDeleted,
+    isWriter,
   } = data;
 
   // 뱃지가 보이는 ROLE
@@ -43,6 +44,9 @@ export default function NestedComment({
     userRoleId === ROLE.official ||
     (userRoleId === ROLE.admin &&
       SHOW_BADGE_PATH.some((path) => pathname.includes(path)));
+
+  // 뱃지 보이는 곳에 유저가 댓글 신고 금지
+  const blockAdminReport = !showBadge || isWriter;
 
   return (
     <div
@@ -70,17 +74,17 @@ export default function NestedComment({
             {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
           </p>
         </div>
-        <p
-          ref={nestedMoreOptionRef}
-          className={styles.dot3}
-          onClick={(e) => {
-            onCommentOptionClick(data, nestedMoreOptionRef);
-          }}
-        >
-          {!isDeleted && isVisible && (
+        {!isDeleted && isVisible && blockAdminReport && (
+          <p
+            ref={nestedMoreOptionRef}
+            className={styles.dot3}
+            onClick={(e) => {
+              onCommentOptionClick(data, nestedMoreOptionRef);
+            }}
+          >
             <Icon id='meat-ball' width={18} height={4} stroke='none' />
-          )}
-        </p>
+          </p>
+        )}
       </div>
       <div className={styles.commentCenter}>
         <div

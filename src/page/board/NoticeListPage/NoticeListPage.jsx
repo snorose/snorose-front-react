@@ -77,6 +77,8 @@ export default function NoticeListPage() {
                 saveScrollPosition();
                 if (currentBoardTextId === 'exam-review') {
                   navigate(`/board/exam-review-notice/post/${post.postId}`);
+                } else if (currentBoardTextId === 'event') {
+                  navigate(`/board/event-notice/post/${post.postId}`);
                 } else {
                   navigate(`/board/${currentBoardTextId}/post/${post.postId}`);
                 }

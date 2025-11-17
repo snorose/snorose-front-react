@@ -40,6 +40,15 @@ export default function PostModalRenderer({
                 functions={[handleEdit, null, handleShare]}
               />
             );
+          // 이벤트 게시글 더보기 모달 (공유하기)
+          case 'event-post-more-option':
+            return (
+              <MoreOptionModal
+                title='이벤트'
+                optionList={MORE_OPTION_MODAL_TEXT.EVENT_MORE_OPTION_LIST}
+                functions={[handleShare]}
+              />
+            );
           // 게시글 신고하기 옵션 리스트 모달
           case 'report-post-types':
             return (
@@ -77,7 +86,7 @@ export default function PostModalRenderer({
             return (
               <ConfirmModal
                 modalText={
-                  currentBoard.id !== 23
+                  [21, 22].includes(Number(currentBoard.id))
                     ? CONFIRM_MODAL_TEXT.DELETE_POST
                     : CONFIRM_MODAL_TEXT.DELETE_POST_WITHOUT_POINT_DEDUCTION
                 }

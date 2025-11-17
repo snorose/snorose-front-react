@@ -63,12 +63,15 @@ export default function MyPostList({
     );
   }
 
-  const makePath = ({ boardId, postId }) => {
-    if (boardId) {
-      return `/board/${getBoardTextId(boardId)}/post/${postId}`;
-    }
-
-    return `/board/exam-review/post/${postId}`;
+  const makePath = ({ boardId, postId, isNotice }) => {
+    if (boardId === 14) {
+      if (isNotice) {
+        return `/board/event-notice/post/${postId}`;
+      }
+      return `/board/event/post/${postId}`;
+    } else if (boardId === 32) {
+      return `/board/exam-review/post/${postId}`;
+    } else return `/board/${getBoardTextId(boardId)}/post/${postId}`;
   };
 
   return (
@@ -78,8 +81,11 @@ export default function MyPostList({
           className={styles.to}
           ref={index === list.length - 1 ? ref : undefined}
           key={post.postId}
-          to={makePath({ boardId: post.boardId, postId: post.postId })}
-          onClick={saveScrollPosition}
+          to={makePath({
+            boardId: post.boardId,
+            postId: post.postId,
+            isNotice: post.isNotice,
+          })}
         >
           <PostBar data={post} hasLike={hasLike} />
         </Link>
