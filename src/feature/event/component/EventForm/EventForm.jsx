@@ -13,6 +13,20 @@ export default function EventForm({
 }) {
   const today = new Date().toISOString().slice(0, 16);
 
+  const handleDrawCountChange = (e) => {
+    const value = e.target.value;
+    onChange('drawCount', value);
+  };
+
+  const handleDrawCountBlur = () => {
+    const num = Number(data.drawCount);
+    if (!num || num < 1) {
+      onChange('drawCount', 1);
+    } else {
+      onChange('drawCount', num);
+    }
+  };
+
   useEffect(() => {
     onValid(validateRequiredFields(formType, data, errors));
   }, [formType, data, errors, onValid]);
@@ -39,21 +53,21 @@ export default function EventForm({
               ? '영화명'
               : '주최'}
         </p>
+        <TextField
+          label='호스트'
+          name='host'
+          value={data.host}
+          placeholder={
+            formType === 'theater'
+              ? '공연명을 입력해주세요'
+              : formType === 'movie'
+                ? '영화명을 입력해주세요'
+                : '주최사를 입력해주세요'
+          }
+          onChange={onChange}
+          error={errors.host}
+        />
       </div>
-      <TextField
-        label='호스트'
-        name='host'
-        value={data.host}
-        placeholder={
-          formType === 'theater'
-            ? '공연명을 입력해주세요'
-            : formType === 'movie'
-              ? '영화명을 입력해주세요'
-              : '주최사를 입력해주세요'
-        }
-        onChange={onChange}
-        error={errors.host}
-      />
 
       {['theater', 'movie'].includes(formType) && (
         <div className={styles.section}>
@@ -106,15 +120,29 @@ export default function EventForm({
         <div className={styles.counterControls}>
           <button
             className={styles.minus}
-            onClick={() => onChange('drawCount', data.drawCount - 1)}
+            onClick={() =>
+              onChange(
+                'drawCount',
+                Math.max(Number(data.drawCount || 1) - 1, 1)
+              )
+            }
             disabled={data.drawCount <= 1}
           >
             -
           </button>
-          <span className={styles.count}>{data.drawCount}</span>
+          <input
+            type='number'
+            className={styles.drawNumber}
+            value={data.drawCount ?? ''}
+            onChange={handleDrawCountChange}
+            onBlur={handleDrawCountBlur}
+            min={1}
+          />
           <button
             className={styles.plus}
-            onClick={() => onChange('drawCount', data.drawCount + 1)}
+            onClick={() =>
+              onChange('drawCount', Number(data.drawCount || 1) + 1)
+            }
           >
             +
           </button>
