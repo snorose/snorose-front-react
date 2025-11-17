@@ -6,8 +6,8 @@
 
 .slide img {
   width: 100%;
-  aspect-ratio: 3.23 / 1;
+  aspect-ratio: 3.3 / 1.2;
   object-fit: cover;
-  object-position: center;
+  object-position: left;
   border-radius: 0.5rem;
 }
