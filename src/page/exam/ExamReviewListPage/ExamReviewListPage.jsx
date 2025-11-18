@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getNoticeLine } from '@/apis';
 
-import { useScrollRestoration } from '@/shared/hook';
 import { AppBar, Icon, MenuIcon, WriteButton } from '@/shared/component';
 import { QUERY_KEY, STALE_TIME } from '@/shared/constant';
 
@@ -23,10 +22,8 @@ export default function ExamReviewListPage() {
     staleTime: STALE_TIME.noticeLine,
   });
 
-  const { scrollRef, saveScrollPosition } = useScrollRestoration();
-
   return (
-    <section className={styles.container} ref={scrollRef}>
+    <section className={styles.container}>
       <AppBar title='시험후기'>
         <MenuIcon />
       </AppBar>
@@ -46,7 +43,7 @@ export default function ExamReviewListPage() {
           placeholder='시험 종류'
         />
       </FilterList>
-      <SearchExamReviewListSuspense saveScrollPosition={saveScrollPosition} />
+      <SearchExamReviewListSuspense />
 
       <WriteButton to='/board/exam-review-write' />
     </section>

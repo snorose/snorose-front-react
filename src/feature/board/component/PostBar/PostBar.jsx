@@ -1,8 +1,8 @@
 import { Badge, Icon } from '@/shared/component';
 import { ROLE } from '@/shared/constant';
 import { postBarDateFormat } from '@/shared/lib';
+import { Chip } from '@/feature/board/component';
 import altImage from '@/assets/images/altImage.png';
-
 import cloudLogo from '@/assets/images/cloudLogo.svg';
 
 import styles from './PostBar.module.css';
@@ -39,7 +39,10 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
                 height={12}
               />
             )}
-            <div className={styles.boardName}>{data.boardName}</div>
+            {data.boardName && <Chip type={'board'} label={data.boardName} />}
+            {data.progressType && (
+              <Chip type={'event'} label={data.progressType} />
+            )}
           </div>
           <div className={styles.postBarCenter}>
             <p className={styles.title}>{data.title}</p>

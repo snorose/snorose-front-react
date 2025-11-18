@@ -104,6 +104,9 @@ const Comment = forwardRef((props, ref) => {
     (userRoleId === ROLE.admin &&
       SHOW_BADGE_PATH.some((path) => pathname.includes(path)));
 
+  // 뱃지 보이는 곳에 댓글 신고 금지
+  const blockAdminReport = !showBadge || data.isWriter;
+
   return (
     <>
       <div
@@ -133,15 +136,15 @@ const Comment = forwardRef((props, ref) => {
               {timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
             </p>
           </div>
-          <div
-            ref={moreOptionRef}
-            className={styles.dot3}
-            onClick={(e) => onCommentOptionClick(data)}
-          >
-            {!isDeleted && isVisible && (
+          {!isDeleted && isVisible && blockAdminReport && (
+            <div
+              ref={moreOptionRef}
+              className={styles.dot3}
+              onClick={(e) => onCommentOptionClick(data)}
+            >
               <Icon id='meat-ball' width={18} height={4} stroke='none' />
-            )}
-          </div>
+            </div>
+          )}
         </div>
         <div
           className={`${styles.commentCenter} ${(isDeleted || !isVisible) && styles.hide}`}

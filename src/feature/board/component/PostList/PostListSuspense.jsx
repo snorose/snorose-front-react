@@ -6,7 +6,7 @@ import { FetchLoading } from '@/shared/component';
 
 import { PostList, PostListErrorFallback } from '@/feature/board/component';
 
-export default function PostListSuspense({ saveScrollPosition }) {
+export default function PostListSuspense() {
   return (
     <QueryErrorResetBoundary>
       {({ reset }) => (
@@ -17,7 +17,7 @@ export default function PostListSuspense({ saveScrollPosition }) {
           <Suspense
             fallback={<FetchLoading>게시글 불러오는 중...</FetchLoading>}
           >
-            <PostList saveScrollPosition={saveScrollPosition} />
+            <PostList />
           </Suspense>
         </ErrorBoundary>
       )}

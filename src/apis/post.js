@@ -1,13 +1,11 @@
 import { defaultAxios, authAxios } from '@/axios';
 import { IconItem } from '@storybook/blocks';
+import { getBoardUrl } from '@/shared/lib';
 import altImage from '@/assets/images/altImage.png';
 
 // 게시글 리스트 가져오기
 export const getPosts = async (boardId, page = 0) => {
-  const url =
-    boardId === 20
-      ? `/v1/best-posts?page=${page}`
-      : `/v1/boards/${boardId}/posts/postlist?page=${page}`;
+  const url = getBoardUrl(boardId, page);
 
   const response = await authAxios.get(url);
 
@@ -42,7 +40,7 @@ export const postPost = async ({
   title,
   content,
   isNotice,
-  // attachmentsInfo,
+  attachmentsInfo = [],
 }) => {
   //'게시글 생성' API에서 받아오는 데이터
   const response = await authAxios.post(`/v1/boards/${boardId}/posts/newpost`, {
@@ -50,24 +48,25 @@ export const postPost = async ({
     title,
     content,
     isNotice,
-    // attachments: attachmentsInfo.map(({ type, fileName, fileComment }) => ({
-    //   type,
-    //   fileName,
-    //   fileComment,
-    // })),
+    attachments: attachmentsInfo?.length
+      ? attachmentsInfo.map(({ type, fileName, fileComment }) => ({
+          type,
+          fileName,
+          fileComment,
+        }))
+      : [],
   });
 
   //만일 '게시글 생성' API에 첨부파일을 넘겼더라면
-  // if (attachmentsInfo.length) {
-  //   //attachmentUrlList 변수에 '게시글 생성' API한테 받은 이미지 S3 url 리스트 저장
-  //   let attachmentUrlList = response.data.result.attachmentUrlList;
-
-  //   //각 S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
-  //   await putFileInBucket(
-  //     attachmentUrlList,
-  //     attachmentsInfo.map((att) => att.file)
-  //   );
-  // }
+  if (attachmentsInfo?.length) {
+    //attachmentUrlList 변수에 '게시글 생성' API한테 받은 이미지 S3 url 리스트 저장
+    let attachmentUrlList = response.data.result.attachmentUrlList;
+    //각 S3 URL에 file 전달하기 (프런트에서 직접 버킷에 넣기)
+    await putFileInBucket(
+      attachmentUrlList,
+      attachmentsInfo.map((att) => att.file)
+    );
+  }
 
   return response;
 };
