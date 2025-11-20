@@ -32,7 +32,7 @@ const content = (
         를 참고해주시길 바랍니다.
       </Content> */}
 
-      <Heading>
+      {/* <Heading>
         스노로즈 제1회 특별 초청강연 | 동문 ‘유트루’ 강연 신청 안내 🎤✨
       </Heading>
       <Content>
@@ -72,30 +72,37 @@ const content = (
           을 확인해주세요!
         </p>
         <img src={eventLectureImage} alt='초청강연 이벤트' />
-      </Content>
+      </Content> */}
 
       {/* <Heading>11월 스노로즈 일정</Heading>
       <Content>
         <img src={calendar} alt='캘린더' />
       </Content> */}
 
-      {/* <Heading>2. 스노로즈 블로그 이벤트기획파트편 공개</Heading>
+      <Heading>&lt;스노로즈 블로그&gt; 프론트엔드 파트편 공개</Heading>
       <Content>
-        <strong>&lt;스노로즈 리뉴얼&gt; 이벤트기획파트편</strong>이
+        {/* <strong>&lt;스노로즈 리뉴얼&gt; 프론트엔드 파트편</strong>이
         업로드되었습니다.
-        <br />
+        <br /> <br /> */}
+        <strong>프론트엔드 파트</strong>는 스노로즈의 주요 화면과 인터랙션을
+        설계·개발하며, 디자인·백엔드·운영기획팀과 협력해 일관된 UI/UX와 안정적인
+        사용자 경험을 만들어가고 있습니다. <br /> <br />
+        이번 아티클에서는 스노로즈가{' '}
+        <strong>어떤 기술 스택과 협업 방식으로 개발되었는지</strong>, 그리고{' '}
+        <strong>프론트엔드팀이 어떤 고민과 선택을 해 왔는지</strong>
+        담았습니다. 지금 바로 확인해 보세요! 🌱 <br /> <br />
         지금{' '}
         <strong>
           <a
             className={styles.link}
-            href='https://snorose.notion.site/2677ef0aa3bf80a4910afcf464b4ead2'
+            href='https://snorose.notion.site/CSS-2ad7ef0aa3bf80ab9df5dcc90b588b79'
             alt='스노로즈 블로그'
           >
             스노로즈 블로그
           </a>
         </strong>
         에서 확인해보세요!
-      </Content> */}
+      </Content>
 
       {/* <Heading>2. 7월 회계 보고</Heading>
       <Content>
