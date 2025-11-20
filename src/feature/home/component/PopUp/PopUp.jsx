@@ -9,30 +9,11 @@ import eventLectureImage from './event_lecture.png';
 const content = (
   <div className={styles.notice}>
     <div>
-      {/* <p className={styles.hello}>
+      <p className={styles.hello}>
         ❄️ 안녕하세요. 숙명인을 위한 커뮤니티, 스노로즈입니다. ❄️
-      </p> */}
+      </p>
 
-      {/* <Heading>1. 스노로즈 알림 기능 런칭 안내</Heading>
-      <Content>
-        <strong>10월 6일(월)</strong>부터 스노로즈에서{' '}
-        <strong>알림 기능</strong>을 제공합니다.
-        <br />
-        알림 기능 소개 및 사용 방법은{' '}
-        <strong>
-          <a
-            className={styles.link}
-            href='https://www.snorose.com/board/notice/post/1854049'
-            target='_blank'
-            alt='스노로즈 알림 기능 런칭 안내'
-          >
-            관련 공지
-          </a>
-        </strong>{' '}
-        를 참고해주시길 바랍니다.
-      </Content> */}
-
-      <Heading>
+      {/* <Heading>
         스노로즈 제1회 특별 초청강연 | 동문 ‘유트루’ 강연 신청 안내 🎤✨
       </Heading>
       <Content>
@@ -72,30 +53,51 @@ const content = (
           을 확인해주세요!
         </p>
         <img src={eventLectureImage} alt='초청강연 이벤트' />
-      </Content>
+      </Content> */}
 
       {/* <Heading>11월 스노로즈 일정</Heading>
       <Content>
         <img src={calendar} alt='캘린더' />
       </Content> */}
 
-      {/* <Heading>2. 스노로즈 블로그 이벤트기획파트편 공개</Heading>
+      <Heading>1. 스노로즈 &lt;이벤트 게시판&gt; 런칭 안내</Heading>
       <Content>
-        <strong>&lt;스노로즈 리뉴얼&gt; 이벤트기획파트편</strong>이
-        업로드되었습니다.
+        이벤트 게시판이 새롭게 오픈되었습니다! <br />
+        <strong>[게시판 &gt; 스노로즈 이벤트]</strong>에서 새롭게 단장한 이벤트
+        게시판을 확인해 보세요!
         <br />
-        지금{' '}
+        👉 자세한 내용은{' '}
         <strong>
           <a
             className={styles.link}
-            href='https://snorose.notion.site/2677ef0aa3bf80a4910afcf464b4ead2'
+            href='https://www.snorose.com/board/notice/post/1863135'
+            alt='스노로즈 이벤트 게시판 런칭 안내'
+          >
+            관련 공지
+          </a>
+        </strong>
+        를 참고해 주세요.
+      </Content>
+
+      <Heading>
+        2. 스노로즈 블로그 &lt;스노로즈 리뉴얼&gt; 프론트엔드 파트편 공개
+      </Heading>
+      <Content>
+        어떤 <strong>기술 스택과 협업 방식</strong>으로 개발해 왔는지, 그리고 그
+        과정에서 어떤 <strong>고민과 선택</strong>을 해왔는지 담은{' '}
+        <strong>프론트엔드 이야기</strong>를 전합니다. <br />
+        👉 자세한 내용은{' '}
+        <strong>
+          <a
+            className={styles.link}
+            href='https://snorose.notion.site/CSS-2ad7ef0aa3bf80ab9df5dcc90b588b79'
             alt='스노로즈 블로그'
           >
             스노로즈 블로그
           </a>
         </strong>
-        에서 확인해보세요!
-      </Content> */}
+        에서 확인하실 수 있어요. <br />
+      </Content>
 
       {/* <Heading>2. 7월 회계 보고</Heading>
       <Content>
@@ -125,9 +127,10 @@ const content = (
 
       <hr />
       <Content>
-        ※ 스노로즈 인스타그램(@snorose1906)에서 월별 스노로즈 일정을 쉽게 확인할
+        {/* ※ 스노로즈 인스타그램(@snorose1906)에서 월별 스노로즈 일정을 쉽게 확인할
         수 있습니다.
-        <br />※ 공식 문의 창구 (
+        <br /> */}
+        ※ 공식 문의 창구 (
         <span>
           이메일(
           <a
