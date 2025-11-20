@@ -46,7 +46,7 @@ export default function EventListPage() {
 
   return (
     <section className={styles.container}>
-      <BackAppBar title='이벤트' hasMenu />
+      <BackAppBar title='이벤트' hasMenu backNavTo='/home' />
       <div className={styles.notification}>
         <Link className={styles.notificationBar} to={`/board/event/notice`}>
           <Icon id='notice-bell' width={11} height={13} />
