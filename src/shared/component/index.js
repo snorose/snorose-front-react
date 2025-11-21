@@ -22,9 +22,7 @@ export { default as NumberInput } from './form/input/NumberInput';
 export { default as PasswordInput } from './form/input/PasswordInput';
 export { default as TextInput } from './form/input/TextInput';
 
-export { default as Input } from './form/input/Input';
 export { default as PwInput } from './form/input/PwInput';
-export { default as SpecialInput } from './form/input/SpecialInput';
 
 export { default as Textarea } from './form/Textarea/Textarea';
 

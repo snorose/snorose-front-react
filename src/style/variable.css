@@ -1,4 +1,6 @@
 :root {
+  --rem-scale: 62.5%;
+
   /* box model */
   --default-width: 60rem;
   --default-margin: 2rem;
