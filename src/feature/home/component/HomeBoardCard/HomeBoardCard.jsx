@@ -2,38 +2,33 @@ import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/shared/hook';
 import { USER_STATUS } from '@/shared/constant';
-import { ACCESS_MESSAGES } from '@/feature/home/constant';
 
 import lockImage from '@/assets/images/lock.svg';
 
-import style from './HomeBoardCard.module.css';
+import styles from './HomeBoardCard.module.css';
 
-export default function HomeBoardCard({
-  className,
-  to,
-  name,
-  desc,
-  backgroundImage,
-}) {
+export default function HomeBoardCard({ path, name, mainImage }) {
   const { status } = useAuth();
+  const isLogin = status === USER_STATUS.isLogin;
+
+  const backgroundClass = {
+    첫눈온방: styles.firstSnow,
+    함박눈방: styles.largeSnow,
+    만년설방: styles.permanentSnow,
+    이벤트: styles.event,
+  };
 
   return (
-    <Link className={`${style.link} ${className}`} to={to}>
-      <div
-        className={style.card}
-        style={{
-          backgroundImage: `${status === USER_STATUS.isLogin ? `url(${backgroundImage})` : `url(${lockImage})`}`,
-        }}
-      >
-        {status === USER_STATUS.isLogin && (
-          <>
-            <p className={style.name}>{name}</p>
-            <p className={style.desc}>{desc}</p>
-          </>
-        )}
-        {status !== USER_STATUS.isLogin && (
-          <p className={style.notLogin}>{ACCESS_MESSAGES.NEED_LOGIN}</p>
-        )}
+    <Link className={`${styles.link}`} to={path}>
+      <div className={styles.cardSection}>
+        <div className={`${styles.card} ${backgroundClass[name]}`}>
+          <img
+            src={isLogin ? mainImage : lockImage}
+            alt={name}
+            className={isLogin ? styles.icon : ''}
+          />
+        </div>
+        {isLogin ? <p className={styles.name}>{name}</p> : ''}
       </div>
     </Link>
   );

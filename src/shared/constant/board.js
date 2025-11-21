@@ -7,6 +7,11 @@ import permanentSnow from '@/assets/images/permanentSnow-board-page.svg';
 import studentCouncil from '@/assets/images/studentCouncil-board-page.svg';
 import event from '@/assets/images/event-board-page.svg';
 
+import firstSnowMain from '@/assets/images/firstSnow-main.svg';
+import largeSnowMain from '@/assets/images/largeSnow-main.svg';
+import permanentSnowMain from '@/assets/images/permanentSnow-main.svg';
+import eventMain from '@/assets/images/event-main.svg';
+
 export const BOARD_ID = Object.freeze({
   all: 0, // 프론트에서만 사용하는 보드 ID
   event: 14,
@@ -27,22 +32,27 @@ export const BOARDS = Object.freeze([
   },
   {
     id: 14,
+    name: '이벤트',
     path: '/board/event',
+    mainImage: eventMain,
   },
   {
     id: 21,
     name: '첫눈온방',
     path: '/board/first-snow',
+    mainImage: firstSnowMain,
   },
   {
     id: 22,
     name: '함박눈방',
     path: '/board/large-snow',
+    mainImage: largeSnowMain,
   },
   {
     id: 23,
     name: '만년설방',
     path: '/board/permanent-snow',
+    mainImage: permanentSnowMain,
   },
   {
     id: 60,
