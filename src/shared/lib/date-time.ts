@@ -54,7 +54,7 @@ export class DateTime {
   static formatAdaptive(date: Date): string {
     const now = new Date();
 
-    if (this.isToday(date)) {
+    if (DateTime.isToday(date)) {
       const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
       return diffInSeconds < DateTime.HOUR_SECONDS
         ? DateTime.timeAgo(date)
