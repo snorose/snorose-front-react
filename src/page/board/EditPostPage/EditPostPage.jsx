@@ -10,7 +10,6 @@ import {
   Badge,
   CloseAppBar,
   ConfirmModal,
-  DeleteModal,
   FetchLoading,
   Icon,
 } from '@/shared/component';
@@ -24,7 +23,7 @@ import {
   ATTACHMENT_MODAL_TEXT,
 } from '@/shared/constant';
 import { useAuth, useBlocker, useModal, useToast } from '@/shared/hook';
-import { formattedNowTime } from '@/shared/lib';
+import { DateTime } from '@/shared/lib';
 import { ModalContext } from '@/shared/context/ModalContext';
 
 import { getPostContent, patchPost } from '@/apis';
@@ -216,7 +215,7 @@ export default function EditPostPage() {
                 )}
                 <p>{userDisplay}</p>
                 <p className={styles.dot}></p>
-                <p>{formattedNowTime()}</p>
+                <p>{DateTime.format(new Date())}</p>
               </div>
               {textId !== 'notice' && (
                 <div
