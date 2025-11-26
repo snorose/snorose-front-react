@@ -1,4 +1,5 @@
 import { attendanceLoader } from '@/shared/loader';
+import { BoardRegistry } from '@/shared/lib';
 import { ROLE } from '@/shared/constant';
 
 import App from '@/App';
@@ -108,19 +109,14 @@ const getRolesForWriteBoard = (boardPath) => {
   }
 };
 
-const boardPaths = [
-  'first-snow',
-  'large-snow',
-  'permanent-snow',
-  'besookt',
-  'all',
-  'notice',
-  'student-council',
-  'graduation-preparation',
-  'finance-audit',
+const BOARDS = [
+  ...BoardRegistry.getCommunity(),
+  ...BoardRegistry.getOfficial(),
+  BoardRegistry.find('BESOOKT'),
+  BoardRegistry.find('NOTICE'),
 ];
 
-const boardRoutes = boardPaths.flatMap((boardPath) => [
+const boardRoutes = BOARDS.flatMap(({ boardKey, boardPath }) => [
   {
     path: `/board/${boardPath}`,
     element: (
@@ -133,6 +129,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     ),
     meta: {
       hideNav: true,
+    },
+    handle: {
+      boardKey,
     },
   },
   {
@@ -148,6 +147,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     meta: {
       hideNav: true,
     },
+    handle: {
+      boardKey,
+    },
   },
   {
     path: `/board/${boardPath}/post/:postId`,
@@ -161,6 +163,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     ),
     meta: {
       hideNav: true,
+    },
+    handle: {
+      boardKey,
     },
   },
   {
@@ -176,6 +181,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     meta: {
       hideNav: true,
     },
+    handle: {
+      boardKey,
+    },
   },
   {
     path: `/board/${boardPath}/post/:postId/edit`,
@@ -190,6 +198,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     meta: {
       hideNav: true,
     },
+    handle: {
+      boardKey,
+    },
   },
   {
     path: `/board/${boardPath}/search`,
@@ -203,6 +214,9 @@ const boardRoutes = boardPaths.flatMap((boardPath) => [
     ),
     meta: {
       hideNav: true,
+    },
+    handle: {
+      boardKey,
     },
   },
 ]);
@@ -245,6 +259,9 @@ export const routeList = [
         meta: {
           hideNav: true,
         },
+        handle: {
+          boardKey: 'EVENT',
+        },
       },
       {
         path: `/board/event/notice`,
@@ -258,6 +275,9 @@ export const routeList = [
         ),
         meta: {
           hideNav: true,
+        },
+        handle: {
+          boardKey: 'EVENT',
         },
       },
       {
@@ -273,6 +293,9 @@ export const routeList = [
         meta: {
           hideNav: true,
         },
+        handle: {
+          boardKey: 'EVENT',
+        },
       },
       {
         path: '/board/event-notice/post/:postId/edit',
@@ -286,6 +309,9 @@ export const routeList = [
         ),
         meta: {
           hideNav: true,
+        },
+        handle: {
+          boardKey: 'EVENT',
         },
       },
       {
@@ -301,6 +327,9 @@ export const routeList = [
         meta: {
           hideNav: true,
         },
+        handle: {
+          boardKey: 'EVENT',
+        },
       },
       {
         path: `/board/event/post/:postId/edit`,
@@ -314,6 +343,9 @@ export const routeList = [
         ),
         meta: {
           hideNav: true,
+        },
+        handle: {
+          boardKey: 'EVENT',
         },
       },
       {
@@ -329,6 +361,9 @@ export const routeList = [
         meta: {
           hideNav: true,
         },
+        handle: {
+          boardKey: 'EVENT',
+        },
       },
       {
         path: '/board/exam-review',
@@ -340,6 +375,9 @@ export const routeList = [
             <ExamReviewListPage />
           </ProtectedRoute>
         ),
+        handle: {
+          boardKey: 'EXAM',
+        },
       },
       {
         path: `/board/exam-review/notice`,
@@ -354,6 +392,9 @@ export const routeList = [
         meta: {
           hideNav: true,
         },
+        handle: {
+          boardKey: 'EXAM',
+        },
       },
       {
         path: '/board/exam-review/search',
@@ -365,6 +406,9 @@ export const routeList = [
             <ExamReviewListPage />
           </ProtectedRoute>
         ),
+        handle: {
+          boardKey: 'EXAM',
+        },
       },
 
       {
@@ -380,6 +424,9 @@ export const routeList = [
         meta: {
           hideNav: true,
         },
+        handle: {
+          boardKey: 'EXAM',
+        },
       },
       {
         path: '/board/exam-review-notice/post/:postId',
@@ -393,6 +440,9 @@ export const routeList = [
         ),
         meta: {
           hideNav: true,
+        },
+        handle: {
+          boardKey: 'EXAM',
         },
       },
       {
@@ -408,6 +458,9 @@ export const routeList = [
         meta: {
           hideNav: true,
         },
+        handle: {
+          boardKey: 'EXAM',
+        },
       },
       {
         path: '/board/exam-review/:postId/edit',
@@ -421,6 +474,9 @@ export const routeList = [
         ),
         meta: {
           hideNav: true,
+        },
+        handle: {
+          boardKey: 'EXAM',
         },
       },
       {
@@ -437,6 +493,9 @@ export const routeList = [
         ),
         meta: {
           hideNav: true,
+        },
+        handle: {
+          boardKey: 'EXAM',
         },
       },
       {
