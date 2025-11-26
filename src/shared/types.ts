@@ -1,0 +1,11 @@
+export type BoardKey =
+  | 'FIRST-SNOW'
+  | 'LARGE-SNOW'
+  | 'PERMANENT-SNOW'
+  | 'BESOOKT'
+  | 'EVENT'
+  | 'EXAM'
+  | 'STUDENT-COUNCIL'
+  | 'GRADUATION-PREPARTION'
+  | 'FINANCE-AUDIT'
+  | 'NOTICE';
