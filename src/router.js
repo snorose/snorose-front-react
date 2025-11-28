@@ -116,110 +116,113 @@ const BOARDS = [
   BoardRegistry.find('NOTICE'),
 ];
 
-const boardRoutes = BOARDS.flatMap(({ boardKey, boardPath }) => [
-  {
-    path: `/board/${boardPath}`,
-    element: (
-      <ProtectedRoute
-        roles={getRolesForReadBoard(boardPath)}
-        message={'게시판 접근 권한이 없어요'}
-      >
-        {boardPath === 'notice' ? <NoticeListPage /> : <PostListPage />}
-      </ProtectedRoute>
-    ),
-    meta: {
-      hideNav: true,
+const boardRoutes = BOARDS.flatMap(({ key }) => {
+  const boardPath = key.toLowerCase();
+  return [
+    {
+      path: `/board/${boardPath}`,
+      element: (
+        <ProtectedRoute
+          roles={getRolesForReadBoard(boardPath)}
+          message={'게시판 접근 권한이 없어요'}
+        >
+          {boardPath === 'notice' ? <NoticeListPage /> : <PostListPage />}
+        </ProtectedRoute>
+      ),
+      meta: {
+        hideNav: true,
+      },
+      handle: {
+        boardKey: key,
+      },
     },
-    handle: {
-      boardKey,
+    {
+      path: `/board/${boardPath}/notice`,
+      element: (
+        <ProtectedRoute
+          roles={getRolesForReadBoard(boardPath)}
+          message={'게시판 접근 권한이 없어요'}
+        >
+          <NoticeListPage />
+        </ProtectedRoute>
+      ),
+      meta: {
+        hideNav: true,
+      },
+      handle: {
+        boardKey: key,
+      },
     },
-  },
-  {
-    path: `/board/${boardPath}/notice`,
-    element: (
-      <ProtectedRoute
-        roles={getRolesForReadBoard(boardPath)}
-        message={'게시판 접근 권한이 없어요'}
-      >
-        <NoticeListPage />
-      </ProtectedRoute>
-    ),
-    meta: {
-      hideNav: true,
+    {
+      path: `/board/${boardPath}/post/:postId`,
+      element: (
+        <ProtectedRoute
+          roles={getRolesForReadBoard(boardPath)}
+          message={'게시글 접근 권한이 없어요'}
+        >
+          <PostPage />
+        </ProtectedRoute>
+      ),
+      meta: {
+        hideNav: true,
+      },
+      handle: {
+        boardKey: key,
+      },
     },
-    handle: {
-      boardKey,
+    {
+      path: `/board/${boardPath}/post-write`,
+      element: (
+        <ProtectedRoute
+          roles={getRolesForWriteBoard(boardPath)}
+          message={'게시글 작성 권한이 없어요'}
+        >
+          <WritePostPage />
+        </ProtectedRoute>
+      ),
+      meta: {
+        hideNav: true,
+      },
+      handle: {
+        boardKey: key,
+      },
     },
-  },
-  {
-    path: `/board/${boardPath}/post/:postId`,
-    element: (
-      <ProtectedRoute
-        roles={getRolesForReadBoard(boardPath)}
-        message={'게시글 접근 권한이 없어요'}
-      >
-        <PostPage />
-      </ProtectedRoute>
-    ),
-    meta: {
-      hideNav: true,
+    {
+      path: `/board/${boardPath}/post/:postId/edit`,
+      element: (
+        <ProtectedRoute
+          roles={getRolesForWriteBoard(boardPath)}
+          message={'게시글 편집 권한이 없어요'}
+        >
+          <EditPostPage />
+        </ProtectedRoute>
+      ),
+      meta: {
+        hideNav: true,
+      },
+      handle: {
+        boardKey: key,
+      },
     },
-    handle: {
-      boardKey,
+    {
+      path: `/board/${boardPath}/search`,
+      element: (
+        <ProtectedRoute
+          roles={getRolesForReadBoard(boardPath)}
+          message={'게시판 접근 권한이 없어요'}
+        >
+          <SearchPage />
+        </ProtectedRoute>
+      ),
+      meta: {
+        hideNav: true,
+      },
+      handle: {
+        boardKey: key,
+      },
     },
-  },
-  {
-    path: `/board/${boardPath}/post-write`,
-    element: (
-      <ProtectedRoute
-        roles={getRolesForWriteBoard(boardPath)}
-        message={'게시글 작성 권한이 없어요'}
-      >
-        <WritePostPage />
-      </ProtectedRoute>
-    ),
-    meta: {
-      hideNav: true,
-    },
-    handle: {
-      boardKey,
-    },
-  },
-  {
-    path: `/board/${boardPath}/post/:postId/edit`,
-    element: (
-      <ProtectedRoute
-        roles={getRolesForWriteBoard(boardPath)}
-        message={'게시글 편집 권한이 없어요'}
-      >
-        <EditPostPage />
-      </ProtectedRoute>
-    ),
-    meta: {
-      hideNav: true,
-    },
-    handle: {
-      boardKey,
-    },
-  },
-  {
-    path: `/board/${boardPath}/search`,
-    element: (
-      <ProtectedRoute
-        roles={getRolesForReadBoard(boardPath)}
-        message={'게시판 접근 권한이 없어요'}
-      >
-        <SearchPage />
-      </ProtectedRoute>
-    ),
-    meta: {
-      hideNav: true,
-    },
-    handle: {
-      boardKey,
-    },
-  },
-]);
+  ];
+});
 
 export const routeList = [
   {
