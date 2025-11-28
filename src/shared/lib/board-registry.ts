@@ -95,10 +95,10 @@ export class BoardRegistry {
       image: besookt,
     },
     {
-      key: 'EXAM',
+      key: 'EXAM-REVIEW',
       id: 32,
       name: '시험후기',
-      to: '/board/finance-audit',
+      to: '/board/exam-review',
     },
   ] as const;
 

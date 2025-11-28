@@ -4,7 +4,7 @@ export type BoardKey =
   | 'PERMANENT-SNOW'
   | 'BESOOKT'
   | 'EVENT'
-  | 'EXAM'
+  | 'EXAM-REVIEW'
   | 'STUDENT-COUNCIL'
   | 'GRADUATION-PREPARATION'
   | 'FINANCE-AUDIT'
