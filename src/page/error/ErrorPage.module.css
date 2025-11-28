@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+
+  width: 100vw;
+  height: 100%;
+  max-width: var(--default-width);
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--blue-0);
+}
+
+.title {
+  margin-bottom: 1rem;
+
+  font: var(--text-title-1-bold);
+}
+
+.message {
+  font: var(--text-body-1-reg);
+}
+
+.button {
+  position: absolute;
+  bottom: 5rem;
+
+  width: 100%;
+  padding: var(--default-margin);
+}

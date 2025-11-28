@@ -54,9 +54,10 @@ import {
   MyPage,
   PointLogListPage,
 } from '@/page/user';
+import { MaintenancePage } from '@/page/maintenance';
+import { ErrorPage } from '@/page/error';
 
 import ProtectedRoute from '@/ProtectedRoute';
-import { MaintenancePage } from '@/page/maintenance';
 
 import { CheckExamPeriodRoute } from '@/feature/exam/lib';
 
@@ -228,6 +229,7 @@ export const routeList = [
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
