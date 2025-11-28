@@ -82,7 +82,7 @@ export class BoardRegistry {
       key: 'EVENT',
       id: 14,
       name: '이벤트',
-      to: '/board/student-council',
+      to: '/board/event',
       desc: '이벤트',
       image: event,
     },
