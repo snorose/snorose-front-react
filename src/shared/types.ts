@@ -6,6 +6,6 @@ export type BoardKey =
   | 'EVENT'
   | 'EXAM'
   | 'STUDENT-COUNCIL'
-  | 'GRADUATION-PREPARTION'
+  | 'GRADUATION-PREPARATION'
   | 'FINANCE-AUDIT'
   | 'NOTICE';

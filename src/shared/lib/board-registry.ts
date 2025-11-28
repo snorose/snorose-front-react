@@ -55,7 +55,7 @@ export class BoardRegistry {
       image: studentCouncil,
     },
     {
-      key: 'GRADUATION-PREPARTION',
+      key: 'GRADUATION-PREPARATION',
       id: 61,
       name: '졸업준비위원회',
       to: '/board/graduation-preparation',
