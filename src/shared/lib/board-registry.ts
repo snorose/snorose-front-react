@@ -13,8 +13,6 @@ interface Board {
   key: BoardKey;
   id: number;
   name: string;
-  to: string;
-  slug?: string;
   desc?: string;
   image?: string;
 }
@@ -24,7 +22,6 @@ const COMMUNITIES = [
     key: 'FIRST-SNOW',
     id: 21,
     name: '첫눈온방',
-    to: '/board/first-snow',
     desc: '새내기 전용 커뮤니티',
     image: firstSnow,
   },
@@ -32,7 +29,6 @@ const COMMUNITIES = [
     key: 'LARGE-SNOW',
     id: 22,
     name: '함박눈방',
-    to: '/board/large-snow',
     desc: '눈송이 모두의 커뮤니티',
     image: largeSnow,
   },
@@ -40,7 +36,6 @@ const COMMUNITIES = [
     key: 'PERMANENT-SNOW',
     id: 23,
     name: '만년설방',
-    to: '/board/permanent-snow',
     desc: '졸업생 전용 커뮤니티',
     image: permanentSnow,
   },
@@ -51,7 +46,6 @@ const OFFICIALS = [
     key: 'STUDENT-COUNCIL',
     id: 60,
     name: '총학생회',
-    to: '/board/student-council',
     desc: '총학생회 공지',
     image: studentCouncil,
   },
@@ -59,7 +53,6 @@ const OFFICIALS = [
     key: 'GRADUATION-PREPARATION',
     id: 61,
     name: '졸업준비위원회',
-    to: '/board/graduation-preparation',
     desc: '졸업준비위원회 공지',
     image: graduationPreparation,
   },
@@ -67,7 +60,6 @@ const OFFICIALS = [
     key: 'FINANCE-AUDIT',
     id: 62,
     name: '재정감사위원회',
-    to: '/board/finance-audit',
     desc: '재정감사 보고',
     image: financeAudit,
   },
@@ -78,13 +70,11 @@ const OTHERS = [
     key: 'NOTICE',
     id: 12,
     name: '공지사항',
-    to: '/board/notice',
   },
   {
     key: 'EVENT',
     id: 14,
     name: '이벤트',
-    to: '/board/event',
     desc: '이벤트',
     image: event,
   },
@@ -92,7 +82,6 @@ const OTHERS = [
     key: 'BESOOKT',
     id: 20,
     name: '베숙트',
-    to: '/board/besookt',
     desc: '추천을 가장 많이\n받은 게시물 모아보기',
     image: besookt,
   },
@@ -100,7 +89,6 @@ const OTHERS = [
     key: 'EXAM-REVIEW',
     id: 32,
     name: '시험후기',
-    to: '/board/exam-review',
   },
 ] as const satisfies readonly Board[];
 
