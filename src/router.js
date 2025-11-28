@@ -111,8 +111,8 @@ const getRolesForWriteBoard = (boardPath) => {
 };
 
 const BOARDS = [
-  ...BoardRegistry.getCommunity(),
-  ...BoardRegistry.getOfficial(),
+  ...BoardRegistry.communities,
+  ...BoardRegistry.officials,
   BoardRegistry.find('BESOOKT'),
   BoardRegistry.find('NOTICE'),
 ];
