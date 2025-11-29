@@ -61,70 +61,16 @@ import ProtectedRoute from '@/ProtectedRoute';
 
 import { CheckExamPeriodRoute } from '@/feature/exam/lib';
 
-const getRolesForReadBoard = (boardPath) => {
-  switch (boardPath) {
-    case 'first-snow':
-      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
-    case 'large-snow':
-      return [ROLE.user, ROLE.admin, ROLE.official];
-    case 'permanent-snow':
-      return [ROLE.user, ROLE.admin, ROLE.official];
-    case 'besookt':
-      return [ROLE.user, ROLE.admin, ROLE.official];
-    case 'all':
-      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
-    case 'notice':
-      return [
-        ROLE.preUser,
-        ROLE.user,
-        ROLE.admin,
-        ROLE.official,
-        ROLE.blacklist,
-      ];
-    case 'student-council':
-      return [ROLE.user, ROLE.admin, ROLE.official];
-    case 'graduation-preparation':
-      return [ROLE.user, ROLE.admin, ROLE.official];
-    case 'finance-audit':
-      return [ROLE.user, ROLE.admin, ROLE.official];
-    default:
-      return [];
-  }
-};
+const BOARDS = [...BoardRegistry.communities, ...BoardRegistry.officials];
 
-const getRolesForWriteBoard = (boardPath) => {
-  switch (boardPath) {
-    case 'first-snow':
-      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
-    case 'large-snow':
-      return [ROLE.user, ROLE.admin];
-    case 'permanent-snow':
-      return [ROLE.user, ROLE.admin];
-    case 'notice':
-    case 'student-council':
-    case 'finance-audit':
-    case 'graduation-preparation':
-      return [ROLE.admin, ROLE.official];
-    default:
-      return [];
-  }
-};
-
-const BOARDS = [
-  ...BoardRegistry.communities,
-  ...BoardRegistry.officials,
-  BoardRegistry.find('BESOOKT'),
-  BoardRegistry.find('NOTICE'),
-];
-
-const boardRoutes = BOARDS.flatMap(({ key }) => {
+const boardRoutes = BOARDS.flatMap(({ key, roles }) => {
   const boardPath = key.toLowerCase();
   return [
     {
       path: `/board/${boardPath}`,
       element: (
         <ProtectedRoute
-          roles={getRolesForReadBoard(boardPath)}
+          roles={roles.read}
           message={'게시판 접근 권한이 없어요'}
         >
           {boardPath === 'notice' ? <NoticeListPage /> : <PostListPage />}
@@ -141,7 +87,7 @@ const boardRoutes = BOARDS.flatMap(({ key }) => {
       path: `/board/${boardPath}/notice`,
       element: (
         <ProtectedRoute
-          roles={getRolesForReadBoard(boardPath)}
+          roles={roles.read}
           message={'게시판 접근 권한이 없어요'}
         >
           <NoticeListPage />
@@ -158,7 +104,7 @@ const boardRoutes = BOARDS.flatMap(({ key }) => {
       path: `/board/${boardPath}/post/:postId`,
       element: (
         <ProtectedRoute
-          roles={getRolesForReadBoard(boardPath)}
+          roles={roles.read}
           message={'게시글 접근 권한이 없어요'}
         >
           <PostPage />
@@ -175,7 +121,7 @@ const boardRoutes = BOARDS.flatMap(({ key }) => {
       path: `/board/${boardPath}/post-write`,
       element: (
         <ProtectedRoute
-          roles={getRolesForWriteBoard(boardPath)}
+          roles={roles.write}
           message={'게시글 작성 권한이 없어요'}
         >
           <WritePostPage />
@@ -192,7 +138,7 @@ const boardRoutes = BOARDS.flatMap(({ key }) => {
       path: `/board/${boardPath}/post/:postId/edit`,
       element: (
         <ProtectedRoute
-          roles={getRolesForWriteBoard(boardPath)}
+          roles={roles.write}
           message={'게시글 편집 권한이 없어요'}
         >
           <EditPostPage />
@@ -209,7 +155,7 @@ const boardRoutes = BOARDS.flatMap(({ key }) => {
       path: `/board/${boardPath}/search`,
       element: (
         <ProtectedRoute
-          roles={getRolesForReadBoard(boardPath)}
+          roles={roles.read}
           message={'게시판 접근 권한이 없어요'}
         >
           <SearchPage />
@@ -243,7 +189,92 @@ export const routeList = [
         path: '/board',
         element: <BoardCategoryPage />,
       },
+      {
+        path: '/board/notice',
+        element: (
+          <ProtectedRoute
+            roles={BoardRegistry.find('NOTICE').roles.read}
+            message={'게시판 접근 권한이 없어요'}
+          >
+            <NoticeListPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+        handle: {
+          boardKey: BoardRegistry.find('NOTICE').key,
+        },
+      },
+      {
+        path: `/board/notice/post/:postId`,
+        element: (
+          <ProtectedRoute
+            roles={BoardRegistry.find('NOTICE').roles.read}
+            message={'게시글 접근 권한이 없어요'}
+          >
+            <PostPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+        handle: {
+          boardKey: BoardRegistry.find('NOTICE').key,
+        },
+      },
+      {
+        path: `/board/notice/post-write`,
+        element: (
+          <ProtectedRoute
+            roles={BoardRegistry.find('NOTICE').roles.write}
+            message={'게시글 작성 권한이 없어요'}
+          >
+            <WritePostPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+        handle: {
+          boardKey: BoardRegistry.find('NOTICE').key,
+        },
+      },
+      {
+        path: `/board/notice/post/:postId/edit`,
+        element: (
+          <ProtectedRoute
+            roles={BoardRegistry.find('NOTICE').roles.write}
+            message={'게시글 편집 권한이 없어요'}
+          >
+            <EditPostPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+        handle: {
+          boardKey: BoardRegistry.find('NOTICE').key,
+        },
+      },
       ...boardRoutes,
+      {
+        path: '/board/besookt',
+        element: (
+          <ProtectedRoute
+            roles={BoardRegistry.find('BESOOKT').roles.read}
+            message={'게시판 접근 권한이 없어요'}
+          >
+            <PostListPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+        handle: {
+          boardKey: BoardRegistry.find('BESOOKT').key,
+        },
+      },
       {
         path: '/board/all/search',
         element: <SearchPage />,
@@ -255,7 +286,7 @@ export const routeList = [
         path: '/board/event',
         element: (
           <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
+            roles={BoardRegistry.find('EVENT').roles.read}
             message={'이벤트 게시판 접근 권한이 없어요'}
           >
             <EventListPage />
@@ -265,14 +296,14 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EVENT',
+          boardKey: BoardRegistry.find('EVENT').key,
         },
       },
       {
         path: `/board/event/notice`,
         element: (
           <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
+            roles={BoardRegistry.find('EVENT').roles.read}
             message={'이벤트 게시판 접근 권한이 없어요'}
           >
             <NoticeListPage />
@@ -282,14 +313,14 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EVENT',
+          boardKey: BoardRegistry.find('EVENT').key,
         },
       },
       {
         path: '/board/event-notice/post/:postId',
         element: (
           <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
+            roles={BoardRegistry.find('EVENT').roles.read}
             message={'공지글 접근 권한이 없어요'}
           >
             <PostPage />
@@ -299,14 +330,14 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EVENT',
+          boardKey: BoardRegistry.find('EVENT').key,
         },
       },
       {
         path: '/board/event-notice/post/:postId/edit',
         element: (
           <ProtectedRoute
-            roles={[ROLE.admin]}
+            roles={BoardRegistry.find('EVENT').roles.write}
             message={'공지글 수정 권한이 없어요'}
           >
             <EditPostPage />
@@ -316,14 +347,14 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EVENT',
+          boardKey: BoardRegistry.find('EVENT').key,
         },
       },
       {
         path: `/board/event/event-post-write`,
         element: (
           <ProtectedRoute
-            roles={[ROLE.admin]}
+            roles={BoardRegistry.find('EVENT').roles.write}
             message={'게시글 작성 권한이 없어요'}
           >
             <WriteEventPage />
@@ -333,14 +364,14 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EVENT',
+          boardKey: BoardRegistry.find('EVENT').key,
         },
       },
       {
         path: `/board/event/post/:postId/edit`,
         element: (
           <ProtectedRoute
-            roles={[ROLE.admin]}
+            roles={BoardRegistry.find('EVENT').roles.write}
             message={'게시글 편집 권한이 없어요'}
           >
             <EditEventPage />
@@ -350,14 +381,14 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EVENT',
+          boardKey: BoardRegistry.find('EVENT').key,
         },
       },
       {
         path: `/board/event/post/:postId`,
         element: (
           <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
+            roles={BoardRegistry.find('EVENT').roles.read}
             message={'게시글 접근 권한이 없어요'}
           >
             <EventPage />
@@ -367,28 +398,28 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EVENT',
+          boardKey: BoardRegistry.find('EVENT').key,
         },
       },
       {
         path: '/board/exam-review',
         element: (
           <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
+            roles={BoardRegistry.find('EXAM-REVIEW').roles.read}
             message={'시험후기 접근 권한이 없어요'}
           >
             <ExamReviewListPage />
           </ProtectedRoute>
         ),
         handle: {
-          boardKey: 'EXAM',
+          boardKey: BoardRegistry.find('EXAM-REVIEW').key,
         },
       },
       {
         path: `/board/exam-review/notice`,
         element: (
           <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
+            roles={BoardRegistry.find('EXAM-REVIEW').roles.read}
             message={'시험후기 접근 권한이 없어요'}
           >
             <NoticeListPage />
@@ -398,29 +429,28 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EXAM',
+          boardKey: BoardRegistry.find('EXAM-REVIEW').key,
         },
       },
       {
         path: '/board/exam-review/search',
         element: (
           <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
+            roles={BoardRegistry.find('EXAM-REVIEW').roles.read}
             message={'시험후기 접근 권한이 없어요'}
           >
             <ExamReviewListPage />
           </ProtectedRoute>
         ),
         handle: {
-          boardKey: 'EXAM',
+          boardKey: BoardRegistry.find('EXAM-REVIEW').key,
         },
       },
-
       {
         path: '/board/exam-review/post/:postId',
         element: (
           <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
+            roles={BoardRegistry.find('EXAM-REVIEW').roles.read}
             message={'시험후기 접근 권한이 없어요'}
           >
             <ExamReviewPage />
@@ -430,14 +460,14 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EXAM',
+          boardKey: BoardRegistry.find('EXAM-REVIEW').key,
         },
       },
       {
         path: '/board/exam-review-notice/post/:postId',
         element: (
           <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
+            roles={BoardRegistry.find('EXAM-REVIEW').roles.read}
             message={'공지글 접근 권한이 없어요'}
           >
             <PostPage />
@@ -447,14 +477,14 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EXAM',
+          boardKey: BoardRegistry.find('EXAM-REVIEW').key,
         },
       },
       {
         path: '/board/exam-review-notice/post/:postId/edit',
         element: (
           <ProtectedRoute
-            roles={[ROLE.admin]}
+            roles={BoardRegistry.find('EXAM-REVIEW').roles.write}
             message={'공지글 수정 권한이 없어요'}
           >
             <EditPostPage />
@@ -464,14 +494,14 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EXAM',
+          boardKey: BoardRegistry.find('EXAM-REVIEW').key,
         },
       },
       {
         path: '/board/exam-review/:postId/edit',
         element: (
           <ProtectedRoute
-            roles={[ROLE.user, ROLE.admin]}
+            roles={BoardRegistry.find('EXAM-REVIEW').roles.write}
             message={'시험후기 수정 권한이 없어요'}
           >
             <EditExamReviewPage />
@@ -481,7 +511,7 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EXAM',
+          boardKey: BoardRegistry.find('EXAM-REVIEW').key,
         },
       },
       {
@@ -489,7 +519,7 @@ export const routeList = [
         element: (
           <CheckExamPeriodRoute>
             <ProtectedRoute
-              roles={[ROLE.user, ROLE.admin]}
+              roles={BoardRegistry.find('EXAM-REVIEW').roles.write}
               message={'시험후기 작성 권한이 없어요'}
             >
               <WriteExamReviewPage />
@@ -500,7 +530,7 @@ export const routeList = [
           hideNav: true,
         },
         handle: {
-          boardKey: 'EXAM',
+          boardKey: BoardRegistry.find('EXAM-REVIEW').key,
         },
       },
       {

@@ -29,7 +29,7 @@ const COMMUNITIES = [
     name: '첫눈온방',
     roles: {
       read: [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official],
-      write: [ROLE.preUser, ROLE.user, ROLE.admin],
+      write: [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official],
     },
     desc: '새내기 전용 커뮤니티',
     image: firstSnow,
@@ -115,7 +115,7 @@ const OTHERS = [
     id: 14,
     name: '이벤트',
     roles: {
-      read: [ROLE.user, ROLE.admin, ROLE.official],
+      read: [ROLE.user, ROLE.admin],
       write: [ROLE.admin],
     },
     desc: '이벤트',
