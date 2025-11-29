@@ -1,4 +1,5 @@
-import { BoardKey } from '@/shared/types';
+import { BoardKey, RoleId } from '@/shared/types';
+import { ROLE } from '@/shared/constant';
 
 import besookt from '@/assets/images/besookt-board-page.svg';
 import financeAudit from '@/assets/images/financeAudit-board-page.svg';
@@ -13,6 +14,10 @@ interface Board {
   key: BoardKey;
   id: number;
   name: string;
+  roles: {
+    read: readonly RoleId[];
+    write?: readonly RoleId[];
+  };
   desc?: string;
   image?: string;
 }
@@ -22,6 +27,10 @@ const COMMUNITIES = [
     key: 'FIRST-SNOW',
     id: 21,
     name: '첫눈온방',
+    roles: {
+      read: [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official],
+      write: [ROLE.preUser, ROLE.user, ROLE.admin],
+    },
     desc: '새내기 전용 커뮤니티',
     image: firstSnow,
   },
@@ -29,6 +38,10 @@ const COMMUNITIES = [
     key: 'LARGE-SNOW',
     id: 22,
     name: '함박눈방',
+    roles: {
+      read: [ROLE.user, ROLE.admin, ROLE.official],
+      write: [ROLE.user, ROLE.admin],
+    },
     desc: '눈송이 모두의 커뮤니티',
     image: largeSnow,
   },
@@ -36,6 +49,10 @@ const COMMUNITIES = [
     key: 'PERMANENT-SNOW',
     id: 23,
     name: '만년설방',
+    roles: {
+      read: [ROLE.user, ROLE.admin, ROLE.official],
+      write: [ROLE.user, ROLE.admin],
+    },
     desc: '졸업생 전용 커뮤니티',
     image: permanentSnow,
   },
@@ -46,6 +63,10 @@ const OFFICIALS = [
     key: 'STUDENT-COUNCIL',
     id: 60,
     name: '총학생회',
+    roles: {
+      read: [ROLE.user, ROLE.admin, ROLE.official],
+      write: [ROLE.admin, ROLE.official],
+    },
     desc: '총학생회 공지',
     image: studentCouncil,
   },
@@ -53,6 +74,10 @@ const OFFICIALS = [
     key: 'GRADUATION-PREPARATION',
     id: 61,
     name: '졸업준비위원회',
+    roles: {
+      read: [ROLE.user, ROLE.admin, ROLE.official],
+      write: [ROLE.admin, ROLE.official],
+    },
     desc: '졸업준비위원회 공지',
     image: graduationPreparation,
   },
@@ -60,6 +85,10 @@ const OFFICIALS = [
     key: 'FINANCE-AUDIT',
     id: 62,
     name: '재정감사위원회',
+    roles: {
+      read: [ROLE.user, ROLE.admin, ROLE.official],
+      write: [ROLE.admin, ROLE.official],
+    },
     desc: '재정감사 보고',
     image: financeAudit,
   },
@@ -70,11 +99,25 @@ const OTHERS = [
     key: 'NOTICE',
     id: 12,
     name: '공지사항',
+    roles: {
+      read: [
+        ROLE.preUser,
+        ROLE.user,
+        ROLE.admin,
+        ROLE.official,
+        ROLE.blacklist,
+      ],
+      write: [ROLE.admin],
+    },
   },
   {
     key: 'EVENT',
     id: 14,
     name: '이벤트',
+    roles: {
+      read: [ROLE.user, ROLE.admin, ROLE.official],
+      write: [ROLE.admin],
+    },
     desc: '이벤트',
     image: event,
   },
@@ -82,6 +125,9 @@ const OTHERS = [
     key: 'BESOOKT',
     id: 20,
     name: '베숙트',
+    roles: {
+      read: [ROLE.user, ROLE.admin, ROLE.official],
+    },
     desc: '추천을 가장 많이\n받은 게시물 모아보기',
     image: besookt,
   },
@@ -89,6 +135,10 @@ const OTHERS = [
     key: 'EXAM-REVIEW',
     id: 32,
     name: '시험후기',
+    roles: {
+      read: [ROLE.user, ROLE.admin, ROLE.official],
+      write: [ROLE.user, ROLE.admin],
+    },
   },
 ] as const satisfies readonly Board[];
 

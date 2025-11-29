@@ -1,3 +1,5 @@
+export type { RoleId, RoleCode } from '@/shared/constant/role';
+
 export type BoardKey =
   | 'FIRST-SNOW'
   | 'LARGE-SNOW'
