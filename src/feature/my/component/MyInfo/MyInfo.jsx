@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { Icon, Badge } from '@/shared/component';
-import { ROLE_NAME } from '@/shared/constant';
+import { ROLE_LABEL } from '@/shared/constant';
 
 import styles from './MyInfo.module.css';
 
@@ -20,7 +20,7 @@ export default function MyInfo({ userInfo }) {
           height={5}
         />
         <div className={styles.memberType}>
-          {ROLE_NAME[userInfo?.userRoleId]}
+          {ROLE_LABEL[userInfo?.userRoleId]}
         </div>
         {<Badge userRoleId={userInfo?.userRoleId} className={styles.badge} />}
       </div>
