@@ -2,7 +2,7 @@ export * from './AppError';
 export * from './GrowthBook';
 
 export * from './attachment.js';
-export * from './date-time';
+export * as DateTime from './date-time';
 export * from './findRoute.js';
 export * from './getBoardTextId.js';
 export * from './getBoardUrl.js';
