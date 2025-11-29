@@ -259,7 +259,7 @@ export default function EditEventPage() {
               )}
               <p>{userDisplay}</p>
               <p className={styles.dot}></p>
-              <p>{DateTime.form(new Date())}</p>
+              <p>{DateTime.format(new Date())}</p>
             </div>
           </div>
           <div className={styles.form}>{renderForm()}</div>
