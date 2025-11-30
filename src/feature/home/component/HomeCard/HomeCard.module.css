@@ -1,15 +1,12 @@
 /* HomeCard */
 
 .layout {
-  margin: 2.4rem var(--default-margin) 2.8rem var(--default-margin);
+  margin: 3rem var(--default-margin) 3rem var(--default-margin);
   display: flex;
-  gap: 0.72rem;
+  gap: 1.1rem;
 }
 
-.left {
-  flex: 3;
-}
-
+.left,
 .right {
   flex: 2;
 }
@@ -18,24 +15,20 @@
 
 .card {
   width: 100%;
-  height: 11.2rem;
-  padding: 1.3rem 0 1.6rem 1.2rem;
+  height: 11rem;
+  padding: 1.4rem 0 1.2rem 1.4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: var(--blue-0);
   border-radius: 0.6rem;
   box-sizing: border-box;
-  color: var(--grey-4);
+  color: var(--blue-4);
   overflow: hidden;
 }
 
 .dark .card {
-  background: radial-gradient(
-    79.53% 146.8% at 31.85% 57.65%,
-    var(--blue-4) 0%,
-    var(--blue-3) 100%
-  );
+  background: var(--gradient-5);
   color: var(--white);
 }
 
@@ -60,17 +53,8 @@
   font: var(--text-headline-1-med);
 }
 
-.tag {
-  font: var(--text-body-2-reg);
-
-  color: var(--grey-4);
-}
-
-.dark .tag {
-  color: var(--grey-1-1);
-}
-
 .image {
-  width: 7.2rem;
+  width: 5.8rem;
   height: auto;
+  margin: 2.5rem 1.2rem 0rem 2.5rem;
 }
