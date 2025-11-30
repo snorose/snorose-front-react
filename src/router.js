@@ -26,6 +26,12 @@ import {
 } from '@/page/board';
 import { NotFoundPage } from '@/page/etc';
 import {
+  WriteEventPage,
+  EditEventPage,
+  EventListPage,
+  EventPage,
+} from '@/page/event';
+import {
   EditExamReviewPage,
   ExamReviewListPage,
   ExamReviewPage,
@@ -93,7 +99,6 @@ const getRolesForWriteBoard = (boardPath) => {
     case 'permanent-snow':
       return [ROLE.user, ROLE.admin];
     case 'notice':
-      return [ROLE.admin];
     case 'student-council':
     case 'finance-audit':
     case 'graduation-preparation':
@@ -223,6 +228,104 @@ export const routeList = [
       {
         path: '/board/all/search',
         element: <SearchPage />,
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/board/event',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            message={'이벤트 게시판 접근 권한이 없어요'}
+          >
+            <EventListPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: `/board/event/notice`,
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            message={'이벤트 게시판 접근 권한이 없어요'}
+          >
+            <NoticeListPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/board/event-notice/post/:postId',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            message={'공지글 접근 권한이 없어요'}
+          >
+            <PostPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: '/board/event-notice/post/:postId/edit',
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.admin]}
+            message={'공지글 수정 권한이 없어요'}
+          >
+            <EditPostPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: `/board/event/event-post-write`,
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.admin]}
+            message={'게시글 작성 권한이 없어요'}
+          >
+            <WriteEventPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: `/board/event/post/:postId/edit`,
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.admin]}
+            message={'게시글 편집 권한이 없어요'}
+          >
+            <EditEventPage />
+          </ProtectedRoute>
+        ),
+        meta: {
+          hideNav: true,
+        },
+      },
+      {
+        path: `/board/event/post/:postId`,
+        element: (
+          <ProtectedRoute
+            roles={[ROLE.user, ROLE.admin]}
+            message={'게시글 접근 권한이 없어요'}
+          >
+            <EventPage />
+          </ProtectedRoute>
+        ),
         meta: {
           hideNav: true,
         },

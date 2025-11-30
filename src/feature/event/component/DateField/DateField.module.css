@@ -1,0 +1,51 @@
+.dateSection {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  word-break: keep-all;
+  margin-top: 0.7rem;
+  font: var(--text-body-1-reg);
+  width: 100%;
+}
+
+.dateSection p {
+  font: var(--text-headline-2-med);
+  flex: 0 0 auto;
+  min-width: 6rem;
+  display: flex;
+  justify-content: center;
+}
+
+.dateSection > div {
+  flex: 1;
+  display: flex;
+}
+
+.dateInput {
+  flex: 1;
+  border: 1px solid var(--blue-2);
+  border-radius: 0.5rem;
+  padding: 1.4rem;
+  background-color: transparent;
+  color: var(--grey-3-1);
+  width: 100%;
+}
+
+.dateInput:focus {
+  border-color: var(--blue-4);
+}
+
+.error {
+  border: 1px solid var(--pink-3);
+  color: var(--pink-3);
+  background-color: var(--pink-1);
+}
+
+.errorMessage {
+  color: var(--pink-3);
+  margin-top: 0.3rem;
+  display: block;
+  font: var(--text-body-1-reg);
+  margin-left: 7rem;
+}
