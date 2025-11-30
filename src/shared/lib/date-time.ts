@@ -5,10 +5,18 @@ const MONTH_SECONDS = DAY_SECONDS * 30;
 const YEAR_SECONDS = DAY_SECONDS * 365;
 const WEEKDAY_KO = ['일', '월', '화', '수', '목', '금', '토'] as const;
 
+type DateTimeFormat = 'ISO' | 'YMD_HM' | 'YMD' | 'YMD_D' | 'MD_HM' | 'HM';
+
 export function format(
-  date: Date,
-  format: 'ISO' | 'YMD_HM' | 'YMD' | 'YMD_D' | 'MD_HM' | 'HM'
+  input: Date | string,
+  format: DateTimeFormat = 'YMD_HM'
 ): string {
+  const date = toValidDate(input);
+
+  if (!date) {
+    return '';
+  }
+
   const yyyy = date.getFullYear();
   const mm = pad(date.getMonth() + 1);
   const dd = pad(date.getDate());
@@ -38,7 +46,13 @@ export function format(
  * same year: MM/DD HH:MM
  * other year: YYYY/MM/DD HH:MM
  */
-export function formatAdaptive(date: Date): string {
+export function formatAdaptive(input: Date | string): string {
+  const date = toValidDate(input);
+
+  if (!date) {
+    return '';
+  }
+
   const now = new Date();
 
   if (isToday(date)) {
@@ -51,7 +65,13 @@ export function formatAdaptive(date: Date): string {
     : format(date, 'YMD_HM');
 }
 
-export function timeAgo(date: Date): string {
+export function timeAgo(input: Date | string): string {
+  const date = toValidDate(input);
+
+  if (!date) {
+    return '';
+  }
+
   const now = new Date();
   let seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
@@ -75,7 +95,13 @@ export function timeAgo(date: Date): string {
   }
 }
 
-export function isToday(date: Date): boolean {
+export function isToday(input: Date | string): boolean {
+  const date = toValidDate(input);
+
+  if (!date) {
+    return false;
+  }
+
   const today = new Date();
 
   return (
@@ -85,7 +111,13 @@ export function isToday(date: Date): boolean {
   );
 }
 
-export function isDayOver(date: Date): boolean {
+export function isDayOver(input: Date | string): boolean {
+  const date = toValidDate(input);
+
+  if (!date) {
+    return false;
+  }
+
   const today = new Date();
 
   const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -96,4 +128,14 @@ export function isDayOver(date: Date): boolean {
 
 function pad(n: number): string {
   return String(n).padStart(2, '0');
+}
+
+function toValidDate(input: Date | string): Date | null {
+  const date = typeof input === 'string' ? new Date(input) : input;
+
+  if (isNaN(date.getTime())) {
+    return null;
+  }
+
+  return date;
 }

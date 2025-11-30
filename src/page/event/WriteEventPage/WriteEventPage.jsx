@@ -275,7 +275,7 @@ export default function WriteEventPage() {
               )}
               <p>{userInfo?.nickname}</p>
               <p className={styles.dot}></p>
-              <p>{DateTime.format(new Date())}</p>
+              <p>{DateTime.format(new Date(), 'MD_HM')}</p>
             </div>
           </div>
 

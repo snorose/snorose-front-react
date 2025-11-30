@@ -24,7 +24,7 @@ export default function PostBar({ data, hasComment = true, hasLike = true }) {
               <Badge userRoleId={data.userRoleId} className={styles.badge} />
             )}
             <p className={styles.dot}>·</p>
-            <p>{DateTime.formatAdaptive(new Date(data.createdAt))}</p>
+            <p>{DateTime.formatAdaptive(data.createdAt)}</p>
             {data.isEdited && <p className={styles.edited}>&nbsp;(수정됨)</p>}
             {data.isConfirmed && (
               <Icon

@@ -124,7 +124,7 @@ export default function ExamReviewPage() {
             <img className={styles.cloudLogoIcon} src={cloudLogo} alt='로고' />
             <span>{userDisplay}</span>
             <span className={styles.dot}></span>
-            <span>{DateTime.format(new Date(createdAt), 'YMD')}</span>
+            <span>{DateTime.format(createdAt, 'YMD')}</span>
             {isEdited && <span>&nbsp;(수정됨)</span>}
             {isConfirmed && <Icon id='check-circle' width={15} height={15} />}
           </div>

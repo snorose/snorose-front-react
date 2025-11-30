@@ -215,7 +215,7 @@ export default function EditPostPage() {
                 )}
                 <p>{userDisplay}</p>
                 <p className={styles.dot}></p>
-                <p>{DateTime.format(new Date())}</p>
+                <p>{DateTime.format(new Date(), 'MD_HM')}</p>
               </div>
               {textId !== 'notice' && (
                 <div

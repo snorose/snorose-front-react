@@ -133,8 +133,7 @@ const Comment = forwardRef((props, ref) => {
             )}
             <p className={styles.dot}>·</p>
             <p>
-              {DateTime.timeAgo(new Date(createdAt))}{' '}
-              {isUpdated ? ' (수정됨)' : null}
+              {DateTime.timeAgo(createdAt)} {isUpdated ? ' (수정됨)' : null}
             </p>
           </div>
           {!isDeleted && isVisible && blockAdminReport && (

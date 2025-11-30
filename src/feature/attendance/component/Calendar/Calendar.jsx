@@ -90,7 +90,7 @@ function Tile({ date, data = [] }) {
         <Icon id='check-circle-fill' width={33} height={33} />
       ) : (
         <div
-          className={`${styles.day} ${DateTime.isToday(new Date(date)) && styles.today}`}
+          className={`${styles.day} ${DateTime.isToday(date) && styles.today}`}
         >
           {new Intl.DateTimeFormat('ko-KR', {
             day: 'numeric',

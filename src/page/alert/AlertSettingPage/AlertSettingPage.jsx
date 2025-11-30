@@ -177,7 +177,7 @@ function NotificationSettings() {
                 ),
               description: NOTICE_MODAL_TEXT.MAEKETING_NOTICE_MODAL.description(
                 isMarketingConsent,
-                DateTime.format(new Date(marketingConsentUpdatedAt), 'YMD_HM')
+                DateTime.format(marketingConsentUpdatedAt, 'YMD_HM')
               ),
               confirmText: NOTICE_MODAL_TEXT.MAEKETING_NOTICE_MODAL.confirmText,
             };

@@ -195,9 +195,9 @@ export default function EventPage() {
             />
             <p>응모 날짜</p>
             <p className={styles.data}>
-              시작일 : {DateTime.format(new Date(data.startAt), 'YMD_HM')}
+              시작일 : {DateTime.format(data.startAt, 'YMD_HM')}
               <br />
-              종료일 : {DateTime.format(new Date(data.endAt), 'YMD_HM')}
+              종료일 : {DateTime.format(data.endAt, 'YMD_HM')}
             </p>
           </div>
 
@@ -211,7 +211,7 @@ export default function EventPage() {
             />
             <p>당첨자 발표일</p>
             <p className={styles.data}>
-              {DateTime.format(new Date(data.announceAt), 'YMD_HM')}
+              {DateTime.format(data.announceAt, 'YMD_HM')}
             </p>
           </div>
           <p
@@ -325,7 +325,7 @@ function MetaContainer({
         )}
         <p className={styles.dot}>·</p>
         <p>
-          {DateTime.format(new Date(createdAt))}, {isEdited && ' (수정됨)'}
+          {DateTime.format(createdAt, 'YMD_HM')} {isEdited && '(수정됨)'}
         </p>
       </div>
 

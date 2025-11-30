@@ -257,7 +257,7 @@ function MetaContainer({
         )}
         <p className={styles.dot}>·</p>
         <p>
-          {DateTime.format(new Date(createdAt), 'YMD_HM')}
+          {DateTime.format(createdAt, 'YMD_HM')}
           {isEdited && ' (수정됨)'}
         </p>
       </div>

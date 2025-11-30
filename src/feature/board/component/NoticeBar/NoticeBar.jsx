@@ -4,7 +4,7 @@ import { DateTime } from '@/shared/lib';
 import styles from './NoticeBar.module.css';
 
 export default function NoticeBar({ data, onClick }) {
-  const formattedDate = DateTime.format(new Date(data.createdAt), 'YMD');
+  const formattedDate = DateTime.format(data.createdAt, 'YMD');
 
   return (
     <div className={styles.post} onClick={onClick}>
