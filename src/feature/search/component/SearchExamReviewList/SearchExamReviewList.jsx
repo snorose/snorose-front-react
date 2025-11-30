@@ -33,7 +33,7 @@ export default function SearchExamReviewList() {
     <PullToRefresh
       onRefresh={() => refetch().then(() => console.log('Refreshed!'))}
     >
-      <List>
+      <List className={styles.examReviewList}>
         {examList.map((post, index) => (
           <Link
             className={styles.to}
