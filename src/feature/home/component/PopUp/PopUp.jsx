@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { usePopUp } from '@/feature/home/hook';
 import styles from './PopUp.module.css';
-// import calendar from './calendar.png';
+import calendar from './calendar.png';
 // import accounting from './accounting.png';
 import eventLectureImage from './event_lecture.png';
 
@@ -55,12 +55,28 @@ const content = (
         <img src={eventLectureImage} alt='초청강연 이벤트' />
       </Content> */}
 
-      {/* <Heading>11월 스노로즈 일정</Heading>
+      <Heading>1. 시험기간 포인트 미지급 기간 공지</Heading>
+      <Content>
+        - 기간: 12월 1일(월) 00:00 ~ 12월 21일(일) 23:59
+        <br />
+        - 위 기간 동안 글, 댓글 포인트는 지급되지 않습니다. <br />- 자세한
+        내용은{' '}
+        <a
+          className={styles.link}
+          href='https://www.snorose.com/board/notice/post/1866252'
+          alt='글/댓글 포인트 미지급 기간 안내'
+        >
+          관련 공지
+        </a>
+        를 참고 부탁드립니다.
+      </Content>
+
+      <Heading>2. 12월 스노로즈 일정</Heading>
       <Content>
         <img src={calendar} alt='캘린더' />
-      </Content> */}
+      </Content>
 
-      <Heading>1. 스노로즈 &lt;이벤트 게시판&gt; 런칭 안내</Heading>
+      {/* <Heading>1. 스노로즈 &lt;이벤트 게시판&gt; 런칭 안내</Heading>
       <Content>
         이벤트 게시판이 새롭게 오픈되었습니다! <br />
         <strong>[게시판 &gt; 스노로즈 이벤트]</strong>에서 새롭게 단장한 이벤트
@@ -77,9 +93,9 @@ const content = (
           </a>
         </strong>
         를 참고해 주세요.
-      </Content>
+      </Content> */}
 
-      <Heading>
+      {/* <Heading>
         2. 스노로즈 블로그 &lt;스노로즈 리뉴얼&gt; 프론트엔드 파트편 공개
       </Heading>
       <Content>
@@ -97,7 +113,7 @@ const content = (
           </a>
         </strong>
         에서 확인하실 수 있어요. <br />
-      </Content>
+      </Content> */}
 
       {/* <Heading>2. 7월 회계 보고</Heading>
       <Content>
