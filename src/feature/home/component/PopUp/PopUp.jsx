@@ -55,23 +55,44 @@ const content = (
         <img src={eventLectureImage} alt='초청강연 이벤트' />
       </Content> */}
 
-      <Heading>1. 시험기간 포인트 미지급 기간 공지</Heading>
+      <Heading>1. 삼성 미라클 안과 X 스노로즈 제휴 프로모션</Heading>
       <Content>
-        - 기간: 12월 1일(월) 00:00 ~ 12월 21일(일) 23:59
+        - 스노로즈 고객 전용 프로모션: 2025.12.1 ~ 12.31
         <br />
-        - 위 기간 동안 글, 댓글 포인트는 지급되지 않습니다. <br />- 자세한
-        내용은{' '}
+        - 안 정밀 검사 무료 + 수술비 최대 할인 + 시크릿 기프트 증정 +
+        동반·당일·수험생 추가 혜택
+        <br />- 자세한 내용은{' '}
         <a
           className={styles.link}
-          href='https://www.snorose.com/board/notice/post/1866252'
-          alt='글/댓글 포인트 미지급 기간 안내'
+          href='https://snorose.com/board/notice/post/1866572'
+          target='_blank'
+          rel='noopener noreferrer'
         >
           관련 공지
         </a>
         를 참고 부탁드립니다.
       </Content>
 
-      <Heading>2. 12월 스노로즈 일정</Heading>
+      <Heading>2. 2026년 스노로즈 신입 리자 모집</Heading>
+      <Content>
+        - 모집 일정: (서류제출) 12.01~12.27
+        <br />
+        - 지원자격: 스노로즈 정회원인 숙명인
+        <br />
+        - 문의: 카카오톡 채널 ‘스노로즈’ 또는 snorose1906@gmail.com
+        <br />- 자세한 내용은{' '}
+        <a
+          className={styles.link}
+          href='https://snorose.com/board/notice/post/1866673'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          관련 공지
+        </a>
+        를 참고 부탁드립니다.
+      </Content>
+
+      <Heading>3. 12월 스노로즈 일정</Heading>
       <Content>
         <img src={calendar} alt='캘린더' />
       </Content>
