@@ -81,6 +81,9 @@ const ALL = [...COMMUNITY, ...OFFICIAL, ...REVIEW, ...SNOROSE] as const;
 export type BoardKey = (typeof ALL)[number]['key'];
 type BoardId = (typeof ALL)[number]['id'];
 
+const byId = new Map(ALL.map((board) => [board.id, board]));
+const byKey = new Map(ALL.map((board) => [board.key, board]));
+
 export const BOARD_REGISTRY = {
   communities: COMMUNITY,
   officials: OFFICIAL,
@@ -88,9 +91,9 @@ export const BOARD_REGISTRY = {
 
   find(identifier: BoardId | BoardKey) {
     if (typeof identifier === 'number') {
-      return ALL.find(({ id }) => id === identifier);
+      return byId.get(identifier);
     }
 
-    return ALL.find(({ key }) => key === identifier);
+    return byKey.get(identifier);
   },
 } as const;
