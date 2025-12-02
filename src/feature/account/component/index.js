@@ -6,5 +6,5 @@ export { default as CompleteStep } from './snoroseVerifyStep/CompleteStep/Comple
 // 회원가입
 export { default as AccountInfoStep } from './signUpStep/AccountInfoStep/AccountInfoStep';
 export { default as AuthorizationStep } from './signUpStep/AuthorizationStep/AuthorizationStep';
-export { default as UserInfoStep } from './/signUpStep/UserInfoStep/UserInfoStep';
+export { default as UserInfoStep } from './signUpStep/UserInfoStep/UserInfoStep';
 export { default as StageDots } from './StageDots/StageDots';
