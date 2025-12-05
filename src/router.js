@@ -42,10 +42,16 @@ import { AttendancePage, MainPage } from '@/page/home';
 import { SearchPage } from '@/page/search';
 import {
   AboutPage,
-  FAQPage,
   PrivacyPolicyPage,
   ServicePolicyPage,
 } from '@/page/snorose';
+import {
+  WriteInquiryPage,
+  EditInquiryPage,
+  WriteReportPage,
+  EditReportPage,
+  FAQPage,
+} from '@/page/support';
 import {
   ActivityPage,
   ChangePwPage,
@@ -224,6 +230,8 @@ export const routeList = [
         path: '/board/all/search',
         element: <SearchPage />,
       },
+
+      /* 이벤트 */
       {
         path: '/board/event',
         element: (
@@ -301,6 +309,8 @@ export const routeList = [
           </ProtectedRoute>
         ),
       },
+
+      /* 시험후기 */
       {
         path: '/board/exam-review',
         element: (
@@ -395,6 +405,8 @@ export const routeList = [
           </CheckExamPeriodRoute>
         ),
       },
+
+      /* 알림 */
       {
         path: '/alert',
         element: (
@@ -422,6 +434,34 @@ export const routeList = [
         element: <AttendancePage />,
         loader: attendanceLoader,
       },
+
+      /* 문의 및 신고 */
+      {
+        path: '/inquiry/write',
+        element: <WriteInquiryPage />,
+      },
+      {
+        path: '/inquiry/:inquiryId',
+        element: <PostPage />,
+      },
+      {
+        path: '/inquiry/:inquiryId/edit',
+        element: <EditInquiryPage />,
+      },
+      {
+        path: '/report/write/:reportType',
+        element: <WriteReportPage />,
+      },
+      {
+        path: '/report/:reportId',
+        element: <PostPage />,
+      },
+      {
+        path: '/report/:reportId/edit',
+        element: <EditReportPage />,
+      },
+
+      /* 마이페이지 */
       {
         path: '/my-page',
         element: (
@@ -464,18 +504,7 @@ export const routeList = [
           </ProtectedRoute>
         ),
       },
-      {
-        path: '/my-page/faq',
-        element: <FAQPage />,
-      },
-      {
-        path: '/my-page/privacy-policy',
-        element: <PrivacyPolicyPage />,
-      },
-      {
-        path: '/my-page/service-policy',
-        element: <ServicePolicyPage />,
-      },
+
       {
         path: '/my-page/my-post',
         element: (
@@ -515,6 +544,22 @@ export const routeList = [
             <ActivityPage />
           </ProtectedRoute>
         ),
+      },
+      // {
+      //   path: '/my-page/inquiry-report',
+      //   element: <FAQPage />,
+      // },
+      {
+        path: '/my-page/faq',
+        element: <FAQPage />,
+      },
+      {
+        path: '/my-page/privacy-policy',
+        element: <PrivacyPolicyPage />,
+      },
+      {
+        path: '/my-page/service-policy',
+        element: <ServicePolicyPage />,
       },
       {
         path: '/about',
