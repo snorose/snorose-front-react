@@ -431,34 +431,78 @@ export const routeList = [
       },
       {
         path: '/attendance',
-        element: <AttendancePage />,
+        element: (
+          <ProtectedRoute>
+            <AttendancePage />
+          </ProtectedRoute>
+        ),
         loader: attendanceLoader,
       },
 
       /* 문의 및 신고 */
       {
-        path: '/inquiry/write',
-        element: <WriteInquiryPage />,
+        path: 'inquiry',
+        children: [
+          {
+            path: 'write',
+            element: (
+              <ProtectedRoute>
+                <WriteInquiryPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: ':inquiryId',
+            element: (
+              <ProtectedRoute>
+                <PostPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: ':inquiryId/edit',
+            element: (
+              <ProtectedRoute>
+                <EditInquiryPage />
+              </ProtectedRoute>
+            ),
+          },
+        ],
       },
       {
-        path: '/inquiry/:inquiryId',
-        element: <PostPage />,
-      },
-      {
-        path: '/inquiry/:inquiryId/edit',
-        element: <EditInquiryPage />,
-      },
-      {
-        path: '/report/write/:reportType',
-        element: <WriteReportPage />,
-      },
-      {
-        path: '/report/:reportId',
-        element: <PostPage />,
-      },
-      {
-        path: '/report/:reportId/edit',
-        element: <EditReportPage />,
+        path: 'report',
+        children: [
+          {
+            path: 'write',
+            children: [
+              { index: true, element: <NotFoundPage /> },
+              {
+                path: ':reportType',
+                element: (
+                  <ProtectedRoute>
+                    <WriteReportPage />
+                  </ProtectedRoute>
+                ),
+              },
+            ],
+          },
+          {
+            path: ':reportId',
+            element: (
+              <ProtectedRoute>
+                <PostPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: ':reportId/edit',
+            element: (
+              <ProtectedRoute>
+                <EditReportPage />
+              </ProtectedRoute>
+            ),
+          },
+        ],
       },
 
       /* 마이페이지 */
