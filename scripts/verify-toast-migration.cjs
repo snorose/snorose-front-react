@@ -295,6 +295,19 @@ function inspect(source, file, { allowLegacy = false } = {}) {
   };
 }
 
+function compareConsumer(before, after, file) {
+  // Scan every module, but only freeze consumers during this migration.
+  // Hook internals (e.g. UUID generation) are covered by runtime tests.
+  // Check both snapshots so deleting a file's last toast call still fails.
+  if (!before.calls.length && !after.calls.length) return false;
+  assert.deepEqual(
+    after.ast,
+    before.ast,
+    `${file}: message, variant, call count or surrounding logic changed`
+  );
+  return true;
+}
+
 function verify(base = '3ee33ff5') {
   const git = (...args) => execFileSync('git', args, { encoding: 'utf8' });
   const baseFiles = new Set(
@@ -324,12 +337,7 @@ function verify(base = '3ee33ff5') {
       }
     );
     exceptions.push(...before.exceptions);
-    assert.deepEqual(
-      after.ast,
-      before.ast,
-      `${file}: message, variant, call count or surrounding logic changed`
-    );
-    if (!before.calls.length && !after.calls.length) continue;
+    if (!compareConsumer(before, after, file)) continue;
     count += after.calls.length;
     fileCount++;
   }
@@ -344,5 +352,5 @@ function verify(base = '3ee33ff5') {
   return { count, fileCount, scannedFiles: files.length, exceptions };
 }
 
-module.exports = { inspect, verify };
+module.exports = { inspect, compareConsumer, verify };
 if (require.main === module) verify(process.argv[2]);

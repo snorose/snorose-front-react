@@ -3,7 +3,11 @@ const assert = require('node:assert/strict');
 const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
 const test = require('node:test');
-const { inspect, verify } = require('./verify-toast-migration.cjs');
+const {
+  inspect,
+  compareConsumer,
+  verify,
+} = require('./verify-toast-migration.cjs');
 
 const fixture = (call, condition = 'ready') => `
   import { useToast as useNotice } from '@/shared/hook';
@@ -115,7 +119,38 @@ test('compares control flow, message evaluation and call count, ignoring formatt
   );
 });
 
-test('all production modules pass against a fixed baseline, with only three declared exceptions', () => {
+test('does not freeze implementation details in modules without toast calls', () => {
+  const before = inspect(
+    "import { v4 as uuidv4 } from 'uuid'; const id = uuidv4();",
+    'src/id.ts'
+  );
+  const after = inspect('const id = crypto.randomUUID();', 'src/id.ts');
+  assert.notDeepEqual(after.ast, before.ast);
+  assert.equal(compareConsumer(before, after, 'src/id.ts'), false);
+});
+
+test('still detects deletion of the last toast call and changes around consumers', () => {
+  const before = inspect(
+    fixture("notify({ message, variant: 'error' })"),
+    'src/example.jsx',
+    { allowLegacy: true }
+  );
+  for (const source of [
+    fixture(''),
+    '',
+    fixture('notify.error(message)', '!ready'),
+  ]) {
+    assert.throws(() =>
+      compareConsumer(
+        before,
+        inspect(source, 'src/example.jsx'),
+        'src/example.jsx'
+      )
+    );
+  }
+});
+
+test('all production toast consumers pass against a fixed baseline, with only three declared exceptions', () => {
   const result = verify();
   assert.equal(result.count, 145);
   assert.equal(result.fileCount, 41);
