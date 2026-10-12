@@ -34,9 +34,13 @@ export type ReportDTO = {
   userDisplay: string;
   title: string;
   content: string;
-  subGroup: 'POST' | 'COMMENT' | 'EXAM' | 'USER';
+  subGroup:
+    | 'POST_REPORT'
+    | 'EXAM_REVIEW_REPORT'
+    | 'COMMENT_REPORT'
+    | 'USER_REPORT';
   reportCause: string;
-  status: 'PENDING' | 'COMPLETED';
+  status: 'PENDING' | 'COMPLETED' | 'WITHDRAWN';
   target: string;
   targetPostId: number;
   targetBoardId: number;
