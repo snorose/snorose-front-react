@@ -11,29 +11,28 @@ import { useToast } from '@/shared/hook';
 
 import styles from './Toast.module.css';
 
+const toastConfig = {
+  error: {
+    iconComponent: IconMultiExclamationTriangle,
+    className: styles.error,
+  },
+  info: {
+    iconComponent: IconMultiInfoCircle,
+    className: styles.info,
+  },
+  success: {
+    iconComponent: IconMultiCheckGreenCircle,
+    className: styles.success,
+  },
+};
+
 export default function Toast({ toast }) {
   const { removeToast } = useToast();
   const toastRef = useRef(null);
 
-  const toastConfig = {
-    error: {
-      iconComponent: IconMultiExclamationTriangle,
-      className: styles.error,
-    },
-    info: {
-      iconComponent: IconMultiInfoCircle,
-      className: styles.info,
-    },
-    success: {
-      iconComponent: IconMultiCheckGreenCircle,
-      className: styles.success,
-    },
-  };
-
-  const variant = toast.variant || 'info';
-  const config = toastConfig[variant] || toastConfig.info;
-  const ToastIcon = config.iconComponent;
-  const toastClassName = `${styles.toast} ${config.className || ''}`;
+  const config = toastConfig[toast.variant];
+  const { iconComponent: ToastIcon, className } = config;
+  const toastOptions = toast.options;
 
   useEffect(() => {
     const fadeOut = setTimeout(() => {
@@ -56,9 +55,14 @@ export default function Toast({ toast }) {
   if (!root) return null;
 
   return createPortal(
-    <div ref={toastRef} className={toastClassName}>
+    <div ref={toastRef} className={`${styles.toast} ${className}`}>
       <ToastIcon className={styles.icon} width={21} height={20} />
       <p className={styles.message}>{toast.message}</p>
+      {toastOptions && (
+        <button className={styles.button} onClick={toastOptions.action}>
+          {toastOptions.label}
+        </button>
+      )}
     </div>,
     root
   );
