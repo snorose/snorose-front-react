@@ -2,15 +2,21 @@ import { createContext, useContext, useState } from 'react';
 
 import { Toast } from '@/shared/component';
 
-const ToastContext = createContext<{
-  setToasts: React.Dispatch<React.SetStateAction<Array<ToastPropsType>>>;
-} | null>(null);
-
 export type ToastPropsType = {
   id: string;
   message: string;
   variant: 'success' | 'error' | 'info';
+  options?: ToastOptions;
 };
+
+export type ToastOptions = {
+  label: string;
+  action: () => void;
+};
+
+const ToastContext = createContext<{
+  setToasts: React.Dispatch<React.SetStateAction<Array<ToastPropsType>>>;
+} | null>(null);
 
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState<Array<ToastPropsType>>([]);
