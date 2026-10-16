@@ -13,7 +13,7 @@ export default function CompleteStep() {
         <IllustrationTaskComplete role='img' aria-label='인증 신청 완료' />
       </div>
 
-      <Link to='/'>
+      <Link to='/' className={styles.action}>
         <PrimaryButton className={styles.button}>메인 페이지로</PrimaryButton>
       </Link>
     </section>
