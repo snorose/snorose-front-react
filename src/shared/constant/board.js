@@ -51,10 +51,12 @@ export const BOARD_ID = Object.freeze({
   exhibition: 1006,
   studyabroad: 71,
   trip: 1007,
-  pet: 1010,
-  health: 1011,
   cooking: 1008,
   sport: 1009,
+  pet: 1010,
+  health: 1011,
+  finance: 1012,
+  beauty: 1013,
 });
 
 export const BOARDS = Object.freeze([
@@ -144,6 +146,16 @@ export const BOARDS = Object.freeze([
     path: '/board/trip',
   },
   {
+    id: 1008,
+    name: '요리·레시피',
+    path: '/board/cooking',
+  },
+  {
+    id: 1009,
+    name: '스포츠·운동',
+    path: '/board/sport',
+  },
+  {
     id: 1010,
     name: '반려동물',
     path: '/board/pet',
@@ -154,14 +166,14 @@ export const BOARDS = Object.freeze([
     path: '/board/health',
   },
   {
-    id: 1008,
-    name: '요리·레시피',
-    path: '/board/cooking',
+    id: 1012,
+    name: '금융',
+    path: '/board/finance',
   },
   {
-    id: 1009,
-    name: '스포츠·운동',
-    path: '/board/sport',
+    id: 1013,
+    name: '뷰티',
+    path: '/board/beauty',
   },
 ]);
 
@@ -343,6 +355,22 @@ export const BOARD_MENUS = [
     category: BOARD_CATEGORY.CULTURE,
   },
   {
+    id: 1008,
+    to: '/board/cooking',
+    textId: 'cooking',
+    title: '요리·레시피',
+    desc: '요리·레시피 커뮤니티',
+    category: BOARD_CATEGORY.CULTURE,
+  },
+  {
+    id: 1009,
+    to: '/board/sport',
+    textId: 'sport',
+    title: '스포츠·운동',
+    desc: '스포츠·운동 커뮤니티',
+    category: BOARD_CATEGORY.CULTURE,
+  },
+  {
     id: 1010,
     to: '/board/pet',
     textId: 'pet',
@@ -359,19 +387,19 @@ export const BOARD_MENUS = [
     category: BOARD_CATEGORY.CULTURE,
   },
   {
-    id: 1008,
-    to: '/board/cooking',
-    textId: 'cooking',
-    title: '요리·레시피',
-    desc: '요리·레시피 커뮤니티',
+    id: 1012,
+    to: '/board/finance',
+    textId: 'finance',
+    title: '금융',
+    desc: '금융 정보 공유 커뮤니티',
     category: BOARD_CATEGORY.CULTURE,
   },
   {
-    id: 1009,
-    to: '/board/sport',
-    textId: 'sport',
-    title: '스포츠·운동',
-    desc: '스포츠·운동 커뮤니티',
+    id: 1013,
+    to: '/board/beauty',
+    textId: 'beauty',
+    title: '뷰티',
+    desc: '뷰티 정보 공유 커뮤니티',
     category: BOARD_CATEGORY.CULTURE,
   },
 ];
