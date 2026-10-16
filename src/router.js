@@ -126,6 +126,8 @@ const getRolesForReadBoard = (boardPath) => {
     case 'trip':
     case 'pet':
     case 'health':
+    case 'finance':
+    case 'beauty':
       return [ROLE.user, ROLE.admin, ROLE.official];
     default:
       return [];
@@ -151,6 +153,8 @@ const getRolesForWriteBoard = (boardPath) => {
     case 'trip':
     case 'pet':
     case 'health':
+    case 'finance':
+    case 'beauty':
       return [ROLE.user, ROLE.admin, ROLE.official];
     case 'notice':
     case 'student-council':
@@ -190,6 +194,8 @@ const cultureBoardPaths = [
   'pet',
   'health',
   'cooking',
+  'finance',
+  'beauty',
   'sport',
 ];
 
