@@ -169,15 +169,29 @@ const CULTURE = [
     name: '뷰티',
     desc: '뷰티 정보 공유 커뮤니티',
   },
+  {
+    key: 'game',
+    id: 1014,
+    name: '게임',
+    desc: '게임 정보·소통 커뮤니티',
+  },
   { key: 'finance', id: 1012, name: '금융', desc: '금융 정보 공유 커뮤니티' },
 ] as const satisfies readonly Board[];
-
 const CAMPUS = [
   {
     key: 'studyabroad',
     id: 71,
     name: '교환학생·어학연수',
     desc: '교환학생·어학연수 정보 공유 커뮤니티',
+  },
+] as const satisfies readonly Board[];
+
+const CAREER = [
+  {
+    key: 'certification',
+    id: 54,
+    name: '어학·자격증',
+    desc: '어학·자격증 정보·공부 커뮤니티',
   },
 ] as const satisfies readonly Board[];
 
@@ -189,6 +203,7 @@ const ALL = [
   ...LIFE,
   ...CULTURE,
   ...CAMPUS,
+  ...CAREER,
 ] as const;
 
 type BoardId = (typeof ALL)[number]['id'];

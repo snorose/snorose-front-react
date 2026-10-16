@@ -118,8 +118,15 @@ export const SIDEBAR_MENUS = Object.freeze([
       { to: '/board/pet', name: '반려동물' },
       { to: '/board/health', name: '건강' },
       { to: '/board/beauty', name: '뷰티' },
+      { to: '/board/game', name: '게임' },
       { to: '/board/finance', name: '금융' },
     ],
+  },
+  {
+    to: '/board',
+    title: '커리어',
+    feature: FEATURE_FLAG.careerBoard,
+    items: [{ to: '/board/certification', name: '어학·자격증' }],
   },
   {
     to: '/board',

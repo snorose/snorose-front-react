@@ -23,6 +23,10 @@ export const BOARD_CATEGORY = {
     value: 'campus',
     label: '캠퍼스',
   },
+  CAREER: {
+    value: 'career',
+    label: '커리어',
+  },
   HIDDEN: {
     value: 'hidden',
     label: '숨김', //아직 게시글 리스트에 띄우지 않을 board들
@@ -55,8 +59,10 @@ export const BOARD_ID = Object.freeze({
   sport: 1009,
   pet: 1010,
   health: 1011,
-  finance: 1012,
   beauty: 1013,
+  game: 1014,
+  finance: 1012,
+  certification: 54,
 });
 
 export const BOARDS = Object.freeze([
@@ -174,6 +180,16 @@ export const BOARDS = Object.freeze([
     id: 1013,
     name: '뷰티',
     path: '/board/beauty',
+  },
+  {
+    id: 1014,
+    name: '게임',
+    path: '/board/game',
+  },
+  {
+    id: 54,
+    name: '어학·자격증 ',
+    path: '/board/certification',
   },
 ]);
 
@@ -401,6 +417,22 @@ export const BOARD_MENUS = [
     title: '금융',
     desc: '금융 정보 공유 커뮤니티',
     category: BOARD_CATEGORY.CULTURE,
+  },
+  {
+    id: 1014,
+    to: '/board/game',
+    textId: 'game',
+    title: '게임',
+    desc: '게임 정보·소통 커뮤니티',
+    category: BOARD_CATEGORY.CULTURE,
+  },
+  {
+    id: 54,
+    to: '/board/certification',
+    textId: 'certification',
+    title: '어학·자격증 ',
+    desc: '어학·자격증 정보·공부 커뮤니티',
+    category: BOARD_CATEGORY.CAREER,
   },
 ];
 
