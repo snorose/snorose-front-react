@@ -188,7 +188,7 @@ export const BOARDS = Object.freeze([
   },
   {
     id: 54,
-    name: '어학·자격증 ',
+    name: '어학·자격증',
     path: '/board/certification',
   },
 ]);
@@ -430,7 +430,7 @@ export const BOARD_MENUS = [
     id: 54,
     to: '/board/certification',
     textId: 'certification',
-    title: '어학·자격증 ',
+    title: '어학·자격증',
     desc: '어학·자격증 정보·공부 커뮤니티',
     category: BOARD_CATEGORY.CAREER,
   },
