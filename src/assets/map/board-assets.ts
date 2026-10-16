@@ -1,12 +1,14 @@
 import {
   IllustrationBarChartCoins,
   IllustrationBooksCap,
+  IllustrationBooksCertificate,
   IllustrationBookshelf,
   IllustrationBoxStarsCircle,
   IllustrationBoxStarsOpen,
   IllustrationDumbbellTowel,
   IllustrationFolderSearch,
   IllustrationFrameRope,
+  IllustrationGamepad,
   IllustrationGlobe,
   IllustrationHeartPill,
   IllustrationIceCupBowl,
@@ -270,6 +272,24 @@ export const BOARD_IMAGES: Partial<Record<BoardKey, BoardImages>> = {
       bottom: '0.5rem',
       width: '7.5rem',
       height: '8.5rem',
+    },
+  },
+  game: {
+    category: IllustrationGamepad,
+    categoryLayout: {
+      right: '2.5rem',
+      bottom: '0.5rem',
+      width: '9.5rem',
+      height: '8rem',
+    },
+  },
+  certification: {
+    category: IllustrationBooksCertificate,
+    categoryLayout: {
+      right: '2.5rem',
+      bottom: '0.5rem',
+      width: '9.5rem',
+      height: '8rem',
     },
   },
 };
