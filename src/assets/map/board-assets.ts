@@ -1,4 +1,5 @@
 import {
+  IllustrationBarChartCoins,
   IllustrationBooksCap,
   IllustrationBookshelf,
   IllustrationBoxStarsCircle,
@@ -9,6 +10,7 @@ import {
   IllustrationGlobe,
   IllustrationHeartPill,
   IllustrationIceCupBowl,
+  IllustrationLipstick,
   IllustrationMicrophone,
   IllustrationPawBone,
   IllustrationPhoneBooks,
@@ -241,6 +243,24 @@ export const BOARD_IMAGES: Partial<Record<BoardKey, BoardImages>> = {
       bottom: '1rem',
       width: '9.6rem',
       height: '5.5rem',
+    },
+  },
+  beauty: {
+    category: IllustrationLipstick,
+    categoryLayout: {
+      right: '3.3rem',
+      bottom: '-0.05rem',
+      width: '8rem',
+      height: '8.9rem',
+    },
+  },
+  finance: {
+    category: IllustrationBarChartCoins,
+    categoryLayout: {
+      right: '2.5rem',
+      bottom: '0.7rem',
+      width: '9.1rem',
+      height: '5.7rem',
     },
   },
   studyabroad: {
