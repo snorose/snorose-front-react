@@ -117,8 +117,8 @@ export const SIDEBAR_MENUS = Object.freeze([
       { to: '/board/sport', name: '스포츠·운동' },
       { to: '/board/pet', name: '반려동물' },
       { to: '/board/health', name: '건강' },
-      { to: '/board/finance', name: '금융' },
       { to: '/board/beauty', name: '뷰티' },
+      { to: '/board/finance', name: '금융' },
     ],
   },
   {
