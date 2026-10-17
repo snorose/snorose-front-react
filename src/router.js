@@ -126,8 +126,10 @@ const getRolesForReadBoard = (boardPath) => {
     case 'trip':
     case 'pet':
     case 'health':
-    case 'finance':
     case 'beauty':
+    case 'game':
+    case 'finance':
+    case 'certification':
       return [ROLE.user, ROLE.admin, ROLE.official];
     default:
       return [];
@@ -153,8 +155,10 @@ const getRolesForWriteBoard = (boardPath) => {
     case 'trip':
     case 'pet':
     case 'health':
-    case 'finance':
     case 'beauty':
+    case 'game':
+    case 'finance':
+    case 'certification':
       return [ROLE.user, ROLE.admin, ROLE.official];
     case 'notice':
     case 'student-council':
@@ -180,6 +184,7 @@ const boardPaths = [
   'finance-audit',
   'residence',
   'sookplace',
+  'certification',
 ];
 
 // 피처 플래그로 노출을 제어하는 게시판
@@ -197,6 +202,7 @@ const cultureBoardPaths = [
   'finance',
   'beauty',
   'sport',
+  'game',
 ];
 
 const campusBoardPaths = ['studyabroad'];
