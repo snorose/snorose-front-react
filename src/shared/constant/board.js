@@ -411,19 +411,19 @@ export const BOARD_MENUS = [
     category: BOARD_CATEGORY.CULTURE,
   },
   {
-    id: 1012,
-    to: '/board/finance',
-    textId: 'finance',
-    title: '금융',
-    desc: '금융 정보 공유 커뮤니티',
-    category: BOARD_CATEGORY.CULTURE,
-  },
-  {
     id: 1014,
     to: '/board/game',
     textId: 'game',
     title: '게임',
     desc: '게임 정보·소통 커뮤니티',
+    category: BOARD_CATEGORY.CULTURE,
+  },
+  {
+    id: 1012,
+    to: '/board/finance',
+    textId: 'finance',
+    title: '금융',
+    desc: '금융 정보 공유 커뮤니티',
     category: BOARD_CATEGORY.CULTURE,
   },
   {
