@@ -76,10 +76,6 @@ export const SIDEBAR_MENUS = Object.freeze([
     ],
   },
   {
-    to: '/board/event',
-    title: '이벤트',
-  },
-  {
     to: '/verify',
     title: '인증',
   },
@@ -92,6 +88,19 @@ export const SIDEBAR_MENUS = Object.freeze([
       { to: '/board/permanent-snow', name: '만년설방' },
       { to: '/board/besookt', name: '베숙트' },
     ],
+  },
+  {
+    to: '/board',
+    title: '공식 게시판',
+    items: [
+      { to: '/board/student-council', name: '총학생회' },
+      { to: '/board/graduation-preparation', name: '졸업준비위원회' },
+      { to: '/board/finance-audit', name: '재정감사위원회' },
+    ],
+  },
+  {
+    to: '/board/event',
+    title: '이벤트',
   },
   {
     to: '/board',
@@ -135,15 +144,6 @@ export const SIDEBAR_MENUS = Object.freeze([
     items: [{ to: '/board/studyabroad', name: '교환학생·어학연수' }],
   },
   {
-    to: '/board',
-    title: '공식 게시판',
-    items: [
-      { to: '/board/student-council', name: '총학생회' },
-      { to: '/board/graduation-preparation', name: '졸업준비위원회' },
-      { to: '/board/finance-audit', name: '재정감사위원회' },
-    ],
-  },
-  {
     to: '/board/exam-review',
     title: '시험후기',
   },
@@ -185,7 +185,6 @@ export const NEW_SIDEBAR_MENUS = Object.freeze([
       },
     ],
   },
-  { title: '이벤트', to: NEW_ROUTES.post.list('event') },
   { title: '인증', to: NEW_ROUTES.verify },
   {
     title: '커뮤니티',
@@ -203,6 +202,7 @@ export const NEW_SIDEBAR_MENUS = Object.freeze([
       to: NEW_ROUTES.post.list(key),
     })),
   },
+  { title: '이벤트', to: NEW_ROUTES.post.list('event') },
   {
     title: '문화생활',
     to: NEW_ROUTES.boardHome,
