@@ -387,19 +387,19 @@ export const BOARD_MENUS = [
     category: BOARD_CATEGORY.CULTURE,
   },
   {
-    id: 1012,
-    to: '/board/finance',
-    textId: 'finance',
-    title: '금융',
-    desc: '금융 정보 공유 커뮤니티',
-    category: BOARD_CATEGORY.CULTURE,
-  },
-  {
     id: 1013,
     to: '/board/beauty',
     textId: 'beauty',
     title: '뷰티',
     desc: '뷰티 정보 공유 커뮤니티',
+    category: BOARD_CATEGORY.CULTURE,
+  },
+  {
+    id: 1012,
+    to: '/board/finance',
+    textId: 'finance',
+    title: '금융',
+    desc: '금융 정보 공유 커뮤니티',
     category: BOARD_CATEGORY.CULTURE,
   },
 ];

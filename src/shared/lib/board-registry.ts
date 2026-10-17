@@ -163,13 +163,13 @@ const CULTURE = [
     name: '건강',
     desc: '건강 정보 공유 커뮤니티',
   },
-  { key: 'finance', id: 1012, name: '금융', desc: '금융 정보 공유 커뮤니티' },
   {
     key: 'beauty',
     id: 1013,
     name: '뷰티',
     desc: '뷰티 정보 공유 커뮤니티',
   },
+  { key: 'finance', id: 1012, name: '금융', desc: '금융 정보 공유 커뮤니티' },
 ] as const satisfies readonly Board[];
 
 const CAMPUS = [
