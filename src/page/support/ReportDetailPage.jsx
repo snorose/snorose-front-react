@@ -64,10 +64,8 @@ function ReportDetailLoader() {
   });
 
   const onMenuOpen = () => {
-    const id = data.isWriter ? 'my-post-more-options' : 'post-more-options';
-
     setModal({
-      id,
+      id: 'my-report-more-options',
       type: null,
     });
   };
