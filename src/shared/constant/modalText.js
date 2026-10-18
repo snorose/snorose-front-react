@@ -63,17 +63,7 @@ const MY_POST_MORE_OPTION_LIST = [
   },
 ];
 
-const MY_REPORT_MORE_OPTION_LIST = [
-  {
-    modalId: 'confirm-post-delete',
-    iconId: 'trash',
-    label: '삭제하기',
-    width: 24,
-    height: 24,
-    icon: IconTrashcanFill,
-    color: 'var(--pink-2)',
-  },
-];
+const MY_REPORT_MORE_OPTION_LIST = [];
 
 const EXAM_REVIEW_MORE_OPTION_LIST = [
   {
