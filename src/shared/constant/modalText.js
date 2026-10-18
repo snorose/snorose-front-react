@@ -224,13 +224,7 @@ const CONFIRM_MODAL = {
   },
   REPORT_CREATE: {
     title: '신고를 완료할까요?',
-    description: `관리자 답변이 등록되면\n수정 및 삭제가 불가능해요`,
-    confirmText: '완료',
-    cancelText: '취소',
-  },
-  REPORT_UPDATE: {
-    title: '신고 수정을 완료할까요?',
-    description: `관리자 답변이 등록되면\n수정 및 삭제가 불가능해요`,
+    description: `관리자 답변이 등록되면\n철회가 불가능해요`,
     confirmText: '완료',
     cancelText: '취소',
   },
