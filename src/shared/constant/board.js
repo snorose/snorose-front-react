@@ -19,13 +19,13 @@ export const BOARD_CATEGORY = {
     value: 'culture',
     label: '문화생활',
   },
-  CAMPUS: {
-    value: 'campus',
-    label: '캠퍼스',
-  },
   CAREER: {
     value: 'career',
     label: '커리어',
+  },
+  CAMPUS: {
+    value: 'campus',
+    label: '캠퍼스',
   },
   HIDDEN: {
     value: 'hidden',
