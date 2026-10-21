@@ -13,7 +13,7 @@ import { getBoardTextId } from '@/shared/lib';
 
 import { PostBar } from '@/feature/board/component';
 import { ACTIVITIES } from '@/feature/my/constant';
-import { INQUIRY_STATUS_MAP } from '@/feature/support/constant';
+import { REPORT_STATUS_MAP } from '@/feature/support/constant';
 
 import styles from './MyPostList.module.css';
 
@@ -97,8 +97,8 @@ export default function MyPostList({
             )}
             {post.status && (
               <PostBar.Chip
-                name={INQUIRY_STATUS_MAP[post.status].label}
-                variant={INQUIRY_STATUS_MAP[post.status].variant}
+                name={REPORT_STATUS_MAP[post.status].label}
+                variant={REPORT_STATUS_MAP[post.status].variant}
               />
             )}
             {post.isConfirmed && <PostBar.ConfirmedChip />}
