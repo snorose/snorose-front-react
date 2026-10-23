@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  min-height: 100dvh;
   padding: 7rem 0 9rem 0;
 }
 
@@ -101,5 +101,6 @@
 }
 
 .noAlertIllustration {
-  width: 101px;
+  width: 10.1rem;
+  height: 10.6rem;
 }
