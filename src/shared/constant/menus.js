@@ -5,9 +5,10 @@ import {
   IconBookFill,
   IconDocument,
   IconDocumentFill,
+  IconHome,
   IconHomeFill,
-  IconMypage,
-  IconMypageFill,
+  IconPerson,
+  IconPersonFill,
 } from '@snorose/icons';
 
 import { FEATURE_FLAG } from '@/shared/constant/feature-flag';
@@ -22,7 +23,7 @@ export const NAVBAR_MENUS = Object.freeze([
     width: 32,
     height: 32,
     ActiveIcon: IconHomeFill,
-    DefaultIcon: IconHomeFill,
+    DefaultIcon: IconHome,
   },
   {
     id: 'board',
@@ -57,8 +58,8 @@ export const NAVBAR_MENUS = Object.freeze([
     label: '내정보',
     width: 32,
     height: 32,
-    ActiveIcon: IconMypageFill,
-    DefaultIcon: IconMypage,
+    ActiveIcon: IconPersonFill,
+    DefaultIcon: IconPerson,
   },
 ]);
 
