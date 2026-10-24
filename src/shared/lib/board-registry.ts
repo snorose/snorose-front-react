@@ -179,7 +179,7 @@ const CULTURE = [
 ] as const satisfies readonly Board[];
 const CAMPUS = [
   {
-    key: 'studyabroad',
+    key: 'study-abroad',
     id: 71,
     name: '교환학생·어학연수',
     desc: '교환학생·어학연수 정보 공유 커뮤니티',

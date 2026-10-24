@@ -77,6 +77,7 @@ import {
 
 import App from '@/App';
 import FeatureGuard from '@/FeatureGuard';
+import LegacyBoardRedirect from '@/LegacyBoardRedirect';
 import ProtectedRoute from '@/ProtectedRoute';
 
 const getRolesForReadBoard = (boardPath) => {
@@ -112,7 +113,7 @@ const getRolesForReadBoard = (boardPath) => {
     case 'cooking':
     case 'sport':
     case 'exhibition':
-    case 'studyabroad':
+    case 'study-abroad':
     case 'trip':
     case 'pet':
     case 'health':
@@ -145,7 +146,7 @@ const getRolesForWriteBoard = (boardPath) => {
     case 'cooking':
     case 'sport':
     case 'exhibition':
-    case 'studyabroad':
+    case 'study-abroad':
     case 'trip':
     case 'pet':
     case 'health':
@@ -193,7 +194,7 @@ const boardPaths = [
   'beauty',
   'sport',
   'game',
-  'studyabroad',
+  'study-abroad',
 ];
 
 const createBoardRoutes = (paths, feature, forceOff = false) => {
@@ -314,6 +315,15 @@ export const routeList = [
         ),
       },
       ...boardRoutes,
+      {
+        path: '/board/studyabroad/*',
+        element: (
+          <LegacyBoardRedirect
+            from='/board/studyabroad'
+            to='/board/study-abroad'
+          />
+        ),
+      },
       {
         path: '/board/all/search',
         element: <SearchPage />,

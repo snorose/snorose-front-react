@@ -137,7 +137,7 @@ export const SIDEBAR_MENUS = Object.freeze([
   {
     to: '/board',
     title: '캠퍼스',
-    items: [{ to: '/board/studyabroad', name: '교환학생·어학연수' }],
+    items: [{ to: '/board/study-abroad', name: '교환학생·어학연수' }],
   },
   {
     to: '/board/exam-review',
