@@ -39,7 +39,7 @@
 
 .badge {
   position: absolute;
-  top: -10px;
+  top: -5px;
   left: 20px;
 
   display: flex;
@@ -47,15 +47,14 @@
   align-items: center;
   justify-content: center;
 
-  min-width: 23px;
-  height: 23px;
-
-  padding: 6px;
+  width: 1.4rem;
+  height: 1.4rem;
 
   background: #ff4d6c;
   border-radius: 9999px;
 }
 
 .badge span {
+  font-size: 10px;
   color: #fff;
 }
