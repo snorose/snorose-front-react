@@ -1,9 +1,4 @@
-import {
-  CAMPUS_BOARD_KILL_SWITCH,
-  CULTURE_BOARD_KILL_SWITCH,
-  FEATURE_FLAG,
-  ROLE,
-} from '@/shared/constant';
+import { ROLE } from '@/shared/constant';
 import { attendanceLoader } from '@/shared/loader';
 import { AppLayout, NavbarLayout } from '@/shared/ui';
 
@@ -184,10 +179,6 @@ const boardPaths = [
   'residence',
   'sookplace',
   'certification',
-];
-
-// 피처 플래그로 노출을 제어하는 게시판
-const cultureBoardPaths = [
   'video-content',
   'anime-comics',
   'book',
@@ -202,9 +193,8 @@ const cultureBoardPaths = [
   'beauty',
   'sport',
   'game',
+  'studyabroad',
 ];
-
-const campusBoardPaths = ['studyabroad'];
 
 const createBoardRoutes = (paths, feature, forceOff = false) => {
   // 플래그가 없는 게시판은 가드 없이 그대로 렌더한다
@@ -287,19 +277,7 @@ const createBoardRoutes = (paths, feature, forceOff = false) => {
   ]);
 };
 
-const boardRoutes = [
-  ...createBoardRoutes(boardPaths),
-  ...createBoardRoutes(
-    cultureBoardPaths,
-    FEATURE_FLAG.cultureBoard,
-    CULTURE_BOARD_KILL_SWITCH
-  ),
-  ...createBoardRoutes(
-    campusBoardPaths,
-    FEATURE_FLAG.campusBoard,
-    CAMPUS_BOARD_KILL_SWITCH
-  ),
-];
+const boardRoutes = [...createBoardRoutes(boardPaths)];
 
 export const routeList = [
   {

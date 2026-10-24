@@ -10,7 +10,6 @@ import {
   IconMypageFill,
 } from '@snorose/icons';
 
-import { FEATURE_FLAG } from '@/shared/constant/feature-flag';
 import { NEW_ROUTES } from '@/shared/constant/route';
 import { BOARD_REGISTRY } from '@/shared/lib';
 
@@ -113,7 +112,6 @@ export const SIDEBAR_MENUS = Object.freeze([
   {
     to: '/board',
     title: '문화생활',
-    feature: FEATURE_FLAG.cultureBoard,
     items: [
       { to: '/board/video-content', name: '영상 컨텐츠' },
       { to: '/board/anime-comics', name: '애니·만화·웹툰·웹소설' },
@@ -134,13 +132,11 @@ export const SIDEBAR_MENUS = Object.freeze([
   {
     to: '/board',
     title: '커리어',
-    feature: FEATURE_FLAG.careerBoard,
     items: [{ to: '/board/certification', name: '어학·자격증' }],
   },
   {
     to: '/board',
     title: '캠퍼스',
-    feature: FEATURE_FLAG.campusBoard,
     items: [{ to: '/board/studyabroad', name: '교환학생·어학연수' }],
   },
   {
@@ -206,7 +202,6 @@ export const NEW_SIDEBAR_MENUS = Object.freeze([
   {
     title: '문화생활',
     to: NEW_ROUTES.boardHome,
-    feature: FEATURE_FLAG.cultureBoard,
     items: BOARD_REGISTRY.culture.map(({ key, name }) => ({
       name,
       to: NEW_ROUTES.post.list(key),

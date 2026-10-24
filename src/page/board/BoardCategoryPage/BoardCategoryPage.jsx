@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { Header } from '@/shared/component';
 import { BOARD_CATEGORY, BOARD_MENUS } from '@/shared/constant';
-import { useCampusBoard, useCultureBoard } from '@/shared/hook';
 
 import { AccordianBoards, BoardBar } from '@/feature/board/component';
 import { Search } from '@/feature/search/component';
@@ -15,16 +14,6 @@ const { HIDDEN, ...VISIBLE_BOARD_CATEGORY } = BOARD_CATEGORY;
 const FAVORITE_BOARD_IDS = [20, 61]; //즐겨찾기 더미 데이터
 
 export default function BoardCategoryPage() {
-  const isCultureBoardOn = useCultureBoard();
-  const isCampusBoardOn = useCampusBoard();
-
-  // 피처 플래그가 꺼진 대분류는 노출하지 않음
-  const boardCategories = Object.values(VISIBLE_BOARD_CATEGORY).filter(
-    (category) =>
-      (category !== BOARD_CATEGORY.CULTURE || isCultureBoardOn) &&
-      (category !== BOARD_CATEGORY.CAMPUS || isCampusBoardOn)
-  );
-
   const [openBoards, setOpenBoards] = useState(() =>
     Object.fromEntries(
       Object.values(VISIBLE_BOARD_CATEGORY).map(({ value }) => [value, true])
@@ -45,7 +34,7 @@ export default function BoardCategoryPage() {
       </div>
 
       <div className={styles.paddingContainer}>
-        {boardCategories.map((category) => (
+        {Object.values(VISIBLE_BOARD_CATEGORY).map((category) => (
           <div key={category.value} className={styles.boardBox}>
             <AccordianBoards
               title={category.label}
