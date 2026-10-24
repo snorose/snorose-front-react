@@ -24,6 +24,7 @@ export const REPORT_PLACEHOLDERS = {
 export const REPORT_STATUS_MAP = {
   PENDING: { label: '답변 전', variant: 'grey' },
   COMPLETED: { label: '답변 완료', variant: 'gradient' },
+  WITHDRAWN: { label: '철회', variant: 'grey' },
 } as const;
 
 export const REPORT_TYPE_TAG = {

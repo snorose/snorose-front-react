@@ -76,10 +76,6 @@ export const SIDEBAR_MENUS = Object.freeze([
     ],
   },
   {
-    to: '/board/event',
-    title: '이벤트',
-  },
-  {
     to: '/verify',
     title: '인증',
   },
@@ -92,6 +88,19 @@ export const SIDEBAR_MENUS = Object.freeze([
       { to: '/board/permanent-snow', name: '만년설방' },
       { to: '/board/besookt', name: '베숙트' },
     ],
+  },
+  {
+    to: '/board',
+    title: '공식 게시판',
+    items: [
+      { to: '/board/student-council', name: '총학생회' },
+      { to: '/board/graduation-preparation', name: '졸업준비위원회' },
+      { to: '/board/finance-audit', name: '재정감사위원회' },
+    ],
+  },
+  {
+    to: '/board/event',
+    title: '이벤트',
   },
   {
     to: '/board',
@@ -113,26 +122,26 @@ export const SIDEBAR_MENUS = Object.freeze([
       { to: '/board/performance', name: '공연' },
       { to: '/board/exhibition', name: '전시' },
       { to: '/board/trip', name: '여행' },
-      { to: '/board/pet', name: '반려동물' },
-      { to: '/board/health', name: '건강' },
       { to: '/board/cooking', name: '요리·레시피' },
       { to: '/board/sport', name: '스포츠·운동' },
+      { to: '/board/pet', name: '반려동물' },
+      { to: '/board/health', name: '건강' },
+      { to: '/board/beauty', name: '뷰티' },
+      { to: '/board/game', name: '게임' },
+      { to: '/board/finance', name: '금융' },
     ],
+  },
+  {
+    to: '/board',
+    title: '커리어',
+    feature: FEATURE_FLAG.careerBoard,
+    items: [{ to: '/board/certification', name: '어학·자격증' }],
   },
   {
     to: '/board',
     title: '캠퍼스',
     feature: FEATURE_FLAG.campusBoard,
     items: [{ to: '/board/studyabroad', name: '교환학생·어학연수' }],
-  },
-  {
-    to: '/board',
-    title: '공식 게시판',
-    items: [
-      { to: '/board/student-council', name: '총학생회' },
-      { to: '/board/graduation-preparation', name: '졸업준비위원회' },
-      { to: '/board/finance-audit', name: '재정감사위원회' },
-    ],
   },
   {
     to: '/board/exam-review',
@@ -176,7 +185,6 @@ export const NEW_SIDEBAR_MENUS = Object.freeze([
       },
     ],
   },
-  { title: '이벤트', to: NEW_ROUTES.post.list('event') },
   { title: '인증', to: NEW_ROUTES.verify },
   {
     title: '커뮤니티',
@@ -194,6 +202,7 @@ export const NEW_SIDEBAR_MENUS = Object.freeze([
       to: NEW_ROUTES.post.list(key),
     })),
   },
+  { title: '이벤트', to: NEW_ROUTES.post.list('event') },
   {
     title: '문화생활',
     to: NEW_ROUTES.boardHome,

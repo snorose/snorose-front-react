@@ -54,12 +54,12 @@ function ReportDetailLoader() {
   const { mutate: deleteReportMutate } = useMutation({
     mutationFn: () => deleteReport(postId),
     onSuccess: () => {
-      toast({ message: TOAST.REPORT.delete, variant: 'success' });
+      toast.success(TOAST.REPORT.delete);
       queryClient.removeQueries(QUERY_KEY.post(postId));
       navigate(-1);
     },
     onError: (error) => {
-      toast({ message: error.message, variant: 'error' });
+      toast.error(error.message);
     },
   });
 
@@ -83,7 +83,10 @@ function ReportDetailLoader() {
       }
       CommentInputContainer={CommentInputContainer}
       Chip={
-        <Chip name={REPORT_STATUS_MAP[data.status].label} variant='gradient' />
+        <Chip
+          name={REPORT_STATUS_MAP[data.status].label}
+          variant={REPORT_STATUS_MAP[data.status].variant}
+        />
       }
       Actions={
         data.status === 'PENDING' && <MeatBallIcon onClick={onMenuOpen} />

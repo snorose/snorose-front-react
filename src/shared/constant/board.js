@@ -19,6 +19,10 @@ export const BOARD_CATEGORY = {
     value: 'culture',
     label: '문화생활',
   },
+  CAREER: {
+    value: 'career',
+    label: '커리어',
+  },
   CAMPUS: {
     value: 'campus',
     label: '캠퍼스',
@@ -51,10 +55,14 @@ export const BOARD_ID = Object.freeze({
   exhibition: 1006,
   studyabroad: 71,
   trip: 1007,
-  pet: 1010,
-  health: 1011,
   cooking: 1008,
   sport: 1009,
+  pet: 1010,
+  health: 1011,
+  beauty: 1013,
+  game: 1014,
+  finance: 1012,
+  certification: 54,
 });
 
 export const BOARDS = Object.freeze([
@@ -144,6 +152,16 @@ export const BOARDS = Object.freeze([
     path: '/board/trip',
   },
   {
+    id: 1008,
+    name: '요리·레시피',
+    path: '/board/cooking',
+  },
+  {
+    id: 1009,
+    name: '스포츠·운동',
+    path: '/board/sport',
+  },
+  {
     id: 1010,
     name: '반려동물',
     path: '/board/pet',
@@ -154,14 +172,24 @@ export const BOARDS = Object.freeze([
     path: '/board/health',
   },
   {
-    id: 1008,
-    name: '요리·레시피',
-    path: '/board/cooking',
+    id: 1012,
+    name: '금융',
+    path: '/board/finance',
   },
   {
-    id: 1009,
-    name: '스포츠·운동',
-    path: '/board/sport',
+    id: 1013,
+    name: '뷰티',
+    path: '/board/beauty',
+  },
+  {
+    id: 1014,
+    name: '게임',
+    path: '/board/game',
+  },
+  {
+    id: 54,
+    name: '어학·자격증',
+    path: '/board/certification',
   },
 ]);
 
@@ -178,8 +206,8 @@ export const BOARD_MENUS = [
     id: 14,
     to: '/board/event',
     textId: 'event',
-    title: '스노로즈 이벤트',
-    desc: '스노로즈 이벤트 게시판',
+    title: '이벤트',
+    desc: '스노로즈 공식 이벤트 게시판',
     category: BOARD_CATEGORY.SNOROSE,
   },
   {
@@ -343,6 +371,22 @@ export const BOARD_MENUS = [
     category: BOARD_CATEGORY.CULTURE,
   },
   {
+    id: 1008,
+    to: '/board/cooking',
+    textId: 'cooking',
+    title: '요리·레시피',
+    desc: '요리·레시피 커뮤니티',
+    category: BOARD_CATEGORY.CULTURE,
+  },
+  {
+    id: 1009,
+    to: '/board/sport',
+    textId: 'sport',
+    title: '스포츠·운동',
+    desc: '스포츠·운동 커뮤니티',
+    category: BOARD_CATEGORY.CULTURE,
+  },
+  {
     id: 1010,
     to: '/board/pet',
     textId: 'pet',
@@ -359,20 +403,36 @@ export const BOARD_MENUS = [
     category: BOARD_CATEGORY.CULTURE,
   },
   {
-    id: 1008,
-    to: '/board/cooking',
-    textId: 'cooking',
-    title: '요리·레시피',
-    desc: '요리·레시피 커뮤니티',
+    id: 1013,
+    to: '/board/beauty',
+    textId: 'beauty',
+    title: '뷰티',
+    desc: '뷰티 정보 공유 커뮤니티',
     category: BOARD_CATEGORY.CULTURE,
   },
   {
-    id: 1009,
-    to: '/board/sport',
-    textId: 'sport',
-    title: '스포츠·운동',
-    desc: '스포츠·운동 커뮤니티',
+    id: 1014,
+    to: '/board/game',
+    textId: 'game',
+    title: '게임',
+    desc: '게임 정보·소통 커뮤니티',
     category: BOARD_CATEGORY.CULTURE,
+  },
+  {
+    id: 1012,
+    to: '/board/finance',
+    textId: 'finance',
+    title: '금융',
+    desc: '금융 정보 공유 커뮤니티',
+    category: BOARD_CATEGORY.CULTURE,
+  },
+  {
+    id: 54,
+    to: '/board/certification',
+    textId: 'certification',
+    title: '어학·자격증',
+    desc: '어학·자격증 정보·공부 커뮤니티',
+    category: BOARD_CATEGORY.CAREER,
   },
 ];
 
@@ -433,6 +493,10 @@ export const PET_CATEGORIES = Object.freeze([
   '자유',
 ]);
 
+export const GAME_CATEGORIES = Object.freeze(['PC', '모바일', '기타']);
+
+export const CERTIFICATION_CATEGORIES = Object.freeze(['어학', '자격증']);
+
 // 게시판과 카테고리를 연결 (책·전시·건강은 카테고리 없음)
 export const BOARD_CATEGORY_MAP = {
   [BOARD_ID.residence]: RESIDENCE_CATEGORIES,
@@ -444,4 +508,6 @@ export const BOARD_CATEGORY_MAP = {
   [BOARD_ID.studyabroad]: STUDYABROAD_CATEGORIES,
   [BOARD_ID.trip]: TRIP_CATEGORIES,
   [BOARD_ID.pet]: PET_CATEGORIES,
+  [BOARD_ID.game]: GAME_CATEGORIES,
+  [BOARD_ID.certification]: CERTIFICATION_CATEGORIES,
 };

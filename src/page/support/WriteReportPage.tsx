@@ -63,17 +63,20 @@ export default function WriteReportPage() {
            */
         });
 
-      toast({ message: TOAST.REPORT.create, variant: 'success' });
-
       queryClient.removeQueries({
         queryKey: [QUERY_KEY.myInquiriesAndReports],
       });
 
-      navigate(`/report/${postId}`, { replace: true });
+      toast.success(TOAST.REPORT.create, {
+        label: '신고 확인',
+        action: () => navigate(`/report/${postId}`),
+      });
+
+      navigate(-1);
     },
 
     onError: (error) => {
-      toast({ message: error.message, variant: 'error' });
+      toast.error(error.message);
     },
   });
 

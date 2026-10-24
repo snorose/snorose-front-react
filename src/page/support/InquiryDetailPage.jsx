@@ -54,12 +54,12 @@ function InquiryDetailLoader() {
   const { mutate: deleteInquiryMutate } = useMutation({
     mutationFn: () => deleteInquiry(postId),
     onSuccess: () => {
-      toast({ message: TOAST.INQUIRY.delete, variant: 'success' });
+      toast.success(TOAST.INQUIRY.delete);
       queryClient.removeQueries(QUERY_KEY.post(postId));
       navigate(-1);
     },
     onError: (error) => {
-      toast({ message: error.message, variant: 'error' });
+      toast.error(error.message);
     },
   });
 
@@ -83,7 +83,10 @@ function InquiryDetailLoader() {
       }
       CommentInputContainer={CommentInputContainer}
       Chip={
-        <Chip name={INQUIRY_STATUS_MAP[data.status].label} variant='gradient' />
+        <Chip
+          name={INQUIRY_STATUS_MAP[data.status].label}
+          variant={INQUIRY_STATUS_MAP[data.status].variant}
+        />
       }
       Actions={
         data.status === 'PENDING' && <MeatBallIcon onClick={onMenuOpen} />

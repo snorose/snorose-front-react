@@ -1,14 +1,18 @@
 import {
+  IllustrationBarChartCoins,
   IllustrationBooksCap,
+  IllustrationBooksCertificate,
   IllustrationBookshelf,
   IllustrationBoxStarsCircle,
   IllustrationBoxStarsOpen,
   IllustrationDumbbellTowel,
   IllustrationFolderSearch,
   IllustrationFrameRope,
+  IllustrationGamepad,
   IllustrationGlobe,
   IllustrationHeartPill,
   IllustrationIceCupBowl,
+  IllustrationLipstick,
   IllustrationMicrophone,
   IllustrationPawBone,
   IllustrationPhoneBooks,
@@ -243,6 +247,24 @@ export const BOARD_IMAGES: Partial<Record<BoardKey, BoardImages>> = {
       height: '5.5rem',
     },
   },
+  beauty: {
+    category: IllustrationLipstick,
+    categoryLayout: {
+      right: '3.3rem',
+      bottom: '-0.05rem',
+      width: '8rem',
+      height: '8.9rem',
+    },
+  },
+  finance: {
+    category: IllustrationBarChartCoins,
+    categoryLayout: {
+      right: '2.5rem',
+      bottom: '0.7rem',
+      width: '9.1rem',
+      height: '5.7rem',
+    },
+  },
   studyabroad: {
     category: IllustrationGlobe,
     categoryLayout: {
@@ -250,6 +272,24 @@ export const BOARD_IMAGES: Partial<Record<BoardKey, BoardImages>> = {
       bottom: '0.5rem',
       width: '7.5rem',
       height: '8.5rem',
+    },
+  },
+  game: {
+    category: IllustrationGamepad,
+    categoryLayout: {
+      right: '2.5rem',
+      bottom: '0.5rem',
+      width: '9.5rem',
+      height: '8rem',
+    },
+  },
+  certification: {
+    category: IllustrationBooksCertificate,
+    categoryLayout: {
+      right: '2.5rem',
+      bottom: '0.5rem',
+      width: '9.5rem',
+      height: '8rem',
     },
   },
 };
