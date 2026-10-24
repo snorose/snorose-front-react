@@ -206,8 +206,8 @@ export const BOARD_MENUS = [
     id: 14,
     to: '/board/event',
     textId: 'event',
-    title: '스노로즈 이벤트',
-    desc: '스노로즈 이벤트 게시판',
+    title: '이벤트',
+    desc: '스노로즈 공식 이벤트 게시판',
     category: BOARD_CATEGORY.SNOROSE,
   },
   {
@@ -493,7 +493,7 @@ export const PET_CATEGORIES = Object.freeze([
   '자유',
 ]);
 
-export const GAME_CATEGORIES = Object.freeze(['PC', '모바일']);
+export const GAME_CATEGORIES = Object.freeze(['PC', '모바일', '기타']);
 
 export const CERTIFICATION_CATEGORIES = Object.freeze(['어학', '자격증']);
 
