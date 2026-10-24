@@ -13,6 +13,8 @@ import {
 import { FEATURE_FLAG } from '@/shared/constant/feature-flag';
 import { NEW_ROUTES } from '@/shared/constant/route';
 import { BOARD_REGISTRY } from '@/shared/lib';
+// 순환 참조로 초기화 전 값을 읽지 않도록 index를 거치지 않는다
+import { NEW_BOARD_KEYS } from '@/shared/lib/new-board';
 
 export const NAVBAR_MENUS = Object.freeze([
   {
@@ -228,6 +230,7 @@ export const NEW_SIDEBAR_MENUS = Object.freeze([
     items: BOARD_REGISTRY.culture.map(({ key, name }) => ({
       name,
       to: NEW_ROUTES.post.list(key),
+      ...(NEW_BOARD_KEYS.includes(key) && { feature: FEATURE_FLAG.newBoard }),
     })),
   },
   {
