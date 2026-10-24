@@ -493,7 +493,7 @@ export const PET_CATEGORIES = Object.freeze([
   '자유',
 ]);
 
-export const GAME_CATEGORIES = Object.freeze(['PC', '모바일']);
+export const GAME_CATEGORIES = Object.freeze(['PC', '모바일', '기타']);
 
 export const CERTIFICATION_CATEGORIES = Object.freeze(['어학', '자격증']);
 
