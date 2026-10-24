@@ -86,18 +86,7 @@ import ProtectedRoute from '@/ProtectedRoute';
 
 const getRolesForReadBoard = (boardPath) => {
   switch (boardPath) {
-    case 'first-snow':
-      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
-    case 'large-snow':
-      return [ROLE.user, ROLE.admin, ROLE.official];
-    case 'permanent-snow':
-      return [ROLE.user, ROLE.admin, ROLE.official];
-    case 'besookt':
-      return [ROLE.user, ROLE.admin, ROLE.official];
-    case 'sookplace':
-      return [ROLE.user, ROLE.admin, ROLE.official];
-    case 'all':
-      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
+    // 강등·광고주까지 열람 가능 (준회원·정회원·리자·공식계정·강등·광고주)
     case 'notice':
       return [
         ROLE.preUser,
@@ -107,12 +96,18 @@ const getRolesForReadBoard = (boardPath) => {
         ROLE.blacklist,
         ROLE.advertiser,
       ];
+    // 준회원부터 열람 가능 (준회원·정회원·리자·공식계정)
+    case 'first-snow':
+    case 'all':
+      return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
+    // 정회원부터 열람 가능 (정회원·리자·공식계정)
+    case 'large-snow':
+    case 'permanent-snow':
+    case 'besookt':
+    case 'sookplace':
     case 'student-council':
-      return [ROLE.user, ROLE.admin, ROLE.official];
     case 'graduation-preparation':
-      return [ROLE.user, ROLE.admin, ROLE.official];
     case 'finance-audit':
-      return [ROLE.user, ROLE.admin, ROLE.official];
     case 'residence':
     case 'video-content':
     case 'anime-comics':
@@ -131,6 +126,7 @@ const getRolesForReadBoard = (boardPath) => {
     case 'finance':
     case 'certification':
       return [ROLE.user, ROLE.admin, ROLE.official];
+    // 그 외 경로는 아무도 열람할 수 없음
     default:
       return [];
   }
@@ -138,18 +134,21 @@ const getRolesForReadBoard = (boardPath) => {
 
 const getRolesForWriteBoard = (boardPath) => {
   switch (boardPath) {
+    // 준회원부터 작성 가능 (준회원·정회원·리자·공식계정)
     case 'first-snow':
       return [ROLE.preUser, ROLE.user, ROLE.admin, ROLE.official];
+    // 정회원부터 작성 가능 (정회원·리자·공식계정)
     case 'large-snow':
     case 'permanent-snow':
     case 'sookplace':
-      return [ROLE.user, ROLE.admin, ROLE.official];
     case 'residence':
     case 'video-content':
     case 'anime-comics':
     case 'book':
     case 'music':
     case 'performance':
+    case 'cooking':
+    case 'sport':
     case 'exhibition':
     case 'studyabroad':
     case 'trip':
@@ -160,13 +159,13 @@ const getRolesForWriteBoard = (boardPath) => {
     case 'finance':
     case 'certification':
       return [ROLE.user, ROLE.admin, ROLE.official];
+    // 리자·공식계정만 작성 가능 (공지사항·공식 게시판)
     case 'notice':
     case 'student-council':
     case 'finance-audit':
-    case 'cooking':
-    case 'sport':
     case 'graduation-preparation':
       return [ROLE.admin, ROLE.official];
+    // 그 외 게시판(베숙트·전체 등)은 아무도 작성할 수 없음
     default:
       return [];
   }
