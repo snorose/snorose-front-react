@@ -121,6 +121,10 @@ const getRolesForReadBoard = (boardPath) => {
     case 'game':
     case 'finance':
     case 'certification':
+    case 'club':
+    case 'promotion':
+    case 'living':
+    case 'women-studies':
       return [ROLE.user, ROLE.admin, ROLE.official];
     // 그 외 경로는 아무도 열람할 수 없음
     default:
@@ -154,6 +158,10 @@ const getRolesForWriteBoard = (boardPath) => {
     case 'game':
     case 'finance':
     case 'certification':
+    case 'club':
+    case 'promotion':
+    case 'living':
+    case 'women-studies':
       return [ROLE.user, ROLE.admin, ROLE.official];
     // 리자·공식계정만 작성 가능 (공지사항·공식 게시판)
     case 'notice':
@@ -195,6 +203,10 @@ const boardPaths = [
   'sport',
   'game',
   'study-abroad',
+  'club',
+  'promotion',
+  'living',
+  'women-studies',
 ];
 
 const createBoardRoutes = (paths, feature, forceOff = false) => {

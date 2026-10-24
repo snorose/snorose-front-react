@@ -85,6 +85,7 @@ export const SIDEBAR_MENUS = Object.freeze([
       { to: '/board/first-snow', name: '첫눈온방' },
       { to: '/board/large-snow', name: '함박눈방' },
       { to: '/board/permanent-snow', name: '만년설방' },
+      { to: '/board/promotion', name: '홍보게시판' },
       { to: '/board/besookt', name: '베숙트' },
     ],
   },
@@ -127,6 +128,8 @@ export const SIDEBAR_MENUS = Object.freeze([
       { to: '/board/beauty', name: '뷰티' },
       { to: '/board/game', name: '게임' },
       { to: '/board/finance', name: '금융' },
+      { to: '/board/living', name: '리빙·소품' },
+      { to: '/board/women-studies', name: '여성학' },
     ],
   },
   {
@@ -137,7 +140,10 @@ export const SIDEBAR_MENUS = Object.freeze([
   {
     to: '/board',
     title: '캠퍼스',
-    items: [{ to: '/board/study-abroad', name: '교환학생·어학연수' }],
+    items: [
+      { to: '/board/club', name: '동아리 이모저모' },
+      { to: '/board/study-abroad', name: '교환학생·어학연수' },
+    ],
   },
   {
     to: '/board/exam-review',

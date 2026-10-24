@@ -63,6 +63,10 @@ export const BOARD_ID = Object.freeze({
   game: 1014,
   finance: 1012,
   certification: 54,
+  club: 70,
+  promotion: 25,
+  living: 1015,
+  'women-studies': 1016,
 });
 
 export const BOARDS = Object.freeze([
@@ -191,6 +195,26 @@ export const BOARDS = Object.freeze([
     name: '어학·자격증',
     path: '/board/certification',
   },
+  {
+    id: 70,
+    name: '동아리 이모저모',
+    path: '/board/club',
+  },
+  {
+    id: 25,
+    name: '홍보게시판',
+    path: '/board/promotion',
+  },
+  {
+    id: 1015,
+    name: '리빙·소품',
+    path: '/board/living',
+  },
+  {
+    id: 1016,
+    name: '여성학',
+    path: '/board/women-studies',
+  },
 ]);
 
 export const BOARD_MENUS = [
@@ -240,6 +264,14 @@ export const BOARD_MENUS = [
     textId: 'permanent-snow',
     title: '만년설방',
     desc: '졸업생 전용 커뮤니티',
+    category: BOARD_CATEGORY.COMMUNITY,
+  },
+  {
+    id: 25,
+    to: '/board/promotion',
+    textId: 'promotion',
+    title: '홍보게시판',
+    desc: '홍보·소식 공유 커뮤니티',
     category: BOARD_CATEGORY.COMMUNITY,
   },
   {
@@ -355,6 +387,14 @@ export const BOARD_MENUS = [
     category: BOARD_CATEGORY.CULTURE,
   },
   {
+    id: 70,
+    to: '/board/club',
+    textId: 'club',
+    title: '동아리 이모저모',
+    desc: '동아리 정보·활동 커뮤니티',
+    category: BOARD_CATEGORY.CAMPUS,
+  },
+  {
     id: 71,
     to: '/board/study-abroad',
     textId: 'study-abroad',
@@ -433,6 +473,22 @@ export const BOARD_MENUS = [
     title: '어학·자격증',
     desc: '어학·자격증 정보·공부 커뮤니티',
     category: BOARD_CATEGORY.CAREER,
+  },
+  {
+    id: 1015,
+    to: '/board/living',
+    textId: 'living',
+    title: '리빙·소품',
+    desc: '생활용품·소품 정보·후기 커뮤니티',
+    category: BOARD_CATEGORY.CULTURE,
+  },
+  {
+    id: 1016,
+    to: '/board/women-studies',
+    textId: 'women-studies',
+    title: '여성학',
+    desc: '여성학 정보·토론 커뮤니티',
+    category: BOARD_CATEGORY.CULTURE,
   },
 ];
 
