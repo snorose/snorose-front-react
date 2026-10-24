@@ -5,6 +5,7 @@ import {
   IconBookFill,
   IconDocument,
   IconDocumentFill,
+  IconHome,
   IconHomeFill,
   IconPerson,
   IconPersonFill,
@@ -22,7 +23,7 @@ export const NAVBAR_MENUS = Object.freeze([
     width: 32,
     height: 32,
     ActiveIcon: IconHomeFill,
-    DefaultIcon: IconHomeFill,
+    DefaultIcon: IconHome,
   },
   {
     id: 'board',
