@@ -1,4 +1,5 @@
-import { ROLE } from '@/shared/constant';
+import { FEATURE_FLAG, NEW_BOARD_KILL_SWITCH, ROLE } from '@/shared/constant';
+import { NEW_BOARD_KEYS } from '@/shared/lib';
 import { attendanceLoader } from '@/shared/loader';
 import { AppLayout, NavbarLayout } from '@/shared/ui';
 
@@ -203,10 +204,6 @@ const boardPaths = [
   'sport',
   'game',
   'study-abroad',
-  'club',
-  'promotion',
-  'living',
-  'women-studies',
 ];
 
 const createBoardRoutes = (paths, feature, forceOff = false) => {
@@ -290,7 +287,15 @@ const createBoardRoutes = (paths, feature, forceOff = false) => {
   ]);
 };
 
-const boardRoutes = [...createBoardRoutes(boardPaths)];
+const boardRoutes = [
+  ...createBoardRoutes(boardPaths),
+  // 피처 플래그로 노출을 제어하는 게시판
+  ...createBoardRoutes(
+    NEW_BOARD_KEYS,
+    FEATURE_FLAG.newBoard,
+    NEW_BOARD_KILL_SWITCH
+  ),
+];
 
 export const routeList = [
   {

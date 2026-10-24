@@ -1,3 +1,5 @@
+import { FEATURE_FLAG } from './feature-flag';
+
 export const BOARD_CATEGORY = {
   COMMUNITY: {
     value: 'community',
@@ -273,6 +275,7 @@ export const BOARD_MENUS = [
     title: '홍보게시판',
     desc: '홍보·소식 공유 커뮤니티',
     category: BOARD_CATEGORY.COMMUNITY,
+    feature: FEATURE_FLAG.newBoard,
   },
   {
     id: 20,
@@ -393,6 +396,7 @@ export const BOARD_MENUS = [
     title: '동아리 이모저모',
     desc: '동아리 정보·활동 커뮤니티',
     category: BOARD_CATEGORY.CAMPUS,
+    feature: FEATURE_FLAG.newBoard,
   },
   {
     id: 71,
@@ -481,6 +485,7 @@ export const BOARD_MENUS = [
     title: '리빙·소품',
     desc: '생활용품·소품 정보·후기 커뮤니티',
     category: BOARD_CATEGORY.CULTURE,
+    feature: FEATURE_FLAG.newBoard,
   },
   {
     id: 1016,
@@ -489,6 +494,7 @@ export const BOARD_MENUS = [
     title: '여성학',
     desc: '여성학 정보·토론 커뮤니티',
     category: BOARD_CATEGORY.CULTURE,
+    feature: FEATURE_FLAG.newBoard,
   },
 ];
 

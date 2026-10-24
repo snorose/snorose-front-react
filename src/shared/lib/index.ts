@@ -6,6 +6,7 @@ export * from './getBoardTextId';
 export * from './getBoardUrl';
 export * from './GrowthBook';
 export * from './hyperlink';
+export * from './new-board';
 export * from './number';
 export * from './pagination';
 export * from './validate';

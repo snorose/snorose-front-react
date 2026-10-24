@@ -10,6 +10,7 @@ import {
   IconMypageFill,
 } from '@snorose/icons';
 
+import { FEATURE_FLAG } from '@/shared/constant/feature-flag';
 import { NEW_ROUTES } from '@/shared/constant/route';
 import { BOARD_REGISTRY } from '@/shared/lib';
 
@@ -85,7 +86,11 @@ export const SIDEBAR_MENUS = Object.freeze([
       { to: '/board/first-snow', name: '첫눈온방' },
       { to: '/board/large-snow', name: '함박눈방' },
       { to: '/board/permanent-snow', name: '만년설방' },
-      { to: '/board/promotion', name: '홍보게시판' },
+      {
+        to: '/board/promotion',
+        name: '홍보게시판',
+        feature: FEATURE_FLAG.newBoard,
+      },
       { to: '/board/besookt', name: '베숙트' },
     ],
   },
@@ -128,8 +133,16 @@ export const SIDEBAR_MENUS = Object.freeze([
       { to: '/board/beauty', name: '뷰티' },
       { to: '/board/game', name: '게임' },
       { to: '/board/finance', name: '금융' },
-      { to: '/board/living', name: '리빙·소품' },
-      { to: '/board/women-studies', name: '여성학' },
+      {
+        to: '/board/living',
+        name: '리빙·소품',
+        feature: FEATURE_FLAG.newBoard,
+      },
+      {
+        to: '/board/women-studies',
+        name: '여성학',
+        feature: FEATURE_FLAG.newBoard,
+      },
     ],
   },
   {
@@ -141,7 +154,11 @@ export const SIDEBAR_MENUS = Object.freeze([
     to: '/board',
     title: '캠퍼스',
     items: [
-      { to: '/board/club', name: '동아리 이모저모' },
+      {
+        to: '/board/club',
+        name: '동아리 이모저모',
+        feature: FEATURE_FLAG.newBoard,
+      },
       { to: '/board/study-abroad', name: '교환학생·어학연수' },
     ],
   },
